@@ -8,8 +8,7 @@ plugins {
     id("org.jetbrains.compose") version "0.3.0-build139"
 }
 
-group = "org.tbcsim"
-version = "1.0-SNAPSHOT"
+group = "com.tbcsim"
 
 repositories {
     jcenter()
@@ -18,7 +17,14 @@ repositories {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-core:2.12.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1")
+
+    implementation("io.github.microutils:kotlin-logging:1.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.3")
+    implementation("org.slf4j:slf4j-simple:1.7.29")
+
     implementation(compose.desktop.currentOs)
     testImplementation(kotlin("test-junit"))
 }

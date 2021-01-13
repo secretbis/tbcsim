@@ -1,5 +1,4 @@
-
-rootProject.name = "TBCSim"
+rootProject.name = "tbcsim"
 
 pluginManagement {
     repositories {
