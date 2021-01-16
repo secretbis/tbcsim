@@ -1,10 +1,11 @@
 package character.auto
 
-import character.Character
 import character.Ability
 
-class MeleeMainHand(character: Character) : Ability(character) {
+class MeleeMainHand() : Ability() {
     var lastAttack: Int = -1
+
+    override val name: String = "Melee (MH)"
 
     override fun available(): Boolean {
         return true

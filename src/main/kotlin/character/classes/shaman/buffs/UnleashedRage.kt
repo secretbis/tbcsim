@@ -2,20 +2,18 @@ package character.classes.shaman.buffs
 
 import character.Buff
 import character.Ability
+import character.Stats
 import sim.Sim
 
-class UnleashedRage(sim: Sim) : Buff(sim) {
-    override val ability: Ability
+class UnleashedRage() : Buff() {
+    override var appliedAtMs: Int
         get() = TODO("Not yet implemented")
-    override val durationMs: Int
-        get() = TODO("Not yet implemented")
+        set(value) {}
+    override val durationMs: Int = 10000
+    override val statModType: ModType = ModType.PERCENTAGE
+    override val hidden: Boolean = false
 
-    override fun apply() {
+    override fun modifyStats(stats: Stats): Stats {
         TODO("Not yet implemented")
     }
-
-    override fun remove() {
-        TODO("Not yet implemented")
-    }
-
 }

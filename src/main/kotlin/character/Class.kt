@@ -12,6 +12,5 @@ interface Class {
     var baseResourceAmount: Int  // This refers to any base amount inherent to the *class*
 
     var canDualWield: Boolean
-    var isDualWielding: Boolean
     var allowAutoAttack: Boolean
 }

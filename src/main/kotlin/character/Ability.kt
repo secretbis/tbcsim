@@ -1,9 +1,7 @@
 package character
 
-import data.model.ItemProc
-
 abstract class Ability {
-    abstract var spell: ItemProc
+    abstract val name: String
     abstract fun available(): Boolean
     abstract fun cast()
 }

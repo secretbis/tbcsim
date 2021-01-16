@@ -12,7 +12,7 @@ class Resource(val character: Character) {
     val maxAmount: Int
 
     init {
-        currentAmount = when(character.resourceType) {
+        currentAmount = when(character.klass.resourceType) {
             Type.RAGE -> 0
             else -> character.resource.max()
         }
@@ -34,7 +34,7 @@ class Resource(val character: Character) {
     }
 
     private fun max(): Int {
-        return when(character.resourceType) {
+        return when(character.klass.resourceType) {
             Type.MANA -> maxMana()
             Type.RAGE -> 0
             Type.ENERGY -> 100

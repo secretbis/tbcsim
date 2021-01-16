@@ -6,7 +6,7 @@
 
 # Get all reasonable items
 items_columns="entry,class,subclass,name,displayid,Quality,AllowableClass,AllowableRace,ItemLevel,"
-items_columns+="stat_type1,stat_value1,stat_type2,stat_value2,stat_type3,stat_value3,stat_type4,stat_value4,stat_type5,stat_value5,dmg_min1,dmg_max1,dmg_type1,dmg_min2,dmg_max2,dmg_type2,dmg_min3,dmg_max3,dmg_type3,dmg_min4,dmg_max4,dmg_type5,dmg_min5,dmg_max5,dmg_type5,"
+items_columns+="stat_type1,stat_value1,stat_type2,stat_value2,stat_type3,stat_value3,stat_type4,stat_value4,stat_type5,stat_value5,dmg_min1,dmg_max1,dmg_type1,dmg_min2,dmg_max2,dmg_type2,dmg_min3,dmg_max3,dmg_type3,dmg_min4,dmg_max4,dmg_type4,dmg_min5,dmg_max5,dmg_type5,"
 items_columns+="armor,holy_res,fire_res,nature_res,frost_res,shadow_res,arcane_res,delay,ammo_type,"
 items_columns+="spellid_1,spelltrigger_1,spellcharges_1,spellppmrate_1,spellcooldown_1,spellcategorycooldown_1,"
 items_columns+="spellid_2,spelltrigger_2,spellcharges_2,spellppmrate_2,spellcooldown_2,spellcategorycooldown_2,"

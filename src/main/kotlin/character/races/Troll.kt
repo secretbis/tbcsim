@@ -5,7 +5,7 @@ import character.Ability
 import character.Stats
 import sim.Sim
 
-class Troll(sim: Sim) : Race(sim) {
+class Troll : Race() {
     override var baseStats: Stats = Stats(
         strength = 1,
         agility = 2,

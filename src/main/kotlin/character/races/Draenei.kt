@@ -5,7 +5,7 @@ import character.Ability
 import character.Stats
 import sim.Sim
 
-class Draenei(sim: Sim) : Race(sim) {
+class Draenei: Race() {
     override var baseStats: Stats = Stats(
         strength = 1,
         agility = -3,

@@ -1,3 +1,7 @@
+import data.DB
 import ui.MainUI;
 
-fun main() = MainUI()
+fun main() {
+    DB.init()
+//    MainUI()
+}

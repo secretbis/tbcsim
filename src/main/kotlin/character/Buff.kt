@@ -7,7 +7,7 @@ abstract class Buff {
         NONE
     }
 
-    abstract val ability: Ability
+    abstract var appliedAtMs: Int
     abstract val durationMs: Int
     abstract val statModType: ModType
     abstract val hidden: Boolean

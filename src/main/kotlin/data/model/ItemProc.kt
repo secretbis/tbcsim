@@ -1,16 +1,12 @@
 package data.model
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
+import character.Proc
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import data.model.deserialize.SpellDeserializer
+import data.model.default.UnknownProc
+import data.model.deserialize.ItemProcDeserializer
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-open class ItemProc (
-    @JsonProperty("Id")
-    override var id: Int,
-    @JsonProperty("SpellName")
-    var name: String,
-    @JsonDeserialize(using = SpellDeserializer::class)
-    var spell: ItemProc
-) : ModelBase()
+@JsonDeserialize(using = ItemProcDeserializer::class)
+open class ItemProc : ModelBase() {
+    var name: String = "Unknown"
+    var proc: Proc = UnknownProc(-1, "Default", -1, "Default")
+}

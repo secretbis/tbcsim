@@ -1,28 +1,27 @@
 package character
 
 import data.model.Item
-import data.model.default.EmptyItem
 
 data class Gear(
-    var mainHand: Item = EmptyItem(),
-    var offHand: Item = EmptyItem(),
-//    var twoHand: Item = EmptyItem(),
-    var ranged: Item = EmptyItem(),
-    var ammo: Item = EmptyItem(),
+    var mainHand: Item = Item(),
+    var offHand: Item = Item(),
+//    var twoHand: Item = Item(),
+    var ranged: Item = Item(),
+    var ammo: Item = Item(),
 
-    var helm: Item = EmptyItem(),
-    var neck: Item = EmptyItem(),
-    var shoulders: Item = EmptyItem(),
-    var back: Item = EmptyItem(),
-    var chest: Item = EmptyItem(),
-    var wrists: Item = EmptyItem(),
-    var hands: Item = EmptyItem(),
-    var waist: Item = EmptyItem(),
-    var feet: Item = EmptyItem(),
-    var ring1: Item = EmptyItem(),
-    var ring2: Item = EmptyItem(),
-    var trinket1: Item = EmptyItem(),
-    var trinket2: Item = EmptyItem()
+    var helm: Item = Item(),
+    var neck: Item = Item(),
+    var shoulders: Item = Item(),
+    var back: Item = Item(),
+    var chest: Item = Item(),
+    var wrists: Item = Item(),
+    var hands: Item = Item(),
+    var waist: Item = Item(),
+    var feet: Item = Item(),
+    var ring1: Item = Item(),
+    var ring2: Item = Item(),
+    var trinket1: Item = Item(),
+    var trinket2: Item = Item()
 ) {
     fun totalStats(): Stats {
         return Stats()

@@ -2,47 +2,38 @@ package data
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import data.model.Item
-import data.model.ModelBase
 import data.model.ItemProc
-import mu.KotlinLogging
+import data.model.ModelBase
 import java.io.File
-
-private val logger = KotlinLogging.logger {}
 
 object DB {
     var items: Map<Int, Item> = mapOf()
     var itemsList: List<Item> = listOf()
-    var spells: Map<Int, ItemProc> = mapOf()
-    var spellsList: List<ItemProc> = listOf()
+    var itemProcs: Map<Int, ItemProc> = mapOf()
+    var itemProcsList: List<ItemProc> = listOf()
 
     private val mapper = ObjectMapper().registerKotlinModule()
 
-    private fun <T : ModelBase> load(file: String, type: TypeReference<T>): Pair<Map<Int, T>, List<T>> {
-        try {
-            // Load
-            val data = File(DB::class.java.getResource(file).toURI()).readText()
-            val parsed: List<T> = mapper.readValue(data)
+    private fun <T : ModelBase> load(file: String, type: TypeReference<List<T>>): Pair<Map<Int, T>, List<T>> {
+        // Load
+        val data = File(DB::class.java.getResource(file).toURI()).readText()
+        val parsed = mapper.readValue(data, type)
 
-            // Transform to map
-            val asMap: Map<Int, T> = parsed.map { it.id to it }.toMap()
+        // Transform to map
+        val asMap: Map<Int, T> = parsed.map { it.id to it }.toMap()
 
-            return Pair(asMap, parsed)
-        } catch (e: Exception) {
-            logger.error(e) { "Failed to load database: $file" }
-            return Pair(mapOf(), listOf())
-        }
+        return Pair(asMap, parsed)
     }
 
     fun init() {
-        // This order is important, since items need to lookup spells
-        val spells = load("itemprocs.json", object : TypeReference<ItemProc>(){})
-        this.spells = spells.first
-        this.spellsList = spells.second
+        // This order is important, since items need to lookup itemProcs
+        val itemProcs = load("/itemprocs.json", object : TypeReference<List<ItemProc>>(){})
+        this.itemProcs = itemProcs.first
+        this.itemProcsList = itemProcs.second
 
-        val items = load("items.json", object : TypeReference<Item>(){})
+        val items = load("/items.json", object : TypeReference<List<Item>>(){})
         this.items = items.first
         this.itemsList = items.second
     }
