@@ -1,19 +1,27 @@
 package sim
 
-import entity.Entity
+import character.Character
 
 class Sim (
-    val durationMs: Int = 120000,
-    val stepMs: Int = 10,
-    val iterations: Int = 1000,
-    val target: Entity
-
+    val subject: Character,
+    val target: Character,
+    val opts: SimOptions
 ) {
-    fun sim(subject: Entity) {
-        for(iter in 1..iterations) {
-            for(step in 0..durationMs step stepMs) {
-                subject.step(step)
+    var elapsedTimeMs: Int = 0
+
+    fun sim() {
+        // Cast any spells flagged in the rotation as precombat
+
+        // Start combat
+        for(iter in 1..opts.iterations) {
+            for(step in 0..opts.durationMs step opts.stepMs) {
+                elapsedTimeMs = step
+                step(subject, step)
             }
         }
+    }
+
+    private fun step(subject: Character, time: Int) {
+
     }
 }

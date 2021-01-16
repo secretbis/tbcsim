@@ -6,36 +6,44 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import data.model.Item
 import data.model.ModelBase
-import data.model.Spell
+import data.model.ItemProc
 import mu.KotlinLogging
 import java.io.File
 
 private val logger = KotlinLogging.logger {}
 
-class DB (val items: Map<Int, Item>, val itemsList: List<Item>, val spells: Map<Int, Spell>, val spellsList: List<Spell>) {
-    companion object {
-        private val mapper = ObjectMapper().registerKotlinModule()
+object DB {
+    var items: Map<Int, Item> = mapOf()
+    var itemsList: List<Item> = listOf()
+    var spells: Map<Int, ItemProc> = mapOf()
+    var spellsList: List<ItemProc> = listOf()
 
-        private fun <T : ModelBase> load(file: String, type: TypeReference<T>): Pair<Map<Int, T>, List<T>> {
-            try {
-                // Load
-                val data = File(DB::class.java.getResource(file).toURI()).readText()
-                val parsed: List<T> = mapper.readValue(data)
+    private val mapper = ObjectMapper().registerKotlinModule()
 
-                // Transform to map
-                val asMap: Map<Int, T> = parsed.map { it.id to it }.toMap()
+    private fun <T : ModelBase> load(file: String, type: TypeReference<T>): Pair<Map<Int, T>, List<T>> {
+        try {
+            // Load
+            val data = File(DB::class.java.getResource(file).toURI()).readText()
+            val parsed: List<T> = mapper.readValue(data)
 
-                return Pair(asMap, parsed)
-            } catch (e: Exception) {
-                logger.error(e) { "Failed to load database: $file" }
-                return Pair(mapOf(), listOf())
-            }
+            // Transform to map
+            val asMap: Map<Int, T> = parsed.map { it.id to it }.toMap()
+
+            return Pair(asMap, parsed)
+        } catch (e: Exception) {
+            logger.error(e) { "Failed to load database: $file" }
+            return Pair(mapOf(), listOf())
         }
+    }
 
-        fun init(): DB {
-            val items = load("items.json", object : TypeReference<Item>(){})
-            val spells = load("spells.json", object : TypeReference<Spell>(){})
-            return DB(items.first, items.second, spells.first, spells.second)
-        }
+    fun init() {
+        // This order is important, since items need to lookup spells
+        val spells = load("itemprocs.json", object : TypeReference<ItemProc>(){})
+        this.spells = spells.first
+        this.spellsList = spells.second
+
+        val items = load("items.json", object : TypeReference<Item>(){})
+        this.items = items.first
+        this.itemsList = items.second
     }
 }

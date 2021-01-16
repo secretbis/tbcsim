@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.21"
     id("org.jetbrains.compose") version "0.3.0-build139"
+    idea
 }
 
 group = "com.tbcsim"
@@ -17,11 +18,13 @@ repositories {
 }
 
 dependencies {
-    implementation("com.fasterxml.jackson.core:jackson-core:2.12.1")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.+")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.+")
 
     implementation("io.github.microutils:kotlin-logging:1.12.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.3")
     implementation("org.slf4j:slf4j-simple:1.7.29")
 

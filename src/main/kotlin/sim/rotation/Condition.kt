@@ -1,5 +1,7 @@
 package sim.rotation
 
+import sim.rotation.criteria.Criterion
+
 class Condition(val type: Type, val criterion: Criterion) {
     enum class Type {
         PRECOMBAT,

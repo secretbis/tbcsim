@@ -6,9 +6,9 @@ data class Event(
     val time: Date,
     val type: Type,
     val durationMs: Int,
-    val amount: Float,
+    val amount: Double,
     val result: Result,
-    val partialAmount: Float
+    val partialAmount: Double
 ) {
     enum class Type {
         MELEE_MH,
