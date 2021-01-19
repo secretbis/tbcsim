@@ -19,6 +19,10 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.lets-plot:lets-plot-jfx:1.5.6")
+    api("org.jetbrains.lets-plot:lets-plot-common:1.5.6")
+    api("org.jetbrains.lets-plot-kotlin:lets-plot-kotlin-api:1.2.0")
+
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
     implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.12.+")

@@ -22,7 +22,7 @@ abstract class MeleeBase(sim: Sim) : Ability(sim) {
         return nextAvailableTimeMs <= sim.currentIteration.elapsedTimeMs
     }
 
-    override fun cast() {
+    override fun cast(free: Boolean) {
         val hitRoll = Random.nextDouble()
         val damageRoll = Random.nextDouble(getWeaponMin(), getWeaponMax())
 

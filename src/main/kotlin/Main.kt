@@ -30,7 +30,7 @@ fun getTestRotation(): Rotation {
 }
 
 fun getSimOpts(): SimOptions {
-    return SimOptions()
+    return SimOptions(iterations = 10)
 }
 
 fun setupLogging() {
