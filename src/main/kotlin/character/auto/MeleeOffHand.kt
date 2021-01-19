@@ -1,17 +1,25 @@
 package character.auto
 
-import character.Ability
+import sim.Event
+import sim.Sim
 
-class MeleeOffHand() : Ability() {
-    var lastAttack: Int = -1
-
+class MeleeOffHand(sim: Sim) : MeleeBase(sim) {
     override val name: String = "Melee (OH)"
+    override fun getEventType(): Event.Type = Event.Type.MELEE_OH
 
     override fun available(): Boolean {
-        return true
+        return sim.subject.hasOffHandWeapon() && super.available()
     }
 
-    override fun cast() {
-        TODO("Not yet implemented")
+    override fun getWeaponMin(): Double {
+        return sim.subject.gear.offHand.minDmg.coerceAtLeast(0.0)
+    }
+
+    override fun getWeaponMax(): Double {
+        return sim.subject.gear.offHand.maxDmg.coerceAtLeast(1.0)
+    }
+
+    override fun getWeaponSpeed(): Double {
+        return (sim.subject.gear.offHand.speed / (1 + sim.subject.getMeleeHastePct())).coerceAtLeast(0.01)
     }
 }

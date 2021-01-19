@@ -23,7 +23,23 @@ data class Stats(
     var spellHealing: Int = 0,
     var spellPen: Int = 0,
 
-    var resilienceRating: Int = 0
+    var resilienceRating: Int = 0,
+
+    // Generic (non-spell-specific) modifiers
+    var multiplicativePhysicalHasteEffects: MutableList<Double> = mutableListOf(),
+    var multiplicativeSpellHasteEffects: MutableList<Double> = mutableListOf(),
+
+    var whiteDamageFlatModifier: Double = 0.0,
+    var whiteDamageMultiplier: Double = 1.0,
+    var whiteDamageCritMultiplier: Double = 2.0,
+
+    var yellowDamageFlatModifier: Double = 0.0,
+    var yellowDamageMultiplier: Double = 1.0,
+    var yellowDamageCritMultiplier: Double = 2.0,
+
+    var spellDamageFlatModifier: Double = 0.0,
+    var spellDamageMultipier: Double = 1.0,
+    var spellDamageCritMultiplier: Double = 1.5
 ) {
     fun add(stats: Stats) : Stats {
         strength += stats.strength
@@ -72,7 +88,7 @@ data class Stats(
         spellHealing -= stats.spellHealing
         spellPen -= stats.spellPen
 
-        resilienceRating += stats.resilienceRating
+        resilienceRating -= stats.resilienceRating
 
         return this
     }

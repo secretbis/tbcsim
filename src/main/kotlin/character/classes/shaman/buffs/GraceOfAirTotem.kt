@@ -1,4 +1,8 @@
 package character.classes.shaman.buffs
 
-class GraceOfAirTotem {
+import character.Buff
+import character.Stats
+
+class GraceOfAirTotem  {
+
 }

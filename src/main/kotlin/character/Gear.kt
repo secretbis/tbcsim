@@ -23,7 +23,13 @@ data class Gear(
     var trinket1: Item = Item(),
     var trinket2: Item = Item()
 ) {
+    fun procs(): List<Proc> {
+        // TODO: Extract procs from equipped gear
+        return listOf()
+    }
+
     fun totalStats(): Stats {
+        // TODO: Sum of stats from equipped gear
         return Stats()
     }
 }

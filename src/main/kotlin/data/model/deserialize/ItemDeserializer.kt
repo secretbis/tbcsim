@@ -21,9 +21,9 @@ class ItemDeserializer : JsonDeserializer<Item>() {
         item.id = node.get("entry").asInt(item.id)
         item.name = node.get("name").asText(item.name)
         item.itemLevel = node.get("ItemLevel").asInt(item.itemLevel)
-        item.minDmg = node.get("dmg_min1").asInt(item.minDmg)
-        item.maxDmg = node.get("dmg_max1").asInt(item.maxDmg)
-        item.speed = node.get("delay").asInt(item.speed)
+        item.minDmg = node.get("dmg_min1").asDouble(item.minDmg)
+        item.maxDmg = node.get("dmg_max1").asDouble(item.maxDmg)
+        item.speed = node.get("delay").asDouble(item.speed)
         item.stats = deserializeStats(node)
 
         val allProcs = deserializeProcs(node)
@@ -64,7 +64,7 @@ class ItemDeserializer : JsonDeserializer<Item>() {
             val type = node.get("stat_type$i").asInt(0)
             val value = node.get("stat_value$i").asInt(0)
 
-            val enumType = StatType.values().find { it.id == type }
+            val enumType = StatType.values().find { it() == type }
 
             when (enumType) {
                 StatType.AGILITY ->

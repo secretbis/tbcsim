@@ -1,27 +1,31 @@
 package character
 
-class Resource(val character: Character) {
+class Resource(
+    val character: Character
+) {
     enum class Type {
         MANA,
         RAGE,
         ENERGY
     }
 
+    val type: Type = character.klass.resourceType
+
     val initialAmount: Int
+    var maxAmount: Int
     var currentAmount: Int
-    val maxAmount: Int
 
     init {
-        currentAmount = when(character.klass.resourceType) {
+        currentAmount = when(type) {
             Type.RAGE -> 0
-            else -> character.resource.max()
+            else -> max()
         }
         initialAmount = currentAmount
         maxAmount = max()
     }
 
     private fun maxMana(): Int {
-        return character.baseResourceAmount
+        return character.klass.baseResourceAmount
             // Add intellect
             .let {
                 when {
@@ -29,12 +33,12 @@ class Resource(val character: Character) {
                     else -> 20 + (15 * (character.stats.intellect - 20))
                 }
             }
-            // TODO: Talents
+            // TODO: Talents and buffs
 
     }
 
     private fun max(): Int {
-        return when(character.klass.resourceType) {
+        return when(type) {
             Type.MANA -> maxMana()
             Type.RAGE -> 0
             Type.ENERGY -> 100

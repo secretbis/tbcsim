@@ -1,5 +1,7 @@
 package character
 
+import sim.Sim
+
 abstract class Buff {
     enum class ModType {
         FLAT,
@@ -10,7 +12,9 @@ abstract class Buff {
     abstract var appliedAtMs: Int
     abstract val durationMs: Int
     abstract val statModType: ModType
-    abstract val hidden: Boolean
 
-    abstract fun modifyStats(stats: Stats): Stats
+    open val hidden: Boolean = false
+    open val stacksWithSelf: Boolean = false
+
+    abstract fun modifyStats(sim: Sim, stats: Stats): Stats
 }

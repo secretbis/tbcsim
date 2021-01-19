@@ -3,29 +3,34 @@ package sim
 import java.util.*
 
 data class Event(
-    val time: Date,
+    var tick: Int = -1,
     val type: Type,
-    val durationMs: Int,
+    val durationMs: Int = 0,
     val amount: Double,
     val result: Result,
-    val partialAmount: Double
+    val partialAmount: Double = 0.0
 ) {
     enum class Type {
         MELEE_MH,
         MELEE_OH,
-        SPELL,
-        BUFF,
+        SPELL_START,
+        SPELL_CAST,
+        BUFF_START,
+        BUFF_END,
         PROC
     }
 
     enum class Result {
         RESIST,
-        PARTIAL_RESIST,
+        PARTIAL_RESIST_CRIT,
+        PARTIAL_RESIST_HIT,
         MISS,
         DODGE,
         PARRY,
         GLANCE,
-        HIT,
-        CRIT
+        BLOCK,
+        CRIT,
+        CRUSH,
+        HIT
     }
 }

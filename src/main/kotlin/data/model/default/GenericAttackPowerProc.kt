@@ -1,6 +1,7 @@
 package data.model.default
 
 import character.*
+import sim.Sim
 
 class GenericAttackPowerProc(attackPower: Int) : Proc() {
     override val static = true
@@ -11,7 +12,7 @@ class GenericAttackPowerProc(attackPower: Int) : Proc() {
         override val statModType: ModType = ModType.FLAT
         override val hidden: Boolean = true
 
-        override fun modifyStats(stats: Stats): Stats {
+        override fun modifyStats(sim: Sim, stats: Stats): Stats {
             stats.attackPower = stats.attackPower + attackPower
             return stats
         }

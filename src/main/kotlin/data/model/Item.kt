@@ -13,9 +13,9 @@ open class Item : ModelBase() {
 
     // TODO: This assumes physical damage types for items
     // TODO: Multiple damage types
-    var minDmg: Int = 0
-    var maxDmg: Int = 0
-    var speed: Int = 1000
+    var minDmg: Double = 0.0
+    var maxDmg: Double = 0.0
+    var speed: Double = 1000.0
 
     // Stats
     var stats: Stats = Stats()
@@ -25,6 +25,6 @@ open class Item : ModelBase() {
     var procs: List<Proc> = listOf()
 
     // Helpers
-    val avgDmg: Int
+    val avgDmg: Double
         get() { return (minDmg + maxDmg) / 2}
 }

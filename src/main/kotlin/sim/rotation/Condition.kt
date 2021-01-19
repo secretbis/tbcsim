@@ -1,10 +1,10 @@
 package sim.rotation
 
+import sim.Sim
 import sim.rotation.criteria.Criterion
 
-class Condition(val type: Type, val criterion: Criterion) {
+class Condition(val type: Type, val criteria: List<Criterion>) {
     enum class Type {
-        PRECOMBAT,
         RESOURCE_GTE,
         RESOURCE_LTE,
         SPELL_COOLDOWN_GTE,
@@ -12,5 +12,9 @@ class Condition(val type: Type, val criterion: Criterion) {
         BUFF_DURATION_GTE,
         BUFF_DURATION_LTE,
         TIME_TO_EXECUTE_LTE
+    }
+
+    fun satisfied(sim: Sim): Boolean {
+        return criteria.all { it.satisfied(sim) }
     }
 }
