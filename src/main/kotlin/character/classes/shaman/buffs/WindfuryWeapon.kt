@@ -3,7 +3,7 @@ package character.classes.shaman.buffs
 import character.*
 import data.model.Item
 import sim.Event
-import sim.Sim
+import sim.SimIteration
 import kotlin.random.Random
 import character.classes.shaman.abilities.WindfuryWeapon as WindfuryWeaponAbility
 
@@ -12,7 +12,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
     override val durationMs: Int = 30 * 60 * 1000
     override val statModType: ModType = ModType.NONE
 
-    override fun modifyStats(sim: Sim, stats: Stats): Stats {
+    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         return stats
     }
 
@@ -26,7 +26,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
                     Trigger.MELEE_YELLOW_CRIT
                 )
 
-                override fun proc(sim: Sim, items: List<Item>?, ability: Ability?) {
+                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
                     if(items?.contains(sourceItem) == true) {
                         val wfAbility = WindfuryWeaponAbility(sim, sourceItem)
 

@@ -1,6 +1,6 @@
 package sim.rotation
 
-import sim.Sim
+import sim.SimIteration
 import sim.rotation.criteria.Criterion
 
 class Condition(val type: Type, val criteria: List<Criterion>) {
@@ -14,7 +14,7 @@ class Condition(val type: Type, val criteria: List<Criterion>) {
         TIME_TO_EXECUTE_LTE
     }
 
-    fun satisfied(sim: Sim): Boolean {
+    fun satisfied(sim: SimIteration): Boolean {
         return criteria.all { it.satisfied(sim) }
     }
 }

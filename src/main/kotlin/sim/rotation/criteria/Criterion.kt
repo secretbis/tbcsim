@@ -1,8 +1,8 @@
 package sim.rotation.criteria
 
-import sim.Sim
+import sim.SimIteration
 
 interface Criterion {
-    fun satisfied(sim: Sim): Boolean
+    fun satisfied(sim: SimIteration): Boolean
 
 }

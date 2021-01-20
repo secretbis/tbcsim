@@ -1,7 +1,7 @@
 package sim.rotation
 
 import character.Ability
-import sim.Sim
+import sim.SimIteration
 
 class Rule(
     val conditions: List<Condition>,
@@ -14,7 +14,7 @@ class Rule(
         COMBAT
     }
 
-    fun satisfied(sim: Sim): Boolean {
+    fun satisfied(sim: SimIteration): Boolean {
         return conditions.all { it.satisfied(sim) }
     }
 }

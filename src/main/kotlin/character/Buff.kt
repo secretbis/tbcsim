@@ -1,6 +1,6 @@
 package character
 
-import sim.Sim
+import sim.SimIteration
 
 abstract class Buff {
     enum class ModType {
@@ -22,6 +22,6 @@ abstract class Buff {
         currentStacks = 0
     }
 
-    abstract fun modifyStats(sim: Sim, stats: Stats): Stats
+    abstract fun modifyStats(sim: SimIteration, stats: Stats): Stats
     abstract val procs: List<Proc>
 }

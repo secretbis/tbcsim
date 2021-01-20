@@ -6,23 +6,23 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.Sim
+import sim.SimIteration
 
-abstract class MeleeBase(sim: Sim) : Ability(sim) {
+abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
     abstract val item: Item
 
     fun getWeaponSpeed(): Double {
         return (item.speed / (1 + sim.subject.getMeleeHastePct())).coerceAtLeast(0.01)
     }
 
-    override fun castTimeMs(): Double = 0.0
-    override fun gcdMs(): Double = 0.0
+    override fun castTimeMs(): Int = 0
+    override fun gcdMs(): Int = 0
 
     var lastAttackTimeMs: Int = 0
 
     override fun available(): Boolean {
         val nextAvailableTimeMs = lastAttackTimeMs + getWeaponSpeed()
-        return nextAvailableTimeMs <= sim.currentIteration.elapsedTimeMs
+        return nextAvailableTimeMs <= sim.elapsedTimeMs
     }
 
     override fun cast(free: Boolean) {
@@ -30,7 +30,7 @@ abstract class MeleeBase(sim: Sim) : Ability(sim) {
         val result = Melee.attackRoll(sim, damageRoll, true)
 
         // Save last hit state and fire event
-        lastAttackTimeMs = sim.currentIteration.elapsedTimeMs
+        lastAttackTimeMs = sim.elapsedTimeMs
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,

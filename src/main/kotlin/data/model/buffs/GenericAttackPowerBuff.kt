@@ -1,7 +1,7 @@
 package data.model.buffs
 
 import character.*
-import sim.Sim
+import sim.SimIteration
 
 class GenericAttackPowerBuff(val attackPower: Int) : Buff() {
     override var appliedAtMs: Int = 0
@@ -9,7 +9,7 @@ class GenericAttackPowerBuff(val attackPower: Int) : Buff() {
     override val statModType: ModType = ModType.FLAT
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: Sim, stats: Stats): Stats {
+    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         stats.attackPower = stats.attackPower + attackPower
         stats.rangedAttackPower = stats.rangedAttackPower + attackPower
         return stats

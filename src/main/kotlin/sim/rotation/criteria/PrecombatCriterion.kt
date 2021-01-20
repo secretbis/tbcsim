@@ -1,9 +1,9 @@
 package sim.rotation.criteria
 
-import sim.Sim
+import sim.SimIteration
 
 class PrecombatCriterion : Criterion {
-    override fun satisfied(sim: Sim): Boolean {
+    override fun satisfied(sim: SimIteration): Boolean {
         TODO("Not yet implemented")
     }
 }

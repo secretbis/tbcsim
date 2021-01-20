@@ -4,7 +4,7 @@ import character.Ability
 import character.Proc
 import character.Talent
 import data.model.Item
-import sim.Sim
+import sim.SimIteration
 import character.classes.shaman.buffs.UnleashedRage as UnleashedRageBuff
 
 class UnleashedRage : Talent() {
@@ -25,7 +25,7 @@ class UnleashedRage : Talent() {
                 Trigger.MELEE_YELLOW_CRIT
             )
 
-            override fun proc(sim: Sim, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
                 sim.addBuff(buff)
             }
         }

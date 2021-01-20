@@ -5,6 +5,10 @@ import character.classes.shaman.buffs.WindfuryWeapon
 import character.races.Draenei
 import data.DB
 import data.model.Item
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import sim.Sim
 import sim.SimOptions
 import sim.rotation.Rotation
@@ -33,23 +37,25 @@ fun getTestRotation(): Rotation {
 }
 
 fun getSimOpts(): SimOptions {
-    return SimOptions(iterations = 1)
+    return SimOptions(iterations = 1000)
 }
 
 fun setupLogging() {
     // Debug logging by default
-    System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG")
+    System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO")
 }
 
 fun main() {
     setupLogging()
     DB.init()
 
-    Sim(
-        getTestCharacter(),
-        getTestRotation(),
-        getSimOpts()
-    ).sim()
+    runBlocking {
+        Sim(
+            getTestCharacter(),
+            getTestRotation(),
+            getSimOpts()
+        ).sim()
+    }
 
 //    MainUI()
 }

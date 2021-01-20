@@ -1,7 +1,7 @@
 package data.model.buffs
 
 import character.*
-import sim.Sim
+import sim.SimIteration
 
 class GenericSpellHealingBuff(val spellHealing: Int) : Buff() {
     override var appliedAtMs: Int = 0
@@ -9,7 +9,7 @@ class GenericSpellHealingBuff(val spellHealing: Int) : Buff() {
     override val statModType: ModType = ModType.FLAT
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: Sim, stats: Stats): Stats {
+    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         stats.spellHealing = stats.spellHealing + spellHealing
         return stats
     }

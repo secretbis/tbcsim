@@ -6,7 +6,6 @@ import kotlin.reflect.full.declaredMemberProperties
 data class Gear(
     var mainHand: Item = Item(),
     var offHand: Item = Item(),
-//    var twoHand: Item = Item(),
     var ranged: Item = Item(),
     var ammo: Item = Item(),
 

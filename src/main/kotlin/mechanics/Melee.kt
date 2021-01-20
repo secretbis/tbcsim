@@ -3,7 +3,7 @@ package mechanics
 import data.model.Item
 import mu.KotlinLogging
 import sim.Event
-import sim.Sim
+import sim.SimIteration
 import kotlin.random.Random
 
 object Melee {
@@ -46,7 +46,7 @@ object Melee {
         3 to 0.25
     )
 
-    private fun <T> valueByLevelDiff(sim: Sim, table: Map<Int, T>) : T {
+    private fun <T> valueByLevelDiff(sim: SimIteration, table: Map<Int, T>) : T {
         val levelDiff = sim.target.level - sim.subject.level
 
         return when {
@@ -62,11 +62,11 @@ object Melee {
         }
     }
 
-    fun getBaseMiss(sim: Sim): Double {
+    fun getBaseMiss(sim: SimIteration): Double {
         return valueByLevelDiff(sim, baseMissChance)
     }
 
-    fun getMeleeMissChance(sim: Sim, isWhiteHit: Boolean): Double {
+    fun getMeleeMissChance(sim: SimIteration, isWhiteHit: Boolean): Double {
         val baseMiss = getBaseMiss(sim)
         val meleeHitChance = sim.subject.getMeleeHitPct()
         val modifiedMiss = (baseMiss - meleeHitChance).coerceAtLeast(0.0)
@@ -80,7 +80,7 @@ object Melee {
         } else modifiedMiss
     }
 
-    fun getMeleeParryChance(sim: Sim): Double {
+    fun getMeleeParryChance(sim: SimIteration): Double {
         return if(sim.opts.allowParryAndBlock) {
             valueByLevelDiff(sim, baseParryChance)
         } else {
@@ -88,11 +88,11 @@ object Melee {
         }
     }
 
-    fun getMeleeDodgeChance(sim: Sim): Double {
+    fun getMeleeDodgeChance(sim: SimIteration): Double {
         return valueByLevelDiff(sim, baseDodgeChance)
     }
 
-    fun getMeleeBlockChance(sim: Sim): Double {
+    fun getMeleeBlockChance(sim: SimIteration): Double {
         return if(sim.opts.allowParryAndBlock) {
             // TODO: Does this happen, and how much is mitigated by a mob?
             0.0
@@ -101,16 +101,16 @@ object Melee {
         }
     }
 
-    fun getMeleeBlockReduction(sim: Sim): Double {
+    fun getMeleeBlockReduction(sim: SimIteration): Double {
         // TODO: Does this happen, and how much is mitigated by a mob?
         return 0.0
     }
 
-    fun getMeleeGlanceChance(sim: Sim): Double {
+    fun getMeleeGlanceChance(sim: SimIteration): Double {
         return valueByLevelDiff(sim, baseGlancingChance)
     }
 
-    fun getMeleeGlanceReduction(sim: Sim): Double {
+    fun getMeleeGlanceReduction(sim: SimIteration): Double {
         val defDifference: Int = (sim.target.level - sim.subject.level).coerceAtLeast(0) * 5
         val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.6).coerceAtLeast(0.0)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
@@ -118,25 +118,25 @@ object Melee {
         return Random.nextDouble(low, high)
     }
 
-    fun getMeleeCritChance(sim: Sim): Double {
+    fun getMeleeCritChance(sim: SimIteration): Double {
         return (sim.subject.getMeleeCritPct() + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
     }
 
-    fun getMeleeArmorPen(sim: Sim): Double {
+    fun getMeleeArmorPen(sim: SimIteration): Double {
         return sim.subject.getArmorPen()
     }
 
-    fun getMeleeArmorMitigation(sim: Sim): Double {
+    fun getMeleeArmorMitigation(sim: SimIteration): Double {
         val targetArmor = sim.target.stats.armor - getMeleeArmorPen(sim)
         return targetArmor / (targetArmor + (467.5 * sim.subject.level - 22167.5))
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
-    fun apToDamage(sim: Sim, attackPower: Int, item: Item): Double {
+    fun apToDamage(sim: SimIteration, attackPower: Int, item: Item): Double {
         return (item.dps + (attackPower / 3.5)) * (item.speed / 1000)
     }
 
-    fun baseDamageRoll(sim: Sim, item: Item, bonusAp: Int = 0): Double {
+    fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0): Double {
         val totalAp = sim.subject.stats.attackPower + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
@@ -145,7 +145,7 @@ object Melee {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sim: Sim, damageRoll: Double, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sim: SimIteration, damageRoll: Double, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
         val hitRoll = Random.nextDouble()
 
         // Generate a single roll table
@@ -179,6 +179,7 @@ object Melee {
             sim.subject.stats.yellowDamageMultiplier
         }
 
+        // Apply constant multipliers
         val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier
         val unmitigated = when {
             hitRoll < missChance -> Pair(0.0, Event.Result.MISS)
@@ -189,8 +190,6 @@ object Melee {
             hitRoll < critChance -> Pair(finalDamageRoll * critMultiplier, Event.Result.CRIT)
             else -> Pair(finalDamageRoll, Event.Result.HIT)
         }
-
-        // Apply constant multipliers (DMF-style buffs)
 
         // Apply target armor mitigation
         return Pair(unmitigated.first * (1 - getMeleeArmorMitigation(sim)), unmitigated.second)

@@ -7,17 +7,17 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.Sim
+import sim.SimIteration
 
-class WindfuryWeapon(sim: Sim, val item: Item) : Ability(sim) {
+class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
     override val id: Int = 25505
     override val name: String = "Windfury Weapon (Rank 5)"
 
     // Windfury weapon has a global 3s ICD, regardless of rank
     val icdMs = 3000
     override fun available(): Boolean {
-        val lastProc = (sim.subject.klass as Shaman).lastWindfuryWeaponProcMs
-        return lastProc == -1 || lastProc + icdMs <= sim.currentIteration.elapsedTimeMs
+        val lastProc = sim.lastWindfuryWeaponProcMs
+        return lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
     }
 
     val extraAp = 445
@@ -26,7 +26,7 @@ class WindfuryWeapon(sim: Sim, val item: Item) : Ability(sim) {
         val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
         val result = Melee.attackRoll(sim, attackOne + attackTwo, true)
 
-        (sim.subject.klass as Shaman).lastWindfuryWeaponProcMs = sim.currentIteration.elapsedTimeMs
+        (sim.subject.klass as Shaman).lastWindfuryWeaponProcMs = sim.elapsedTimeMs
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
@@ -48,6 +48,6 @@ class WindfuryWeapon(sim: Sim, val item: Item) : Ability(sim) {
         }
     }
 
-    override fun castTimeMs(): Double = 0.0
-    override fun gcdMs(): Double = 0.0
+    override fun castTimeMs(): Int = 0
+    override fun gcdMs(): Int = 0
 }

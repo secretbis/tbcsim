@@ -1,7 +1,7 @@
 package character
 
 import mechanics.Rating
-import sim.Sim
+import sim.SimIteration
 
 class Character(
     val klass: Class,
@@ -27,7 +27,7 @@ class Character(
         return hasMainHandWeapon() && hasOffHandWeapon()
     }
 
-    fun computeStats(sim: Sim, buffs: List<Buff>) {
+    fun computeStats(sim: SimIteration, buffs: List<Buff>) {
         // Apply basic stats
         this.stats = Stats()
             .add(klass.baseStats)

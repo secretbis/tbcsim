@@ -1,9 +1,9 @@
 package character.auto
 
 import data.model.Item
-import sim.Sim
+import sim.SimIteration
 
-class MeleeMainHand(sim: Sim) : MeleeBase(sim) {
+class MeleeMainHand(sim: SimIteration) : MeleeBase(sim) {
     override val id: Int = 1
     override val name: String = "Melee (MH)"
 

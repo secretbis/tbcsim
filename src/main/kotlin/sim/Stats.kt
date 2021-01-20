@@ -14,11 +14,11 @@ object Stats {
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
-    fun dps(sim: Sim) {
-        val perIteration = sim.iterations.map {
+    fun dps(iterations: List<SimIteration>) {
+        val perIteration = iterations.map {
             it.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->
                 acc + event.amount
-            } / (sim.opts.durationMs / 1000.0)
+            } / (it.opts.durationMs / 1000.0)
         }
 
         val median = median(perIteration)
@@ -30,8 +30,8 @@ object Stats {
         logger.info("Std. Dev: ${df.format(sd)}")
     }
 
-    fun resultsByAbility(sim: Sim) {
-        val byAbility = sim.iterations.flatMap { it.events }
+    fun resultsByAbility(iterations: List<SimIteration>) {
+        val byAbility = iterations.flatMap { it.events }
             .filter { it.eventType == Event.Type.DAMAGE }
             .groupBy { it.ability.name }
 

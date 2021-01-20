@@ -1,13 +1,13 @@
 package character
 
-import sim.Sim
+import sim.SimIteration
 
-abstract class Ability(val sim: Sim) {
+abstract class Ability(val sim: SimIteration) {
     abstract val id: Int
     abstract val name: String
 
     abstract fun available(): Boolean
     abstract fun cast(free: Boolean = false)
-    abstract fun castTimeMs(): Double
-    abstract fun gcdMs(): Double
+    abstract fun castTimeMs(): Int
+    abstract fun gcdMs(): Int
 }

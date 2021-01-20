@@ -3,7 +3,7 @@ package character.races
 import character.Race
 import character.Ability
 import character.Stats
-import sim.Sim
+import sim.SimIteration
 
 class Draenei: Race() {
     override var baseStats: Stats = Stats(

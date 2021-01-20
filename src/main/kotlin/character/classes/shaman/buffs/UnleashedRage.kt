@@ -4,7 +4,7 @@ import character.Buff
 import character.Proc
 import character.Stats
 import character.classes.shaman.talents.UnleashedRage as UnleashedRageTalent
-import sim.Sim
+import sim.SimIteration
 import kotlin.math.floor
 
 class UnleashedRage : Buff() {
@@ -13,7 +13,7 @@ class UnleashedRage : Buff() {
     override val statModType: ModType = ModType.PERCENTAGE
     override val hidden: Boolean = false
 
-    override fun modifyStats(sim: Sim, stats: Stats): Stats {
+    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         val talentRanks = sim.subject.klass.talents.find {
             it.name == UnleashedRageTalent.name
         }?.currentRank ?: 0

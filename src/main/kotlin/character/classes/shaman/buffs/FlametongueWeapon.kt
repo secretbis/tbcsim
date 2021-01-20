@@ -1,9 +1,9 @@
 package character.classes.shaman.buffs
 
 import character.Ability
-import sim.Sim
+import sim.SimIteration
 
-class FlametongueWeapon(sim: Sim) : Ability(sim) {
+class FlametongueWeapon(sim: SimIteration) : Ability(sim) {
     override val id: Int = 25489
     override val name: String = "Flametongue Weapon (Rank 7)"
 
@@ -15,6 +15,6 @@ class FlametongueWeapon(sim: Sim) : Ability(sim) {
         TODO("Not yet implemented")
     }
 
-    override fun castTimeMs(): Double = 0.0
-    override fun gcdMs(): Double = 0.0
+    override fun castTimeMs(): Int = 0
+    override fun gcdMs(): Int = 0
 }
