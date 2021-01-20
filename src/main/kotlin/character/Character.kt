@@ -9,20 +9,11 @@ class Character(
     val level: Int = 70,
     var gear: Gear = Gear(),
 ) {
-    // Sim and UI state
-    lateinit var sim: Sim
-
-    var buffs: MutableList<Buff> = mutableListOf()
     lateinit var stats: Stats
-    val resource: Resource
+    var resource: Resource? = null
 
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
-
-    init {
-        computeStats()
-        resource = Resource(this)
-    }
 
     fun hasMainHandWeapon(): Boolean {
         return gear.mainHand.id != -1
@@ -36,7 +27,7 @@ class Character(
         return hasMainHandWeapon() && hasOffHandWeapon()
     }
 
-    fun computeStats() {
+    fun computeStats(sim: Sim, buffs: List<Buff>) {
         // Apply basic stats
         this.stats = Stats()
             .add(klass.baseStats)
@@ -54,6 +45,16 @@ class Character(
                     it.modifyStats(sim, this)
                 }
             }
+            .apply {
+                // Apply percentage modifiers from buffs which are potentially dependent on other percentage modifiers
+                buffs.filter { it.statModType == Buff.ModType.PERCENTAGE_OF_PERCENTAGE }.forEach {
+                    it.modifyStats(sim, this)
+                }
+            }
+
+        if(resource == null) {
+            resource = Resource(this)
+        }
     }
 
     fun getMeleeHitPct(): Double {

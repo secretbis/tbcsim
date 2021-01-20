@@ -6,6 +6,7 @@ interface Class {
     var abilities: List<Ability>
     var buffs: List<Buff>
     var talents: List<Talent>
+    var procs: List<Proc>
 
     // Class resource
     var resourceType: Resource.Type

@@ -1,10 +1,12 @@
 package data.model.deserialize
 
+import character.Proc
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import data.model.ItemProc
+import data.model.default.UnknownProc
 
 class ItemProcDeserializer : JsonDeserializer<ItemProc>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): ItemProc {
@@ -19,5 +21,9 @@ class ItemProcDeserializer : JsonDeserializer<ItemProc>() {
 
 
         return itemProc
+    }
+
+    fun createProcForId(id: Int, name: String): Proc {
+        return UnknownProc()
     }
 }

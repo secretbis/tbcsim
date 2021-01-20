@@ -1,6 +1,7 @@
 package character
 
 import data.model.Item
+import kotlin.reflect.full.declaredMemberProperties
 
 data class Gear(
     var mainHand: Item = Item(),
@@ -23,13 +24,36 @@ data class Gear(
     var trinket1: Item = Item(),
     var trinket2: Item = Item()
 ) {
+    fun buffs(): List<Buff> {
+        val buffs = mutableListOf<Buff>()
+        Gear::class.declaredMemberProperties.forEach {
+            val enchant = (it.get(this) as Item).enchant
+            val tempEnh = (it.get(this) as Item).temporaryEnhancement
+
+            if(enchant != null) {
+                buffs.add(enchant)
+            }
+
+            if(tempEnh != null) {
+                buffs.add(tempEnh)
+            }
+        }
+        return buffs
+    }
+
     fun procs(): List<Proc> {
-        // TODO: Extract procs from equipped gear
-        return listOf()
+        val procs = mutableListOf<Proc>()
+        Gear::class.declaredMemberProperties.forEach {
+            procs.addAll((it.get(this) as Item).procs)
+        }
+        return procs
     }
 
     fun totalStats(): Stats {
-        // TODO: Sum of stats from equipped gear
-        return Stats()
+        val stats = Stats()
+        Gear::class.declaredMemberProperties.forEach {
+            stats.add((it.get(this) as Item).stats)
+        }
+        return stats
     }
 }

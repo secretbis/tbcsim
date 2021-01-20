@@ -1,7 +1,7 @@
 package character.classes.shaman
 
 import character.*
-import character.classes.shaman.buffs.UnleashedRage
+import character.classes.shaman.talents.UnleashedRage
 
 class Shaman : Class {
 
@@ -13,10 +13,11 @@ class Shaman : Class {
         spirit = 135
     )
     override var abilities: List<Ability> = listOf()
-    override var buffs: List<Buff> = listOf(
+    override var buffs: List<Buff> = listOf()
+    override var talents: List<Talent> = listOf(
         UnleashedRage()
     )
-    override var talents: List<Talent> = listOf()
+    override var procs: List<Proc> = listOf()
 
     override var resourceType: Resource.Type = Resource.Type.MANA
     override var baseResourceAmount: Int = 0
@@ -26,4 +27,9 @@ class Shaman : Class {
 
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 2
+
+    // Ability state
+
+    // Windfury weapon has a shared cooldown of 3s across both hands
+    var lastWindfuryWeaponProcMs: Int = -1
 }

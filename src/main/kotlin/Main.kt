@@ -1,6 +1,7 @@
 import character.Character
 import character.Gear
 import character.classes.shaman.Shaman
+import character.classes.shaman.buffs.WindfuryWeapon
 import character.races.Draenei
 import data.DB
 import data.model.Item
@@ -12,9 +13,11 @@ fun getTestCharacter(): Character {
     val gear = Gear()
     gear.mainHand = Item()
     gear.mainHand.id = 1
+    gear.mainHand.temporaryEnhancement = WindfuryWeapon(gear.mainHand)
 
     gear.offHand = Item()
     gear.offHand.id = 2
+    gear.mainHand.temporaryEnhancement = WindfuryWeapon(gear.offHand)
 
     return Character(
         klass = Shaman(),
@@ -30,7 +33,7 @@ fun getTestRotation(): Rotation {
 }
 
 fun getSimOpts(): SimOptions {
-    return SimOptions(iterations = 10)
+    return SimOptions(iterations = 1)
 }
 
 fun setupLogging() {
@@ -41,10 +44,12 @@ fun setupLogging() {
 fun main() {
     setupLogging()
     DB.init()
+
     Sim(
         getTestCharacter(),
         getTestRotation(),
         getSimOpts()
     ).sim()
+
 //    MainUI()
 }

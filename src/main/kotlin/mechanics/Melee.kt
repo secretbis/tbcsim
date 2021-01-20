@@ -1,6 +1,8 @@
 package mechanics
 
+import data.model.Item
 import mu.KotlinLogging
+import sim.Event
 import sim.Sim
 import kotlin.random.Random
 
@@ -8,7 +10,8 @@ object Melee {
     private val logger = KotlinLogging.logger {}
 
     // Base mitigation values based on level difference
-    val baseDualWieldMiss: Double = 0.19
+    const val baseDualWieldMiss: Double = 0.19
+    const val baseCritChance: Double = 0.05
     val baseMissChance = mapOf(
         0 to 0.05,
         1 to 0.055,
@@ -44,7 +47,7 @@ object Melee {
     )
 
     private fun <T> valueByLevelDiff(sim: Sim, table: Map<Int, T>) : T {
-        val levelDiff = sim.opts.targetLevel - sim.subject.level
+        val levelDiff = sim.target.level - sim.subject.level
 
         return when {
             levelDiff <= 0 -> {
@@ -116,7 +119,7 @@ object Melee {
     }
 
     fun getMeleeCritChance(sim: Sim): Double {
-        return sim.subject.getMeleeCritPct()
+        return (sim.subject.getMeleeCritPct() + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
     }
 
     fun getMeleeArmorPen(sim: Sim): Double {
@@ -124,7 +127,72 @@ object Melee {
     }
 
     fun getMeleeArmorMitigation(sim: Sim): Double {
-        val targetArmor = sim.opts.targetArmor - getMeleeArmorPen(sim)
+        val targetArmor = sim.target.stats.armor - getMeleeArmorPen(sim)
         return targetArmor / (targetArmor + (467.5 * sim.subject.level - 22167.5))
+    }
+
+    // Converts an attack power value into a flat damage modifier for a particular item
+    fun apToDamage(sim: Sim, attackPower: Int, item: Item): Double {
+        return (item.dps + (attackPower / 3.5)) * (item.speed / 1000)
+    }
+
+    fun baseDamageRoll(sim: Sim, item: Item, bonusAp: Int = 0): Double {
+        val totalAp = sim.subject.stats.attackPower + bonusAp
+        val min = item.minDmg.coerceAtLeast(0.0)
+        val max = item.maxDmg.coerceAtLeast(1.0)
+
+        return Random.nextDouble(min, max) + apToDamage(sim, totalAp, item)
+    }
+
+    // Performs an attack roll given an initial unmitigated damage value
+    fun attackRoll(sim: Sim, damageRoll: Double, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+        val hitRoll = Random.nextDouble()
+
+        // Generate a single roll table
+        val missChance = getMeleeMissChance(sim, true)
+        val dodgeChance = getMeleeDodgeChance(sim) + missChance
+        val parryChance = getMeleeParryChance(sim) + dodgeChance
+        val glanceChance = if(isWhiteDmg) {
+            getMeleeGlanceChance(sim) + parryChance
+        } else {
+            parryChance
+        }
+        val blockChance = getMeleeBlockChance(sim) + glanceChance
+        val critChance = getMeleeCritChance(sim) + blockChance
+
+        // Find all our possible damage mods from buffs and so on
+        val flatModifier = if(isWhiteDmg) {
+            sim.subject.stats.whiteDamageMultiplier
+        } else {
+            sim.subject.stats.yellowDamageMultiplier
+        }
+
+        val critMultiplier = if(isWhiteDmg) {
+            sim.subject.stats.whiteDamageCritMultiplier
+        } else {
+            sim.subject.stats.yellowDamageCritMultiplier
+        }
+
+        val allMultiplier = if(isWhiteDmg) {
+            sim.subject.stats.whiteDamageMultiplier
+        } else {
+            sim.subject.stats.yellowDamageMultiplier
+        }
+
+        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier
+        val unmitigated = when {
+            hitRoll < missChance -> Pair(0.0, Event.Result.MISS)
+            hitRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
+            hitRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
+            isWhiteDmg && hitRoll < glanceChance -> Pair(finalDamageRoll * (1 - getMeleeGlanceReduction(sim)), Event.Result.GLANCE)
+            hitRoll < blockChance -> Pair(finalDamageRoll * (1 - getMeleeBlockReduction(sim)), Event.Result.BLOCK)
+            hitRoll < critChance -> Pair(finalDamageRoll * critMultiplier, Event.Result.CRIT)
+            else -> Pair(finalDamageRoll, Event.Result.HIT)
+        }
+
+        // Apply constant multipliers (DMF-style buffs)
+
+        // Apply target armor mitigation
+        return Pair(unmitigated.first * (1 - getMeleeArmorMitigation(sim)), unmitigated.second)
     }
 }

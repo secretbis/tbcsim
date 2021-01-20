@@ -1,18 +1,20 @@
 package sim
 
-import java.util.*
+import character.Ability
+import data.Constants
 
 data class Event(
     var tick: Int = -1,
-    val type: Type,
+    val ability: Ability,
+    val eventType: Type,
+    val damageType: Constants.DamageType? = null,
     val durationMs: Int = 0,
-    val amount: Double,
-    val result: Result,
+    val amount: Double = 0.0,
+    val result: Result = Result.NONE,
     val partialAmount: Double = 0.0
 ) {
     enum class Type {
-        MELEE_MH,
-        MELEE_OH,
+        DAMAGE,
         SPELL_START,
         SPELL_CAST,
         BUFF_START,
@@ -31,6 +33,7 @@ data class Event(
         BLOCK,
         CRIT,
         CRUSH,
-        HIT
+        HIT,
+        NONE
     }
 }

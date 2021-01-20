@@ -1,5 +1,6 @@
 package data.model
 
+import character.Buff
 import character.Proc
 import character.Stats
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
@@ -21,10 +22,13 @@ open class Item : ModelBase() {
     var stats: Stats = Stats()
 
     // Procs and effects
-    var staticEffects: List<Proc> = listOf()
+    var enchant: Buff? = null
+    var temporaryEnhancement: Buff? = null
     var procs: List<Proc> = listOf()
 
     // Helpers
     val avgDmg: Double
         get() { return (minDmg + maxDmg) / 2}
+    val dps: Double
+        get() { return avgDmg / speed }
 }

@@ -1,11 +1,11 @@
 package character
 
-import sim.Sim
+abstract class Talent {
+    abstract val name: String
 
-abstract class Talent(val character: Character) {
-    abstract var maxRank: Int
+    abstract val maxRank: Int
     abstract var currentRank: Int
 
-    // If needed, inject additional procs or buffs into the sim state
-    abstract fun apply(sim: Sim)
+    open val buffs: List<Buff> = listOf()
+    open val procs: List<Proc> = listOf()
 }

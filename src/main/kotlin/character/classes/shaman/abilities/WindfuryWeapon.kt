@@ -1,36 +1,32 @@
-package character.auto
+package character.classes.shaman.abilities
 
 import character.Ability
 import character.Proc
+import character.classes.shaman.Shaman
 import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
 import sim.Sim
 
-abstract class MeleeBase(sim: Sim) : Ability(sim) {
-    abstract val item: Item
+class WindfuryWeapon(sim: Sim, val item: Item) : Ability(sim) {
+    override val id: Int = 25505
+    override val name: String = "Windfury Weapon (Rank 5)"
 
-    fun getWeaponSpeed(): Double {
-        return (item.speed / (1 + sim.subject.getMeleeHastePct())).coerceAtLeast(0.01)
-    }
-
-    override fun castTimeMs(): Double = 0.0
-    override fun gcdMs(): Double = 0.0
-
-    var lastAttackTimeMs: Int = 0
-
+    // Windfury weapon has a global 3s ICD, regardless of rank
+    val icdMs = 3000
     override fun available(): Boolean {
-        val nextAvailableTimeMs = lastAttackTimeMs + getWeaponSpeed()
-        return nextAvailableTimeMs <= sim.currentIteration.elapsedTimeMs
+        val lastProc = (sim.subject.klass as Shaman).lastWindfuryWeaponProcMs
+        return lastProc == -1 || lastProc + icdMs <= sim.currentIteration.elapsedTimeMs
     }
 
+    val extraAp = 445
     override fun cast(free: Boolean) {
-        val damageRoll = Melee.baseDamageRoll(sim, item)
-        val result = Melee.attackRoll(sim, damageRoll, true)
+        val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
+        val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
+        val result = Melee.attackRoll(sim, attackOne + attackTwo, true)
 
-        // Save last hit state and fire event
-        lastAttackTimeMs = sim.currentIteration.elapsedTimeMs
+        (sim.subject.klass as Shaman).lastWindfuryWeaponProcMs = sim.currentIteration.elapsedTimeMs
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
@@ -51,4 +47,7 @@ abstract class MeleeBase(sim: Sim) : Ability(sim) {
             sim.fireProc(triggerTypes, listOf(item), this)
         }
     }
+
+    override fun castTimeMs(): Double = 0.0
+    override fun gcdMs(): Double = 0.0
 }

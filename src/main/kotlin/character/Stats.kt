@@ -8,8 +8,11 @@ data class Stats(
     var intellect: Int = 0,
     var spirit: Int = 0,
 
+    var armor: Int = 0,
+
     // Secondary stats
     var attackPower: Int = 0,
+    var rangedAttackPower: Int = 0,
     var physicalCritRating: Int = 0,
     var physicalHitRating: Int = 0,
     var physicalHasteRating: Int = 0,
@@ -48,7 +51,10 @@ data class Stats(
         intellect += stats.intellect
         spirit += stats.intellect
 
+        armor += stats.armor
+
         attackPower += stats.attackPower
+        rangedAttackPower += stats.rangedAttackPower
         physicalCritRating += stats.physicalCritRating
         physicalHitRating += stats.physicalHitRating
         physicalHasteRating += stats.physicalHasteRating
@@ -74,7 +80,10 @@ data class Stats(
         intellect -= stats.intellect
         spirit -= stats.intellect
 
+        armor -= stats.armor
+
         attackPower -= stats.attackPower
+        rangedAttackPower -= stats.rangedAttackPower
         physicalCritRating -= stats.physicalCritRating
         physicalHitRating -= stats.physicalHitRating
         physicalHasteRating -= stats.physicalHasteRating

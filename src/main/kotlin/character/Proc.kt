@@ -1,11 +1,20 @@
 package character
 
+import data.model.Item
+import sim.Sim
+
 abstract class Proc {
-    // A static proc is basically just a hidden buff
-    // Lots of items are implemented with stuff like AP bonuses as "spells/procs"
-    open val static: Boolean = false
-    open val trigger: Int = 0
+    enum class Trigger {
+        MELEE_WHITE_HIT,
+        MELEE_WHITE_CRIT,
+        MELEE_YELLOW_HIT,
+        MELEE_YELLOW_CRIT,
+        SPELL_HIT,
+        SPELL_CRIT
+    }
+
+    open val triggers: List<Trigger> = listOf()
     open val ppm: Double = 0.0
 
-    abstract fun proc(character: Character)
+    abstract fun proc(sim: Sim, items: List<Item>?, ability: Ability?)
 }

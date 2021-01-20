@@ -7,6 +7,8 @@ class Boss : Class {
     override var abilities: List<Ability> = listOf()
     override var buffs: List<Buff> = listOf()
     override var talents: List<Talent> = listOf()
+    override var procs: List<Proc> = listOf()
+
     override var resourceType: Resource.Type = Resource.Type.MANA
     override var baseResourceAmount: Int = 0
     override var canDualWield: Boolean = false

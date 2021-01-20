@@ -26,9 +26,7 @@ class ItemDeserializer : JsonDeserializer<Item>() {
         item.speed = node.get("delay").asDouble(item.speed)
         item.stats = deserializeStats(node)
 
-        val allProcs = deserializeProcs(node)
-        item.staticEffects = allProcs.filter { it.static }
-        item.procs = allProcs.filter { !it.static }
+        item.procs = deserializeProcs(node)
 
         return item
     }

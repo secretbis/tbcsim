@@ -1,17 +1,16 @@
 package data.model.default
 
-import character.Character
+import character.Ability
 import character.Proc
+import data.model.Item
 import mu.KotlinLogging
+import sim.Sim
 
-class UnknownProc(
-        private val itemId: Int,
-        private val itemName: String,
-        private val spellId: Int,
-        private val spellName: String) : Proc() {
+class UnknownProc : Proc() {
     val logger = KotlinLogging.logger {}
 
-    override fun proc(character: Character) {
-        logger.warn { "Unknown proc $spellName ($spellId) from item $itemName ($itemId)" }
+    override fun proc(sim: Sim, items: List<Item>?, ability: Ability?) {
+        val itemStr = items?.map { "item: ${it.name} (${it.id})" }?.joinToString { ", " } ?: ""
+        logger.warn { "Unknown proc ${ability?.name} (${ability?.id}) $itemStr" }
     }
 }
