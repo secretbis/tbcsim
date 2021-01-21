@@ -3,23 +3,62 @@ package character
 import sim.SimIteration
 
 abstract class Buff {
-    enum class ModType {
-        FLAT,
-        PERCENTAGE,
-        PERCENTAGE_OF_PERCENTAGE,
-        NONE
+    open class State {
+        var currentStacks: Int = 0
+        var currentCharges: Int = 0
+        var appliedAtMs: Int = 0
     }
 
-    abstract var appliedAtMs: Int
     abstract val durationMs: Int
-    abstract val statModType: ModType
 
     open val hidden: Boolean = false
     open val maxStacks: Int = 0
-    open var currentStacks: Int = 0
+    open val maxCharges: Int = 0
 
-    open fun reset() {
-        currentStacks = 0
+    // Buff implementations can implement their own state containers
+    open fun stateFactory(): State {
+        return State()
+    }
+
+    internal fun state(sim: SimIteration): State {
+        // Create state object if it does not exist, and return it
+        val state = sim.buffState.getOrDefault(this, stateFactory())
+        sim.buffState[this] = state
+        return state
+    }
+
+    open fun refresh(sim: SimIteration) {
+        val state = state(sim)
+
+        // Always refresh buff application time
+        state.appliedAtMs = sim.elapsedTimeMs
+
+        // Add stacks if it stacks
+        if (maxStacks > 0 && state.currentStacks < maxStacks) {
+            // Increase stacks
+            state.currentStacks += state.currentStacks + 1
+        }
+
+        // Refresh charges if it has charges
+        state.currentCharges = maxCharges
+    }
+
+    open fun reset(sim: SimIteration) {
+        val state = state(sim)
+
+        state.currentStacks = 0
+        state.currentCharges = maxCharges
+    }
+
+    open fun isFinished(sim: SimIteration): Boolean {
+        val state = state(sim)
+
+        val noChargesLeft = maxCharges > 0 && state.currentCharges == 0
+
+        // Duration of -1 means static
+        val isExpired = durationMs != -1 && (sim.elapsedTimeMs > state.appliedAtMs + durationMs)
+
+        return noChargesLeft || isExpired
     }
 
     abstract fun modifyStats(sim: SimIteration, stats: Stats): Stats

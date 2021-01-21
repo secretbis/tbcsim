@@ -8,6 +8,7 @@ class Character(
     val race: Race,
     val level: Int = 70,
     var gear: Gear = Gear(),
+    var talents: Map<String, Talent> = mapOf()
 ) {
     lateinit var stats: Stats
     var resource: Resource? = null
@@ -34,20 +35,7 @@ class Character(
             .add(race.baseStats)
             .add(gear.totalStats())
             .apply {
-                // Apply flat modifiers from buffs
-                buffs.filter { it.statModType == Buff.ModType.FLAT }.forEach {
-                    it.modifyStats(sim ,this)
-                }
-            }
-            .apply {
-                // Apply percentage modifiers from buffs
-                buffs.filter { it.statModType == Buff.ModType.PERCENTAGE }.forEach {
-                    it.modifyStats(sim, this)
-                }
-            }
-            .apply {
-                // Apply percentage modifiers from buffs which are potentially dependent on other percentage modifiers
-                buffs.filter { it.statModType == Buff.ModType.PERCENTAGE_OF_PERCENTAGE }.forEach {
+                buffs.forEach {
                     it.modifyStats(sim, this)
                 }
             }
@@ -57,45 +45,70 @@ class Character(
         }
     }
 
-    fun getMeleeHitPct(): Double {
+    fun armor(): Int {
+        return (stats.armor * stats.armorMultiplier).toInt()
+    }
+
+    fun attackPower(): Int {
+        return (
+            (
+                stats.attackPower +
+                stats.strength * klass.attackPowerFromStrength +
+                stats.agility * klass.attackPowerFromAgility
+            ) * stats.attackPowerMultiplier
+        ).toInt()
+    }
+
+    fun rangedAttackPower(): Int {
+        return (
+            (
+                stats.attackPower +
+                stats.agility * klass.rangedAttackPowerFromAgility
+            ) * stats.rangedAttackPowerMultiplier
+        ).toInt()
+    }
+
+    fun spellDamage(): Int {
+        return (stats.spellDamage * stats.spellDamageMultiplier).toInt()
+    }
+
+    fun meleeHitPct(): Double {
         return stats.physicalHitRating / Rating.meleeHitPerPct
     }
 
-    fun getSpellHitPct(): Double {
+    fun spellHitPct(): Double {
         return stats.spellHitRating / Rating.spellHitPerPct
     }
 
-    fun getExpertisePct(): Double {
+    fun expertisePct(): Double {
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
-    fun getMeleeCritPct(): Double {
+    fun meleeCritPct(): Double {
         return stats.physicalCritRating / Rating.critPerPct
     }
 
-    fun getSpellCritPct(): Double {
+    fun spellCritPct(): Double {
         return stats.spellCritRating / Rating.critPerPct
     }
 
-    fun getArmorPen(): Double {
-        return stats.armorPen.toDouble()
+    fun armorPen(): Int {
+        return stats.armorPen
     }
 
-    fun getMeleeHastePct(): Double {
-        // TODO: Buffs and etc
-        return stats.physicalHasteRating / Rating.hastePerPct
+    fun meleeHasteMultiplier(): Double {
+        return (1 + (stats.physicalHasteRating / Rating.hastePerPct / 100)) * stats.physicalHasteMultiplier
     }
 
-    fun getSpellHastePct(): Double {
-        // TODO: Buffs and etc
-        return stats.spellHasteRating / Rating.hastePerPct
+    fun spellHasteMultiplier(): Double {
+        return (1 + (stats.physicalHasteRating / Rating.hastePerPct / 100)) * stats.physicalHasteMultiplier
     }
 
-    fun getPhysicalGcd(): Double {
-        return (gcdBaseMs / (1 + getMeleeHastePct())).coerceAtLeast(minGcdMs)
+    fun physicalGcd(): Double {
+        return (gcdBaseMs / meleeHasteMultiplier()).coerceAtLeast(minGcdMs)
     }
 
-    fun getSpellGcd(): Double {
-        return gcdBaseMs / (1 + getSpellHastePct()).coerceAtLeast(minGcdMs)
+    fun spellGcd(): Double {
+        return (gcdBaseMs / spellHasteMultiplier()).coerceAtLeast(minGcdMs)
     }
 }

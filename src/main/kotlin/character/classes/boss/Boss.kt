@@ -15,4 +15,5 @@ class Boss : Class {
     override var allowAutoAttack: Boolean = false
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 0
+    override var rangedAttackPowerFromAgility: Int = 0
 }

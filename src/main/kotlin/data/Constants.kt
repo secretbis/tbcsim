@@ -132,7 +132,7 @@ object Constants {
         MISCELLANEOUS,
         GLYPH;
 
-        fun getSubclasses(itemClass: ItemClass) : List<ItemSubclass> {
+        fun subclasses(itemClass: ItemClass) : List<ItemSubclass> {
             return ItemSubclass.values().filter { it.itemClass == itemClass }
         }
 

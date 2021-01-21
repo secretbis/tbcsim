@@ -8,13 +8,22 @@ import kotlin.random.Random
 import character.classes.shaman.abilities.WindfuryWeapon as WindfuryWeaponAbility
 
 class WindfuryWeapon(val sourceItem: Item) : Buff() {
-    override var appliedAtMs: Int = 0
+    class WindfuryWeaponState : Buff.State() {
+        var lastWindfuryWeaponProcMs: Int = -1
+    }
+
+    override fun stateFactory(): WindfuryWeaponState {
+        return WindfuryWeaponState()
+    }
+
     override val durationMs: Int = 30 * 60 * 1000
-    override val statModType: ModType = ModType.NONE
 
     override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         return stats
     }
+
+    // Windfury weapon has a global 3s ICD, regardless of rank
+    val icdMs = 3000
 
     override val procs: List<Proc>
         get() = listOf(
@@ -27,7 +36,12 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
                 )
 
                 override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    if(items?.contains(sourceItem) == true) {
+                    val state = state(sim) as WindfuryWeaponState
+
+                    val lastProc = state.lastWindfuryWeaponProcMs
+                    val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
+
+                    if(offIcd && items?.contains(sourceItem) == true) {
                         val wfAbility = WindfuryWeaponAbility(sim, sourceItem)
 
                         // 20% chance to trigger

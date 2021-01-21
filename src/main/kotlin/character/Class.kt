@@ -17,4 +17,5 @@ interface Class {
 
     var attackPowerFromAgility: Int
     var attackPowerFromStrength: Int
+    var rangedAttackPowerFromAgility: Int
 }

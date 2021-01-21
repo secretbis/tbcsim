@@ -11,8 +11,8 @@ import sim.SimIteration
 abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
     abstract val item: Item
 
-    fun getWeaponSpeed(): Double {
-        return (item.speed / (1 + sim.subject.getMeleeHastePct())).coerceAtLeast(0.01)
+    fun weaponSpeed(): Double {
+        return (item.speed / sim.subject.meleeHasteMultiplier()).coerceAtLeast(0.01)
     }
 
     override fun castTimeMs(): Int = 0
@@ -21,7 +21,7 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
     var lastAttackTimeMs: Int = 0
 
     override fun available(): Boolean {
-        val nextAvailableTimeMs = lastAttackTimeMs + getWeaponSpeed()
+        val nextAvailableTimeMs = lastAttackTimeMs + weaponSpeed()
         return nextAvailableTimeMs <= sim.elapsedTimeMs
     }
 
@@ -42,8 +42,8 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
         // Proc anything that can proc off a white hit
         // TODO: Procs off miss/dodge/parry/etc?
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_WHITE_HIT)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_WHITE_CRIT)
+            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT)
+            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT)
             else -> null
         }
 

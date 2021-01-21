@@ -2,18 +2,16 @@ import character.Character
 import character.Gear
 import character.classes.shaman.Shaman
 import character.classes.shaman.buffs.WindfuryWeapon
+import character.classes.shaman.talents.NaturesGuidance
 import character.races.Draenei
 import data.DB
 import data.model.Item
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import sim.Sim
 import sim.SimOptions
 import sim.rotation.Rotation
 
-fun getTestCharacter(): Character {
+fun testCharacter(): Character {
     val gear = Gear()
     gear.mainHand = Item()
     gear.mainHand.id = 1
@@ -26,23 +24,28 @@ fun getTestCharacter(): Character {
     return Character(
         klass = Shaman(),
         race = Draenei(),
-        gear = gear
+        gear = gear,
+        talents = mapOf(
+            NaturesGuidance.name to NaturesGuidance(3)
+        )
     )
 }
 
-fun getTestRotation(): Rotation {
+fun testRotation(): Rotation {
     return Rotation(
         listOf()
     )
 }
 
-fun getSimOpts(): SimOptions {
+fun simOpts(): SimOptions {
     return SimOptions(iterations = 1000)
 }
 
 fun setupLogging() {
-    // Debug logging by default
-    System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO")
+    val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
+    if(System.getProperty(logKey).isNullOrEmpty()) {
+        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO")
+    }
 }
 
 fun main() {
@@ -51,9 +54,9 @@ fun main() {
 
     runBlocking {
         Sim(
-            getTestCharacter(),
-            getTestRotation(),
-            getSimOpts()
+            testCharacter(),
+            testRotation(),
+            simOpts()
         ).sim()
     }
 

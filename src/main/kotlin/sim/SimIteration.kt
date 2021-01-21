@@ -13,7 +13,6 @@ import mu.KotlinLogging
 import sim.rotation.Rotation
 import sim.rotation.Rule
 
-// TODO: Construct with clones of target and subject
 class SimIteration(
     val subject: Character,
     val rotation: Rotation,
@@ -21,7 +20,7 @@ class SimIteration(
 ) {
     val logger = KotlinLogging.logger {}
 
-    val target: Character = getDefaultTarget()
+    val target: Character = defaultTarget()
 
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
@@ -30,15 +29,15 @@ class SimIteration(
     var procs: MutableList<Proc> = mutableListOf()
     var buffs: MutableList<Buff> = mutableListOf()
 
+    // Buffs need a place to store state per iteration
+    val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
+
     // Global state
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
 
     // Flag to track if a buff was added, meaning we need to recompute stats
     var buffRecentlyAdded: Boolean = false
-
-    // TODO: Delegate state as low as possible
-    var lastWindfuryWeaponProcMs: Int = -1
 
     fun onGcd(): Boolean {
         return elapsedTimeMs < gcdEndMs
@@ -64,15 +63,15 @@ class SimIteration(
 
         // Collect procs from class, talents, gear, and etc.
         procs.addAll(subject.klass.procs)
-        subject.klass.talents.filter { it.currentRank > 0 }.forEach {
-            procs.addAll(it.procs)
+        subject.talents.filter { it.value.currentRank > 0 }.forEach {
+            procs.addAll(it.value.procs)
         }
         procs.addAll(subject.gear.procs())
 
         // Collect buffs from class, talents, gear, and etc
         buffs.addAll(subject.klass.buffs)
-        subject.klass.talents.filter { it.currentRank > 0 }.forEach {
-            buffs.addAll(it.buffs)
+        subject.talents.filter { it.value.currentRank > 0 }.forEach {
+            buffs.addAll(it.value.buffs)
         }
         buffs.addAll(subject.gear.buffs())
 
@@ -83,9 +82,9 @@ class SimIteration(
     fun step() {
         // Filter out and reset any expired buffs
         val toRemove = buffs.filter {
-            elapsedTimeMs > it.appliedAtMs + it.durationMs
+            it.isFinished(this)
         }
-        toRemove.forEach { it.reset() }
+        toRemove.forEach { it.reset(this) }
         buffs.removeAll(toRemove)
 
         // Compute stats if something about our buffs changed
@@ -114,22 +113,14 @@ class SimIteration(
     }
 
     fun addBuff(buff: Buff) {
+        // Refresh, and flag buffs as changed
+        buff.refresh(this)
+        buffRecentlyAdded = true
+
+        // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
-
-        // Always refresh buff application time
-        buff.appliedAtMs = elapsedTimeMs
-
-        // Handle buff refreshing, stacking, and etc.
-        if(exists) {
-            if (buff.maxStacks > 0 && buff.currentStacks < buff.maxStacks) {
-                // Increase stacks
-                buff.currentStacks = buff.currentStacks + 1
-                buffRecentlyAdded = true
-            }
-        } else {
-            // Not yet present
+        if(!exists) {
             buffs.add(buff)
-            buffRecentlyAdded = true
         }
     }
 
@@ -169,7 +160,7 @@ class SimIteration(
         events.add(event)
     }
 
-    private fun getDefaultTarget(): Character {
+    private fun defaultTarget(): Character {
         val char = Character(
             BossClass(),
             BossRace(),

@@ -31,6 +31,7 @@ data class Event(
         PARRY,
         GLANCE,
         BLOCK,
+        BLOCKED_CRIT,
         CRIT,
         CRUSH,
         HIT,

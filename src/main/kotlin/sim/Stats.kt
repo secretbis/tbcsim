@@ -56,8 +56,9 @@ object Stats {
                     val sd = sd(nonzeroAmounts, average)
 
                     // Compute result distributions with the entire set of events
+                    // Count blocked crits as crits, since the block value is very small
                     val hitPct = events.filter { it.result == Event.Result.HIT }.size / count * 100.0
-                    val critPct = events.filter { it.result == Event.Result.CRIT }.size / count * 100.0
+                    val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT }.size / count * 100.0
                     val missPct = events.filter { it.result == Event.Result.MISS }.size / count * 100.0
                     val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / count * 100.0
                     val parryPct = events.filter { it.result == Event.Result.PARRY }.size / count * 100.0
@@ -81,6 +82,18 @@ object Stats {
                     precision(10, 2)
                     precision(11, 2)
 
+                    formatFlag(1, ",")
+                    formatFlag(2, ",")
+                    formatFlag(3, ",")
+                    formatFlag(4, ",")
+                    formatFlag(5, ",")
+                    formatFlag(6, ",")
+                    formatFlag(7, ",")
+                    formatFlag(8, ",")
+                    formatFlag(9, ",")
+                    formatFlag(10, ",")
+                    formatFlag(11, ",")
+
                     postfix(6, "%")
                     postfix(7, "%")
                     postfix(8, "%")
@@ -89,6 +102,7 @@ object Stats {
                     postfix(11, "%")
 
                     borderStyle = Table.BorderStyle.SINGLE_LINE
+
                 }
             }.render(StringBuilder())
         }
