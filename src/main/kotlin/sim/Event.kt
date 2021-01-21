@@ -1,14 +1,16 @@
 package sim
 
 import character.Ability
+import character.Buff
 import data.Constants
 
 data class Event(
     var tick: Int = -1,
-    val ability: Ability,
+    var timeMs: Int = -1,
+    val ability: Ability? = null,
+    val buff: Buff? = null,
     val eventType: Type,
     val damageType: Constants.DamageType? = null,
-    val durationMs: Int = 0,
     val amount: Double = 0.0,
     val result: Result = Result.NONE,
     val partialAmount: Double = 0.0
@@ -18,6 +20,7 @@ data class Event(
         SPELL_START,
         SPELL_CAST,
         BUFF_START,
+        BUFF_REFRESH,
         BUFF_END,
         PROC
     }

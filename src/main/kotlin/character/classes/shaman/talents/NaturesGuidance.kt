@@ -17,6 +17,7 @@ class NaturesGuidance(currentRank: Int) : Talent(currentRank) {
 
     override val buffs: List<Buff> = listOf(
         object : Buff() {
+            override val name: String = Companion.name
             override val durationMs: Int = -1
             override val hidden: Boolean = true
 

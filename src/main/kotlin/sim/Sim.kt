@@ -25,6 +25,7 @@ class Sim (
         // Stats
         Stats.dps(iterations)
         Stats.resultsByAbility(iterations)
+        Stats.resultsByBuff(iterations)
     }
 
     private fun iterate() : SimIteration {
@@ -35,6 +36,8 @@ class Sim (
             iteration.elapsedTimeMs = timeMs
             iteration.tick()
         }
+
+        iteration.cleanup()
 
         return iteration
     }

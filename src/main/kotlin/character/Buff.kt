@@ -9,6 +9,7 @@ abstract class Buff {
         var appliedAtMs: Int = 0
     }
 
+    abstract val name: String
     abstract val durationMs: Int
 
     open val hidden: Boolean = false

@@ -17,6 +17,7 @@ class Shaman : Class {
     override var buffs: List<Buff> = listOf()
     override var talents: List<Talent> = listOf(
         AncestralKnowledge(0),
+//        Concussion(0),
         Convection(0),
         ElementalDevastation(0),
         ElementalWeapons(0),

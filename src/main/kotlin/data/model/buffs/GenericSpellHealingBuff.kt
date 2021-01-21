@@ -4,6 +4,7 @@ import character.*
 import sim.SimIteration
 
 class GenericSpellHealingBuff(val spellHealing: Int) : Buff() {
+    override val name: String = "Spell Healing"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

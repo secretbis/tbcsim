@@ -16,6 +16,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
         return WindfuryWeaponState()
     }
 
+    override val name = "Windfury Weapon"
     override val durationMs: Int = 30 * 60 * 1000
 
     override fun modifyStats(sim: SimIteration, stats: Stats): Stats {

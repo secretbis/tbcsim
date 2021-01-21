@@ -1,5 +1,6 @@
 package sim
 
+import character.Buff
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
 import mu.KotlinLogging
@@ -8,6 +9,16 @@ import kotlin.math.sqrt
 
 object Stats {
     val logger = KotlinLogging.logger {}
+
+    data class BuffSegment(
+        val startMs: Int,
+        val endMs: Int,
+        val refreshCount: Int,
+        val buff: Buff
+    ) {
+        val durationMs: Int
+            get() = endMs - startMs
+    }
 
     val df = DecimalFormat("#,###.##")
 
@@ -30,17 +41,108 @@ object Stats {
         logger.info("Std. Dev: ${df.format(sd)}")
     }
 
+    fun resultsByBuff(iterations: List<SimIteration>) {
+        val byBuff = iterations.flatMap { it.events }
+            .filter {
+                it.buff != null && !it.buff.hidden && (
+                    it.eventType == Event.Type.BUFF_START ||
+                    it.eventType == Event.Type.BUFF_REFRESH ||
+                    it.eventType == Event.Type.BUFF_END
+                )
+            }
+            .groupBy { it.buff!!.name }
+
+        val keys = byBuff.keys.toList()
+
+        logger.info {
+            "\n" +
+            table {
+                header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds")
+
+                for (key in keys) {
+                    val events = byBuff[key]!!
+                    val applied = events.filter { it.eventType == Event.Type.BUFF_START }.size
+                    val refreshed = events.filter { it.eventType == Event.Type.BUFF_REFRESH }.size
+
+                    val segments = mutableListOf<BuffSegment>()
+                    var lastEvent: Event? = null
+                    var currentStart: Event? = null
+                    var refreshCount: Int = 0
+                    events.forEach {
+                        if(it.eventType == Event.Type.BUFF_START) {
+                            if(lastEvent?.eventType == Event.Type.BUFF_START) {
+                                logger.warn { "Possibly invalid segment - found two starts for buff: ${it.buff!!.name}" }
+                            }
+
+                            currentStart = it
+                        }
+
+                        if(it.eventType == Event.Type.BUFF_REFRESH) {
+                            if(lastEvent?.eventType == Event.Type.BUFF_END) {
+                                logger.warn { "Possibly invalid segment - refresh without enclosing start for buff: ${it.buff!!.name}" }
+                            }
+                            refreshCount++
+                        }
+
+                        if(it.eventType == Event.Type.BUFF_END) {
+                            if(lastEvent?.eventType == Event.Type.BUFF_END) {
+                                logger.warn { "Possibly invalid segment - found two ends for buff: ${it.buff!!.name}" }
+                            }
+
+                            if(currentStart != null) {
+                                segments.add(BuffSegment(currentStart!!.timeMs, it.timeMs, refreshCount, it.buff!!))
+                                // Reset
+                                currentStart = null
+                                refreshCount = 0
+                            } else {
+                                logger.warn { "Possibly invalid segment - found end without start for buff: ${it.buff!!.name}" }
+                            }
+                        }
+
+                        lastEvent = it
+                    }
+
+                    val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs) * 100.0
+                    val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
+
+                    row(key, applied, refreshed, uptimePct, avgDuration)
+                }
+
+                hints {
+                    alignment(0, Table.Hints.Alignment.LEFT)
+
+                    for(i in 1..2) {
+                        precision(1, 0)
+                    }
+
+                    for(i in 3..4) {
+                        precision(i, 2)
+                    }
+
+                    for(i in 1..4) {
+                        formatFlag(i, ",")
+                    }
+
+                    for(i in 3..3) {
+                        postfix(i, "%")
+                    }
+
+                    borderStyle = Table.BorderStyle.SINGLE_LINE
+                }
+            }.render(StringBuilder())
+        }
+    }
+
     fun resultsByAbility(iterations: List<SimIteration>) {
         val byAbility = iterations.flatMap { it.events }
             .filter { it.eventType == Event.Type.DAMAGE }
-            .groupBy { it.ability.name }
+            .groupBy { it.ability?.name ?: "Unknown" }
 
         val keys = byAbility.keys.toList()
 
         logger.info {
             "\n" +
             table {
-                // TODO: Rest of results
                 header("Name", "Count", "TotalDmg", "AverageDmg", "MedianDmg", "StdDevDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                 for (key in keys) {
@@ -71,38 +173,19 @@ object Stats {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
                     precision(1, 0)
-                    precision(2, 2)
-                    precision(3, 2)
-                    precision(4, 2)
-                    precision(5, 2)
-                    precision(6, 2)
-                    precision(7, 2)
-                    precision(8, 2)
-                    precision(9, 2)
-                    precision(10, 2)
-                    precision(11, 2)
+                    for(i in 2..11) {
+                        precision(i, 2)
+                    }
 
-                    formatFlag(1, ",")
-                    formatFlag(2, ",")
-                    formatFlag(3, ",")
-                    formatFlag(4, ",")
-                    formatFlag(5, ",")
-                    formatFlag(6, ",")
-                    formatFlag(7, ",")
-                    formatFlag(8, ",")
-                    formatFlag(9, ",")
-                    formatFlag(10, ",")
-                    formatFlag(11, ",")
+                    for(i in 1..11) {
+                        formatFlag(i, ",")
+                    }
 
-                    postfix(6, "%")
-                    postfix(7, "%")
-                    postfix(8, "%")
-                    postfix(9, "%")
-                    postfix(10, "%")
-                    postfix(11, "%")
+                    for(i in 6..11) {
+                        postfix(i, "%")
+                    }
 
                     borderStyle = Table.BorderStyle.SINGLE_LINE
-
                 }
             }.render(StringBuilder())
         }

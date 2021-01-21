@@ -69,11 +69,11 @@ class SimIteration(
         procs.addAll(subject.gear.procs())
 
         // Collect buffs from class, talents, gear, and etc
-        buffs.addAll(subject.klass.buffs)
+        subject.klass.buffs.forEach { addBuff(it) }
         subject.talents.filter { it.value.currentRank > 0 }.forEach {
-            buffs.addAll(it.value.buffs)
+            it.value.buffs.forEach { buff -> addBuff(buff) }
         }
-        buffs.addAll(subject.gear.buffs())
+        subject.gear.buffs().forEach { addBuff(it) }
 
         // Compute initial stats
         subject.computeStats(this, buffs)
@@ -84,7 +84,13 @@ class SimIteration(
         val toRemove = buffs.filter {
             it.isFinished(this)
         }
-        toRemove.forEach { it.reset(this) }
+        toRemove.forEach {
+            it.reset(this)
+            logEvent(Event(
+                eventType = Event.Type.BUFF_END,
+                buff = it
+            ))
+        }
         buffs.removeAll(toRemove)
 
         // Compute stats if something about our buffs changed
@@ -112,6 +118,16 @@ class SimIteration(
         }
     }
 
+     fun cleanup() {
+         // Log end for all buffs
+         buffs.forEach {
+             logEvent(Event(
+                eventType = Event.Type.BUFF_END,
+                buff = it
+            ))
+         }
+     }
+
     fun addBuff(buff: Buff) {
         // Refresh, and flag buffs as changed
         buff.refresh(this)
@@ -121,6 +137,15 @@ class SimIteration(
         val exists = buffs.find { it === buff } != null
         if(!exists) {
             buffs.add(buff)
+            logEvent(Event(
+                eventType = Event.Type.BUFF_START,
+                buff = buff
+            ))
+        } else {
+            logEvent(Event(
+                eventType = Event.Type.BUFF_REFRESH,
+                buff = buff
+            ))
         }
     }
 
@@ -150,12 +175,16 @@ class SimIteration(
     }
 
     fun logEvent(event: Event) {
-        // Auto-set tick if not specified
+        // Auto-set tick and time if not specified
         if(event.tick == -1) {
             event.tick = tick
         }
 
-        logger.debug { "Got event: ${event.ability.name} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
+        if(event.timeMs == -1) {
+            event.timeMs = elapsedTimeMs
+        }
+
+        logger.debug { "Got event: ${event.ability?.name ?: "Unknown"} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
 
         events.add(event)
     }

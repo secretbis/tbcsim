@@ -14,6 +14,7 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     val buff = object : Buff() {
+        override val name: String = Companion.name
         override val durationMs: Int = 10000
         override val hidden: Boolean = true
 
