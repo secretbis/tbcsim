@@ -21,7 +21,6 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
             val talentRanks = sim.subject.talents[Flurry.name]?.currentRank ?: 0
 
-            // Make sure to double check charges here in case two auto attacks fall on the same tick
             val state = state(sim)
             val modifier = if(talentRanks > 0 && state.currentCharges > 0) {
                 1.05 + (0.05 * talentRanks)

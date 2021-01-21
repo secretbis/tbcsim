@@ -36,8 +36,8 @@ class SimIteration(
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
 
-    // Flag to track if a buff was added, meaning we need to recompute stats
-    var buffRecentlyAdded: Boolean = false
+    // Flag to track if we need to recompute stats on the next tick
+    var recomputeStatsOnNextTick: Boolean = false
 
     fun onGcd(): Boolean {
         return elapsedTimeMs < gcdEndMs
@@ -79,7 +79,7 @@ class SimIteration(
         subject.computeStats(this, buffs)
     }
 
-    fun step() {
+    fun tick() {
         // Filter out and reset any expired buffs
         val toRemove = buffs.filter {
             it.isFinished(this)
@@ -88,9 +88,9 @@ class SimIteration(
         buffs.removeAll(toRemove)
 
         // Compute stats if something about our buffs changed
-        if(toRemove.isNotEmpty() || buffRecentlyAdded) {
+        if(toRemove.isNotEmpty() || recomputeStatsOnNextTick) {
             subject.computeStats(this, buffs)
-            buffRecentlyAdded = false
+            recomputeStatsOnNextTick = false
         }
 
         // Find and cast next rotation ability
@@ -115,7 +115,7 @@ class SimIteration(
     fun addBuff(buff: Buff) {
         // Refresh, and flag buffs as changed
         buff.refresh(this)
-        buffRecentlyAdded = true
+        recomputeStatsOnNextTick = true
 
         // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
@@ -140,9 +140,9 @@ class SimIteration(
             }
 
             // Get procs from static sources
-            allProcs.addAll(procs)
+            allProcs.addAll(procs.filter { proc -> proc.triggers.contains(trigger) })
 
-            // Fire all procs
+            // Fire all found procs
             allProcs.forEach {
                 it.proc(this, items, ability)
             }

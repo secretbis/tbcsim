@@ -33,7 +33,7 @@ class Sim (
         for (timeMs in 0..opts.durationMs step opts.stepMs) {
             iteration.tick++
             iteration.elapsedTimeMs = timeMs
-            iteration.step()
+            iteration.tick()
         }
 
         return iteration

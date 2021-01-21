@@ -2,6 +2,7 @@ import character.Character
 import character.Gear
 import character.classes.shaman.Shaman
 import character.classes.shaman.buffs.WindfuryWeapon
+import character.classes.shaman.talents.Flurry
 import character.classes.shaman.talents.NaturesGuidance
 import character.races.Draenei
 import data.DB
@@ -26,6 +27,7 @@ fun testCharacter(): Character {
         race = Draenei(),
         gear = gear,
         talents = mapOf(
+            Flurry.name to Flurry(5),
             NaturesGuidance.name to NaturesGuidance(3)
         )
     )
