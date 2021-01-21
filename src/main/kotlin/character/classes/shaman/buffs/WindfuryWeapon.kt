@@ -18,6 +18,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
 
     override val name = "Windfury Weapon"
     override val durationMs: Int = 30 * 60 * 1000
+    override val hidden: Boolean = true
 
     override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         return stats
@@ -37,7 +38,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
                 )
 
                 override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    val state = state(sim) as WindfuryWeaponState
+                    val state = sharedState(name, sim) as WindfuryWeaponState
 
                     val lastProc = state.lastWindfuryWeaponProcMs
                     val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
@@ -50,6 +51,7 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
 
                         if(rng && wfAbility.available()) {
                             wfAbility.cast()
+                            state.lastWindfuryWeaponProcMs = sim.elapsedTimeMs
                             sim.logEvent(
                                 Event(
                                     eventType = Event.Type.PROC,

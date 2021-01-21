@@ -31,7 +31,7 @@ class Shaman : Class {
 //        ThunderingStrikes(0),
 //        TotemicFocus(0),
         UnleashedRage(0),
-//        WeaponMastery(0)
+        WeaponMastery(0)
     )
     override var procs: List<Proc> = listOf()
 

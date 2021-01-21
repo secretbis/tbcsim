@@ -143,10 +143,10 @@ object Melee {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sim: SimIteration, damageRoll: Double, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sim: SimIteration, damageRoll: Double, isWhiteDmg: Boolean = false, isOffHand: Boolean = false) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val flatModifier = if(isWhiteDmg) {
-            sim.subject.stats.yellowDamageFlatModifier
+            sim.subject.stats.whiteDamageFlatModifier
         } else {
             sim.subject.stats.yellowDamageFlatModifier
         }
@@ -163,8 +163,18 @@ object Melee {
             sim.subject.stats.yellowDamageMultiplier
         }
 
+        val offHandMultiplier = if(isOffHand) {
+            Stats.offHandPenalty + (1 - if(isWhiteDmg) {
+                sim.subject.stats.whiteDamageAddlOffHandPenaltyMultiplier
+            } else {
+                sim.subject.stats.yellowDamageAddlOffHandPenaltyMultiplier
+            })
+        } else {
+            1.0
+        }
+
         // Apply constant multipliers and finalize the damage roll
-        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier
+        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * offHandMultiplier
 
         // Get the attack result
         val missChance = meleeMissChance(sim, true)

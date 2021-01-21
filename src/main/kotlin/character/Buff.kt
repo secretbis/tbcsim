@@ -21,6 +21,13 @@ abstract class Buff {
         return State()
     }
 
+    internal fun sharedState(name: String, sim: SimIteration): State {
+        // Create state object if it does not exist, and return it
+        val state = sim.sharedBuffState.getOrDefault(name, stateFactory())
+        sim.sharedBuffState[name] = state
+        return state
+    }
+
     internal fun state(sim: SimIteration): State {
         // Create state object if it does not exist, and return it
         val state = sim.buffState.getOrDefault(this, stateFactory())

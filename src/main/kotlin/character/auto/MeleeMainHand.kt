@@ -6,6 +6,7 @@ import sim.SimIteration
 class MeleeMainHand(sim: SimIteration) : MeleeBase(sim) {
     override val id: Int = 1
     override val name: String = "Melee (MH)"
+    override val isOffhand: Boolean = false
 
     override val item: Item
         get() { return sim.subject.gear.mainHand }

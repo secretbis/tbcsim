@@ -41,10 +41,12 @@ data class Stats(
     var whiteDamageFlatModifier: Double = 0.0,
     var whiteDamageMultiplier: Double = 1.0,
     var whiteDamageAddlCritMultiplier: Double = 1.0,
+    var whiteDamageAddlOffHandPenaltyMultiplier: Double = 1.0,
 
     var yellowDamageFlatModifier: Double = 0.0,
     var yellowDamageMultiplier: Double = 1.0,
     var yellowDamageAddlCritMultiplier: Double = 1.0,
+    var yellowDamageAddlOffHandPenaltyMultiplier: Double = 1.0,
 
     var spellDamageFlatModifier: Double = 0.0,
     var spellDamageMultiplier: Double = 1.0,
@@ -54,8 +56,9 @@ data class Stats(
     var manaMultiplier: Double = 1.0
 ) {
     companion object {
-        val physicalCritMultiplier: Double = 2.0
-        val spellCritMultiplier: Double = 1.5
+        const val physicalCritMultiplier: Double = 2.0
+        const val spellCritMultiplier: Double = 1.5
+        const val offHandPenalty: Double = 0.5
     }
 
     fun add(stats: Stats) : Stats {
@@ -93,10 +96,12 @@ data class Stats(
         whiteDamageFlatModifier += stats.whiteDamageFlatModifier
         whiteDamageMultiplier *= stats.whiteDamageMultiplier
         whiteDamageAddlCritMultiplier *= stats.whiteDamageAddlCritMultiplier
+        whiteDamageAddlOffHandPenaltyMultiplier *= stats.whiteDamageAddlOffHandPenaltyMultiplier
 
         yellowDamageFlatModifier += stats.yellowDamageFlatModifier
         yellowDamageMultiplier *= stats.yellowDamageMultiplier
         yellowDamageAddlCritMultiplier *= stats.yellowDamageAddlCritMultiplier
+        yellowDamageAddlOffHandPenaltyMultiplier *= stats.yellowDamageAddlOffHandPenaltyMultiplier
 
         spellDamageFlatModifier += stats.spellDamageFlatModifier
         spellDamageMultiplier *= stats.spellDamageMultiplier
@@ -142,10 +147,12 @@ data class Stats(
         whiteDamageFlatModifier -= stats.whiteDamageFlatModifier
         whiteDamageMultiplier /= stats.whiteDamageMultiplier
         whiteDamageAddlCritMultiplier /= stats.whiteDamageAddlCritMultiplier
+        whiteDamageAddlOffHandPenaltyMultiplier /= stats.whiteDamageAddlOffHandPenaltyMultiplier
 
         yellowDamageFlatModifier += stats.yellowDamageFlatModifier
         yellowDamageMultiplier /= stats.yellowDamageMultiplier
         yellowDamageAddlCritMultiplier /= stats.yellowDamageAddlCritMultiplier
+        yellowDamageAddlOffHandPenaltyMultiplier /= stats.yellowDamageAddlOffHandPenaltyMultiplier
 
         spellDamageFlatModifier += stats.spellDamageFlatModifier
         spellDamageMultiplier /= stats.spellDamageMultiplier

@@ -11,10 +11,18 @@ import sim.SimIteration
 
 class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
     override val id: Int = 25505
-    override val name: String = "Windfury Weapon (Rank 5)"
+    override val name: String
+        get() {
+            val suffix = if(isOffHand()) { " (OH)" } else { " (MH)" }
+            return "Windfury Weapon (Rank 5) $suffix"
+        }
 
     override fun available(): Boolean {
         return true
+    }
+
+    fun isOffHand(): Boolean {
+        return item === sim.subject.gear.offHand
     }
 
     val baseExtraAp = 445
@@ -26,7 +34,7 @@ class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
         // Do attacks
         val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
         val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
-        val result = Melee.attackRoll(sim, attackOne + attackTwo, true)
+        val result = Melee.attackRoll(sim, attackOne + attackTwo, true, isOffHand())
 
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,

@@ -20,6 +20,21 @@ object Stats {
             get() = endMs - startMs
     }
 
+    data class AbilityBreakdown(
+        val name: String,
+        val count: Int,
+        val total: Double,
+        val average: Double,
+        val median: Double,
+        val sd: Double,
+        val hitPct: Double,
+        val critPct: Double,
+        val missPct: Double,
+        val dodgePct: Double,
+        val parryPct: Double,
+        val glancePct: Double,
+    )
+
     val df = DecimalFormat("#,###.##")
 
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
@@ -55,7 +70,7 @@ object Stats {
         val keys = byBuff.keys.toList()
 
         logger.info {
-            "\n" +
+            "Buffs\n" +
             table {
                 header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds")
 
@@ -141,11 +156,11 @@ object Stats {
         val keys = byAbility.keys.toList()
 
         logger.info {
-            "\n" +
+            "Ability Breakdown\n" +
             table {
                 header("Name", "Count", "TotalDmg", "AverageDmg", "MedianDmg", "StdDevDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
-                for (key in keys) {
+                val rows = keys.map { key ->
                     val events = byAbility[key]!!
                     val amounts = events.map { it.amount }
                     val count = amounts.size.toDouble()
@@ -166,7 +181,24 @@ object Stats {
                     val parryPct = events.filter { it.result == Event.Result.PARRY }.size / count * 100.0
                     val glancePct = events.filter { it.result == Event.Result.GLANCE }.size / count * 100.0
 
-                    row(key, count, total, average, median, sd, hitPct, critPct, missPct, dodgePct, parryPct, glancePct)
+                    AbilityBreakdown(
+                        key,
+                        count.toInt(),
+                        total,
+                        average,
+                        median,
+                        sd,
+                        hitPct,
+                        critPct,
+                        missPct,
+                        dodgePct,
+                        parryPct,
+                        glancePct
+                    )
+                }.sortedBy { it.total }.reversed()
+
+                for(row in rows) {
+                    row(row.name, row.count, row.total, row.average, row.median, row.sd, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                 }
 
                 hints {

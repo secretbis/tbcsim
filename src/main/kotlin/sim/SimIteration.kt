@@ -30,7 +30,9 @@ class SimIteration(
     var buffs: MutableList<Buff> = mutableListOf()
 
     // Buffs need a place to store state per iteration
+    // Store individual data per instance and store shared data per-string (generally the buff name)
     val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
+    val sharedBuffState: MutableMap<String, Buff.State> = mutableMapOf()
 
     // Global state
     var gcdEndMs: Int = 0
