@@ -15,6 +15,6 @@ class FlametongueWeapon(sim: SimIteration) : Ability(sim) {
         TODO("Not yet implemented")
     }
 
-    override fun castTimeMs(): Int = 0
-    override fun gcdMs(): Int = 0
+    override val baseCastTimeMs: Int = 0
+    override val gcdMs: Int = 0
 }

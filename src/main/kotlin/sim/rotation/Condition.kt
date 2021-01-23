@@ -11,6 +11,8 @@ class Condition(val type: Type, val criteria: List<Criterion>) {
         SPELL_COOLDOWN_LTE,
         BUFF_DURATION_GTE,
         BUFF_DURATION_LTE,
+        DEBUFF_DURATION_GTE,
+        DEBUFF_DURATION_LTE,
         TIME_TO_EXECUTE_LTE
     }
 

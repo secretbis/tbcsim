@@ -25,6 +25,7 @@ dependencies {
     api("org.jetbrains.lets-plot-kotlin:lets-plot-kotlin-api:1.2.0")
 
     implementation("de.m3y.kformat:kformat:0.7")
+    implementation("com.squareup:kotlinpoet:1.7.2")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
     implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")

@@ -22,6 +22,9 @@ data class Event(
         BUFF_START,
         BUFF_REFRESH,
         BUFF_END,
+        DEBUFF_START,
+        DEBUFF_REFRESH,
+        DEBUFF_END,
         PROC
     }
 

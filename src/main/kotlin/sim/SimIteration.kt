@@ -28,6 +28,7 @@ class SimIteration(
     var autoAttack: List<Ability> = listOf()
     var procs: MutableList<Proc> = mutableListOf()
     var buffs: MutableList<Buff> = mutableListOf()
+    var debuffs: MutableList<Buff> = mutableListOf()
 
     // Buffs need a place to store state per iteration
     // Store individual data per instance and store shared data per-string (generally the buff name)
@@ -84,23 +85,36 @@ class SimIteration(
 
     fun tick() {
         // Filter out and reset any expired buffs
-        val toRemove = buffs.filter {
+        val buffsToRemove = buffs.filter {
             it.isFinished(this)
         }
-        toRemove.forEach {
+        buffsToRemove.forEach {
             it.reset(this)
             logEvent(Event(
                 eventType = Event.Type.BUFF_END,
                 buff = it
             ))
         }
-        buffs.removeAll(toRemove)
+        buffs.removeAll(buffsToRemove)
 
         // Compute stats if something about our buffs changed
-        if(toRemove.isNotEmpty() || recomputeStatsOnNextTick) {
+        if(buffsToRemove.isNotEmpty() || recomputeStatsOnNextTick) {
             subject.computeStats(this, buffs)
             recomputeStatsOnNextTick = false
         }
+
+        // Filter out and reset any expired debuffs
+        val debuffsToRemove = debuffs.filter {
+            it.isFinished(this)
+        }
+        debuffsToRemove.forEach {
+            it.reset(this)
+            logEvent(Event(
+                eventType = Event.Type.DEBUFF_END,
+                buff = it
+            ))
+        }
+        debuffs.removeAll(debuffsToRemove)
 
         // Find and cast next rotation ability
         if(!isCasting() && !onGcd()) {
@@ -110,7 +124,7 @@ class SimIteration(
                 rotationAbility.cast()
 
                 // Set next cast times, and add latency if configured
-                gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs() + opts.latencyMs
+                gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs + opts.latencyMs
                 castEndMs = elapsedTimeMs + rotationAbility.castTimeMs() + opts.latencyMs
             }
         }
@@ -126,6 +140,13 @@ class SimIteration(
          buffs.forEach {
              logEvent(Event(
                 eventType = Event.Type.BUFF_END,
+                buff = it
+            ))
+         }
+
+         debuffs.forEach {
+             logEvent(Event(
+                eventType = Event.Type.DEBUFF_END,
                 buff = it
             ))
          }
@@ -147,6 +168,25 @@ class SimIteration(
         } else {
             logEvent(Event(
                 eventType = Event.Type.BUFF_REFRESH,
+                buff = buff
+            ))
+        }
+    }
+
+    fun addDebuff(buff: Buff) {
+        buff.refresh(this)
+
+        // If this is a new debuff, add it
+        val exists = buffs.find { it === buff } != null
+        if(!exists) {
+            buffs.add(buff)
+            logEvent(Event(
+                eventType = Event.Type.DEBUFF_START,
+                buff = buff
+            ))
+        } else {
+            logEvent(Event(
+                eventType = Event.Type.DEBUFF_REFRESH,
                 buff = buff
             ))
         }

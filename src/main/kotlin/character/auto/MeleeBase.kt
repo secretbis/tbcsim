@@ -16,8 +16,8 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
         return (item.speed / sim.subject.meleeHasteMultiplier()).coerceAtLeast(0.01)
     }
 
-    override fun castTimeMs(): Int = 0
-    override fun gcdMs(): Int = 0
+    override val baseCastTimeMs: Int = 0
+    override val gcdMs: Int = 0
 
     var lastAttackTimeMs: Int = 0
 

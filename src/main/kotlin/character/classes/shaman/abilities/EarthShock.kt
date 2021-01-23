@@ -4,12 +4,16 @@ import character.Ability
 import sim.SimIteration
 
 class EarthShock(sim: SimIteration) : Ability(sim) {
-    override val id: Int = 25457
+    override val id: Int = 25454
     override val name: String = "Earth Shock"
 
-    override fun castTimeMs(): Int = 0
+    override val baseCastTimeMs: Int = 0
+    override val gcdMs: Int = sim.subject.spellGcd().toInt()
 
-    override fun gcdMs(): Int {
-        return sim.subject.spellGcd().toInt()
+    val baseDamage = Pair(658, 693)
+    override fun cast(free: Boolean) {
+        super.cast(free)
+
+
     }
 }

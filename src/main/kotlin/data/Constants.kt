@@ -35,7 +35,14 @@ object Constants {
         CRIT_TAKEN_RATING(34),
         RESILIENCE_RATING(35),
         HASTE_RATING(36),
-        EXPERTISE_RATING(37);
+        EXPERTISE_RATING(37),
+
+        // These aren't actual DB values, and are likely implemented in other ways
+        ARMOR_PEN(95),
+        SPELL_PEN(96),
+        MANA_PER_5_SECONDS(97),
+        SPELL_POWER(98),
+        ATTACK_POWER(99);
 
         operator fun invoke(): Int {
             return id

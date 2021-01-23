@@ -48,13 +48,15 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
     }
 
     override fun cast(free: Boolean) {
+        super.cast(free)
+
         // Do attacks
         val mhItem = sim.subject.gear.mainHand
-        val mhAttack = Melee.baseDamageRoll(sim, mhItem)
-        val mhResult = Melee.attackRoll(sim, mhAttack, false)
+        val mhAttack = Melee.baseDamageRoll(sim, mhItem, isNormalized = true)
+        val mhResult = Melee.attackRoll(sim, mhAttack, isWhiteDmg = false)
 
         val ohItem = sim.subject.gear.offHand
-        val ohAttack = Melee.baseDamageRoll(sim, ohItem)
+        val ohAttack = Melee.baseDamageRoll(sim, ohItem, isNormalized = true)
         val ohResult = Melee.attackRoll(sim, ohAttack, isWhiteDmg = false, isOffHand = true)
 
         // TODO: Distinguish MH and OH events in the logs?
@@ -97,6 +99,6 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
         }
     }
 
-    override fun castTimeMs(): Int = 0
-    override fun gcdMs(): Int = sim.subject.physicalGcd().toInt()
+    override val baseCastTimeMs: Int = 0
+    override val gcdMs: Int = sim.subject.physicalGcd().toInt()
 }

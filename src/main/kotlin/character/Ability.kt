@@ -35,6 +35,28 @@ abstract class Ability(val sim: SimIteration) {
         state.cooldownStartMs = sim.elapsedTimeMs
     }
 
-    abstract fun castTimeMs(): Int
-    abstract fun gcdMs(): Int
+    // Base cast time should include talent reductions, and other static modifiers
+    abstract val baseCastTimeMs: Int
+    // This defines whether an ability is a DoT or not
+    open val baseDurationMs: Int = 0
+    abstract val gcdMs: Int
+
+    // Final cast time accounting for haste
+    fun castTimeMs(): Int {
+        return (baseCastTimeMs / sim.subject.spellHasteMultiplier()).toInt()
+    }
+
+    // AP and spell damage coefficients
+    // TODO: Verify that these formulas reflect TBC mechanics
+    // https://wowwiki.fandom.com/wiki/Spell_power
+    open val spellPowerCoeff: Double
+        get() {
+            // DoT
+            return if(baseDurationMs == 0) {
+                // Most instant spells are treated as 1.5s cast time for coeff purposes
+                baseCastTimeMs.coerceAtLeast(1500) / 3500.0
+            } else {
+                baseDurationMs / 15000.0
+            }
+        }
 }

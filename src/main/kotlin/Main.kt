@@ -2,10 +2,7 @@ import character.Character
 import character.Gear
 import character.classes.shaman.Shaman
 import character.classes.shaman.buffs.WindfuryWeapon
-import character.classes.shaman.talents.DualWield
-import character.classes.shaman.talents.Flurry
-import character.classes.shaman.talents.NaturesGuidance
-import character.classes.shaman.talents.WeaponMastery
+import character.classes.shaman.talents.*
 import character.races.Draenei
 import data.DB
 import data.model.Item
@@ -32,6 +29,7 @@ fun testCharacter(): Character {
         klass = Shaman(
             talents = mapOf(
                 DualWield.name to DualWield(1),
+                DualWieldSpecialization.name to DualWieldSpecialization(3),
                 Flurry.name to Flurry(5),
                 NaturesGuidance.name to NaturesGuidance(3),
                 WeaponMastery.name to WeaponMastery(5)

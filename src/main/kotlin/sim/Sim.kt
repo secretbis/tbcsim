@@ -26,6 +26,7 @@ class Sim (
         Stats.dps(iterations)
         Stats.resultsByAbility(iterations)
         Stats.resultsByBuff(iterations)
+        Stats.resultsByDebuff(iterations)
     }
 
     private fun iterate() : SimIteration {

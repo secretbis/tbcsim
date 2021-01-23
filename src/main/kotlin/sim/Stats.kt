@@ -59,26 +59,48 @@ object Stats {
         val mean = perIteration.average()
         val sd = sd(perIteration, mean)
 
-        logger.info("Median DPS: ${df.format(median)}")
         logger.info("Average DPS: ${df.format(mean)}")
+        logger.info("Median DPS: ${df.format(median)}")
         logger.info("Std. Dev: ${df.format(sd)}")
     }
 
     fun resultsByBuff(iterations: List<SimIteration>) {
-        val byBuff = iterations.flatMap { it.events }
-            .filter {
-                it.buff != null && !it.buff.hidden && (
-                    it.eventType == Event.Type.BUFF_START ||
-                    it.eventType == Event.Type.BUFF_REFRESH ||
-                    it.eventType == Event.Type.BUFF_END
-                )
-            }
-            .groupBy { it.buff!!.name }
+        processBuffs(
+            iterations,
+            "Buffs",
+            iterations.flatMap { it.events }
+                .filter {
+                    it.buff != null && !it.buff.hidden && (
+                        it.eventType == Event.Type.BUFF_START ||
+                        it.eventType == Event.Type.BUFF_REFRESH ||
+                        it.eventType == Event.Type.BUFF_END
+                    )
+                }
+                .groupBy { it.buff!!.name }
+        )
+    }
 
+    fun resultsByDebuff(iterations: List<SimIteration>) {
+        processBuffs(
+            iterations,
+            "Debuffs",
+            iterations.flatMap { it.events }
+                .filter {
+                    it.buff != null && !it.buff.hidden && (
+                        it.eventType == Event.Type.DEBUFF_START ||
+                        it.eventType == Event.Type.DEBUFF_REFRESH ||
+                        it.eventType == Event.Type.DEBUFF_END
+                    )
+                }
+                .groupBy { it.buff!!.name }
+        )
+    }
+
+    private fun processBuffs(iterations: List<SimIteration>, title: String, byBuff: Map<String, List<Event>>) {
         val keys = byBuff.keys.toList()
 
         logger.info {
-            "Buffs\n" +
+            "$title\n" +
             table {
                 header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds")
 

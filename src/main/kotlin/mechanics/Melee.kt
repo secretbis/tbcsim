@@ -1,10 +1,12 @@
 package mechanics
 
 import character.Stats
+import data.Constants
 import data.model.Item
 import mu.KotlinLogging
 import sim.Event
 import sim.SimIteration
+import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
 object Melee {
@@ -45,6 +47,19 @@ object Melee {
         1 to 0.15,
         2 to 0.20,
         3 to 0.25
+    )
+
+    // Instant yellow attack AP normalization
+    val normalizedWeaponSpeedMs: Map<Constants.ItemSubclass, Double> = mapOf(
+        Constants.ItemSubclass.AXE_2H to 3300.0,
+        Constants.ItemSubclass.MACE_2H to 3300.0,
+        Constants.ItemSubclass.SWORD_2H to 3300.0,
+        Constants.ItemSubclass.DAGGER to 1700.0,
+        Constants.ItemSubclass.AXE_1H to 2400.0,
+        Constants.ItemSubclass.MACE_1H to 2400.0,
+        Constants.ItemSubclass.SWORD_1H to 2400.0,
+        Constants.ItemSubclass.FIST to 2400.0,
+        // TODO: Druid weirdness
     )
 
     private fun <T> valueByLevelDiff(sim: SimIteration, table: Map<Int, T>) : T {
@@ -130,16 +145,21 @@ object Melee {
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
-    fun apToDamage(sim: SimIteration, attackPower: Int, item: Item): Double {
-        return (item.dps + (attackPower / 3.5)) * (item.speed / 1000)
+    fun apToDamage(sim: SimIteration, attackPower: Int, item: Item, isNormalized: Boolean = false): Double {
+        val speed = if(isNormalized) {
+            normalizedWeaponSpeedMs[item.itemSubclass]
+                ?: throw IllegalArgumentException("Weapon subClass has no normalization coefficient: ${item.itemSubclass}")
+        } else item.speed
+
+        return attackPower / 14 * (speed / 1000)
     }
 
-    fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0): Double {
+    fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
         val totalAp = sim.subject.attackPower() + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
-        return Random.nextDouble(min, max) + apToDamage(sim, totalAp, item)
+        return Random.nextDouble(min, max) + apToDamage(sim, totalAp, item, isNormalized)
     }
 
     // Performs an attack roll given an initial unmitigated damage value

@@ -1,4 +1,4 @@
-package character.classes.shaman.buffs
+package character.classes.shaman.abilities
 
 import character.Ability
 import sim.SimIteration
@@ -15,6 +15,6 @@ class WindfuryTotem(sim: SimIteration) : Ability(sim) {
         TODO("Not yet implemented")
     }
 
-    override fun castTimeMs(): Int = 0
-    override fun gcdMs(): Int = sim.subject.totemGcd().toInt()
+    override val baseCastTimeMs: Int = 0
+    override val gcdMs: Int = sim.subject.totemGcd().toInt()
 }
