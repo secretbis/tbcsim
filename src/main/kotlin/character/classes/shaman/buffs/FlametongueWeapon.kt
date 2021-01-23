@@ -5,9 +5,9 @@ import sim.SimIteration
 
 class FlametongueWeapon(sim: SimIteration) : Ability(sim) {
     override val id: Int = 25489
-    override val name: String = "Flametongue Weapon (Rank 7)"
+    override val name: String = "Flametongue Weapon"
 
-    override fun available(): Boolean {
+    override fun available(sim: SimIteration): Boolean {
         return true
     }
 

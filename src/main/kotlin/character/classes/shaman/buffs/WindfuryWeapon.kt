@@ -7,7 +7,7 @@ import sim.SimIteration
 import kotlin.random.Random
 import character.classes.shaman.abilities.WindfuryWeapon as WindfuryWeaponAbility
 
-class WindfuryWeapon(val sourceItem: Item) : Buff() {
+class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     class WindfuryWeaponState : Buff.State() {
         var lastWindfuryWeaponProcMs: Int = -1
     }
@@ -27,9 +27,9 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
     // Windfury weapon has a global 3s ICD, regardless of rank
     val icdMs = 3000
 
-    override val procs: List<Proc>
-        get() = listOf(
-            object : Proc() {
+    override fun procs(sim: SimIteration): List<Proc> {
+        return listOf(
+            object : ItemProc(sourceItems) {
                 override val triggers: List<Trigger> = listOf(
                     Trigger.MELEE_WHITE_HIT,
                     Trigger.MELEE_WHITE_CRIT,
@@ -37,30 +37,37 @@ class WindfuryWeapon(val sourceItem: Item) : Buff() {
                     Trigger.MELEE_YELLOW_CRIT
                 )
 
-                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                override val type: Type = Type.PERCENT
+                override val percentChance: Double = 20.0
+
+                override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?): Boolean {
+                    // Check shared WF ICD state
                     val state = sharedState(name, sim) as WindfuryWeaponState
 
                     val lastProc = state.lastWindfuryWeaponProcMs
                     val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
 
-                    if(offIcd && items?.contains(sourceItem) == true) {
-                        val wfAbility = WindfuryWeaponAbility(sim, sourceItem)
+                    return offIcd && super.shouldProc(sim, items, ability)
+                }
 
-                        // 20% chance to trigger
-                        val rng = Random.nextDouble() < 0.20
+                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    val wfAbility = WindfuryWeaponAbility(sim, sourceItems[0])
+                    if(wfAbility.available(sim)) {
+                        wfAbility.cast()
 
-                        if(rng && wfAbility.available()) {
-                            wfAbility.cast()
-                            state.lastWindfuryWeaponProcMs = sim.elapsedTimeMs
-                            sim.logEvent(
-                                Event(
-                                    eventType = Event.Type.PROC,
-                                    ability = wfAbility
-                                )
+                        // Update ICD state
+                        val state = sharedState(name, sim) as WindfuryWeaponState
+                        state.lastWindfuryWeaponProcMs = sim.elapsedTimeMs
+
+                        sim.logEvent(
+                            Event(
+                                eventType = Event.Type.PROC,
+                                ability = wfAbility
                             )
-                        }
+                        )
                     }
                 }
             }
         )
+    }
 }

@@ -11,7 +11,7 @@ class MeleeOffHand(sim: SimIteration) : MeleeBase(sim) {
     override val item: Item
         get() { return sim.subject.gear.offHand }
 
-    override fun available(): Boolean {
-        return sim.subject.hasOffHandWeapon() && super.available()
+    override fun available(sim: SimIteration): Boolean {
+        return sim.subject.isDualWielding() && super.available(sim)
     }
 }

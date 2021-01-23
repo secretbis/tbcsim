@@ -11,7 +11,7 @@ class MeleeMainHand(sim: SimIteration) : MeleeBase(sim) {
     override val item: Item
         get() { return sim.subject.gear.mainHand }
 
-    override fun available(): Boolean {
-        return sim.subject.hasMainHandWeapon() && super.available()
+    override fun available(sim: SimIteration): Boolean {
+        return sim.subject.hasMainHandWeapon() && super.available(sim)
     }
 }

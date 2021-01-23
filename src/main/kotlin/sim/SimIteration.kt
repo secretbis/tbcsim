@@ -33,6 +33,7 @@ class SimIteration(
     // Store individual data per instance and store shared data per-string (generally the buff name)
     val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedBuffState: MutableMap<String, Buff.State> = mutableMapOf()
+    val abilityState: MutableMap<String, Ability.State> = mutableMapOf()
 
     // Global state
     var gcdEndMs: Int = 0
@@ -65,15 +66,15 @@ class SimIteration(
 
         // Collect procs from class, talents, gear, and etc.
         procs.addAll(subject.klass.procs)
-        subject.talents.filter { it.value.currentRank > 0 }.forEach {
-            procs.addAll(it.value.procs)
+        subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
+            procs.addAll(it.value.procs(this))
         }
         procs.addAll(subject.gear.procs())
 
         // Collect buffs from class, talents, gear, and etc
         subject.klass.buffs.forEach { addBuff(it) }
-        subject.talents.filter { it.value.currentRank > 0 }.forEach {
-            it.value.buffs.forEach { buff -> addBuff(buff) }
+        subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
+            it.value.buffs(this).forEach { buff -> addBuff(buff) }
         }
         subject.gear.buffs().forEach { addBuff(it) }
 
@@ -116,7 +117,7 @@ class SimIteration(
 
         // Do auto attacks
         autoAttack.forEach {
-            if(it.available()) it.cast()
+            if(it.available(this)) it.cast()
         }
     }
 
@@ -161,7 +162,7 @@ class SimIteration(
 
             // Get procs from active buffs
             buffs.forEach { buff ->
-                buff.procs.filter { proc -> proc.triggers.contains(trigger) }.forEach {
+                buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach {
                     allProcs.add(it)
                 }
             }
@@ -171,7 +172,9 @@ class SimIteration(
 
             // Fire all found procs
             allProcs.forEach {
-                it.proc(this, items, ability)
+                if(it.shouldProc(this, items, ability)) {
+                    it.proc(this, items, ability)
+                }
             }
         }
     }

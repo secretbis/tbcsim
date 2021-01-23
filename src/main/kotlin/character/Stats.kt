@@ -52,6 +52,14 @@ data class Stats(
     var spellDamageMultiplier: Double = 1.0,
     var spellDamageAddlCritMultiplier: Double = 1.0,
 
+    var physicalDamageMultiplier: Double = 1.0,
+    var holyDamageMultiplier: Double = 1.0,
+    var fireDamageMultiplier: Double = 1.0,
+    var natureDamageMultiplier: Double = 1.0,
+    var frostDamageMultiplier: Double = 1.0,
+    var shadowDamageMultiplier: Double = 1.0,
+    var arcaneDamageMultiplier: Double = 1.0,
+
     var healthMultiplier: Double = 1.0,
     var manaMultiplier: Double = 1.0
 ) {
@@ -107,6 +115,15 @@ data class Stats(
         spellDamageMultiplier *= stats.spellDamageMultiplier
         spellDamageAddlCritMultiplier *= stats.spellDamageAddlCritMultiplier
 
+        physicalDamageMultiplier *= stats.physicalDamageMultiplier
+        holyDamageMultiplier *= stats.holyDamageMultiplier
+        fireDamageMultiplier *= stats.fireDamageMultiplier
+        natureDamageMultiplier *= stats.natureDamageMultiplier
+        frostDamageMultiplier *= stats.frostDamageMultiplier
+        shadowDamageMultiplier *= stats.shadowDamageMultiplier
+        arcaneDamageMultiplier *= stats.arcaneDamageMultiplier
+
+        healthMultiplier *= stats.healthMultiplier
         manaMultiplier *= stats.manaMultiplier
 
         return this
@@ -149,15 +166,24 @@ data class Stats(
         whiteDamageAddlCritMultiplier /= stats.whiteDamageAddlCritMultiplier
         whiteDamageAddlOffHandPenaltyMultiplier /= stats.whiteDamageAddlOffHandPenaltyMultiplier
 
-        yellowDamageFlatModifier += stats.yellowDamageFlatModifier
+        yellowDamageFlatModifier -= stats.yellowDamageFlatModifier
         yellowDamageMultiplier /= stats.yellowDamageMultiplier
         yellowDamageAddlCritMultiplier /= stats.yellowDamageAddlCritMultiplier
         yellowDamageAddlOffHandPenaltyMultiplier /= stats.yellowDamageAddlOffHandPenaltyMultiplier
 
-        spellDamageFlatModifier += stats.spellDamageFlatModifier
+        spellDamageFlatModifier -= stats.spellDamageFlatModifier
         spellDamageMultiplier /= stats.spellDamageMultiplier
         spellDamageAddlCritMultiplier /= stats.spellDamageAddlCritMultiplier
 
+        physicalDamageMultiplier /= stats.physicalDamageMultiplier
+        holyDamageMultiplier /= stats.holyDamageMultiplier
+        fireDamageMultiplier /= stats.fireDamageMultiplier
+        natureDamageMultiplier /= stats.natureDamageMultiplier
+        frostDamageMultiplier /= stats.frostDamageMultiplier
+        shadowDamageMultiplier /= stats.shadowDamageMultiplier
+        arcaneDamageMultiplier /= stats.arcaneDamageMultiplier
+
+        healthMultiplier /= stats.healthMultiplier
         manaMultiplier /= stats.manaMultiplier
 
         return this

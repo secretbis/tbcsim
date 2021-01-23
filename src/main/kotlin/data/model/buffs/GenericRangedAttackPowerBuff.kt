@@ -12,5 +12,5 @@ class GenericRangedAttackPowerBuff(val rangedAttackPower: Int) : Buff() {
         return stats.add(Stats(rangedAttackPower = rangedAttackPower))
     }
 
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

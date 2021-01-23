@@ -17,7 +17,7 @@ abstract class Buff {
     open val maxCharges: Int = 0
 
     // Buff implementations can implement their own state containers
-    open fun stateFactory(): State {
+    internal open fun stateFactory(): State {
         return State()
     }
 
@@ -70,5 +70,5 @@ abstract class Buff {
     }
 
     abstract fun modifyStats(sim: SimIteration, stats: Stats): Stats
-    abstract val procs: List<Proc>
+    abstract fun procs(sim: SimIteration): List<Proc>
 }

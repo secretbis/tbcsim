@@ -2,6 +2,7 @@ package character.classes.shaman.talents
 
 import character.Proc
 import character.Talent
+import sim.SimIteration
 
 class ElementalWeapons(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -11,7 +12,7 @@ class ElementalWeapons(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 
     fun windfuryApMultiplier(): Double {
         return when(currentRank) {

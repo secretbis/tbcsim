@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.21"
     id("org.jetbrains.compose") version "0.3.0-build139"
     idea
+    application
 }
 
 group = "com.tbcsim"
@@ -46,15 +47,19 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
 }
 
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-
-        nativeDistributions {
-            packageName = "TBCSim"
-            version = version
-            description = "A simulator for TBC damage dealers"
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-        }
-    }
+application {
+    mainClassName = "MainKt"
 }
+
+//compose.desktop {
+//    application {
+//        mainClass = "MainKt"
+//
+//        nativeDistributions {
+//            packageName = "TBCSim"
+//            version = version
+//            description = "A simulator for TBC damage dealers"
+//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+//        }
+//    }
+//}

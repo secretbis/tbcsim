@@ -35,6 +35,14 @@ object Stats {
         val glancePct: Double,
     )
 
+    data class BuffBreakdown(
+        val name: String,
+        val applied: Int,
+        val refreshed: Int,
+        val uptimePct: Double,
+        val avgDuration: Double
+   )
+
     val df = DecimalFormat("#,###.##")
 
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
@@ -74,7 +82,7 @@ object Stats {
             table {
                 header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds")
 
-                for (key in keys) {
+                val rows = keys.map { key ->
                     val events = byBuff[key]!!
                     val applied = events.filter { it.eventType == Event.Type.BUFF_START }.size
                     val refreshed = events.filter { it.eventType == Event.Type.BUFF_REFRESH }.size
@@ -117,10 +125,20 @@ object Stats {
                         lastEvent = it
                     }
 
-                    val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs) * 100.0
+                    val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
                     val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
 
-                    row(key, applied, refreshed, uptimePct, avgDuration)
+                    BuffBreakdown(
+                        key,
+                        applied,
+                        refreshed,
+                        uptimePct,
+                        avgDuration
+                    )
+                }.sortedBy { it.name }
+
+                for(row in rows) {
+                    row(row.name, row.applied, row.refreshed, row.uptimePct, row.avgDuration)
                 }
 
                 hints {
@@ -158,7 +176,7 @@ object Stats {
         logger.info {
             "Ability Breakdown\n" +
             table {
-                header("Name", "Count", "TotalDmg", "AverageDmg", "MedianDmg", "StdDevDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
+                header("Name", "Count", "TotalDmg", "PctOfTotal", "AverageDmg", "MedianDmg", "StdDevDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                 val rows = keys.map { key ->
                     val events = byAbility[key]!!
@@ -197,23 +215,27 @@ object Stats {
                     )
                 }.sortedBy { it.total }.reversed()
 
+                val grandTotal: Double = rows.sumByDouble { it.total }
+
                 for(row in rows) {
-                    row(row.name, row.count, row.total, row.average, row.median, row.sd, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                    val pctOfGrandTotal = row.total / grandTotal * 100.0
+                    row(row.name, row.count, row.total, pctOfGrandTotal, row.average, row.median, row.sd, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                 }
 
                 hints {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
                     precision(1, 0)
-                    for(i in 2..11) {
+                    for(i in 2..12) {
                         precision(i, 2)
                     }
 
-                    for(i in 1..11) {
+                    for(i in 1..12) {
                         formatFlag(i, ",")
                     }
 
-                    for(i in 6..11) {
+                    postfix(3, "%")
+                    for(i in 6..12) {
                         postfix(i, "%")
                     }
 

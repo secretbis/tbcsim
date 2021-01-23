@@ -15,10 +15,9 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = 10000
-        override val hidden: Boolean = false
 
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            val talentRanks = sim.subject.talents[UnleashedRage.name]?.currentRank ?: 0
+            val talentRanks = sim.subject.klass.talents[UnleashedRage.name]?.currentRank ?: 0
 
             val modifier = 1 * (0.2 * talentRanks)
             return stats.add(
@@ -29,19 +28,22 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
             )
         }
 
-        override val procs: List<Proc> = listOf()
+        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
-    override val procs: List<Proc> = listOf(
-        object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.MELEE_WHITE_CRIT,
-                Trigger.MELEE_YELLOW_CRIT
-            )
+    override fun procs(sim: SimIteration): List<Proc> {
+        return listOf(
+            object : Proc() {
+                override val triggers: List<Trigger> = listOf(
+                    Trigger.MELEE_WHITE_CRIT,
+                    Trigger.MELEE_YELLOW_CRIT
+                )
+                override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                sim.addBuff(buff)
+                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    sim.addBuff(buff)
+                }
             }
-        }
-    )
+        )
+    }
 }

@@ -7,8 +7,7 @@ class Character(
     val klass: Class,
     val race: Race,
     val level: Int = 70,
-    var gear: Gear = Gear(),
-    var talents: Map<String, Talent> = mapOf()
+    var gear: Gear = Gear()
 ) {
     lateinit var stats: Stats
     var resource: Resource? = null
@@ -25,7 +24,7 @@ class Character(
     }
 
     fun isDualWielding(): Boolean {
-        return hasMainHandWeapon() && hasOffHandWeapon()
+        return klass.canDualWield && hasMainHandWeapon() && hasOffHandWeapon()
     }
 
     fun computeStats(sim: SimIteration, buffs: List<Buff>) {
@@ -110,5 +109,10 @@ class Character(
 
     fun spellGcd(): Double {
         return (gcdBaseMs / spellHasteMultiplier()).coerceAtLeast(minGcdMs)
+    }
+
+    fun totemGcd(): Double {
+        // TODO: Confirm this will be the case in Classic TBC at launch
+        return 1.0
     }
 }

@@ -3,7 +3,7 @@ package character.classes.shaman
 import character.*
 import character.classes.shaman.talents.*
 
-class Shaman : Class {
+class Shaman(talents: Map<String, Talent>) : Class(talents) {
 
     override var baseStats: Stats = Stats(
         agility = 222,
@@ -13,35 +13,19 @@ class Shaman : Class {
         spirit = 135
     )
 
-    override var abilities: List<Ability> = listOf()
-    override var buffs: List<Buff> = listOf()
-    override var talents: List<Talent> = listOf(
-        AncestralKnowledge(0),
-//        Concussion(0),
-        Convection(0),
-        ElementalDevastation(0),
-        ElementalWeapons(0),
-        Flurry(0),
-//        ImprovedWeaponTotems(0),
-        MentalQuickness(0),
-        NaturesGuidance(0),
-//        Reverberation(0),
-//        ShamanisticFocus(0),
-//        ShamanisticRage(0),
-//        ThunderingStrikes(0),
-//        TotemicFocus(0),
-        UnleashedRage(0),
-        WeaponMastery(0)
-    )
-    override var procs: List<Proc> = listOf()
+    override val abilities: List<Ability> = listOf()
+    override val buffs: List<Buff> = listOf()
+    override val procs: List<Proc> = listOf()
 
-    override var resourceType: Resource.Type = Resource.Type.MANA
-    override var baseResourceAmount: Int = 0
+    override val resourceType: Resource.Type = Resource.Type.MANA
+    override val baseResourceAmount: Int = 0
 
-    override var canDualWield: Boolean = true
-    override var allowAutoAttack: Boolean = true
+    override val canDualWield: Boolean
+        get() = talents["Dual Wield"]?.currentRank == 1
 
-    override var attackPowerFromAgility: Int = 0
-    override var attackPowerFromStrength: Int = 2
-    override var rangedAttackPowerFromAgility: Int = 1
+    override val allowAutoAttack: Boolean = true
+
+    override val attackPowerFromAgility: Int = 0
+    override val attackPowerFromStrength: Int = 2
+    override val rangedAttackPowerFromAgility: Int = 1
 }

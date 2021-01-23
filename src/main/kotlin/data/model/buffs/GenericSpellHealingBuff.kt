@@ -12,5 +12,5 @@ class GenericSpellHealingBuff(val spellHealing: Int) : Buff() {
         return stats.add(Stats(spellHealing = spellHealing))
     }
 
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

@@ -14,27 +14,29 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    override val buffs: List<Buff> = listOf(
-        object : Buff() {
-            override val name: String = Companion.name
-            override val durationMs: Int = -1
-            override val hidden: Boolean = true
+    override fun buffs(sim: SimIteration): List<Buff> {
+        return listOf(
+            object : Buff() {
+                override val name: String = Companion.name
+                override val durationMs: Int = -1
+                override val hidden: Boolean = true
 
-            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                val talentRanks = sim.subject.talents[WeaponMastery.name]?.currentRank ?: 0
+                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                    val talentRanks = sim.subject.klass.talents[WeaponMastery.name]?.currentRank ?: 0
 
-                val modifier = 1 + (0.02 * talentRanks)
-                return stats.add(
-                    Stats(
-                        whiteDamageMultiplier = modifier,
-                        yellowDamageMultiplier = modifier
+                    val modifier = 1 + (0.02 * talentRanks)
+                    return stats.add(
+                        Stats(
+                            whiteDamageMultiplier = modifier,
+                            yellowDamageMultiplier = modifier
+                        )
                     )
-                )
+                }
+
+                override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
+        )
+    }
 
-            override val procs: List<Proc> = listOf()
-        }
-    )
-
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

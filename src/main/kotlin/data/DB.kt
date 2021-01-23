@@ -18,7 +18,7 @@ object DB {
 
     private fun <T : ModelBase> load(file: String, type: TypeReference<List<T>>): Pair<Map<Int, T>, List<T>> {
         // Load
-        val data = File(DB::class.java.getResource(file).toURI()).readText()
+        val data = DB::class.java.getResourceAsStream(file).readAllBytes().decodeToString()
         val parsed = mapper.readValue(data, type)
 
         // Transform to map

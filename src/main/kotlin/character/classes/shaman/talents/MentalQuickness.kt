@@ -14,23 +14,25 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    override val buffs: List<Buff> = listOf(
-        object : Buff() {
-            override val name: String = "${Companion.name} (Spell Damage)"
-            override val durationMs: Int = -1
-            override val hidden: Boolean = true
+    override fun buffs(sim: SimIteration): List<Buff> {
+        return listOf(
+            object : Buff() {
+                override val name: String = "${Companion.name} (Spell Damage)"
+                override val durationMs: Int = -1
+                override val hidden: Boolean = true
 
-            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                val modifier = currentRank * 0.1
-                val spellDamage = modifier * sim.subject.attackPower()
-                return stats.add(Stats(spellDamage = spellDamage.toInt()))
+                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                    val modifier = currentRank * 0.1
+                    val spellDamage = modifier * sim.subject.attackPower()
+                    return stats.add(Stats(spellDamage = spellDamage.toInt()))
+                }
+
+                override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
+        )
+    }
 
-            override val procs: List<Proc> = listOf()
-        }
-    )
-
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 
     // TODO: Apply this discount to instant spells
     fun instantManaCostMultiplier(): Double {

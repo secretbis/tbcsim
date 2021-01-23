@@ -12,5 +12,5 @@ class GenericSpellDamageBuff(val spellDamage: Int) : Buff() {
         return stats.add(Stats(spellDamage = spellDamage))
     }
 
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

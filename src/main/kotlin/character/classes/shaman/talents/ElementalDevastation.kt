@@ -22,18 +22,21 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
             return stats.add(Stats(physicalCritRating = 3 * Rating.critPerPct))
         }
 
-        override val procs: List<Proc> = listOf()
+        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
-    override val procs: List<Proc> = listOf(
-        object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CRIT
-            )
+    override fun procs(sim: SimIteration): List<Proc> {
+        return listOf(
+            object : Proc() {
+                override val triggers: List<Trigger> = listOf(
+                    Trigger.SPELL_CRIT
+                )
+                override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                sim.addBuff(buff)
+                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    sim.addBuff(buff)
+                }
             }
-        }
-    )
+        )
+    }
 }

@@ -13,5 +13,5 @@ class UnknownBuff : Buff() {
         return stats
     }
 
-    override val procs: List<Proc> = listOf()
+    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

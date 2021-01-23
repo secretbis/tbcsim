@@ -1,5 +1,7 @@
 package character
 
+import sim.SimIteration
+
 abstract class Talent(private var _currentRank: Int) {
     abstract val name: String
     abstract val maxRank: Int
@@ -12,6 +14,6 @@ abstract class Talent(private var _currentRank: Int) {
             } else _currentRank
         }
 
-    open val buffs: List<Buff> = listOf()
-    open val procs: List<Proc> = listOf()
+    open fun buffs(sim: SimIteration): List<Buff> = listOf()
+    open fun procs(sim: SimIteration): List<Proc> = listOf()
 }

@@ -4,15 +4,16 @@ import character.Buff
 import character.Proc
 import character.Stats
 import character.Talent
+import mechanics.Rating
 import sim.SimIteration
 
-class AncestralKnowledge(currentRank: Int) : Talent(currentRank) {
+class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
     companion object {
-        const val name: String = "Ancestral Knowledge"
+        const val name = "Dual Wield Specialization"
     }
 
     override val name: String = Companion.name
-    override val maxRank: Int = 5
+    override val maxRank: Int = 3
 
     override fun buffs(sim: SimIteration): List<Buff> {
         return listOf(
@@ -22,20 +23,22 @@ class AncestralKnowledge(currentRank: Int) : Talent(currentRank) {
                 override val hidden: Boolean = true
 
                 override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                    val talentRanks = sim.subject.klass.talents[AncestralKnowledge.name]?.currentRank ?: 0
+                    // 2% hit per rank
+                    val modifier = currentRank
+                    val physicalHitRating = modifier * 2 * Rating.meleeHitPerPct
 
-                    val modifier = 1 + (0.01 * talentRanks)
-                    return stats.add(
-                        Stats(
-                            manaMultiplier = modifier
+                    // Only when dual wielding
+                    return if(sim.subject.isDualWielding()) {
+                        stats.add(
+                            Stats(
+                                physicalHitRating = physicalHitRating
+                            )
                         )
-                    )
+                    } else stats
                 }
 
                 override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
         )
     }
-
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }
