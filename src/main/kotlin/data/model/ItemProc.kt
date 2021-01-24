@@ -2,7 +2,7 @@ package data.model
 
 import character.Proc
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import data.model.default.UnknownProc
+import data.default.UnknownProc
 import data.model.deserialize.ItemProcDeserializer
 
 // This class functions as deserialization temporary storage, and shouldn't be used elsewhere

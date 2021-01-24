@@ -4,10 +4,12 @@ import character.classes.shaman.Shaman
 import character.classes.shaman.buffs.WindfuryWeapon
 import character.classes.shaman.talents.*
 import character.races.Draenei
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.flag
+import com.github.ajalt.clikt.parameters.options.option
 import data.DB
 import data.model.Item
-import data.model.buffs.Executioner
-import data.model.buffs.Mongoose
+import data.buffs.Mongoose
 import kotlinx.coroutines.runBlocking
 import sim.Sim
 import sim.SimOptions
@@ -57,17 +59,24 @@ fun setupLogging() {
     }
 }
 
-fun main() {
-    setupLogging()
-    DB.init()
+class TBCSim : CliktCommand() {
+    val generate: Boolean by option("-g", "--generate", help="Autogenerate item classes").flag(default = false)
 
-    runBlocking {
-        Sim(
-            testCharacter(),
-            testRotation(),
-            simOpts()
-        ).sim()
+    override fun run() {
+        setupLogging()
+
+        if(generate) {
+            DB.init()
+        } else {
+            runBlocking {
+                Sim(
+                    testCharacter(),
+                    testRotation(),
+                    simOpts()
+                ).sim()
+            }
+        }
     }
-
-//    MainUI()
 }
+
+fun main(args: Array<String>) = TBCSim().main(args)

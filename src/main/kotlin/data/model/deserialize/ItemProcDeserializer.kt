@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import data.model.ItemProc
-import data.model.default.UnknownProc
+import data.default.UnknownProc
 
 class ItemProcDeserializer : JsonDeserializer<ItemProc>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): ItemProc {

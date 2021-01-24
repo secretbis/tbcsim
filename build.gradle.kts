@@ -1,5 +1,4 @@
 import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -26,6 +25,8 @@ dependencies {
 
     implementation("de.m3y.kformat:kformat:0.7")
     implementation("com.squareup:kotlinpoet:1.7.2")
+    implementation("com.fleshgrinder.kotlin:case-format:0.1.0")
+    implementation("com.github.ajalt.clikt:clikt:3.1.0")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
     implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")

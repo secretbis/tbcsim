@@ -3,11 +3,12 @@ package data
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import data.codegen.ItemGen
 import data.model.Item
 import data.model.ItemProc
 import data.model.ModelBase
-import data.model.socketbonus.SocketBonusRaw
-import data.model.socketbonus.allSocketBonusesRaw
+import data.socketbonus.SocketBonusRaw
+import data.socketbonus.allSocketBonusesRaw
 
 object DB {
     var items: Map<Int, Item> = mapOf()
@@ -30,6 +31,12 @@ object DB {
         return Pair(asMap, parsed)
     }
 
+    fun writeAllItemsToFile() {
+        for(item in itemsList) {
+            ItemGen.writeItemClassFile(item)
+        }
+    }
+
     fun init() {
         // Socket bonuses are already in KT form
         this.socketBonusesListRaw = allSocketBonusesRaw
@@ -43,5 +50,7 @@ object DB {
         val items = load("/items.json", object : TypeReference<List<Item>>(){})
         this.items = items.first
         this.itemsList = items.second
+
+        writeAllItemsToFile()
     }
 }
