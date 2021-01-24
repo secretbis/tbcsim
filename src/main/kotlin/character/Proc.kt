@@ -21,6 +21,7 @@ abstract class Proc {
         // Spells
         SPELL_HIT,
         SPELL_CRIT,
+        SPELL_RESIST,
 
         // Damage types
         PHYSICAL_DAMAGE,
@@ -29,7 +30,10 @@ abstract class Proc {
         NATURE_DAMAGE,
         FROST_DAMAGE,
         SHADOW_DAMAGE,
-        ARCANE_DAMAGE
+        ARCANE_DAMAGE,
+
+        // Time
+        ALL_TICKS
     }
 
     enum class Type {

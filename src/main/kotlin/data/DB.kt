@@ -6,13 +6,16 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import data.model.Item
 import data.model.ItemProc
 import data.model.ModelBase
-import java.io.File
+import data.model.socketbonus.SocketBonusRaw
+import data.model.socketbonus.allSocketBonusesRaw
 
 object DB {
     var items: Map<Int, Item> = mapOf()
     var itemsList: List<Item> = listOf()
     var itemProcs: Map<Int, ItemProc> = mapOf()
     var itemProcsList: List<ItemProc> = listOf()
+    var socketBonusesRaw: Map<Int, SocketBonusRaw> = mapOf()
+    var socketBonusesListRaw: List<SocketBonusRaw> = listOf()
 
     private val mapper = ObjectMapper().registerKotlinModule()
 
@@ -28,6 +31,10 @@ object DB {
     }
 
     fun init() {
+        // Socket bonuses are already in KT form
+        this.socketBonusesListRaw = allSocketBonusesRaw
+        this.socketBonusesRaw = socketBonusesListRaw.groupBy { it.id }.mapValues { it.value.first() }
+
         // This order is important, since items need to lookup itemProcs
         val itemProcs = load("/itemprocs.json", object : TypeReference<List<ItemProc>>(){})
         this.itemProcs = itemProcs.first

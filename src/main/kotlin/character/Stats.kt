@@ -29,6 +29,13 @@ data class Stats(
 
     var resilienceRating: Double = 0.0,
 
+    // Resistances
+    var fireResistance: Int = 0,
+    var natureResistance: Int = 0,
+    var frostResistance: Int = 0,
+    var shadowResistance: Int = 0,
+    var arcaneResistance: Int = 0,
+
     // Generic (non-spell-specific) modifiers
     var armorMultiplier: Double = 1.0,
 
@@ -96,6 +103,12 @@ data class Stats(
 
         resilienceRating += stats.resilienceRating
 
+        fireResistance += stats.fireResistance
+        natureResistance += stats.natureResistance
+        frostResistance += stats.frostResistance
+        shadowResistance += stats.shadowResistance
+        arcaneResistance += stats.arcaneResistance
+
         armorMultiplier *= stats.armorMultiplier
 
         physicalHasteMultiplier *= stats.physicalHasteMultiplier
@@ -155,6 +168,12 @@ data class Stats(
         spellPen -= stats.spellPen
 
         resilienceRating -= stats.resilienceRating
+
+        fireResistance -= stats.fireResistance
+        natureResistance -= stats.natureResistance
+        frostResistance -= stats.frostResistance
+        shadowResistance -= stats.shadowResistance
+        arcaneResistance -= stats.arcaneResistance
 
         armorMultiplier /= stats.armorMultiplier
 

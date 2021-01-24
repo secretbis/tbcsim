@@ -8,7 +8,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import data.Constants.StatType
 import data.DB
+import data.model.Color
 import data.model.Item
+import data.model.Socket
 import mu.KotlinLogging
 
 class ItemDeserializer : JsonDeserializer<Item>() {
@@ -25,24 +27,61 @@ class ItemDeserializer : JsonDeserializer<Item>() {
         item.maxDmg = node.get("dmg_max1").asDouble(item.maxDmg)
         item.speed = node.get("delay").asDouble(item.speed)
         item.stats = deserializeStats(node)
-
         item.procs = deserializeProcs(node)
+        item.sockets = deserializeSockets(node)
+        item.socketBonus = deserializeSocketBonus(node)
 
         return item
     }
 
+    private fun deserializeSocketBonus(node: JsonNode): List<Pair<StatType, Int>>? {
+        val bonusId = node.get("socketBonus").asInt(0)
+
+        if(bonusId == 0) return null
+
+        val socketBonus = DB.socketBonusesRaw[bonusId]
+        if(socketBonus == null) {
+            logger.warn("Unextracted socket bonus ID: $bonusId")
+            return null
+        }
+
+        // Some socket bonuses have two stat bonuses
+        return listOfNotNull(
+            Pair(socketBonus.stat, socketBonus.amount),
+            if(socketBonus.stat2 != null) {
+                Pair(socketBonus.stat2!!, socketBonus.amount2)
+            } else null
+        )
+    }
+
+    private fun deserializeSockets(node: JsonNode): List<Socket> {
+        return (1..3).mapNotNull { i ->
+            val socketColor = node.get("socketColor_$i").asInt()
+            if(socketColor == 0) {
+                null
+            } else {
+                val color = Color.values().find { it.mask == socketColor }
+                if (color != null) {
+                    Socket(color)
+                } else {
+                    logger.warn { "Could not interpret socket color value: $color" }
+                    null
+                }
+            }
+        }
+    }
+
     private fun deserializeProcs(node: JsonNode): List<Proc> {
-        val procs: MutableList<Proc> = mutableListOf()
-        for(i in 1..5) {
+        return (1..5).mapNotNull { i ->
             val spellId = node.get("spellid_$i").asInt(0)
 
-            if(spellId == 0) continue
+            if(spellId == 0) return@mapNotNull null
 
             val itemProc = DB.itemProcs[spellId]
 
             if(itemProc == null) {
                 logger.warn("Unextracted spell ID: $spellId")
-                continue
+                return@mapNotNull null
             }
 
             // TODO: Are these relevant for item procs?  Maybe?
@@ -50,10 +89,8 @@ class ItemDeserializer : JsonDeserializer<Item>() {
 //            val spellCooldown = node.get("spellcooldown_$i")
 //            var spellCategoryCooldown = node.get("spellcategorycooldown_$i")
 
-            procs.add(itemProc.proc)
+            itemProc.proc
         }
-
-        return procs
     }
 
     private fun deserializeStats(node: JsonNode) : Stats {

@@ -31,7 +31,8 @@ open class Item(
 
     // Sockets
     var sockets: List<Socket> = listOf()
-    var socketBonus: Pair<Constants.StatType, Int> = Pair(Constants.StatType.STAMINA, 0)
+    var socketBonus: List<Pair<Constants.StatType, Int>>? = null
+
     val metaGemActive: Boolean
         get() {
             val byType = sockets.groupBy { it.color }

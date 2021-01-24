@@ -1,9 +1,6 @@
 package sim
 
-import character.Ability
-import character.Buff
-import character.Character
-import character.Proc
+import character.*
 import character.auto.MeleeMainHand
 import character.auto.MeleeOffHand
 import character.classes.boss.Boss as BossClass
@@ -35,6 +32,8 @@ class SimIteration(
     val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedBuffState: MutableMap<String, Buff.State> = mutableMapOf()
     val abilityState: MutableMap<String, Ability.State> = mutableMapOf()
+    val debuffState: MutableMap<Buff, Buff.State> = mutableMapOf()
+    val sharedDebuffState: MutableMap<String, Buff.State> = mutableMapOf()
 
     // Global state
     var gcdEndMs: Int = 0
@@ -173,21 +172,21 @@ class SimIteration(
         }
     }
 
-    fun addDebuff(buff: Buff) {
-        buff.refresh(this)
+    fun addDebuff(debuff: Debuff) {
+        debuff.refresh(this)
 
         // If this is a new debuff, add it
-        val exists = buffs.find { it === buff } != null
+        val exists = debuffs.find { it === debuff } != null
         if(!exists) {
-            buffs.add(buff)
+            debuffs.add(debuff)
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_START,
-                buff = buff
+                buff = debuff
             ))
         } else {
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_REFRESH,
-                buff = buff
+                buff = debuff
             ))
         }
     }

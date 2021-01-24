@@ -23,8 +23,8 @@ abstract class Gem(val color: Color, val quality: Quality) {
         DELICATE(listOf(GemStat(Constants.StatType.AGILITY, 6, 8, 10))),
         BOLD(listOf(GemStat(Constants.StatType.STRENGTH, 6, 8, 10))),
         BRIGHT(listOf(GemStat(Constants.StatType.ATTACK_POWER, 12, 14, 16))),
-        TEARDROP(listOf(GemStat(Constants.StatType.SPELL_POWER, 7, 9, 12))),
-        RUNED(listOf(GemStat(Constants.StatType.SPELL_POWER, 7, 9, 12))),
+        TEARDROP(listOf(GemStat(Constants.StatType.SPELL_DAMAGE, 7, 9, 12))),
+        RUNED(listOf(GemStat(Constants.StatType.SPELL_DAMAGE, 7, 9, 12))),
         FLASHING(listOf(GemStat(Constants.StatType.PARRY_RATING, 0, 8, 10))),
         SUBTLE(listOf(GemStat(Constants.StatType.DODGE_RATING, 0, 8, 10))),
 
@@ -54,7 +54,7 @@ abstract class Gem(val color: Color, val quality: Quality) {
             GemStat(Constants.StatType.HIT_RATING, 3, 4, 5)
         )),
         POTENT(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.CRIT_RATING, 3, 4, 5)
         )),
         WICKED(listOf(
@@ -62,15 +62,15 @@ abstract class Gem(val color: Color, val quality: Quality) {
             GemStat(Constants.StatType.CRIT_RATING, 3, 4, 5)
         )),
         VEILED(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.HIT_RATING, 3, 4, 5)
         )),
         LUMINOUS(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.INTELLECT, 3, 4, 5)
         )),
         RECKLESS(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.HASTE_RATING, 3, 4, 5)
         )),
 
@@ -106,7 +106,7 @@ abstract class Gem(val color: Color, val quality: Quality) {
             GemStat(Constants.StatType.STAMINA, 4, 6, 7)
         )),
         GLOWING(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.STAMINA, 4, 6, 7)
         )),
         BALANCED(listOf(
@@ -114,7 +114,7 @@ abstract class Gem(val color: Color, val quality: Quality) {
             GemStat(Constants.StatType.STAMINA, 4, 6, 7)
         )),
         ROYAL(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.MANA_PER_5_SECONDS, 1, 2, 3)
         )),
         INFUSED(listOf(
@@ -122,7 +122,7 @@ abstract class Gem(val color: Color, val quality: Quality) {
             GemStat(Constants.StatType.MANA_PER_5_SECONDS, 1, 2, 2)
         )),
         PURIFIED(listOf(
-            GemStat(Constants.StatType.SPELL_POWER, 4, 5, 6),
+            GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
             GemStat(Constants.StatType.SPIRIT, 3, 4, 5)
         )),
         REGAL(listOf(
