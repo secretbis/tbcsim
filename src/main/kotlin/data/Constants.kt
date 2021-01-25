@@ -20,12 +20,13 @@ object Constants {
         CRIT_MELEE_RATING(19),
         CRIT_RANGED_RATING(20),
         CRIT_SPELL_RATING(21),
-        HIT_TAKEN_MELEE_RATING(22),
-        HIT_TAKEN_RANGED_RATING(23),
-        HIT_TAKEN_SPELL_RATING(24),
-        CRIT_TAKEN_MELEE_RATING(25),
-        CRIT_TAKEN_RANGED_RATING(26),
-        CRIT_TAKEN_SPELL_RATING(27),
+        // These are never actually used as far as I can tell
+//        HIT_TAKEN_MELEE_RATING(22),
+//        HIT_TAKEN_RANGED_RATING(23),
+//        HIT_TAKEN_SPELL_RATING(24),
+//        CRIT_TAKEN_MELEE_RATING(25),
+//        CRIT_TAKEN_RANGED_RATING(26),
+//        CRIT_TAKEN_SPELL_RATING(27),
         HASTE_MELEE_RATING(28),
         HASTE_RANGED_RATING(29),
         HASTE_SPELL_RATING(30),
@@ -141,8 +142,11 @@ object Constants {
         MISCELLANEOUS,
         GLYPH;
 
-        fun subclasses(itemClass: ItemClass) : List<ItemSubclass> {
-            return ItemSubclass.values().filter { it.itemClass == itemClass }
+        companion object {
+            fun subclasses(itemClass: ItemClass?) : List<ItemSubclass> {
+                if(itemClass == null) return listOf()
+                return ItemSubclass.values().filter { it.itemClass == itemClass }
+            }
         }
 
         operator fun invoke(): Int {
@@ -150,7 +154,7 @@ object Constants {
         }
     }
 
-    enum class ItemSubclass(val itemClass: ItemClass, private val itemClassOrdinal: Int) {
+    enum class ItemSubclass(val itemClass: ItemClass, val itemClassOrdinal: Int) {
         CONSUMABLE(ItemClass.CONSUMABLE,0),
         POTION(ItemClass.CONSUMABLE,1),
         ELIXIR(ItemClass.CONSUMABLE,2),

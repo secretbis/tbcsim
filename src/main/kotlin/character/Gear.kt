@@ -23,6 +23,29 @@ data class Gear(
     var trinket1: Item = Item(),
     var trinket2: Item = Item()
 ) {
+    fun all(): List<Item> {
+        return listOf(
+            mainHand,
+            offHand,
+            rangedTotemLibram,
+            ammo,
+            helm,
+            neck,
+            shoulders,
+            back,
+            chest,
+            wrists,
+            hands,
+            waist,
+            legs,
+            feet,
+            ring1,
+            ring2,
+            trinket1,
+            trinket2
+        )
+    }
+
     fun buffs(): List<Buff> {
         val buffs = mutableListOf<Buff>()
         Gear::class.declaredMemberProperties.forEach {
@@ -38,14 +61,6 @@ data class Gear(
             }
         }
         return buffs
-    }
-
-    fun procs(): List<Proc> {
-        val procs = mutableListOf<Proc>()
-        Gear::class.declaredMemberProperties.forEach {
-            procs.addAll((it.get(this) as Item).procs)
-        }
-        return procs
     }
 
     fun totalStats(): Stats {

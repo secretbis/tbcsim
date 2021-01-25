@@ -7,9 +7,9 @@ import character.races.Draenei
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
-import data.DB
+import data.codegen.CodeGen
 import data.model.Item
-import data.buffs.Mongoose
+import data.enchants.Mongoose
 import kotlinx.coroutines.runBlocking
 import sim.Sim
 import sim.SimOptions
@@ -60,13 +60,13 @@ fun setupLogging() {
 }
 
 class TBCSim : CliktCommand() {
-    val generate: Boolean by option("-g", "--generate", help="Autogenerate item classes").flag(default = false)
+    val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
 
     override fun run() {
         setupLogging()
 
         if(generate) {
-            DB.init()
+            CodeGen.generate()
         } else {
             runBlocking {
                 Sim(

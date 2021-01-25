@@ -69,7 +69,6 @@ class SimIteration(
         subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
             procs.addAll(it.value.procs(this))
         }
-        procs.addAll(subject.gear.procs())
 
         // Collect buffs from class, talents, gear, and etc
         subject.klass.buffs.forEach { addBuff(it) }
@@ -195,9 +194,6 @@ class SimIteration(
         for(trigger in triggers) {
             // Get any procs from the triggering item
             val allProcs: MutableList<Proc> = mutableListOf()
-            if (items != null) {
-                allProcs.addAll(items.flatMap { it.procs }.filter { it.triggers.contains(trigger) })
-            }
 
             // Get procs from active buffs
             buffs.forEach { buff ->

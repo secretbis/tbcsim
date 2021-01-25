@@ -1,7 +1,11 @@
 package data.model
 
-import data.Constants
+import character.Stats
 
 class SocketBonus(
-    val stat: Constants.StatType
-)
+    val stats: Stats
+) {
+    fun modifyStats(stats: Stats): Stats {
+        return stats.add(this.stats)
+    }
+}

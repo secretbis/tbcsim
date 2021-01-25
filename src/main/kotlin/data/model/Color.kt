@@ -9,5 +9,5 @@ enum class Color(val mask: Int) {
 
     ORANGE(6),
     PURPLE(10),
-    GREEN(12),
+    GREEN(12);
 }

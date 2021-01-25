@@ -1,5 +1,7 @@
 package character
 
+import data.Constants.StatType
+
 data class Stats(
     // Base stats
     var strength: Int = 0,
@@ -27,7 +29,13 @@ data class Stats(
     var spellHealing: Int = 0,
     var spellPen: Int = 0,
 
+    // Defensive stats
     var resilienceRating: Double = 0.0,
+    var defenseRating: Double = 0.0,
+    var blockValue: Double = 0.0,
+    var blockRating: Double = 0.0,
+    var dodgeRating: Double = 0.0,
+    var parryRating: Double = 0.0,
 
     // Resistances
     var fireResistance: Int = 0,
@@ -68,7 +76,9 @@ data class Stats(
     var arcaneDamageMultiplier: Double = 1.0,
 
     var healthMultiplier: Double = 1.0,
-    var manaMultiplier: Double = 1.0
+    var healthFlatModifier: Int = 0,
+    var manaMultiplier: Double = 1.0,
+    var manaFlatModifier: Int = 0,
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -102,6 +112,11 @@ data class Stats(
         spellPen += stats.spellPen
 
         resilienceRating += stats.resilienceRating
+        defenseRating += stats.defenseRating
+        blockValue += stats.blockValue
+        blockRating += stats.blockRating
+        dodgeRating += stats.dodgeRating
+        parryRating += stats.parryRating
 
         fireResistance += stats.fireResistance
         natureResistance += stats.natureResistance
@@ -137,7 +152,9 @@ data class Stats(
         arcaneDamageMultiplier *= stats.arcaneDamageMultiplier
 
         healthMultiplier *= stats.healthMultiplier
+        healthFlatModifier += stats.healthFlatModifier
         manaMultiplier *= stats.manaMultiplier
+        manaFlatModifier += stats.manaFlatModifier
 
         return this
     }
@@ -168,6 +185,11 @@ data class Stats(
         spellPen -= stats.spellPen
 
         resilienceRating -= stats.resilienceRating
+        defenseRating -= stats.defenseRating
+        blockValue -= stats.blockValue
+        blockRating -= stats.blockRating
+        dodgeRating -= stats.dodgeRating
+        parryRating -= stats.parryRating
 
         fireResistance -= stats.fireResistance
         natureResistance -= stats.natureResistance
@@ -203,7 +225,73 @@ data class Stats(
         arcaneDamageMultiplier /= stats.arcaneDamageMultiplier
 
         healthMultiplier /= stats.healthMultiplier
+        healthFlatModifier -= stats.healthFlatModifier
         manaMultiplier /= stats.manaMultiplier
+        manaFlatModifier -= stats.manaFlatModifier
+
+        return this
+    }
+
+    // Serves as a way to update a Stats object given a DB enum constant and a value
+    // This function mutates its first argument
+    fun addByStatType(statType: StatType, value: Int): Stats {
+        // TODO: Reorder this into something that makes sense
+        when (statType) {
+            StatType.AGILITY ->
+                agility += value
+            StatType.CRIT_MELEE_RATING, StatType.CRIT_RANGED_RATING ->
+                physicalCritRating += value
+            StatType.CRIT_RATING -> {
+                physicalCritRating += value
+                spellCritRating += value
+            }
+            StatType.CRIT_SPELL_RATING ->
+                spellCritRating += value
+            StatType.EXPERTISE_RATING ->
+                expertiseRating += value
+            StatType.HASTE_MELEE_RATING, StatType.HASTE_RANGED_RATING ->
+                physicalHasteRating += value
+            StatType.HASTE_RATING -> {
+                physicalHasteRating += value
+                spellHasteRating += value
+            }
+            StatType.HASTE_SPELL_RATING ->
+                spellHasteRating += value
+            StatType.HIT_MELEE_RATING, StatType.HIT_RANGED_RATING ->
+                physicalHitRating += value
+            StatType.HIT_RATING -> {
+                physicalHitRating += value
+                spellHitRating += value
+            }
+            StatType.HIT_SPELL_RATING -> {
+                spellHitRating += value
+            }
+            StatType.INTELLECT ->
+                intellect += value
+            StatType.SPIRIT ->
+                spirit += value
+            StatType.STAMINA ->
+                stamina += value
+            StatType.STRENGTH ->
+                strength += value
+            StatType.DEFENSE_SKILL_RATING ->
+                defenseRating += value
+            StatType.BLOCK_VALUE ->
+                blockValue += value
+            StatType.BLOCK_RATING ->
+                blockRating += value
+            StatType.DODGE_RATING ->
+                dodgeRating += value
+            StatType.PARRY_RATING ->
+                parryRating += value
+            StatType.MANA ->
+                manaFlatModifier += value
+            StatType.HEALTH ->
+                healthFlatModifier += value
+            else -> {
+                // Do nothing
+            }
+        }
 
         return this
     }

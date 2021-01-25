@@ -1,0 +1,973 @@
+554 - Primal Mooncloth Belt
+554 - Primal Mooncloth Robe
+558 - Arcanoweave Robe
+563 - Enchanted Adamantite Leggings
+564 - Flamebane Breastplate
+565 - Khorium Boots
+566 - Ragesteel Breastplate
+566 - Ragesteel Gloves
+566 - Ragesteel Helm
+566 - Ragesteel Shoulders
+567 - Brutal Gladiator's Plate Chestpiece
+567 - Brutal Gladiator's Plate Gauntlets
+567 - Brutal Gladiator's Plate Helm
+567 - Brutal Gladiator's Plate Legguards
+567 - Brutal Gladiator's Plate Shoulders
+567 - Gladiator's Plate Chestpiece
+567 - Gladiator's Plate Gauntlets
+567 - Gladiator's Plate Helm
+567 - Gladiator's Plate Legguards
+567 - Gladiator's Plate Shoulders
+567 - Merciless Gladiator's Plate Chestpiece
+567 - Merciless Gladiator's Plate Gauntlets
+567 - Merciless Gladiator's Plate Helm
+567 - Merciless Gladiator's Plate Legguards
+567 - Merciless Gladiator's Plate Shoulders
+567 - Vengeful Gladiator's Plate Chestpiece
+567 - Vengeful Gladiator's Plate Gauntlets
+567 - Vengeful Gladiator's Plate Helm
+567 - Vengeful Gladiator's Plate Legguards
+567 - Vengeful Gladiator's Plate Shoulders
+568 - Brutal Gladiator's Dreadweave Gloves
+568 - Brutal Gladiator's Dreadweave Hood
+568 - Brutal Gladiator's Dreadweave Leggings
+568 - Brutal Gladiator's Dreadweave Mantle
+568 - Brutal Gladiator's Dreadweave Robe
+568 - Gladiator's Dreadweave Gloves
+568 - Gladiator's Dreadweave Hood
+568 - Gladiator's Dreadweave Leggings
+568 - Gladiator's Dreadweave Mantle
+568 - Gladiator's Dreadweave Robe
+568 - Merciless Gladiator's Dreadweave Gloves
+568 - Merciless Gladiator's Dreadweave Hood
+568 - Merciless Gladiator's Dreadweave Leggings
+568 - Merciless Gladiator's Dreadweave Mantle
+568 - Merciless Gladiator's Dreadweave Robe
+568 - Vengeful Gladiator's Dreadweave Gloves
+568 - Vengeful Gladiator's Dreadweave Hood
+568 - Vengeful Gladiator's Dreadweave Leggings
+568 - Vengeful Gladiator's Dreadweave Mantle
+568 - Vengeful Gladiator's Dreadweave Robe
+569 - Felsteel Helm
+577 - Brutal Gladiator's Leather Gloves
+577 - Brutal Gladiator's Leather Helm
+577 - Brutal Gladiator's Leather Legguards
+577 - Brutal Gladiator's Leather Spaulders
+577 - Brutal Gladiator's Leather Tunic
+577 - Gladiator's Leather Gloves
+577 - Gladiator's Leather Helm
+577 - Gladiator's Leather Legguards
+577 - Gladiator's Leather Spaulders
+577 - Gladiator's Leather Tunic
+577 - Merciless Gladiator's Leather Gloves
+577 - Merciless Gladiator's Leather Helm
+577 - Merciless Gladiator's Leather Legguards
+577 - Merciless Gladiator's Leather Spaulders
+577 - Merciless Gladiator's Leather Tunic
+577 - Vengeful Gladiator's Leather Gloves
+577 - Vengeful Gladiator's Leather Helm
+577 - Vengeful Gladiator's Leather Legguards
+577 - Vengeful Gladiator's Leather Spaulders
+577 - Vengeful Gladiator's Leather Tunic
+578 - Brutal Gladiator's Linked Armor
+578 - Brutal Gladiator's Linked Gauntlets
+578 - Brutal Gladiator's Linked Helm
+578 - Brutal Gladiator's Linked Leggings
+578 - Brutal Gladiator's Linked Spaulders
+578 - Gladiator's Linked Armor
+578 - Gladiator's Linked Gauntlets
+578 - Gladiator's Linked Helm
+578 - Gladiator's Linked Leggings
+578 - Gladiator's Linked Spaulders
+578 - Merciless Gladiator's Linked Armor
+578 - Merciless Gladiator's Linked Gauntlets
+578 - Merciless Gladiator's Linked Helm
+578 - Merciless Gladiator's Linked Leggings
+578 - Merciless Gladiator's Linked Spaulders
+578 - Vengeful Gladiator's Linked Armor
+578 - Vengeful Gladiator's Linked Gauntlets
+578 - Vengeful Gladiator's Linked Helm
+578 - Vengeful Gladiator's Linked Leggings
+578 - Vengeful Gladiator's Linked Spaulders
+579 - Brutal Gladiator's Silk Amice
+579 - Brutal Gladiator's Silk Cowl
+579 - Brutal Gladiator's Silk Handguards
+579 - Brutal Gladiator's Silk Raiment
+579 - Brutal Gladiator's Silk Trousers
+579 - Gladiator's Silk Amice
+579 - Gladiator's Silk Cowl
+579 - Gladiator's Silk Handguards
+579 - Gladiator's Silk Raiment
+579 - Gladiator's Silk Trousers
+579 - Merciless Gladiator's Silk Amice
+579 - Merciless Gladiator's Silk Cowl
+579 - Merciless Gladiator's Silk Handguards
+579 - Merciless Gladiator's Silk Raiment
+579 - Merciless Gladiator's Silk Trousers
+579 - Vengeful Gladiator's Silk Amice
+579 - Vengeful Gladiator's Silk Cowl
+579 - Vengeful Gladiator's Silk Handguards
+579 - Vengeful Gladiator's Silk Raiment
+579 - Vengeful Gladiator's Silk Trousers
+580 - Brutal Gladiator's Mail Armor
+580 - Brutal Gladiator's Mail Gauntlets
+580 - Brutal Gladiator's Mail Helm
+580 - Brutal Gladiator's Mail Leggings
+580 - Brutal Gladiator's Mail Spaulders
+580 - Gladiator's Mail Armor
+580 - Gladiator's Mail Gauntlets
+580 - Gladiator's Mail Helm
+580 - Gladiator's Mail Leggings
+580 - Gladiator's Mail Spaulders
+580 - Merciless Gladiator's Mail Armor
+580 - Merciless Gladiator's Mail Gauntlets
+580 - Merciless Gladiator's Mail Helm
+580 - Merciless Gladiator's Mail Leggings
+580 - Merciless Gladiator's Mail Spaulders
+580 - Vengeful Gladiator's Mail Armor
+580 - Vengeful Gladiator's Mail Gauntlets
+580 - Vengeful Gladiator's Mail Helm
+580 - Vengeful Gladiator's Mail Leggings
+580 - Vengeful Gladiator's Mail Spaulders
+581 - Brutal Gladiator's Satin Gloves
+581 - Brutal Gladiator's Satin Hood
+581 - Brutal Gladiator's Satin Leggings
+581 - Brutal Gladiator's Satin Mantle
+581 - Brutal Gladiator's Satin Robe
+581 - Gladiator's Satin Gloves
+581 - Gladiator's Satin Hood
+581 - Gladiator's Satin Leggings
+581 - Gladiator's Satin Mantle
+581 - Gladiator's Satin Robe
+581 - Merciless Gladiator's Satin Gloves
+581 - Merciless Gladiator's Satin Hood
+581 - Merciless Gladiator's Satin Leggings
+581 - Merciless Gladiator's Satin Mantle
+581 - Merciless Gladiator's Satin Robe
+581 - Vengeful Gladiator's Satin Gloves
+581 - Vengeful Gladiator's Satin Hood
+581 - Vengeful Gladiator's Satin Leggings
+581 - Vengeful Gladiator's Satin Mantle
+581 - Vengeful Gladiator's Satin Robe
+582 - Brutal Gladiator's Lamellar Chestpiece
+582 - Brutal Gladiator's Lamellar Gauntlets
+582 - Brutal Gladiator's Lamellar Helm
+582 - Brutal Gladiator's Lamellar Legguards
+582 - Brutal Gladiator's Lamellar Shoulders
+582 - Gladiator's Lamellar Chestpiece
+582 - Gladiator's Lamellar Gauntlets
+582 - Gladiator's Lamellar Helm
+582 - Gladiator's Lamellar Legguards
+582 - Gladiator's Lamellar Shoulders
+582 - Merciless Gladiator's Lamellar Chestpiece
+582 - Merciless Gladiator's Lamellar Gauntlets
+582 - Merciless Gladiator's Lamellar Helm
+582 - Merciless Gladiator's Lamellar Legguards
+582 - Merciless Gladiator's Lamellar Shoulders
+582 - Vengeful Gladiator's Lamellar Chestpiece
+582 - Vengeful Gladiator's Lamellar Gauntlets
+582 - Vengeful Gladiator's Lamellar Helm
+582 - Vengeful Gladiator's Lamellar Legguards
+582 - Vengeful Gladiator's Lamellar Shoulders
+583 - Brutal Gladiator's Scaled Chestpiece
+583 - Brutal Gladiator's Scaled Gauntlets
+583 - Brutal Gladiator's Scaled Helm
+583 - Brutal Gladiator's Scaled Legguards
+583 - Brutal Gladiator's Scaled Shoulders
+583 - Gladiator's Scaled Chestpiece
+583 - Gladiator's Scaled Gauntlets
+583 - Gladiator's Scaled Helm
+583 - Gladiator's Scaled Legguards
+583 - Gladiator's Scaled Shoulders
+583 - Merciless Gladiator's Scaled Chestpiece
+583 - Merciless Gladiator's Scaled Gauntlets
+583 - Merciless Gladiator's Scaled Helm
+583 - Merciless Gladiator's Scaled Legguards
+583 - Merciless Gladiator's Scaled Shoulders
+583 - Vengeful Gladiator's Scaled Chestpiece
+583 - Vengeful Gladiator's Scaled Gauntlets
+583 - Vengeful Gladiator's Scaled Helm
+583 - Vengeful Gladiator's Scaled Legguards
+583 - Vengeful Gladiator's Scaled Shoulders
+584 - Brutal Gladiator's Dragonhide Gloves
+584 - Brutal Gladiator's Dragonhide Helm
+584 - Brutal Gladiator's Dragonhide Legguards
+584 - Brutal Gladiator's Dragonhide Spaulders
+584 - Brutal Gladiator's Dragonhide Tunic
+584 - Gladiator's Dragonhide Gloves
+584 - Gladiator's Dragonhide Helm
+584 - Gladiator's Dragonhide Legguards
+584 - Gladiator's Dragonhide Spaulders
+584 - Gladiator's Dragonhide Tunic
+584 - Merciless Gladiator's Dragonhide Gloves
+584 - Merciless Gladiator's Dragonhide Helm
+584 - Merciless Gladiator's Dragonhide Legguards
+584 - Merciless Gladiator's Dragonhide Spaulders
+584 - Merciless Gladiator's Dragonhide Tunic
+584 - Vengeful Gladiator's Dragonhide Gloves
+584 - Vengeful Gladiator's Dragonhide Helm
+584 - Vengeful Gladiator's Dragonhide Legguards
+584 - Vengeful Gladiator's Dragonhide Spaulders
+584 - Vengeful Gladiator's Dragonhide Tunic
+585 - Brutal Gladiator's Wyrmhide Gloves
+585 - Brutal Gladiator's Wyrmhide Helm
+585 - Brutal Gladiator's Wyrmhide Legguards
+585 - Brutal Gladiator's Wyrmhide Spaulders
+585 - Brutal Gladiator's Wyrmhide Tunic
+585 - Gladiator's Wyrmhide Gloves
+585 - Gladiator's Wyrmhide Helm
+585 - Gladiator's Wyrmhide Legguards
+585 - Gladiator's Wyrmhide Spaulders
+585 - Gladiator's Wyrmhide Tunic
+585 - Merciless Gladiator's Wyrmhide Gloves
+585 - Merciless Gladiator's Wyrmhide Helm
+585 - Merciless Gladiator's Wyrmhide Legguards
+585 - Merciless Gladiator's Wyrmhide Spaulders
+585 - Merciless Gladiator's Wyrmhide Tunic
+585 - Vengeful Gladiator's Wyrmhide Gloves
+585 - Vengeful Gladiator's Wyrmhide Helm
+585 - Vengeful Gladiator's Wyrmhide Legguards
+585 - Vengeful Gladiator's Wyrmhide Spaulders
+585 - Vengeful Gladiator's Wyrmhide Tunic
+586 - Brutal Gladiator's Chain Armor
+586 - Brutal Gladiator's Chain Gauntlets
+586 - Brutal Gladiator's Chain Helm
+586 - Brutal Gladiator's Chain Leggings
+586 - Brutal Gladiator's Chain Spaulders
+586 - Gladiator's Chain Armor
+586 - Gladiator's Chain Gauntlets
+586 - Gladiator's Chain Helm
+586 - Gladiator's Chain Leggings
+586 - Gladiator's Chain Spaulders
+586 - Merciless Gladiator's Chain Armor
+586 - Merciless Gladiator's Chain Gauntlets
+586 - Merciless Gladiator's Chain Helm
+586 - Merciless Gladiator's Chain Leggings
+586 - Merciless Gladiator's Chain Spaulders
+586 - Vengeful Gladiator's Chain Armor
+586 - Vengeful Gladiator's Chain Gauntlets
+586 - Vengeful Gladiator's Chain Helm
+586 - Vengeful Gladiator's Chain Leggings
+586 - Vengeful Gladiator's Chain Spaulders
+587 - High Warlord's Lamellar Chestpiece
+587 - High Warlord's Lamellar Gauntlets
+587 - High Warlord's Lamellar Helm
+587 - High Warlord's Lamellar Legguards
+587 - High Warlord's Lamellar Shoulders
+588 - High Warlord's Plate Chestpiece
+588 - High Warlord's Plate Gauntlets
+588 - High Warlord's Plate Helm
+588 - High Warlord's Plate Legguards
+588 - High Warlord's Plate Shoulders
+589 - Grand Marshal's Lamellar Chestpiece
+589 - Grand Marshal's Lamellar Gauntlets
+589 - Grand Marshal's Lamellar Helm
+589 - Grand Marshal's Lamellar Legguards
+589 - Grand Marshal's Lamellar Shoulders
+590 - Grand Marshal's Plate Chestpiece
+590 - Grand Marshal's Plate Gauntlets
+590 - Grand Marshal's Plate Helm
+590 - Grand Marshal's Plate Legguards
+590 - Grand Marshal's Plate Shoulders
+591 - Grand Marshal's Dreadweave Gloves
+591 - Grand Marshal's Dreadweave Hood
+591 - Grand Marshal's Dreadweave Leggings
+591 - Grand Marshal's Dreadweave Mantle
+591 - Grand Marshal's Dreadweave Robe
+592 - High Warlord's Dreadweave Gloves
+592 - High Warlord's Dreadweave Hood
+592 - High Warlord's Dreadweave Leggings
+592 - High Warlord's Dreadweave Mantle
+592 - High Warlord's Dreadweave Robe
+593 - Grand Marshal's Linked Armor
+593 - Grand Marshal's Linked Gauntlets
+593 - Grand Marshal's Linked Helm
+593 - Grand Marshal's Linked Leggings
+593 - Grand Marshal's Linked Spaulders
+594 - High Warlord's Linked Armor
+594 - High Warlord's Linked Gauntlets
+594 - High Warlord's Linked Helm
+594 - High Warlord's Linked Leggings
+594 - High Warlord's Linked Spaulders
+595 - Grand Marshal's Chain Armor
+595 - Grand Marshal's Chain Gauntlets
+595 - Grand Marshal's Chain Helm
+595 - Grand Marshal's Chain Leggings
+595 - Grand Marshal's Chain Spaulders
+596 - High Warlord's Chain Armor
+596 - High Warlord's Chain Gauntlets
+596 - High Warlord's Chain Helm
+596 - High Warlord's Chain Leggings
+596 - High Warlord's Chain Spaulders
+597 - Grand Marshal's Satin Gloves
+597 - Grand Marshal's Satin Hood
+597 - Grand Marshal's Satin Leggings
+597 - Grand Marshal's Satin Mantle
+597 - Grand Marshal's Satin Robe
+598 - High Warlord's Satin Gloves
+598 - High Warlord's Satin Hood
+598 - High Warlord's Satin Leggings
+598 - High Warlord's Satin Mantle
+598 - High Warlord's Satin Robe
+599 - Grand Marshal's Silk Amice
+599 - Grand Marshal's Silk Cowl
+599 - Grand Marshal's Silk Handguards
+599 - Grand Marshal's Silk Raiment
+599 - Grand Marshal's Silk Trousers
+600 - High Warlord's Silk Amice
+600 - High Warlord's Silk Cowl
+600 - High Warlord's Silk Handguards
+600 - High Warlord's Silk Raiment
+600 - High Warlord's Silk Trousers
+601 - Grand Marshal's Dragonhide Gloves
+601 - Grand Marshal's Dragonhide Helm
+601 - Grand Marshal's Dragonhide Legguards
+601 - Grand Marshal's Dragonhide Spaulders
+601 - Grand Marshal's Dragonhide Tunic
+602 - High Warlord's Dragonhide Gloves
+602 - High Warlord's Dragonhide Helm
+602 - High Warlord's Dragonhide Legguards
+602 - High Warlord's Dragonhide Spaulders
+602 - High Warlord's Dragonhide Tunic
+603 - Grand Marshal's Mail Armor
+603 - Grand Marshal's Mail Gauntlets
+603 - Grand Marshal's Mail Helm
+603 - Grand Marshal's Mail Leggings
+603 - Grand Marshal's Mail Spaulders
+604 - High Warlord's Mail Armor
+604 - High Warlord's Mail Gauntlets
+604 - High Warlord's Mail Helm
+604 - High Warlord's Mail Leggings
+604 - High Warlord's Mail Spaulders
+605 - Grand Marshal's Leather Gloves
+605 - Grand Marshal's Leather Helm
+605 - Grand Marshal's Leather Legguards
+605 - Grand Marshal's Leather Spaulders
+605 - Grand Marshal's Leather Tunic
+606 - High Warlord's Leather Gloves
+606 - High Warlord's Leather Helm
+606 - High Warlord's Leather Legguards
+606 - High Warlord's Leather Spaulders
+606 - High Warlord's Leather Tunic
+607 - Grand Marshal's Scaled Chestpiece
+607 - Grand Marshal's Scaled Gauntlets
+607 - Grand Marshal's Scaled Helm
+607 - Grand Marshal's Scaled Legguards
+607 - Grand Marshal's Scaled Shoulders
+608 - High Warlord's Scaled Chestpiece
+608 - High Warlord's Scaled Gauntlets
+608 - High Warlord's Scaled Helm
+608 - High Warlord's Scaled Legguards
+608 - High Warlord's Scaled Shoulders
+609 - Grand Marshal's Wyrmhide Gloves
+609 - Grand Marshal's Wyrmhide Helm
+609 - Grand Marshal's Wyrmhide Legguards
+609 - Grand Marshal's Wyrmhide Spaulders
+609 - Grand Marshal's Wyrmhide Tunic
+610 - High Warlord's Wyrmhide Gloves
+610 - High Warlord's Wyrmhide Helm
+610 - High Warlord's Wyrmhide Legguards
+610 - High Warlord's Wyrmhide Spaulders
+610 - High Warlord's Wyrmhide Tunic
+615 - Brutal Gladiator's Felweave Amice
+615 - Brutal Gladiator's Felweave Cowl
+615 - Brutal Gladiator's Felweave Handguards
+615 - Brutal Gladiator's Felweave Raiment
+615 - Brutal Gladiator's Felweave Trousers
+615 - Gladiator's Felweave Amice
+615 - Gladiator's Felweave Cowl
+615 - Gladiator's Felweave Handguards
+615 - Gladiator's Felweave Raiment
+615 - Gladiator's Felweave Trousers
+615 - Merciless Gladiator's Felweave Amice
+615 - Merciless Gladiator's Felweave Cowl
+615 - Merciless Gladiator's Felweave Handguards
+615 - Merciless Gladiator's Felweave Raiment
+615 - Merciless Gladiator's Felweave Trousers
+615 - Vengeful Gladiator's Felweave Amice
+615 - Vengeful Gladiator's Felweave Cowl
+615 - Vengeful Gladiator's Felweave Handguards
+615 - Vengeful Gladiator's Felweave Raiment
+615 - Vengeful Gladiator's Felweave Trousers
+616 - Ebon Netherscale Belt
+616 - Ebon Netherscale Breastplate
+617 - Netherstrike Belt
+617 - Netherstrike Bracers
+617 - Netherstrike Breastplate
+618 - Windhawk Belt
+618 - Windhawk Bracers
+618 - Windhawk Hauberk
+619 - Primalstrike Belt
+619 - Primalstrike Bracers
+619 - Primalstrike Vest
+620 - Handgrips of Assassination
+620 - Helm of Assassination
+620 - Leggings of Assassination
+620 - Shoulderpads of Assassination
+620 - Tunic of Assassination
+621 - Netherblade Breeches
+621 - Netherblade Chestpiece
+621 - Netherblade Facemask
+621 - Netherblade Gloves
+621 - Netherblade Shoulderpads
+622 - Deathmantle Chestguard
+622 - Deathmantle Handguards
+622 - Deathmantle Helm
+622 - Deathmantle Legguards
+622 - Deathmantle Shoulderpads
+623 - Breastplate of the Righteous
+623 - Gauntlets of the Righteous
+623 - Helm of the Righteous
+623 - Legplates of the Righteous
+623 - Spaulders of the Righteous
+624 - Justicar Chestpiece
+624 - Justicar Diadem
+624 - Justicar Gloves
+624 - Justicar Leggings
+624 - Justicar Pauldrons
+625 - Justicar Chestguard
+625 - Justicar Faceguard
+625 - Justicar Handguards
+625 - Justicar Legguards
+625 - Justicar Shoulderguards
+626 - Justicar Breastplate
+626 - Justicar Crown
+626 - Justicar Gauntlets
+626 - Justicar Greaves
+626 - Justicar Shoulderplates
+627 - Crystalforge Chestpiece
+627 - Crystalforge Gloves
+627 - Crystalforge Greathelm
+627 - Crystalforge Leggings
+627 - Crystalforge Pauldrons
+628 - Crystalforge Chestguard
+628 - Crystalforge Faceguard
+628 - Crystalforge Handguards
+628 - Crystalforge Legguards
+628 - Crystalforge Shoulderguards
+629 - Crystalforge Breastplate
+629 - Crystalforge Gauntlets
+629 - Crystalforge Greaves
+629 - Crystalforge Shoulderbraces
+629 - Crystalforge War-Helm
+630 - Tidefury Chestpiece
+630 - Tidefury Gauntlets
+630 - Tidefury Helm
+630 - Tidefury Kilt
+630 - Tidefury Shoulderguards
+631 - Cyclone Gloves
+631 - Cyclone Hauberk
+631 - Cyclone Headdress
+631 - Cyclone Kilt
+631 - Cyclone Shoulderpads
+632 - Cyclone Chestguard
+632 - Cyclone Faceguard
+632 - Cyclone Handguards
+632 - Cyclone Legguards
+632 - Cyclone Shoulderguards
+633 - Cyclone Breastplate
+633 - Cyclone Gauntlets
+633 - Cyclone Helm
+633 - Cyclone Shoulderplates
+633 - Cyclone War-Kilt
+634 - Cataclysm Chestguard
+634 - Cataclysm Gloves
+634 - Cataclysm Headguard
+634 - Cataclysm Legguards
+634 - Cataclysm Shoulderguards
+635 - Cataclysm Chestpiece
+635 - Cataclysm Handgrips
+635 - Cataclysm Headpiece
+635 - Cataclysm Leggings
+635 - Cataclysm Shoulderpads
+636 - Cataclysm Chestplate
+636 - Cataclysm Gauntlets
+636 - Cataclysm Helm
+636 - Cataclysm Legplates
+636 - Cataclysm Shoulderplates
+637 - Moonglade Cowl
+637 - Moonglade Handwraps
+637 - Moonglade Pants
+637 - Moonglade Robe
+637 - Moonglade Shoulders
+638 - Chestguard of Malorne
+638 - Crown of Malorne
+638 - Handguards of Malorne
+638 - Legguards of Malorne
+638 - Shoulderguards of Malorne
+639 - Antlers of Malorne
+639 - Britches of Malorne
+639 - Chestpiece of Malorne
+639 - Gloves of Malorne
+639 - Pauldrons of Malorne
+640 - Breastplate of Malorne
+640 - Gauntlets of Malorne
+640 - Greaves of Malorne
+640 - Mantle of Malorne
+640 - Stag-Helm of Malorne
+641 - Nordrassil Chestplate
+641 - Nordrassil Feral-Kilt
+641 - Nordrassil Feral-Mantle
+641 - Nordrassil Handgrips
+641 - Nordrassil Headdress
+642 - Nordrassil Chestguard
+642 - Nordrassil Gloves
+642 - Nordrassil Headguard
+642 - Nordrassil Life-Kilt
+642 - Nordrassil Life-Mantle
+643 - Nordrassil Chestpiece
+643 - Nordrassil Gauntlets
+643 - Nordrassil Headpiece
+643 - Nordrassil Wrath-Kilt
+643 - Nordrassil Wrath-Mantle
+644 - Gloves of Oblivion
+644 - Hood of Oblivion
+644 - Robe of Oblivion
+644 - Spaulders of Oblivion
+644 - Trousers of Oblivion
+645 - Voidheart Crown
+645 - Voidheart Gloves
+645 - Voidheart Leggings
+645 - Voidheart Mantle
+645 - Voidheart Robe
+646 - Gloves of the Corruptor
+646 - Hood of the Corruptor
+646 - Leggings of the Corruptor
+646 - Mantle of the Corruptor
+646 - Robe of the Corruptor
+647 - Incanter's Cowl
+647 - Incanter's Gloves
+647 - Incanter's Pauldrons
+647 - Incanter's Robe
+647 - Incanter's Trousers
+648 - Collar of the Aldor
+648 - Gloves of the Aldor
+648 - Legwraps of the Aldor
+648 - Pauldrons of the Aldor
+648 - Vestments of the Aldor
+649 - Cowl of Tirisfal
+649 - Gloves of Tirisfal
+649 - Leggings of Tirisfal
+649 - Mantle of Tirisfal
+649 - Robes of Tirisfal
+650 - Beast Lord Cuirass
+650 - Beast Lord Handguards
+650 - Beast Lord Helm
+650 - Beast Lord Leggings
+650 - Beast Lord Mantle
+651 - Demon Stalker Gauntlets
+651 - Demon Stalker Greathelm
+651 - Demon Stalker Greaves
+651 - Demon Stalker Harness
+651 - Demon Stalker Shoulderguards
+652 - Rift Stalker Gauntlets
+652 - Rift Stalker Hauberk
+652 - Rift Stalker Helm
+652 - Rift Stalker Leggings
+652 - Rift Stalker Mantle
+653 - Breastplate of the Bold
+653 - Gauntlets of the Bold
+653 - Legplates of the Bold
+653 - Shoulderguards of the Bold
+653 - Warhelm of the Bold
+654 - Warbringer Chestguard
+654 - Warbringer Greathelm
+654 - Warbringer Handguards
+654 - Warbringer Legguards
+654 - Warbringer Shoulderguards
+655 - Warbringer Battle-Helm
+655 - Warbringer Breastplate
+655 - Warbringer Gauntlets
+655 - Warbringer Greaves
+655 - Warbringer Shoulderplates
+656 - Destroyer Chestguard
+656 - Destroyer Greathelm
+656 - Destroyer Handguards
+656 - Destroyer Legguards
+656 - Destroyer Shoulderguards
+657 - Destroyer Battle-Helm
+657 - Destroyer Breastplate
+657 - Destroyer Gauntlets
+657 - Destroyer Greaves
+657 - Destroyer Shoulderblades
+658 - Mana-Etched Crown
+658 - Mana-Etched Gloves
+658 - Mana-Etched Pantaloons
+658 - Mana-Etched Spaulders
+658 - Mana-Etched Vestments
+659 - Wastewalker Gloves
+659 - Wastewalker Helm
+659 - Wastewalker Leggings
+659 - Wastewalker Shoulderpads
+659 - Wastewalker Tunic
+660 - Gauntlets of Desolation
+660 - Greaves of Desolation
+660 - Hauberk of Desolation
+660 - Helm of Desolation
+660 - Pauldrons of Desolation
+661 - Doomplate Chestguard
+661 - Doomplate Gauntlets
+661 - Doomplate Legguards
+661 - Doomplate Shoulderguards
+661 - Doomplate Warhelm
+662 - Hallowed Crown
+662 - Hallowed Garments
+662 - Hallowed Handwraps
+662 - Hallowed Pauldrons
+662 - Hallowed Trousers
+663 - Handwraps of the Incarnate
+663 - Light-Collar of the Incarnate
+663 - Light-Mantle of the Incarnate
+663 - Robes of the Incarnate
+663 - Trousers of the Incarnate
+664 - Gloves of the Incarnate
+664 - Leggings of the Incarnate
+664 - Shroud of the Incarnate
+664 - Soul-Collar of the Incarnate
+664 - Soul-Mantle of the Incarnate
+665 - Breeches of the Avatar
+665 - Cowl of the Avatar
+665 - Gloves of the Avatar
+665 - Mantle of the Avatar
+665 - Vestments of the Avatar
+666 - Handguards of the Avatar
+666 - Hood of the Avatar
+666 - Leggings of the Avatar
+666 - Shroud of the Avatar
+666 - Wings of the Avatar
+668 - Slayer's Belt
+668 - Slayer's Boots
+668 - Slayer's Bracers
+668 - Slayer's Chestguard
+668 - Slayer's Handguards
+668 - Slayer's Helm
+668 - Slayer's Legguards
+668 - Slayer's Shoulderpads
+669 - Gronnstalker's Belt
+669 - Gronnstalker's Boots
+669 - Gronnstalker's Bracers
+669 - Gronnstalker's Chestguard
+669 - Gronnstalker's Gloves
+669 - Gronnstalker's Helmet
+669 - Gronnstalker's Leggings
+669 - Gronnstalker's Spaulders
+670 - Belt of the Malefic
+670 - Boots of the Malefic
+670 - Bracers of the Malefic
+670 - Gloves of the Malefic
+670 - Hood of the Malefic
+670 - Leggings of the Malefic
+670 - Mantle of the Malefic
+670 - Robe of the Malefic
+671 - Belt of the Tempest
+671 - Boots of the Tempest
+671 - Bracers of the Tempest
+671 - Cowl of the Tempest
+671 - Gloves of the Tempest
+671 - Leggings of the Tempest
+671 - Mantle of the Tempest
+671 - Robes of the Tempest
+672 - Onslaught Battle-Helm
+672 - Onslaught Belt
+672 - Onslaught Bracers
+672 - Onslaught Breastplate
+672 - Onslaught Gauntlets
+672 - Onslaught Greaves
+672 - Onslaught Shoulderblades
+672 - Onslaught Treads
+673 - Onslaught Boots
+673 - Onslaught Chestguard
+673 - Onslaught Greathelm
+673 - Onslaught Handguards
+673 - Onslaught Legguards
+673 - Onslaught Shoulderguards
+673 - Onslaught Waistguard
+673 - Onslaught Wristguards
+674 - Bracers of Absolution
+674 - Cord of Absolution
+674 - Handguards of Absolution
+674 - Hood of Absolution
+674 - Leggings of Absolution
+674 - Shoulderpads of Absolution
+674 - Shroud of Absolution
+674 - Treads of Absolution
+675 - Belt of Absolution
+675 - Boots of Absolution
+675 - Breeches of Absolution
+675 - Cowl of Absolution
+675 - Cuffs of Absolution
+675 - Gloves of Absolution
+675 - Mantle of Absolution
+675 - Vestments of Absolution
+676 - Thunderheart Chestguard
+676 - Thunderheart Cover
+676 - Thunderheart Gauntlets
+676 - Thunderheart Leggings
+676 - Thunderheart Pauldrons
+676 - Thunderheart Treads
+676 - Thunderheart Waistguard
+676 - Thunderheart Wristguards
+677 - Thunderheart Bands
+677 - Thunderheart Cord
+677 - Thunderheart Footwraps
+677 - Thunderheart Handguards
+677 - Thunderheart Headguard
+677 - Thunderheart Pants
+677 - Thunderheart Shoulderpads
+677 - Thunderheart Vest
+678 - Thunderheart Belt
+678 - Thunderheart Boots
+678 - Thunderheart Bracers
+678 - Thunderheart Gloves
+678 - Thunderheart Helmet
+678 - Thunderheart Legguards
+678 - Thunderheart Spaulders
+678 - Thunderheart Tunic
+679 - Lightbringer Chestguard
+679 - Lightbringer Faceguard
+679 - Lightbringer Handguards
+679 - Lightbringer Legguards
+679 - Lightbringer Shoulderguards
+679 - Lightbringer Stompers
+679 - Lightbringer Waistguard
+679 - Lightbringer Wristguards
+680 - Lightbringer Bands
+680 - Lightbringer Boots
+680 - Lightbringer Breastplate
+680 - Lightbringer Gauntlets
+680 - Lightbringer Girdle
+680 - Lightbringer Greaves
+680 - Lightbringer Shoulderbraces
+680 - Lightbringer War-Helm
+681 - Lightbringer Belt
+681 - Lightbringer Bracers
+681 - Lightbringer Chestpiece
+681 - Lightbringer Gloves
+681 - Lightbringer Greathelm
+681 - Lightbringer Leggings
+681 - Lightbringer Pauldrons
+681 - Lightbringer Treads
+682 - Skyshatter Cover
+682 - Skyshatter Girdle
+682 - Skyshatter Greaves
+682 - Skyshatter Grips
+682 - Skyshatter Pants
+682 - Skyshatter Pauldrons
+682 - Skyshatter Tunic
+682 - Skyshatter Wristguards
+683 - Skyshatter Belt
+683 - Skyshatter Boots
+683 - Skyshatter Bracers
+683 - Skyshatter Chestguard
+683 - Skyshatter Gloves
+683 - Skyshatter Helmet
+683 - Skyshatter Leggings
+683 - Skyshatter Shoulderpads
+684 - Skyshatter Bands
+684 - Skyshatter Breastplate
+684 - Skyshatter Cord
+684 - Skyshatter Gauntlets
+684 - Skyshatter Headguard
+684 - Skyshatter Legguards
+684 - Skyshatter Mantle
+684 - Skyshatter Treads
+685 - Brutal Gladiator's Kodohide Gloves
+685 - Brutal Gladiator's Kodohide Helm
+685 - Brutal Gladiator's Kodohide Legguards
+685 - Brutal Gladiator's Kodohide Spaulders
+685 - Brutal Gladiator's Kodohide Tunic
+685 - Gladiator's Kodohide Gloves
+685 - Gladiator's Kodohide Helm
+685 - Gladiator's Kodohide Legguards
+685 - Gladiator's Kodohide Spaulders
+685 - Gladiator's Kodohide Tunic
+685 - Merciless Gladiator's Kodohide Gloves
+685 - Merciless Gladiator's Kodohide Helm
+685 - Merciless Gladiator's Kodohide Legguards
+685 - Merciless Gladiator's Kodohide Spaulders
+685 - Merciless Gladiator's Kodohide Tunic
+685 - Vengeful Gladiator's Kodohide Gloves
+685 - Vengeful Gladiator's Kodohide Helm
+685 - Vengeful Gladiator's Kodohide Legguards
+685 - Vengeful Gladiator's Kodohide Spaulders
+685 - Vengeful Gladiator's Kodohide Tunic
+686 - Brutal Gladiator's Ringmail Armor
+686 - Brutal Gladiator's Ringmail Gauntlets
+686 - Brutal Gladiator's Ringmail Helm
+686 - Brutal Gladiator's Ringmail Leggings
+686 - Brutal Gladiator's Ringmail Spaulders
+686 - Gladiator's Ringmail Armor
+686 - Gladiator's Ringmail Gauntlets
+686 - Gladiator's Ringmail Helm
+686 - Gladiator's Ringmail Leggings
+686 - Gladiator's Ringmail Spaulders
+686 - Merciless Gladiator's Ringmail Armor
+686 - Merciless Gladiator's Ringmail Gauntlets
+686 - Merciless Gladiator's Ringmail Helm
+686 - Merciless Gladiator's Ringmail Leggings
+686 - Merciless Gladiator's Ringmail Spaulders
+686 - Vengeful Gladiator's Ringmail Armor
+686 - Vengeful Gladiator's Ringmail Gauntlets
+686 - Vengeful Gladiator's Ringmail Helm
+686 - Vengeful Gladiator's Ringmail Leggings
+686 - Vengeful Gladiator's Ringmail Spaulders
+687 - Brutal Gladiator's Mooncloth Gloves
+687 - Brutal Gladiator's Mooncloth Hood
+687 - Brutal Gladiator's Mooncloth Leggings
+687 - Brutal Gladiator's Mooncloth Mantle
+687 - Brutal Gladiator's Mooncloth Robe
+687 - Gladiator's Mooncloth Gloves
+687 - Gladiator's Mooncloth Hood
+687 - Gladiator's Mooncloth Leggings
+687 - Gladiator's Mooncloth Mantle
+687 - Gladiator's Mooncloth Robe
+687 - Merciless Gladiator's Mooncloth Gloves
+687 - Merciless Gladiator's Mooncloth Hood
+687 - Merciless Gladiator's Mooncloth Leggings
+687 - Merciless Gladiator's Mooncloth Mantle
+687 - Merciless Gladiator's Mooncloth Robe
+687 - Vengeful Gladiator's Mooncloth Gloves
+687 - Vengeful Gladiator's Mooncloth Hood
+687 - Vengeful Gladiator's Mooncloth Leggings
+687 - Vengeful Gladiator's Mooncloth Mantle
+687 - Vengeful Gladiator's Mooncloth Robe
+688 - Grand Marshal's Kodohide Gloves
+688 - Grand Marshal's Kodohide Helm
+688 - Grand Marshal's Kodohide Legguards
+688 - Grand Marshal's Kodohide Spaulders
+688 - Grand Marshal's Kodohide Tunic
+689 - High Warlord's Kodohide Gloves
+689 - High Warlord's Kodohide Helm
+689 - High Warlord's Kodohide Legguards
+689 - High Warlord's Kodohide Spaulders
+689 - High Warlord's Kodohide Tunic
+690 - Brutal Gladiator's Ornamented Chestguard
+690 - Brutal Gladiator's Ornamented Gloves
+690 - Brutal Gladiator's Ornamented Headcover
+690 - Brutal Gladiator's Ornamented Legplates
+690 - Brutal Gladiator's Ornamented Spaulders
+690 - Gladiator's Ornamented Chestguard
+690 - Gladiator's Ornamented Gloves
+690 - Gladiator's Ornamented Headcover
+690 - Gladiator's Ornamented Legplates
+690 - Gladiator's Ornamented Spaulders
+690 - Merciless Gladiator's Ornamented Chestguard
+690 - Merciless Gladiator's Ornamented Gloves
+690 - Merciless Gladiator's Ornamented Headcover
+690 - Merciless Gladiator's Ornamented Legplates
+690 - Merciless Gladiator's Ornamented Spaulders
+690 - Vengeful Gladiator's Ornamented Chestguard
+690 - Vengeful Gladiator's Ornamented Gloves
+690 - Vengeful Gladiator's Ornamented Headcover
+690 - Vengeful Gladiator's Ornamented Legplates
+690 - Vengeful Gladiator's Ornamented Spaulders
+691 - Grand Marshal's Mooncloth Cowl
+691 - Grand Marshal's Mooncloth Legguards
+691 - Grand Marshal's Mooncloth Mitts
+691 - Grand Marshal's Mooncloth Shoulderpads
+691 - Grand Marshal's Mooncloth Vestments
+692 - High Warlord's Mooncloth Cowl
+692 - High Warlord's Mooncloth Legguards
+692 - High Warlord's Mooncloth Mitts
+692 - High Warlord's Mooncloth Shoulderpads
+692 - High Warlord's Mooncloth Vestments
+693 - Grand Marshal's Ornamented Chestplate
+693 - Grand Marshal's Ornamented Gloves
+693 - Grand Marshal's Ornamented Headguard
+693 - Grand Marshal's Ornamented Leggings
+693 - Grand Marshal's Ornamented Spaulders
+694 - High Warlord's Ornamented Chestplate
+694 - High Warlord's Ornamented Gloves
+694 - High Warlord's Ornamented Headguard
+694 - High Warlord's Ornamented Leggings
+694 - High Warlord's Ornamented Spaulders
+695 - Grand Marshal's Ringmail Chestguard
+695 - Grand Marshal's Ringmail Gloves
+695 - Grand Marshal's Ringmail Headpiece
+695 - Grand Marshal's Ringmail Legguards
+695 - Grand Marshal's Ringmail Shoulders
+696 - High Warlord's Ringmail Chestguard
+696 - High Warlord's Ringmail Gloves
+696 - High Warlord's Ringmail Headpiece
+696 - High Warlord's Ringmail Legguards
+696 - High Warlord's Ringmail Shoulderpads
+699 - Warglaive of Azzinoth
+719 - Claw of Molten Fury
+719 - Fist of Molten Fury
+737 - Latro's Dancing Blade
+737 - Latro's Shifting Sword
+738 - Dreadweave Gloves
+738 - Dreadweave Hood
+738 - Dreadweave Leggings
+738 - Dreadweave Mantle
+738 - Dreadweave Robe
+739 - Mooncloth Cowl
+739 - Mooncloth Legguards
+739 - Mooncloth Mitts
+739 - Mooncloth Shoulderpads
+739 - Mooncloth Vestments
+740 - Satin Gloves
+740 - Satin Hood
+740 - Satin Leggings
+740 - Satin Mantle
+740 - Satin Robe
+741 - Evoker's Silk Amice
+741 - Evoker's Silk Cowl
+741 - Evoker's Silk Handguards
+741 - Evoker's Silk Raiment
+741 - Evoker's Silk Trousers
+742 - Dragonhide Gloves
+742 - Dragonhide Helm
+742 - Dragonhide Legguards
+742 - Dragonhide Robe
+742 - Dragonhide Spaulders
+743 - Wyrmhide Gloves
+743 - Wyrmhide Helm
+743 - Wyrmhide Legguards
+743 - Wyrmhide Robe
+743 - Wyrmhide Spaulders
+744 - Kodohide Gloves
+744 - Kodohide Helm
+744 - Kodohide Legguards
+744 - Kodohide Robe
+744 - Kodohide Spaulders
+745 - Opportunist's Leather Gloves
+745 - Opportunist's Leather Helm
+745 - Opportunist's Leather Legguards
+745 - Opportunist's Leather Spaulders
+745 - Opportunist's Leather Tunic
+746 - Seer's Mail Armor
+746 - Seer's Mail Gauntlets
+746 - Seer's Mail Helm
+746 - Seer's Mail Leggings
+746 - Seer's Mail Spaulders
+747 - Seer's Ringmail Chestguard
+747 - Seer's Ringmail Gloves
+747 - Seer's Ringmail Headpiece
+747 - Seer's Ringmail Legguards
+747 - Seer's Ringmail Shoulderpads
+748 - Seer's Linked Armor
+748 - Seer's Linked Gauntlets
+748 - Seer's Linked Helm
+748 - Seer's Linked Leggings
+748 - Seer's Linked Spaulders
+749 - Stalker's Chain Armor
+749 - Stalker's Chain Gauntlets
+749 - Stalker's Chain Helm
+749 - Stalker's Chain Leggings
+749 - Stalker's Chain Spaulders
+750 - Savage Plate Chestpiece
+750 - Savage Plate Gauntlets
+750 - Savage Plate Helm
+750 - Savage Plate Legguards
+750 - Savage Plate Shoulders
+751 - Crusader's Ornamented Chestplate
+751 - Crusader's Ornamented Gloves
+751 - Crusader's Ornamented Headguard
+751 - Crusader's Ornamented Leggings
+751 - Crusader's Ornamented Spaulders
+752 - Crusader's Scaled Chestpiece
+752 - Crusader's Scaled Gauntlets
+752 - Crusader's Scaled Helm
+752 - Crusader's Scaled Legguards
+752 - Crusader's Scaled Shoulders

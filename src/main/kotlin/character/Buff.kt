@@ -10,6 +10,7 @@ abstract class Buff {
         var nextPeriodicEventMs: Int = 0
     }
 
+    open val id: Int = -1
     abstract val name: String
     abstract val durationMs: Int
 
