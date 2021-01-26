@@ -14,36 +14,46 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
-        override val durationMs: Int = 10000
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            val talentRanks = sim.subject.klass.talents[UnleashedRage.name]?.currentRank ?: 0
-
-            val modifier = 1 * (0.2 * talentRanks)
-            return stats.add(
-                Stats(
-                    attackPowerMultiplier = modifier,
-                    rangedAttackPowerMultiplier = modifier
-                )
-            )
+            return stats
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
-    }
+        val proc = object : Proc() {
+            override val triggers: List<Trigger> = listOf(
+                Trigger.MELEE_WHITE_CRIT,
+                Trigger.MELEE_YELLOW_CRIT
+            )
+            override val type: Type = Type.STATIC
 
-    override fun procs(sim: SimIteration): List<Proc> {
-        return listOf(
-            object : Proc() {
-                override val triggers: List<Trigger> = listOf(
-                    Trigger.MELEE_WHITE_CRIT,
-                    Trigger.MELEE_YELLOW_CRIT
-                )
-                override val type: Type = Type.STATIC
+            val buff = object : Buff() {
+                override val name: String = Companion.name
+                override val durationMs: Int = 10000
 
-                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    sim.addBuff(buff)
+                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                    val talentRanks = sim.subject.klass.talents[UnleashedRage.name]?.currentRank ?: 0
+
+                    val modifier = 1 * (0.2 * talentRanks)
+                    return stats.add(
+                        Stats(
+                            attackPowerMultiplier = modifier,
+                            rangedAttackPowerMultiplier = modifier
+                        )
+                    )
                 }
+
+                override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
-        )
+
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                sim.addBuff(buff)
+            }
+        }
+
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
+
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
 }

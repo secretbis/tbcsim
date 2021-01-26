@@ -15,5 +15,5 @@ abstract class Talent(private var _currentRank: Int) {
         }
 
     open fun buffs(sim: SimIteration): List<Buff> = listOf()
-    open fun procs(sim: SimIteration): List<Proc> = listOf()
+//    open fun procs(sim: SimIteration): List<Proc> = listOf()
 }

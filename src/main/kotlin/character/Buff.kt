@@ -5,7 +5,19 @@ import sim.SimIteration
 abstract class Buff {
     open class State {
         var currentStacks: Int = 0
+            set(value) {
+                if(value < 0) {
+                    throw IllegalStateException("Buff currentStacks cannot be set below 0 - this is a bug")
+                }
+                field = value
+            }
         var currentCharges: Int = 0
+            set(value) {
+                if(value < 0) {
+                    throw IllegalStateException("currentCharges cannot be set below 0 - this is a bug")
+                }
+                field = value
+            }
         var appliedAtMs: Int = 0
         var nextPeriodicEventMs: Int = 0
     }
@@ -46,7 +58,7 @@ abstract class Buff {
         // Add stacks if it stacks
         if (maxStacks > 0 && state.currentStacks < maxStacks) {
             // Increase stacks
-            state.currentStacks += state.currentStacks + 1
+            state.currentStacks += 1
         }
 
         // Refresh charges if it has charges
@@ -63,7 +75,7 @@ abstract class Buff {
     open fun isFinished(sim: SimIteration): Boolean {
         val state = state(sim)
 
-        val noChargesLeft = maxCharges > 0 && state.currentCharges == 0
+        val noChargesLeft = maxCharges > 0 && state.currentCharges <= 0
 
         // Duration of -1 means static
         val isExpired = durationMs != -1 && (sim.elapsedTimeMs > state.appliedAtMs + durationMs)

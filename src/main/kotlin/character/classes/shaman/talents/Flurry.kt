@@ -12,33 +12,53 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    val buff = object : Buff() {
+    val wrapper = object : Buff() {
         override val name: String = Companion.name
-        override val durationMs: Int = 15000
-        override val maxCharges: Int = 3
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
 
-        // Increase melee haste for as long as we have charges
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            val talentRanks = sim.subject.klass.talents[Flurry.name]?.currentRank ?: 0
-
-            val state = state(sim)
-            val modifier = if(talentRanks > 0 && state.currentCharges > 0) {
-                1.05 + (0.05 * talentRanks)
-            } else 1.0
-
-            return stats.add(
-                Stats(
-                    physicalHasteMultiplier = modifier
-                )
-            )
+            return stats
         }
 
-        // Proc off of melee auto hits to reduce our stacks
-        override fun procs(sim: SimIteration): List<Proc> {
-            return listOf(
-                object : Proc() {
+        val onCritProc = object : Proc() {
+            override val triggers: List<Trigger> = listOf(
+                Trigger.MELEE_AUTO_CRIT,
+                Trigger.MELEE_WHITE_CRIT,
+                Trigger.MELEE_YELLOW_CRIT
+            )
+            override val type: Type = Type.STATIC
+
+            val hasteBuff = object : Buff() {
+                override val name: String = Companion.name
+                override val durationMs: Int = 15000
+                override val maxCharges: Int = 3
+
+                // Increase melee haste for as long as we have charges
+                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                    val talentRanks = sim.subject.klass.talents[Flurry.name]?.currentRank ?: 0
+
+                    val state = state(sim)
+                    val modifier = if (talentRanks > 0 && state.currentCharges > 0) {
+                        1.05 + (0.05 * talentRanks)
+                    } else 1.0
+
+                    return stats.add(
+                        Stats(
+                            physicalHasteMultiplier = modifier
+                        )
+                    )
+                }
+
+                val chargeProc = object : Proc() {
                     override val triggers: List<Trigger> = listOf(
-                        Trigger.MELEE_AUTO_HIT
+                        Trigger.MELEE_AUTO_HIT,
+                        Trigger.MELEE_WHITE_HIT,
+                        Trigger.MELEE_MISS,
+                        Trigger.MELEE_DODGE,
+                        Trigger.MELEE_PARRY,
+                        Trigger.MELEE_BLOCK,
+                        Trigger.MELEE_GLANCE
                     )
                     override val type: Type = Type.STATIC
 
@@ -47,24 +67,18 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                         state.currentCharges -= 1
                     }
                 }
-            )
-        }
-    }
 
-    override fun procs(sim: SimIteration): List<Proc> {
-        return listOf(
-            object : Proc() {
-                override val triggers: List<Trigger> = listOf(
-                    Trigger.MELEE_AUTO_CRIT,
-                    Trigger.MELEE_WHITE_CRIT,
-                    Trigger.MELEE_YELLOW_CRIT
-                )
-                override val type: Type = Type.STATIC
-
-                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    sim.addBuff(buff)
-                }
+                // Proc off of melee auto hits to reduce our stacks
+                override fun procs(sim: SimIteration): List<Proc> = listOf(chargeProc)
             }
-        )
+
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                sim.addBuff(hasteBuff)
+            }
+        }
+
+        override fun procs(sim: SimIteration): List<Proc> = listOf(onCritProc)
     }
+
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(wrapper)
 }

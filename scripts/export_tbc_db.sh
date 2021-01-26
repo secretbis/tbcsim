@@ -18,7 +18,7 @@ items_columns+="socketColor_1,socketColor_2,socketColor_3,socketBonus,"
 items_columns+="ArmorDamageModifier"
 
 # Only select rare, epic, and legendary items with a reasonable itemlevel
-items_where="Quality in (3, 4, 5) and ItemLevel >= 115"
+items_where="Quality in (3, 4, 5) and ItemLevel >= 100"
 
 # TODO: Cherry-pick some vanilla items for big Naxx pumpers
 

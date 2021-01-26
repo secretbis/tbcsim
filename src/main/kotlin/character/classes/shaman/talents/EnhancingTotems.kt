@@ -12,8 +12,6 @@ class EnhancingTotems(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
-
     // TODO: Apply this to SoE Totem
     fun strengthOfEarthMultiplier(): Double {
         return 1.0 + when(currentRank) {

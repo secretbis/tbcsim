@@ -32,8 +32,6 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
         )
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
-
     // TODO: Apply this discount to instant spells
     fun instantManaCostMultiplier(): Double {
         return when(currentRank) {

@@ -29,22 +29,20 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
             )
         }
 
-        // Proc off of nature damage to reduce our stacks
-        override fun procs(sim: SimIteration): List<Proc> {
-            return listOf(
-                object : Proc() {
-                    override val triggers: List<Trigger> = listOf(
-                        Trigger.NATURE_DAMAGE
-                    )
-                    override val type: Type = Type.STATIC
-
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                        val state = state(sim)
-                        state.currentCharges -= 1
-                    }
-                }
+        val proc = object : Proc() {
+            override val triggers: List<Trigger> = listOf(
+                Trigger.NATURE_DAMAGE
             )
+            override val type: Type = Type.STATIC
+
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                val state = state(sim)
+                state.currentCharges -= 1
+            }
         }
+
+        // Proc off of nature damage to reduce our stacks
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
     override fun cast(free: Boolean) {

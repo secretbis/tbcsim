@@ -1,68 +1,6 @@
 class: Shaman
-
-# Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
-gear:
-  mainHand:
-    - name: Dragonmaw
-      enchant: Mongoose
-  offHand:
-    - name: Dragonmaw
-      # No Executioner until ZA
-      enchant: Mongoose
-  rangedLibramTotem:
-    - name:
-  helm:
-    - name: Helm of Desolation
-      gems:
-        - Inscribed Noble Topaz
-        - Thundering Skyfire Diamond
-  neck:
-    - name: Natasha's Choker
-  shoulders:
-    - name: Shalassi Sentry's Epaulets
-      gems:
-        - Bold Living Ruby
-        - Inscribed Noble Topaz
-  back:
-    - name: Cloak of the Inciter
-  chest:
-    - name: Nether Chain Shirt
-      gems:
-        - Bold Living Ruby
-        - Sovereign Nightseye
-        - Inscribed Noble Topaz
-  wrists:
-    - name: Felstalker Bracers
-      gems:
-        - Bold Living Ruby
-  hands:
-    - name: Windstrike Gloves
-  waist:
-    - name: Ebon Netherscale Belt
-      gems:
-        - Sovereign Nightseye
-        - Inscribed Noble Topaz
-  legs:
-    - name: Wyrmscale Greaves
-      gems:
-        - Bold Living Ruby
-        - Bold Living Ruby
-        - Bold Living Ruby
-  feet:
-    - name: Boots of the Endless Hunt
-  ring1:
-    - name: Shaffar's Band of Brutality
-  ring2:
-    - name: Ring of the Overseer
-  trinket1:
-    - name: Hourglass of the Unraveller
-  trinket2:
-    - name: Bloodlust Brooch
-
-# WIP: Specify additional items to compare
-#      Each will be tested individually, in all combinations, and the sim will rank each setup
-gearCompare: []
+race: Draenei
+level: 70
 
 # Stock sub-resto Enhancement
 talents:
@@ -102,6 +40,70 @@ talents:
     rank: 5
   - name: Nature's Guidance
     rank: 3
+
+# Pre-raid BIS-ish
+# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
+gear:
+  mainHand:
+    name: Dragonmaw
+    enchant: Mongoose
+  offHand:
+    name: Dragonmaw
+    # No Executioner until ZA
+    enchant: Mongoose
+  rangedLibramTotem:
+    name: Totem of the Astral Winds
+  helm:
+    name: Helm of Desolation
+    gems:
+      - Inscribed Noble Topaz
+      - Thundering Skyfire Diamond
+  neck:
+    name: Natasha's Choker
+  shoulders:
+    name: Shalassi Sentry's Epaulets
+    gems:
+      - Bold Living Ruby
+      - Inscribed Noble Topaz
+  back:
+    name: Cloak of the Inciter
+  chest:
+    name: Nether Chain Shirt
+    gems:
+      - Bold Living Ruby
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  wrists:
+    name: Felstalker Bracers
+    gems:
+      - Bold Living Ruby
+  hands:
+    name: Windstrike Gloves
+  waist:
+    name: Ebon Netherscale Belt
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  legs:
+    name: Wyrmscale Greaves
+    gems:
+      - Bold Living Ruby
+      - Bold Living Ruby
+      - Bold Living Ruby
+  feet:
+    name: Boots of the Endless Hunt
+  ring1:
+    name: Shaffar's Band of Brutality
+  ring2:
+    name: Ring of the Overseer
+  trinket1:
+    name: Hourglass of the Unraveller
+  trinket2:
+    name: Bloodlust Brooch
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
 
 rotation:
   precombat:

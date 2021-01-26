@@ -33,5 +33,5 @@ class Convection(currentRank: Int) : Talent(currentRank) {
         override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
 }

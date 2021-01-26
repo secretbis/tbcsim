@@ -12,8 +12,6 @@ class ElementalWeapons(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
-
     fun windfuryApMultiplier(): Double {
         return when(currentRank) {
             0 -> 1.0

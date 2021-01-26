@@ -13,30 +13,40 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
+    val proc = object : Proc() {
+        override val triggers: List<Trigger> = listOf(
+            Trigger.SPELL_CRIT
+        )
+        override val type: Type = Type.STATIC
+
+        val buff = object : Buff() {
+            override val name: String = Companion.name
+            override val durationMs: Int = 10000
+            override val hidden: Boolean = true
+
+            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                return stats.add(Stats(physicalCritRating = 3 * Rating.critPerPct))
+            }
+
+            override fun procs(sim: SimIteration): List<Proc> = listOf()
+        }
+
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            sim.addBuff(buff)
+        }
+    }
+
     val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val durationMs: Int = 10000
+        override val name: String = "${Companion.name} (talent)"
+        override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(physicalCritRating = 3 * Rating.critPerPct))
+            return stats
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
-    override fun procs(sim: SimIteration): List<Proc> {
-        return listOf(
-            object : Proc() {
-                override val triggers: List<Trigger> = listOf(
-                    Trigger.SPELL_CRIT
-                )
-                override val type: Type = Type.STATIC
-
-                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    sim.addBuff(buff)
-                }
-            }
-        )
-    }
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
 }

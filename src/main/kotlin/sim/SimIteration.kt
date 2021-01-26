@@ -23,7 +23,7 @@ class SimIteration(
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
     var autoAttack: List<Ability> = listOf()
-    var procs: MutableList<Proc> = mutableListOf()
+//    var procs: MutableList<Proc> = mutableListOf()
     var buffs: MutableList<Buff> = mutableListOf()
     var debuffs: MutableList<Buff> = mutableListOf()
 
@@ -64,12 +64,6 @@ class SimIteration(
             )
         }
 
-        // Collect procs from class, talents, gear, and etc.
-        procs.addAll(subject.klass.procs)
-        subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
-            procs.addAll(it.value.procs(this))
-        }
-
         // Collect buffs from class, talents, gear, and etc
         subject.klass.buffs.forEach { addBuff(it) }
         subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
@@ -78,11 +72,14 @@ class SimIteration(
         subject.gear.buffs().forEach { addBuff(it) }
 
         // Compute initial stats
+        recomputeStats()
+    }
+
+    private fun recomputeStats() {
         subject.computeStats(this, buffs)
     }
 
-    fun tick() {
-        // Filter out and reset any expired buffs
+    private fun pruneBuffs() {
         val buffsToRemove = buffs.filter {
             it.isFinished(this)
         }
@@ -96,12 +93,12 @@ class SimIteration(
         buffs.removeAll(buffsToRemove)
 
         // Compute stats if something about our buffs changed
-        if(buffsToRemove.isNotEmpty() || recomputeStatsOnNextTick) {
-            subject.computeStats(this, buffs)
-            recomputeStatsOnNextTick = false
+        if(buffsToRemove.isNotEmpty()) {
+            recomputeStats()
         }
+    }
 
-        // Filter out and reset any expired debuffs
+    private fun pruneDebuffs() {
         val debuffsToRemove = debuffs.filter {
             it.isFinished(this)
         }
@@ -113,6 +110,16 @@ class SimIteration(
             ))
         }
         debuffs.removeAll(debuffsToRemove)
+
+        if(debuffsToRemove.isNotEmpty()) {
+            recomputeStats()
+        }
+    }
+
+    fun tick() {
+        // Filter out and reset any expired buffs/debuffs
+        pruneBuffs()
+        pruneDebuffs()
 
         // Find and cast next rotation ability
         if(!isCasting() && !onGcd()) {
@@ -153,7 +160,6 @@ class SimIteration(
     fun addBuff(buff: Buff) {
         // Refresh, and flag buffs as changed
         buff.refresh(this)
-        recomputeStatsOnNextTick = true
 
         // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
@@ -170,6 +176,21 @@ class SimIteration(
             ))
         }
     }
+
+//    fun removeBuff(buff: Buff) {
+//        buff.reset(this)
+//        recomputeStats()
+//
+//        val exists = buffs.find { it === buff } != null
+//        if(!exists) {
+//            logger.warn { "Tried to remove buff, but buff was not present: ${buff.name}" }
+//        } else {
+//            logEvent(Event(
+//                eventType = Event.Type.BUFF_END,
+//                buff = buff
+//            ))
+//        }
+//    }
 
     fun addDebuff(debuff: Debuff) {
         debuff.refresh(this)
@@ -190,26 +211,41 @@ class SimIteration(
         }
     }
 
-    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null) {
-        for(trigger in triggers) {
-            // Get any procs from the triggering item
-            val allProcs: MutableList<Proc> = mutableListOf()
+//    fun removeDebuff(debuff: Buff) {
+//        debuff.reset(this)
+//        recomputeStats()
+//
+//        val exists = debuffs.find { it === debuff } != null
+//        if(!exists) {
+//            logger.warn { "Tried to remove debuff, but debuff was not present: ${debuff.name}" }
+//        } else {
+//            logEvent(Event(
+//                eventType = Event.Type.DEBUFF_END,
+//                buff = debuff
+//            ))
+//        }
+//    }
 
+    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null) {
+        // Collect fireable procs
+        val allProcs: MutableSet<Proc> = mutableSetOf()
+        for(trigger in triggers) {
             // Get procs from active buffs
             buffs.forEach { buff ->
                 buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach {
                     allProcs.add(it)
                 }
             }
+        }
 
-            // Get procs from static sources
-            allProcs.addAll(procs.filter { proc -> proc.triggers.contains(trigger) })
+        // Fire all found procs
+        allProcs.forEach {
+            if(it.shouldProc(this, items, ability)) {
+                it.proc(this, items, ability)
 
-            // Fire all found procs
-            allProcs.forEach {
-                if(it.shouldProc(this, items, ability)) {
-                    it.proc(this, items, ability)
-                }
+                // Always check buff/debuff state after any proc
+                pruneBuffs()
+                pruneDebuffs()
             }
         }
     }

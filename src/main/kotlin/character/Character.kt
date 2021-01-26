@@ -9,7 +9,7 @@ class Character(
     val level: Int = 70,
     var gear: Gear = Gear()
 ) {
-    lateinit var stats: Stats
+    var stats: Stats = Stats()
     var resource: Resource? = null
 
     var gcdBaseMs: Double = 1500.0
@@ -84,7 +84,7 @@ class Character(
     }
 
     fun meleeCritPct(): Double {
-        return stats.physicalCritRating / Rating.critPerPct
+        return stats.physicalCritRating / Rating.critPerPct + stats.agility * klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
@@ -96,11 +96,11 @@ class Character(
     }
 
     fun meleeHasteMultiplier(): Double {
-        return (1 + (stats.physicalHasteRating / Rating.hastePerPct / 100)) * stats.physicalHasteMultiplier
+        return (1.0 + (stats.physicalHasteRating / Rating.hastePerPct / 100.0)) * stats.physicalHasteMultiplier
     }
 
     fun spellHasteMultiplier(): Double {
-        return (1 + (stats.physicalHasteRating / Rating.hastePerPct / 100)) * stats.physicalHasteMultiplier
+        return (1.0 + (stats.physicalHasteRating / Rating.hastePerPct / 100.0)) * stats.spellHasteMultiplier
     }
 
     fun physicalGcd(): Double {

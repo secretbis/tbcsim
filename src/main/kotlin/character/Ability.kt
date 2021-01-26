@@ -3,7 +3,7 @@ package character
 import sim.SimIteration
 
 abstract class Ability(val sim: SimIteration) {
-    class State {
+    open class State {
         var cooldownStartMs: Int = -1
     }
 
@@ -19,8 +19,11 @@ abstract class Ability(val sim: SimIteration) {
 
     internal fun state(sim: SimIteration): State {
         // Create state object if it does not exist, and return it
-        val state = sim.abilityState.getOrDefault(this, stateFactory())
-        sim.abilityState[name] = state
+        var state = sim.abilityState[name]
+        if(state == null) {
+            state = stateFactory()
+            sim.abilityState[name] = state
+        }
         return state
     }
 

@@ -213,8 +213,8 @@ object Stats {
                     val sd = sd(nonzeroAmounts, average)
 
                     // Compute result distributions with the entire set of events
-                    // Count blocked crits as crits, since the block value is very small
-                    val hitPct = events.filter { it.result == Event.Result.HIT }.size / count * 100.0
+                    // Count blocked hits/crits as hits/crits, since the block value is very small
+                    val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK }.size / count * 100.0
                     val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT }.size / count * 100.0
                     val missPct = events.filter { it.result == Event.Result.MISS }.size / count * 100.0
                     val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / count * 100.0

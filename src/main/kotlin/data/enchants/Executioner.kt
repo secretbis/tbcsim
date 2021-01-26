@@ -37,40 +37,47 @@ class Executioner : Buff() {
         return stats
     }
 
-    override fun procs(sim: SimIteration): List<Proc> {
-        // Find items
-        val sourceItems = listOfNotNull(
-            if (sim.subject.gear.mainHand.enchant is Executioner) {
-                sim.subject.gear.mainHand
-            } else {
-                null
-            },
-            if (sim.subject.gear.offHand.enchant is Executioner) {
-                sim.subject.gear.offHand
-            } else {
-                null
-            }
-        )
-
-        return listOf(
-            object : Proc() {
-                override val triggers: List<Trigger> = listOf(
-                    Trigger.MELEE_AUTO_HIT,
-                    Trigger.MELEE_AUTO_CRIT,
-                    Trigger.MELEE_YELLOW_HIT,
-                    Trigger.MELEE_YELLOW_CRIT,
-                    Trigger.MELEE_WHITE_HIT,
-                    Trigger.MELEE_WHITE_CRIT
-                )
-
-                override val type: Type = Type.PPM
-                override val ppm: Double = 1.2
-                override val requiresItem: Boolean = true
-
-                override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                    sim.addBuff(singletonBuff(sourceItems))
+    private var _procs: List<Proc>? = null
+    private fun makeProcs(sim: SimIteration): List<Proc> {
+        if(_procs == null) {
+            // Find items
+            val sourceItems = listOfNotNull(
+                if (sim.subject.gear.mainHand.enchant is Executioner) {
+                    sim.subject.gear.mainHand
+                } else {
+                    null
+                },
+                if (sim.subject.gear.offHand.enchant is Executioner) {
+                    sim.subject.gear.offHand
+                } else {
+                    null
                 }
-            }
-        )
+            )
+
+            _procs = listOf(
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(
+                        Trigger.MELEE_AUTO_HIT,
+                        Trigger.MELEE_AUTO_CRIT,
+                        Trigger.MELEE_YELLOW_HIT,
+                        Trigger.MELEE_YELLOW_CRIT,
+                        Trigger.MELEE_WHITE_HIT,
+                        Trigger.MELEE_WHITE_CRIT
+                    )
+
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 1.2
+                    override val requiresItem: Boolean = true
+
+                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                        sim.addBuff(singletonBuff(sourceItems))
+                    }
+                }
+            )
+        }
+
+        return _procs!!
     }
+
+    override fun procs(sim: SimIteration): List<Proc> = makeProcs(sim)
 }

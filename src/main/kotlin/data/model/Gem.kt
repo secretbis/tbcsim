@@ -1,5 +1,6 @@
 package data.model
 
+import character.Buff
 import character.Proc
 import data.Constants
 import sim.SimIteration
@@ -131,5 +132,5 @@ abstract class Gem(val color: Color, val quality: Quality) {
         )),
     }
 
-    open fun procs(sim: SimIteration): List<Proc> = listOf()
+    open fun buffs(sim: SimIteration): List<Buff> = listOf()
 }

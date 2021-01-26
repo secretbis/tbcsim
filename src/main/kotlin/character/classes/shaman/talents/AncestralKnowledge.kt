@@ -14,28 +14,24 @@ class AncestralKnowledge(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    override fun buffs(sim: SimIteration): List<Buff> {
-        return listOf(
-            object : Buff() {
-                override val name: String = Companion.name
-                override val durationMs: Int = -1
-                override val hidden: Boolean = true
+    val buff = object : Buff() {
+        override val name: String = Companion.name
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
 
-                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                    val talentRanks = sim.subject.klass.talents[AncestralKnowledge.name]?.currentRank ?: 0
+        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+            val talentRanks = sim.subject.klass.talents[AncestralKnowledge.name]?.currentRank ?: 0
 
-                    val modifier = 1 + (0.01 * talentRanks)
-                    return stats.add(
-                        Stats(
-                            manaMultiplier = modifier
-                        )
-                    )
-                }
+            val modifier = 1 + (0.01 * talentRanks)
+            return stats.add(
+                Stats(
+                    manaMultiplier = modifier
+                )
+            )
+        }
 
-                override fun procs(sim: SimIteration): List<Proc> = listOf()
-            }
-        )
+        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
 }

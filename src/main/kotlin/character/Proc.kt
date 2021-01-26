@@ -18,6 +18,13 @@ abstract class Proc {
         // A melee special attack
         MELEE_YELLOW_HIT,
         MELEE_YELLOW_CRIT,
+        // Melee non-hits
+        MELEE_MISS,
+        MELEE_DODGE,
+        MELEE_PARRY,
+        MELEE_BLOCK,
+        MELEE_GLANCE,
+
         // Spells
         SPELL_HIT,
         SPELL_CRIT,
@@ -31,9 +38,6 @@ abstract class Proc {
         FROST_DAMAGE,
         SHADOW_DAMAGE,
         ARCANE_DAMAGE,
-
-        // Time
-        ALL_TICKS
     }
 
     enum class Type {

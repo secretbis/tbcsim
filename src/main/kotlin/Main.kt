@@ -1,52 +1,14 @@
-import character.Character
-import character.Gear
-import character.classes.shaman.Shaman
-import character.classes.shaman.buffs.WindfuryWeapon
-import character.classes.shaman.talents.*
-import character.races.Draenei
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.types.file
 import data.codegen.CodeGen
-import data.model.Item
-import data.enchants.Mongoose
 import kotlinx.coroutines.runBlocking
 import sim.Sim
 import sim.SimOptions
-import sim.rotation.Rotation
-
-fun testCharacter(): Character {
-    val gear = Gear()
-    gear.mainHand = Item()
-    gear.mainHand.id = 1
-    gear.mainHand.enchant = Mongoose(gear.mainHand)
-    gear.mainHand.temporaryEnhancement = WindfuryWeapon(gear.mainHand)
-
-    gear.offHand = Item()
-    gear.offHand.id = 2
-    gear.offHand.enchant = Mongoose(gear.offHand)
-    gear.offHand.temporaryEnhancement = WindfuryWeapon(gear.offHand)
-
-    return Character(
-        klass = Shaman(
-            talents = mapOf(
-                DualWield.name to DualWield(1),
-                DualWieldSpecialization.name to DualWieldSpecialization(3),
-                Flurry.name to Flurry(5),
-                NaturesGuidance.name to NaturesGuidance(3),
-                WeaponMastery.name to WeaponMastery(5)
-            )
-        ),
-        race = Draenei(),
-        gear = gear
-    )
-}
-
-fun testRotation(): Rotation {
-    return Rotation(
-        listOf()
-    )
-}
+import sim.config.Config
+import java.io.File
 
 fun simOpts(): SimOptions {
     return SimOptions(iterations = 1000)
@@ -61,6 +23,7 @@ fun setupLogging() {
 
 class TBCSim : CliktCommand() {
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
+    val configFile: File by argument(help = "Path to configuration file").file(mustExist = true)
 
     override fun run() {
         setupLogging()
@@ -68,11 +31,12 @@ class TBCSim : CliktCommand() {
         if(generate) {
             CodeGen.generate()
         } else {
+            val config = Config.fromYml(configFile)
             runBlocking {
                 Sim(
-                    testCharacter(),
-                    testRotation(),
-                    simOpts()
+                    config.character,
+                    config.rotation,
+                    config.opts
                 ).sim()
             }
         }
