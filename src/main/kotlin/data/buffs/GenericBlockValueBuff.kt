@@ -4,7 +4,7 @@ import character.*
 import sim.SimIteration
 
 class GenericBlockValueBuff(val blockValue: Int) : Buff() {
-    override val name: String = "Block Value"
+    override val name: String = "Block Value $blockValue"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

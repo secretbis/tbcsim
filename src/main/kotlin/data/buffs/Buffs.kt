@@ -31,6 +31,58 @@ object Buffs {
         Regex("Block Value \\d+") to fun (name: String): Buff {
             val amount = name.drop(12).toInt()
             return GenericBlockValueBuff(amount)
+        },
+        Regex("Increase Holy Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(19).toInt()
+            return GenericHolyDamageBuff(amount)
+        },
+        Regex("Increase Fire Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(19).toInt()
+            return GenericFireDamageBuff(amount)
+        },
+        Regex("Increase Nature Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(21).toInt()
+            return GenericNatureDamageBuff(amount)
+        },
+        Regex("Increase Frost Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(20).toInt()
+            return GenericFrostDamageBuff(amount)
+        },
+        Regex("Increase Shadow Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(21).toInt()
+            return GenericShadowDamageBuff(amount)
+        },
+        Regex("Increase Arcane Dam \\d+") to fun (name: String): Buff {
+            val amount = name.drop(21).toInt()
+            return GenericArcaneDamageBuff(amount)
+        },
+        Regex("Increased Dodge \\d+") to fun (name: String): Buff {
+            val amount = name.drop(16).toInt()
+            return GenericDodgeRatingBuff(amount)
+        },
+        Regex("Increased Hit Rating \\d+") to fun (name: String): Buff {
+            val amount = name.drop(21).toInt()
+            return GenericHitRatingBuff(amount)
+        },
+        Regex("Increased Critical \\d+") to fun (name: String): Buff {
+            val amount = name.drop(19).toInt()
+            return GenericCritRatingBuff(amount)
+        },
+        Regex("Increased Spell Hit Chance \\d+") to fun (name: String): Buff {
+            val amount = name.drop(27).toInt()
+            return GenericSpellHitRatingBuff(amount)
+        },
+        Regex("Spell Penetration \\d+") to fun (name: String): Buff {
+            val amount = name.drop(18).toInt()
+            return GenericSpellPenBuff(amount)
+        },
+        Regex("Increased Spell Penetration \\d+") to fun (name: String): Buff {
+            val amount = name.drop(28).toInt()
+            return GenericSpellPenBuff(amount)
+        },
+        Regex("Attack Power - Feral \\(\\+\\d+\\)") to fun (name: String): Buff {
+            val amount = name.drop(23).dropLast(1).toInt()
+            return GenericFeralAttackPowerBuff(amount)
         }
     )
 
@@ -51,6 +103,17 @@ object Buffs {
             34774 -> DragonspineTrophy()
 
             // All the random mp5 buffs
+            18378 -> GenericManaRegenBuff(8)
+            18379 -> GenericManaRegenBuff(6)
+            20959 -> GenericManaRegenBuff(10)
+            21359 -> GenericManaRegenBuff(1)
+            21360 -> GenericManaRegenBuff(2)
+            21361 -> GenericManaRegenBuff(3)
+            21362 -> GenericManaRegenBuff(4)
+            21363 -> GenericManaRegenBuff(5)
+            21364 -> GenericManaRegenBuff(7)
+            21365 -> GenericManaRegenBuff(9)
+            21366 -> GenericManaRegenBuff(11)
             21618 -> GenericManaRegenBuff(4)
             21619 -> GenericManaRegenBuff(4)
             21620 -> GenericManaRegenBuff(5)
@@ -78,6 +141,7 @@ object Buffs {
             21642 -> GenericManaRegenBuff(14)
             21643 -> GenericManaRegenBuff(15)
             21644 -> GenericManaRegenBuff(15)
+            35836 -> GenericManaRegenBuff(16)
 
             else -> null
         }

@@ -29,6 +29,13 @@ data class Stats(
     var spellHealing: Int = 0,
     var spellPen: Int = 0,
 
+    var holyDamage: Int = 0,
+    var fireDamage: Int = 0,
+    var natureDamage: Int = 0,
+    var frostDamage: Int = 0,
+    var shadowDamage: Int = 0,
+    var arcaneDamage: Int = 0,
+
     // Defensive stats
     var resilienceRating: Double = 0.0,
     var defenseRating: Double = 0.0,
@@ -112,6 +119,13 @@ data class Stats(
         spellHealing += stats.spellHealing
         spellPen += stats.spellPen
 
+        holyDamage += stats.holyDamage
+        fireDamage += stats.fireDamage
+        natureDamage += stats.natureDamage
+        frostDamage += stats.frostDamage
+        shadowDamage += stats.shadowDamage
+        arcaneDamage += stats.arcaneDamage
+
         resilienceRating += stats.resilienceRating
         defenseRating += stats.defenseRating
         blockValue += stats.blockValue
@@ -185,6 +199,13 @@ data class Stats(
         spellDamage -= stats.spellDamage
         spellHealing -= stats.spellHealing
         spellPen -= stats.spellPen
+
+        holyDamage -= stats.holyDamage
+        fireDamage -= stats.fireDamage
+        natureDamage -= stats.natureDamage
+        frostDamage -= stats.frostDamage
+        shadowDamage -= stats.shadowDamage
+        arcaneDamage -= stats.arcaneDamage
 
         resilienceRating -= stats.resilienceRating
         defenseRating -= stats.defenseRating

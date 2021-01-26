@@ -4,7 +4,7 @@ import character.*
 import sim.SimIteration
 
 class GenericAttackPowerBuff(val attackPower: Int) : Buff() {
-    override val name: String = "Attack Power"
+    override val name: String = "Attack Power $attackPower"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

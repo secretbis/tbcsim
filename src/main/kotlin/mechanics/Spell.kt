@@ -76,7 +76,19 @@ object Spell {
     }
 
     fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, ): Double {
-        val totalSpellDamage = sim.subject.spellDamage() + bonusSpellDamage
+        // Add school damage
+        val schoolDamage = when(school) {
+            Constants.DamageType.HOLY -> sim.subject.stats.holyDamage
+            Constants.DamageType.FIRE -> sim.subject.stats.fireDamage
+            Constants.DamageType.NATURE -> sim.subject.stats.natureDamage
+            Constants.DamageType.FROST -> sim.subject.stats.frostDamage
+            Constants.DamageType.SHADOW -> sim.subject.stats.shadowDamage
+            Constants.DamageType.ARCANE -> sim.subject.stats.arcaneDamage
+            else -> 0
+        }
+
+        val totalSpellDamage = sim.subject.spellDamage() + bonusSpellDamage + schoolDamage
+
         val min = minDmg.coerceAtLeast(0.0)
         val max = maxDmg.coerceAtLeast(1.0)
 
