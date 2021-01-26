@@ -50,6 +50,6 @@ public class CowlOfLightsPurity : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44853)
+      Buffs.byIdOrName(44853, "Increase Healing 141", this)
       )
 }

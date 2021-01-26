@@ -49,6 +49,6 @@ public class GirdleOfStability : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42106)
+      Buffs.byIdOrName(42106, "Block Value 56", this)
       )
 }

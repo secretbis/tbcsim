@@ -44,6 +44,6 @@ public class StaffOfInfiniteMysteries : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42057)
+      Buffs.byIdOrName(42057, "Increase Spell Dam 185", this)
       )
 }

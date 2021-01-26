@@ -50,6 +50,6 @@ public class TwinbladeOfThePhoenix : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34751)
+      Buffs.byIdOrName(34751, "Attack Power 110", this)
       )
 }

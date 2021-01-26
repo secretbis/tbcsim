@@ -52,6 +52,6 @@ public class JusticarChestguard : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2932)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14054)
+      Buffs.byIdOrName(14054, "Increase Spell Dam 27", this)
       )
 }

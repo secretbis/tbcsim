@@ -53,7 +53,7 @@ public class RiftStalkerHauberk : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15826),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(15826, "Attack Power 80", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

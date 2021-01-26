@@ -42,7 +42,7 @@ public class SwamplightLantern : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18031),
-      Buffs.byId(18379)
+      Buffs.byIdOrName(18031, "Increase Healing 40", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

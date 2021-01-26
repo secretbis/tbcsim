@@ -44,7 +44,7 @@ public class StaffOfImmaculateRecovery : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42110),
-      Buffs.byId(21641)
+      Buffs.byIdOrName(42110, "Increase Healing 443", this),
+      Buffs.byIdOrName(21641, "Increased Mana Regen", this)
       )
 }

@@ -43,6 +43,6 @@ public class RingOfUnrelentingStorms : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17999)
+      Buffs.byIdOrName(17999, "Increase Nature Dam 43", this)
       )
 }

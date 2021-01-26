@@ -50,6 +50,6 @@ public class HallowedCrown : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2890)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18037)
+      Buffs.byIdOrName(18037, "Increase Healing 57", this)
       )
 }

@@ -48,7 +48,7 @@ public class AuchenaiTrackersHauberk : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2952)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14052),
-      Buffs.byId(21363)
+      Buffs.byIdOrName(14052, "Attack Power 60", this),
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this)
       )
 }

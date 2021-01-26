@@ -42,6 +42,6 @@ public class IdolOfTheUnseenMoon : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43739)
+      Buffs.byIdOrName(43739, "Lunar Grace", this)
       )
 }

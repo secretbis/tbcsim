@@ -50,6 +50,6 @@ public class HelmOfTheClaw : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15818)
+      Buffs.byIdOrName(15818, "Attack Power 66", this)
       )
 }

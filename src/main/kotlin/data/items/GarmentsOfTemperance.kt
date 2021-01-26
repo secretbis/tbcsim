@@ -43,7 +43,7 @@ public class GarmentsOfTemperance : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(25179),
-      Buffs.byId(42100)
+      Buffs.byIdOrName(25179, "Increase Healing 112", this),
+      Buffs.byIdOrName(42100, "Increased Mana Regen", this)
       )
 }

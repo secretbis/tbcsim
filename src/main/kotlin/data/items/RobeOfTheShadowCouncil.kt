@@ -45,6 +45,6 @@ public class RobeOfTheShadowCouncil : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42108)
+      Buffs.byIdOrName(42108, "Increase Spell Dam 68", this)
       )
 }

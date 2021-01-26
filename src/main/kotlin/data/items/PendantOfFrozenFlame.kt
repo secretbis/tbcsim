@@ -42,6 +42,6 @@ public class PendantOfFrozenFlame : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(30997)
+      Buffs.byIdOrName(30997, "Fire Absorption", this)
       )
 }

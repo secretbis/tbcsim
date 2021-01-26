@@ -49,7 +49,7 @@ public class SpauldersOfTheThalassianSavior : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36098),
-      Buffs.byId(21641)
+      Buffs.byIdOrName(36098, "Increase Healing 99", this),
+      Buffs.byIdOrName(21641, "Increased Mana Regen", this)
       )
 }

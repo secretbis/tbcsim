@@ -50,6 +50,6 @@ public class PontifexKilt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18041)
+      Buffs.byIdOrName(18041, "Increase Healing 66", this)
       )
 }

@@ -49,7 +49,7 @@ public class SabatonsOfTheRighteousDefender : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28113),
-      Buffs.byId(14047)
+      Buffs.byIdOrName(28113, "Block Value 30", this),
+      Buffs.byIdOrName(14047, "Increase Spell Dam 23", this)
       )
 }

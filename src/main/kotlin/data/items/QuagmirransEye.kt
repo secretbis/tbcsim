@@ -42,7 +42,7 @@ public class QuagmirransEye : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18054),
-      Buffs.byId(33297)
+      Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),
+      Buffs.byIdOrName(33297, "Spell Haste Trinket", this)
       )
 }

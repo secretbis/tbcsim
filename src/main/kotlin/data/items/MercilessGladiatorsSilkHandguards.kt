@@ -45,7 +45,7 @@ public class MercilessGladiatorsSilkHandguards : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33066),
-      Buffs.byId(18053)
+      Buffs.byIdOrName(33066, "Mage Fire Blast Range Bonus", this),
+      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this)
       )
 }

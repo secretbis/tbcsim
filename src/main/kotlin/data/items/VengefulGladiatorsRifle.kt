@@ -44,6 +44,6 @@ public class VengefulGladiatorsRifle : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21439)
+      Buffs.byIdOrName(21439, "Attack Power Ranged 34", this)
       )
 }

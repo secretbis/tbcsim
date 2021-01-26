@@ -46,6 +46,6 @@ public class CycloneWarKilt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21632)
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

@@ -51,6 +51,6 @@ public class TheHorsemansHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43873)
+      Buffs.byIdOrName(43873, "Headless Horseman Laugh", this)
       )
 }

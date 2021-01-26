@@ -51,6 +51,6 @@ public class DestroyerShoulderguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3017)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28325)
+      Buffs.byIdOrName(28325, "Block Value 32", this)
       )
 }

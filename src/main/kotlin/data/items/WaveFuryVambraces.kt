@@ -43,7 +43,7 @@ public class WaveFuryVambraces : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15714),
-      Buffs.byId(21620)
+      Buffs.byIdOrName(15714, "Increase Spell Dam 22", this),
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

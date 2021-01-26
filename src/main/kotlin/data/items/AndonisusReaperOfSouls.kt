@@ -42,6 +42,6 @@ public class AndonisusReaperOfSouls : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28347)
+      Buffs.byIdOrName(28347, "Dimensional Siphon", this)
       )
 }

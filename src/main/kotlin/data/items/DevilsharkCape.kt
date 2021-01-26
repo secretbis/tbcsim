@@ -44,6 +44,6 @@ public class DevilsharkCape : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33274)
+      Buffs.byIdOrName(33274, "Block Value 29", this)
       )
 }

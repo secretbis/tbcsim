@@ -43,7 +43,7 @@ public class GreavesOfSpellpower : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14127),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(14127, "Increase Spell Dam 28", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

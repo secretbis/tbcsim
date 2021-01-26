@@ -42,8 +42,8 @@ public class ShatteredSunPendantOfRestoration : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18043),
-      Buffs.byId(21628),
-      Buffs.byId(45484)
+      Buffs.byIdOrName(18043, "Increase Healing 70", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this),
+      Buffs.byIdOrName(45484, "Sunwell Exalted Healer Neck", this)
       )
 }

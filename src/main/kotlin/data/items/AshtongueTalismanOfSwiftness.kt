@@ -42,6 +42,6 @@ public class AshtongueTalismanOfSwiftness : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40485)
+      Buffs.byIdOrName(40485, "Hunter Tier 6 Trinket", this)
       )
 }

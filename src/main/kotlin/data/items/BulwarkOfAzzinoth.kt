@@ -43,6 +43,6 @@ public class BulwarkOfAzzinoth : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40407)
+      Buffs.byIdOrName(40407, "Illidan Tank Shield", this)
       )
 }

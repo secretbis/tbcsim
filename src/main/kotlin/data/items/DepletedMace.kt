@@ -45,7 +45,7 @@ public class DepletedMace : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9332),
-      Buffs.byId(40752)
+      Buffs.byIdOrName(9332, "Attack Power 22", this),
+      Buffs.byIdOrName(40752, "Apexis Crystal Infusion", this)
       )
 }

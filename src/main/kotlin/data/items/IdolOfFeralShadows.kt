@@ -42,6 +42,6 @@ public class IdolOfFeralShadows : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34241)
+      Buffs.byIdOrName(34241, "Increased Rip Damage", this)
       )
 }

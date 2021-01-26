@@ -47,6 +47,6 @@ public class BulwarkOfTheAmaniEmpire : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39987)
+      Buffs.byIdOrName(39987, "Block Value 42", this)
       )
 }

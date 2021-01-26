@@ -44,6 +44,6 @@ public class TheHammerOfDestiny : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38284)
+      Buffs.byIdOrName(38284, "Destiny Fulfilled", this)
       )
 }

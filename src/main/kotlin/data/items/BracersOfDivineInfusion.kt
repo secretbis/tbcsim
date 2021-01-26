@@ -47,7 +47,7 @@ public class BracersOfDivineInfusion : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18032),
-      Buffs.byId(21363)
+      Buffs.byIdOrName(18032, "Increase Healing 42", this),
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this)
       )
 }

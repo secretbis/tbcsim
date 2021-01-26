@@ -43,7 +43,7 @@ public class BandOfFrigidElements : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17896),
-      Buffs.byId(16638)
+      Buffs.byIdOrName(17896, "Increase Frost Dam 34", this),
+      Buffs.byIdOrName(16638, "Increase Nature Dam 34", this)
       )
 }

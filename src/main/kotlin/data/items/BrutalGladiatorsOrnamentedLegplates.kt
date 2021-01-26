@@ -45,6 +45,6 @@ public class BrutalGladiatorsOrnamentedLegplates : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42089)
+      Buffs.byIdOrName(42089, "Increase Healing 103", this)
       )
 }

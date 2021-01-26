@@ -43,7 +43,7 @@ public class LionheartExecutioner : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34515),
-      Buffs.byId(34513)
+      Buffs.byIdOrName(34515, "Fear Resistance 8", this),
+      Buffs.byIdOrName(34513, "Lionheart", this)
       )
 }

@@ -50,6 +50,6 @@ public class LightbringerGreathelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42077)
+      Buffs.byIdOrName(42077, "Increase Healing 119", this)
       )
 }

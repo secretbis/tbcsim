@@ -44,6 +44,6 @@ public class MantleOfAutumn : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18033)
+      Buffs.byIdOrName(18033, "Increase Healing 46", this)
       )
 }

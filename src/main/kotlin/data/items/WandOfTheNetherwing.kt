@@ -42,6 +42,6 @@ public class WandOfTheNetherwing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9345)
+      Buffs.byIdOrName(9345, "Increase Spell Dam 16", this)
       )
 }

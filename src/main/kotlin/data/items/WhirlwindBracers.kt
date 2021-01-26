@@ -43,7 +43,7 @@ public class WhirlwindBracers : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18033),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(18033, "Increase Healing 46", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

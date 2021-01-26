@@ -46,6 +46,6 @@ public class MaghariHuntsmansLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15829)
+      Buffs.byIdOrName(15829, "Attack Power 86", this)
       )
 }

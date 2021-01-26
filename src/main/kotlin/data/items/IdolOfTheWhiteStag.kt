@@ -42,6 +42,6 @@ public class IdolOfTheWhiteStag : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(41037)
+      Buffs.byIdOrName(41037, "Mangle AP Buff", this)
       )
 }

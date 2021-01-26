@@ -43,8 +43,8 @@ public class BeasttamersShoulders : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15825),
-      Buffs.byId(27206),
-      Buffs.byId(27043)
+      Buffs.byIdOrName(15825, "Attack Power 78", this),
+      Buffs.byIdOrName(27206, "Increased Pet Damage +3%", this),
+      Buffs.byIdOrName(27043, "Increased Pet Crit +2%", this)
       )
 }

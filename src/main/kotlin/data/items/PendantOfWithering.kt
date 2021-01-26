@@ -42,6 +42,6 @@ public class PendantOfWithering : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(30999)
+      Buffs.byIdOrName(30999, "Nature Absorption", this)
       )
 }

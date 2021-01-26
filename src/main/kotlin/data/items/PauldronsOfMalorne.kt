@@ -50,7 +50,7 @@ public class PauldronsOfMalorne : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18053),
-      Buffs.byId(21620)
+      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this),
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

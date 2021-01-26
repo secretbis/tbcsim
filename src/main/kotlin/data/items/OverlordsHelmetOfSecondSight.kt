@@ -53,6 +53,6 @@ public class OverlordsHelmetOfSecondSight : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39841)
+      Buffs.byIdOrName(39841, "Spectrecles", this)
       )
 }

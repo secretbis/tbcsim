@@ -42,6 +42,6 @@ public class TheNightBlade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38307)
+      Buffs.byIdOrName(38307, "The Dark of Night", this)
       )
 }

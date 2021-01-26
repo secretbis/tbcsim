@@ -42,6 +42,6 @@ public class ScarabOfDisplacement : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38351)
+      Buffs.byIdOrName(38351, "Displacement", this)
       )
 }

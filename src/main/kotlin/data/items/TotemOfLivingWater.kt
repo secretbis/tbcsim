@@ -42,6 +42,6 @@ public class TotemOfLivingWater : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43752)
+      Buffs.byIdOrName(43752, "Reduced Chain Heal Cost", this)
       )
 }

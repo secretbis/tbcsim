@@ -48,7 +48,7 @@ public class NetherfuryBelt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14248),
-      Buffs.byId(21631)
+      Buffs.byIdOrName(14248, "Increase Spell Dam 21", this),
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
       )
 }

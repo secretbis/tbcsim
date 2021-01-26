@@ -46,6 +46,6 @@ public class MarksmansBelt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9331)
+      Buffs.byIdOrName(9331, "Attack Power 20", this)
       )
 }

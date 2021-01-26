@@ -50,7 +50,7 @@ public class TerrorPitGirdle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15810),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(15810, "Attack Power 44", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

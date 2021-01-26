@@ -46,6 +46,6 @@ public class VengefulGladiatorsDragonhideGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44835)
+      Buffs.byIdOrName(44835, "Maim Interrupt", this)
       )
 }

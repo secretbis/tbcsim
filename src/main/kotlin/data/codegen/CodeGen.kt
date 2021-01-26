@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import data.codegen.generators.ItemGen
 import data.codegen.generators.ItemSetGen
-import data.codegen.generators.ItemBuffGen
 import data.codegen.generators.SocketBonusGen
 
 object CodeGen {
@@ -21,7 +20,6 @@ object CodeGen {
 
     fun generate() {
         SocketBonusGen.generate()
-        ItemBuffGen.generate()
         ItemSetGen.generate()
         ItemGen.generate()
     }

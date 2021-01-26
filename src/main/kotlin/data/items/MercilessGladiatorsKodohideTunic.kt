@@ -50,7 +50,7 @@ public class MercilessGladiatorsKodohideTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2856)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18047),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(18047, "Increase Healing 79", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

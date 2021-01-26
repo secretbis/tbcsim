@@ -43,7 +43,7 @@ public class PauldronsOfTheSolaceGiver : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18037),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(18037, "Increase Healing 57", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

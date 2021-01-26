@@ -49,6 +49,6 @@ public class VindicatorsLeatherBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9334)
+      Buffs.byIdOrName(9334, "Attack Power 26", this)
       )
 }

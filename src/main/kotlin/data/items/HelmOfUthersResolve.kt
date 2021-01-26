@@ -50,7 +50,7 @@ public class HelmOfUthersResolve : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18055),
-      Buffs.byId(35075)
+      Buffs.byIdOrName(18055, "Increase Spell Dam 39", this),
+      Buffs.byIdOrName(35075, "Block Value 38", this)
       )
 }

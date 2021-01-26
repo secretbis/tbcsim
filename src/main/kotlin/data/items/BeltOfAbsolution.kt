@@ -50,7 +50,7 @@ public class BeltOfAbsolution : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3098)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32584),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(32584, "Increase Healing 95", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

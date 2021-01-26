@@ -42,6 +42,6 @@ public class StonebreakersTotem : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43748)
+      Buffs.byIdOrName(43748, "Elemental Strength", this)
       )
 }

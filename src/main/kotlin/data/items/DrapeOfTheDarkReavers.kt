@@ -45,6 +45,6 @@ public class DrapeOfTheDarkReavers : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15806)
+      Buffs.byIdOrName(15806, "Attack Power 34", this)
       )
 }

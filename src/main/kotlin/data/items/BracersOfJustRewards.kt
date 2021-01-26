@@ -44,6 +44,6 @@ public class BracersOfJustRewards : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21618)
+      Buffs.byIdOrName(21618, "Increased Mana Regen", this)
       )
 }

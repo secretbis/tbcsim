@@ -52,6 +52,6 @@ public class GrandMarshalsDragonhideTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9317)
+      Buffs.byIdOrName(9317, "Increase Healing 31", this)
       )
 }

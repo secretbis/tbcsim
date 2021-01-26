@@ -42,6 +42,6 @@ public class AdamantineFigurine : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33479)
+      Buffs.byIdOrName(33479, "Adamantine Shell", this)
       )
 }

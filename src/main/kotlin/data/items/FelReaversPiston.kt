@@ -42,7 +42,7 @@ public class FelReaversPiston : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38299),
-      Buffs.byId(42082)
+      Buffs.byIdOrName(38299, "HoTs on Heals", this),
+      Buffs.byIdOrName(42082, "Increased Mana Regen", this)
       )
 }

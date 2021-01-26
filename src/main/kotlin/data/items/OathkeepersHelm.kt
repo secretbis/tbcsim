@@ -50,7 +50,7 @@ public class OathkeepersHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2908)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18049),
-      Buffs.byId(21365)
+      Buffs.byIdOrName(18049, "Increase Spell Dam 26", this),
+      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
       )
 }

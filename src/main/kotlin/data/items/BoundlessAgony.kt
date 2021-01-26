@@ -43,6 +43,6 @@ public class BoundlessAgony : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42113)
+      Buffs.byIdOrName(42113, "Armor Penetration 210", this)
       )
 }

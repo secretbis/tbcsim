@@ -44,7 +44,7 @@ public class NetherwingDefendersShield : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23731),
-      Buffs.byId(9344)
+      Buffs.byIdOrName(23731, "Block Value 19", this),
+      Buffs.byIdOrName(9344, "Increase Spell Dam 15", this)
       )
 }

@@ -43,7 +43,7 @@ public class TalismanOfTheSunKing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18038),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(18038, "Increase Healing 59", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

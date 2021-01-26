@@ -49,7 +49,7 @@ public class KiltOfImmortalNature : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(25179),
-      Buffs.byId(21633)
+      Buffs.byIdOrName(25179, "Increase Healing 112", this),
+      Buffs.byIdOrName(21633, "Increased Mana Regen", this)
       )
 }

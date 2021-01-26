@@ -46,6 +46,6 @@ public class MaleficMaskOfTheShadows : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15828)
+      Buffs.byIdOrName(15828, "Attack Power 84", this)
       )
 }

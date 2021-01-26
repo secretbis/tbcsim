@@ -50,7 +50,7 @@ public class NaturalLifeLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33820),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(33820, "Increase Healing 88", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

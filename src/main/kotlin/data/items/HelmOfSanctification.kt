@@ -49,7 +49,7 @@ public class HelmOfSanctification : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18044),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(18044, "Increase Healing 73", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

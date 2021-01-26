@@ -50,7 +50,7 @@ public class GlovesOfQuickening : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15812),
-      Buffs.byId(21619)
+      Buffs.byIdOrName(15812, "Attack Power 52", this),
+      Buffs.byIdOrName(21619, "Increased Mana Regen", this)
       )
 }

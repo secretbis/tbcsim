@@ -44,6 +44,6 @@ public class ChestguardOfRelentlessStorms : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42099)
+      Buffs.byIdOrName(42099, "Increase Spell Dam 74", this)
       )
 }

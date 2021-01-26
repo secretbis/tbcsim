@@ -43,6 +43,6 @@ public class SkyBreaker : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28530)
+      Buffs.byIdOrName(28530, "Increase Spell Dam 132", this)
       )
 }

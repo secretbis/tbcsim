@@ -45,7 +45,7 @@ public class SeersRingmailGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32973),
-      Buffs.byId(18033)
+      Buffs.byIdOrName(32973, "Shaman Shock Range Bonus", this),
+      Buffs.byIdOrName(18033, "Increase Healing 46", this)
       )
 }

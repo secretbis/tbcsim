@@ -49,6 +49,6 @@ public class IronGauntletsOfTheMaiden : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2972)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35075)
+      Buffs.byIdOrName(35075, "Block Value 38", this)
       )
 }

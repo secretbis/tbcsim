@@ -44,6 +44,6 @@ public class GraspOfTheDead : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17905)
+      Buffs.byIdOrName(17905, "Increase Frost Dam 46", this)
       )
 }

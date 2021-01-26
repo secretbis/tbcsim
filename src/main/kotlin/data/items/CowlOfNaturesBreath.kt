@@ -44,6 +44,6 @@ public class CowlOfNaturesBreath : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23593)
+      Buffs.byIdOrName(23593, "Increase Healing 92", this)
       )
 }

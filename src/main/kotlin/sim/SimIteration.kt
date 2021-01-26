@@ -23,7 +23,6 @@ class SimIteration(
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
     var autoAttack: List<Ability> = listOf()
-//    var procs: MutableList<Proc> = mutableListOf()
     var buffs: MutableList<Buff> = mutableListOf()
     var debuffs: MutableList<Buff> = mutableListOf()
 
@@ -177,21 +176,6 @@ class SimIteration(
         }
     }
 
-//    fun removeBuff(buff: Buff) {
-//        buff.reset(this)
-//        recomputeStats()
-//
-//        val exists = buffs.find { it === buff } != null
-//        if(!exists) {
-//            logger.warn { "Tried to remove buff, but buff was not present: ${buff.name}" }
-//        } else {
-//            logEvent(Event(
-//                eventType = Event.Type.BUFF_END,
-//                buff = buff
-//            ))
-//        }
-//    }
-
     fun addDebuff(debuff: Debuff) {
         debuff.refresh(this)
 
@@ -210,21 +194,6 @@ class SimIteration(
             ))
         }
     }
-
-//    fun removeDebuff(debuff: Buff) {
-//        debuff.reset(this)
-//        recomputeStats()
-//
-//        val exists = debuffs.find { it === debuff } != null
-//        if(!exists) {
-//            logger.warn { "Tried to remove debuff, but debuff was not present: ${debuff.name}" }
-//        } else {
-//            logEvent(Event(
-//                eventType = Event.Type.DEBUFF_END,
-//                buff = debuff
-//            ))
-//        }
-//    }
 
     fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null) {
         // Collect fireable procs

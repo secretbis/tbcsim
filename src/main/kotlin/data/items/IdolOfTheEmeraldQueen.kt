@@ -42,6 +42,6 @@ public class IdolOfTheEmeraldQueen : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34246)
+      Buffs.byIdOrName(34246, "Increased Lifebloom Periodic", this)
       )
 }

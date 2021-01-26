@@ -48,6 +48,6 @@ public class VindicatorsPendantOfTriumph : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14056)
+      Buffs.byIdOrName(14056, "Attack Power 50", this)
       )
 }

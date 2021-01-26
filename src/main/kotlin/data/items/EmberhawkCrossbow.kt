@@ -43,6 +43,6 @@ public class EmberhawkCrossbow : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9142)
+      Buffs.byIdOrName(9142, "Attack Power 14", this)
       )
 }

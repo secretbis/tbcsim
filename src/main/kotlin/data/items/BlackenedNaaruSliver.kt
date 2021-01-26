@@ -43,6 +43,6 @@ public class BlackenedNaaruSliver : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(45355)
+      Buffs.byIdOrName(45355, "Item - T7 Melee Trinket Base", this)
       )
 }

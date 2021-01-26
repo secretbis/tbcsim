@@ -42,6 +42,6 @@ public class SkycallTotem : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43750)
+      Buffs.byIdOrName(43750, "Energized", this)
       )
 }

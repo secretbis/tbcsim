@@ -42,6 +42,6 @@ public class GreatEarthforgedHammer : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15820)
+      Buffs.byIdOrName(15820, "Attack Power 70", this)
       )
 }

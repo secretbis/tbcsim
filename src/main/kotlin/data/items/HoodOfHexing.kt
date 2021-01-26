@@ -51,6 +51,6 @@ public class HoodOfHexing : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23732)
+      Buffs.byIdOrName(23732, "Increase Spell Dam 56", this)
       )
 }

@@ -42,6 +42,6 @@ public class AshtongueTalismanOfAcumen : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40438)
+      Buffs.byIdOrName(40438, "Priest Tier 6 Trinket", this)
       )
 }

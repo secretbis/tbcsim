@@ -52,6 +52,6 @@ public class NetherbladeChestpiece : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15823)
+      Buffs.byIdOrName(15823, "Attack Power 74", this)
       )
 }

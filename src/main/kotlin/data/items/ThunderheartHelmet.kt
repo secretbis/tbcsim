@@ -50,7 +50,7 @@ public class ThunderheartHelmet : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37952),
-      Buffs.byId(21629)
+      Buffs.byIdOrName(37952, "Increase Healing 117", this),
+      Buffs.byIdOrName(21629, "Increased Mana Regen", this)
       )
 }

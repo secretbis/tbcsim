@@ -42,6 +42,6 @@ public class StormfuryTotem : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37762)
+      Buffs.byIdOrName(37762, "Reduced Stormstrike Cost", this)
       )
 }

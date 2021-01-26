@@ -46,6 +46,6 @@ public class TerestiansStranglestaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44911)
+      Buffs.byIdOrName(44911, "Attack Power - Feral (+0829)", this)
       )
 }

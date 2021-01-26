@@ -48,7 +48,7 @@ public class BracersOfTheForestStalker : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15807),
-      Buffs.byId(39922)
+      Buffs.byIdOrName(15807, "Attack Power 32", this),
+      Buffs.byIdOrName(39922, "Armor Penetration 70", this)
       )
 }

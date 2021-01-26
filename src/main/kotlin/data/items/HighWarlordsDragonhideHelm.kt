@@ -51,6 +51,6 @@ public class HighWarlordsDragonhideHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9317)
+      Buffs.byIdOrName(9317, "Increase Healing 31", this)
       )
 }

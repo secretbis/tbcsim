@@ -44,8 +44,8 @@ public class GladiatorsWyrmhideGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18054),
-      Buffs.byId(33830),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),
+      Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

@@ -42,6 +42,6 @@ public class MercilessGladiatorsTotemOfSurvival : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43861)
+      Buffs.byIdOrName(43861, "Merciless Totem of Survival", this)
       )
 }

@@ -43,6 +43,6 @@ public class MercilessGladiatorsSalvation : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42127)
+      Buffs.byIdOrName(42127, "Increase Healing 423", this)
       )
 }

@@ -51,8 +51,8 @@ public class EmbraceOfTheTwistingNether : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(90)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15828),
-      Buffs.byId(21632),
-      Buffs.byId(34518)
+      Buffs.byIdOrName(15828, "Attack Power 84", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this),
+      Buffs.byIdOrName(34518, "Nether Protection", this)
       )
 }

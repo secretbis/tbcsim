@@ -48,6 +48,6 @@ public class RejuvenatingBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18040)
+      Buffs.byIdOrName(18040, "Increase Healing 64", this)
       )
 }

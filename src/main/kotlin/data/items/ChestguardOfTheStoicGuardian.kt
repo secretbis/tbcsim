@@ -50,6 +50,6 @@ public class ChestguardOfTheStoicGuardian : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14055)
+      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this)
       )
 }

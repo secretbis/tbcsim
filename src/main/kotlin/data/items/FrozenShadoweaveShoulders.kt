@@ -49,7 +49,7 @@ public class FrozenShadoweaveShoulders : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2880)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18025),
-      Buffs.byId(17908)
+      Buffs.byIdOrName(18025, "Increase Shadow Dam 50", this),
+      Buffs.byIdOrName(17908, "Increase Frost Dam 50", this)
       )
 }

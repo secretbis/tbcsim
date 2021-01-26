@@ -52,7 +52,7 @@ public class BrutalGladiatorsChainHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15818),
-      Buffs.byId(39927)
+      Buffs.byIdOrName(15818, "Attack Power 66", this),
+      Buffs.byIdOrName(39927, "Armor Penetration 84", this)
       )
 }

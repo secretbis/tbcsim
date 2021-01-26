@@ -43,7 +43,7 @@ public class VeteransKodohideBelt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18042),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(18042, "Increase Healing 68", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

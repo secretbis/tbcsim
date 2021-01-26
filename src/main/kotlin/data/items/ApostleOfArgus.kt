@@ -43,7 +43,7 @@ public class ApostleOfArgus : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42059),
-      Buffs.byId(42060)
+      Buffs.byIdOrName(42059, "Increase Healing 486", this),
+      Buffs.byIdOrName(42060, "Increased Mana Regen", this)
       )
 }

@@ -44,6 +44,6 @@ public class BrutalGladiatorsDreadweaveLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33236)
+      Buffs.byIdOrName(33236, "Increase Spell Dam 67", this)
       )
 }

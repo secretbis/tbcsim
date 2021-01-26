@@ -44,7 +44,7 @@ public class VengefulGladiatorsWarStaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43455),
-      Buffs.byId(44001)
+      Buffs.byIdOrName(43455, "Increase Spell Dam 247", this),
+      Buffs.byIdOrName(44001, "Increased Spell Penetration 35", this)
       )
 }

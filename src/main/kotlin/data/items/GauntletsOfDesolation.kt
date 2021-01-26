@@ -51,6 +51,6 @@ public class GauntletsOfDesolation : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15807)
+      Buffs.byIdOrName(15807, "Attack Power 32", this)
       )
 }

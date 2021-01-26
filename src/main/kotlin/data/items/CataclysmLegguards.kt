@@ -48,7 +48,7 @@ public class CataclysmLegguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42089),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(42089, "Increase Healing 103", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

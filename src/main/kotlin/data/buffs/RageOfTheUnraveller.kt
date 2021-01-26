@@ -1,9 +1,6 @@
 package data.buffs
 
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Stats
+import character.*
 import data.model.Item
 import sim.SimIteration
 
@@ -11,6 +8,7 @@ class RageOfTheUnraveller : Buff() {
     override val id: Int = 33648
     override val name: String = "Rage of the Unraveller"
     override val durationMs: Int = -1
+    override val hidden: Boolean = true
 
     override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
         return stats

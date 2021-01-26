@@ -43,6 +43,6 @@ public class TheDecapitator : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37208)
+      Buffs.byIdOrName(37208, "The Decapitator", this)
       )
 }

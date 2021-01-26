@@ -49,7 +49,7 @@ public class SunhawkLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39988),
-      Buffs.byId(21639)
+      Buffs.byIdOrName(39988, "Increase Healing 108", this),
+      Buffs.byIdOrName(21639, "Increased Mana Regen", this)
       )
 }

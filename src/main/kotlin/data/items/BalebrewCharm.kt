@@ -42,6 +42,6 @@ public class BalebrewCharm : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(48042)
+      Buffs.byIdOrName(48042, "Summon the Black Brewmaiden", this)
       )
 }

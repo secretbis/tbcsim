@@ -51,6 +51,6 @@ public class LeggingsOfTirisfal : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2909)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34040)
+      Buffs.byIdOrName(34040, "Increase Spell Dam 54", this)
       )
 }

@@ -52,6 +52,6 @@ public class RangerGeneralsChestguard : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15830)
+      Buffs.byIdOrName(15830, "Attack Power 88", this)
       )
 }

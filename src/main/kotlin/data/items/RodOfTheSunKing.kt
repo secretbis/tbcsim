@@ -42,7 +42,7 @@ public class RodOfTheSunKing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36070),
-      Buffs.byId(15812)
+      Buffs.byIdOrName(36070, "Power of the Sun King", this),
+      Buffs.byIdOrName(15812, "Attack Power 52", this)
       )
 }

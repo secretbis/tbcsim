@@ -42,7 +42,7 @@ public class ScarabOfTheInfiniteCycle : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18043),
-      Buffs.byId(33953)
+      Buffs.byIdOrName(18043, "Increase Healing 70", this),
+      Buffs.byIdOrName(33953, "Spell Haste Healer Trinket", this)
       )
 }

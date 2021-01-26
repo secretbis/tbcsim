@@ -42,6 +42,6 @@ public class BlessedBookOfNagrand : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32403)
+      Buffs.byIdOrName(32403, "Increased Flash of Light Healing", this)
       )
 }

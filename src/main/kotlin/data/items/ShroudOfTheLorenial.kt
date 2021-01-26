@@ -49,6 +49,6 @@ public class ShroudOfTheLorenial : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33233)
+      Buffs.byIdOrName(33233, "Increase Spell Dam 61", this)
       )
 }

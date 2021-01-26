@@ -44,6 +44,6 @@ public class GrandMarshalsHeavyCrossbow : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21434)
+      Buffs.byIdOrName(21434, "Attack Power Ranged 22", this)
       )
 }

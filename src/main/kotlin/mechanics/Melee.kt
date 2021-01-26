@@ -113,6 +113,7 @@ object Melee {
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun meleeBlockReduction(sim: SimIteration): Double {
         // TODO: How much is mitigated by a mob?
         // This is 46 for now since that's what Thaddius blocks for
@@ -132,7 +133,7 @@ object Melee {
     }
 
     fun meleeCritChance(sim: SimIteration): Double {
-        return (sim.subject.meleeCritPct() + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
+        return (sim.subject.meleeCritPct() / 100.0 + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
     }
 
     fun meleeArmorPen(sim: SimIteration): Int {
@@ -145,6 +146,7 @@ object Melee {
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
+    @Suppress("UNUSED_PARAMETER")
     fun apToDamage(sim: SimIteration, attackPower: Int, item: Item, isNormalized: Boolean = false): Double {
         val speed = if(isNormalized) {
             normalizedWeaponSpeedMs[item.itemSubclass]

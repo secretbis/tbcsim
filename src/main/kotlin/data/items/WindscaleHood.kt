@@ -44,7 +44,7 @@ public class WindscaleHood : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17493),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(17493, "Increase Spell Dam 44", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

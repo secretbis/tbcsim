@@ -44,7 +44,7 @@ public class SteelspineFaceguard : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15816),
-      Buffs.byId(21631)
+      Buffs.byIdOrName(15816, "Attack Power 62", this),
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
       )
 }

@@ -43,6 +43,6 @@ public class HemetsElekkGun : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14027)
+      Buffs.byIdOrName(14027, "Attack Power 24", this)
       )
 }

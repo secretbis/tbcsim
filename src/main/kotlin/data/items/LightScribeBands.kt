@@ -44,6 +44,6 @@ public class LightScribeBands : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9316)
+      Buffs.byIdOrName(9316, "Increase Healing 29", this)
       )
 }

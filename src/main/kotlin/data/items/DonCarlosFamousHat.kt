@@ -42,7 +42,7 @@ public class DonCarlosFamousHat : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(52172),
-      Buffs.byId(51149)
+      Buffs.byIdOrName(52172, "Coyote Spirit Despawn Aura", this),
+      Buffs.byIdOrName(51149, "Summon Coyote Spirit", this)
       )
 }

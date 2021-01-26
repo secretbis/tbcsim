@@ -44,6 +44,6 @@ public class ArchmagesGuile : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33490)
+      Buffs.byIdOrName(33490, "Increase Spell Dam 121", this)
       )
 }

@@ -44,7 +44,7 @@ public class BrutalGladiatorsMoonclothLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32584),
-      Buffs.byId(35836)
+      Buffs.byIdOrName(32584, "Increase Healing 95", this),
+      Buffs.byIdOrName(35836, "Increased Mana Regen", this)
       )
 }

@@ -42,7 +42,7 @@ public class FigurineTalasiteOwl : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21640),
-      Buffs.byId(31045)
+      Buffs.byIdOrName(21640, "Increased Mana Regen", this),
+      Buffs.byIdOrName(31045, "Talasite Owl", this)
       )
 }

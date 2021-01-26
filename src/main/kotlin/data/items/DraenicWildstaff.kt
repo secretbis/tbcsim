@@ -46,6 +46,6 @@ public class DraenicWildstaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44908)
+      Buffs.byIdOrName(44908, "Attack Power - Feral (+0539)", this)
       )
 }

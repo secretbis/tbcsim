@@ -45,7 +45,7 @@ public class GladiatorsSilkHandguards : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33066),
-      Buffs.byId(17367)
+      Buffs.byIdOrName(33066, "Mage Fire Blast Range Bonus", this),
+      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
       )
 }

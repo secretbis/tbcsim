@@ -44,7 +44,7 @@ public class MankindosBelt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18040),
-      Buffs.byId(21630)
+      Buffs.byIdOrName(18040, "Increase Healing 64", this),
+      Buffs.byIdOrName(21630, "Increased Mana Regen", this)
       )
 }

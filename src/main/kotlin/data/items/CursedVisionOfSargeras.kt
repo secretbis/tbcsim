@@ -52,7 +52,7 @@ public class CursedVisionOfSargeras : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33782),
-      Buffs.byId(47524)
+      Buffs.byIdOrName(33782, "Attack Power 108", this),
+      Buffs.byIdOrName(47524, "Sense Demons", this)
       )
 }

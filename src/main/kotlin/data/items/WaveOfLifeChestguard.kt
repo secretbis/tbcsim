@@ -47,7 +47,7 @@ public class WaveOfLifeChestguard : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(25179),
-      Buffs.byId(21641)
+      Buffs.byIdOrName(25179, "Increase Healing 112", this),
+      Buffs.byIdOrName(21641, "Increased Mana Regen", this)
       )
 }

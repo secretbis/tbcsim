@@ -54,7 +54,7 @@ public class BrutalGladiatorsLeatherTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15815),
-      Buffs.byId(39927)
+      Buffs.byIdOrName(15815, "Attack Power 58", this),
+      Buffs.byIdOrName(39927, "Armor Penetration 84", this)
       )
 }

@@ -51,6 +51,6 @@ public class VoidheartRobe : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18058)
+      Buffs.byIdOrName(18058, "Increase Spell Dam 42", this)
       )
 }

@@ -44,9 +44,9 @@ public class ThoridalTheStarsFury : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15806),
-      Buffs.byId(43219),
-      Buffs.byId(44972),
-      Buffs.byId(46699)
+      Buffs.byIdOrName(15806, "Attack Power 34", this),
+      Buffs.byIdOrName(43219, "Armor Penetration 112", this),
+      Buffs.byIdOrName(44972, "Legendary Bow Haste", this),
+      Buffs.byIdOrName(46699, "Requires No Ammo", this)
       )
 }

@@ -42,6 +42,6 @@ public class IdolOfTheRavenGoddess : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39926)
+      Buffs.byIdOrName(39926, "Improved Party Auras", this)
       )
 }

@@ -43,7 +43,7 @@ public class NorthshireBattlemace : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21620),
-      Buffs.byId(28686)
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this),
+      Buffs.byIdOrName(28686, "Increase Healing 161", this)
       )
 }

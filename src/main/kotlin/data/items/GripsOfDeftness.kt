@@ -44,6 +44,6 @@ public class GripsOfDeftness : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14052)
+      Buffs.byIdOrName(14052, "Attack Power 60", this)
       )
 }

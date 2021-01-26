@@ -44,6 +44,6 @@ public class PauldronsOfWildMagic : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18050)
+      Buffs.byIdOrName(18050, "Increase Spell Dam 33", this)
       )
 }

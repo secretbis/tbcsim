@@ -45,7 +45,7 @@ public class BrutalGladiatorsSilkHandguards : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44301),
-      Buffs.byId(17493)
+      Buffs.byIdOrName(44301, "Improved Polymorph", this),
+      Buffs.byIdOrName(17493, "Increase Spell Dam 44", this)
       )
 }

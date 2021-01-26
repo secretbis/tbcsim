@@ -43,6 +43,6 @@ public class CataclysmsEdge : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42061)
+      Buffs.byIdOrName(42061, "Armor Penetration 335", this)
       )
 }

@@ -43,6 +43,6 @@ public class DarkBlessing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42070)
+      Buffs.byIdOrName(42070, "Increase Healing 431", this)
       )
 }

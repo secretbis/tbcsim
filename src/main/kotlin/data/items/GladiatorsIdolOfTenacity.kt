@@ -42,6 +42,6 @@ public class GladiatorsIdolOfTenacity : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42367)
+      Buffs.byIdOrName(42367, "Idol of Tenacity", this)
       )
 }

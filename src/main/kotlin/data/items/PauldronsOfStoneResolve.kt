@@ -49,6 +49,6 @@ public class PauldronsOfStoneResolve : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3017)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28113)
+      Buffs.byIdOrName(28113, "Block Value 30", this)
       )
 }

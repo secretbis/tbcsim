@@ -45,6 +45,6 @@ public class Sunflare : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44974)
+      Buffs.byIdOrName(44974, "Increase Spell Dam 292", this)
       )
 }

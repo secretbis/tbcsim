@@ -49,7 +49,7 @@ public class LightbringerLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42093),
-      Buffs.byId(21634)
+      Buffs.byIdOrName(42093, "Healing 114", this),
+      Buffs.byIdOrName(21634, "Increased Mana Regen", this)
       )
 }

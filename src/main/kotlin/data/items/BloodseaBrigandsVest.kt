@@ -52,6 +52,6 @@ public class BloodseaBrigandsVest : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15832)
+      Buffs.byIdOrName(15832, "Attack Power 92", this)
       )
 }

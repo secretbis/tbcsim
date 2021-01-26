@@ -42,7 +42,7 @@ public class OculusOfTheHiddenEye : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18050),
-      Buffs.byId(33012)
+      Buffs.byIdOrName(18050, "Increase Spell Dam 33", this),
+      Buffs.byIdOrName(33012, "Consume Essence", this)
       )
 }

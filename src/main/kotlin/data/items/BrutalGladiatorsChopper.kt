@@ -46,7 +46,7 @@ public class BrutalGladiatorsChopper : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15808),
-      Buffs.byId(43901)
+      Buffs.byIdOrName(15808, "Attack Power 38", this),
+      Buffs.byIdOrName(43901, "Armor Penetration 49", this)
       )
 }

@@ -43,7 +43,7 @@ public class MantleOfTheMindFlayer : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14055),
-      Buffs.byId(42056)
+      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+      Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
       )
 }

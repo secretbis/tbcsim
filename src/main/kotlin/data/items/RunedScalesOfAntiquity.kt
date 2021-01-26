@@ -48,7 +48,7 @@ public class RunedScalesOfAntiquity : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39806),
-      Buffs.byId(21640)
+      Buffs.byIdOrName(39806, "Increase Healing 114", this),
+      Buffs.byIdOrName(21640, "Increased Mana Regen", this)
       )
 }

@@ -42,7 +42,7 @@ public class LuminescentRodOfTheNaaru : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18029),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(18029, "Increase Healing 35", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

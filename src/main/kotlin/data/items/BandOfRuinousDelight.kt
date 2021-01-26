@@ -44,7 +44,7 @@ public class BandOfRuinousDelight : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40679),
-      Buffs.byId(15818)
+      Buffs.byIdOrName(40679, "Armor Penetration 161", this),
+      Buffs.byIdOrName(15818, "Attack Power 66", this)
       )
 }

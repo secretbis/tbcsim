@@ -44,7 +44,7 @@ public class GlowingBreastplateOfTruth : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21633),
-      Buffs.byId(15696)
+      Buffs.byIdOrName(21633, "Increased Mana Regen", this),
+      Buffs.byIdOrName(15696, "Increase Healing 53", this)
       )
 }

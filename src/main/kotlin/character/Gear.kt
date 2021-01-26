@@ -8,7 +8,7 @@ data class Gear(
     var offHand: Item = Item(),
     var rangedTotemLibram: Item = Item(),
     var ammo: Item = Item(),
-    var helm: Item = Item(),
+    var head: Item = Item(),
     var neck: Item = Item(),
     var shoulders: Item = Item(),
     var back: Item = Item(),
@@ -29,7 +29,7 @@ data class Gear(
             offHand,
             rangedTotemLibram,
             ammo,
-            helm,
+            head,
             neck,
             shoulders,
             back,
@@ -49,8 +49,11 @@ data class Gear(
     fun buffs(): List<Buff> {
         val buffs = mutableListOf<Buff>()
         Gear::class.declaredMemberProperties.forEach {
+            val general = (it.get(this) as Item).buffs
             val enchant = (it.get(this) as Item).enchant
             val tempEnh = (it.get(this) as Item).temporaryEnhancement
+
+            buffs.addAll(general)
 
             if(enchant != null) {
                 buffs.add(enchant)

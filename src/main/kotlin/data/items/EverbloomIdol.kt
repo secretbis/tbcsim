@@ -42,6 +42,6 @@ public class EverbloomIdol : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33693)
+      Buffs.byIdOrName(33693, "Increased Shred Damage", this)
       )
 }

@@ -42,7 +42,7 @@ public class HandOfEternity : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21628),
-      Buffs.byId(39602)
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this),
+      Buffs.byIdOrName(39602, "Increase Healing 317", this)
       )
 }

@@ -48,10 +48,10 @@ public class LivingReplicatorSpecs : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26225),
-      Buffs.byId(21631),
-      Buffs.byId(30645),
-      Buffs.byId(40273),
-      Buffs.byId(12883)
+      Buffs.byIdOrName(26225, "Increase Healing 106", this),
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this),
+      Buffs.byIdOrName(30645, "Gas Cloud Tracking", this),
+      Buffs.byIdOrName(40273, "Stealth Detection", this),
+      Buffs.byIdOrName(12883, "Longsight", this)
       )
 }

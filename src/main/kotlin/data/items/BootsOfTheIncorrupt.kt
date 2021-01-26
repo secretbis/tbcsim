@@ -44,7 +44,7 @@ public class BootsOfTheIncorrupt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21630),
-      Buffs.byId(18037)
+      Buffs.byIdOrName(21630, "Increased Mana Regen", this),
+      Buffs.byIdOrName(18037, "Increase Healing 57", this)
       )
 }

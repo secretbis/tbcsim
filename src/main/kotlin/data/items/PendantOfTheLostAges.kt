@@ -43,7 +43,7 @@ public class PendantOfTheLostAges : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18053),
-      Buffs.byId(35126)
+      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this),
+      Buffs.byIdOrName(35126, "Silence Resistance 20%", this)
       )
 }

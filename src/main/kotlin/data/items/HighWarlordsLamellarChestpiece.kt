@@ -51,6 +51,6 @@ public class HighWarlordsLamellarChestpiece : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9415)
+      Buffs.byIdOrName(9415, "Increase Spell Dam 9", this)
       )
 }

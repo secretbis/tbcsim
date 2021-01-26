@@ -42,6 +42,6 @@ public class LibramOfTheEternalRest : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34252)
+      Buffs.byIdOrName(34252, "Improved Consecration", this)
       )
 }

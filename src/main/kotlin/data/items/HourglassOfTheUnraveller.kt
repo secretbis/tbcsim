@@ -43,6 +43,6 @@ public class HourglassOfTheUnraveller : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33648)
+      Buffs.byIdOrName(33648, "Rage of the Unraveller", this)
       )
 }

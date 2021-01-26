@@ -44,8 +44,8 @@ public class KodohideGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18035),
-      Buffs.byId(33830),
-      Buffs.byId(21619)
+      Buffs.byIdOrName(18035, "Increase Healing 51", this),
+      Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this),
+      Buffs.byIdOrName(21619, "Increased Mana Regen", this)
       )
 }

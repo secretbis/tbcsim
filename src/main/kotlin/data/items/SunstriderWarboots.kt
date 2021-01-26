@@ -48,6 +48,6 @@ public class SunstriderWarboots : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2879)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42098)
+      Buffs.byIdOrName(42098, "Armor Penetration 140", this)
       )
 }

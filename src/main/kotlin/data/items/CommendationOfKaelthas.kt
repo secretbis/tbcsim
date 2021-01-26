@@ -42,6 +42,6 @@ public class CommendationOfKaelthas : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(45057)
+      Buffs.byIdOrName(45057, "Evasive Maneuvers", this)
       )
 }

@@ -43,6 +43,6 @@ public class VindicatorsDreadweaveBelt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18057)
+      Buffs.byIdOrName(18057, "Increase Spell Dam 41", this)
       )
 }

@@ -45,6 +45,6 @@ public class HalberdOfDesolation : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28735)
+      Buffs.byIdOrName(28735, "Attack Power 100", this)
       )
 }

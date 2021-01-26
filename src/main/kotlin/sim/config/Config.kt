@@ -2,7 +2,8 @@ package sim.config
 
 import character.*
 import com.charleskorn.kaml.Yaml
-import data.enchants.Mongoose
+import data.enchants.Enchants
+import data.items.ItemIndex
 import data.model.Item
 import mu.KotlinLogging
 import sim.SimOptions
@@ -48,10 +49,19 @@ class Config(
         private fun createItemFromGear(itemYml: GearItemYml?): Item {
 
             return if(itemYml != null) {
-                val item = Item()
+                var item = ItemIndex.byName(itemYml.name)
+//                var item = Item()
+                if(item == null) {
+                    logger.warn { "Could not find item with name: ${itemYml.name}" }
+                    item = Item()
+                }
 
                 if(itemYml.enchant != null) {
-                    item.enchant = Mongoose(item)
+                    val enchant = Enchants.byName(itemYml.enchant, item)
+                    if(enchant == null) {
+                        logger.warn { "Could not find enchant with name: ${itemYml.name}" }
+                    }
+                    item.enchant = enchant
                 }
 
                 item
@@ -84,7 +94,23 @@ class Config(
             // TODO: Actually implement this
             val gear = Gear(
                 mainHand = createItemFromGear(yml.gear?.mainHand),
-                offHand = createItemFromGear(yml.gear?.offHand)
+                offHand = createItemFromGear(yml.gear?.offHand),
+                rangedTotemLibram = createItemFromGear(yml.gear?.rangedLibramTotem),
+                ammo = createItemFromGear(yml.gear?.ammo),
+                head = createItemFromGear(yml.gear?.head),
+                neck = createItemFromGear(yml.gear?.neck),
+                shoulders = createItemFromGear(yml.gear?.shoulders),
+                back = createItemFromGear(yml.gear?.back),
+                chest = createItemFromGear(yml.gear?.chest),
+                wrists = createItemFromGear(yml.gear?.wrists),
+                hands = createItemFromGear(yml.gear?.hands),
+                waist = createItemFromGear(yml.gear?.waist),
+                legs = createItemFromGear(yml.gear?.legs),
+                feet = createItemFromGear(yml.gear?.feet),
+                ring1 = createItemFromGear(yml.gear?.ring1),
+                ring2 = createItemFromGear(yml.gear?.ring2),
+                trinket1 = createItemFromGear(yml.gear?.trinket1),
+                trinket2 = createItemFromGear(yml.gear?.trinket2)
             )
 
             return Character(

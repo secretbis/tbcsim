@@ -48,6 +48,6 @@ public class OgrilaAegis : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3017)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(22852)
+      Buffs.byIdOrName(22852, "Block Value 23", this)
       )
 }

@@ -44,6 +44,6 @@ public class NetherCoresControlRod : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9342)
+      Buffs.byIdOrName(9342, "Increase Spell Dam 13", this)
       )
 }

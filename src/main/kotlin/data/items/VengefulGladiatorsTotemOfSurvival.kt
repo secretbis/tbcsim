@@ -42,6 +42,6 @@ public class VengefulGladiatorsTotemOfSurvival : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43862)
+      Buffs.byIdOrName(43862, "Vengeful Totem of Survival", this)
       )
 }

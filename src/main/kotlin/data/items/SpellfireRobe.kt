@@ -49,7 +49,7 @@ public class SpellfireRobe : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26703),
-      Buffs.byId(26715)
+      Buffs.byIdOrName(26703, "Increase Fire Dam 72", this),
+      Buffs.byIdOrName(26715, "Increase Arcane Dam 72", this)
       )
 }

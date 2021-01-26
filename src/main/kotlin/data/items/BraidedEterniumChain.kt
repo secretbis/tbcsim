@@ -43,7 +43,7 @@ public class BraidedEterniumChain : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33488),
-      Buffs.byId(31025)
+      Buffs.byIdOrName(33488, "Weapon Damage", this),
+      Buffs.byIdOrName(31025, "Braided Eternium Chain", this)
       )
 }

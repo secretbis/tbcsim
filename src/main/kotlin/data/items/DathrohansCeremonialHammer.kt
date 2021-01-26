@@ -44,6 +44,6 @@ public class DathrohansCeremonialHammer : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33273)
+      Buffs.byIdOrName(33273, "Increase Healing 227", this)
       )
 }

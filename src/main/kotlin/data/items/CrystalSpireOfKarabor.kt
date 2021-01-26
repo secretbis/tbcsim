@@ -43,8 +43,8 @@ public class CrystalSpireOfKarabor : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42059),
-      Buffs.byId(18379),
-      Buffs.byId(40971)
+      Buffs.byIdOrName(42059, "Increase Healing 486", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this),
+      Buffs.byIdOrName(40971, "Bonus Healing", this)
       )
 }

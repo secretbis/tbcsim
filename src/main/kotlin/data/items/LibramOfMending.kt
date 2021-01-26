@@ -42,6 +42,6 @@ public class LibramOfMending : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43741)
+      Buffs.byIdOrName(43741, "Light's Grace", this)
       )
 }

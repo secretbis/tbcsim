@@ -42,7 +42,7 @@ public class GnomereganAutoBlocker : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42038),
-      Buffs.byId(35169)
+      Buffs.byIdOrName(42038, "Block Value 59", this),
+      Buffs.byIdOrName(35169, "Gnome Ingenuity", this)
       )
 }

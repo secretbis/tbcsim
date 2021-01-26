@@ -51,6 +51,6 @@ public class VengefulGladiatorsLinkedSpaulders : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21364)
+      Buffs.byIdOrName(21364, "Increased Mana Regen", this)
       )
 }

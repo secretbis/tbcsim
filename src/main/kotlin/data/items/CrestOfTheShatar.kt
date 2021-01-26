@@ -48,6 +48,6 @@ public class CrestOfTheShatar : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2876)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23181)
+      Buffs.byIdOrName(23181, "Block Value 24", this)
       )
 }

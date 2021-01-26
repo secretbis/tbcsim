@@ -50,6 +50,6 @@ public class MercilessGladiatorsDreadweaveRobe : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2856)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17493)
+      Buffs.byIdOrName(17493, "Increase Spell Dam 44", this)
       )
 }

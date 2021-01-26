@@ -49,7 +49,7 @@ public class GlovesOfAbsolution : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36062),
-      Buffs.byId(21363)
+      Buffs.byIdOrName(36062, "Increase Healing 86", this),
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this)
       )
 }

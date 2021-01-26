@@ -42,6 +42,6 @@ public class IdolOfUrsoc : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34253)
+      Buffs.byIdOrName(34253, "Increased Lacerate Damage", this)
       )
 }

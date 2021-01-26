@@ -51,7 +51,7 @@ public class BladedChaosTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40933),
-      Buffs.byId(42113)
+      Buffs.byIdOrName(40933, "Attack Power 120", this),
+      Buffs.byIdOrName(42113, "Armor Penetration 210", this)
       )
 }

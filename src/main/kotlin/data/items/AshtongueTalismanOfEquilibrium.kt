@@ -42,6 +42,6 @@ public class AshtongueTalismanOfEquilibrium : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40442)
+      Buffs.byIdOrName(40442, "Druid Tier 6 Trinket", this)
       )
 }

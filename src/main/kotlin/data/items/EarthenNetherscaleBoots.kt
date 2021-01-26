@@ -44,7 +44,7 @@ public class EarthenNetherscaleBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23990),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(23990, "Item - Minor Run Speed", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

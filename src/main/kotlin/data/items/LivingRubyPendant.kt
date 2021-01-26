@@ -43,8 +43,8 @@ public class LivingRubyPendant : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18029),
-      Buffs.byId(18379),
-      Buffs.byId(31024)
+      Buffs.byIdOrName(18029, "Increase Healing 35", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this),
+      Buffs.byIdOrName(31024, "Living Ruby Pendant", this)
       )
 }

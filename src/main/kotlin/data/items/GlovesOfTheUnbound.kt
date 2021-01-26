@@ -48,6 +48,6 @@ public class GlovesOfTheUnbound : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2862)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15808)
+      Buffs.byIdOrName(15808, "Attack Power 38", this)
       )
 }

@@ -50,6 +50,6 @@ public class AmaniDiviningStaff : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44075)
+      Buffs.byIdOrName(44075, "Increase Spell Dam 217", this)
       )
 }

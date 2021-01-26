@@ -48,6 +48,6 @@ public class CycloneGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21620)
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

@@ -42,6 +42,6 @@ public class TotemOfTheMaelstrom : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37738)
+      Buffs.byIdOrName(37738, "Reduced Healing Wave Cost", this)
       )
 }

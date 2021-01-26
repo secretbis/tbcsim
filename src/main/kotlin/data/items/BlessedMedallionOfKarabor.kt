@@ -42,6 +42,6 @@ public class BlessedMedallionOfKarabor : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(41234)
+      Buffs.byIdOrName(41234, "Teleport: Black Temple", this)
       )
 }

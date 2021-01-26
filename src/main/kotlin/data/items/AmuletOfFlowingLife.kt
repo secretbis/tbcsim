@@ -48,7 +48,7 @@ public class AmuletOfFlowingLife : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18040),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(18040, "Increase Healing 64", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

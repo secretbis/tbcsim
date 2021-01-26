@@ -49,6 +49,6 @@ public class ExorcistsLeatherHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9331)
+      Buffs.byIdOrName(9331, "Attack Power 20", this)
       )
 }

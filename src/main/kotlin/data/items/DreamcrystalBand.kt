@@ -43,6 +43,6 @@ public class DreamcrystalBand : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17995)
+      Buffs.byIdOrName(17995, "Increase Nature Dam 37", this)
       )
 }

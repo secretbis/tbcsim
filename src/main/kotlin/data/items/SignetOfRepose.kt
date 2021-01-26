@@ -44,6 +44,6 @@ public class SignetOfRepose : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9315)
+      Buffs.byIdOrName(9315, "Increase Healing 26", this)
       )
 }

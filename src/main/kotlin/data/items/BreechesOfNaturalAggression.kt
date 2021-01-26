@@ -50,6 +50,6 @@ public class BreechesOfNaturalAggression : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23929)
+      Buffs.byIdOrName(23929, "Increase Spell Dam 71", this)
       )
 }

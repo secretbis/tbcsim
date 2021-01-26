@@ -42,6 +42,6 @@ public class FigurineEmpyreanTortoise : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(46780)
+      Buffs.byIdOrName(46780, "Empyrean Tortoise", this)
       )
 }

@@ -51,8 +51,8 @@ public class TwistingNetherChainShirt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(90)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15819),
-      Buffs.byId(21365),
-      Buffs.byId(34518)
+      Buffs.byIdOrName(15819, "Attack Power 68", this),
+      Buffs.byIdOrName(21365, "Increased Mana Regen", this),
+      Buffs.byIdOrName(34518, "Nether Protection", this)
       )
 }

@@ -42,6 +42,6 @@ public class IdolOfTheAvianHeart : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38321)
+      Buffs.byIdOrName(38321, "Improved Healing Touch", this)
       )
 }

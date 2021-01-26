@@ -42,7 +42,7 @@ public class BangleOfEndlessBlessings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38334),
-      Buffs.byId(34210)
+      Buffs.byIdOrName(38334, "Proc Mana Regen", this),
+      Buffs.byIdOrName(34210, "Endless Blessings", this)
       )
 }

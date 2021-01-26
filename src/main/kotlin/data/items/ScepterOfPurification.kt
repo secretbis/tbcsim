@@ -44,6 +44,6 @@ public class ScepterOfPurification : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18046)
+      Buffs.byIdOrName(18046, "Increase Healing 77", this)
       )
 }

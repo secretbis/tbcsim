@@ -50,6 +50,6 @@ public class WarpInfusedDrape : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2864)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14798)
+      Buffs.byIdOrName(14798, "Increase Spell Dam 30", this)
       )
 }

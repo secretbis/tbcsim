@@ -42,6 +42,6 @@ public class JewelOfCharismaticMystique : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33486)
+      Buffs.byIdOrName(33486, "Auchindoun Threat Reduction Trinket", this)
       )
 }

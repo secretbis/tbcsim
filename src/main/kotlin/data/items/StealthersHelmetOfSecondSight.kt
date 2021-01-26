@@ -51,7 +51,7 @@ public class StealthersHelmetOfSecondSight : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14052),
-      Buffs.byId(39841)
+      Buffs.byIdOrName(14052, "Attack Power 60", this),
+      Buffs.byIdOrName(39841, "Spectrecles", this)
       )
 }

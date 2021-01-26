@@ -51,6 +51,6 @@ public class QuickstriderMoccasins : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15815)
+      Buffs.byIdOrName(15815, "Attack Power 58", this)
       )
 }

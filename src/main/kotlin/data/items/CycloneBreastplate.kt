@@ -53,6 +53,6 @@ public class CycloneBreastplate : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18378)
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

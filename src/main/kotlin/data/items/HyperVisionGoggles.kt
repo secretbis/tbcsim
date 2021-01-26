@@ -43,7 +43,7 @@ public class HyperVisionGoggles : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15828),
-      Buffs.byId(30249)
+      Buffs.byIdOrName(15828, "Attack Power 84", this),
+      Buffs.byIdOrName(30249, "Hyper Vision", this)
       )
 }

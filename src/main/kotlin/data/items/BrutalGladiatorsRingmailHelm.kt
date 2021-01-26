@@ -50,6 +50,6 @@ public class BrutalGladiatorsRingmailHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39903)
+      Buffs.byIdOrName(39903, "Increase Healing 97", this)
       )
 }

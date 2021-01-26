@@ -49,6 +49,6 @@ public class GirdleOfTheBlastedReaches : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2863)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9336)
+      Buffs.byIdOrName(9336, "Attack Power 30", this)
       )
 }

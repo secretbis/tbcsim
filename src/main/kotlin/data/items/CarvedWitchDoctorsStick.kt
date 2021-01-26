@@ -47,6 +47,6 @@ public class CarvedWitchDoctorsStick : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9346)
+      Buffs.byIdOrName(9346, "Increase Spell Dam 18", this)
       )
 }

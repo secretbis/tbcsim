@@ -42,7 +42,7 @@ public class TheSkullOfGuldan : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39569),
-      Buffs.byId(40396)
+      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
+      Buffs.byIdOrName(40396, "Fel Infusion", this)
       )
 }

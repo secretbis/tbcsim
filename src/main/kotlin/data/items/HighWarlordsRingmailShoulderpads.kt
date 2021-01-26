@@ -50,7 +50,7 @@ public class HighWarlordsRingmailShoulderpads : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21362),
-      Buffs.byId(9316)
+      Buffs.byIdOrName(21362, "Increased Mana Regen", this),
+      Buffs.byIdOrName(9316, "Increase Healing 29", this)
       )
 }

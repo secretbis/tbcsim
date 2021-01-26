@@ -44,7 +44,7 @@ public class GuardiansBandOfDominance : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14798),
-      Buffs.byId(43782)
+      Buffs.byIdOrName(14798, "Increase Spell Dam 30", this),
+      Buffs.byIdOrName(43782, "Spell Penetration 14", this)
       )
 }

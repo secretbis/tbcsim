@@ -44,6 +44,6 @@ public class CrownOfTheSun : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39988)
+      Buffs.byIdOrName(39988, "Increase Healing 108", this)
       )
 }

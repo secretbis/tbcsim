@@ -43,7 +43,7 @@ public class MasterThiefsGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15815),
-      Buffs.byId(43588)
+      Buffs.byIdOrName(15815, "Attack Power 58", this),
+      Buffs.byIdOrName(43588, "Disarm Duration Reduction", this)
       )
 }

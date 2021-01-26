@@ -48,6 +48,6 @@ public class ExorcistsSilkHood : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2880)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(13881)
+      Buffs.byIdOrName(13881, "Increase Spell Dam 29", this)
       )
 }

@@ -49,7 +49,7 @@ public class CycloneHeaddress : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18045),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(18045, "Increase Healing 75", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

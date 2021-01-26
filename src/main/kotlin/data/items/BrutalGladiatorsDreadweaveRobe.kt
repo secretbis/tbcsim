@@ -50,6 +50,6 @@ public class BrutalGladiatorsDreadweaveRobe : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2856)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23213)
+      Buffs.byIdOrName(23213, "Increase Spell Dam 57", this)
       )
 }

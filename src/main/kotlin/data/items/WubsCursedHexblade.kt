@@ -44,7 +44,7 @@ public class WubsCursedHexblade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44075),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(44075, "Increase Spell Dam 217", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

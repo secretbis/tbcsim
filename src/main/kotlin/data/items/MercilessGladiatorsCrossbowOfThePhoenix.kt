@@ -44,6 +44,6 @@ public class MercilessGladiatorsCrossbowOfThePhoenix : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21436)
+      Buffs.byIdOrName(21436, "Attack Power Ranged 26", this)
       )
 }

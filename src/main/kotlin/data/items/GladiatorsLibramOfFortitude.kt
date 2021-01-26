@@ -42,6 +42,6 @@ public class GladiatorsLibramOfFortitude : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43850)
+      Buffs.byIdOrName(43850, "Libram of Fortitude", this)
       )
 }

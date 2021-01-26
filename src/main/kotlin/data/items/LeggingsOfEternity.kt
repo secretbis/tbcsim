@@ -49,7 +49,7 @@ public class LeggingsOfEternity : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26228),
-      Buffs.byId(35836)
+      Buffs.byIdOrName(26228, "Increase Healing 121", this),
+      Buffs.byIdOrName(35836, "Increased Mana Regen", this)
       )
 }

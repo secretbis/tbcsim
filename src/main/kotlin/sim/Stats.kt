@@ -26,7 +26,6 @@ object Stats {
         val total: Double,
         val average: Double,
         val median: Double,
-        val sd: Double,
         val hitPct: Double,
         val critPct: Double,
         val missPct: Double,
@@ -198,7 +197,7 @@ object Stats {
         logger.info {
             "Ability Breakdown\n" +
             table {
-                header("Name", "Count", "TotalDmg", "PctOfTotal", "AverageDmg", "MedianDmg", "StdDevDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
+                header("Name", "Count", "TotalDmg", "PctOfTotal", "AverageDmg", "MedianDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                 val rows = keys.map { key ->
                     val events = byAbility[key]!!
@@ -210,7 +209,6 @@ object Stats {
                     val nonzeroAmounts = amounts.filter { it > 0 }
                     val average = total / nonzeroAmounts.size.toDouble()
                     val median = median(nonzeroAmounts)
-                    val sd = sd(nonzeroAmounts, average)
 
                     // Compute result distributions with the entire set of events
                     // Count blocked hits/crits as hits/crits, since the block value is very small
@@ -227,7 +225,6 @@ object Stats {
                         total,
                         average,
                         median,
-                        sd,
                         hitPct,
                         critPct,
                         missPct,
@@ -241,23 +238,23 @@ object Stats {
 
                 for(row in rows) {
                     val pctOfGrandTotal = row.total / grandTotal * 100.0
-                    row(row.name, row.count, row.total, pctOfGrandTotal, row.average, row.median, row.sd, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                    row(row.name, row.count, row.total, pctOfGrandTotal, row.average, row.median, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                 }
 
                 hints {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
                     precision(1, 0)
-                    for(i in 2..12) {
+                    for(i in 2..11) {
                         precision(i, 2)
                     }
 
-                    for(i in 1..12) {
+                    for(i in 1..11) {
                         formatFlag(i, ",")
                     }
 
                     postfix(3, "%")
-                    for(i in 6..12) {
+                    for(i in 6..11) {
                         postfix(i, "%")
                     }
 

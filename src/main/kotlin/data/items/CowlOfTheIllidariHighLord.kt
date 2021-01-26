@@ -50,6 +50,6 @@ public class CowlOfTheIllidariHighLord : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23730)
+      Buffs.byIdOrName(23730, "Increase Spell Dam 64", this)
       )
 }

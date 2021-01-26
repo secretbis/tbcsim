@@ -44,7 +44,7 @@ public class HauberkOfTheEmpiresChampion : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26225),
-      Buffs.byId(21637)
+      Buffs.byIdOrName(26225, "Increase Healing 106", this),
+      Buffs.byIdOrName(21637, "Increased Mana Regen", this)
       )
 }

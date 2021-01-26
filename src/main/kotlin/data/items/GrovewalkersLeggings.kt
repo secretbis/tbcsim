@@ -49,6 +49,6 @@ public class GrovewalkersLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39806)
+      Buffs.byIdOrName(39806, "Increase Healing 114", this)
       )
 }

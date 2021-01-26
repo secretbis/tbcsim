@@ -42,7 +42,7 @@ public class PrismOfInnerCalm : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38326),
-      Buffs.byId(38327)
+      Buffs.byIdOrName(38326, "Crit Threat Reduction Melee", this),
+      Buffs.byIdOrName(38327, "Crit Threat Reduction Spell", this)
       )
 }

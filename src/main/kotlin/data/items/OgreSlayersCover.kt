@@ -44,6 +44,6 @@ public class OgreSlayersCover : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14799)
+      Buffs.byIdOrName(14799, "Increase Spell Dam 20", this)
       )
 }

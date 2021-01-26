@@ -49,6 +49,6 @@ public class GlovesOfSaintlyBlessings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2974)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18031)
+      Buffs.byIdOrName(18031, "Increase Healing 40", this)
       )
 }

@@ -78,10 +78,16 @@ abstract class Proc {
         } else {
             chances.add(
                 when (type) {
-                    // Non-item procs cannot have PPM
                     Type.PPM -> {
-                        logger.warn("Attempted to compute a PPM without an Item from ability: ${ability?.name}")
-                        0.0
+                        // Try to use the procced item if it is a weapon
+                        val itemFromProc = items?.find { it === sim.subject.gear.mainHand  } ?: items?.find { it === sim.subject.gear.offHand }
+
+                        if(itemFromProc == null) {
+                            logger.debug { "Attempted to compute a PPM without an Item from ability: ${ability?.name}" }
+                            0.0
+                        } else {
+                            (itemFromProc.speed / 1000.0) * ppm / 60.0
+                        }
                     }
                     Type.PERCENT -> percentChance / 100.0
                     Type.STATIC -> 100.0

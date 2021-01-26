@@ -49,7 +49,7 @@ public class SlayersShoulderpads : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15819),
-      Buffs.byId(42095)
+      Buffs.byIdOrName(15819, "Attack Power 68", this),
+      Buffs.byIdOrName(42095, "Armor Penetration 175", this)
       )
 }

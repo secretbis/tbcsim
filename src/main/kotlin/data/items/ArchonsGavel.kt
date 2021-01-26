@@ -47,7 +47,7 @@ public class ArchonsGavel : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44759),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(44759, "Increase Healing 500", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

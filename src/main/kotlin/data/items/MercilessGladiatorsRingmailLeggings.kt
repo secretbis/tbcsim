@@ -45,7 +45,7 @@ public class MercilessGladiatorsRingmailLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26154),
-      Buffs.byId(21629)
+      Buffs.byIdOrName(26154, "Increase Healing 90", this),
+      Buffs.byIdOrName(21629, "Increased Mana Regen", this)
       )
 }

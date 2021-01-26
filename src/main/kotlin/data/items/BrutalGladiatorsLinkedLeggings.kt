@@ -47,6 +47,6 @@ public class BrutalGladiatorsLinkedLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39927)
+      Buffs.byIdOrName(39927, "Armor Penetration 84", this)
       )
 }

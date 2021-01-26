@@ -43,6 +43,6 @@ public class InfernoWaistCord : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26694)
+      Buffs.byIdOrName(26694, "Increase Fire Dam 59", this)
       )
 }

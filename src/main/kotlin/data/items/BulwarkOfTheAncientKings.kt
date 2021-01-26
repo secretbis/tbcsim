@@ -53,6 +53,6 @@ public class BulwarkOfTheAncientKings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34511)
+      Buffs.byIdOrName(34511, "Valor", this)
       )
 }

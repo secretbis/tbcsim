@@ -42,6 +42,6 @@ public class AxeOfTheGronnLords : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42039)
+      Buffs.byIdOrName(42039, "Attack Power 124", this)
       )
 }

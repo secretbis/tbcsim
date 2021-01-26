@@ -50,6 +50,6 @@ public class UnwaveringLegguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42038)
+      Buffs.byIdOrName(42038, "Block Value 59", this)
       )
 }

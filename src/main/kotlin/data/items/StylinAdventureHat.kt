@@ -42,7 +42,7 @@ public class StylinAdventureHat : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33484),
-      Buffs.byId(23212)
+      Buffs.byIdOrName(33484, "Increase Spell Dam 50", this),
+      Buffs.byIdOrName(23212, "Increased Mana Regen", this)
       )
 }

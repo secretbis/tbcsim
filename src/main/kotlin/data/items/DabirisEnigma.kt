@@ -42,6 +42,6 @@ public class DabirisEnigma : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36372)
+      Buffs.byIdOrName(36372, "Phalanx", this)
       )
 }

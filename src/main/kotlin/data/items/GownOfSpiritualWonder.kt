@@ -48,6 +48,6 @@ public class GownOfSpiritualWonder : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3097)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(25179)
+      Buffs.byIdOrName(25179, "Increase Healing 112", this)
       )
 }

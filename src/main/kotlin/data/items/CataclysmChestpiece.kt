@@ -51,7 +51,7 @@ public class CataclysmChestpiece : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39569),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

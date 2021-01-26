@@ -42,7 +42,7 @@ public class BlackBowOfTheBetrayer : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(46939),
-      Buffs.byId(9334)
+      Buffs.byIdOrName(46939, "Black Bow of the Betrayer", this),
+      Buffs.byIdOrName(9334, "Attack Power 26", this)
       )
 }

@@ -52,6 +52,6 @@ public class FelLeatherLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(1585)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15812)
+      Buffs.byIdOrName(15812, "Attack Power 52", this)
       )
 }

@@ -72,7 +72,7 @@ object Spell {
     }
 
     fun spellCritChance(sim: SimIteration): Double {
-        return (sim.subject.spellCritPct() + baseCritChance).coerceAtLeast(0.0)
+        return (sim.subject.spellCritPct() / 100.0 + baseCritChance).coerceAtLeast(0.0)
     }
 
     fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, ): Double {

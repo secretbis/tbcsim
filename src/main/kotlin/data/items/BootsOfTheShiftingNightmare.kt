@@ -44,6 +44,6 @@ public class BootsOfTheShiftingNightmare : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26730)
+      Buffs.byIdOrName(26730, "Increase Shadow Dam 59", this)
       )
 }

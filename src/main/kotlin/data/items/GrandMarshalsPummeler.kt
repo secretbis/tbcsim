@@ -46,6 +46,6 @@ public class GrandMarshalsPummeler : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9334)
+      Buffs.byIdOrName(9334, "Attack Power 26", this)
       )
 }

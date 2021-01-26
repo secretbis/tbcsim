@@ -52,6 +52,6 @@ public class MercilessGladiatorsChainSpaulders : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14027)
+      Buffs.byIdOrName(14027, "Attack Power 24", this)
       )
 }

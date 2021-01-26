@@ -50,6 +50,6 @@ public class FaceplateOfTheImpenetrable : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34592)
+      Buffs.byIdOrName(34592, "Block Value 45", this)
       )
 }

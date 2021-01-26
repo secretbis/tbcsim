@@ -46,6 +46,6 @@ public class TunicOfTheRangerLord : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15830)
+      Buffs.byIdOrName(15830, "Attack Power 88", this)
       )
 }

@@ -44,7 +44,7 @@ public class NadinasPendantOfPurity : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18047),
-      Buffs.byId(21629)
+      Buffs.byIdOrName(18047, "Increase Healing 79", this),
+      Buffs.byIdOrName(21629, "Increased Mana Regen", this)
       )
 }

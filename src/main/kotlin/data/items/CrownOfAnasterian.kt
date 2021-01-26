@@ -50,6 +50,6 @@ public class CrownOfAnasterian : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3263)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44983)
+      Buffs.byIdOrName(44983, "Armor Penetration 231", this)
       )
 }

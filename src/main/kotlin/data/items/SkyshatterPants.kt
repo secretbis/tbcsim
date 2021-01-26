@@ -53,6 +53,6 @@ public class SkyshatterPants : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3015)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21631)
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
       )
 }

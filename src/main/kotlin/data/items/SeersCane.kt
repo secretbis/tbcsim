@@ -43,7 +43,7 @@ public class SeersCane : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35338),
-      Buffs.byId(21633)
+      Buffs.byIdOrName(35338, "Increase Healing 228", this),
+      Buffs.byIdOrName(21633, "Increased Mana Regen", this)
       )
 }

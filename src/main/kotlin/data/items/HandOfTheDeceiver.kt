@@ -47,7 +47,7 @@ public class HandOfTheDeceiver : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15813),
-      Buffs.byId(40226)
+      Buffs.byIdOrName(15813, "Attack Power 54", this),
+      Buffs.byIdOrName(40226, "Armor Penetration 196", this)
       )
 }

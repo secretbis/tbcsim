@@ -44,7 +44,7 @@ public class DepletedMailGauntlets : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2863)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15814),
-      Buffs.byId(40753)
+      Buffs.byIdOrName(15814, "Attack Power 56", this),
+      Buffs.byIdOrName(40753, "Apexis Crystal Infusion", this)
       )
 }

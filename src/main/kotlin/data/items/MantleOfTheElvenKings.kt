@@ -46,6 +46,6 @@ public class MantleOfTheElvenKings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18055)
+      Buffs.byIdOrName(18055, "Increase Spell Dam 39", this)
       )
 }

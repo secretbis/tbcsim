@@ -43,6 +43,6 @@ public class ProtectorsMarkOfTheRedemption : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23203)
+      Buffs.byIdOrName(23203, "Block Value 15", this)
       )
 }

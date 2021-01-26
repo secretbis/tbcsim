@@ -44,6 +44,6 @@ public class CrystalforgedWarAxe : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15826)
+      Buffs.byIdOrName(15826, "Attack Power 80", this)
       )
 }

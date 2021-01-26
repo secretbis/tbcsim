@@ -52,6 +52,6 @@ public class EmbraceOfThePhoenix : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36068)
+      Buffs.byIdOrName(36068, " Attack Power 104", this)
       )
 }

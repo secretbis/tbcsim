@@ -44,6 +44,6 @@ public class WickedWitchsHat : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17280)
+      Buffs.byIdOrName(17280, "Increase Spell Dam 43", this)
       )
 }

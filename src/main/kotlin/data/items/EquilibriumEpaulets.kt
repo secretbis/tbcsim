@@ -49,7 +49,7 @@ public class EquilibriumEpaulets : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36098),
-      Buffs.byId(21636)
+      Buffs.byIdOrName(36098, "Increase Healing 99", this),
+      Buffs.byIdOrName(21636, "Increased Mana Regen", this)
       )
 }

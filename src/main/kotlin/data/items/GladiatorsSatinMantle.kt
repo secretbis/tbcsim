@@ -49,6 +49,6 @@ public class GladiatorsSatinMantle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15714)
+      Buffs.byIdOrName(15714, "Increase Spell Dam 22", this)
       )
 }

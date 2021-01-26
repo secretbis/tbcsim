@@ -49,7 +49,7 @@ public class BladeangelsMoneyBelt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15815),
-      Buffs.byId(39981)
+      Buffs.byIdOrName(15815, "Attack Power 58", this),
+      Buffs.byIdOrName(39981, "Armor Penetration 77", this)
       )
 }

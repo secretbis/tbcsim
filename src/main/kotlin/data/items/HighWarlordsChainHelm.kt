@@ -52,6 +52,6 @@ public class HighWarlordsChainHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9335)
+      Buffs.byIdOrName(9335, "Attack Power 28", this)
       )
 }

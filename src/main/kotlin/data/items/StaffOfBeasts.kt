@@ -44,6 +44,6 @@ public class StaffOfBeasts : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44903)
+      Buffs.byIdOrName(44903, "Attack Power - Feral (+0375)", this)
       )
 }

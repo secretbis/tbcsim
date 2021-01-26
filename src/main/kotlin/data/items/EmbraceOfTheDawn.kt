@@ -43,7 +43,7 @@ public class EmbraceOfTheDawn : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21628),
-      Buffs.byId(31026)
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this),
+      Buffs.byIdOrName(31026, "Embrace of the Dawn", this)
       )
 }

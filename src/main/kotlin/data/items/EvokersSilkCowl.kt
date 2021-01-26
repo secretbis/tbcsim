@@ -50,6 +50,6 @@ public class EvokersSilkCowl : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14047)
+      Buffs.byIdOrName(14047, "Increase Spell Dam 23", this)
       )
 }

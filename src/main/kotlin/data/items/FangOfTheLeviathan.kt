@@ -44,6 +44,6 @@ public class FangOfTheLeviathan : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44073)
+      Buffs.byIdOrName(44073, "Increase Spell Dam 215", this)
       )
 }

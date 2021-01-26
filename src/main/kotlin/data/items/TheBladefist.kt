@@ -42,6 +42,6 @@ public class TheBladefist : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35131)
+      Buffs.byIdOrName(35131, "Bladestorm", this)
       )
 }

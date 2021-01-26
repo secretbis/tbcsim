@@ -48,6 +48,6 @@ public class BattlemaceOfTheHighPriestess : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35338)
+      Buffs.byIdOrName(35338, "Increase Healing 228", this)
       )
 }

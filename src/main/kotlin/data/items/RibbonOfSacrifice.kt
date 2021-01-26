@@ -42,7 +42,7 @@ public class RibbonOfSacrifice : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38332),
-      Buffs.byId(18044)
+      Buffs.byIdOrName(38332, "Blessing of Life", this),
+      Buffs.byIdOrName(18044, "Increase Healing 73", this)
       )
 }

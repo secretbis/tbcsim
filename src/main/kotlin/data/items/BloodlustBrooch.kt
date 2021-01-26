@@ -42,7 +42,7 @@ public class BloodlustBrooch : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15821),
-      Buffs.byId(35166)
+      Buffs.byIdOrName(15821, "Attack Power 72", this),
+      Buffs.byIdOrName(35166, "Lust for Battle", this)
       )
 }

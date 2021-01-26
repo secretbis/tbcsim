@@ -42,6 +42,6 @@ public class Blinkstrike : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38308)
+      Buffs.byIdOrName(38308, "Blinkstrike", this)
       )
 }

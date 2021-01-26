@@ -52,6 +52,6 @@ public class CataclysmShoulderplates : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2887)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21627)
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

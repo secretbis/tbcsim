@@ -48,6 +48,6 @@ public class GlaiveOfThePit : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2952)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34696)
+      Buffs.byIdOrName(34696, "Drain Life", this)
       )
 }

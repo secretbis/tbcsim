@@ -51,7 +51,7 @@ public class StormHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2882)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15810),
-      Buffs.byId(21365)
+      Buffs.byIdOrName(15810, "Attack Power 44", this),
+      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
       )
 }

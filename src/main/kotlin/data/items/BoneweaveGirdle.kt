@@ -47,6 +47,6 @@ public class BoneweaveGirdle : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15824)
+      Buffs.byIdOrName(15824, "Attack Power 76", this)
       )
 }

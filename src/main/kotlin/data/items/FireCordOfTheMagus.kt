@@ -44,6 +44,6 @@ public class FireCordOfTheMagus : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26695)
+      Buffs.byIdOrName(26695, "Increase Fire Dam 60", this)
       )
 }

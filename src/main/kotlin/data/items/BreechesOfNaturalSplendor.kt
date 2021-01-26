@@ -50,6 +50,6 @@ public class BreechesOfNaturalSplendor : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(29369)
+      Buffs.byIdOrName(29369, "Increase Healing 134", this)
       )
 }

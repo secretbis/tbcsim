@@ -49,6 +49,6 @@ public class AnetheronsNoose : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39569)
+      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this)
       )
 }

@@ -50,7 +50,7 @@ public class NordrassilWrathKilt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34040),
-      Buffs.byId(21364)
+      Buffs.byIdOrName(34040, "Increase Spell Dam 54", this),
+      Buffs.byIdOrName(21364, "Increased Mana Regen", this)
       )
 }

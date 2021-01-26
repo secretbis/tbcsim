@@ -42,7 +42,7 @@ public class AegisOfTheVindicator : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15696),
-      Buffs.byId(21366)
+      Buffs.byIdOrName(15696, "Increase Healing 53", this),
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this)
       )
 }

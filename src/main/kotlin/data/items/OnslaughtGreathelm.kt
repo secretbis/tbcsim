@@ -52,6 +52,6 @@ public class OnslaughtGreathelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35074)
+      Buffs.byIdOrName(35074, "Block Value 35", this)
       )
 }

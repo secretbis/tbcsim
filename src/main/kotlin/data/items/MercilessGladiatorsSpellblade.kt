@@ -44,6 +44,6 @@ public class MercilessGladiatorsSpellblade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42122)
+      Buffs.byIdOrName(42122, "Increase Spell Dam 225", this)
       )
 }

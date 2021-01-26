@@ -43,6 +43,6 @@ public class IconOfUnyieldingCourage : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34106)
+      Buffs.byIdOrName(34106, "Armor Penetration", this)
       )
 }

@@ -42,6 +42,6 @@ public class BrutalGladiatorsTotemOfTheThirdWind : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(46098)
+      Buffs.byIdOrName(46098, "Brutal Totem of Third WInd", this)
       )
 }

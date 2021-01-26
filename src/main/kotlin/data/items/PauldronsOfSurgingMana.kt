@@ -43,6 +43,6 @@ public class PauldronsOfSurgingMana : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21638)
+      Buffs.byIdOrName(21638, "Increased Mana Regen", this)
       )
 }

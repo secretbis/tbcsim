@@ -47,6 +47,6 @@ public class VengefulGladiatorsBonegrinder : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43902)
+      Buffs.byIdOrName(43902, "Armor Penetration 98", this)
       )
 }

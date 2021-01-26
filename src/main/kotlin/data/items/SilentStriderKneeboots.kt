@@ -43,7 +43,7 @@ public class SilentStriderKneeboots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14056),
-      Buffs.byId(17746)
+      Buffs.byIdOrName(14056, "Attack Power 50", this),
+      Buffs.byIdOrName(17746, "Stealth 5", this)
       )
 }

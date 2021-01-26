@@ -47,7 +47,7 @@ public class StalkersChainGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9331),
-      Buffs.byId(28539)
+      Buffs.byIdOrName(9331, "Attack Power 20", this),
+      Buffs.byIdOrName(28539, "Multi-Shot Damage Increase", this)
       )
 }

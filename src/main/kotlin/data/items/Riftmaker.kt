@@ -42,7 +42,7 @@ public class Riftmaker : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35353),
-      Buffs.byId(9332)
+      Buffs.byIdOrName(35353, "Temporal Rift", this),
+      Buffs.byIdOrName(9332, "Attack Power 22", this)
       )
 }

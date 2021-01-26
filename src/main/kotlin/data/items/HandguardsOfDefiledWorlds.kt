@@ -50,6 +50,6 @@ public class HandguardsOfDefiledWorlds : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(24196)
+      Buffs.byIdOrName(24196, "Increase Spell Dam 47", this)
       )
 }

@@ -50,7 +50,7 @@ public class GlovesOfImmortalDusk : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3092)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15831),
-      Buffs.byId(40555)
+      Buffs.byIdOrName(15831, "Attack Power 90", this),
+      Buffs.byIdOrName(40555, "Armor Penetration 154", this)
       )
 }

@@ -48,6 +48,6 @@ public class AuchenaiBoots : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(20959)
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

@@ -44,7 +44,7 @@ public class BandOfLucentBeams : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18044),
-      Buffs.byId(21630)
+      Buffs.byIdOrName(18044, "Increase Healing 73", this),
+      Buffs.byIdOrName(21630, "Increased Mana Regen", this)
       )
 }

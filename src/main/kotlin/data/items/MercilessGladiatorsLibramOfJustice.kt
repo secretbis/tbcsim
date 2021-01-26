@@ -42,6 +42,6 @@ public class MercilessGladiatorsLibramOfJustice : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42368)
+      Buffs.byIdOrName(42368, "Merciless Libram of Justice", this)
       )
 }

@@ -44,7 +44,7 @@ public class MoonstriderBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15715),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(15715, "Increase Spell Dam 25", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

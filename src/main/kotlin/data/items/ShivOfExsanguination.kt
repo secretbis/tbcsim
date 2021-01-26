@@ -42,7 +42,7 @@ public class ShivOfExsanguination : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15809),
-      Buffs.byId(40226)
+      Buffs.byIdOrName(15809, "Attack Power 42", this),
+      Buffs.byIdOrName(40226, "Armor Penetration 196", this)
       )
 }

@@ -43,7 +43,7 @@ public class UltraSpectropicDetectionGoggles : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(30645),
-      Buffs.byId(12883)
+      Buffs.byIdOrName(30645, "Gas Cloud Tracking", this),
+      Buffs.byIdOrName(12883, "Longsight", this)
       )
 }

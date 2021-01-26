@@ -51,7 +51,7 @@ public class JudicatorsLegguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(24196),
-      Buffs.byId(34593)
+      Buffs.byIdOrName(24196, "Increase Spell Dam 47", this),
+      Buffs.byIdOrName(34593, "Block Value 33", this)
       )
 }

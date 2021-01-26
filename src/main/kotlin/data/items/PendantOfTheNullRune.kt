@@ -42,6 +42,6 @@ public class PendantOfTheNullRune : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(31002)
+      Buffs.byIdOrName(31002, "Arcane Absorption", this)
       )
 }

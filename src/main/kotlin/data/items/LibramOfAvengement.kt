@@ -42,6 +42,6 @@ public class LibramOfAvengement : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34258)
+      Buffs.byIdOrName(34258, "Justice", this)
       )
 }

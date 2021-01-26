@@ -44,6 +44,6 @@ public class VeteransRingmailGirdle : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18038)
+      Buffs.byIdOrName(18038, "Increase Healing 59", this)
       )
 }

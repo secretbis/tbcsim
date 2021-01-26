@@ -42,6 +42,6 @@ public class LibramOfDivinePurpose : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43743)
+      Buffs.byIdOrName(43743, "Improved Seal of Righteousness", this)
       )
 }

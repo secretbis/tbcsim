@@ -42,7 +42,7 @@ public class FigurineKhoriumBoar : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15828),
-      Buffs.byId(46782)
+      Buffs.byIdOrName(15828, "Attack Power 84", this),
+      Buffs.byIdOrName(46782, "Khorium Boar", this)
       )
 }

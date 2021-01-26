@@ -43,7 +43,7 @@ public class HammerOfThePenitent : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33273),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(33273, "Increase Healing 227", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

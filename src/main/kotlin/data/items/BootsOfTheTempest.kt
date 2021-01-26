@@ -51,6 +51,6 @@ public class BootsOfTheTempest : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(45011)
+      Buffs.byIdOrName(45011, "Increase Spell Dam 50", this)
       )
 }

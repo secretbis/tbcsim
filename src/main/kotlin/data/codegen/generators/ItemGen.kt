@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package data.codegen.generators
 
 import character.Stats
@@ -12,6 +14,7 @@ import data.model.*
 import data.socketbonus.SocketBonuses
 import mu.KotlinLogging
 import java.io.File
+import java.lang.IllegalArgumentException
 import java.lang.reflect.Modifier
 
 object ItemGen {
@@ -20,6 +23,10 @@ object ItemGen {
 
     private fun load(): List<Map<String, Any?>> {
         return CodeGen.load("/items.json", object : TypeReference<List<Map<String, Any?>>>(){})
+    }
+
+    private fun loadBuffs(): List<Map<String, Any?>> {
+        return CodeGen.load("/itemprocs.json", object : TypeReference<List<Map<String, Any?>>>(){})
     }
 
     private fun deserializeSockets(itemData: Map<String, Any?>): List<Socket> {
@@ -52,25 +59,87 @@ object ItemGen {
     }
 
     fun generate() {
-        for(itemData in load()) {
-            val item = Item()
-            item.id = itemData["entry"] as Int? ?: item.id
-            item.name = itemData["name"] as String? ?: item.name
-            item.itemLevel = itemData["ItemLevel"] as Int? ?: item.itemLevel
-            item.itemClass = Constants.ItemClass.values().find {
-                it.ordinal == itemData["class"] as Int?
-            }
-            item.itemSubclass = Constants.ItemClass.subclasses(item.itemClass).find {
-                it.itemClassOrdinal == itemData["subclass"] as Int?
-            }
-            item.minDmg = (itemData["dmg_min1"] as Number? ?: item.minDmg).toDouble()
-            item.maxDmg = (itemData["dmg_max1"] as Number? ?: item.maxDmg).toDouble()
-            item.speed = (itemData["delay"] as Number? ?: item.speed).toDouble()
-            item.stats = deserializeStats(itemData)
-            item.sockets = deserializeSockets(itemData)
+        val itemsData = load()
+        val itemBuffsData = loadBuffs()
 
-            writeItemClassFile(item, itemData)
+        val protoItems = itemsData.map {
+            val item = Item()
+            item.id = it["entry"] as Int? ?: item.id
+            item.name = it["name"] as String? ?: item.name
+            item.itemLevel = it["ItemLevel"] as Int? ?: item.itemLevel
+            item.itemClass = Constants.ItemClass.values().find { it2 ->
+                it2.ordinal == it["class"] as Int?
+            }
+            item.itemSubclass = Constants.ItemClass.subclasses(item.itemClass).find { it2 ->
+                it2.itemClassOrdinal == it["subclass"] as Int?
+            }
+            item.minDmg = (it["dmg_min1"] as Number? ?: item.minDmg).toDouble()
+            item.maxDmg = (it["dmg_max1"] as Number? ?: item.maxDmg).toDouble()
+            item.speed = (it["delay"] as Number? ?: item.speed).toDouble()
+            item.stats = deserializeStats(it)
+            item.sockets = deserializeSockets(it)
+
+            Pair(item, it)
         }
+
+        // Write individual item files
+        protoItems.forEach { itemPair ->
+            writeItemClassFile(itemPair.first, itemPair.second, itemBuffsData)
+        }
+
+        // Write index file
+        writeItemIndexFile(protoItems.map { it.first })
+    }
+
+    private fun writeItemIndexFile(items: List<Item>) {
+        // There is a maximum method size, apparently, and generating naively surpasses it
+        val maxWhensPerMethod = 1000
+        val itemLists = items.chunked(maxWhensPerMethod)
+
+        val itemBlocks = itemLists.map { list ->
+            list.map {
+                CodeBlock.of("%S -> %L()", it.name, it.cleanName)
+            }.joinToCode(separator = "\n", prefix = "return when(name) {\n", suffix = "\nelse -> null\n}\n")
+        }
+
+        val objBuilder = TypeSpec.objectBuilder("ItemIndex")
+
+        // Add an entry point that calls all the smaller methods
+        val entryBlock = itemBlocks.mapIndexed { index, _ ->
+            CodeBlock.of("items$index(name)")
+        }.joinToCode(separator = " ?: ", prefix = "return ", suffix = "")
+
+        // Add the entry method
+        objBuilder.addFunction(
+            FunSpec.builder("byName")
+                .addParameter("name", String::class)
+                .returns(Item::class.asTypeName().copy(true))
+                .addStatement("%L", entryBlock)
+                .build()
+        )
+
+        // Add each split item method
+        itemBlocks.forEachIndexed { index, codeBlock ->
+            objBuilder.addFunction(
+                FunSpec.builder("items$index")
+                    .addParameter("name", String::class)
+                    .returns(Item::class.asTypeName().copy(true))
+                    .addStatement("%L", codeBlock)
+                    .build()
+            )
+        }
+
+        FileSpec.builder(pkg, "ItemIndex")
+            .addType(objBuilder.build())
+            .addAnnotation(
+                // TODO: Some item variants have the same name in the data
+            //       Need to distinguish them somehow
+                AnnotationSpec.builder(Suppress::class)
+                    .addMember("%S", "DUPLICATE_LABEL_IN_WHEN")
+                    .build()
+            )
+            .build()
+            .writeTo(File(CodeGen.outPath))
     }
 
     private fun shouldOverwrite(name: String): Boolean {
@@ -156,15 +225,25 @@ object ItemGen {
         }
     }
 
-    private fun renderBuffs(item: Item, itemData: Map<String, Any?>): CodeBlock {
+    private fun renderBuffs(item: Item, itemData: Map<String, Any?>, itemBuffsData: List<Map<String, Any?>>): CodeBlock {
         val buffIds = (1..5).mapNotNull { i ->
             val spellId = itemData["spellid_$i"] as Int? ?: 0
-            if(spellId == 0) { null } else spellId
+
+            if(spellId == 0) {
+                null
+            } else {
+                // Find buff name and ID from DB
+                val itemBuff = itemBuffsData.find { it["Id"] as Int == spellId }
+                    ?: throw IllegalArgumentException("Cannot find item buff with ID: $spellId")
+
+                val name = itemBuff["SpellName"] as String
+                Pair(spellId, name)
+            }
         }
 
         return if(buffIds.isNotEmpty()) {
             buffIds.map {
-                CodeBlock.of("%T.byId(%L)", Buffs::class, it)
+                CodeBlock.of("%T.byIdOrName(%L, %S, %L)", Buffs::class, it.first, it.second, "this")
             }.joinToCode(separator = ",\n", prefix = "listOfNotNull(\n", suffix = "\n)")
         } else {
             CodeBlock.builder()
@@ -173,7 +252,7 @@ object ItemGen {
         }
     }
 
-    fun writeItemClassFile(item: Item, itemData: Map<String, Any?>) {
+    fun writeItemClassFile(item: Item, itemData: Map<String, Any?>, itemBuffsData: List<Map<String, Any?>>) {
         val className = item.cleanName
 
         if(shouldOverwrite(className)) {
@@ -269,7 +348,7 @@ object ItemGen {
                             PropertySpec.builder("buffs", LIST.parameterizedBy(ClassName("character", "Buff")))
                                 .addModifiers(KModifier.OVERRIDE)
                                 .mutable(true)
-                                .initializer("%L", renderBuffs(item, itemData))
+                                .initializer("%L", renderBuffs(item, itemData, itemBuffsData))
                                 .build()
                         )
                         .build()

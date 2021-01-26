@@ -44,7 +44,7 @@ public class EluniteEmpoweredBracers : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18052),
-      Buffs.byId(18379)
+      Buffs.byIdOrName(18052, "Increase Spell Dam 34", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

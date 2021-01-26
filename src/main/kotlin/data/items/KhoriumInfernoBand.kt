@@ -42,7 +42,7 @@ public class KhoriumInfernoBand : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17868),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(17868, "Increase Fire Dam 27", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

@@ -42,7 +42,7 @@ public class BerserkersCall : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15831),
-      Buffs.byId(43716)
+      Buffs.byIdOrName(15831, "Attack Power 90", this),
+      Buffs.byIdOrName(43716, "Call of the Berserker", this)
       )
 }

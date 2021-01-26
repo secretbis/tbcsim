@@ -48,6 +48,6 @@ public class SwordBreakersBulwark : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42078)
+      Buffs.byIdOrName(42078, "Block Value 47", this)
       )
 }

@@ -45,7 +45,7 @@ public class VengefulGladiatorsFelweaveHandguards : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33063),
-      Buffs.byId(18056)
+      Buffs.byIdOrName(33063, "Fear Cast Pushback Reduction", this),
+      Buffs.byIdOrName(18056, "Increase Spell Dam 40", this)
       )
 }

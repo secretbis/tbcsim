@@ -51,6 +51,6 @@ public class TerrorweaveTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2952)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33485)
+      Buffs.byIdOrName(33485, "Attack Power 96", this)
       )
 }

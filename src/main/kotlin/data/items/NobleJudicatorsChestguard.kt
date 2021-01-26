@@ -50,7 +50,7 @@ public class NobleJudicatorsChestguard : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42093),
-      Buffs.byId(21633)
+      Buffs.byIdOrName(42093, "Healing 114", this),
+      Buffs.byIdOrName(21633, "Increased Mana Regen", this)
       )
 }

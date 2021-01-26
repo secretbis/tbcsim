@@ -51,7 +51,7 @@ public class SkyshatterMantle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28264),
-      Buffs.byId(21618)
+      Buffs.byIdOrName(28264, "Increase Spell Dam 46", this),
+      Buffs.byIdOrName(21618, "Increased Mana Regen", this)
       )
 }

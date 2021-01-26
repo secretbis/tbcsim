@@ -43,7 +43,7 @@ public class BandOfTheEternalChampion : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14052),
-      Buffs.byId(35080)
+      Buffs.byIdOrName(14052, "Attack Power 60", this),
+      Buffs.byIdOrName(35080, "Band of the Eternal Champion", this)
       )
 }

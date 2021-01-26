@@ -44,6 +44,6 @@ public class RedHavocBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28113)
+      Buffs.byIdOrName(28113, "Block Value 30", this)
       )
 }

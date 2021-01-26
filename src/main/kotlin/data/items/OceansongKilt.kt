@@ -43,6 +43,6 @@ public class OceansongKilt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17320)
+      Buffs.byIdOrName(17320, "Increase Healing 84", this)
       )
 }

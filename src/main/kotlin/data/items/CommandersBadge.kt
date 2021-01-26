@@ -42,6 +42,6 @@ public class CommandersBadge : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40815)
+      Buffs.byIdOrName(40815, "Netherwing Ally", this)
       )
 }

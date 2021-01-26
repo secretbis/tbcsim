@@ -43,7 +43,7 @@ public class CrystalheartPulseStaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40151),
-      Buffs.byId(33780)
+      Buffs.byIdOrName(40151, "Increase Healing 382", this),
+      Buffs.byIdOrName(33780, "Increased Mana Regen", this)
       )
 }

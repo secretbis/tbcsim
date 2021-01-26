@@ -43,6 +43,6 @@ public class ShadowvineCloakOfInfusion : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21631)
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
       )
 }

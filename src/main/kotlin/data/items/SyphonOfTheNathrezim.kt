@@ -42,7 +42,7 @@ public class SyphonOfTheNathrezim : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14056),
-      Buffs.byId(40291)
+      Buffs.byIdOrName(14056, "Attack Power 50", this),
+      Buffs.byIdOrName(40291, "Siphon Essence", this)
       )
 }

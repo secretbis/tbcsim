@@ -46,6 +46,6 @@ public class AmeersImpulseTaser : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36430)
+      Buffs.byIdOrName(36430, "Increase Spell Dam 103", this)
       )
 }

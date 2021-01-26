@@ -44,6 +44,6 @@ public class VestOfMountingAssault : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39708)
+      Buffs.byIdOrName(39708, "Attack Power 116", this)
       )
 }

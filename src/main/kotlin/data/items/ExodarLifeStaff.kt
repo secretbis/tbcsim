@@ -48,7 +48,7 @@ public class ExodarLifeStaff : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42125),
-      Buffs.byId(40231)
+      Buffs.byIdOrName(42125, "Increase Healing 364", this),
+      Buffs.byIdOrName(40231, "Increased Mana Regen", this)
       )
 }

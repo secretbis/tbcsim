@@ -50,7 +50,7 @@ public class NetherstrikeBelt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14798),
-      Buffs.byId(21365)
+      Buffs.byIdOrName(14798, "Increase Spell Dam 30", this),
+      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
       )
 }

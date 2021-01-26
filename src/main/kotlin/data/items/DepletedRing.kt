@@ -43,7 +43,7 @@ public class DepletedRing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40754),
-      Buffs.byId(17995)
+      Buffs.byIdOrName(40754, "Apexis Crystal Infusion", this),
+      Buffs.byIdOrName(17995, "Increase Nature Dam 37", this)
       )
 }

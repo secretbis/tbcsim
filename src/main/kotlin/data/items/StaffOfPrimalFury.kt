@@ -43,7 +43,7 @@ public class StaffOfPrimalFury : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44913),
-      Buffs.byId(42109)
+      Buffs.byIdOrName(44913, "Attack Power - Feral (+0973)", this),
+      Buffs.byIdOrName(42109, "Armor Penetration", this)
       )
 }

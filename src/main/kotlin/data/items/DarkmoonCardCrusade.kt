@@ -42,7 +42,7 @@ public class DarkmoonCardCrusade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39438),
-      Buffs.byId(39440)
+      Buffs.byIdOrName(39438, "Aura of the Crusade", this),
+      Buffs.byIdOrName(39440, "Aura of the Crusade", this)
       )
 }

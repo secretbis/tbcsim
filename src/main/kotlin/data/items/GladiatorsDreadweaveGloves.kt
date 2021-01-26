@@ -44,7 +44,7 @@ public class GladiatorsDreadweaveGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33063),
-      Buffs.byId(17367)
+      Buffs.byIdOrName(33063, "Fear Cast Pushback Reduction", this),
+      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
       )
 }

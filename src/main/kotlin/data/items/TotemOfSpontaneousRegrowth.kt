@@ -42,6 +42,6 @@ public class TotemOfSpontaneousRegrowth : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34294)
+      Buffs.byIdOrName(34294, "Increased Healing Wave", this)
       )
 }

@@ -46,6 +46,6 @@ public class MercilessGladiatorsPlateGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(22778)
+      Buffs.byIdOrName(22778, "Hamstring Rage Reduction", this)
       )
 }

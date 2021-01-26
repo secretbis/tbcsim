@@ -44,6 +44,6 @@ public class ThatiasSelfCorrectingGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34061)
+      Buffs.byIdOrName(34061, "Block Value 39", this)
       )
 }

@@ -42,6 +42,6 @@ public class ClefthoofHideQuiver : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(29414)
+      Buffs.byIdOrName(29414, "Haste", this)
       )
 }

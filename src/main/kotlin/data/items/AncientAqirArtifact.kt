@@ -42,6 +42,6 @@ public class AncientAqirArtifact : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43713)
+      Buffs.byIdOrName(43713, "Hardened Skin", this)
       )
 }

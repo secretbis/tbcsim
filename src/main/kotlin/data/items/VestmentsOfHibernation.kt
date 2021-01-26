@@ -45,6 +45,6 @@ public class VestmentsOfHibernation : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40258)
+      Buffs.byIdOrName(40258, "Armor Penetration 150", this)
       )
 }

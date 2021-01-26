@@ -44,6 +44,6 @@ public class BroochOfUnquenchableFury : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18049)
+      Buffs.byIdOrName(18049, "Increase Spell Dam 26", this)
       )
 }

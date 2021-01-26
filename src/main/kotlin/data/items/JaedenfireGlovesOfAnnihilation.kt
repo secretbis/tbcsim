@@ -43,6 +43,6 @@ public class JaedenfireGlovesOfAnnihilation : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18017)
+      Buffs.byIdOrName(18017, "Increase Shadow Dam 39", this)
       )
 }

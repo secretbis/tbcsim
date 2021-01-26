@@ -49,7 +49,7 @@ public class VengefulGladiatorsKodohideSpaulders : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18037),
-      Buffs.byId(21620)
+      Buffs.byIdOrName(18037, "Increase Healing 57", this),
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

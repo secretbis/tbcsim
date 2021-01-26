@@ -43,6 +43,6 @@ public class LeggingsOfTheSacredCrest : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33780)
+      Buffs.byIdOrName(33780, "Increased Mana Regen", this)
       )
 }

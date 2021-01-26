@@ -49,6 +49,6 @@ public class GlimmeringSteelMantle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17320)
+      Buffs.byIdOrName(17320, "Increase Healing 84", this)
       )
 }

@@ -43,7 +43,7 @@ public class BandOfTheEternalDefender : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40443),
-      Buffs.byId(35077)
+      Buffs.byIdOrName(40443, "Block Value 44", this),
+      Buffs.byIdOrName(35077, "Band of the Eternal Defender", this)
       )
 }

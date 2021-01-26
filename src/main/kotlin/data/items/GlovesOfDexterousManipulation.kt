@@ -48,6 +48,6 @@ public class GlovesOfDexterousManipulation : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3092)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15809)
+      Buffs.byIdOrName(15809, "Attack Power 42", this)
       )
 }

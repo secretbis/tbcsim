@@ -42,7 +42,7 @@ public class FetishOfTheFallen : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15814),
-      Buffs.byId(33014)
+      Buffs.byIdOrName(15814, "Attack Power 56", this),
+      Buffs.byIdOrName(33014, "Consume Life", this)
       )
 }

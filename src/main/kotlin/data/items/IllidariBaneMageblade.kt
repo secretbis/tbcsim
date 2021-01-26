@@ -44,6 +44,6 @@ public class IllidariBaneMageblade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37649)
+      Buffs.byIdOrName(37649, "Illdari Bane", this)
       )
 }

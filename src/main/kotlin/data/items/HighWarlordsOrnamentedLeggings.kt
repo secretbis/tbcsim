@@ -45,6 +45,6 @@ public class HighWarlordsOrnamentedLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15696)
+      Buffs.byIdOrName(15696, "Increase Healing 53", this)
       )
 }

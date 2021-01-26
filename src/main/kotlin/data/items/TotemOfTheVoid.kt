@@ -42,6 +42,6 @@ public class TotemOfTheVoid : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34230)
+      Buffs.byIdOrName(34230, "Increased Lightning Damage", this)
       )
 }

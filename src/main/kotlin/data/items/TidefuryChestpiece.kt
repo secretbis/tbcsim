@@ -51,7 +51,7 @@ public class TidefuryChestpiece : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18053),
-      Buffs.byId(21618)
+      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this),
+      Buffs.byIdOrName(21618, "Increased Mana Regen", this)
       )
 }

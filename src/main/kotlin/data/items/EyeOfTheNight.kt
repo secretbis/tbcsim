@@ -43,7 +43,7 @@ public class EyeOfTheNight : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28869),
-      Buffs.byId(31033)
+      Buffs.byIdOrName(28869, "Spell Penetration 15", this),
+      Buffs.byIdOrName(31033, "Eye of the Night", this)
       )
 }

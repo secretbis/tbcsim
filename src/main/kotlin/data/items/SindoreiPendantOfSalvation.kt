@@ -47,7 +47,7 @@ public class SindoreiPendantOfSalvation : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3098)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18040),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(18040, "Increase Healing 64", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

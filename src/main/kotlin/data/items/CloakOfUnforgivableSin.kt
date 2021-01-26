@@ -49,6 +49,6 @@ public class CloakOfUnforgivableSin : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15821)
+      Buffs.byIdOrName(15821, "Attack Power 72", this)
       )
 }

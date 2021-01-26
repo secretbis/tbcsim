@@ -44,6 +44,6 @@ public class BrutalGladiatorsPainsaw : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42107)
+      Buffs.byIdOrName(42107, "Attack Power 102", this)
       )
 }

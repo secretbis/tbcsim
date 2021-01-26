@@ -43,7 +43,7 @@ public class ShockwaveTruncheon : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39585),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(39585, "Increase Healing 317", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

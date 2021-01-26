@@ -43,6 +43,6 @@ public class SkyguardSilverCross : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(41260)
+      Buffs.byIdOrName(41260, "Aviana's Purpose", this)
       )
 }

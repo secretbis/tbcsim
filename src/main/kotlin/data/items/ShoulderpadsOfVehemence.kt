@@ -47,6 +47,6 @@ public class ShoulderpadsOfVehemence : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15831)
+      Buffs.byIdOrName(15831, "Attack Power 90", this)
       )
 }

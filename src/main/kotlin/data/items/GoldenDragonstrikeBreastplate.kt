@@ -45,7 +45,7 @@ public class GoldenDragonstrikeBreastplate : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14056),
-      Buffs.byId(21631)
+      Buffs.byIdOrName(14056, "Attack Power 50", this),
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
       )
 }

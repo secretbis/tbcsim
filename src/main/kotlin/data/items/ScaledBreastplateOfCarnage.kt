@@ -45,7 +45,7 @@ public class ScaledBreastplateOfCarnage : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15826),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(15826, "Attack Power 80", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

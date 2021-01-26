@@ -51,7 +51,7 @@ public class HoodOfAbsolution : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34760),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(34760, "Increase Spell Dam 62", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

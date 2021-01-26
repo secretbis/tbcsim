@@ -42,7 +42,7 @@ public class TomeOfDiabolicRemedy : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40343),
-      Buffs.byId(43710)
+      Buffs.byIdOrName(40343, "Increased Mana Regen", this),
+      Buffs.byIdOrName(43710, "Diabolic Remedy", this)
       )
 }

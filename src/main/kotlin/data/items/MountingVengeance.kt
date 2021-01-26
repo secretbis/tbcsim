@@ -47,7 +47,7 @@ public class MountingVengeance : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2879)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15811),
-      Buffs.byId(42098)
+      Buffs.byIdOrName(15811, "Attack Power 46", this),
+      Buffs.byIdOrName(42098, "Armor Penetration 140", this)
       )
 }

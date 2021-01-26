@@ -44,6 +44,6 @@ public class VindicatorsLamellarGreaves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14055)
+      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this)
       )
 }

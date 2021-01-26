@@ -46,7 +46,7 @@ public class VengefulGladiatorsLeatherGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14049),
-      Buffs.byId(32748)
+      Buffs.byIdOrName(14049, "Attack Power 40", this),
+      Buffs.byIdOrName(32748, "Deadly Throw Interrupt", this)
       )
 }

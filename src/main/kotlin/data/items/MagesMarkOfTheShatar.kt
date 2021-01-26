@@ -42,6 +42,6 @@ public class MagesMarkOfTheShatar : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9343)
+      Buffs.byIdOrName(9343, "Increase Spell Dam 14", this)
       )
 }

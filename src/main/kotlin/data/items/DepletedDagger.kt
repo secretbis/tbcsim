@@ -43,7 +43,7 @@ public class DepletedDagger : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14049),
-      Buffs.byId(40749)
+      Buffs.byIdOrName(14049, "Attack Power 40", this),
+      Buffs.byIdOrName(40749, "Apexis Crystal Infusion", this)
       )
 }

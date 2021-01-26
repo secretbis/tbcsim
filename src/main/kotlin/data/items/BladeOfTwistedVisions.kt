@@ -44,6 +44,6 @@ public class BladeOfTwistedVisions : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42814)
+      Buffs.byIdOrName(42814, "Increase Spell Dam 229", this)
       )
 }

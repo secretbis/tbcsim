@@ -44,6 +44,6 @@ public class Earthwarden : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44909)
+      Buffs.byIdOrName(44909, "Attack Power - Feral (+0712)", this)
       )
 }

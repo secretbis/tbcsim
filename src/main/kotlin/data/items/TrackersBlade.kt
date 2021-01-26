@@ -45,6 +45,6 @@ public class TrackersBlade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15810)
+      Buffs.byIdOrName(15810, "Attack Power 44", this)
       )
 }

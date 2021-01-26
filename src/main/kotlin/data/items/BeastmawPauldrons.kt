@@ -44,7 +44,7 @@ public class BeastmawPauldrons : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15811),
-      Buffs.byId(18378)
+      Buffs.byIdOrName(15811, "Attack Power 46", this),
+      Buffs.byIdOrName(18378, "Increased Mana Regen", this)
       )
 }

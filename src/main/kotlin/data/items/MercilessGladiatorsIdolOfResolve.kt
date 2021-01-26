@@ -42,6 +42,6 @@ public class MercilessGladiatorsIdolOfResolve : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43842)
+      Buffs.byIdOrName(43842, "Merciless Idol of Resolve", this)
       )
 }

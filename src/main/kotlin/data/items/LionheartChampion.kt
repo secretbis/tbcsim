@@ -43,7 +43,7 @@ public class LionheartChampion : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34514),
-      Buffs.byId(34513)
+      Buffs.byIdOrName(34514, "Fear Resistance 5", this),
+      Buffs.byIdOrName(34513, "Lionheart", this)
       )
 }

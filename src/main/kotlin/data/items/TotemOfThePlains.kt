@@ -42,6 +42,6 @@ public class TotemOfThePlains : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32401)
+      Buffs.byIdOrName(32401, "Increased Lesser Healing Wave", this)
       )
 }

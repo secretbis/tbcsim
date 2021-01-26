@@ -42,6 +42,6 @@ public class LibramOfRepentance : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37742)
+      Buffs.byIdOrName(37742, "Increased Holy Shield Block", this)
       )
 }

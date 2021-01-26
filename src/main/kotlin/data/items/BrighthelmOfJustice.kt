@@ -43,7 +43,7 @@ public class BrighthelmOfJustice : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(31941),
-      Buffs.byId(21641)
+      Buffs.byIdOrName(31941, "Increase Healing 101", this),
+      Buffs.byIdOrName(21641, "Increased Mana Regen", this)
       )
 }

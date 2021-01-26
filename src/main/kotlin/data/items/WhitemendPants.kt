@@ -50,7 +50,7 @@ public class WhitemendPants : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(94)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18039),
-      Buffs.byId(21366)
+      Buffs.byIdOrName(18039, "Increase Healing 62", this),
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this)
       )
 }

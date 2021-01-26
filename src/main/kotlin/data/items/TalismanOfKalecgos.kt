@@ -42,6 +42,6 @@ public class TalismanOfKalecgos : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17846)
+      Buffs.byIdOrName(17846, "Increase Arcane Dam 50", this)
       )
 }

@@ -45,6 +45,6 @@ public class LeggingsOfDivineRetribution : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42157)
+      Buffs.byIdOrName(42157, "Armor Penetration 350", this)
       )
 }

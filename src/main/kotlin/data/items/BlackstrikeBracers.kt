@@ -46,6 +46,6 @@ public class BlackstrikeBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21363)
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this)
       )
 }

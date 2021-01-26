@@ -46,6 +46,6 @@ public class BootsOfUtterDarkness : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15818)
+      Buffs.byIdOrName(15818, "Attack Power 66", this)
       )
 }

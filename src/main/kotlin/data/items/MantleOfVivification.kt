@@ -42,7 +42,7 @@ public class MantleOfVivification : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21364),
-      Buffs.byId(18031)
+      Buffs.byIdOrName(21364, "Increased Mana Regen", this),
+      Buffs.byIdOrName(18031, "Increase Healing 40", this)
       )
 }

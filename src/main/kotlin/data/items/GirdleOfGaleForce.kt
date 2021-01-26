@@ -43,7 +43,7 @@ public class GirdleOfGaleForce : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21626),
-      Buffs.byId(9335)
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this),
+      Buffs.byIdOrName(9335, "Attack Power 28", this)
       )
 }

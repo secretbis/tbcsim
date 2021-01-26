@@ -43,7 +43,7 @@ public class LatrosDancingBlade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9335),
-      Buffs.byId(43902)
+      Buffs.byIdOrName(9335, "Attack Power 28", this),
+      Buffs.byIdOrName(43902, "Armor Penetration 98", this)
       )
 }

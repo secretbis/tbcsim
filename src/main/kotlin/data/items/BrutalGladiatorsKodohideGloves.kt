@@ -44,8 +44,8 @@ public class BrutalGladiatorsKodohideGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33820),
-      Buffs.byId(33830),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(33820, "Increase Healing 88", this),
+      Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

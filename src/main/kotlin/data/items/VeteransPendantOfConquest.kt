@@ -48,6 +48,6 @@ public class VeteransPendantOfConquest : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3164)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14248)
+      Buffs.byIdOrName(14248, "Increase Spell Dam 21", this)
       )
 }

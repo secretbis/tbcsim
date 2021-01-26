@@ -51,6 +51,6 @@ public class HardKhoriumBattleplate : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3263)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40934)
+      Buffs.byIdOrName(40934, "Armor Penetration", this)
       )
 }

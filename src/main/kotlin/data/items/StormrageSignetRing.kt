@@ -44,7 +44,7 @@ public class StormrageSignetRing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15818),
-      Buffs.byId(40680)
+      Buffs.byIdOrName(15818, "Attack Power 66", this),
+      Buffs.byIdOrName(40680, "Armor Penetration 126", this)
       )
 }

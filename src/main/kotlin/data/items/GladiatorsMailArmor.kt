@@ -51,7 +51,7 @@ public class GladiatorsMailArmor : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21364),
-      Buffs.byId(17367)
+      Buffs.byIdOrName(21364, "Increased Mana Regen", this),
+      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
       )
 }

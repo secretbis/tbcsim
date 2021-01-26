@@ -49,7 +49,7 @@ public class StaffOfDarkMending : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44077),
-      Buffs.byId(42082)
+      Buffs.byIdOrName(44077, "Increase Healing 407", this),
+      Buffs.byIdOrName(42082, "Increased Mana Regen", this)
       )
 }

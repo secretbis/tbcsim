@@ -42,7 +42,7 @@ public class CloakOfTheEverliving : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21631),
-      Buffs.byId(15696)
+      Buffs.byIdOrName(21631, "Increased Mana Regen", this),
+      Buffs.byIdOrName(15696, "Increase Healing 53", this)
       )
 }

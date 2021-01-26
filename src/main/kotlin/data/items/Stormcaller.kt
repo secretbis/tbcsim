@@ -44,6 +44,6 @@ public class Stormcaller : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34611)
+      Buffs.byIdOrName(34611, "Increase Spell Dam 159", this)
       )
 }

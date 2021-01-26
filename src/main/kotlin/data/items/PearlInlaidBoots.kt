@@ -44,7 +44,7 @@ public class PearlInlaidBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17320),
-      Buffs.byId(21630)
+      Buffs.byIdOrName(17320, "Increase Healing 84", this),
+      Buffs.byIdOrName(21630, "Increased Mana Regen", this)
       )
 }

@@ -42,6 +42,6 @@ public class ShiftingNaaruSliver : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(45042)
+      Buffs.byIdOrName(45042, "Power Circle", this)
       )
 }

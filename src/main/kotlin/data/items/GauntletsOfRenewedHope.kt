@@ -48,7 +48,7 @@ public class GauntletsOfRenewedHope : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2863)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21363),
-      Buffs.byId(18039)
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this),
+      Buffs.byIdOrName(18039, "Increase Healing 62", this)
       )
 }

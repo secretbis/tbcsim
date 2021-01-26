@@ -42,7 +42,7 @@ public class FigurineSeasprayAlbatross : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40231),
-      Buffs.byId(46785)
+      Buffs.byIdOrName(40231, "Increased Mana Regen", this),
+      Buffs.byIdOrName(46785, "Seaspray Albatross", this)
       )
 }

@@ -42,6 +42,6 @@ public class DarkmoonCardMadness : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39446)
+      Buffs.byIdOrName(39446, "Aura of Madness", this)
       )
 }

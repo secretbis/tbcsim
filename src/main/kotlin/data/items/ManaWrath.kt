@@ -43,6 +43,6 @@ public class ManaWrath : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28792)
+      Buffs.byIdOrName(28792, "Increase Spell Dam 126", this)
       )
 }

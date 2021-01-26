@@ -44,7 +44,7 @@ public class BroochOfTheHighborne : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18043),
-      Buffs.byId(21365)
+      Buffs.byIdOrName(18043, "Increase Healing 70", this),
+      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
       )
 }

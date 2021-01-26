@@ -43,7 +43,7 @@ public class PrimalSurgeBracers : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18030),
-      Buffs.byId(18379)
+      Buffs.byIdOrName(18030, "Increase Healing 37", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

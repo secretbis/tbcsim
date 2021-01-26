@@ -48,7 +48,7 @@ public class GreavesOfPacification : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39903),
-      Buffs.byId(21642)
+      Buffs.byIdOrName(39903, "Increase Healing 97", this),
+      Buffs.byIdOrName(21642, "Increased Mana Regen", this)
       )
 }

@@ -43,6 +43,6 @@ public class CloakOfTheAncientSpirits : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18379)
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

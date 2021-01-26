@@ -48,7 +48,7 @@ public class LightbringerGloves : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3152)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36062),
-      Buffs.byId(21637)
+      Buffs.byIdOrName(36062, "Increase Healing 86", this),
+      Buffs.byIdOrName(21637, "Increased Mana Regen", this)
       )
 }

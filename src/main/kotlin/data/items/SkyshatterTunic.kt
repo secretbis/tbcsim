@@ -55,6 +55,6 @@ public class SkyshatterTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21366)
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this)
       )
 }

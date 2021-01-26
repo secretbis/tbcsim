@@ -49,7 +49,7 @@ public class SuntouchedChainLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26690),
-      Buffs.byId(33780)
+      Buffs.byIdOrName(26690, "Increase Healing 110", this),
+      Buffs.byIdOrName(33780, "Increased Mana Regen", this)
       )
 }

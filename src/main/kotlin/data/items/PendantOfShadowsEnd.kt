@@ -42,6 +42,6 @@ public class PendantOfShadowsEnd : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(31000)
+      Buffs.byIdOrName(31000, "Shadow Absorption", this)
       )
 }

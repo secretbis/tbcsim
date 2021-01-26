@@ -48,6 +48,6 @@ public class TarrenMillDefendersCinch : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2863)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21635)
+      Buffs.byIdOrName(21635, "Increased Mana Regen", this)
       )
 }

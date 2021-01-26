@@ -43,6 +43,6 @@ public class GladiatorsSalvation : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42120)
+      Buffs.byIdOrName(42120, "Increase Healing 375", this)
       )
 }

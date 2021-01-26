@@ -42,7 +42,7 @@ public class VengefulGladiatorsPiercingTouch : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9343),
-      Buffs.byId(26283)
+      Buffs.byIdOrName(9343, "Increase Spell Dam 14", this),
+      Buffs.byIdOrName(26283, "Increased Spell Penetration 20", this)
       )
 }

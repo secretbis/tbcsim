@@ -49,7 +49,7 @@ public class NetherstrikeBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14799),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(14799, "Increase Spell Dam 20", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

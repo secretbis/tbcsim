@@ -43,6 +43,6 @@ public class KamaeisCeruleanSkirt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(25179)
+      Buffs.byIdOrName(25179, "Increase Healing 112", this)
       )
 }

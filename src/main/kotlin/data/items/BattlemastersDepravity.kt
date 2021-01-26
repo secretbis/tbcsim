@@ -42,6 +42,6 @@ public class BattlemastersDepravity : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44055)
+      Buffs.byIdOrName(44055, "Tremendous Fortitude", this)
       )
 }

@@ -42,6 +42,6 @@ public class ArcanistsStone : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34000)
+      Buffs.byIdOrName(34000, "The Arcanist's Stone", this)
       )
 }

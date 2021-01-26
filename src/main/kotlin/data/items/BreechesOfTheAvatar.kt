@@ -49,7 +49,7 @@ public class BreechesOfTheAvatar : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(31941),
-      Buffs.byId(21635)
+      Buffs.byIdOrName(31941, "Increase Healing 101", this),
+      Buffs.byIdOrName(21635, "Increased Mana Regen", this)
       )
 }

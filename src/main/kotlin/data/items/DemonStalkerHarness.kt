@@ -51,7 +51,7 @@ public class DemonStalkerHarness : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15820),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(15820, "Attack Power 70", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

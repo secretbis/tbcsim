@@ -43,6 +43,6 @@ public class SerpentCoilBraid : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37447)
+      Buffs.byIdOrName(37447, "Improved Mana Gems", this)
       )
 }

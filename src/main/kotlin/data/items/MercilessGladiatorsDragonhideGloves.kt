@@ -46,7 +46,7 @@ public class MercilessGladiatorsDragonhideGloves : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(7681),
-      Buffs.byId(33830)
+      Buffs.byIdOrName(7681, "Increase Healing 15", this),
+      Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this)
       )
 }

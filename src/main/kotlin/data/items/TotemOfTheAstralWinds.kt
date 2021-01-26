@@ -42,6 +42,6 @@ public class TotemOfTheAstralWinds : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34244)
+      Buffs.byIdOrName(34244, "Increased Windfury Weapon", this)
       )
 }

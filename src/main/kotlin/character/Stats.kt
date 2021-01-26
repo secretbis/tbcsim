@@ -79,6 +79,7 @@ data class Stats(
     var healthFlatModifier: Int = 0,
     var manaMultiplier: Double = 1.0,
     var manaFlatModifier: Int = 0,
+    var manaPer5Seconds: Int = 0,
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -155,6 +156,7 @@ data class Stats(
         healthFlatModifier += stats.healthFlatModifier
         manaMultiplier *= stats.manaMultiplier
         manaFlatModifier += stats.manaFlatModifier
+        manaPer5Seconds += stats.manaPer5Seconds
 
         return this
     }
@@ -228,6 +230,7 @@ data class Stats(
         healthFlatModifier -= stats.healthFlatModifier
         manaMultiplier /= stats.manaMultiplier
         manaFlatModifier -= stats.manaFlatModifier
+        manaPer5Seconds -= stats.manaPer5Seconds
 
         return this
     }
@@ -288,6 +291,8 @@ data class Stats(
                 manaFlatModifier += value
             StatType.HEALTH ->
                 healthFlatModifier += value
+            StatType.MANA_PER_5_SECONDS ->
+                manaPer5Seconds += value
             else -> {
                 // Do nothing
             }

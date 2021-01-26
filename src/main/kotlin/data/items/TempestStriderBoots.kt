@@ -43,7 +43,7 @@ public class TempestStriderBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18035),
-      Buffs.byId(42082)
+      Buffs.byIdOrName(18035, "Increase Healing 51", this),
+      Buffs.byIdOrName(42082, "Increased Mana Regen", this)
       )
 }

@@ -44,7 +44,7 @@ public class InfinityBlade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15820),
-      Buffs.byId(36478)
+      Buffs.byIdOrName(15820, "Attack Power 70", this),
+      Buffs.byIdOrName(36478, "Magic Disruption", this)
       )
 }

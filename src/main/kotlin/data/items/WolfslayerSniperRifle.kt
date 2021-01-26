@@ -42,6 +42,6 @@ public class WolfslayerSniperRifle : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15807)
+      Buffs.byIdOrName(15807, "Attack Power 32", this)
       )
 }

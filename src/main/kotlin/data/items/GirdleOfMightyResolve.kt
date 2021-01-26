@@ -49,7 +49,7 @@ public class GirdleOfMightyResolve : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2876)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14798),
-      Buffs.byId(35075)
+      Buffs.byIdOrName(14798, "Increase Spell Dam 30", this),
+      Buffs.byIdOrName(35075, "Block Value 38", this)
       )
 }

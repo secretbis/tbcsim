@@ -49,7 +49,7 @@ public class BeastLordMantle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15806),
-      Buffs.byId(21363)
+      Buffs.byIdOrName(15806, "Attack Power 34", this),
+      Buffs.byIdOrName(21363, "Increased Mana Regen", this)
       )
 }

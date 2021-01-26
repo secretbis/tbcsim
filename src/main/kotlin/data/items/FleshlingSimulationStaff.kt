@@ -47,6 +47,6 @@ public class FleshlingSimulationStaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44906)
+      Buffs.byIdOrName(44906, "Attack Power - Feral (+0457)", this)
       )
 }

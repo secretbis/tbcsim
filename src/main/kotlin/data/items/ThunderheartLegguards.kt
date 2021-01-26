@@ -49,7 +49,7 @@ public class ThunderheartLegguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3098)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37952),
-      Buffs.byId(21366)
+      Buffs.byIdOrName(37952, "Increase Healing 117", this),
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this)
       )
 }

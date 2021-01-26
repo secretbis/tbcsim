@@ -47,7 +47,7 @@ public class VeteransWyrmhideBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14254),
-      Buffs.byId(18379)
+      Buffs.byIdOrName(14254, "Increase Spell Dam 19", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

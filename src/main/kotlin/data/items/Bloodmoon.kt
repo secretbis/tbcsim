@@ -43,6 +43,6 @@ public class Bloodmoon : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36069)
+      Buffs.byIdOrName(36069, "Attack Power 112", this)
       )
 }

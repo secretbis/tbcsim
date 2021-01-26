@@ -48,6 +48,6 @@ public class ChestplateOfStoicism : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34061)
+      Buffs.byIdOrName(34061, "Block Value 39", this)
       )
 }

@@ -50,6 +50,6 @@ public class ScaledDrakeskinChestguard : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42107)
+      Buffs.byIdOrName(42107, "Attack Power 102", this)
       )
 }

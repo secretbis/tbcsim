@@ -44,8 +44,8 @@ public class CosmicInfuser : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36411),
-      Buffs.byId(36387),
-      Buffs.byId(36488)
+      Buffs.byIdOrName(36411, "Increased Mana Regen", this),
+      Buffs.byIdOrName(36387, "Increase Healing 600", this),
+      Buffs.byIdOrName(36488, "Infernal Protection", this)
       )
 }

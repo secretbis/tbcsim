@@ -42,6 +42,6 @@ public class TotemOfHealingRains : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38322)
+      Buffs.byIdOrName(38322, "Improved Chain Heal", this)
       )
 }

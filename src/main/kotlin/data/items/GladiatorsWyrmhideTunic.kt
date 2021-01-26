@@ -50,7 +50,7 @@ public class GladiatorsWyrmhideTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2856)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28264),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(28264, "Increase Spell Dam 46", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

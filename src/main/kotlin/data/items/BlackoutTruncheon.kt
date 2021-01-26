@@ -47,6 +47,6 @@ public class BlackoutTruncheon : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(1584)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33489)
+      Buffs.byIdOrName(33489, "Blinding Speed", this)
       )
 }

@@ -50,7 +50,7 @@ public class WhitemendHood : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(94)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18047),
-      Buffs.byId(21366)
+      Buffs.byIdOrName(18047, "Increase Healing 79", this),
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this)
       )
 }

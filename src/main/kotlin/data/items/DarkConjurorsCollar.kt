@@ -50,6 +50,6 @@ public class DarkConjurorsCollar : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44979)
+      Buffs.byIdOrName(44979, "Increase Spell Dam 75", this)
       )
 }

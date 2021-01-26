@@ -51,7 +51,7 @@ public class EbonNetherscaleBelt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9333),
-      Buffs.byId(21629)
+      Buffs.byIdOrName(9333, "Attack Power 48", this),
+      Buffs.byIdOrName(21629, "Increased Mana Regen", this)
       )
 }

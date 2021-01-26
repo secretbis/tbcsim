@@ -51,6 +51,6 @@ public class RobesOfTheIncarnate : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2869)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33820)
+      Buffs.byIdOrName(33820, "Increase Healing 88", this)
       )
 }

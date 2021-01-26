@@ -44,7 +44,7 @@ public class KhoriumBoots : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21630),
-      Buffs.byId(18049)
+      Buffs.byIdOrName(21630, "Increased Mana Regen", this),
+      Buffs.byIdOrName(18049, "Increase Spell Dam 26", this)
       )
 }

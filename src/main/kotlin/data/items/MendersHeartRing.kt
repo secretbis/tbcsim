@@ -44,6 +44,6 @@ public class MendersHeartRing : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17371)
+      Buffs.byIdOrName(17371, "Increase Healing 44", this)
       )
 }

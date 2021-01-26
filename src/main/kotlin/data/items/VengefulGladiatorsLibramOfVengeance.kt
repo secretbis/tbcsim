@@ -42,6 +42,6 @@ public class VengefulGladiatorsLibramOfVengeance : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43856)
+      Buffs.byIdOrName(43856, "Vengeful Libram of Vengeance", this)
       )
 }

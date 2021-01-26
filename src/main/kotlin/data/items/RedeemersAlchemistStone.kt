@@ -42,7 +42,7 @@ public class RedeemersAlchemistStone : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42077),
-      Buffs.byId(17619)
+      Buffs.byIdOrName(42077, "Increase Healing 119", this),
+      Buffs.byIdOrName(17619, "Alchemist's Stone", this)
       )
 }

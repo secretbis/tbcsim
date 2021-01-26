@@ -43,6 +43,6 @@ public class ShadowCloakOfDalaran : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18053)
+      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this)
       )
 }

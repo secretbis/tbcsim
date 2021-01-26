@@ -44,6 +44,6 @@ public class TheNexusKey : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44072)
+      Buffs.byIdOrName(44072, "Increase Spell Dam 236", this)
       )
 }

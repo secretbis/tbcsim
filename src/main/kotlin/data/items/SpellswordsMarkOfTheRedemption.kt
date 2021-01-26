@@ -44,6 +44,6 @@ public class SpellswordsMarkOfTheRedemption : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9346)
+      Buffs.byIdOrName(9346, "Increase Spell Dam 18", this)
       )
 }

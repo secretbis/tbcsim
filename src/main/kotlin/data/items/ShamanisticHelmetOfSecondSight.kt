@@ -50,8 +50,8 @@ public class ShamanisticHelmetOfSecondSight : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14055),
-      Buffs.byId(21362),
-      Buffs.byId(39841)
+      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+      Buffs.byIdOrName(21362, "Increased Mana Regen", this),
+      Buffs.byIdOrName(39841, "Spectrecles", this)
       )
 }

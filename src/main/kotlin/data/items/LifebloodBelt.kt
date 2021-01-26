@@ -43,7 +43,7 @@ public class LifebloodBelt : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18036),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(18036, "Increase Healing 55", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

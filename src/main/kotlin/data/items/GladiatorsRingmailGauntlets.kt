@@ -45,7 +45,7 @@ public class GladiatorsRingmailGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38501),
-      Buffs.byId(18038)
+      Buffs.byIdOrName(38501, "Shaman Lesser Healing Wave Crit Chance", this),
+      Buffs.byIdOrName(18038, "Increase Healing 59", this)
       )
 }

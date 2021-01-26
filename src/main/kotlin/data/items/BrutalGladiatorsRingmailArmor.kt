@@ -51,7 +51,7 @@ public class BrutalGladiatorsRingmailArmor : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21366),
-      Buffs.byId(23593)
+      Buffs.byIdOrName(21366, "Increased Mana Regen", this),
+      Buffs.byIdOrName(23593, "Increase Healing 92", this)
       )
 }

@@ -43,6 +43,6 @@ public class VengefulGladiatorsBatonOfLight : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9318)
+      Buffs.byIdOrName(9318, "Increase Healing 33", this)
       )
 }

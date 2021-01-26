@@ -51,6 +51,6 @@ public class UtopianTunicOfElune : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23929)
+      Buffs.byIdOrName(23929, "Increase Spell Dam 71", this)
       )
 }

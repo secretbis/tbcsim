@@ -53,6 +53,6 @@ public class OnslaughtBreastplate : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2952)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40680)
+      Buffs.byIdOrName(40680, "Armor Penetration 126", this)
       )
 }

@@ -51,7 +51,7 @@ public class CoifOfAlleria : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39885),
-      Buffs.byId(44810)
+      Buffs.byIdOrName(39885, "Attack Power 126", this),
+      Buffs.byIdOrName(44810, "Armor Penetration 182", this)
       )
 }

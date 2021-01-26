@@ -50,9 +50,9 @@ public class DeathblowXGoggles : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15824),
-      Buffs.byId(30645),
-      Buffs.byId(40273),
-      Buffs.byId(12883)
+      Buffs.byIdOrName(15824, "Attack Power 76", this),
+      Buffs.byIdOrName(30645, "Gas Cloud Tracking", this),
+      Buffs.byIdOrName(40273, "Stealth Detection", this),
+      Buffs.byIdOrName(12883, "Longsight", this)
       )
 }

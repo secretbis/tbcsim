@@ -49,7 +49,7 @@ public class ManaEtchedCrown : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28869),
-      Buffs.byId(18052)
+      Buffs.byIdOrName(28869, "Spell Penetration 15", this),
+      Buffs.byIdOrName(18052, "Increase Spell Dam 34", this)
       )
 }

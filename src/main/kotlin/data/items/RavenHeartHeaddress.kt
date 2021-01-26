@@ -51,6 +51,6 @@ public class RavenHeartHeaddress : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18029)
+      Buffs.byIdOrName(18029, "Increase Healing 35", this)
       )
 }

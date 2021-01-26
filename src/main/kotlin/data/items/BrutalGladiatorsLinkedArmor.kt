@@ -54,7 +54,7 @@ public class BrutalGladiatorsLinkedArmor : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21635),
-      Buffs.byId(39927)
+      Buffs.byIdOrName(21635, "Increased Mana Regen", this),
+      Buffs.byIdOrName(39927, "Armor Penetration 84", this)
       )
 }

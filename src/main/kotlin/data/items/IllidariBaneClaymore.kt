@@ -44,6 +44,6 @@ public class IllidariBaneClaymore : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37652)
+      Buffs.byIdOrName(37652, "Demon Slaying 150", this)
       )
 }

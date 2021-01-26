@@ -44,6 +44,6 @@ public class NathrezimMindblade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42040)
+      Buffs.byIdOrName(42040, "Increase Spell Dam 203", this)
       )
 }

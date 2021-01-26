@@ -43,7 +43,7 @@ public class HammerOfRighteousMight : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(37542),
-      Buffs.byId(21643)
+      Buffs.byIdOrName(37542, "Increase Spell Dam 168", this),
+      Buffs.byIdOrName(21643, "Increased Mana Regen", this)
       )
 }

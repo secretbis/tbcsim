@@ -42,7 +42,7 @@ public class DarkIronSmokingPipe : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17280),
-      Buffs.byId(51953)
+      Buffs.byIdOrName(17280, "Increase Spell Dam 43", this),
+      Buffs.byIdOrName(51953, "Dark Iron Pipeweed", this)
       )
 }

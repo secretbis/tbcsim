@@ -48,7 +48,7 @@ public class StormfrontGauntlets : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2879)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14254),
-      Buffs.byId(21627)
+      Buffs.byIdOrName(14254, "Increase Spell Dam 19", this),
+      Buffs.byIdOrName(21627, "Increased Mana Regen", this)
       )
 }

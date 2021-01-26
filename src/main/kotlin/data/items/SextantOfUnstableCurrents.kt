@@ -42,6 +42,6 @@ public class SextantOfUnstableCurrents : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38347)
+      Buffs.byIdOrName(38347, "Crit Proc Spell Damage", this)
       )
 }

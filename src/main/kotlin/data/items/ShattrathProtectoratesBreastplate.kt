@@ -48,6 +48,6 @@ public class ShattrathProtectoratesBreastplate : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2926)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26158)
+      Buffs.byIdOrName(26158, "Increase Spell Dam 60", this)
       )
 }

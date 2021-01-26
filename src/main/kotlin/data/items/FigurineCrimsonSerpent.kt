@@ -43,6 +43,6 @@ public class FigurineCrimsonSerpent : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(46783)
+      Buffs.byIdOrName(46783, "Crimson Serpent", this)
       )
 }

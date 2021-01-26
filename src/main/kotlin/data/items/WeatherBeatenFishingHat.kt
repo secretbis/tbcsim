@@ -43,7 +43,7 @@ public class WeatherBeatenFishingHat : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(7823),
-      Buffs.byId(43699)
+      Buffs.byIdOrName(7823, "Fishing Skill +5", this),
+      Buffs.byIdOrName(43699, "Fishing Hat Lure", this)
       )
 }

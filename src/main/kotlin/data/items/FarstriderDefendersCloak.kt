@@ -42,6 +42,6 @@ public class FarstriderDefendersCloak : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35075)
+      Buffs.byIdOrName(35075, "Block Value 38", this)
       )
 }

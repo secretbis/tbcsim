@@ -42,8 +42,8 @@ public class FigurineNightseyePanther : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17746),
-      Buffs.byId(15813),
-      Buffs.byId(31047)
+      Buffs.byIdOrName(17746, "Stealth 5", this),
+      Buffs.byIdOrName(15813, "Attack Power 54", this),
+      Buffs.byIdOrName(31047, "Nightseye Panther", this)
       )
 }

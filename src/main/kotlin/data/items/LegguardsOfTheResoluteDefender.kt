@@ -44,6 +44,6 @@ public class LegguardsOfTheResoluteDefender : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(13665)
+      Buffs.byIdOrName(13665, "Increased Parry 20", this)
       )
 }

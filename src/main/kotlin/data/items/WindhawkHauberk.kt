@@ -52,7 +52,7 @@ public class WindhawkHauberk : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17367),
-      Buffs.byId(18032)
+      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this),
+      Buffs.byIdOrName(18032, "Increase Healing 42", this)
       )
 }

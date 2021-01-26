@@ -49,7 +49,7 @@ public class HoodOfTheThirdEye : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26154),
-      Buffs.byId(21638)
+      Buffs.byIdOrName(26154, "Increase Healing 90", this),
+      Buffs.byIdOrName(21638, "Increased Mana Regen", this)
       )
 }

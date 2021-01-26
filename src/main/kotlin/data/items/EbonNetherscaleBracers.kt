@@ -50,7 +50,7 @@ public class EbonNetherscaleBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(75)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15808),
-      Buffs.byId(21620)
+      Buffs.byIdOrName(15808, "Attack Power 38", this),
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

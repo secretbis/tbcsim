@@ -42,6 +42,6 @@ public class DepletedBadge : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40744)
+      Buffs.byIdOrName(40744, "Apexis Crystal Infusion", this)
       )
 }

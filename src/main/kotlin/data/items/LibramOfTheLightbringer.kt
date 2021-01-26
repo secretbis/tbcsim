@@ -42,6 +42,6 @@ public class LibramOfTheLightbringer : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34231)
+      Buffs.byIdOrName(34231, "Increased Holy Light Healing", this)
       )
 }

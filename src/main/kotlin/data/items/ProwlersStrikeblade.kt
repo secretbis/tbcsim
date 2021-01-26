@@ -42,7 +42,7 @@ public class ProwlersStrikeblade : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15809),
-      Buffs.byId(42098)
+      Buffs.byIdOrName(15809, "Attack Power 42", this),
+      Buffs.byIdOrName(42098, "Armor Penetration 140", this)
       )
 }

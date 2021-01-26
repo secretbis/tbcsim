@@ -44,6 +44,6 @@ public class Stormherald : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34510)
+      Buffs.byIdOrName(34510, "Stun", this)
       )
 }

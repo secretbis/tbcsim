@@ -45,6 +45,6 @@ public class PauldronsOfGruesomeFate : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40555)
+      Buffs.byIdOrName(40555, "Armor Penetration 154", this)
       )
 }

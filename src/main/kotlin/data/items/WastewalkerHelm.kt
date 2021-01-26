@@ -52,6 +52,6 @@ public class WastewalkerHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15814)
+      Buffs.byIdOrName(15814, "Attack Power 56", this)
       )
 }

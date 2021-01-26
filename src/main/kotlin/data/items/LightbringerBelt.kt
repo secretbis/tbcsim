@@ -50,7 +50,7 @@ public class LightbringerBelt : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(32584),
-      Buffs.byId(21635)
+      Buffs.byIdOrName(32584, "Increase Healing 95", this),
+      Buffs.byIdOrName(21635, "Increased Mana Regen", this)
       )
 }

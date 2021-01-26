@@ -44,6 +44,6 @@ public class SoulWandOfTheAldor : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9408)
+      Buffs.byIdOrName(9408, "Increase Healing 22", this)
       )
 }

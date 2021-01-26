@@ -51,7 +51,7 @@ public class EvokersHelmetOfSecondSight : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14055),
-      Buffs.byId(39841)
+      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+      Buffs.byIdOrName(39841, "Spectrecles", this)
       )
 }

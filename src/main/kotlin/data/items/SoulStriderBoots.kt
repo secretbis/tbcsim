@@ -49,6 +49,6 @@ public class SoulStriderBoots : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2974)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18040)
+      Buffs.byIdOrName(18040, "Increase Healing 64", this)
       )
 }

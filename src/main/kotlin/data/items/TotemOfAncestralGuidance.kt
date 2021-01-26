@@ -42,6 +42,6 @@ public class TotemOfAncestralGuidance : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(41040)
+      Buffs.byIdOrName(41040, "Increased Lightning Damage", this)
       )
 }

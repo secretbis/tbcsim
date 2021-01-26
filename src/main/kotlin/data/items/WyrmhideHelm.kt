@@ -49,7 +49,7 @@ public class WyrmhideHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18052),
-      Buffs.byId(21620)
+      Buffs.byIdOrName(18052, "Increase Spell Dam 34", this),
+      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
       )
 }

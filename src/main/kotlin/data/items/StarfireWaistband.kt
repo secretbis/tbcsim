@@ -49,7 +49,7 @@ public class StarfireWaistband : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18056),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(18056, "Increase Spell Dam 40", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

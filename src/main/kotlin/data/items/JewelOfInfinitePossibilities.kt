@@ -44,6 +44,6 @@ public class JewelOfInfinitePossibilities : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14047)
+      Buffs.byIdOrName(14047, "Increase Spell Dam 23", this)
       )
 }

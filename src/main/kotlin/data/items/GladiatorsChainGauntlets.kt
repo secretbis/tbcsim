@@ -47,7 +47,7 @@ public class GladiatorsChainGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9334),
-      Buffs.byId(28539)
+      Buffs.byIdOrName(9334, "Attack Power 26", this),
+      Buffs.byIdOrName(28539, "Multi-Shot Damage Increase", this)
       )
 }

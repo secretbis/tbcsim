@@ -42,7 +42,7 @@ public class CorensLuckyCoin : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42038),
-      Buffs.byId(51952)
+      Buffs.byIdOrName(42038, "Block Value 59", this),
+      Buffs.byIdOrName(51952, "Dark Iron Luck", this)
       )
 }

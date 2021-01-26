@@ -49,7 +49,7 @@ public class ChestguardOfHiddenPurpose : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36062),
-      Buffs.byId(21644)
+      Buffs.byIdOrName(36062, "Increase Healing 86", this),
+      Buffs.byIdOrName(21644, "Increased Mana Regen", this)
       )
 }

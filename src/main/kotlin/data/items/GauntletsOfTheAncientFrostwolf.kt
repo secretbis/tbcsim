@@ -49,7 +49,7 @@ public class GauntletsOfTheAncientFrostwolf : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18048),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(18048, "Increase Healing 81", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

@@ -49,7 +49,7 @@ public class BeltOfTheGuardian : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14248),
-      Buffs.byId(34593)
+      Buffs.byIdOrName(14248, "Increase Spell Dam 21", this),
+      Buffs.byIdOrName(34593, "Block Value 33", this)
       )
 }

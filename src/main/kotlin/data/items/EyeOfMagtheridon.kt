@@ -42,7 +42,7 @@ public class EyeOfMagtheridon : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34040),
-      Buffs.byId(34749)
+      Buffs.byIdOrName(34040, "Increase Spell Dam 54", this),
+      Buffs.byIdOrName(34749, "Recurring Power", this)
       )
 }

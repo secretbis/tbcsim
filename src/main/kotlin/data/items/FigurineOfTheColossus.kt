@@ -42,6 +42,6 @@ public class FigurineOfTheColossus : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33089)
+      Buffs.byIdOrName(33089, "Vigilance of the Colossus", this)
       )
 }

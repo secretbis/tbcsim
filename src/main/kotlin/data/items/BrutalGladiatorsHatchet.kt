@@ -46,7 +46,7 @@ public class BrutalGladiatorsHatchet : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15809),
-      Buffs.byId(47041)
+      Buffs.byIdOrName(15809, "Attack Power 42", this),
+      Buffs.byIdOrName(47041, "Armor Penetration 42", this)
       )
 }

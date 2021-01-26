@@ -43,6 +43,6 @@ public class WorldBreaker : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36111)
+      Buffs.byIdOrName(36111, "World Breaker", this)
       )
 }

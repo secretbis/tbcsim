@@ -44,7 +44,7 @@ public class PrimalMoonclothShoulders : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23593),
-      Buffs.byId(21364)
+      Buffs.byIdOrName(23593, "Increase Healing 92", this),
+      Buffs.byIdOrName(21364, "Increased Mana Regen", this)
       )
 }

@@ -51,6 +51,6 @@ public class CrystalforgeShoulderguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15714)
+      Buffs.byIdOrName(15714, "Increase Spell Dam 22", this)
       )
 }

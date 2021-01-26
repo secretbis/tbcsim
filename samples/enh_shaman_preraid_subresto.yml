@@ -53,7 +53,7 @@ gear:
     enchant: Mongoose
   rangedLibramTotem:
     name: Totem of the Astral Winds
-  helm:
+  head:
     name: Helm of Desolation
     gems:
       - Inscribed Noble Topaz

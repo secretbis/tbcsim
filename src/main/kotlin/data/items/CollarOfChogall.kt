@@ -43,6 +43,6 @@ public class CollarOfChogall : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(26227)
+      Buffs.byIdOrName(26227, "Increase Spell Dam 68", this)
       )
 }

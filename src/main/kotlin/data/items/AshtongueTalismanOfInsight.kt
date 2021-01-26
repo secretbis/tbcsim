@@ -42,6 +42,6 @@ public class AshtongueTalismanOfInsight : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40482)
+      Buffs.byIdOrName(40482, "Mage Tier 6 Trinket", this)
       )
 }

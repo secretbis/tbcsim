@@ -51,7 +51,7 @@ public class VestmentsOfTheAldor : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28360),
-      Buffs.byId(26283)
+      Buffs.byIdOrName(28360, "Increase Spell Dam 49", this),
+      Buffs.byIdOrName(26283, "Increased Spell Penetration 20", this)
       )
 }

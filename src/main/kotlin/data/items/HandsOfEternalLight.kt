@@ -49,6 +49,6 @@ public class HandsOfEternalLight : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36098)
+      Buffs.byIdOrName(36098, "Increase Healing 99", this)
       )
 }

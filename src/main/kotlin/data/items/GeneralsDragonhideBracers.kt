@@ -48,6 +48,6 @@ public class GeneralsDragonhideBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(7680)
+      Buffs.byIdOrName(7680, "Increase Healing 13", this)
       )
 }

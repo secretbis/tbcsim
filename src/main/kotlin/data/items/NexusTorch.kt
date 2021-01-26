@@ -44,6 +44,6 @@ public class NexusTorch : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9398)
+      Buffs.byIdOrName(9398, "Increase Spell Dam 8", this)
       )
 }

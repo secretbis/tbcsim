@@ -48,7 +48,7 @@ public class GirdleOfFallenStars : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2974)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18044),
-      Buffs.byId(21632)
+      Buffs.byIdOrName(18044, "Increase Healing 73", this),
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this)
       )
 }

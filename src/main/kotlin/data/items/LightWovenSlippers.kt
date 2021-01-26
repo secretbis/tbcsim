@@ -44,7 +44,7 @@ public class LightWovenSlippers : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9316),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(9316, "Increase Healing 29", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

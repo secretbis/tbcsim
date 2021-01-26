@@ -47,6 +47,6 @@ public class GladiatorsMaul : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44912)
+      Buffs.byIdOrName(44912, "Attack Power - Feral (+0894)", this)
       )
 }

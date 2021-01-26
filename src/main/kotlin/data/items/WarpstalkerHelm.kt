@@ -49,6 +49,6 @@ public class WarpstalkerHelm : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9333)
+      Buffs.byIdOrName(9333, "Attack Power 48", this)
       )
 }

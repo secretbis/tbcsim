@@ -52,6 +52,6 @@ public class DemontoothShoulderpads : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39925)
+      Buffs.byIdOrName(39925, "Armor Penetration 105", this)
       )
 }

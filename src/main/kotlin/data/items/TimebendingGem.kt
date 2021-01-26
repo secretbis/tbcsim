@@ -43,6 +43,6 @@ public class TimebendingGem : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14089)
+      Buffs.byIdOrName(14089, "Attack Power 36", this)
       )
 }

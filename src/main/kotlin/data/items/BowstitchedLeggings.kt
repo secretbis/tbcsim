@@ -52,6 +52,6 @@ public class BowstitchedLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2952)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(28735)
+      Buffs.byIdOrName(28735, "Attack Power 100", this)
       )
 }

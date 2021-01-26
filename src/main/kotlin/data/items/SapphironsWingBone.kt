@@ -42,6 +42,6 @@ public class SapphironsWingBone : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17909)
+      Buffs.byIdOrName(17909, "Increase Frost Dam 51", this)
       )
 }

@@ -44,6 +44,6 @@ public class StaffOfTheAshtongueDeathsworn : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(36428)
+      Buffs.byIdOrName(36428, "Increase Healing 194", this)
       )
 }

@@ -42,6 +42,6 @@ public class MoroesLuckyPocketWatch : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(34519)
+      Buffs.byIdOrName(34519, "Time's Favor", this)
       )
 }

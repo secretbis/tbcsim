@@ -44,6 +44,6 @@ public class JadedCrystalDagger : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(45309)
+      Buffs.byIdOrName(45309, "Increase Spell Dam 185", this)
       )
 }

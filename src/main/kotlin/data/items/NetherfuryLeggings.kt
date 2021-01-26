@@ -49,7 +49,7 @@ public class NetherfuryLeggings : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2864)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(13881),
-      Buffs.byId(20959)
+      Buffs.byIdOrName(13881, "Increase Spell Dam 29", this),
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
       )
 }

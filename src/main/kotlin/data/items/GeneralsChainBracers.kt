@@ -50,6 +50,6 @@ public class GeneralsChainBracers : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9329)
+      Buffs.byIdOrName(9329, "Attack Power 16", this)
       )
 }

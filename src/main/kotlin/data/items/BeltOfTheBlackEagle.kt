@@ -51,6 +51,6 @@ public class BeltOfTheBlackEagle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15818)
+      Buffs.byIdOrName(15818, "Attack Power 66", this)
       )
 }

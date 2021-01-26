@@ -45,7 +45,7 @@ public class BeastLordLeggings : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15812),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(15812, "Attack Power 52", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

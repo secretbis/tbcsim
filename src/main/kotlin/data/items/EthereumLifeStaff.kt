@@ -44,6 +44,6 @@ public class EthereumLifeStaff : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(44071)
+      Buffs.byIdOrName(44071, "Copy of Copy of Increase Healing 415", this)
       )
 }

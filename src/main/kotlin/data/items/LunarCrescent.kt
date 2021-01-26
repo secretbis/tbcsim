@@ -43,6 +43,6 @@ public class LunarCrescent : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(33485)
+      Buffs.byIdOrName(33485, "Attack Power 96", this)
       )
 }

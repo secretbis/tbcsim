@@ -50,7 +50,7 @@ public class CoifOfTheJungleStalker : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15821),
-      Buffs.byId(42098)
+      Buffs.byIdOrName(15821, "Attack Power 72", this),
+      Buffs.byIdOrName(42098, "Armor Penetration 140", this)
       )
 }

@@ -42,7 +42,7 @@ public class DrapeOfTheRighteous : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21628),
-      Buffs.byId(42041)
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this),
+      Buffs.byIdOrName(42041, "Holy Damage Bonus 43", this)
       )
 }

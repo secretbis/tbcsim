@@ -49,7 +49,7 @@ public class HatefuryMantle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(39569),
-      Buffs.byId(42056)
+      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
+      Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
       )
 }

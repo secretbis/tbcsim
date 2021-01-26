@@ -44,7 +44,7 @@ public class DorysEmbrace : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15811),
-      Buffs.byId(43219)
+      Buffs.byIdOrName(15811, "Attack Power 46", this),
+      Buffs.byIdOrName(43219, "Armor Penetration 112", this)
       )
 }

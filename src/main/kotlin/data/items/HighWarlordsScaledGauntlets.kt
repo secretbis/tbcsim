@@ -47,6 +47,6 @@ public class HighWarlordsScaledGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(23300)
+      Buffs.byIdOrName(23300, "Seal of the Crusader Judgement Increase", this)
       )
 }

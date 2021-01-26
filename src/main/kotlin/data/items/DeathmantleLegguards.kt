@@ -50,6 +50,6 @@ public class DeathmantleLegguards : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15829)
+      Buffs.byIdOrName(15829, "Attack Power 86", this)
       )
 }

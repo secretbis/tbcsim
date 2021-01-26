@@ -47,7 +47,7 @@ public class SwiftsteelGloves : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(76)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(20959),
-      Buffs.byId(14056)
+      Buffs.byIdOrName(20959, "Increased Mana Regen", this),
+      Buffs.byIdOrName(14056, "Attack Power 50", this)
       )
 }

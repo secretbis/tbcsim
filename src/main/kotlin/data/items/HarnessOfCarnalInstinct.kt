@@ -51,6 +51,6 @@ public class HarnessOfCarnalInstinct : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(40226)
+      Buffs.byIdOrName(40226, "Armor Penetration 196", this)
       )
 }

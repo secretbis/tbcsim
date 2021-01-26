@@ -49,6 +49,6 @@ public class MercilessGladiatorsMoonclothHood : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18038)
+      Buffs.byIdOrName(18038, "Increase Healing 59", this)
       )
 }

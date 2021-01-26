@@ -50,7 +50,7 @@ public class ScaledGreavesOfPatience : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2871)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15811),
-      Buffs.byId(21362)
+      Buffs.byIdOrName(15811, "Attack Power 46", this),
+      Buffs.byIdOrName(21362, "Increased Mana Regen", this)
       )
 }

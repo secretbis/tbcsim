@@ -42,7 +42,7 @@ public class KeepersRingOfPiety : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18032),
-      Buffs.byId(21628)
+      Buffs.byIdOrName(18032, "Increase Healing 42", this),
+      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
       )
 }

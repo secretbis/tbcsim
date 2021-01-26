@@ -43,7 +43,7 @@ public class BeltOfGaleForce : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(21632),
-      Buffs.byId(18038)
+      Buffs.byIdOrName(21632, "Increased Mana Regen", this),
+      Buffs.byIdOrName(18038, "Increase Healing 59", this)
       )
 }

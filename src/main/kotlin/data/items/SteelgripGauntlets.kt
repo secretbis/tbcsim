@@ -48,6 +48,6 @@ public class SteelgripGauntlets : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2887)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(43588)
+      Buffs.byIdOrName(43588, "Disarm Duration Reduction", this)
       )
 }

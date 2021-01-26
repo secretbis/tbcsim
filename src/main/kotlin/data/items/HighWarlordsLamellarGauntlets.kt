@@ -45,7 +45,7 @@ public class HighWarlordsLamellarGauntlets : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(14248),
-      Buffs.byId(23300)
+      Buffs.byIdOrName(14248, "Increase Spell Dam 21", this),
+      Buffs.byIdOrName(23300, "Seal of the Crusader Judgement Increase", this)
       )
 }

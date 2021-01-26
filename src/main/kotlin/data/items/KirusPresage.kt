@@ -44,7 +44,7 @@ public class KirusPresage : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(35338),
-      Buffs.byId(21626)
+      Buffs.byIdOrName(35338, "Increase Healing 228", this),
+      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
       )
 }

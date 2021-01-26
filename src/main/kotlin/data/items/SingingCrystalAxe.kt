@@ -42,6 +42,6 @@ public class SingingCrystalAxe : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(38282)
+      Buffs.byIdOrName(38282, "The Blade's Song", this)
       )
 }

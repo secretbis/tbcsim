@@ -48,6 +48,6 @@ public class UnyieldingGirdle : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(81)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17367)
+      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
       )
 }

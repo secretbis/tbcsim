@@ -44,7 +44,7 @@ public class ShardEncrustedBreastplate : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15820),
-      Buffs.byId(21361)
+      Buffs.byIdOrName(15820, "Attack Power 70", this),
+      Buffs.byIdOrName(21361, "Increased Mana Regen", this)
       )
 }

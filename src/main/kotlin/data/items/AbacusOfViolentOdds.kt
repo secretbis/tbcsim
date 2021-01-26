@@ -42,7 +42,7 @@ public class AbacusOfViolentOdds : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(15817),
-      Buffs.byId(33807)
+      Buffs.byIdOrName(15817, "Attack Power 64", this),
+      Buffs.byIdOrName(33807, "Haste", this)
       )
 }

@@ -43,7 +43,7 @@ public class LivingDragonscaleHelm : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18048),
-      Buffs.byId(21641)
+      Buffs.byIdOrName(18048, "Increase Healing 81", this),
+      Buffs.byIdOrName(21641, "Increased Mana Regen", this)
       )
 }

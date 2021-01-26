@@ -46,6 +46,6 @@ public class MantleOfDarkness : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(29524)
+      Buffs.byIdOrName(29524, "Attack Power 94", this)
       )
 }

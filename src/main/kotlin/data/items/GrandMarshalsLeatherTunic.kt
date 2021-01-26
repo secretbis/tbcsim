@@ -52,6 +52,6 @@ public class GrandMarshalsLeatherTunic : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9141)
+      Buffs.byIdOrName(9141, "Attack Power 12", this)
       )
 }

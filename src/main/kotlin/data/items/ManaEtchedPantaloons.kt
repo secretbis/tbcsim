@@ -45,7 +45,7 @@ public class ManaEtchedPantaloons : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18050),
-      Buffs.byId(33491)
+      Buffs.byIdOrName(18050, "Increase Spell Dam 33", this),
+      Buffs.byIdOrName(33491, "Spell Penetration 18", this)
       )
 }

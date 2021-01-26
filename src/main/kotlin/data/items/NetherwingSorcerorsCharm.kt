@@ -43,7 +43,7 @@ public class NetherwingSorcerorsCharm : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(9346),
-      Buffs.byId(18379)
+      Buffs.byIdOrName(9346, "Increase Spell Dam 18", this),
+      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
       )
 }

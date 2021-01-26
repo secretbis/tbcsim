@@ -48,7 +48,7 @@ public class GuiseOfTheTidalLurker : Item() {
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(42089),
-      Buffs.byId(21644)
+      Buffs.byIdOrName(42089, "Increase Healing 103", this),
+      Buffs.byIdOrName(21644, "Increased Mana Regen", this)
       )
 }

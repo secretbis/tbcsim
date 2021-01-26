@@ -45,6 +45,6 @@ public class ColdwhisperCord : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(17897)
+      Buffs.byIdOrName(17897, "Increase Frost Dam 36", this)
       )
 }

@@ -42,7 +42,7 @@ public class LowerCityPrayerbook : Item() {
   public override var socketBonus: SocketBonus? = null
 
   public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byId(18043),
-      Buffs.byId(37877)
+      Buffs.byIdOrName(18043, "Increase Healing 70", this),
+      Buffs.byIdOrName(37877, "Blessing of Faith", this)
       )
 }
