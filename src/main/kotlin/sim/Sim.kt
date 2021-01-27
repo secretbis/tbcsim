@@ -1,20 +1,17 @@
 package sim
 
-import character.Character
 import kotlinx.coroutines.*
 import mu.KotlinLogging
-import sim.rotation.Rotation
+import sim.config.Config
 
 class Sim (
-    val subject: Character,
-    val rotation: Rotation,
-    val opts: SimOptions
+    val config: Config
 ) {
     val logger = KotlinLogging.logger {}
 
     suspend fun sim() {
         // Iteration coroutines
-        val iterations = (1..opts.iterations).map {
+        val iterations = (1..config.opts.iterations).map {
             GlobalScope.async {
                 iterate()
             }
@@ -31,8 +28,8 @@ class Sim (
 
     private fun iterate() : SimIteration {
         // Simulate
-        val iteration = SimIteration(subject, rotation, opts)
-        for (timeMs in 0..opts.durationMs step opts.stepMs) {
+        val iteration = SimIteration(config.character, config.rotation, config.opts)
+        for (timeMs in 0..config.opts.durationMs step config.opts.stepMs) {
             iteration.tick++
             iteration.elapsedTimeMs = timeMs
             iteration.tick()

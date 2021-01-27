@@ -1,7 +1,11 @@
 package character.classes.shaman
 
 import character.*
+import character.classes.shaman.abilities.*
 import character.classes.shaman.talents.*
+import character.classes.shaman.talents.Stormstrike
+import data.model.Item
+import java.lang.IllegalArgumentException
 
 class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
@@ -30,6 +34,24 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
         }
     }
 
+    override fun abilityFromString(name: String, item: Item?): Ability?{
+        return when(name) {
+            Stormstrike.name -> character.classes.shaman.abilities.Stormstrike()
+            EarthShock.name -> EarthShock()
+            FlameShock.name -> FlameShock()
+            GraceOfAirTotem.name -> GraceOfAirTotem()
+            StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
+            WindfuryTotem.name -> WindfuryTotem()
+            WindfuryWeapon.name -> {
+                if(item == null) {
+                    throw IllegalArgumentException("Windfury Weapon must have an item context")
+                }
+                WindfuryWeapon(item)
+            }
+            else -> null
+        }
+    }
+
     override var baseStats: Stats = Stats(
         agility = 222,
         intellect = 180,
@@ -38,9 +60,7 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
         spirit = 135
     )
 
-    override val abilities: List<Ability> = listOf()
     override val buffs: List<Buff> = listOf()
-    override val procs: List<Proc> = listOf()
 
     override val resourceType: Resource.Type = Resource.Type.MANA
     override val baseResourceAmount: Int = 0

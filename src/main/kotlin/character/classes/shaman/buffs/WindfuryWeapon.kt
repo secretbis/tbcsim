@@ -48,9 +48,9 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         }
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-            val wfAbility = WindfuryWeaponAbility(sim, sourceItems[0])
+            val wfAbility = WindfuryWeaponAbility(sourceItems[0])
             if(wfAbility.available(sim)) {
-                wfAbility.cast()
+                wfAbility.cast(sim)
 
                 // Update ICD state
                 val state = sharedState(name, sim) as WindfuryWeaponState
@@ -59,7 +59,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 sim.logEvent(
                     Event(
                         eventType = Event.Type.PROC,
-                        ability = wfAbility
+                        abilityName = wfAbility.fullName(sim)
                     )
                 )
             }

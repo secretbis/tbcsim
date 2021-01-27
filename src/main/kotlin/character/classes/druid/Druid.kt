@@ -2,16 +2,20 @@ package character.classes.druid
 
 import character.*
 import character.Class
+import data.model.Item
 
 class Druid : Class(mapOf()) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }
 
+    override fun abilityFromString(name: String, item: Item?): Ability? {
+        return null
+    }
+
     override var baseStats: Stats = Stats()
-    override var abilities: List<Ability> = listOf()
     override var buffs: List<Buff> = listOf()
-    override var procs: List<Proc> = listOf()
+
     override var resourceType: Resource.Type = Resource.Type.MANA
     override var baseResourceAmount: Int = 0
     override var canDualWield: Boolean = false

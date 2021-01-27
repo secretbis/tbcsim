@@ -38,9 +38,6 @@ class SimIteration(
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
 
-    // Flag to track if we need to recompute stats on the next tick
-    var recomputeStatsOnNextTick: Boolean = false
-
     fun onGcd(): Boolean {
         return elapsedTimeMs < gcdEndMs
     }
@@ -52,14 +49,14 @@ class SimIteration(
     init {
         // Cast any spells flagged in the rotation as precombat
         rotation.rules.filter { it.type == Rule.Type.PRECOMBAT }.forEach {
-            it.ability.cast()
+            it.ability.cast(this)
         }
 
         // Add auto-attack, if allowed
         if(subject.klass.allowAutoAttack) {
             autoAttack = listOf(
-                MeleeMainHand(this),
-                MeleeOffHand(this)
+                MeleeMainHand(),
+                MeleeOffHand()
             )
         }
 
@@ -125,17 +122,18 @@ class SimIteration(
             val rotationAbility = rotation.next(this)
 
             if(rotationAbility != null) {
-                rotationAbility.cast()
+                rotationAbility.cast(this)
+                rotationAbility.afterCast(this)
 
                 // Set next cast times, and add latency if configured
-                gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs + opts.latencyMs
-                castEndMs = elapsedTimeMs + rotationAbility.castTimeMs() + opts.latencyMs
+                gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
+                castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
             }
         }
 
         // Do auto attacks
         autoAttack.forEach {
-            if(it.available(this)) it.cast()
+            if(it.available(this)) it.cast(this)
         }
     }
 
@@ -229,7 +227,7 @@ class SimIteration(
             event.timeMs = elapsedTimeMs
         }
 
-        logger.debug { "Got event: ${event.ability?.name ?: "Unknown"} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
+        logger.debug { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
 
         events.add(event)
     }

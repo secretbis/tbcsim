@@ -8,17 +8,19 @@ import sim.Event
 import sim.SimIteration
 import kotlin.random.Random
 
-class EarthShock(sim: SimIteration) : Ability(sim) {
+class EarthShock : Ability() {
+    companion object {
+        const val name = "Earth Shock"
+    }
+
     override val id: Int = 25454
-    override val name: String = "Earth Shock"
+    override val name: String = Companion.name
 
     override val baseCastTimeMs: Int = 0
-    override val gcdMs: Int = sim.subject.spellGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.subject.spellGcd().toInt()
 
     val baseDamage = Pair(658.0, 693.0)
-    override fun cast(free: Boolean) {
-        super.cast(free)
-
+    override fun cast(sim: SimIteration, free: Boolean) {
         val school = Constants.DamageType.NATURE
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
@@ -26,7 +28,7 @@ class EarthShock(sim: SimIteration) : Ability(sim) {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = school,
-            ability = this,
+            abilityName = name,
             amount = result.first,
             result = result.second,
         ))

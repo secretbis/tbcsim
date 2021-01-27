@@ -3,7 +3,6 @@ package character.races
 import character.Race
 import character.Ability
 import character.Stats
-import sim.SimIteration
 
 class Troll : Race() {
     override var baseStats: Stats = Stats(

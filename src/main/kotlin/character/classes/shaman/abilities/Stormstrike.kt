@@ -10,13 +10,17 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-class Stormstrike(sim: SimIteration) : Ability(sim) {
+class Stormstrike : Ability() {
+    companion object {
+        const val name = "Stormstrike"
+    }
+
     override val id: Int = 17364
-    override val name: String = "Stormstrike"
-    override val cooldownMs: Double = 10.0
+    override val name: String = Companion.name
+    override fun cooldownMs(sim: SimIteration): Double = 10.0
 
     val buff = object : Buff() {
-        override val name: String = "Stormstrike"
+        override val name: String = Companion.name
         override val durationMs: Int = 12000
         override val maxCharges: Int = 2
 
@@ -45,9 +49,7 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
-    override fun cast(free: Boolean) {
-        super.cast(free)
-
+    override fun cast(sim: SimIteration, free: Boolean) {
         // Do attacks
         val mhItem = sim.subject.gear.mainHand
         val mhAttack = Melee.baseDamageRoll(sim, mhItem, isNormalized = true)
@@ -61,7 +63,7 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
+            abilityName = name,
             amount = mhResult.first,
             result = mhResult.second,
         ))
@@ -69,13 +71,14 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
+            abilityName = name,
             amount = ohResult.first,
             result = ohResult.second,
         ))
 
         // Proc anything that can proc off a yellow hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
+        //       Would need to create new events to distinguish yellow-mitigation, to avoid consuming things like Flurry charges
         val triggerTypes = when(mhResult.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -86,6 +89,8 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
             sim.fireProc(triggerTypes, listOf(mhItem), this)
         }
 
+        // TODO: This is modeled as two distint hit events for the purposes of procs
+        //       Confirm if that is correct behavior
         val triggerTypesOh = when(ohResult.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -98,5 +103,5 @@ class Stormstrike(sim: SimIteration) : Ability(sim) {
     }
 
     override val baseCastTimeMs: Int = 0
-    override val gcdMs: Int = sim.subject.physicalGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.subject.physicalGcd().toInt()
 }

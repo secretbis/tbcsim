@@ -6,7 +6,7 @@ abstract class Race {
     companion object {
         fun fromString(name: String): Race? {
             return when(name.toLowerCase().trim()) {
-                "draenei" -> Draenei()
+                "draenei" -> return Draenei()
                 else -> null
             }
         }

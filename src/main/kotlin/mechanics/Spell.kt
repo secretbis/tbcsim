@@ -68,7 +68,7 @@ object Spell {
         // TODO: Model partial resists as 0/25/50/75
         //       There seems to be no real formula for that, though, so just going with avg every time for now
         val totalResistance = (targetResistance - sim.subject.stats.spellPen).coerceAtLeast(0) + targetResistance
-        return (0.75 * targetResistance / (5 * sim.subject.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
+        return (0.75 * totalResistance / (5 * sim.subject.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 
     fun spellCritChance(sim: SimIteration): Double {

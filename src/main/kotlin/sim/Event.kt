@@ -1,13 +1,12 @@
 package sim
 
-import character.Ability
 import character.Buff
 import data.Constants
 
 data class Event(
     var tick: Int = -1,
     var timeMs: Int = -1,
-    val ability: Ability? = null,
+    val abilityName: String? = null,
     val buff: Buff? = null,
     val eventType: Type,
     val damageType: Constants.DamageType? = null,

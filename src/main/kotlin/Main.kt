@@ -35,11 +35,7 @@ class TBCSim : CliktCommand() {
             if(configFile != null) {
                 val config = Config.fromYml(configFile!!)
                 runBlocking {
-                    Sim(
-                        config.character,
-                        config.rotation,
-                        config.opts
-                    ).sim()
+                    Sim(config).sim()
                 }
             } else {
                 println("Please specify a sim config file path as the first positional argument")

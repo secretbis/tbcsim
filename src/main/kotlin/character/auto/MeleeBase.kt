@@ -8,16 +8,16 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
-    abstract val item: Item
+abstract class MeleeBase : Ability() {
+    abstract fun item(sim: SimIteration): Item
     abstract val isOffhand: Boolean
 
-    fun weaponSpeed(): Double {
-        return (item.speed / sim.subject.meleeHasteMultiplier()).coerceAtLeast(0.01)
-    }
-
     override val baseCastTimeMs: Int = 0
-    override val gcdMs: Int = 0
+    override fun gcdMs(sim: SimIteration): Int = 0
+
+    fun weaponSpeed(sim: SimIteration): Double {
+        return (item(sim).speed / sim.subject.meleeHasteMultiplier()).coerceAtLeast(0.01)
+    }
 
     class AutoAttackState : Ability.State() {
         var lastAttackTimeMs = 0
@@ -28,12 +28,12 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
     }
 
     override fun available(sim: SimIteration): Boolean {
-        val nextAvailableTimeMs = (state(sim) as AutoAttackState).lastAttackTimeMs + weaponSpeed()
+        val nextAvailableTimeMs = (state(sim) as AutoAttackState).lastAttackTimeMs + weaponSpeed(sim)
         return nextAvailableTimeMs <= sim.elapsedTimeMs
     }
 
-    override fun cast(free: Boolean) {
-        val damageRoll = Melee.baseDamageRoll(sim, item)
+    override fun cast(sim: SimIteration, free: Boolean) {
+        val damageRoll = Melee.baseDamageRoll(sim, item(sim))
         val result = Melee.attackRoll(sim, damageRoll, true, isOffhand)
 
         // Save last hit state and fire event
@@ -41,7 +41,7 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
+            abilityName = name,
             amount = result.first,
             result = result.second,
         ))
@@ -60,7 +60,7 @@ abstract class MeleeBase(sim: SimIteration) : Ability(sim) {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this)
+            sim.fireProc(triggerTypes, listOf(item(sim)), this)
         }
     }
 }

@@ -1,6 +1,7 @@
 package character
 
 import character.classes.shaman.Shaman
+import data.model.Item
 
 abstract class Class(
     var talents: Map<String, Talent>
@@ -16,9 +17,10 @@ abstract class Class(
 
     // Everything that comes with the class
     abstract val baseStats: Stats
-    abstract val abilities: List<Ability>
     abstract val buffs: List<Buff>
-    abstract val procs: List<Proc>
+
+    // Ability factory
+    abstract fun abilityFromString(name: String, item: Item? = null): Ability?
 
     // Talent factory
     abstract fun talentFromString(name: String, ranks: Int): Talent?

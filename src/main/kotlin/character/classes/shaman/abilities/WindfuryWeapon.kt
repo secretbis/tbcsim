@@ -9,24 +9,29 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
-    override val id: Int = 25505
-    override val name: String
-        get() {
-            val suffix = if(isOffHand()) { "(OH)" } else { "(MH)" }
-            return "Windfury Weapon $suffix"
-        }
-
-    override fun available(sim: SimIteration): Boolean {
-        return if(isOffHand()) { sim.subject.isDualWielding() } else true
+class WindfuryWeapon(val item: Item) : Ability() {
+    companion object {
+        const val name = "Windfury Weapon"
     }
 
-    fun isOffHand(): Boolean {
+    override val id: Int = 25505
+    override val name: String = Companion.name
+
+    fun fullName(sim: SimIteration): String {
+        val suffix = if(isOffHand(sim)) { "(OH)" } else { "(MH)" }
+        return "${Companion.name} $suffix"
+    }
+
+    override fun available(sim: SimIteration): Boolean {
+        return if(isOffHand(sim)) { sim.subject.isDualWielding() } else true
+    }
+
+    fun isOffHand(sim: SimIteration): Boolean {
         return item === sim.subject.gear.offHand
     }
 
     val baseExtraAp = 445
-    override fun cast(free: Boolean) {
+    override fun cast(sim: SimIteration, free: Boolean) {
         // Apply talents
         val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
         val extraAp = (baseExtraAp * (elementalWeapons?.windfuryApMultiplier() ?: 1.0)).toInt()
@@ -34,12 +39,12 @@ class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
         // Do attacks
         val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
         val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
-        val result = Melee.attackRoll(sim, attackOne + attackTwo, true, isOffHand())
+        val result = Melee.attackRoll(sim, attackOne + attackTwo, true, isOffHand(sim))
 
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
+            abilityName = fullName(sim),
             amount = result.first,
             result = result.second,
         ))
@@ -58,5 +63,5 @@ class WindfuryWeapon(sim: SimIteration, val item: Item) : Ability(sim) {
     }
 
     override val baseCastTimeMs: Int = 0
-    override val gcdMs: Int = 0
+    override fun gcdMs(sim: SimIteration): Int = 0
 }

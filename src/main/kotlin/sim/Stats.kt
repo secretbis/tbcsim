@@ -190,7 +190,8 @@ object Stats {
     fun resultsByAbility(iterations: List<SimIteration>) {
         val byAbility = iterations.flatMap { it.events }
             .filter { it.eventType == Event.Type.DAMAGE }
-            .groupBy { it.ability?.name ?: "Unknown" }
+            .filter { it.abilityName != null }
+            .groupBy { it.abilityName!! }
 
         val keys = byAbility.keys.toList()
 

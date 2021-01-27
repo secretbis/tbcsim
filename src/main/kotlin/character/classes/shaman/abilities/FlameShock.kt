@@ -8,17 +8,19 @@ import mechanics.Spell
 import sim.Event
 import sim.SimIteration
 
-class FlameShock(sim: SimIteration) : Ability(sim) {
+class FlameShock : Ability() {
+    companion object {
+        const val name = "Flame Shock"
+    }
+
     override val id: Int = 25457
-    override val name: String = "Flame Shock"
+    override val name: String = Companion.name
 
     override val baseCastTimeMs: Int = 0
-    override val gcdMs: Int = sim.subject.spellGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.subject.spellGcd().toInt()
 
     val baseDamage = 377.0
-    override fun cast(free: Boolean) {
-        super.cast(free)
-
+    override fun cast(sim: SimIteration, free: Boolean) {
         val school = Constants.DamageType.FIRE
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage, baseDamage, spellPowerCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
@@ -26,7 +28,7 @@ class FlameShock(sim: SimIteration) : Ability(sim) {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = school,
-            ability = this,
+            abilityName = name,
             amount = result.first,
             result = result.second,
         ))
@@ -38,7 +40,7 @@ class FlameShock(sim: SimIteration) : Ability(sim) {
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST, Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
             Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
             Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)
             else -> null

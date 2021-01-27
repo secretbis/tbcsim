@@ -47,7 +47,6 @@ class Config(
         }
 
         private fun createItemFromGear(itemYml: GearItemYml?): Item {
-
             return if(itemYml != null) {
                 var item = ItemIndex.byName(itemYml.name)
 //                var item = Item()
@@ -91,7 +90,6 @@ class Config(
             characterClass.talents = talents
 
             // Gear
-            // TODO: Actually implement this
             val gear = Gear(
                 mainHand = createItemFromGear(yml.gear?.mainHand),
                 offHand = createItemFromGear(yml.gear?.offHand),
