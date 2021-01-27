@@ -36,8 +36,7 @@ public class SonicSpear : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 30,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf()

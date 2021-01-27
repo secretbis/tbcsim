@@ -38,8 +38,7 @@ public class MercilessGladiatorsPlateShoulders : Item() {
   public override var stats: Stats = Stats(
       strength = 29,
       stamina = 51,
-      physicalCritRating = 27.0,
-      spellCritRating = 27.0
+      physicalCritRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -38,8 +38,7 @@ public class ShadowedGauntletsOfParoxysm : Item() {
   public override var stats: Stats = Stats(
       agility = 41,
       stamina = 33,
-      physicalHasteRating = 30.0,
-      spellHasteRating = 30.0
+      physicalHasteRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf(

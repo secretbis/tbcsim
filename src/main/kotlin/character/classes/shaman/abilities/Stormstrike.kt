@@ -20,7 +20,7 @@ class Stormstrike : Ability() {
     override fun cooldownMs(sim: SimIteration): Int = 10000
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "${Companion.name} (Nature)"
         override val durationMs: Int = 12000
         override val maxCharges: Int = 2
 
@@ -75,6 +75,9 @@ class Stormstrike : Ability() {
             amount = ohResult.first,
             result = ohResult.second,
         ))
+
+        // Apply the nature buff
+        sim.addBuff(buff)
 
         // Proc anything that can proc off a yellow hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?

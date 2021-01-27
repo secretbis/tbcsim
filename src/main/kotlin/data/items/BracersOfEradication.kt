@@ -38,9 +38,7 @@ public class BracersOfEradication : Item() {
       strength = 25,
       stamina = 12,
       physicalCritRating = 24.0,
-      physicalHitRating = 17.0,
-      spellCritRating = 24.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

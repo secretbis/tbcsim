@@ -35,8 +35,7 @@ public class BlackFeatherlightBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 41,
-      physicalHitRating = 34.0,
-      spellHitRating = 34.0
+      physicalHitRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf()

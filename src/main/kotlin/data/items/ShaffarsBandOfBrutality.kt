@@ -35,9 +35,7 @@ public class ShaffarsBandOfBrutality : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 20.0,
-      physicalHitRating = 19.0,
-      spellCritRating = 20.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

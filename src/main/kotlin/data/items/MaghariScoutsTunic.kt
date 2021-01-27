@@ -36,8 +36,7 @@ public class MaghariScoutsTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 18,
-      physicalHitRating = 12.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

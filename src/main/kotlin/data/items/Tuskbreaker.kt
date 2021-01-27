@@ -34,8 +34,7 @@ public class Tuskbreaker : Item() {
   public override var speed: Double = 2900.0
 
   public override var stats: Stats = Stats(
-      physicalHasteRating = 18.0,
-      spellHasteRating = 18.0
+      physicalHasteRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

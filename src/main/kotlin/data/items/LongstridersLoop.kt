@@ -36,8 +36,7 @@ public class LongstridersLoop : Item() {
   public override var stats: Stats = Stats(
       agility = 16,
       stamina = 15,
-      physicalHitRating = 11.0,
-      spellHitRating = 11.0
+      physicalHitRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf()

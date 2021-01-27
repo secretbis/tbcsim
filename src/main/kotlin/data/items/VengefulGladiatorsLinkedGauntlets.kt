@@ -37,8 +37,7 @@ public class VengefulGladiatorsLinkedGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 33,
       stamina = 51,
-      physicalCritRating = 32.0,
-      spellCritRating = 32.0
+      physicalCritRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf()

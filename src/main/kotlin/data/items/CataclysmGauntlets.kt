@@ -38,8 +38,7 @@ public class CataclysmGauntlets : Item() {
       agility = 24,
       stamina = 34,
       intellect = 23,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf()

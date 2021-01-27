@@ -40,8 +40,7 @@ public class HighWarlordsChainHelm : Item() {
       agility = 20,
       stamina = 30,
       intellect = 14,
-      physicalCritRating = 14.0,
-      spellCritRating = 14.0
+      physicalCritRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

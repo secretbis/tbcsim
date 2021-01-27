@@ -36,8 +36,7 @@ public class TheOathkeeper : Item() {
       strength = 35,
       stamina = 24,
       intellect = 32,
-      physicalHitRating = 26.0,
-      spellHitRating = 26.0
+      physicalHitRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf()

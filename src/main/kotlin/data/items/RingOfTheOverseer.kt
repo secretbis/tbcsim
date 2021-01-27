@@ -35,8 +35,7 @@ public class RingOfTheOverseer : Item() {
 
   public override var stats: Stats = Stats(
       agility = 16,
-      physicalHitRating = 12.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

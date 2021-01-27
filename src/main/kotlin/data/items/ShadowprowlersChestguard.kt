@@ -38,8 +38,7 @@ public class ShadowprowlersChestguard : Item() {
       strength = 32,
       agility = 40,
       stamina = 12,
-      physicalHitRating = 8.0,
-      spellHitRating = 8.0
+      physicalHitRating = 8.0
       )
 
   public override var sockets: List<Socket> = listOf(

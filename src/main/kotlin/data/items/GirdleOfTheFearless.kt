@@ -38,7 +38,6 @@ public class GirdleOfTheFearless : Item() {
       stamina = 58,
       physicalHitRating = 23.0,
       expertiseRating = 22.0,
-      spellHitRating = 23.0,
       defenseRating = 34.0
       )
 

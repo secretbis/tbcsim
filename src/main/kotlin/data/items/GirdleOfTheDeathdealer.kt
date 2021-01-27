@@ -36,8 +36,7 @@ public class GirdleOfTheDeathdealer : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 28,
-      physicalHitRating = 20.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

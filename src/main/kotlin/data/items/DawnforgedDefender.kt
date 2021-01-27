@@ -36,7 +36,6 @@ public class DawnforgedDefender : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       physicalHitRating = 13.0,
-      spellHitRating = 13.0,
       dodgeRating = 18.0
       )
 

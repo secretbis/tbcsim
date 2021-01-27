@@ -38,9 +38,7 @@ public class DreadbootsOfTheLegion : Item() {
       strength = 38,
       stamina = 40,
       physicalCritRating = 30.0,
-      physicalHitRating = 18.0,
-      spellCritRating = 30.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

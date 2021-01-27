@@ -37,9 +37,7 @@ public class SoftstepBootsOfTracking : Item() {
       agility = 27,
       intellect = 29,
       physicalCritRating = 26.0,
-      physicalHitRating = 17.0,
-      spellCritRating = 26.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

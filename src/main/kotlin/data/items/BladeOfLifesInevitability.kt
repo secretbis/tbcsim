@@ -37,8 +37,7 @@ public class BladeOfLifesInevitability : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      physicalHasteRating = 16.0,
-      spellHasteRating = 16.0
+      physicalHasteRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

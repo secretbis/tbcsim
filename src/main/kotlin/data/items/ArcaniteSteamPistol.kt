@@ -34,8 +34,7 @@ public class ArcaniteSteamPistol : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

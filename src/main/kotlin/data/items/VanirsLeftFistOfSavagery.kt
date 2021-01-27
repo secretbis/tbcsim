@@ -35,9 +35,7 @@ public class VanirsLeftFistOfSavagery : Item() {
 
   public override var stats: Stats = Stats(
       physicalHitRating = 21.0,
-      physicalHasteRating = 23.0,
-      spellHitRating = 21.0,
-      spellHasteRating = 23.0
+      physicalHasteRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -39,8 +39,7 @@ public class DeathmantleHelm : Item() {
   public override var stats: Stats = Stats(
       agility = 39,
       stamina = 48,
-      physicalCritRating = 25.0,
-      spellCritRating = 25.0
+      physicalCritRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf(

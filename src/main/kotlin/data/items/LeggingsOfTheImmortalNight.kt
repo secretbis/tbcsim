@@ -38,8 +38,7 @@ public class LeggingsOfTheImmortalNight : Item() {
   public override var stats: Stats = Stats(
       agility = 41,
       stamina = 48,
-      physicalHitRating = 32.0,
-      spellHitRating = 32.0
+      physicalHitRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf(

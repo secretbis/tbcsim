@@ -39,9 +39,7 @@ public class DuplicitousGuise : Item() {
       agility = 43,
       stamina = 57,
       physicalHitRating = 30.0,
-      physicalHasteRating = 34.0,
-      spellHitRating = 30.0,
-      spellHasteRating = 34.0
+      physicalHasteRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf(

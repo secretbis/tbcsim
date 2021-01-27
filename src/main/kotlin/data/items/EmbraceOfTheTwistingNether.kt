@@ -38,8 +38,7 @@ public class EmbraceOfTheTwistingNether : Item() {
   public override var stats: Stats = Stats(
       stamina = 56,
       intellect = 27,
-      physicalCritRating = 35.0,
-      spellCritRating = 35.0
+      physicalCritRating = 35.0
       )
 
   public override var sockets: List<Socket> = listOf(

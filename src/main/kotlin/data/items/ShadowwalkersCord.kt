@@ -36,8 +36,7 @@ public class ShadowwalkersCord : Item() {
   public override var stats: Stats = Stats(
       agility = 27,
       stamina = 38,
-      physicalHasteRating = 37.0,
-      spellHasteRating = 37.0
+      physicalHasteRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

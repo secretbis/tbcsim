@@ -36,8 +36,7 @@ public class HardKhoriumBand : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 42,
-      physicalHasteRating = 28.0,
-      spellHasteRating = 28.0
+      physicalHasteRating = 28.0
       )
 
   public override var sockets: List<Socket> = listOf()

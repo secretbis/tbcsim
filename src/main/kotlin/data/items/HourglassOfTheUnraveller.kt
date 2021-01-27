@@ -34,8 +34,7 @@ public class HourglassOfTheUnraveller : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 32.0,
-      spellCritRating = 32.0
+      physicalCritRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf()

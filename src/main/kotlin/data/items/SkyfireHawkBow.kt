@@ -34,8 +34,7 @@ public class SkyfireHawkBow : Item() {
   public override var speed: Double = 2400.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -39,8 +39,7 @@ public class BeltOfTheBlackEagle : Item() {
       agility = 17,
       stamina = 20,
       intellect = 23,
-      physicalCritRating = 17.0,
-      spellCritRating = 17.0
+      physicalCritRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

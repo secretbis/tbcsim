@@ -38,8 +38,7 @@ public class MasterAssassinWristwraps : Item() {
   public override var stats: Stats = Stats(
       agility = 17,
       stamina = 22,
-      physicalCritRating = 18.0,
-      spellCritRating = 18.0
+      physicalCritRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

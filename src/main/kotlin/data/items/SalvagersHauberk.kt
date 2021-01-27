@@ -35,8 +35,7 @@ public class SalvagersHauberk : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
-      physicalCritRating = 33.0,
-      spellCritRating = 33.0
+      physicalCritRating = 33.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,8 +36,7 @@ public class BoggspineKnuckles : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 10,
-      physicalHitRating = 11.0,
-      spellHitRating = 11.0
+      physicalHitRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf()

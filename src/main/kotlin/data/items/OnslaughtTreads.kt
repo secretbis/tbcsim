@@ -39,10 +39,7 @@ public class OnslaughtTreads : Item() {
       strength = 44,
       physicalCritRating = 36.0,
       physicalHitRating = 25.0,
-      physicalHasteRating = 30.0,
-      spellCritRating = 36.0,
-      spellHitRating = 25.0,
-      spellHasteRating = 30.0
+      physicalHasteRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf(

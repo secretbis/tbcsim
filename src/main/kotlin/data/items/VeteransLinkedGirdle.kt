@@ -36,8 +36,7 @@ public class VeteransLinkedGirdle : Item() {
       strength = 31,
       stamina = 45,
       intellect = 20,
-      physicalCritRating = 30.0,
-      spellCritRating = 30.0
+      physicalCritRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

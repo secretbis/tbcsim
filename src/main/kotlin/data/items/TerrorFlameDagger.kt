@@ -35,8 +35,7 @@ public class TerrorFlameDagger : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

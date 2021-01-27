@@ -38,7 +38,6 @@ public class AuchenaiMonksTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       physicalHitRating = 19.0,
-      spellHitRating = 19.0,
       dodgeRating = 24.0
       )
 

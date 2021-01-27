@@ -39,8 +39,7 @@ public class GladiatorsLeatherSpaulders : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 39,
-      physicalCritRating = 21.0,
-      spellCritRating = 21.0
+      physicalCritRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

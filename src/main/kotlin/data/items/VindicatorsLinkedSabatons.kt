@@ -36,8 +36,7 @@ public class VindicatorsLinkedSabatons : Item() {
       strength = 33,
       stamina = 49,
       intellect = 23,
-      physicalCritRating = 34.0,
-      spellCritRating = 34.0
+      physicalCritRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf()

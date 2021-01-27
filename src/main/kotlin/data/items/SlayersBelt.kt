@@ -41,10 +41,7 @@ public class SlayersBelt : Item() {
       stamina = 21,
       physicalCritRating = 13.0,
       physicalHitRating = 30.0,
-      physicalHasteRating = 27.0,
-      spellCritRating = 13.0,
-      spellHitRating = 30.0,
-      spellHasteRating = 27.0
+      physicalHasteRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf(

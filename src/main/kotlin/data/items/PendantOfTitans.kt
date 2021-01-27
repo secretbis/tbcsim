@@ -35,7 +35,6 @@ public class PendantOfTitans : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       physicalHitRating = 20.0,
-      spellHitRating = 20.0,
       defenseRating = 21.0,
       dodgeRating = 25.0
       )

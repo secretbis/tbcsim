@@ -39,8 +39,7 @@ public class FiendSlayerBoots : Item() {
       agility = 26,
       stamina = 24,
       intellect = 16,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

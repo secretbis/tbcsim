@@ -36,7 +36,6 @@ public class InuurosBlade : Item() {
       stamina = 21,
       physicalHitRating = 8.0,
       expertiseRating = 11.0,
-      spellHitRating = 8.0,
       defenseRating = 13.0
       )
 

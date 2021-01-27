@@ -35,9 +35,7 @@ public class CrossbowOfRelentlessStrikes : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 18.0,
-      physicalHitRating = 14.0,
-      spellCritRating = 18.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

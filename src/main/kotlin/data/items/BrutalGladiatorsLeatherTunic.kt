@@ -40,9 +40,7 @@ public class BrutalGladiatorsLeatherTunic : Item() {
       agility = 36,
       stamina = 71,
       physicalCritRating = 22.0,
-      physicalHitRating = 17.0,
-      spellCritRating = 22.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

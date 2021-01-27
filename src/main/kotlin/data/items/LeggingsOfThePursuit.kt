@@ -39,8 +39,7 @@ public class LeggingsOfThePursuit : Item() {
       agility = 44,
       stamina = 36,
       intellect = 30,
-      physicalHitRating = 15.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf(

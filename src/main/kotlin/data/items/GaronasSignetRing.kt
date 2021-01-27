@@ -36,8 +36,7 @@ public class GaronasSignetRing : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 25,
-      physicalHitRating = 18.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

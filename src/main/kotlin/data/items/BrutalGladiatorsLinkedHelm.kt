@@ -40,9 +40,7 @@ public class BrutalGladiatorsLinkedHelm : Item() {
       strength = 40,
       stamina = 74,
       physicalCritRating = 39.0,
-      physicalHitRating = 18.0,
-      spellCritRating = 39.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

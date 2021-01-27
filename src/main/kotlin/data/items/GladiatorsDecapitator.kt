@@ -36,9 +36,7 @@ public class GladiatorsDecapitator : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       physicalCritRating = 35.0,
-      physicalHitRating = 20.0,
-      spellCritRating = 35.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

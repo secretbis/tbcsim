@@ -38,8 +38,7 @@ public class GrimgrinFaceguard : Item() {
   public override var stats: Stats = Stats(
       agility = 40,
       stamina = 48,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf(

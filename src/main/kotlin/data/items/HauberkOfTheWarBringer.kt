@@ -39,8 +39,7 @@ public class HauberkOfTheWarBringer : Item() {
       agility = 24,
       stamina = 25,
       intellect = 17,
-      physicalHasteRating = 20.0,
-      spellHasteRating = 20.0
+      physicalHasteRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

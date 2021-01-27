@@ -37,9 +37,7 @@ public class MercilessGladiatorsMaul : Item() {
       strength = 42,
       stamina = 55,
       physicalCritRating = 42.0,
-      physicalHitRating = 18.0,
-      spellCritRating = 42.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

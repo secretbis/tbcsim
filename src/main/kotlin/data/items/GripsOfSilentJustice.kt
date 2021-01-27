@@ -38,8 +38,7 @@ public class GripsOfSilentJustice : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 37,
-      physicalHitRating = 15.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf(

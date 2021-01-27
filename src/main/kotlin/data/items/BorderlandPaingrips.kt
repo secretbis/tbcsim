@@ -38,8 +38,7 @@ public class BorderlandPaingrips : Item() {
   public override var stats: Stats = Stats(
       strength = 47,
       stamina = 48,
-      physicalCritRating = 39.0,
-      spellCritRating = 39.0
+      physicalCritRating = 39.0
       )
 
   public override var sockets: List<Socket> = listOf(

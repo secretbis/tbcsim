@@ -35,8 +35,7 @@ public class Nightstrike : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       physicalHitRating = 10.0,
-      expertiseRating = 10.0,
-      spellHitRating = 10.0
+      expertiseRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

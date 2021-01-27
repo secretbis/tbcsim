@@ -38,8 +38,7 @@ public class DemonStalkerGreaves : Item() {
       agility = 40,
       stamina = 30,
       intellect = 30,
-      physicalHitRating = 15.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

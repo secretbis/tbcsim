@@ -35,8 +35,7 @@ public class ReflexBlades : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 13,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf()

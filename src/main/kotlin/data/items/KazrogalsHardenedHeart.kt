@@ -37,7 +37,6 @@ public class KazrogalsHardenedHeart : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       physicalHitRating = 21.0,
-      spellHitRating = 21.0,
       defenseRating = 28.0
       )
 

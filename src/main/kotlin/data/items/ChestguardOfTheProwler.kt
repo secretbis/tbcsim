@@ -37,7 +37,6 @@ public class ChestguardOfTheProwler : Item() {
       agility = 31,
       stamina = 26,
       physicalHitRating = 17.0,
-      spellHitRating = 17.0,
       parryRating = 16.0
       )
 

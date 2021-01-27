@@ -39,9 +39,7 @@ public class CarapaceOfSunAndShadow : Item() {
       agility = 42,
       stamina = 45,
       physicalHitRating = 30.0,
-      physicalHasteRating = 38.0,
-      spellHitRating = 30.0,
-      spellHasteRating = 38.0
+      physicalHasteRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf(

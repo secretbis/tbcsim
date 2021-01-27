@@ -41,9 +41,7 @@ public class SlayersBoots : Item() {
       stamina = 24,
       physicalCritRating = 16.0,
       physicalHitRating = 28.0,
-      expertiseRating = 24.0,
-      spellCritRating = 16.0,
-      spellHitRating = 28.0
+      expertiseRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf(

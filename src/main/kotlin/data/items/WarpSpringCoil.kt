@@ -34,8 +34,7 @@ public class WarpSpringCoil : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 21.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

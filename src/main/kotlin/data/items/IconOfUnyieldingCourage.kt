@@ -34,8 +34,7 @@ public class IconOfUnyieldingCourage : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 30.0,
-      spellHitRating = 30.0
+      physicalHitRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

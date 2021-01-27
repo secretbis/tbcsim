@@ -39,9 +39,7 @@ public class RagesteelShoulders : Item() {
       strength = 32,
       stamina = 12,
       physicalCritRating = 17.0,
-      physicalHitRating = 9.0,
-      spellCritRating = 17.0,
-      spellHitRating = 9.0
+      physicalHitRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf(

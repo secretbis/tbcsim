@@ -37,9 +37,7 @@ public class BrutalGladiatorsStaff : Item() {
       strength = 50,
       stamina = 66,
       physicalCritRating = 50.0,
-      physicalHitRating = 26.0,
-      spellCritRating = 50.0,
-      spellHitRating = 26.0
+      physicalHitRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf()

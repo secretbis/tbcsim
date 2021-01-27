@@ -27,6 +27,7 @@ class FlameShock : Ability() {
 
     val baseDamage = 377.0
     override fun cast(sim: SimIteration, free: Boolean) {
+        val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.FIRE
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
@@ -39,8 +40,8 @@ class FlameShock : Ability() {
             result = result.second,
         ))
 
-        // Proc the DoT
-        FlameShockDot().procs(sim).forEach { it.proc(sim, listOf(), this) }
+        // Apply the DoT
+        sim.addDebuff(FlameShockDot())
 
         // Proc anything that can proc off Fire damage
         val triggerTypes = when(result.second) {

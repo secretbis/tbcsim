@@ -37,7 +37,7 @@ public class TornheartAxeOfBattle : Item() {
       stamina = 27,
       intellect = 30,
       physicalCritRating = 17.0,
-      spellCritRating = 34.0
+      spellCritRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

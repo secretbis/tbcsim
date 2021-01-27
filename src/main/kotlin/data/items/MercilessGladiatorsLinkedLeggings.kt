@@ -37,8 +37,7 @@ public class MercilessGladiatorsLinkedLeggings : Item() {
       strength = 34,
       stamina = 60,
       intellect = 29,
-      physicalCritRating = 40.0,
-      spellCritRating = 40.0
+      physicalCritRating = 40.0
       )
 
   public override var sockets: List<Socket> = listOf()

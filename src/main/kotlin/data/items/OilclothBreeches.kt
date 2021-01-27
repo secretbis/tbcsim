@@ -36,9 +36,7 @@ public class OilclothBreeches : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       physicalCritRating = 30.0,
-      physicalHitRating = 25.0,
-      spellCritRating = 30.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

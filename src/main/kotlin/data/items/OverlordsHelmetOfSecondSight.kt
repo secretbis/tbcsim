@@ -39,9 +39,7 @@ public class OverlordsHelmetOfSecondSight : Item() {
       strength = 29,
       stamina = 22,
       physicalCritRating = 24.0,
-      physicalHitRating = 13.0,
-      spellCritRating = 24.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

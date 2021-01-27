@@ -35,9 +35,7 @@ public class TalonOfThePhoenix : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 19.0,
-      physicalHitRating = 15.0,
-      spellCritRating = 19.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,9 +36,7 @@ public class MantleOfDarkness : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       physicalCritRating = 33.0,
-      physicalHitRating = 22.0,
-      spellCritRating = 33.0,
-      spellHitRating = 22.0
+      physicalHitRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

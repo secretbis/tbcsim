@@ -39,8 +39,7 @@ public class ShoulderpadsOfTheStranger : Item() {
       agility = 33,
       stamina = 28,
       physicalCritRating = 16.0,
-      expertiseRating = 10.0,
-      spellCritRating = 16.0
+      expertiseRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf(

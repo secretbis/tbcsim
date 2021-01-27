@@ -38,9 +38,7 @@ public class HelmOfTheIllidariShatterer : Item() {
       strength = 51,
       stamina = 29,
       physicalCritRating = 42.0,
-      physicalHitRating = 34.0,
-      spellCritRating = 42.0,
-      spellHitRating = 34.0
+      physicalHitRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf(

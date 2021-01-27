@@ -37,8 +37,7 @@ public class TunicOfTheRangerLord : Item() {
       agility = 45,
       stamina = 34,
       intellect = 23,
-      physicalCritRating = 23.0,
-      spellCritRating = 23.0
+      physicalCritRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf()

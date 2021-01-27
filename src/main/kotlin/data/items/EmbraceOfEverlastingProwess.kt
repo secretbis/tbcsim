@@ -39,8 +39,7 @@ public class EmbraceOfEverlastingProwess : Item() {
       agility = 49,
       stamina = 52,
       intellect = 23,
-      physicalHasteRating = 20.0,
-      spellHasteRating = 20.0
+      physicalHasteRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

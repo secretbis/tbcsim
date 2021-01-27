@@ -37,8 +37,7 @@ public class HighWarlordsLinkedLeggings : Item() {
       strength = 22,
       stamina = 42,
       intellect = 22,
-      physicalCritRating = 28.0,
-      spellCritRating = 28.0
+      physicalCritRating = 28.0
       )
 
   public override var sockets: List<Socket> = listOf()

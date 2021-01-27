@@ -35,8 +35,7 @@ public class WastewalkerShiv : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalHitRating = 12.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

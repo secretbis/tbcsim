@@ -39,8 +39,7 @@ public class NetherbladeChestpiece : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 39,
-      physicalHitRating = 11.0,
-      spellHitRating = 11.0
+      physicalHitRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf(

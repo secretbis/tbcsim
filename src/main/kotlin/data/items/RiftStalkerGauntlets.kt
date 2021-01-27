@@ -38,8 +38,7 @@ public class RiftStalkerGauntlets : Item() {
       agility = 34,
       stamina = 29,
       intellect = 20,
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -38,8 +38,7 @@ public class DoomplateShoulderguards : Item() {
   public override var stats: Stats = Stats(
       strength = 19,
       stamina = 22,
-      physicalCritRating = 20.0,
-      spellCritRating = 20.0
+      physicalCritRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

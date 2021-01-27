@@ -36,9 +36,7 @@ public class CobrascaleGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       physicalCritRating = 25.0,
-      physicalHitRating = 20.0,
-      spellCritRating = 25.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

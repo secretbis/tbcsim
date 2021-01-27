@@ -36,9 +36,7 @@ public class LegguardsOfEndlessRage : Item() {
       strength = 70,
       stamina = 61,
       physicalCritRating = 46.0,
-      physicalHitRating = 19.0,
-      spellCritRating = 46.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

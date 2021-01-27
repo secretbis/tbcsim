@@ -37,8 +37,6 @@ public class MaghariWarlordsLegplates : Item() {
       stamina = 64,
       physicalCritRating = 12.0,
       physicalHitRating = 15.0,
-      spellCritRating = 12.0,
-      spellHitRating = 15.0,
       defenseRating = 16.0
       )
 

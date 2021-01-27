@@ -34,8 +34,7 @@ public class WrathfireHandCannon : Item() {
   public override var speed: Double = 2000.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 10.0,
-      spellCritRating = 10.0
+      physicalCritRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

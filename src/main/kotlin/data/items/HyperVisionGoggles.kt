@@ -34,8 +34,7 @@ public class HyperVisionGoggles : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 23.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf()

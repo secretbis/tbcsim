@@ -35,8 +35,7 @@ public class BroochOfDeftness : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       physicalHitRating = 22.0,
-      expertiseRating = 21.0,
-      spellHitRating = 22.0
+      expertiseRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

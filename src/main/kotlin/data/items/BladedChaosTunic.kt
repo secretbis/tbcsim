@@ -38,8 +38,7 @@ public class BladedChaosTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 42,
       stamina = 45,
-      physicalCritRating = 38.0,
-      spellCritRating = 38.0
+      physicalCritRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf(

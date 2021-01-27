@@ -39,8 +39,7 @@ public class StarstalkerLegguards : Item() {
       agility = 57,
       stamina = 49,
       intellect = 24,
-      physicalHitRating = 20.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

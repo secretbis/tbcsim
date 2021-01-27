@@ -35,9 +35,7 @@ public class TrackersBlade : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 23.0,
-      physicalHitRating = 20.0,
-      spellCritRating = 23.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

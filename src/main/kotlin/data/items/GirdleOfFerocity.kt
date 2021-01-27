@@ -37,8 +37,7 @@ public class GirdleOfFerocity : Item() {
       agility = 28,
       stamina = 21,
       intellect = 22,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

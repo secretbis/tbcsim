@@ -40,8 +40,7 @@ public class OnslaughtGreaves : Item() {
       strength = 62,
       agility = 41,
       stamina = 55,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -39,9 +39,7 @@ public class OnslaughtBracers : Item() {
   public override var stats: Stats = Stats(
       strength = 33,
       physicalCritRating = 30.0,
-      physicalHitRating = 16.0,
-      spellCritRating = 30.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

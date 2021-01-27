@@ -35,7 +35,6 @@ public class CrystallineKopesh : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       physicalHitRating = 13.0,
-      spellHitRating = 13.0,
       defenseRating = 12.0
       )
 

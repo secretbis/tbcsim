@@ -34,8 +34,7 @@ public class SlayersAxe : Item() {
 
   public override var stats: Stats = Stats(
       strength = 51,
-      physicalCritRating = 21.0,
-      spellCritRating = 21.0
+      physicalCritRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -22,6 +22,7 @@ class Sim (
         // Stats
         Stats.dps(iterations)
         Stats.resultsByAbility(iterations)
+        Stats.resultsByDamageType(iterations)
         Stats.resultsByBuff(iterations)
         Stats.resultsByDebuff(iterations)
     }

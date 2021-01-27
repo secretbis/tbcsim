@@ -38,9 +38,7 @@ public class HardKhoriumBattlefists : Item() {
       strength = 45,
       stamina = 45,
       physicalHitRating = 23.0,
-      physicalHasteRating = 36.0,
-      spellHitRating = 23.0,
-      spellHasteRating = 36.0
+      physicalHasteRating = 36.0
       )
 
   public override var sockets: List<Socket> = listOf(

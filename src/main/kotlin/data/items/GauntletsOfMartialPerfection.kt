@@ -37,8 +37,7 @@ public class GauntletsOfMartialPerfection : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 34,
-      physicalCritRating = 23.0,
-      spellCritRating = 23.0
+      physicalCritRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf(

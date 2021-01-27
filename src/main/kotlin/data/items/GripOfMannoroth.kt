@@ -35,9 +35,7 @@ public class GripOfMannoroth : Item() {
 
   public override var stats: Stats = Stats(
       physicalHitRating = 20.0,
-      physicalHasteRating = 31.0,
-      spellHitRating = 20.0,
-      spellHasteRating = 31.0
+      physicalHasteRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,9 +36,7 @@ public class CloakOfTheInciter : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       physicalCritRating = 18.0,
-      physicalHitRating = 16.0,
-      spellCritRating = 18.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf()

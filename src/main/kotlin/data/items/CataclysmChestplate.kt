@@ -40,8 +40,7 @@ public class CataclysmChestplate : Item() {
       agility = 32,
       stamina = 46,
       intellect = 28,
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf(

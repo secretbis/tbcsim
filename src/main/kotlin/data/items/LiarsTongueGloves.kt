@@ -37,8 +37,7 @@ public class LiarsTongueGloves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      physicalCritRating = 26.0,
-      spellCritRating = 26.0
+      physicalCritRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf(

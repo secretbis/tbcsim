@@ -39,8 +39,7 @@ public class LightbringerWarHelm : Item() {
       strength = 61,
       stamina = 60,
       intellect = 32,
-      physicalCritRating = 23.0,
-      spellCritRating = 23.0
+      physicalCritRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf(

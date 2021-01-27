@@ -35,8 +35,7 @@ public class CrystalweaveCape : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 15,
-      physicalHasteRating = 26.0,
-      spellHasteRating = 26.0
+      physicalHasteRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf()

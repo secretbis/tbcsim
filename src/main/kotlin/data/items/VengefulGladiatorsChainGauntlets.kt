@@ -38,8 +38,7 @@ public class VengefulGladiatorsChainGauntlets : Item() {
       agility = 33,
       stamina = 52,
       intellect = 15,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

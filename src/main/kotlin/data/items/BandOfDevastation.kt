@@ -35,8 +35,7 @@ public class BandOfDevastation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 44,
-      physicalHasteRating = 31.0,
-      spellHasteRating = 31.0
+      physicalHasteRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf()

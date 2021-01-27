@@ -35,8 +35,7 @@ public class SwiftsteelBracers : Item() {
   public override var stats: Stats = Stats(
       strength = 35,
       stamina = 32,
-      physicalHasteRating = 27.0,
-      spellHasteRating = 27.0
+      physicalHasteRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf()

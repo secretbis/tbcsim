@@ -38,8 +38,7 @@ public class MaskOfTheDeceiver : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 36,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

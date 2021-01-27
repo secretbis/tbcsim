@@ -39,8 +39,7 @@ public class VengefulGladiatorsScaledHelm : Item() {
       strength = 47,
       stamina = 54,
       intellect = 27,
-      physicalCritRating = 28.0,
-      spellCritRating = 28.0
+      physicalCritRating = 28.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -35,8 +35,7 @@ public class Devastation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
-      physicalCritRating = 50.0,
-      spellCritRating = 50.0
+      physicalCritRating = 50.0
       )
 
   public override var sockets: List<Socket> = listOf()

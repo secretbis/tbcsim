@@ -36,9 +36,7 @@ public class CloakOfTheComingNight : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       physicalHitRating = 12.0,
-      physicalHasteRating = 18.0,
-      spellHitRating = 12.0,
-      spellHasteRating = 18.0
+      physicalHasteRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

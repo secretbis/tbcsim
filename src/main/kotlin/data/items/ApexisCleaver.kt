@@ -35,8 +35,7 @@ public class ApexisCleaver : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 39,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,7 +36,6 @@ public class LeggingsOfTheSly : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       physicalCritRating = 20.0,
-      spellCritRating = 20.0,
       defenseRating = 29.0
       )
 

@@ -39,8 +39,7 @@ public class EmbraceOfThePhoenix : Item() {
       agility = 44,
       stamina = 43,
       intellect = 30,
-      physicalHasteRating = 44.0,
-      spellHasteRating = 44.0
+      physicalHasteRating = 44.0
       )
 
   public override var sockets: List<Socket> = listOf(

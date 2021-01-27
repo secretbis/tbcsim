@@ -36,8 +36,7 @@ public class CloakOfFiends : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 22,
-      physicalHasteRating = 25.0,
-      spellHasteRating = 25.0
+      physicalHasteRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

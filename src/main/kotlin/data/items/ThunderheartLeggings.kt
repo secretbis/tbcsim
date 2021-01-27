@@ -40,8 +40,7 @@ public class ThunderheartLeggings : Item() {
       agility = 41,
       stamina = 49,
       intellect = 12,
-      physicalHitRating = 27.0,
-      spellHitRating = 27.0
+      physicalHitRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf(

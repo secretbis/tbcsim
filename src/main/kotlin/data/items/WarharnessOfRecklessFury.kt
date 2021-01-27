@@ -38,9 +38,7 @@ public class WarharnessOfRecklessFury : Item() {
       strength = 61,
       stamina = 67,
       physicalCritRating = 41.0,
-      physicalHasteRating = 32.0,
-      spellCritRating = 41.0,
-      spellHasteRating = 32.0
+      physicalHasteRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -38,9 +38,7 @@ public class BrutalGladiatorsLeatherLegguards : Item() {
       agility = 40,
       stamina = 74,
       physicalCritRating = 30.0,
-      physicalHitRating = 17.0,
-      spellCritRating = 30.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -35,8 +35,7 @@ public class TridentOfTheOutcastTribe : Item() {
   public override var stats: Stats = Stats(
       strength = 37,
       stamina = 54,
-      physicalHitRating = 36.0,
-      spellHitRating = 36.0
+      physicalHitRating = 36.0
       )
 
   public override var sockets: List<Socket> = listOf()

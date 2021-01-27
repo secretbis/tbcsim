@@ -36,8 +36,7 @@ public class VindicatorsScaledGreaves : Item() {
       strength = 40,
       stamina = 39,
       intellect = 26,
-      physicalCritRating = 27.0,
-      spellCritRating = 27.0
+      physicalCritRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf()

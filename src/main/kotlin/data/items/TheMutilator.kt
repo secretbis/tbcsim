@@ -35,8 +35,7 @@ public class TheMutilator : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf()

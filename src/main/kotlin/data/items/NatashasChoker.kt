@@ -35,9 +35,7 @@ public class NatashasChoker : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 15.0,
-      physicalHitRating = 10.0,
-      spellCritRating = 15.0,
-      spellHitRating = 10.0
+      physicalHitRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

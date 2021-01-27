@@ -37,8 +37,7 @@ public class GirdleOfTheProwler : Item() {
       agility = 25,
       stamina = 21,
       intellect = 22,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

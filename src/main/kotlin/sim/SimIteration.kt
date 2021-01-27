@@ -24,7 +24,7 @@ class SimIteration(
     var events: MutableList<Event> = mutableListOf()
     var autoAttack: List<Ability> = listOf()
     var buffs: MutableList<Buff> = mutableListOf()
-    var debuffs: MutableList<Buff> = mutableListOf()
+    var debuffs: MutableList<Debuff> = mutableListOf()
 
     // Buffs need a place to store state per iteration
     // Store individual data per instance and store shared data per-string (generally the buff name)
@@ -141,6 +141,13 @@ class SimIteration(
         // Do auto attacks
         autoAttack.forEach {
             if(it.available(this)) it.cast(this)
+        }
+
+        // Check debuffs
+        debuffs.forEach {
+            if(it.shouldTick(this)) {
+                it.tick(this)
+            }
         }
 
         // Fire server tick proc

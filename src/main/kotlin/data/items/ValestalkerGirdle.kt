@@ -37,8 +37,7 @@ public class ValestalkerGirdle : Item() {
       agility = 27,
       stamina = 25,
       intellect = 18,
-      physicalHasteRating = 36.0,
-      spellHasteRating = 36.0
+      physicalHasteRating = 36.0
       )
 
   public override var sockets: List<Socket> = listOf()

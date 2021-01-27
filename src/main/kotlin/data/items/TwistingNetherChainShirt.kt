@@ -38,8 +38,7 @@ public class TwistingNetherChainShirt : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 22,
-      physicalCritRating = 33.0,
-      spellCritRating = 33.0
+      physicalCritRating = 33.0
       )
 
   public override var sockets: List<Socket> = listOf(

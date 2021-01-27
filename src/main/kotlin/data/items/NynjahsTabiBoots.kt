@@ -38,8 +38,7 @@ public class NynjahsTabiBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 21,
-      physicalHitRating = 22.0,
-      spellHitRating = 22.0
+      physicalHitRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf(

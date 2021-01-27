@@ -35,8 +35,7 @@ public class RisingTide : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      physicalHitRating = 21.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

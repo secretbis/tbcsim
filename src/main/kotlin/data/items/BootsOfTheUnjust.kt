@@ -36,9 +36,7 @@ public class BootsOfTheUnjust : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       physicalCritRating = 19.0,
-      physicalHitRating = 13.0,
-      spellCritRating = 19.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf()

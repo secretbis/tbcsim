@@ -39,8 +39,7 @@ public class VindicatorsChainBracers : Item() {
       agility = 23,
       stamina = 33,
       intellect = 13,
-      physicalCritRating = 11.0,
-      spellCritRating = 11.0
+      physicalCritRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf(

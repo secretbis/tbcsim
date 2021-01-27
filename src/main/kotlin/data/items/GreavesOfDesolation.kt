@@ -38,9 +38,7 @@ public class GreavesOfDesolation : Item() {
       stamina = 24,
       intellect = 33,
       physicalCritRating = 22.0,
-      physicalHitRating = 12.0,
-      spellCritRating = 22.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

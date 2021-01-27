@@ -37,8 +37,7 @@ public class PendantOfTriumph : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      physicalCritRating = 10.0,
-      spellCritRating = 10.0
+      physicalCritRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf(

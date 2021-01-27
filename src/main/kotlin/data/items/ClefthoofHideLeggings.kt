@@ -37,8 +37,7 @@ public class ClefthoofHideLeggings : Item() {
       agility = 30,
       stamina = 24,
       physicalHitRating = 17.0,
-      expertiseRating = 18.0,
-      spellHitRating = 17.0
+      expertiseRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

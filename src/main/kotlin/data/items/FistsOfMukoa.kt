@@ -37,8 +37,7 @@ public class FistsOfMukoa : Item() {
       agility = 25,
       stamina = 24,
       intellect = 17,
-      physicalHasteRating = 37.0,
-      spellHasteRating = 37.0
+      physicalHasteRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

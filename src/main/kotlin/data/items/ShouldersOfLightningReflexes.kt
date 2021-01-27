@@ -37,8 +37,7 @@ public class ShouldersOfLightningReflexes : Item() {
       agility = 27,
       stamina = 19,
       intellect = 21,
-      physicalHasteRating = 37.0,
-      spellHasteRating = 37.0
+      physicalHasteRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

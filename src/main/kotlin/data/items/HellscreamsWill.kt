@@ -34,8 +34,7 @@ public class HellscreamsWill : Item() {
   public override var speed: Double = 3500.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 42.0,
-      spellHitRating = 42.0
+      physicalHitRating = 42.0
       )
 
   public override var sockets: List<Socket> = listOf()

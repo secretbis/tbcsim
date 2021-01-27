@@ -35,7 +35,6 @@ public class HonorsCall : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       physicalHitRating = 8.0,
-      spellHitRating = 8.0,
       defenseRating = 16.0
       )
 

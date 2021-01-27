@@ -36,8 +36,7 @@ public class Legionfoe : Item() {
       strength = 31,
       stamina = 45,
       physicalCritRating = 26.0,
-      expertiseRating = 19.0,
-      spellCritRating = 26.0
+      expertiseRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

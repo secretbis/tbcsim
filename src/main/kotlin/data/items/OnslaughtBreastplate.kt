@@ -40,8 +40,7 @@ public class OnslaughtBreastplate : Item() {
       strength = 53,
       agility = 34,
       stamina = 54,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

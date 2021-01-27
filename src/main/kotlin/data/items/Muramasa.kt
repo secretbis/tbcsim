@@ -35,9 +35,7 @@ public class Muramasa : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       physicalHitRating = 17.0,
-      physicalHasteRating = 35.0,
-      spellHitRating = 17.0,
-      spellHasteRating = 35.0
+      physicalHasteRating = 35.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -39,9 +39,7 @@ public class DestroyerShoulderblades : Item() {
       strength = 36,
       stamina = 38,
       physicalCritRating = 20.0,
-      physicalHitRating = 18.0,
-      spellCritRating = 20.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

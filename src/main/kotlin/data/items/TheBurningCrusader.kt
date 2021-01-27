@@ -37,8 +37,7 @@ public class TheBurningCrusader : Item() {
       agility = 27,
       stamina = 27,
       physicalHitRating = 26.0,
-      expertiseRating = 17.0,
-      spellHitRating = 26.0
+      expertiseRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

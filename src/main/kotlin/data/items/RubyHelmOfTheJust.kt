@@ -37,8 +37,7 @@ public class RubyHelmOfTheJust : Item() {
       strength = 36,
       stamina = 24,
       intellect = 25,
-      physicalCritRating = 16.0,
-      spellCritRating = 16.0
+      physicalCritRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf()

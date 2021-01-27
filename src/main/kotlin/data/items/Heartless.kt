@@ -35,8 +35,7 @@ public class Heartless : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      physicalHasteRating = 20.0,
-      spellHasteRating = 20.0
+      physicalHasteRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

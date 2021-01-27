@@ -38,8 +38,7 @@ public class ChainOfUnleashedRage : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 37,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

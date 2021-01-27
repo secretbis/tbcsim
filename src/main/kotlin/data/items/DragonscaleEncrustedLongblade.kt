@@ -35,8 +35,7 @@ public class DragonscaleEncrustedLongblade : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       physicalHasteRating = 25.0,
-      expertiseRating = 25.0,
-      spellHasteRating = 25.0
+      expertiseRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

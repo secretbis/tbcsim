@@ -35,7 +35,6 @@ public class HailstonePendant : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       physicalHitRating = 19.0,
-      spellHitRating = 19.0,
       defenseRating = 22.0
       )
 

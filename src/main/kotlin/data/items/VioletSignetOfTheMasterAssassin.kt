@@ -35,8 +35,7 @@ public class VioletSignetOfTheMasterAssassin : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      physicalHitRating = 25.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

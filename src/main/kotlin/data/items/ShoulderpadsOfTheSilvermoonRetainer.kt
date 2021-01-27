@@ -36,8 +36,7 @@ public class ShoulderpadsOfTheSilvermoonRetainer : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 32,
-      physicalHitRating = 23.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf()

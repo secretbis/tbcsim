@@ -35,8 +35,7 @@ public class BloodswornWarboots : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 29,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

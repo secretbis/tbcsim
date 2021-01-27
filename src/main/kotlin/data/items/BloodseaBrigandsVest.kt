@@ -38,9 +38,7 @@ public class BloodseaBrigandsVest : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       physicalCritRating = 36.0,
-      physicalHitRating = 27.0,
-      spellCritRating = 36.0,
-      spellHitRating = 27.0
+      physicalHitRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -40,8 +40,7 @@ public class GladiatorsChainArmor : Item() {
       agility = 27,
       stamina = 51,
       intellect = 17,
-      physicalCritRating = 18.0,
-      spellCritRating = 18.0
+      physicalCritRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

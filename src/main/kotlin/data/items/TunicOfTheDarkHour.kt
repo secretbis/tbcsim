@@ -38,8 +38,7 @@ public class TunicOfTheDarkHour : Item() {
   public override var stats: Stats = Stats(
       agility = 44,
       stamina = 51,
-      physicalHitRating = 34.0,
-      spellHitRating = 34.0
+      physicalHitRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -39,8 +39,7 @@ public class HandwrapsOfTheAggressor : Item() {
       agility = 35,
       stamina = 36,
       intellect = 19,
-      physicalHasteRating = 13.0,
-      spellHasteRating = 13.0
+      physicalHasteRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

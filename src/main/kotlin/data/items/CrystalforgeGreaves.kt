@@ -40,8 +40,7 @@ public class CrystalforgeGreaves : Item() {
       agility = 27,
       stamina = 42,
       intellect = 23,
-      physicalHitRating = 21.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

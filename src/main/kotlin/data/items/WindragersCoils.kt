@@ -34,8 +34,7 @@ public class WindragersCoils : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 12.0,
-      spellCritRating = 12.0
+      physicalCritRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

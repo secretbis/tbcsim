@@ -36,8 +36,7 @@ public class NomadsWovenCloak : Item() {
       strength = 14,
       agility = 14,
       stamina = 21,
-      physicalHitRating = 13.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf()

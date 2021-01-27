@@ -36,8 +36,7 @@ public class NetherdrakeHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 26,
-      physicalCritRating = 31.0,
-      spellCritRating = 31.0
+      physicalCritRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -35,9 +35,7 @@ public class TsunamiTalisman : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 38.0,
-      physicalHitRating = 10.0,
-      spellCritRating = 38.0,
-      spellHitRating = 10.0
+      physicalHitRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

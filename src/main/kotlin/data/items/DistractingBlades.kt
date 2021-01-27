@@ -35,8 +35,7 @@ public class DistractingBlades : Item() {
 
   public override var stats: Stats = Stats(
       agility = 14,
-      physicalHasteRating = 10.0,
-      spellHasteRating = 10.0
+      physicalHasteRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

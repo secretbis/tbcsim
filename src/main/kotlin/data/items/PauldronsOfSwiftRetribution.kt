@@ -36,8 +36,7 @@ public class PauldronsOfSwiftRetribution : Item() {
       strength = 29,
       stamina = 24,
       intellect = 20,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

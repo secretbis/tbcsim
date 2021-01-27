@@ -33,8 +33,7 @@ public class WindforgedRapier : Item() {
   public override var speed: Double = 1700.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf()

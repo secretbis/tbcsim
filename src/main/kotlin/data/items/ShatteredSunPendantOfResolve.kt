@@ -36,8 +36,7 @@ public class ShatteredSunPendantOfResolve : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       physicalHitRating = 13.0,
-      expertiseRating = 18.0,
-      spellHitRating = 13.0
+      expertiseRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

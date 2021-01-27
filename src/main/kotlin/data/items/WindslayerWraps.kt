@@ -36,8 +36,7 @@ public class WindslayerWraps : Item() {
       strength = 36,
       agility = 18,
       stamina = 25,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

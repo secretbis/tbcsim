@@ -39,8 +39,7 @@ public class TamelessBreeches : Item() {
       agility = 45,
       stamina = 52,
       intellect = 20,
-      physicalHasteRating = 17.0,
-      spellHasteRating = 17.0
+      physicalHasteRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

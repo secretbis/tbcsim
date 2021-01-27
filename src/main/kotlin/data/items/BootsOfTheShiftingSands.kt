@@ -37,8 +37,7 @@ public class BootsOfTheShiftingSands : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf(

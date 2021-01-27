@@ -39,8 +39,7 @@ public class GrandMarshalsScaledShoulders : Item() {
       strength = 25,
       stamina = 33,
       intellect = 8,
-      physicalCritRating = 9.0,
-      spellCritRating = 9.0
+      physicalCritRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf(

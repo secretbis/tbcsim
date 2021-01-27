@@ -37,9 +37,7 @@ public class DreamWingHelm : Item() {
       stamina = 16,
       intellect = 25,
       physicalCritRating = 20.0,
-      physicalHitRating = 13.0,
-      spellCritRating = 20.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf()

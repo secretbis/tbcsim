@@ -37,8 +37,7 @@ public class HardKhoriumChoker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 42,
-      physicalHasteRating = 29.0,
-      spellHasteRating = 29.0
+      physicalHasteRating = 29.0
       )
 
   public override var sockets: List<Socket> = listOf(

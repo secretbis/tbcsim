@@ -38,8 +38,7 @@ public class CruxOfTheApocalypse : Item() {
   public override var stats: Stats = Stats(
       agility = 18,
       stamina = 15,
-      physicalHasteRating = 27.0,
-      spellHasteRating = 27.0
+      physicalHasteRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf(

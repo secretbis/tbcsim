@@ -36,9 +36,7 @@ public class MantleOfTheUnforgiven : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       physicalCritRating = 21.0,
-      physicalHitRating = 12.0,
-      spellCritRating = 21.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

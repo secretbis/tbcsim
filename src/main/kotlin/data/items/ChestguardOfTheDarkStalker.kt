@@ -35,8 +35,7 @@ public class ChestguardOfTheDarkStalker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      physicalCritRating = 32.0,
-      spellCritRating = 32.0
+      physicalCritRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf()

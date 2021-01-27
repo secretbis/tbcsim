@@ -36,8 +36,7 @@ public class ToweringMantleOfTheHunt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
-      physicalCritRating = 21.0,
-      spellCritRating = 21.0
+      physicalCritRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -35,8 +35,7 @@ public class BrutalGladiatorsLongbow : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      physicalCritRating = 17.0,
-      spellCritRating = 17.0
+      physicalCritRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

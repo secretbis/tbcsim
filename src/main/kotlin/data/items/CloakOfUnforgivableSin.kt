@@ -38,8 +38,7 @@ public class CloakOfUnforgivableSin : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 25,
-      physicalHasteRating = 32.0,
-      spellHasteRating = 32.0
+      physicalHasteRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf(

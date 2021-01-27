@@ -36,9 +36,7 @@ public class ChestplateOfAdal : Item() {
       strength = 35,
       stamina = 27,
       physicalCritRating = 25.0,
-      physicalHitRating = 22.0,
-      spellCritRating = 25.0,
-      spellHitRating = 22.0
+      physicalHitRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

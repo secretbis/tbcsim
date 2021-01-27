@@ -36,9 +36,7 @@ public class TorchOfTheDamned : Item() {
       strength = 51,
       stamina = 45,
       physicalCritRating = 38.0,
-      physicalHasteRating = 50.0,
-      spellCritRating = 38.0,
-      spellHasteRating = 50.0
+      physicalHasteRating = 50.0
       )
 
   public override var sockets: List<Socket> = listOf()

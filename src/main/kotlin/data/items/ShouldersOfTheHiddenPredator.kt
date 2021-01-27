@@ -36,8 +36,7 @@ public class ShouldersOfTheHiddenPredator : Item() {
   public override var stats: Stats = Stats(
       agility = 38,
       stamina = 37,
-      physicalCritRating = 26.0,
-      spellCritRating = 26.0
+      physicalCritRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf()

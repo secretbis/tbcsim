@@ -26,6 +26,7 @@ class WindfuryTotem: Ability() {
     val weaponBuff = object : Buff() {
         override val name: String = "Windfury Totem (Weapon)"
         override val durationMs: Int = 10000
+        override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
             return stats
@@ -103,7 +104,7 @@ class WindfuryTotem: Ability() {
     val totemBuff = object : Buff() {
         override val name: String = "Windfury Totem"
         override val durationMs: Int = 120000
-        override val hidden: Boolean = true
+        override val mutex: Mutex = Mutex.AIR_TOTEM
 
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
             return stats

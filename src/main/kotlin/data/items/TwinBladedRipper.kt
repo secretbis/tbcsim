@@ -37,8 +37,7 @@ public class TwinBladedRipper : Item() {
       agility = 12,
       stamina = 12,
       physicalHitRating = 11.0,
-      expertiseRating = 7.0,
-      spellHitRating = 11.0
+      expertiseRating = 7.0
       )
 
   public override var sockets: List<Socket> = listOf()

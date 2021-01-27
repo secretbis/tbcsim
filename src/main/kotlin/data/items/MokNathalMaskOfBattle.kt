@@ -37,8 +37,7 @@ public class MokNathalMaskOfBattle : Item() {
       agility = 23,
       stamina = 21,
       intellect = 21,
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

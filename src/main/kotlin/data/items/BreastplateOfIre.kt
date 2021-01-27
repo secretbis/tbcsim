@@ -37,8 +37,7 @@ public class BreastplateOfIre : Item() {
   public override var stats: Stats = Stats(
       strength = 52,
       stamina = 64,
-      physicalHasteRating = 51.0,
-      spellHasteRating = 51.0
+      physicalHasteRating = 51.0
       )
 
   public override var sockets: List<Socket> = listOf(

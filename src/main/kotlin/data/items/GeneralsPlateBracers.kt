@@ -37,8 +37,7 @@ public class GeneralsPlateBracers : Item() {
   public override var stats: Stats = Stats(
       strength = 19,
       stamina = 25,
-      physicalCritRating = 14.0,
-      spellCritRating = 14.0
+      physicalCritRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

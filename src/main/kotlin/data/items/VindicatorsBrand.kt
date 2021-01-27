@@ -34,8 +34,7 @@ public class VindicatorsBrand : Item() {
   public override var speed: Double = 2600.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

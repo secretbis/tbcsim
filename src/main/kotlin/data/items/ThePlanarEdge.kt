@@ -34,8 +34,7 @@ public class ThePlanarEdge : Item() {
   public override var speed: Double = 2700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 20.0,
-      spellCritRating = 20.0
+      physicalCritRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

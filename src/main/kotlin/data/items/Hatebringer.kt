@@ -37,8 +37,7 @@ public class Hatebringer : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 21,
-      physicalCritRating = 22.0,
-      spellCritRating = 22.0
+      physicalCritRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf(

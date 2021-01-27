@@ -36,8 +36,7 @@ public class AuchenaiDeathShroud : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 15,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

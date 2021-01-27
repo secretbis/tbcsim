@@ -39,8 +39,7 @@ public class PauldronsOfDesolation : Item() {
       agility = 23,
       stamina = 16,
       intellect = 19,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

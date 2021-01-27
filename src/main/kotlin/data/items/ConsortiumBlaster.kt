@@ -35,8 +35,7 @@ public class ConsortiumBlaster : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      physicalCritRating = 7.0,
-      spellCritRating = 7.0
+      physicalCritRating = 7.0
       )
 
   public override var sockets: List<Socket> = listOf()

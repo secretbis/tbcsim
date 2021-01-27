@@ -263,33 +263,20 @@ data class Stats(
         when (statType) {
             StatType.AGILITY ->
                 agility += value
-            StatType.CRIT_MELEE_RATING, StatType.CRIT_RANGED_RATING ->
+            StatType.CRIT_RATING,StatType.CRIT_MELEE_RATING, StatType.CRIT_RANGED_RATING ->
                 physicalCritRating += value
-            StatType.CRIT_RATING -> {
-                physicalCritRating += value
-                spellCritRating += value
-            }
             StatType.CRIT_SPELL_RATING ->
                 spellCritRating += value
             StatType.EXPERTISE_RATING ->
                 expertiseRating += value
-            StatType.HASTE_MELEE_RATING, StatType.HASTE_RANGED_RATING ->
+            StatType.HASTE_RATING, StatType.HASTE_MELEE_RATING, StatType.HASTE_RANGED_RATING ->
                 physicalHasteRating += value
-            StatType.HASTE_RATING -> {
-                physicalHasteRating += value
-                spellHasteRating += value
-            }
             StatType.HASTE_SPELL_RATING ->
                 spellHasteRating += value
-            StatType.HIT_MELEE_RATING, StatType.HIT_RANGED_RATING ->
+            StatType.HIT_RATING, StatType.HIT_MELEE_RATING, StatType.HIT_RANGED_RATING ->
                 physicalHitRating += value
-            StatType.HIT_RATING -> {
-                physicalHitRating += value
+            StatType.HIT_SPELL_RATING ->
                 spellHitRating += value
-            }
-            StatType.HIT_SPELL_RATING -> {
-                spellHitRating += value
-            }
             StatType.INTELLECT ->
                 intellect += value
             StatType.SPIRIT ->

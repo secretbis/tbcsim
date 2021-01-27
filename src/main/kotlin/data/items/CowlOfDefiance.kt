@@ -36,8 +36,7 @@ public class CowlOfDefiance : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 33,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf()

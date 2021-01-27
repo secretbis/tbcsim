@@ -35,9 +35,7 @@ public class BurningBladeDevoteesCinch : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       physicalCritRating = 22.0,
-      physicalHitRating = 22.0,
-      spellCritRating = 22.0,
-      spellHitRating = 22.0
+      physicalHitRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

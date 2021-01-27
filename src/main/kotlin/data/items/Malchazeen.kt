@@ -35,8 +35,7 @@ public class Malchazeen : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
-      physicalHitRating = 15.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

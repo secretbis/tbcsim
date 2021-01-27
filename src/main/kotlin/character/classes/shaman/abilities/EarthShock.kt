@@ -28,6 +28,7 @@ class EarthShock : Ability() {
 
     val baseDamage = Pair(658.0, 693.0)
     override fun cast(sim: SimIteration, free: Boolean) {
+        val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.NATURE
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)

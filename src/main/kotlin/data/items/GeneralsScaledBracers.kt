@@ -38,8 +38,7 @@ public class GeneralsScaledBracers : Item() {
       strength = 26,
       stamina = 22,
       intellect = 11,
-      physicalCritRating = 7.0,
-      spellCritRating = 7.0
+      physicalCritRating = 7.0
       )
 
   public override var sockets: List<Socket> = listOf(

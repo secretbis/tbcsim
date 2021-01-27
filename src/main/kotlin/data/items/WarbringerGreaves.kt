@@ -36,8 +36,7 @@ public class WarbringerGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 51,
       stamina = 54,
-      physicalCritRating = 37.0,
-      spellCritRating = 37.0
+      physicalCritRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

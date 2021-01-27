@@ -1,6 +1,7 @@
 package sim
 
 import character.Buff
+import data.Constants
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
 import mu.KotlinLogging
@@ -40,7 +41,13 @@ object Stats {
         val refreshed: Int,
         val uptimePct: Double,
         val avgDuration: Double
-   )
+    )
+
+    data class DamageTypeBreakdown(
+        val type: Constants.DamageType,
+        val count: Int,
+        val total: Double
+    )
 
     val df = DecimalFormat("#,###.##")
 
@@ -76,8 +83,11 @@ object Stats {
                             it.eventType == Event.Type.BUFF_END
                         )
                     }
-            }
-            .groupBy { it.buff!!.name }
+                }
+                .groupBy { it.buff!!.name },
+            Event.Type.BUFF_START,
+            Event.Type.BUFF_REFRESH,
+            Event.Type.BUFF_END
         )
     }
 
@@ -95,11 +105,21 @@ object Stats {
                         )
                     }
                 }
-                .groupBy { it.buff!!.name }
+                .groupBy { it.buff!!.name },
+            Event.Type.DEBUFF_START,
+            Event.Type.DEBUFF_REFRESH,
+            Event.Type.DEBUFF_END
         )
     }
 
-    private fun processBuffs(iterations: List<SimIteration>, title: String, byBuff: Map<String, List<Event>>) {
+    private fun processBuffs(
+        iterations: List<SimIteration>,
+        title: String,
+        byBuff: Map<String, List<Event>>,
+        buffStart: Event.Type,
+        buffRefresh: Event.Type,
+        buffEnd: Event.Type
+    ) {
         val keys = byBuff.keys.toList()
 
         logger.info {
@@ -109,31 +129,31 @@ object Stats {
 
                 val rows = keys.map { key ->
                     val events = byBuff[key]!!
-                    val applied = events.filter { it.eventType == Event.Type.BUFF_START }.size
-                    val refreshed = events.filter { it.eventType == Event.Type.BUFF_REFRESH }.size
+                    val applied = events.filter { it.eventType == buffStart }.size
+                    val refreshed = events.filter { it.eventType == buffRefresh }.size
 
                     val segments = mutableListOf<BuffSegment>()
                     var lastEvent: Event? = null
                     var currentStart: Event? = null
-                    var refreshCount: Int = 0
+                    var refreshCount = 0
                     events.forEach {
-                        if(it.eventType == Event.Type.BUFF_START) {
-                            if(lastEvent?.eventType == Event.Type.BUFF_START) {
+                        if(it.eventType == buffStart) {
+                            if(lastEvent?.eventType == buffStart) {
                                 logger.warn { "Possibly invalid segment - found two starts for buff: ${it.buff!!.name}" }
                             }
 
                             currentStart = it
                         }
 
-                        if(it.eventType == Event.Type.BUFF_REFRESH) {
-                            if(lastEvent?.eventType == Event.Type.BUFF_END) {
+                        if(it.eventType == buffRefresh) {
+                            if(lastEvent?.eventType == buffEnd) {
                                 logger.warn { "Possibly invalid segment - refresh without enclosing start for buff: ${it.buff!!.name}" }
                             }
                             refreshCount++
                         }
 
-                        if(it.eventType == Event.Type.BUFF_END) {
-                            if(lastEvent?.eventType == Event.Type.BUFF_END) {
+                        if(it.eventType == buffEnd) {
+                            if(lastEvent?.eventType == buffEnd) {
                                 logger.warn { "Possibly invalid segment - found two ends for buff: ${it.buff!!.name}" }
                             }
 
@@ -264,6 +284,61 @@ object Stats {
                     for(i in 6..11) {
                         postfix(i, "%")
                     }
+
+                    borderStyle = Table.BorderStyle.SINGLE_LINE
+                }
+            }.render(StringBuilder())
+        }
+    }
+
+    fun resultsByDamageType(iterations: List<SimIteration>) {
+        val byDmgType = iterations.flatMap { iter ->
+            iter.events
+                .filter { it.eventType == Event.Type.DAMAGE }
+                .filter { it.damageType != null }
+            }
+            .groupBy { it.damageType }
+
+        val keys = byDmgType.keys.toList()
+
+        logger.info {
+            "Damage Type Breakdown\n" +
+            table {
+                header("Name", "Count", "TotalDmg", "PctOfTotal")
+
+                val rows = keys.map { key ->
+                    val events = byDmgType[key]!!
+                    val amounts = events.map { it.amount }
+                    val count = amounts.size.toDouble()
+                    val total = amounts.sum()
+
+                    DamageTypeBreakdown(
+                        key!!,
+                        count.toInt(),
+                        total
+                    )
+                }.sortedBy { it.total }.reversed()
+
+                val grandTotal: Double = rows.sumByDouble { it.total }
+
+                for(row in rows) {
+                    val pctOfGrandTotal = row.total / grandTotal * 100.0
+                    row(row.type.name, row.count, row.total, pctOfGrandTotal)
+                }
+
+                hints {
+                    alignment(0, Table.Hints.Alignment.LEFT)
+
+                    precision(1, 0)
+                    for(i in 2..3) {
+                        precision(i, 2)
+                    }
+
+                    for(i in 1..11) {
+                        formatFlag(i, ",")
+                    }
+
+                    postfix(3, "%")
 
                     borderStyle = Table.BorderStyle.SINGLE_LINE
                 }

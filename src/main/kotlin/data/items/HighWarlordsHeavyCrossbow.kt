@@ -35,8 +35,7 @@ public class HighWarlordsHeavyCrossbow : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalCritRating = 9.0,
-      spellCritRating = 9.0
+      physicalCritRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf()

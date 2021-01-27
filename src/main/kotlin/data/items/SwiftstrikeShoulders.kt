@@ -36,8 +36,7 @@ public class SwiftstrikeShoulders : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 34,
-      physicalHasteRating = 38.0,
-      spellHasteRating = 38.0
+      physicalHasteRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf()

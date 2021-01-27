@@ -36,7 +36,6 @@ public class NaaruBeltOfPrecision : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       physicalHitRating = 15.0,
-      spellHitRating = 15.0,
       dodgeRating = 21.0
       )
 

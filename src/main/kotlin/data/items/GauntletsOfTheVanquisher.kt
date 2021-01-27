@@ -36,8 +36,7 @@ public class GauntletsOfTheVanquisher : Item() {
       strength = 24,
       agility = 23,
       stamina = 30,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

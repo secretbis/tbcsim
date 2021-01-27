@@ -35,8 +35,7 @@ public class StormrageSignetRing : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      physicalHitRating = 30.0,
-      spellHitRating = 30.0
+      physicalHitRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

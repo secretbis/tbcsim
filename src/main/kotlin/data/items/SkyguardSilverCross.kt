@@ -34,8 +34,7 @@ public class SkyguardSilverCross : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 34.0,
-      spellCritRating = 34.0
+      physicalCritRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf()

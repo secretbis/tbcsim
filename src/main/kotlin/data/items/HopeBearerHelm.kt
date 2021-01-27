@@ -38,8 +38,7 @@ public class HopeBearerHelm : Item() {
       strength = 30,
       agility = 23,
       stamina = 19,
-      physicalHitRating = 13.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

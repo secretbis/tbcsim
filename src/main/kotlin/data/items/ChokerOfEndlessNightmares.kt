@@ -35,9 +35,7 @@ public class ChokerOfEndlessNightmares : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 27.0,
-      physicalHitRating = 21.0,
-      spellCritRating = 27.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

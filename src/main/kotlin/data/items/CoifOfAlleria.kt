@@ -39,8 +39,7 @@ public class CoifOfAlleria : Item() {
       agility = 43,
       stamina = 45,
       intellect = 25,
-      physicalCritRating = 34.0,
-      spellCritRating = 34.0
+      physicalCritRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf(

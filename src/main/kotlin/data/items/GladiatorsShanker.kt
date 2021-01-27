@@ -36,9 +36,7 @@ public class GladiatorsShanker : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       physicalCritRating = 15.0,
-      physicalHitRating = 9.0,
-      spellCritRating = 15.0,
-      spellHitRating = 9.0
+      physicalHitRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf()

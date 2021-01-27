@@ -36,9 +36,7 @@ public class ShattrathsChampionBelt : Item() {
   public override var stats: Stats = Stats(
       intellect = 22,
       physicalCritRating = 21.0,
-      physicalHitRating = 15.0,
-      spellCritRating = 21.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

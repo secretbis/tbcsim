@@ -37,9 +37,7 @@ public class TerrorweaveTunic : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 25.0,
-      physicalHitRating = 21.0,
-      spellCritRating = 25.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

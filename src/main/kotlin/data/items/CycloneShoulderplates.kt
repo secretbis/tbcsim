@@ -40,8 +40,7 @@ public class CycloneShoulderplates : Item() {
       agility = 18,
       stamina = 31,
       intellect = 18,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

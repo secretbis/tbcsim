@@ -37,8 +37,7 @@ public class ShiveringFelspine : Item() {
 
   public override var stats: Stats = Stats(
       agility = 52,
-      physicalHasteRating = 53.0,
-      spellHasteRating = 53.0
+      physicalHasteRating = 53.0
       )
 
   public override var sockets: List<Socket> = listOf(

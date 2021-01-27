@@ -36,9 +36,7 @@ public class HighWarlordsRightRipper : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       physicalCritRating = 13.0,
-      physicalHitRating = 8.0,
-      spellCritRating = 13.0,
-      spellHitRating = 8.0
+      physicalHitRating = 8.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -38,9 +38,7 @@ public class ApolyonTheSoulRender : Item() {
   public override var stats: Stats = Stats(
       stamina = 75,
       physicalCritRating = 42.0,
-      physicalHasteRating = 32.0,
-      spellCritRating = 42.0,
-      spellHasteRating = 32.0
+      physicalHasteRating = 32.0
       )
 
   public override var sockets: List<Socket> = listOf(

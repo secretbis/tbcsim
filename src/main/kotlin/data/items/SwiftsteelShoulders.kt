@@ -36,9 +36,7 @@ public class SwiftsteelShoulders : Item() {
       strength = 47,
       stamina = 29,
       physicalHitRating = 19.0,
-      physicalHasteRating = 35.0,
-      spellHitRating = 19.0,
-      spellHasteRating = 35.0
+      physicalHasteRating = 35.0
       )
 
   public override var sockets: List<Socket> = listOf()

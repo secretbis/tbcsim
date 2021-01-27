@@ -38,9 +38,7 @@ public class MidnightLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       physicalCritRating = 27.0,
-      physicalHitRating = 17.0,
-      spellCritRating = 27.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -36,9 +36,7 @@ public class RingOfAThousandMarks : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       physicalCritRating = 23.0,
-      physicalHitRating = 19.0,
-      spellCritRating = 23.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -34,8 +34,7 @@ public class FelsteelBoomstick : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalCritRating = 13.0,
-      spellCritRating = 13.0
+      physicalCritRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,8 +36,7 @@ public class ShoulderpadsOfDancingBlades : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 39,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf()

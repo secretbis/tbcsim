@@ -40,8 +40,7 @@ public class RiftStalkerLeggings : Item() {
       agility = 40,
       stamina = 39,
       intellect = 26,
-      physicalHitRating = 18.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

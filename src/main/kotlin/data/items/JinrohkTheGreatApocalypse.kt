@@ -35,8 +35,7 @@ public class JinrohkTheGreatApocalypse : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
-      physicalHasteRating = 45.0,
-      spellHasteRating = 45.0
+      physicalHasteRating = 45.0
       )
 
   public override var sockets: List<Socket> = listOf()

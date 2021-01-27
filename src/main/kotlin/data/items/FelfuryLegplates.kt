@@ -38,9 +38,7 @@ public class FelfuryLegplates : Item() {
       strength = 61,
       stamina = 48,
       physicalCritRating = 34.0,
-      physicalHasteRating = 50.0,
-      spellCritRating = 34.0,
-      spellHasteRating = 50.0
+      physicalHasteRating = 50.0
       )
 
   public override var sockets: List<Socket> = listOf(

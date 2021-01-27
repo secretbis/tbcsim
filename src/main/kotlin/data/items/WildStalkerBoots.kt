@@ -36,8 +36,7 @@ public class WildStalkerBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 17,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -38,9 +38,7 @@ public class DeadlyCuffs : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       physicalCritRating = 28.0,
-      physicalHitRating = 12.0,
-      spellCritRating = 28.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf(

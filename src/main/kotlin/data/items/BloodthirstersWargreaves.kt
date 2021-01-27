@@ -37,8 +37,7 @@ public class BloodthirstersWargreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 43,
-      physicalHitRating = 38.0,
-      spellHitRating = 38.0
+      physicalHitRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf(

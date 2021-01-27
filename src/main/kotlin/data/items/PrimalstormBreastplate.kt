@@ -36,8 +36,7 @@ public class PrimalstormBreastplate : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 27,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,8 +36,7 @@ public class FoolsBane : Item() {
   public override var speed: Double = 2600.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 24.0,
-      spellCritRating = 24.0
+      physicalCritRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf(

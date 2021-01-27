@@ -40,8 +40,7 @@ public class DemontoothShoulderpads : Item() {
       agility = 38,
       stamina = 38,
       intellect = 19,
-      physicalCritRating = 20.0,
-      spellCritRating = 20.0
+      physicalCritRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

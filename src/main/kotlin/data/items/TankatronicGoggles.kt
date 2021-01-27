@@ -38,7 +38,6 @@ public class TankatronicGoggles : Item() {
   public override var stats: Stats = Stats(
       stamina = 67,
       physicalHitRating = 13.0,
-      spellHitRating = 13.0,
       defenseRating = 38.0,
       dodgeRating = 22.0
       )

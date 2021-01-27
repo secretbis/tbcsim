@@ -36,9 +36,7 @@ public class PillagersGauntlets : Item() {
       strength = 38,
       stamina = 45,
       physicalHitRating = 18.0,
-      physicalHasteRating = 38.0,
-      spellHitRating = 18.0,
-      spellHasteRating = 38.0
+      physicalHasteRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf()

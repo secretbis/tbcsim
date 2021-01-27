@@ -40,8 +40,7 @@ public class CataclysmHelm : Item() {
       agility = 32,
       stamina = 46,
       intellect = 23,
-      physicalHitRating = 21.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

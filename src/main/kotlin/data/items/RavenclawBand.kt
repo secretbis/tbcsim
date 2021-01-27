@@ -36,8 +36,7 @@ public class RavenclawBand : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 15,
-      physicalHitRating = 13.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf()

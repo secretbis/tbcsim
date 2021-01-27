@@ -37,7 +37,6 @@ public class BonefistGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 51,
       physicalHitRating = 21.0,
-      spellHitRating = 21.0,
       parryRating = 30.0
       )
 

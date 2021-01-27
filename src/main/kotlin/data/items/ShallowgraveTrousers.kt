@@ -36,8 +36,7 @@ public class ShallowgraveTrousers : Item() {
   public override var stats: Stats = Stats(
       agility = 45,
       stamina = 46,
-      physicalHasteRating = 30.0,
-      spellHasteRating = 30.0
+      physicalHasteRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

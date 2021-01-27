@@ -37,9 +37,7 @@ public class ShoulderpadsOfVehemence : Item() {
       agility = 33,
       stamina = 45,
       physicalHitRating = 26.0,
-      physicalHasteRating = 30.0,
-      spellHitRating = 26.0,
-      spellHasteRating = 30.0
+      physicalHasteRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

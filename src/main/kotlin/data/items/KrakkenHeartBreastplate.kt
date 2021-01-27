@@ -36,8 +36,7 @@ public class KrakkenHeartBreastplate : Item() {
       strength = 61,
       agility = 43,
       stamina = 42,
-      physicalHitRating = 30.0,
-      spellHitRating = 30.0
+      physicalHitRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

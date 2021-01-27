@@ -37,8 +37,7 @@ public class BloodlordLegplates : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 27,
-      physicalCritRating = 11.0,
-      spellCritRating = 11.0
+      physicalCritRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf(

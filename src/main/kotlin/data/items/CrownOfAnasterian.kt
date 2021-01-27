@@ -38,8 +38,7 @@ public class CrownOfAnasterian : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 67,
-      physicalCritRating = 40.0,
-      spellCritRating = 40.0
+      physicalCritRating = 40.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -39,9 +39,7 @@ public class OnslaughtBelt : Item() {
       strength = 43,
       physicalCritRating = 40.0,
       physicalHasteRating = 26.0,
-      expertiseRating = 26.0,
-      spellCritRating = 40.0,
-      spellHasteRating = 26.0
+      expertiseRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -37,8 +37,7 @@ public class MarksmansBelt : Item() {
       agility = 19,
       stamina = 28,
       intellect = 12,
-      physicalCritRating = 9.0,
-      spellCritRating = 9.0
+      physicalCritRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf()

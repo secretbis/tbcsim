@@ -38,8 +38,7 @@ public class QuadDeathblowXGoggles : Item() {
   public override var stats: Stats = Stats(
       agility = 61,
       stamina = 47,
-      physicalHitRating = 24.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -35,7 +35,6 @@ public class PepesShroudOfPacification : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       physicalHitRating = 25.0,
-      spellHitRating = 25.0,
       dodgeRating = 30.0
       )
 

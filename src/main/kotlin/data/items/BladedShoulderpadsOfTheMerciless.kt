@@ -38,9 +38,7 @@ public class BladedShoulderpadsOfTheMerciless : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       physicalCritRating = 21.0,
-      physicalHitRating = 13.0,
-      spellCritRating = 21.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

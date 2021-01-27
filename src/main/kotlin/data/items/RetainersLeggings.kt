@@ -35,8 +35,7 @@ public class RetainersLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      physicalHitRating = 26.0,
-      spellHitRating = 26.0
+      physicalHitRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -38,8 +38,7 @@ public class ExorcistsLinkedHelm : Item() {
       strength = 24,
       stamina = 30,
       intellect = 13,
-      physicalCritRating = 22.0,
-      spellCritRating = 22.0
+      physicalCritRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf(

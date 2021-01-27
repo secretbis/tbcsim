@@ -37,8 +37,7 @@ public class HighWarlordsLeatherLegguards : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 42,
-      physicalCritRating = 14.0,
-      spellCritRating = 14.0
+      physicalCritRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

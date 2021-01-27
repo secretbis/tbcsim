@@ -39,8 +39,7 @@ public class WastewalkerShoulderpads : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 13,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

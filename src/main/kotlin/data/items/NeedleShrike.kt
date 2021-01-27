@@ -34,8 +34,7 @@ public class NeedleShrike : Item() {
   public override var speed: Double = 1400.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 11.0,
-      spellHitRating = 11.0
+      physicalHitRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf()

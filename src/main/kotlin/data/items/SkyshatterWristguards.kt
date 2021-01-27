@@ -40,9 +40,7 @@ public class SkyshatterWristguards : Item() {
       intellect = 17,
       physicalCritRating = 22.0,
       physicalHitRating = 17.0,
-      expertiseRating = 17.0,
-      spellCritRating = 22.0,
-      spellHitRating = 17.0
+      expertiseRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -35,7 +35,6 @@ public class BandOfTheAbyssalLord : Item() {
   public override var stats: Stats = Stats(
       stamina = 53,
       physicalHitRating = 21.0,
-      spellHitRating = 21.0,
       defenseRating = 27.0
       )
 

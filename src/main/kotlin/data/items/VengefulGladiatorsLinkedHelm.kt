@@ -40,9 +40,7 @@ public class VengefulGladiatorsLinkedHelm : Item() {
       strength = 34,
       stamina = 67,
       physicalCritRating = 33.0,
-      physicalHitRating = 12.0,
-      spellCritRating = 33.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf(

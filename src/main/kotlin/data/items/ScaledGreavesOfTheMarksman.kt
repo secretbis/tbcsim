@@ -37,8 +37,7 @@ public class ScaledGreavesOfTheMarksman : Item() {
 
   public override var stats: Stats = Stats(
       agility = 37,
-      physicalHitRating = 16.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf(

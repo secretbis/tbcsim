@@ -38,8 +38,7 @@ public class NetherShadowTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 52,
-      physicalHitRating = 35.0,
-      spellHitRating = 35.0
+      physicalHitRating = 35.0
       )
 
   public override var sockets: List<Socket> = listOf(

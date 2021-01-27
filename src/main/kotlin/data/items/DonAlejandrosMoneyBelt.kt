@@ -38,8 +38,7 @@ public class DonAlejandrosMoneyBelt : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 37,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf(

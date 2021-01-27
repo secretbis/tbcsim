@@ -37,8 +37,7 @@ public class BootsOfNaturalGrace : Item() {
       agility = 26,
       stamina = 37,
       intellect = 13,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf()

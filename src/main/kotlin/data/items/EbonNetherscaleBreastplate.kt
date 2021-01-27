@@ -39,8 +39,7 @@ public class EbonNetherscaleBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 23,
-      physicalCritRating = 31.0,
-      spellCritRating = 31.0
+      physicalCritRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf(

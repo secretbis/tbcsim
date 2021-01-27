@@ -35,7 +35,6 @@ public class FrayedTetherOfTheDrowned : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       physicalHitRating = 18.0,
-      spellHitRating = 18.0,
       defenseRating = 24.0
       )
 

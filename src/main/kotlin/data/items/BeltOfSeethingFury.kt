@@ -35,8 +35,7 @@ public class BeltOfSeethingFury : Item() {
   public override var stats: Stats = Stats(
       strength = 48,
       stamina = 37,
-      physicalHasteRating = 38.0,
-      spellHasteRating = 38.0
+      physicalHasteRating = 38.0
       )
 
   public override var sockets: List<Socket> = listOf()

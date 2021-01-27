@@ -41,9 +41,7 @@ public class GronnstalkersBelt : Item() {
       stamina = 21,
       intellect = 17,
       physicalCritRating = 19.0,
-      physicalHitRating = 24.0,
-      spellCritRating = 19.0,
-      spellHitRating = 24.0
+      physicalHitRating = 24.0
       )
 
   public override var sockets: List<Socket> = listOf(

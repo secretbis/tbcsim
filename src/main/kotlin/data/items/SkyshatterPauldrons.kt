@@ -41,9 +41,7 @@ public class SkyshatterPauldrons : Item() {
       stamina = 48,
       intellect = 19,
       physicalCritRating = 26.0,
-      physicalHitRating = 11.0,
-      spellCritRating = 26.0,
-      spellHitRating = 11.0
+      physicalHitRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf(

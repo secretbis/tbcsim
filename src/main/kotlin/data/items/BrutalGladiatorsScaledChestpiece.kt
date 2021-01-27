@@ -39,8 +39,7 @@ public class BrutalGladiatorsScaledChestpiece : Item() {
       strength = 46,
       stamina = 61,
       intellect = 32,
-      physicalCritRating = 41.0,
-      spellCritRating = 41.0
+      physicalCritRating = 41.0
       )
 
   public override var sockets: List<Socket> = listOf(

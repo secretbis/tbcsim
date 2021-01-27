@@ -38,8 +38,7 @@ public class BeltOfDeepShadow : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 14,
-      physicalHitRating = 18.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

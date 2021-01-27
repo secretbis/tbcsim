@@ -37,8 +37,7 @@ public class WarglaiveOfAzzinoth : Item() {
   public override var stats: Stats = Stats(
       agility = 22,
       stamina = 29,
-      physicalHitRating = 21.0,
-      spellHitRating = 21.0
+      physicalHitRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf()

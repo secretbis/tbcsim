@@ -34,8 +34,7 @@ public class DibMuadsCrysknife : Item() {
   public override var speed: Double = 1400.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

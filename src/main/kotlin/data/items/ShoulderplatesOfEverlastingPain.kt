@@ -37,8 +37,7 @@ public class ShoulderplatesOfEverlastingPain : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 33,
-      physicalHasteRating = 21.0,
-      spellHasteRating = 21.0
+      physicalHasteRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

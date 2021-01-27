@@ -37,8 +37,7 @@ public class TerestiansStranglestaff : Item() {
       strength = 38,
       agility = 37,
       stamina = 48,
-      physicalHitRating = 25.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

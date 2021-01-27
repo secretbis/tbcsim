@@ -40,8 +40,7 @@ public class GronnstalkersLeggings : Item() {
       agility = 37,
       stamina = 43,
       intellect = 28,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf(

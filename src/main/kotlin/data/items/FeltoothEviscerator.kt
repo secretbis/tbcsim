@@ -34,8 +34,7 @@ public class FeltoothEviscerator : Item() {
   public override var speed: Double = 1400.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 22.0,
-      spellCritRating = 22.0
+      physicalCritRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

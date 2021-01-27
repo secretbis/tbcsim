@@ -39,8 +39,7 @@ public class SeersLinkedSpaulders : Item() {
       strength = 13,
       stamina = 33,
       intellect = 8,
-      physicalCritRating = 17.0,
-      spellCritRating = 17.0
+      physicalCritRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

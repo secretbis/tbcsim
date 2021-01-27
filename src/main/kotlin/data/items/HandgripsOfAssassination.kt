@@ -37,8 +37,7 @@ public class HandgripsOfAssassination : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 24,
-      physicalHitRating = 17.0,
-      spellHitRating = 17.0
+      physicalHitRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf()

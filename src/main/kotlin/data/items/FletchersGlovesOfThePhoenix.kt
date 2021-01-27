@@ -39,8 +39,7 @@ public class FletchersGlovesOfThePhoenix : Item() {
       agility = 30,
       stamina = 33,
       intellect = 25,
-      physicalHasteRating = 34.0,
-      spellHasteRating = 34.0
+      physicalHasteRating = 34.0
       )
 
   public override var sockets: List<Socket> = listOf(

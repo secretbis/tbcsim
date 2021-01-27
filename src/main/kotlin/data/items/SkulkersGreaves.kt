@@ -38,8 +38,7 @@ public class SkulkersGreaves : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 28,
-      physicalHitRating = 28.0,
-      spellHitRating = 28.0
+      physicalHitRating = 28.0
       )
 
   public override var sockets: List<Socket> = listOf(

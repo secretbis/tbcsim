@@ -35,8 +35,7 @@ public class GauntletsOfTheSkullsplitter : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       agility = 18,
-      physicalHitRating = 12.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

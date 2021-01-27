@@ -38,8 +38,7 @@ public class InsidiousBands : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 28,
-      physicalHitRating = 12.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf(

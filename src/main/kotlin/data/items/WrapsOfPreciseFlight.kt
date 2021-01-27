@@ -37,8 +37,7 @@ public class WrapsOfPreciseFlight : Item() {
       agility = 18,
       stamina = 28,
       intellect = 20,
-      physicalCritRating = 19.0,
-      spellCritRating = 19.0
+      physicalCritRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

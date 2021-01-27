@@ -36,8 +36,7 @@ public class ClawOfTheNetherwingFlight : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       physicalHitRating = 15.0,
-      expertiseRating = 15.0,
-      spellHitRating = 15.0
+      expertiseRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

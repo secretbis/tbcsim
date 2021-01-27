@@ -37,7 +37,6 @@ public class CleaverOfTheUnforgiving : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       physicalHitRating = 12.0,
-      spellHitRating = 12.0,
       parryRating = 20.0
       )
 

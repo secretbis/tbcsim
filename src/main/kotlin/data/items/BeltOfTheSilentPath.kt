@@ -38,8 +38,7 @@ public class BeltOfTheSilentPath : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 33,
-      physicalHitRating = 23.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf(

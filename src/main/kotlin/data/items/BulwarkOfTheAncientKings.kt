@@ -39,9 +39,7 @@ public class BulwarkOfTheAncientKings : Item() {
       strength = 40,
       stamina = 56,
       physicalCritRating = 41.0,
-      physicalHitRating = 25.0,
-      spellCritRating = 41.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf(

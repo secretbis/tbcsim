@@ -36,8 +36,7 @@ public class MaulgarsWarhelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       intellect = 31,
-      physicalCritRating = 42.0,
-      spellCritRating = 42.0
+      physicalCritRating = 42.0
       )
 
   public override var sockets: List<Socket> = listOf()

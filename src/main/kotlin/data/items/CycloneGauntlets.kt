@@ -39,8 +39,7 @@ public class CycloneGauntlets : Item() {
       agility = 21,
       stamina = 26,
       intellect = 24,
-      physicalHitRating = 19.0,
-      spellHitRating = 19.0
+      physicalHitRating = 19.0
       )
 
   public override var sockets: List<Socket> = listOf()

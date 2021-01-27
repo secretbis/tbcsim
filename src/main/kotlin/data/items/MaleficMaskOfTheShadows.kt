@@ -36,9 +36,7 @@ public class MaleficMaskOfTheShadows : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       physicalCritRating = 42.0,
-      physicalHitRating = 31.0,
-      spellCritRating = 42.0,
-      spellHitRating = 31.0
+      physicalHitRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf()

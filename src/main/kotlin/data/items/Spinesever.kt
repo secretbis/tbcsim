@@ -36,8 +36,7 @@ public class Spinesever : Item() {
   public override var stats: Stats = Stats(
       agility = 11,
       stamina = 12,
-      physicalHitRating = 10.0,
-      spellHitRating = 10.0
+      physicalHitRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

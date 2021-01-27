@@ -37,8 +37,7 @@ public class AmaniMaskOfDeath : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 51,
-      physicalHitRating = 33.0,
-      spellHitRating = 33.0
+      physicalHitRating = 33.0
       )
 
   public override var sockets: List<Socket> = listOf(

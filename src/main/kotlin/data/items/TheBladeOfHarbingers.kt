@@ -35,9 +35,7 @@ public class TheBladeOfHarbingers : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 55.0,
-      physicalHasteRating = 53.0,
-      spellCritRating = 55.0,
-      spellHasteRating = 53.0
+      physicalHasteRating = 53.0
       )
 
   public override var sockets: List<Socket> = listOf()

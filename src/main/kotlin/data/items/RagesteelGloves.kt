@@ -35,8 +35,7 @@ public class RagesteelGloves : Item() {
 
   public override var stats: Stats = Stats(
       strength = 35,
-      physicalCritRating = 27.0,
-      spellCritRating = 27.0
+      physicalCritRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -36,9 +36,7 @@ public class MercilessGladiatorsHacker : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       physicalCritRating = 19.0,
-      physicalHitRating = 10.0,
-      spellCritRating = 19.0,
-      spellHitRating = 10.0
+      physicalHitRating = 10.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -35,9 +35,7 @@ public class ApexisCrystalMace : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 20.0,
-      physicalHitRating = 8.0,
-      spellCritRating = 20.0,
-      spellHitRating = 8.0
+      physicalHitRating = 8.0
       )
 
   public override var sockets: List<Socket> = listOf()

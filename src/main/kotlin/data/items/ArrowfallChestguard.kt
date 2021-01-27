@@ -37,8 +37,7 @@ public class ArrowfallChestguard : Item() {
       agility = 39,
       stamina = 25,
       intellect = 38,
-      physicalHasteRating = 30.0,
-      spellHasteRating = 30.0
+      physicalHasteRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

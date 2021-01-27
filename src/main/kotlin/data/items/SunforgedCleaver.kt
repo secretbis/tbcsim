@@ -35,9 +35,7 @@ public class SunforgedCleaver : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 13.0,
-      physicalHasteRating = 15.0,
-      spellCritRating = 13.0,
-      spellHasteRating = 15.0
+      physicalHasteRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

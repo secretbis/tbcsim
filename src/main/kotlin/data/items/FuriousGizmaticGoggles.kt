@@ -39,9 +39,7 @@ public class FuriousGizmaticGoggles : Item() {
       strength = 48,
       stamina = 28,
       physicalCritRating = 38.0,
-      physicalHitRating = 13.0,
-      spellCritRating = 38.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

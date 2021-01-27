@@ -38,9 +38,7 @@ public class RedBeltOfBattle : Item() {
       strength = 41,
       stamina = 21,
       physicalCritRating = 24.0,
-      physicalHitRating = 14.0,
-      spellCritRating = 24.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

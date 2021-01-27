@@ -37,8 +37,7 @@ public class BrutalGladiatorsPlateGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 59,
-      physicalCritRating = 37.0,
-      spellCritRating = 37.0
+      physicalCritRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

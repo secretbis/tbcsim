@@ -35,8 +35,7 @@ public class KhoriumChampion : Item() {
 
   public override var stats: Stats = Stats(
       strength = 50,
-      physicalHitRating = 37.0,
-      spellHitRating = 37.0
+      physicalHitRating = 37.0
       )
 
   public override var sockets: List<Socket> = listOf()

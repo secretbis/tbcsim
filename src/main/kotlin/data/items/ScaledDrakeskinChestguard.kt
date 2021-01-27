@@ -39,8 +39,7 @@ public class ScaledDrakeskinChestguard : Item() {
       agility = 47,
       stamina = 39,
       intellect = 26,
-      physicalHasteRating = 25.0,
-      spellHasteRating = 25.0
+      physicalHasteRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf(

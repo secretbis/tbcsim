@@ -40,9 +40,7 @@ public class CrystalforgeBreastplate : Item() {
       stamina = 40,
       intellect = 20,
       physicalCritRating = 21.0,
-      physicalHitRating = 23.0,
-      spellCritRating = 21.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf(

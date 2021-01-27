@@ -37,7 +37,6 @@ public class DemonHideSpaulders : Item() {
       agility = 23,
       stamina = 18,
       physicalHitRating = 11.0,
-      spellHitRating = 11.0,
       dodgeRating = 13.0
       )
 

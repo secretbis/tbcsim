@@ -35,8 +35,7 @@ public class MithrilBandOfTheUnscarred : Item() {
   public override var stats: Stats = Stats(
       strength = 26,
       stamina = 24,
-      physicalCritRating = 22.0,
-      spellCritRating = 22.0
+      physicalCritRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

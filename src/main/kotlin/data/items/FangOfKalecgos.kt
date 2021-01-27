@@ -35,8 +35,7 @@ public class FangOfKalecgos : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
-      physicalHasteRating = 25.0,
-      spellHasteRating = 25.0
+      physicalHasteRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

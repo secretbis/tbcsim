@@ -39,8 +39,7 @@ public class ForestProwlersHelm : Item() {
       agility = 42,
       stamina = 29,
       intellect = 28,
-      physicalCritRating = 20.0,
-      spellCritRating = 20.0
+      physicalCritRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf(

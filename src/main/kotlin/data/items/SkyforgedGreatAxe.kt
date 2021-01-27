@@ -34,8 +34,7 @@ public class SkyforgedGreatAxe : Item() {
   public override var speed: Double = 3400.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 35.0,
-      spellCritRating = 35.0
+      physicalCritRating = 35.0
       )
 
   public override var sockets: List<Socket> = listOf()

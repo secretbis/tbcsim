@@ -36,9 +36,7 @@ public class FelSteelWarhelm : Item() {
       strength = 46,
       stamina = 46,
       physicalCritRating = 44.0,
-      physicalHitRating = 30.0,
-      spellCritRating = 44.0,
-      spellHitRating = 30.0
+      physicalHitRating = 30.0
       )
 
   public override var sockets: List<Socket> = listOf()

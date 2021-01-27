@@ -36,8 +36,7 @@ public class ElekkHideLeggings : Item() {
       strength = 38,
       stamina = 28,
       intellect = 20,
-      physicalCritRating = 20.0,
-      spellCritRating = 20.0
+      physicalCritRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

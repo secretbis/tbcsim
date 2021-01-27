@@ -37,8 +37,7 @@ public class MaghariHuntsmansLeggings : Item() {
       agility = 16,
       stamina = 18,
       intellect = 12,
-      physicalHitRating = 15.0,
-      spellHitRating = 15.0
+      physicalHitRating = 15.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -38,8 +38,7 @@ public class EdgewalkerLongboots : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 28,
-      physicalHitRating = 13.0,
-      spellHitRating = 13.0
+      physicalHitRating = 13.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -35,8 +35,7 @@ public class TwinbladeOfMastery : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       physicalCritRating = 21.0,
-      expertiseRating = 11.0,
-      spellCritRating = 21.0
+      expertiseRating = 11.0
       )
 
   public override var sockets: List<Socket> = listOf()

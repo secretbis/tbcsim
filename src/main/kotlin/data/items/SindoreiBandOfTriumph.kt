@@ -35,8 +35,7 @@ public class SindoreiBandOfTriumph : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      physicalCritRating = 28.0,
-      spellCritRating = 28.0
+      physicalCritRating = 28.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -135,10 +135,10 @@ rotation:
           seconds: 0
     - name: Strength of Earth Totem
       criteria:
-        # Refresh SoE if about to expire
+        # Refresh SoE if expired
         - type: BUFF_DURATION_LTE
           buff: Strength of Earth Totem
-          seconds: 1
+          seconds: 0
     - name: Flame Shock
       criteria:
         # Apply Flame Shock if the DoT is missing
@@ -154,7 +154,7 @@ simOpts:
 #  durationMs: 120000
 #  stepMs: 1
 #  latencyMs: 0
-  iterations: 1
+#  iterations: 1
 #  targetLevel: 73
 #  targetArmor: 7700
 #  allowParryAndBlock: false

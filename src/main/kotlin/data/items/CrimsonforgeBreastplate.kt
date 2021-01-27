@@ -36,9 +36,7 @@ public class CrimsonforgeBreastplate : Item() {
       strength = 36,
       stamina = 45,
       physicalCritRating = 26.0,
-      physicalHitRating = 16.0,
-      spellCritRating = 26.0,
-      spellHitRating = 16.0
+      physicalHitRating = 16.0
       )
 
   public override var sockets: List<Socket> = listOf()

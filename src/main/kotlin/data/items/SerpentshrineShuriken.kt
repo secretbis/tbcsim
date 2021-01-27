@@ -35,9 +35,7 @@ public class SerpentshrineShuriken : Item() {
   public override var stats: Stats = Stats(
       stamina = 14,
       physicalCritRating = 20.0,
-      physicalHitRating = 12.0,
-      spellCritRating = 20.0,
-      spellHitRating = 12.0
+      physicalHitRating = 12.0
       )
 
   public override var sockets: List<Socket> = listOf()

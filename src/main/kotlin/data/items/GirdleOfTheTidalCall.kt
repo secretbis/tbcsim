@@ -36,8 +36,7 @@ public class GirdleOfTheTidalCall : Item() {
       strength = 35,
       stamina = 30,
       intellect = 20,
-      physicalCritRating = 33.0,
-      spellCritRating = 33.0
+      physicalCritRating = 33.0
       )
 
   public override var sockets: List<Socket> = listOf()

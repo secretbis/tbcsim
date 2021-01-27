@@ -35,8 +35,7 @@ public class Endbringer : Item() {
   public override var stats: Stats = Stats(
       strength = 29,
       stamina = 28,
-      physicalCritRating = 45.0,
-      spellCritRating = 45.0
+      physicalCritRating = 45.0
       )
 
   public override var sockets: List<Socket> = listOf()

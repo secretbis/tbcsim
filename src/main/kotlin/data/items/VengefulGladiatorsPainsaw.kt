@@ -35,8 +35,7 @@ public class VengefulGladiatorsPainsaw : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 62,
-      physicalCritRating = 47.0,
-      spellCritRating = 47.0
+      physicalCritRating = 47.0
       )
 
   public override var sockets: List<Socket> = listOf()

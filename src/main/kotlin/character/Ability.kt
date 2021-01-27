@@ -73,18 +73,4 @@ abstract class Ability {
     fun castTimeMs(sim: SimIteration): Int {
         return (baseCastTimeMs / sim.subject.spellHasteMultiplier()).toInt()
     }
-
-    // AP and spell damage coefficients
-    // TODO: Verify that these formulas reflect TBC mechanics
-    // https://wowwiki.fandom.com/wiki/Spell_power
-    open val spellPowerCoeff: Double
-        get() {
-            // DoT
-            return if(baseDurationMs == 0) {
-                // Most instant spells are treated as 1.5s cast time for coeff purposes
-                baseCastTimeMs.coerceAtLeast(1500) / 3500.0
-            } else {
-                baseDurationMs / 15000.0
-            }
-        }
 }

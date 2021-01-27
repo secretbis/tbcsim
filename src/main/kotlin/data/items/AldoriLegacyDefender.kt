@@ -37,7 +37,6 @@ public class AldoriLegacyDefender : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       physicalHitRating = 15.0,
-      spellHitRating = 15.0,
       defenseRating = 19.0
       )
 

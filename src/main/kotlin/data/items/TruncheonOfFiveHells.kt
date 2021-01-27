@@ -35,7 +35,6 @@ public class TruncheonOfFiveHells : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       physicalHitRating = 14.0,
-      spellHitRating = 14.0,
       defenseRating = 15.0
       )
 

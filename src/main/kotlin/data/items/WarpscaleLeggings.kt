@@ -37,7 +37,6 @@ public class WarpscaleLeggings : Item() {
       agility = 32,
       stamina = 31,
       physicalHitRating = 14.0,
-      spellHitRating = 14.0,
       dodgeRating = 21.0
       )
 

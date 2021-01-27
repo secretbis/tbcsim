@@ -35,8 +35,7 @@ public class BoraksReminder : Item() {
 
   public override var stats: Stats = Stats(
       agility = 11,
-      physicalHitRating = 7.0,
-      spellHitRating = 7.0
+      physicalHitRating = 7.0
       )
 
   public override var sockets: List<Socket> = listOf()

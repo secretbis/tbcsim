@@ -38,8 +38,7 @@ public class WarmaulOfInfusedLight : Item() {
       strength = 20,
       stamina = 30,
       intellect = 28,
-      physicalCritRating = 21.0,
-      spellCritRating = 21.0
+      physicalCritRating = 21.0
       )
 
   public override var sockets: List<Socket> = listOf(

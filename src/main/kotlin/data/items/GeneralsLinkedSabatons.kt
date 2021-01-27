@@ -36,8 +36,7 @@ public class GeneralsLinkedSabatons : Item() {
       agility = 27,
       stamina = 39,
       intellect = 18,
-      physicalCritRating = 27.0,
-      spellCritRating = 27.0
+      physicalCritRating = 27.0
       )
 
   public override var sockets: List<Socket> = listOf()

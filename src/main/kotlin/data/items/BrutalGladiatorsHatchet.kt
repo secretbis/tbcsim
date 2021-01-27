@@ -36,9 +36,7 @@ public class BrutalGladiatorsHatchet : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       physicalCritRating = 20.0,
-      physicalHitRating = 9.0,
-      spellCritRating = 20.0,
-      spellHitRating = 9.0
+      physicalHitRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf()

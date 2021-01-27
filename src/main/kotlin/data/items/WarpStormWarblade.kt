@@ -35,7 +35,6 @@ public class WarpStormWarblade : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       physicalHitRating = 15.0,
-      spellHitRating = 15.0,
       defenseRating = 13.0
       )
 

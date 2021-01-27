@@ -34,8 +34,7 @@ public class AggressorsMarkOfTheShatar : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 29.0,
-      spellCritRating = 29.0
+      physicalCritRating = 29.0
       )
 
   public override var sockets: List<Socket> = listOf()

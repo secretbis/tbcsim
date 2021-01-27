@@ -39,8 +39,7 @@ public class EbonNetherscaleBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 14,
-      physicalCritRating = 22.0,
-      spellCritRating = 22.0
+      physicalCritRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf(

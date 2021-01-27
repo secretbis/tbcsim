@@ -38,9 +38,7 @@ public class MantleOfPerenolde : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       physicalCritRating = 23.0,
-      physicalHitRating = 23.0,
-      spellCritRating = 23.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf(

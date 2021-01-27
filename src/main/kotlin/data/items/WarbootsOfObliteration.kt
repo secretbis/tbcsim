@@ -35,8 +35,7 @@ public class WarbootsOfObliteration : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 29,
-      physicalCritRating = 31.0,
-      spellCritRating = 31.0
+      physicalCritRating = 31.0
       )
 
   public override var sockets: List<Socket> = listOf()

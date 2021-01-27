@@ -40,8 +40,7 @@ public class NordrassilFeralKilt : Item() {
       agility = 37,
       stamina = 42,
       intellect = 17,
-      physicalHitRating = 18.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

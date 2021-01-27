@@ -38,8 +38,7 @@ public class ShadowmastersBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 38,
-      physicalCritRating = 17.0,
-      spellCritRating = 17.0
+      physicalCritRating = 17.0
       )
 
   public override var sockets: List<Socket> = listOf(

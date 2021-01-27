@@ -38,9 +38,7 @@ public class LegplatesOfUnendingFury : Item() {
       strength = 52,
       stamina = 48,
       physicalHitRating = 25.0,
-      physicalHasteRating = 43.0,
-      spellHitRating = 25.0,
-      spellHasteRating = 43.0
+      physicalHasteRating = 43.0
       )
 
   public override var sockets: List<Socket> = listOf(

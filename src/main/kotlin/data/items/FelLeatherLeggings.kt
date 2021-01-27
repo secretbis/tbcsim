@@ -38,9 +38,7 @@ public class FelLeatherLeggings : Item() {
 
   public override var stats: Stats = Stats(
       physicalCritRating = 25.0,
-      physicalHitRating = 25.0,
-      spellCritRating = 25.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf(

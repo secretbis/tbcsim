@@ -37,8 +37,7 @@ public class DraenicWildstaff : Item() {
       strength = 34,
       agility = 32,
       stamina = 33,
-      physicalHitRating = 22.0,
-      spellHitRating = 22.0
+      physicalHitRating = 22.0
       )
 
   public override var sockets: List<Socket> = listOf()

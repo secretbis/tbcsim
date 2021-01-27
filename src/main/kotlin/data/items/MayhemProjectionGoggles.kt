@@ -39,9 +39,7 @@ public class MayhemProjectionGoggles : Item() {
       strength = 62,
       stamina = 47,
       physicalCritRating = 51.0,
-      physicalHitRating = 26.0,
-      spellCritRating = 51.0,
-      spellHitRating = 26.0
+      physicalHitRating = 26.0
       )
 
   public override var sockets: List<Socket> = listOf(

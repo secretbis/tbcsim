@@ -35,8 +35,7 @@ public class ChestguardOfExile : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 33,
-      physicalCritRating = 36.0,
-      spellCritRating = 36.0
+      physicalCritRating = 36.0
       )
 
   public override var sockets: List<Socket> = listOf()

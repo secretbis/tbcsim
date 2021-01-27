@@ -38,8 +38,7 @@ public class WaistguardOfTheGreatBeast : Item() {
       strength = 29,
       agility = 28,
       stamina = 30,
-      physicalHitRating = 18.0,
-      spellHitRating = 18.0
+      physicalHitRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf(

@@ -36,8 +36,7 @@ public class BlackenedChestplate : Item() {
       strength = 30,
       agility = 30,
       stamina = 27,
-      physicalHitRating = 25.0,
-      spellHitRating = 25.0
+      physicalHitRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf()

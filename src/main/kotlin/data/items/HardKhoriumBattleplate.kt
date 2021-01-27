@@ -38,8 +38,7 @@ public class HardKhoriumBattleplate : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 55,
-      physicalCritRating = 41.0,
-      spellCritRating = 41.0
+      physicalCritRating = 41.0
       )
 
   public override var sockets: List<Socket> = listOf(

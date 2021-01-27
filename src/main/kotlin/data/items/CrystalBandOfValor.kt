@@ -35,7 +35,6 @@ public class CrystalBandOfValor : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       physicalHitRating = 16.0,
-      spellHitRating = 16.0,
       defenseRating = 22.0
       )
 

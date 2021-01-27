@@ -36,8 +36,7 @@ public class PauldronsOfGruesomeFate : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 33,
-      physicalHitRating = 23.0,
-      spellHitRating = 23.0
+      physicalHitRating = 23.0
       )
 
   public override var sockets: List<Socket> = listOf()

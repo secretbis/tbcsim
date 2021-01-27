@@ -36,8 +36,7 @@ public class FelboarHideShoes : Item() {
   public override var stats: Stats = Stats(
       agility = 18,
       stamina = 15,
-      physicalHitRating = 9.0,
-      spellHitRating = 9.0
+      physicalHitRating = 9.0
       )
 
   public override var sockets: List<Socket> = listOf()

@@ -34,8 +34,7 @@ public class MadnessOfTheBetrayer : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalHitRating = 20.0,
-      spellHitRating = 20.0
+      physicalHitRating = 20.0
       )
 
   public override var sockets: List<Socket> = listOf()

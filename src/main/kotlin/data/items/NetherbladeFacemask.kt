@@ -39,8 +39,7 @@ public class NetherbladeFacemask : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 39,
-      physicalHitRating = 14.0,
-      spellHitRating = 14.0
+      physicalHitRating = 14.0
       )
 
   public override var sockets: List<Socket> = listOf(

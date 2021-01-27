@@ -37,8 +37,7 @@ public class HighWarlordsLinkedGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 21,
       stamina = 33,
-      physicalCritRating = 18.0,
-      spellCritRating = 18.0
+      physicalCritRating = 18.0
       )
 
   public override var sockets: List<Socket> = listOf()

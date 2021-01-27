@@ -39,8 +39,7 @@ public class JusticarBreastplate : Item() {
       strength = 42,
       stamina = 24,
       intellect = 33,
-      physicalCritRating = 25.0,
-      spellCritRating = 25.0
+      physicalCritRating = 25.0
       )
 
   public override var sockets: List<Socket> = listOf(
