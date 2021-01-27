@@ -17,8 +17,6 @@ talents:
     rank: 5
   - name: Improved Weapon Totems
     rank: 2
-  - name: Spirit Weapons
-    rank: 1
   - name: Elemental Weapons
     rank: 3
   - name: Mental Quickness
@@ -107,10 +105,48 @@ gearCompare: {}
 
 rotation:
   precombat:
-    - name: Windfury Weapon
+    - name: Windfury Weapon (MH)
+    - name: Windfury Weapon (OH)
     - name: Strength of Earth Totem
     - name: Windfury Totem
-  combat: []
+  combat:
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+    - name: Windfury Totem
+      criteria:
+        # If GoA has existed for 9+ seconds, refresh WFT for party
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 111
+        # But not if we already have a WFT active
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem
+          seconds: 0
+    - name: Grace of Air Totem
+      criteria:
+        # Replace Windfury Totem as quickly as possible
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem
+          seconds: 120
+        # But not if we already have a GoAT active
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 0
+    - name: Strength of Earth Totem
+      criteria:
+        # Refresh SoE if about to expire
+        - type: BUFF_DURATION_LTE
+          buff: Strength of Earth Totem
+          seconds: 1
+    - name: Flame Shock
+      criteria:
+        # Apply Flame Shock if the DoT is missing
+        - type: DEBUFF_DURATION_LTE
+          debuff: Flame Shock (DoT)
+          seconds: 0
+    - name: Stormstrike
+    - name: Earth Shock
 
 # These are the sim defaults, for reference
 # Uncomment to change them as desired
@@ -118,7 +154,7 @@ simOpts:
 #  durationMs: 120000
 #  stepMs: 1
 #  latencyMs: 0
-#  iterations: 1000
+  iterations: 1
 #  targetLevel: 73
 #  targetArmor: 7700
 #  allowParryAndBlock: false

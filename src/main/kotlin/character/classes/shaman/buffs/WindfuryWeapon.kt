@@ -1,11 +1,10 @@
 package character.classes.shaman.buffs
 
 import character.*
+import character.classes.shaman.abilities.WindfuryWeapon
 import data.model.Item
 import sim.Event
 import sim.SimIteration
-import kotlin.random.Random
-import character.classes.shaman.abilities.WindfuryWeapon as WindfuryWeaponAbility
 
 class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     class WindfuryWeaponState : Buff.State() {
@@ -21,6 +20,9 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val hidden: Boolean = true
 
     override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        // Mark each mainhand weapon as having this instead
+        // FIXME: This needs to be removed if this buff expires or is otherwise removed
+        sourceItems.first().temporaryEnhancement = this
         return stats
     }
 
@@ -47,10 +49,21 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
             return offIcd && super.shouldProc(sim, items, ability)
         }
 
+        var wfAbility: Ability? = null
+
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-            val wfAbility = WindfuryWeaponAbility(sourceItems[0])
-            if(wfAbility.available(sim)) {
-                wfAbility.cast(sim)
+            if(wfAbility == null) {
+                val suffix = when(sourceItem) {
+                    sim.subject.gear.mainHand -> "(MH)"
+                    sim.subject.gear.offHand -> "(OH)"
+                    else -> "(Unknown)"
+                }
+                val name = "Windfury Weapon $suffix"
+                wfAbility = WindfuryWeapon(name, sourceItem)
+            }
+
+            if(wfAbility!!.available(sim)) {
+                wfAbility!!.cast(sim)
 
                 // Update ICD state
                 val state = sharedState(name, sim) as WindfuryWeaponState
@@ -59,7 +72,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 sim.logEvent(
                     Event(
                         eventType = Event.Type.PROC,
-                        abilityName = wfAbility.fullName(sim)
+                        abilityName = wfAbility!!.name
                     )
                 )
             }

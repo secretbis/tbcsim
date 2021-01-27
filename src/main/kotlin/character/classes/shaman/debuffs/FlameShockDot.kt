@@ -1,10 +1,8 @@
 package character.classes.shaman.debuffs
 
-import character.Ability
 import character.Debuff
 import character.Proc
 import character.Stats
-import data.model.Item
 
 import sim.SimIteration
 

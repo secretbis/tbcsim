@@ -133,7 +133,7 @@ object ItemGen {
             .addType(objBuilder.build())
             .addAnnotation(
                 // TODO: Some item variants have the same name in the data
-            //       Need to distinguish them somehow
+                //       Need to distinguish them somehow when finding by name
                 AnnotationSpec.builder(Suppress::class)
                     .addMember("%S", "DUPLICATE_LABEL_IN_WHEN")
                     .build()

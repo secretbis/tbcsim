@@ -38,6 +38,9 @@ abstract class Proc {
         FROST_DAMAGE,
         SHADOW_DAMAGE,
         ARCANE_DAMAGE,
+
+        // Mechanics
+        SERVER_TICK
     }
 
     enum class Type {

@@ -14,10 +14,10 @@ class ElementalWeapons(currentRank: Int) : Talent(currentRank) {
 
     fun windfuryApMultiplier(): Double {
         return when(currentRank) {
-            0 -> 1.0
             1 -> 1.13
             2 -> 1.26
-            else -> 1.4
+            3 -> 1.4
+            else -> 1.0
         }
     }
 

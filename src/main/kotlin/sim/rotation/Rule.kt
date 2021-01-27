@@ -4,17 +4,11 @@ import character.Ability
 import sim.SimIteration
 
 class Rule(
-    val conditions: List<Condition>,
     val ability: Ability,
-    // Almost all of these will be combat rules - precombat is processed separately
-    val type: Type = Type.COMBAT
+    val phase: Rotation.Phase,
+    val criteria: List<Criterion>,
 ) {
-    enum class Type {
-        PRECOMBAT,
-        COMBAT
-    }
-
     fun satisfied(sim: SimIteration): Boolean {
-        return conditions.all { it.satisfied(sim) }
+        return criteria.all { it.satisfied(sim) }
     }
 }

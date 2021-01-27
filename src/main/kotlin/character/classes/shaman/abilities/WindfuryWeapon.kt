@@ -9,18 +9,12 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-class WindfuryWeapon(val item: Item) : Ability() {
+class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     companion object {
         const val name = "Windfury Weapon"
     }
 
     override val id: Int = 25505
-    override val name: String = Companion.name
-
-    fun fullName(sim: SimIteration): String {
-        val suffix = if(isOffHand(sim)) { "(OH)" } else { "(MH)" }
-        return "${Companion.name} $suffix"
-    }
 
     override fun available(sim: SimIteration): Boolean {
         return if(isOffHand(sim)) { sim.subject.isDualWielding() } else true
@@ -44,7 +38,7 @@ class WindfuryWeapon(val item: Item) : Ability() {
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = fullName(sim),
+            abilityName = name,
             amount = result.first,
             result = result.second,
         ))

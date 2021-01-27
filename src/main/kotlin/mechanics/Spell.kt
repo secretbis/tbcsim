@@ -75,7 +75,14 @@ object Spell {
         return (sim.subject.spellCritPct() / 100.0 + baseCritChance).coerceAtLeast(0.0)
     }
 
-    fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, ): Double {
+    fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
+        val min = minDmg.coerceAtLeast(0.0)
+        val max = maxDmg.coerceAtLeast(1.0)
+        val dmg = Random.nextDouble(min, max)
+        return baseDamageRoll(sim, dmg, spellDamageCoeff, school, bonusSpellDamage)
+    }
+
+    fun baseDamageRoll(sim: SimIteration, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
         // Add school damage
         val schoolDamage = when(school) {
             Constants.DamageType.HOLY -> sim.subject.stats.holyDamage
@@ -88,11 +95,7 @@ object Spell {
         }
 
         val totalSpellDamage = sim.subject.spellDamage() + bonusSpellDamage + schoolDamage
-
-        val min = minDmg.coerceAtLeast(0.0)
-        val max = maxDmg.coerceAtLeast(1.0)
-
-        return Random.nextDouble(min, max) + (totalSpellDamage * spellDamageCoeff)
+        return dmg + (totalSpellDamage * spellDamageCoeff)
     }
 
     // Performs an attack roll given an initial unmitigated damage value

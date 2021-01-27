@@ -51,12 +51,7 @@ data class RotationYml(
 @Serializable
 data class RotationRuleYml(
     val name: String,
-    val condition: ConditionYml? = null
-)
-
-@Serializable
-data class ConditionYml(
-    val rule: String
+    val criteria: List<Map<String, String?>>? = null
 )
 
 @Serializable

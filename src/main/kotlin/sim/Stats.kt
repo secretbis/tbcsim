@@ -67,15 +67,17 @@ object Stats {
         processBuffs(
             iterations,
             "Buffs",
-            iterations.flatMap { it.events }
-                .filter {
-                    it.buff != null && !it.buff.hidden && (
-                        it.eventType == Event.Type.BUFF_START ||
-                        it.eventType == Event.Type.BUFF_REFRESH ||
-                        it.eventType == Event.Type.BUFF_END
-                    )
-                }
-                .groupBy { it.buff!!.name }
+            iterations.flatMap { iter ->
+                iter.events
+                    .filter {
+                        it.buff != null && !it.buff.hidden && (
+                            it.eventType == Event.Type.BUFF_START ||
+                            it.eventType == Event.Type.BUFF_REFRESH ||
+                            it.eventType == Event.Type.BUFF_END
+                        )
+                    }
+            }
+            .groupBy { it.buff!!.name }
         )
     }
 
@@ -83,13 +85,15 @@ object Stats {
         processBuffs(
             iterations,
             "Debuffs",
-            iterations.flatMap { it.events }
-                .filter {
-                    it.buff != null && !it.buff.hidden && (
-                        it.eventType == Event.Type.DEBUFF_START ||
-                        it.eventType == Event.Type.DEBUFF_REFRESH ||
-                        it.eventType == Event.Type.DEBUFF_END
-                    )
+            iterations.flatMap { iter ->
+                iter.events
+                    .filter {
+                        it.buff != null && !it.buff.hidden && (
+                            it.eventType == Event.Type.DEBUFF_START ||
+                            it.eventType == Event.Type.DEBUFF_REFRESH ||
+                            it.eventType == Event.Type.DEBUFF_END
+                        )
+                    }
                 }
                 .groupBy { it.buff!!.name }
         )
@@ -188,9 +192,11 @@ object Stats {
     }
 
     fun resultsByAbility(iterations: List<SimIteration>) {
-        val byAbility = iterations.flatMap { it.events }
-            .filter { it.eventType == Event.Type.DAMAGE }
-            .filter { it.abilityName != null }
+        val byAbility = iterations.flatMap { iter ->
+            iter.events
+                .filter { it.eventType == Event.Type.DAMAGE }
+                .filter { it.abilityName != null }
+            }
             .groupBy { it.abilityName!! }
 
         val keys = byAbility.keys.toList()

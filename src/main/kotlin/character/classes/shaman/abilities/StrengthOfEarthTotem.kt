@@ -1,6 +1,10 @@
 package character.classes.shaman.abilities
 
 import character.Ability
+import character.Buff
+import character.Proc
+import character.Stats
+import character.classes.shaman.talents.EnhancingTotems
 import sim.SimIteration
 
 class StrengthOfEarthTotem: Ability() {
@@ -15,8 +19,23 @@ class StrengthOfEarthTotem: Ability() {
         return true
     }
 
+    val buff = object : Buff() {
+        override val name: String = Companion.name
+        override val durationMs: Int = 120000
+        override val mutex: Mutex = Mutex.EARTH_TOTEM
+
+        val baseStr = 86.0
+        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+            val etTalent = sim.subject.klass.talents[EnhancingTotems.name] as EnhancingTotems?
+            val multiplier = 1.0 * (etTalent?.strengthOfEarthMultiplier() ?: 1.0)
+            return stats.add(Stats(strength = (baseStr * multiplier).toInt()))
+        }
+
+        override fun procs(sim: SimIteration): List<Proc> = listOf()
+    }
+
     override fun cast(sim: SimIteration, free: Boolean) {
-        TODO("Not yet implemented")
+        sim.addBuff(buff)
     }
 
     override val baseCastTimeMs: Int = 0

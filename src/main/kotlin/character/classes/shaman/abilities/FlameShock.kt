@@ -3,6 +3,7 @@ package character.classes.shaman.abilities
 import character.Ability
 import character.Proc
 import character.classes.shaman.debuffs.FlameShockDot
+import character.classes.shaman.talents.Reverberation
 import data.Constants
 import mechanics.Spell
 import sim.Event
@@ -17,12 +18,17 @@ class FlameShock : Ability() {
     override val name: String = Companion.name
 
     override val baseCastTimeMs: Int = 0
+    override fun cooldownMs(sim: SimIteration): Int {
+        val reverberation = sim.subject.klass.talents[Reverberation.name] as Reverberation?
+        return 6000 - (200 * (reverberation?.currentRank ?: 0))
+    }
+    override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
     override fun gcdMs(sim: SimIteration): Int = sim.subject.spellGcd().toInt()
 
     val baseDamage = 377.0
     override fun cast(sim: SimIteration, free: Boolean) {
         val school = Constants.DamageType.FIRE
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage, baseDamage, spellPowerCoeff, school)
+        val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
 
         sim.logEvent(Event(

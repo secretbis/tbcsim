@@ -7,7 +7,9 @@ import data.items.ItemIndex
 import data.model.Item
 import mu.KotlinLogging
 import sim.SimOptions
+import sim.rotation.Criterion
 import sim.rotation.Rotation
+import sim.rotation.Rule
 import java.io.File
 
 class Config(
@@ -21,10 +23,12 @@ class Config(
         fun fromYml(file: File): Config {
             val configFile = file.readText()
             val yml = Yaml.default.decodeFromString(ConfigYml.serializer(), configFile)
+            val character = createCharacter(yml)
+            val rotation = createRotation(yml, character)
 
             return Config(
-                createCharacter(yml),
-                createRotation(yml),
+                character,
+                rotation,
                 createOpts(yml)
             )
         }
@@ -41,9 +45,37 @@ class Config(
             )
         }
 
-        private fun createRotation(yml: ConfigYml): Rotation {
-            // TODO: Actually implement this
-            return Rotation(listOf())
+        private fun makeRules(rotationRuleYml: List<RotationRuleYml>?, character: Character, phase: Rotation.Phase): List<Rule> {
+            return rotationRuleYml?.map {
+                val ability = character.klass.abilityFromString(it.name)
+                if(ability == null) {
+                    logger.warn { "Could not find ability with name: ${it.name}" }
+                    null
+                } else {
+                    val criteria = it.criteria?.map { data ->
+                        val criterion = Criterion.fromString(data["type"], data)
+                        if(criterion == null) {
+                            logger.warn { "Could not find criterion with type: ${data["type"]}" }
+                            null
+                        } else criterion
+                    }?.filterNotNull() ?: listOf()
+
+                    Rule(
+                        ability,
+                        phase,
+                        criteria
+                    )
+                }
+            }?.filterNotNull() ?: listOf()
+        }
+
+        private fun createRotation(yml: ConfigYml, character: Character): Rotation {
+            val precombatRules = makeRules(yml.rotation?.precombat, character, Rotation.Phase.PRECOMBAT)
+            val combatRules = makeRules(yml.rotation?.combat, character, Rotation.Phase.COMBAT)
+
+            return Rotation(
+                precombatRules + combatRules
+            )
         }
 
         private fun createItemFromGear(itemYml: GearItemYml?): Item {

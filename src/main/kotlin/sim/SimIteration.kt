@@ -8,7 +8,6 @@ import character.races.Boss as BossRace
 import data.model.Item
 import mu.KotlinLogging
 import sim.rotation.Rotation
-import sim.rotation.Rule
 
 class SimIteration(
     val subject: Character,
@@ -19,6 +18,7 @@ class SimIteration(
 
     val target: Character = defaultTarget()
 
+    val serverTickMs = 2000
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
@@ -31,6 +31,7 @@ class SimIteration(
     val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedBuffState: MutableMap<String, Buff.State> = mutableMapOf()
     val abilityState: MutableMap<String, Ability.State> = mutableMapOf()
+    val sharedAbilityState: MutableMap<String, Ability.State> = mutableMapOf()
     val debuffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedDebuffState: MutableMap<String, Buff.State> = mutableMapOf()
 
@@ -47,11 +48,6 @@ class SimIteration(
     }
 
     init {
-        // Cast any spells flagged in the rotation as precombat
-        rotation.rules.filter { it.type == Rule.Type.PRECOMBAT }.forEach {
-            it.ability.cast(this)
-        }
-
         // Add auto-attack, if allowed
         if(subject.klass.allowAutoAttack) {
             autoAttack = listOf(
@@ -69,10 +65,14 @@ class SimIteration(
 
         // Compute initial stats
         recomputeStats()
+
+        // Cast any spells flagged in the rotation as precombat
+        rotation.precombat(this)
     }
 
     private fun recomputeStats() {
         subject.computeStats(this, buffs)
+        target.computeStats(this, debuffs)
     }
 
     private fun pruneBuffs() {
@@ -125,6 +125,13 @@ class SimIteration(
                 rotationAbility.cast(this)
                 rotationAbility.afterCast(this)
 
+                // Log cast event
+                // TODO: Is the SPELL_START event useful?
+                logEvent(Event(
+                    eventType = Event.Type.SPELL_CAST,
+                    abilityName = rotationAbility.name
+                ))
+
                 // Set next cast times, and add latency if configured
                 gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
                 castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
@@ -134,6 +141,11 @@ class SimIteration(
         // Do auto attacks
         autoAttack.forEach {
             if(it.available(this)) it.cast(this)
+        }
+
+        // Fire server tick proc
+        if(elapsedTimeMs % serverTickMs == 0) {
+            fireProc(listOf(Proc.Trigger.SERVER_TICK))
         }
     }
 
@@ -161,11 +173,27 @@ class SimIteration(
         // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
         if(!exists) {
+            // If this buff is mutex with others, remove any existing with that class
+            if(buff.mutex != Buff.Mutex.NONE) {
+                val toRemove = buffs.filter { it.mutex == buff.mutex }
+                toRemove.forEach {
+                    it.reset(this)
+                    logEvent(Event(
+                        eventType = Event.Type.BUFF_END,
+                        buff = it
+                    ))
+                }
+                buffs.removeAll(toRemove)
+            }
+
             buffs.add(buff)
             logEvent(Event(
                 eventType = Event.Type.BUFF_START,
                 buff = buff
             ))
+
+            // Always recompute after adding a buff
+            recomputeStats()
         } else {
             logEvent(Event(
                 eventType = Event.Type.BUFF_REFRESH,
@@ -185,6 +213,9 @@ class SimIteration(
                 eventType = Event.Type.DEBUFF_START,
                 buff = debuff
             ))
+
+            // Always recompute after adding a debuff
+            recomputeStats()
         } else {
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_REFRESH,

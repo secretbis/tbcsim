@@ -42,12 +42,8 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
             GraceOfAirTotem.name -> GraceOfAirTotem()
             StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
             WindfuryTotem.name -> WindfuryTotem()
-            WindfuryWeapon.name -> {
-                if(item == null) {
-                    throw IllegalArgumentException("Windfury Weapon must have an item context")
-                }
-                WindfuryWeapon(item)
-            }
+            WindfuryWeaponMainHand.name -> WindfuryWeaponMainHand()
+            WindfuryWeaponOffHand.name -> WindfuryWeaponOffHand()
             else -> null
         }
     }

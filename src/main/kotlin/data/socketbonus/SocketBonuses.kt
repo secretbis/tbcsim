@@ -18,6 +18,7 @@ object SocketBonuses {
         }
     }
 
+    // TODO: Map-ify this, finding every time is inefficient
     val allSocketBonusesRaw = listOf(
         SocB76(),
         SocB90(),

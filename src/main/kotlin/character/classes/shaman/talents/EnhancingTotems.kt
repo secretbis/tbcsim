@@ -16,15 +16,17 @@ class EnhancingTotems(currentRank: Int) : Talent(currentRank) {
     fun strengthOfEarthMultiplier(): Double {
         return 1.0 + when(currentRank) {
             1 -> 0.08
-            else -> 0.15
+            2 -> 0.15
+            else -> 0.0
         }
     }
 
     // TODO: Apply this to GoA Totem
-    fun graceOfAirTotemDamageMultiplier(): Double {
+    fun graceOfAirTotemMultiplier(): Double {
         return 1.0 + when(currentRank) {
             1 -> 0.08
-            else -> 0.15
+            2 -> 0.15
+            else -> 0.0
         }
     }
 }

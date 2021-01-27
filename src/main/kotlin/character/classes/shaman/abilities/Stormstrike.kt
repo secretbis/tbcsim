@@ -17,7 +17,7 @@ class Stormstrike : Ability() {
 
     override val id: Int = 17364
     override val name: String = Companion.name
-    override fun cooldownMs(sim: SimIteration): Double = 10.0
+    override fun cooldownMs(sim: SimIteration): Int = 10000
 
     val buff = object : Buff() {
         override val name: String = Companion.name

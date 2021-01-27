@@ -19,12 +19,20 @@ abstract class Buff {
                 field = value
             }
         var appliedAtMs: Int = 0
-        var nextPeriodicEventMs: Int = 0
+    }
+
+    enum class Mutex {
+        NONE,
+        AIR_TOTEM,
+        FIRE_TOTEM,
+        WATER_TOTEM,
+        EARTH_TOTEM
     }
 
     open val id: Int = -1
     abstract val name: String
     abstract val durationMs: Int
+    open val mutex: Mutex = Mutex.NONE
 
     open val hidden: Boolean = false
     open val maxStacks: Int = 0
@@ -78,9 +86,19 @@ abstract class Buff {
         val noChargesLeft = maxCharges > 0 && state.currentCharges <= 0
 
         // Duration of -1 means static
-        val isExpired = durationMs != -1 && (sim.elapsedTimeMs > state.appliedAtMs + durationMs)
+        val isExpired = durationMs != -1 && remainingDurationMs(sim) <= 0
 
         return noChargesLeft || isExpired
+    }
+
+    open fun remainingDurationMs(sim: SimIteration): Int {
+        return if(durationMs == -1) {
+            // 24 hours in ms
+            1000 * 60 * 60 * 24
+        } else {
+            val state = state(sim)
+            ((state.appliedAtMs + durationMs) - sim.elapsedTimeMs).coerceAtLeast(0)
+        }
     }
 
     abstract fun modifyStats(sim: SimIteration, stats: Stats): Stats

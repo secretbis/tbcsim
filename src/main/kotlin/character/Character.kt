@@ -113,6 +113,6 @@ class Character(
 
     fun totemGcd(): Double {
         // TODO: Confirm this will be the case in Classic TBC at launch
-        return 1.0
+        return 1000.0
     }
 }
