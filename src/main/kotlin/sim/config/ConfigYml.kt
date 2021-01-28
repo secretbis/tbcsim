@@ -3,6 +3,18 @@ package sim.config
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class PartyYml(
+    val buffs: List<String>? = null
+)
+
+@Serializable
+data class RaidYml(
+    val buffs: List<String>? = null,
+    val debuffs: List<String>? = null,
+    val party: PartyYml? = null
+)
+
+@Serializable
 data class GearYml(
     val mainHand: GearItemYml? = null,
     val offHand: GearItemYml? = null,
@@ -74,5 +86,6 @@ data class ConfigYml(
     val gear: GearYml? = null,
     val gearCompare: GearCompareYml? = null,
     val rotation: RotationYml? = null,
+    val raid: RaidYml? = null,
     val simOpts: SimOptionsYml? = null
 )

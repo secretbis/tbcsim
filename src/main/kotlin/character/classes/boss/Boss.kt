@@ -3,7 +3,7 @@ package character.classes.boss
 import character.*
 import data.model.Item
 
-class Boss : Class(mapOf()) {
+class Boss(override var baseStats: Stats) : Class(mapOf()) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }
@@ -12,7 +12,6 @@ class Boss : Class(mapOf()) {
         return null
     }
 
-    override var baseStats: Stats = Stats()
     override var buffs: List<Buff> = listOf()
     override var resourceType: Resource.Type = Resource.Type.MANA
     override var baseResourceAmount: Int = 0

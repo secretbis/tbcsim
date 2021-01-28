@@ -1,6 +1,7 @@
 package sim
 
 import character.Buff
+import character.Character
 import data.Constants
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
@@ -15,7 +16,8 @@ object Stats {
         val startMs: Int,
         val endMs: Int,
         val refreshCount: Int,
-        val buff: Buff
+        val buff: Buff,
+        val stackDurationsMs: List<Pair<Int, Int>>
     ) {
         val durationMs: Int
             get() = endMs - startMs
@@ -40,7 +42,8 @@ object Stats {
         val applied: Int,
         val refreshed: Int,
         val uptimePct: Double,
-        val avgDuration: Double
+        val avgDuration: Double,
+        val avgStacks: Double
     )
 
     data class DamageTypeBreakdown(
@@ -49,10 +52,72 @@ object Stats {
         val total: Double
     )
 
+    fun sep() {
+        println("************************************************************************************")
+    }
+
     val df = DecimalFormat("#,###.##")
 
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
+
+    fun precombatStats(subject: Character, target: Character) {
+        println(
+            "PLAYER STATS\n" +
+            table {
+                row("Strength:", subject.strength(), "Phys. Hit:", subject.meleeHitPct())
+                row("Agility:", subject.agility(), "Phys. Crit:", subject.meleeCritPct())
+                row("Intellect:", subject.intellect(), "Phys. Haste:", 1.0 - subject.meleeHasteMultiplier())
+                row("Stamina:", subject.stamina(), "Spell Hit:", subject.spellHitPct())
+                row("Spirit:", subject.spirit(), "Spell Crit:", subject.spellCritPct())
+                row("Armor Pen:", subject.armor(), "Spell Haste:", 1.0 - subject.spellHasteMultiplier())
+                row("Attack Power", subject.attackPower(), "Expertise:", subject.expertisePct())
+                row("R. Attack Power", subject.rangedAttackPower())
+
+                hints {
+                    alignment(0, Table.Hints.Alignment.RIGHT)
+                    alignment(1, Table.Hints.Alignment.LEFT)
+                    alignment(2, Table.Hints.Alignment.RIGHT)
+                    alignment(3, Table.Hints.Alignment.LEFT)
+                    alignment(4, Table.Hints.Alignment.RIGHT)
+                    alignment(5, Table.Hints.Alignment.LEFT)
+
+                    precision(1, 0)
+                    precision(3, 2)
+                    precision(5, 2)
+
+                    postfix(3, "%")
+
+                    borderStyle = Table.BorderStyle.NONE
+                }
+            }.render(StringBuilder())
+        )
+
+        println(
+            "TARGET STATS\n" +
+            table {
+                row("Arcane Res:", target.stats.arcaneResistance, "Armor:", target.armor())
+                row("Fire Res:", target.stats.fireResistance)
+                row("Frost Res:", target.stats.frostResistance)
+                row("Nature Res:", target.stats.natureResistance)
+                row("Shadow Res:", target.stats.shadowResistance)
+
+
+                hints {
+                    alignment(0, Table.Hints.Alignment.RIGHT)
+                    alignment(1, Table.Hints.Alignment.LEFT)
+                    alignment(2, Table.Hints.Alignment.RIGHT)
+                    alignment(3, Table.Hints.Alignment.LEFT)
+                    alignment(4, Table.Hints.Alignment.RIGHT)
+                    alignment(5, Table.Hints.Alignment.LEFT)
+
+                    precision(1, 0)
+
+                    borderStyle = Table.BorderStyle.NONE
+                }
+            }.render(StringBuilder())
+        )
+    }
 
     fun dps(iterations: List<SimIteration>) {
         val perIteration = iterations.map {
@@ -65,9 +130,11 @@ object Stats {
         val mean = perIteration.average()
         val sd = sd(perIteration, mean)
 
-        logger.info("Average DPS: ${df.format(mean)}")
-        logger.info("Median DPS: ${df.format(median)}")
-        logger.info("Std. Dev: ${df.format(sd)}")
+        sep()
+        println("AVERAGE DPS: ${df.format(mean)}")
+        println("MEDIAN DPS: ${df.format(median)}")
+        println("STDDEV DPS: ${df.format(sd)}")
+        sep()
     }
 
     fun resultsByBuff(iterations: List<SimIteration>) {
@@ -122,10 +189,10 @@ object Stats {
     ) {
         val keys = byBuff.keys.toList()
 
-        logger.info {
+        println(
             "$title\n" +
             table {
-                header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds")
+                header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds" /*, "AvgStacks" */)
 
                 val rows = keys.map { key ->
                     val events = byBuff[key]!!
@@ -136,6 +203,8 @@ object Stats {
                     var lastEvent: Event? = null
                     var currentStart: Event? = null
                     var refreshCount = 0
+                    var stackDurationsMs = mutableListOf<Pair<Int, Int>>()
+
                     events.forEach {
                         if(it.eventType == buffStart) {
                             if(lastEvent?.eventType == buffStart) {
@@ -158,32 +227,46 @@ object Stats {
                             }
 
                             if(currentStart != null) {
-                                segments.add(BuffSegment(currentStart!!.timeMs, it.timeMs, refreshCount, it.buff!!))
+                                segments.add(BuffSegment(currentStart!!.timeMs, it.timeMs, refreshCount, it.buff!!, stackDurationsMs))
                                 // Reset
                                 currentStart = null
                                 refreshCount = 0
+                                stackDurationsMs = mutableListOf()
                             } else {
                                 logger.warn { "Possibly invalid segment - found end without start for buff: ${it.buff!!.name}" }
                             }
                         }
+
+                        // Track stacks
+                        // FIXME: Need more event data about stack consumption in order to actually do this
+//                        if(it.eventType == buffRefresh || it.eventType == buffEnd) {
+//                            if(it.buffStacks != 0) {
+//                                stackDurationsMs.add(Pair(it.buffStacks, it.timeMs - lastEvent!!.timeMs))
+//                            }
+//                        }
 
                         lastEvent = it
                     }
 
                     val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
                     val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
+//                    val avgStacks = segments.map { segment ->
+//                        val totalSegmentTimeMs = segment.stackDurationsMs.sumBy { it.second }
+//                        segment.stackDurationsMs.sumBy { it.first } / totalSegmentTimeMs.toDouble()
+//                    }.sum() / 1000.0
 
                     BuffBreakdown(
                         key,
                         applied,
                         refreshed,
                         uptimePct,
-                        avgDuration
+                        avgDuration,
+                        avgStacks = 0.0
                     )
                 }.sortedBy { it.name }
 
                 for(row in rows) {
-                    row(row.name, row.applied, row.refreshed, row.uptimePct, row.avgDuration)
+                    row(row.name, row.applied, row.refreshed, row.uptimePct, row.avgDuration/*, row.avgStacks */)
                 }
 
                 hints {
@@ -193,11 +276,11 @@ object Stats {
                         precision(1, 0)
                     }
 
-                    for(i in 3..4) {
+                    for(i in 3..5) {
                         precision(i, 2)
                     }
 
-                    for(i in 1..4) {
+                    for(i in 1..5) {
                         formatFlag(i, ",")
                     }
 
@@ -208,7 +291,7 @@ object Stats {
                     borderStyle = Table.BorderStyle.SINGLE_LINE
                 }
             }.render(StringBuilder())
-        }
+        )
     }
 
     fun resultsByAbility(iterations: List<SimIteration>) {
@@ -221,7 +304,7 @@ object Stats {
 
         val keys = byAbility.keys.toList()
 
-        logger.info {
+        println(
             "Ability Breakdown\n" +
             table {
                 header("Name", "Count", "TotalDmg", "PctOfTotal", "AverageDmg", "MedianDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
@@ -288,7 +371,7 @@ object Stats {
                     borderStyle = Table.BorderStyle.SINGLE_LINE
                 }
             }.render(StringBuilder())
-        }
+        )
     }
 
     fun resultsByDamageType(iterations: List<SimIteration>) {
@@ -301,7 +384,7 @@ object Stats {
 
         val keys = byDmgType.keys.toList()
 
-        logger.info {
+        println(
             "Damage Type Breakdown\n" +
             table {
                 header("Name", "Count", "TotalDmg", "PctOfTotal")
@@ -343,6 +426,6 @@ object Stats {
                     borderStyle = Table.BorderStyle.SINGLE_LINE
                 }
             }.render(StringBuilder())
-        }
+        )
     }
 }

@@ -63,7 +63,7 @@ open class Item {
 
     // Helpers
     open val avgDmg: Double
-        get() { return (minDmg + maxDmg) / 2}
+        get() { return (minDmg + maxDmg) / 2.0 }
     open val dps: Double
         get() { return avgDmg / speed }
 }

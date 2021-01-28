@@ -8,6 +8,7 @@ data class Event(
     var timeMs: Int = -1,
     val abilityName: String? = null,
     val buff: Buff? = null,
+    val buffStacks: Int = 0,
     val eventType: Type,
     val damageType: Constants.DamageType? = null,
     val amount: Double = 0.0,
@@ -16,10 +17,10 @@ data class Event(
 ) {
     enum class Type {
         DAMAGE,
-        SPELL_START,
         SPELL_CAST,
         BUFF_START,
         BUFF_REFRESH,
+        BUFF_CHARGE_CONSUMED,
         BUFF_END,
         DEBUFF_START,
         DEBUFF_REFRESH,

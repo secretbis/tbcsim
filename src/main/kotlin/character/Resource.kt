@@ -29,8 +29,8 @@ class Resource(
             // Add intellect
             .let {
                 when {
-                    character.stats.intellect <= 20 -> character.stats.intellect
-                    else -> 20 + (15 * (character.stats.intellect - 20))
+                    character.intellect() <= 20 -> character.intellect()
+                    else -> 20 + (15 * (character.intellect() - 20))
                 }
             }
             // TODO: Talents and buffs

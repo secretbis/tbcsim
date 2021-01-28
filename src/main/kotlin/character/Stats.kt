@@ -10,6 +10,12 @@ data class Stats(
     var intellect: Int = 0,
     var spirit: Int = 0,
 
+    var strengthMultiplier: Double = 1.0,
+    var agilityMultiplier: Double = 1.0,
+    var staminaMultiplier: Double = 1.0,
+    var intellectMultiplier: Double = 1.0,
+    var spiritMultiplier: Double = 1.0,
+
     var armor: Int = 0,
 
     // Secondary stats
@@ -101,6 +107,12 @@ data class Stats(
         intellect += stats.intellect
         spirit += stats.intellect
 
+        strengthMultiplier *= stats.strengthMultiplier
+        agilityMultiplier *= stats.agilityMultiplier
+        staminaMultiplier *= stats.staminaMultiplier
+        intellectMultiplier *= stats.intellectMultiplier
+        spiritMultiplier *= stats.intellectMultiplier
+
         armor += stats.armor
 
         attackPower += stats.attackPower
@@ -181,6 +193,12 @@ data class Stats(
         stamina -= stats.stamina
         intellect -= stats.intellect
         spirit -= stats.intellect
+
+        strengthMultiplier /= stats.strengthMultiplier
+        agilityMultiplier /= stats.agilityMultiplier
+        staminaMultiplier /= stats.staminaMultiplier
+        intellectMultiplier /= stats.intellectMultiplier
+        spiritMultiplier /= stats.intellectMultiplier
 
         armor -= stats.armor
 

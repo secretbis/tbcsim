@@ -63,11 +63,11 @@ class SimIteration(
         }
         subject.gear.buffs().forEach { addBuff(it) }
 
-        // Compute initial stats
-        recomputeStats()
-
         // Cast any spells flagged in the rotation as precombat
         rotation.precombat(this)
+
+        // Compute initial stats
+        recomputeStats()
     }
 
     private fun recomputeStats() {
@@ -118,23 +118,26 @@ class SimIteration(
         pruneDebuffs()
 
         // Find and cast next rotation ability
-        if(!isCasting() && !onGcd()) {
-            val rotationAbility = rotation.next(this)
-
+        if(!isCasting()) {
+            val rotationAbility = rotation.next(this, onGcd())
             if(rotationAbility != null) {
-                rotationAbility.cast(this)
-                rotationAbility.afterCast(this)
+                if(!onGcd() || (onGcd() && rotationAbility.castableOnGcd)) {
+                    rotationAbility.cast(this)
+                    rotationAbility.afterCast(this)
 
-                // Log cast event
-                // TODO: Is the SPELL_START event useful?
-                logEvent(Event(
-                    eventType = Event.Type.SPELL_CAST,
-                    abilityName = rotationAbility.name
-                ))
+                    // Log cast event
+                    // TODO: Is the SPELL_START event useful?
+                    logEvent(
+                        Event(
+                            eventType = Event.Type.SPELL_CAST,
+                            abilityName = rotationAbility.name
+                        )
+                    )
 
-                // Set next cast times, and add latency if configured
-                gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
-                castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
+                    // Set next cast times, and add latency if configured
+                    gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
+                    castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
+                }
             }
         }
 
@@ -177,12 +180,18 @@ class SimIteration(
         // Refresh, and flag buffs as changed
         buff.refresh(this)
 
+        // If this buff stacks, track stacks
+        val stacks = if(buff.maxStacks > 0) {
+            buffState[buff]?.currentStacks ?: 0
+        } else 0
+
         // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
         if(!exists) {
             // If this buff is mutex with others, remove any existing with that class
-            if(buff.mutex != Buff.Mutex.NONE) {
-                val toRemove = buffs.filter { it.mutex == buff.mutex }
+            if(!buff.mutex.contains(Buff.Mutex.NONE)) {
+                // A buff should be removed if it matches any of the incoming buff's mutex categories
+                val toRemove = buffs.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
                 toRemove.forEach {
                     it.reset(this)
                     logEvent(Event(
@@ -196,7 +205,8 @@ class SimIteration(
             buffs.add(buff)
             logEvent(Event(
                 eventType = Event.Type.BUFF_START,
-                buff = buff
+                buff = buff,
+                buffStacks = stacks
             ))
 
             // Always recompute after adding a buff
@@ -204,7 +214,8 @@ class SimIteration(
         } else {
             logEvent(Event(
                 eventType = Event.Type.BUFF_REFRESH,
-                buff = buff
+                buff = buff,
+                buffStacks = stacks
             ))
         }
     }
@@ -227,6 +238,19 @@ class SimIteration(
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_REFRESH,
                 buff = debuff
+            ))
+        }
+    }
+
+    fun consumeBuff(buff: Buff) {
+        val state = buffState[buff]
+        if(state != null) {
+            state.currentCharges -= 1
+
+            logEvent(Event(
+                eventType = Event.Type.BUFF_CHARGE_CONSUMED,
+                buff = buff,
+                buffStacks = state.currentStacks
             ))
         }
     }
@@ -272,13 +296,14 @@ class SimIteration(
 
     private fun defaultTarget(): Character {
         val char = Character(
-            BossClass(),
+            BossClass(baseStats = Stats(
+                armor = 7700
+            )),
             BossRace(),
             opts.targetLevel
         )
 
         char.computeStats(this, listOf())
-        char.stats.armor = opts.targetArmor
 
         return char
     }

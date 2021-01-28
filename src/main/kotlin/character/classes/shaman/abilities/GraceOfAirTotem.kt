@@ -22,7 +22,7 @@ class GraceOfAirTotem : Ability() {
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = 120000
-        override val mutex: Mutex = Mutex.AIR_TOTEM
+        override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
 
         val baseAgi = 77.0
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {

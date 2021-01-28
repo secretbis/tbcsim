@@ -22,7 +22,7 @@ class StrengthOfEarthTotem: Ability() {
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = 120000
-        override val mutex: Mutex = Mutex.EARTH_TOTEM
+        override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
 
         val baseStr = 86.0
         override fun modifyStats(sim: SimIteration, stats: Stats): Stats {

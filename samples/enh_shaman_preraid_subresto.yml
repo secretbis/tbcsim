@@ -103,12 +103,23 @@ gear:
 #      Each will be tested individually, in all combinations, and the sim will rank each setup
 gearCompare: {}
 
+# Rotation items are things that your character can personally do
 rotation:
   precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+#    - name: Roasted Clefthoof
+    - name: Spicy Hot Talbuk
+
+    # Abilities
     - name: Windfury Weapon (MH)
     - name: Windfury Weapon (OH)
     - name: Strength of Earth Totem
     - name: Windfury Totem
+
   combat:
     # All rotation items have the following implied criteria:
     # - It won't cast while it's on cooldown
@@ -133,6 +144,17 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Grace of Air Totem
           seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions:
+        # One immediately
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
     - name: Strength of Earth Totem
       criteria:
         # Refresh SoE if expired
@@ -148,13 +170,45 @@ rotation:
     - name: Stormstrike
     - name: Earth Shock
 
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raid:
+  buffs:
+    # Consider your raid composition when selecting which buffs to apply
+    # e.g. if you don't have two paladins, you can't have two blessings
+    - Blessing of Kings
+    - Improved Blessing of Might
+    - Improved Mark of the Wild
+    - Improved Seal of the Crusader
+  debuffs:
+    # Sunder Armor and Imp EA cannot be applied at the same time
+    # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+    # To test with Sunder, comment out Imp EA
+    - Sunder Armor
+#    - Improved Expose Armor
+    - Faerie Fire
+    - Curse of Recklessness
+    - Blood Frenzy
+#    - Curse of the Elements
+#    - Curse of Shadow
+
+  party:
+    # Adjust these based on what you expect your personal group composition to be
+    # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
+    buffs:
+      - Ferocious Inspiration
+      - Leader of the Pack
+      - Improved Battle Shout
+      - Improved Sanctity Aura
+
 # These are the sim defaults, for reference
 # Uncomment to change them as desired
 simOpts:
-#  durationMs: 120000
+#  durationMs: 180000
 #  stepMs: 1
 #  latencyMs: 0
-#  iterations: 1
+#  iterations: 100
 #  targetLevel: 73
 #  targetArmor: 7700
 #  allowParryAndBlock: false

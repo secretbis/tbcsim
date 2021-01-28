@@ -93,14 +93,14 @@ object Melee {
 
     fun meleeParryChance(sim: SimIteration): Double {
         return if(sim.opts.allowParryAndBlock) {
-            valueByLevelDiff(sim, baseParryChance)
+            (valueByLevelDiff(sim, baseParryChance) - (sim.subject.expertisePct() / 100.0)).coerceAtLeast(0.0)
         } else {
             0.0
         }
     }
 
     fun meleeDodgeChance(sim: SimIteration): Double {
-        return valueByLevelDiff(sim, baseDodgeChance)
+        return (valueByLevelDiff(sim, baseDodgeChance) - (sim.subject.expertisePct() / 100.0)).coerceAtLeast(0.0)
     }
 
     fun meleeBlockChance(sim: SimIteration): Double {
@@ -153,7 +153,7 @@ object Melee {
                 ?: throw IllegalArgumentException("Weapon subClass has no normalization coefficient: ${item.itemSubclass}")
         } else item.speed
 
-        return attackPower / 14 * (speed / 1000)
+        return attackPower / 14 * (speed / 1000.0)
     }
 
     fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
@@ -183,7 +183,7 @@ object Melee {
             sim.subject.stats.whiteDamageMultiplier
         } else {
             sim.subject.stats.yellowDamageMultiplier
-        }
+        } * sim.subject.stats.physicalDamageMultiplier
 
         val offHandMultiplier = if(isOffHand) {
             Stats.offHandPenalty + (1 - if(isWhiteDmg) {

@@ -11,7 +11,7 @@ data class SimOptions(
 ) {
    class Defaults {
        companion object {
-           var durationMs: Int = 120000
+           var durationMs: Int = 180000
            var stepMs: Int = 1
            var latencyMs: Int = 0
            var iterations: Int = 1000

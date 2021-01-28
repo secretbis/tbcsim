@@ -13,7 +13,9 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
         BUFF_DURATION_GTE,
         BUFF_DURATION_LTE,
         DEBUFF_DURATION_GTE,
-        DEBUFF_DURATION_LTE
+        DEBUFF_DURATION_LTE,
+        FIGHT_TIME_ELAPSED_GTE,
+        FIGHT_TIME_REMAINING_MODULO_LTE
     }
 
     companion object {
@@ -31,6 +33,8 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
                 Type.BUFF_DURATION_LTE -> BuffDurationLte(data)
                 Type.DEBUFF_DURATION_GTE -> DebuffDurationGte(data)
                 Type.DEBUFF_DURATION_LTE -> DebuffDurationLte(data)
+                Type.FIGHT_TIME_ELAPSED_GTE -> FightTimeElapsedGte(data)
+                Type.FIGHT_TIME_REMAINING_MODULO_LTE -> FightTimeRemainingModuloLte(data)
                 else -> {
                     logger.warn { "Unknown rotation criterion: $typeName" }
                     null

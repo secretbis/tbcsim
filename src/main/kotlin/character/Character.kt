@@ -44,16 +44,36 @@ class Character(
         }
     }
 
+    fun strength(): Int {
+        return (stats.strength.coerceAtLeast(0) * stats.strengthMultiplier).toInt()
+    }
+
+    fun agility(): Int {
+        return (stats.agility.coerceAtLeast(0) * stats.agilityMultiplier).toInt()
+    }
+
+    fun intellect(): Int {
+        return (stats.intellect.coerceAtLeast(0) * stats.intellectMultiplier).toInt()
+    }
+
+    fun spirit(): Int {
+        return (stats.spirit.coerceAtLeast(0) * stats.spiritMultiplier).toInt()
+    }
+
+    fun stamina(): Int {
+        return (stats.stamina.coerceAtLeast(0) * stats.staminaMultiplier).toInt()
+    }
+
     fun armor(): Int {
-        return (stats.armor * stats.armorMultiplier).toInt()
+        return (stats.armor.coerceAtLeast(0) * stats.armorMultiplier).toInt()
     }
 
     fun attackPower(): Int {
         return (
             (
-                stats.attackPower +
-                stats.strength * klass.attackPowerFromStrength +
-                stats.agility * klass.attackPowerFromAgility
+                stats.attackPower.coerceAtLeast(0) +
+                strength() * klass.attackPowerFromStrength +
+                agility() * klass.attackPowerFromAgility
             ) * stats.attackPowerMultiplier
         ).toInt()
     }
@@ -61,8 +81,8 @@ class Character(
     fun rangedAttackPower(): Int {
         return (
             (
-                stats.attackPower +
-                stats.agility * klass.rangedAttackPowerFromAgility
+                stats.attackPower.coerceAtLeast(0) +
+                agility() * klass.rangedAttackPowerFromAgility
             ) * stats.rangedAttackPowerMultiplier
         ).toInt()
     }
@@ -84,7 +104,7 @@ class Character(
     }
 
     fun meleeCritPct(): Double {
-        return stats.physicalCritRating / Rating.critPerPct + stats.agility * klass.critPctPerAgility
+        return stats.physicalCritRating / Rating.critPerPct + agility() * klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
@@ -92,7 +112,7 @@ class Character(
     }
 
     fun armorPen(): Int {
-        return stats.armorPen
+        return stats.armorPen.coerceAtLeast(0)
     }
 
     fun meleeHasteMultiplier(): Double {

@@ -2,6 +2,7 @@ package character.classes.shaman.talents
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class Flurry(currentRank: Int) : Talent(currentRank) {

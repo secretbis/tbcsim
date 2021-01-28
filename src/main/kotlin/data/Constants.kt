@@ -73,6 +73,7 @@ object Constants {
     // These values are ordinal
     enum class DamageType {
         PHYSICAL,
+        PHYSICAL_IGNORE_ARMOR,
         HOLY,
         FIRE,
         NATURE,

@@ -2,6 +2,8 @@ package sim.config
 
 import character.*
 import com.charleskorn.kaml.Yaml
+import data.abilities.generic.GenericAbilities
+import data.abilities.raid.RaidAbilities
 import data.enchants.Enchants
 import data.items.ItemIndex
 import data.model.Item
@@ -47,7 +49,8 @@ class Config(
 
         private fun makeRules(rotationRuleYml: List<RotationRuleYml>?, character: Character, phase: Rotation.Phase): List<Rule> {
             return rotationRuleYml?.map {
-                val ability = character.klass.abilityFromString(it.name)
+                // Check names in the character class first, then check generics
+                val ability = character.klass.abilityFromString(it.name) ?: GenericAbilities.byName(it.name)
                 if(ability == null) {
                     logger.warn { "Could not find ability with name: ${it.name}" }
                     null
@@ -73,8 +76,24 @@ class Config(
             val precombatRules = makeRules(yml.rotation?.precombat, character, Rotation.Phase.PRECOMBAT)
             val combatRules = makeRules(yml.rotation?.combat, character, Rotation.Phase.COMBAT)
 
+            // Only build Raid/Party rules from the collection of raid abilities
+            val raidAndPartyAbilities: List<String> = (yml.raid?.buffs ?: listOf()) + (yml.raid?.debuffs ?: listOf()) + (yml.raid?.party?.buffs ?: listOf())
+            val raidAndPartyRules = raidAndPartyAbilities.mapNotNull {
+                val ability = RaidAbilities.byName(it)
+                if(ability == null) {
+                    logger.warn { "Could not find raid/party ability with name: $it" }
+                    null
+                } else {
+                    Rule(
+                        ability,
+                        Rotation.Phase.RAID_OR_PARTY,
+                        listOf()
+                    )
+                }
+            }
+
             return Rotation(
-                precombatRules + combatRules
+                precombatRules + combatRules + raidAndPartyRules
             )
         }
 

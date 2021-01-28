@@ -26,13 +26,18 @@ abstract class Buff {
         AIR_TOTEM,
         FIRE_TOTEM,
         WATER_TOTEM,
-        EARTH_TOTEM
+        EARTH_TOTEM,
+        BATTLE_ELIXIR,
+        GUARDIAN_ELIXIR,
+        POTION,
+        FOOD,
+        DRUMS
     }
 
     open val id: Int = -1
     abstract val name: String
     abstract val durationMs: Int
-    open val mutex: Mutex = Mutex.NONE
+    open val mutex: List<Mutex> = listOf(Mutex.NONE)
 
     open val hidden: Boolean = false
     open val maxStacks: Int = 0

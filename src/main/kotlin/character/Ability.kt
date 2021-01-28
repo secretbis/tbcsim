@@ -9,12 +9,15 @@ abstract class Ability {
 
     enum class SharedCooldown {
         NONE,
-        SHAMAN_SHOCK
+        SHAMAN_SHOCK,
+        POTION,
+        DRUMS
     }
 
     abstract val id: Int
     abstract val name: String
     abstract fun gcdMs(sim: SimIteration): Int
+    open val castableOnGcd = false
     open fun cooldownMs(sim: SimIteration): Int = 0
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
 
