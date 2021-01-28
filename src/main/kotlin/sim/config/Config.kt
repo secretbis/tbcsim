@@ -2,10 +2,11 @@ package sim.config
 
 import character.*
 import com.charleskorn.kaml.Yaml
+import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
 import data.enchants.Enchants
-import data.items.ItemIndex
+import data.model.Gem
 import data.model.Item
 import mu.KotlinLogging
 import sim.SimOptions
@@ -99,8 +100,7 @@ class Config(
 
         private fun createItemFromGear(itemYml: GearItemYml?): Item {
             return if(itemYml != null) {
-                var item = ItemIndex.byName(itemYml.name)
-//                var item = Item()
+                var item = Items.byName(itemYml.name)
                 if(item == null) {
                     logger.warn { "Could not find item with name: ${itemYml.name}" }
                     item = Item()
@@ -110,8 +110,29 @@ class Config(
                     val enchant = Enchants.byName(itemYml.enchant, item)
                     if(enchant == null) {
                         logger.warn { "Could not find enchant with name: ${itemYml.name}" }
+                    } else {
+                        item.enchant = enchant
                     }
-                    item.enchant = enchant
+                }
+
+                // Fill sockets
+                if(item.sockets.size != itemYml.gems?.size ?: 0) {
+                    // Check that all sockets are filled
+                    logger.warn { "Too many or too few gems specified for item: ${itemYml.name}" }
+                }
+
+                item.sockets.forEachIndexed { index, socket ->
+                    val gemName = itemYml.gems?.get(index)
+                    val gem = if(gemName != null) { Items.byName(gemName) } else null
+                    if(gem == null) {
+                        logger.warn { "Could not find gem with name: ${gemName}" }
+                    } else {
+                        if(gem is Gem && socket.canSocket(gem)) {
+                            socket.gem = gem
+                        } else {
+                            logger.warn { "Cannot socket item into socket: $gemName -> ${itemYml.name} #$index" }
+                        }
+                    }
                 }
 
                 item

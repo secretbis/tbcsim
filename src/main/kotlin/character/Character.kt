@@ -27,12 +27,16 @@ class Character(
         return klass.canDualWield && hasMainHandWeapon() && hasOffHandWeapon()
     }
 
+    private var gearSnapshot: Stats? = null
     fun computeStats(sim: SimIteration, buffs: List<Buff>) {
         // Apply basic stats
+        if(gearSnapshot == null) {
+            gearSnapshot = gear.totalStats()
+        }
         this.stats = Stats()
             .add(klass.baseStats)
             .add(race.baseStats)
-            .add(gear.totalStats())
+            .add(gearSnapshot!!)
             .apply {
                 buffs.forEach {
                     it.modifyStats(sim, this)

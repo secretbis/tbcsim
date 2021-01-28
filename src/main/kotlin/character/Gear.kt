@@ -1,5 +1,7 @@
 package character
 
+import data.model.Color
+import data.model.Gem
 import data.model.Item
 import kotlin.reflect.full.declaredMemberProperties
 
@@ -48,19 +50,23 @@ data class Gear(
 
     fun buffs(): List<Buff> {
         val buffs = mutableListOf<Buff>()
-        Gear::class.declaredMemberProperties.forEach {
-            val general = (it.get(this) as Item).buffs
-            val enchant = (it.get(this) as Item).enchant
-            val tempEnh = (it.get(this) as Item).temporaryEnhancement
-
-            buffs.addAll(general)
-
-            if(enchant != null) {
-                buffs.add(enchant)
+        all().forEach {
+            buffs.addAll(it.buffs)
+            if(it.enchant != null) {
+                buffs.add(it.enchant!!)
             }
 
-            if(tempEnh != null) {
-                buffs.add(tempEnh)
+            if(it.temporaryEnhancement != null) {
+                buffs.add(it.temporaryEnhancement!!)
+            }
+
+            // Only meta gems provide buffs
+            it.sockets.forEach { socket ->
+                if(socket.color == Color.META && socket.gem != null) {
+                    if(metaGemActive()) {
+                        buffs.addAll(socket.gem?.buffs ?: listOf())
+                    }
+                }
             }
         }
         return buffs
@@ -68,9 +74,29 @@ data class Gear(
 
     fun totalStats(): Stats {
         val stats = Stats()
-        Gear::class.declaredMemberProperties.forEach {
-            stats.add((it.get(this) as Item).stats)
+        all().forEach {
+            stats.add(it.stats)
+
+            // Compute stats from sockets
+            it.sockets.forEach { socket ->
+                if(socket.gem != null) {
+                    stats.add(socket.gem!!.stats)
+                }
+            }
+
+            // Add socket bonuses if active
+            if(it.socketBonusActive) {
+                if(it.socketBonus != null) {
+                    stats.add(it.socketBonus!!.stats)
+                }
+            }
         }
         return stats
+    }
+
+    fun metaGemActive(): Boolean {
+        val allSockets = all().flatMap { it.sockets }
+        val metaGem = allSockets.find { it.color == Color.META && it.gem != null }?.gem
+        return metaGem?.metaActive(allSockets) ?: false
     }
 }

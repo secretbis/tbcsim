@@ -10,4 +10,10 @@ enum class Color(val mask: Int) {
     ORANGE(6),
     PURPLE(10),
     GREEN(12);
+
+    companion object {
+        fun matchesColor(gem: Gem, color: Color): Boolean {
+            return gem.color.mask and color.mask != 0
+        }
+    }
 }

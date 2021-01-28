@@ -11,6 +11,6 @@ class Socket(val color: Color) {
     }
 
     fun matches(): Boolean {
-        return gem?.color?.mask ?: 0 and color.mask != 0
+        return gem != null && Color.matchesColor(gem!!, color)
     }
 }

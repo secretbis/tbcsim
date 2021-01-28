@@ -46,15 +46,6 @@ open class Item {
             }
         }
 
-    open val metaGemActive: Boolean
-        get() {
-            val byType = sockets.groupBy { it.color }
-            // TODO: Different meta gem requirements
-            return byType[Color.RED]?.size ?: 0 >= 2 &&
-                    byType[Color.YELLOW]?.size ?: 0 >= 2 &&
-                    byType[Color.BLUE]?.size ?: 0 >= 2
-        }
-
     // Granted buffs and effects
     open var buffs: List<Buff> = listOf()
 

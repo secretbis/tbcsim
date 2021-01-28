@@ -202,13 +202,12 @@ raid:
       - Improved Battle Shout
       - Improved Sanctity Aura
 
-# These are the sim defaults, for reference
-# Uncomment to change them as desired
+# Set sim options here, as desired
 simOpts:
 #  durationMs: 180000
 #  stepMs: 1
 #  latencyMs: 0
-#  iterations: 100
+#  iterations: 10
 #  targetLevel: 73
 #  targetArmor: 7700
 #  allowParryAndBlock: false
