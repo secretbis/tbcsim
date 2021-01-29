@@ -3,6 +3,7 @@ package sim
 import kotlinx.coroutines.*
 import mu.KotlinLogging
 import sim.config.Config
+import kotlin.random.Random
 
 class Sim (
     val config: Config
@@ -34,7 +35,10 @@ class Sim (
             Stats.precombatStats(iteration.subject, iteration.target)
         }
 
-        for (timeMs in 0..config.opts.durationMs step config.opts.stepMs) {
+        // Randomly alter the fight duration, if configured
+        val durationMs = config.opts.durationMs + Random.nextInt(-config.opts.durationVariationMs, config.opts.durationVariationMs)
+
+        for (timeMs in 0..durationMs step config.opts.stepMs) {
             iteration.tick++
             iteration.elapsedTimeMs = timeMs
             iteration.tick()

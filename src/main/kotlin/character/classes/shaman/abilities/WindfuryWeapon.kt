@@ -24,17 +24,24 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         return item === sim.subject.gear.offHand
     }
 
-    val baseExtraAp = 445
+    val extraAp = 445
     override fun cast(sim: SimIteration, free: Boolean) {
         // Apply talents
         val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
-        val extraAp = (baseExtraAp * (elementalWeapons?.windfuryApMultiplier() ?: 1.0)).toInt()
 
         // Do attacks
         val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
         val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
-        val result = Melee.attackRoll(sim, attackOne + attackTwo, true, isOffHand(sim))
 
+        // Per EJ, WF Weapon is yellow damage
+        // https://web.archive.org/web/20080811084026/http://elitistjerks.com/f47/t15809-shaman_windfury/
+        val initialResult = Melee.attackRoll(sim, attackOne + attackTwo, false, isOffHand(sim))
+
+        // Apply the nuttiest talent ever made
+        val elementalWeaponsMod = elementalWeapons?.windfuryApMultiplier() ?: 1.0
+        val result = Pair(initialResult.first * elementalWeaponsMod, initialResult.second)
+
+        // TODO: Is this considered one damage event or two, for the purposes of procs?
         sim.logEvent(Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,

@@ -142,7 +142,7 @@ object Melee {
 
     fun meleeArmorMitigation(sim: SimIteration): Double {
         val targetArmor = sim.target.armor() - meleeArmorPen(sim)
-        return targetArmor / (targetArmor + (467.5 * sim.subject.level - 22167.5))
+        return targetArmor / (targetArmor + (467.5 * sim.target.level - 22167.5))
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item

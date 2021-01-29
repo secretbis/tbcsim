@@ -7,17 +7,23 @@ data class SimOptions(
     var iterations: Int = Defaults.iterations,
     var targetLevel: Int = Defaults.targetLevel,
     var targetArmor: Int = Defaults.targetArmor,
-    var allowParryAndBlock: Boolean = Defaults.allowParryAndBlock
+    var allowParryAndBlock: Boolean = Defaults.allowParryAndBlock,
+    var durationVariationMs: Int = Defaults.durationVariationMs
 ) {
    class Defaults {
        companion object {
-           var durationMs: Int = 180000
-           var stepMs: Int = 1
-           var latencyMs: Int = 0
-           var iterations: Int = 1000
-           var targetLevel: Int = 73
-           var targetArmor: Int = 7700
-           var allowParryAndBlock: Boolean = false
+           // The length of the fight you wish to simulate, in millseconds
+           val durationMs: Int = 180000
+           val stepMs: Int = 1
+           val latencyMs: Int = 0
+           val iterations: Int = 1000
+           val targetLevel: Int = 73
+           // Per ancient forums, most TBC bosses have 7700 or 6200 armor
+           val targetArmor: Int = 7700
+           val allowParryAndBlock: Boolean = false
+           // Randomly alters the fight duration by adding or subtracting a random number of milliseconds, up to the configured value
+           // This helps model the real world more effectively, and can better evaluate things like haste effects or potion usage timings
+           val durationVariationMs: Int = 0
        }
    }
 }

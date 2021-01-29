@@ -51,12 +51,13 @@ class Stormstrike : Ability() {
 
     override fun cast(sim: SimIteration, free: Boolean) {
         // Do attacks
+        // Stormstrike is yellow, and not normalized per EJ
         val mhItem = sim.subject.gear.mainHand
-        val mhAttack = Melee.baseDamageRoll(sim, mhItem, isNormalized = true)
+        val mhAttack = Melee.baseDamageRoll(sim, mhItem, isNormalized = false)
         val mhResult = Melee.attackRoll(sim, mhAttack, isWhiteDmg = false)
 
         val ohItem = sim.subject.gear.offHand
-        val ohAttack = Melee.baseDamageRoll(sim, ohItem, isNormalized = true)
+        val ohAttack = Melee.baseDamageRoll(sim, ohItem, isNormalized = false)
         val ohResult = Melee.attackRoll(sim, ohAttack, isWhiteDmg = false, isOffHand = true)
 
         // TODO: Distinguish MH and OH events in the logs?

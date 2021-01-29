@@ -207,7 +207,8 @@ simOpts:
 #  durationMs: 180000
 #  stepMs: 1
 #  latencyMs: 0
-#  iterations: 10
+  iterations: 100
 #  targetLevel: 73
 #  targetArmor: 7700
 #  allowParryAndBlock: false
+#  fightDurationVariance: 10

@@ -25,8 +25,8 @@ object Stats {
 
     data class AbilityBreakdown(
         val name: String,
-        val count: Int,
-        val total: Double,
+        val countAvg: Double,
+        val totalAvg: Double,
         val average: Double,
         val median: Double,
         val hitPct: Double,
@@ -39,8 +39,8 @@ object Stats {
 
     data class BuffBreakdown(
         val name: String,
-        val applied: Int,
-        val refreshed: Int,
+        val appliedAvg: Double,
+        val refreshedAvg: Double,
         val uptimePct: Double,
         val avgDuration: Double,
         val avgStacks: Double
@@ -48,8 +48,8 @@ object Stats {
 
     data class DamageTypeBreakdown(
         val type: Constants.DamageType,
-        val count: Int,
-        val total: Double
+        val countAvg: Double,
+        val totalAvg: Double
     )
 
     fun sep() {
@@ -192,12 +192,12 @@ object Stats {
         println(
             "$title\n" +
             table {
-                header("Name", "AppliedCount", "RefreshedCount", "UptimePct", "AvgDurationSeconds" /*, "AvgStacks" */)
+                header("Name", "AppliedCountAvg", "RefreshedCountAvg", "UptimePct", "AvgDurationSeconds" /*, "AvgStacks" */)
 
                 val rows = keys.map { key ->
                     val events = byBuff[key]!!
-                    val applied = events.filter { it.eventType == buffStart }.size
-                    val refreshed = events.filter { it.eventType == buffRefresh }.size
+                    val applied = events.filter { it.eventType == buffStart }.size / iterations.size.toDouble()
+                    val refreshed = events.filter { it.eventType == buffRefresh }.size / iterations.size.toDouble()
 
                     val segments = mutableListOf<BuffSegment>()
                     var lastEvent: Event? = null
@@ -266,21 +266,14 @@ object Stats {
                 }.sortedBy { it.name }
 
                 for(row in rows) {
-                    row(row.name, row.applied, row.refreshed, row.uptimePct, row.avgDuration/*, row.avgStacks */)
+                    row(row.name, row.appliedAvg, row.refreshedAvg, row.uptimePct, row.avgDuration/*, row.avgStacks */)
                 }
 
                 hints {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
-                    for(i in 1..2) {
-                        precision(1, 0)
-                    }
-
-                    for(i in 3..5) {
-                        precision(i, 2)
-                    }
-
                     for(i in 1..5) {
+                        precision(i, 2)
                         formatFlag(i, ",")
                     }
 
@@ -307,32 +300,32 @@ object Stats {
         println(
             "Ability Breakdown\n" +
             table {
-                header("Name", "Count", "TotalDmg", "PctOfTotal", "AverageDmg", "MedianDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
+                header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "AverageDmg", "MedianDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                 val rows = keys.map { key ->
                     val events = byAbility[key]!!
                     val amounts = events.map { it.amount }
-                    val count = amounts.size.toDouble()
-                    val total = amounts.sum()
+                    val countAvg = amounts.size.toDouble() / iterations.size.toDouble()
+                    val totalAvg = amounts.sum() / iterations.size.toDouble()
 
                     // Compute damage stats only for events where an attack actually connected
                     val nonzeroAmounts = amounts.filter { it > 0 }
-                    val average = total / nonzeroAmounts.size.toDouble()
+                    val average = amounts.sum() / nonzeroAmounts.size.toDouble()
                     val median = median(nonzeroAmounts)
 
                     // Compute result distributions with the entire set of events
                     // Count blocked hits/crits as hits/crits, since the block value is very small
-                    val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK }.size / count * 100.0
-                    val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT }.size / count * 100.0
-                    val missPct = events.filter { it.result == Event.Result.MISS }.size / count * 100.0
-                    val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / count * 100.0
-                    val parryPct = events.filter { it.result == Event.Result.PARRY }.size / count * 100.0
-                    val glancePct = events.filter { it.result == Event.Result.GLANCE }.size / count * 100.0
+                    val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK }.size / amounts.size.toDouble() * 100.0
+                    val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT }.size / amounts.size.toDouble() * 100.0
+                    val missPct = events.filter { it.result == Event.Result.MISS }.size / amounts.size.toDouble() * 100.0
+                    val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / amounts.size.toDouble() * 100.0
+                    val parryPct = events.filter { it.result == Event.Result.PARRY }.size / amounts.size.toDouble() * 100.0
+                    val glancePct = events.filter { it.result == Event.Result.GLANCE }.size / amounts.size.toDouble() * 100.0
 
                     AbilityBreakdown(
                         key,
-                        count.toInt(),
-                        total,
+                        countAvg,
+                        totalAvg,
                         average,
                         median,
                         hitPct,
@@ -342,24 +335,20 @@ object Stats {
                         parryPct,
                         glancePct
                     )
-                }.sortedBy { it.total }.reversed()
+                }.sortedBy { it.totalAvg }.reversed()
 
-                val grandTotal: Double = rows.sumByDouble { it.total }
+                val grandTotal: Double = rows.sumByDouble { it.totalAvg }
 
                 for(row in rows) {
-                    val pctOfGrandTotal = row.total / grandTotal * 100.0
-                    row(row.name, row.count, row.total, pctOfGrandTotal, row.average, row.median, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                    val pctOfGrandTotal = row.totalAvg / grandTotal * 100.0
+                    row(row.name, row.countAvg, row.totalAvg, pctOfGrandTotal, row.average, row.median, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                 }
 
                 hints {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
-                    precision(1, 0)
-                    for(i in 2..11) {
-                        precision(i, 2)
-                    }
-
                     for(i in 1..11) {
+                        precision(i, 2)
                         formatFlag(i, ",")
                     }
 
@@ -387,33 +376,32 @@ object Stats {
         println(
             "Damage Type Breakdown\n" +
             table {
-                header("Name", "Count", "TotalDmg", "PctOfTotal")
+                header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal")
 
                 val rows = keys.map { key ->
                     val events = byDmgType[key]!!
                     val amounts = events.map { it.amount }
-                    val count = amounts.size.toDouble()
-                    val total = amounts.sum()
+                    val count = amounts.size.toDouble() / iterations.size.toDouble()
+                    val total = amounts.sum() / iterations.size.toDouble()
 
                     DamageTypeBreakdown(
                         key!!,
-                        count.toInt(),
+                        count,
                         total
                     )
-                }.sortedBy { it.total }.reversed()
+                }.sortedBy { it.totalAvg }.reversed()
 
-                val grandTotal: Double = rows.sumByDouble { it.total }
+                val grandTotal: Double = rows.sumByDouble { it.totalAvg }
 
                 for(row in rows) {
-                    val pctOfGrandTotal = row.total / grandTotal * 100.0
-                    row(row.type.name, row.count, row.total, pctOfGrandTotal)
+                    val pctOfGrandTotal = row.totalAvg / grandTotal * 100.0
+                    row(row.type.name, row.countAvg, row.totalAvg, pctOfGrandTotal)
                 }
 
                 hints {
                     alignment(0, Table.Hints.Alignment.LEFT)
 
-                    precision(1, 0)
-                    for(i in 2..3) {
+                    for(i in 1..3) {
                         precision(i, 2)
                     }
 
