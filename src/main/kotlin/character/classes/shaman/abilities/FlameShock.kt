@@ -23,7 +23,7 @@ class FlameShock : Ability() {
         return 6000 - (200 * (reverberation?.currentRank ?: 0))
     }
     override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
-    override fun gcdMs(sim: SimIteration): Int = sim.subject.spellGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
 
     val baseDamage = 377.0
     override fun cast(sim: SimIteration, free: Boolean) {

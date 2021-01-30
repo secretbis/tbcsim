@@ -17,7 +17,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     override val id: Int = 25505
 
     override fun available(sim: SimIteration): Boolean {
-        return if(isOffHand(sim)) { sim.subject.isDualWielding() } else true
+        return if(isOffHand(sim)) { sim.isDualWielding() } else true
     }
 
     fun isOffHand(sim: SimIteration): Boolean {

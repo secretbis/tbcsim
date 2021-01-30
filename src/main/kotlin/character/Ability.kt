@@ -74,6 +74,6 @@ abstract class Ability {
 
     // Final cast time accounting for haste
     fun castTimeMs(sim: SimIteration): Int {
-        return (baseCastTimeMs / sim.subject.spellHasteMultiplier()).toInt()
+        return (baseCastTimeMs / sim.spellHasteMultiplier()).toInt()
     }
 }

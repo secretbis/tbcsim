@@ -16,7 +16,7 @@ abstract class MeleeBase : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     fun weaponSpeed(sim: SimIteration): Double {
-        return (item(sim).speed / sim.subject.meleeHasteMultiplier()).coerceAtLeast(0.01)
+        return (item(sim).speed / sim.meleeHasteMultiplier()).coerceAtLeast(0.01)
     }
 
     class AutoAttackState : Ability.State() {

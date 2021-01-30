@@ -3,31 +3,28 @@ package data.abilities.raid
 import character.*
 import sim.SimIteration
 
-class CurseOfRecklessness : Ability() {
+class ImprovedScorch : Ability() {
     companion object {
-        const val name = "Curse of Recklessness"
+        const val name = "Improved Scorch"
     }
 
-    override val id: Int = 27226
+    override val id: Int = 12873
     override val name: String = Companion.name
     override fun gcdMs(sim: SimIteration): Int = 0
 
-    val debuff = object : Debuff() {
-         override val name: String = Companion.name
+    val buff = object : Buff() {
+        override val name: String = Companion.name
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
-            return Stats(
-                armor = -800,
-                attackPower = 135
-            )
+            return Stats(fireDamageMultiplier = 1.15)
         }
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {
-        sim.addDebuff(debuff)
+        sim.addBuff(buff)
     }
 
     override val baseCastTimeMs: Int = 0

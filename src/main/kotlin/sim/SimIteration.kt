@@ -6,6 +6,7 @@ import character.auto.MeleeOffHand
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 import data.model.Item
+import mechanics.Rating
 import mu.KotlinLogging
 import sim.rotation.Rotation
 
@@ -16,7 +17,13 @@ class SimIteration(
 ) {
     val logger = KotlinLogging.logger {}
 
+    // Setup target
     val target: Character = defaultTarget()
+
+    // Stats storage
+    var subjectStats: Stats = Stats()
+    var targetStats: Stats = Stats()
+    var resource: Resource? = null
 
     val serverTickMs = 2000
     var tick: Int = 0
@@ -35,7 +42,9 @@ class SimIteration(
     val debuffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedDebuffState: MutableMap<String, Buff.State> = mutableMapOf()
 
-    // Global state
+    // GCD/casting state
+    var gcdBaseMs: Double = 1500.0
+    val minGcdMs: Double = 1000.0
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
 
@@ -71,8 +80,8 @@ class SimIteration(
     }
 
     private fun recomputeStats() {
-        subject.computeStats(this, buffs)
-        target.computeStats(this, debuffs)
+        subjectStats = computeStats(subject, buffs)
+        targetStats = computeStats(target, debuffs)
     }
 
     private fun pruneBuffs() {
@@ -307,8 +316,132 @@ class SimIteration(
             opts.targetLevel
         )
 
-        char.computeStats(this, listOf())
+        computeStats(char, listOf())
 
         return char
+    }
+
+    fun hasMainHandWeapon(): Boolean {
+        return subject.gear.mainHand.id != -1
+    }
+
+    fun hasOffHandWeapon(): Boolean {
+        return subject.gear.offHand.id != -1
+    }
+
+    fun isDualWielding(): Boolean {
+        return subject.klass.canDualWield && hasMainHandWeapon() && hasOffHandWeapon()
+    }
+
+    fun computeStats(character: Character, buffs: List<Buff>): Stats {
+        return Stats()
+            .add(character.klass.baseStats)
+            .add(character.race.baseStats)
+            .add(character.gear.totalStats())
+            .let {
+                buffs.forEach { buff ->
+                    val stats = buff.modifyStats(this)
+                    if(stats != null) {
+                        it.add(stats)
+                    }
+                }
+                it
+            }
+    }
+
+    fun strength(): Int {
+        return (subjectStats.strength.coerceAtLeast(0) * subjectStats.strengthMultiplier).toInt()
+    }
+
+    fun agility(): Int {
+        return (subjectStats.agility.coerceAtLeast(0) * subjectStats.agilityMultiplier).toInt()
+    }
+
+    fun intellect(): Int {
+        return (subjectStats.intellect.coerceAtLeast(0) * subjectStats.intellectMultiplier).toInt()
+    }
+
+    fun spirit(): Int {
+        return (subjectStats.spirit.coerceAtLeast(0) * subjectStats.spiritMultiplier).toInt()
+    }
+
+    fun stamina(): Int {
+        return (subjectStats.stamina.coerceAtLeast(0) * subjectStats.staminaMultiplier).toInt()
+    }
+
+    fun armor(): Int {
+        return (subjectStats.armor.coerceAtLeast(0) * subjectStats.armorMultiplier).toInt()
+    }
+
+    fun targetArmor(): Int {
+        return (targetStats.armor.coerceAtLeast(0) * targetStats.armorMultiplier).toInt()
+    }
+
+    fun attackPower(): Int {
+        return (
+            (
+                subjectStats.attackPower.coerceAtLeast(0) +
+                strength() * subject.klass.attackPowerFromStrength +
+                agility() * subject.klass.attackPowerFromAgility
+            ) * subjectStats.attackPowerMultiplier
+        ).toInt()
+    }
+
+    fun rangedAttackPower(): Int {
+        return (
+            (
+                subjectStats.attackPower.coerceAtLeast(0) +
+                agility() * subject.klass.rangedAttackPowerFromAgility
+            ) * subjectStats.rangedAttackPowerMultiplier
+        ).toInt()
+    }
+
+    fun spellDamage(): Int {
+        return (subjectStats.spellDamage * subjectStats.spellDamageMultiplier).toInt()
+    }
+
+    fun meleeHitPct(): Double {
+        return subjectStats.physicalHitRating / Rating.meleeHitPerPct
+    }
+
+    fun spellHitPct(): Double {
+        return subjectStats.spellHitRating / Rating.spellHitPerPct
+    }
+
+    fun expertisePct(): Double {
+        return subjectStats.expertiseRating / Rating.expertisePerPct
+    }
+
+    fun meleeCritPct(): Double {
+        return subjectStats.physicalCritRating / Rating.critPerPct + agility() * subject.klass.critPctPerAgility
+    }
+
+    fun spellCritPct(): Double {
+        return subjectStats.spellCritRating / Rating.critPerPct
+    }
+
+    fun armorPen(): Int {
+        return subjectStats.armorPen.coerceAtLeast(0)
+    }
+
+    fun meleeHasteMultiplier(): Double {
+        return (1.0 + (subjectStats.physicalHasteRating / Rating.hastePerPct / 100.0)) * subjectStats.physicalHasteMultiplier
+    }
+
+    fun spellHasteMultiplier(): Double {
+        return (1.0 + (subjectStats.physicalHasteRating / Rating.hastePerPct / 100.0)) * subjectStats.spellHasteMultiplier
+    }
+
+    fun physicalGcd(): Double {
+        return (gcdBaseMs / meleeHasteMultiplier()).coerceAtLeast(minGcdMs)
+    }
+
+    fun spellGcd(): Double {
+        return (gcdBaseMs / spellHasteMultiplier()).coerceAtLeast(minGcdMs)
+    }
+
+    fun totemGcd(): Double {
+        // TODO: Confirm this will be the case in Classic TBC at launch
+        return 1000.0
     }
 }

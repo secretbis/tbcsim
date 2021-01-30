@@ -13,9 +13,13 @@ class Sim (
     suspend fun sim() {
         // Iteration coroutines
         val startTime = System.currentTimeMillis()
+//        val iterationContext = newSingleThreadContext("IterationContext")
+
         val iterations = (1..config.opts.iterations).map {
-            GlobalScope.async {
-                iterate(it)
+            GlobalScope.async(Dispatchers.Default) {
+//                withContext(iterationContext) {
+                    iterate(it)
+//                }
             }
         }.awaitAll()
 
@@ -24,18 +28,18 @@ class Sim (
         println("Completed ${iterations.size} iterations in $totalTime seconds")
 
         // Stats
-        Stats.resultsByBuff(iterations)
-        Stats.resultsByDebuff(iterations)
-        Stats.resultsByDamageType(iterations)
-        Stats.resultsByAbility(iterations)
-        Stats.dps(iterations)
+        SimStats.resultsByBuff(iterations)
+        SimStats.resultsByDebuff(iterations)
+        SimStats.resultsByDamageType(iterations)
+        SimStats.resultsByAbility(iterations)
+        SimStats.dps(iterations)
     }
 
     private fun iterate(num: Int) : SimIteration {
         // Simulate
         val iteration = SimIteration(config.character, config.rotation, config.opts)
         if(num == 1) {
-            Stats.precombatStats(iteration.subject, iteration.target)
+            SimStats.precombatStats(iteration)
         }
 
         // Randomly alter the fight duration, if configured

@@ -12,10 +12,10 @@ class WindfuryWeaponOffHand : Ability() {
 
     override val id: Int = 25505
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = sim.subject.spellGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
 
     override fun available(sim: SimIteration): Boolean {
-        return sim.subject.hasOffHandWeapon()
+        return sim.hasOffHandWeapon()
     }
 
     var buff: Buff? = null

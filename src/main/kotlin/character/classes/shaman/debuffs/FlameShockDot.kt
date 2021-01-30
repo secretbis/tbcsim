@@ -41,7 +41,6 @@ class FlameShockDot : Debuff() {
             val triggerTypes = when(result.second) {
                 Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
                 Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-                Event.Result.RESIST -> listOf(Proc.Trigger.FIRE_DAMAGE)
                 Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
                 Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
                 else -> null

@@ -19,8 +19,10 @@ object RaidAbilities {
             ImprovedExposeArmor.name -> ImprovedExposeArmor()
             ImprovedMarkOfTheWild.name -> ImprovedMarkOfTheWild()
             ImprovedSanctityAura.name -> ImprovedSanctityAura()
+            ImprovedScorch.name -> ImprovedScorch()
             ImprovedSealOfTheCrusader.name -> ImprovedSealOfTheCrusader()
             LeaderOfThePack.name -> LeaderOfThePack()
+            Misery.name -> Misery()
             SunderArmor.name -> SunderArmor()
             else -> null
         }

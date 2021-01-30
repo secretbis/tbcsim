@@ -13,10 +13,6 @@ class SunderArmor : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val debuff = object : Debuff() {
-        override fun tick(sim: SimIteration) {
-            // Not periodic, do nothing
-        }
-
         override val name: String = Companion.name
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1

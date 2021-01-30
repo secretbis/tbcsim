@@ -11,6 +11,6 @@ class MeleeMainHand : MeleeBase() {
     override fun item(sim: SimIteration): Item = sim.subject.gear.mainHand
 
     override fun available(sim: SimIteration): Boolean {
-        return sim.subject.hasMainHandWeapon() && super.available(sim)
+        return sim.hasMainHandWeapon() && super.available(sim)
     }
 }

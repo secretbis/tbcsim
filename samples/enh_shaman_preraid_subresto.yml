@@ -186,10 +186,12 @@ raid:
     # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
     # To test with Sunder, comment out Imp EA
     - Sunder Armor
-#    - Improved Expose Armor
+    - Improved Expose Armor
     - Faerie Fire
     - Curse of Recklessness
     - Blood Frenzy
+    - Improved Scorch
+    - Misery
 #    - Curse of the Elements
 #    - Curse of Shadow
 

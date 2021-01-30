@@ -37,5 +37,5 @@ class GraceOfAirTotem : Ability() {
     }
 
     override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.subject.totemGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 }

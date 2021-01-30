@@ -26,7 +26,7 @@ class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
             val physicalHitRating = modifier * 2 * Rating.meleeHitPerPct
 
             // Only when dual wielding
-            return if(sim.subject.isDualWielding()) {
+            return if(sim.isDualWielding()) {
                 Stats(physicalHitRating = physicalHitRating)
             } else null
         }

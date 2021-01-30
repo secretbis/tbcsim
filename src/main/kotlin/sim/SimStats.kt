@@ -9,7 +9,7 @@ import mu.KotlinLogging
 import java.text.DecimalFormat
 import kotlin.math.sqrt
 
-object Stats {
+object SimStats {
     val logger = KotlinLogging.logger {}
 
     data class BuffSegment(
@@ -61,18 +61,18 @@ object Stats {
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
-    fun precombatStats(subject: Character, target: Character) {
+    fun precombatStats(sim: SimIteration) {
         println(
             "PLAYER STATS\n" +
             table {
-                row("Strength:", subject.strength(), "Phys. Hit:", subject.meleeHitPct())
-                row("Agility:", subject.agility(), "Phys. Crit:", subject.meleeCritPct())
-                row("Intellect:", subject.intellect(), "Phys. Haste:", 1.0 - subject.meleeHasteMultiplier())
-                row("Stamina:", subject.stamina(), "Spell Hit:", subject.spellHitPct())
-                row("Spirit:", subject.spirit(), "Spell Crit:", subject.spellCritPct())
-                row("Armor Pen:", subject.armor(), "Spell Haste:", 1.0 - subject.spellHasteMultiplier())
-                row("Attack Power", subject.attackPower(), "Expertise:", subject.expertisePct())
-                row("R. Attack Power", subject.rangedAttackPower())
+                row("Strength:", sim.strength(), "Phys. Hit:", sim.meleeHitPct())
+                row("Agility:", sim.agility(), "Phys. Crit:", sim.meleeCritPct())
+                row("Intellect:", sim.intellect(), "Phys. Haste:", 1.0 - sim.meleeHasteMultiplier())
+                row("Stamina:", sim.stamina(), "Spell Hit:", sim.spellHitPct())
+                row("Spirit:", sim.spirit(), "Spell Crit:", sim.spellCritPct())
+                row("Armor Pen:", sim.armorPen(), "Spell Haste:", 1.0 - sim.spellHasteMultiplier())
+                row("Attack Power", sim.attackPower(), "Expertise:", sim.expertisePct())
+                row("R. Attack Power", sim.rangedAttackPower())
 
                 hints {
                     alignment(0, Table.Hints.Alignment.RIGHT)
@@ -96,11 +96,11 @@ object Stats {
         println(
             "TARGET STATS\n" +
             table {
-                row("Arcane Res:", target.stats.arcaneResistance, "Armor:", target.armor())
-                row("Fire Res:", target.stats.fireResistance)
-                row("Frost Res:", target.stats.frostResistance)
-                row("Nature Res:", target.stats.natureResistance)
-                row("Shadow Res:", target.stats.shadowResistance)
+                row("Arcane Res:", sim.targetStats.arcaneResistance, "Armor:", sim.targetArmor())
+                row("Fire Res:", sim.targetStats.fireResistance)
+                row("Frost Res:", sim.targetStats.frostResistance)
+                row("Nature Res:", sim.targetStats.natureResistance)
+                row("Shadow Res:", sim.targetStats.shadowResistance)
 
 
                 hints {

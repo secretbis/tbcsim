@@ -15,7 +15,7 @@ class ResourceGte(data: Map<String, String?>) : Criterion(Type.RESOURCE_GTE, dat
     }
 
     override fun satisfied(sim: SimIteration): Boolean {
-        val resource = sim.subject.resource?.currentAmount
+        val resource = sim.resource?.currentAmount
         return amount != null && resource != null && resource >= amount
     }
 }

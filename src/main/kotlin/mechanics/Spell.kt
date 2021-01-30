@@ -60,7 +60,7 @@ object Spell {
 
     fun spellMissChance(sim: SimIteration): Double {
         val baseMiss = valueByLevelDiff(sim, baseMissChance)
-        val spellHitChance = sim.subject.spellHitPct() / 100.0
+        val spellHitChance = sim.spellHitPct() / 100.0
 
         // Spells can never get to 100% hit kekw
         return (baseMiss - spellHitChance).coerceAtLeast(0.01)
@@ -70,22 +70,22 @@ object Spell {
     // https://dwarfpriest.wordpress.com/2008/01/07/spell-hit-spell-penetration-and-resistances/
     fun spellResistReduction(sim: SimIteration, school: Constants.DamageType): Double {
         val targetResistance = when(school) {
-            Constants.DamageType.ARCANE -> sim.target.stats.arcaneResistance
-            Constants.DamageType.FIRE -> sim.target.stats.fireResistance
-            Constants.DamageType.FROST -> sim.target.stats.frostResistance
-            Constants.DamageType.NATURE -> sim.target.stats.natureResistance
-            Constants.DamageType.SHADOW -> sim.target.stats.shadowResistance
+            Constants.DamageType.ARCANE -> sim.targetStats.arcaneResistance
+            Constants.DamageType.FIRE -> sim.targetStats.fireResistance
+            Constants.DamageType.FROST -> sim.targetStats.frostResistance
+            Constants.DamageType.NATURE -> sim.targetStats.natureResistance
+            Constants.DamageType.SHADOW -> sim.targetStats.shadowResistance
             else -> 0
         }
 
         // TODO: Model partial resists as 0/25/50/75
         //       There seems to be no real formula for that, though, so just going with avg every time for now
-        val totalResistance = (targetResistance - sim.subject.stats.spellPen).coerceAtLeast(0) + targetResistance
+        val totalResistance = (targetResistance - sim.subjectStats.spellPen).coerceAtLeast(0) + targetResistance
         return (0.75 * totalResistance / (5 * sim.subject.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 
     fun spellCritChance(sim: SimIteration): Double {
-        return (sim.subject.spellCritPct() / 100.0 + baseCritChance).coerceAtLeast(0.0)
+        return (sim.spellCritPct() / 100.0 + baseCritChance).coerceAtLeast(0.0)
     }
 
     fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
@@ -98,25 +98,25 @@ object Spell {
     fun baseDamageRoll(sim: SimIteration, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
         // Add school damage
         val schoolDamage = when(school) {
-            Constants.DamageType.HOLY -> sim.subject.stats.holyDamage
-            Constants.DamageType.FIRE -> sim.subject.stats.fireDamage
-            Constants.DamageType.NATURE -> sim.subject.stats.natureDamage
-            Constants.DamageType.FROST -> sim.subject.stats.frostDamage
-            Constants.DamageType.SHADOW -> sim.subject.stats.shadowDamage
-            Constants.DamageType.ARCANE -> sim.subject.stats.arcaneDamage
+            Constants.DamageType.HOLY -> sim.subjectStats.holyDamage
+            Constants.DamageType.FIRE -> sim.subjectStats.fireDamage
+            Constants.DamageType.NATURE -> sim.subjectStats.natureDamage
+            Constants.DamageType.FROST -> sim.subjectStats.frostDamage
+            Constants.DamageType.SHADOW -> sim.subjectStats.shadowDamage
+            Constants.DamageType.ARCANE -> sim.subjectStats.arcaneDamage
             else -> 0
         }
 
-        val totalSpellDamage = sim.subject.spellDamage() + bonusSpellDamage + schoolDamage
+        val totalSpellDamage = sim.spellDamage() + bonusSpellDamage + schoolDamage
         return dmg + (totalSpellDamage * spellDamageCoeff)
     }
 
     // Performs an attack roll given an initial unmitigated damage value
     fun attackRoll(sim: SimIteration, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
-        val flatModifier = sim.subject.stats.spellDamageFlatModifier
-        val critMultiplier = Stats.spellCritMultiplier + (1 - sim.subject.stats.spellDamageAddlCritMultiplier)
-        val allMultiplier = sim.subject.stats.spellDamageMultiplier
+        val flatModifier = sim.subjectStats.spellDamageFlatModifier
+        val critMultiplier = Stats.spellCritMultiplier + (1 - sim.subjectStats.spellDamageAddlCritMultiplier)
+        val allMultiplier = sim.subjectStats.spellDamageMultiplier
 
         // Apply constant multipliers and finalize the damage roll
         val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier

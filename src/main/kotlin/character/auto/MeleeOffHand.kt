@@ -11,6 +11,6 @@ class MeleeOffHand : MeleeBase() {
     override fun item(sim: SimIteration): Item = sim.subject.gear.offHand
 
     override fun available(sim: SimIteration): Boolean {
-        return sim.subject.isDualWielding() && super.available(sim)
+        return sim.isDualWielding() && super.available(sim)
     }
 }

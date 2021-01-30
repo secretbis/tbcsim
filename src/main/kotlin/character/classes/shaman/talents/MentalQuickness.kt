@@ -23,7 +23,7 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
 
                 override fun modifyStats(sim: SimIteration): Stats {
                     val modifier = currentRank * 0.1
-                    val spellDamage = modifier * sim.subject.attackPower()
+                    val spellDamage = modifier * sim.attackPower()
                     return Stats(spellDamage = spellDamage.toInt())
                 }
             }

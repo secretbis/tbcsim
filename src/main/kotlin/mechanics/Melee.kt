@@ -80,27 +80,27 @@ object Melee {
 
     fun baseMiss(sim: SimIteration, isWhiteHit: Boolean): Double {
         val baseMissForLevel = valueByLevelDiff(sim, baseMissChance)
-        return if(isWhiteHit && sim.subject.isDualWielding()) {
+        return if(isWhiteHit && sim.isDualWielding()) {
             baseMissForLevel + baseDualWieldMiss
         } else baseMissForLevel
     }
 
     fun meleeMissChance(sim: SimIteration, isWhiteHit: Boolean): Double {
         val baseMiss = baseMiss(sim, isWhiteHit)
-        val meleeHitChance = sim.subject.meleeHitPct() / 100.0
+        val meleeHitChance = sim.meleeHitPct() / 100.0
         return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
     }
 
     fun meleeParryChance(sim: SimIteration): Double {
         return if(sim.opts.allowParryAndBlock) {
-            (valueByLevelDiff(sim, baseParryChance) - (sim.subject.expertisePct() / 100.0)).coerceAtLeast(0.0)
+            (valueByLevelDiff(sim, baseParryChance) - (sim.expertisePct() / 100.0)).coerceAtLeast(0.0)
         } else {
             0.0
         }
     }
 
     fun meleeDodgeChance(sim: SimIteration): Double {
-        return (valueByLevelDiff(sim, baseDodgeChance) - (sim.subject.expertisePct() / 100.0)).coerceAtLeast(0.0)
+        return (valueByLevelDiff(sim, baseDodgeChance) - (sim.expertisePct() / 100.0)).coerceAtLeast(0.0)
     }
 
     fun meleeBlockChance(sim: SimIteration): Double {
@@ -133,15 +133,15 @@ object Melee {
     }
 
     fun meleeCritChance(sim: SimIteration): Double {
-        return (sim.subject.meleeCritPct() / 100.0 + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
+        return (sim.meleeCritPct() / 100.0 + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
     }
 
     fun meleeArmorPen(sim: SimIteration): Int {
-        return sim.subject.armorPen()
+        return sim.armorPen()
     }
 
     fun meleeArmorMitigation(sim: SimIteration): Double {
-        val targetArmor = sim.target.armor() - meleeArmorPen(sim)
+        val targetArmor = sim.armor() - meleeArmorPen(sim)
         return targetArmor / (targetArmor + (467.5 * sim.target.level - 22167.5))
     }
 
@@ -157,7 +157,7 @@ object Melee {
     }
 
     fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
-        val totalAp = sim.subject.attackPower() + bonusAp
+        val totalAp = sim.attackPower() + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
@@ -168,28 +168,28 @@ object Melee {
     fun attackRoll(sim: SimIteration, damageRoll: Double, isWhiteDmg: Boolean = false, isOffHand: Boolean = false) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val flatModifier = if(isWhiteDmg) {
-            sim.subject.stats.whiteDamageFlatModifier
+            sim.subjectStats.whiteDamageFlatModifier
         } else {
-            sim.subject.stats.yellowDamageFlatModifier
+            sim.subjectStats.yellowDamageFlatModifier
         }
 
         val critMultiplier = Stats.physicalCritMultiplier + (1 - if(isWhiteDmg) {
-            sim.subject.stats.whiteDamageAddlCritMultiplier
+            sim.subjectStats.whiteDamageAddlCritMultiplier
         } else {
-            sim.subject.stats.yellowDamageAddlCritMultiplier
+            sim.subjectStats.yellowDamageAddlCritMultiplier
         })
 
         val allMultiplier = if(isWhiteDmg) {
-            sim.subject.stats.whiteDamageMultiplier
+            sim.subjectStats.whiteDamageMultiplier
         } else {
-            sim.subject.stats.yellowDamageMultiplier
-        } * sim.subject.stats.physicalDamageMultiplier
+            sim.subjectStats.yellowDamageMultiplier
+        } * sim.subjectStats.physicalDamageMultiplier
 
         val offHandMultiplier = if(isOffHand) {
             Stats.offHandPenalty + (1 - if(isWhiteDmg) {
-                sim.subject.stats.whiteDamageAddlOffHandPenaltyMultiplier
+                sim.subjectStats.whiteDamageAddlOffHandPenaltyMultiplier
             } else {
-                sim.subject.stats.yellowDamageAddlOffHandPenaltyMultiplier
+                sim.subjectStats.yellowDamageAddlOffHandPenaltyMultiplier
             })
         } else {
             1.0
@@ -199,7 +199,7 @@ object Melee {
         val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * offHandMultiplier
 
         // Get the attack result
-        val missChance = meleeMissChance(sim, true)
+        val missChance = meleeMissChance(sim, isWhiteDmg)
         val dodgeChance = meleeDodgeChance(sim) + missChance
         val parryChance = meleeParryChance(sim) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
