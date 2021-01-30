@@ -94,6 +94,10 @@ STDDEV DPS: 104.89
 This has only a command-line interface.
 
 ```
+tbcsim ./samples/enh_shaman_preraid_subresto.yml
+
+------------------------------------------------
+
 Usage: tbcsim [OPTIONS] [CONFIGFILE]
 
 Options:
@@ -113,6 +117,19 @@ Options:
 
 Arguments:
   CONFIGFILE  Path to configuration file
+
+------------------------------------------------
+
+DEFAULTS
+
+Duration:      180s
+Duration Var:  0s
+Step:          1ms
+Latency:       0ms
+Iterations:    100
+Target Armor:  7700
+Target Level:  73
+Parry/Block:   false
 ```
 
 The first run will take awhile, since compiling the sim plus every item in TBC takes a hot minute.
