@@ -1,6 +1,9 @@
 package sim
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import mu.KotlinLogging
 import sim.config.Config
 import kotlin.random.Random

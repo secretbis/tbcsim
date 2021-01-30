@@ -1,7 +1,6 @@
 package sim
 
 import character.Buff
-import character.Character
 import data.Constants
 import de.m3y.kformat.Table
 import de.m3y.kformat.table

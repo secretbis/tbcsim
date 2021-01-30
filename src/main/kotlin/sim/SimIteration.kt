@@ -3,12 +3,12 @@ package sim
 import character.*
 import character.auto.MeleeMainHand
 import character.auto.MeleeOffHand
-import character.classes.boss.Boss as BossClass
-import character.races.Boss as BossRace
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
 import sim.rotation.Rotation
+import character.classes.boss.Boss as BossClass
+import character.races.Boss as BossRace
 
 class SimIteration(
     val subject: Character,

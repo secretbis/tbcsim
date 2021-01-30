@@ -1,7 +1,6 @@
 package data.gems
 
 import character.Buff
-import character.Proc
 import character.Stats
 import data.model.Color
 import data.model.Gem

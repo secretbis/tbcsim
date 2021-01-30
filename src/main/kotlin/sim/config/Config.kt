@@ -1,6 +1,9 @@
 package sim.config
 
-import character.*
+import character.Character
+import character.Class
+import character.Gear
+import character.Race
 import com.charleskorn.kaml.Yaml
 import data.Items
 import data.abilities.generic.GenericAbilities
@@ -9,7 +12,6 @@ import data.enchants.Enchants
 import data.model.Gem
 import data.model.Item
 import mu.KotlinLogging
-import sim.SimOptions
 import sim.rotation.Criterion
 import sim.rotation.Rotation
 import sim.rotation.Rule

@@ -1,6 +1,9 @@
 package data.buffs
 
-import character.*
+import character.Ability
+import character.Buff
+import character.Proc
+import character.Stats
 import data.model.Item
 import sim.SimIteration
 
