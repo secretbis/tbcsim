@@ -15,11 +15,9 @@ class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
         override val name: String = "Thundering Skyfire Diamond"
         override val durationMs: Int = 10000
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(physicalHasteRating = 240.0))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(physicalHasteRating = 240.0)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     val buff = object : Buff() {
@@ -27,7 +25,7 @@ class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats? {
             return stats
         }
 

@@ -12,10 +12,6 @@ class Mongoose(val item: Item) : ItemBuff(listOf(item)) {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
-
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {
         if(_procs == null) {
@@ -31,11 +27,9 @@ class Mongoose(val item: Item) : ItemBuff(listOf(item)) {
                 override val name: String = "Mongoose $suffix"
                 override val durationMs: Int = 15000
 
-                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                    return stats.add(Stats(physicalHasteRating = 30.0, agility = 120))
+                override fun modifyStats(sim: SimIteration): Stats {
+                    return Stats(physicalHasteRating = 30.0, agility = 120)
                 }
-
-                override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
 
             _procs = listOf(

@@ -14,22 +14,16 @@ class FaerieFire : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val debuff = object : Debuff() {
-        override fun tick(sim: SimIteration) {
-            // Not periodic, do nothing
-        }
-
         override val name: String = Companion.name
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.subtract(Stats(
-                armor = 610
-            ))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(
+                armor = -610
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

@@ -25,13 +25,11 @@ class StrengthOfEarthTotem: Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
 
         val baseStr = 86.0
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats {
             val etTalent = sim.subject.klass.talents[EnhancingTotems.name] as EnhancingTotems?
             val multiplier = 1.0 * (etTalent?.strengthOfEarthMultiplier() ?: 1.0)
-            return stats.add(Stats(strength = (baseStr * multiplier).toInt()))
+            return Stats(strength = (baseStr * multiplier).toInt())
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

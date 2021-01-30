@@ -177,7 +177,6 @@ class SimIteration(
      }
 
     fun addBuff(buff: Buff) {
-        // Refresh, and flag buffs as changed
         buff.refresh(this)
 
         // If this buff stacks, track stacks
@@ -217,6 +216,11 @@ class SimIteration(
                 buff = buff,
                 buffStacks = stacks
             ))
+
+            // If a buff is stackable, then recompute on a refresh as well
+            if(stacks > 0) {
+                recomputeStats()
+            }
         }
     }
 

@@ -21,13 +21,11 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
                 override val durationMs: Int = -1
                 override val hidden: Boolean = true
 
-                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                override fun modifyStats(sim: SimIteration): Stats {
                     val modifier = currentRank * 0.1
                     val spellDamage = modifier * sim.subject.attackPower()
-                    return stats.add(Stats(spellDamage = spellDamage.toInt()))
+                    return Stats(spellDamage = spellDamage.toInt())
                 }
-
-                override fun procs(sim: SimIteration): List<Proc> = listOf()
             }
         )
     }

@@ -12,10 +12,6 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
-
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {
         if(_procs == null) {
@@ -49,11 +45,9 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
                         override val durationMs: Int = 10000
 
-                        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                            return stats.add(Stats(physicalHasteRating = 212.0))
+                        override fun modifyStats(sim: SimIteration): Stats? {
+                            return Stats(physicalHasteRating = 212.0)
                         }
-
-                        override fun procs(sim: SimIteration): List<Proc> = listOf()
                     }
 
                     override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {

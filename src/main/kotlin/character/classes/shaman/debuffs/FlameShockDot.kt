@@ -15,10 +15,6 @@ class FlameShockDot : Debuff() {
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
-
     val fsdAbility = object : Ability() {
         override val id: Int = 25457
         override val name: String = "Flame Shock (DoT)"
@@ -61,6 +57,4 @@ class FlameShockDot : Debuff() {
     override fun tick(sim: SimIteration) {
         fsdAbility.cast(sim)
     }
-
-    override fun procs(sim: SimIteration): List<Proc> = listOf()
 }

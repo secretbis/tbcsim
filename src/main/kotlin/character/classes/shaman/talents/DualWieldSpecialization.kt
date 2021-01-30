@@ -20,22 +20,16 @@ class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats? {
             // 2% hit per rank
             val modifier = currentRank
             val physicalHitRating = modifier * 2 * Rating.meleeHitPerPct
 
             // Only when dual wielding
             return if(sim.subject.isDualWielding()) {
-                stats.add(
-                    Stats(
-                        physicalHitRating = physicalHitRating
-                    )
-                )
-            } else stats
+                Stats(physicalHitRating = physicalHitRating)
+            } else null
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)

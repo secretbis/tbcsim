@@ -19,11 +19,11 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val durationMs: Int = 30 * 60 * 1000
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+    override fun modifyStats(sim: SimIteration): Stats? {
         // Mark each mainhand weapon as having this instead
         // FIXME: This needs to be removed if this buff expires or is otherwise removed
         sourceItems.first().temporaryEnhancement = this
-        return stats
+        return null
     }
 
     // Windfury weapon has a global 3s ICD, regardless of rank

@@ -27,8 +27,8 @@ class ImprovedMarkOfTheWild : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
                 armor = armor,
                 strength = attr,
                 agility = attr,
@@ -41,10 +41,8 @@ class ImprovedMarkOfTheWild : Ability() {
                 natureResistance = resist,
                 shadowResistance = resist,
                 arcaneResistance = resist
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

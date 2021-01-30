@@ -12,10 +12,6 @@ class DragonspineTrophy : Buff() {
     override val name: String = "Dragonspine Trophy"
     override val durationMs: Int = -1
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
-
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
             Trigger.MELEE_AUTO_HIT,
@@ -33,11 +29,9 @@ class DragonspineTrophy : Buff() {
             override val name: String = "Dragonspine Trophy"
             override val durationMs: Int = 10000
 
-            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                return stats.add(Stats(physicalHasteRating = 325.0))
+            override fun modifyStats(sim: SimIteration): Stats {
+                return Stats(physicalHasteRating = 325.0)
             }
-
-            override fun procs(sim: SimIteration): List<Proc> = listOf()
         }
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {

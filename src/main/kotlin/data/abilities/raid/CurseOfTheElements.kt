@@ -18,14 +18,12 @@ class CurseOfTheElements : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
                 fireDamageMultiplier = 1.1,
                 frostDamageMultiplier = 1.1,
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     val debuff = object : Debuff() {
@@ -38,14 +36,12 @@ class CurseOfTheElements : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.subtract(Stats(
-                fireResistance = 88,
-                frostResistance = 88
-            ))
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
+                fireResistance = -88,
+                frostResistance = -88
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

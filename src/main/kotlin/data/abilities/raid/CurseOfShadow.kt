@@ -18,13 +18,11 @@ class CurseOfShadow : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
                 shadowDamageMultiplier = 1.1
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     val debuff = object : Debuff() {
@@ -37,13 +35,11 @@ class CurseOfShadow : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.subtract(Stats(
-                shadowResistance = 88
-            ))
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
+                shadowResistance = -88
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

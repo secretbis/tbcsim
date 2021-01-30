@@ -20,11 +20,9 @@ class ElixirOfMajorAgility : Ability() {
         override val durationMs: Int = 60 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR)
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(agility = 35, physicalCritRating = 20.0))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(agility = 35, physicalCritRating = 20.0)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

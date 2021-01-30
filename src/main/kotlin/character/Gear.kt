@@ -1,5 +1,6 @@
 package character
 
+import data.buffs.permanent.PermanentBuff
 import data.model.Color
 import data.model.Gem
 import data.model.Item
@@ -51,7 +52,9 @@ data class Gear(
     fun buffs(): List<Buff> {
         val buffs = mutableListOf<Buff>()
         all().forEach {
-            buffs.addAll(it.buffs)
+            // Only add dynamic buffs
+            buffs.addAll(it.buffs.filter { buff -> buff !is PermanentBuff })
+
             if(it.enchant != null) {
                 buffs.add(it.enchant!!)
             }
@@ -60,7 +63,7 @@ data class Gear(
                 buffs.add(it.temporaryEnhancement!!)
             }
 
-            // Only meta gems provide buffs
+            // Only meta gems provide dynamic buffs
             it.sockets.forEach { socket ->
                 if(socket.color == Color.META && socket.gem != null) {
                     if(metaGemActive()) {
@@ -76,6 +79,11 @@ data class Gear(
         val stats = Stats()
         all().forEach {
             stats.add(it.stats)
+
+            // Find any stats that are implemented on the server side by permanent buffs
+            it.buffs.filterIsInstance<PermanentBuff>().forEach { pbuff ->
+                stats.add(pbuff.permanentStats())
+            }
 
             // Compute stats from sockets
             it.sockets.forEach { socket ->

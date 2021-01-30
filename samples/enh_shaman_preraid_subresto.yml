@@ -111,8 +111,8 @@ rotation:
     #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
     - name: Flask of Relentless Assault
 #    - name: Elixir of Major Agility
-#    - name: Roasted Clefthoof
-    - name: Spicy Hot Talbuk
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
 
     # Abilities
     - name: Windfury Weapon (MH)

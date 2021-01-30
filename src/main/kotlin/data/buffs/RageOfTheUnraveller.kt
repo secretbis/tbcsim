@@ -10,10 +10,6 @@ class RageOfTheUnraveller : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
-
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
             Trigger.MELEE_AUTO_CRIT,
@@ -28,11 +24,9 @@ class RageOfTheUnraveller : Buff() {
             override val name: String = "Rage of the Unraveller"
             override val durationMs: Int = 10000
 
-            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                return stats.add(Stats(attackPower = 300))
+            override fun modifyStats(sim: SimIteration): Stats {
+                return Stats(attackPower = 300)
             }
-
-            override fun procs(sim: SimIteration): List<Proc> = listOf()
         }
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {

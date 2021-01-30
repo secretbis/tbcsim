@@ -24,11 +24,9 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
             override val durationMs: Int = 10000
             override val hidden: Boolean = true
 
-            override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                return stats.add(Stats(physicalCritRating = 3 * Rating.critPerPct))
+            override fun modifyStats(sim: SimIteration): Stats {
+                return Stats(physicalCritRating = 3 * Rating.critPerPct)
             }
-
-            override fun procs(sim: SimIteration): List<Proc> = listOf()
         }
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
@@ -40,10 +38,6 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
         override val name: String = "${Companion.name} (talent)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
-
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats
-        }
 
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }

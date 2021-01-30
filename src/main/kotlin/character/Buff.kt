@@ -106,6 +106,9 @@ abstract class Buff {
         }
     }
 
-    abstract fun modifyStats(sim: SimIteration, stats: Stats): Stats
-    abstract fun procs(sim: SimIteration): List<Proc>
+    open fun modifyStats(sim: SimIteration): Stats? {
+        return null
+    }
+
+    open fun procs(sim: SimIteration): List<Proc> = listOf()
 }

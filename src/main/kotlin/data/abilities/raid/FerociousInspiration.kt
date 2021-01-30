@@ -22,14 +22,12 @@ class FerociousInspiration : Ability() {
         override val hidden: Boolean = true
 
         // TODO: What's the typical uptime on this?  Currently assumes 100% uptime
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
                 physicalDamageMultiplier = 1.03,
                 spellDamageMultiplier = 1.03
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

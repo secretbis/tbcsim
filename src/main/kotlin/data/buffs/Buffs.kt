@@ -1,6 +1,7 @@
 package data.buffs
 
 import character.Buff
+import data.buffs.permanent.*
 import data.model.Item
 import mu.KotlinLogging
 

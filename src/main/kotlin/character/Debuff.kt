@@ -13,7 +13,9 @@ abstract class Debuff : Buff() {
         return (sim.elapsedTimeMs - state.appliedAtMs) % tickDeltaMs == 0
     }
 
-    abstract fun tick(sim: SimIteration)
+    open fun tick(sim: SimIteration) {
+        // Do nothing by default
+    }
 
     override fun sharedState(name: String, sim: SimIteration): State {
         // Create state object if it does not exist, and return it

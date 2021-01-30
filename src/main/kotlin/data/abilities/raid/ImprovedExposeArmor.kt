@@ -22,13 +22,11 @@ class ImprovedExposeArmor : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.subtract(Stats(
-                armor = (2050 * 1.5).toInt()
-            ))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(
+                armor = -1 * (2050 * 1.5).toInt()
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

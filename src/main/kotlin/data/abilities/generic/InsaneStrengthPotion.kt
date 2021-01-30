@@ -22,11 +22,9 @@ class InsaneStrengthPotion : Ability() {
         override val durationMs: Int = 15000
         override val mutex: List<Mutex> = listOf(Mutex.POTION)
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(strength = 120, defenseRating = -75.0))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(strength = 120, defenseRating = -75.0)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

@@ -19,18 +19,12 @@ class Convection(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats {
             val talentRanks = sim.subject.klass.talents[Convection.name]?.currentRank ?: 0
 
             val modifier = 1 * (0.01 * talentRanks)
-            return stats.add(
-                Stats(
-                    manaMultiplier = modifier
-                )
-            )
+            return Stats(manaMultiplier = modifier)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)

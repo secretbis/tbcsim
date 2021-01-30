@@ -13,15 +13,13 @@ class RelentlessEarthstormDiamond : Gem(listOf(), Color.META, Quality.META) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(
                 agility = 12,
                 whiteDamageAddlCritMultiplier = 1.03,
                 yellowDamageAddlCritMultiplier = 1.03
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override var buffs: List<Buff> = listOf(buff)

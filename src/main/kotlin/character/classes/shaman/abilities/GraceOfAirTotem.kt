@@ -25,13 +25,11 @@ class GraceOfAirTotem : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
 
         val baseAgi = 77.0
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats {
             val etTalent = sim.subject.klass.talents[EnhancingTotems.name] as EnhancingTotems?
             val multiplier = 1.0 * (etTalent?.graceOfAirTotemMultiplier() ?: 1.0)
-            return stats.add(Stats(agility = (baseAgi * multiplier).toInt()))
+            return Stats(agility = (baseAgi * multiplier).toInt())
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

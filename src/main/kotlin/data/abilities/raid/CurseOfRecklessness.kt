@@ -22,15 +22,12 @@ class CurseOfRecklessness : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.subtract(Stats(
-                armor = 800
-            )).add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(
+                armor = -800,
                 attackPower = 135
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

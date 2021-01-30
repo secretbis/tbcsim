@@ -21,17 +21,15 @@ class BlessingOfKings : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(
                 strengthMultiplier = 1.1,
                 agilityMultiplier = 1.1,
                 intellectMultiplier = 1.1,
                 spiritMultiplier = 1.1,
                 staminaMultiplier = 1.1
-            ))
+            )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

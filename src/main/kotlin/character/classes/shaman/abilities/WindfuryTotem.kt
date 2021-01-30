@@ -28,10 +28,6 @@ class WindfuryTotem: Ability() {
         override val durationMs: Int = 10000
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats
-        }
-
         val wfTotemAbility = object : Ability() {
             val baseExtraAp = 445
             override val id: Int = 15497
@@ -105,10 +101,6 @@ class WindfuryTotem: Ability() {
         override val name: String = "Windfury Totem"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
-
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats
-        }
 
         val totemProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(

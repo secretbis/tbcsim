@@ -21,6 +21,7 @@ data class Stats(
     // Secondary stats
     var attackPower: Int = 0,
     var rangedAttackPower: Int = 0,
+    var feralAttackPower: Int = 0,
 
     var physicalCritRating: Double = 0.0,
     var physicalHitRating: Double = 0.0,
@@ -117,6 +118,7 @@ data class Stats(
 
         attackPower += stats.attackPower
         rangedAttackPower += stats.rangedAttackPower
+        feralAttackPower += stats.feralAttackPower
 
         physicalCritRating += stats.physicalCritRating
         physicalHitRating += stats.physicalHitRating
@@ -204,6 +206,7 @@ data class Stats(
 
         attackPower -= stats.attackPower
         rangedAttackPower -= stats.rangedAttackPower
+        feralAttackPower -= stats.feralAttackPower
 
         physicalCritRating -= stats.physicalCritRating
         physicalHitRating -= stats.physicalHitRating

@@ -2,7 +2,6 @@ package character.classes.shaman.talents
 
 import character.*
 import data.model.Item
-import sim.Event
 import sim.SimIteration
 
 class Flurry(currentRank: Int) : Talent(currentRank) {
@@ -18,10 +17,6 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats
-        }
-
         val onCritProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
                 Trigger.MELEE_AUTO_CRIT,
@@ -36,7 +31,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                 override val maxCharges: Int = 3
 
                 // Increase melee haste for as long as we have charges
-                override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+                override fun modifyStats(sim: SimIteration): Stats {
                     val talentRanks = sim.subject.klass.talents[Flurry.name]?.currentRank ?: 0
 
                     val state = state(sim)
@@ -44,11 +39,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                         1.05 + (0.05 * talentRanks)
                     } else 1.0
 
-                    return stats.add(
-                        Stats(
-                            physicalHasteMultiplier = modifier
-                        )
-                    )
+                    return Stats(physicalHasteMultiplier = modifier)
                 }
 
                 val chargeProc = object : Proc() {
@@ -66,6 +57,8 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                     override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
                         val state = state(sim)
                         state.currentCharges -= 1
+                        // TODO: Fix the declaration order in this file so this can work correctly
+                        //sim.consumeBuff(hasteBuff)
                     }
                 }
 

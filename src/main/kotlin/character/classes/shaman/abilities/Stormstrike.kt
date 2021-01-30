@@ -25,12 +25,8 @@ class Stormstrike : Ability() {
         override val maxCharges: Int = 2
 
         // Increase nature damage for as long as we have charges
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(
-                Stats(
-                    natureDamageMultiplier = 1.2
-                )
-            )
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(natureDamageMultiplier = 1.2)
         }
 
         val proc = object : Proc() {

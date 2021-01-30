@@ -12,13 +12,16 @@ class Sim (
 
     suspend fun sim() {
         // Iteration coroutines
+        val startTime = System.currentTimeMillis()
         val iterations = (1..config.opts.iterations).map {
             GlobalScope.async {
                 iterate(it)
             }
         }.awaitAll()
 
-        println("Completed ${iterations.size} iterations")
+        val endTime = System.currentTimeMillis()
+        val totalTime = (endTime - startTime) / 1000
+        println("Completed ${iterations.size} iterations in $totalTime seconds")
 
         // Stats
         Stats.resultsByBuff(iterations)
@@ -36,7 +39,9 @@ class Sim (
         }
 
         // Randomly alter the fight duration, if configured
-        val durationMs = config.opts.durationMs + Random.nextInt(-config.opts.durationVariationMs, config.opts.durationVariationMs)
+        val dvms = config.opts.durationVariationMs
+        val variability = if(dvms != 0) { Random.nextInt(-1 * dvms, dvms) } else 0
+        val durationMs = config.opts.durationMs + variability
 
         for (timeMs in 0..durationMs step config.opts.stepMs) {
             iteration.tick++

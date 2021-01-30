@@ -20,19 +20,15 @@ class NaturesGuidance(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats {
             val modifier = currentRank
             val physicalHitRating = modifier * Rating.meleeHitPerPct
             val spellHitRating = modifier * Rating.spellHitPerPct
-            return stats.add(
-                Stats(
-                    physicalHitRating = physicalHitRating,
-                    spellHitRating = spellHitRating
-                )
+            return Stats(
+                physicalHitRating = physicalHitRating,
+                spellHitRating = spellHitRating
             )
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)

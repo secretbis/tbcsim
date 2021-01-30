@@ -23,11 +23,9 @@ class HastePotion : Ability() {
         override val durationMs: Int = 15000
         override val mutex: List<Mutex> = listOf(Mutex.POTION)
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(physicalHasteRating = 400.0))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(physicalHasteRating = 400.0)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

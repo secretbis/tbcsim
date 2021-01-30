@@ -17,11 +17,9 @@ class Executioner : Buff() {
                     override val name: String = "Executioner"
                     override val durationMs: Int = 15000
 
-                    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-                        return stats.add(Stats(armorPen = 840))
+                    override fun modifyStats(sim: SimIteration): Stats {
+                        return Stats(armorPen = 840)
                     }
-
-                    override fun procs(sim: SimIteration): List<Proc> = listOf()
                 }
             }
 
@@ -32,10 +30,6 @@ class Executioner : Buff() {
     override val name: String = "Executioner (enchant)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
-
-    override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-        return stats
-    }
 
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {

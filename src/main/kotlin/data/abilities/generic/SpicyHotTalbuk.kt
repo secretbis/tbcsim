@@ -20,11 +20,9 @@ class SpicyHotTalbuk : Ability() {
         override val durationMs: Int = 30 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.FOOD)
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
-            return stats.add(Stats(physicalHitRating = 20.0, spirit = 20))
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(physicalHitRating = 20.0, spirit = 20)
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {

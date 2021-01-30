@@ -22,18 +22,16 @@ class SunderArmor : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration, stats: Stats): Stats {
+        override fun modifyStats(sim: SimIteration): Stats? {
             val impEaActive = sim.debuffs.find { it.name == "Improved Expose Armor" } != null
             return if(impEaActive) {
-                stats
+                null
             } else {
-                stats.subtract(Stats(
-                    armor = 520 * 5
-                ))
+                Stats(
+                    armor = -1 * 520 * 5
+                )
             }
         }
-
-        override fun procs(sim: SimIteration): List<Proc> = listOf()
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {
