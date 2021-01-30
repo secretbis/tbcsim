@@ -6,7 +6,8 @@ import sim.config.Config
 import kotlin.random.Random
 
 class Sim (
-    val config: Config
+    val config: Config,
+    val opts: SimOptions
 ) {
     val logger = KotlinLogging.logger {}
 
@@ -15,7 +16,7 @@ class Sim (
         val startTime = System.currentTimeMillis()
 //        val iterationContext = newSingleThreadContext("IterationContext")
 
-        val iterations = (1..config.opts.iterations).map {
+        val iterations = (1..opts.iterations).map {
             GlobalScope.async(Dispatchers.Default) {
 //                withContext(iterationContext) {
                     iterate(it)
@@ -37,17 +38,17 @@ class Sim (
 
     private fun iterate(num: Int) : SimIteration {
         // Simulate
-        val iteration = SimIteration(config.character, config.rotation, config.opts)
+        val iteration = SimIteration(config.character, config.rotation, opts)
         if(num == 1) {
             SimStats.precombatStats(iteration)
         }
 
         // Randomly alter the fight duration, if configured
-        val dvms = config.opts.durationVariationMs
+        val dvms = opts.durationVaribilityMs
         val variability = if(dvms != 0) { Random.nextInt(-1 * dvms, dvms) } else 0
-        val durationMs = config.opts.durationMs + variability
+        val durationMs = opts.durationMs + variability
 
-        for (timeMs in 0..durationMs step config.opts.stepMs) {
+        for (timeMs in 0..durationMs step opts.stepMs) {
             iteration.tick++
             iteration.elapsedTimeMs = timeMs
             iteration.tick()

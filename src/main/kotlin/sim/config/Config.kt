@@ -17,8 +17,7 @@ import java.io.File
 
 class Config(
     val character: Character,
-    val rotation: Rotation,
-    val opts: SimOptions
+    val rotation: Rotation
 ) {
     companion object {
         val logger = KotlinLogging.logger {}
@@ -31,20 +30,7 @@ class Config(
 
             return Config(
                 character,
-                rotation,
-                createOpts(yml)
-            )
-        }
-
-        private fun createOpts(yml: ConfigYml): SimOptions {
-            return SimOptions(
-                durationMs = yml.simOpts?.durationMs ?: SimOptions.Defaults.durationMs,
-                stepMs = yml.simOpts?.stepMs ?: SimOptions.Defaults.stepMs,
-                latencyMs = yml.simOpts?.latencyMs ?: SimOptions.Defaults.latencyMs,
-                iterations = yml.simOpts?.iterations ?: SimOptions.Defaults.iterations,
-                targetLevel = yml.simOpts?.targetLevel ?: SimOptions.Defaults.targetLevel,
-                targetArmor = yml.simOpts?.targetArmor ?: SimOptions.Defaults.targetArmor,
-                allowParryAndBlock = yml.simOpts?.allowParryAndBlock ?: SimOptions.Defaults.allowParryAndBlock,
+                rotation
             )
         }
 

@@ -12,7 +12,6 @@ class ImprovedWeaponTotems(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    // TODO: Apply this to Windfury Totem
     fun windfuryTotemApMultiplier(): Double {
         return 1.0 + 0.15 * currentRank
     }

@@ -16,10 +16,15 @@ abstract class Ability {
 
     abstract val id: Int
     abstract val name: String
+
     abstract fun gcdMs(sim: SimIteration): Int
     open val castableOnGcd = false
+
     open fun cooldownMs(sim: SimIteration): Int = 0
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
+
+    open val resourceCost: Double = 0.0
+    open val resourceType: Resource.Type = Resource.Type.MANA
 
     // Buff implementations can implement their own state containers
     internal open fun stateFactory(): State {
@@ -53,7 +58,6 @@ abstract class Ability {
         return state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sim) <= sim.elapsedTimeMs)
     }
 
-    // TODO: Resource costs
     abstract fun cast(sim: SimIteration, free: Boolean = false)
     open fun afterCast(sim: SimIteration) {
         // Store individual cooldown state

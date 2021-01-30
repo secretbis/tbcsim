@@ -1,2 +1,2 @@
-./gradlew.bat --quiet installDist
-./build/install/tbcsim/bin/tbcsim.bat %*
+call gradlew.bat --quiet installDist
+call build/install/tbcsim/bin/tbcsim.bat %*

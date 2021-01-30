@@ -1,53 +1,59 @@
 package character.classes.shaman.buffs
 
+import character.classes.shaman.abilities.FlametongueWeapon as FlametongueWeaponAbility
 import character.Ability
+import character.ItemBuff
+import character.ItemProc
 import character.Proc
-import data.Constants
-import mechanics.Spell
+import data.model.Item
 import sim.Event
 import sim.SimIteration
 
-class FlametongueWeapon : Ability() {
+class FlametongueWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     companion object {
         const val name = "Flametongue Weapon"
     }
     override val id: Int = 25489
     override val name: String = Companion.name
+    override val durationMs: Int = 30 * 60 * 1000
 
-    override fun available(sim: SimIteration): Boolean {
-        return true
+    val proc = object : ItemProc(sourceItems) {
+        override val triggers: List<Trigger> = listOf(
+            Trigger.MELEE_WHITE_HIT,
+            Trigger.MELEE_WHITE_CRIT,
+            Trigger.MELEE_YELLOW_HIT,
+            Trigger.MELEE_YELLOW_CRIT
+        )
+
+        override val type: Type = Type.PPM
+        // TODO: PPM unconfirmed
+        override val ppm: Double = 9.0
+
+        var ftAbility: Ability? = null
+
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            if (ftAbility == null) {
+                val suffix = when (sourceItem) {
+                    sim.subject.gear.mainHand -> "(MH)"
+                    sim.subject.gear.offHand -> "(OH)"
+                    else -> "(Unknown)"
+                }
+                val name = "Flametongue Weapon $suffix"
+                ftAbility = FlametongueWeaponAbility(name, sourceItem)
+            }
+
+            if (ftAbility!!.available(sim)) {
+                ftAbility!!.cast(sim)
+
+                sim.logEvent(
+                    Event(
+                        eventType = Event.Type.PROC,
+                        abilityName = ftAbility!!.name
+                    )
+                )
+            }
+        }
     }
 
-    // Per internet anedcodes, this gets 10% of spell power
-    val spCoeff = 0.10
-    val baseDamage = Pair(0.0, 1.0)
-    override fun cast(sim: SimIteration, free: Boolean) {
-        val school = Constants.DamageType.FIRE
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spCoeff, school)
-        val result = Spell.attackRoll(sim, damageRoll, school)
-
-        sim.logEvent(Event(
-            eventType = Event.Type.DAMAGE,
-            damageType = school,
-            abilityName = name,
-            amount = result.first,
-            result = result.second,
-        ))
-
-        // Proc anything that can proc off Nature damage
-        val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            else -> null
-        }
-
-        if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(), this)
-        }
-    }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
 }

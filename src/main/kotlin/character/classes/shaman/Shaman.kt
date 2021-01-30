@@ -39,6 +39,8 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
             Stormstrike.name -> character.classes.shaman.abilities.Stormstrike()
             EarthShock.name -> EarthShock()
             FlameShock.name -> FlameShock()
+            FlametongueWeaponMainHand.name -> FlametongueWeaponMainHand()
+            FlametongueWeaponOffHand.name -> FlametongueWeaponOffHand()
             GraceOfAirTotem.name -> GraceOfAirTotem()
             StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
             WindfuryTotem.name -> WindfuryTotem()
