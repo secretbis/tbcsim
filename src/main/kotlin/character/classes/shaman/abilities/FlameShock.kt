@@ -3,7 +3,7 @@ package character.classes.shaman.abilities
 import character.Ability
 import character.Proc
 import character.classes.shaman.debuffs.FlameShockDot
-import character.classes.shaman.talents.Reverberation
+import character.classes.shaman.talents.*
 import data.Constants
 import mechanics.Spell
 import sim.Event
@@ -20,16 +20,33 @@ class FlameShock : Ability() {
     override val baseCastTimeMs: Int = 0
     override fun cooldownMs(sim: SimIteration): Int {
         val reverberation = sim.subject.klass.talents[Reverberation.name] as Reverberation?
-        return 6000 - (200 * (reverberation?.currentRank ?: 0))
+        return 6000 - (reverberation?.shockCooldownReductionAmountMs() ?: 0).toInt()
     }
     override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
     override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+
+    override fun resourceCost(sim: SimIteration): Double {
+        val convection = sim.subject.klass.talents[Convection.name] as Convection?
+        val cvMult = convection?.lightningAndShockCostMultiplier() ?: 1.0
+
+        val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
+        val mqMult = mq?.instantManaCostMultiplier() ?: 1.0
+
+        val shFocus = sim.buffs.find { it.name == ShamanisticFocus.name }
+        val shfMult = if(shFocus != null) { 0.60 } else 1.0
+
+        return 500.0 * cvMult * mqMult * shfMult
+    }
 
     val baseDamage = 377.0
     override fun cast(sim: SimIteration, free: Boolean) {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.FIRE
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school)
+
+        val concussion = sim.subject.klass.talents[Concussion.name] as Concussion?
+        val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
+
+        val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school) * concussionMod
         val result = Spell.attackRoll(sim, damageRoll, school)
 
         sim.logEvent(Event(
@@ -44,6 +61,7 @@ class FlameShock : Ability() {
         sim.addDebuff(FlameShockDot())
 
         // Proc anything that can proc off Fire damage
+        val baseTriggerTypes = listOf(Proc.Trigger.CAST_SHAMAN_SHOCK)
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)
@@ -54,7 +72,7 @@ class FlameShock : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(), this)
+            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this)
         }
     }
 }

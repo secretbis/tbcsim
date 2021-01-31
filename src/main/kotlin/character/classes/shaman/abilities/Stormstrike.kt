@@ -19,6 +19,23 @@ class Stormstrike : Ability() {
     override val name: String = Companion.name
     override fun cooldownMs(sim: SimIteration): Int = 10000
 
+    override fun resourceCost(sim: SimIteration): Double {
+        return 0.08 * sim.subject.klass.baseMana
+    }
+
+    val proc = fun(buff: Buff): Proc {
+        return object : Proc() {
+            override val triggers: List<Trigger> = listOf(
+                Trigger.NATURE_DAMAGE
+            )
+            override val type: Type = Type.STATIC
+
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                sim.consumeBuff(buff)
+            }
+        }
+    }
+
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Nature)"
         override val durationMs: Int = 12000
@@ -29,17 +46,7 @@ class Stormstrike : Ability() {
             return Stats(natureDamageMultiplier = 1.2)
         }
 
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.NATURE_DAMAGE
-            )
-            override val type: Type = Type.STATIC
-
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                val state = state(sim)
-                state.currentCharges -= 1
-            }
-        }
+        val proc = proc(this)
 
         // Proc off of nature damage to reduce our stacks
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)

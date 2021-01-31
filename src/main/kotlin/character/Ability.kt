@@ -23,7 +23,7 @@ abstract class Ability {
     open fun cooldownMs(sim: SimIteration): Int = 0
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
 
-    open val resourceCost: Double = 0.0
+    open fun resourceCost(sim: SimIteration): Double = 0.0
     open val resourceType: Resource.Type = Resource.Type.MANA
 
     // Buff implementations can implement their own state containers
@@ -33,8 +33,8 @@ abstract class Ability {
 
     internal open fun sharedState(type: SharedCooldown, sim: SimIteration): State {
         // Create state object if it does not exist, and return it
-        val state = sim.sharedAbilityState.getOrDefault(name, stateFactory())
-        sim.sharedAbilityState[name] = state
+        val state = sim.sharedAbilityState.getOrDefault(type.toString(), stateFactory())
+        sim.sharedAbilityState[type.toString()] = state
         return state
     }
 

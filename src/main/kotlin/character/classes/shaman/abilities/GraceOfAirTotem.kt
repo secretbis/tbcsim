@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.Stats
 import character.classes.shaman.talents.EnhancingTotems
+import character.classes.shaman.talents.TotemicFocus
 import sim.SimIteration
 
 class GraceOfAirTotem : Ability() {
@@ -14,6 +15,16 @@ class GraceOfAirTotem : Ability() {
 
     override val id: Int = 25359
     override val name: String = Companion.name
+
+    override val baseCastTimeMs: Int = 0
+    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
+
+    override fun resourceCost(sim: SimIteration): Double {
+        // TODO: Does this count as an "instant spell" for mental quickness?
+        val tf = sim.subject.klass.talents[TotemicFocus.name] as TotemicFocus?
+        val tfMult = tf?.totemCostMultiplier() ?: 1.0
+        return 310.0 * tfMult
+    }
 
     override fun available(sim: SimIteration): Boolean {
         return true
@@ -35,7 +46,4 @@ class GraceOfAirTotem : Ability() {
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(buff)
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 }

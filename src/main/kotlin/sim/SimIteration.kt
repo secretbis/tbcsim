@@ -23,9 +23,10 @@ class SimIteration(
     // Stats storage
     var subjectStats: Stats = Stats()
     var targetStats: Stats = Stats()
-    var resource: Resource? = null
+    val resource: Resource
 
     val serverTickMs = 2000
+    var lastMp5Tick = 0
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
@@ -77,6 +78,9 @@ class SimIteration(
 
         // Compute initial stats
         recomputeStats()
+
+        // Initialize our subject resource
+        resource = Resource(this)
     }
 
     private fun recomputeStats() {
@@ -131,6 +135,12 @@ class SimIteration(
             val rotationAbility = rotation.next(this, onGcd())
             if(rotationAbility != null) {
                 if(!onGcd() || (onGcd() && rotationAbility.castableOnGcd)) {
+                    val resourceCost = rotationAbility.resourceCost(this).toInt()
+                    val resourceType = rotationAbility.resourceType
+                    if(resourceCost != 0) {
+                        subtractResource(resourceCost, resourceType, rotationAbility)
+                    }
+
                     rotationAbility.cast(this)
                     rotationAbility.afterCast(this)
 
@@ -159,6 +169,14 @@ class SimIteration(
         debuffs.forEach {
             if(it.shouldTick(this)) {
                 it.tick(this)
+            }
+        }
+
+        // MP5
+        if(subject.klass.resourceType == Resource.Type.MANA) {
+            if (elapsedTimeMs - lastMp5Tick >= 5000) {
+                addResource(subjectStats.manaPer5Seconds, Resource.Type.MANA)
+                lastMp5Tick = elapsedTimeMs
             }
         }
 
@@ -236,6 +254,11 @@ class SimIteration(
     fun addDebuff(debuff: Debuff) {
         debuff.refresh(this)
 
+        // If this debuff stacks, track stacks
+        val stacks = if(debuff.maxStacks > 0) {
+            debuffState[debuff]?.currentStacks ?: 0
+        } else 0
+
         // If this is a new debuff, add it
         val exists = debuffs.find { it === debuff } != null
         if(!exists) {
@@ -252,6 +275,11 @@ class SimIteration(
                 eventType = Event.Type.DEBUFF_REFRESH,
                 buff = debuff
             ))
+
+            // If a debuff is stackable, then recompute on a refresh as well
+            if(stacks > 0) {
+                recomputeStats()
+            }
         }
     }
 
@@ -265,6 +293,41 @@ class SimIteration(
                 buff = buff,
                 buffStacks = state.currentStacks
             ))
+
+            pruneBuffs()
+            pruneDebuffs()
+        }
+    }
+
+    fun addResource(amount: Int, type: Resource.Type, ability: Ability? = null) {
+        if(resource.type == type) {
+            resource.add(amount)
+
+            logEvent(Event(
+                eventType = Event.Type.RESOURCE_CHANGED,
+                amount = resource.currentAmount.toDouble(),
+                delta = amount.toDouble(),
+                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
+                abilityName = ability?.name
+            ))
+        } else {
+            logger.warn { "Attempted to add resource type $type but subject resource is ${resource.type}" }
+        }
+    }
+
+    fun subtractResource(amount: Int, type: Resource.Type, ability: Ability? = null) {
+        if(resource.type == type) {
+            resource.subtract(amount)
+
+            logEvent(Event(
+                eventType = Event.Type.RESOURCE_CHANGED,
+                amount = resource.currentAmount.toDouble(),
+                delta = amount.toDouble(),
+                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
+                abilityName = ability?.name
+            ))
+        } else {
+            logger.warn { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }
         }
     }
 

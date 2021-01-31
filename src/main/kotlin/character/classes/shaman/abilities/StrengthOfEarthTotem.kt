@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.Stats
 import character.classes.shaman.talents.EnhancingTotems
+import character.classes.shaman.talents.TotemicFocus
 import sim.SimIteration
 
 class StrengthOfEarthTotem: Ability() {
@@ -17,6 +18,13 @@ class StrengthOfEarthTotem: Ability() {
 
     override fun available(sim: SimIteration): Boolean {
         return true
+    }
+
+    override fun resourceCost(sim: SimIteration): Double {
+        // TODO: Does this count as an "instant spell" for mental quickness?
+        val tf = sim.subject.klass.talents[TotemicFocus.name] as TotemicFocus?
+        val tfMult = tf?.totemCostMultiplier() ?: 1.0
+        return 300.0 * tfMult
     }
 
     val buff = object : Buff() {

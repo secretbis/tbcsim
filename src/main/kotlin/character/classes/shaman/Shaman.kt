@@ -3,9 +3,9 @@ package character.classes.shaman
 import character.*
 import character.classes.shaman.abilities.*
 import character.classes.shaman.talents.*
+import character.classes.shaman.talents.ShamanisticRage as ShamanisticRageTalent
 import character.classes.shaman.talents.Stormstrike
 import data.model.Item
-import java.lang.IllegalArgumentException
 
 class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
@@ -24,7 +24,7 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
             NaturesGuidance.name -> NaturesGuidance(ranks)
             Reverberation.name -> Reverberation(ranks)
             ShamanisticFocus.name -> ShamanisticFocus(ranks)
-            ShamanisticRage.name -> ShamanisticRage(ranks)
+            ShamanisticRageTalent.name -> ShamanisticRageTalent(ranks)
             Stormstrike.name -> Stormstrike(ranks)
             ThunderingStrikes.name -> ThunderingStrikes(ranks)
             TotemicFocus.name -> TotemicFocus(ranks)
@@ -43,6 +43,8 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
             FlametongueWeaponOffHand.name -> FlametongueWeaponOffHand()
             GraceOfAirTotem.name -> GraceOfAirTotem()
             StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
+            ShamanisticRage.name -> ShamanisticRage()
+            WaterShield.name -> WaterShield()
             WindfuryTotem.name -> WindfuryTotem()
             WindfuryWeaponMainHand.name -> WindfuryWeaponMainHand()
             WindfuryWeaponOffHand.name -> WindfuryWeaponOffHand()
@@ -72,4 +74,6 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override val attackPowerFromStrength: Int = 2
     override val critPctPerAgility: Double = 1.0 / 25.0
     override val rangedAttackPowerFromAgility: Int = 1
+
+    override val baseMana: Int = 2958
 }

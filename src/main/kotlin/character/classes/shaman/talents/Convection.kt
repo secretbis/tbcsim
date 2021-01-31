@@ -14,18 +14,7 @@ class Convection(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        override fun modifyStats(sim: SimIteration): Stats {
-            val talentRanks = sim.subject.klass.talents[Convection.name]?.currentRank ?: 0
-
-            val modifier = 1 * (0.01 * talentRanks)
-            return Stats(manaMultiplier = modifier)
-        }
+    fun lightningAndShockCostMultiplier(): Double {
+        return 1.0 - (currentRank * 0.02)
     }
-
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
 }

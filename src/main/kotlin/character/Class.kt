@@ -36,4 +36,6 @@ abstract class Class(
     abstract val attackPowerFromStrength: Int
     abstract val critPctPerAgility: Double
     abstract val rangedAttackPowerFromAgility: Int
+
+    abstract val baseMana: Int
 }

@@ -1,12 +1,14 @@
 package sim
 
 import character.Buff
+import character.Resource
 import data.Constants
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
 import mu.KotlinLogging
 import java.text.DecimalFormat
 import kotlin.math.sqrt
+import kotlin.random.Random
 
 object SimStats {
     val logger = KotlinLogging.logger {}
@@ -72,6 +74,7 @@ object SimStats {
                 row("Armor Pen:", sim.armorPen(), "Spell Haste:", 1.0 - sim.spellHasteMultiplier())
                 row("Attack Power", sim.attackPower(), "Expertise:", sim.expertisePct())
                 row("R. Attack Power", sim.rangedAttackPower())
+                row("MP5", sim.subjectStats.manaPer5Seconds)
 
                 hints {
                     alignment(0, Table.Hints.Alignment.RIGHT)
@@ -414,5 +417,19 @@ object SimStats {
                 }
             }.render(StringBuilder())
         )
+    }
+
+    fun resourceUsage(iterations: List<SimIteration>, resourceType: Resource.Type) {
+        // Pick an execution at random
+        val iterationIdx = Random.nextInt(iterations.size)
+        val iteration = iterations[iterationIdx]
+        val durationSeconds = (iteration.opts.durationMs / 1000.0).toInt()
+        println("Resource usage for iteration $iterationIdx")
+
+        val series = iteration.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
+            Pair(it.tick, it.amountPct)
+        }
+
+        Chart.print(series, xMax = durationSeconds, yLabel = resourceType.toString())
     }
 }

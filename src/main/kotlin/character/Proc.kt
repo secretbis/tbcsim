@@ -40,7 +40,10 @@ abstract class Proc {
         ARCANE_DAMAGE,
 
         // Mechanics
-        SERVER_TICK
+        SERVER_TICK,
+
+        // Specifics
+        CAST_SHAMAN_SHOCK
     }
 
     enum class Type {

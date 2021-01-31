@@ -12,8 +12,7 @@ class Reverberation(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    // TODO: Apply this to Shocks
-    fun shockCooldownReductionAmount(): Double {
-        return 0.2 * currentRank
+    fun shockCooldownReductionAmountMs(): Int {
+        return (0.2 * currentRank * 1000).toInt()
     }
 }

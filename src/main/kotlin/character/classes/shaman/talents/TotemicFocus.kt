@@ -9,4 +9,8 @@ class TotemicFocus(ranks: Int) : Talent(ranks) {
 
     override val name: String = Companion.name
     override val maxRank: Int = 5
+
+    fun totemCostMultiplier(): Double {
+        return 1.0 - (0.05 * currentRank)
+    }
 }

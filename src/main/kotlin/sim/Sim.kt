@@ -32,6 +32,7 @@ class Sim (
         println("Completed ${iterations.size} iterations in $totalTime seconds")
 
         // Stats
+        SimStats.resourceUsage(iterations, config.character.klass.resourceType)
         SimStats.resultsByBuff(iterations)
         SimStats.resultsByDebuff(iterations)
         SimStats.resultsByDamageType(iterations)

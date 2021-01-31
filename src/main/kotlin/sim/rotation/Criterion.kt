@@ -6,8 +6,8 @@ import sim.rotation.criteria.*
 
 abstract class Criterion(val type: Type, val data: Map<String, String?>) {
     enum class Type {
-        RESOURCE_GTE,
-        RESOURCE_LTE,
+        RESOURCE_GTE_PCT,
+        RESOURCE_LTE_PCT,
         ABILITY_COOLDOWN_GTE,
         ABILITY_COOLDOWN_LTE,
         BUFF_DURATION_GTE,
@@ -25,8 +25,8 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
 
             val type = Type.values().asList().find { it.name == typeName }
             return when(type) {
-                Type.RESOURCE_GTE -> ResourceGte(data)
-                Type.RESOURCE_LTE -> ResourceLte(data)
+                Type.RESOURCE_GTE_PCT -> ResourceGtePct(data)
+                Type.RESOURCE_LTE_PCT -> ResourceLtePct(data)
                 Type.ABILITY_COOLDOWN_GTE -> AbilityCooldownGte(data)
                 Type.ABILITY_COOLDOWN_LTE -> AbilityCooldownLte(data)
                 Type.BUFF_DURATION_GTE -> BuffDurationGte(data)

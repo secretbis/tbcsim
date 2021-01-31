@@ -21,4 +21,6 @@ class Boss(override var baseStats: Stats) : Class(mapOf()) {
     override var attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0
     override var rangedAttackPowerFromAgility: Int = 0
+
+    override val baseMana: Int = 0
 }

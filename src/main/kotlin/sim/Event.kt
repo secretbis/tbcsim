@@ -12,6 +12,8 @@ data class Event(
     val eventType: Type,
     val damageType: Constants.DamageType? = null,
     val amount: Double = 0.0,
+    val amountPct: Double = 0.0,
+    val delta: Double = 0.0,
     val result: Result = Result.NONE,
     val partialAmount: Double = 0.0
 ) {
@@ -25,7 +27,8 @@ data class Event(
         DEBUFF_START,
         DEBUFF_REFRESH,
         DEBUFF_END,
-        PROC
+        PROC,
+        RESOURCE_CHANGED
     }
 
     enum class Result {

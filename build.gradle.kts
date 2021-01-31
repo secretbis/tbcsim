@@ -6,7 +6,6 @@ plugins {
     kotlin("jvm") version "1.4.21"
     kotlin("plugin.serialization") version "1.4.21"
 
-//    id("org.jetbrains.compose") version "0.3.0-build139"
     idea
     application
 }
@@ -16,14 +15,9 @@ group = "com.tbcsim"
 repositories {
     jcenter()
     mavenCentral()
-//    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 dependencies {
-//    implementation("org.jetbrains.lets-plot:lets-plot-jfx:1.5.6")
-//    api("org.jetbrains.lets-plot:lets-plot-common:1.5.6")
-//    api("org.jetbrains.lets-plot-kotlin:lets-plot-kotlin-api:1.2.0")
-
     implementation("de.m3y.kformat:kformat:0.7")
     implementation("com.squareup:kotlinpoet:1.7.2")
     implementation("com.fleshgrinder.kotlin:case-format:0.1.0")
@@ -42,11 +36,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
     implementation("org.slf4j:slf4j-simple:1.7.29")
 
-//    implementation(compose.desktop.currentOs)
+    testImplementation("io.kotest:kotest-assertions-core:4.3.2")
+    testImplementation("io.kotest:kotest-property:4.3.2")
+    testImplementation("io.kotest:kotest-runner-junit5:4.3.2")
 }
 
 tasks.test {
-    useJUnit()
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {
