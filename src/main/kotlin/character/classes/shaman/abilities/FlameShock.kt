@@ -5,6 +5,7 @@ import character.Proc
 import character.classes.shaman.debuffs.FlameShockDot
 import character.classes.shaman.talents.*
 import data.Constants
+import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.SimIteration
@@ -27,15 +28,15 @@ class FlameShock : Ability() {
 
     override fun resourceCost(sim: SimIteration): Double {
         val convection = sim.subject.klass.talents[Convection.name] as Convection?
-        val cvMult = convection?.lightningAndShockCostMultiplier() ?: 1.0
+        val cvRed = convection?.lightningAndShockCostReduction() ?: 0.0
 
         val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
-        val mqMult = mq?.instantManaCostMultiplier() ?: 1.0
+        val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
         val shFocus = sim.buffs.find { it.name == ShamanisticFocus.name }
-        val shfMult = if(shFocus != null) { 0.60 } else 1.0
+        val shfRed = if(shFocus != null) { 0.60 } else 0.0
 
-        return 500.0 * cvMult * mqMult * shfMult
+        return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed))
     }
 
     val baseDamage = 377.0

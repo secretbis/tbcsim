@@ -14,7 +14,7 @@ class Convection(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    fun lightningAndShockCostMultiplier(): Double {
-        return 1.0 - (currentRank * 0.02)
+    fun lightningAndShockCostReduction(): Double {
+        return currentRank * 0.02
     }
 }

@@ -23,7 +23,11 @@ object Chart {
         bgFill: String = " ",
         pointChar: String = "*"
     ) {
-        // Origin is 2, 2 after axes and separators - rows will be printed in reverse order
+        // Allow space for axes and labels
+        val xMargin = 7
+        val yMargin = 2
+
+        // Rows will be printed in reverse order, so the first array is the "bottom" row
         val chart = Array(yMaxRows) { _ ->
             Array(xMaxCols) { bgFill }
         }
@@ -42,8 +46,8 @@ object Chart {
         }
 
         // Compute bucket sizes
-        val xBucketSize: Int = ceil(xMax.toDouble() / (xMaxCols - 2).toDouble()).toInt()
-        val yBucketSize: Int = ceil(yMax.toDouble() / (yMaxRows - 2).toDouble()).toInt()
+        val xBucketSize: Int = ceil(xMax.toDouble() / (xMaxCols - xMargin).toDouble()).toInt()
+        val yBucketSize: Int = ceil(yMax.toDouble() / (yMaxRows - yMargin).toDouble()).toInt()
 
         // Write axes and separators
         chart.forEachIndexed { index, row ->
@@ -89,11 +93,11 @@ object Chart {
 
         // Write point char if there is a value within each bucket
         sorted.forEach {
-            val xBucket = (it.first / xBucketSize).coerceAtMost(chart[0].size - 3)
-            val yBucket = (it.second / yBucketSize).toInt().coerceAtMost(chart.size - 3)
+            val xBucket = (it.first / xBucketSize)
+            val yBucket = (it.second / yBucketSize).toInt()
 
             try {
-               chart[yBucket + 2][xBucket + 7] = pointChar
+               chart[yBucket + yMargin][xBucket + xMargin] = pointChar
             } catch(e: ArrayIndexOutOfBoundsException) {
                 e.toString()
             }

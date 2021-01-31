@@ -480,7 +480,10 @@ class SimIteration(
     }
 
     fun spellCritPct(): Double {
-        return subjectStats.spellCritRating / Rating.critPerPct
+        // https://wow.gamepedia.com/Spell_critical_strike
+        val intPerCrit = 80.0
+        val critFromInt = intellect() / intPerCrit
+        return subjectStats.spellCritRating / Rating.critPerPct + critFromInt + subject.klass.baseSpellCritChance
     }
 
     fun armorPen(): Int {

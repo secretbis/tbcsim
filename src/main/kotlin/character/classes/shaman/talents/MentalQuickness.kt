@@ -30,13 +30,12 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
         )
     }
 
-    // TODO: Apply this discount to instant spells
-    fun instantManaCostMultiplier(): Double {
+    fun instantManaCostReduction(): Double {
         return when(currentRank) {
-            1 -> 0.98
-            2 -> 0.96
-            3 -> 0.94
-            else -> 1.0
+            1 -> 0.02
+            2 -> 0.04
+            3 -> 0.06
+            else -> 0.0
         }
     }
 }

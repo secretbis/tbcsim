@@ -1,21 +1,27 @@
-package character.classes.shaman.abilities
+package data.abilities.raid
 
-import character.*
+import character.Ability
+import character.Buff
+import character.Proc
+import character.Stats
 import data.model.Item
+import mechanics.Rating
 import sim.SimIteration
 
-class ShamanisticRage : Ability() {
+class JudgementOfWisdom : Ability() {
     companion object {
-        const val name = "Shamanistic Rage"
+        const val name = "Leader of the Pack"
     }
 
-    override val id: Int = 30823
+    override val id: Int = 17007
     override val name: String = Companion.name
-    override fun cooldownMs(sim: SimIteration): Int = 120000
+    override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
         override val name: String = Companion.name
-        override val durationMs: Int = 15000
+        // Assume the caster is always maintaining this
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -29,23 +35,25 @@ class ShamanisticRage : Ability() {
                 Trigger.MELEE_GLANCE,
             )
             override val type: Type = Type.PERCENT
-            // TODO: Shamanistic Rage proc chance unconfirmed
-            override val percentChance: Double = 35.0
+            override val percentChance: Double = 50.0
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                val amount = (sim.attackPower() * 0.30).toInt()
-                sim.addResource(amount, Resource.Type.MANA)
+                TODO("Not yet implemented")
             }
+
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        val bonusCritRating = 5.0 * Rating.critPerPct
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(
+                physicalCritRating = bonusCritRating
+            )
+        }
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {
-        // Apply the regen buff
         sim.addBuff(buff)
     }
 
     override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
 }

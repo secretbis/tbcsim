@@ -427,7 +427,7 @@ object SimStats {
         println("Resource usage for iteration $iterationIdx")
 
         val series = iteration.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
-            Pair(it.tick, it.amountPct)
+            Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
         }
 
         Chart.print(series, xMax = durationSeconds, yLabel = resourceType.toString())

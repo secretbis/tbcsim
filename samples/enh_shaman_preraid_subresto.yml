@@ -131,6 +131,7 @@ rotation:
         # If our mana is 30% or lower, cast Shamanistic Rage
         - type: RESOURCE_LTE_PCT
           pct: 30
+    - name: Stormstrike
     - name: Windfury Totem
       criteria:
         # If GoA has existed for 9+ seconds, refresh WFT for party
@@ -174,7 +175,6 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Flame Shock (DoT)
           seconds: 0
-    - name: Stormstrike
     - name: Earth Shock
 
 # Raid and group setup
@@ -199,6 +199,7 @@ raid:
     - Blood Frenzy
     - Improved Scorch
     - Misery
+    - Judgement of Wisdom
 #    - Curse of the Elements
 #    - Curse of Shadow
 

@@ -63,7 +63,6 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override val buffs: List<Buff> = listOf()
 
     override val resourceType: Resource.Type = Resource.Type.MANA
-    override val baseResourceAmount: Int = 0
 
     override val canDualWield: Boolean
         get() = talents["Dual Wield"]?.currentRank == 1
@@ -76,4 +75,5 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override val rangedAttackPowerFromAgility: Int = 1
 
     override val baseMana: Int = 2958
+    override val baseSpellCritChance: Double = 2.2
 }

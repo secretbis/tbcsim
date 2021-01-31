@@ -27,7 +27,7 @@ class Resource(
     }
 
     private fun maxMana(): Int {
-        return sim.subject.klass.baseResourceAmount
+        return sim.subject.klass.baseMana
             // Add intellect
             .let {
                 it + when {

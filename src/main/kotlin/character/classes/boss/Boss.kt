@@ -14,7 +14,6 @@ class Boss(override var baseStats: Stats) : Class(mapOf()) {
 
     override var buffs: List<Buff> = listOf()
     override var resourceType: Resource.Type = Resource.Type.MANA
-    override var baseResourceAmount: Int = 0
     override var canDualWield: Boolean = false
     override var allowAutoAttack: Boolean = false
     override var attackPowerFromAgility: Int = 0
@@ -23,4 +22,5 @@ class Boss(override var baseStats: Stats) : Class(mapOf()) {
     override var rangedAttackPowerFromAgility: Int = 0
 
     override val baseMana: Int = 0
+    override val baseSpellCritChance: Double = 0.0
 }

@@ -27,7 +27,6 @@ abstract class Class(
 
     // Class resource
     abstract val resourceType: Resource.Type
-    abstract val baseResourceAmount: Int  // This refers to any base amount inherent to the *class*
 
     abstract val canDualWield: Boolean
     abstract val allowAutoAttack: Boolean
@@ -37,5 +36,22 @@ abstract class Class(
     abstract val critPctPerAgility: Double
     abstract val rangedAttackPowerFromAgility: Int
 
+    // Class-specific constant
+    // Druid 2370
+    // Hunter 3383
+    // Mage 2241
+    // Paladin 2953
+    // Priest 2620
+    // Shaman 2958
+    // Warlock 2871
     abstract val baseMana: Int
+
+    // Class-specific constant base spell crit
+    // Druid 1.85
+    // Mage 0.91
+    // Paladin 3.336
+    // Priest 1.24
+    // Shaman 2.2
+    // Warlock 1.701
+    abstract val baseSpellCritChance: Double
 }
