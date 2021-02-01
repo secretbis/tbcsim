@@ -7,6 +7,7 @@ import character.Stats
 import data.model.Color
 import data.model.Gem
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
@@ -41,7 +42,7 @@ class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
             override val type: Type = Type.PPM
             override val ppm: Double = 1.0
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addBuff(hasteBuff)
             }
         }

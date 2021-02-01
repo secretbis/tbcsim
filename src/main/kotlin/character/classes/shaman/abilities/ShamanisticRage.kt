@@ -2,6 +2,7 @@ package character.classes.shaman.abilities
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class ShamanisticRage : Ability() {
@@ -11,6 +12,7 @@ class ShamanisticRage : Ability() {
 
     override val id: Int = 30823
     override val name: String = Companion.name
+    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
     override fun cooldownMs(sim: SimIteration): Int = 120000
 
     val buff = object : Buff() {
@@ -32,7 +34,7 @@ class ShamanisticRage : Ability() {
             // TODO: Shamanistic Rage proc chance unconfirmed
             override val percentChance: Double = 35.0
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 val amount = (sim.attackPower() * 0.30).toInt()
                 sim.addResource(amount, Resource.Type.MANA)
             }
@@ -45,7 +47,4 @@ class ShamanisticRage : Ability() {
         // Apply the regen buff
         sim.addBuff(buff)
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
 }

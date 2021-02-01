@@ -2,6 +2,7 @@ package character
 
 import data.model.Item
 import mu.KotlinLogging
+import sim.Event
 import sim.SimIteration
 import kotlin.random.Random
 
@@ -62,7 +63,7 @@ abstract class Proc {
     open val ppm: Double = 0.0
     open val percentChance: Double = 0.0
 
-    open fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?): Boolean {
+    open fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         val chances: MutableList<Double> = mutableListOf()
 
         if(requiresItem) {
@@ -106,5 +107,5 @@ abstract class Proc {
         return chances.any { roll < it }
     }
 
-    abstract fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?)
+    abstract fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?)
 }

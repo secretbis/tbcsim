@@ -1,19 +1,17 @@
 package data.abilities.raid
 
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Stats
+import character.*
 import data.model.Item
 import mechanics.Rating
+import sim.Event
 import sim.SimIteration
 
 class JudgementOfWisdom : Ability() {
     companion object {
-        const val name = "Leader of the Pack"
+        const val name = "Judgement of Wisdom"
     }
 
-    override val id: Int = 17007
+    override val id: Int = 27164
     override val name: String = Companion.name
     override fun gcdMs(sim: SimIteration): Int = 0
 
@@ -37,23 +35,17 @@ class JudgementOfWisdom : Ability() {
             override val type: Type = Type.PERCENT
             override val percentChance: Double = 50.0
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
-                TODO("Not yet implemented")
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+                if(sim.subject.klass.resourceType == Resource.Type.MANA) {
+                    sim.addResource(74, Resource.Type.MANA)
+                }
             }
-
         }
 
-        val bonusCritRating = 5.0 * Rating.critPerPct
-        override fun modifyStats(sim: SimIteration): Stats? {
-            return Stats(
-                physicalCritRating = bonusCritRating
-            )
-        }
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(buff)
     }
-
-    override val baseCastTimeMs: Int = 0
 }

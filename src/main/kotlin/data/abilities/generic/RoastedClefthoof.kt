@@ -28,6 +28,4 @@ class RoastedClefthoof : Ability() {
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(buff)
     }
-
-    override val baseCastTimeMs: Int = 0
 }

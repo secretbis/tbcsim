@@ -2,6 +2,7 @@ package data.enchants
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 import java.lang.IllegalArgumentException
 
@@ -47,7 +48,7 @@ class Mongoose(val item: Item) : ItemBuff(listOf(item)) {
                     override val ppm: Double = 1.2
                     override val requiresItem: Boolean = true
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                         sim.addBuff(buff)
                     }
                 }

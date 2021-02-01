@@ -50,8 +50,6 @@ class FlameShockDot : Debuff() {
                 sim.fireProc(triggerTypes, listOf(), this)
             }
         }
-
-    override val baseCastTimeMs: Int = 0
 }
     override fun tick(sim: SimIteration) {
         fsdAbility.cast(sim)

@@ -18,7 +18,6 @@ class FlameShock : Ability() {
     override val id: Int = 25457
     override val name: String = Companion.name
 
-    override val baseCastTimeMs: Int = 0
     override fun cooldownMs(sim: SimIteration): Int {
         val reverberation = sim.subject.klass.talents[Reverberation.name] as Reverberation?
         return 6000 - (reverberation?.shockCooldownReductionAmountMs() ?: 0).toInt()

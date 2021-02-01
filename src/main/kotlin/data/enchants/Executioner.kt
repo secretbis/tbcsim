@@ -2,6 +2,7 @@ package data.enchants
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 // Fun blog about Goose and Executioner:
@@ -63,7 +64,7 @@ class Executioner : Buff() {
                     override val ppm: Double = 1.2
                     override val requiresItem: Boolean = true
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                         sim.addBuff(singletonBuff(sourceItems))
                     }
                 }

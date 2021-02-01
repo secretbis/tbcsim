@@ -15,6 +15,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 25505
+    override fun gcdMs(sim: SimIteration): Int = 0
 
     override fun available(sim: SimIteration): Boolean {
         return if(isOffHand(sim)) { sim.isDualWielding() } else true
@@ -53,8 +54,8 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         // Proc anything that can proc off a white hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 
@@ -62,7 +63,4 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
             sim.fireProc(triggerTypes, listOf(item), this)
         }
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = 0
 }

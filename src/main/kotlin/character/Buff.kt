@@ -1,22 +1,24 @@
 package character
 
+import mu.KotlinLogging
 import sim.SimIteration
 
 abstract class Buff {
     open class State {
+        val logger = KotlinLogging.logger {}
         var currentStacks: Int = 0
             set(value) {
-                if(value < 0) {
-                    throw IllegalStateException("Buff currentStacks cannot be set below 0 - this is a bug")
-                }
-                field = value
+                field = if(value < 0) {
+                    logger.warn { "Buff currentStacks cannot be set below 0 - this is probably a bug" }
+                    0
+                } else value
             }
         var currentCharges: Int = 0
             set(value) {
-                if(value < 0) {
-                    throw IllegalStateException("currentCharges cannot be set below 0 - this is a bug")
-                }
-                field = value
+                field = if(value < 0) {
+                    logger.warn { "currentCharges cannot be set below 0 - this is probably a bug" }
+                    0
+                } else value
             }
         var appliedAtMs: Int = 0
     }

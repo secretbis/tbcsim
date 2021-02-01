@@ -21,6 +21,8 @@ class WindfuryTotem: Ability() {
     override val id: Int = 25587
     override val name: String = Companion.name
 
+    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
+
     override fun available(sim: SimIteration): Boolean {
         return true
     }
@@ -79,8 +81,6 @@ class WindfuryTotem: Ability() {
                     sim.fireProc(triggerTypes, listOf(mh), this)
                 }
             }
-
-            override val baseCastTimeMs: Int = 0
         }
 
         val weaponProc = object : Proc() {
@@ -94,13 +94,13 @@ class WindfuryTotem: Ability() {
             override val type: Type = Type.PERCENT
             override val percentChance: Double = 20.0
 
-            override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?): Boolean {
+            override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 val isMhWeapon = items?.first() === sim.subject.gear.mainHand
                 val mhHasNoTempEnh = sim.subject.gear.mainHand.temporaryEnhancement == null
-                return isMhWeapon && mhHasNoTempEnh && super.shouldProc(sim, items, ability)
+                return isMhWeapon && mhHasNoTempEnh && super.shouldProc(sim, items, ability, event)
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 wfTotemAbility.cast(sim)
             }
         }
@@ -120,7 +120,7 @@ class WindfuryTotem: Ability() {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addBuff(weaponBuff)
             }
         }
@@ -131,7 +131,4 @@ class WindfuryTotem: Ability() {
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(totemBuff)
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 }

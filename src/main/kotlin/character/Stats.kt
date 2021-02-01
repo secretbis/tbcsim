@@ -58,6 +58,13 @@ data class Stats(
     var shadowResistance: Int = 0,
     var arcaneResistance: Int = 0,
 
+    // ItemClass specific modifiers
+    var bowCritRating: Double = 0.0,
+    var gunCritRating: Double = 0.0,
+    var swordExpertiseRating: Double = 0.0,
+    var maceExpertiseRating: Double = 0.0,
+    var axeExpertiseRating: Double = 0.0,
+
     // Generic (non-spell-specific) modifiers
     var armorMultiplier: Double = 1.0,
 
@@ -70,12 +77,12 @@ data class Stats(
     var whiteDamageFlatModifier: Double = 0.0,
     var whiteDamageMultiplier: Double = 1.0,
     var whiteDamageAddlCritMultiplier: Double = 1.0,
-    var whiteDamageAddlOffHandPenaltyMultiplier: Double = 1.0,
+    var whiteDamageAddlOffHandPenaltyModifier: Double = 0.0,
 
     var yellowDamageFlatModifier: Double = 0.0,
     var yellowDamageMultiplier: Double = 1.0,
     var yellowDamageAddlCritMultiplier: Double = 1.0,
-    var yellowDamageAddlOffHandPenaltyMultiplier: Double = 1.0,
+    var yellowDamageAddlOffHandPenaltyModifier: Double = 0.0,
 
     var spellDamageFlatModifier: Double = 0.0,
     var spellDamageMultiplier: Double = 1.0,
@@ -88,6 +95,7 @@ data class Stats(
     var frostDamageMultiplier: Double = 1.0,
     var shadowDamageMultiplier: Double = 1.0,
     var arcaneDamageMultiplier: Double = 1.0,
+    var petDamageMultiplier: Double = 1.0,
 
     var healthMultiplier: Double = 1.0,
     var healthFlatModifier: Int = 0,
@@ -153,6 +161,12 @@ data class Stats(
         shadowResistance += stats.shadowResistance
         arcaneResistance += stats.arcaneResistance
 
+        bowCritRating += bowCritRating
+        gunCritRating += gunCritRating
+        swordExpertiseRating += swordExpertiseRating
+        maceExpertiseRating += maceExpertiseRating
+        axeExpertiseRating += axeExpertiseRating
+
         armorMultiplier *= stats.armorMultiplier
 
         physicalHasteMultiplier *= stats.physicalHasteMultiplier
@@ -161,12 +175,12 @@ data class Stats(
         whiteDamageFlatModifier += stats.whiteDamageFlatModifier
         whiteDamageMultiplier *= stats.whiteDamageMultiplier
         whiteDamageAddlCritMultiplier *= stats.whiteDamageAddlCritMultiplier
-        whiteDamageAddlOffHandPenaltyMultiplier *= stats.whiteDamageAddlOffHandPenaltyMultiplier
+        whiteDamageAddlOffHandPenaltyModifier += stats.whiteDamageAddlOffHandPenaltyModifier
 
         yellowDamageFlatModifier += stats.yellowDamageFlatModifier
         yellowDamageMultiplier *= stats.yellowDamageMultiplier
         yellowDamageAddlCritMultiplier *= stats.yellowDamageAddlCritMultiplier
-        yellowDamageAddlOffHandPenaltyMultiplier *= stats.yellowDamageAddlOffHandPenaltyMultiplier
+        yellowDamageAddlOffHandPenaltyModifier += stats.yellowDamageAddlOffHandPenaltyModifier
 
         spellDamageFlatModifier += stats.spellDamageFlatModifier
         spellDamageMultiplier *= stats.spellDamageMultiplier
@@ -179,6 +193,7 @@ data class Stats(
         frostDamageMultiplier *= stats.frostDamageMultiplier
         shadowDamageMultiplier *= stats.shadowDamageMultiplier
         arcaneDamageMultiplier *= stats.arcaneDamageMultiplier
+        petDamageMultiplier *= stats.petDamageMultiplier
 
         healthMultiplier *= stats.healthMultiplier
         healthFlatModifier += stats.healthFlatModifier
@@ -241,6 +256,12 @@ data class Stats(
         shadowResistance -= stats.shadowResistance
         arcaneResistance -= stats.arcaneResistance
 
+        bowCritRating -= bowCritRating
+        gunCritRating -= gunCritRating
+        swordExpertiseRating -= swordExpertiseRating
+        maceExpertiseRating -= maceExpertiseRating
+        axeExpertiseRating -= axeExpertiseRating
+
         armorMultiplier /= stats.armorMultiplier
 
         physicalHasteMultiplier /= stats.physicalHasteMultiplier
@@ -249,12 +270,12 @@ data class Stats(
         whiteDamageFlatModifier -= stats.whiteDamageFlatModifier
         whiteDamageMultiplier /= stats.whiteDamageMultiplier
         whiteDamageAddlCritMultiplier /= stats.whiteDamageAddlCritMultiplier
-        whiteDamageAddlOffHandPenaltyMultiplier /= stats.whiteDamageAddlOffHandPenaltyMultiplier
+        whiteDamageAddlOffHandPenaltyModifier -= stats.whiteDamageAddlOffHandPenaltyModifier
 
         yellowDamageFlatModifier -= stats.yellowDamageFlatModifier
         yellowDamageMultiplier /= stats.yellowDamageMultiplier
         yellowDamageAddlCritMultiplier /= stats.yellowDamageAddlCritMultiplier
-        yellowDamageAddlOffHandPenaltyMultiplier /= stats.yellowDamageAddlOffHandPenaltyMultiplier
+        yellowDamageAddlOffHandPenaltyModifier -= stats.yellowDamageAddlOffHandPenaltyModifier
 
         spellDamageFlatModifier -= stats.spellDamageFlatModifier
         spellDamageMultiplier /= stats.spellDamageMultiplier
@@ -267,6 +288,7 @@ data class Stats(
         frostDamageMultiplier /= stats.frostDamageMultiplier
         shadowDamageMultiplier /= stats.shadowDamageMultiplier
         arcaneDamageMultiplier /= stats.arcaneDamageMultiplier
+        petDamageMultiplier /= stats.petDamageMultiplier
 
         healthMultiplier /= stats.healthMultiplier
         healthFlatModifier -= stats.healthFlatModifier

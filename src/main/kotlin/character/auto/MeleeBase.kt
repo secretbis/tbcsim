@@ -12,7 +12,6 @@ abstract class MeleeBase : Ability() {
     abstract fun item(sim: SimIteration): Item
     abstract val isOffhand: Boolean
 
-    override val baseCastTimeMs: Int = 0
     override fun gcdMs(sim: SimIteration): Int = 0
 
     fun weaponSpeed(sim: SimIteration): Double {
@@ -51,7 +50,7 @@ abstract class MeleeBase : Ability() {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.GLANCE -> listOf(Proc.Trigger.MELEE_GLANCE)
+            Event.Result.GLANCE -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_GLANCE, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
             Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
             Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)

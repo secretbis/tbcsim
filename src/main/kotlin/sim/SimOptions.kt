@@ -8,7 +8,8 @@ data class SimOptions(
     var iterations: Int = Defaults.iterations,
     var targetLevel: Int = Defaults.targetLevel,
     var targetArmor: Int = Defaults.targetArmor,
-    var allowParryAndBlock: Boolean = Defaults.allowParryAndBlock
+    var allowParryAndBlock: Boolean = Defaults.allowParryAndBlock,
+    var showHiddenBuffs: Boolean = Defaults.showHiddenBuffs
 ) {
    class Defaults {
        companion object {
@@ -24,6 +25,7 @@ data class SimOptions(
            // Per ancient forums, most TBC bosses have 7700 or 6200 armor
            val targetArmor: Int = 7700
            val allowParryAndBlock: Boolean = false
+           val showHiddenBuffs: Boolean = false
        }
    }
 }

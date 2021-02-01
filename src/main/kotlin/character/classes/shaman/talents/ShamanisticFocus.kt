@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.Talent
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class ShamanisticFocus(ranks: Int) : Talent(ranks) {
@@ -22,7 +23,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.consumeBuff(buff)
             }
         }
@@ -51,7 +52,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addBuff(postCritBuff)
             }
         }

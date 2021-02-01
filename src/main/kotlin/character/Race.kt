@@ -1,6 +1,7 @@
 package character
 
 import character.races.Draenei
+import sim.SimIteration
 
 abstract class Race {
     companion object {
@@ -13,5 +14,6 @@ abstract class Race {
     }
 
     abstract var baseStats: Stats
-    abstract var racials: List<Ability>
+    abstract fun racialByName(name: String): Ability?
+    abstract fun buffs(sim: SimIteration): List<Buff>
 }

@@ -2,7 +2,9 @@ package character.races
 
 import character.Race
 import character.Ability
+import character.Buff
 import character.Stats
+import sim.SimIteration
 
 class Tauren : Race() {
     override var baseStats: Stats = Stats(
@@ -12,6 +14,17 @@ class Tauren : Race() {
         intellect = -4,
         spirit = 2
     )
-    override var racials: List<Ability> = listOf()
+    override fun racialByName(name: String): Ability? = null
 
+    val endurance = object : Buff() {
+        override val name: String = "Endurance"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sim: SimIteration): Stats? {
+            return Stats(healthMultiplier = 1.05)
+        }
+    }
+
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(endurance)
 }

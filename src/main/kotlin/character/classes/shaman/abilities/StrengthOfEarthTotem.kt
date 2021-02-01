@@ -16,6 +16,7 @@ class StrengthOfEarthTotem: Ability() {
 
     override val id: Int = 25528
     override val name: String = Companion.name
+    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 
     override fun available(sim: SimIteration): Boolean {
         return true
@@ -47,7 +48,4 @@ class StrengthOfEarthTotem: Ability() {
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(buff)
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 }

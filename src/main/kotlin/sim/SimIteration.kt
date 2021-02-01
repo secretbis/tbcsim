@@ -25,7 +25,7 @@ class SimIteration(
     var targetStats: Stats = Stats()
     val resource: Resource
 
-    val serverTickMs = 2000
+    val serverTickMs = 3000
     var lastMp5Tick = 0
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
@@ -48,6 +48,7 @@ class SimIteration(
     val minGcdMs: Double = 1000.0
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
+    var castingAbility: Ability? = null
 
     fun onGcd(): Boolean {
         return elapsedTimeMs < gcdEndMs
@@ -67,6 +68,7 @@ class SimIteration(
         }
 
         // Collect buffs from class, talents, gear, and etc
+        subject.race.buffs(this).forEach { addBuff(it) }
         subject.klass.buffs.forEach { addBuff(it) }
         subject.klass.talents.filter { it.value.currentRank > 0 }.forEach {
             it.value.buffs(this).forEach { buff -> addBuff(buff) }
@@ -132,37 +134,44 @@ class SimIteration(
 
         // Find and cast next rotation ability
         if(!isCasting()) {
-            val rotationAbility = rotation.next(this, onGcd())
-            if(rotationAbility != null) {
-                if(!onGcd() || (onGcd() && rotationAbility.castableOnGcd)) {
-                    val resourceCost = rotationAbility.resourceCost(this).toInt()
-                    val resourceType = rotationAbility.resourceType
-                    if(resourceCost != 0) {
-                        subtractResource(resourceCost, resourceType, rotationAbility)
-                    }
+            // If we are not casting, and have an ability queued up, actually cast it
+            if(castingAbility != null) {
+                val resourceCost = castingAbility!!.resourceCost(this).toInt()
+                val resourceType = castingAbility!!.resourceType(this)
+                if (resourceCost != 0) {
+                    subtractResource(resourceCost, resourceType, castingAbility)
+                }
 
-                    rotationAbility.cast(this)
-                    rotationAbility.afterCast(this)
+                castingAbility!!.cast(this)
+                castingAbility!!.afterCast(this)
 
-                    // Log cast event
-                    // TODO: Is the SPELL_START event useful?
-                    logEvent(
-                        Event(
-                            eventType = Event.Type.SPELL_CAST,
-                            abilityName = rotationAbility.name
-                        )
+                // Log cast event
+                logEvent(
+                    Event(
+                        eventType = Event.Type.SPELL_CAST,
+                        abilityName = castingAbility!!.name
                     )
+                )
 
+                // Reset casting state
+                castingAbility = null
+            } else {
+                val rotationAbility = rotation.next(this, onGcd())
+                if (rotationAbility != null) {
                     // Set next cast times, and add latency if configured
+                    castingAbility = rotationAbility
                     gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
                     castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
                 }
             }
-        }
 
-        // Do auto attacks
-        autoAttack.forEach {
-            if(it.available(this)) it.cast(this)
+            // Double check casting, since we could have just started
+            // Do auto attacks
+            if (!isCasting()) {
+                autoAttack.forEach {
+                    if (it.available(this)) it.cast(this)
+                }
+            }
         }
 
         // Check debuffs
@@ -331,7 +340,7 @@ class SimIteration(
         }
     }
 
-    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null) {
+    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null, event: Event? = null) {
         // Collect fireable procs
         val allProcs: MutableSet<Proc> = mutableSetOf()
         for(trigger in triggers) {
@@ -345,8 +354,8 @@ class SimIteration(
 
         // Fire all found procs
         allProcs.forEach {
-            if(it.shouldProc(this, items, ability)) {
-                it.proc(this, items, ability)
+            if(it.shouldProc(this, items, ability, event)) {
+                it.proc(this, items, ability, event)
 
                 // Always check buff/debuff state after any proc
                 pruneBuffs()
@@ -394,6 +403,11 @@ class SimIteration(
 
     fun isDualWielding(): Boolean {
         return subject.klass.canDualWield && hasMainHandWeapon() && hasOffHandWeapon()
+    }
+
+    fun isExecutePhase(): Boolean {
+        // The last 20% of the duration is considered to be Execute phase
+        return elapsedTimeMs >= 0.8 * opts.durationMs
     }
 
     fun computeStats(character: Character, buffs: List<Buff>): Stats {

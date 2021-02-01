@@ -2,6 +2,7 @@ package character.classes.shaman.talents
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class UnleashedRage(currentRank: Int) : Talent(currentRank) {
@@ -39,7 +40,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
                 }
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addBuff(buff)
             }
         }

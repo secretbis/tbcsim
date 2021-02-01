@@ -26,6 +26,4 @@ class FlametongueWeaponMainHand : Ability() {
         }
         sim.addBuff(buff!!)
     }
-
-    override val baseCastTimeMs: Int = 0
 }

@@ -17,7 +17,6 @@ class GraceOfAirTotem : Ability() {
     override val id: Int = 25359
     override val name: String = Companion.name
 
-    override val baseCastTimeMs: Int = 0
     override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 
     override fun resourceCost(sim: SimIteration): Double {

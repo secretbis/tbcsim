@@ -17,6 +17,7 @@ class ThunderingStrikes(ranks: Int) : Talent(ranks) {
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = -1
+        override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
             val critPct = 1.0 * currentRank

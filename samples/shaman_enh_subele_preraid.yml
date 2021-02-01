@@ -33,11 +33,15 @@ talents:
     rank: 5
   - name: Shamanistic Rage
     rank: 1
-  # Resto talents
-  - name: Totemic Focus
+  # Ele talents
+  - name: Convection
     rank: 5
-  - name: Nature's Guidance
-    rank: 3
+  - name: Concussion
+    rank: 5
+  - name: Reverberation
+    rank: 5
+  - name: Elemental Focus
+    rank: 1
 
 # Pre-raid BIS-ish
 # Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
@@ -155,8 +159,7 @@ rotation:
     - name: Haste Potion
       criteria:
         # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions:
-        # One immediately
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
         - type: FIGHT_TIME_REMAINING_MODULO_LTE
           modulusSeconds: 120
           seconds: 20
@@ -200,7 +203,7 @@ raid:
     - Improved Scorch
     - Misery
     - Judgement of Wisdom
-#    - Curse of the Elements
+    - Curse of the Elements
 #    - Curse of Shadow
 
   party:

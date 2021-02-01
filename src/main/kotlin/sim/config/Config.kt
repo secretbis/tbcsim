@@ -39,7 +39,7 @@ class Config(
         private fun makeRules(rotationRuleYml: List<RotationRuleYml>?, character: Character, phase: Rotation.Phase): List<Rule> {
             return rotationRuleYml?.mapNotNull {
                 // Check names in the character class first, then check generics
-                val ability = character.klass.abilityFromString(it.name) ?: GenericAbilities.byName(it.name)
+                val ability = character.klass.abilityFromString(it.name) ?: character.race.racialByName(it.name) ?: GenericAbilities.byName(it.name)
                 if(ability == null) {
                     logger.warn { "Could not find ability with name: ${it.name}" }
                     null

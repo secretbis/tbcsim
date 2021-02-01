@@ -13,7 +13,13 @@ class Druid : Class(mapOf()) {
         return null
     }
 
-    override var baseStats: Stats = Stats()
+    override var baseStats: Stats = Stats(
+        agility = 222,
+        intellect = 180,
+        strength = 108,
+        stamina = 154,
+        spirit = 135
+    )
     override var buffs: List<Buff> = listOf()
 
     override var resourceType: Resource.Type = Resource.Type.MANA

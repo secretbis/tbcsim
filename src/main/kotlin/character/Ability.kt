@@ -24,7 +24,7 @@ abstract class Ability {
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
 
     open fun resourceCost(sim: SimIteration): Double = 0.0
-    open val resourceType: Resource.Type = Resource.Type.MANA
+    open fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.MANA
 
     // Buff implementations can implement their own state containers
     internal open fun stateFactory(): State {
@@ -71,13 +71,5 @@ abstract class Ability {
         }
     }
 
-    // Base cast time should include talent reductions, and other static modifiers
-    abstract val baseCastTimeMs: Int
-    // This defines whether an ability is a DoT or not
-    open val baseDurationMs: Int = 0
-
-    // Final cast time accounting for haste
-    fun castTimeMs(sim: SimIteration): Int {
-        return (baseCastTimeMs / sim.spellHasteMultiplier()).toInt()
-    }
+    open fun castTimeMs(sim: SimIteration): Int = 0
 }

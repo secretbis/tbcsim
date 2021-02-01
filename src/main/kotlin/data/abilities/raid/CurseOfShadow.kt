@@ -42,6 +42,4 @@ class CurseOfShadow : Ability() {
         sim.addBuff(buff)
         sim.addDebuff(debuff)
     }
-
-    override val baseCastTimeMs: Int = 0
 }

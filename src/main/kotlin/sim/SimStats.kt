@@ -140,13 +140,14 @@ object SimStats {
     }
 
     fun resultsByBuff(iterations: List<SimIteration>) {
+        val showHidden = iterations[0].opts.showHiddenBuffs
         processBuffs(
             iterations,
             "Buffs",
             iterations.flatMap { iter ->
                 iter.events
                     .filter {
-                        it.buff != null && !it.buff.hidden && (
+                        it.buff != null && (!it.buff.hidden || showHidden) && (
                             it.eventType == Event.Type.BUFF_START ||
                             it.eventType == Event.Type.BUFF_REFRESH ||
                             it.eventType == Event.Type.BUFF_END
@@ -161,13 +162,14 @@ object SimStats {
     }
 
     fun resultsByDebuff(iterations: List<SimIteration>) {
+        val showHidden = iterations[0].opts.showHiddenBuffs
         processBuffs(
             iterations,
             "Debuffs",
             iterations.flatMap { iter ->
                 iter.events
                     .filter {
-                        it.buff != null && !it.buff.hidden && (
+                        it.buff != null && (!it.buff.hidden || showHidden) && (
                             it.eventType == Event.Type.DEBUFF_START ||
                             it.eventType == Event.Type.DEBUFF_REFRESH ||
                             it.eventType == Event.Type.DEBUFF_END

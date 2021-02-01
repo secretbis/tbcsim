@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Proc
 import character.Stats
+import character.classes.shaman.talents.Stormstrike as StormstrikeTalent
 import data.Constants
 import data.model.Item
 import mechanics.Melee
@@ -18,9 +19,14 @@ class Stormstrike : Ability() {
     override val id: Int = 17364
     override val name: String = Companion.name
     override fun cooldownMs(sim: SimIteration): Int = 10000
+    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
 
     override fun resourceCost(sim: SimIteration): Double {
         return 0.08 * sim.subject.klass.baseMana
+    }
+
+    override fun available(sim: SimIteration): Boolean {
+        return sim.subject.klass.talents[StormstrikeTalent.name]?.currentRank == 1 && super.available(sim)
     }
 
     val proc = fun(buff: Buff): Proc {
@@ -30,7 +36,7 @@ class Stormstrike : Ability() {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.consumeBuff(buff)
             }
         }
@@ -108,7 +114,4 @@ class Stormstrike : Ability() {
             sim.fireProc(triggerTypesOh, listOf(ohItem), this)
         }
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
 }

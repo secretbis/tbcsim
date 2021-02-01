@@ -2,6 +2,7 @@ package character.classes.shaman.talents
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class Flurry(currentRank: Int) : Talent(currentRank) {
@@ -16,7 +17,6 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
                 Trigger.MELEE_AUTO_HIT,
-                Trigger.MELEE_WHITE_HIT,
                 Trigger.MELEE_MISS,
                 Trigger.MELEE_DODGE,
                 Trigger.MELEE_PARRY,
@@ -25,7 +25,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.consumeBuff(buff)
             }
         }
@@ -62,7 +62,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         )
         override val type: Type = Type.STATIC
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             sim.addBuff(hasteBuff)
         }
     }

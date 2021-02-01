@@ -2,7 +2,11 @@ package character.races
 
 import character.Race
 import character.Ability
+import character.Buff
 import character.Stats
+import character.races.abilities.Berserking
+import mechanics.Rating
+import sim.SimIteration
 
 class Troll : Race() {
     override var baseStats: Stats = Stats(
@@ -11,5 +15,24 @@ class Troll : Race() {
         intellect = -4,
         spirit = 1
     )
-    override var racials: List<Ability> = listOf()
+
+    override fun racialByName(name: String): Ability? {
+        return when(name) {
+            "Berserking" -> Berserking()
+            else -> null
+        }
+    }
+
+    // TODO: Beast slaying racial, and target types in general
+    val bowSpec = object : Buff() {
+        override val name: String = "Bow Specialization"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sim: SimIteration): Stats {
+            return Stats(bowCritRating = 1.0 * Rating.critPerPct)
+        }
+    }
+
+    override fun buffs(sim: SimIteration): List<Buff> = listOf(bowSpec)
 }

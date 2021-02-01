@@ -31,7 +31,7 @@ class FlametongueWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         var ftAbility: Ability? = null
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             if (ftAbility == null) {
                 val suffix = when (sourceItem) {
                     sim.subject.gear.mainHand -> "(MH)"

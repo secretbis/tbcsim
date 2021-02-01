@@ -30,6 +30,7 @@ class TBCSim : CliktCommand() {
     val targetLevel: Int by option("--target-level", help="Target level, from 70 to 73").int().default(73).validate { it in 70..73 }
     val targetArmor: Int by option("-a", "--target-armor", help="The target's base armor value, before debuffs ").int().default(7700)
     val allowParryAndBlock: Boolean by option("-p", "--allow-parry-block").flag(default = false)
+    val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = false)
 
     override fun run() {
         setupLogging()
@@ -47,7 +48,8 @@ class TBCSim : CliktCommand() {
                     iterations = iterations,
                     targetLevel = targetLevel,
                     targetArmor = targetArmor,
-                    allowParryAndBlock = allowParryAndBlock
+                    allowParryAndBlock = allowParryAndBlock,
+                    showHiddenBuffs = showHiddenBuffs
                 )
 
                 runBlocking {

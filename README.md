@@ -6,8 +6,10 @@ This information is not very cleanly available, and requires a fair amount of ar
 As such, I'm sure there are a thousand subtle bugs.  Please report any if you find them! 
 
 Implemented:
-- Classes
+- Specs
   - Enhancement Shaman
+  - Arms Warrior
+  - Fury Warrior
 - All items ilvl >= 91 (except some unique on-use/procs)
   - Including gems, socket bonuses, and meta gems
 - Full stats breakdowns
@@ -18,12 +20,12 @@ Implemented:
 - Fully customizable rotations
 - Raid buffs/debuffs
 - Consumables
+- Racial abilities
 
 Not yet implemented:
-- All specs that aren't Enhancement Shaman
+- All specs not listed above
 - Item set bonuses
 - Most item enchants
-- Racial abilities
 - Automated gear comparison
 
 ## Example output
@@ -129,6 +131,7 @@ Options:
   -a, --target-armor INT          The target's base armor value, before
                                   debuffs
   -p, --allow-parry-block
+  -b, --show-hidden-buffs
   -h, --help                      Show this message and exit
 
 Arguments:
@@ -158,4 +161,4 @@ Tbcsim accepts a yml file as its configuration.  This contains:
 - Rotation
 - Raid buffs and consumables
 
-[Click here to see a full example](./samples/enh_shaman_preraid_subresto.yml)
+[Click here to see a full example](samples/shaman_enh_subresto_preraid.yml)

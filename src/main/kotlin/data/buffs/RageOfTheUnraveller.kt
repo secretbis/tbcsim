@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.Stats
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 class RageOfTheUnraveller : Buff() {
@@ -32,7 +33,7 @@ class RageOfTheUnraveller : Buff() {
             }
         }
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             sim.addBuff(buff)
         }
     }

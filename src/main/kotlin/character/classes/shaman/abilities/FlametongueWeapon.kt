@@ -15,6 +15,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 25489
+    override fun gcdMs(sim: SimIteration): Int = 0
 
     override fun available(sim: SimIteration): Boolean {
         return if(isOffHand(sim)) { sim.isDualWielding() } else true
@@ -38,16 +39,18 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val damageRoll = Spell.baseDamageRoll(sim, speedBasedDamage, spCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
 
-        sim.logEvent(Event(
-            eventType = Event.Type.DAMAGE,
-            damageType = school,
-            abilityName = name,
-            amount = result.first,
-            result = result.second,
-        ))
+        sim.logEvent(
+            Event(
+                eventType = Event.Type.DAMAGE,
+                damageType = school,
+                abilityName = name,
+                amount = result.first,
+                result = result.second,
+            )
+        )
 
         // Proc anything that can proc off Nature damage
-        val triggerTypes = when(result.second) {
+        val triggerTypes = when (result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
             Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
@@ -55,11 +58,8 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
             else -> null
         }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sim.fireProc(triggerTypes, listOf(), this)
         }
     }
-
-    override val baseCastTimeMs: Int = 0
-    override fun gcdMs(sim: SimIteration): Int = 0
 }

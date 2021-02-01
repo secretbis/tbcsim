@@ -21,7 +21,8 @@ class EarthShock : Ability() {
     override val id: Int = 25454
     override val name: String = Companion.name
 
-    override val baseCastTimeMs: Int = 0
+    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+
     override fun cooldownMs(sim: SimIteration): Int {
         val reverberation = sim.subject.klass.talents[Reverberation.name] as Reverberation?
         return 6000 - (reverberation?.shockCooldownReductionAmountMs() ?: 0).toInt()
@@ -41,7 +42,6 @@ class EarthShock : Ability() {
         return General.resourceCostReduction(535.0, listOf(cvRed, mqRed, shfRed))
     }
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
 
     val baseDamage = Pair(658.0, 693.0)
     override fun cast(sim: SimIteration, free: Boolean) {

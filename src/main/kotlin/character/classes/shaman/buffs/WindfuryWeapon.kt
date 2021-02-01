@@ -39,19 +39,19 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         override val type: Type = Type.PERCENT
         override val percentChance: Double = 20.0
 
-        override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?): Boolean {
+        override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
             // Check shared WF ICD state
             val state = sharedState(name, sim) as WindfuryWeaponState
 
             val lastProc = state.lastWindfuryWeaponProcMs
             val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
 
-            return offIcd && super.shouldProc(sim, items, ability)
+            return offIcd && super.shouldProc(sim, items, ability, event)
         }
 
         var wfAbility: Ability? = null
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             if(wfAbility == null) {
                 val suffix = when(sourceItem) {
                     sim.subject.gear.mainHand -> "(MH)"

@@ -186,11 +186,11 @@ object Melee {
         } * sim.subjectStats.physicalDamageMultiplier
 
         val offHandMultiplier = if(isOffHand) {
-            Stats.offHandPenalty + (1 - if(isWhiteDmg) {
-                sim.subjectStats.whiteDamageAddlOffHandPenaltyMultiplier
+            Stats.offHandPenalty + if(isWhiteDmg) {
+                sim.subjectStats.whiteDamageAddlOffHandPenaltyModifier
             } else {
-                sim.subjectStats.yellowDamageAddlOffHandPenaltyMultiplier
-            })
+                sim.subjectStats.yellowDamageAddlOffHandPenaltyModifier
+            }
         } else {
             1.0
         }

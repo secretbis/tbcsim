@@ -2,6 +2,7 @@ package data.buffs
 
 import character.*
 import data.model.Item
+import sim.Event
 import sim.SimIteration
 
 // https://tbc-twinhead.twinstar.cz/?spell=21165
@@ -50,7 +51,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                         }
                     }
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?) {
+                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                         sim.addBuff(buff)
                     }
                 }
