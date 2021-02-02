@@ -112,7 +112,7 @@ STDDEV DPS: 130.06
 This has only a command-line interface.
 
 ```
-tbcsim ./samples/enh_shaman_preraid_subresto.yml
+tbcsim ./samples/shaman_enh_subresto_preraid.yml
 
 ------------------------------------------------
 
