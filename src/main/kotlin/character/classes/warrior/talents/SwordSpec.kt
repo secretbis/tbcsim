@@ -35,7 +35,7 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
                 Trigger.MELEE_BLOCK
             )
             override val type: Type = Type.PERCENT
-            override val percentChance: Double = 5.0 * currentRank
+            override val percentChance: Double = 1.0 * currentRank
 
             private fun isSword(item: Item): Boolean {
                 return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
@@ -68,6 +68,8 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
                 ))
             }
         }
+
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
     override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)

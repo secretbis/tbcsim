@@ -110,7 +110,32 @@ rotation:
     - name: Battle Shout
     - name: Bloodrage
 
-  combat: []
+  # TODO: This rotation seems a little rage starved, and doesn't cast many Whirlwinds.  Needs work.
+  combat:
+    - name: Bloodrage
+    - name: Execute
+    # Avoid clipping autos, only cast Slam if there is time left in the swing timer to do so
+    - name: Slam
+      criteria:
+        - type: MAIN_HAND_SWING_TIMER_GTE
+          seconds: 0.51
+    - name: Mortal Strike
+    - name: Whirlwind
+    - name: Battle Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Battle Shout
+          seconds: 0
+    - name: Insane Strength Potion
+      criteria:
+        # Use a Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying

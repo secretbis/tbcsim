@@ -4,8 +4,8 @@ import sim.SimIteration
 import sim.rotation.Criterion
 
 class FightTimeElapsedGte(data: Map<String, String?>) : Criterion(Type.FIGHT_TIME_ELAPSED_GTE, data) {
-    val seconds: Int? = try {
-        (data["seconds"] as String).toInt().coerceAtLeast(0)
+    val seconds: Double? = try {
+        (data["seconds"] as String).toDouble().coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null

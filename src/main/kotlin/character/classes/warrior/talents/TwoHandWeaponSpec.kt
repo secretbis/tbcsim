@@ -33,7 +33,7 @@ class TwoHandWeaponSpec(currentRank: Int) : Talent(currentRank) {
         override fun modifyStats(sim: SimIteration): Stats {
             return if(is2H(sim.subject.gear.mainHand)) {
                 val multiplier = currentRank * 0.01
-                Stats(physicalDamageMultiplier = multiplier)
+                Stats(physicalDamageMultiplier = 1.0 + multiplier)
             } else Stats()
         }
     }

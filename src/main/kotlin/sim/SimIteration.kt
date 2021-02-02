@@ -64,8 +64,12 @@ class SimIteration(
     init {
         // Add auto-attack, if allowed
         if(subject.klass.allowAutoAttack) {
-            mhAutoAttack = MeleeMainHand()
-            ohAutoAttack = MeleeOffHand()
+            if(hasMainHandWeapon()) {
+                mhAutoAttack = MeleeMainHand()
+            }
+            if(hasOffHandWeapon()) {
+                ohAutoAttack = MeleeOffHand()
+            }
         }
 
         // Collect buffs from class, talents, gear, and etc
@@ -433,6 +437,10 @@ class SimIteration(
 
     fun isDualWielding(): Boolean {
         return subject.klass.canDualWield && hasMainHandWeapon() && hasOffHandWeapon()
+    }
+
+    fun weaponSpeed(item: Item): Double {
+        return (item.speed / meleeHasteMultiplier()).coerceAtLeast(0.01)
     }
 
     fun isExecutePhase(): Boolean {

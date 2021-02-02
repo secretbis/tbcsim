@@ -11,8 +11,8 @@ class AbilityCooldownGte(data: Map<String, String?>) : Criterion(Type.ABILITY_CO
         null
     }
 
-    val seconds: Int? = try {
-        (data["seconds"] as String).toInt().coerceAtLeast(0)
+    val seconds: Double? = try {
+        (data["seconds"] as String).toDouble().coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null
@@ -25,6 +25,6 @@ class AbilityCooldownGte(data: Map<String, String?>) : Criterion(Type.ABILITY_CO
         if(ability == null || seconds == null) return false
 
         val abilityState = sim.abilityState[ability]
-        return abilityState != null && (sim.elapsedTimeMs - abilityState.cooldownStartMs).coerceAtLeast(0) >= seconds
+        return abilityState != null && (sim.elapsedTimeMs - abilityState.cooldownStartMs).coerceAtLeast(0) >= seconds * 1000.0
     }
 }

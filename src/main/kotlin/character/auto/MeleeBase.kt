@@ -14,10 +14,6 @@ abstract class MeleeBase : Ability() {
 
     override fun gcdMs(sim: SimIteration): Int = 0
 
-    fun weaponSpeed(sim: SimIteration): Double {
-        return (item(sim).speed / sim.meleeHasteMultiplier()).coerceAtLeast(0.01)
-    }
-
     class AutoAttackState : Ability.State() {
         var lastAttackTimeMs = 0
     }
@@ -27,7 +23,7 @@ abstract class MeleeBase : Ability() {
     }
 
     override fun available(sim: SimIteration): Boolean {
-        val nextAvailableTimeMs = (state(sim) as AutoAttackState).lastAttackTimeMs + weaponSpeed(sim)
+        val nextAvailableTimeMs = (state(sim) as AutoAttackState).lastAttackTimeMs + sim.weaponSpeed(item(sim))
         return nextAvailableTimeMs <= sim.elapsedTimeMs
     }
 
