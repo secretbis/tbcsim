@@ -14,7 +14,6 @@ object Melee {
 
     // Base mitigation values based on level difference
     const val baseDualWieldMiss: Double = 0.19
-    const val baseCritChance: Double = 0.05
     val baseMissChance = mapOf(
         0 to 0.05,
         1 to 0.055,
@@ -78,15 +77,20 @@ object Melee {
         }
     }
 
-    fun baseMiss(sim: SimIteration, isWhiteHit: Boolean): Double {
+    fun baseMiss(sim: SimIteration, isWhiteHit: Boolean, isOffHand: Boolean): Double {
         val baseMissForLevel = valueByLevelDiff(sim, baseMissChance)
+
+        // The heroic strike nonsense only eliminates the dual-wield penalty, and nothing further
+        val offHandHitBonus = if(isOffHand) { sim.subjectStats.offHandAddlWhiteHitPct / 100.0 } else 0.0
+        val actualDWMissChance = (baseDualWieldMiss - offHandHitBonus).coerceAtLeast(0.0)
+
         return if(isWhiteHit && sim.isDualWielding()) {
-            baseMissForLevel + baseDualWieldMiss
+            baseMissForLevel + actualDWMissChance
         } else baseMissForLevel
     }
 
-    fun meleeMissChance(sim: SimIteration, isWhiteHit: Boolean): Double {
-        val baseMiss = baseMiss(sim, isWhiteHit)
+    fun meleeMissChance(sim: SimIteration, isWhiteHit: Boolean, isOffHand: Boolean): Double {
+        val baseMiss = baseMiss(sim, isWhiteHit, isOffHand)
         val meleeHitChance = sim.meleeHitPct() / 100.0
         return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
     }
@@ -133,7 +137,7 @@ object Melee {
     }
 
     fun meleeCritChance(sim: SimIteration): Double {
-        return (sim.meleeCritPct() / 100.0 + baseCritChance - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
+        return (sim.meleeCritPct() / 100.0 - valueByLevelDiff(sim, critSuppression)).coerceAtLeast(0.0)
     }
 
     fun meleeArmorPen(sim: SimIteration): Int {
@@ -199,7 +203,7 @@ object Melee {
         val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * offHandMultiplier
 
         // Get the attack result
-        val missChance = meleeMissChance(sim, isWhiteDmg)
+        val missChance = meleeMissChance(sim, isWhiteDmg, isOffHand)
         val dodgeChance = meleeDodgeChance(sim) + missChance
         val parryChance = meleeParryChance(sim) + dodgeChance
         val glanceChance = if(isWhiteDmg) {

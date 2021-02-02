@@ -1,6 +1,7 @@
 package character
 
 import character.classes.shaman.Shaman
+import character.classes.warrior.Warrior
 import data.model.Item
 
 abstract class Class(
@@ -10,6 +11,7 @@ abstract class Class(
         fun fromString(name: String, talents: Map<String, Talent> = mapOf()): Class? {
             return when(name.toLowerCase().trim()) {
                 "shaman" -> Shaman(talents)
+                "warrior" -> Warrior(talents)
                 else -> null
             }
         }

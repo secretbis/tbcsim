@@ -2,7 +2,7 @@ class: Warrior
 race: Human
 level: 70
 
-# Stock Arms
+# Stock Fury
 talents:
   # Fury talents
   - name: Cruelty
@@ -11,14 +11,24 @@ talents:
     rank: 5
   - name: Commanding Presence
     rank: 5
-  - name: Improved Slam
-    rank: 2
+  - name: Dual Wield Specialization
+    rank: 5
   - name: Weapon Mastery
     rank: 2
+  - name: Flurry
+    rank: 5
+  - name: Improved Whirlwind
+    rank: 1
+  - name: Precision
+    rank: 3
   - name: Sweeping Strikes
     rank: 1
-  - name: Flurry
-    rank: 3
+  - name: Bloodthirst
+    rank: 1
+  - name: Improved Berserker Stance
+    rank: 5
+  - name: Rampage
+    rank: 1
   # Arms talents
   - name: Improved Heroic Strike
     rank: 3
@@ -28,22 +38,16 @@ talents:
     rank: 3
   - name: Impale
     rank: 2
-  - name: Two-Handed Weapon Specialization
-    rank: 5
-  - name: Death Wish
-    rank: 1
-  - name: Sword Specialization
-    rank: 5
-  - name: Mortal Strike
-    rank: 1
-  - name: Blood Frenzy
-    rank: 2
 
 # Pre-raid BIS-ish
 # Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Lionheart Blade
+    name: Drakefist Hammer
+    enchant: Mongoose
+  offHand:
+    name: Drakefist Hammer
+    # No Executioner until ZA
     enchant: Mongoose
   rangedLibramTotem:
     name: Felsteel Whisper Knives
@@ -64,11 +68,11 @@ gear:
     gems:
       - Bold Living Ruby
   chest:
-    name: Chestguard of Exile
+    name: Chestplate of A'dal
   wrists:
     name: Black Felsteel Bracers
   hands:
-    name: Ragesteel Gloves
+    name: Cobrascale Gloves
   waist:
     name: Girdle of the Deathdealer
   legs:
@@ -110,7 +114,36 @@ rotation:
     - name: Battle Shout
     - name: Bloodrage
 
-  combat: []
+  combat:
+    - name: Bloodrage
+    - name: Rampage
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Rampage
+          seconds: 7
+    - name: Execute
+    - name: Bloodthirst
+    - name: Whirlwind
+    - name: Heroic Strike
+      criteria:
+        # Cast HS if we have 60 rage or more
+        - type: RESOURCE_GTE_PCT
+          pct: 60
+    - name: Battle Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Battle Shout
+          seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying

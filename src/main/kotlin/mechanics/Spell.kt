@@ -10,8 +10,6 @@ import kotlin.random.Random
 object Spell {
     private val logger = KotlinLogging.logger {}
 
-    const val baseCritChance: Double = 0.05
-
     // https://wowwiki.fandom.com/wiki/Spell_hit
     val baseMissChance = mapOf(
         0 to 0.04,
@@ -85,7 +83,7 @@ object Spell {
     }
 
     fun spellCritChance(sim: SimIteration): Double {
-        return (sim.spellCritPct() / 100.0 + baseCritChance).coerceAtLeast(0.0)
+        return (sim.spellCritPct() / 100.0).coerceAtLeast(0.0)
     }
 
     fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {

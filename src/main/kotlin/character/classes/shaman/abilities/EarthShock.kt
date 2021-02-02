@@ -54,13 +54,14 @@ class EarthShock : Ability() {
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod
         val result = Spell.attackRoll(sim, damageRoll, school)
 
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off Nature damage
         val baseTriggerTypes = listOf(Proc.Trigger.CAST_SHAMAN_SHOCK)
@@ -74,7 +75,7 @@ class EarthShock : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this)
+            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }
 }

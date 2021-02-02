@@ -49,13 +49,14 @@ class FlameShock : Ability() {
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school) * concussionMod
         val result = Spell.attackRoll(sim, damageRoll, school)
 
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Apply the DoT
         sim.addDebuff(FlameShockDot())
@@ -72,7 +73,7 @@ class FlameShock : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this)
+            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }
 }

@@ -1,9 +1,6 @@
 package character.classes.warrior.talents
 
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Talent
+import character.*
 import data.Constants
 import data.model.Item
 import mechanics.Melee
@@ -53,17 +50,7 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
                     return
                 }
 
-                val isOffhand = item === sim.subject.gear.offHand
-                val damageRoll = Melee.baseDamageRoll(sim, item)
-                val result = Melee.attackRoll(sim, damageRoll, true, isOffhand)
-
-                sim.logEvent(Event(
-                    eventType = Event.Type.DAMAGE,
-                    damageType = Constants.DamageType.PHYSICAL,
-                    abilityName = name,
-                    amount = result.first,
-                    result = result.second,
-                ))
+                sim.addResource(7, Resource.Type.RAGE)
             }
         }
     }

@@ -9,4 +9,6 @@ class TacticalMastery(currentRank: Int) : Talent(currentRank) {
 
     override val name: String = Companion.name
     override val maxRank: Int = 3
+
+    // TODO: Stance swapping isn't really a thing for DPS in TBC
 }

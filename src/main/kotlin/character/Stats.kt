@@ -102,6 +102,9 @@ data class Stats(
     var manaMultiplier: Double = 1.0,
     var manaFlatModifier: Int = 0,
     var manaPer5Seconds: Int = 0,
+
+    // Weird abilities
+    var offHandAddlWhiteHitPct: Double = 0.0
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -201,6 +204,8 @@ data class Stats(
         manaFlatModifier += stats.manaFlatModifier
         manaPer5Seconds += stats.manaPer5Seconds
 
+        offHandAddlWhiteHitPct += stats.offHandAddlWhiteHitPct
+
         return this
     }
 
@@ -295,6 +300,8 @@ data class Stats(
         manaMultiplier /= stats.manaMultiplier
         manaFlatModifier -= stats.manaFlatModifier
         manaPer5Seconds -= stats.manaPer5Seconds
+
+        offHandAddlWhiteHitPct -= offHandAddlWhiteHitPct
 
         return this
     }

@@ -15,6 +15,7 @@ object RaidAbilities {
             CurseOfTheElements.name -> CurseOfTheElements()
             FaerieFire.name -> FaerieFire()
             FerociousInspiration.name -> FerociousInspiration()
+            GraceOfAirTotem.name -> GraceOfAirTotem()
             ImprovedBattleShout.name -> ImprovedBattleShout()
             ImprovedBlessingOfMight.name -> ImprovedBlessingOfMight()
             ImprovedExposeArmor.name -> ImprovedExposeArmor()
@@ -25,7 +26,10 @@ object RaidAbilities {
             JudgementOfWisdom.name -> JudgementOfWisdom()
             LeaderOfThePack.name -> LeaderOfThePack()
             Misery.name -> Misery()
+            StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
             SunderArmor.name -> SunderArmor()
+            UnleashedRage.name -> UnleashedRage()
+            WindfuryTotem.name -> WindfuryTotem()
             else -> null
         }
     }

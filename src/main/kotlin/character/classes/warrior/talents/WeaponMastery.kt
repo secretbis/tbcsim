@@ -20,6 +20,7 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
+            // This is slightly wrong when parry is turned on, but that's a scuffed situation anyway
             return Stats(expertiseRating = currentRank * Rating.expertisePerPct)
         }
     }

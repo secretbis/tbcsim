@@ -11,6 +11,7 @@ data class Event(
     val buffStacks: Int = 0,
     val eventType: Type,
     val damageType: Constants.DamageType? = null,
+    val isWhiteDamage: Boolean = false,
     val amount: Double = 0.0,
     val amountPct: Double = 0.0,
     val delta: Double = 0.0,

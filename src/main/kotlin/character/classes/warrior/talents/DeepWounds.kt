@@ -61,9 +61,15 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addDebuff(bleedDebuff)
-                sim.addBuff(bloodFrenzy)
+
+                val hasBfRanks = sim.subject.klass.talents[BloodFrenzy.name]?.currentRank ?: 0 > 0
+                if(hasBfRanks) {
+                    sim.addBuff(bloodFrenzy)
+                }
             }
         }
+
+        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
     override fun buffs(sim: SimIteration): List<Buff> = listOf(staticBuff)

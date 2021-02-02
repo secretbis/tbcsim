@@ -43,13 +43,14 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         val result = Pair(initialResult.first * elementalWeaponsMod, initialResult.second)
 
         // TODO: Is this considered one damage event or two, for the purposes of procs?
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off a white hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
@@ -60,7 +61,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

@@ -2,17 +2,15 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
-import character.Proc
 import character.Stats
-import mechanics.Rating
 import sim.SimIteration
 
-class LeaderOfThePack : Ability() {
+class GraceOfAirTotem : Ability() {
     companion object {
-        const val name = "Leader of the Pack"
+        const val name = "Grace of Air Totem"
     }
 
-    override val id: Int = 17007
+    override val id: Int = 25359
     override val name: String = Companion.name
     override fun gcdMs(sim: SimIteration): Int = 0
 
@@ -22,10 +20,11 @@ class LeaderOfThePack : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        val bonusCritRating = 5.0 * Rating.critPerPct
-        override fun modifyStats(sim: SimIteration): Stats {
+        // Assume a GoA uptime of about 80% when twisting
+        // Also assume the caster has Enhancing Totems
+        override fun modifyStats(sim: SimIteration): Stats? {
             return Stats(
-                physicalCritRating = bonusCritRating
+                agility = (77.0 * 1.15 * 0.8).toInt()
             )
         }
     }

@@ -28,13 +28,14 @@ class FlameShockDot : Debuff() {
             val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
             val result = Spell.attackRoll(sim, damageRoll, school)
 
-            sim.logEvent(Event(
+            val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = result.first,
                 result = result.second,
-            ))
+            )
+            sim.logEvent(event)
 
             // Proc anything that can proc off Fire damage
             // Do not proc off anything that implies a spell cast
@@ -47,7 +48,7 @@ class FlameShockDot : Debuff() {
             }
 
             if(triggerTypes != null) {
-                sim.fireProc(triggerTypes, listOf(), this)
+                sim.fireProc(triggerTypes, listOf(), this, event)
             }
         }
 }

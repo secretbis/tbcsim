@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Proc
 import character.Resource
+import character.classes.warrior.talents.EndlessRage
 import data.model.Item
 import sim.Event
 import sim.SimIteration
@@ -12,6 +13,14 @@ class RageGeneration : Buff() {
     override val name: String = "Rage Generation"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+
+    val rageConversionFactor = 274.7
+    fun damageToRage(sim: SimIteration, damage: Double, item: Item, weaponFactor: Double): Int {
+        val endlessRage = sim.subject.klass.talents[EndlessRage.name]?.currentRank ?: 0 > 0
+        val multiplier = if(endlessRage) { 1.25 } else 1.0
+
+        return (((damage / rageConversionFactor * 7.5) + (item.speed / 1000.0 * weaponFactor)) / 2.0 * multiplier).toInt()
+    }
 
     val procHit = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -22,24 +31,19 @@ class RageGeneration : Buff() {
         )
         override val type: Type = Type.STATIC
 
-        val rageConversionFactor = 274.7
-        fun damageToRage(damage: Double, item: Item, weaponFactor: Double): Int {
-            return (((damage / rageConversionFactor * 7.5) + (item.speed / 1000.0 * weaponFactor)) / 2).toInt()
-        }
-
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             val item = items?.get(0) ?: return
             val isOffhand = item === sim.subject.gear.offHand
 
-            if(event?.eventType == Event.Type.DAMAGE) {
+            if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount
                 val rage = if (isOffhand) {
-                    damageToRage(damage, item, 1.75)
+                    damageToRage(sim, damage, item, 1.75)
                 } else {
-                    damageToRage(damage, item, 3.5)
+                    damageToRage(sim, damage, item, 3.5)
                 }
 
-                sim.addResource(rage, Resource.Type.RAGE)
+                sim.addResource(rage.toInt(), Resource.Type.RAGE)
             }
         }
     }
@@ -51,21 +55,16 @@ class RageGeneration : Buff() {
         )
         override val type: Type = Type.STATIC
 
-        val rageConversionFactor = 274.7
-        fun damageToRage(damage: Double, item: Item, weaponFactor: Double): Int {
-            return (((damage / rageConversionFactor * 7.5) + (item.speed / 1000.0 * weaponFactor)) / 2).toInt()
-        }
-
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             val item = items?.get(0) ?: return
             val isOffhand = item === sim.subject.gear.offHand
 
-            if(event?.eventType == Event.Type.DAMAGE) {
+            if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount
                 val rage = if (isOffhand) {
-                    damageToRage(damage, item, 3.5)
+                    damageToRage(sim, damage, item, 3.5)
                 } else {
-                    damageToRage(damage, item, 7.0)
+                    damageToRage(sim, damage, item, 7.0)
                 }
 
                 sim.addResource(rage, Resource.Type.RAGE)

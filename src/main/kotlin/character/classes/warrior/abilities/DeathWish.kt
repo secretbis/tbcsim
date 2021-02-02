@@ -36,5 +36,4 @@ class DeathWish : Ability() {
     override fun cast(sim: SimIteration, free: Boolean) {
         sim.addBuff(buff)
     }
-
 }

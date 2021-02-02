@@ -33,17 +33,21 @@ class Execute : Ability() {
     }
 
     override fun cast(sim: SimIteration, free: Boolean) {
-        val damage = 925.0 * sim.resource.currentAmount * 21
+        val damage = 925.0 + sim.resource.currentAmount * 21
         val result = Melee.attackRoll(sim, damage, isWhiteDmg = false, isOffHand = false)
 
+        // Drain rage
+        sim.subtractResource(sim.resource.currentAmount, Resource.Type.RAGE)
+
         // Save last hit state and fire event
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -58,7 +62,7 @@ class Execute : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this)
+            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
         }
     }
 }

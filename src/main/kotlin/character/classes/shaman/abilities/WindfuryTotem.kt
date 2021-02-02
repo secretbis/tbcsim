@@ -59,15 +59,15 @@ class WindfuryTotem: Ability() {
                 val attack = Melee.baseDamageRoll(sim, mh, extraAp)
                 val result = Melee.attackRoll(sim, attack, isWhiteDmg = true, isOffHand = false)
 
-                sim.logEvent(
-                    Event(
-                        eventType = Event.Type.DAMAGE,
-                        damageType = Constants.DamageType.PHYSICAL,
-                        abilityName = name,
-                        amount = result.first,
-                        result = result.second,
-                    )
+                val event = Event(
+                    eventType = Event.Type.DAMAGE,
+                    damageType = Constants.DamageType.PHYSICAL,
+                    isWhiteDamage = true,
+                    abilityName = name,
+                    amount = result.first,
+                    result = result.second,
                 )
+                sim.logEvent(event)
 
                 // Proc anything that can proc off a white hit
                 // TODO: Should I fire procs off miss/dodge/parry/etc?
@@ -78,7 +78,7 @@ class WindfuryTotem: Ability() {
                 }
 
                 if(triggerTypes != null) {
-                    sim.fireProc(triggerTypes, listOf(mh), this)
+                    sim.fireProc(triggerTypes, listOf(mh), this, event)
                 }
             }
         }

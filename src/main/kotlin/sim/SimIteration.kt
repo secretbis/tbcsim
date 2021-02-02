@@ -1,6 +1,7 @@
 package sim
 
 import character.*
+import character.auto.MeleeBase
 import character.auto.MeleeMainHand
 import character.auto.MeleeOffHand
 import data.model.Item
@@ -30,7 +31,8 @@ class SimIteration(
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
-    var autoAttack: List<Ability> = listOf()
+    var mhAutoAttack: Ability? = null
+    var ohAutoAttack: Ability? = null
     var buffs: MutableList<Buff> = mutableListOf()
     var debuffs: MutableList<Debuff> = mutableListOf()
 
@@ -49,6 +51,7 @@ class SimIteration(
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
     var castingAbility: Ability? = null
+    var mainHandAutoReplacement: Ability? = null
 
     fun onGcd(): Boolean {
         return elapsedTimeMs < gcdEndMs
@@ -61,10 +64,8 @@ class SimIteration(
     init {
         // Add auto-attack, if allowed
         if(subject.klass.allowAutoAttack) {
-            autoAttack = listOf(
-                MeleeMainHand(),
-                MeleeOffHand()
-            )
+            mhAutoAttack = MeleeMainHand()
+            ohAutoAttack = MeleeOffHand()
         }
 
         // Collect buffs from class, talents, gear, and etc
@@ -75,14 +76,17 @@ class SimIteration(
         }
         subject.gear.buffs().forEach { addBuff(it) }
 
-        // Cast any spells flagged in the rotation as precombat
-        rotation.precombat(this)
-
         // Compute initial stats
         recomputeStats()
 
         // Initialize our subject resource
         resource = Resource(this)
+
+        // Cast any spells flagged in the rotation as precombat
+        rotation.precombat(this)
+
+        // Recompute after precombat casts
+        recomputeStats()
     }
 
     private fun recomputeStats() {
@@ -168,8 +172,24 @@ class SimIteration(
             // Double check casting, since we could have just started
             // Do auto attacks
             if (!isCasting()) {
-                autoAttack.forEach {
-                    if (it.available(this)) it.cast(this)
+                if (mhAutoAttack?.available(this) == true) {
+                    // Check to see if we have a replacement ability
+                    // Be sure to double check the cost, since our resource may have changed since we requested the replacement
+                    if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
+                        // If we can cast it, do so
+                        if(mainHandAutoReplacement?.available(this) == true) {
+                            mainHandAutoReplacement!!.cast(this)
+                        } else mhAutoAttack?.cast(this)
+
+                        // Reset our requested ability, regardless if we were able to use it or not
+                        mainHandAutoReplacement = null
+
+                        // Mark our MH auto attack as having occurred
+                        val mhState = mhAutoAttack?.state(this) as MeleeBase.AutoAttackState?
+                        mhState?.lastAttackTimeMs = elapsedTimeMs
+                    } else mhAutoAttack?.cast(this)
+                } else if (ohAutoAttack?.available(this) == true) {
+                    ohAutoAttack?.cast(this)
                 }
             }
         }
@@ -191,7 +211,7 @@ class SimIteration(
 
         // Fire server tick proc
         if(elapsedTimeMs % serverTickMs == 0) {
-            fireProc(listOf(Proc.Trigger.SERVER_TICK))
+            fireProc(listOf(Proc.Trigger.SERVER_TICK), null, null, null)
         }
     }
 
@@ -212,6 +232,10 @@ class SimIteration(
          }
      }
 
+    fun replaceNextMainHandAutoAttack(ability: Ability) {
+        this.mainHandAutoReplacement = ability
+    }
+
     fun addBuff(buff: Buff) {
         buff.refresh(this)
 
@@ -223,6 +247,12 @@ class SimIteration(
         // If this is a new buff, add it
         val exists = buffs.find { it === buff } != null
         if(!exists) {
+            // Check if we're adding a duplicate name - this can cause rotation issues
+            val sameName = buffs.find { it.name == buff.name }
+            if(sameName != null) {
+                logger.debug { "Buff with duplicate name added: ${sameName.name}" }
+            }
+
             // If this buff is mutex with others, remove any existing with that class
             if(!buff.mutex.contains(Buff.Mutex.NONE)) {
                 // A buff should be removed if it matches any of the incoming buff's mutex categories
@@ -340,7 +370,7 @@ class SimIteration(
         }
     }
 
-    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>? = null, ability: Ability? = null, event: Event? = null) {
+    fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>?, ability: Ability?, event: Event?) {
         // Collect fireable procs
         val allProcs: MutableSet<Proc> = mutableSetOf()
         for(trigger in triggers) {

@@ -47,10 +47,10 @@ talents:
 # Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
 gear:
   mainHand:
-    name: Dragonmaw
+    name: Drakefist Hammer
     enchant: Mongoose
   offHand:
-    name: Dragonmaw
+    name: Drakefist Hammer
     # No Executioner until ZA
     enchant: Mongoose
   rangedLibramTotem:

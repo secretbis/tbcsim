@@ -6,6 +6,7 @@ import data.Constants
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
 import mu.KotlinLogging
+import sim.rotation.Rotation
 import java.text.DecimalFormat
 import kotlin.math.sqrt
 import kotlin.random.Random
@@ -119,6 +120,12 @@ object SimStats {
                 }
             }.render(StringBuilder())
         )
+
+        println("ACTIVE RAID BUFFS")
+        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
+            println(" - ${it.ability.name}")
+        }
+        println()
     }
 
     fun dps(iterations: List<SimIteration>) {

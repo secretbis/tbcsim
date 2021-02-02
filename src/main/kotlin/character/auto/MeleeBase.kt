@@ -37,13 +37,16 @@ abstract class MeleeBase : Ability() {
 
         // Save last hit state and fire event
         (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs
-        sim.logEvent(Event(
+
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
+            isWhiteDamage = true,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off a white hit
         val triggerTypes = when(result.second) {
@@ -59,7 +62,7 @@ abstract class MeleeBase : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item(sim)), this)
+            sim.fireProc(triggerTypes, listOf(item(sim)), this, event)
         }
     }
 }

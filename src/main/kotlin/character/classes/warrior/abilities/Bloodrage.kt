@@ -13,7 +13,7 @@ class Bloodrage : Ability() {
     override val name: String = Companion.name
 
     override fun cooldownMs(sim: SimIteration): Int = 60000
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun gcdMs(sim: SimIteration): Int = 0
 
     override fun cast(sim: SimIteration, free: Boolean) {
         // Close enough

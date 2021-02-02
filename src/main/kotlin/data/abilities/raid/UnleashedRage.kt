@@ -2,17 +2,15 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
-import character.Proc
 import character.Stats
-import mechanics.Rating
 import sim.SimIteration
 
-class LeaderOfThePack : Ability() {
+class UnleashedRage : Ability() {
     companion object {
-        const val name = "Leader of the Pack"
+        const val name = "Unleashed Rage"
     }
 
-    override val id: Int = 17007
+    override val id: Int = 25359
     override val name: String = Companion.name
     override fun gcdMs(sim: SimIteration): Int = 0
 
@@ -22,10 +20,10 @@ class LeaderOfThePack : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        val bonusCritRating = 5.0 * Rating.critPerPct
+        // Assume uptime of about 90%
         override fun modifyStats(sim: SimIteration): Stats {
             return Stats(
-                physicalCritRating = bonusCritRating
+                attackPowerMultiplier = 0.10 * 0.90
             )
         }
     }

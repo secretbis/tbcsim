@@ -47,7 +47,7 @@ class Resource(
     private fun max(): Int {
         return when(type) {
             Type.MANA -> maxMana()
-            Type.RAGE -> 0
+            Type.RAGE -> 100
             Type.ENERGY -> 100
         }
     }

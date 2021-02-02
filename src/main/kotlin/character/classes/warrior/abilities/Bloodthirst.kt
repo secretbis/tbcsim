@@ -3,6 +3,7 @@ package character.classes.warrior.abilities
 import character.Ability
 import character.Proc
 import character.Resource
+import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import data.Constants
 import mechanics.Melee
 import sim.Event
@@ -22,18 +23,23 @@ class Bloodthirst : Ability() {
     override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sim: SimIteration): Double = 30.0
 
+    override fun available(sim: SimIteration): Boolean {
+        return sim.subject.klass.talents[BloodthirstTalent.name]?.currentRank == 1 && super.available(sim)
+    }
+
     override fun cast(sim: SimIteration, free: Boolean) {
         val damage = sim.attackPower() * 0.45
         val result = Melee.attackRoll(sim, damage, isWhiteDmg = false, isOffHand = false)
 
         // Save last hit state and fire event
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -50,7 +56,7 @@ class Bloodthirst : Ability() {
         if(triggerTypes != null) {
             // TODO: This currently assigns the main hand weapon as context,
             //       since that would allow things like Sword Spec to proc off of BT, which I presume it can
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this)
+            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
         }
     }
 }

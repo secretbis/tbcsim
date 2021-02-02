@@ -26,17 +26,18 @@ class Slam : Ability() {
     override fun resourceCost(sim: SimIteration): Double = 15.0
 
     override fun cast(sim: SimIteration, free: Boolean) {
-        val damageRoll = Melee.baseDamageRoll(sim, sim.subject.gear.mainHand)
+        val damageRoll = Melee.baseDamageRoll(sim, sim.subject.gear.mainHand, isNormalized = false)
         val result = Melee.attackRoll(sim, damageRoll, isWhiteDmg = false, isOffHand = false)
 
         // Save last hit state and fire event
-        sim.logEvent(Event(
+        val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
             result = result.second,
-        ))
+        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -51,7 +52,7 @@ class Slam : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this)
+            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
         }
     }
 }

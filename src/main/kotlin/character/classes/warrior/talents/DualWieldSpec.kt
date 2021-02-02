@@ -19,7 +19,7 @@ class DualWieldSpec(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
-            val modifier = -1 * currentRank * 0.05
+            val modifier = currentRank * 0.05
             return Stats(
                 whiteDamageAddlOffHandPenaltyModifier = modifier,
                 yellowDamageAddlOffHandPenaltyModifier = modifier

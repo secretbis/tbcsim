@@ -39,15 +39,14 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val damageRoll = Spell.baseDamageRoll(sim, speedBasedDamage, spCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
 
-        sim.logEvent(
-            Event(
+        val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = result.first,
                 result = result.second,
             )
-        )
+        sim.logEvent(event)
 
         // Proc anything that can proc off Nature damage
         val triggerTypes = when (result.second) {
@@ -59,7 +58,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         }
 
         if (triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(), this)
+            sim.fireProc(triggerTypes, listOf(), this, event)
         }
     }
 }

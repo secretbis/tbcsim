@@ -2,13 +2,11 @@ package character.classes.warrior.talents
 
 import character.Talent
 
-class SweepingStrikes(currentRank: Int) : Talent(currentRank) {
+class MortalStrike(currentRank: Int) : Talent(currentRank) {
     companion object {
-        const val name = "Sweeping Strikes"
+        const val name = "Mortal Strike"
     }
 
     override val name: String = Companion.name
     override val maxRank: Int = 1
-
-    // TODO: How to model cleaving situations?
 }

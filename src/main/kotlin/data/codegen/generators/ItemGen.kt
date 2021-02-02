@@ -268,6 +268,13 @@ object ItemGen {
                                 .build()
                         )
                         .addProperty(
+                            PropertySpec.builder("id", Int::class)
+                                .addModifiers(KModifier.OVERRIDE)
+                                .mutable(true)
+                                .initializer("%L", item.id)
+                                .build()
+                        )
+                        .addProperty(
                             PropertySpec.builder("name", String::class)
                                 .addModifiers(KModifier.OVERRIDE)
                                 .mutable(true)

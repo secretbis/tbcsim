@@ -70,21 +70,23 @@ class Stormstrike : Ability() {
         val ohResult = Melee.attackRoll(sim, ohAttack, isWhiteDmg = false, isOffHand = true)
 
         // TODO: Distinguish MH and OH events in the logs?
-        sim.logEvent(Event(
+        val eventMh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = mhResult.first,
             result = mhResult.second,
-        ))
+        )
+        sim.logEvent(eventMh)
 
-        sim.logEvent(Event(
+        val eventOh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = ohResult.first,
             result = ohResult.second,
-        ))
+        )
+        sim.logEvent(eventOh)
 
         // Apply the nature buff
         sim.addBuff(buff)
@@ -99,7 +101,7 @@ class Stormstrike : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(mhItem), this)
+            sim.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
         }
 
         // TODO: This is modeled as two distint hit events for the purposes of procs
@@ -111,7 +113,7 @@ class Stormstrike : Ability() {
         }
 
         if(triggerTypesOh != null) {
-            sim.fireProc(triggerTypesOh, listOf(ohItem), this)
+            sim.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
         }
     }
 }
