@@ -200,84 +200,112 @@ object SimStats {
     ) {
         val keys = byBuff.keys.toList()
 
+        val rows = keys.map { key ->
+        val events = byBuff[key]!!
+        val applied = events.filter { it.eventType == buffStart }.size / iterations.size.toDouble()
+        val refreshed = events.filter { it.eventType == buffRefresh }.size / iterations.size.toDouble()
+
+        // General segment tracking
+        val segments = mutableListOf<BuffSegment>()
+        var lastEvent: Event? = null
+        var currentStart: Event? = null
+        var refreshCount = 0
+
+        // Stack tracking - this is different because we need the size of each sub-segment
+        // start -> <subsegment 1> -> refresh -> <subsegment 2> -> refresh -> <subsegment 3> -> end
+        // Pair is time, stack count
+        var stackDurationsMs = mutableListOf<Pair<Int, Int>>()
+        var lastStackSegmentEvent: Event? = null
+
+        events.forEach {
+            if(it.eventType == buffStart) {
+                if(lastEvent?.eventType == buffStart) {
+                    logger.warn { "Possibly invalid segment - found two starts for buff: ${it.buff!!.name}" }
+                }
+
+                currentStart = it
+
+                if(it.buffStacks != 0) {
+                    lastStackSegmentEvent = it
+                }
+            }
+
+            if(it.eventType == buffRefresh || it.eventType == buffEnd) {
+                if(it.buffStacks != 0) {
+                    if(lastStackSegmentEvent != null) {
+                        stackDurationsMs.add(
+                            Pair(
+                                it.timeMs - lastStackSegmentEvent!!.timeMs,
+                                lastStackSegmentEvent!!.buffStacks
+                            )
+                        )
+
+                        if (it.eventType == buffRefresh) {
+                            lastStackSegmentEvent = it
+                        } else {
+                            lastStackSegmentEvent = null
+                        }
+                    } else {
+                        logger.warn { "Possibly invalid stack segment - refresh without prior start for buff: ${it.buff!!.name}" }
+                    }
+                }
+            }
+
+            if(it.eventType == buffRefresh) {
+                if(lastEvent?.eventType == buffEnd) {
+                    logger.warn { "Possibly invalid segment - refresh without prior start for buff: ${it.buff!!.name}" }
+                }
+                refreshCount++
+            }
+
+            if(it.eventType == buffEnd) {
+                if(lastEvent?.eventType == buffEnd) {
+                    logger.warn { "Possibly invalid segment - found two ends for buff: ${it.buff!!.name}" }
+                }
+
+                if(currentStart != null) {
+                    segments.add(BuffSegment(currentStart!!.timeMs, it.timeMs, refreshCount, it.buff!!, stackDurationsMs))
+                    // Reset
+                    currentStart = null
+                    refreshCount = 0
+                    stackDurationsMs = mutableListOf()
+                } else {
+                    logger.warn { "Possibly invalid segment - found end without start for buff: ${it.buff!!.name}" }
+                }
+            }
+
+            lastEvent = it
+        }
+
+        val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
+        val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
+        val avgStacks = segments.map { segment ->
+            // Compue the weighted average of each stack sub-segment
+            if(segment.stackDurationsMs.isNotEmpty()) {
+                val totalSegmentTimeMs = segment.stackDurationsMs.sumBy { it.first }
+                segment.stackDurationsMs.sumBy { it.first * it.second } / totalSegmentTimeMs.toDouble()
+            } else {
+                0.0
+            }
+        }.sum() / segments.size.toDouble()
+
+        BuffBreakdown(
+            key,
+            applied,
+            refreshed,
+            uptimePct,
+            avgDuration,
+            avgStacks
+        )
+    }.sortedBy { it.name }
+
         println(
             "$title\n" +
             table {
-                header("Name", "AppliedCountAvg", "RefreshedCountAvg", "UptimePct", "AvgDurationSeconds" /*, "AvgStacks" */)
-
-                val rows = keys.map { key ->
-                    val events = byBuff[key]!!
-                    val applied = events.filter { it.eventType == buffStart }.size / iterations.size.toDouble()
-                    val refreshed = events.filter { it.eventType == buffRefresh }.size / iterations.size.toDouble()
-
-                    val segments = mutableListOf<BuffSegment>()
-                    var lastEvent: Event? = null
-                    var currentStart: Event? = null
-                    var refreshCount = 0
-                    var stackDurationsMs = mutableListOf<Pair<Int, Int>>()
-
-                    events.forEach {
-                        if(it.eventType == buffStart) {
-                            if(lastEvent?.eventType == buffStart) {
-                                logger.warn { "Possibly invalid segment - found two starts for buff: ${it.buff!!.name}" }
-                            }
-
-                            currentStart = it
-                        }
-
-                        if(it.eventType == buffRefresh) {
-                            if(lastEvent?.eventType == buffEnd) {
-                                logger.warn { "Possibly invalid segment - refresh without enclosing start for buff: ${it.buff!!.name}" }
-                            }
-                            refreshCount++
-                        }
-
-                        if(it.eventType == buffEnd) {
-                            if(lastEvent?.eventType == buffEnd) {
-                                logger.warn { "Possibly invalid segment - found two ends for buff: ${it.buff!!.name}" }
-                            }
-
-                            if(currentStart != null) {
-                                segments.add(BuffSegment(currentStart!!.timeMs, it.timeMs, refreshCount, it.buff!!, stackDurationsMs))
-                                // Reset
-                                currentStart = null
-                                refreshCount = 0
-                                stackDurationsMs = mutableListOf()
-                            } else {
-                                logger.warn { "Possibly invalid segment - found end without start for buff: ${it.buff!!.name}" }
-                            }
-                        }
-
-                        // Track stacks
-                        // FIXME: Need more event data about stack consumption in order to actually do this
-//                        if(it.eventType == buffRefresh || it.eventType == buffEnd) {
-//                            if(it.buffStacks != 0) {
-//                                stackDurationsMs.add(Pair(it.buffStacks, it.timeMs - lastEvent!!.timeMs))
-//                            }
-//                        }
-
-                        lastEvent = it
-                    }
-
-                    val uptimePct = segments.map { it.durationMs }.sum() / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
-                    val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
-//                    val avgStacks = segments.map { segment ->
-//                        val totalSegmentTimeMs = segment.stackDurationsMs.sumBy { it.second }
-//                        segment.stackDurationsMs.sumBy { it.first } / totalSegmentTimeMs.toDouble()
-//                    }.sum() / 1000.0
-
-                    BuffBreakdown(
-                        key,
-                        applied,
-                        refreshed,
-                        uptimePct,
-                        avgDuration,
-                        avgStacks = 0.0
-                    )
-                }.sortedBy { it.name }
+                header("Name", "AppliedCountAvg", "RefreshedCountAvg", "UptimePct", "AvgDurationSeconds", "AvgStacks")
 
                 for(row in rows) {
-                    row(row.name, row.appliedAvg, row.refreshedAvg, row.uptimePct, row.avgDuration/*, row.avgStacks */)
+                    row(row.name, row.appliedAvg, row.refreshedAvg, row.uptimePct, row.avgDuration, row.avgStacks)
                 }
 
                 hints {
@@ -326,9 +354,9 @@ object SimStats {
 
                     // Compute result distributions with the entire set of events
                     // Count blocked hits/crits as hits/crits, since the block value is very small
-                    val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK }.size / amounts.size.toDouble() * 100.0
-                    val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT }.size / amounts.size.toDouble() * 100.0
-                    val missPct = events.filter { it.result == Event.Result.MISS }.size / amounts.size.toDouble() * 100.0
+                    val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK || it.result == Event.Result.PARTIAL_RESIST_HIT }.size / amounts.size.toDouble() * 100.0
+                    val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }.size / amounts.size.toDouble() * 100.0
+                    val missPct = events.filter { it.result == Event.Result.MISS || it.result == Event.Result.RESIST }.size / amounts.size.toDouble() * 100.0
                     val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / amounts.size.toDouble() * 100.0
                     val parryPct = events.filter { it.result == Event.Result.PARRY }.size / amounts.size.toDouble() * 100.0
                     val glancePct = events.filter { it.result == Event.Result.GLANCE }.size / amounts.size.toDouble() * 100.0

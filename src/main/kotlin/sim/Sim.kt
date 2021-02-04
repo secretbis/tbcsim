@@ -1,9 +1,6 @@
 package sim
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 import mu.KotlinLogging
 import sim.config.Config
 import kotlin.random.Random
@@ -17,13 +14,10 @@ class Sim (
     suspend fun sim() {
         // Iteration coroutines
         val startTime = System.currentTimeMillis()
-//        val iterationContext = newSingleThreadContext("IterationContext")
 
         val iterations = (1..opts.iterations).map {
             GlobalScope.async(Dispatchers.Default) {
-//                withContext(iterationContext) {
-                    iterate(it)
-//                }
+                iterate(it)
             }
         }.awaitAll()
 

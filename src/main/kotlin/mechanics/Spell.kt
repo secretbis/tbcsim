@@ -125,7 +125,7 @@ object Spell {
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
+            attackRoll < missChance -> Pair(0.0, Event.Result.RESIST)
             else -> Pair(finalDamageRoll, Event.Result.HIT)
         }
 

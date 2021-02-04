@@ -308,7 +308,8 @@ class SimIteration(
             debuffs.add(debuff)
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_START,
-                buff = debuff
+                buff = debuff,
+                buffStacks = stacks
             ))
 
             // Always recompute after adding a debuff
@@ -316,7 +317,8 @@ class SimIteration(
         } else {
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_REFRESH,
-                buff = debuff
+                buff = debuff,
+                buffStacks = stacks
             ))
 
             // If a debuff is stackable, then recompute on a refresh as well

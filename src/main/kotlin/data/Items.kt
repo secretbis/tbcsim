@@ -2,6 +2,7 @@ package data
 
 import data.gems.*
 import data.items.ItemIndex
+import data.itemscustom.Annihilator
 import data.model.Gem
 import data.model.Item
 
@@ -13,6 +14,9 @@ object Items {
 
     private fun items(name: String): Item? {
         return when(name) {
+            // Manually added items
+            "Annihilator" -> Annihilator()
+
             // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
             // Meta gems
             "Chaotic Skyfire Diamond" -> ChaoticSkyfireDiamond()
