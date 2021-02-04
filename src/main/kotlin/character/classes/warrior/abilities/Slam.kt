@@ -51,6 +51,9 @@ class Slam : Ability() {
             else -> null
         }
 
+        // Reset MH swing timer
+        sim.mhAutoAttack?.resetSwingTimer(sim)
+
         if(triggerTypes != null) {
             sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
         }

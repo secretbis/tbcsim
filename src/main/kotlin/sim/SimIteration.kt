@@ -32,8 +32,8 @@ class SimIteration(
     var tick: Int = 0
     var elapsedTimeMs: Int = 0
     var events: MutableList<Event> = mutableListOf()
-    var mhAutoAttack: Ability? = null
-    var ohAutoAttack: Ability? = null
+    var mhAutoAttack: MeleeBase? = null
+    var ohAutoAttack: MeleeBase? = null
     var buffs: MutableList<Buff> = mutableListOf()
     var debuffs: MutableList<Debuff> = mutableListOf()
 

@@ -19,6 +19,10 @@ abstract class MeleeBase : Ability() {
         var count = 0
     }
 
+    fun resetSwingTimer(sim: SimIteration) {
+        (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs
+    }
+
     override fun stateFactory(): AutoAttackState {
         return AutoAttackState()
     }
