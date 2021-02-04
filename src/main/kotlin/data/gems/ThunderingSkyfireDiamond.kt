@@ -26,7 +26,7 @@ class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats? {
+        override fun modifyStats(sim: SimIteration): Stats {
             return stats
         }
 
@@ -39,8 +39,11 @@ class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
                 Trigger.MELEE_YELLOW_HIT,
                 Trigger.MELEE_YELLOW_CRIT,
             )
+
+            // https://70.wowfan.net/en/?spell=39958
             override val type: Type = Type.PPM
-            override val ppm: Double = 1.0
+            override val ppm: Double = 0.7
+            override fun cooldownMs(sim: SimIteration): Int = 40000
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 sim.addBuff(hasteBuff)

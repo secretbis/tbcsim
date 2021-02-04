@@ -9,6 +9,7 @@ import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
 import data.enchants.Enchants
+import data.model.Color
 import data.model.Gem
 import data.model.Item
 import mu.KotlinLogging
@@ -170,6 +171,11 @@ class Config(
                 trinket1 = createItemFromGear(yml.gear?.trinket1),
                 trinket2 = createItemFromGear(yml.gear?.trinket2)
             )
+
+            // Check that meta gem is active, warn if not
+            if(!gear.metaGemActive()) {
+                logger.warn { "Meta gem is not active - consider adjusting your gems in gear" }
+            }
 
             return Character(
                 klass = characterClass,

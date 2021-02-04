@@ -45,5 +45,19 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
         }
     }
 
+    // Base type for rotation state containers
+    open class State
+
+    internal open fun stateFactory(): State {
+        return State()
+    }
+
+    internal open fun state(sim: SimIteration): State {
+        // Create state object if it does not exist, and return it
+        val state = sim.rotationState.getOrDefault(type, stateFactory())
+        sim.rotationState[type] = state
+        return state
+    }
+
     abstract fun satisfied(sim: SimIteration): Boolean
 }

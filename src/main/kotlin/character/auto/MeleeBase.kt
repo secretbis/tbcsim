@@ -16,6 +16,7 @@ abstract class MeleeBase : Ability() {
 
     class AutoAttackState : Ability.State() {
         var lastAttackTimeMs = 0
+        var count = 0
     }
 
     override fun stateFactory(): AutoAttackState {
@@ -33,6 +34,7 @@ abstract class MeleeBase : Ability() {
 
         // Save last hit state and fire event
         (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs
+        (state(sim) as AutoAttackState).count += 1
 
         val event = Event(
             eventType = Event.Type.DAMAGE,

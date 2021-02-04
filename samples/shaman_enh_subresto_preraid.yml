@@ -69,15 +69,17 @@ gear:
     name: Nether Chain Shirt
     gems:
       - Bold Living Ruby
-      - Sovereign Nightseye
       - Inscribed Noble Topaz
+      - Sovereign Nightseye
   wrists:
     name: Felstalker Bracers
     gems:
       - Bold Living Ruby
+      - Sovereign Nightseye
   hands:
     name: Windstrike Gloves
   waist:
+#    name: Girdle of the Deathdealer
     name: Ebon Netherscale Belt
     gems:
       - Sovereign Nightseye

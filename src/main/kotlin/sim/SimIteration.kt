@@ -7,6 +7,7 @@ import character.auto.MeleeOffHand
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
+import sim.rotation.Criterion
 import sim.rotation.Rotation
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
@@ -44,6 +45,8 @@ class SimIteration(
     val sharedAbilityState: MutableMap<String, Ability.State> = mutableMapOf()
     val debuffState: MutableMap<Buff, Buff.State> = mutableMapOf()
     val sharedDebuffState: MutableMap<String, Buff.State> = mutableMapOf()
+    val procState: MutableMap<Proc, Proc.State> = mutableMapOf()
+    val rotationState: MutableMap<Criterion.Type, Criterion.State> = mutableMapOf()
 
     // GCD/casting state
     var gcdBaseMs: Double = 1500.0
@@ -392,6 +395,7 @@ class SimIteration(
         allProcs.forEach {
             if(it.shouldProc(this, items, ability, event)) {
                 it.proc(this, items, ability, event)
+                it.afterProc(this)
 
                 // Always check buff/debuff state after any proc
                 pruneBuffs()

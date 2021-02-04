@@ -63,8 +63,42 @@ abstract class Proc {
     open val ppm: Double = 0.0
     open val percentChance: Double = 0.0
 
+    // Many procs have ICDs
+    open fun cooldownMs(sim: SimIteration): Int = 0
+
+    open class State {
+        var cooldownStartMs: Int = -1
+    }
+
+    internal open fun stateFactory(): State {
+        return State()
+    }
+
+    internal fun state(sim: SimIteration): State {
+        // Create state object if it does not exist, and return it
+        var state = sim.procState[this]
+        if(state == null) {
+            state = stateFactory()
+            sim.procState[this] = state
+        }
+        return state
+    }
+
+    open fun afterProc(sim: SimIteration) {
+        // Store individual cooldown state
+        val state = state(sim)
+        state.cooldownStartMs = sim.elapsedTimeMs
+    }
+
     open fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         val chances: MutableList<Double> = mutableListOf()
+
+        // Return false if on ICD
+        val state = state(sim)
+        val offCooldown = state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sim) <= sim.elapsedTimeMs)
+        if(!offCooldown) {
+            return false
+        }
 
         if(requiresItem) {
             if(items.isNullOrEmpty()) {

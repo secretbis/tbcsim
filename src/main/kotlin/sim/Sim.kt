@@ -37,8 +37,10 @@ class Sim (
     private fun iterate(num: Int) : SimIteration {
         // Simulate
         val iteration = SimIteration(config.character, config.rotation, opts)
-        if(num == 1) {
-            SimStats.precombatStats(iteration)
+        if(logger.isDebugEnabled) {
+            if (num == 1) {
+                SimStats.precombatStats(iteration)
+            }
         }
 
         // Randomly alter the fight duration, if configured

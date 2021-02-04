@@ -50,14 +50,14 @@ gear:
   head:
     name: Wastewalker Helm
     gems:
-      - Bold Living Ruby
+      - Sovereign Nightseye
       - Relentless Earthstorm Diamond
   neck:
     name: Traitor's Noose
   shoulders:
     name: Ragesteel Shoulders
     gems:
-      - Smooth Dawnstone
+      - Rigid Dawnstone
       - Smooth Dawnstone
   back:
     name: Vengeance Wrap
@@ -80,7 +80,7 @@ gear:
   feet:
     name: Fel Leather Boots
     gems:
-      - Smooth Dawnstone
+      - Sovereign Nightseye
       - Bold Living Ruby
   ring1:
     name: Shaffar's Band of Brutality
@@ -106,15 +106,15 @@ rotation:
     - name: Roasted Clefthoof
 #    - name: Spicy Hot Talbuk
 
-    # Abilities
-    - name: Battle Shout
-    - name: Bloodrage
-
-  # TODO: This rotation seems a little rage starved, and doesn't cast many Whirlwinds.  Needs work.
   combat:
     - name: Bloodrage
+    - name: Death Wish
+      criteria:
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 180
+          seconds: 30
     - name: Execute
-    # Avoid clipping autos, only cast Slam if there is time left in the swing timer to do so
+    # Avoid clipping autos, only cast Slam if the swing timer has very recently reset
     - name: Slam
       criteria:
         - type: MAIN_HAND_SWING_TIMER_GTE
@@ -136,6 +136,11 @@ rotation:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
+    - name: Heroic Strike
+      criteria:
+        # Cast HS if we have excess rage
+        - type: RESOURCE_GTE_PCT
+          pct: 90
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying
