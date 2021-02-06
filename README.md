@@ -161,4 +161,4 @@ Tbcsim accepts a yml file as its configuration.  This contains:
 - Rotation
 - Raid buffs and consumables
 
-[Click here to see a full example](samples/shaman_enh_subresto_preraid.yml)
+[Click here to see a full example](src/commonMain/resources/samples/shaman_enh_subresto_preraid.yml)

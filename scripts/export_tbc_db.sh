@@ -23,13 +23,13 @@ items_where="Quality in (3, 4, 5) and ItemLevel >= 91 and class != 3"
 
 # TODO: Cherry-pick some vanilla items for big Naxx pumpers
 
-items_output_path=src/main/resources/items.json
+items_output_path=src/jvmMain/resources/items.json
 command="use tbcmangos; select $items_columns from item_template where $items_where;"
 echo "$command" | mysqlsh --sql --result-format=json/array --host='localhost' --port=3306 --user='mangos' --password='mangos' --log-level='none' > "$items_output_path"
 
 # Get any spells associated with the selected items
 spell_ids=$(cat $items_output_path | jq -r '.[] | "\(.spellid_1)\n\(.spellid_2)\n\(.spellid_3)\n\(.spellid_4)\n\(.spellid_5)"' | sort | uniq | tr '\n' ',' | sed -e 's/,$//')
 
-spells_output_path=src/main/resources/itemprocs.json
+spells_output_path=src/jvmMain/resources/itemprocs.json
 command="use tbcmangos; select * from spell_template where Id in ($spell_ids);"
 echo "$command" | mysqlsh --sql --result-format=json/array --host='localhost' --port=3306 --user='mangos' --password='mangos' --log-level='none' > "$spells_output_path"

@@ -1,9 +1,13 @@
-//import org.jetbrains.compose.compose
-
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
+import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.targets.js.ir.JsIrBinary
+import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
+
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("multiplatform") version "1.4.21"
     kotlin("plugin.serialization") version "1.4.21"
 
     idea
@@ -13,55 +17,140 @@ plugins {
 group = "com.tbcsim"
 
 repositories {
-    jcenter()
+    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
+    maven(url = "https://kotlin.bintray.com/kotlinx/")
     mavenCentral()
+    jcenter()
+    maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
 }
 
-dependencies {
-    implementation("de.m3y.kformat:kformat:0.7")
-    implementation("com.squareup:kotlinpoet:1.7.2")
-    implementation("com.fleshgrinder.kotlin:case-format:0.1.0")
-    implementation("com.github.ajalt.clikt:clikt:3.1.0")
-    implementation("com.charleskorn.kaml:kaml:0.26.0")
+kotlin {
+    // Build individual JS files instead of a big one
+    // Fixed by commit (Kotlin 1.5.20-dev): https://github.com/JetBrains/kotlin/commit/3f10914f05b860a74a30656b046f896644795c57
+    // Found at: https://github.com/fluidsonic/kjs-chunks/blob/main/build.gradle.kts
+    js(KotlinJsCompilerType.IR) {
+        compilations.named(KotlinCompilation.MAIN_COMPILATION_NAME) {
+            val compilation = this
+            val compileKotlinTask = compileKotlinTask
+            val npmModuleIndex = compilation.npmProject.dir.resolve(compilation.npmProject.main)
+            val npmModuleDir = npmModuleIndex.parentFile
 
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.+")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.+")
+            compileKotlinTask
+                .doFirst {
+                    // Disable klib creation.
+                    // Instead simply create separate JS files per module & dependency (in /build/classes/main/)
 
-    implementation("io.github.microutils:kotlin-logging:1.12.0")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
-    implementation("org.slf4j:slf4j-simple:1.7.29")
+                    kotlinOptions {
+                        freeCompilerArgs = freeCompilerArgs
+                            .filter { it != "-Xir-produce-klib-dir" }
+                            .plus(listOf("-Xir-per-module", "-Xir-produce-js"))
+                    }
+                }
+                .finalizedBy(tasks.create<Copy>("copy${compileKotlinTaskName.removePrefix("compile")}ToRootProject") {
+                    // Copy the separate JS files to the expected location (from /build/classes/main/ to /build/js/packages/kjs-chunks/kotlin/)
 
-    testImplementation("io.kotest:kotest-assertions-core:4.3.2")
-    testImplementation("io.kotest:kotest-property:4.3.2")
-    testImplementation("io.kotest:kotest-runner-junit5:4.3.2")
+                    from(compileKotlinTask) {
+                        exclude { it.file == compileKotlinTask.outputFile }
+                    }
+                    from(compileKotlinTask.outputFile) {
+                        rename { npmModuleIndex.name }
+                    }
+                    into(npmModuleDir)
+                })
+        }
+
+        browser()
+
+        binaries.executable().forEach { binary ->
+            // Looks like we don't need this task anymore?
+
+            binary as JsIrBinary
+            binary.linkTask.configure {
+                isEnabled = false
+            }
+        }
+    }
+
+    jvm {
+        withJava()
+    }
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation("de.m3y.kformat:kformat:0.7")
+
+                implementation("net.mamoe.yamlkt:yamlkt:0.8.0")
+
+                implementation("io.github.microutils:kotlin-logging:2.0.4")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.+")
+                implementation("com.fasterxml.jackson.core:jackson-core:2.12.+")
+                implementation("com.fasterxml.jackson.core:jackson-databind:2.12.+")
+                implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.+")
+
+                implementation("net.pearx.kasechange:kasechange-jvm:1.3.0")
+
+                implementation("com.github.ajalt.clikt:clikt:3.1.0")
+
+                implementation("com.squareup:kotlinpoet:1.7.2")
+
+                implementation("io.github.microutils:kotlin-logging-jvm:2.0.4")
+                implementation("org.slf4j:slf4j-simple:1.7.29")
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation("io.kotest:kotest-assertions-core:4.3.2")
+                implementation("io.kotest:kotest-property:4.3.2")
+                implementation("io.kotest:kotest-runner-junit5:4.3.2")
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation("org.jetbrains:kotlin-react:17.0.1-pre.144-kotlin-1.4.21")
+                implementation("org.jetbrains:kotlin-react-dom:17.0.1-pre.144-kotlin-1.4.21")
+                implementation(npm("react", "17.0.1"))
+                implementation(npm("react-dom", "17.0.1"))
+
+                implementation(npm("js-joda", "~1.11.0"))
+
+                implementation("io.github.microutils:kotlin-logging-js:2.0.4")
+            }
+        }
+    }
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
+}
+
+distributions {
+    main {
+        contents {
+            from("$buildDir/libs") {
+                rename("${rootProject.name}-jvm", rootProject.name)
+                into("lib")
+            }
+        }
+    }
 }
 
 application {
     mainClassName = "MainKt"
 }
-
-//compose.desktop {
-//    application {
-//        mainClass = "MainKt"
-//
-//        nativeDistributions {
-//            packageName = "TBCSim"
-//            version = version
-//            description = "A simulator for TBC damage dealers"
-//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//        }
-//    }
-//}
