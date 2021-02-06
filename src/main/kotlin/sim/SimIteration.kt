@@ -66,7 +66,7 @@ class SimIteration(
 
     init {
         // Add auto-attack, if allowed
-        if(subject.klass.allowAutoAttack) {
+        if(rotation.autoAttack) {
             if(hasMainHandWeapon()) {
                 mhAutoAttack = MeleeMainHand()
             }
@@ -82,6 +82,7 @@ class SimIteration(
             it.value.buffs(this).forEach { buff -> addBuff(buff) }
         }
         subject.gear.buffs().forEach { addBuff(it) }
+        rotation.combat(this).forEach { it.buffs(this).forEach { buff -> addBuff(buff) } }
 
         // Compute initial stats
         recomputeStats()
@@ -90,7 +91,7 @@ class SimIteration(
         resource = Resource(this)
 
         // Cast any spells flagged in the rotation as precombat
-        rotation.precombat(this)
+        rotation.castAllPrecombat(this)
 
         // Recompute after precombat casts
         recomputeStats()
@@ -147,12 +148,7 @@ class SimIteration(
         if(!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
             if(castingAbility != null) {
-                val resourceCost = castingAbility!!.resourceCost(this).toInt()
-                val resourceType = castingAbility!!.resourceType(this)
-                if (resourceCost != 0) {
-                    subtractResource(resourceCost, resourceType, castingAbility)
-                }
-
+                castingAbility!!.beforeCast(this)
                 castingAbility!!.cast(this)
                 castingAbility!!.afterCast(this)
 
@@ -414,7 +410,7 @@ class SimIteration(
             event.timeMs = elapsedTimeMs
         }
 
-        logger.debug { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
+        logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
 
         events.add(event)
     }

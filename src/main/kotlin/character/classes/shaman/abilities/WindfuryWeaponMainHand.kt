@@ -20,7 +20,7 @@ class WindfuryWeaponMainHand : Ability() {
 
     var buff: Buff? = null
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         if(buff == null) {
             buff = WindfuryWeapon(sim.subject.gear.mainHand)
         }

@@ -2,7 +2,6 @@ package data.abilities.generic
 
 import character.Ability
 import character.Buff
-import character.Proc
 import character.Stats
 import sim.SimIteration
 
@@ -25,7 +24,7 @@ class SpicyHotTalbuk : Ability() {
         }
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(buff)
     }
 }

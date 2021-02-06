@@ -31,7 +31,6 @@ abstract class Class(
     abstract val resourceType: Resource.Type
 
     abstract val canDualWield: Boolean
-    abstract val allowAutoAttack: Boolean
 
     abstract val attackPowerFromAgility: Int
     abstract val attackPowerFromStrength: Int

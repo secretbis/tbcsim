@@ -110,10 +110,10 @@ object Spell {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sim: SimIteration, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sim: SimIteration, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val flatModifier = sim.subjectStats.spellDamageFlatModifier
-        val critMultiplier = Stats.spellCritMultiplier + (1 - sim.subjectStats.spellDamageAddlCritMultiplier)
+        val critMultiplier = Stats.spellCritMultiplier + (sim.subjectStats.spellDamageAddlCritMultiplier - 1)
         val allMultiplier = sim.subjectStats.spellDamageMultiplier
 
         // Apply constant multipliers and finalize the damage roll
@@ -121,7 +121,7 @@ object Spell {
 
         // Get the attack result
         val missChance = spellMissChance(sim)
-        val critChance = spellCritChance(sim)
+        val critChance = spellCritChance(sim) + bonusCritChance
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {

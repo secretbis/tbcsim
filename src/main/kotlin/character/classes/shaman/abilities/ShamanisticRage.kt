@@ -32,7 +32,7 @@ class ShamanisticRage : Ability() {
             )
             override val type: Type = Type.PERCENT
             // TODO: Shamanistic Rage proc chance unconfirmed
-            override val percentChance: Double = 35.0
+            override fun percentChance(sim: SimIteration): Double = 35.0
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 val amount = (sim.attackPower() * 0.30).toInt()
@@ -43,7 +43,7 @@ class ShamanisticRage : Ability() {
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         // Apply the regen buff
         sim.addBuff(buff)
     }

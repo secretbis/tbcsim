@@ -61,6 +61,43 @@ object Melee {
         // TODO: Druid weirdness
     )
 
+    fun is2H(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
+               item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
+               item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
+               item.itemSubclass == Constants.ItemSubclass.POLEARM ||
+               item.itemSubclass == Constants.ItemSubclass.STAFF
+    }
+
+    fun isAxe(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
+               item.itemSubclass == Constants.ItemSubclass.AXE_1H
+    }
+
+    fun isMace(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
+               item.itemSubclass == Constants.ItemSubclass.MACE_1H
+    }
+
+    fun isPoleaxe(item: Item): Boolean {
+        return isAxe(item) || item.itemSubclass == Constants.ItemSubclass.POLEARM
+    }
+
+    fun isSword(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
+               item.itemSubclass == Constants.ItemSubclass.SWORD_1H
+    }
+
+    // Computes additional item-specific expertise, i.e. racial abilities
+    fun expertisePctForItem(sim: SimIteration, item: Item): Double {
+        return when {
+            isAxe(item) -> sim.subjectStats.axeExpertiseRating
+            isMace(item) -> sim.subjectStats.maceExpertiseRating
+            isSword(item) -> sim.subjectStats.swordExpertiseRating
+            else -> 0.0
+        } / Rating.expertisePerPct
+    }
+
     private fun <T> valueByLevelDiff(sim: SimIteration, table: Map<Int, T>) : T {
         val levelDiff = sim.target.level - sim.subject.level
 
@@ -95,16 +132,16 @@ object Melee {
         return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
     }
 
-    fun meleeParryChance(sim: SimIteration): Double {
+    fun meleeParryChance(sim: SimIteration, item: Item): Double {
         return if(sim.opts.allowParryAndBlock) {
-            (valueByLevelDiff(sim, baseParryChance) - (sim.expertisePct() / 100.0)).coerceAtLeast(0.0)
+            (valueByLevelDiff(sim, baseParryChance) - (sim.expertisePct() / 100.0) - (expertisePctForItem(sim, item) / 100.0)).coerceAtLeast(0.0)
         } else {
             0.0
         }
     }
 
-    fun meleeDodgeChance(sim: SimIteration): Double {
-        return (valueByLevelDiff(sim, baseDodgeChance) - (sim.expertisePct() / 100.0)).coerceAtLeast(0.0)
+    fun meleeDodgeChance(sim: SimIteration, item: Item): Double {
+        return (valueByLevelDiff(sim, baseDodgeChance) - (sim.expertisePct() / 100.0) - (expertisePctForItem(sim, item) / 100.0)).coerceAtLeast(0.0)
     }
 
     fun meleeBlockChance(sim: SimIteration): Double {
@@ -169,7 +206,9 @@ object Melee {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sim: SimIteration, damageRoll: Double, isWhiteDmg: Boolean = false, isOffHand: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sim: SimIteration, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+        val isOffHand = item === sim.subject.gear.offHand
+
         // Find all our possible damage mods from buffs and so on
         val flatModifier = if(isWhiteDmg) {
             sim.subjectStats.whiteDamageFlatModifier
@@ -177,11 +216,11 @@ object Melee {
             sim.subjectStats.yellowDamageFlatModifier
         }
 
-        val critMultiplier = Stats.physicalCritMultiplier + (1 - if(isWhiteDmg) {
+        val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
             sim.subjectStats.whiteDamageAddlCritMultiplier
         } else {
             sim.subjectStats.yellowDamageAddlCritMultiplier
-        })
+        } - 1)
 
         val allMultiplier = if(isWhiteDmg) {
             sim.subjectStats.whiteDamageMultiplier
@@ -204,8 +243,8 @@ object Melee {
 
         // Get the attack result
         val missChance = meleeMissChance(sim, isWhiteDmg, isOffHand)
-        val dodgeChance = meleeDodgeChance(sim) + missChance
-        val parryChance = meleeParryChance(sim) + dodgeChance
+        val dodgeChance = meleeDodgeChance(sim, item) + missChance
+        val parryChance = meleeParryChance(sim, item) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
             meleeGlanceChance(sim) + parryChance
         } else {

@@ -37,7 +37,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         )
 
         override val type: Type = Type.PERCENT
-        override val percentChance: Double = 20.0
+        override fun percentChance(sim: SimIteration): Double = 20.0
 
         override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
             // Check shared WF ICD state

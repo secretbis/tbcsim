@@ -32,9 +32,10 @@ class Execute : Ability() {
         return 15.0 - discount
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
+        val item = sim.subject.gear.mainHand
         val damage = 925.0 + sim.resource.currentAmount * 21
-        val result = Melee.attackRoll(sim, damage, isWhiteDmg = false, isOffHand = false)
+        val result = Melee.attackRoll(sim, damage, item, isWhiteDmg = false)
 
         // Drain rage
         sim.subtractResource(sim.resource.currentAmount, Resource.Type.RAGE)
@@ -62,7 +63,7 @@ class Execute : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

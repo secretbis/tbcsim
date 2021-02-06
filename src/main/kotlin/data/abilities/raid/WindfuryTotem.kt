@@ -31,11 +31,11 @@ class WindfuryTotem : Ability() {
 
             override fun gcdMs(sim: SimIteration): Int = 0
 
-            override fun cast(sim: SimIteration, free: Boolean) {
+            override fun cast(sim: SimIteration) {
                 // Do attack
                 val mh = sim.subject.gear.mainHand
                 val attack = Melee.baseDamageRoll(sim, mh, baseExtraAp.toInt())
-                val result = Melee.attackRoll(sim, attack, isWhiteDmg = true, isOffHand = false)
+                val result = Melee.attackRoll(sim, attack, mh, isWhiteDmg = true)
 
                 val event = Event(
                     eventType = Event.Type.DAMAGE,
@@ -70,7 +70,7 @@ class WindfuryTotem : Ability() {
             )
 
             override val type: Type = Type.PERCENT
-            override val percentChance: Double = 20.0
+            override fun percentChance(sim: SimIteration): Double = 20.0
 
             override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 val isMhWeapon = items?.first() === sim.subject.gear.mainHand
@@ -86,7 +86,7 @@ class WindfuryTotem : Ability() {
         override fun procs(sim: SimIteration): List<Proc> = listOf(weaponProc)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(weaponBuff)
     }
 }

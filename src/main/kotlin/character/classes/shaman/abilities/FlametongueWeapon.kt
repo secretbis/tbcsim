@@ -28,7 +28,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
     // Per internet anedcodes, this gets 10% of spell power
     val spCoeff = 0.10
     val baseDamage = 40.35
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
         val mod = elementalWeapons?.flametongueDamageMultiplier() ?: 1.0
 
@@ -40,12 +40,12 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val result = Spell.attackRoll(sim, damageRoll, school)
 
         val event = Event(
-                eventType = Event.Type.DAMAGE,
-                damageType = school,
-                abilityName = name,
-                amount = result.first,
-                result = result.second,
-            )
+            eventType = Event.Type.DAMAGE,
+            damageType = school,
+            abilityName = name,
+            amount = result.first,
+            result = result.second,
+        )
         sim.logEvent(event)
 
         // Proc anything that can proc off Nature damage

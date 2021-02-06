@@ -10,7 +10,6 @@ import sim.SimIteration
 
 abstract class MeleeBase : Ability() {
     abstract fun item(sim: SimIteration): Item
-    abstract val isOffhand: Boolean
 
     override fun gcdMs(sim: SimIteration): Int = 0
 
@@ -32,9 +31,9 @@ abstract class MeleeBase : Ability() {
         return nextAvailableTimeMs <= sim.elapsedTimeMs
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         val damageRoll = Melee.baseDamageRoll(sim, item(sim))
-        val result = Melee.attackRoll(sim, damageRoll, true, isOffhand)
+        val result = Melee.attackRoll(sim, damageRoll, item(sim), isWhiteDmg = true)
 
         // Save last hit state and fire event
         (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs

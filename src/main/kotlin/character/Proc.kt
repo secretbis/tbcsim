@@ -44,7 +44,9 @@ abstract class Proc {
         SERVER_TICK,
 
         // Specifics
-        CAST_SHAMAN_SHOCK
+        SHAMAN_CAST_SHOCK,
+        SHAMAN_CAST_LIGHTNING_BOLT,
+        SHAMAN_CAST_CHAIN_LIGHTNING,
     }
 
     enum class Type {
@@ -61,7 +63,7 @@ abstract class Proc {
 
     abstract val type: Type
     open val ppm: Double = 0.0
-    open val percentChance: Double = 0.0
+    open fun percentChance(sim: SimIteration): Double = 0.0
 
     // Many procs have ICDs
     open fun cooldownMs(sim: SimIteration): Int = 0
@@ -111,7 +113,7 @@ abstract class Proc {
                     when (type) {
                         // PPM always uses the BASE item speed, not hasted
                         Type.PPM -> (item.speed / 1000.0) * ppm / 60.0
-                        Type.PERCENT -> percentChance / 100.0
+                        Type.PERCENT -> percentChance(sim) / 100.0
                         Type.STATIC -> 100.0
                     }
                 )
@@ -130,7 +132,7 @@ abstract class Proc {
                             (itemFromProc.speed / 1000.0) * ppm / 60.0
                         }
                     }
-                    Type.PERCENT -> percentChance / 100.0
+                    Type.PERCENT -> percentChance(sim) / 100.0
                     Type.STATIC -> 100.0
                 }
             )

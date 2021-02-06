@@ -19,7 +19,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
     val consumeProc = fun(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.CAST_SHAMAN_SHOCK
+                Trigger.SHAMAN_CAST_SHOCK
             )
             override val type: Type = Type.STATIC
 

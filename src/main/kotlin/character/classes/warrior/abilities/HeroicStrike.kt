@@ -42,12 +42,12 @@ class HeroicStrike : Ability() {
 
         override fun gcdMs(sim: SimIteration): Int = 0
 
-        override fun cast(sim: SimIteration, free: Boolean) {
+        override fun cast(sim: SimIteration) {
             sim.consumeBuff(offHandHitBuff)
 
             val mhItem = sim.subject.gear.mainHand
             val damage = Melee.baseDamageRoll(sim, mhItem, isNormalized = false) + bonusDamage
-            val result = Melee.attackRoll(sim, damage, isWhiteDmg = false, isOffHand = false)
+            val result = Melee.attackRoll(sim, damage, mhItem, isWhiteDmg = false)
 
             // Save last hit state and fire event
             val event = Event(
@@ -72,12 +72,12 @@ class HeroicStrike : Ability() {
             }
 
             if(triggerTypes != null) {
-                sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+                sim.fireProc(triggerTypes, listOf(mhItem), this, event)
             }
         }
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.replaceNextMainHandAutoAttack(nextHitAbility)
         sim.addBuff(offHandHitBuff)
     }

@@ -26,7 +26,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     }
 
     val extraAp = 445
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         // Apply talents
         val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
 
@@ -36,7 +36,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
 
         // Per EJ, WF Weapon is yellow damage
         // https://web.archive.org/web/20080811084026/http://elitistjerks.com/f47/t15809-shaman_windfury/
-        val initialResult = Melee.attackRoll(sim, attackOne + attackTwo, false, isOffHand(sim))
+        val initialResult = Melee.attackRoll(sim, attackOne + attackTwo, item, isWhiteDmg = false)
 
         // Apply the nuttiest talent ever made
         val elementalWeaponsMod = elementalWeapons?.windfuryApMultiplier() ?: 1.0

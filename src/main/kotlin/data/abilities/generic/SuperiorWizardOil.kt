@@ -1,32 +1,30 @@
-package data.abilities.raid
+package data.abilities.generic
 
 import character.Ability
 import character.Buff
-import character.Proc
 import character.Stats
 import sim.SimIteration
 
-class BlessingOfWisdom : Ability() {
+class SuperiorWizardOil : Ability() {
     companion object {
-        const val name = "Blessing of Wisdom"
+        const val name = "Superior Wizard Oil"
     }
 
-    override val id: Int = 20217
+    override val id: Int = 22522
     override val name: String = Companion.name
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
         override val name: String = Companion.name
-        // Assume the caster is always maintaining this
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+        override val durationMs: Int = 60 * 60 * 1000
+        override val mutex: List<Mutex> = listOf(Mutex.WEAPON_TEMP_ENH_MH)
 
         override fun modifyStats(sim: SimIteration): Stats {
-            return Stats(manaPer5Seconds = 41)
+            return Stats(spellDamage = 42)
         }
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(buff)
     }
 }

@@ -33,7 +33,8 @@ abstract class Buff {
         GUARDIAN_ELIXIR,
         POTION,
         FOOD,
-        DRUMS
+        WEAPON_TEMP_ENH_MH,
+        WEAPON_TEMP_ENH_OH
     }
 
     open val id: Int = -1

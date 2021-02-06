@@ -76,6 +76,7 @@ object SimStats {
                 row("Attack Power", sim.attackPower(), "Expertise:", sim.expertisePct())
                 row("R. Attack Power", sim.rangedAttackPower())
                 row("MP5", sim.subjectStats.manaPer5Seconds)
+                row("Spell Power", sim.spellDamage())
 
                 hints {
                     alignment(0, Table.Hints.Alignment.RIGHT)

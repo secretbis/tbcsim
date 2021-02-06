@@ -31,12 +31,13 @@ class MortalStrike : Ability() {
         return sim.subject.klass.talents[MortalStrikeTalent.name]?.currentRank == 1 && super.available(sim)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         val impMSRanks = sim.subject.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
         val dmgMult = 1.0 + (0.01 * impMSRanks)
 
-        val damageRoll = Melee.baseDamageRoll(sim, sim.subject.gear.mainHand, isNormalized = true) * dmgMult
-        val result = Melee.attackRoll(sim, damageRoll, isWhiteDmg = false, isOffHand = false)
+        val item = sim.subject.gear.mainHand
+        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = true) * dmgMult
+        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(
@@ -61,7 +62,7 @@ class MortalStrike : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

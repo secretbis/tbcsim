@@ -11,8 +11,13 @@ abstract class Ability {
         NONE,
         SHAMAN_SHOCK,
         POTION,
+        RUNE_OR_MANA_GEM,
         DRUMS
     }
+
+    data class CastOptions(
+        var costReductionPct: Double
+    )
 
     abstract val id: Int
     abstract val name: String
@@ -58,7 +63,16 @@ abstract class Ability {
         return state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sim) <= sim.elapsedTimeMs)
     }
 
-    abstract fun cast(sim: SimIteration, free: Boolean = false)
+    open fun beforeCast(sim: SimIteration) {
+        // Spend the appropriate resource
+        val resourceCost = this.resourceCost(sim).toInt()
+        val resourceType = this.resourceType(sim)
+        if (resourceCost != 0) {
+            sim.subtractResource(resourceCost, resourceType, this)
+        }
+    }
+
+    abstract fun cast(sim: SimIteration)
     open fun afterCast(sim: SimIteration) {
         // Store individual cooldown state
         val state = state(sim)
@@ -72,4 +86,5 @@ abstract class Ability {
     }
 
     open fun castTimeMs(sim: SimIteration): Int = 0
+    open fun buffs(sim: SimIteration): List<Buff> = listOf()
 }

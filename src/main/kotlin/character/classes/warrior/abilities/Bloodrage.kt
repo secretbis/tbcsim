@@ -15,7 +15,7 @@ class Bloodrage : Ability() {
     override fun cooldownMs(sim: SimIteration): Int = 60000
     override fun gcdMs(sim: SimIteration): Int = 0
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         // Close enough
         sim.addResource(20, Resource.Type.RAGE)
     }

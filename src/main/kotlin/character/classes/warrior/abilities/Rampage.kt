@@ -70,7 +70,7 @@ class Rampage : Ability() {
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(stackBuff)
     }
 }

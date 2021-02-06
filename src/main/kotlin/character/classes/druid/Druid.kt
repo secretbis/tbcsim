@@ -24,7 +24,6 @@ class Druid : Class(mapOf()) {
 
     override var resourceType: Resource.Type = Resource.Type.MANA
     override var canDualWield: Boolean = false
-    override var allowAutoAttack: Boolean = false
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0

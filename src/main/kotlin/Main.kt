@@ -11,10 +11,11 @@ import sim.SimOptions
 import sim.config.Config
 import java.io.File
 
-fun setupLogging() {
+fun setupLogging(debug: Boolean) {
+    val level = if(debug) { "DEBUG" } else "INFO"
     val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
     if(System.getProperty(logKey).isNullOrEmpty()) {
-        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO")
+        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, level)
     }
 }
 
@@ -31,9 +32,10 @@ class TBCSim : CliktCommand() {
     val targetArmor: Int by option("-a", "--target-armor", help="The target's base armor value, before debuffs ").int().default(7700)
     val allowParryAndBlock: Boolean by option("-p", "--allow-parry-block").flag(default = false)
     val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = false)
+    val debug: Boolean by option("--debug").flag(default = false)
 
     override fun run() {
-        setupLogging()
+        setupLogging(debug)
 
         if(generate) {
             CodeGen.generate()

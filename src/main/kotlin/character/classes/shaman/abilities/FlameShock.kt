@@ -35,11 +35,14 @@ class FlameShock : Ability() {
         val shFocus = sim.buffs.find { it.name == ShamanisticFocus.name }
         val shfRed = if(shFocus != null) { 0.60 } else 0.0
 
-        return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed))
+        val eleFocus = sim.buffs.find { it.name == ElementalFocus.name }
+        val elefRed = if(eleFocus != null) { 0.40 } else 0.0
+
+        return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed, elefRed))
     }
 
     val baseDamage = 377.0
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.FIRE
 
@@ -62,7 +65,7 @@ class FlameShock : Ability() {
         sim.addDebuff(FlameShockDot())
 
         // Proc anything that can proc off Fire damage
-        val baseTriggerTypes = listOf(Proc.Trigger.CAST_SHAMAN_SHOCK)
+        val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)

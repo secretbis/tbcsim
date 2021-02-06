@@ -32,7 +32,7 @@ class ImprovedSealOfTheCrusader : Ability() {
         }
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(buff)
     }
 }

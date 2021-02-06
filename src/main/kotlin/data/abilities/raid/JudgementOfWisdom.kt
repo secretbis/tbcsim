@@ -31,9 +31,11 @@ class JudgementOfWisdom : Ability() {
                 Trigger.MELEE_YELLOW_CRIT,
                 Trigger.MELEE_BLOCK,
                 Trigger.MELEE_GLANCE,
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT
             )
             override val type: Type = Type.PERCENT
-            override val percentChance: Double = 50.0
+            override fun percentChance(sim: SimIteration): Double = 50.0
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 if(sim.subject.klass.resourceType == Resource.Type.MANA) {
@@ -45,7 +47,7 @@ class JudgementOfWisdom : Ability() {
         override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         sim.addBuff(buff)
     }
 }

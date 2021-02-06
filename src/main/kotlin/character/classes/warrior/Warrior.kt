@@ -88,7 +88,6 @@ class Warrior(talents: Map<String, Talent>) : Class(talents) {
 
     override val resourceType: Resource.Type = Resource.Type.RAGE
     override val canDualWield: Boolean = true
-    override val allowAutoAttack: Boolean = true
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 2
     override val critPctPerAgility: Double = 1.0 / 33.0

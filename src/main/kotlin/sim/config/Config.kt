@@ -83,7 +83,8 @@ class Config(
             }
 
             return Rotation(
-                precombatRules + combatRules + raidAndPartyRules
+                precombatRules + combatRules + raidAndPartyRules,
+                yml.rotation?.autoAttack ?: true
             )
         }
 

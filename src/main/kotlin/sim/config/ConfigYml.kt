@@ -56,6 +56,7 @@ data class TalentYml(
 
 @Serializable
 data class RotationYml(
+    val autoAttack: Boolean? = null,
     val precombat: List<RotationRuleYml>? = null,
     val combat: List<RotationRuleYml>
 )

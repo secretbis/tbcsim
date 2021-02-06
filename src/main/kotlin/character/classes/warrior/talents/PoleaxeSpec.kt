@@ -5,6 +5,7 @@ import character.Stats
 import character.Talent
 import data.Constants
 import data.model.Item
+import mechanics.Melee
 import mechanics.Rating
 import sim.SimIteration
 
@@ -16,12 +17,6 @@ class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    private fun isPoleaxe(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_1H ||
-               item.itemSubclass == Constants.ItemSubclass.POLEARM
-    }
-
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = -1
@@ -29,7 +24,7 @@ class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
 
         override fun modifyStats(sim: SimIteration): Stats {
             // This doesn't account for dual-wielding different weapon types, since Fury should never take this
-            return if(isPoleaxe(sim.subject.gear.mainHand)) {
+            return if(Melee.isPoleaxe(sim.subject.gear.mainHand)) {
                 val critPct = 1.0 * currentRank
                 return Stats(physicalCritRating = critPct * Rating.critPerPct)
             } else Stats()

@@ -23,7 +23,7 @@ class FlameShockDot : Debuff() {
         val dmgPerTick = 105.0
         val numTicks = 4.0
         val school = Constants.DamageType.FIRE
-        override fun cast(sim: SimIteration, free: Boolean) {
+        override fun cast(sim: SimIteration) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
             val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
             val result = Spell.attackRoll(sim, damageRoll, school)

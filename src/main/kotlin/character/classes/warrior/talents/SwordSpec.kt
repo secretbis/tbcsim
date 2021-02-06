@@ -35,29 +35,23 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
                 Trigger.MELEE_BLOCK
             )
             override val type: Type = Type.PERCENT
-            override val percentChance: Double = 1.0 * currentRank
-
-            private fun isSword(item: Item): Boolean {
-                return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
-                       item.itemSubclass == Constants.ItemSubclass.SWORD_1H
-            }
+            override fun percentChance(sim: SimIteration): Double = 1.0 * currentRank
 
             override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 // Sword spec cannot proc off itself
                 val isSwordSpec = ability?.name == Companion.name
-                return !isSwordSpec && items?.all { isSword(it) } ?: false && super.shouldProc(sim, items, ability, event)
+                return !isSwordSpec && items?.all { Melee.isSword(it) } ?: false && super.shouldProc(sim, items, ability, event)
             }
 
             override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
                 val item = items?.get(0)
-                if(item == null || !isSword(item)) {
+                if(item == null || !Melee.isSword(item)) {
                     logger.warn { "Tried to proc warrior Sword Specialization, but the context was not a sword." }
                     return
                 }
 
-                val isOffhand = item === sim.subject.gear.offHand
                 val damageRoll = Melee.baseDamageRoll(sim, item)
-                val result = Melee.attackRoll(sim, damageRoll, true, isOffhand)
+                val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = true)
 
                 sim.logEvent(Event(
                     eventType = Event.Type.DAMAGE,

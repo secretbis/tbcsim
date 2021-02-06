@@ -10,7 +10,6 @@ class MeleeOffHand : MeleeBase() {
 
     override val id: Int = 1
     override val name: String = Companion.name
-    override val isOffhand: Boolean = true
 
     override fun item(sim: SimIteration): Item = sim.subject.gear.offHand
 

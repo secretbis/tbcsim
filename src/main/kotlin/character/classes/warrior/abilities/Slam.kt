@@ -25,9 +25,10 @@ class Slam : Ability() {
     override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sim: SimIteration): Double = 15.0
 
-    override fun cast(sim: SimIteration, free: Boolean) {
-        val damageRoll = Melee.baseDamageRoll(sim, sim.subject.gear.mainHand, isNormalized = false)
-        val result = Melee.attackRoll(sim, damageRoll, isWhiteDmg = false, isOffHand = false)
+    override fun cast(sim: SimIteration) {
+        val item = sim.subject.gear.mainHand
+        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = false)
+        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(
@@ -55,7 +56,7 @@ class Slam : Ability() {
         sim.mhAutoAttack?.resetSwingTimer(sim)
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

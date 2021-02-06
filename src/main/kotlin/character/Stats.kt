@@ -164,11 +164,11 @@ data class Stats(
         shadowResistance += stats.shadowResistance
         arcaneResistance += stats.arcaneResistance
 
-        bowCritRating += bowCritRating
-        gunCritRating += gunCritRating
-        swordExpertiseRating += swordExpertiseRating
-        maceExpertiseRating += maceExpertiseRating
-        axeExpertiseRating += axeExpertiseRating
+        bowCritRating += stats.bowCritRating
+        gunCritRating += stats.gunCritRating
+        swordExpertiseRating += stats.swordExpertiseRating
+        maceExpertiseRating += stats.maceExpertiseRating
+        axeExpertiseRating += stats.axeExpertiseRating
 
         armorMultiplier *= stats.armorMultiplier
 
@@ -261,11 +261,11 @@ data class Stats(
         shadowResistance -= stats.shadowResistance
         arcaneResistance -= stats.arcaneResistance
 
-        bowCritRating -= bowCritRating
-        gunCritRating -= gunCritRating
-        swordExpertiseRating -= swordExpertiseRating
-        maceExpertiseRating -= maceExpertiseRating
-        axeExpertiseRating -= axeExpertiseRating
+        bowCritRating -= stats.bowCritRating
+        gunCritRating -= stats.gunCritRating
+        swordExpertiseRating -= stats.swordExpertiseRating
+        maceExpertiseRating -= stats.maceExpertiseRating
+        axeExpertiseRating -= stats.axeExpertiseRating
 
         armorMultiplier /= stats.armorMultiplier
 

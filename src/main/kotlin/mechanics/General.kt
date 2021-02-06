@@ -6,6 +6,6 @@ object General {
         // Resource reductions all work relative to the base mana cost, so each needs to be subtracted individually
         return reductions.fold(baseCost) { acc, reduction ->
             acc - acc * reduction
-        }
+        }.coerceAtLeast(0.0)
     }
 }

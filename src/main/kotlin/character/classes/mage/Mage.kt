@@ -26,8 +26,6 @@ class Mage(talents: Map<String, Talent>) : Class(talents) {
         get() = TODO("Not yet implemented")
     override val canDualWield: Boolean
         get() = TODO("Not yet implemented")
-    override val allowAutoAttack: Boolean
-        get() = TODO("Not yet implemented")
     override val attackPowerFromAgility: Int
         get() = TODO("Not yet implemented")
     override val attackPowerFromStrength: Int

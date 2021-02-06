@@ -20,7 +20,7 @@ class FlametongueWeaponOffHand : Ability() {
 
     var buff: Buff? = null
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         if(buff == null) {
             buff = FlametongueWeapon(sim.subject.gear.offHand)
         }

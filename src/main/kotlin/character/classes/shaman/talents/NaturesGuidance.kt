@@ -1,7 +1,6 @@
 package character.classes.shaman.talents
 
 import character.Buff
-import character.Proc
 import character.Stats
 import character.Talent
 import mechanics.Rating
@@ -21,9 +20,8 @@ class NaturesGuidance(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
-            val modifier = currentRank
-            val physicalHitRating = modifier * Rating.meleeHitPerPct
-            val spellHitRating = modifier * Rating.spellHitPerPct
+            val physicalHitRating = currentRank * Rating.meleeHitPerPct
+            val spellHitRating = currentRank * Rating.spellHitPerPct
             return Stats(
                 physicalHitRating = physicalHitRating,
                 spellHitRating = spellHitRating

@@ -24,9 +24,10 @@ class Whirlwind : Ability() {
     override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sim: SimIteration): Double = 30.0
 
-    override fun cast(sim: SimIteration, free: Boolean) {
-        val damageRoll = Melee.baseDamageRoll(sim, sim.subject.gear.mainHand, isNormalized = true)
-        val result = Melee.attackRoll(sim, damageRoll, isWhiteDmg = false, isOffHand = false)
+    override fun cast(sim: SimIteration) {
+        val item = sim.subject.gear.mainHand
+        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = true)
+        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(

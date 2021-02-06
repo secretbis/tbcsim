@@ -8,7 +8,7 @@ object RaidAbilities {
     fun byName(name: String): Ability? {
         return when(name) {
             BlessingOfKings.name -> BlessingOfKings()
-            BlessingOfWisdom.name -> BlessingOfWisdom()
+            ImprovedBlessingOfWisdom.name -> ImprovedBlessingOfWisdom()
             BloodFrenzy.name -> BloodFrenzy()
             CurseOfRecklessness.name -> CurseOfRecklessness()
             CurseOfShadow.name -> CurseOfShadow()

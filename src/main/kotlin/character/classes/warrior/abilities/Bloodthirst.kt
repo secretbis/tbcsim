@@ -27,9 +27,13 @@ class Bloodthirst : Ability() {
         return sim.subject.klass.talents[BloodthirstTalent.name]?.currentRank == 1 && super.available(sim)
     }
 
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
+        // TODO: This currently assigns the main hand weapon as context,
+        //       since that would allow things like Sword Spec to proc off of BT, which I presume it can
+        val item = sim.subject.gear.mainHand
+
         val damage = sim.attackPower() * 0.45
-        val result = Melee.attackRoll(sim, damage, isWhiteDmg = false, isOffHand = false)
+        val result = Melee.attackRoll(sim, damage, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(
@@ -54,9 +58,7 @@ class Bloodthirst : Ability() {
         }
 
         if(triggerTypes != null) {
-            // TODO: This currently assigns the main hand weapon as context,
-            //       since that would allow things like Sword Spec to proc off of BT, which I presume it can
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

@@ -2,11 +2,7 @@ package character.classes.shaman.abilities
 
 import character.Ability
 import character.Proc
-import character.classes.shaman.talents.Concussion
-import character.classes.shaman.talents.Convection
-import character.classes.shaman.talents.MentalQuickness
-import character.classes.shaman.talents.Reverberation
-import character.classes.shaman.talents.ShamanisticFocus
+import character.classes.shaman.talents.*
 import data.Constants
 import mechanics.General
 import mechanics.Spell
@@ -39,12 +35,15 @@ class EarthShock : Ability() {
         val shFocus = sim.buffs.find { it.name == ShamanisticFocus.name }
         val shfRed = if(shFocus != null) { 0.60 } else 0.0
 
-        return General.resourceCostReduction(535.0, listOf(cvRed, mqRed, shfRed))
+        val eleFocus = sim.buffs.find { it.name == ElementalFocus.name }
+        val elefRed = if(eleFocus != null) { 0.40 } else 0.0
+
+        return General.resourceCostReduction(535.0, listOf(cvRed, mqRed, shfRed, elefRed))
     }
 
 
     val baseDamage = Pair(658.0, 693.0)
-    override fun cast(sim: SimIteration, free: Boolean) {
+    override fun cast(sim: SimIteration) {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.NATURE
 
@@ -64,7 +63,7 @@ class EarthShock : Ability() {
         sim.logEvent(event)
 
         // Proc anything that can proc off Nature damage
-        val baseTriggerTypes = listOf(Proc.Trigger.CAST_SHAMAN_SHOCK)
+        val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)

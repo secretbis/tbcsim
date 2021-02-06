@@ -8,6 +8,7 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
     enum class Type {
         RESOURCE_GTE_PCT,
         RESOURCE_LTE_PCT,
+        RESOURCE_MISSING_GTE,
         ABILITY_COOLDOWN_GTE,
         ABILITY_COOLDOWN_LTE,
         BUFF_DURATION_GTE,
@@ -16,7 +17,7 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
         DEBUFF_DURATION_LTE,
         FIGHT_TIME_ELAPSED_GTE,
         FIGHT_TIME_REMAINING_MODULO_LTE,
-        MAIN_HAND_SWING_TIMER_GTE
+        MAIN_HAND_SWING_TIMER_GTE,
     }
 
     companion object {
@@ -28,6 +29,7 @@ abstract class Criterion(val type: Type, val data: Map<String, String?>) {
             return when(type) {
                 Type.RESOURCE_GTE_PCT -> ResourceGtePct(data)
                 Type.RESOURCE_LTE_PCT -> ResourceLtePct(data)
+                Type.RESOURCE_MISSING_GTE -> ResourceMissingGte(data)
                 Type.ABILITY_COOLDOWN_GTE -> AbilityCooldownGte(data)
                 Type.ABILITY_COOLDOWN_LTE -> AbilityCooldownLte(data)
                 Type.BUFF_DURATION_GTE -> BuffDurationGte(data)
