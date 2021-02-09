@@ -25,9 +25,7 @@ class FlametongueWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
             Trigger.MELEE_YELLOW_CRIT
         )
 
-        override val type: Type = Type.PPM
-        // TODO: PPM unconfirmed
-        override val ppm: Double = 9.0
+        override val type: Type = Type.STATIC
 
         var ftAbility: Ability? = null
 

@@ -116,8 +116,8 @@ rotation:
 
     # Abilities
     - name: Windfury Weapon (MH)
-    - name: Windfury Weapon (OH)
-#    - name: Flametongue Weapon (OH)
+#    - name: Windfury Weapon (OH)
+    - name: Flametongue Weapon (OH)
     - name: Strength of Earth Totem
     - name: Windfury Totem
     - name: Water Shield

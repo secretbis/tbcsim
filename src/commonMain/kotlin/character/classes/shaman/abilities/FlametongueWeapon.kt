@@ -33,8 +33,8 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val mod = elementalWeapons?.flametongueDamageMultiplier() ?: 1.0
 
         val school = Constants.DamageType.FIRE
-        // TODO: Weapo speed scaling mechanics unconfirmed
-        //       Ancient source: http://urbad.net/blue/eu/394130313-TBC_Enhancement_Shaman_FAQ
+        // TODO: Weapon speed scaling mechanics unconfirmed
+        //       Current formula matches testing on pservers
         val speedBasedDamage = baseDamage * item.speed / 1000.0 * mod
         val damageRoll = Spell.baseDamageRoll(sim, speedBasedDamage, spCoeff, school)
         val result = Spell.attackRoll(sim, damageRoll, school)
@@ -48,7 +48,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         )
         sim.logEvent(event)
 
-        // Proc anything that can proc off Nature damage
+        // Proc anything that can proc off Fire damage
         val triggerTypes = when (result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
