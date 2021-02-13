@@ -82,6 +82,17 @@ object Spell {
         return (0.75 * totalResistance / (5 * sim.subject.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 
+    fun spellSchoolDamageMultiplier(sim: SimIteration, school: Constants.DamageType): Double {
+        return when(school) {
+            Constants.DamageType.ARCANE -> sim.subjectStats.arcaneDamageMultiplier
+            Constants.DamageType.FIRE -> sim.subjectStats.fireDamageMultiplier
+            Constants.DamageType.FROST -> sim.subjectStats.frostDamageMultiplier
+            Constants.DamageType.NATURE -> sim.subjectStats.natureDamageMultiplier
+            Constants.DamageType.SHADOW -> sim.subjectStats.shadowDamageMultiplier
+            else -> 1.0
+        }
+    }
+
     fun spellCritChance(sim: SimIteration): Double {
         return (sim.spellCritPct() / 100.0).coerceAtLeast(0.0)
     }
@@ -105,19 +116,23 @@ object Spell {
             else -> 0
         }
 
-        val totalSpellDamage = sim.spellDamage() + bonusSpellDamage + schoolDamage
+        val totalSpellDamage = (sim.spellDamage() + bonusSpellDamage + schoolDamage)
         return dmg + (totalSpellDamage * spellDamageCoeff)
     }
 
     // Performs an attack roll given an initial unmitigated damage value
     fun attackRoll(sim: SimIteration, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
-        val flatModifier = sim.subjectStats.spellDamageFlatModifier
         val critMultiplier = Stats.spellCritMultiplier + (sim.subjectStats.spellDamageAddlCritMultiplier - 1)
+
+        // School damage multiplier
+        val schoolDamageMultiplier = spellSchoolDamageMultiplier(sim, school)
+
+        // Additional damage multipliers
+        val flatModifier = sim.subjectStats.spellDamageFlatModifier
         val allMultiplier = sim.subjectStats.spellDamageMultiplier
 
-        // Apply constant multipliers and finalize the damage roll
-        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier
+        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * schoolDamageMultiplier
 
         // Get the attack result
         val missChance = spellMissChance(sim)
