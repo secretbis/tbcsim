@@ -1,12 +1,15 @@
 package sim.config
 
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
+@JsExport
 @Serializable
 data class PartyYml(
     val buffs: List<String>? = null
 )
 
+@JsExport
 @Serializable
 data class RaidYml(
     val buffs: List<String>? = null,
@@ -14,6 +17,7 @@ data class RaidYml(
     val party: PartyYml? = null
 )
 
+@JsExport
 @Serializable
 data class GearYml(
     val mainHand: GearItemYml? = null,
@@ -36,6 +40,7 @@ data class GearYml(
     val trinket2: GearItemYml? = null,
 )
 
+@JsExport
 @Serializable
 data class GearItemYml(
     val name: String,
@@ -43,17 +48,20 @@ data class GearItemYml(
     val gems: List<String>? = null
 )
 
+@JsExport
 @Serializable
 data class GearCompareYml(
     val name: String? = null
 )
 
+@JsExport
 @Serializable
 data class TalentYml(
     val name: String,
     val rank: Int
 )
 
+@JsExport
 @Serializable
 data class RotationYml(
     val autoAttack: Boolean? = null,
@@ -61,25 +69,28 @@ data class RotationYml(
     val combat: List<RotationRuleYml>
 )
 
+@JsExport
 @Serializable
 data class RotationRuleYml(
     val name: String,
     val criteria: List<RotationRuleCriterion>? = null
 )
 
+@JsExport
 @Serializable
 data class RotationRuleCriterion(
     val type: String? = null,
     val buff: String? = null,
     val debuff: String? = null,
     val ability: String? = null,
-    val seconds: Int? = null,
+    val seconds: Double? = null,
     val modulusSeconds: Int? = null,
     val pct: Int? = null,
     val oncePerSwing: Boolean? = null,
     val amount: Int? = null
 )
 
+@JsExport
 @Serializable
 data class SimOptionsYml(
     val durationMs: Int? = null,
@@ -91,10 +102,13 @@ data class SimOptionsYml(
     val allowParryAndBlock: Boolean? = null
 )
 
+@JsExport
 @Serializable
 data class ConfigYml(
     val `class`: String,
     val race: String,
+    val spec: String,
+    val description: String,
     val level: Int = 70,
     val talents: List<TalentYml>?,
     val gear: GearYml? = null,

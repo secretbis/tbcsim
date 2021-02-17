@@ -13,7 +13,7 @@ class DebuffDurationGte(data: RotationRuleCriterion) : Criterion(Type.DEBUFF_DUR
     }
 
     val seconds: Double? = try {
-        (data.seconds as Int).toDouble().coerceAtLeast(0.0)
+        (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null
@@ -25,7 +25,7 @@ class DebuffDurationGte(data: RotationRuleCriterion) : Criterion(Type.DEBUFF_DUR
     override fun satisfied(sim: SimIteration): Boolean {
         if(debuff == null || seconds == null) return false
 
-        val debuff = sim.debuffs.find { it.name == debuff }
+        val debuff = sim.debuffs[debuff]
         return debuff != null && debuff.remainingDurationMs(sim) >= (seconds * 1000)
     }
 }

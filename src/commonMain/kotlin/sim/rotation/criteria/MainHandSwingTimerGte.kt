@@ -12,7 +12,7 @@ class MainHandSwingTimerGte(data: RotationRuleCriterion) : Criterion(Type.MAIN_H
     }
 
     val seconds: Double? = try {
-        (data.seconds as Int).toDouble().coerceAtLeast(0.0)
+        (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null

@@ -9,9 +9,20 @@ import sim.SimIteration
 // Same for all the hammers
 class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val id: Int = 21165
-    override val name: String = "Haste (BS Hammer)"
+    override val name: String = "Haste (BS Hammer) (static) $sourceItem"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+
+    private fun makeName(sim: SimIteration): String {
+        val suffix = if (sourceItem === sim.subject.gear.mainHand) {
+            "(MH)"
+        } else if (sourceItem === sim.subject.gear.offHand) {
+            "(OH)"
+        } else {
+            throw IllegalArgumentException("BSHammerHaste can only be applied to weapons")
+        }
+        return "Haste (BS Hammer) $suffix".trim()
+    }
 
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {
@@ -33,16 +44,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
                     val buff = object : Buff() {
                         override val name: String
-                            get() {
-                                val suffix = if (sourceItem === sim.subject.gear.mainHand) {
-                                    "(MH)"
-                                } else if (sourceItem === sim.subject.gear.offHand) {
-                                    "(OH)"
-                                } else {
-                                    throw IllegalArgumentException("BSHammerHaste can only be applied to weapons")
-                                }
-                                return "Haste (BS Hammer) $suffix".trim()
-                            }
+                            get() = makeName(sim)
 
                         override val durationMs: Int = 10000
 

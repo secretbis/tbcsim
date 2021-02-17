@@ -6,9 +6,8 @@ import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
 import data.codegen.CodeGen
 import kotlinx.coroutines.runBlocking
-import sim.Sim
-import sim.SimOptions
-import sim.config.Config
+import sim.*
+import sim.config.ConfigMaker
 import java.io.File
 import kotlin.time.ExperimentalTime
 
@@ -43,7 +42,7 @@ class TBCSim : CliktCommand() {
             CodeGen.generate()
         } else {
             if(configFile != null) {
-                val config = Config.fromYml(configFile!!.readText())
+                val config = ConfigMaker.fromYml(configFile!!.readText())
                 val opts = SimOptions(
                     durationMs = duration * 1000,
                     durationVaribilityMs = durationVariability * 1000,
@@ -57,7 +56,29 @@ class TBCSim : CliktCommand() {
                 )
 
                 runBlocking {
-                    Sim(config, opts).sim()
+                    val iterations = Sim(config, opts, {}).sim()
+
+                    // Stats
+                    val durationSeconds = (opts.durationMs / 1000.0).toInt()
+                    val resourceType = config.character.klass.resourceType
+                    val resource = SimStats.resourceUsage(iterations)
+                    println("Resource usage for iteration ${resource.iterationIdx}")
+                    Chart.print(resource.series, xMax = durationSeconds, yLabel = resourceType.toString())
+
+                    val buffs = SimStats.resultsByBuff(iterations)
+                    SimStatsPrinter.printBuffs("Buffs", buffs)
+
+                    val debuffs = SimStats.resultsByDebuff(iterations)
+                    SimStatsPrinter.printBuffs("Debuffs", debuffs)
+
+                    val dmgType = SimStats.resultsByDamageType(iterations)
+                    SimStatsPrinter.printDamage(dmgType)
+
+                    val abilities = SimStats.resultsByAbility(iterations)
+                    SimStatsPrinter.printAbilities(abilities)
+
+                    val dps = SimStats.dps(iterations)
+                    SimStatsPrinter.printDps(dps)
                 }
             } else {
                 println("Please specify a sim config file path as the first positional argument")

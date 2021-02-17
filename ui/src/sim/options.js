@@ -1,0 +1,95 @@
+import React, { useState } from 'react';
+import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, Schema, InputNumber, Checkbox, Row, Col } from 'rsuite';
+
+import simDefaults from '../data/simdefaults';
+
+const { BooleanType, NumberType } = Schema.Types;
+const model = Schema.Model({
+  durationSeconds: NumberType().range(30, 600, "Valid fight durations are 30-600s").isRequired("A fight duration is required."),
+  durationVariabilitySeconds: NumberType().range(0, 60, "Valid fight variability amounts are 0-60s").isRequired("A fight variability amount is required."),
+  stepMs: NumberType().range(10, 1000, "Valid step durations are 10-1000ms").isRequired("A fight step size is required"),
+  latencyMs: NumberType().range(0, 500, "Valid latencies are 0-500ms").isRequired("A latency amount is required"),
+  iterations: NumberType().range(1, 10000, "Valid iteration counts are 1-10000").isRequired("Number of iterations is required"),
+  targetLevel: NumberType().range(70, 73, "Valid target levels are 70-73").isRequired("Target level is required"),
+  targetArmor: NumberType().range(0, 10000, "Valid target armor amounts are 0-10000").isRequired("Target armor is required"),
+  allowParryAndBlock: BooleanType().isRequired("Parry and block choice is required."),
+  showHiddenBuffs: BooleanType().isRequired("Hidden buffs choice is required.")
+});
+
+const groupStyle = {
+  marginBottom: '5px'
+};
+
+export default function({ setters }) {
+  const [formState, setFormState] = useState(simDefaults);
+
+  function onChange(value, evt) {
+    setFormState({...formState, ...value})
+  }
+
+  function onCheck(formErr) {
+    if(Object.keys(formErr).length === 0) {
+      // If the form is valid, set real state instead of local state
+      Object.entries(formState).forEach(([key, val]) => {
+        setters[key](val)
+      });
+    }
+  }
+
+  return (
+    <Form
+      checkTrigger={'change'}
+      formValue={formState}
+      model={model}
+      onChange={onChange}
+      onCheck={onCheck}
+    >
+      <Row>
+        <Col xs={12}>
+          <FormGroup controlId="iterations" style={groupStyle}>
+            <ControlLabel>Number of Iterations</ControlLabel>
+            <FormControl name="iterations" accepter={InputNumber} />
+            <HelpBlock tooltip>How many iterations to run, per simulation</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="durationSeconds" style={groupStyle}>
+            <ControlLabel>Duration (seconds)</ControlLabel>
+            <FormControl name="durationSeconds" accepter={InputNumber} />
+            <HelpBlock tooltip>The fight length, in seconds</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="stepMs" style={groupStyle}>
+            <ControlLabel>Iteration Step (ms)</ControlLabel>
+            <FormControl name="stepMs" accepter={InputNumber} />
+            <HelpBlock tooltip>How often to process the current simulation state.  Set this lower for greater accuracy, and higher for faster sims</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="latencyMs" style={groupStyle}>
+            <ControlLabel>Latency (ms)</ControlLabel>
+            <FormControl name="latencyMs" accepter={InputNumber} />
+            <HelpBlock tooltip>Simulate this amount of latency, in milliseconds</HelpBlock>
+          </FormGroup>
+        </Col>
+        <Col xs={12}>
+          <FormGroup controlId="durationVariabilitySeconds" style={groupStyle}>
+            <ControlLabel>Duration Variability (seconds)</ControlLabel>
+            <FormControl name="durationVariabilitySeconds" accepter={InputNumber} />
+            <HelpBlock tooltip>Randomly vary the length of each iteration by up to this amount, in seconds</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="targetLevel" style={groupStyle}>
+            <ControlLabel>Target Level</ControlLabel>
+            <FormControl name="targetLevel" accepter={InputNumber} />
+            <HelpBlock tooltip>The level of the simulation target</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="targetArmor" style={groupStyle}>
+            <ControlLabel>Target Armor</ControlLabel>
+            <FormControl name="targetArmor" accepter={InputNumber} />
+            <HelpBlock tooltip>The base armor value of the simulation target</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="allowParryAndBlock" style={groupStyle}>
+            <ControlLabel>Allow Parry/Block?</ControlLabel>
+            <FormControl name="allowParryAndBlock" accepter={Checkbox} />
+            <HelpBlock tooltip>If checked, allows parry and block for melee simulation</HelpBlock>
+          </FormGroup>
+        </Col>
+      </Row>
+    </Form>
+  )
+}

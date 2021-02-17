@@ -17,6 +17,7 @@ class ElementalMastery : Ability() {
     override val name: String = Companion.name
 
     override fun gcdMs(sim: SimIteration): Int = 0
+    override fun cooldownMs(sim: SimIteration): Int = 180000
 
     private fun makeProc(buff: Buff): Proc {
         return object : Proc() {
@@ -40,7 +41,7 @@ class ElementalMastery : Ability() {
     }
 
     val emBuff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "${Companion.name} (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
         override val maxCharges: Int = 1

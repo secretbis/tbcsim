@@ -4,10 +4,10 @@ import de.m3y.kformat.Table
 import de.m3y.kformat.table
 import java.text.DecimalFormat
 
-actual object SimStatsPrinter {
+object SimStatsPrinter {
     val df = DecimalFormat("#,###.##")
 
-    actual fun printBuffs(title: String, rows: List<SimStats.BuffBreakdown>) {
+    fun printBuffs(title: String, rows: List<SimStats.BuffBreakdown>) {
         println(
             "$title\n" +
             table {
@@ -35,17 +35,14 @@ actual object SimStatsPrinter {
         )
     }
 
-    actual fun printAbilities(rows: List<SimStats.AbilityBreakdown>) {
+    fun printAbilities(rows: List<SimStats.AbilityBreakdown>) {
         println(
             "Ability Breakdown\n" +
             table {
-                header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "AverageDmg", "MedianDmg", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
-
-                val grandTotal: Double = rows.sumByDouble { it.totalAvg }
+                header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "AvgHit", "AvgCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                 for(row in rows) {
-                    val pctOfGrandTotal = row.totalAvg / grandTotal * 100.0
-                    row(row.name, row.countAvg, row.totalAvg, pctOfGrandTotal, row.average, row.median, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                    row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.avgHit, row.avgCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                 }
 
                 hints {
@@ -67,17 +64,14 @@ actual object SimStatsPrinter {
         )
     }
 
-    actual fun printDamage(rows: List<SimStats.DamageTypeBreakdown>) {
+    fun printDamage(rows: List<SimStats.DamageTypeBreakdown>) {
         println(
             "Damage Type Breakdown\n" +
             table {
                 header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal")
 
-                val grandTotal: Double = rows.sumByDouble { it.totalAvg }
-
                 for(row in rows) {
-                    val pctOfGrandTotal = row.totalAvg / grandTotal * 100.0
-                    row(row.type.name, row.countAvg, row.totalAvg, pctOfGrandTotal)
+                    row(row.type.name, row.countAvg, row.totalAvg, row.pctOfTotal)
                 }
 
                 hints {
@@ -99,13 +93,13 @@ actual object SimStatsPrinter {
         )
     }
 
-    actual fun printDps(mean: Double, median: Double, sd: Double) {
-        println("AVERAGE DPS: ${df.format(mean)}")
-        println("MEDIAN DPS: ${df.format(median)}")
-        println("STDDEV DPS: ${df.format(sd)}")
+    fun printDps(dps: SimStats.DpsBreakdown) {
+        println("AVERAGE DPS: ${df.format(dps.mean)}")
+        println("MEDIAN DPS: ${df.format(dps.median)}")
+        println("STDDEV DPS: ${df.format(dps.sd)}")
     }
 
-    actual fun printPrecombatStats(sim: SimIteration) {
+    fun printPrecombatStats(sim: SimIteration) {
         println(
             "PLAYER STATS\n" +
             table {

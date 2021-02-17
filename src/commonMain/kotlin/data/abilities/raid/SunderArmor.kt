@@ -19,7 +19,7 @@ class SunderArmor : Ability() {
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats? {
-            val impEaActive = sim.debuffs.find { it.name == "Improved Expose Armor" } != null
+            val impEaActive = sim.debuffs[ImprovedExposeArmor.name] != null
             return if(impEaActive) {
                 null
             } else {

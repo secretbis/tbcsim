@@ -16,7 +16,7 @@ class FightTimeRemainingModuloLte(data: RotationRuleCriterion) : Criterion(Type.
     }
 
     val seconds: Double? = try {
-        (data.seconds as Int).toDouble().coerceAtLeast(0.0)
+        (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null
@@ -27,7 +27,6 @@ class FightTimeRemainingModuloLte(data: RotationRuleCriterion) : Criterion(Type.
 
     override fun satisfied(sim: SimIteration): Boolean {
         if(modulusSeconds == null || seconds == null) return false
-
         return sim.elapsedTimeMs % (modulusSeconds * 1000) <= seconds * 1000
     }
 }

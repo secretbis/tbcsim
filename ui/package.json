@@ -1,0 +1,45 @@
+{
+  "name": "ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.2",
+    "rsuite": "^4.8.9",
+    "tbcsim": "file:../build/js/packages/tbcsim",
+    "web-vitals": "^1.1.0"
+  },
+  "scripts": {
+    "start": "craco --max_old_space_size=8192 start",
+    "build": "craco --max_old_space_size=8192 build",
+    "test": "craco --max_old_space_size=8192 test",
+    "eject": "craco --max_old_space_size=8192 eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "yaml-loader": "^0.6.0"
+  }
+}

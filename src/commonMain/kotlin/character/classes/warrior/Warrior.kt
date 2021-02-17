@@ -18,10 +18,6 @@ import character.classes.warrior.talents.Rampage as RampageTalent
 import data.model.Item
 
 class Warrior(talents: Map<String, Talent>) : Class(talents) {
-    companion object {
-        const val rampageFlagBuffName = "Rampage (available)"
-    }
-
     override val baseStats: Stats = Stats(
         agility = 154,
         intellect = 123,

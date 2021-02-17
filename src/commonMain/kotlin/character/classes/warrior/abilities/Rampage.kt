@@ -2,6 +2,7 @@ package character.classes.warrior.abilities
 
 import character.*
 import character.classes.warrior.Warrior
+import character.classes.warrior.buffs.RampageBase
 import data.model.Item
 import sim.Event
 import character.classes.warrior.talents.Rampage as RampageTalent
@@ -22,7 +23,7 @@ class Rampage : Ability() {
 
     override fun available(sim: SimIteration): Boolean {
         val talented = sim.subject.klass.talents[RampageTalent.name]?.currentRank == 1
-        val hasTriggerBuff = sim.buffs.find { it.name == Warrior.rampageFlagBuffName } != null
+        val hasTriggerBuff = sim.buffs[RampageBase.rampageFlagBuff.name] != null
         return talented && hasTriggerBuff && super.available(sim)
     }
 

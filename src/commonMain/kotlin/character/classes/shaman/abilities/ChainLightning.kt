@@ -30,7 +30,7 @@ open class ChainLightning : Ability() {
         val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
-        val eleFocus = sim.buffs.find { it.name == ElementalFocus.name }
+        val eleFocus = sim.buffs[ElementalFocus.name]
         val elefRed = if(eleFocus != null) { 0.40 } else 0.0
 
         return General.resourceCostReduction(760.0, listOf(cvRed, mqRed, elefRed))

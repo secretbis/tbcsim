@@ -26,8 +26,9 @@ object SimStats {
         val name: String,
         val countAvg: Double,
         val totalAvg: Double,
-        val average: Double,
-        val median: Double,
+        val pctOfTotal: Double,
+        val avgHit: Double,
+        val avgCrit: Double,
         val hitPct: Double,
         val critPct: Double,
         val missPct: Double,
@@ -48,7 +49,14 @@ object SimStats {
     data class DamageTypeBreakdown(
         val type: Constants.DamageType,
         val countAvg: Double,
-        val totalAvg: Double
+        val totalAvg: Double,
+        val pctOfTotal: Double
+    )
+
+    data class DpsBreakdown(
+        val median: Double,
+        val mean: Double,
+        val sd: Double
     )
 
     fun sep() {
@@ -58,37 +66,35 @@ object SimStats {
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
-    fun precombatStats(sim: SimIteration) {
-        SimStatsPrinter.printPrecombatStats(sim)
+//    fun precombatStats(sim: SimIteration) {
+//        SimStatsPrinter.printPrecombatStats(sim)
+//
+//        println("ACTIVE RAID BUFFS")
+//        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
+//            println(" - ${it.ability.name}")
+//        }
+//        println()
+//    }
 
-        println("ACTIVE RAID BUFFS")
-        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
-            println(" - ${it.ability.name}")
-        }
-        println()
-    }
-
-    fun dps(iterations: List<SimIteration>) {
+    fun dps(iterations: List<SimIteration>): DpsBreakdown {
         val perIteration = iterations.map {
             it.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->
                 acc + event.amount
             } / (it.opts.durationMs / 1000.0)
         }
 
-        val median = median(perIteration)
         val mean = perIteration.average()
-        val sd = sd(perIteration, mean)
-
-        sep()
-        SimStatsPrinter.printDps(mean, median, sd)
-        sep()
+        return DpsBreakdown(
+            median(perIteration),
+            mean = mean,
+            sd = sd(perIteration, mean)
+        )
     }
 
-    fun resultsByBuff(iterations: List<SimIteration>) {
+    fun resultsByBuff(iterations: List<SimIteration>): List<BuffBreakdown> {
         val showHidden = iterations[0].opts.showHiddenBuffs
-        processBuffs(
+        return processBuffs(
             iterations,
-            "Buffs",
             iterations.flatMap { iter ->
                 iter.events
                     .filter {
@@ -106,11 +112,10 @@ object SimStats {
         )
     }
 
-    fun resultsByDebuff(iterations: List<SimIteration>) {
+    fun resultsByDebuff(iterations: List<SimIteration>): List<BuffBreakdown> {
         val showHidden = iterations[0].opts.showHiddenBuffs
-        processBuffs(
+        return processBuffs(
             iterations,
-            "Debuffs",
             iterations.flatMap { iter ->
                 iter.events
                     .filter {
@@ -130,15 +135,14 @@ object SimStats {
 
     private fun processBuffs(
         iterations: List<SimIteration>,
-        title: String,
         byBuff: Map<String, List<Event>>,
         buffStart: Event.Type,
         buffRefresh: Event.Type,
         buffEnd: Event.Type
-    ) {
+    ): List<BuffBreakdown> {
         val keys = byBuff.keys.toList()
 
-        val rows = keys.map { key ->
+        return keys.map { key ->
             val events = byBuff[key]!!
             val applied = events.filter { it.eventType == buffStart }.size / iterations.size.toDouble()
             val refreshed = events.filter { it.eventType == buffRefresh }.size / iterations.size.toDouble()
@@ -236,11 +240,9 @@ object SimStats {
                 avgStacks
             )
         }.sortedBy { it.name }
-
-        SimStatsPrinter.printBuffs(title, rows)
     }
 
-    fun resultsByAbility(iterations: List<SimIteration>) {
+    fun resultsByAbility(iterations: List<SimIteration>): List<AbilityBreakdown> {
         val byAbility = iterations.flatMap { iter ->
             iter.events
                 .filter { it.eventType == Event.Type.DAMAGE }
@@ -249,33 +251,39 @@ object SimStats {
             .groupBy { it.abilityName!! }
 
         val keys = byAbility.keys.toList()
+        val grandTotal = keys.fold(0.0) { acc, it ->
+            acc + (byAbility[it]?.sumByDouble { it.amount } ?: 0.0)
+        }
 
-        val rows = keys.map { key ->
+        return keys.map { key ->
             val events = byAbility[key]!!
             val amounts = events.map { it.amount }
             val countAvg = amounts.size.toDouble() / iterations.size.toDouble()
             val totalAvg = amounts.sum() / iterations.size.toDouble()
 
-            // Compute damage stats only for events where an attack actually connected
-            val nonzeroAmounts = amounts.filter { it > 0 }
-            val average = amounts.sum() / nonzeroAmounts.size.toDouble()
-            val median = median(nonzeroAmounts)
+            val allHits = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK || it.result == Event.Result.PARTIAL_RESIST_HIT }
+            val allCrits = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }
+            val avgHit = allHits.map { it.amount }.sum() / allHits.size.toDouble()
+            val avgCrit = allCrits.map { it.amount }.sum() / allCrits.size.toDouble()
 
             // Compute result distributions with the entire set of events
             // Count blocked hits/crits as hits/crits, since the block value is very small
-            val hitPct = events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK || it.result == Event.Result.PARTIAL_RESIST_HIT }.size / amounts.size.toDouble() * 100.0
-            val critPct = events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }.size / amounts.size.toDouble() * 100.0
+            val hitPct = allHits.size / amounts.size.toDouble() * 100.0
+            val critPct = allCrits.size / amounts.size.toDouble() * 100.0
             val missPct = events.filter { it.result == Event.Result.MISS || it.result == Event.Result.RESIST }.size / amounts.size.toDouble() * 100.0
             val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / amounts.size.toDouble() * 100.0
             val parryPct = events.filter { it.result == Event.Result.PARRY }.size / amounts.size.toDouble() * 100.0
             val glancePct = events.filter { it.result == Event.Result.GLANCE }.size / amounts.size.toDouble() * 100.0
 
+            val pctOfTotal = totalAvg / grandTotal * 100.0
+
             AbilityBreakdown(
                 key,
                 countAvg,
                 totalAvg,
-                average,
-                median,
+                pctOfTotal,
+                avgHit,
+                avgCrit,
                 hitPct,
                 critPct,
                 missPct,
@@ -284,11 +292,9 @@ object SimStats {
                 glancePct
             )
         }.sortedBy { it.totalAvg }.reversed()
-
-        SimStatsPrinter.printAbilities(rows)
     }
 
-    fun resultsByDamageType(iterations: List<SimIteration>) {
+    fun resultsByDamageType(iterations: List<SimIteration>): List<DamageTypeBreakdown> {
         val byDmgType = iterations.flatMap { iter ->
             iter.events
                 .filter { it.eventType == Event.Type.DAMAGE }
@@ -297,33 +303,44 @@ object SimStats {
             .groupBy { it.damageType }
 
         val keys = byDmgType.keys.toList()
-        val rows = keys.map { key ->
+
+        val grandTotal = keys.fold(0.0) { acc, it ->
+            acc + (byDmgType[it]?.sumByDouble { it.amount } ?: 0.0)
+        }
+
+        return keys.map { key ->
             val events = byDmgType[key]!!
             val amounts = events.map { it.amount }
             val count = amounts.size.toDouble() / iterations.size.toDouble()
             val total = amounts.sum() / iterations.size.toDouble()
+            val pctOfTotal = total / grandTotal * 100.0
 
             DamageTypeBreakdown(
                 key!!,
                 count,
-                total
+                total,
+                pctOfTotal
             )
         }.sortedBy { it.totalAvg }.reversed()
-
-        SimStatsPrinter.printDamage(rows)
     }
 
-    fun resourceUsage(iterations: List<SimIteration>, resourceType: Resource.Type) {
+    data class ResourceBreakdown(
+        val iterationIdx: Int,
+        val series: List<Pair<Int, Double>>
+    )
+
+    fun resourceUsage(iterations: List<SimIteration>): ResourceBreakdown {
         // Pick an execution at random
         val iterationIdx = Random.nextInt(iterations.size)
         val iteration = iterations[iterationIdx]
-        val durationSeconds = (iteration.opts.durationMs / 1000.0).toInt()
-        println("Resource usage for iteration $iterationIdx")
 
         val series = iteration.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
             Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
         }
 
-        Chart.print(series, xMax = durationSeconds, yLabel = resourceType.toString())
+        return ResourceBreakdown(
+            iterationIdx,
+            series
+        )
     }
 }

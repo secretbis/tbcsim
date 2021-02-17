@@ -1,0 +1,180 @@
+class: Warrior
+spec: Fury
+description: Fury Warrior (pre-raid)
+race: Human
+level: 70
+
+# Stock Fury
+talents:
+  # Fury talents
+  - name: Cruelty
+    rank: 5
+  - name: Unbridled Wrath
+    rank: 5
+  - name: Commanding Presence
+    rank: 5
+  - name: Dual Wield Specialization
+    rank: 5
+  - name: Weapon Mastery
+    rank: 2
+  - name: Flurry
+    rank: 5
+  - name: Improved Whirlwind
+    rank: 1
+  - name: Precision
+    rank: 3
+  - name: Sweeping Strikes
+    rank: 1
+  - name: Bloodthirst
+    rank: 1
+  - name: Improved Berserker Stance
+    rank: 5
+  - name: Rampage
+    rank: 1
+  # Arms talents
+  - name: Improved Heroic Strike
+    rank: 3
+  - name: Anger Management
+    rank: 1
+  - name: Deep Wounds
+    rank: 3
+  - name: Impale
+    rank: 2
+
+# Pre-raid BIS-ish
+# Assumes BS/LW professions, no PvP gear
+gear:
+  mainHand:
+    name: Drakefist Hammer
+    enchant: Mongoose
+  offHand:
+    name: Drakefist Hammer
+    # No Executioner until ZA
+    enchant: Mongoose
+  rangedLibramTotem:
+    name: Felsteel Whisper Knives
+  head:
+    name: Wastewalker Helm
+    gems:
+      - Bold Living Ruby
+      - Relentless Earthstorm Diamond
+  neck:
+    name: Traitor's Noose
+  shoulders:
+    name: Ragesteel Shoulders
+    gems:
+      - Smooth Dawnstone
+      - Smooth Dawnstone
+  back:
+    name: Vengeance Wrap
+    gems:
+      - Bold Living Ruby
+  chest:
+    name: Chestplate of A'dal
+  wrists:
+    name: Black Felsteel Bracers
+  hands:
+    name: Cobrascale Gloves
+  waist:
+    name: Girdle of the Deathdealer
+  legs:
+    name: Fel Leather Leggings
+    gems:
+      - Bold Living Ruby
+      - Smooth Dawnstone
+      - Smooth Dawnstone
+  feet:
+    name: Fel Leather Boots
+    gems:
+      - Smooth Dawnstone
+      - Bold Living Ruby
+  ring1:
+    name: Shaffar's Band of Brutality
+  ring2:
+    name: Ring of Umbral Doom
+  trinket1:
+    name: Hourglass of the Unraveller
+  trinket2:
+    name: Bloodlust Brooch
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
+
+    # Abilities
+    - name: Battle Shout
+    - name: Bloodrage
+
+  combat:
+    - name: Bloodrage
+    - name: Rampage
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Rampage
+          seconds: 7
+    - name: Execute
+    - name: Bloodthirst
+    - name: Whirlwind
+    - name: Heroic Strike
+      criteria:
+        # Cast HS if we have 60 rage or more
+        - type: RESOURCE_GTE_PCT
+          pct: 60
+    - name: Battle Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Battle Shout
+          seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raid:
+  buffs:
+    # Consider your raid composition when selecting which buffs to apply
+    # e.g. if you don't have two paladins, you can't have two blessings
+    - Blessing of Kings
+    - Improved Blessing of Might
+    - Improved Mark of the Wild
+    - Improved Seal of the Crusader
+  debuffs:
+    # Sunder Armor and Imp EA cannot be applied at the same time
+    # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+    # To test with Sunder, comment out Imp EA
+    - Sunder Armor
+    - Improved Expose Armor
+    - Faerie Fire
+    - Curse of Recklessness
+
+  party:
+    # Adjust these based on what you expect your personal group composition to be
+    # This happens to assume a BM Hunter, Feral Druid, Enhancement Shaman and Ret Paladin
+    buffs:
+      - Ferocious Inspiration
+      - Leader of the Pack
+      - Improved Sanctity Aura
+      - Windfury Totem
+      - Grace of Air Totem
+      - Strength of Earth Totem
+      - Unleashed Rage

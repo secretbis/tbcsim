@@ -13,7 +13,7 @@ class BuffDurationGte(data: RotationRuleCriterion) : Criterion(Type.BUFF_DURATIO
     }
 
     val seconds: Double? = try {
-        (data.seconds as Int).toDouble().coerceAtLeast(0.0)
+        (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'seconds' is required for criterion $type" }
         null
@@ -25,7 +25,7 @@ class BuffDurationGte(data: RotationRuleCriterion) : Criterion(Type.BUFF_DURATIO
     override fun satisfied(sim: SimIteration): Boolean {
         if(buff == null || seconds == null) return false
 
-        val buff = sim.buffs.find { it.name == buff }
+        val buff = sim.buffs[buff]
         return buff != null && buff.remainingDurationMs(sim) >= (seconds * 1000)
     }
 }

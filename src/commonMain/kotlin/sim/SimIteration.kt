@@ -9,9 +9,11 @@ import mechanics.Rating
 import mu.KotlinLogging
 import sim.rotation.Criterion
 import sim.rotation.Rotation
+import kotlin.js.JsExport
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 
+@JsExport
 class SimIteration(
     val subject: Character,
     val rotation: Rotation,
@@ -34,8 +36,8 @@ class SimIteration(
     var events: MutableList<Event> = mutableListOf()
     var mhAutoAttack: MeleeBase? = null
     var ohAutoAttack: MeleeBase? = null
-    var buffs: MutableList<Buff> = mutableListOf()
-    var debuffs: MutableList<Debuff> = mutableListOf()
+    var buffs: MutableMap<String, Buff> = mutableMapOf()
+    var debuffs: MutableMap<String, Debuff> = mutableMapOf()
 
     // Buffs need a place to store state per iteration
     // Store individual data per instance and store shared data per-string (generally the buff name)
@@ -98,12 +100,12 @@ class SimIteration(
     }
 
     private fun recomputeStats() {
-        subjectStats = computeStats(subject, buffs)
-        targetStats = computeStats(target, debuffs)
+        subjectStats = computeStats(subject, buffs.values.toList())
+        targetStats = computeStats(target, debuffs.values.toList())
     }
 
     private fun pruneBuffs() {
-        val buffsToRemove = buffs.filter {
+        val buffsToRemove = buffs.values.filter {
             it.isFinished(this)
         }
         buffsToRemove.forEach {
@@ -112,8 +114,8 @@ class SimIteration(
                 eventType = Event.Type.BUFF_END,
                 buff = it
             ))
+            buffs.remove(it.name)
         }
-        buffs.removeAll(buffsToRemove)
 
         // Compute stats if something about our buffs changed
         if(buffsToRemove.isNotEmpty()) {
@@ -122,7 +124,7 @@ class SimIteration(
     }
 
     private fun pruneDebuffs() {
-        val debuffsToRemove = debuffs.filter {
+        val debuffsToRemove = debuffs.values.filter {
             it.isFinished(this)
         }
         debuffsToRemove.forEach {
@@ -131,8 +133,8 @@ class SimIteration(
                 eventType = Event.Type.DEBUFF_END,
                 buff = it
             ))
+            debuffs.remove(it.name)
         }
-        debuffs.removeAll(debuffsToRemove)
 
         if(debuffsToRemove.isNotEmpty()) {
             recomputeStats()
@@ -198,7 +200,7 @@ class SimIteration(
         }
 
         // Check debuffs
-        debuffs.forEach {
+        debuffs.values.forEach {
             if(it.shouldTick(this)) {
                 it.tick(this)
             }
@@ -220,14 +222,14 @@ class SimIteration(
 
      fun cleanup() {
          // Log end for all buffs
-         buffs.forEach {
+         buffs.values.forEach {
              logEvent(Event(
                 eventType = Event.Type.BUFF_END,
                 buff = it
             ))
          }
 
-         debuffs.forEach {
+         debuffs.values.forEach {
              logEvent(Event(
                 eventType = Event.Type.DEBUFF_END,
                 buff = it
@@ -248,29 +250,23 @@ class SimIteration(
         } else 0
 
         // If this is a new buff, add it
-        val exists = buffs.find { it === buff } != null
+        val exists = buffs[buff.name] != null
         if(!exists) {
-            // Check if we're adding a duplicate name - this can cause rotation issues
-            val sameName = buffs.find { it.name == buff.name }
-            if(sameName != null) {
-                logger.debug { "Buff with duplicate name added: ${sameName.name}" }
-            }
-
             // If this buff is mutex with others, remove any existing with that class
             if(!buff.mutex.contains(Buff.Mutex.NONE)) {
                 // A buff should be removed if it matches any of the incoming buff's mutex categories
-                val toRemove = buffs.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
+                val toRemove = buffs.values.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
                 toRemove.forEach {
                     it.reset(this)
                     logEvent(Event(
                         eventType = Event.Type.BUFF_END,
                         buff = it
                     ))
+                    buffs.remove(it.name)
                 }
-                buffs.removeAll(toRemove)
             }
 
-            buffs.add(buff)
+            buffs[buff.name] = buff
             logEvent(Event(
                 eventType = Event.Type.BUFF_START,
                 buff = buff,
@@ -302,9 +298,9 @@ class SimIteration(
         } else 0
 
         // If this is a new debuff, add it
-        val exists = debuffs.find { it === debuff } != null
+        val exists = debuffs[debuff.name] != null
         if(!exists) {
-            debuffs.add(debuff)
+            debuffs[debuff.name] = debuff
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_START,
                 buff = debuff,
@@ -380,7 +376,7 @@ class SimIteration(
         val allProcs: MutableSet<Proc> = mutableSetOf()
         for(trigger in triggers) {
             // Get procs from active buffs
-            buffs.forEach { buff ->
+            buffs.values.forEach { buff ->
                 buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach {
                     allProcs.add(it)
                 }

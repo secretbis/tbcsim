@@ -10,7 +10,7 @@ import sim.SimIteration
 
 class RageOfTheUnraveller : Buff() {
     override val id: Int = 33648
-    override val name: String = "Rage of the Unraveller"
+    override val name: String = "Rage of the Unraveller (static)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
@@ -59,7 +58,11 @@ kotlin {
                 })
         }
 
-        browser()
+        browser {
+            webpackTask {
+                output.libraryTarget = "commonjs2"
+            }
+        }
 
         binaries.executable().forEach { binary ->
             // Looks like we don't need this task anymore?

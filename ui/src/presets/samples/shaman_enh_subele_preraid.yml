@@ -1,0 +1,218 @@
+class: Shaman
+spec: Enhancement
+description: Enhancement Shaman (pre-raid, sub-Ele)
+race: Draenei
+level: 70
+
+# Stock sub-resto Enhancement
+talents:
+  # Enh talents
+  - name: Ancestral Knowledge
+    rank: 5
+  - name: Thundering Strikes
+    rank: 5
+  - name: Enhancing Totems
+    rank: 2
+  - name: Shamanistic Focus
+    rank: 1
+  - name: Flurry
+    rank: 5
+  - name: Improved Weapon Totems
+    rank: 2
+  - name: Elemental Weapons
+    rank: 3
+  - name: Mental Quickness
+    rank: 3
+  - name: Weapon Mastery
+    rank: 5
+  - name: Dual Wield
+    rank: 1
+  - name: Dual Wield Specialization
+    rank: 3
+  - name: Stormstrike
+    rank: 1
+  - name: Unleashed Rage
+    rank: 5
+  - name: Shamanistic Rage
+    rank: 1
+  # Ele talents
+  - name: Convection
+    rank: 5
+  - name: Concussion
+    rank: 5
+  - name: Reverberation
+    rank: 5
+  - name: Elemental Focus
+    rank: 1
+
+# Pre-raid BIS-ish
+# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
+gear:
+  mainHand:
+    name: Drakefist Hammer
+    enchant: Mongoose
+  offHand:
+    name: Drakefist Hammer
+    # No Executioner until ZA
+    enchant: Mongoose
+  rangedLibramTotem:
+    name: Totem of the Astral Winds
+  head:
+    name: Helm of Desolation
+    gems:
+      - Inscribed Noble Topaz
+      - Thundering Skyfire Diamond
+  neck:
+    name: Natasha's Choker
+  shoulders:
+    name: Shalassi Sentry's Epaulets
+    gems:
+      - Bold Living Ruby
+      - Inscribed Noble Topaz
+  back:
+    name: Cloak of the Inciter
+  chest:
+    name: Nether Chain Shirt
+    gems:
+      - Bold Living Ruby
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  wrists:
+    name: Felstalker Bracers
+    gems:
+      - Bold Living Ruby
+  hands:
+    name: Windstrike Gloves
+  waist:
+    name: Ebon Netherscale Belt
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  legs:
+    name: Wyrmscale Greaves
+    gems:
+      - Bold Living Ruby
+      - Bold Living Ruby
+      - Bold Living Ruby
+  feet:
+    name: Boots of the Endless Hunt
+  ring1:
+    name: Shaffar's Band of Brutality
+  ring2:
+    name: Ring of the Overseer
+  trinket1:
+    name: Hourglass of the Unraveller
+  trinket2:
+    name: Bloodlust Brooch
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
+
+    # Abilities
+    - name: Windfury Weapon (MH)
+    - name: Windfury Weapon (OH)
+#    - name: Flametongue Weapon (OH)
+    - name: Strength of Earth Totem
+    - name: Windfury Totem
+    - name: Water Shield
+
+  combat:
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+    - name: Shamanistic Rage
+      criteria:
+        # If our mana is 30% or lower, cast Shamanistic Rage
+        - type: RESOURCE_LTE_PCT
+          pct: 30
+    - name: Stormstrike
+    - name: Windfury Totem
+      criteria:
+        # If GoA has existed for 9+ seconds, refresh WFT for party
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 111
+        # But not if we already have a WFT active
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem
+          seconds: 0
+    - name: Grace of Air Totem
+      criteria:
+        # Replace Windfury Totem as quickly as possible
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem
+          seconds: 120
+        # But not if we already have a GoAT active
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Strength of Earth Totem
+      criteria:
+        # Refresh SoE if expired
+        - type: BUFF_DURATION_LTE
+          buff: Strength of Earth Totem
+          seconds: 0
+    - name: Flame Shock
+      criteria:
+        # Apply Flame Shock if the DoT is missing
+        - type: DEBUFF_DURATION_LTE
+          debuff: Flame Shock (DoT)
+          seconds: 0
+    - name: Earth Shock
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raid:
+  buffs:
+    # Consider your raid composition when selecting which buffs to apply
+    # e.g. if you don't have two paladins, you can't have two blessings
+    - Blessing of Kings
+    - Improved Blessing of Might
+    - Improved Mark of the Wild
+    - Improved Seal of the Crusader
+  debuffs:
+    # Sunder Armor and Imp EA cannot be applied at the same time
+    # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+    # To test with Sunder, comment out Imp EA
+    - Sunder Armor
+    - Improved Expose Armor
+    - Faerie Fire
+    - Curse of Recklessness
+    - Blood Frenzy
+    - Improved Scorch
+    - Misery
+    - Judgement of Wisdom
+    - Curse of the Elements
+#    - Curse of Shadow
+
+  party:
+    # Adjust these based on what you expect your personal group composition to be
+    # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
+    buffs:
+      - Ferocious Inspiration
+      - Leader of the Pack
+      - Improved Battle Shout
+      - Improved Sanctity Aura

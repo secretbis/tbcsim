@@ -32,10 +32,10 @@ class FlameShock : Ability() {
         val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
-        val shFocus = sim.buffs.find { it.name == ShamanisticFocus.name }
+        val shFocus = sim.buffs[ShamanisticFocus.name]
         val shfRed = if(shFocus != null) { 0.60 } else 0.0
 
-        val eleFocus = sim.buffs.find { it.name == ElementalFocus.name }
+        val eleFocus = sim.buffs[ElementalFocus.name]
         val elefRed = if(eleFocus != null) { 0.40 } else 0.0
 
         return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed, elefRed))

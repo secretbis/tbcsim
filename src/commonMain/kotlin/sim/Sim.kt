@@ -10,31 +10,31 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 class Sim (
     val config: Config,
-    val opts: SimOptions
+    val opts: SimOptions,
+    val progressCb:(SimProgress) -> Unit
 ) {
     val logger = KotlinLogging.logger {}
 
-    suspend fun sim() {
+    suspend fun sim(): List<SimIteration> {
         // Iteration coroutines
         val startTime = Clock.System.now()
 
         val iterations = (1..opts.iterations).map {
-            GlobalScope.async(Dispatchers.Default) {
+            GlobalScope.async {
+                progressCb(SimProgress(
+                    opts,
+                    it
+                ))
+
                 iterate(it)
             }
         }.awaitAll()
 
         val endTime = Clock.System.now()
-        val totalTime = endTime.minus(startTime).inMilliseconds
+        val totalTime = endTime.minus(startTime).inSeconds
         println("Completed ${iterations.size} iterations in $totalTime seconds")
 
-        // Stats
-        SimStats.resourceUsage(iterations, config.character.klass.resourceType)
-        SimStats.resultsByBuff(iterations)
-        SimStats.resultsByDebuff(iterations)
-        SimStats.resultsByDamageType(iterations)
-        SimStats.resultsByAbility(iterations)
-        SimStats.dps(iterations)
+        return iterations
     }
 
     private fun iterate(num: Int) : SimIteration {
