@@ -41,11 +41,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: npm install
-        run: npm install
-        working-directory: ./ui
+        run: cd ui && npm install
       - name: npm build
-        run: npm run build
-        working-directory: ./ui
+        run: cd ui && npm run build
 
       # Ship to gh-pages
       - name: Deploy
