@@ -89,7 +89,6 @@ kotlin {
 
                 implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
             }
         }
@@ -122,7 +121,6 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(npm("js-joda", "~1.11.0"))
                 implementation("io.github.microutils:kotlin-logging-js:2.0.4")
             }
         }

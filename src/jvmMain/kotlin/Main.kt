@@ -9,7 +9,6 @@ import kotlinx.coroutines.runBlocking
 import sim.*
 import sim.config.ConfigMaker
 import java.io.File
-import kotlin.time.ExperimentalTime
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
@@ -19,7 +18,6 @@ fun setupLogging(debug: Boolean) {
     }
 }
 
-@ExperimentalTime
 class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
@@ -88,5 +86,4 @@ class TBCSim : CliktCommand() {
     }
 }
 
-@ExperimentalTime
 fun main(args: Array<String>) = TBCSim().main(args)

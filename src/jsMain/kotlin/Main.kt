@@ -5,9 +5,7 @@ import sim.SimIteration
 import sim.SimOptions
 import sim.SimProgress
 import sim.config.Config
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 @JsExport
 fun runSim(config: Config, opts: SimOptions, progressCb: (SimProgress) -> Unit, cb: (iterations: Array<SimIteration>) -> Unit) {
     GlobalScope.promise {

@@ -3,11 +3,9 @@ package sim
 import kotlinx.coroutines.*
 import mu.KotlinLogging
 import sim.config.Config
+import util.Time
 import kotlin.random.Random
-import kotlinx.datetime.Clock
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class Sim (
     val config: Config,
     val opts: SimOptions,
@@ -17,7 +15,7 @@ class Sim (
 
     suspend fun sim(): List<SimIteration> {
         // Iteration coroutines
-        val startTime = Clock.System.now()
+        val startTime = Time.currentTimeMillis()
 
         val iterations = (1..opts.iterations).map {
             GlobalScope.async {
@@ -30,8 +28,8 @@ class Sim (
             }
         }.awaitAll()
 
-        val endTime = Clock.System.now()
-        val totalTime = endTime.minus(startTime).inSeconds
+        val endTime = Time.currentTimeMillis()
+        val totalTime = endTime.minus(startTime) / 1000.0
         println("Completed ${iterations.size} iterations in $totalTime seconds")
 
         return iterations
