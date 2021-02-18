@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, Schema, InputNumber, Checkbox, Row, Col } from 'rsuite';
+import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, Schema, InputNumber, Checkbox, Row, Col, CheckboxGroup } from 'rsuite';
 
 import simDefaults from '../data/simdefaults';
 
-const { BooleanType, NumberType } = Schema.Types;
+const { ArrayType, NumberType } = Schema.Types;
 const model = Schema.Model({
   durationSeconds: NumberType().range(30, 600, "Valid fight durations are 30-600s").isRequired("A fight duration is required."),
   durationVariabilitySeconds: NumberType().range(0, 60, "Valid fight variability amounts are 0-60s").isRequired("A fight variability amount is required."),
@@ -12,8 +12,8 @@ const model = Schema.Model({
   iterations: NumberType().range(1, 10000, "Valid iteration counts are 1-10000").isRequired("Number of iterations is required"),
   targetLevel: NumberType().range(70, 73, "Valid target levels are 70-73").isRequired("Target level is required"),
   targetArmor: NumberType().range(0, 10000, "Valid target armor amounts are 0-10000").isRequired("Target armor is required"),
-  allowParryAndBlock: BooleanType().isRequired("Parry and block choice is required."),
-  showHiddenBuffs: BooleanType().isRequired("Hidden buffs choice is required.")
+  allowParryAndBlock: ArrayType(),
+  showHiddenBuffs: ArrayType()
 });
 
 const groupStyle = {
@@ -25,9 +25,19 @@ export default function({ dispatch }) {
 
   function handleSubmit() {
     Object.entries(form.current.state.formValue).forEach(([key, val]) => {
+      // InputNumber form fields set strings for some goddamned reason
       if(model.schema[key].name == 'number') {
         val = parseInt(val, 10)
       }
+
+      // Checkboxes can only be tracked in forms via a CheckboxGroup
+      // https://github.com/rsuite/rsuite/issues/818
+      // So, the array is actually always just one number "1" as item zero, or empty
+      if(model.schema[key].name == 'array') {
+        val = val[0] === 1
+      }
+
+      // Dispatch state change
       dispatch({ type: key, value: val })
     });
   }
@@ -87,7 +97,9 @@ export default function({ dispatch }) {
           </FormGroup>
           <FormGroup controlId="allowParryAndBlock" style={groupStyle}>
             <ControlLabel>Allow Parry/Block?</ControlLabel>
-            <FormControl name="allowParryAndBlock" accepter={Checkbox} />
+            <FormControl name="allowParryAndBlock" accepter={CheckboxGroup}>
+              <Checkbox value={1} />
+            </FormControl>
             <HelpBlock tooltip>If checked, allows parry and block for melee simulation</HelpBlock>
           </FormGroup>
         </Col>
