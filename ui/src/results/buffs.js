@@ -1,39 +1,42 @@
 import React from 'react';
 
+import { toFixed, toFixedPct } from './formatters';
 import Table from './table';
 
 const columnInfo = [
   {
-    title: "Name",
+    title: 'Name',
+    key: 'name',
     flex: 2,
-    key: "name"
+    minWidth: 200
   },{
-    title: "AppliedCountAvg",
-    flex: 1,
-    key: "appliedAvg"
+    title: 'AppliedCountAvg',
+    key: 'appliedAvg',
+    formatter: toFixed()
   },{
-    title: "RefreshedCountAvg",
-    flex: 1,
-    key: "refreshedAvg"
+    title: 'RefreshedCountAvg',
+    key: 'refreshedAvg',
+    formatter: toFixed()
   },{
-    title: "UptimePct",
-    flex: 1,
-    key: "uptimePct"
+    title: 'UptimePct',
+    key: 'uptimePct',
+    formatter: toFixedPct()
   },{
-    title: "AvgDurationSeconds",
-    flex: 1,
-    key: "avgDuration"
+    title: 'AvgDurationSeconds',
+    key: 'avgDuration',
+    formatter: toFixed()
   },{
-    title: "AvgStacks",
-    flex: 1,
-    key: "avgStacks"
+    title: 'AvgStacks',
+    key: 'avgStacks',
+    formatter: toFixed()
   }
 ];
 
-export default (props) => {
+export default ({ title, data }) => {
   return (
     <Table
-      data={props.data}
+      title={title}
+      data={data}
       columnInfo={columnInfo}
     />
   )

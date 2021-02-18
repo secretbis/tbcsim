@@ -1,22 +1,35 @@
 import React from 'react';
-import { Table } from 'rsuite';
+import { Container, Table } from 'rsuite';
+
+import { noop } from './formatters'
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default (props) => {
+export default ({ title, data, columnInfo }) => {
+
+  function renderCell(col, row) {
+    const formatter = col.formatter || noop
+    return formatter(row[col.key])
+  }
+
   return (
-    <Table
-      autoHeight={true}
-      data={props.data}
-    >
-      {props.columnInfo.map(col => {
-        return (
-          <Column flexGrow={col.style}>
-            <HeaderCell>{col.title}</HeaderCell>
-            <Cell dataKey={col.key} />
-          </Column>
-        );
-      })}
-    </Table>
+    <Container>
+      <h5 style={{ marginBottom: '5px' }}>{title}</h5>
+      <Table
+        autoHeight={true}
+        data={data}
+      >
+        {columnInfo.map((col, idx) => {
+          return (
+            <Column key={idx} flexGrow={col.flex || 1} minWidth={col.minWidth}>
+              <HeaderCell title={col.title}>{col.title}</HeaderCell>
+              <Cell>
+                {row => renderCell(col, row)}
+              </Cell>
+            </Column>
+          );
+        })}
+      </Table>
+    </Container>
   )
 }

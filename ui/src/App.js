@@ -1,14 +1,60 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Container, Content, Header, Grid, Footer, Row, Button, Navbar, Nav, Icon, Message } from 'rsuite';
 
 import simDefaults from './data/simdefaults';
 import Presets from './presets/presets';
 import SimOptions from './sim/options';
+import SimResults from './results/results';
+
 import * as tbcsim from 'tbcsim';
 
 import './App.css';
 
-const bannerTitle = "Hello!  This is a work in progress."
+function stateReducer(state, action) {
+  let newState = state
+  if (state.hasOwnProperty(action.type)) {
+    newState = { ...state, [action.type]: state[action.type] = action.value };
+  } else {
+    console.warn(`Unhandled action type: ${action.type}`);
+  }
+
+  // Compute some props
+  if(newState.durationSeconds != null) {
+    newState.durationMs = newState.durationSeconds * 1000
+  }
+
+  if(newState.durationVariabilitySeconds != null) {
+    newState.durationVariabilityMs = newState.durationVariabilitySeconds * 1000
+  }
+
+  return newState
+}
+
+const initialState = {
+  iterationsCompleted: null,
+  iterationResults: null,
+
+  resultsByAbility: null,
+  resultsByBuff: null,
+  resultsByDebuff: null,
+  resultsByDamageType: null,
+  resultsResourceUsage: null,
+  resultsDps: null,
+
+  durationSeconds: simDefaults.durationSeconds,
+  durationVariabilitySeconds: simDefaults.durationVariabilitySeconds,
+  stepMs: simDefaults.stepMs,
+  latencyMs: simDefaults.latencyMs,
+  iterations: simDefaults.iterations,
+  targetLevel: simDefaults.targetLevel,
+  targetArmor: simDefaults.targetArmor,
+  allowParryAndBlock: simDefaults.allowParryAndBlock,
+  showHiddenBuffs: simDefaults.showHiddenBuffs,
+
+  characterPreset: null,
+};
+
+const bannerTitle = 'Hello!  This is a work in progress.'
 function bannerMsg() {
   return (
     <div>
@@ -22,92 +68,73 @@ function bannerMsg() {
 }
 
 function App() {
-  // Sim status
-  const [iterationsCompleted, setIterationsCompleted] = useState(null);
+  const [state, dispatch] = useReducer(stateReducer, initialState)
 
-  // Sim options state
-  const [durationSeconds, setDurationSeconds] = useState(simDefaults.durationSeconds);
-  const [durationVariabilitySeconds, setDurationVariabilitySeconds] = useState(simDefaults.durationVariabilitySeconds);
-  const [stepMs, setStepMs] = useState(simDefaults.stepMs);
-  const [latencyMs, setLatencyMs] = useState(simDefaults.latencyMs);
-  const [iterations, setIterations] = useState(simDefaults.iterations);
-  const [targetLevel, setTargetLevel] = useState(simDefaults.targetLevel);
-  const [targetArmor, setTargetArmor] = useState(simDefaults.targetArmor);
-  const [allowParryAndBlock, setAllowParryAndBlock] = useState(simDefaults.allowParryAndBlock);
-  const [showHiddenBuffs, setShowHiddenBuffs] = useState(simDefaults.showHiddenBuffs);
-
-  const optSetters = {
-    durationSeconds: setDurationSeconds,
-    durationVariabilitySeconds: setDurationVariabilitySeconds,
-    stepMs: setStepMs,
-    latencyMs: setLatencyMs,
-    iterations: setIterations,
-    targetLevel: setTargetLevel,
-    targetArmor: setTargetArmor,
-    allowParryAndBlock: setAllowParryAndBlock,
-    showHiddenBuffs: setShowHiddenBuffs
-  }
-
-  const optData = {
-    durationMs: durationSeconds * 1000,
-    durationVariabilityMs: durationVariabilitySeconds * 1000,
-    stepMs,
-    latencyMs,
-    iterations,
-    targetLevel,
-    targetArmor,
-    allowParryAndBlock,
-    showHiddenBuffs,
+  const resultsData = {
+    ability: state.resultsByAbility,
+    buff: state.resultsByBuff,
+    debuff: state.resultsByDebuff,
+    damageType: state.resultsByDamageType,
+    resourceUsage: state.resultsResourceUsage,
+    dps: state.resultsDps
   };
 
-  // Character/preset state
-  const [characterPreset, setCharacterPreset] = React.useState();
-
-  function sim(rawOpts, preset) {
+  function sim() {
     // TODO: This serialize-deserialize jump can probably be made more efficient
-    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify(preset))
+    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify(state.characterPreset))
 
     const simOpts = new tbcsim.sim.SimOptions(
-      rawOpts.durationMs,
-      rawOpts.durationVariabilityMs,
-      rawOpts.stepMs,
-      rawOpts.latencyMs,
-      rawOpts.iterations,
-      rawOpts.targetLevel,
-      rawOpts.targetArmor,
-      rawOpts.allowParryAndBlock,
-      rawOpts.showHiddenBuffs
+      state.durationMs,
+      state.durationVariabilityMs,
+      state.stepMs,
+      state.latencyMs,
+      state.iterations,
+      state.targetLevel,
+      state.targetArmor,
+      state.allowParryAndBlock,
+      state.showHiddenBuffs
     )
 
     tbcsim.runSim(config, simOpts,
       ({ opts, iterationsCompleted }) => {
         console.log(`Completed: ${iterationsCompleted}`)
-        setIterationsCompleted(iterationsCompleted)
+        dispatch({ type: 'iterationsCompleted', value: iterationsCompleted })
       }, (iterations) => {
-          setIterationsCompleted(null)
-          debugger
+          const iterList = tbcsim.util.Utils.listWrap(iterations)
+
+          dispatch({ type: 'iterationsCompleted', value: null })
+          dispatch({ type: 'iterationResults', value: iterList })
+
+          // Compute results
+          dispatch({ type: 'resultsResourceUsage', value: tbcsim.sim.SimStats.resourceUsage(iterList) })
+          dispatch({ type: 'resultsByBuff', value: tbcsim.sim.SimStats.resultsByBuff(iterList).toArray() })
+          dispatch({ type: 'resultsByDebuff', value: tbcsim.sim.SimStats.resultsByDebuff(iterList).toArray() })
+          dispatch({ type: 'resultsByDamageType', value: tbcsim.sim.SimStats.resultsByDamageType(iterList).toArray() })
+          dispatch({ type: 'resultsByAbility', value: tbcsim.sim.SimStats.resultsByAbility(iterList).toArray() })
+          dispatch({ type: 'resultsDps', value: tbcsim.sim.SimStats.dps_0(iterList) })
       }
     )
   }
 
   function onSimClick() {
-    sim(optData, characterPreset)
+    dispatch({ type: 'iterationResults', value: null })
+    sim()
   }
 
-  const simDisabled = characterPreset == null || iterationsCompleted != null;
+  const simDisabled = state.characterPreset == null || state.iterationsCompleted != null;
 
   // App
   return (
-    <Container style={{ height: "100%" }}>
+    <Container style={{ height: '100%' }}>
       <Header>
         <Navbar>
           <Navbar.Header>
-            <h3 style={{padding: '10px 15px'}}>TBCSim</h3>
+            <h4 style={{ padding: '15px' }}>TBCSim</h4>
           </Navbar.Header>
           <Navbar.Body>
             <Nav pullRight>
               <Nav.Item icon={<Icon icon='github' />}>
-                <a style={{color: '#e9ebf0', textDecoration: 'none'}} href='https://github.com/marisa-ashkandi/tbcsim/issues/new'>Report a Bug</a>
+                <a style={{ color: '#e9ebf0', textDecoration: 'none' }} href='https://github.com/marisa-ashkandi/tbcsim/issues/new' target='_blank' rel='noreferrer noopener'>Report a Bug</a>
               </Nav.Item>
             </Nav>
           </Navbar.Body>
@@ -115,23 +142,28 @@ function App() {
       </Header>
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
-          <Message type="warning" title={bannerTitle} description={bannerMsg()} />
+          <Message type='warning' title={bannerTitle} description={bannerMsg()} />
           <Container style={{padding: '10px 0px', fontWeight: 800}}>
-            <Presets value={characterPreset} setter={setCharacterPreset} />
+            <Presets value={state.characterPreset} dispatch={dispatch} />
           </Container>
           <Container style={{padding: '10px 0px', maxWidth: '700px'}}>
-            <SimOptions setters={optSetters} />
+            <SimOptions dispatch={dispatch} />
           </Container>
           <Row>
-            <Button disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
-            {iterationsCompleted != null &&
-              <span style={{ marginLeft: "10px" }}>Iterations completed: {iterationsCompleted}</span>
+            <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
+            {state.iterationsCompleted != null &&
+              <span style={{ marginLeft: '10px' }}>Iterations completed: {state.iterationsCompleted}</span>
             }
           </Row>
+          {state.iterationResults &&
+          <Container>
+            <SimResults character={state.characterPreset} results={resultsData} />
+          </Container>
+          }
         </Grid>
       </Content>
       <Footer>
-        <Navbar className="justify-content-center">
+        <Navbar className='justify-content-center'>
           <Navbar.Body>
             <Nav>
               <Nav.Item></Nav.Item>

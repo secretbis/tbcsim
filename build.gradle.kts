@@ -60,7 +60,7 @@ kotlin {
 
         browser {
             webpackTask {
-                output.libraryTarget = "commonjs2"
+                output.libraryTarget = "commonjs"
             }
         }
 

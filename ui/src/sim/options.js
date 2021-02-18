@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, Schema, InputNumber, Checkbox, Row, Col } from 'rsuite';
 
 import simDefaults from '../data/simdefaults';
@@ -7,7 +7,7 @@ const { BooleanType, NumberType } = Schema.Types;
 const model = Schema.Model({
   durationSeconds: NumberType().range(30, 600, "Valid fight durations are 30-600s").isRequired("A fight duration is required."),
   durationVariabilitySeconds: NumberType().range(0, 60, "Valid fight variability amounts are 0-60s").isRequired("A fight variability amount is required."),
-  stepMs: NumberType().range(10, 1000, "Valid step durations are 10-1000ms").isRequired("A fight step size is required"),
+  stepMs: NumberType().range(1, 1000, "Valid step durations are 1-1000ms").isRequired("A fight step size is required"),
   latencyMs: NumberType().range(0, 500, "Valid latencies are 0-500ms").isRequired("A latency amount is required"),
   iterations: NumberType().range(1, 10000, "Valid iteration counts are 1-10000").isRequired("Number of iterations is required"),
   targetLevel: NumberType().range(70, 73, "Valid target levels are 70-73").isRequired("Target level is required"),
@@ -20,29 +20,31 @@ const groupStyle = {
   marginBottom: '5px'
 };
 
-export default function({ setters }) {
-  const [formState, setFormState] = useState(simDefaults);
+export default function({ dispatch }) {
+  const form = useRef(null);
 
-  function onChange(value, evt) {
-    setFormState({...formState, ...value})
+  function handleSubmit() {
+    Object.entries(form.current.state.formValue).forEach(([key, val]) => {
+      if(model.schema[key].name == 'number') {
+        val = parseInt(val, 10)
+      }
+      dispatch({ type: key, value: val })
+    });
   }
 
   function onCheck(formErr) {
-    if(Object.keys(formErr).length === 0) {
-      // If the form is valid, set real state instead of local state
-      Object.entries(formState).forEach(([key, val]) => {
-        setters[key](val)
-      });
+    if(form && Object.keys(formErr).length === 0) {
+      setTimeout(() => handleSubmit())
     }
   }
 
   return (
     <Form
       checkTrigger={'change'}
-      formValue={formState}
+      formDefaultValue={simDefaults}
       model={model}
-      onChange={onChange}
       onCheck={onCheck}
+      ref={form}
     >
       <Row>
         <Col xs={12}>

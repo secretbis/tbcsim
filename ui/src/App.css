@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.rs-table-cell-header .rs-table-cell-content {
+  font-size: 15px !important;
+  font-weight: 600;
+}

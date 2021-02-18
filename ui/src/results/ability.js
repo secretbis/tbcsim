@@ -1,62 +1,65 @@
 import React from 'react';
 
+import { toFixed, toFixedPct } from './formatters';
 import Table from './table';
 
 const columnInfo = [
   {
-    title: "Name",
-    flex: 1,
-    key: "name"
+    title: 'Name',
+    key: 'name',
+    flex: 2,
+    minWidth: 200
   },{
-    title: "CountAvg",
-    flex: 1,
-    key: "countAvg"
+    title: 'CountAvg',
+    key: 'countAvg',
+    formatter: toFixed()
   },{
-    title: "TotalDmgAvg",
-    flex: 1,
-    key: "totalAvg"
+    title: 'TotalDmgAvg',
+    key: 'totalAvg',
+    formatter: toFixed()
   },{
-    title: "PctOfTotal",
-    flex: 1,
-    key: "pctOfTotal"
+    title: 'PctOfTotal',
+    key: 'pctOfTotal',
+    formatter: toFixedPct()
   },{
-    title: "AvgHit",
-    flex: 1,
-    key: "avgHit"
+    title: 'AvgHit',
+    key: 'avgHit',
+    formatter: toFixed()
   },{
-    title: "AvgCrit",
-    flex: 1,
-    key: "avgCrit"
+    title: 'AvgCrit',
+    key: 'avgCrit',
+    formatter: toFixed()
   },{
-    title: "Hit%",
-    flex: 1,
-    key: "hitPct"
+    title: 'Hit%',
+    key: 'hitPct',
+    formatter: toFixedPct()
   },{
-    title: "Crit%",
-    flex: 1,
-    key: "critPct"
+    title: 'Crit%',
+    key: 'critPct',
+    formatter: toFixedPct()
   },{
-    title: "Miss%",
-    flex: 1,
-    key: "missPct"
+    title: 'Miss%',
+    key: 'missPct',
+    formatter: toFixedPct()
   },{
-    title: "Dodge%",
-    flex: 1,
-    key: "dodgePct"
+    title: 'Dodge%',
+    key: 'dodgePct',
+    formatter: toFixedPct()
   },{
-    title: "Parry%",
-    flex: 1,
-    key: "parryPct"
+    title: 'Parry%',
+    key: 'parryPct',
+    formatter: toFixedPct()
   },{
-    title: "Glance%",
-    flex: 1,
-    key: "glancePct"
+    title: 'Glance%',
+    key: 'glancePct',
+    formatter: toFixedPct()
   }
 ]
 
 export default (props) => {
   return (
     <Table
+      title={'Ability Breakdown'}
       data={props.data}
       columnInfo={columnInfo}
     />

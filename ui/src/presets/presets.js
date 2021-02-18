@@ -23,12 +23,12 @@ const presets = {
   ]
 }
 
-export default ({ value, setter }) => {
+export default ({ value, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function onSelect(key, evt) {
     const [klass, idx] = key.split('-')
-    setter(presets[klass][idx])
+    dispatch({ type: 'characterPreset', value: presets[klass][idx] })
     setIsOpen(false)
   }
 

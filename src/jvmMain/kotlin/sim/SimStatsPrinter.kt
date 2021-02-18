@@ -2,12 +2,13 @@ package sim
 
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
+import sim.statsmodel.*
 import java.text.DecimalFormat
 
 object SimStatsPrinter {
     val df = DecimalFormat("#,###.##")
 
-    fun printBuffs(title: String, rows: List<SimStats.BuffBreakdown>) {
+    fun printBuffs(title: String, rows: List<BuffBreakdown>) {
         println(
             "$title\n" +
             table {
@@ -35,7 +36,7 @@ object SimStatsPrinter {
         )
     }
 
-    fun printAbilities(rows: List<SimStats.AbilityBreakdown>) {
+    fun printAbilities(rows: List<AbilityBreakdown>) {
         println(
             "Ability Breakdown\n" +
             table {
@@ -64,14 +65,14 @@ object SimStatsPrinter {
         )
     }
 
-    fun printDamage(rows: List<SimStats.DamageTypeBreakdown>) {
+    fun printDamage(rows: List<DamageTypeBreakdown>) {
         println(
             "Damage Type Breakdown\n" +
             table {
                 header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal")
 
                 for(row in rows) {
-                    row(row.type.name, row.countAvg, row.totalAvg, row.pctOfTotal)
+                    row(row.type, row.countAvg, row.totalAvg, row.pctOfTotal)
                 }
 
                 hints {
@@ -93,7 +94,7 @@ object SimStatsPrinter {
         )
     }
 
-    fun printDps(dps: SimStats.DpsBreakdown) {
+    fun printDps(dps: DpsBreakdown) {
         println("AVERAGE DPS: ${df.format(dps.mean)}")
         println("MEDIAN DPS: ${df.format(dps.median)}")
         println("STDDEV DPS: ${df.format(dps.sd)}")

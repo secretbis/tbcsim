@@ -1,63 +1,14 @@
 package sim
 
-import character.Buff
-import character.Resource
-import data.Constants
 import mu.KotlinLogging
-import sim.rotation.Rotation
+import sim.statsmodel.*
+import kotlin.js.JsExport
 import kotlin.math.sqrt
 import kotlin.random.Random
 
+@JsExport
 object SimStats {
     val logger = KotlinLogging.logger {}
-
-    data class BuffSegment(
-        val startMs: Int,
-        val endMs: Int,
-        val refreshCount: Int,
-        val buff: Buff,
-        val stackDurationsMs: List<Pair<Int, Int>>
-    ) {
-        val durationMs: Int
-            get() = endMs - startMs
-    }
-
-    data class AbilityBreakdown(
-        val name: String,
-        val countAvg: Double,
-        val totalAvg: Double,
-        val pctOfTotal: Double,
-        val avgHit: Double,
-        val avgCrit: Double,
-        val hitPct: Double,
-        val critPct: Double,
-        val missPct: Double,
-        val dodgePct: Double,
-        val parryPct: Double,
-        val glancePct: Double,
-    )
-
-    data class BuffBreakdown(
-        val name: String,
-        val appliedAvg: Double,
-        val refreshedAvg: Double,
-        val uptimePct: Double,
-        val avgDuration: Double,
-        val avgStacks: Double
-    )
-
-    data class DamageTypeBreakdown(
-        val type: Constants.DamageType,
-        val countAvg: Double,
-        val totalAvg: Double,
-        val pctOfTotal: Double
-    )
-
-    data class DpsBreakdown(
-        val median: Double,
-        val mean: Double,
-        val sd: Double
-    )
 
     fun sep() {
         println("************************************************************************************")
@@ -253,7 +204,7 @@ object SimStats {
         val keys = byAbility.keys.toList()
         val grandTotal = keys.fold(0.0) { acc, it ->
             acc + (byAbility[it]?.sumByDouble { it.amount } ?: 0.0)
-        }
+        } / iterations.size.toDouble()
 
         return keys.map { key ->
             val events = byAbility[key]!!
@@ -306,7 +257,7 @@ object SimStats {
 
         val grandTotal = keys.fold(0.0) { acc, it ->
             acc + (byDmgType[it]?.sumByDouble { it.amount } ?: 0.0)
-        }
+        } / iterations.size.toDouble()
 
         return keys.map { key ->
             val events = byDmgType[key]!!
@@ -316,18 +267,13 @@ object SimStats {
             val pctOfTotal = total / grandTotal * 100.0
 
             DamageTypeBreakdown(
-                key!!,
+                key!!.name,
                 count,
                 total,
                 pctOfTotal
             )
         }.sortedBy { it.totalAvg }.reversed()
     }
-
-    data class ResourceBreakdown(
-        val iterationIdx: Int,
-        val series: List<Pair<Int, Double>>
-    )
 
     fun resourceUsage(iterations: List<SimIteration>): ResourceBreakdown {
         // Pick an execution at random
