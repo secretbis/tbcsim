@@ -41,12 +41,10 @@ class SimIteration(
 
     // Buffs need a place to store state per iteration
     // Store individual data per instance and store shared data per-string (generally the buff name)
-    val buffState: MutableMap<Buff, Buff.State> = mutableMapOf()
-    val sharedBuffState: MutableMap<String, Buff.State> = mutableMapOf()
+    val buffState: MutableMap<String, Buff.State> = mutableMapOf()
     val abilityState: MutableMap<String, Ability.State> = mutableMapOf()
     val sharedAbilityState: MutableMap<String, Ability.State> = mutableMapOf()
-    val debuffState: MutableMap<Buff, Buff.State> = mutableMapOf()
-    val sharedDebuffState: MutableMap<String, Buff.State> = mutableMapOf()
+    val debuffState: MutableMap<String, Buff.State> = mutableMapOf()
     val procState: MutableMap<Proc, Proc.State> = mutableMapOf()
     val rotationState: MutableMap<Criterion.Type, Criterion.State> = mutableMapOf()
 
@@ -246,7 +244,7 @@ class SimIteration(
 
         // If this buff stacks, track stacks
         val stacks = if(buff.maxStacks > 0) {
-            buffState[buff]?.currentStacks ?: 0
+            buffState[buff.name]?.currentStacks ?: 0
         } else 0
 
         // If this is a new buff, add it
@@ -294,7 +292,7 @@ class SimIteration(
 
         // If this debuff stacks, track stacks
         val stacks = if(debuff.maxStacks > 0) {
-            debuffState[debuff]?.currentStacks ?: 0
+            debuffState[debuff.name]?.currentStacks ?: 0
         } else 0
 
         // If this is a new debuff, add it
@@ -324,7 +322,7 @@ class SimIteration(
     }
 
     fun consumeBuff(buff: Buff) {
-        val state = buffState[buff]
+        val state = buffState[buff.name]
         if(state != null) {
             state.currentCharges -= 1
 

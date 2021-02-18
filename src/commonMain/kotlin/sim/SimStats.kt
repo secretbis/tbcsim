@@ -17,16 +17,6 @@ object SimStats {
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
-//    fun precombatStats(sim: SimIteration) {
-//        SimStatsPrinter.printPrecombatStats(sim)
-//
-//        println("ACTIVE RAID BUFFS")
-//        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
-//            println(" - ${it.ability.name}")
-//        }
-//        println()
-//    }
-
     fun dps(iterations: List<SimIteration>): DpsBreakdown {
         val perIteration = iterations.map {
             it.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->

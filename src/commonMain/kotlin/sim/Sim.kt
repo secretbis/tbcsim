@@ -19,12 +19,15 @@ class Sim (
 
         val iterations = (1..opts.iterations).map {
             GlobalScope.async {
+                val iteration = iterate(it)
+
                 progressCb(SimProgress(
                     opts,
-                    it
+                    it,
+                    iteration
                 ))
 
-                iterate(it)
+                iteration
             }
         }.awaitAll()
 
@@ -38,9 +41,6 @@ class Sim (
     private fun iterate(num: Int) : SimIteration {
         // Simulate
         val iteration = SimIteration(config.character, config.rotation, opts)
-//        if (num == 1) {
-//            SimStats.precombatStats(iteration)
-//        }
 
         // Randomly alter the fight duration, if configured
         val dvms = opts.durationVaribilityMs

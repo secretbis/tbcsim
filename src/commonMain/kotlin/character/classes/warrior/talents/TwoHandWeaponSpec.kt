@@ -23,8 +23,8 @@ class TwoHandWeaponSpec(currentRank: Int) : Talent(currentRank) {
 
         override fun modifyStats(sim: SimIteration): Stats {
             return if(Melee.is2H(sim.subject.gear.mainHand)) {
-                val multiplier = currentRank * 0.01
-                Stats(physicalDamageMultiplier = 1.0 + multiplier)
+                val multiplier = 1.0 + currentRank * 0.01
+                Stats(physicalDamageMultiplier = multiplier)
             } else Stats()
         }
     }

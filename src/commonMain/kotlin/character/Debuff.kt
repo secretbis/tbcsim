@@ -17,17 +17,10 @@ abstract class Debuff : Buff() {
         // Do nothing by default
     }
 
-    override fun sharedState(name: String, sim: SimIteration): State {
+    override fun state(sim: SimIteration, stateKey: String): State {
         // Create state object if it does not exist, and return it
-        val state = sim.sharedDebuffState[name] ?: stateFactory()
-        sim.sharedDebuffState[name] = state
-        return state
-    }
-
-    override fun state(sim: SimIteration): State {
-        // Create state object if it does not exist, and return it
-        val state = sim.debuffState[this] ?: stateFactory()
-        sim.debuffState[this] = state
+        val state = sim.debuffState[stateKey] ?: stateFactory()
+        sim.debuffState[stateKey] = state
         return state
     }
 }

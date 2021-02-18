@@ -26,6 +26,10 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         return null
     }
 
+    private fun buffState(sim: SimIteration): WindfuryWeaponState {
+        return this.state(sim, "Windfury Weapon") as WindfuryWeaponState
+    }
+
     // Windfury weapon has a global 3s ICD, regardless of rank
     val icdMs = 3000
     val proc = object : ItemProc(sourceItems) {
@@ -41,7 +45,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
             // Check shared WF ICD state
-            val state = sharedState(name, sim) as WindfuryWeaponState
+            val state = buffState(sim)
 
             val lastProc = state.lastWindfuryWeaponProcMs
             val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
@@ -66,7 +70,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 wfAbility!!.cast(sim)
 
                 // Update ICD state
-                val state = sharedState(name, sim) as WindfuryWeaponState
+                val state = buffState(sim)
                 state.lastWindfuryWeaponProcMs = sim.elapsedTimeMs
 
                 sim.logEvent(

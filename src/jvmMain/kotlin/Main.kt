@@ -54,7 +54,11 @@ class TBCSim : CliktCommand() {
                 )
 
                 runBlocking {
-                    val iterations = Sim(config, opts, {}).sim()
+                    val iterations = Sim(config, opts) {
+                        if(it.iterationsCompleted == 1) {
+                            SimStatsPrinter.precombatStats(it.currentIteration)
+                        }
+                    }.sim()
 
                     // Stats
                     val durationSeconds = (opts.durationMs / 1000.0).toInt()

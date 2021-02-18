@@ -19,7 +19,7 @@ class ImprovedBerserkerStance(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sim: SimIteration): Stats {
-            val multiplier = currentRank * 0.02
+            val multiplier = 1.0 + currentRank * 0.02
             return Stats(attackPowerMultiplier = multiplier)
         }
     }

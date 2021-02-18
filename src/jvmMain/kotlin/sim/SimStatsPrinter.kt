@@ -2,11 +2,22 @@ package sim
 
 import de.m3y.kformat.Table
 import de.m3y.kformat.table
+import sim.rotation.Rotation
 import sim.statsmodel.*
 import java.text.DecimalFormat
 
 object SimStatsPrinter {
     val df = DecimalFormat("#,###.##")
+
+    fun precombatStats(sim: SimIteration) {
+        printPrecombatStats(sim)
+
+        println("ACTIVE RAID BUFFS")
+        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
+            println(" - ${it.ability.name}")
+        }
+        println()
+    }
 
     fun printBuffs(title: String, rows: List<BuffBreakdown>) {
         println(
@@ -106,10 +117,10 @@ object SimStatsPrinter {
             table {
                 row("Strength:", sim.strength(), "Phys. Hit:", sim.meleeHitPct())
                 row("Agility:", sim.agility(), "Phys. Crit:", sim.meleeCritPct())
-                row("Intellect:", sim.intellect(), "Phys. Haste:", 1.0 - sim.meleeHasteMultiplier())
+                row("Intellect:", sim.intellect(), "Phys. Haste:", sim.meleeHasteMultiplier() - 1.0)
                 row("Stamina:", sim.stamina(), "Spell Hit:", sim.spellHitPct())
                 row("Spirit:", sim.spirit(), "Spell Crit:", sim.spellCritPct())
-                row("Armor Pen:", sim.armorPen(), "Spell Haste:", 1.0 - sim.spellHasteMultiplier())
+                row("Armor Pen:", sim.armorPen(), "Spell Haste:", sim.spellHasteMultiplier() - 1.0)
                 row("Attack Power", sim.attackPower(), "Expertise:", sim.expertisePct())
                 row("R. Attack Power", sim.rangedAttackPower())
                 row("MP5", sim.subjectStats.manaPer5Seconds)

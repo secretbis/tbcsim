@@ -95,6 +95,15 @@ function App() {
       state.showHiddenBuffs
     )
 
+    function cleanKtList(list) {
+      let finalList = list
+      if(list && list.toArray) {
+        return list.toArray()
+      }
+
+      return []
+    }
+
     tbcsim.runSim(config, simOpts,
       ({ opts, iterationsCompleted }) => {
         console.log(`Completed: ${iterationsCompleted}`)
@@ -105,12 +114,17 @@ function App() {
           dispatch({ type: 'iterationsCompleted', value: null })
           dispatch({ type: 'iterationResults', value: iterList })
 
+          const buffResults = cleanKtList(tbcsim.sim.SimStats.resultsByBuff(iterList));
+          const debuffResults = cleanKtList(tbcsim.sim.SimStats.resultsByDebuff(iterList));
+          const abilityResults = cleanKtList(tbcsim.sim.SimStats.resultsByAbility(iterList));
+          const damageTypeResults = cleanKtList(tbcsim.sim.SimStats.resultsByDamageType(iterList));
+
           // Compute results
           dispatch({ type: 'resultsResourceUsage', value: tbcsim.sim.SimStats.resourceUsage(iterList) })
-          dispatch({ type: 'resultsByBuff', value: tbcsim.sim.SimStats.resultsByBuff(iterList).toArray() })
-          dispatch({ type: 'resultsByDebuff', value: tbcsim.sim.SimStats.resultsByDebuff(iterList).toArray() })
-          dispatch({ type: 'resultsByDamageType', value: tbcsim.sim.SimStats.resultsByDamageType(iterList).toArray() })
-          dispatch({ type: 'resultsByAbility', value: tbcsim.sim.SimStats.resultsByAbility(iterList).toArray() })
+          dispatch({ type: 'resultsByBuff', value: buffResults })
+          dispatch({ type: 'resultsByDebuff', value: debuffResults })
+          dispatch({ type: 'resultsByDamageType', value: damageTypeResults })
+          dispatch({ type: 'resultsByAbility', value: abilityResults })
           dispatch({ type: 'resultsDps', value: tbcsim.sim.SimStats.dps_0(iterList) })
       }
     )
