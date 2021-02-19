@@ -27,8 +27,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Kotlin Build
-        run: ./gradlew build
+      - name: Kotlin JS Build
+        run: ./gradlew compileKotlinJs
 
       # NPM/UI
       - uses: actions/setup-node@v2
