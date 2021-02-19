@@ -43,8 +43,10 @@ public class GnomereganAutoBlocker : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(42038, "Block Value 59", this),
-      Buffs.byIdOrName(35169, "Gnome Ingenuity", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(42038, "Block Value 59", this),
+        Buffs.byIdOrName(35169, "Gnome Ingenuity", this)
+        )}
+
 }

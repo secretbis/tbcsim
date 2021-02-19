@@ -51,7 +51,9 @@ public class OnslaughtBattleHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39925, "Armor Penetration 105", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39925, "Armor Penetration 105", this)
+        )}
+
 }

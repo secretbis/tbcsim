@@ -43,8 +43,10 @@ public class TomeOfDiabolicRemedy : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(40343, "Increased Mana Regen", this),
-      Buffs.byIdOrName(43710, "Diabolic Remedy", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(40343, "Increased Mana Regen", this),
+        Buffs.byIdOrName(43710, "Diabolic Remedy", this)
+        )}
+
 }

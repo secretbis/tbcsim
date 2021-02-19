@@ -43,8 +43,10 @@ public class PrismOfInnerCalm : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(38326, "Crit Threat Reduction Melee", this),
-      Buffs.byIdOrName(38327, "Crit Threat Reduction Spell", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(38326, "Crit Threat Reduction Melee", this),
+        Buffs.byIdOrName(38327, "Crit Threat Reduction Spell", this)
+        )}
+
 }

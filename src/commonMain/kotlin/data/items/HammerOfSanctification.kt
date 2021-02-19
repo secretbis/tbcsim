@@ -49,8 +49,10 @@ public class HammerOfSanctification : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(44973, "Increase Healing 550", this),
-      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(44973, "Increase Healing 550", this),
+        Buffs.byIdOrName(21631, "Increased Mana Regen", this)
+        )}
+
 }

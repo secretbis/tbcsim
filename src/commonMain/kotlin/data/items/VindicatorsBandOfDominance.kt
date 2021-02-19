@@ -44,8 +44,10 @@ public class VindicatorsBandOfDominance : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18050, "Increase Spell Dam 33", this),
-      Buffs.byIdOrName(43782, "Spell Penetration 14", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18050, "Increase Spell Dam 33", this),
+        Buffs.byIdOrName(43782, "Spell Penetration 14", this)
+        )}
+
 }

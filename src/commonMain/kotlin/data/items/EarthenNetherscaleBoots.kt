@@ -45,8 +45,10 @@ public class EarthenNetherscaleBoots : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(23990, "Item - Minor Run Speed", this),
-      Buffs.byIdOrName(20959, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(23990, "Item - Minor Run Speed", this),
+        Buffs.byIdOrName(20959, "Increased Mana Regen", this)
+        )}
+
 }

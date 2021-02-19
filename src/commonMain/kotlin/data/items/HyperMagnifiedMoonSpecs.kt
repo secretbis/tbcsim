@@ -50,10 +50,12 @@ public class HyperMagnifiedMoonSpecs : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(23730, "Increase Spell Dam 64", this),
-      Buffs.byIdOrName(30645, "Gas Cloud Tracking", this),
-      Buffs.byIdOrName(40273, "Stealth Detection", this),
-      Buffs.byIdOrName(12883, "Longsight", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(23730, "Increase Spell Dam 64", this),
+        Buffs.byIdOrName(30645, "Gas Cloud Tracking", this),
+        Buffs.byIdOrName(40273, "Stealth Detection", this),
+        Buffs.byIdOrName(12883, "Longsight", this)
+        )}
+
 }

@@ -47,8 +47,10 @@ public class GladiatorsDragonhideGloves : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(7680, "Increase Healing 13", this),
-      Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(7680, "Increase Healing 13", this),
+        Buffs.byIdOrName(33830, "Cyclone Cast Time Decrease", this)
+        )}
+
 }

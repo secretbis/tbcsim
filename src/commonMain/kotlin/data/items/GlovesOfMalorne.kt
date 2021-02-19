@@ -47,7 +47,9 @@ public class GlovesOfMalorne : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18050, "Increase Spell Dam 33", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18050, "Increase Spell Dam 33", this)
+        )}
+
 }

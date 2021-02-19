@@ -45,8 +45,10 @@ public class BrutalGladiatorsMoonclothGloves : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(44297, "Improved Psychic Scream", this),
-      Buffs.byIdOrName(18046, "Increase Healing 77", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(44297, "Improved Psychic Scream", this),
+        Buffs.byIdOrName(18046, "Increase Healing 77", this)
+        )}
+
 }

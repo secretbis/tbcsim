@@ -45,9 +45,11 @@ public class StaffOfDisintegration : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(36385, "Increase Spell Dam 325", this),
-      Buffs.byIdOrName(44917, "Attack Power - Feral (+1459)", this),
-      Buffs.byIdOrName(36480, "Mental Protection Field", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(36385, "Increase Spell Dam 325", this),
+        Buffs.byIdOrName(44917, "Attack Power - Feral (+1459)", this),
+        Buffs.byIdOrName(36480, "Mental Protection Field", this)
+        )}
+
 }

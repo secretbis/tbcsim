@@ -51,8 +51,10 @@ public class SkyshatterCord : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45011, "Increase Spell Dam 50", this),
-      Buffs.byIdOrName(21626, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45011, "Increase Spell Dam 50", this),
+        Buffs.byIdOrName(21626, "Increased Mana Regen", this)
+        )}
+
 }

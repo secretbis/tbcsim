@@ -46,8 +46,10 @@ public class HighWarlordsSilkHandguards : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(33066, "Mage Fire Blast Range Bonus", this),
-      Buffs.byIdOrName(14254, "Increase Spell Dam 19", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(33066, "Mage Fire Blast Range Bonus", this),
+        Buffs.byIdOrName(14254, "Increase Spell Dam 19", this)
+        )}
+
 }

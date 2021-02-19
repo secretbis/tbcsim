@@ -50,7 +50,9 @@ public class ShadowedGauntletsOfParoxysm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15827, "Attack Power 82", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15827, "Attack Power 82", this)
+        )}
+
 }

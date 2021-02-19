@@ -50,8 +50,10 @@ public class FrozenShadoweaveShoulders : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2880)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18025, "Increase Shadow Dam 50", this),
-      Buffs.byIdOrName(17908, "Increase Frost Dam 50", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18025, "Increase Shadow Dam 50", this),
+        Buffs.byIdOrName(17908, "Increase Frost Dam 50", this)
+        )}
+
 }

@@ -43,7 +43,9 @@ public class ShardOfContempt : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45354, "Item - Sunwell Dungeon Melee Trinket", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45354, "Item - Sunwell Dungeon Melee Trinket", this)
+        )}
+
 }

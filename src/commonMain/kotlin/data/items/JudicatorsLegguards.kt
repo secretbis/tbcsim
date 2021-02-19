@@ -52,8 +52,10 @@ public class JudicatorsLegguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(24196, "Increase Spell Dam 47", this),
-      Buffs.byIdOrName(34593, "Block Value 33", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(24196, "Increase Spell Dam 47", this),
+        Buffs.byIdOrName(34593, "Block Value 33", this)
+        )}
+
 }

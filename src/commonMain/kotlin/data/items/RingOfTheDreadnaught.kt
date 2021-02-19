@@ -44,8 +44,10 @@ public class RingOfTheDreadnaught : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(13669, "Increased Dodge 12", this),
-      Buffs.byIdOrName(13390, "Increased Defense", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(13669, "Increased Dodge 12", this),
+        Buffs.byIdOrName(13390, "Increased Defense", this)
+        )}
+
 }

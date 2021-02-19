@@ -46,7 +46,9 @@ public class HellfireEncasedPendant : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17885, "Increase Fire Dam 51", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17885, "Increase Fire Dam 51", this)
+        )}
+
 }

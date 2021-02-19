@@ -43,7 +43,9 @@ public class MercilessGladiatorsTotemOfTheThirdWind : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(42370, "Merciless Totem of the Third WInd", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(42370, "Merciless Totem of the Third WInd", this)
+        )}
+
 }

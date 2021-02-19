@@ -50,8 +50,10 @@ public class GauntletsOfTheSoothedSoul : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(36098, "Increase Healing 99", this),
-      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(36098, "Increase Healing 99", this),
+        Buffs.byIdOrName(21365, "Increased Mana Regen", this)
+        )}
+
 }

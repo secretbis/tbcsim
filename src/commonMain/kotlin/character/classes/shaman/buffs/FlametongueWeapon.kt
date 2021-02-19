@@ -14,7 +14,7 @@ class FlametongueWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         const val name = "Flametongue Weapon"
     }
     override val id: Int = 25489
-    override val name: String = Companion.name
+    override val name = "Flametongue Weapon (static) ${sourceItem.uniqueName}"
     override val durationMs: Int = 30 * 60 * 1000
 
     val proc = object : ItemProc(sourceItems) {

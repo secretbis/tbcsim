@@ -51,8 +51,10 @@ public class RiftStalkerLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2902)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15832, "Attack Power 92", this),
-      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15832, "Attack Power 92", this),
+        Buffs.byIdOrName(21628, "Increased Mana Regen", this)
+        )}
+
 }

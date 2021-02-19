@@ -51,7 +51,9 @@ public class TunicOfTheNightwatcher : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18049, "Increase Spell Dam 26", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18049, "Increase Spell Dam 26", this)
+        )}
+
 }

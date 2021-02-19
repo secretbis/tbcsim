@@ -48,5 +48,7 @@ public class FlamebaneGloves : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2870)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

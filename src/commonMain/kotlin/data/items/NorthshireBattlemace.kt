@@ -44,8 +44,10 @@ public class NorthshireBattlemace : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(21620, "Increased Mana Regen", this),
-      Buffs.byIdOrName(28686, "Increase Healing 161", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(21620, "Increased Mana Regen", this),
+        Buffs.byIdOrName(28686, "Increase Healing 161", this)
+        )}
+
 }

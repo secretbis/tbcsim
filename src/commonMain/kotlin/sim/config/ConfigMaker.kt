@@ -95,13 +95,15 @@ object ConfigMaker {
         )
     }
 
-    private fun createItemFromGear(itemYml: GearItemYml?): Item {
+    private fun createItemFromGear(itemYml: GearItemYml?, equippedSlot: String): Item {
         return if(itemYml != null) {
             var item = Items.byName(itemYml.name)
             if(item == null) {
                 logger.warn { "Could not find item with name: ${itemYml.name}" }
                 item = Item()
             }
+
+            item.equippedSlot = equippedSlot
 
             if(itemYml.enchant != null) {
                 val enchant = Enchants.byName(itemYml.enchant, item)
@@ -159,26 +161,25 @@ object ConfigMaker {
         characterClass.talents = talents
 
         // Gear
-        val gear = Gear(
-            mainHand = createItemFromGear(yml.gear?.mainHand),
-            offHand = createItemFromGear(yml.gear?.offHand),
-            rangedTotemLibram = createItemFromGear(yml.gear?.rangedLibramTotem),
-            ammo = createItemFromGear(yml.gear?.ammo),
-            head = createItemFromGear(yml.gear?.head),
-            neck = createItemFromGear(yml.gear?.neck),
-            shoulders = createItemFromGear(yml.gear?.shoulders),
-            back = createItemFromGear(yml.gear?.back),
-            chest = createItemFromGear(yml.gear?.chest),
-            wrists = createItemFromGear(yml.gear?.wrists),
-            hands = createItemFromGear(yml.gear?.hands),
-            waist = createItemFromGear(yml.gear?.waist),
-            legs = createItemFromGear(yml.gear?.legs),
-            feet = createItemFromGear(yml.gear?.feet),
-            ring1 = createItemFromGear(yml.gear?.ring1),
-            ring2 = createItemFromGear(yml.gear?.ring2),
-            trinket1 = createItemFromGear(yml.gear?.trinket1),
-            trinket2 = createItemFromGear(yml.gear?.trinket2)
-        )
+        val gear = Gear()
+        gear.mainHand = createItemFromGear(yml.gear?.mainHand, "mainHand")
+        gear.offHand = createItemFromGear(yml.gear?.offHand, "offHand")
+        gear.rangedTotemLibram = createItemFromGear(yml.gear?.rangedLibramTotem, "rangedLibramTotem")
+        gear.ammo = createItemFromGear(yml.gear?.ammo, "ammo")
+        gear.head = createItemFromGear(yml.gear?.head, "head")
+        gear.neck = createItemFromGear(yml.gear?.neck, "neck")
+        gear.shoulders = createItemFromGear(yml.gear?.shoulders, "shoulders")
+        gear.back = createItemFromGear(yml.gear?.back, "back")
+        gear.chest = createItemFromGear(yml.gear?.chest, "chest")
+        gear.wrists = createItemFromGear(yml.gear?.wrists, "wrists")
+        gear.hands = createItemFromGear(yml.gear?.hands, "hands")
+        gear.waist = createItemFromGear(yml.gear?.waist, "waist")
+        gear.legs = createItemFromGear(yml.gear?.legs,"legs")
+        gear.feet = createItemFromGear(yml.gear?.feet, "feet")
+        gear.ring1 = createItemFromGear(yml.gear?.ring1, "ring1")
+        gear.ring2 = createItemFromGear(yml.gear?.ring2, "ring2")
+        gear.trinket1 = createItemFromGear(yml.gear?.trinket1, "trinket1")
+        gear.trinket2 = createItemFromGear(yml.gear?.trinket2, "trinket2")
 
         // Check that meta gem is active, warn if not
         if(!gear.metaGemActive()) {

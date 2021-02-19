@@ -51,8 +51,10 @@ public class NordrassilLifeMantle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2974)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18046, "Increase Healing 77", this),
-      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18046, "Increase Healing 77", this),
+        Buffs.byIdOrName(18379, "Increased Mana Regen", this)
+        )}
+
 }

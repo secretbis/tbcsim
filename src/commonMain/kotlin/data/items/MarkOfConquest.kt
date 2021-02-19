@@ -43,9 +43,11 @@ public class MarkOfConquest : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15813, "Attack Power 54", this),
-      Buffs.byIdOrName(33510, "Health Restore", this),
-      Buffs.byIdOrName(39598, "Mana Restore", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15813, "Attack Power 54", this),
+        Buffs.byIdOrName(33510, "Health Restore", this),
+        Buffs.byIdOrName(39598, "Mana Restore", this)
+        )}
+
 }

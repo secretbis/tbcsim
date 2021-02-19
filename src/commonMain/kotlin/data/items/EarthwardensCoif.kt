@@ -50,8 +50,10 @@ public class EarthwardensCoif : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15806, "Attack Power 34", this),
-      Buffs.byIdOrName(21364, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15806, "Attack Power 34", this),
+        Buffs.byIdOrName(21364, "Increased Mana Regen", this)
+        )}
+
 }

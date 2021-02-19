@@ -51,7 +51,9 @@ public class CrystalwindLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(33233, "Increase Spell Dam 61", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(33233, "Increase Spell Dam 61", this)
+        )}
+
 }

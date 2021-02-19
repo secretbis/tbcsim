@@ -15,7 +15,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         return WindfuryWeaponState()
     }
 
-    override val name = "Windfury Weapon (static) $sourceItem"
+    override val name = "Windfury Weapon (static) ${sourceItem.uniqueName}"
     override val durationMs: Int = 30 * 60 * 1000
     override val hidden: Boolean = true
 

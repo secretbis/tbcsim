@@ -50,8 +50,10 @@ public class TidefuryShoulderguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14254, "Increase Spell Dam 19", this),
-      Buffs.byIdOrName(18379, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14254, "Increase Spell Dam 19", this),
+        Buffs.byIdOrName(18379, "Increased Mana Regen", this)
+        )}
+
 }

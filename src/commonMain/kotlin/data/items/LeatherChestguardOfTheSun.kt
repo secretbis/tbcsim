@@ -51,8 +51,10 @@ public class LeatherChestguardOfTheSun : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(29369, "Increase Healing 134", this),
-      Buffs.byIdOrName(21638, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(29369, "Increase Healing 134", this),
+        Buffs.byIdOrName(21638, "Increased Mana Regen", this)
+        )}
+
 }

@@ -44,7 +44,9 @@ public class ManaWrath : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(28792, "Increase Spell Dam 126", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(28792, "Increase Spell Dam 126", this)
+        )}
+
 }

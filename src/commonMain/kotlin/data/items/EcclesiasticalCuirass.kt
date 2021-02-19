@@ -49,7 +49,9 @@ public class EcclesiasticalCuirass : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3152)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39903, "Increase Healing 97", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39903, "Increase Healing 97", this)
+        )}
+
 }

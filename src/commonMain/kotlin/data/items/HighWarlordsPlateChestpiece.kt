@@ -51,5 +51,7 @@ public class HighWarlordsPlateChestpiece : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

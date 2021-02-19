@@ -50,5 +50,7 @@ public class BrutalGladiatorsPlateShoulders : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3205)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

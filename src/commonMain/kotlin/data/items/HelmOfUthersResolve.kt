@@ -51,8 +51,10 @@ public class HelmOfUthersResolve : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18055, "Increase Spell Dam 39", this),
-      Buffs.byIdOrName(35075, "Block Value 38", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18055, "Increase Spell Dam 39", this),
+        Buffs.byIdOrName(35075, "Block Value 38", this)
+        )}
+
 }

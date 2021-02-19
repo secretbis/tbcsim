@@ -51,7 +51,9 @@ public class DuplicitousGuise : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2873)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39885, "Attack Power 126", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39885, "Attack Power 126", this)
+        )}
+
 }

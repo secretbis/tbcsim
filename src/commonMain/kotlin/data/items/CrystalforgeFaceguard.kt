@@ -52,8 +52,10 @@ public class CrystalforgeFaceguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18053, "Increase Spell Dam 36", this),
-      Buffs.byIdOrName(42034, "Block Value 40", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18053, "Increase Spell Dam 36", this),
+        Buffs.byIdOrName(42034, "Block Value 40", this)
+        )}
+
 }

@@ -45,8 +45,10 @@ public class RubySlippers : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
-      Buffs.byIdOrName(39937, "There's No Place Like Home", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+        Buffs.byIdOrName(39937, "There's No Place Like Home", this)
+        )}
+
 }

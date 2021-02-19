@@ -45,7 +45,9 @@ public class ShoulderpadsOfTheSilvermoonRetainer : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15816, "Attack Power 62", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15816, "Attack Power 62", this)
+        )}
+
 }

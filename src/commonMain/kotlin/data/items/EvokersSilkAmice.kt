@@ -51,7 +51,9 @@ public class EvokersSilkAmice : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15715, "Increase Spell Dam 25", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15715, "Increase Spell Dam 25", this)
+        )}
+
 }

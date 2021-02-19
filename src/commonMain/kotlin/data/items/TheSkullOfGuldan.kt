@@ -43,8 +43,10 @@ public class TheSkullOfGuldan : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
-      Buffs.byIdOrName(40396, "Fel Infusion", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
+        Buffs.byIdOrName(40396, "Fel Infusion", this)
+        )}
+
 }

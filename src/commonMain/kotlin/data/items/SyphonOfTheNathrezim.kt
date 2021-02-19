@@ -43,8 +43,10 @@ public class SyphonOfTheNathrezim : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14056, "Attack Power 50", this),
-      Buffs.byIdOrName(40291, "Siphon Essence", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14056, "Attack Power 50", this),
+        Buffs.byIdOrName(40291, "Siphon Essence", this)
+        )}
+
 }

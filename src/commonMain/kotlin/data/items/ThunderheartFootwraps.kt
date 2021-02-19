@@ -51,8 +51,10 @@ public class ThunderheartFootwraps : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2884)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45011, "Increase Spell Dam 50", this),
-      Buffs.byIdOrName(21634, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45011, "Increase Spell Dam 50", this),
+        Buffs.byIdOrName(21634, "Increased Mana Regen", this)
+        )}
+
 }

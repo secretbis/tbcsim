@@ -43,8 +43,10 @@ public class ShivOfExsanguination : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15809, "Attack Power 42", this),
-      Buffs.byIdOrName(40226, "Armor Penetration 196", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15809, "Attack Power 42", this),
+        Buffs.byIdOrName(40226, "Armor Penetration 196", this)
+        )}
+
 }

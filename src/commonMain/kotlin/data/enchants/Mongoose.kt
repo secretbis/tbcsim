@@ -8,7 +8,7 @@ import sim.SimIteration
 // Fun blog about Goose and Executioner:
 // https://warcraft.blizzplanet.com/blog/comments/world_of_warcraft_burning_crusade___enchanting___executioner_vs_mongoose
 class Mongoose(val item: Item) : ItemBuff(listOf(item)) {
-    override val name: String = "Mongoose (static) $item"
+    override val name: String = "Mongoose (static) ${item.uniqueName}"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

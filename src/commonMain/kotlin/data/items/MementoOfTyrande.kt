@@ -43,8 +43,10 @@ public class MementoOfTyrande : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(25179, "Increase Healing 112", this),
-      Buffs.byIdOrName(37655, "Bonus Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(25179, "Increase Healing 112", this),
+        Buffs.byIdOrName(37655, "Bonus Mana Regen", this)
+        )}
+
 }

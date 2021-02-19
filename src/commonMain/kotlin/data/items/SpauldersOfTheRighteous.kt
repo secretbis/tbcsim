@@ -51,7 +51,9 @@ public class SpauldersOfTheRighteous : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2861)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9344, "Increase Spell Dam 15", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9344, "Increase Spell Dam 15", this)
+        )}
+
 }

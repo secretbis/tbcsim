@@ -52,8 +52,10 @@ public class GrandMarshalsRingmailChestguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(21620, "Increased Mana Regen", this),
-      Buffs.byIdOrName(9317, "Increase Healing 31", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(21620, "Increased Mana Regen", this),
+        Buffs.byIdOrName(9317, "Increase Healing 31", this)
+        )}
+
 }

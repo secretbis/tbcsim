@@ -46,10 +46,12 @@ public class CryptstalkerTunic : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15464, "Increased Hit Rating 10", this),
-      Buffs.byIdOrName(7597, "Increased Critical 14", this),
-      Buffs.byIdOrName(21618, "Increased Mana Regen", this),
-      Buffs.byIdOrName(14052, "Attack Power 60", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15464, "Increased Hit Rating 10", this),
+        Buffs.byIdOrName(7597, "Increased Critical 14", this),
+        Buffs.byIdOrName(21618, "Increased Mana Regen", this),
+        Buffs.byIdOrName(14052, "Attack Power 60", this)
+        )}
+
 }

@@ -50,8 +50,10 @@ public class SpellfireBelt : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17884, "Increase Fire Dam 50", this),
-      Buffs.byIdOrName(17846, "Increase Arcane Dam 50", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17884, "Increase Fire Dam 50", this),
+        Buffs.byIdOrName(17846, "Increase Arcane Dam 50", this)
+        )}
+
 }

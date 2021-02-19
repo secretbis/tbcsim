@@ -43,8 +43,10 @@ public class BloodlustBrooch : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15821, "Attack Power 72", this),
-      Buffs.byIdOrName(35166, "Lust for Battle", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15821, "Attack Power 72", this),
+        Buffs.byIdOrName(35166, "Lust for Battle", this)
+        )}
+
 }

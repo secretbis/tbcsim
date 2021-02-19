@@ -44,8 +44,10 @@ public class WrapsOfPurification : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15696, "Increase Healing 53", this),
-      Buffs.byIdOrName(21364, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15696, "Increase Healing 53", this),
+        Buffs.byIdOrName(21364, "Increased Mana Regen", this)
+        )}
+
 }

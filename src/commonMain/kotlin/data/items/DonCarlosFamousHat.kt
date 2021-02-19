@@ -43,8 +43,10 @@ public class DonCarlosFamousHat : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(52172, "Coyote Spirit Despawn Aura", this),
-      Buffs.byIdOrName(51149, "Summon Coyote Spirit", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(52172, "Coyote Spirit Despawn Aura", this),
+        Buffs.byIdOrName(51149, "Summon Coyote Spirit", this)
+        )}
+
 }

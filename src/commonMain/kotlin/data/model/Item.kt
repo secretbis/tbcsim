@@ -14,6 +14,7 @@ open class Item {
     open var name: String = ""
     open var itemLevel: Int = 0
     open var itemSet: ItemSet? = null
+    var equippedSlot: String = ""
 
     // TODO: Validate itemSubclass is indeed a subclass of the itemClass
     open var itemClass: Constants.ItemClass? = null
@@ -40,7 +41,7 @@ open class Item {
         }
 
     // Granted buffs and effects
-    open var buffs: List<Buff> = listOf()
+    open val buffs: List<Buff> by lazy { listOf() }
 
     var enchant: Buff? = null
     var temporaryEnhancement: Buff? = null
@@ -50,4 +51,6 @@ open class Item {
         get() { return (minDmg + maxDmg) / 2.0 }
     open val dps: Double
         get() { return avgDmg / speed }
+    val uniqueName: String
+        get() { return name + equippedSlot }
 }

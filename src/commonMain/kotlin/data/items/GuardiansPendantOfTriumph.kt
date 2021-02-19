@@ -48,7 +48,9 @@ public class GuardiansPendantOfTriumph : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15815, "Attack Power 58", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15815, "Attack Power 58", this)
+        )}
+
 }

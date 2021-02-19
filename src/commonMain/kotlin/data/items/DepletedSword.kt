@@ -45,8 +45,10 @@ public class DepletedSword : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(34796, "Increase Spell Dam 121", this),
-      Buffs.byIdOrName(40756, "Apexis Crystal Infusion", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(34796, "Increase Spell Dam 121", this),
+        Buffs.byIdOrName(40756, "Apexis Crystal Infusion", this)
+        )}
+
 }

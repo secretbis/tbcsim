@@ -18,10 +18,10 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "craco --max_old_space_size=4096 start",
-    "build": "craco --max_old_space_size=4096 build",
-    "test": "craco --max_old_space_size=4096 test",
-    "eject": "craco --max_old_space_size=4096 eject"
+    "start": "craco --max_old_space_size=6144 start",
+    "build": "craco --max_old_space_size=6144 build",
+    "test": "craco --max_old_space_size=6144 test",
+    "eject": "craco --max_old_space_size=6144 eject"
   },
   "eslintConfig": {
     "extends": [

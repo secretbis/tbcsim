@@ -50,5 +50,7 @@ public class UnscarredBreastplate : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(113)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

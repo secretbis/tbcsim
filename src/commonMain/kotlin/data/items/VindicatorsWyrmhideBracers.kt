@@ -48,8 +48,10 @@ public class VindicatorsWyrmhideBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14047, "Increase Spell Dam 23", this),
-      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14047, "Increase Spell Dam 23", this),
+        Buffs.byIdOrName(21628, "Increased Mana Regen", this)
+        )}
+
 }

@@ -44,8 +44,10 @@ public class WarpSlicer : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15820, "Attack Power 70", this),
-      Buffs.byIdOrName(36479, "Speed Infusion", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15820, "Attack Power 70", this),
+        Buffs.byIdOrName(36479, "Speed Infusion", this)
+        )}
+
 }

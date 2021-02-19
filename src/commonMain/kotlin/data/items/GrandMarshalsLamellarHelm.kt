@@ -51,7 +51,9 @@ public class GrandMarshalsLamellarHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14254, "Increase Spell Dam 19", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14254, "Increase Spell Dam 19", this)
+        )}
+
 }

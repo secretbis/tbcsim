@@ -52,5 +52,7 @@ public class BreastplateOfTheBold : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2932)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

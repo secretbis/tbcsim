@@ -43,7 +43,9 @@ public class SapphironsWingBone : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17909, "Increase Frost Dam 51", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17909, "Increase Frost Dam 51", this)
+        )}
+
 }

@@ -49,7 +49,9 @@ public class ShroudOfNaturesHarmony : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3097)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(25179, "Increase Healing 112", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(25179, "Increase Healing 112", this)
+        )}
+
 }

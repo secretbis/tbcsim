@@ -47,8 +47,10 @@ public class AuchenaiBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14089, "Attack Power 36", this),
-      Buffs.byIdOrName(21618, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14089, "Attack Power 36", this),
+        Buffs.byIdOrName(21618, "Increased Mana Regen", this)
+        )}
+
 }

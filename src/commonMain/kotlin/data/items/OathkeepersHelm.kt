@@ -51,8 +51,10 @@ public class OathkeepersHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2908)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18049, "Increase Spell Dam 26", this),
-      Buffs.byIdOrName(21365, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18049, "Increase Spell Dam 26", this),
+        Buffs.byIdOrName(21365, "Increased Mana Regen", this)
+        )}
+
 }

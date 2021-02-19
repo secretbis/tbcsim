@@ -48,5 +48,7 @@ public class NetherRunnersCowl : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

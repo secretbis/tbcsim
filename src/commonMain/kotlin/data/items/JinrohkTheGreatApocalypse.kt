@@ -44,7 +44,9 @@ public class JinrohkTheGreatApocalypse : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(40933, "Attack Power 120", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(40933, "Attack Power 120", this)
+        )}
+
 }

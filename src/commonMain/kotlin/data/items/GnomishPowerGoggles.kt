@@ -43,8 +43,10 @@ public class GnomishPowerGoggles : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(26155, "Increase Spell Dam 59", this),
-      Buffs.byIdOrName(18382, "Increased Critical Spell", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(26155, "Increase Spell Dam 59", this),
+        Buffs.byIdOrName(18382, "Increased Critical Spell", this)
+        )}
+
 }

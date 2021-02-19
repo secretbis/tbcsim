@@ -49,7 +49,9 @@ public class ExorcistsDragonhideHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18030, "Increase Healing 37", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18030, "Increase Healing 37", this)
+        )}
+
 }

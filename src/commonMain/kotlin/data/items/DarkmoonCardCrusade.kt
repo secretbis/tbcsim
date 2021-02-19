@@ -43,8 +43,10 @@ public class DarkmoonCardCrusade : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39438, "Aura of the Crusade", this),
-      Buffs.byIdOrName(39440, "Aura of the Crusade", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39438, "Aura of the Crusade", this),
+        Buffs.byIdOrName(39440, "Aura of the Crusade", this)
+        )}
+
 }

@@ -45,8 +45,10 @@ public class LivingCrystalBreastplate : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(13881, "Increase Spell Dam 29", this),
-      Buffs.byIdOrName(18036, "Increase Healing 55", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(13881, "Increase Spell Dam 29", this),
+        Buffs.byIdOrName(18036, "Increase Healing 55", this)
+        )}
+
 }

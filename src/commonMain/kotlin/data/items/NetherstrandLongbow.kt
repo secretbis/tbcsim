@@ -44,10 +44,12 @@ public class NetherstrandLongbow : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(21453, "Attack Power Ranged 70", this),
-      Buffs.byIdOrName(36413, "Mortal Shots", this),
-      Buffs.byIdOrName(36412, "Summon Nether Spikes", this),
-      Buffs.byIdOrName(36482, "Armor Disruption", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(21453, "Attack Power Ranged 70", this),
+        Buffs.byIdOrName(36413, "Mortal Shots", this),
+        Buffs.byIdOrName(36412, "Summon Nether Spikes", this),
+        Buffs.byIdOrName(36482, "Armor Disruption", this)
+        )}
+
 }

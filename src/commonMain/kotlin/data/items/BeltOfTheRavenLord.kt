@@ -49,5 +49,7 @@ public class BeltOfTheRavenLord : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

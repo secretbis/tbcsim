@@ -43,7 +43,9 @@ public class PendantOfWithering : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(30999, "Nature Absorption", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(30999, "Nature Absorption", this)
+        )}
+
 }

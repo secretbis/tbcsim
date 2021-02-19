@@ -45,9 +45,11 @@ public class FrostscytheOfLordAhune : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(46632, "Increase Spell Dam 176", this),
-      Buffs.byIdOrName(46643, "Frostscythe", this),
-      Buffs.byIdOrName(21638, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(46632, "Increase Spell Dam 176", this),
+        Buffs.byIdOrName(46643, "Frostscythe", this),
+        Buffs.byIdOrName(21638, "Increased Mana Regen", this)
+        )}
+
 }

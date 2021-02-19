@@ -9,7 +9,7 @@ import sim.SimIteration
 // Same for all the hammers
 class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val id: Int = 21165
-    override val name: String = "Haste (BS Hammer) (static) $sourceItem"
+    override val name: String = "Haste (BS Hammer) (static) ${sourceItem.uniqueName}"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

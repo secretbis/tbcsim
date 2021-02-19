@@ -44,8 +44,10 @@ public class StaffOfNaturalFury : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(44909, "Attack Power - Feral (+0712)", this),
-      Buffs.byIdOrName(38314, "Cheaper Druid Shapeshifting", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(44909, "Attack Power - Feral (+0712)", this),
+        Buffs.byIdOrName(38314, "Cheaper Druid Shapeshifting", this)
+        )}
+
 }

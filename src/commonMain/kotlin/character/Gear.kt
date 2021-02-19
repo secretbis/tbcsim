@@ -4,26 +4,54 @@ import data.buffs.permanent.PermanentBuff
 import data.model.Color
 import data.model.Item
 
-data class Gear(
-    var mainHand: Item = Item(),
-    var offHand: Item = Item(),
-    var rangedTotemLibram: Item = Item(),
-    var ammo: Item = Item(),
-    var head: Item = Item(),
-    var neck: Item = Item(),
-    var shoulders: Item = Item(),
-    var back: Item = Item(),
-    var chest: Item = Item(),
-    var wrists: Item = Item(),
-    var hands: Item = Item(),
-    var waist: Item = Item(),
-    var legs: Item = Item(),
-    var feet: Item = Item(),
-    var ring1: Item = Item(),
-    var ring2: Item = Item(),
-    var trinket1: Item = Item(),
+class Gear {
+    // The same item can be theoretically be equipped in these slots
+    var mainHand: Item = Item()
+        set(value) {
+            value.equippedSlot = "mainHand"
+            field = value
+        }
+    var offHand: Item = Item()
+        set(value) {
+            value.equippedSlot = "offHand"
+            field = value
+        }
+
+    var rangedTotemLibram: Item = Item()
+    var ammo: Item = Item()
+    var head: Item = Item()
+    var neck: Item = Item()
+    var shoulders: Item = Item()
+    var back: Item = Item()
+    var chest: Item = Item()
+    var wrists: Item = Item()
+    var hands: Item = Item()
+    var waist: Item = Item()
+    var legs: Item = Item()
+    var feet: Item = Item()
+
+    var ring1: Item = Item()
+        set(value) {
+            value.equippedSlot = "ring1"
+            field = value
+        }
+    var ring2: Item = Item()
+        set(value) {
+            value.equippedSlot = "ring2"
+            field = value
+        }
+
+    var trinket1: Item = Item()
+        set(value) {
+            value.equippedSlot = "trinket1"
+            field = value
+        }
     var trinket2: Item = Item()
-) {
+        set(value) {
+            value.equippedSlot = "trinket2"
+            field = value
+        }
+
     fun all(): List<Item> {
         return listOf(
             mainHand,

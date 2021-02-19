@@ -50,8 +50,10 @@ public class LightbringerStompers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15714, "Increase Spell Dam 22", this),
-      Buffs.byIdOrName(28325, "Block Value 32", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15714, "Increase Spell Dam 22", this),
+        Buffs.byIdOrName(28325, "Block Value 32", this)
+        )}
+
 }

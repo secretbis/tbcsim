@@ -50,7 +50,9 @@ public class ChainOfUnleashedRage : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2860)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(40555, "Armor Penetration 154", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(40555, "Armor Penetration 154", this)
+        )}
+
 }

@@ -45,7 +45,9 @@ public class LegguardsOfTheResoluteDefender : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(13665, "Increased Parry 20", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(13665, "Increased Parry 20", this)
+        )}
+
 }

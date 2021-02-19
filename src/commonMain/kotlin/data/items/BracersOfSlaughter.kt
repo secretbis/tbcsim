@@ -48,5 +48,7 @@ public class BracersOfSlaughter : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3015)
 
-  public override var buffs: List<Buff> = listOf()
+  public override val buffs: List<Buff> by lazy {
+        listOf()}
+
 }

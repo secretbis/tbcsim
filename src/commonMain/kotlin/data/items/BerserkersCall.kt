@@ -43,8 +43,10 @@ public class BerserkersCall : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15831, "Attack Power 90", this),
-      Buffs.byIdOrName(43716, "Call of the Berserker", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15831, "Attack Power 90", this),
+        Buffs.byIdOrName(43716, "Call of the Berserker", this)
+        )}
+
 }

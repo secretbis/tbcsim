@@ -44,8 +44,10 @@ public class GemOfTrappedInnocents : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9344, "Increase Spell Dam 15", this),
-      Buffs.byIdOrName(18382, "Increased Critical Spell", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9344, "Increase Spell Dam 15", this),
+        Buffs.byIdOrName(18382, "Increased Critical Spell", this)
+        )}
+
 }

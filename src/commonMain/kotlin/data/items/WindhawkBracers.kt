@@ -51,8 +51,10 @@ public class WindhawkBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3016)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9345, "Increase Spell Dam 16", this),
-      Buffs.byIdOrName(9317, "Increase Healing 31", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9345, "Increase Spell Dam 16", this),
+        Buffs.byIdOrName(9317, "Increase Healing 31", this)
+        )}
+
 }

@@ -43,8 +43,10 @@ public class EmptyMugOfDirebrew : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15821, "Attack Power 72", this),
-      Buffs.byIdOrName(51955, "Dire Drunkard", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15821, "Attack Power 72", this),
+        Buffs.byIdOrName(51955, "Dire Drunkard", this)
+        )}
+
 }

@@ -53,8 +53,10 @@ public class ShroudOfAbsolution : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(33233, "Increase Spell Dam 61", this),
-      Buffs.byIdOrName(21635, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(33233, "Increase Spell Dam 61", this),
+        Buffs.byIdOrName(21635, "Increased Mana Regen", this)
+        )}
+
 }

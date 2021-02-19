@@ -43,8 +43,10 @@ public class FigurineTalasiteOwl : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(21640, "Increased Mana Regen", this),
-      Buffs.byIdOrName(31045, "Talasite Owl", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(21640, "Increased Mana Regen", this),
+        Buffs.byIdOrName(31045, "Talasite Owl", this)
+        )}
+
 }

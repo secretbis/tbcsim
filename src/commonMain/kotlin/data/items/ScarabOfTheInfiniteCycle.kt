@@ -43,8 +43,10 @@ public class ScarabOfTheInfiniteCycle : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18043, "Increase Healing 70", this),
-      Buffs.byIdOrName(33953, "Spell Haste Healer Trinket", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18043, "Increase Healing 70", this),
+        Buffs.byIdOrName(33953, "Spell Haste Healer Trinket", this)
+        )}
+
 }

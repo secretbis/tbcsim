@@ -46,7 +46,9 @@ public class JusticarGloves : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18045, "Increase Healing 75", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18045, "Increase Healing 75", this)
+        )}
+
 }

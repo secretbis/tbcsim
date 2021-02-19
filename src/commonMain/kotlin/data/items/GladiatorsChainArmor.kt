@@ -53,7 +53,9 @@ public class GladiatorsChainArmor : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2874)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9334, "Attack Power 26", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9334, "Attack Power 26", this)
+        )}
+
 }

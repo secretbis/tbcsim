@@ -43,7 +43,9 @@ public class SolariansSapphire : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(37536, "Improved Battle Shout", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(37536, "Improved Battle Shout", this)
+        )}
+
 }

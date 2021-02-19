@@ -50,8 +50,10 @@ public class BeltOfTheGuardian : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14248, "Increase Spell Dam 21", this),
-      Buffs.byIdOrName(34593, "Block Value 33", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14248, "Increase Spell Dam 21", this),
+        Buffs.byIdOrName(34593, "Block Value 33", this)
+        )}
+
 }

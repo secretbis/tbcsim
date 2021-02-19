@@ -44,8 +44,10 @@ public class ForemansReinforcedHelmet : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15816, "Attack Power 62", this),
-      Buffs.byIdOrName(30519, "Foreman's Reinforced Helmet", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15816, "Attack Power 62", this),
+        Buffs.byIdOrName(30519, "Foreman's Reinforced Helmet", this)
+        )}
+
 }

@@ -51,8 +51,10 @@ public class ScaledGreavesOfPatience : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2871)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15811, "Attack Power 46", this),
-      Buffs.byIdOrName(21362, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15811, "Attack Power 46", this),
+        Buffs.byIdOrName(21362, "Increased Mana Regen", this)
+        )}
+
 }

@@ -44,8 +44,10 @@ public class MantleOfTheMindFlayer : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
-      Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+        Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
+        )}
+
 }

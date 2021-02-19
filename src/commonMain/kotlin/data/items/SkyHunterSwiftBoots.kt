@@ -45,8 +45,10 @@ public class SkyHunterSwiftBoots : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9334, "Attack Power 26", this),
-      Buffs.byIdOrName(21620, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9334, "Attack Power 26", this),
+        Buffs.byIdOrName(21620, "Increased Mana Regen", this)
+        )}
+
 }

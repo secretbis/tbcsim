@@ -43,8 +43,10 @@ public class KhoriumBandOfFrost : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17892, "Increase Frost Dam 27", this),
-      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17892, "Increase Frost Dam 27", this),
+        Buffs.byIdOrName(21628, "Increased Mana Regen", this)
+        )}
+
 }

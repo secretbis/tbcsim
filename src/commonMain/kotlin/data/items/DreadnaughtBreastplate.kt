@@ -45,9 +45,11 @@ public class DreadnaughtBreastplate : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14249, "Increased Defense", this),
-      Buffs.byIdOrName(13669, "Increased Dodge 12", this),
-      Buffs.byIdOrName(15465, "Increased Hit Rating 20", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14249, "Increased Defense", this),
+        Buffs.byIdOrName(13669, "Increased Dodge 12", this),
+        Buffs.byIdOrName(15465, "Increased Hit Rating 20", this)
+        )}
+
 }

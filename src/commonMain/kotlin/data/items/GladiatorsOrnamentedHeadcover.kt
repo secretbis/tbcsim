@@ -51,7 +51,9 @@ public class GladiatorsOrnamentedHeadcover : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18037, "Increase Healing 57", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18037, "Increase Healing 57", this)
+        )}
+
 }

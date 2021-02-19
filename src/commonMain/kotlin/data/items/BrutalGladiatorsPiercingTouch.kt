@@ -43,8 +43,10 @@ public class BrutalGladiatorsPiercingTouch : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9345, "Increase Spell Dam 16", this),
-      Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9345, "Increase Spell Dam 16", this),
+        Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
+        )}
+
 }

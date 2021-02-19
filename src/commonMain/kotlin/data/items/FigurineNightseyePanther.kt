@@ -43,9 +43,11 @@ public class FigurineNightseyePanther : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17746, "Stealth 5", this),
-      Buffs.byIdOrName(15813, "Attack Power 54", this),
-      Buffs.byIdOrName(31047, "Nightseye Panther", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17746, "Stealth 5", this),
+        Buffs.byIdOrName(15813, "Attack Power 54", this),
+        Buffs.byIdOrName(31047, "Nightseye Panther", this)
+        )}
+
 }

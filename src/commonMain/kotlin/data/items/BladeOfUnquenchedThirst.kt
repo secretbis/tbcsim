@@ -43,8 +43,10 @@ public class BladeOfUnquenchedThirst : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(24585, "Drain Life", this),
-      Buffs.byIdOrName(9332, "Attack Power 22", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(24585, "Drain Life", this),
+        Buffs.byIdOrName(9332, "Attack Power 22", this)
+        )}
+
 }

@@ -46,7 +46,9 @@ public class BootsOfTheProtector : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14054, "Increase Spell Dam 27", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14054, "Increase Spell Dam 27", this)
+        )}
+
 }

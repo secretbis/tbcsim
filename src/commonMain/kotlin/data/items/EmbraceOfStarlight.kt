@@ -50,7 +50,9 @@ public class EmbraceOfStarlight : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(26158, "Increase Spell Dam 60", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(26158, "Increase Spell Dam 60", this)
+        )}
+
 }

@@ -50,8 +50,10 @@ public class GirdleOfMightyResolve : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2876)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14798, "Increase Spell Dam 30", this),
-      Buffs.byIdOrName(35075, "Block Value 38", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14798, "Increase Spell Dam 30", this),
+        Buffs.byIdOrName(35075, "Block Value 38", this)
+        )}
+
 }

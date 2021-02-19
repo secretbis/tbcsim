@@ -44,8 +44,10 @@ public class LionheartChampion : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(34514, "Fear Resistance 5", this),
-      Buffs.byIdOrName(34513, "Lionheart", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(34514, "Fear Resistance 5", this),
+        Buffs.byIdOrName(34513, "Lionheart", this)
+        )}
+
 }

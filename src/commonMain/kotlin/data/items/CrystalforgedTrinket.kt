@@ -43,8 +43,10 @@ public class CrystalforgedTrinket : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(40724, "Valor", this),
-      Buffs.byIdOrName(40723, "Weapon Damage", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(40724, "Valor", this),
+        Buffs.byIdOrName(40723, "Weapon Damage", this)
+        )}
+
 }

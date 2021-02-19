@@ -45,8 +45,10 @@ public class StanchionOfPrimalInstinct : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45783, "Attack Power - Feral (+1197)", this),
-      Buffs.byIdOrName(42157, "Armor Penetration 350", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45783, "Attack Power - Feral (+1197)", this),
+        Buffs.byIdOrName(42157, "Armor Penetration 350", this)
+        )}
+
 }

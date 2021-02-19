@@ -47,8 +47,10 @@ public class MercilessGladiatorsChainGauntlets : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15806, "Attack Power 34", this),
-      Buffs.byIdOrName(28539, "Multi-Shot Damage Increase", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15806, "Attack Power 34", this),
+        Buffs.byIdOrName(28539, "Multi-Shot Damage Increase", this)
+        )}
+
 }

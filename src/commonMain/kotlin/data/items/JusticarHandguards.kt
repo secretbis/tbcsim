@@ -46,8 +46,10 @@ public class JusticarHandguards : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14054, "Increase Spell Dam 27", this),
-      Buffs.byIdOrName(35074, "Block Value 35", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14054, "Increase Spell Dam 27", this),
+        Buffs.byIdOrName(35074, "Block Value 35", this)
+        )}
+
 }

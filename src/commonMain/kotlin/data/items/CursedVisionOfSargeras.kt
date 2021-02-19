@@ -51,8 +51,10 @@ public class CursedVisionOfSargeras : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(33782, "Attack Power 108", this),
-      Buffs.byIdOrName(47524, "Sense Demons", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(33782, "Attack Power 108", this),
+        Buffs.byIdOrName(47524, "Sense Demons", this)
+        )}
+
 }

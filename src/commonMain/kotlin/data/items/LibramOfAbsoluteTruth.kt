@@ -43,7 +43,9 @@ public class LibramOfAbsoluteTruth : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(37739, "Reduced Holy Light Cost", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(37739, "Reduced Holy Light Cost", this)
+        )}
+
 }

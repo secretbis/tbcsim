@@ -50,8 +50,10 @@ public class StarStriderBoots : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15818, "Attack Power 66", this),
-      Buffs.byIdOrName(21618, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15818, "Attack Power 66", this),
+        Buffs.byIdOrName(21618, "Increased Mana Regen", this)
+        )}
+
 }

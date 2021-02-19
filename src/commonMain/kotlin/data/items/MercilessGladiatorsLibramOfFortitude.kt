@@ -43,7 +43,9 @@ public class MercilessGladiatorsLibramOfFortitude : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(43851, "Merciless Libram of Fortitude", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(43851, "Merciless Libram of Fortitude", this)
+        )}
+
 }

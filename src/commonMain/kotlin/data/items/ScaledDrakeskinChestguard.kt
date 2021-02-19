@@ -50,7 +50,9 @@ public class ScaledDrakeskinChestguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(42107, "Attack Power 102", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(42107, "Attack Power 102", this)
+        )}
+
 }

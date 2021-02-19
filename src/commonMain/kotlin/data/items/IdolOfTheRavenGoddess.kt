@@ -43,7 +43,9 @@ public class IdolOfTheRavenGoddess : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39926, "Improved Party Auras", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39926, "Improved Party Auras", this)
+        )}
+
 }

@@ -50,8 +50,10 @@ public class HatefuryMantle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
-      Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(39569, "Increase Spell Dam 55", this),
+        Buffs.byIdOrName(42056, "Increased Spell Penetration 23", this)
+        )}
+
 }

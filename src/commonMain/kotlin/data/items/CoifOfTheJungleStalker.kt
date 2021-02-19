@@ -51,8 +51,10 @@ public class CoifOfTheJungleStalker : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15821, "Attack Power 72", this),
-      Buffs.byIdOrName(42098, "Armor Penetration 140", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15821, "Attack Power 72", this),
+        Buffs.byIdOrName(42098, "Armor Penetration 140", this)
+        )}
+
 }

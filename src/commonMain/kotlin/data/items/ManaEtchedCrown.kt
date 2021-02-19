@@ -50,8 +50,10 @@ public class ManaEtchedCrown : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(28869, "Spell Penetration 15", this),
-      Buffs.byIdOrName(18052, "Increase Spell Dam 34", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(28869, "Spell Penetration 15", this),
+        Buffs.byIdOrName(18052, "Increase Spell Dam 34", this)
+        )}
+
 }

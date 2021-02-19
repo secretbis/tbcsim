@@ -45,9 +45,11 @@ public class PlagueheartRobe : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(23727, "Increased Spell Hit Chance 8", this),
-      Buffs.byIdOrName(28767, "Increase Spell Dam 51", this),
-      Buffs.byIdOrName(18384, "Increased Critical Spell", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(23727, "Increased Spell Hit Chance 8", this),
+        Buffs.byIdOrName(28767, "Increase Spell Dam 51", this),
+        Buffs.byIdOrName(18384, "Increased Critical Spell", this)
+        )}
+
 }

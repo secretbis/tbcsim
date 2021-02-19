@@ -43,7 +43,9 @@ public class IconOfUnyieldingCourage : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(34106, "Armor Penetration", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(34106, "Armor Penetration", this)
+        )}
+
 }

@@ -52,8 +52,10 @@ public class NetherstrikeBreastplate : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),
-      Buffs.byIdOrName(21630, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),
+        Buffs.byIdOrName(21630, "Increased Mana Regen", this)
+        )}
+
 }

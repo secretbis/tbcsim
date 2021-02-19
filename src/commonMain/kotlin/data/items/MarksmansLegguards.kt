@@ -50,7 +50,9 @@ public class MarksmansLegguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(9332, "Attack Power 22", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(9332, "Attack Power 22", this)
+        )}
+
 }

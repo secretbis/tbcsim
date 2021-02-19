@@ -46,7 +46,9 @@ public class GladiatorsMaul : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(44912, "Attack Power - Feral (+0894)", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(44912, "Attack Power - Feral (+0894)", this)
+        )}
+
 }

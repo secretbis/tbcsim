@@ -44,8 +44,10 @@ public class BandOfFrigidElements : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(17896, "Increase Frost Dam 34", this),
-      Buffs.byIdOrName(16638, "Increase Nature Dam 34", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(17896, "Increase Frost Dam 34", this),
+        Buffs.byIdOrName(16638, "Increase Nature Dam 34", this)
+        )}
+
 }

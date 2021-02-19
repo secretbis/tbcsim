@@ -49,7 +49,9 @@ public class OgrilaAegis : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3017)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(22852, "Block Value 23", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(22852, "Block Value 23", this)
+        )}
+
 }

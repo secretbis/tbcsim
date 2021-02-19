@@ -43,9 +43,11 @@ public class VialOfTheSunwell : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45059, "Vessel of the Naaru", this),
-      Buffs.byIdOrName(45064, "Vessel of the Naaru", this),
-      Buffs.byIdOrName(21643, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45059, "Vessel of the Naaru", this),
+        Buffs.byIdOrName(45064, "Vessel of the Naaru", this),
+        Buffs.byIdOrName(21643, "Increased Mana Regen", this)
+        )}
+
 }

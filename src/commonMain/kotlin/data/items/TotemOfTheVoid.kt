@@ -43,7 +43,9 @@ public class TotemOfTheVoid : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(34230, "Increased Lightning Damage", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(34230, "Increased Lightning Damage", this)
+        )}
+
 }

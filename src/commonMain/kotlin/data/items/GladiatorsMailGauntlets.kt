@@ -46,8 +46,10 @@ public class GladiatorsMailGauntlets : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(32973, "Shaman Shock Range Bonus", this),
-      Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(32973, "Shaman Shock Range Bonus", this),
+        Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
+        )}
+
 }

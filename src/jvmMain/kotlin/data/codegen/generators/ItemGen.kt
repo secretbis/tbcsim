@@ -360,8 +360,13 @@ object ItemGen {
                         .addProperty(
                             PropertySpec.builder("buffs", LIST.parameterizedBy(ClassName("character", "Buff")))
                                 .addModifiers(KModifier.OVERRIDE)
-                                .mutable(true)
-                                .initializer("%L", renderBuffs(item, itemData, itemBuffsData))
+                                .delegate(
+                                    CodeBlock.builder()
+                                        .beginControlFlow("lazy")
+                                        .add(renderBuffs(item, itemData, itemBuffsData))
+                                        .endControlFlow()
+                                        .build()
+                                )
                                 .build()
                         )
                         .build()

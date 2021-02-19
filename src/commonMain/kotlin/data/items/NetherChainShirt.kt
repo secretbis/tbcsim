@@ -51,8 +51,10 @@ public class NetherChainShirt : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(90)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(14049, "Attack Power 40", this),
-      Buffs.byIdOrName(21628, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(14049, "Attack Power 40", this),
+        Buffs.byIdOrName(21628, "Increased Mana Regen", this)
+        )}
+
 }

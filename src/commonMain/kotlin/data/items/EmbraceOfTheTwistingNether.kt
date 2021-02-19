@@ -51,9 +51,11 @@ public class EmbraceOfTheTwistingNether : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(90)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15828, "Attack Power 84", this),
-      Buffs.byIdOrName(21632, "Increased Mana Regen", this),
-      Buffs.byIdOrName(34518, "Nether Protection", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15828, "Attack Power 84", this),
+        Buffs.byIdOrName(21632, "Increased Mana Regen", this),
+        Buffs.byIdOrName(34518, "Nether Protection", this)
+        )}
+
 }

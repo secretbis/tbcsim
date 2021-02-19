@@ -51,7 +51,9 @@ public class LeggingsOfTheSeventhCircle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(33484, "Increase Spell Dam 50", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(33484, "Increase Spell Dam 50", this)
+        )}
+
 }

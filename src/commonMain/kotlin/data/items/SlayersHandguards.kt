@@ -50,8 +50,10 @@ public class SlayersHandguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15819, "Attack Power 68", this),
-      Buffs.byIdOrName(42095, "Armor Penetration 175", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15819, "Attack Power 68", this),
+        Buffs.byIdOrName(42095, "Armor Penetration 175", this)
+        )}
+
 }

@@ -43,8 +43,10 @@ public class HexShrunkenHead : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(26142, "Increase Spell Dam 53", this),
-      Buffs.byIdOrName(43712, "Mojo Madness", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(26142, "Increase Spell Dam 53", this),
+        Buffs.byIdOrName(43712, "Mojo Madness", this)
+        )}
+
 }

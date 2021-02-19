@@ -43,7 +43,9 @@ public class BlackenedNaaruSliver : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(45355, "Item - T7 Melee Trinket Base", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(45355, "Item - T7 Melee Trinket Base", this)
+        )}
+
 }

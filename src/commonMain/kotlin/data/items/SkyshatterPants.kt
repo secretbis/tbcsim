@@ -52,7 +52,9 @@ public class SkyshatterPants : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3015)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(21631, "Increased Mana Regen", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(21631, "Increased Mana Regen", this)
+        )}
+
 }

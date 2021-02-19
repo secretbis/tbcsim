@@ -51,7 +51,9 @@ public class HelmOfDesolation : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2873)
 
-  public override var buffs: List<Buff> = listOfNotNull(
-      Buffs.byIdOrName(15818, "Attack Power 66", this)
-      )
+  public override val buffs: List<Buff> by lazy {
+        listOfNotNull(
+        Buffs.byIdOrName(15818, "Attack Power 66", this)
+        )}
+
 }
