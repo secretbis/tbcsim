@@ -79,6 +79,8 @@ class HeroicStrike : Ability() {
 
     override fun cast(sim: SimIteration) {
         sim.replaceNextMainHandAutoAttack(nextHitAbility)
-        sim.addBuff(offHandHitBuff)
+        if(sim.isDualWielding()) {
+            sim.addBuff(offHandHitBuff)
+        }
     }
 }
