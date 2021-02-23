@@ -7,10 +7,13 @@ import character.Stats
 import data.model.Color
 import data.model.Gem
 import data.model.Item
+import data.model.Quality
 import sim.Event
 import sim.SimIteration
+import kotlin.js.JsExport
 
-class ThunderingSkyfireDiamond : Gem(listOf(), Color.META, Quality.META) {
+@JsExport
+class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_misc_gem_diamond_07.jpg", null, Color.META, Quality.META) {
 
     val hasteBuff = object : Buff() {
         override val name: String = "Thundering Skyfire Diamond"

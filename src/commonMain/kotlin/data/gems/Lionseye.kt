@@ -2,5 +2,9 @@ package data.gems
 
 import data.model.Color
 import data.model.Gem
+import data.model.Prefix
+import data.model.Quality
+import kotlin.js.JsExport
 
-class Lionseye(val prefix: Prefix) : Gem(prefix, Color.YELLOW, Quality.RARE)
+@JsExport
+class Lionseye(id: Int, val prefix: Prefix) : Gem(id, "Lionseye", "inv_jewelcrafting_lionseye_02.jpg", prefix, Color.YELLOW, Quality.RARE)

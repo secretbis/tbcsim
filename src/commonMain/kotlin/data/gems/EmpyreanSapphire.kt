@@ -2,5 +2,9 @@ package data.gems
 
 import data.model.Color
 import data.model.Gem
+import data.model.Prefix
+import data.model.Quality
+import kotlin.js.JsExport
 
-class EmpyreanSapphire(val prefix: Prefix) : Gem(prefix, Color.BLUE, Quality.EPIC)
+@JsExport
+class EmpyreanSapphire(id: Int, val prefix: Prefix) : Gem(id, "Empyrean Sapphire", "inv_jewelcrafting_empyreansapphire_02.jpg", prefix, Color.BLUE, Quality.EPIC)

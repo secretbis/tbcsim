@@ -41,3 +41,23 @@
   font-size: 15px !important;
   font-weight: 600;
 }
+
+.item-uncommon {
+  color: #1eff00;
+}
+
+.item-rare {
+  color: #0070dd;
+}
+
+.item-epic {
+  color: #a335ee;
+}
+
+.item-legendary {
+  color: #ff8000;
+}
+
+.item-enchant {
+  color: #1eff00;
+}

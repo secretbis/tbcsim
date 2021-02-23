@@ -12,7 +12,7 @@ object CodeGen {
 
     val outPath: String = "${System.getProperty("user.dir")}/src/commonMain/kotlin/"
 
-    fun <T> load(file: String, type: TypeReference<List<T>>): List<T> {
+    fun <T> load(file: String, type: TypeReference<T>): T {
         // Load
         val data = CodeGen::class.java.getResourceAsStream(file).readAllBytes().decodeToString()
         return mapper.readValue(data, type)

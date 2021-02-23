@@ -1,7 +1,5 @@
 package data
 
-import kotlin.js.JsExport
-
 // This contains meanings for all the magic numbers in the WoW TBC database
 object Constants {
     enum class StatType(private val id: Int) {

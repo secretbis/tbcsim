@@ -2,5 +2,9 @@ package data.gems
 
 import data.model.Color
 import data.model.Gem
+import data.model.Prefix
+import data.model.Quality
+import kotlin.js.JsExport
 
-class DeepPeridot(val prefix: Prefix) : Gem(prefix, Color.GREEN, Quality.UNCOMMON)
+@JsExport
+class DeepPeridot(id: Int, val prefix: Prefix) : Gem(id, "Deep Peridot", "inv_misc_gem_deepperidot_02.jpg", prefix, Color.GREEN, Quality.UNCOMMON)

@@ -1,5 +1,8 @@
 package data.model
 
+import kotlin.js.JsExport
+
+@JsExport
 class Socket(val color: Color) {
     var gem: Gem? = null
 

@@ -3,7 +3,9 @@ package data.model
 import character.Buff
 import character.Stats
 import data.Constants
+import kotlin.js.JsExport
 
+@JsExport
 open class Item {
     // Flag for ItemGen - all generated Items will have this set to true
     // If an item is manually edited, set this to false to prevent future ItemGen runs from overwriting
@@ -13,7 +15,11 @@ open class Item {
     open var id: Int = -1
     open var name: String = ""
     open var itemLevel: Int = 0
+    open var quality: Int = 0
+    open var icon: String = "unknown.jpg"
     open var itemSet: ItemSet? = null
+
+    open var inventorySlot: Int = 0
     var equippedSlot: String = ""
 
     // TODO: Validate itemSubclass is indeed a subclass of the itemClass
@@ -30,7 +36,7 @@ open class Item {
     open var stats: Stats = Stats()
 
     // Sockets
-    open var sockets: List<Socket> = listOf()
+    open var sockets: Array<Socket> = arrayOf()
     open var socketBonus: SocketBonus? = null
 
     open val socketBonusActive: Boolean

@@ -97,7 +97,7 @@ object ConfigMaker {
 
     private fun createItemFromGear(itemYml: GearItemYml?, equippedSlot: String): Item {
         return if(itemYml != null) {
-            var item = Items.byName(itemYml.name)
+            var item = Items.byName[itemYml.name]
             if(item == null) {
                 logger.warn { "Could not find item with name: ${itemYml.name}" }
                 item = Item()
@@ -122,7 +122,7 @@ object ConfigMaker {
 
             item.sockets.forEachIndexed { index, socket ->
                 val gemName = itemYml.gems?.get(index)
-                val gem = if(gemName != null) { Items.byName(gemName) } else null
+                val gem = if(gemName != null) { Items.byName[gemName] } else null
                 if(gem == null) {
                     logger.warn { "Could not find gem with name: ${gemName}" }
                 } else {

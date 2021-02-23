@@ -1,7 +1,8 @@
 import React, { useReducer, useState } from 'react';
-import { Container, Content, Header, Grid, Footer, Row, Button, Navbar, Nav, Icon, Message } from 'rsuite';
+import { Container, Content, Header, Grid, Footer, Row, Button, Panel, Navbar, Nav, Icon, Message } from 'rsuite';
 
-import simDefaults from './data/simdefaults';
+import simDefaults from './data/sim_defaults';
+import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
 import SimOptions from './sim/options';
 import SimResults from './results/results';
@@ -51,7 +52,7 @@ const initialState = {
   allowParryAndBlock: simDefaults.allowParryAndBlock,
   showHiddenBuffs: simDefaults.showHiddenBuffs,
 
-  characterPreset: null,
+  character: null,
 };
 
 const bannerTitle = 'Hello!  This is a work in progress.'
@@ -81,7 +82,7 @@ function App() {
 
   function sim() {
     // TODO: This serialize-deserialize jump can probably be made more efficient
-    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify(state.characterPreset))
+    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify(state.character))
 
     const simOpts = new tbcsim.sim.SimOptions(
       state.durationMs,
@@ -135,7 +136,7 @@ function App() {
     sim()
   }
 
-  const simDisabled = state.characterPreset == null || state.iterationsCompleted != null;
+  const simDisabled = state.character == null || state.iterationsCompleted != null;
 
   // App
   return (
@@ -147,8 +148,12 @@ function App() {
           </Navbar.Header>
           <Navbar.Body>
             <Nav pullRight>
-              <Nav.Item icon={<Icon icon='github' />}>
-                <a style={{ color: '#e9ebf0', textDecoration: 'none' }} href='https://github.com/marisa-ashkandi/tbcsim/issues/new' target='_blank' rel='noreferrer noopener'>Report a Bug</a>
+              <Nav.Item
+                icon={<Icon icon='github' />}
+                style={{ color: '#e9ebf0', textDecoration: 'none' }}
+                href='https://github.com/marisa-ashkandi/tbcsim/issues/new'
+                target='_blank'
+                rel='noreferrer noopener'>Report a Bug
               </Nav.Item>
             </Nav>
           </Navbar.Body>
@@ -158,10 +163,15 @@ function App() {
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
           <Container style={{padding: '10px 0px', fontWeight: 800}}>
-            <Presets value={state.characterPreset} dispatch={dispatch} />
+            <Presets value={state.character} dispatch={dispatch} />
           </Container>
-          <Container style={{padding: '10px 0px', maxWidth: '700px'}}>
-            <SimOptions dispatch={dispatch} />
+          <Container>
+            <GearEditor character={state.character}></GearEditor>
+          </Container>
+          <Container style={{maxWidth: '700px'}}>
+            <Panel header="Sim Options" collapsible bordered defaultExpanded={false}>
+              <SimOptions dispatch={dispatch} />
+            </Panel>
           </Container>
           <Row>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
@@ -171,7 +181,7 @@ function App() {
           </Row>
           {state.iterationResults &&
           <Container>
-            <SimResults character={state.characterPreset} results={resultsData} />
+            <SimResults character={state.character} results={resultsData} />
           </Container>
           }
         </Grid>

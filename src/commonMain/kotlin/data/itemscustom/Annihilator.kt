@@ -9,7 +9,9 @@ import data.model.SocketBonus
 import mechanics.Spell
 import sim.Event
 import sim.SimIteration
+import kotlin.js.JsExport
 
+@JsExport
 class Annihilator : Item() {
     companion object {
         private var singletonDebuff: Debuff? = null
@@ -42,7 +44,7 @@ class Annihilator : Item() {
     override var maxDmg: Double = 92.0
     override var speed: Double = 1700.0
     override var stats: Stats = Stats()
-    override var sockets: List<Socket> = listOf()
+    override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
 
     val staticBuff = object : Buff() {

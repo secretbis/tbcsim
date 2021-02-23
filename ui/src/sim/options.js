@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, Schema, InputNumber, Checkbox, Row, Col, CheckboxGroup } from 'rsuite';
 
-import simDefaults from '../data/simdefaults';
+import simDefaults from '../data/sim_defaults';
 
 const { ArrayType, NumberType } = Schema.Types;
 const model = Schema.Model({

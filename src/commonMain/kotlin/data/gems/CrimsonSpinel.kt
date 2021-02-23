@@ -2,5 +2,9 @@ package data.gems
 
 import data.model.Color
 import data.model.Gem
+import data.model.Prefix
+import data.model.Quality
+import kotlin.js.JsExport
 
-class CrimsonSpinel(val prefix: Prefix) : Gem(prefix, Color.RED, Quality.EPIC)
+@JsExport
+class CrimsonSpinel(id: Int, val prefix: Prefix) : Gem(id, "Crimson Spinel", "inv_jewelcrafting_crimsonspinel_02.jpg", prefix, Color.RED, Quality.EPIC)
