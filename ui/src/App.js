@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
+import _ from 'lodash';
 import { Container, Content, Header, Grid, Footer, Row, Button, Panel, Navbar, Nav, Icon, Message } from 'rsuite';
 
 import simDefaults from './data/sim_defaults';
@@ -16,7 +17,28 @@ function stateReducer(state, action) {
   if (state.hasOwnProperty(action.type)) {
     newState = { ...state, [action.type]: state[action.type] = action.value };
   } else {
-    console.warn(`Unhandled action type: ${action.type}`);
+    if(action.type == 'loadCharacterPreset') {
+      newState = {
+        ...state,
+
+        character: {
+          class: action.value.class,
+          description: action.value.description || '',
+          spec: action.value.spec,
+          race: action.value.race,
+          level: action.value.level,
+          gear: action.value.gear,
+          rotation: action.value.rotation,
+          talents: action.value.talents,
+        },
+
+        raidBuffs: action.value.raidBuffs,
+        raidDebuffs: action.value.raidDebuffs,
+        partyBuffs: action.value.partyBuffs,
+      }
+    } else {
+      console.warn(`Unhandled action type: ${action.type}`);
+    }
   }
 
   // Compute some props
@@ -52,7 +74,20 @@ const initialState = {
   allowParryAndBlock: simDefaults.allowParryAndBlock,
   showHiddenBuffs: simDefaults.showHiddenBuffs,
 
-  character: null,
+  character: {
+    class: null,
+    description: null,
+    spec: null,
+    race: null,
+    level: null,
+    gear: null,
+    rotation: null,
+    talents: null,
+  },
+
+  raidBuffs: [],
+  raidDebuffs: [],
+  partyBuffs: [],
 };
 
 const bannerTitle = 'Hello!  This is a work in progress.'
@@ -82,7 +117,24 @@ function App() {
 
   function sim() {
     // TODO: This serialize-deserialize jump can probably be made more efficient
-    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify(state.character))
+    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify({
+      class: state.character.class,
+      description: state.character.description || '',
+      spec: state.character.spec,
+      race: state.character.race,
+      level: state.character.level,
+      gear: _.mapValues(state.character.gear, it => ({
+        name: it.name,
+        gems: it.gems ? it.gems.map(gem => gem.name) : [],
+        enchant: it.enchant ? it.enchant.name : null
+      })),
+      rotation: state.character.rotation,
+      talents: state.character.talents,
+
+      raidBuffs: state.raidBuffs,
+      raidDebuffs: state.raidDebuffs,
+      partyBuffs: state.partyBuffs
+    }))
 
     const simOpts = new tbcsim.sim.SimOptions(
       state.durationMs,
@@ -162,17 +214,13 @@ function App() {
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
-          <Container style={{padding: '10px 0px', fontWeight: 800}}>
-            <Presets value={state.character} dispatch={dispatch} />
-          </Container>
-          <Container>
-            <GearEditor character={state.character}></GearEditor>
-          </Container>
-          <Container style={{maxWidth: '700px'}}>
-            <Panel header="Sim Options" collapsible bordered defaultExpanded={false}>
-              <SimOptions dispatch={dispatch} />
-            </Panel>
-          </Container>
+          <Presets value={state.character} dispatch={dispatch} />
+          <Panel header="Gear" collapsible bordered defaultExpanded={true}>
+            <GearEditor character={state.character} dispatch={dispatch}></GearEditor>
+          </Panel>
+          <Panel header="Sim Options" collapsible bordered defaultExpanded={false} style={{maxWidth: '700px'}}>
+            <SimOptions dispatch={dispatch} />
+          </Panel>
           <Row>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
             {state.iterationsCompleted != null &&

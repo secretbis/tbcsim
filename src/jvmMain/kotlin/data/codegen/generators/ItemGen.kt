@@ -17,7 +17,6 @@ import net.pearx.kasechange.toPascalCase
 import java.io.File
 import java.lang.IllegalArgumentException
 import java.lang.reflect.Modifier
-import kotlin.js.ExperimentalJsExport
 
 object ItemGen {
     val logger = KotlinLogging.logger {}
@@ -35,7 +34,7 @@ object ItemGen {
         return CodeGen.load("/item_icons.json", object : TypeReference<Map<String, String?>>(){})
     }
 
-    private fun deserializeSockets(itemData: Map<String, Any?>): List<Socket> {
+    private fun deserializeSockets(itemData: Map<String, Any?>): Array<Socket> {
         return (1..3).mapNotNull { i ->
             val socketColor = itemData["socketColor_$i"] as Int
             if(socketColor == 0) {
@@ -49,7 +48,7 @@ object ItemGen {
                     null
                 }
             }
-        }
+        }.toTypedArray()
     }
 
     private fun deserializeStats(itemData: Map<String, Any?>) : Stats {

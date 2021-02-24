@@ -1,50 +1,59 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Col, Row } from 'rsuite'
 
-import GearSelector from './gear_selector';
+import { itemClasses, armorSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classMainHandItemClasses, classOffHandItemClasses } from '../data/constants';
 import GearSlot from './gear_slot';
 
-export default function({ character }) {
-  const [selectorVisible, setSelectorVisible] = useState(false);
-  const [selectorSlot, setSelectorSlot] = useState(null);
-
-  function onSelect(item) {
-    // TODO: Store and render item
-    debugger
-  }
-
-  function onClick(slot) {
-    setSelectorSlot(slot)
-    setSelectorVisible(true)
-  }
-
+export default function({ character, dispatch }) {
   character = character || {}
-  const gear = character.gear;
+
+  if(!character.class) {
+    return null;
+  }
+
+  const armorSlotIC = {
+    itemClasses: [itemClasses.armor],
+    itemSubclasses: {
+      [itemClasses.armor]: classArmorSubclasses[character.class.toLowerCase()]
+    }
+  };
+
+  const jewelrySlotIC = {
+    itemClasses: [itemClasses.armor],
+    itemSubclasses: {
+      [itemClasses.armor]: [armorSubclasses.misc]
+    }
+  };
+
+  const mainHandSlotIC = classMainHandItemClasses[character.class.toLowerCase()];
+  const offHandSlotIC = classOffHandItemClasses[character.class.toLowerCase()];
+
+  const mainHandInvSlots = classMainHandInvSlots[character.class.toLowerCase()];
+  const offHandInvSlots = classOffHandInvSlots[character.class.toLowerCase()];
 
   return (
     <Container style={{ maxWidth: '750px', minWidth: '500px' }}>
       <Row>
         <Col xs={12}>
-          <GearSlot gear={gear} slot='head' onClick={() => onClick('head')} />
-          <GearSlot gear={gear} slot='neck' onClick={() => onClick('neck')} />
-          <GearSlot gear={gear} slot='shoulders' onClick={() => onClick('shoulders')} />
-          <GearSlot gear={gear} slot='back' onClick={() => onClick('back')} />
-          <GearSlot gear={gear} slot='chest' onClick={() => onClick('chest')} />
-          <GearSlot gear={gear} slot='wrists' onClick={() => onClick('wrists')} />
-          <GearSlot gear={gear} slot='mainHand' onClick={() => onClick('mainHand')} />
-          <GearSlot gear={gear} slot='offHand' onClick={() => onClick('offHand')} />
+          <GearSlot character={character} inventorySlots={[1]} itemClasses={armorSlotIC} slotName='head' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[2]} itemClasses={jewelrySlotIC} slotName='neck' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[3]} itemClasses={armorSlotIC} slotName='shoulders' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[16]} itemClasses={armorSlotIC} slotName='back' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[5]} itemClasses={armorSlotIC} slotName='chest' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[9]} itemClasses={armorSlotIC} slotName='wrists' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={mainHandInvSlots} itemClasses={mainHandSlotIC} slotName='mainHand' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={offHandInvSlots} itemClasses={offHandSlotIC} slotName='offHand' dispatch={dispatch} />
         </Col>
         <Col xs={12}>
-          <GearSlot gear={gear} slot='hands' onClick={() => onClick('hands')} />
-          <GearSlot gear={gear} slot='waist' onClick={() => onClick('waist')} />
-          <GearSlot gear={gear} slot='legs' onClick={() => onClick('legs')} />
-          <GearSlot gear={gear} slot='feet' onClick={() => onClick('feet')} />
-          <GearSlot gear={gear} slot='ring1' onClick={() => onClick('ring1')} />
-          <GearSlot gear={gear} slot='ring2' onClick={() => onClick('ring2')} />
-          <GearSlot gear={gear} slot='trinket1' onClick={() => onClick('trinket1')} />
-          <GearSlot gear={gear} slot='trinket2' onClick={() => onClick('trinket2')} />
+          <GearSlot character={character} inventorySlots={[10]} itemClasses={armorSlotIC} slotName='hands' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[6]} itemClasses={armorSlotIC} slotName='waist' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[7]} itemClasses={armorSlotIC} slotName='legs' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[8]} itemClasses={armorSlotIC} slotName='feet' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring1' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring2' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket1' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket2' dispatch={dispatch} />
         </Col>
-        <GearSelector visible={selectorVisible} setVisible={setSelectorVisible} onSelect={onSelect} />
       </Row>
     </Container>
   );

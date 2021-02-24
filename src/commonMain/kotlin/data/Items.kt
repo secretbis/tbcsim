@@ -11,7 +11,7 @@ import kotlin.js.JsExport
 // Wraps the auto-generated ItemIndex, and adds in manual overrides
 @JsExport
 object Items {
-    val items = listOf(
+    val items = arrayOf(
         // Manually added items
         Annihilator(),
 
@@ -140,5 +140,5 @@ object Items {
 
     val byName = items.map { it.name to it }.toMap()
     val byId = items.map { it.id to it }.toMap()
-    val bySlot = items.groupBy { it.inventorySlot }
+    val bySlot = items.groupBy { it.inventorySlot }.mapValues { it.value.toTypedArray() }
 }

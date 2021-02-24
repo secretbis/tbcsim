@@ -181,34 +181,33 @@ rotation:
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying
 # These are assumed to be up the entire fight
-raid:
-  buffs:
-    # Consider your raid composition when selecting which buffs to apply
-    # e.g. if you don't have two paladins, you can't have two blessings
-    - Blessing of Kings
-    - Improved Blessing of Might
-    - Improved Mark of the Wild
-    - Improved Seal of the Crusader
-  debuffs:
-    # Sunder Armor and Imp EA cannot be applied at the same time
-    # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-    # To test with Sunder, comment out Imp EA
-    - Sunder Armor
-    - Improved Expose Armor
-    - Faerie Fire
-    - Curse of Recklessness
-    - Blood Frenzy
-    - Improved Scorch
-    - Misery
-    - Judgement of Wisdom
-    - Curse of the Elements
-#    - Curse of Shadow
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
 
-  party:
-    # Adjust these based on what you expect your personal group composition to be
-    # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
-    buffs:
-      - Ferocious Inspiration
-      - Leader of the Pack
-      - Improved Battle Shout
-      - Improved Sanctity Aura
+raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+#  - Curse of Shadow
+
+partyBuffs:
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
+  - Ferocious Inspiration
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Improved Sanctity Aura

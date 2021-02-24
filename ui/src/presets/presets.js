@@ -48,7 +48,7 @@ export default ({ value, dispatch }) => {
 
       return item
     })
-    dispatch({ type: 'character', value: clone })
+    dispatch({ type: 'loadCharacterPreset', value: clone })
     setIsOpen(false)
   }
 
@@ -62,7 +62,7 @@ export default ({ value, dispatch }) => {
   }
 
   return (
-    <Row>
+    <Row style={{padding: '10px 0px', fontWeight: 800}}>
       <Col>
         <Dropdown title="Presets"
           onMouseEnter={() => setIsOpen(true)}
