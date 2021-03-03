@@ -1,12 +1,14 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import _ from 'lodash';
-import { Container, Content, Header, Grid, Footer, Row, Button, Panel, Navbar, Nav, Icon, Message } from 'rsuite';
+import { Container, Content, Header, Grid, Footer, Row, Col, Button, Panel, Navbar, Nav, Icon, Message } from 'rsuite';
 
+import RaidBuffs from './buffs/raid_buffs';
 import simDefaults from './data/sim_defaults';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
-import SimOptions from './sim/options';
 import SimResults from './results/results';
+import Rotation from './rotation/rotation';
+import SimOptions from './sim/options';
 
 import * as tbcsim from 'tbcsim';
 
@@ -14,8 +16,8 @@ import './App.css';
 
 function stateReducer(state, action) {
   let newState = state
-  if (state.hasOwnProperty(action.type)) {
-    newState = { ...state, [action.type]: state[action.type] = action.value };
+  if (_.has(state, action.type)) {
+    newState = { ...state, ...(_.set({}, action.type, action.value)) };
   } else {
     if(action.type == 'loadCharacterPreset') {
       newState = {
@@ -32,10 +34,34 @@ function stateReducer(state, action) {
           talents: action.value.talents,
         },
 
-        raidBuffs: action.value.raidBuffs,
-        raidDebuffs: action.value.raidDebuffs,
-        partyBuffs: action.value.partyBuffs,
+        raidBuffs: _.reduce(action.value.raidBuffs, (acc, buff) => {
+          acc[buff] = true
+          return acc;
+        }, {}),
+        raidDebuffs: _.reduce(action.value.raidDebuffs, (acc, debuff) => {
+          acc[debuff] = true
+          return acc;
+        }, {}),
       }
+    } else if(action.type == 'updateGearSlot') {
+      newState = {
+        ...state,
+        character: {
+          ...state.character,
+          gear: {
+            ...state.character.gear,
+            ...action.value
+          }
+        }
+      }
+    } else if(action.type == 'setRaidBuff') {
+        newState = {
+          ...state,
+          raidBuffs: {
+            ...state.raidBuffs,
+            [action.value.name]: action.value.value
+          }
+        }
     } else {
       console.warn(`Unhandled action type: ${action.type}`);
     }
@@ -64,15 +90,17 @@ const initialState = {
   resultsResourceUsage: null,
   resultsDps: null,
 
-  durationSeconds: simDefaults.durationSeconds,
-  durationVariabilitySeconds: simDefaults.durationVariabilitySeconds,
-  stepMs: simDefaults.stepMs,
-  latencyMs: simDefaults.latencyMs,
-  iterations: simDefaults.iterations,
-  targetLevel: simDefaults.targetLevel,
-  targetArmor: simDefaults.targetArmor,
-  allowParryAndBlock: simDefaults.allowParryAndBlock,
-  showHiddenBuffs: simDefaults.showHiddenBuffs,
+  simOptions: {
+    durationSeconds: simDefaults.durationSeconds,
+    durationVariabilitySeconds: simDefaults.durationVariabilitySeconds,
+    stepMs: simDefaults.stepMs,
+    latencyMs: simDefaults.latencyMs,
+    iterations: simDefaults.iterations,
+    targetLevel: simDefaults.targetLevel,
+    targetArmor: simDefaults.targetArmor,
+    allowParryAndBlock: simDefaults.allowParryAndBlock,
+    showHiddenBuffs: simDefaults.showHiddenBuffs
+  },
 
   character: {
     class: null,
@@ -85,10 +113,50 @@ const initialState = {
     talents: null,
   },
 
-  raidBuffs: [],
-  raidDebuffs: [],
-  partyBuffs: [],
+  raidBuffs: _.reduce(tbcsim.data.abilities.raid.RaidAbilities.buffNames, (acc, buff) => {
+    acc[buff] = true
+    return acc;
+  }, {}),
+  raidDebuffs: _.reduce(tbcsim.data.abilities.raid.RaidAbilities.debuffNames, (acc, debuff) => {
+    acc[debuff] = true
+    return acc;
+  }, {}),
 };
+
+initialState.serialize = function() {
+  return JSON.stringify({
+    character: {
+      class: this.character.class,
+      description: this.character.description || '',
+      spec: this.character.spec,
+      race: this.character.race,
+      level: this.character.level,
+      gear: _.mapValues(this.character.gear, it => ({
+        name: it.name,
+        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
+        enchant: it.enchant ? it.enchant.name : null
+      })),
+      rotation: this.character.rotation,
+      talents: this.character.talents,
+    },
+
+    raidBuffs: this.raidBuffs,
+    raidDebuffs: this.raidDebuffs,
+    partyBuffs: this.partyBuffs
+  })
+};
+
+initialState.deserialize = function(serialized) {
+  const newState = JSON.parse(serialized);
+
+  // Rehydrate character data into actual items and etc.
+  if(newState.character) {
+    newState.character = tbcsim.config.ConfigMaker.fromJson(newState.character)
+  }
+
+  return newState;
+};
+
 
 const bannerTitle = 'Hello!  This is a work in progress.'
 function bannerMsg() {
@@ -105,6 +173,7 @@ function bannerMsg() {
 
 function App() {
   const [state, dispatch] = useReducer(stateReducer, initialState)
+  const [gearExpanded, setGearExpanded] = useState(true);
 
   const resultsData = {
     ability: state.resultsByAbility,
@@ -117,24 +186,22 @@ function App() {
 
   function sim() {
     // TODO: This serialize-deserialize jump can probably be made more efficient
-    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify({
-      class: state.character.class,
-      description: state.character.description || '',
-      spec: state.character.spec,
-      race: state.character.race,
-      level: state.character.level,
-      gear: _.mapValues(state.character.gear, it => ({
-        name: it.name,
-        gems: it.gems ? it.gems.map(gem => gem.name) : [],
-        enchant: it.enchant ? it.enchant.name : null
-      })),
-      rotation: state.character.rotation,
-      talents: state.character.talents,
+    const config = tbcsim.sim.config.ConfigMaker.fromJson({
+      ..._.pick(state.serialize(), [
+        'character.class',
+        'character.description',
+        'character.spec',
+        'character.race',
+        'character.level',
+        'character.gear',
+        'character.rotation',
+        'character.talents'
+      ]),
 
       raidBuffs: state.raidBuffs,
       raidDebuffs: state.raidDebuffs,
       partyBuffs: state.partyBuffs
-    }))
+    })
 
     const simOpts = new tbcsim.sim.SimOptions(
       state.durationMs,
@@ -215,13 +282,28 @@ function App() {
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
           <Presets value={state.character} dispatch={dispatch} />
-          <Panel header="Gear" collapsible bordered defaultExpanded={true}>
-            <GearEditor character={state.character} dispatch={dispatch}></GearEditor>
-          </Panel>
+          <Row style={{maxWidth: '1400px'}}>
+            <Col xs={14}>
+              <Panel header="Gear" collapsible bordered onClick={() => setGearExpanded(!gearExpanded)} expanded={gearExpanded && state.character.class !== null}>
+                <GearEditor character={state.character} dispatch={dispatch}></GearEditor>
+              </Panel>
+            </Col>
+            <Col xs={10}>
+              <Panel header="Buffs" collapsible bordered defaultExpanded={false}>
+                <RaidBuffs state={state.raidBuffs} stateKey='raidBuffs' dispatch={dispatch} />
+              </Panel>
+              <Panel header="Debuffs" collapsible bordered defaultExpanded={false}>
+                <RaidBuffs state={state.raidDebuffs} stateKey='raidDebuffs' dispatch={dispatch} />
+              </Panel>
+              <Panel header="Rotation" collapsible bordered defaultExpanded={false}>
+                <Rotation rotation={state.character.rotation} dispatch={dispatch} />
+              </Panel>
+            </Col>
+          </Row>
           <Panel header="Sim Options" collapsible bordered defaultExpanded={false} style={{maxWidth: '700px'}}>
             <SimOptions dispatch={dispatch} />
           </Panel>
-          <Row>
+          <Row style={{ margin: '10px 0 0 0' }}>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
             {state.iterationsCompleted != null &&
               <span style={{ marginLeft: '10px' }}>Iterations completed: {state.iterationsCompleted}</span>

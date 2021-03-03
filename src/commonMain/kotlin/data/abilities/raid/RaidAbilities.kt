@@ -1,36 +1,43 @@
 package data.abilities.raid
 
 import character.Ability
+import kotlin.js.JsExport
 
 // These are spells that are provided by other players in the raid, and may carry some
 //  assumptions about stacks and talents, and when they are applied
+@JsExport
 object RaidAbilities {
-    fun byName(name: String): Ability? {
-        return when(name) {
-            BlessingOfKings.name -> BlessingOfKings()
-            ImprovedBlessingOfWisdom.name -> ImprovedBlessingOfWisdom()
-            BloodFrenzy.name -> BloodFrenzy()
-            CurseOfRecklessness.name -> CurseOfRecklessness()
-            CurseOfShadow.name -> CurseOfShadow()
-            CurseOfTheElements.name -> CurseOfTheElements()
-            FaerieFire.name -> FaerieFire()
-            FerociousInspiration.name -> FerociousInspiration()
-            GraceOfAirTotem.name -> GraceOfAirTotem()
-            ImprovedBattleShout.name -> ImprovedBattleShout()
-            ImprovedBlessingOfMight.name -> ImprovedBlessingOfMight()
-            ImprovedExposeArmor.name -> ImprovedExposeArmor()
-            ImprovedMarkOfTheWild.name -> ImprovedMarkOfTheWild()
-            ImprovedSanctityAura.name -> ImprovedSanctityAura()
-            ImprovedScorch.name -> ImprovedScorch()
-            ImprovedSealOfTheCrusader.name -> ImprovedSealOfTheCrusader()
-            JudgementOfWisdom.name -> JudgementOfWisdom()
-            LeaderOfThePack.name -> LeaderOfThePack()
-            Misery.name -> Misery()
-            StrengthOfEarthTotem.name -> StrengthOfEarthTotem()
-            SunderArmor.name -> SunderArmor()
-            UnleashedRage.name -> UnleashedRage()
-            WindfuryTotem.name -> WindfuryTotem()
-            else -> null
-        }
-    }
+    val raidBuffs: Array<Ability> = arrayOf(
+        BlessingOfKings(),
+        ImprovedBlessingOfWisdom(),
+        FerociousInspiration(),
+        GraceOfAirTotem(),
+        ImprovedBattleShout(),
+        ImprovedBlessingOfMight(),
+        ImprovedMarkOfTheWild(),
+        ImprovedSanctityAura(),
+        ImprovedSealOfTheCrusader(),
+        LeaderOfThePack(),
+        StrengthOfEarthTotem(),
+        UnleashedRage(),
+        WindfuryTotem(),
+    )
+
+    val raidDebuffs: Array<Ability> = arrayOf(
+        BloodFrenzy(),
+        CurseOfRecklessness(),
+        CurseOfShadow(),
+        CurseOfTheElements(),
+        FaerieFire(),
+        ImprovedExposeArmor(),
+        ImprovedScorch(),
+        JudgementOfWisdom(),
+        Misery(),
+        SunderArmor(),
+    )
+
+    val buffNames: Array<String> = raidBuffs.map { it.name }.toTypedArray()
+    val debuffNames: Array<String> = raidDebuffs.map { it.name }.toTypedArray()
+
+    val byName: Map<String, Ability> = (raidBuffs + raidDebuffs).map { it.name to it }.toMap()
 }

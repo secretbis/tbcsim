@@ -108,6 +108,5 @@ data class ConfigYml(
     val rotation: RotationYml? = null,
     val raidBuffs: List<String>? = null,
     val raidDebuffs: List<String>? = null,
-    val partyBuffs: List<String>? = null,
     val simOpts: SimOptionsYml? = null
 )

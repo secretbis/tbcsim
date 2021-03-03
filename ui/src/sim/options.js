@@ -38,7 +38,7 @@ export default function({ dispatch }) {
       }
 
       // Dispatch state change
-      dispatch({ type: key, value: val })
+      dispatch({ type: `simOptions.${key}`, value: val })
     });
   }
 

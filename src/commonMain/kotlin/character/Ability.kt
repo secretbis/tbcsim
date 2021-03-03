@@ -15,10 +15,6 @@ abstract class Ability {
         DRUMS
     }
 
-    data class CastOptions(
-        var costReductionPct: Double
-    )
-
     abstract val id: Int
     abstract val name: String
 

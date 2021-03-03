@@ -6,7 +6,7 @@ import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ inventorySlots, itemClasses, visible, setVisible, dispatch }) {
+export default function({ inventorySlots, itemClasses, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState(null);
 
   function getItemsForSlot() {
@@ -35,15 +35,18 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, disp
     return _.sortBy(filtered, 'itemLevel').reverse()
   }
 
-  function getGems() {
+  function onRowClick(item, e) {
+    e.preventDefault()
+    e.stopPropagation()
 
+    setVisible(false)
+    onSelect(item)
   }
 
-  function onRowClick(item) {
-    debugger
-  }
+  function onHide(e) {
+    e.preventDefault()
+    e.stopPropagation()
 
-  function onHide() {
     setVisible(false);
     setFilter(null);
   }
@@ -55,8 +58,14 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, disp
   function IconCell({ rowData, dataKey, ...props }) {
     const cellValue = rowData[dataKey]
     return (
-      <Cell { ...props} style={{ padding: 'none' }}>
-        <img style={{  marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+        <a
+          href={`https://70.wowfan.net/en?item=${rowData.id}`}
+          onClick={e => e.preventDefault() && onRowClick(rowData)}
+          style={{ textDecoration: 'none' }}
+        >
+          <img style={{  marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+        </a>
       </Cell>
     )
   }
@@ -64,8 +73,23 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, disp
   function NameCell({ rowData, dataKey, ...props }) {
     const cellValue = rowData[dataKey]
     return (
-      <Cell { ...props}>
-        <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
+      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+        <a
+          href={`https://70.wowfan.net/en?item=${rowData.id}`}
+          onClick={e => e.preventDefault()}
+          style={{ textDecoration: 'none' }}
+        >
+          <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
+        </a>
+      </Cell>
+    )
+  }
+
+  function ItemLevelCell({ rowData, dataKey, ...props }) {
+    const cellValue = rowData[dataKey]
+    return (
+      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+        <p>{cellValue}</p>
       </Cell>
     )
   }
@@ -94,7 +118,7 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, disp
           </Column>
           <Column flexGrow={1}>
             <HeaderCell>ilvl</HeaderCell>
-            <Cell dataKey="itemLevel" />
+            <ItemLevelCell dataKey="itemLevel" />
           </Column>
         </Table>
       </Modal.Body>

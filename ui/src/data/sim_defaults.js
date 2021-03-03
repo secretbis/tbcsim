@@ -9,7 +9,7 @@ const simDefaults = {
   iterations: 10,
   targetLevel: tbcsim.sim.SimDefaults.targetLevel,
   targetArmor: tbcsim.sim.SimDefaults.targetArmor,
-  allowParryAndBlock: tbcsim.sim.SimDefaults.allowParryAndBlock,
+  // allowParryAndBlock: tbcsim.sim.SimDefaults.allowParryAndBlock,
   showHiddenBuffs: tbcsim.sim.SimDefaults.showHiddenBuffs
 };
 

@@ -50,6 +50,18 @@ export const itemClasses = {
   glyph: 16,
 };
 
+export const gemSubclasses = {
+  red: 0,
+  blue: 1,
+  yellow: 2,
+  purple: 3,
+  green: 4,
+  orange: 5,
+  meta: 6,
+  simple: 7,
+  prismatic: 8,
+};
+
 export const weaponSubclasses = {
   axe_1h: 0,
   axe_2h: 1,

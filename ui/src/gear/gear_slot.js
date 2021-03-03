@@ -2,6 +2,7 @@ import React, { useState }  from 'react'
 import { Col, Row } from 'rsuite';
 
 import GearSelector from './gear_selector';
+import GemSlot from './gem_slot';
 
 const defaultWidth = '55px';
 const bgImages = {
@@ -44,17 +45,7 @@ const titles = {
   trinket2: 'TRINKET 2',
   ranged: 'RANGED',
   ammo: 'AMMO',
-}
-
-const bgImgRoot = 'slotbg'
-const imgRoot = 'icons'
-
-const socketImages = {
-  blue: 'sockets/blue.png',
-  meta: 'sockets/meta.png',
-  red: 'sockets/red.png',
-  yellow: 'sockets/yellow.png',
-}
+};
 
 export default function({ character, slotName, inventorySlots, itemClasses, width=defaultWidth, dispatch }) {
   const item = character && character.gear && character.gear[slotName];
@@ -62,16 +53,22 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
 
   const [selectorVisible, setSelectorVisible] = useState(false);
 
-  function onClick() {
+  function onClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
     setSelectorVisible(true);
   }
 
-  function renderGemSlot(socket, idx) {
-    const color = socket._color_0._name_2.toLowerCase();
-    const gem = socket.gem;
-    const icon = gem ? `${imgRoot}/${gem.icon}` : socketImages[color];
+  function onItemSelect(item) {
+    // Clean sockets and enchants
+    item.sockets.forEach(sk => sk.gem = null);
+    item.enchant = null;
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+  }
 
-    return <img src={icon} style={{ width: 20, height: 20, marginRight: 5 }} />;
+  function onGemSelect(gem, idx) {
+    item.sockets[idx].gem = gem
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
   }
 
   function renderItemLabel() {
@@ -98,7 +95,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
             className={itemClass} rel={`${itemGems}&amp;${itemEnchant}&amp;${itemSet}`}
             onClick={e => e.preventDefault() && onClick()}
           >
-            <img style={itemImgStyles} src={`${imgRoot}/${item.icon}`} />
+            <img style={itemImgStyles} src={`icons/${item.icon}`} />
           </a>
         </Col>
         <Col>
@@ -111,7 +108,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </a>
             {item.sockets.map((sk, idx) => {
-              return renderGemSlot(sk, idx);
+              return <GemSlot key={idx} socket={sk} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {!['trinket1', 'trinket2', 'neck'].includes(slotName) ?
               item.enchant ? <p>{item.enchant.name}</p> : <p>No enchant</p>
@@ -128,7 +125,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
         <Col xs={5} onClick={onClick}>
           <img
             style={itemImgStyles}
-            src={`${bgImgRoot}/${bgImages[slotName]}`}
+            src={`slotbg/${bgImages[slotName]}`}
           />
         </Col>
         {renderItemLabel()}
@@ -140,12 +137,12 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     <>
       {item ? renderItem() : renderBlank()}
       <GearSelector
-          inventorySlots={inventorySlots}
-          itemClasses={itemClasses}
-          visible={selectorVisible}
-          setVisible={setSelectorVisible}
-          dispatch={dispatch}
-        />
+        inventorySlots={inventorySlots}
+        itemClasses={itemClasses}
+        visible={selectorVisible}
+        setVisible={setSelectorVisible}
+        onSelect={onItemSelect}
+      />
     </>
   );
 }

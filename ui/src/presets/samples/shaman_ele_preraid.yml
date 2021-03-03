@@ -180,26 +180,18 @@ raidBuffs:
   - Improved Blessing of Wisdom
   - Improved Mark of the Wild
   - Improved Seal of the Crusader
-
-raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
-  - Sunder Armor
-  - Improved Expose Armor
-  - Faerie Fire
-  - Curse of Recklessness
-  - Blood Frenzy
-  - Improved Scorch
-  - Misery
-  - Judgement of Wisdom
-  - Curse of the Elements
-#  - Curse of Shadow
-
-partyBuffs:
   # Adjust these based on what you expect your personal group composition to be
   # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
   - Ferocious Inspiration
   - Leader of the Pack
   - Improved Battle Shout
   - Improved Sanctity Aura
+
+raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+#  - Curse of Shadow

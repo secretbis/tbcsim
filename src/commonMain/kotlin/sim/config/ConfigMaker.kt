@@ -74,9 +74,9 @@ object ConfigMaker {
         val combatRules = makeRules(yml.rotation?.combat, character, Rotation.Phase.COMBAT)
 
         // Only build Raid/Party rules from the collection of raid abilities
-        val raidAndPartyAbilities: List<String> = (yml.raidBuffs ?: listOf()) + (yml.raidDebuffs ?: listOf()) + (yml.partyBuffs ?: listOf())
+        val raidAndPartyAbilities: List<String> = (yml.raidBuffs ?: listOf()) + (yml.raidDebuffs ?: listOf())
         val raidAndPartyRules = raidAndPartyAbilities.mapNotNull {
-            val ability = RaidAbilities.byName(it)
+            val ability = RaidAbilities.byName[it]
             if(ability == null) {
                 logger.warn { "Could not find raid/party ability with name: $it" }
                 null

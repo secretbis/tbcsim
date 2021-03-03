@@ -1,15 +1,17 @@
 package data.model
 
-enum class Color(val mask: Int) {
-    META(1),
+import data.Constants
 
-    RED(2),
-    YELLOW(4),
-    BLUE(8),
+enum class Color(val mask: Int, val itemSubclass: Constants.ItemSubclass) {
+    META(1, Constants.ItemSubclass.META),
 
-    ORANGE(6),
-    PURPLE(10),
-    GREEN(12);
+    RED(2, Constants.ItemSubclass.RED),
+    YELLOW(4, Constants.ItemSubclass.YELLOW),
+    BLUE(8, Constants.ItemSubclass.BLUE),
+
+    ORANGE(6, Constants.ItemSubclass.ORANGE),
+    PURPLE(10, Constants.ItemSubclass.PURPLE),
+    GREEN(12, Constants.ItemSubclass.GREEN);
 
     companion object {
         fun matchesColor(gem: Gem, color: Color): Boolean {

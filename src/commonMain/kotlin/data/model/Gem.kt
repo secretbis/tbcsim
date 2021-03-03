@@ -22,6 +22,9 @@ abstract class Gem(id: Int, name: String, icon: String, prefix: Prefix?, val col
 
         val cleanPrefixName = if(prefix != null) { "${prefix.name.toLowerCase().capitalize()} " } else ""
 
+        this.itemClass = Constants.ItemClass.GEM;
+        this.itemSubclass = color.itemSubclass
+
         this.stats = tmpStats
         this.quality = quality.ordinal
         this.name = "$cleanPrefixName$name"

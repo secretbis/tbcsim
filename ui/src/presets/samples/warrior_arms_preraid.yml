@@ -154,17 +154,6 @@ raidBuffs:
   - Improved Blessing of Might
   - Improved Mark of the Wild
   - Improved Seal of the Crusader
-
-raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
-  - Sunder Armor
-  - Improved Expose Armor
-  - Faerie Fire
-  - Curse of Recklessness
-
-partyBuffs:
   # Adjust these based on what you expect your personal group composition to be
   # This happens to assume a BM Hunter, Feral Druid, Enhancement Shaman and Ret Paladin
   - Ferocious Inspiration
@@ -174,3 +163,12 @@ partyBuffs:
   - Grace of Air Totem
   - Strength of Earth Totem
   - Unleashed Rage
+
+raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
