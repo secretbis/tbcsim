@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { itemClasses, gemSubclasses as gsc } from '../data/constants';
+import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
 
 const socketImages = {
@@ -43,18 +44,17 @@ export default function({ socket, onSelect }) {
   }
 
   return (
-    <a
-      href={`https://70.wowfan.net/en?item=${gem.id}`}
-      onClick={onGemClick}
-    >
-      <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
-      <GearSelector
-        inventorySlots={[0]}
-        itemClasses={color == 'meta' ? metaIC : nonMetaIC}
-        visible={selectorVisible}
-        setVisible={setSelectorVisible}
-        onSelect={onGemSelect}
-      />
-    </a>
+    <span onClick={onGemClick}>
+      <ItemTooltip>
+        <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
+        <GearSelector
+          inventorySlots={[0]}
+          itemClasses={color == 'meta' ? metaIC : nonMetaIC}
+          visible={selectorVisible}
+          setVisible={setSelectorVisible}
+          onSelect={onGemSelect}
+        />
+      </ItemTooltip>
+    </span>
   )
 }

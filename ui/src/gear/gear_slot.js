@@ -1,6 +1,7 @@
 import React, { useState }  from 'react'
 import { Col, Row } from 'rsuite';
 
+import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
 import GemSlot from './gem_slot';
 
@@ -82,31 +83,18 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
   }
 
   function renderItem() {
-    const itemClass = `q${item.quality}`
-    const itemGems = 'gems=' + item.sockets.map(sk => sk.gem && sk.gem.id).join(':')
-    const itemEnchant = item.enchant ? `ench=${item.enchant.id}` : ''
-    const itemSet = ''//TODO: 'pcs=' + gear.all().map(it => it.id).join(':')
-
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
         <Col xs={5}>
-          <a
-            href={`https://70.wowfan.net/en?item=${item.id}`}
-            className={itemClass} rel={`${itemGems}&amp;${itemEnchant}&amp;${itemSet}`}
-            onClick={e => e.preventDefault() && onClick()}
-          >
+          <ItemTooltip item={item} gear={character.gear}>
             <img style={itemImgStyles} src={`icons/${item.icon}`} />
-          </a>
+          </ItemTooltip>
         </Col>
         <Col>
           <Row>
-            <a
-              href={`https://70.wowfan.net/en?item=${item.id}`}
-              target='_blank'
-              className={itemClass} rel={`${itemGems}&amp;${itemEnchant}&amp;${itemSet}`}
-            >
+            <ItemTooltip item={item} gear={character.gear}>
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
-            </a>
+            </ItemTooltip>
             {item.sockets.map((sk, idx) => {
               return <GemSlot key={idx} socket={sk} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 
+import ItemTooltip from './item_tooltip';
+
 import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
@@ -59,13 +61,9 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, onSe
     const cellValue = rowData[dataKey]
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <a
-          href={`https://70.wowfan.net/en?item=${rowData.id}`}
-          onClick={e => e.preventDefault() && onRowClick(rowData)}
-          style={{ textDecoration: 'none' }}
-        >
+        <ItemTooltip item={rowData}>
           <img style={{  marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
-        </a>
+        </ItemTooltip>
       </Cell>
     )
   }
@@ -74,13 +72,9 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, onSe
     const cellValue = rowData[dataKey]
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <a
-          href={`https://70.wowfan.net/en?item=${rowData.id}`}
-          onClick={e => e.preventDefault()}
-          style={{ textDecoration: 'none' }}
-        >
+        <ItemTooltip item={rowData}>
           <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
-        </a>
+        </ItemTooltip>
       </Cell>
     )
   }

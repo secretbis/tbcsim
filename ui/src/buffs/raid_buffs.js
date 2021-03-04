@@ -17,7 +17,8 @@ export default function({ state, stateKey, dispatch }) {
 
   function onChange(key, checked) {
     // Dispatch state change
-    dispatch({ type: `setRaidBuff`, value: {
+    const action = stateKey == 'raidBuffs' ? 'setRaidBuff' : 'setRaidDebuff';
+    dispatch({ type: action, value: {
       name: key,
       value: checked
     }})
