@@ -132,7 +132,7 @@ initialState.serialize = function() {
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
         gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
-        enchant: it.enchant ? it.enchant.name : null
+        enchant: it.enchant ? it.enchant.displayName : null
       })),
       rotation: this.character.rotation,
       talents: this.character.talents,

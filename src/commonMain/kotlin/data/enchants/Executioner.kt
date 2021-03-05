@@ -1,13 +1,17 @@
 package data.enchants
 
 import character.*
+import data.Constants
+import data.model.Enchant
 import data.model.Item
 import sim.Event
 import sim.SimIteration
+import kotlin.js.JsExport
 
 // Fun blog about Goose and Executioner:
 // https://warcraft.blizzplanet.com/blog/comments/world_of_warcraft_burning_crusade___enchanting___executioner_vs_mongoose
-class Executioner : Buff() {
+@JsExport
+class Executioner(item: Item) : Enchant(item) {
     // Executioner always stacks once even if enchanted and procced twice, so use a singleton Buff object to track it
     companion object {
         private var singletonBuff: Buff? = null
@@ -28,9 +32,11 @@ class Executioner : Buff() {
         }
     }
 
+    override val id: Int = 42976
     override val name: String = "Executioner (enchant)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
 
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {

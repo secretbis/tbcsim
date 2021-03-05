@@ -1,16 +1,22 @@
 package data.enchants
 
 import character.*
+import data.model.Enchant
 import data.model.Item
 import sim.Event
 import sim.SimIteration
+import kotlin.js.JsExport
 
 // Fun blog about Goose and Executioner:
 // https://warcraft.blizzplanet.com/blog/comments/world_of_warcraft_burning_crusade___enchanting___executioner_vs_mongoose
-class Mongoose(val item: Item) : ItemBuff(listOf(item)) {
+@JsExport
+class Mongoose(item: Item) : Enchant(item) {
+    override val id: Int = 46536
     override val name: String = "Mongoose (static) ${item.uniqueName}"
+    override var displayName: String? = "Mongoose"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val inventorySlot: Int = 13
 
     private var _procs: List<Proc>? = null
     private fun makeProcs(sim: SimIteration): List<Proc> {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import _ from 'lodash';
+import _, { trimEnd } from 'lodash';
 import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 
 import ItemTooltip from './item_tooltip';
@@ -8,30 +8,43 @@ import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ inventorySlots, itemClasses, visible, setVisible, onSelect }) {
+export default function({ type, item, TooltipComponent, inventorySlots, itemClasses, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState(null);
+
+  TooltipComponent = TooltipComponent || ItemTooltip
+
+  let baseData = tbcsim.data.Items
+  if(type === "enchants") {
+    baseData = tbcsim.data.Enchants
+  }
 
   function getItemsForSlot() {
     let items = [];
     for(const inventorySlot of inventorySlots) {
-      items = [...items, ...(tbcsim.data.Items.bySlot.get_35(inventorySlot) || [])];
+      items = [...items, ...(baseData.bySlot.get_35(inventorySlot) || [])];
     }
 
-    // Filter again by equippable item subclasses
+    items = items.map(i => i(item))
+
+    // Filter again by equippable item subclasses, if provided
     const filtered = _.filter(items, item => {
-      const itemClass = item.itemClass._ordinal;
+      if(itemClasses) {
+        const itemClass = item.itemClass._ordinal;
 
-      if(itemClasses.itemClasses.includes(itemClass)) {
-        const itemSubclass = item.itemSubclass._itemClassOrdinal;
-        const subclasses = itemClasses.itemSubclasses[itemClass]
+        if(itemClasses.itemClasses.includes(itemClass)) {
+          const itemSubclass = item.itemSubclass._itemClassOrdinal;
+          const subclasses = itemClasses.itemSubclasses[itemClass]
 
-        if(subclasses.includes(itemSubclass)) {
-          const matchesName = filter ? item.name.toLowerCase().includes(filter.toLowerCase()) : true
-          return matchesName
+          if(subclasses.includes(itemSubclass)) {
+            const matchesName = filter ? (item.displayName || item.name).toLowerCase().includes(filter.toLowerCase()) : true
+            return matchesName
+          }
         }
+
+        return false;
       }
 
-      return false;
+      return true;
     });
 
     return _.sortBy(filtered, 'itemLevel').reverse()
@@ -59,22 +72,26 @@ export default function({ inventorySlots, itemClasses, visible, setVisible, onSe
 
   function IconCell({ rowData, dataKey, ...props }) {
     const cellValue = rowData[dataKey]
-    return (
-      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <ItemTooltip item={rowData}>
-          <img style={{  marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
-        </ItemTooltip>
-      </Cell>
-    )
+    if(cellValue) {
+      return (
+        <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+          <TooltipComponent item={rowData} enchant={rowData}>
+            <img style={{ border: '1px solid #AAA', marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+          </TooltipComponent>
+        </Cell>
+      )
+    }
+
+    return null;
   }
 
   function NameCell({ rowData, dataKey, ...props }) {
-    const cellValue = rowData[dataKey]
+    const cellValue = rowData.displayName || rowData.name
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <ItemTooltip item={rowData}>
+        <TooltipComponent item={rowData} enchant={rowData}>
           <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
-        </ItemTooltip>
+        </TooltipComponent>
       </Cell>
     )
   }

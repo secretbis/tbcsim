@@ -7,7 +7,7 @@ import character.Race
 import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
-import data.enchants.Enchants
+import data.Enchants
 import data.itemscustom.EmptyItem
 import data.model.Gem
 import data.model.Item
@@ -98,7 +98,7 @@ object ConfigMaker {
 
     private fun createItemFromGear(itemYml: GearItemYml?, equippedSlot: String): Item {
         return if(itemYml != null) {
-            var item: Item? = Items.byName[itemYml.name]?.clone()
+            var item: Item? = Items.byName[itemYml.name]?.invoke()
             if(item == null) {
                 logger.warn { "Could not find item with name: ${itemYml.name}" }
                 item = EmptyItem()
@@ -107,7 +107,7 @@ object ConfigMaker {
             item.equippedSlot = equippedSlot
 
             if(itemYml.enchant != null) {
-                val enchant = Enchants.byName(itemYml.enchant, item)
+                val enchant = Enchants.byName[itemYml.enchant]?.invoke(item)
                 if(enchant == null) {
                     logger.warn { "Could not find enchant with name: ${itemYml.name}" }
                 } else {
@@ -123,7 +123,7 @@ object ConfigMaker {
 
             item.sockets.forEachIndexed { index, socket ->
                 val gemName = itemYml.gems?.get(index)
-                val gem: Item? = if(gemName != null) { Items.byName[gemName] } else null
+                val gem: Item? = if(gemName != null) { Items.byName[gemName]?.invoke() } else null
                 if(gem == null) {
                     logger.warn { "Could not find gem with name: $gemName" }
                 } else {

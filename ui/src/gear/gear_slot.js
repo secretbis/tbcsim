@@ -3,6 +3,7 @@ import { Col, Row } from 'rsuite';
 
 import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
+import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 
 const defaultWidth = '55px';
@@ -72,6 +73,11 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
   }
 
+  function onEnchantSelect(enchant) {
+    item.enchant = enchant
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+  }
+
   function renderItemLabel() {
     return (
       <Row>
@@ -96,10 +102,10 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </ItemTooltip>
             {item.sockets.map((sk, idx) => {
-              return <GemSlot key={idx} socket={sk} onSelect={(gem) => onGemSelect(gem, idx)} />
+              return <GemSlot key={idx} socket={sk} gear={character.gear} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {!['trinket1', 'trinket2', 'neck'].includes(slotName) ?
-              item.enchant ? <p>{item.enchant.name}</p> : <p>No enchant</p>
+              <EnchantSlot item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
             : null}
           </Row>
         </Col>

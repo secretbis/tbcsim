@@ -34,16 +34,31 @@ export default ({ value, dispatch }) => {
     const clone = JSON.parse(JSON.stringify(presets[klass][idx]))
     clone.gear = _.mapValues(clone.gear, rawItem => {
       // TODO: This method is code generator internals, and possibly fragile
-      const item = tbcsim.data.Items.byName.get_35(rawItem.name)
+      let item = tbcsim.data.Items.byName.get_35(rawItem.name)
+      if(!item) {
+         return;
+      }
+      item = item()
+
       if(rawItem.gems) {
         rawItem.gems.forEach((gemName, idx) => {
-          const gem = tbcsim.data.Items.byName.get_35(gemName)
+          const gem = tbcsim.data.Items.byName.get_35(gemName)()
           item.sockets[idx].gem = gem
         })
       }
 
       if(rawItem.enchant) {
-        debugger
+        const enchant = tbcsim.data.Enchants.byName.get_35(rawItem.enchant)
+        if(enchant) {
+          item.enchant = enchant(item)
+        }
+      }
+
+      if(rawItem.temporaryEnhancement) {
+        const tmpEnchant = tbcsim.data.TempEnchants.byName.get_35(rawItem.temporaryEnhancement)
+        if(tmpEnchant) {
+          item.temporaryEnhancement = tmpEnchant(item)
+        }
       }
 
       return item

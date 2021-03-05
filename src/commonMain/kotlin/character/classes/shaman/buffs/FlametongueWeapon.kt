@@ -5,16 +5,19 @@ import character.Ability
 import character.ItemBuff
 import character.ItemProc
 import character.Proc
+import data.Constants
 import data.model.Item
+import data.model.TempEnchant
 import sim.Event
 import sim.SimIteration
 
-class FlametongueWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
+class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     companion object {
         const val name = "Flametongue Weapon"
     }
     override val id: Int = 25489
     override val name = "Flametongue Weapon (static) ${sourceItem.uniqueName}"
+    override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 30 * 60 * 1000
 
     val proc = object : ItemProc(sourceItems) {

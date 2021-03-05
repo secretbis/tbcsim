@@ -2,6 +2,7 @@ package character.classes.shaman.abilities
 
 import character.Ability
 import character.Buff
+import character.Mutex
 import character.Proc
 import character.classes.shaman.talents.ImprovedWeaponTotems
 import character.classes.shaman.talents.MentalQuickness

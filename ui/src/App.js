@@ -10,6 +10,7 @@ import Presets from './presets/presets';
 import SimResults from './results/results';
 import Rotation from './rotation/rotation';
 import SimOptions from './sim/options';
+import Talents from './talents/talents';
 
 import * as tbcsim from 'tbcsim';
 
@@ -52,7 +53,7 @@ function App() {
       gear: _.mapValues(state.character.gear, it => ({
         name: it.name,
         gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
-        enchant: it.enchant ? it.enchant.name : null
+        enchant: it.enchant ? it.enchant.displayName : null
       })),
       rotation: state.character.rotation,
       talents: state.character.talents,
@@ -155,6 +156,9 @@ function App() {
               </Panel>
               <Panel header="Rotation" collapsible bordered defaultExpanded={false}>
                 <Rotation rotation={state.character.rotation} dispatch={dispatch} />
+              </Panel>
+              <Panel header="Talents" collapsible bordered defaultExpanded={false}>
+                <Talents talents={state.character.talents} dispatch={dispatch} />
               </Panel>
             </Col>
           </Row>

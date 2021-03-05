@@ -3,14 +3,9 @@ package data.model
 import character.Buff
 import character.Stats
 import data.Constants
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
 import kotlin.js.JsExport
 
 @JsExport
-@Serializable
-@Polymorphic
 abstract class Item {
     // Flag for ItemGen - all generated Items will have this set to true
     // If an item is manually edited, set this to false to prevent future ItemGen runs from overwriting
@@ -19,6 +14,8 @@ abstract class Item {
     // Item attributes
     abstract var id: Int
     abstract var name: String
+    open var displayName: String? = null
+        get() = field ?: name
     abstract var itemLevel: Int
     abstract var quality: Int
     abstract var icon: String
@@ -44,8 +41,6 @@ abstract class Item {
     abstract var sockets: Array<Socket>
     abstract var socketBonus: SocketBonus?
 
-    open fun itemSerializersModule() = SerializersModule {}
-
     open val socketBonusActive: Boolean
         get() {
             return sockets.all {
@@ -56,8 +51,8 @@ abstract class Item {
     // Granted buffs and effects
     open val buffs: List<Buff> by lazy { listOf() }
 
-    var enchant: Buff? = null
-    var temporaryEnhancement: Buff? = null
+    var enchant: Enchant? = null
+    var temporaryEnhancement: TempEnchant? = null
 
     // Helpers
     open val avgDmg: Double
@@ -66,9 +61,4 @@ abstract class Item {
         get() { return avgDmg / speed }
     val uniqueName: String
         get() { return name + equippedSlot }
-
-    fun clone(): Item {
-        val s = Json { serializersModule = itemSerializersModule() }
-        return s.decodeFromString(s.encodeToString(this))
-    }
 }

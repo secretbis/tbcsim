@@ -13,7 +13,6 @@ import data.itemscustom.EmptyItem
 import data.itemsets.ItemSets
 import data.model.*
 import data.socketbonus.SocketBonuses
-import kotlinx.serialization.modules.SerializersModule
 import mu.KotlinLogging
 import net.pearx.kasechange.toPascalCase
 import java.io.File
@@ -106,48 +105,17 @@ object ItemGen {
         val objBuilder = TypeSpec.objectBuilder("ItemIndex")
 
         val itemsListBlock = items.map {
-            CodeBlock.of("%L()", safeItemName(it))
-        }.joinToCode(separator = ",\n", prefix = "listOf(\n", suffix = "\n)\n")
+            CodeBlock.of("{ %L() }", safeItemName(it))
+        }.joinToCode(separator = ",\n", prefix = "arrayOf(\n", suffix = "\n)\n")
 
         objBuilder.addProperty(
-            PropertySpec.builder("items", LIST.parameterizedBy(ClassName("data.model", "Item")))
+            PropertySpec.builder("items", ARRAY.parameterizedBy(LambdaTypeName.get(returnType = ClassName("data.model", "Item"))))
                 .initializer("%L", itemsListBlock)
-                .build()
-        )
-
-        objBuilder.addProperty(
-            PropertySpec.builder("byName", MAP.parameterizedBy(String::class.asClassName(), ClassName("data.model", "Item")))
-                .initializer(
-                    CodeBlock.builder()
-                        .addStatement(
-                            "items.map { it.name to it }.toMap()"
-                        )
-                        .build()
-                )
-                .build()
-        )
-
-        objBuilder.addProperty(
-            PropertySpec.builder("byId", MAP.parameterizedBy(Int::class.asClassName(), ClassName("data.model", "Item")))
-                .initializer(
-                    CodeBlock.builder()
-                        .addStatement(
-                            "items.map { it.id to it }.toMap()"
-                        )
-                        .build()
-                )
                 .build()
         )
 
         FileSpec.builder(pkg, "ItemIndex")
             .addType(objBuilder.build())
-            .addAnnotation(
-                // TODO: Some item variants have the same name in the data
-                //       Need to distinguish them somehow when finding by name
-                AnnotationSpec.builder(Suppress::class)
-                    .addMember("%S", "DUPLICATE_LABEL_IN_WHEN")
-                    .build()
-            )
             .build()
             .writeTo(File(CodeGen.outPath))
     }
@@ -262,13 +230,6 @@ object ItemGen {
         }
     }
 
-    fun renderItemSerializer(item: Item): FunSpec {
-        return FunSpec.builder("itemSerializersModule")
-            .addModifiers(KModifier.OVERRIDE)
-            .addStatement("return %T { polymorphic(Item::class, ${safeItemName(item)}::class, serializer()) }", SerializersModule::class)
-            .build()
-    }
-
     fun safeItemName(item: Item): String {
         val safeRegex = Regex("""[^a-zA-Z ]""")
         return item.name.replace(safeRegex, "").toPascalCase()
@@ -285,11 +246,6 @@ object ItemGen {
                         .addAnnotation(
                             AnnotationSpec.builder(
                                 ClassName.bestGuess("kotlin.js.JsExport")
-                            ).build()
-                        )
-                        .addAnnotation(
-                            AnnotationSpec.builder(
-                                ClassName.bestGuess("kotlinx.serialization.Serializable")
                             ).build()
                         )
                         .addProperty(
@@ -416,7 +372,6 @@ object ItemGen {
                                 )
                                 .build()
                         )
-                        .addFunction(renderItemSerializer(item))
                         .build()
                 )
                 .build()

@@ -1,12 +1,6 @@
 const {
   addBeforeLoader,
   loaderByName,
-  when,
-  whenDev,
-  whenProd,
-  whenTest,
-  ESLINT_MODES,
-  POSTCSS_MODES,
 } = require("@craco/craco");
 
 module.exports = {
@@ -21,15 +15,5 @@ module.exports = {
 
       return webpackConfig;
     }
-    // configure: {
-    //   module: {
-    //     rules: [
-    //       {
-    //         test: /\.ya?ml$/,
-    //         use: "yaml-loader",
-    //       },
-    //     ],
-    //   },
-    // },
   },
 };

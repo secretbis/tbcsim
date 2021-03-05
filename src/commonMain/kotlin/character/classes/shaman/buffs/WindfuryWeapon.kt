@@ -2,11 +2,13 @@ package character.classes.shaman.buffs
 
 import character.*
 import character.classes.shaman.abilities.WindfuryWeapon
+import data.Constants
 import data.model.Item
+import data.model.TempEnchant
 import sim.Event
 import sim.SimIteration
 
-class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
+class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     class WindfuryWeaponState : Buff.State() {
         var lastWindfuryWeaponProcMs: Int = -1
     }
@@ -16,6 +18,7 @@ class WindfuryWeapon(sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     }
 
     override val name = "Windfury Weapon (static) ${sourceItem.uniqueName}"
+    override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 30 * 60 * 1000
     override val hidden: Boolean = true
 

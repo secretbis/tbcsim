@@ -1,9 +1,6 @@
 package data.abilities.generic
 
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Stats
+import character.*
 import sim.SimIteration
 
 class InsaneStrengthPotion : Ability() {

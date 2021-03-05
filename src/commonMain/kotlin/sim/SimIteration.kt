@@ -251,7 +251,7 @@ class SimIteration(
         val exists = buffs[buff.name] != null
         if(!exists) {
             // If this buff is mutex with others, remove any existing with that class
-            if(!buff.mutex.contains(Buff.Mutex.NONE)) {
+            if(!buff.mutex.contains(Mutex.NONE)) {
                 // A buff should be removed if it matches any of the incoming buff's mutex categories
                 val toRemove = buffs.values.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
                 toRemove.forEach {
