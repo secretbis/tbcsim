@@ -123,7 +123,7 @@ object ConfigMaker {
 
             item.sockets.forEachIndexed { index, socket ->
                 val gemName = itemYml.gems?.get(index)
-                val gem: Item? = if(gemName != null) { Items.byName[gemName]?.clone() } else null
+                val gem: Item? = if(gemName != null) { Items.byName[gemName] } else null
                 if(gem == null) {
                     logger.warn { "Could not find gem with name: $gemName" }
                 } else {

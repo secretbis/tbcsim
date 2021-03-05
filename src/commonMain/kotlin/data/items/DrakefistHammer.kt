@@ -8,6 +8,7 @@ import `data`.model.Socket
 import `data`.model.SocketBonus
 import character.Buff
 import character.Stats
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
@@ -59,7 +60,7 @@ public class DrakefistHammer : Item() {
         Buffs.byIdOrName(21165, "Haste", this)
         )}
 
-  public override fun itemSerializersModule() = SerializersModule {
-    polymorphic(Item::class, DrakefistHammer::class, serializer())
-  }
+
+  public override fun itemSerializersModule() = SerializersModule { polymorphic(Item::class,
+      DrakefistHammer::class, serializer()) }
 }

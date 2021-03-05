@@ -262,10 +262,10 @@ object ItemGen {
         }
     }
 
-    fun renderItemSerializer(): FunSpec {
+    fun renderItemSerializer(item: Item): FunSpec {
         return FunSpec.builder("itemSerializersModule")
             .addModifiers(KModifier.OVERRIDE)
-            .addStatement("return %T { polymorphic(Item::class, DrakefistHammer::class, serializer()) }", SerializersModule::class)
+            .addStatement("return %T { polymorphic(Item::class, ${safeItemName(item)}::class, serializer()) }", SerializersModule::class)
             .build()
     }
 
@@ -416,6 +416,7 @@ object ItemGen {
                                 )
                                 .build()
                         )
+                        .addFunction(renderItemSerializer(item))
                         .build()
                 )
                 .build()

@@ -11,6 +11,7 @@ import `data`.model.SocketBonus
 import `data`.socketbonus.SocketBonuses
 import character.Buff
 import character.Stats
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
@@ -18,6 +19,7 @@ import kotlin.String
 import kotlin.collections.List
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
 
 @JsExport
 @Serializable
@@ -66,4 +68,7 @@ public class OpportunistsLeatherSpaulders : Item() {
         Buffs.byIdOrName(9332, "Attack Power 22", this)
         )}
 
+
+  public override fun itemSerializersModule() = SerializersModule { polymorphic(Item::class,
+      OpportunistsLeatherSpaulders::class, serializer()) }
 }

@@ -8,6 +8,7 @@ import `data`.model.Socket
 import `data`.model.SocketBonus
 import character.Buff
 import character.Stats
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
@@ -15,6 +16,7 @@ import kotlin.String
 import kotlin.collections.List
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
 
 @JsExport
 @Serializable
@@ -60,4 +62,7 @@ public class WaveSongGirdle : Item() {
         Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)
         )}
 
+
+  public override fun itemSerializersModule() = SerializersModule { polymorphic(Item::class,
+      WaveSongGirdle::class, serializer()) }
 }

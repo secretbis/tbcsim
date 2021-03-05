@@ -8,6 +8,7 @@ import `data`.model.Socket
 import `data`.model.SocketBonus
 import character.Buff
 import character.Stats
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
@@ -15,6 +16,7 @@ import kotlin.String
 import kotlin.collections.List
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
 
 @JsExport
 @Serializable
@@ -61,4 +63,7 @@ public class SpellslingersProtector : Item() {
         Buffs.byIdOrName(9345, "Increase Spell Dam 16", this)
         )}
 
+
+  public override fun itemSerializersModule() = SerializersModule { polymorphic(Item::class,
+      SpellslingersProtector::class, serializer()) }
 }

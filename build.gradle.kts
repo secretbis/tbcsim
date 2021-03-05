@@ -133,6 +133,10 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
+    kotlinOptions.freeCompilerArgs += listOf(
+        "-Xuse-experimental=kotlin.js.ExperimentalJsExport",
+        "-Xuse-experimental=kotlin.js.JsExport"
+    )
 }
 
 distributions {
