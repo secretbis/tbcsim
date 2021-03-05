@@ -19,9 +19,9 @@
   },
   "scripts": {
     "start": "craco --max_old_space_size=8192 start",
-    "build": "craco --max_old_space_size=6999 build",
-    "test": "craco --max_old_space_size=6999 test",
-    "eject": "craco --max_old_space_size=6999 eject"
+    "build": "GENERATE_SOURCEMAP=false craco --max_old_space_size=6144 build",
+    "test": "craco --max_old_space_size=6144 test",
+    "eject": "craco --max_old_space_size=6144 eject"
   },
   "eslintConfig": {
     "extends": [

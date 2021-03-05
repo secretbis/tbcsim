@@ -9,15 +9,15 @@ module.exports = {
   },
   webpack: {
     plugins: {
-      remove: ['ESLintWebpackPlugin'],
+      remove: ['ESLintWebpackPlugin', 'StyleLintPlugin'],
     },
     configure: function(webpackConfig) {
-      const fragLoader = {
+      const yamlLoader = {
         test: /\.ya?ml$/,
         use: ['json-loader', 'yaml-loader']
       };
 
-      addBeforeLoader(webpackConfig, loaderByName("file-loader"), fragLoader );
+      addBeforeLoader(webpackConfig, loaderByName("file-loader"), yamlLoader);
 
       return webpackConfig;
     }
