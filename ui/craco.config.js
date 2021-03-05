@@ -4,7 +4,13 @@ const {
 } = require("@craco/craco");
 
 module.exports = {
+  eslint: {
+    enable: false
+  },
   webpack: {
+    plugins: {
+      remove: ['ESLintWebpackPlugin'],
+    },
     configure: function(webpackConfig) {
       const fragLoader = {
         test: /\.ya?ml$/,
