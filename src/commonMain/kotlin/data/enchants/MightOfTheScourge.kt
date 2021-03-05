@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 @JsExport
 class MightOfTheScourge(item: Item) : Enchant(item) {
     override val id: Int = 29483
-    override val inventorySlot: Int = Constants.InventorySlot.HEAD.ordinal
+    override val inventorySlot: Int = Constants.InventorySlot.SHOULDER.ordinal
     override val name: String = "Might of the Scourge"
 
     override fun modifyStats(sim: SimIteration): Stats {
