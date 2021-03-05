@@ -56,7 +56,7 @@ class Rampage : Ability() {
     }
 
     val stackBuff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Rampage"
         override val durationMs: Int = 30000
 
         override val maxStacks: Int = 5

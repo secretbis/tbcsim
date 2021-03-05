@@ -21,7 +21,7 @@ class BattleShout : Ability() {
     override fun resourceCost(sim: SimIteration): Double = 10.0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Battle Shout"
         override val durationMs: Int = 120000
 
         override fun modifyStats(sim: SimIteration): Stats {

@@ -7,4 +7,4 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class AzureMoonstone(id: Int, val prefix: Prefix) : Gem(id, "Azure Moonstone", "inv_misc_gem_azuredraenite_02.jpg", prefix, Color.BLUE, Quality.UNCOMMON)
+class AzureMoonstone(id: Int, prefix: Prefix) : Gem(id, "Azure Moonstone", "inv_misc_gem_azuredraenite_02.jpg", prefix, Color.BLUE, Quality.UNCOMMON)

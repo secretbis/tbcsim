@@ -1,8 +1,10 @@
 package data.model
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @JsExport
+@Serializable
 class Socket(val color: Color) {
     var gem: Gem? = null
 

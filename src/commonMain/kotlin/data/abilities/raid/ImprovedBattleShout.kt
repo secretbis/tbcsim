@@ -18,7 +18,7 @@ class ImprovedBattleShout : Ability() {
     // Always assume the raid buffer has 5/5 imp BS
     val bonusAp = 305.0 * 1.25
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Improved Battle Shout"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

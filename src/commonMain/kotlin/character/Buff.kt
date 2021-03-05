@@ -1,8 +1,10 @@
 package character
 
+import kotlinx.serialization.Serializable
 import mu.KotlinLogging
 import sim.SimIteration
 
+@Serializable
 abstract class Buff {
     open class State {
         val logger = KotlinLogging.logger {}

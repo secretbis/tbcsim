@@ -3,8 +3,6 @@ package data
 import data.gems.*
 import data.items.ItemIndex
 import data.itemscustom.Annihilator
-import data.model.Gem
-import data.model.Item
 import data.model.Prefix
 import kotlin.js.JsExport
 

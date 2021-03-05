@@ -14,7 +14,7 @@ class FaerieFire : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val debuff = object : Debuff() {
-        override val name: String = Companion.name
+        override val name: String = "Faerie Fire"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

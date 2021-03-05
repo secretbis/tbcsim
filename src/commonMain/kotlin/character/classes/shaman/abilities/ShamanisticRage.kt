@@ -16,7 +16,7 @@ class ShamanisticRage : Ability() {
     override fun cooldownMs(sim: SimIteration): Int = 120000
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Shamanistic Rage"
         override val durationMs: Int = 15000
 
         val proc = object : Proc() {

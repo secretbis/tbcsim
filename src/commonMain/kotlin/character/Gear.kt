@@ -1,52 +1,53 @@
 package character
 
 import data.buffs.permanent.PermanentBuff
+import data.itemscustom.EmptyItem
 import data.model.Color
 import data.model.Item
 
 class Gear {
     // The same item can be theoretically be equipped in these slots
-    var mainHand: Item = Item()
+    var mainHand: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "mainHand"
             field = value
         }
-    var offHand: Item = Item()
+    var offHand: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "offHand"
             field = value
         }
 
-    var rangedTotemLibram: Item = Item()
-    var ammo: Item = Item()
-    var head: Item = Item()
-    var neck: Item = Item()
-    var shoulders: Item = Item()
-    var back: Item = Item()
-    var chest: Item = Item()
-    var wrists: Item = Item()
-    var hands: Item = Item()
-    var waist: Item = Item()
-    var legs: Item = Item()
-    var feet: Item = Item()
+    var rangedTotemLibram: Item = EmptyItem()
+    var ammo: Item = EmptyItem()
+    var head: Item = EmptyItem()
+    var neck: Item = EmptyItem()
+    var shoulders: Item = EmptyItem()
+    var back: Item = EmptyItem()
+    var chest: Item = EmptyItem()
+    var wrists: Item = EmptyItem()
+    var hands: Item = EmptyItem()
+    var waist: Item = EmptyItem()
+    var legs: Item = EmptyItem()
+    var feet: Item = EmptyItem()
 
-    var ring1: Item = Item()
+    var ring1: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "ring1"
             field = value
         }
-    var ring2: Item = Item()
+    var ring2: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "ring2"
             field = value
         }
 
-    var trinket1: Item = Item()
+    var trinket1: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "trinket1"
             field = value
         }
-    var trinket2: Item = Item()
+    var trinket2: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "trinket2"
             field = value

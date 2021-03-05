@@ -25,7 +25,7 @@ class DeathWish : Ability() {
     }
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Death Wish"
         override val durationMs: Int = 30000
 
         override fun modifyStats(sim: SimIteration): Stats {

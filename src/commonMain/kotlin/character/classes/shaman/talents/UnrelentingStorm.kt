@@ -13,7 +13,7 @@ class UnrelentingStorm(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Unrelenting Storm"
         override val durationMs: Int = -1
 
         override fun modifyStats(sim: SimIteration): Stats {

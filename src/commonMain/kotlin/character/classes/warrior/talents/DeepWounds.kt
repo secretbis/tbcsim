@@ -25,7 +25,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
     }
 
     val bleedDebuff = object : Debuff() {
-        override val name: String = Companion.name
+        override val name: String = "Deep Wounds"
         override val durationMs: Int = 12000
         override val tickDeltaMs: Int = 3000
 

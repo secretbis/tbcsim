@@ -8,6 +8,7 @@ import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
 import data.enchants.Enchants
+import data.itemscustom.EmptyItem
 import data.model.Gem
 import data.model.Item
 import kotlinx.serialization.json.Json
@@ -97,10 +98,10 @@ object ConfigMaker {
 
     private fun createItemFromGear(itemYml: GearItemYml?, equippedSlot: String): Item {
         return if(itemYml != null) {
-            var item = Items.byName[itemYml.name]
+            var item: Item? = Items.byName[itemYml.name]?.clone()
             if(item == null) {
                 logger.warn { "Could not find item with name: ${itemYml.name}" }
-                item = Item()
+                item = EmptyItem()
             }
 
             item.equippedSlot = equippedSlot
@@ -122,9 +123,9 @@ object ConfigMaker {
 
             item.sockets.forEachIndexed { index, socket ->
                 val gemName = itemYml.gems?.get(index)
-                val gem = if(gemName != null) { Items.byName[gemName] } else null
+                val gem: Item? = if(gemName != null) { Items.byName[gemName]?.clone() } else null
                 if(gem == null) {
-                    logger.warn { "Could not find gem with name: ${gemName}" }
+                    logger.warn { "Could not find gem with name: $gemName" }
                 } else {
                     if(gem is Gem && socket.canSocket(gem)) {
                         socket.gem = gem
@@ -135,7 +136,7 @@ object ConfigMaker {
             }
 
             item
-        } else Item()
+        } else EmptyItem()
     }
 
     private fun createCharacter(yml: ConfigYml): Character {

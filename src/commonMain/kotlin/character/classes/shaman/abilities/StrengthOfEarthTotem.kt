@@ -33,7 +33,7 @@ class StrengthOfEarthTotem: Ability() {
     }
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Strength of Earth Totem"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
 

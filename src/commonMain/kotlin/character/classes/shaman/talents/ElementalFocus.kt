@@ -32,7 +32,7 @@ class ElementalFocus(ranks: Int) : Talent(ranks) {
     }
 
     val postCritBuff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Elemental Focus"
         override val durationMs: Int = -1
         override val maxCharges: Int = 2
 

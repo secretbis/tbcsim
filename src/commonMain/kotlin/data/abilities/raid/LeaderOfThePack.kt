@@ -17,7 +17,7 @@ class LeaderOfThePack : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Leader of the Pack"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

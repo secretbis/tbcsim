@@ -13,7 +13,7 @@ class ImprovedExposeArmor : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val debuff = object : Debuff() {
-        override val name: String = Companion.name
+        override val name: String = "Improved Expose Armor"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

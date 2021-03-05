@@ -43,7 +43,7 @@ class Stormstrike : Ability() {
     }
 
     val buff = object : Buff() {
-        override val name: String = "${Companion.name} (Nature)"
+        override val name: String = "Stormstrike (Nature)"
         override val durationMs: Int = 12000
         override val maxCharges: Int = 2
 

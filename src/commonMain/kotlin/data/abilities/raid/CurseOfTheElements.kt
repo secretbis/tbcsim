@@ -13,7 +13,7 @@ class CurseOfTheElements : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Curse of the Elements"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
@@ -27,7 +27,7 @@ class CurseOfTheElements : Ability() {
     }
 
     val debuff = object : Debuff() {
-        override val name: String = Companion.name
+        override val name: String = "Curse of the Elements"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

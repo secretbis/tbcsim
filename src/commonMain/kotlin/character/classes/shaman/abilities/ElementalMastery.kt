@@ -41,7 +41,7 @@ class ElementalMastery : Ability() {
     }
 
     val emBuff = object : Buff() {
-        override val name: String = "${Companion.name} (static)"
+        override val name: String = "Elemental Mastery (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
         override val maxCharges: Int = 1

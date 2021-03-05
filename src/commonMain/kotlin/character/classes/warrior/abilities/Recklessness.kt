@@ -17,7 +17,7 @@ class Recklessness : Ability() {
     override fun cooldownMs(sim: SimIteration): Int = 30 * 60 * 1000
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Recklessness"
         override val durationMs: Int = 15000
 
         override fun modifyStats(sim: SimIteration): Stats {

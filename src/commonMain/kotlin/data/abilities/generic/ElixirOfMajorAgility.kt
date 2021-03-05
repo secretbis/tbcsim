@@ -16,7 +16,7 @@ class ElixirOfMajorAgility : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Elixir of Major Agility"
         override val durationMs: Int = 60 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR)
 

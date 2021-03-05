@@ -37,7 +37,7 @@ class TotemOfWrath : Ability() {
     }
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Totem of Wrath"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.FIRE_TOTEM)
 

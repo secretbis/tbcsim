@@ -7,4 +7,4 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class Nightseye(id: Int, val prefix: Prefix) : Gem(id, "Nightseye", "inv_jewelcrafting_nightseye_03.jpg", prefix, Color.PURPLE, Quality.RARE)
+class Nightseye(id: Int, prefix: Prefix) : Gem(id, "Nightseye", "inv_jewelcrafting_nightseye_03.jpg", prefix, Color.PURPLE, Quality.RARE)

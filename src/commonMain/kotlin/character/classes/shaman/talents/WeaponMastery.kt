@@ -15,7 +15,7 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Weapon Mastery"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

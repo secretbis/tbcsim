@@ -18,7 +18,7 @@ class InsaneStrengthPotion : Ability() {
     override fun cooldownMs(sim: SimIteration): Int = 120000
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Insane Strength Potion"
         override val durationMs: Int = 15000
         override val mutex: List<Mutex> = listOf(Mutex.POTION)
 

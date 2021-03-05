@@ -19,7 +19,7 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Sword Specialization (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -39,7 +39,7 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
 
             override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 // Sword spec cannot proc off itself
-                val isSwordSpec = ability?.name == Companion.name
+                val isSwordSpec = ability?.name == name
                 return !isSwordSpec && items?.all { Melee.isSword(it) } ?: false && super.shouldProc(sim, items, ability, event)
             }
 

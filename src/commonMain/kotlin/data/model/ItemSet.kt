@@ -2,8 +2,11 @@ package data.model
 
 import character.Buff
 import character.Character
+import kotlinx.serialization.Serializable
 
+@Serializable
 open class ItemSet {
+    @Serializable
     data class Bonus(
         val setId: Int,
         val requiredSetItems: Int,

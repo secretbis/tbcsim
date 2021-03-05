@@ -30,7 +30,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
     }
 
     val postCritBuff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Shamanistic Focus"
         override val durationMs: Int = 12000
         override val maxCharges: Int = 1
 

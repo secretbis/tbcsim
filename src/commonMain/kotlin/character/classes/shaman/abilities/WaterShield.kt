@@ -15,7 +15,7 @@ class WaterShield : Ability() {
     override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Water Shield"
         override val durationMs: Int = 10 * 60 * 1000
 
         override fun modifyStats(sim: SimIteration): Stats {

@@ -17,7 +17,7 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
     override fun buffs(sim: SimIteration): List<Buff> {
         return listOf(
             object : Buff() {
-                override val name: String = "${Companion.name} (Spell Damage)"
+                override val name: String = "Mental Quickness (Spell Damage)"
                 override val durationMs: Int = -1
                 override val hidden: Boolean = true
 

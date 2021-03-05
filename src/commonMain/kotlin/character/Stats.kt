@@ -1,7 +1,9 @@
 package character
 
 import data.Constants.StatType
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Stats(
     // Base stats
     var strength: Int = 0,

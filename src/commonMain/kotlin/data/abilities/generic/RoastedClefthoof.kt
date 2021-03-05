@@ -16,7 +16,7 @@ class RoastedClefthoof : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Roasted Clefthoof"
         override val durationMs: Int = 30 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.FOOD)
 

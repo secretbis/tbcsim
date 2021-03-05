@@ -15,7 +15,7 @@ class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 3
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Elemental Precision"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

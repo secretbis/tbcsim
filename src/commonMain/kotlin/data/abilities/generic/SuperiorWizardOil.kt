@@ -15,7 +15,7 @@ class SuperiorWizardOil : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Superior Wizard Oil"
         override val durationMs: Int = 60 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.WEAPON_TEMP_ENH_MH)
 

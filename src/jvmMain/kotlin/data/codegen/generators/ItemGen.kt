@@ -9,9 +9,11 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import data.Constants
 import data.buffs.Buffs
 import data.codegen.CodeGen
+import data.itemscustom.EmptyItem
 import data.itemsets.ItemSets
 import data.model.*
 import data.socketbonus.SocketBonuses
+import kotlinx.serialization.modules.SerializersModule
 import mu.KotlinLogging
 import net.pearx.kasechange.toPascalCase
 import java.io.File
@@ -69,7 +71,7 @@ object ItemGen {
         val itemIcons = loadIcons()
 
         val protoItems = itemsData.map {
-            val item = Item()
+            val item = EmptyItem()
             item.id = it["entry"] as Int? ?: item.id
             item.name = it["name"] as String? ?: item.name
             item.itemLevel = it["ItemLevel"] as Int? ?: item.itemLevel
@@ -191,10 +193,10 @@ object ItemGen {
         return if(item.sockets.isNotEmpty()) {
             item.sockets.map {
                 CodeBlock.of("%1T(%2T.%3L)", Socket::class, Color::class, it.color)
-            }.joinToCode(separator = ",\n", prefix = "listOf(\n", suffix = "\n)")
+            }.joinToCode(separator = ",\n", prefix = "arrayOf(\n", suffix = "\n)")
         } else {
             CodeBlock.builder()
-                .add("%L", "listOf()")
+                .add("%L", "arrayOf()")
                 .build()
         }
     }
@@ -260,6 +262,13 @@ object ItemGen {
         }
     }
 
+    fun renderItemSerializer(): FunSpec {
+        return FunSpec.builder("itemSerializersModule")
+            .addModifiers(KModifier.OVERRIDE)
+            .addStatement("return %T { polymorphic(Item::class, DrakefistHammer::class, serializer()) }", SerializersModule::class)
+            .build()
+    }
+
     fun safeItemName(item: Item): String {
         val safeRegex = Regex("""[^a-zA-Z ]""")
         return item.name.replace(safeRegex, "").toPascalCase()
@@ -276,6 +285,11 @@ object ItemGen {
                         .addAnnotation(
                             AnnotationSpec.builder(
                                 ClassName.bestGuess("kotlin.js.JsExport")
+                            ).build()
+                        )
+                        .addAnnotation(
+                            AnnotationSpec.builder(
+                                ClassName.bestGuess("kotlinx.serialization.Serializable")
                             ).build()
                         )
                         .addProperty(
@@ -377,7 +391,7 @@ object ItemGen {
                                 .build()
                         )
                         .addProperty(
-                            PropertySpec.builder("sockets", LIST.parameterizedBy(ClassName("data.model", "Socket")))
+                            PropertySpec.builder("sockets", ARRAY.parameterizedBy(ClassName("data.model", "Socket")))
                                 .addModifiers(KModifier.OVERRIDE)
                                 .mutable(true)
                                 .initializer("%L", renderSockets(item, itemData))

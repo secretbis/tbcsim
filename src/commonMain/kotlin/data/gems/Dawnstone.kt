@@ -7,4 +7,4 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class Dawnstone(id: Int, val prefix: Prefix) : Gem(id, "Dawnstone", "inv_jewelcrafting_dawnstone_03.jpg", prefix, Color.YELLOW, Quality.RARE)
+class Dawnstone(id: Int, prefix: Prefix) : Gem(id, "Dawnstone", "inv_jewelcrafting_dawnstone_03.jpg", prefix, Color.YELLOW, Quality.RARE)

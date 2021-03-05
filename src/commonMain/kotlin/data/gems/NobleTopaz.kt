@@ -7,4 +7,4 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class NobleTopaz(id: Int, val prefix: Prefix) : Gem(id, "Noble Topaz", "inv_jewelcrafting_nobletopaz_03.jpg", prefix, Color.ORANGE, Quality.RARE)
+class NobleTopaz(id: Int, prefix: Prefix) : Gem(id, "Noble Topaz", "inv_jewelcrafting_nobletopaz_03.jpg", prefix, Color.ORANGE, Quality.RARE)
