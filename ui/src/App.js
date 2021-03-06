@@ -114,7 +114,7 @@ function App() {
     sim()
   }
 
-  const simDisabled = state.character == null || state.iterationsCompleted != null;
+  const simDisabled = state.character.class == null || state.iterationsCompleted != null;
 
   // App
   return (

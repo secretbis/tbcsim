@@ -7,7 +7,9 @@ import * as tbcsim from 'tbcsim';
 export function stateReducer(state, action) {
   let newState = state
   if (_.has(state, action.type)) {
-    newState = { ...state, ...(_.set({}, action.type, action.value)) };
+    newState = _.merge({
+      ...state,
+    }, _.set({}, action.type, action.value));
   } else {
     if(action.type == 'loadCharacterPreset') {
       newState = {
@@ -45,13 +47,13 @@ export function stateReducer(state, action) {
         }
       }
     } else if(action.type == 'setRaidBuff') {
-        newState = {
-          ...state,
-          raidBuffs: {
-            ...state.raidBuffs,
-            [action.value.name]: action.value.value
-          }
+      newState = {
+        ...state,
+        raidBuffs: {
+          ...state.raidBuffs,
+          [action.value.name]: action.value.value
         }
+      }
     } else if(action.type == 'setRaidDebuff') {
       newState = {
         ...state,
