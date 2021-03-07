@@ -1,6 +1,7 @@
 package data.abilities.raid
 
 import character.Ability
+import character.classes.shaman.abilities.WrathOfAirTotem
 import kotlin.js.JsExport
 
 // These are spells that are provided by other players in the raid, and may carry some
@@ -9,30 +10,33 @@ import kotlin.js.JsExport
 object RaidAbilities {
     val raidBuffs: Array<Ability> = arrayOf(
         BlessingOfKings(),
-        ImprovedBlessingOfWisdom(),
         FerociousInspiration(),
         GraceOfAirTotem(),
         ImprovedBattleShout(),
         ImprovedBlessingOfMight(),
+        ImprovedBlessingOfWisdom(),
         ImprovedMarkOfTheWild(),
         ImprovedSanctityAura(),
         ImprovedSealOfTheCrusader(),
         LeaderOfThePack(),
+        ManaSpringTotem(),
         StrengthOfEarthTotem(),
+        TotemOfWrath(),
         UnleashedRage(),
         WindfuryTotem(),
+        WrathOfAirTotem()
     )
 
     val raidDebuffs: Array<Ability> = arrayOf(
         BloodFrenzy(),
         CurseOfRecklessness(),
-        CurseOfShadow(),
         CurseOfTheElements(),
         FaerieFire(),
         ImprovedExposeArmor(),
         ImprovedScorch(),
         JudgementOfWisdom(),
         Misery(),
+        MoonkinAura(),
         SunderArmor(),
     )
 

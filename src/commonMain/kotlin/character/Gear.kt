@@ -132,6 +132,6 @@ class Gear {
     fun metaGemActive(): Boolean {
         val allSockets = all().flatMap { it.sockets.toList() }
         val metaGem = allSockets.find { it.color == Color.META && it.gem != null }?.gem
-        return metaGem?.metaActive(allSockets) ?: false
+        return metaGem?.metaActive(allSockets) ?: true
     }
 }

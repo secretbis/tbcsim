@@ -8,7 +8,7 @@ import sim.SimIteration
 
 class ImprovedBlessingOfWisdom : Ability() {
     companion object {
-        const val name = "Blessing of Wisdom"
+        const val name = "Improved Blessing of Wisdom"
     }
 
     override val id: Int = 20217
@@ -16,7 +16,7 @@ class ImprovedBlessingOfWisdom : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = "Blessing of Wisdom"
+        override val name: String = Companion.name
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

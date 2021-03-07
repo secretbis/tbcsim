@@ -11,7 +11,7 @@ import kotlin.js.JsExport
 class RingSpellpower(item: Item) : Enchant(item) {
     override val id: Int = 46518
     override val inventorySlot: Int = Constants.InventorySlot.FINGER.ordinal
-    override val name: String = "Spellpower"
+    override val name: String = "Spellpower (Ring)"
 
     override fun modifyStats(sim: SimIteration): Stats {
         return Stats(

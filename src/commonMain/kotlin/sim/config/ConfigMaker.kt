@@ -109,7 +109,7 @@ object ConfigMaker {
             if(itemYml.enchant != null) {
                 val enchant = Enchants.byName[itemYml.enchant]?.invoke(item)
                 if(enchant == null) {
-                    logger.warn { "Could not find enchant with name: ${itemYml.name}" }
+                    logger.warn { "Could not find enchant with name: ${itemYml.enchant}" }
                 } else {
                     item.enchant = enchant
                 }

@@ -7,6 +7,11 @@ import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
 import shamanEnhSubRestoPreraidAnniDw from './samples/shaman_enh_subresto_preraid_annihilator_dw.yml'
 import shamanEnhSubRestoPreraidAnniOh from './samples/shaman_enh_subresto_preraid_annihilator_oh.yml'
+import warlockAfflictionUAPreraid from './samples/warlock_affliction_ua_preraid.yml'
+import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
+import warlockAfflictionDSPreraid from './samples/warlock_affliction_ds_preraid.yml'
+import warlockDestroFirePreraid from './samples/warlock_destro_fire_preraid.yml'
+import warlockDestroShadowPreraid from './samples/warlock_destro_shadow_preraid.yml'
 import warriorArmsPreraid from './samples/warrior_arms_preraid.yml'
 import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
 
@@ -19,6 +24,9 @@ const presets = {
     shamanEnhSubRestoPreraid,
     shamanEnhSubRestoPreraidAnniDw,
     shamanEnhSubRestoPreraidAnniOh,
+  ],
+  warlock: [
+    warlockDestroFirePreraid
   ],
   warrior: [
     warriorArmsPreraid,

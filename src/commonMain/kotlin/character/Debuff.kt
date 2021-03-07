@@ -10,7 +10,10 @@ abstract class Debuff : Buff() {
         if(tickDeltaMs == -1) return false
 
         val state = state(sim)
-        return (sim.elapsedTimeMs - state.appliedAtMs) % tickDeltaMs == 0
+        if(sim.elapsedTimeMs == state.appliedAtMs) return false
+        if(sim.elapsedTimeMs == state.appliedAtMs + 1) return false
+
+        return (sim.elapsedTimeMs - state.appliedAtMs + 1) % tickDeltaMs == 0
     }
 
     open fun tick(sim: SimIteration) {

@@ -97,14 +97,14 @@ object Spell {
         return (sim.spellCritPct() / 100.0).coerceAtLeast(0.0)
     }
 
-    fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
+    fun baseDamageRoll(sim: SimIteration, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         val min = minDmg.coerceAtLeast(0.0)
         val max = maxDmg.coerceAtLeast(1.0)
         val dmg = Random.nextDouble(min, max)
-        return baseDamageRoll(sim, dmg, spellDamageCoeff, school, bonusSpellDamage)
+        return baseDamageRoll(sim, dmg, spellDamageCoeff, school, bonusSpellDamage, bonusSpellDamageMultiplier)
     }
 
-    fun baseDamageRoll(sim: SimIteration, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0): Double {
+    fun baseDamageRoll(sim: SimIteration, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
         val schoolDamage = when(school) {
             Constants.DamageType.HOLY -> sim.subjectStats.holyDamage
@@ -116,7 +116,7 @@ object Spell {
             else -> 0
         }
 
-        val totalSpellDamage = (sim.spellDamage() + bonusSpellDamage + schoolDamage)
+        val totalSpellDamage = (sim.spellDamage() + bonusSpellDamage + schoolDamage) * bonusSpellDamageMultiplier
         return dmg + (totalSpellDamage * spellDamageCoeff)
     }
 

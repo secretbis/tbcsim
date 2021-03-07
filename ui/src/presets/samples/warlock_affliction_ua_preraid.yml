@@ -1,0 +1,174 @@
+class: Warlock
+spec: Destruction
+description: Fire Destruction Warlock (pre-raid)
+race: Human
+level: 70
+
+talents:
+  # Destro talents
+  - name: Cataclysm
+    rank: 5
+  - name: Bane
+    rank: 5
+  - name: Devastation
+    rank: 5
+  - name: Shadowburn
+    rank: 1
+  - name: Ruin
+    rank: 1
+  - name: Improved Immolate
+    rank: 5
+  - name: Emberstorm
+    rank: 5
+  - name: Backlash
+    rank: 3
+  - name: Conflagrate
+    rank: 1
+  - name: Shadow and Flame
+    rank: 5
+
+  # Demo talents
+  - name: Fel Intellect
+    rank: 3
+  - name: Demonic Aegis
+    rank: 3
+  - name: Demonic Sacrifice
+    rank: 1
+
+# Pre-raid BIS-ish
+# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
+gear:
+  mainHand:
+    name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
+  offHand:
+    name: Orb of the Soul-Eater
+  rangedLibramTotem:
+    name: Nether Core's Control Rod
+  head:
+    name: Spellstrike Hood
+    enchant: Glyph of Power
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  neck:
+    name: Hydra-fang Necklace
+  shoulders:
+    name: Frozen Shadoweave Shoulders
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  back:
+    name: Sethekk Oracle Cloak
+  chest:
+    name: Frozen Shadoweave Robe
+    enchant: Exceptional Stats
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Crimson Bracers of Gloom
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Gloves of the Deadwatcher
+    enchant: Major Spellpower (Gloves)
+  waist:
+    name: Girdle of Ruination
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  feet:
+    name: Frozen Shadoweave Boots
+    enchant: Boar's Speed
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  ring1:
+    name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ashyen's Gift
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: "Darkmoon Card: Crusade"
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Pure Death
+    - name: Crunchy Serpent
+    - name: Superior Wizard Oil
+    - name: Fel Armor
+    - name: Demonic Sacrifice (Succubus)
+
+  combat:
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+    - name: Life Tap
+      criteria:
+        - type: RESOURCE_LTE_PCT
+          pct: 10
+    - name: Curse of Doom
+      criteria:
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 60
+          seconds: 5
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
+    - name: Destruction Potion
+      criteria:
+        # Use a potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
+        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two potions
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 120
+          seconds: 20
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Unstable Affliction
+
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
+  - Ferocious Inspiration
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Improved Sanctity Aura
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+
+raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Improved Scorch

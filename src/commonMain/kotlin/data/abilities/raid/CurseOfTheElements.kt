@@ -1,6 +1,7 @@
 package data.abilities.raid
 
 import character.*
+import character.classes.warlock.talents.Malediction
 import sim.SimIteration
 
 class CurseOfTheElements : Ability() {
@@ -18,10 +19,15 @@ class CurseOfTheElements : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats? {
+        override fun modifyStats(sim: SimIteration): Stats {
+            val malediction = sim.subject.klass.talents[Malediction.name] as Malediction?
+            val additionalDmgPct = (malediction?.currentRank ?: 0) * 0.01
+
             return Stats(
-                fireDamageMultiplier = 1.1,
-                frostDamageMultiplier = 1.1,
+                arcaneDamageMultiplier = 1.1 + additionalDmgPct,
+                fireDamageMultiplier = 1.1 + additionalDmgPct,
+                frostDamageMultiplier = 1.1 + additionalDmgPct,
+                shadowDamageMultiplier = 1.1 + additionalDmgPct,
             )
         }
     }
@@ -34,8 +40,10 @@ class CurseOfTheElements : Ability() {
 
         override fun modifyStats(sim: SimIteration): Stats? {
             return Stats(
+                arcaneResistance = -88,
                 fireResistance = -88,
-                frostResistance = -88
+                frostResistance = -88,
+                shadowResistance = -88,
             )
         }
     }

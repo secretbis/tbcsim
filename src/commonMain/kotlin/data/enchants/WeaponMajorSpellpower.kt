@@ -11,7 +11,7 @@ import kotlin.js.JsExport
 class WeaponMajorSpellpower(item: Item) : Enchant(item) {
     override val id: Int = 35456
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
-    override val name: String = "Major Spellpower"
+    override val name: String = "Major Spellpower (Weapon)"
 
     override fun modifyStats(sim: SimIteration): Stats {
         return Stats(

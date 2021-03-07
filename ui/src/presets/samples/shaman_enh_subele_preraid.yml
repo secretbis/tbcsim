@@ -59,6 +59,7 @@ gear:
     name: Totem of the Astral Winds
   head:
     name: Helm of Desolation
+    enchant: Glyph of Ferocity
     gems:
       - Inscribed Noble Topaz
       - Thundering Skyfire Diamond
@@ -212,4 +213,3 @@ raidDebuffs:
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements
-#  - Curse of Shadow

@@ -10,6 +10,7 @@ object Enchants {
     val enchants = arrayOf(
         { item: Item -> BootsCatsSwiftness(item) },
         { item: Item -> BootsDexterity(item) },
+        { item: Item -> BootsBoarsSpeed(item) },
         { item: Item -> BootsSurefooted(item) },
         { item: Item -> BracerAssault(item) },
         { item: Item -> BracerBrawn(item) },

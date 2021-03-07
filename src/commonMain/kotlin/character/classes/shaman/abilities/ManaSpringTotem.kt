@@ -40,12 +40,10 @@ class ManaSpringTotem : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.WATER_TOTEM)
 
         // TODO: Does anyone care about the Restorative Totems talent?  Probably not
-
-        val baseMp5 = 20.0
         override fun modifyStats(sim: SimIteration): Stats {
-            val etTalent = sim.subject.klass.talents[EnhancingTotems.name] as EnhancingTotems?
-            val multiplier = 1.0 * (etTalent?.graceOfAirTotemMultiplier() ?: 1.0)
-            return Stats(agility = (baseMp5 * multiplier).toInt())
+            return Stats(
+                manaPer5Seconds = 50
+            )
         }
     }
 

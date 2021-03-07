@@ -37,7 +37,8 @@ abstract class Proc {
         FIRE_DAMAGE,
         NATURE_DAMAGE,
         FROST_DAMAGE,
-        SHADOW_DAMAGE,
+        SHADOW_DAMAGE_PERIODIC,
+        SHADOW_DAMAGE_NON_PERIODIC,
         ARCANE_DAMAGE,
 
         // Mechanics
@@ -47,6 +48,9 @@ abstract class Proc {
         SHAMAN_CAST_SHOCK,
         SHAMAN_CAST_LIGHTNING_BOLT,
         SHAMAN_CAST_CHAIN_LIGHTNING,
+
+        WARLOCK_CRIT_SHADOW_BOLT,
+        WARLOCK_TICK_CORRUPTION
     }
 
     enum class Type {

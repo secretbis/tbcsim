@@ -27,6 +27,7 @@ data class Event(
         BUFF_END,
         DEBUFF_START,
         DEBUFF_REFRESH,
+        DEBUFF_CHARGE_CONSUMED,
         DEBUFF_END,
         PROC,
         RESOURCE_CHANGED

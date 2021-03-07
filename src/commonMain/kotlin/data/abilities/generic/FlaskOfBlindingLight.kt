@@ -21,7 +21,11 @@ class FlaskOfBlindingLight : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR, Mutex.GUARDIAN_ELIXIR)
 
         override fun modifyStats(sim: SimIteration): Stats {
-            return Stats(spellDamage = 80)
+            return Stats(
+                arcaneDamage = 80,
+                holyDamage = 80,
+                natureDamage = 80,
+            )
         }
     }
 

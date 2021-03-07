@@ -324,13 +324,41 @@ class SimIteration(
     fun consumeBuff(buff: Buff) {
         val state = buffState[buff.name]
         if(state != null) {
-            state.currentCharges -= 1
+            if(buff.maxCharges >= 1) {
+                state.currentCharges -= 1
 
-            logEvent(Event(
-                eventType = Event.Type.BUFF_CHARGE_CONSUMED,
-                buff = buff,
-                buffStacks = state.currentStacks
-            ))
+                logEvent(
+                    Event(
+                        eventType = Event.Type.BUFF_CHARGE_CONSUMED,
+                        buff = buff,
+                        buffStacks = state.currentStacks
+                    )
+                )
+            } else {
+                buffState.remove(buff.name)
+            }
+
+            pruneBuffs()
+            pruneDebuffs()
+        }
+    }
+
+    fun consumeDebuff(debuff: Debuff) {
+        val state = debuffState[debuff.name]
+        if(state != null) {
+            if(debuff.maxCharges >= 1) {
+                state.currentCharges -= 1
+
+                logEvent(
+                    Event(
+                        eventType = Event.Type.DEBUFF_CHARGE_CONSUMED,
+                        buff = debuff,
+                        buffStacks = state.currentStacks
+                    )
+                )
+            } else {
+                debuffState.remove(debuff.name)
+            }
 
             pruneBuffs()
             pruneDebuffs()

@@ -51,6 +51,7 @@ gear:
     name: Felsteel Whisper Knives
   head:
     name: Wastewalker Helm
+    enchant: Glyph of Ferocity
     gems:
       - Sovereign Nightseye
       - Relentless Earthstorm Diamond

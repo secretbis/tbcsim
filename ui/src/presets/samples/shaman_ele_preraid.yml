@@ -49,6 +49,7 @@ gear:
     name: Totem of the Void
   head:
     name: Spellstrike Hood
+    enchant: Glyph of Power
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -194,4 +195,3 @@ raidDebuffs:
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements
-#  - Curse of Shadow

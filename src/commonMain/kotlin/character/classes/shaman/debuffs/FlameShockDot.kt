@@ -26,32 +26,20 @@ class FlameShockDot : Debuff() {
         override fun cast(sim: SimIteration) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
             val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
-            val result = Spell.attackRoll(sim, damageRoll, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = result.first,
-                result = result.second,
+                amount = damageRoll,
+                result = Event.Result.HIT,
             )
             sim.logEvent(event)
 
-            // Proc anything that can proc off Fire damage
-            // Do not proc off anything that implies a spell cast
-            val triggerTypes = when(result.second) {
-                Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-                Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-                Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-                Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-                else -> null
-            }
-
-            if(triggerTypes != null) {
-                sim.fireProc(triggerTypes, listOf(), this, event)
-            }
+            sim.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
         }
-}
+    }
+
     override fun tick(sim: SimIteration) {
         fsdAbility.cast(sim)
     }

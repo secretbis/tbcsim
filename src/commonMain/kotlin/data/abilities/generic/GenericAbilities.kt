@@ -13,6 +13,7 @@ object GenericAbilities {
             DestructionPotion.name -> DestructionPotion()
             ElixirOfMajorAgility.name -> ElixirOfMajorAgility()
             FlaskOfBlindingLight.name -> FlaskOfBlindingLight()
+            FlaskOfPureDeath.name -> FlaskOfPureDeath()
             FlaskOfRelentlessAssault.name -> FlaskOfRelentlessAssault()
             HastePotion.name -> HastePotion()
             InsaneStrengthPotion.name -> InsaneStrengthPotion()
