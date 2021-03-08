@@ -23,6 +23,7 @@ function bannerMsg() {
       <p>At this moment, only a few specs are available:</p>
       <ul>
         <li>Enhancement/Elemental Shaman</li>
+        <li>Affliction/Destruction Warlock</li>
         <li>Arms/Fury Warrior</li>
       </ul>
     </div>
