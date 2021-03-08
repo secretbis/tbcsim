@@ -27,6 +27,7 @@ class Warlock(talents: Map<String, Talent>) : Class(talents) {
             AmplifyCurse.name -> AmplifyCurse()
             Conflagrate.name -> Conflagrate()
             Corruption.name -> Corruption()
+            CurseOfAgony.name -> CurseOfAgony()
             CurseOfDoom.name -> CurseOfDoom()
             DemonicSacrificeImp.name -> DemonicSacrificeImp()
             DemonicSacrificeSuccubus.name -> DemonicSacrificeSuccubus()
@@ -59,6 +60,7 @@ class Warlock(talents: Map<String, Talent>) : Class(talents) {
             EmpoweredCorruption.name -> EmpoweredCorruption(ranks)
             FelIntellect.name -> FelIntellect(ranks)
             ImprovedCorruption.name -> ImprovedCorruption(ranks)
+            ImprovedCurseOfAgony.name -> ImprovedCurseOfAgony(ranks)
             ImprovedHealthstone.name -> ImprovedHealthstone(ranks)
             ImprovedImmolate.name -> ImprovedImmolate(ranks)
             ImprovedLifeTap.name -> ImprovedLifeTap(ranks)
@@ -72,6 +74,7 @@ class Warlock(talents: Map<String, Talent>) : Class(talents) {
             ShadowMastery.name -> ShadowMastery(ranks)
             SiphonLifeTalent.name -> SiphonLifeTalent(ranks)
             Suppression.name -> Suppression(ranks)
+            UnstableAfflictionTalent.name -> UnstableAfflictionTalent(ranks)
             else -> null
         }
     }

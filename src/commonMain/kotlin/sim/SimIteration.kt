@@ -30,6 +30,7 @@ class SimIteration(
     val resource: Resource
 
     val serverTickMs = 3000
+    var lastServerTickMs = 0
     var lastMp5Tick = 0
     var tickNum: Int = 0
     var elapsedTimeMs: Int = 0
@@ -126,6 +127,10 @@ class SimIteration(
             it.isFinished(this)
         }
         debuffsToRemove.forEach {
+            if(it.shouldTick(this)) {
+                it.tick(this)
+            }
+
             it.reset(this)
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_END,
@@ -213,7 +218,8 @@ class SimIteration(
         }
 
         // Fire server tick proc
-        if(elapsedTimeMs % serverTickMs == 0) {
+        if(elapsedTimeMs >= lastServerTickMs + serverTickMs) {
+            lastServerTickMs = elapsedTimeMs
             fireProc(listOf(Proc.Trigger.SERVER_TICK), null, null, null)
         }
     }
@@ -402,7 +408,7 @@ class SimIteration(
         val allProcs: MutableSet<Proc> = mutableSetOf()
         for(trigger in triggers) {
             // Get procs from active buffs
-            buffs.values.forEach { buff ->
+            (buffs + debuffs).values.forEach { buff ->
                 buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach {
                     allProcs.add(it)
                 }

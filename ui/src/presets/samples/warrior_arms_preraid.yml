@@ -59,36 +59,45 @@ gear:
     name: Traitor's Noose
   shoulders:
     name: Ragesteel Shoulders
+    enchant: Greater Inscription of Vengeance
     gems:
       - Rigid Dawnstone
       - Smooth Dawnstone
   back:
     name: Vengeance Wrap
+    enchant: Greater Agility
     gems:
       - Bold Living Ruby
   chest:
     name: Chestguard of Exile
+    enchant: Exceptional Stats
   wrists:
     name: Black Felsteel Bracers
+    enchant: Brawn
   hands:
     name: Ragesteel Gloves
+    enchant: Major Strength
   waist:
     name: Girdle of the Deathdealer
   legs:
     name: Fel Leather Leggings
+    enchant: Nethercobra Leg Armor
     gems:
       - Bold Living Ruby
       - Smooth Dawnstone
       - Smooth Dawnstone
   feet:
     name: Fel Leather Boots
+    enchant: Cat's Swiftness
     gems:
       - Sovereign Nightseye
       - Bold Living Ruby
   ring1:
     name: Shaffar's Band of Brutality
+    enchant: Stats (Ring)
   ring2:
     name: Ring of Umbral Doom
+    enchant: Stats (Ring)
   trinket1:
     name: Hourglass of the Unraveller
   trinket2:
@@ -131,11 +140,6 @@ rotation:
           seconds: 0
     - name: Insane Strength Potion
       criteria:
-        # Use a Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 120
-          seconds: 20
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5

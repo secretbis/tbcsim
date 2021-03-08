@@ -9,7 +9,8 @@ export default ({ title, data, columnInfo }) => {
 
   function renderCell(col, row) {
     const formatter = col.formatter || noop
-    return formatter(row[col.key])
+    const result = formatter(row[col.key])
+    return result === "NaN" ? '-' : result;
   }
 
   return (

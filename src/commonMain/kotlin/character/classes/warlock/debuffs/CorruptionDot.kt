@@ -13,7 +13,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimIteration
 
-class Corruption : Debuff() {
+class CorruptionDot : Debuff() {
     companion object {
         const val name = "Corruption (DoT)"
     }
@@ -33,10 +33,14 @@ class Corruption : Debuff() {
         }
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+            sim.logEvent(Event(
+                eventType = Event.Type.PROC,
+                abilityName = Nightfall.name
+            ))
+
             sim.addBuff(object: Buff() {
                 override val name: String = Nightfall.name
                 override val durationMs: Int = 10000
-                override val hidden: Boolean = true
             })
         }
     }

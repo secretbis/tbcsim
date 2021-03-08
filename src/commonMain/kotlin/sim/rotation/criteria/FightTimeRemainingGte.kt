@@ -4,7 +4,7 @@ import sim.SimIteration
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
-class FightTimeElapsedGte(data: RotationRuleCriterion) : Criterion(Type.FIGHT_TIME_ELAPSED_GTE, data) {
+class FightTimeRemainingGte(data: RotationRuleCriterion) : Criterion(Type.FIGHT_TIME_REMAINING_GTE, data) {
     val seconds: Double? = try {
         (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
@@ -16,6 +16,6 @@ class FightTimeElapsedGte(data: RotationRuleCriterion) : Criterion(Type.FIGHT_TI
     }
 
     override fun satisfied(sim: SimIteration): Boolean {
-        return if(seconds == null) { false } else { sim.elapsedTimeMs >= seconds * 1000 }
+        return if(seconds == null) { false } else { sim.opts.durationMs - sim.elapsedTimeMs >= seconds * 1000 }
     }
 }

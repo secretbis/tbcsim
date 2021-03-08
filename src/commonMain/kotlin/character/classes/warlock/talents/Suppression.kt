@@ -8,4 +8,8 @@ class Suppression(currentRank: Int) : Talent(currentRank) {
     }
     override val name: String = Companion.name
     override val maxRank: Int = 5
+
+    fun bonusAfflictionHitPct(): Double {
+        return (0.02 * currentRank)
+    }
 }

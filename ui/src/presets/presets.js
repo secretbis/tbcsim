@@ -26,7 +26,11 @@ const presets = {
     shamanEnhSubRestoPreraidAnniOh,
   ],
   warlock: [
-    warlockDestroFirePreraid
+    warlockDestroFirePreraid,
+    warlockDestroShadowPreraid,
+    warlockAfflictionUAPreraid,
+    warlockAfflictionRuinPreraid,
+    warlockAfflictionDSPreraid
   ],
   warrior: [
     warriorArmsPreraid,
@@ -94,6 +98,9 @@ export default ({ value, dispatch }) => {
         >
           <Dropdown.Menu title="Shaman">
             {presetsFor("shaman")}
+          </Dropdown.Menu>
+          <Dropdown.Menu title="Warlock">
+            {presetsFor("warlock")}
           </Dropdown.Menu>
           <Dropdown.Menu title="Warrior">
             {presetsFor("warrior")}

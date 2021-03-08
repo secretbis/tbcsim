@@ -43,6 +43,7 @@ talents:
 gear:
   mainHand:
     name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
   offHand:
     name: Lamp of Peaceful Radiance
   rangedLibramTotem:
@@ -58,6 +59,7 @@ gear:
     name: Brooch of Heightened Potential
   shoulders:
     name: Mana-Etched Spaulders
+    enchant: Greater Inscription of the Orb
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -65,16 +67,19 @@ gear:
     name: Ogre Slayer's Cover
   chest:
     name: Netherstrike Breastplate
+    enchant: Exceptional Stats
     gems:
       - Glowing Nightseye
       - Potent Noble Topaz
       - Glowing Nightseye
   wrists:
     name: Netherstrike Bracers
+    enchant: Spellpower (Bracers)
     gems:
       - Potent Noble Topaz
   hands:
     name: Mana-Etched Gloves
+    enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -85,19 +90,23 @@ gear:
       - Runed Living Ruby
   legs:
     name: Spellstrike Pants
+    enchant: Runic Spellthread
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
       - Runed Living Ruby
   feet:
     name: Sigil-Laced Boots
+    enchant: Boar's Speed
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   ring1:
     name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
   ring2:
     name: Ryngo's Band of Ingenuity
+    enchant: Spellpower (Ring)
   trinket1:
     name: Quagmirran's Eye
   trinket2:
@@ -150,19 +159,10 @@ rotation:
           pct: 30
     - name: Destruction Potion
       criteria:
-        # Use a potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two potions
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 120
-          seconds: 20
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
     - name: Elemental Mastery
-      criteria:
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 180
-          seconds: 10
     # Ele OOMs real quick with CL, so only try to cast this with an EF proc active
     - name: Chain Lightning
       criteria:

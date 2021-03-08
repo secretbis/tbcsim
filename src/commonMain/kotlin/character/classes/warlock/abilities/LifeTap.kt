@@ -21,8 +21,9 @@ class LifeTap : Ability() {
         val impLt = sim.subject.klass.talents[ImprovedLifeTap.name] as ImprovedLifeTap?
         val impLtMultiplier = impLt?.lifeTapManaMultiplier() ?: 1.0
 
-        // Per internet, spell power coeff is 50%
-        val withSpellPower = Spell.baseDamageRoll(sim, manaPerCast, 0.5, Constants.DamageType.SHADOW)
+        // Per lock discord, coefficient is 0.8
+        val spellPowerCoeff = 0.8
+        val withSpellPower = Spell.baseDamageRoll(sim, manaPerCast, spellPowerCoeff, Constants.DamageType.SHADOW)
 
         val totalAmount = withSpellPower * impLtMultiplier
         sim.addResource(totalAmount.toInt(), Resource.Type.MANA)

@@ -5,15 +5,21 @@ import sim.SimIteration
 abstract class Debuff : Buff() {
     open val tickDeltaMs: Int = -1
 
-    // TODO: This is probably pretty slow
     open fun shouldTick(sim: SimIteration): Boolean {
         if(tickDeltaMs == -1) return false
 
         val state = state(sim)
-        if(sim.elapsedTimeMs == state.appliedAtMs) return false
-        if(sim.elapsedTimeMs == state.appliedAtMs + 1) return false
 
-        return (sim.elapsedTimeMs - state.appliedAtMs + 1) % tickDeltaMs == 0
+        // Never tick the debuff on the same server tick it was applied
+        if(sim.elapsedTimeMs == state.appliedAtMs) return false
+
+        val shouldTick = sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs
+        if(shouldTick) {
+            state.tickCount++
+            state.lastTickMs = sim.elapsedTimeMs
+        }
+
+        return shouldTick
     }
 
     open fun tick(sim: SimIteration) {

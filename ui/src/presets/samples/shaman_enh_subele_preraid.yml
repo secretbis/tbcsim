@@ -67,23 +67,28 @@ gear:
     name: Natasha's Choker
   shoulders:
     name: Shalassi Sentry's Epaulets
+    enchant: Greater Inscription of Vengeance
     gems:
       - Bold Living Ruby
       - Inscribed Noble Topaz
   back:
     name: Cloak of the Inciter
+    enchant: Greater Agility
   chest:
     name: Nether Chain Shirt
+    enchant: Exceptional Stats
     gems:
       - Bold Living Ruby
       - Sovereign Nightseye
       - Inscribed Noble Topaz
   wrists:
     name: Felstalker Bracers
+    enchant: Brawn
     gems:
       - Bold Living Ruby
   hands:
     name: Windstrike Gloves
+    enchant: Major Strength
   waist:
     name: Ebon Netherscale Belt
     gems:
@@ -91,12 +96,14 @@ gear:
       - Inscribed Noble Topaz
   legs:
     name: Wyrmscale Greaves
+    enchant: Nethercobra Leg Armor
     gems:
       - Bold Living Ruby
       - Bold Living Ruby
       - Bold Living Ruby
   feet:
     name: Boots of the Endless Hunt
+    enchant: Cat's Swiftness
   ring1:
     name: Shaffar's Band of Brutality
   ring2:
@@ -161,11 +168,6 @@ rotation:
           seconds: 0
     - name: Haste Potion
       criteria:
-        # Use a Haste Potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two haste potions
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 120
-          seconds: 20
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5

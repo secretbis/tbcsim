@@ -27,6 +27,10 @@ open class DemonicSacrifice(suffix: String, stats: (sim: SimIteration) -> Stats)
 
     override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
 
+    override fun available(sim: SimIteration): Boolean {
+        return sim.subject.klass.talents[character.classes.warlock.talents.DemonicSacrifice.name]?.currentRank ?: 0  > 0
+    }
+
     val buff = object : Buff() {
         override val name: String = "Demonic Sacrifice"
         override val durationMs: Int = 30 * 60 * 1000

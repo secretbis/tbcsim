@@ -8,8 +8,11 @@ import mechanics.Spell
 import sim.Event
 import sim.SimIteration
 
-class UnstableAffliction : Debuff() {
-    override val name: String = "Unstable Affliction"
+class UnstableAfflictionDot : Debuff() {
+    companion object {
+        const val name = "Unstable Affliction (DoT)"
+    }
+    override val name: String = Companion.name
     override val durationMs: Int = 18000
     override val tickDeltaMs: Int = 3000
 
@@ -18,7 +21,7 @@ class UnstableAffliction : Debuff() {
     val school = Constants.DamageType.SHADOW
     val ua = object : Ability() {
         override val id: Int = 30405
-        override val name: String = "Unstable Affliction (DoT)"
+        override val name: String = Companion.name
         override fun gcdMs(sim: SimIteration): Int = 0
 
         override fun cast(sim: SimIteration) {

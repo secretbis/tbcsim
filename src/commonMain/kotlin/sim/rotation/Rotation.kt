@@ -1,12 +1,14 @@
 package sim.rotation
 
 import character.Ability
+import mu.KotlinLogging
 import sim.SimIteration
 
 class Rotation(
     val rules: List<Rule>,
     val autoAttack: Boolean
 ) {
+    private val logger = KotlinLogging.logger {}
     enum class Phase {
         PRECOMBAT,
         COMBAT,
@@ -18,7 +20,11 @@ class Rotation(
             it.phase == Phase.PRECOMBAT ||
             it.phase == Phase.RAID_OR_PARTY
         }.forEach {
-            it.ability.cast(sim)
+            if(it.ability.available(sim)) {
+                it.ability.cast(sim)
+            } else {
+                logger.warn { "Could not cast precombat ability (not available): ${it.ability.name}" }
+            }
         }
     }
 

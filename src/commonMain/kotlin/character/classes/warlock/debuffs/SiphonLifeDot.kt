@@ -3,12 +3,13 @@ package character.classes.warlock.debuffs
 import character.Ability
 import character.Debuff
 import data.Constants
+import mechanics.Spell
 import sim.Event
 import sim.SimIteration
 
-class SiphonLife : Debuff() {
+class SiphonLifeDot : Debuff() {
     companion object {
-        const val name = "Siphon Life"
+        const val name = "Siphon Life (DoT)"
     }
     override val name: String = Companion.name
     override val durationMs: Int = 30000
@@ -20,15 +21,18 @@ class SiphonLife : Debuff() {
         override fun gcdMs(sim: SimIteration): Int = 0
 
         val dmgPerTick = 63.0
+        val numTicks = 10.0
         // TODO: What the heck school is this spell anyway
-        val school = Constants.DamageType.PHYSICAL
+        val school = Constants.DamageType.SHADOW
         override fun cast(sim: SimIteration) {
-            // Does this actually just tick for 63 damage?  Seriously?
+            val spellPowerCoeff = 0.5 / numTicks
+            val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
+
             val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = dmgPerTick,
+                amount = damageRoll,
                 result = Event.Result.HIT,
             )
             sim.logEvent(event)

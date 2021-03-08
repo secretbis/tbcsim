@@ -37,6 +37,7 @@ object RaidAbilities {
         JudgementOfWisdom(),
         Misery(),
         MoonkinAura(),
+        ShadowWeaving(),
         SunderArmor(),
     )
 

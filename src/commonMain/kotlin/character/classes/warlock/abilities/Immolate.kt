@@ -35,15 +35,18 @@ class Immolate : Ability() {
         return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
     }
 
+    val dot = ImmolateDot()
+
     val baseDamage = 327.0
     override fun cast(sim: SimIteration) {
         val devastation = sim.subject.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
         val impImmolate = sim.subject.klass.talents[ImprovedImmolate.name] as ImprovedImmolate?
-        val impImmolateInitialMultiplier = impImmolate?.immolateInitialDamageMultiplier() ?: 0.0
+        val impImmolateInitialMultiplier = impImmolate?.immolateInitialDamageMultiplier() ?: 1.0
 
-        val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
+        // Per lock discord, value is 20%
+        val spellPowerCoeff = 0.2
         val school = Constants.DamageType.FIRE
 
         val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school) * impImmolateInitialMultiplier
@@ -59,7 +62,7 @@ class Immolate : Ability() {
         sim.logEvent(event)
 
         // Apply the DoT
-        sim.addDebuff(ImmolateDot())
+        sim.addDebuff(dot)
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {

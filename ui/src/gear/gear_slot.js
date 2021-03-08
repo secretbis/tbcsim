@@ -104,7 +104,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
             {item.sockets.map((sk, idx) => {
               return <GemSlot key={idx} socket={sk} gear={character.gear} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
-            {!['trinket1', 'trinket2', 'neck'].includes(slotName) ?
+            {!['trinket1', 'trinket2', 'neck', 'waist'].includes(slotName) ?
               <EnchantSlot item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
             : null}
           </Row>

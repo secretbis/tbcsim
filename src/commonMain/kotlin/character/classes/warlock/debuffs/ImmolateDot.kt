@@ -26,7 +26,8 @@ class ImmolateDot : Debuff() {
         val numTicks = 5.0
         val school = Constants.DamageType.FIRE
         override fun cast(sim: SimIteration) {
-            val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
+            // Per lock discord
+            val spellPowerCoeff = 0.65 / numTicks
             val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(

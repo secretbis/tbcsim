@@ -54,9 +54,6 @@ class Shadowburn : Ability() {
         )
         sim.logEvent(event)
 
-        // Remove the Immolate DoT
-        sim.consumeDebuff(ImmolateDot())
-
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)

@@ -1,39 +1,41 @@
 class: Warlock
-spec: Destruction
-description: Fire Destruction Warlock (pre-raid)
+spec: Affliction
+description: Affliction UA Warlock (pre-raid)
 race: Human
 level: 70
 
 talents:
+  # Affliction talents
+  - name: Suppression
+    rank: 5
+  - name: Empowered Corruption
+    rank: 5
+  - name: Improved Life Tap
+    rank: 2
+  - name: Improved Curse of Agony
+    rank: 2
+  - name: Amplify Curse
+    rank: 1
+  - name: Nightfall
+    rank: 2
+  - name: Siphon Life
+    rank: 1
+  - name: Shadow Mastery
+    rank: 5
+  - name: Contagion
+    rank: 5
+  - name: Malediction
+    rank: 3
+  - name: Unstable Affliction
+    rank: 1
+
   # Destro talents
-  - name: Cataclysm
+  - name: Improved Shadow Bolt
     rank: 5
   - name: Bane
     rank: 5
   - name: Devastation
     rank: 5
-  - name: Shadowburn
-    rank: 1
-  - name: Ruin
-    rank: 1
-  - name: Improved Immolate
-    rank: 5
-  - name: Emberstorm
-    rank: 5
-  - name: Backlash
-    rank: 3
-  - name: Conflagrate
-    rank: 1
-  - name: Shadow and Flame
-    rank: 5
-
-  # Demo talents
-  - name: Fel Intellect
-    rank: 3
-  - name: Demonic Aegis
-    rank: 3
-  - name: Demonic Sacrifice
-    rank: 1
 
 # Pre-raid BIS-ish
 # Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
@@ -110,7 +112,6 @@ rotation:
     - name: Crunchy Serpent
     - name: Superior Wizard Oil
     - name: Fel Armor
-    - name: Demonic Sacrifice (Succubus)
 
   combat:
     # Use a Dark Rune if we've used at least 1500 mana
@@ -124,23 +125,47 @@ rotation:
           pct: 10
     - name: Curse of Doom
       criteria:
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 60
-          seconds: 5
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 61
+    - name: Curse of Agony
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Agony (DoT)
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
         - type: DEBUFF_DURATION_LTE
           debuff: Curse of Doom
           seconds: 0
     - name: Destruction Potion
       criteria:
-        # Use a potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two potions
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 120
-          seconds: 20
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
+          seconds: 2
     - name: Unstable Affliction
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Unstable Affliction (DoT)
+          seconds: 0
+    - name: Corruption
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Corruption (DoT)
+          seconds: 0
+    - name: Siphon Life
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Siphon Life (DoT)
+          seconds: 0
+    - name: Immolate
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Immolate (DoT)
+          seconds: 0
+    - name: Shadow Bolt
 
 
 # Raid and group setup
@@ -172,3 +197,4 @@ raidDebuffs:
   - Judgement of Wisdom
   - Curse of the Elements
   - Improved Scorch
+  - Shadow Weaving

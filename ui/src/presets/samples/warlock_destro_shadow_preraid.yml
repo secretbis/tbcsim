@@ -1,6 +1,6 @@
 class: Warlock
 spec: Destruction
-description: Fire Destruction Warlock (pre-raid)
+description: Destruction Shadow Warlock (pre-raid)
 race: Human
 level: 70
 
@@ -122,22 +122,20 @@ rotation:
           pct: 10
     - name: Curse of Doom
       criteria:
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 60
-          seconds: 5
         - type: DEBUFF_DURATION_LTE
           debuff: Curse of Doom
           seconds: 0
     - name: Destruction Potion
       criteria:
-        # Use a potion if the remaining fight seconds modulo 120 seconds is less than 20 seconds
-        # e.g. Since the potion cooldown is 120s, a 3m (180s) fight would use two potions
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 120
-          seconds: 20
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
+# TODO: Some internet guides say to do this, but it doesn't seem to be an improvement
+#    - name: Immolate
+#      criteria:
+#        - type: DEBUFF_DURATION_LTE
+#          debuff: Immolate (DoT)
+#          seconds: 0
     - name: Shadow Bolt
 
 # Raid and group setup
@@ -169,3 +167,4 @@ raidDebuffs:
   - Judgement of Wisdom
   - Curse of the Elements
   - Improved Scorch
+  - Shadow Weaving

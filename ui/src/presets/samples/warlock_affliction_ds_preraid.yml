@@ -1,31 +1,31 @@
 class: Warlock
-spec: Destruction
-description: Destruction Fire Warlock (pre-raid)
+spec: Affliction
+description: Affliction DS Warlock (pre-raid)
 race: Human
 level: 70
 
 talents:
-  # Destro talents
-  - name: Cataclysm
+  # Affliction talents
+  - name: Suppression
     rank: 5
-  - name: Bane
+  - name: Empowered Corruption
     rank: 5
-  - name: Devastation
-    rank: 5
-  - name: Shadowburn
+  - name: Improved Life Tap
+    rank: 2
+  - name: Improved Curse of Agony
+    rank: 2
+  - name: Amplify Curse
     rank: 1
-  - name: Ruin
+  - name: Nightfall
+    rank: 2
+  - name: Siphon Life
     rank: 1
-  - name: Improved Immolate
+  - name: Shadow Mastery
     rank: 5
-  - name: Emberstorm
+  - name: Contagion
     rank: 5
-  - name: Backlash
+  - name: Malediction
     rank: 3
-  - name: Conflagrate
-    rank: 1
-  - name: Shadow and Flame
-    rank: 5
 
   # Demo talents
   - name: Fel Intellect
@@ -36,12 +36,13 @@ talents:
     rank: 1
 
 # Pre-raid BIS-ish
+# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
 gear:
   mainHand:
     name: Eternium Runed Blade
     enchant: Major Spellpower (Weapon)
   offHand:
-    name: Flametongue Seal
+    name: Orb of the Soul-Eater
   rangedLibramTotem:
     name: Nether Core's Control Rod
   head:
@@ -54,12 +55,15 @@ gear:
   neck:
     name: Hydra-fang Necklace
   shoulders:
-    name: Mantle of Three Terrors
+    name: Frozen Shadoweave Shoulders
     enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   back:
     name: Sethekk Oracle Cloak
   chest:
-    name: Spellfire Robe
+    name: Frozen Shadoweave Robe
     enchant: Exceptional Stats
     gems:
       - Runed Living Ruby
@@ -68,13 +72,10 @@ gear:
     name: Crimson Bracers of Gloom
     enchant: Spellpower (Bracer)
   hands:
-    name: Spellfire Gloves
+    name: Gloves of the Deadwatcher
     enchant: Major Spellpower (Gloves)
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   waist:
-    name: Spellfire Belt
+    name: Girdle of Ruination
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -86,8 +87,11 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   feet:
-    name: Extravagant Boots of Malice
+    name: Frozen Shadoweave Boots
     enchant: Boar's Speed
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   ring1:
     name: Sparking Arcanite Ring
     enchant: Spellpower (Ring)
@@ -106,7 +110,7 @@ rotation:
     - name: Crunchy Serpent
     - name: Superior Wizard Oil
     - name: Fel Armor
-    - name: Demonic Sacrifice (Imp)
+    - name: Demonic Sacrifice (Succubus)
 
   combat:
     # Use a Dark Rune if we've used at least 1500 mana
@@ -132,26 +136,31 @@ rotation:
           seconds: 0
         - type: FIGHT_TIME_REMAINING_LTE
           seconds: 60
-    - name: Immolate
-      criteria:
         - type: DEBUFF_DURATION_LTE
-          debuff: Immolate (DoT)
+          debuff: Curse of Doom
           seconds: 0
     - name: Destruction Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
-    - name: Incinerate
-      criteria:
-        - type: DEBUFF_DURATION_GTE
-          debuff: Immolate (DoT)
           seconds: 2
-    - name: Conflagrate
+    - name: Corruption
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Corruption (DoT)
+          seconds: 0
+    - name: Siphon Life
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Siphon Life (DoT)
+          seconds: 0
+    - name: Immolate
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Immolate (DoT)
-          seconds: 1.999
+          seconds: 0
+    - name: Shadow Bolt
+
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying

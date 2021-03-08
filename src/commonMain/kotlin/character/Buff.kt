@@ -21,6 +21,8 @@ abstract class Buff {
                 } else value
             }
         var appliedAtMs: Int = 0
+        var lastTickMs: Int = -1
+        var tickCount: Int = 0
     }
 
     open val id: Int = -1
@@ -49,6 +51,7 @@ abstract class Buff {
 
         // Always refresh buff application time
         state.appliedAtMs = sim.elapsedTimeMs
+        state.lastTickMs = sim.elapsedTimeMs
 
         // Add stacks if it stacks
         if (maxStacks > 0 && state.currentStacks < maxStacks) {
@@ -58,6 +61,7 @@ abstract class Buff {
 
         // Refresh charges if it has charges
         state.currentCharges = maxCharges
+        state.tickCount = 0
     }
 
     open fun reset(sim: SimIteration) {
@@ -65,6 +69,7 @@ abstract class Buff {
 
         state.currentStacks = 0
         state.currentCharges = maxCharges
+        state.tickCount = 0
     }
 
     open fun isFinished(sim: SimIteration): Boolean {
