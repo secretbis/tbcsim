@@ -29,7 +29,6 @@ Implemented:
 Not yet implemented:
 - All specs not listed above
 - Item set bonuses
-- Most item enchants
 - Automated gear comparison
 
 ## Example output

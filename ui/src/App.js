@@ -142,10 +142,13 @@ function App() {
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
           <Presets value={state.character} dispatch={dispatch} />
-          <Row style={{maxWidth: '1400px'}}>
-            <Col xs={14}>
-              <Panel header="Gear" collapsible bordered onClick={() => setGearExpanded(!gearExpanded)} expanded={gearExpanded && state.character.class !== null}>
-                <GearEditor character={state.character} dispatch={dispatch}></GearEditor>
+          <Row>
+            <Col xs={14} style={{ maxWidth: '750px' }}>
+              <Panel header="Gear" bordered>
+                {state.character.class ?
+                  <GearEditor character={state.character} dispatch={dispatch}></GearEditor> :
+                  <p>Please select a preset above</p>
+                }
               </Panel>
             </Col>
             <Col xs={10}>
@@ -161,11 +164,11 @@ function App() {
               <Panel header="Talents" collapsible bordered defaultExpanded={false}>
                 <Talents talents={state.character.talents} dispatch={dispatch} />
               </Panel>
+              <Panel header="Sim Options" collapsible bordered defaultExpanded={false}>
+                <SimOptions dispatch={dispatch} />
+              </Panel>
             </Col>
           </Row>
-          <Panel header="Sim Options" collapsible bordered defaultExpanded={false} style={{maxWidth: '700px'}}>
-            <SimOptions dispatch={dispatch} />
-          </Panel>
           <Row style={{ margin: '10px 0 0 0' }}>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
             {state.iterationsCompleted != null &&
