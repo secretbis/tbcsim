@@ -47,7 +47,7 @@ open class ShadowBolt : Ability() {
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
         val shadowAndFlame = sim.subject.klass.talents[ShadowAndFlame.name] as ShadowAndFlame?
-        val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 0.0
+        val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 1.0
 
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.SHADOW
