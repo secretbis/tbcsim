@@ -69,14 +69,14 @@ gear:
     name: Netherstrike Breastplate
     enchant: Exceptional Stats
     gems:
-      - Glowing Nightseye
-      - Potent Noble Topaz
-      - Glowing Nightseye
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
   wrists:
     name: Netherstrike Bracers
     enchant: Spellpower (Bracers)
     gems:
-      - Potent Noble Topaz
+      - Runed Living Ruby
   hands:
     name: Mana-Etched Gloves
     enchant: Major Spellpower (Gloves)

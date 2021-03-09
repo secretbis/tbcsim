@@ -43,13 +43,14 @@ export default function({ socket, gear, onSelect }) {
     onSelect(gem)
   }
 
+  const isMetaGem = color == 'meta'
   return (
     <span onClick={onGemClick}>
-      <ItemTooltip item={gem} gear={gear}>
+      <ItemTooltip item={gem} isMetaGem={isMetaGem} gear={gear}>
         <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
         <GearSelector
           inventorySlots={[0]}
-          itemClasses={color == 'meta' ? metaIC : nonMetaIC}
+          itemClasses={isMetaGem ? metaIC : nonMetaIC}
           visible={selectorVisible}
           setVisible={setSelectorVisible}
           onSelect={onGemSelect}
