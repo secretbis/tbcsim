@@ -24,6 +24,7 @@ object RaidAbilities {
         TotemOfWrath(),
         UnleashedRage(),
         WindfuryTotem(),
+        WindfuryTotemRank1(),
         WrathOfAirTotem()
     )
 

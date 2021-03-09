@@ -18,11 +18,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     override fun available(sim: SimIteration): Boolean {
-        return if(isOffHand(sim)) { sim.isDualWielding() } else true
-    }
-
-    fun isOffHand(sim: SimIteration): Boolean {
-        return item === sim.subject.gear.offHand
+        return if(Melee.isOffhand(sim, item)) { sim.isDualWielding() } else true
     }
 
     val extraAp = 445

@@ -133,7 +133,7 @@ rotation:
     - name: Windfury Weapon (OH)
 #    - name: Flametongue Weapon (OH)
     - name: Strength of Earth Totem
-    - name: Windfury Totem
+    - name: Windfury Totem (Rank 1)
     - name: Water Shield
 
   combat:
@@ -146,7 +146,7 @@ rotation:
         - type: RESOURCE_LTE_PCT
           pct: 30
     - name: Stormstrike
-    - name: Windfury Totem
+    - name: Windfury Totem (Rank 1)
       criteria:
         # If GoA has existed for 9+ seconds, refresh WFT for party
         - type: BUFF_DURATION_LTE

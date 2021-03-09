@@ -5,6 +5,7 @@ import character.Proc
 import character.classes.shaman.talents.ElementalWeapons
 import data.Constants
 import data.model.Item
+import mechanics.Melee
 import mechanics.Spell
 import sim.Event
 import sim.SimIteration
@@ -18,11 +19,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
     override fun gcdMs(sim: SimIteration): Int = 0
 
     override fun available(sim: SimIteration): Boolean {
-        return if(isOffHand(sim)) { sim.isDualWielding() } else true
-    }
-
-    fun isOffHand(sim: SimIteration): Boolean {
-        return item === sim.subject.gear.offHand
+        return if(Melee.isOffhand(sim, item)) { sim.isDualWielding() } else true
     }
 
     // Per internet anedcodes, this gets 10% of spell power

@@ -6,6 +6,7 @@ import character.Proc
 import character.Resource
 import character.classes.warrior.talents.EndlessRage
 import data.model.Item
+import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
@@ -33,7 +34,7 @@ class RageGeneration : Buff() {
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             val item = items?.get(0) ?: return
-            val isOffhand = item === sim.subject.gear.offHand
+            val isOffhand = Melee.isOffhand(sim, item)
 
             if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount
@@ -57,7 +58,7 @@ class RageGeneration : Buff() {
 
         override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
             val item = items?.get(0) ?: return
-            val isOffhand = item === sim.subject.gear.offHand
+            val isOffhand = Melee.isOffhand(sim, item)
 
             if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount

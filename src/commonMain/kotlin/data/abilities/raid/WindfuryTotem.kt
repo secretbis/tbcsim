@@ -9,13 +9,11 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-class WindfuryTotem : Ability() {
-    companion object {
-        const val name = "Windfury Totem"
-    }
+open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilityName: String) : Ability() {
+    constructor() : this(445.0, 25587, "Windfury Totem")
 
-    override val id: Int = 25528
-    override val name: String = Companion.name
+    override val id: Int = abilityId
+    override val name: String = abilityName
     override fun gcdMs(sim: SimIteration): Int = 0
 
     val weaponBuff = object : Buff() {
@@ -25,16 +23,16 @@ class WindfuryTotem : Ability() {
 
         val wfTotemAbility = object : Ability() {
             // Assume Enhancing Totems
-            val baseExtraAp = 445.0 * 1.3
-            override val id: Int = 15497
-            override val name: String = "Windfury Totem"
+            val totalExtraAp = baseApBonus * 1.3
+            override val id: Int = abilityId
+            override val name: String = abilityName
 
             override fun gcdMs(sim: SimIteration): Int = 0
 
             override fun cast(sim: SimIteration) {
                 // Do attack
                 val mh = sim.subject.gear.mainHand
-                val attack = Melee.baseDamageRoll(sim, mh, baseExtraAp.toInt())
+                val attack = Melee.baseDamageRoll(sim, mh, totalExtraAp.toInt())
                 val result = Melee.attackRoll(sim, attack, mh, isWhiteDmg = true)
 
                 val event = Event(

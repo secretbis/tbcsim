@@ -14,13 +14,11 @@ import mechanics.Melee
 import sim.Event
 import sim.SimIteration
 
-class WindfuryTotem: Ability() {
-    companion object {
-        const val name = "Windfury Totem"
-    }
+open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val abilityId: Int, val abilityName: String): Ability() {
+    constructor(): this(445.0, 325.0,25587, "Windfury Totem")
 
-    override val id: Int = 25587
-    override val name: String = Companion.name
+    override val id: Int = abilityId
+    override val name: String = abilityName
 
     override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
 
@@ -35,7 +33,7 @@ class WindfuryTotem: Ability() {
         val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
-        return General.resourceCostReduction(325.0, listOf(tfRed, mqRed))
+        return General.resourceCostReduction(baseManaCost, listOf(tfRed, mqRed))
     }
 
     val weaponBuff = object : Buff() {
@@ -44,16 +42,15 @@ class WindfuryTotem: Ability() {
         override val hidden: Boolean = true
 
         val wfTotemAbility = object : Ability() {
-            val baseExtraAp = 445
-            override val id: Int = 15497
-            override val name: String = "Windfury Totem"
+            override val id: Int = abilityId
+            override val name: String = abilityName
 
             override fun gcdMs(sim: SimIteration): Int = 0
 
             override fun cast(sim: SimIteration) {
                 // Apply talents
                 val impWeaponTotems = sim.subject.klass.talents[ImprovedWeaponTotems.name] as ImprovedWeaponTotems?
-                val extraAp = (baseExtraAp * (impWeaponTotems?.windfuryTotemApMultiplier() ?: 1.0)).toInt()
+                val extraAp = (baseApBonus * (impWeaponTotems?.windfuryTotemApMultiplier() ?: 1.0)).toInt()
 
                 // Do attack
                 val mh = sim.subject.gear.mainHand

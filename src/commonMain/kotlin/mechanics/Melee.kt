@@ -113,11 +113,15 @@ object Melee {
         }
     }
 
-    fun baseMiss(sim: SimIteration, isWhiteHit: Boolean, isOffHand: Boolean): Double {
+    fun isOffhand(sim: SimIteration, item: Item): Boolean {
+        return item === sim.subject.gear.offHand
+    }
+
+    fun baseMiss(sim: SimIteration, item: Item, isWhiteHit: Boolean): Double {
         val baseMissForLevel = valueByLevelDiff(sim, baseMissChance)
 
         // The heroic strike nonsense only eliminates the dual-wield penalty, and nothing further
-        val offHandHitBonus = if(isOffHand) { sim.subjectStats.offHandAddlWhiteHitPct / 100.0 } else 0.0
+        val offHandHitBonus = if(isOffhand(sim, item)) { sim.subjectStats.offHandAddlWhiteHitPct / 100.0 } else 0.0
         val actualDWMissChance = (baseDualWieldMiss - offHandHitBonus).coerceAtLeast(0.0)
 
         return if(isWhiteHit && sim.isDualWielding()) {
@@ -125,8 +129,8 @@ object Melee {
         } else baseMissForLevel
     }
 
-    fun meleeMissChance(sim: SimIteration, isWhiteHit: Boolean, isOffHand: Boolean): Double {
-        val baseMiss = baseMiss(sim, isWhiteHit, isOffHand)
+    fun meleeMissChance(sim: SimIteration, item: Item, isWhiteHit: Boolean): Double {
+        val baseMiss = baseMiss(sim, item, isWhiteHit)
         val meleeHitChance = sim.meleeHitPct() / 100.0
         return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
     }
@@ -181,7 +185,7 @@ object Melee {
     }
 
     fun meleeArmorMitigation(sim: SimIteration): Double {
-        val targetArmor = sim.armor() - meleeArmorPen(sim)
+        val targetArmor = (sim.targetArmor() - meleeArmorPen(sim)).coerceAtLeast(0)
         return targetArmor / (targetArmor + (467.5 * sim.target.level - 22167.5))
     }
 
@@ -196,38 +200,12 @@ object Melee {
         return attackPower / 14 * (speed / 1000.0)
     }
 
-    fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
+    fun baseDamageRoll(sim: SimIteration, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false, isWhiteDmg: Boolean = false): Double {
         val totalAp = sim.attackPower() + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
-        return Random.nextDouble(min, max) + apToDamage(sim, totalAp, item, isNormalized)
-    }
-
-    // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sim: SimIteration, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
-        val isOffHand = item === sim.subject.gear.offHand
-
-        // Find all our possible damage mods from buffs and so on
-        val flatModifier = if(isWhiteDmg) {
-            sim.subjectStats.whiteDamageFlatModifier
-        } else {
-            sim.subjectStats.yellowDamageFlatModifier
-        }
-
-        val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
-            sim.subjectStats.whiteDamageAddlCritMultiplier
-        } else {
-            sim.subjectStats.yellowDamageAddlCritMultiplier
-        } - 1)
-
-        val allMultiplier = if(isWhiteDmg) {
-            sim.subjectStats.whiteDamageMultiplier
-        } else {
-            sim.subjectStats.yellowDamageMultiplier
-        } * sim.subjectStats.physicalDamageMultiplier
-
-        val offHandMultiplier = if(isOffHand) {
+        val offHandMultiplier = if(isOffhand(sim, item)) {
             Stats.offHandPenalty + if(isWhiteDmg) {
                 sim.subjectStats.whiteDamageAddlOffHandPenaltyModifier
             } else {
@@ -237,11 +215,32 @@ object Melee {
             1.0
         }
 
-        // Apply constant multipliers and finalize the damage roll
-        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * offHandMultiplier
+        val flatModifier = if(isWhiteDmg) {
+            sim.subjectStats.whiteDamageFlatModifier
+        } else {
+            sim.subjectStats.yellowDamageFlatModifier
+        }
+
+        val allMultiplier = if(isWhiteDmg) {
+            sim.subjectStats.whiteDamageMultiplier
+        } else {
+            sim.subjectStats.yellowDamageMultiplier
+        } * sim.subjectStats.physicalDamageMultiplier
+
+        return (Random.nextDouble(min, max) + apToDamage(sim, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
+    }
+
+    // Performs an attack roll given an initial unmitigated damage value
+    fun attackRoll(sim: SimIteration, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+        // Find all our possible damage mods from buffs and so on
+        val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
+            sim.subjectStats.whiteDamageAddlCritMultiplier
+        } else {
+            sim.subjectStats.yellowDamageAddlCritMultiplier
+        } - 1)
 
         // Get the attack result
-        val missChance = meleeMissChance(sim, isWhiteDmg, isOffHand)
+        val missChance = meleeMissChance(sim, item, isWhiteDmg)
         val dodgeChance = meleeDodgeChance(sim, item) + missChance
         val parryChance = meleeParryChance(sim, item) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
@@ -261,10 +260,10 @@ object Melee {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
             attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(finalDamageRoll * (1 - meleeGlanceReduction(sim)), Event.Result.GLANCE)
-            attackRoll < blockChance -> Pair(finalDamageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
-            isWhiteDmg && attackRoll < critChance -> Pair(finalDamageRoll * critMultiplier, Event.Result.CRIT)
-            else -> Pair(finalDamageRoll, Event.Result.HIT)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sim)), Event.Result.GLANCE)
+            attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
+            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
+            else -> Pair(damageRoll, Event.Result.HIT)
         }
 
         if(!isWhiteDmg) {
@@ -282,7 +281,7 @@ object Melee {
         }
 
         // Apply target armor mitigation
-        finalResult = Pair(finalResult.first * (1 - meleeArmorMitigation(sim)), finalResult.second)
+//        finalResult = Pair(finalResult.first * (1 - meleeArmorMitigation(sim)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
         if(finalResult.second == Event.Result.BLOCK || finalResult.second == Event.Result.BLOCKED_CRIT) {

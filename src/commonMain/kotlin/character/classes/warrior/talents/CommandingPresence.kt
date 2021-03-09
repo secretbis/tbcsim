@@ -10,5 +10,5 @@ class CommandingPresence(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    fun shoutMultiplier(): Double = currentRank * 0.05
+    fun shoutMultiplier(): Double = 1.0 + (currentRank * 0.05)
 }

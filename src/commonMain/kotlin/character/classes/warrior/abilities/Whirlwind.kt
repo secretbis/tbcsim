@@ -3,6 +3,7 @@ package character.classes.warrior.abilities
 import character.*
 import character.classes.warrior.talents.ImprovedWhirlwind
 import data.Constants
+import data.model.Item
 import mechanics.Melee
 import sim.Event
 import sim.SimIteration
@@ -25,21 +26,42 @@ class Whirlwind : Ability() {
     override fun resourceCost(sim: SimIteration): Double = 30.0
 
     override fun cast(sim: SimIteration) {
-        val item = sim.subject.gear.mainHand
-        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = true)
-        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
+        val mh = sim.subject.gear.mainHand
+        val mhDamageRoll = Melee.baseDamageRoll(sim, mh, isNormalized = true)
+        val mhResult = Melee.attackRoll(sim, mhDamageRoll, mh)
 
         // Save last hit state and fire event
-        val event = Event(
+        val mhEvent = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
-            amount = result.first,
-            result = result.second,
+            abilityName = "$name (MH)",
+            amount = mhResult.first,
+            result = mhResult.second,
         )
-        sim.logEvent(event)
+        sim.logEvent(mhEvent)
 
-        // Proc anything that can proc off a yellow hit
+        fireTriggers(sim, mh, mhEvent, mhResult)
+
+        if(sim.isDualWielding()) {
+            val oh = sim.subject.gear.offHand
+            val ohDamageRoll = Melee.baseDamageRoll(sim, oh, isNormalized = true)
+            val ohResult = Melee.attackRoll(sim, ohDamageRoll, oh)
+
+            // Save last hit state and fire event
+            val ohEvent = Event(
+                eventType = Event.Type.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                abilityName = "$name (OH)",
+                amount = ohResult.first,
+                result = ohResult.second,
+            )
+            sim.logEvent(ohEvent)
+
+            fireTriggers(sim, oh, ohEvent, ohResult)
+        }
+    }
+
+    private fun fireTriggers(sim: SimIteration, item: Item, event: Event, result: Pair<Double, Event.Result>) {
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -52,7 +74,7 @@ class Whirlwind : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(sim.subject.gear.mainHand), this, event)
+            sim.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 

@@ -108,12 +108,12 @@ class SimIteration(
             it.isFinished(this)
         }
         buffsToRemove.forEach {
+            buffs.remove(it.name)
             it.reset(this)
             logEvent(Event(
                 eventType = Event.Type.BUFF_END,
                 buff = it
             ))
-            buffs.remove(it.name)
         }
 
         // Compute stats if something about our buffs changed
@@ -127,6 +127,9 @@ class SimIteration(
             it.isFinished(this)
         }
         debuffsToRemove.forEach {
+            debuffs.remove(it.name)
+
+            // TODO: This is kind of a hack, but final tick is hard to handle with a stepMs that isn't 1
             if(it.shouldTick(this)) {
                 it.tick(this)
             }
@@ -136,7 +139,6 @@ class SimIteration(
                 eventType = Event.Type.DEBUFF_END,
                 buff = it
             ))
-            debuffs.remove(it.name)
         }
 
         if(debuffsToRemove.isNotEmpty()) {
