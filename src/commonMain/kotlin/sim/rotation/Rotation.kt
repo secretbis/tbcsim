@@ -40,12 +40,12 @@ class Rotation(
         return rules.filter { it.phase == Phase.COMBAT }.map { it.ability }
     }
 
-    fun next(sim: SimIteration, onGcd: Boolean = false): Ability? {
+    fun next(sim: SimIteration, onGcd: Boolean = false): Rule? {
         return rules.filter { it.phase == Phase.COMBAT }.firstOrNull {
             it.ability.available(sim) &&
             it.satisfied(sim) &&
             (!onGcd || (onGcd && it.ability.castableOnGcd)) &&
             it.ability.resourceCost(sim) <= sim.resource.currentAmount
-        }?.ability
+        }
     }
 }

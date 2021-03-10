@@ -9,6 +9,7 @@ import mechanics.Rating
 import mu.KotlinLogging
 import sim.rotation.Criterion
 import sim.rotation.Rotation
+import sim.rotation.Rule
 import kotlin.js.JsExport
 import kotlin.math.ceil
 import character.classes.boss.Boss as BossClass
@@ -62,7 +63,7 @@ class SimIteration(
     val minGcdMs: Double = 1000.0
     var gcdEndMs: Int = 0
     var castEndMs: Int = 0
-    var castingAbility: Ability? = null
+    var castingRule: Rule? = null
     var mainHandAutoReplacement: Ability? = null
 
     fun onGcd(): Boolean {
@@ -174,26 +175,27 @@ class SimIteration(
         // Find and cast next rotation ability
         if(!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
-            if(castingAbility != null) {
-                castingAbility!!.beforeCast(this)
-                castingAbility!!.cast(this)
-                castingAbility!!.afterCast(this)
+            if(castingRule != null) {
+                castingRule!!.ability.beforeCast(this)
+                castingRule!!.ability.cast(this)
+                castingRule!!.ability.afterCast(this)
 
                 // Log cast event
                 logEvent(
                     Event(
                         eventType = Event.Type.SPELL_CAST,
-                        abilityName = castingAbility!!.name
+                        abilityName = castingRule!!.ability.name
                     )
                 )
 
                 // Reset casting state
-                castingAbility = null
+                castingRule = null
             } else {
-                val rotationAbility = rotation.next(this, onGcd())
+                val rotationRule = rotation.next(this, onGcd())
+                val rotationAbility = rotationRule?.ability
                 if (rotationAbility != null) {
                     // Set next cast times, and add latency if configured
-                    castingAbility = rotationAbility
+                    castingRule = rotationRule
                     gcdEndMs = elapsedTimeMs + rotationAbility.gcdMs(this) + opts.latencyMs
                     castEndMs = elapsedTimeMs + rotationAbility.castTimeMs(this) + opts.latencyMs
                 }

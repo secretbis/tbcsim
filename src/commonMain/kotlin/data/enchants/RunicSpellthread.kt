@@ -15,12 +15,7 @@ class RunicSpellthread(item: Item) : Enchant(item) {
 
     override fun modifyStats(sim: SimIteration): Stats {
         return Stats(
-            frostDamage = 35,
-            shadowDamage = 35,
-            arcaneDamage = 35,
-            fireDamage = 35,
-            natureDamage = 35,
-            holyDamage = 35,
+            spellDamage = 35,
             stamina = 20
         )
     }

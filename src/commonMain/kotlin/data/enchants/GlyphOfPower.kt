@@ -15,12 +15,7 @@ class GlyphOfPower(item: Item) : Enchant(item) {
 
     override fun modifyStats(sim: SimIteration): Stats {
         return Stats(
-            frostDamage = 22,
-            shadowDamage = 22,
-            arcaneDamage = 22,
-            fireDamage = 22,
-            natureDamage = 22,
-            holyDamage = 22,
+            spellDamage = 22,
             spellHealing = 22,
             spellHitRating = 14.0,
         )

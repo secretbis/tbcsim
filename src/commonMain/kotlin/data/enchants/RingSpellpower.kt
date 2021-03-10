@@ -14,13 +14,6 @@ class RingSpellpower(item: Item) : Enchant(item) {
     override val name: String = "Spellpower (Ring)"
 
     override fun modifyStats(sim: SimIteration): Stats {
-        return Stats(
-            frostDamage = 12,
-            shadowDamage = 12,
-            arcaneDamage = 12,
-            fireDamage = 12,
-            natureDamage = 12,
-            holyDamage = 12
-        )
+        return Stats(spellDamage = 12)
     }
 }

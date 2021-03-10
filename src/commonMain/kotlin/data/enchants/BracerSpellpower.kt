@@ -14,13 +14,6 @@ class BracerSpellpower(item: Item) : Enchant(item) {
     override val name: String = "Spellpower (Bracer)"
 
     override fun modifyStats(sim: SimIteration): Stats {
-        return Stats(
-            frostDamage = 15,
-            shadowDamage = 15,
-            arcaneDamage = 15,
-            fireDamage = 15,
-            natureDamage = 15,
-            holyDamage = 15
-        )
+        return Stats(spellDamage = 15)
     }
 }

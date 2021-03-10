@@ -12,7 +12,7 @@ abstract class Ability {
         SHAMAN_SHOCK,
         POTION,
         RUNE_OR_MANA_GEM,
-        DRUMS
+        ACTIVE_TRINKET
     }
 
     abstract val id: Int
@@ -23,6 +23,7 @@ abstract class Ability {
 
     open fun cooldownMs(sim: SimIteration): Int = 0
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
+    open fun trinketLockoutMs(sim: SimIteration): Int = 0
 
     open fun resourceCost(sim: SimIteration): Double = 0.0
     open fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.MANA
@@ -34,6 +35,7 @@ abstract class Ability {
 
     internal open fun sharedState(type: SharedCooldown, sim: SimIteration): State {
         // Create state object if it does not exist, and return it
+        // TODO: Shared state with factory overrides can conflict - needs to be owned elsewhere
         val state = sim.sharedAbilityState[type.toString()] ?: stateFactory()
         sim.sharedAbilityState[type.toString()] = state
         return state

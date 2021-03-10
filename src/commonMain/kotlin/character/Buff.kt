@@ -86,5 +86,9 @@ abstract class Buff {
         return null
     }
 
+    open fun activeTrinketAbility(sim: SimIteration): Ability? {
+        return null
+    }
+
     open fun procs(sim: SimIteration): List<Proc> = listOf()
 }

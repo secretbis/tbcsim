@@ -14,13 +14,7 @@ class WeaponMajorSpellpower(item: Item) : Enchant(item) {
     override val name: String = "Major Spellpower (Weapon)"
 
     override fun modifyStats(sim: SimIteration): Stats {
-        return Stats(
-            frostDamage = 40,
-            shadowDamage = 40,
-            arcaneDamage = 40,
-            fireDamage = 40,
-            natureDamage = 40,
-            holyDamage = 40
+        return Stats(spellDamage = 40
         )
     }
 }

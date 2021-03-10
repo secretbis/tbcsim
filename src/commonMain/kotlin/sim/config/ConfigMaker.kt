@@ -64,7 +64,8 @@ object ConfigMaker {
                 Rule(
                     ability,
                     phase,
-                    criteria
+                    criteria,
+                    it.options
                 )
             }
         } ?: listOf()
@@ -85,7 +86,8 @@ object ConfigMaker {
                 Rule(
                     ability,
                     Rotation.Phase.RAID_OR_PARTY,
-                    listOf()
+                    listOf(),
+                    null
                 )
             }
         }

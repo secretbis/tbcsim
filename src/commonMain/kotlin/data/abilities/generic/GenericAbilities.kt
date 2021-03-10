@@ -21,6 +21,7 @@ object GenericAbilities {
             SpicyHotTalbuk.name -> SpicyHotTalbuk()
             SuperiorWizardOil.name -> SuperiorWizardOil()
             SuperManaPotion.name -> SuperManaPotion()
+            UseActiveTrinket.name -> UseActiveTrinket()
             else -> null
         }
     }

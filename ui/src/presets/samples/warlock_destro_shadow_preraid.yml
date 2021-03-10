@@ -148,12 +148,7 @@ raidBuffs:
   - Improved Blessing of Wisdom
   - Improved Mark of the Wild
   - Improved Seal of the Crusader
-  # Adjust these based on what you expect your personal group composition to be
-  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
-  - Ferocious Inspiration
-  - Leader of the Pack
-  - Improved Battle Shout
-  - Improved Sanctity Aura
+
   - Moonkin Aura
   - Wrath of Air Totem
   - Totem of Wrath

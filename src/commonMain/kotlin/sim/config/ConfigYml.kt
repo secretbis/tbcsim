@@ -63,9 +63,16 @@ data class RotationYml(
 
 @JsExport
 @Serializable
+data class RotationRuleOptions(
+    val name: String? = null
+)
+
+@JsExport
+@Serializable
 data class RotationRuleYml(
     val name: String,
-    val criteria: List<RotationRuleCriterion>? = null
+    val criteria: List<RotationRuleCriterion>? = null,
+    val options: RotationRuleOptions? = null
 )
 
 @JsExport

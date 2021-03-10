@@ -100,8 +100,13 @@ object Buffs {
     fun byId(id: Int, item: Item): Buff? {
         return when(id) {
             21165 -> BSHammerHaste(item)
+            33297 -> QuagmirransEye()
             33648 -> RageOfTheUnraveller()
+            34244 -> TotemOfTheAstralWinds()
             34774 -> DragonspineTrophy()
+            35166 -> BloodlustBrooch()
+            39438 -> DarkmoonCardCrusadeAP()
+            39440 -> DarkmoonCardCrusadeSP()
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)

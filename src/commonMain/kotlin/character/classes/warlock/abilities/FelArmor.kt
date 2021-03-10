@@ -27,14 +27,7 @@ class FelArmor : Ability() {
             val demonicAegis = sim.subject.klass.talents[DemonicAegis.name] as DemonicAegis?
             val spellDmg = (100.0 * (demonicAegis?.improvedArmorMultiplier() ?: 1.0)).toInt()
 
-            return Stats(
-                frostDamage = spellDmg,
-                shadowDamage = spellDmg,
-                arcaneDamage = spellDmg,
-                fireDamage = spellDmg,
-                natureDamage = spellDmg,
-                holyDamage = spellDmg
-            )
+            return Stats(spellDamage = spellDmg)
         }
     }
 

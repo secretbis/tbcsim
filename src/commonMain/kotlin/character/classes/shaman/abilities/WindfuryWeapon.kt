@@ -4,6 +4,7 @@ import character.Ability
 import character.Proc
 import character.classes.shaman.talents.ElementalWeapons
 import data.Constants
+import data.buffs.TotemOfTheAstralWinds
 import data.model.Item
 import mechanics.Melee
 import sim.Event
@@ -21,12 +22,16 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         return if(Melee.isOffhand(sim, item)) { sim.isDualWielding() } else true
     }
 
-    val extraAp = 445
     override fun cast(sim: SimIteration) {
+        // Check for modifying items
+        val totemOfTheAstralWinds = sim.buffs[TotemOfTheAstralWinds.name] as TotemOfTheAstralWinds?
+        val totemApBonus = totemOfTheAstralWinds?.windfuryWeaponApBonus() ?: 0
+
         // Apply talents
         val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
 
         // Do attacks
+        val extraAp = 445 + totemApBonus
         val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
         val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
 

@@ -15,12 +15,7 @@ class MysticSpellthread(item: Item) : Enchant(item) {
 
     override fun modifyStats(sim: SimIteration): Stats {
         return Stats(
-            frostDamage = 25,
-            shadowDamage = 25,
-            arcaneDamage = 25,
-            fireDamage = 25,
-            natureDamage = 25,
-            holyDamage = 25,
+            spellDamage = 25,
             stamina = 15
         )
     }
