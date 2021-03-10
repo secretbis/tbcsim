@@ -72,17 +72,6 @@ abstract class Buff {
         state.tickCount = 0
     }
 
-    open fun isFinished(sim: SimIteration): Boolean {
-        val state = state(sim)
-
-        val noChargesLeft = maxCharges > 0 && state.currentCharges <= 0
-
-        // Duration of -1 means static
-        val isExpired = durationMs != -1 && remainingDurationMs(sim) <= 0
-
-        return noChargesLeft || isExpired
-    }
-
     open fun remainingDurationMs(sim: SimIteration): Int {
         return if(durationMs == -1) {
             // 24 hours in ms

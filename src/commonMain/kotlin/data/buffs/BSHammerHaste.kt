@@ -8,6 +8,26 @@ import sim.SimIteration
 // https://tbc-twinhead.twinstar.cz/?spell=21165
 // Same for all the hammers
 class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
+    companion object {
+        private var singletonBuff: Buff? = null
+
+        fun singletonBuff(): Buff {
+            if(singletonBuff == null) {
+                singletonBuff = object : Buff() {
+                    override val name: String = "Haste (BS Hammer)"
+
+                    override val durationMs: Int = 10000
+
+                    override fun modifyStats(sim: SimIteration): Stats? {
+                        return Stats(physicalHasteRating = 212.0)
+                    }
+                }
+            }
+
+            return singletonBuff!!
+        }
+    }
+
     override val id: Int = 21165
     override val name: String = "Haste (BS Hammer) (static) ${sourceItem.uniqueName}"
     override val durationMs: Int = -1
@@ -31,18 +51,8 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                     override val ppm: Double = 1.0
                     override val requiresItem: Boolean = true
 
-                    val buff = object : Buff() {
-                        override val name: String = "Haste (BS Hammer)"
-
-                        override val durationMs: Int = 10000
-
-                        override fun modifyStats(sim: SimIteration): Stats? {
-                            return Stats(physicalHasteRating = 212.0)
-                        }
-                    }
-
                     override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sim.addBuff(buff)
+                        sim.addBuff(singletonBuff())
                     }
                 }
             )

@@ -10,6 +10,7 @@ import mu.KotlinLogging
 import sim.rotation.Criterion
 import sim.rotation.Rotation
 import kotlin.js.JsExport
+import kotlin.math.ceil
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 
@@ -39,6 +40,13 @@ class SimIteration(
     var ohAutoAttack: MeleeBase? = null
     var buffs: MutableMap<String, Buff> = mutableMapOf()
     var debuffs: MutableMap<String, Debuff> = mutableMapOf()
+
+    // Track debuff expirations per tick, and per buff
+    // If these get out of sync, sadness will probably ensue, and simstats will be confused
+    val buffExpirations: MutableMap<Int, MutableSet<Buff>> = mutableMapOf()
+    val debuffExpirations: MutableMap<Int, MutableSet<Debuff>> = mutableMapOf()
+    val buffExpirationTick: MutableMap<String, Int> = mutableMapOf()
+    val debuffExpirationTick: MutableMap<String, Int> = mutableMapOf()
 
     // Buffs need a place to store state per iteration
     // Store individual data per instance and store shared data per-string (generally the buff name)
@@ -103,35 +111,59 @@ class SimIteration(
         targetStats = computeStats(target, debuffs.values.toList())
     }
 
+    private fun getExpirationTick(buff: Buff): Int {
+        return ceil((elapsedTimeMs + buff.durationMs) / opts.stepMs.toDouble()).toInt()
+    }
+
     private fun pruneBuffs() {
-        val buffsToRemove = buffs.values.filter {
-            it.isFinished(this)
+        val toRemove = buffExpirations[tickNum]
+        if(toRemove?.isEmpty() == false) {
+            removeBuffs(toRemove.toList())
         }
-        buffsToRemove.forEach {
+    }
+
+    private fun pruneDebuffs() {
+        val toRemove = debuffExpirations[tickNum]
+        if(toRemove?.isEmpty() == false) {
+            removeDebuffs(toRemove.toList())
+        }
+    }
+
+    private fun removeBuffs(buffsList: List<Buff>) {
+        buffsList.forEach {
             buffs.remove(it.name)
+            buffState.remove(it.name)
+
+            val expirationTick = buffExpirationTick[it.name]
+            if(expirationTick != null) {
+                buffExpirations[expirationTick]?.remove(it)
+            }
+
             it.reset(this)
+
             logEvent(Event(
                 eventType = Event.Type.BUFF_END,
                 buff = it
             ))
         }
 
-        // Compute stats if something about our buffs changed
-        if(buffsToRemove.isNotEmpty()) {
-            recomputeStats()
-        }
+        recomputeStats()
     }
 
-    private fun pruneDebuffs() {
-        val debuffsToRemove = debuffs.values.filter {
-            it.isFinished(this)
-        }
-        debuffsToRemove.forEach {
+    private fun removeDebuffs(debuffsList: List<Debuff>) {
+        debuffsList.forEach {
             debuffs.remove(it.name)
 
             // TODO: This is kind of a hack, but final tick is hard to handle with a stepMs that isn't 1
             if(it.shouldTick(this)) {
                 it.tick(this)
+            }
+
+            debuffState.remove(it.name)
+
+            val expirationTick = debuffExpirationTick[it.name]
+            if(expirationTick != null) {
+                debuffExpirations[expirationTick]?.remove(it)
             }
 
             it.reset(this)
@@ -141,13 +173,11 @@ class SimIteration(
             ))
         }
 
-        if(debuffsToRemove.isNotEmpty()) {
-            recomputeStats()
-        }
+        recomputeStats()
     }
 
     fun tick() {
-        // Filter out and reset any expired buffs/debuffs
+        // Prune any buffs set to expire this tick
         pruneBuffs()
         pruneDebuffs()
 
@@ -255,6 +285,18 @@ class SimIteration(
             buffState[buff.name]?.currentStacks ?: 0
         } else 0
 
+        // Set expiration tick
+        // Remove the old expiration
+        val oldTick = buffExpirationTick[buff.name]
+        buffExpirations[oldTick]?.remove(buff)
+
+        // Find the new expiration, and store that in both places
+        val newTick = this.getExpirationTick(buff)
+        buffExpirationTick[buff.name] = newTick
+
+        val expirationSet = buffExpirations.getOrPut(newTick, { mutableSetOf() })
+        expirationSet.add(buff)
+
         // If this is a new buff, add it
         val exists = buffs[buff.name] != null
         if(!exists) {
@@ -303,6 +345,18 @@ class SimIteration(
             debuffState[debuff.name]?.currentStacks ?: 0
         } else 0
 
+        // Set expiration tick
+        // Remove the old expiration
+        val oldTick = debuffExpirationTick[debuff.name]
+        debuffExpirations[oldTick]?.remove(debuff)
+
+        // Find the new expiration, and store that in both places
+        val newTick = this.getExpirationTick(debuff)
+        debuffExpirationTick[debuff.name] = newTick
+
+        val expirationSet = debuffExpirations.getOrPut(newTick, { mutableSetOf() })
+        expirationSet.add(debuff)
+
         // If this is a new debuff, add it
         val exists = debuffs[debuff.name] != null
         if(!exists) {
@@ -342,12 +396,15 @@ class SimIteration(
                         buffStacks = state.currentStacks
                     )
                 )
-            } else {
-                buffState.remove(buff.name)
-            }
 
-            pruneBuffs()
-            pruneDebuffs()
+                // Remove this if fully consumed
+                if(state.currentCharges == 0) {
+                    removeBuffs(listOf(buff))
+                }
+
+            } else {
+                removeBuffs(listOf(buff))
+            }
         }
     }
 
@@ -364,12 +421,14 @@ class SimIteration(
                         buffStacks = state.currentStacks
                     )
                 )
-            } else {
-                debuffState.remove(debuff.name)
-            }
 
-            pruneBuffs()
-            pruneDebuffs()
+                // Remove this if fully consumed
+                if(state.currentCharges == 0) {
+                    removeDebuffs(listOf(debuff))
+                }
+            } else {
+                removeDebuffs(listOf(debuff))
+            }
         }
     }
 
@@ -422,10 +481,6 @@ class SimIteration(
             if(it.shouldProc(this, items, ability, event)) {
                 it.proc(this, items, ability, event)
                 it.afterProc(this)
-
-                // Always check buff/debuff state after any proc
-                pruneBuffs()
-                pruneDebuffs()
             }
         }
     }
