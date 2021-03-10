@@ -281,7 +281,7 @@ object Melee {
         }
 
         // Apply target armor mitigation
-//        finalResult = Pair(finalResult.first * (1 - meleeArmorMitigation(sim)), finalResult.second)
+        finalResult = Pair(finalResult.first * (1 - meleeArmorMitigation(sim)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
         if(finalResult.second == Event.Result.BLOCK || finalResult.second == Event.Result.BLOCKED_CRIT) {
