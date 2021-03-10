@@ -13,7 +13,7 @@ abstract class Debuff : Buff() {
         // Never tick the debuff on the same server tick it was applied
         if(sim.elapsedTimeMs == state.appliedAtMs) return false
 
-        val shouldTick = sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs
+        val shouldTick = sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs - sim.opts.stepMs
         if(shouldTick) {
             state.tickCount++
             state.lastTickMs = sim.elapsedTimeMs

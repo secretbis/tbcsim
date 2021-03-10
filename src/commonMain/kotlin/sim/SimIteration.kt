@@ -153,12 +153,6 @@ class SimIteration(
     private fun removeDebuffs(debuffsList: List<Debuff>) {
         debuffsList.forEach {
             debuffs.remove(it.name)
-
-            // TODO: This is kind of a hack, but final tick is hard to handle with a stepMs that isn't 1
-            if(it.shouldTick(this)) {
-                it.tick(this)
-            }
-
             debuffState.remove(it.name)
 
             val expirationTick = debuffExpirationTick[it.name]
@@ -177,10 +171,6 @@ class SimIteration(
     }
 
     fun tick() {
-        // Prune any buffs set to expire this tick
-        pruneBuffs()
-        pruneDebuffs()
-
         // Find and cast next rotation ability
         if(!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
@@ -254,6 +244,10 @@ class SimIteration(
             lastServerTickMs = elapsedTimeMs
             fireProc(listOf(Proc.Trigger.SERVER_TICK), null, null, null)
         }
+
+        // Prune any buffs set to expire this tick
+        pruneBuffs()
+        pruneDebuffs()
     }
 
      fun cleanup() {
