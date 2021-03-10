@@ -150,13 +150,13 @@ rotation:
           seconds: 111
         # But not if we already have a WFT active
         - type: BUFF_DURATION_LTE
-          buff: Windfury Totem
+          buff: Windfury Totem (Rank 1)
           seconds: 0
     - name: Grace of Air Totem
       criteria:
         # Replace Windfury Totem as quickly as possible
         - type: BUFF_DURATION_LTE
-          buff: Windfury Totem
+          buff: Windfury Totem (Rank 1)
           seconds: 120
         # But not if we already have a GoAT active
         - type: BUFF_DURATION_LTE

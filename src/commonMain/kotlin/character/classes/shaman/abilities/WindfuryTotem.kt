@@ -108,9 +108,10 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
 
     // This is the hidden buff that refreshes the weapon buff on every server tick
     val totemBuff = object : Buff() {
-        override val name: String = "Windfury Totem"
+        override val name: String = abilityName
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
+        override val hidden: Boolean = true
 
         val totemProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
