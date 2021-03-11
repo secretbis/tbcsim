@@ -83,10 +83,10 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
 
         val weaponProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                // TODO: Per random internet forums, this only procs off autos
-                //       Needs confirmation
                 Trigger.MELEE_AUTO_HIT,
                 Trigger.MELEE_AUTO_CRIT,
+                Trigger.MELEE_REPLACED_AUTO_ATTACK_HIT,
+                Trigger.MELEE_REPLACED_AUTO_ATTACK_CRIT
             )
 
             override val type: Type = Type.PERCENT

@@ -26,6 +26,11 @@ abstract class Proc {
         MELEE_BLOCK,
         MELEE_GLANCE,
 
+        // Special case a white hit that was replaced by a yellow hit
+        // Windfury totem, for example, can proc off Heroic Strike/Cleave
+        MELEE_REPLACED_AUTO_ATTACK_HIT,
+        MELEE_REPLACED_AUTO_ATTACK_CRIT,
+
         // Spells
         SPELL_HIT,
         SPELL_CRIT,

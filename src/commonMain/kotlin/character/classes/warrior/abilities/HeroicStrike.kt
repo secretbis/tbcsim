@@ -59,15 +59,15 @@ class HeroicStrike : Ability() {
             )
             sim.logEvent(event)
 
-            // Proc anything that can proc off a yellow hit
+            // Proc anything that can proc off a yellow hit or a replaced auto-attack hit
             val triggerTypes = when(result.second) {
-                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_REPLACED_AUTO_ATTACK_HIT, Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_REPLACED_AUTO_ATTACK_CRIT, Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
                 Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
                 Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
                 Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-                Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_REPLACED_AUTO_ATTACK_HIT, Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_REPLACED_AUTO_ATTACK_CRIT, Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
                 else -> null
             }
 
