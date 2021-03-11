@@ -37,6 +37,8 @@ public class Thunder : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 333.0
 
   public override var maxDmg: Double = 500.0

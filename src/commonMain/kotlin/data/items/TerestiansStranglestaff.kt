@@ -38,6 +38,19 @@ public class TerestiansStranglestaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.WARRIOR,
+      Constants.AllowableClass.PALADIN,
+      Constants.AllowableClass.HUNTER,
+      Constants.AllowableClass.ROGUE,
+      Constants.AllowableClass.PRIEST,
+      Constants.AllowableClass.DEATHKNIGHT,
+      Constants.AllowableClass.SHAMAN,
+      Constants.AllowableClass.MAGE,
+      Constants.AllowableClass.WARLOCK,
+      Constants.AllowableClass.DRUID
+      )
+
   public override var minDmg: Double = 132.60000610351562
 
   public override var maxDmg: Double = 270.6000061035156

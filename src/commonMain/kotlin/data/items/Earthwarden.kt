@@ -38,6 +38,8 @@ public class Earthwarden : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 142.63999938964844
 
   public override var maxDmg: Double = 278.6400146484375

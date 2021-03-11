@@ -99,6 +99,19 @@ export const armorSubclasses = {
   totem: 9,
 }
 
+export const allowableClasses = {
+  warrior: 0,
+  paladin: 1,
+  hunter: 2,
+  rogue: 3,
+  priest: 4,
+  deathknight: 5,
+  shaman: 6,
+  mage: 7,
+  warlock: 8,
+  druid: 9,
+};
+
 // Technically some of these can wear cloth, but literally will never do so (e.g. hunter, ret paladin)
 const asc = armorSubclasses
 const wsc = weaponSubclasses

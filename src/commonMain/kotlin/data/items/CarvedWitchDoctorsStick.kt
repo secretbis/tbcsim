@@ -40,6 +40,8 @@ public class CarvedWitchDoctorsStick : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.WAND
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 184.0
 
   public override var maxDmg: Double = 343.0

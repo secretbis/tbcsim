@@ -38,6 +38,8 @@ public class RunesongDagger : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 27.549999237060547
 
   public override var maxDmg: Double = 90.55000305175781

@@ -38,6 +38,8 @@ public class StaffOfDisintegration : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 131.16000366210938
 
   public override var maxDmg: Double = 309.1600036621094

@@ -38,6 +38,8 @@ public class VengefulGladiatorsShiv : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 101.0
 
   public override var maxDmg: Double = 188.0

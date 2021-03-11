@@ -27,6 +27,7 @@ abstract class Item {
     // TODO: Validate itemSubclass is indeed a subclass of the itemClass
     abstract var itemClass: Constants.ItemClass?
     abstract var itemSubclass: Constants.ItemSubclass?
+    open var allowableClasses: Array<Constants.AllowableClass>? = null
 
     // TODO: This assumes physical damage types for items
     // TODO: Multiple damage types

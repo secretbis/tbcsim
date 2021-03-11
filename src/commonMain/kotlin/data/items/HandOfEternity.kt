@@ -38,6 +38,8 @@ public class HandOfEternity : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 35.380001068115234
 
   public override var maxDmg: Double = 131.3800048828125

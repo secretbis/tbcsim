@@ -38,6 +38,8 @@ public class FangOfTheLeviathan : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 21.459999084472656
 
   public override var maxDmg: Double = 126.45999908447266

@@ -38,6 +38,8 @@ public class SeekersGavel : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 45.310001373291016
 
   public override var maxDmg: Double = 145.30999755859375

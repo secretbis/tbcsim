@@ -38,6 +38,8 @@ public class ClawOfTheNetherwingFlight : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 83.0
 
   public override var maxDmg: Double = 156.0

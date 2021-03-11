@@ -38,6 +38,8 @@ public class AuchenaiStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 92.37000274658203
 
   public override var maxDmg: Double = 171.3699951171875

@@ -38,6 +38,8 @@ public class CrystalheartPulseStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 143.44000244140625
 
   public override var maxDmg: Double = 297.44000244140625

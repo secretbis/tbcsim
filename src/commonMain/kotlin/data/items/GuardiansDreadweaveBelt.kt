@@ -38,6 +38,12 @@ public class GuardiansDreadweaveBelt : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.CLOTH
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.PRIEST,
+      Constants.AllowableClass.MAGE,
+      Constants.AllowableClass.WARLOCK
+      )
+
   public override var minDmg: Double = 0.0
 
   public override var maxDmg: Double = 0.0

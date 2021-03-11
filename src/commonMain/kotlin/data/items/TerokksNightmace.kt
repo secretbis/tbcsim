@@ -37,6 +37,8 @@ public class TerokksNightmace : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 100.0
 
   public override var maxDmg: Double = 187.0

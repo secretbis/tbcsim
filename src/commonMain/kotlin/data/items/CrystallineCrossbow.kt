@@ -37,6 +37,8 @@ public class CrystallineCrossbow : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.CROSSBOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 165.0
 
   public override var maxDmg: Double = 248.0

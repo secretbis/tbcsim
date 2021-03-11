@@ -38,6 +38,8 @@ public class DonSantosFamousHuntingRifle : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.GUN
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 139.0
 
   public override var maxDmg: Double = 259.0

@@ -38,6 +38,8 @@ public class GrandMarshalsWarStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 133.10000610351562
 
   public override var maxDmg: Double = 245.10000610351562

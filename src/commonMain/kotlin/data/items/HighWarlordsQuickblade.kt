@@ -38,6 +38,8 @@ public class HighWarlordsQuickblade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 103.0
 
   public override var maxDmg: Double = 155.0

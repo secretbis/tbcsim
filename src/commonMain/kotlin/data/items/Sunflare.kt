@@ -38,6 +38,8 @@ public class Sunflare : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 12.600000381469727
 
   public override var maxDmg: Double = 136.60000610351562

@@ -38,6 +38,8 @@ public class SummonersBlade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 54.91999816894531
 
   public override var maxDmg: Double = 159.9199981689453

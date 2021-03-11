@@ -37,6 +37,8 @@ public class RecoillessRocketRipperX : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.GUN
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 131.0
 
   public override var maxDmg: Double = 244.0

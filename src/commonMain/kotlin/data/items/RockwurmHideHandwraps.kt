@@ -37,6 +37,8 @@ public class RockwurmHideHandwraps : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.CLOTH
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 0.0
 
   public override var maxDmg: Double = 0.0

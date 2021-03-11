@@ -38,6 +38,8 @@ public class WandOfTheForgottenStar : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.WAND
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 186.0
 
   public override var maxDmg: Double = 346.0

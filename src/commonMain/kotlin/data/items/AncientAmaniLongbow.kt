@@ -38,6 +38,8 @@ public class AncientAmaniLongbow : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.BOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 181.0
 
   public override var maxDmg: Double = 337.0

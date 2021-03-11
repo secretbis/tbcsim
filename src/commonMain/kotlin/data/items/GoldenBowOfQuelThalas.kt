@@ -38,6 +38,8 @@ public class GoldenBowOfQuelThalas : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.BOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 204.0
 
   public override var maxDmg: Double = 380.0

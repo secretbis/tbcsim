@@ -37,6 +37,8 @@ public class Endbringer : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 253.0
 
   public override var maxDmg: Double = 381.0

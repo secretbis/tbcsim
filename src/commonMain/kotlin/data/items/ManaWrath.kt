@@ -38,6 +38,8 @@ public class ManaWrath : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 35.459999084472656
 
   public override var maxDmg: Double = 113.45999908447266

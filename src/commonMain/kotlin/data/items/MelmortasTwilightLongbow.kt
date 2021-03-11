@@ -38,6 +38,8 @@ public class MelmortasTwilightLongbow : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.BOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 135.0
 
   public override var maxDmg: Double = 252.0

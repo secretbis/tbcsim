@@ -38,6 +38,8 @@ public class MogorsAnointingClub : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 47.27000045776367
 
   public override var maxDmg: Double = 126.2699966430664

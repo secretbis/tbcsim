@@ -37,6 +37,8 @@ public class Gorehowl : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.AXE_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 345.0
 
   public override var maxDmg: Double = 518.0

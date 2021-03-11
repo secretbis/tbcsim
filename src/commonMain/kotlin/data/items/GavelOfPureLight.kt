@@ -38,6 +38,19 @@ public class GavelOfPureLight : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.WARRIOR,
+      Constants.AllowableClass.PALADIN,
+      Constants.AllowableClass.HUNTER,
+      Constants.AllowableClass.ROGUE,
+      Constants.AllowableClass.PRIEST,
+      Constants.AllowableClass.DEATHKNIGHT,
+      Constants.AllowableClass.SHAMAN,
+      Constants.AllowableClass.MAGE,
+      Constants.AllowableClass.WARLOCK,
+      Constants.AllowableClass.DRUID
+      )
+
   public override var minDmg: Double = 32.380001068115234
 
   public override var maxDmg: Double = 125.37999725341797

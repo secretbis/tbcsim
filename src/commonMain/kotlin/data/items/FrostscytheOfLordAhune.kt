@@ -38,6 +38,8 @@ public class FrostscytheOfLordAhune : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 143.1999969482422
 
   public override var maxDmg: Double = 286.20001220703125

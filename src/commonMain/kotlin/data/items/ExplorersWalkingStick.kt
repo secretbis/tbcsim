@@ -38,6 +38,8 @@ public class ExplorersWalkingStick : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 132.0
 
   public override var maxDmg: Double = 199.0

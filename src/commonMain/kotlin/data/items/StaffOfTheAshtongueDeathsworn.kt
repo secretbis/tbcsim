@@ -38,6 +38,8 @@ public class StaffOfTheAshtongueDeathsworn : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 162.5399932861328
 
   public override var maxDmg: Double = 292.5400085449219

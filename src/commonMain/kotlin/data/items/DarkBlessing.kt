@@ -38,6 +38,19 @@ public class DarkBlessing : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.WARRIOR,
+      Constants.AllowableClass.PALADIN,
+      Constants.AllowableClass.HUNTER,
+      Constants.AllowableClass.ROGUE,
+      Constants.AllowableClass.PRIEST,
+      Constants.AllowableClass.DEATHKNIGHT,
+      Constants.AllowableClass.SHAMAN,
+      Constants.AllowableClass.MAGE,
+      Constants.AllowableClass.WARLOCK,
+      Constants.AllowableClass.DRUID
+      )
+
   public override var minDmg: Double = 22.1299991607666
 
   public override var maxDmg: Double = 135.1300048828125

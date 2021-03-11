@@ -38,6 +38,8 @@ public class LionheartChampion : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 341.0
 
   public override var maxDmg: Double = 513.0

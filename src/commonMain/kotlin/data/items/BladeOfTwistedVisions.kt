@@ -38,6 +38,8 @@ public class BladeOfTwistedVisions : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 20.860000610351562
 
   public override var maxDmg: Double = 127.86000061035156

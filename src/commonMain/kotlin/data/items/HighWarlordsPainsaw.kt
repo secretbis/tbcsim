@@ -38,6 +38,8 @@ public class HighWarlordsPainsaw : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.POLEARM
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 164.0
 
   public override var maxDmg: Double = 246.0

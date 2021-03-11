@@ -38,6 +38,8 @@ public class StaffOfInfiniteMysteries : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 142.83999633789062
 
   public override var maxDmg: Double = 289.8399963378906

@@ -8,7 +8,7 @@ import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ type, item, TooltipComponent, inventorySlots, itemClasses, visible, setVisible, onSelect }) {
+export default function({ type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState(null);
 
   TooltipComponent = TooltipComponent || ItemTooltip
@@ -27,25 +27,34 @@ export default function({ type, item, TooltipComponent, inventorySlots, itemClas
     items = items.map(i => i(item))
 
     // Filter again by equippable item subclasses, if provided
-    const filtered = _.filter(items, item => {
-      if(itemClasses) {
-        const itemClass = item.itemClass._ordinal;
+    const filtered = _.filter(
+      _.filter(items, item => {
+        if(itemClasses) {
+          const itemClass = item.itemClass._ordinal;
 
-        if(itemClasses.itemClasses.includes(itemClass)) {
-          const itemSubclass = item.itemSubclass._itemClassOrdinal;
-          const subclasses = itemClasses.itemSubclasses[itemClass]
+          if(itemClasses.itemClasses.includes(itemClass)) {
+            const itemSubclass = item.itemSubclass._itemClassOrdinal;
+            const subclasses = itemClasses.itemSubclasses[itemClass]
 
-          if(subclasses.includes(itemSubclass)) {
-            const matchesName = filter ? (item.displayName || item.name).toLowerCase().includes(filter.toLowerCase()) : true
-            return matchesName
+            if(subclasses.includes(itemSubclass)) {
+              const matchesName = filter ? (item.displayName || item.name).toLowerCase().includes(filter.toLowerCase()) : true
+              return matchesName
+            }
           }
+
+          return false;
         }
 
-        return false;
-      }
-
-      return true;
-    });
+        return true;
+      }), item => {
+        // Filter by allowable classes
+        if(allowableClasses) {
+          return item.allowableClasses == null || item.allowableClasses.some(it => {
+            return allowableClasses.map(it => it.toUpperCase()).includes(it._name_2.toUpperCase());
+          })
+        }
+        return true;
+      });
 
     return _.sortBy(filtered, 'itemLevel').reverse()
   }

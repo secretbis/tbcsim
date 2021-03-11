@@ -38,6 +38,8 @@ public class ZangartoothShortblade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 36.04999923706055
 
   public override var maxDmg: Double = 88.05000305175781

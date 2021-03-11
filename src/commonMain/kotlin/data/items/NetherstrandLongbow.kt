@@ -38,6 +38,11 @@ public class NetherstrandLongbow : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.BOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.HUNTER,
+      Constants.AllowableClass.DEATHKNIGHT
+      )
+
   public override var minDmg: Double = 256.0
 
   public override var maxDmg: Double = 385.0

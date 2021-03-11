@@ -37,6 +37,8 @@ public class TerokksQuill : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.POLEARM
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 246.0
 
   public override var maxDmg: Double = 370.0

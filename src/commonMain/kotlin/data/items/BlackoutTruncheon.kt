@@ -40,6 +40,8 @@ public class BlackoutTruncheon : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 73.0
 
   public override var maxDmg: Double = 136.0

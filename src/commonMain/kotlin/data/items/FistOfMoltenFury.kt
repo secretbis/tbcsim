@@ -39,6 +39,8 @@ public class FistOfMoltenFury : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.FIST
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 120.0
 
   public override var maxDmg: Double = 181.0

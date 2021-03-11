@@ -230,6 +230,21 @@ object ItemGen {
         }
     }
 
+    private fun renderAllowableClasses(item: Item, itemData: Map<String, Any?>): CodeBlock {
+        val classMask = itemData["AllowableClass"] as Int?
+        if(classMask != null && classMask != -1) {
+            val classes = Constants.AllowableClass.values().filter {
+                it() and classMask != 0
+            }
+
+            return classes.map {
+                CodeBlock.of("%T.%L", Constants.AllowableClass::class, it.name)
+            }.joinToCode(separator = ",\n", prefix = "arrayOf(\n", suffix = "\n)")
+        } else {
+            return CodeBlock.of("%L", null)
+        }
+    }
+
     fun safeItemName(item: Item): String {
         val safeRegex = Regex("""[^a-zA-Z ]""")
         return item.name.replace(safeRegex, "").toPascalCase()
@@ -316,6 +331,13 @@ object ItemGen {
                                 .addModifiers(KModifier.OVERRIDE)
                                 .mutable(true)
                                 .initializer("%L", renderItemSubclass(item, itemData))
+                                .build()
+                        )
+                        .addProperty(
+                            PropertySpec.builder("allowableClasses",  Array::class.asTypeName().parameterizedBy(Constants.AllowableClass::class.asTypeName()).copy(true))
+                                .addModifiers(KModifier.OVERRIDE)
+                                .mutable(true)
+                                .initializer("%L", renderAllowableClasses(item, itemData))
                                 .build()
                         )
                         .addProperty(

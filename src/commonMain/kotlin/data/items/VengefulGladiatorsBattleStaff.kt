@@ -38,6 +38,8 @@ public class VengefulGladiatorsBattleStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 90.4000015258789
 
   public override var maxDmg: Double = 198.39999389648438

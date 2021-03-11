@@ -38,6 +38,8 @@ public class SerpentcrestLifeStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 100.27999877929688
 
   public override var maxDmg: Double = 187.27999877929688

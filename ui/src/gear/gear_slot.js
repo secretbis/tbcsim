@@ -131,6 +131,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     <>
       {item ? renderItem() : renderBlank()}
       <GearSelector
+        allowableClasses={[character.class]}
         inventorySlots={inventorySlots}
         itemClasses={itemClasses}
         visible={selectorVisible}

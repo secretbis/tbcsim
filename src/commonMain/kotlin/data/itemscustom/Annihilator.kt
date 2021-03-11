@@ -45,6 +45,7 @@ class Annihilator : Item() {
     override var inventorySlot: Int = 13
     override var itemClass: Constants.ItemClass? = Constants.ItemClass.WEAPON
     override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.AXE_1H
+    override var allowableClasses: Array<Constants.AllowableClass>? = null
     override var minDmg: Double = 49.0
     override var maxDmg: Double = 92.0
     override var speed: Double = 1700.0

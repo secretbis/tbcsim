@@ -40,6 +40,8 @@ public class StaffOfDarkMending : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 144.24000549316406
 
   public override var maxDmg: Double = 303.239990234375

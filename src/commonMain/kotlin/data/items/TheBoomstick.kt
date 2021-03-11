@@ -37,6 +37,8 @@ public class TheBoomstick : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.GUN
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 92.0
 
   public override var maxDmg: Double = 173.0

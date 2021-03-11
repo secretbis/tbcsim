@@ -38,6 +38,8 @@ public class TimeShiftedDagger : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 37.790000915527344
 
   public override var maxDmg: Double = 102.79000091552734

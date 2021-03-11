@@ -40,6 +40,19 @@ public class ArchonsGavel : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.WARRIOR,
+      Constants.AllowableClass.PALADIN,
+      Constants.AllowableClass.HUNTER,
+      Constants.AllowableClass.ROGUE,
+      Constants.AllowableClass.PRIEST,
+      Constants.AllowableClass.DEATHKNIGHT,
+      Constants.AllowableClass.SHAMAN,
+      Constants.AllowableClass.MAGE,
+      Constants.AllowableClass.WARLOCK,
+      Constants.AllowableClass.DRUID
+      )
+
   public override var minDmg: Double = 16.299999237060547
 
   public override var maxDmg: Double = 133.3000030517578

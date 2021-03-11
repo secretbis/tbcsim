@@ -6,7 +6,7 @@ const simDefaults = {
   durationVariabilitySeconds: tbcsim.sim.SimDefaults.durationVaribilityMs / 1000,
   stepMs: 100,
   latencyMs: tbcsim.sim.SimDefaults.latencyMs,
-  iterations: 10,
+  iterations: 50,
   targetLevel: tbcsim.sim.SimDefaults.targetLevel,
   targetArmor: tbcsim.sim.SimDefaults.targetArmor,
   // allowParryAndBlock: tbcsim.sim.SimDefaults.allowParryAndBlock,

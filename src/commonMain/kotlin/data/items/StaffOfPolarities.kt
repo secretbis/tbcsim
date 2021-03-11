@@ -38,6 +38,8 @@ public class StaffOfPolarities : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 92.13999938964844
 
   public override var maxDmg: Double = 156.13999938964844

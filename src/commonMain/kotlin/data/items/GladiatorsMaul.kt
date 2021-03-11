@@ -38,6 +38,8 @@ public class GladiatorsMaul : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 89.4000015258789
 
   public override var maxDmg: Double = 185.39999389648438

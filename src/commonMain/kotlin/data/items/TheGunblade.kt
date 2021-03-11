@@ -38,6 +38,8 @@ public class TheGunblade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.GUN
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 112.0
 
   public override var maxDmg: Double = 210.0

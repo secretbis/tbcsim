@@ -38,6 +38,8 @@ public class AmeersJudgement : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 105.08000183105469
 
   public override var maxDmg: Double = 190.0800018310547

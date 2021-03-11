@@ -38,6 +38,8 @@ public class StaffOfImmaculateRecovery : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 145.1999969482422
 
   public override var maxDmg: Double = 312.20001220703125

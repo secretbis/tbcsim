@@ -38,6 +38,8 @@ public class IllidariBaneMageblade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 31.520000457763672
 
   public override var maxDmg: Double = 100.5199966430664

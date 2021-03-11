@@ -38,6 +38,8 @@ public class OronoksAncientScepter : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 151.6999969482422
 
   public override var maxDmg: Double = 272.70001220703125

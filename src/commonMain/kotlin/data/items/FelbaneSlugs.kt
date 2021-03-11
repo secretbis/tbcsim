@@ -37,6 +37,8 @@ public class FelbaneSlugs : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.BULLET
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 37.0
 
   public override var maxDmg: Double = 37.0

@@ -38,6 +38,8 @@ public class GladiatorsSpellblade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 22.31999969482422
 
   public override var maxDmg: Double = 110.31999969482422

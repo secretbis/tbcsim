@@ -172,7 +172,7 @@ function App() {
           <Row style={{ margin: '10px 0 0 0' }}>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
             {state.iterationsCompleted != null &&
-              <span style={{ marginLeft: '10px' }}>Iterations completed: {state.iterationsCompleted}</span>
+              <span style={{ marginLeft: '10px' }}>Iterations completed: {state.iterationsCompleted} of {state.simOptions.iterations}</span>
             }
           </Row>
           {state.iterationResults &&

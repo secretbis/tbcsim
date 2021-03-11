@@ -38,6 +38,8 @@ public class BattleMagesBaton : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 92.2699966430664
 
   public override var maxDmg: Double = 161.27000427246094

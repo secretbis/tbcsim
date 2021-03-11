@@ -38,6 +38,8 @@ public class StaffOfDivineInfusion : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 153.6999969482422
 
   public override var maxDmg: Double = 276.70001220703125

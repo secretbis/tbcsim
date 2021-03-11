@@ -38,6 +38,8 @@ public class BleedingHollowWarhammer : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 47.279998779296875
 
   public override var maxDmg: Double = 151.27999877929688

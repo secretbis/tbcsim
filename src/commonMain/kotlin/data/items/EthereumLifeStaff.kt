@@ -38,6 +38,8 @@ public class EthereumLifeStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 144.0399932861328
 
   public override var maxDmg: Double = 306.0400085449219

@@ -38,6 +38,8 @@ public class CosmicInfuser : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 14.15999984741211
 
   public override var maxDmg: Double = 220.16000366210938

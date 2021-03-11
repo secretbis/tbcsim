@@ -38,6 +38,8 @@ public class Nethershard : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 40.9900016784668
 
   public override var maxDmg: Double = 98.98999786376953

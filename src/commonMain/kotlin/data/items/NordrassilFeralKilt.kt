@@ -40,6 +40,10 @@ public class NordrassilFeralKilt : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.LEATHER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = arrayOf(
+      Constants.AllowableClass.DRUID
+      )
+
   public override var minDmg: Double = 0.0
 
   public override var maxDmg: Double = 0.0

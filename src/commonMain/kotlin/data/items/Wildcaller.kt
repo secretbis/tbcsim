@@ -38,6 +38,8 @@ public class Wildcaller : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 122.76000213623047
 
   public override var maxDmg: Double = 221.75999450683594

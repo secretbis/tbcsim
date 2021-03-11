@@ -38,6 +38,8 @@ public class TerokksShadowstaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 143.60000610351562
 
   public override var maxDmg: Double = 282.6000061035156

@@ -38,6 +38,8 @@ public class HighWarlordsShiv : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 80.0
 
   public override var maxDmg: Double = 121.0

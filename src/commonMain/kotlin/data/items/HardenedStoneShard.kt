@@ -38,6 +38,8 @@ public class HardenedStoneShard : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 79.0
 
   public override var maxDmg: Double = 120.0

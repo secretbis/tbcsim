@@ -38,6 +38,8 @@ public class VengefulGladiatorsShanker : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 148.0
 
   public override var maxDmg: Double = 223.0

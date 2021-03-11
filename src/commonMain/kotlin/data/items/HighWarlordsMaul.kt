@@ -38,6 +38,8 @@ public class HighWarlordsMaul : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 158.9199981689453
 
   public override var maxDmg: Double = 293.9200134277344

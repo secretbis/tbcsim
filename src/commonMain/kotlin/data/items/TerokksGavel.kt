@@ -38,6 +38,8 @@ public class TerokksGavel : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 39.400001525878906
 
   public override var maxDmg: Double = 126.4000015258789

@@ -40,6 +40,8 @@ public class ExodarLifeStaff : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 143.8000030517578
 
   public override var maxDmg: Double = 293.79998779296875

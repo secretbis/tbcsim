@@ -38,6 +38,8 @@ public class EterniumRunedBlade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.DAGGER
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 27.600000381469727
 
   public override var maxDmg: Double = 113.5999984741211

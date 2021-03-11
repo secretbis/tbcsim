@@ -38,6 +38,8 @@ public class QuantumBlade : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.SWORD_2H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 304.0
 
   public override var maxDmg: Double = 456.0

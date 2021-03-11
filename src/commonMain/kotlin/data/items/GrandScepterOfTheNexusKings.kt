@@ -38,6 +38,8 @@ public class GrandScepterOfTheNexusKings : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.STAFF
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 106.27999877929688
 
   public override var maxDmg: Double = 196.27999877929688

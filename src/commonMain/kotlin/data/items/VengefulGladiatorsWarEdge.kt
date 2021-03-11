@@ -38,6 +38,8 @@ public class VengefulGladiatorsWarEdge : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.THROWN
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 141.0
 
   public override var maxDmg: Double = 212.0

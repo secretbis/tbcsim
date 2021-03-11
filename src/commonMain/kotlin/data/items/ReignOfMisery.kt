@@ -38,6 +38,8 @@ public class ReignOfMisery : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.MACE_1H
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 13.600000381469727
 
   public override var maxDmg: Double = 118.5999984741211

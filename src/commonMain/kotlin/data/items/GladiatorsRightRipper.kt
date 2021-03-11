@@ -38,6 +38,8 @@ public class GladiatorsRightRipper : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.FIST
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 166.0
 
   public override var maxDmg: Double = 309.0

@@ -38,6 +38,8 @@ public class VanirsLeftFistOfBrutality : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.FIST
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 180.0
 
   public override var maxDmg: Double = 335.0

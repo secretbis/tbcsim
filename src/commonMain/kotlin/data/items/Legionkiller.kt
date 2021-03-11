@@ -37,6 +37,8 @@ public class Legionkiller : Item() {
 
   public override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.CROSSBOW
 
+  public override var allowableClasses: Array<Constants.AllowableClass>? = null
+
   public override var minDmg: Double = 184.0
 
   public override var maxDmg: Double = 342.0

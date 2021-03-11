@@ -20,6 +20,7 @@ class EmptyItem : Item() {
     override var inventorySlot: Int = Constants.InventorySlot.NOT_EQUIPPABLE.ordinal
     override var itemClass: Constants.ItemClass? = null
     override var itemSubclass: Constants.ItemSubclass? = null
+    override var allowableClasses: Array<Constants.AllowableClass>? = null
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 1.0
