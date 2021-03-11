@@ -143,6 +143,11 @@ rotation:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
+    - name: Use Active Trinket
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using trinkets
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
     - name: Heroic Strike
       criteria:
         # Cast HS if we have excess rage
