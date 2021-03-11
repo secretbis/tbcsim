@@ -499,7 +499,7 @@ class SimIteration(
     private fun defaultTarget(): Character {
         val char = Character(
             BossClass(baseStats = Stats(
-                armor = 7700
+                armor = opts.targetArmor
             )),
             BossRace(),
             opts.targetLevel

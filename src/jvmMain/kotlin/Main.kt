@@ -22,15 +22,15 @@ class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
 
-    val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(180)
-    val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(0)
-    val stepMs: Int by option("-s", "--step-ms", help="Fight simulation step size, in milliseconds").int().default(1)
-    val latencyMs: Int by option("-l", "--latency", help="Latency to add when casting spells, in milliseconds").int().default(0)
-    val iterations: Int by option("-i", "--iterations", help="Number of simulation iterations to run").int().default(100)
-    val targetLevel: Int by option("--target-level", help="Target level, from 70 to 73").int().default(73).validate { it in 70..73 }
-    val targetArmor: Int by option("-a", "--target-armor", help="The target's base armor value, before debuffs ").int().default(7700)
-    val allowParryAndBlock: Boolean by option("-p", "--allow-parry-block").flag(default = false)
-    val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = false)
+    val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
+    val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
+    val stepMs: Int by option("-s", "--step-ms", help="Fight simulation step size, in milliseconds").int().default(SimDefaults.stepMs)
+    val latencyMs: Int by option("-l", "--latency", help="Latency to add when casting spells, in milliseconds").int().default(SimDefaults.latencyMs)
+    val iterations: Int by option("-i", "--iterations", help="Number of simulation iterations to run").int().default(SimDefaults.iterations)
+    val targetLevel: Int by option("--target-level", help="Target level, from 70 to 73").int().default(SimDefaults.targetLevel).validate { it in 70..73 }
+    val targetArmor: Int by option("-a", "--target-armor", help="The target's base armor value, before debuffs ").int().default(SimDefaults.targetArmor)
+    val allowParryAndBlock: Boolean by option("-p", "--allow-parry-block").flag(default = SimDefaults.allowParryAndBlock)
+    val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = SimDefaults.showHiddenBuffs)
     val debug: Boolean by option("--debug").flag(default = false)
 
     override fun run() {
