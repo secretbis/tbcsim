@@ -23,6 +23,17 @@ object ItemGen {
     val logger = KotlinLogging.logger {}
     val pkg: String = "data.items"
 
+    val itemOverrides = mapOf(
+        32837 to mapOf(
+            "className" to "WarglaiveOfAzzinothMH",
+            "name" to "Warglaive of Azzinoth (MH)"
+        ),
+        32838 to mapOf(
+            "className" to "WarglaiveOfAzzinothOH",
+            "name" to "Warglaive of Azzinoth (OH)"
+        )
+    )
+
     private fun load(): List<Map<String, Any?>> {
         return CodeGen.load("/items.json", object : TypeReference<List<Map<String, Any?>>>(){})
     }
@@ -71,8 +82,11 @@ object ItemGen {
 
         val protoItems = itemsData.map {
             val item = EmptyItem()
+
             item.id = it["entry"] as Int? ?: item.id
-            item.name = it["name"] as String? ?: item.name
+
+            val nameOverride = itemOverrides[item.id]?.get("name")
+            item.name = nameOverride ?: it["name"] as String? ?: item.name
             item.itemLevel = it["ItemLevel"] as Int? ?: item.itemLevel
             item.quality = it["Quality"] as Int? ?: item.quality
             item.inventorySlot = it["InventoryType"] as Int? ?: item.inventorySlot
@@ -246,6 +260,9 @@ object ItemGen {
     }
 
     fun safeItemName(item: Item): String {
+        if(itemOverrides[item.id] != null) {
+            return itemOverrides[item.id]!!["className"]!!
+        }
         val safeRegex = Regex("""[^a-zA-Z ]""")
         return item.name.replace(safeRegex, "").toPascalCase()
     }
