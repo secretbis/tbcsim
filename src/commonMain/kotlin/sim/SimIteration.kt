@@ -634,7 +634,8 @@ class SimIteration(
     }
 
     fun physicalGcd(): Double {
-        return (gcdBaseMs / meleeHasteMultiplier()).coerceAtLeast(minGcdMs)
+        // Melee haste doesn't affect melee GCD, sadge
+        return gcdBaseMs
     }
 
     fun spellGcd(): Double {
