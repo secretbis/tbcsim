@@ -5,7 +5,7 @@ import character.Debuff
 import data.Constants
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class SiphonLifeDot : Debuff() {
     companion object {
@@ -18,15 +18,15 @@ class SiphonLifeDot : Debuff() {
     val siphon = object : Ability() {
         override val id: Int = 30911
         override val name: String = Companion.name
-        override fun gcdMs(sim: SimIteration): Int = 0
+        override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 63.0
         val numTicks = 10.0
         // TODO: What the heck school is this spell anyway
         val school = Constants.DamageType.SHADOW
-        override fun cast(sim: SimIteration) {
+        override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = 0.5 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -35,11 +35,11 @@ class SiphonLifeDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sim.logEvent(event)
+            sp.logEvent(event)
         }
     }
 
-    override fun tick(sim: SimIteration) {
-        siphon.cast(sim)
+    override fun tick(sp: SimParticipant) {
+        siphon.cast(sp)
     }
 }

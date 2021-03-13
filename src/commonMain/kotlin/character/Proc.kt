@@ -3,7 +3,7 @@ package character
 import data.model.Item
 import mu.KotlinLogging
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 import kotlin.random.Random
 
 abstract class Proc {
@@ -31,6 +31,12 @@ abstract class Proc {
         MELEE_REPLACED_AUTO_ATTACK_HIT,
         MELEE_REPLACED_AUTO_ATTACK_CRIT,
 
+        // Pets
+        PET_MELEE_HIT,
+        PET_MELEE_CRIT,
+        PET_SPELL_HIT,
+        PET_SPELL_CRIT,
+
         // Spells
         SPELL_HIT,
         SPELL_CRIT,
@@ -47,7 +53,8 @@ abstract class Proc {
         ARCANE_DAMAGE,
 
         // Mechanics
-        SERVER_TICK,
+        SERVER_TICK, // 2s
+        SERVER_SLOW_TICK,  // 3s
 
         // Specifics
         SHAMAN_CAST_SHOCK,
@@ -72,10 +79,10 @@ abstract class Proc {
 
     abstract val type: Type
     open val ppm: Double = 0.0
-    open fun percentChance(sim: SimIteration): Double = 0.0
+    open fun percentChance(sp: SimParticipant): Double = 0.0
 
     // Many procs have ICDs
-    open fun cooldownMs(sim: SimIteration): Int = 0
+    open fun cooldownMs(sp: SimParticipant): Int = 0
 
     open class State {
         var cooldownStartMs: Int = -1
@@ -85,28 +92,28 @@ abstract class Proc {
         return State()
     }
 
-    internal fun state(sim: SimIteration): State {
+    internal fun state(sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
-        var state = sim.procState[this]
+        var state = sp.procState[this]
         if(state == null) {
             state = stateFactory()
-            sim.procState[this] = state
+            sp.procState[this] = state
         }
         return state
     }
 
-    open fun afterProc(sim: SimIteration) {
+    open fun afterProc(sp: SimParticipant) {
         // Store individual cooldown state
-        val state = state(sim)
-        state.cooldownStartMs = sim.elapsedTimeMs
+        val state = state(sp)
+        state.cooldownStartMs = sp.sim.elapsedTimeMs
     }
 
-    open fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+    open fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         val chances: MutableList<Double> = mutableListOf()
 
         // Return false if on ICD
-        val state = state(sim)
-        val offCooldown = state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sim) <= sim.elapsedTimeMs)
+        val state = state(sp)
+        val offCooldown = state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sp) <= sp.sim.elapsedTimeMs)
         if(!offCooldown) {
             return false
         }
@@ -122,7 +129,7 @@ abstract class Proc {
                     when (type) {
                         // PPM always uses the BASE item speed, not hasted
                         Type.PPM -> (item.speed / 1000.0) * ppm / 60.0
-                        Type.PERCENT -> percentChance(sim) / 100.0
+                        Type.PERCENT -> percentChance(sp) / 100.0
                         Type.STATIC -> 100.0
                     }
                 )
@@ -132,7 +139,7 @@ abstract class Proc {
                 when (type) {
                     Type.PPM -> {
                         // Try to use the procced item if it is a weapon
-                        val itemFromProc = items?.find { it === sim.subject.gear.mainHand  } ?: items?.find { it === sim.subject.gear.offHand }
+                        val itemFromProc = items?.find { it === sp.character.gear.mainHand  } ?: items?.find { it === sp.character.gear.offHand }
 
                         if(itemFromProc == null) {
                             logger.debug { "Attempted to compute a PPM without an Item from ability: ${ability?.name}" }
@@ -141,7 +148,7 @@ abstract class Proc {
                             (itemFromProc.speed / 1000.0) * ppm / 60.0
                         }
                     }
-                    Type.PERCENT -> percentChance(sim) / 100.0
+                    Type.PERCENT -> percentChance(sp) / 100.0
                     Type.STATIC -> 100.0
                 }
             )
@@ -152,5 +159,5 @@ abstract class Proc {
         return chances.any { roll < it }
     }
 
-    abstract fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?)
+    abstract fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?)
 }

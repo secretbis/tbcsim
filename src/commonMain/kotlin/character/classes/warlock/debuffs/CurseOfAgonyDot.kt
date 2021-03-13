@@ -7,7 +7,7 @@ import character.classes.warlock.talents.*
 import data.Constants
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class CurseOfAgonyDot : Debuff() {
     companion object {
@@ -23,21 +23,21 @@ class CurseOfAgonyDot : Debuff() {
     val dot = object : Ability() {
         override val id: Int = 27218
         override val name: String = Companion.name
-        override fun gcdMs(sim: SimIteration): Int = 0
+        override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 113.0
         val numTicks = 12.0
         val school = Constants.DamageType.SHADOW
-        override fun cast(sim: SimIteration) {
-            val impCoa = sim.subject.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
+        override fun cast(sp: SimParticipant) {
+            val impCoa = sp.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
             val impCoaMultiplier = impCoa?.damageMultiplier() ?: 1.0
 
-            val contagion = sim.subject.klass.talents[Contagion.name] as Contagion?
+            val contagion = sp.character.klass.talents[Contagion.name] as Contagion?
             val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
 
             // Per lock discord
             val spellPowerCoeff = 1.0 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school) * contagionMultiplier * impCoaMultiplier
+            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school) * contagionMultiplier * impCoaMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -46,13 +46,13 @@ class CurseOfAgonyDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sim.logEvent(event)
+            sp.logEvent(event)
 
-            sim.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+            sp.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
 
-    override fun tick(sim: SimIteration) {
-        dot.cast(sim)
+    override fun tick(sp: SimParticipant) {
+        dot.cast(sp)
     }
 }

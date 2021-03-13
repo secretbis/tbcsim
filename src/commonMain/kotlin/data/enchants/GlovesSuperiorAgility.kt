@@ -4,7 +4,7 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimIteration
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -13,7 +13,7 @@ class GlovesSuperiorAgility(item: Item) : Enchant(item) {
     override val inventorySlot: Int = Constants.InventorySlot.HANDS.ordinal
     override val name: String = "Superior Agility"
 
-    override fun modifyStats(sim: SimIteration): Stats {
+    override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
             agility = 15
         )

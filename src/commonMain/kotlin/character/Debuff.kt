@@ -1,35 +1,36 @@
 package character
 
 import sim.SimIteration
+import sim.SimParticipant
 
 abstract class Debuff : Buff() {
     open val tickDeltaMs: Int = -1
 
-    open fun shouldTick(sim: SimIteration): Boolean {
+    open fun shouldTick(sp: SimParticipant): Boolean {
         if(tickDeltaMs == -1) return false
 
-        val state = state(sim)
+        val state = state(sp)
 
         // Never tick the debuff on the same server tick it was applied
-        if(sim.elapsedTimeMs == state.appliedAtMs) return false
+        if(sp.sim.elapsedTimeMs == state.appliedAtMs) return false
 
-        val shouldTick = sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs - sim.opts.stepMs
+        val shouldTick = sp.sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs - sp.sim.opts.stepMs
         if(shouldTick) {
             state.tickCount++
-            state.lastTickMs = sim.elapsedTimeMs
+            state.lastTickMs = sp.sim.elapsedTimeMs
         }
 
         return shouldTick
     }
 
-    open fun tick(sim: SimIteration) {
+    open fun tick(sp: SimParticipant) {
         // Do nothing by default
     }
 
-    override fun state(sim: SimIteration, stateKey: String): State {
+    override fun state(sp: SimParticipant, stateKey: String): State {
         // Create state object if it does not exist, and return it
-        val state = sim.debuffState[stateKey] ?: stateFactory()
-        sim.debuffState[stateKey] = state
+        val state = sp.debuffState[stateKey] ?: stateFactory()
+        sp.debuffState[stateKey] = state
         return state
     }
 }

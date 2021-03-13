@@ -8,7 +8,7 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class SwordSpec(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -35,25 +35,25 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
                 Trigger.MELEE_BLOCK
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sim: SimIteration): Double = 1.0 * currentRank
+            override fun percentChance(sp: SimParticipant): Double = 1.0 * currentRank
 
-            override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 // Sword spec cannot proc off itself
                 val isSwordSpec = ability?.name == name
-                return !isSwordSpec && items?.all { Melee.isSword(it) } ?: false && super.shouldProc(sim, items, ability, event)
+                return !isSwordSpec && items?.all { Melee.isSword(it) } ?: false && super.shouldProc(sp, items, ability, event)
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val item = items?.get(0)
                 if(item == null || !Melee.isSword(item)) {
                     logger.warn { "Tried to proc warrior Sword Specialization, but the context was not a sword." }
                     return
                 }
 
-                val damageRoll = Melee.baseDamageRoll(sim, item)
-                val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = true)
+                val damageRoll = Melee.baseDamageRoll(sp, item)
+                val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = true)
 
-                sim.logEvent(Event(
+                sp.logEvent(Event(
                     eventType = Event.Type.DAMAGE,
                     damageType = Constants.DamageType.PHYSICAL,
                     abilityName = name,
@@ -63,8 +63,8 @@ class SwordSpec(currentRank: Int) : Talent(currentRank) {
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

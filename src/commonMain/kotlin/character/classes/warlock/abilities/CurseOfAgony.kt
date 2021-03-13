@@ -6,7 +6,7 @@ import character.classes.warlock.talents.Suppression
 import data.Constants
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class CurseOfAgony : Ability() {
     companion object {
@@ -15,18 +15,18 @@ class CurseOfAgony : Ability() {
 
     override val id: Int = 27218
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double = 265.0
+    override fun resourceCost(sp: SimParticipant): Double = 265.0
 
     val dot = CurseOfAgonyDot()
 
-    override fun cast(sim: SimIteration) {
-        val suppression = sim.subject.klass.talents[Suppression.name] as Suppression?
+    override fun cast(sp: SimParticipant) {
+        val suppression = sp.character.klass.talents[Suppression.name] as Suppression?
         val suppressionBonusHit = suppression?.bonusAfflictionHitPct() ?: 0.0
 
         val school = Constants.DamageType.SHADOW
-        val result = Spell.attackRoll(sim, 0.0, school, true, 0.0, suppressionBonusHit)
+        val result = Spell.attackRoll(sp, 0.0, school, true, 0.0, suppressionBonusHit)
 
         val event = Event(
             eventType = Event.Type.SPELL_CAST,
@@ -34,10 +34,10 @@ class CurseOfAgony : Ability() {
             abilityName = name,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
-            sim.addDebuff(dot)
+            sp.addDebuff(dot)
         }
     }
 }

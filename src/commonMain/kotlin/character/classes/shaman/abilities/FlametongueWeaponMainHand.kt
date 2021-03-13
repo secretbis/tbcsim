@@ -3,7 +3,7 @@ package character.classes.shaman.abilities
 import character.Ability
 import character.Buff
 import character.classes.shaman.buffs.FlametongueWeapon
-import sim.SimIteration
+import sim.SimParticipant
 
 class FlametongueWeaponMainHand : Ability() {
     companion object {
@@ -12,18 +12,18 @@ class FlametongueWeaponMainHand : Ability() {
 
     override val id: Int = 25489
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.hasOffHandWeapon()
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.hasOffHandWeapon()
     }
 
     var buff: Buff? = null
 
-    override fun cast(sim: SimIteration) {
+    override fun cast(sp: SimParticipant) {
         if(buff == null) {
-            buff = FlametongueWeapon(sim.subject.gear.mainHand)
+            buff = FlametongueWeapon(sp.character.gear.mainHand)
         }
-        sim.addBuff(buff!!)
+        sp.addBuff(buff!!)
     }
 }

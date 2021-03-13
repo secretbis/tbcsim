@@ -6,7 +6,7 @@ import data.model.Color
 import data.model.Gem
 import data.model.Quality
 import data.model.Socket
-import sim.SimIteration
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -16,7 +16,7 @@ class ChaoticSkyfireDiamond : Gem(34220, "Chaotic Skyfire Diamond", "inv_misc_ge
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 physicalCritRating = 12.0,
                 whiteDamageAddlCritMultiplier = 1.03,

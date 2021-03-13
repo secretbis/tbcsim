@@ -1,17 +1,18 @@
 package character
 
-import sim.SimIteration
+import sim.SimParticipant
 
 class Resource(
-    val sim: SimIteration
+    val sp: SimParticipant
 ) {
     enum class Type {
         MANA,
         RAGE,
-        ENERGY
+        ENERGY,
+        FOCUS
     }
 
-    val type: Type = sim.subject.klass.resourceType
+    val type: Type = sp.character.klass.resourceType
 
     val initialAmount: Int
     var maxAmount: Int
@@ -27,19 +28,19 @@ class Resource(
     }
 
     private fun maxMana(): Int {
-        return sim.subject.klass.baseMana
+        return sp.character.klass.baseMana
             // Add intellect
             .let {
                 it + when {
-                    sim.intellect() <= 20 -> sim.intellect()
-                    else -> 20 + (15 * (sim.intellect() - 20))
+                    sp.intellect() <= 20 -> sp.intellect()
+                    else -> 20 + (15 * (sp.intellect() - 20))
                 }
             }
             .let {
-                it + sim.subjectStats.manaFlatModifier
+                it + sp.stats.manaFlatModifier
             }
             .let {
-                (it * sim.subjectStats.manaMultiplier).toInt()
+                (it * sp.stats.manaMultiplier).toInt()
             }
 
     }
@@ -49,6 +50,7 @@ class Resource(
             Type.MANA -> maxMana()
             Type.RAGE -> 100
             Type.ENERGY -> 100
+            Type.FOCUS -> 100
         }
     }
 

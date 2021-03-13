@@ -3,7 +3,7 @@ package character.classes.warrior.talents
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class AngerManagement(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,15 +19,15 @@ class AngerManagement(currentRank: Int) : Talent(currentRank) {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SERVER_TICK
+                Trigger.SERVER_SLOW_TICK
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addResource(1, Resource.Type.RAGE)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addResource(1, Resource.Type.RAGE)
             }
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

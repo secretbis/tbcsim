@@ -5,7 +5,7 @@ import character.classes.warrior.talents.ImprovedExecute
 import data.Constants
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class Execute : Ability() {
     companion object {
@@ -15,15 +15,15 @@ class Execute : Ability() {
     override val id: Int = 12292
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.isExecutePhase() && super.available(sim)
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.sim.isExecutePhase() && super.available(sp)
     }
 
-    override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sim: SimIteration): Double {
-        val impExRanks = sim.subject.klass.talents[ImprovedExecute.name]?.currentRank
+    override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+    override fun resourceCost(sp: SimParticipant): Double {
+        val impExRanks = sp.character.klass.talents[ImprovedExecute.name]?.currentRank
         val discount = when(impExRanks) {
             1 -> 2
             2 -> 5
@@ -32,13 +32,13 @@ class Execute : Ability() {
         return 15.0 - discount
     }
 
-    override fun cast(sim: SimIteration) {
-        val item = sim.subject.gear.mainHand
-        val damage = 925.0 + sim.resource.currentAmount * 21
-        val result = Melee.attackRoll(sim, damage, item, isWhiteDmg = false)
+    override fun cast(sp: SimParticipant) {
+        val item = sp.character.gear.mainHand
+        val damage = 925.0 + sp.resource.currentAmount * 21
+        val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
         // Drain rage
-        sim.subtractResource(sim.resource.currentAmount, Resource.Type.RAGE)
+        sp.subtractResource(sp.resource.currentAmount, Resource.Type.RAGE)
 
         // Save last hit state and fire event
         val event = Event(
@@ -48,7 +48,7 @@ class Execute : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -63,7 +63,7 @@ class Execute : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

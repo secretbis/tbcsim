@@ -11,7 +11,7 @@ import data.Constants
 import mechanics.General
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class Immolate : Ability() {
     companion object {
@@ -20,37 +20,37 @@ class Immolate : Ability() {
     override val id: Int = 32231
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val cataclysm = sim.subject.klass.talents[Cataclysm.name] as Cataclysm?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val cataclysm = sp.character.klass.talents[Cataclysm.name] as Cataclysm?
         val cataRed = cataclysm?.destructionCostReduction() ?: 0.0
 
         return General.resourceCostReduction(445.0, listOf(cataRed))
     }
 
     val baseCastTimeMs = 2000
-    override fun castTimeMs(sim: SimIteration): Int {
-        val bane = sim.subject.klass.talents[Bane.name] as Bane?
+    override fun castTimeMs(sp: SimParticipant): Int {
+        val bane = sp.character.klass.talents[Bane.name] as Bane?
         return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
     }
 
     val dot = ImmolateDot()
 
     val baseDamage = 327.0
-    override fun cast(sim: SimIteration) {
-        val devastation = sim.subject.klass.talents[Devastation.name] as Devastation?
+    override fun cast(sp: SimParticipant) {
+        val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
-        val impImmolate = sim.subject.klass.talents[ImprovedImmolate.name] as ImprovedImmolate?
+        val impImmolate = sp.character.klass.talents[ImprovedImmolate.name] as ImprovedImmolate?
         val impImmolateInitialMultiplier = impImmolate?.immolateInitialDamageMultiplier() ?: 1.0
 
         // Per lock discord, value is 20%
         val spellPowerCoeff = 0.2
         val school = Constants.DamageType.FIRE
 
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage, spellPowerCoeff, school) * impImmolateInitialMultiplier
-        val result = Spell.attackRoll(sim, damageRoll, school, isBinary = false, devastationAddlCrit)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage, spellPowerCoeff, school) * impImmolateInitialMultiplier
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -59,10 +59,10 @@ class Immolate : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Apply the DoT
-        sim.addDebuff(dot)
+        sp.addDebuff(dot)
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {
@@ -75,7 +75,7 @@ class Immolate : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(), this, event)
+            sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }
 }

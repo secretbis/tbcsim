@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -22,10 +22,10 @@ class BuffDurationLte(data: RotationRuleCriterion) : Criterion(Type.BUFF_DURATIO
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
+    override fun satisfied(sp: SimParticipant): Boolean {
         if(buff == null || seconds == null) return false
 
-        val buff = sim.buffs[buff]
-        return buff == null || buff.remainingDurationMs(sim) <= (seconds * 1000)
+        val buff = sp.buffs[buff]
+        return buff == null || buff.remainingDurationMs(sp) <= (seconds * 1000)
     }
 }

@@ -6,7 +6,7 @@ import character.Proc
 import character.Stats
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class RageOfTheUnraveller : Buff() {
     override val id: Int = 33648
@@ -28,15 +28,15 @@ class RageOfTheUnraveller : Buff() {
             override val name: String = "Rage of the Unraveller"
             override val durationMs: Int = 10000
 
-            override fun modifyStats(sim: SimIteration): Stats {
+            override fun modifyStats(sp: SimParticipant): Stats {
                 return Stats(attackPower = 300)
             }
         }
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(buff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(buff)
         }
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

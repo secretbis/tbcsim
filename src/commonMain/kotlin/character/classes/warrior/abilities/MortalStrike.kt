@@ -6,7 +6,7 @@ import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import data.Constants
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class MortalStrike : Ability() {
     companion object {
@@ -16,28 +16,28 @@ class MortalStrike : Ability() {
     override val id: Int = 30330
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
-    override fun cooldownMs(sim: SimIteration): Int {
-        val impMSRanks = sim.subject.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
+    override fun cooldownMs(sp: SimParticipant): Int {
+        val impMSRanks = sp.character.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
         val discount = 200 * impMSRanks
         return 6000 - discount
     }
 
-    override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sim: SimIteration): Double = 30.0
+    override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+    override fun resourceCost(sp: SimParticipant): Double = 30.0
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.subject.klass.talents[MortalStrikeTalent.name]?.currentRank == 1 && super.available(sim)
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.klass.talents[MortalStrikeTalent.name]?.currentRank == 1 && super.available(sp)
     }
 
-    override fun cast(sim: SimIteration) {
-        val impMSRanks = sim.subject.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
+    override fun cast(sp: SimParticipant) {
+        val impMSRanks = sp.character.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
         val dmgMult = 1.0 + (0.01 * impMSRanks)
 
-        val item = sim.subject.gear.mainHand
-        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = true) * dmgMult
-        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
+        val item = sp.character.gear.mainHand
+        val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMult
+        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(
@@ -47,7 +47,7 @@ class MortalStrike : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -62,7 +62,7 @@ class MortalStrike : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

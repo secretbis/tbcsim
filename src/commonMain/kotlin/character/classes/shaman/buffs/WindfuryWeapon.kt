@@ -7,6 +7,7 @@ import data.model.Item
 import data.model.TempEnchant
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 
 class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     class WindfuryWeaponState : Buff.State() {
@@ -22,15 +23,15 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     override val durationMs: Int = 30 * 60 * 1000
     override val hidden: Boolean = true
 
-    override fun modifyStats(sim: SimIteration): Stats? {
+    override fun modifyStats(sp: SimParticipant): Stats? {
         // Mark each mainhand weapon as having this instead
         // FIXME: This needs to be removed if this buff expires or is otherwise removed
         sourceItems.first().temporaryEnhancement = this
         return null
     }
 
-    private fun buffState(sim: SimIteration): WindfuryWeaponState {
-        return this.state(sim, "Windfury Weapon") as WindfuryWeaponState
+    private fun buffState(sp: SimParticipant): WindfuryWeaponState {
+        return this.state(sp, "Windfury Weapon") as WindfuryWeaponState
     }
 
     // Windfury weapon has a global 3s ICD, regardless of rank
@@ -44,39 +45,39 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
         )
 
         override val type: Type = Type.PERCENT
-        override fun percentChance(sim: SimIteration): Double = 20.0
+        override fun percentChance(sp: SimParticipant): Double = 20.0
 
-        override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+        override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
             // Check shared WF ICD state
-            val state = buffState(sim)
+            val state = buffState(sp)
 
             val lastProc = state.lastWindfuryWeaponProcMs
-            val offIcd = lastProc == -1 || lastProc + icdMs <= sim.elapsedTimeMs
+            val offIcd = lastProc == -1 || lastProc + icdMs <= sp.sim.elapsedTimeMs
 
-            return offIcd && super.shouldProc(sim, items, ability, event)
+            return offIcd && super.shouldProc(sp, items, ability, event)
         }
 
         var wfAbility: Ability? = null
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             if(wfAbility == null) {
                 val suffix = when(sourceItem) {
-                    sim.subject.gear.mainHand -> "(MH)"
-                    sim.subject.gear.offHand -> "(OH)"
+                    sp.character.gear.mainHand -> "(MH)"
+                    sp.character.gear.offHand -> "(OH)"
                     else -> "(Unknown)"
                 }
                 val name = "Windfury Weapon $suffix"
                 wfAbility = WindfuryWeapon(name, sourceItem)
             }
 
-            if(wfAbility!!.available(sim)) {
-                wfAbility!!.cast(sim)
+            if(wfAbility!!.available(sp)) {
+                wfAbility!!.cast(sp)
 
                 // Update ICD state
-                val state = buffState(sim)
-                state.lastWindfuryWeaponProcMs = sim.elapsedTimeMs
+                val state = buffState(sp)
+                state.lastWindfuryWeaponProcMs = sp.sim.elapsedTimeMs
 
-                sim.logEvent(
+                sp.logEvent(
                     Event(
                         eventType = Event.Type.PROC,
                         abilityName = wfAbility!!.name
@@ -86,5 +87,5 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
         }
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

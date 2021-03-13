@@ -3,7 +3,7 @@ package character.classes.shaman.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnrelentingStorm(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -16,10 +16,10 @@ class UnrelentingStorm(currentRank: Int) : Talent(currentRank) {
         override val name: String = "Unrelenting Storm"
         override val durationMs: Int = -1
 
-        override fun modifyStats(sim: SimIteration): Stats {
-            return Stats(manaPer5Seconds = (sim.intellect() * 0.02 * currentRank).toInt())
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return Stats(manaPer5Seconds = (sp.intellect() * 0.02 * currentRank).toInt())
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

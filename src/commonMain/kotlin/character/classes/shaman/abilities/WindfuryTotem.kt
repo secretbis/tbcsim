@@ -12,7 +12,7 @@ import data.model.Item
 import mechanics.General
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val abilityId: Int, val abilityName: String): Ability() {
     constructor(): this(445.0, 325.0,25587, "Windfury Totem")
@@ -20,17 +20,17 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
     override val id: Int = abilityId
     override val name: String = abilityName
 
-    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
-    override fun available(sim: SimIteration): Boolean {
+    override fun available(sp: SimParticipant): Boolean {
         return true
     }
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val tf = sim.subject.klass.talents[TotemicFocus.name] as TotemicFocus?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val tf = sp.character.klass.talents[TotemicFocus.name] as TotemicFocus?
         val tfRed = tf?.totemCostReduction() ?: 0.0
 
-        val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
+        val mq = sp.character.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
         return General.resourceCostReduction(baseManaCost, listOf(tfRed, mqRed))
@@ -45,17 +45,17 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
             override val id: Int = abilityId
             override val name: String = abilityName
 
-            override fun gcdMs(sim: SimIteration): Int = 0
+            override fun gcdMs(sp: SimParticipant): Int = 0
 
-            override fun cast(sim: SimIteration) {
+            override fun cast(sp: SimParticipant) {
                 // Apply talents
-                val impWeaponTotems = sim.subject.klass.talents[ImprovedWeaponTotems.name] as ImprovedWeaponTotems?
+                val impWeaponTotems = sp.character.klass.talents[ImprovedWeaponTotems.name] as ImprovedWeaponTotems?
                 val extraAp = (baseApBonus * (impWeaponTotems?.windfuryTotemApMultiplier() ?: 1.0)).toInt()
 
                 // Do attack
-                val mh = sim.subject.gear.mainHand
-                val attack = Melee.baseDamageRoll(sim, mh, extraAp)
-                val result = Melee.attackRoll(sim, attack, mh, isWhiteDmg = true)
+                val mh = sp.character.gear.mainHand
+                val attack = Melee.baseDamageRoll(sp, mh, extraAp)
+                val result = Melee.attackRoll(sp, attack, mh, isWhiteDmg = true)
 
                 val event = Event(
                     eventType = Event.Type.DAMAGE,
@@ -65,7 +65,7 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
                     amount = result.first,
                     result = result.second,
                 )
-                sim.logEvent(event)
+                sp.logEvent(event)
 
                 // Proc anything that can proc off a white hit
                 // TODO: Should I fire procs off miss/dodge/parry/etc?
@@ -76,7 +76,7 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
                 }
 
                 if(triggerTypes != null) {
-                    sim.fireProc(triggerTypes, listOf(mh), this, event)
+                    sp.fireProc(triggerTypes, listOf(mh), this, event)
                 }
             }
         }
@@ -90,20 +90,20 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
             )
 
             override val type: Type = Type.PERCENT
-            override fun percentChance(sim: SimIteration): Double = 20.0
+            override fun percentChance(sp: SimParticipant): Double = 20.0
 
-            override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
-                val isMhWeapon = items?.first() === sim.subject.gear.mainHand
-                val mhHasNoTempEnh = sim.subject.gear.mainHand.temporaryEnhancement == null
-                return isMhWeapon && mhHasNoTempEnh && super.shouldProc(sim, items, ability, event)
+            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+                val isMhWeapon = items?.first() === sp.character.gear.mainHand
+                val mhHasNoTempEnh = sp.character.gear.mainHand.temporaryEnhancement == null
+                return isMhWeapon && mhHasNoTempEnh && super.shouldProc(sp, items, ability, event)
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                wfTotemAbility.cast(sim)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                wfTotemAbility.cast(sp)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(weaponProc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(weaponProc)
     }
 
     // This is the hidden buff that refreshes the weapon buff on every server tick
@@ -119,15 +119,15 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addBuff(weaponBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(weaponBuff)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(totemProc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(totemProc)
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(totemBuff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(totemBuff)
     }
 }

@@ -9,11 +9,11 @@ import java.text.DecimalFormat
 object SimStatsPrinter {
     val df = DecimalFormat("#,###.##")
 
-    fun precombatStats(sim: SimIteration) {
-        printPrecombatStats(sim)
+    fun precombatStats(sp: SimParticipant) {
+        printPrecombatStats(sp)
 
         println("ACTIVE RAID BUFFS")
-        sim.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
+        sp.rotation.rules.filter { it.phase == Rotation.Phase.RAID_OR_PARTY }.forEach {
             println(" - ${it.ability.name}")
         }
         println()
@@ -111,20 +111,20 @@ object SimStatsPrinter {
         println("STDDEV DPS: ${df.format(dps.sd)}")
     }
 
-    fun printPrecombatStats(sim: SimIteration) {
+    fun printPrecombatStats(sp: SimParticipant) {
         println(
             "PLAYER STATS\n" +
             table {
-                row("Strength:", sim.strength(), "Phys. Hit:", sim.meleeHitPct())
-                row("Agility:", sim.agility(), "Phys. Crit:", sim.meleeCritPct())
-                row("Intellect:", sim.intellect(), "Phys. Haste:", sim.meleeHasteMultiplier() - 1.0)
-                row("Stamina:", sim.stamina(), "Spell Hit:", sim.spellHitPct())
-                row("Spirit:", sim.spirit(), "Spell Crit:", sim.spellCritPct())
-                row("Armor Pen:", sim.armorPen(), "Spell Haste:", sim.spellHasteMultiplier() - 1.0)
-                row("Attack Power", sim.attackPower(), "Expertise:", sim.expertisePct())
-                row("R. Attack Power", sim.rangedAttackPower())
-                row("MP5", sim.subjectStats.manaPer5Seconds)
-                row("Spell Power", sim.spellDamage())
+                row("Strength:", sp.strength(), "Phys. Hit:", sp.meleeHitPct())
+                row("Agility:", sp.agility(), "Phys. Crit:", sp.meleeCritPct())
+                row("Intellect:", sp.intellect(), "Phys. Haste:", sp.meleeHasteMultiplier() - 1.0)
+                row("Stamina:", sp.stamina(), "Spell Hit:", sp.spellHitPct())
+                row("Spirit:", sp.spirit(), "Spell Crit:", sp.spellCritPct())
+                row("Armor Pen:", sp.armorPen(), "Spell Haste:", sp.spellHasteMultiplier() - 1.0)
+                row("Attack Power", sp.attackPower(), "Expertise:", sp.expertisePct())
+                row("R. Attack Power", sp.rangedAttackPower())
+                row("MP5", sp.stats.manaPer5Seconds)
+                row("Spell Power", sp.spellDamage())
 
                 hints {
                     alignment(0, Table.Hints.Alignment.RIGHT)
@@ -148,11 +148,11 @@ object SimStatsPrinter {
         println(
             "TARGET STATS\n" +
             table {
-                row("Arcane Res:", sim.targetStats.arcaneResistance, "Armor:", sim.targetArmor())
-                row("Fire Res:", sim.targetStats.fireResistance)
-                row("Frost Res:", sim.targetStats.frostResistance)
-                row("Nature Res:", sim.targetStats.natureResistance)
-                row("Shadow Res:", sim.targetStats.shadowResistance)
+                row("Arcane Res:", sp.sim.target.stats.arcaneResistance, "Armor:", sp.sim.target.armor())
+                row("Fire Res:", sp.sim.target.stats.fireResistance)
+                row("Frost Res:", sp.sim.target.stats.frostResistance)
+                row("Nature Res:", sp.sim.target.stats.natureResistance)
+                row("Shadow Res:", sp.sim.target.stats.shadowResistance)
 
 
                 hints {

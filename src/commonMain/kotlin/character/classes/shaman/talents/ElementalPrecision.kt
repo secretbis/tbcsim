@@ -4,7 +4,7 @@ import character.Buff
 import character.Stats
 import character.Talent
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,7 +19,7 @@ class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             // This isn't technically exactly equal to spell hit rating (no arcane, shadow, etc)
             // But for shaman it's good enough
             val spellHitRating = 2 * currentRank * Rating.spellHitPerPct
@@ -29,5 +29,5 @@ class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

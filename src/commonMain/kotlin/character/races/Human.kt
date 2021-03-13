@@ -5,7 +5,7 @@ import character.Buff
 import character.Race
 import character.Stats
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class Human : Race() {
     // Humans have no modifications to baseline
@@ -16,7 +16,7 @@ class Human : Race() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             val expertiseRating = 5.0 * Rating.expertiseRatingPerPoint
             return Stats(
                 swordExpertiseRating = expertiseRating,
@@ -26,5 +26,5 @@ class Human : Race() {
     }
 
     override fun racialByName(name: String): Ability? = null
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(swordMaceSpec)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(swordMaceSpec)
 }

@@ -6,7 +6,7 @@ import character.Proc
 import character.Talent
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class ShamanisticFocus(ranks: Int) : Talent(ranks) {
     companion object {
@@ -23,8 +23,8 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.consumeBuff(buff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.consumeBuff(buff)
             }
         }
     }
@@ -36,7 +36,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
 
         val proc = consumeProc(this)
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
     val staticBuff = object : Buff() {
@@ -52,13 +52,13 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addBuff(postCritBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(postCritBuff)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(onCritProc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(onCritProc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(staticBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(staticBuff)
 }

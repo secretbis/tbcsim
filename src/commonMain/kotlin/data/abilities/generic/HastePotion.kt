@@ -1,7 +1,7 @@
 package data.abilities.generic
 
 import character.*
-import sim.SimIteration
+import sim.SimParticipant
 
 class HastePotion : Ability() {
     companion object {
@@ -10,22 +10,22 @@ class HastePotion : Ability() {
 
     override val id: Int = 22838
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd = true
     override val sharedCooldown: SharedCooldown = SharedCooldown.POTION
-    override fun cooldownMs(sim: SimIteration): Int = 120000
+    override fun cooldownMs(sp: SimParticipant): Int = 120000
 
     val buff = object : Buff() {
         override val name: String = "Haste Potion"
         override val durationMs: Int = 15000
         override val mutex: List<Mutex> = listOf(Mutex.POTION)
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalHasteRating = 400.0)
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

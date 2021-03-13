@@ -6,7 +6,7 @@ import character.Proc
 import character.Stats
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class DarkmoonCardCrusadeAP : Buff() {
     companion object {
@@ -22,8 +22,8 @@ class DarkmoonCardCrusadeAP : Buff() {
         override val durationMs: Int = 10000
         override val maxStacks: Int = 20
 
-        override fun modifyStats(sim: SimIteration): Stats {
-            val stacks = state(sim).currentStacks
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val stacks = state(sp).currentStacks
             return Stats(attackPower = 6 * stacks)
         }
     }
@@ -40,10 +40,10 @@ class DarkmoonCardCrusadeAP : Buff() {
         )
         override val type: Type = Type.STATIC
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(apBuff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(apBuff)
         }
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf(apProc)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(apProc)
 }

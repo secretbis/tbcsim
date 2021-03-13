@@ -3,10 +3,9 @@ package character.classes.warrior.buffs
 import character.Ability
 import character.Buff
 import character.Proc
-import character.classes.warrior.Warrior
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class RampageBase : Buff() {
     companion object {
@@ -30,10 +29,10 @@ class RampageBase : Buff() {
         )
         override val type: Type = Type.STATIC
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(rampageFlagBuff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(rampageFlagBuff)
         }
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

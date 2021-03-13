@@ -4,7 +4,7 @@ import character.Ability
 import character.Buff
 import character.Race
 import character.Stats
-import sim.SimIteration
+import sim.SimParticipant
 
 class Gnome : Race() {
     override var baseStats: Stats = Stats(
@@ -20,11 +20,11 @@ class Gnome : Race() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats? {
+        override fun modifyStats(sp: SimParticipant): Stats? {
             return Stats(intellectMultiplier = 1.05)
         }
     }
 
     override fun racialByName(name: String): Ability? = null
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(expansiveMind)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(expansiveMind)
 }

@@ -17,18 +17,37 @@ object SimStats {
     fun median(l: List<Double>) = l.sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
-    fun dps(iterations: List<SimIteration>): DpsBreakdown {
+    // This is always subject + subject pet, if present
+    private fun dpsForParticipant(sp: SimParticipant): Double {
+        return sp.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->
+            acc + event.amount
+        } / (sp.sim.opts.durationMs / 1000.0)
+    }
+
+    fun dps(iterations: List<SimIteration>): Map<String, DpsBreakdown> {
         val perIteration = iterations.map {
-            it.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->
-                acc + event.amount
-            } / (it.opts.durationMs / 1000.0)
+            mapOf(
+                "subject" to dpsForParticipant(it.subject),
+                "subjectPet" to  if(it.subjectPet != null) { dpsForParticipant(it.subjectPet) } else 0.0
+            )
         }
 
-        val mean = perIteration.average()
-        return DpsBreakdown(
-            median(perIteration),
-            mean = mean,
-            sd = sd(perIteration, mean)
+        val subjectData = perIteration.map { it["subject"]!! }
+        val subjectPetData = perIteration.map { it["subjectPet"]!! }
+
+        val subjectMean = subjectData.average()
+        val subjectPetMean = subjectPetData.average()
+        return mapOf(
+            "subject" to DpsBreakdown(
+                median(subjectData),
+                mean = subjectMean,
+                sd = sd(subjectData, subjectMean)
+            ),
+            "subjectPet" to DpsBreakdown(
+                median(subjectPetData),
+                mean = subjectPetMean,
+                sd = sd(subjectPetData, subjectPetMean)
+            )
         )
     }
 

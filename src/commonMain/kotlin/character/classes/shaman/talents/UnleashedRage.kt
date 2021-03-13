@@ -3,7 +3,7 @@ package character.classes.shaman.talents
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnleashedRage(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -29,8 +29,8 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
                 override val name: String = "Unleashed Rage"
                 override val durationMs: Int = 10000
 
-                override fun modifyStats(sim: SimIteration): Stats {
-                    val talentRanks = sim.subject.klass.talents[UnleashedRage.name]?.currentRank ?: 0
+                override fun modifyStats(sp: SimParticipant): Stats {
+                    val talentRanks = sp.character.klass.talents[UnleashedRage.name]?.currentRank ?: 0
 
                     val modifier = 1 * (0.2 * talentRanks)
                     return Stats(
@@ -40,13 +40,13 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
                 }
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addBuff(buff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(buff)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

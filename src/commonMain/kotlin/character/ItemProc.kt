@@ -2,14 +2,14 @@ package character
 
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 abstract class ItemProc(val sourceItems: List<Item>) : Proc() {
     override val requiresItem: Boolean = true
 
     // For an ItemProc, always check that the proc attempt came from the sourceItem
-    override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+    override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         val validItem = sourceItems.any { items?.contains(it) == true }
-        return validItem && super.shouldProc(sim, sourceItems, ability, event)
+        return validItem && super.shouldProc(sp, sourceItems, ability, event)
     }
 }

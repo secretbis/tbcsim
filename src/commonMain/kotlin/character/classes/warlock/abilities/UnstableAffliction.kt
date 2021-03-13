@@ -6,7 +6,7 @@ import character.classes.warlock.talents.Suppression
 import data.Constants
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnstableAffliction : Ability() {
     companion object {
@@ -16,23 +16,23 @@ class UnstableAffliction : Ability() {
     override val id: Int = 30405
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
-    override fun castTimeMs(sim: SimIteration): Int = 1500
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
+    override fun castTimeMs(sp: SimParticipant): Int = 1500
 
-    override fun resourceCost(sim: SimIteration): Double = 400.0
+    override fun resourceCost(sp: SimParticipant): Double = 400.0
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.subject.klass.talents[UnstableAffliction.name]?.currentRank ?: 0 > 0
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.klass.talents[UnstableAffliction.name]?.currentRank ?: 0 > 0
     }
 
     val dot = UnstableAfflictionDot()
 
-    override fun cast(sim: SimIteration) {
-        val suppression = sim.subject.klass.talents[Suppression.name] as Suppression?
+    override fun cast(sp: SimParticipant) {
+        val suppression = sp.character.klass.talents[Suppression.name] as Suppression?
         val suppressionBonusHit = suppression?.bonusAfflictionHitPct() ?: 0.0
 
         val school = Constants.DamageType.SHADOW
-        val result = Spell.attackRoll(sim, 0.0, school, true, 0.0, suppressionBonusHit)
+        val result = Spell.attackRoll(sp, 0.0, school, true, 0.0, suppressionBonusHit)
 
         val event = Event(
             eventType = Event.Type.SPELL_CAST,
@@ -40,10 +40,10 @@ class UnstableAffliction : Ability() {
             abilityName = name,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
-            sim.addDebuff(dot)
+            sp.addDebuff(dot)
         }
     }
 }

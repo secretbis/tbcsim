@@ -4,6 +4,7 @@ import character.*
 import data.model.Item
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 
 // https://tbc-twinhead.twinstar.cz/?spell=21165
 // Same for all the hammers
@@ -18,7 +19,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
                     override val durationMs: Int = 10000
 
-                    override fun modifyStats(sim: SimIteration): Stats? {
+                    override fun modifyStats(sp: SimParticipant): Stats? {
                         return Stats(physicalHasteRating = 212.0)
                     }
                 }
@@ -34,7 +35,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val hidden: Boolean = true
 
     private var _procs: List<Proc>? = null
-    private fun makeProcs(sim: SimIteration): List<Proc> {
+    private fun makeProcs(sp: SimParticipant): List<Proc> {
         if(_procs == null) {
             _procs = listOf(
                 object : Proc() {
@@ -51,8 +52,8 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                     override val ppm: Double = 1.0
                     override val requiresItem: Boolean = true
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sim.addBuff(singletonBuff())
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(singletonBuff())
                     }
                 }
             )
@@ -61,5 +62,5 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         return _procs!!
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = makeProcs(sim)
+    override fun procs(sp: SimParticipant): List<Proc> = makeProcs(sp)
 }

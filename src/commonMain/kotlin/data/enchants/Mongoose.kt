@@ -5,6 +5,7 @@ import data.model.Enchant
 import data.model.Item
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 // Fun blog about Goose and Executioner:
@@ -19,11 +20,11 @@ class Mongoose(item: Item) : Enchant(item) {
     override val inventorySlot: Int = 13
 
     private var _procs: List<Proc>? = null
-    private fun makeProcs(sim: SimIteration): List<Proc> {
+    private fun makeProcs(sp: SimParticipant): List<Proc> {
         if(_procs == null) {
-            val suffix = if (item === sim.subject.gear.mainHand) {
+            val suffix = if (item === sp.character.gear.mainHand) {
                 "(MH)"
-            } else if (item === sim.subject.gear.offHand) {
+            } else if (item === sp.character.gear.offHand) {
                 "(OH)"
             } else {
                 throw IllegalArgumentException("Mongoose can only be applied to weapons")
@@ -33,7 +34,7 @@ class Mongoose(item: Item) : Enchant(item) {
                 override val name: String = "Mongoose $suffix"
                 override val durationMs: Int = 15000
 
-                override fun modifyStats(sim: SimIteration): Stats {
+                override fun modifyStats(sp: SimParticipant): Stats {
                     return Stats(physicalHasteRating = 30.0, agility = 120)
                 }
             }
@@ -53,8 +54,8 @@ class Mongoose(item: Item) : Enchant(item) {
                     override val ppm: Double = 1.2
                     override val requiresItem: Boolean = true
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sim.addBuff(buff)
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(buff)
                     }
                 }
             )
@@ -63,5 +64,5 @@ class Mongoose(item: Item) : Enchant(item) {
         return _procs!!
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = makeProcs(sim)
+    override fun procs(sp: SimParticipant): List<Proc> = makeProcs(sp)
 }

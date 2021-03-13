@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -22,10 +22,10 @@ class DebuffDurationLte(data: RotationRuleCriterion) : Criterion(Type.DEBUFF_DUR
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
+    override fun satisfied(sp: SimParticipant): Boolean {
         if(debuff == null || seconds == null) return false
 
-        val debuff = sim.debuffs[debuff]
-        return debuff == null || debuff.remainingDurationMs(sim) <= (seconds * 1000)
+        val debuff = sp.debuffs[debuff]
+        return debuff == null || debuff.remainingDurationMs(sp) <= (seconds * 1000)
     }
 }

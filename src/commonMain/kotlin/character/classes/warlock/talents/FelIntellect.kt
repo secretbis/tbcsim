@@ -3,7 +3,7 @@ package character.classes.warlock.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class FelIntellect(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -17,10 +17,10 @@ class FelIntellect(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(intellectMultiplier = 1.0 + (0.01 * currentRank))
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(intBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(intBuff)
 }

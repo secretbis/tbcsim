@@ -1,6 +1,7 @@
 package character
 
 import sim.SimIteration
+import sim.SimParticipant
 
 abstract class Ability {
     open class State {
@@ -18,71 +19,71 @@ abstract class Ability {
     abstract val id: Int
     abstract val name: String
 
-    abstract fun gcdMs(sim: SimIteration): Int
+    abstract fun gcdMs(sp: SimParticipant): Int
     open val castableOnGcd = false
 
-    open fun cooldownMs(sim: SimIteration): Int = 0
+    open fun cooldownMs(sp: SimParticipant): Int = 0
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
-    open fun trinketLockoutMs(sim: SimIteration): Int = 0
+    open fun trinketLockoutMs(sp: SimParticipant): Int = 0
 
-    open fun resourceCost(sim: SimIteration): Double = 0.0
-    open fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.MANA
+    open fun resourceCost(sp: SimParticipant): Double = 0.0
+    open fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.MANA
 
     // Buff implementations can implement their own state containers
     internal open fun stateFactory(): State {
         return State()
     }
 
-    internal open fun sharedState(type: SharedCooldown, sim: SimIteration): State {
+    internal open fun sharedState(type: SharedCooldown, sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
         // TODO: Shared state with factory overrides can conflict - needs to be owned elsewhere
-        val state = sim.sharedAbilityState[type.toString()] ?: stateFactory()
-        sim.sharedAbilityState[type.toString()] = state
+        val state = sp.sharedAbilityState[type.toString()] ?: stateFactory()
+        sp.sharedAbilityState[type.toString()] = state
         return state
     }
 
-    internal fun state(sim: SimIteration): State {
+    internal fun state(sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
-        var state = sim.abilityState[name]
+        var state = sp.abilityState[name]
         if(state == null) {
             state = stateFactory()
-            sim.abilityState[name] = state
+            sp.abilityState[name] = state
         }
         return state
     }
 
-    open fun available(sim: SimIteration): Boolean {
+    open fun available(sp: SimParticipant): Boolean {
         val state = if(sharedCooldown == SharedCooldown.NONE) {
-            state(sim)
+            state(sp)
         } else {
-            sharedState(sharedCooldown, sim)
+            sharedState(sharedCooldown, sp)
         }
 
-        return state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sim) <= sim.elapsedTimeMs)
+        return state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sp) <= sp.sim.elapsedTimeMs)
     }
 
-    open fun beforeCast(sim: SimIteration) {
+    open fun beforeCast(sp: SimParticipant) {
         // Spend the appropriate resource
-        val resourceCost = this.resourceCost(sim).toInt()
-        val resourceType = this.resourceType(sim)
+        val resourceCost = this.resourceCost(sp).toInt()
+        val resourceType = this.resourceType(sp)
         if (resourceCost != 0) {
-            sim.subtractResource(resourceCost, resourceType, this)
+            sp.subtractResource(resourceCost, resourceType, this)
         }
     }
 
-    abstract fun cast(sim: SimIteration)
-    open fun afterCast(sim: SimIteration) {
+    abstract fun cast(sp: SimParticipant)
+    open fun afterCast(sp: SimParticipant) {
         // Store individual cooldown state
-        val state = state(sim)
-        state.cooldownStartMs = sim.elapsedTimeMs
+        val state = state(sp)
+        state.cooldownStartMs = sp.sim.elapsedTimeMs
 
         // Store shared cooldown state
         if(sharedCooldown != SharedCooldown.NONE) {
-            val sharedState = sharedState(sharedCooldown, sim)
-            sharedState.cooldownStartMs = sim.elapsedTimeMs
+            val sharedState = sharedState(sharedCooldown, sp)
+            sharedState.cooldownStartMs = sp.sim.elapsedTimeMs
         }
     }
 
-    open fun castTimeMs(sim: SimIteration): Int = 0
-    open fun buffs(sim: SimIteration): List<Buff> = listOf()
+    open fun castTimeMs(sp: SimParticipant): Int = 0
+    open fun buffs(sp: SimParticipant): List<Buff> = listOf()
 }

@@ -1,7 +1,7 @@
 package data.abilities.raid
 
 import character.*
-import sim.SimIteration
+import sim.SimParticipant
 
 class CurseOfRecklessness : Ability() {
     companion object {
@@ -10,7 +10,7 @@ class CurseOfRecklessness : Ability() {
 
     override val id: Int = 27226
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     val debuff = object : Debuff() {
          override val name: String = "Curse of Recklessness"
@@ -18,7 +18,7 @@ class CurseOfRecklessness : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 armor = -800,
                 attackPower = 135
@@ -26,7 +26,7 @@ class CurseOfRecklessness : Ability() {
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addDebuff(debuff)
+    override fun cast(sp: SimParticipant) {
+        sp.addDebuff(debuff)
     }
 }

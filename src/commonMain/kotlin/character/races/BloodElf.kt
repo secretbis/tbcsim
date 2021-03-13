@@ -4,7 +4,7 @@ import character.Ability
 import character.Buff
 import character.Race
 import character.Stats
-import sim.SimIteration
+import sim.SimParticipant
 
 class BloodElf : Race() {
     override var baseStats: Stats = Stats(
@@ -16,5 +16,5 @@ class BloodElf : Race() {
     )
 
     override fun racialByName(name: String): Ability? = null
-    override fun buffs(sim: SimIteration): List<Buff> = listOf()
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf()
 }

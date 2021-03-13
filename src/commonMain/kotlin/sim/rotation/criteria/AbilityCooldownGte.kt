@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -22,10 +22,10 @@ class AbilityCooldownGte(data: RotationRuleCriterion) : Criterion(Type.ABILITY_C
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
+    override fun satisfied(sp: SimParticipant): Boolean {
         if(ability == null || seconds == null) return false
 
-        val abilityState = sim.abilityState[ability]
-        return abilityState != null && (sim.elapsedTimeMs - abilityState.cooldownStartMs).coerceAtLeast(0) >= seconds * 1000.0
+        val abilityState = sp.abilityState[ability]
+        return abilityState != null && (sp.sim.elapsedTimeMs - abilityState.cooldownStartMs).coerceAtLeast(0) >= seconds * 1000.0
     }
 }

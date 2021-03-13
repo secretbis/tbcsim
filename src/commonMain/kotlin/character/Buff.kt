@@ -1,7 +1,7 @@
 package character
 
 import mu.KotlinLogging
-import sim.SimIteration
+import sim.SimParticipant
 
 abstract class Buff {
     open class State {
@@ -39,19 +39,19 @@ abstract class Buff {
         return State()
     }
 
-    internal open fun state(sim: SimIteration, stateKey: String = name): State {
+    internal open fun state(sp: SimParticipant, stateKey: String = name): State {
         // Create state object if it does not exist, and return it
-        val state = sim.buffState[stateKey] ?: stateFactory()
-        sim.buffState[stateKey] = state
+        val state = sp.buffState[stateKey] ?: stateFactory()
+        sp.buffState[stateKey] = state
         return state
     }
 
-    open fun refresh(sim: SimIteration) {
-        val state = state(sim)
+    open fun refresh(sp: SimParticipant) {
+        val state = state(sp)
 
         // Always refresh buff application time
-        state.appliedAtMs = sim.elapsedTimeMs
-        state.lastTickMs = sim.elapsedTimeMs
+        state.appliedAtMs = sp.sim.elapsedTimeMs
+        state.lastTickMs = sp.sim.elapsedTimeMs
 
         // Add stacks if it stacks
         if (maxStacks > 0 && state.currentStacks < maxStacks) {
@@ -64,31 +64,31 @@ abstract class Buff {
         state.tickCount = 0
     }
 
-    open fun reset(sim: SimIteration) {
-        val state = state(sim)
+    open fun reset(sp: SimParticipant) {
+        val state = state(sp)
 
         state.currentStacks = 0
         state.currentCharges = maxCharges
         state.tickCount = 0
     }
 
-    open fun remainingDurationMs(sim: SimIteration): Int {
+    open fun remainingDurationMs(sp: SimParticipant): Int {
         return if(durationMs == -1) {
             // 24 hours in ms
             1000 * 60 * 60 * 24
         } else {
-            val state = state(sim)
-            ((state.appliedAtMs + durationMs) - sim.elapsedTimeMs).coerceAtLeast(0)
+            val state = state(sp)
+            ((state.appliedAtMs + durationMs) - sp.sim.elapsedTimeMs).coerceAtLeast(0)
         }
     }
 
-    open fun modifyStats(sim: SimIteration): Stats? {
+    open fun modifyStats(sp: SimParticipant): Stats? {
         return null
     }
 
-    open fun activeTrinketAbility(sim: SimIteration): Ability? {
+    open fun activeTrinketAbility(sp: SimParticipant): Ability? {
         return null
     }
 
-    open fun procs(sim: SimIteration): List<Proc> = listOf()
+    open fun procs(sp: SimParticipant): List<Proc> = listOf()
 }

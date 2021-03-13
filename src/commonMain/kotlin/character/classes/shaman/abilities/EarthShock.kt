@@ -7,7 +7,7 @@ import data.Constants
 import mechanics.General
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class EarthShock : Ability() {
     companion object {
@@ -17,25 +17,25 @@ class EarthShock : Ability() {
     override val id: Int = 25454
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun cooldownMs(sim: SimIteration): Int {
-        val reverberation = sim.subject.klass.talents[Reverberation.name] as Reverberation?
+    override fun cooldownMs(sp: SimParticipant): Int {
+        val reverberation = sp.character.klass.talents[Reverberation.name] as Reverberation?
         return 6000 - (reverberation?.shockCooldownReductionAmountMs() ?: 0).toInt()
     }
     override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val convection = sim.subject.klass.talents[Convection.name] as Convection?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val convection = sp.character.klass.talents[Convection.name] as Convection?
         val cvRed = convection?.lightningAndShockCostReduction() ?: 0.0
 
-        val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
+        val mq = sp.character.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
-        val shFocus = sim.buffs[ShamanisticFocus.name]
+        val shFocus = sp.buffs[ShamanisticFocus.name]
         val shfRed = if(shFocus != null) { 0.60 } else 0.0
 
-        val eleFocus = sim.buffs[ElementalFocus.name]
+        val eleFocus = sp.buffs[ElementalFocus.name]
         val elefRed = if(eleFocus != null) { 0.40 } else 0.0
 
         return General.resourceCostReduction(535.0, listOf(cvRed, mqRed, shfRed, elefRed))
@@ -43,15 +43,15 @@ class EarthShock : Ability() {
 
 
     val baseDamage = Pair(658.0, 693.0)
-    override fun cast(sim: SimIteration) {
+    override fun cast(sp: SimParticipant) {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.NATURE
 
-        val concussion = sim.subject.klass.talents[Concussion.name] as Concussion?
+        val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod
-        val result = Spell.attackRoll(sim, damageRoll, school)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod
+        val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -60,7 +60,7 @@ class EarthShock : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off Nature damage
         val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
@@ -74,7 +74,7 @@ class EarthShock : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
+            sp.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }
 }

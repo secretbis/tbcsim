@@ -1,11 +1,10 @@
 package character.classes.warrior.talents
 
 import character.*
-import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class MaceSpec(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -32,23 +31,23 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
                 Trigger.MELEE_BLOCK
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sim: SimIteration): Double = 5.0 * currentRank
+            override fun percentChance(sp: SimParticipant): Double = 5.0 * currentRank
 
-            override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
-                return items?.all { Melee.isMace(it) } ?: false && super.shouldProc(sim, items, ability, event)
+            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+                return items?.all { Melee.isMace(it) } ?: false && super.shouldProc(sp, items, ability, event)
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val item = items?.get(0)
                 if(item == null || !Melee.isMace(item)) {
                     logger.warn { "Tried to proc warrior Mace Specialization, but the context was not a mace." }
                     return
                 }
 
-                sim.addResource(7, Resource.Type.RAGE)
+                sp.addResource(7, Resource.Type.RAGE)
             }
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

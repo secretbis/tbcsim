@@ -7,7 +7,7 @@ import data.Constants
 import mechanics.General
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 open class ShadowBolt : Ability() {
     companion object {
@@ -17,43 +17,43 @@ open class ShadowBolt : Ability() {
     override val id: Int = 27209
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val cataclysm = sim.subject.klass.talents[Cataclysm.name] as Cataclysm?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val cataclysm = sp.character.klass.talents[Cataclysm.name] as Cataclysm?
         val cataRed = cataclysm?.destructionCostReduction() ?: 0.0
 
         return General.resourceCostReduction(420.0, listOf(cataRed))
     }
 
     val baseCastTimeMs = 3000
-    override fun castTimeMs(sim: SimIteration): Int {
+    override fun castTimeMs(sp: SimParticipant): Int {
         // Check for Nightfall proc
-        val nightfallProc = sim.buffs[Nightfall.name]
+        val nightfallProc = sp.buffs[Nightfall.name]
 
         if(nightfallProc != null) {
-            sim.consumeBuff(nightfallProc)
+            sp.consumeBuff(nightfallProc)
             return 0
         }
 
         // Otherwise cast normally
-        val bane = sim.subject.klass.talents[Bane.name] as Bane?
+        val bane = sp.character.klass.talents[Bane.name] as Bane?
         return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
     }
 
     val baseDamage = Pair(541.0, 603.0)
-    override fun cast(sim: SimIteration) {
-        val devastation = sim.subject.klass.talents[Devastation.name] as Devastation?
+    override fun cast(sp: SimParticipant) {
+        val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
-        val shadowAndFlame = sim.subject.klass.talents[ShadowAndFlame.name] as ShadowAndFlame?
+        val shadowAndFlame = sp.character.klass.talents[ShadowAndFlame.name] as ShadowAndFlame?
         val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 1.0
 
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.SHADOW
 
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier)
-        val result = Spell.attackRoll(sim, damageRoll, school, isBinary = false, devastationAddlCrit)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier)
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -62,7 +62,7 @@ open class ShadowBolt : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off non-periodic Shadow damage
         val baseTriggerTypes = if(result.second == Event.Result.CRIT) { listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT) } else listOf()
@@ -76,7 +76,7 @@ open class ShadowBolt : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
+            sp.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }
 }

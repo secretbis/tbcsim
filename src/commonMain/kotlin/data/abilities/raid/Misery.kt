@@ -1,7 +1,7 @@
 package data.abilities.raid
 
 import character.*
-import sim.SimIteration
+import sim.SimParticipant
 
 class Misery : Ability() {
     companion object {
@@ -10,7 +10,7 @@ class Misery : Ability() {
 
     override val id: Int = 33195
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Misery"
@@ -18,12 +18,12 @@ class Misery : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spellDamageMultiplier = 1.05)
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

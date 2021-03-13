@@ -2,6 +2,7 @@ package sim.rotation
 
 import mu.KotlinLogging
 import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.criteria.*
 
@@ -59,12 +60,12 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
         return State()
     }
 
-    internal open fun state(sim: SimIteration): State {
+    internal open fun state(sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
-        val state = sim.rotationState[type] ?: stateFactory()
-        sim.rotationState[type] = state
+        val state = sp.rotationState[type] ?: stateFactory()
+        sp.rotationState[type] = state
         return state
     }
 
-    abstract fun satisfied(sim: SimIteration): Boolean
+    abstract fun satisfied(sp: SimParticipant): Boolean
 }

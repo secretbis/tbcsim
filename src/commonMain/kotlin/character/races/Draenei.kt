@@ -8,7 +8,7 @@ import character.classes.mage.Mage
 import character.classes.priest.Priest
 import character.classes.shaman.Shaman
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class Draenei : Race() {
     override var baseStats: Stats = Stats(
@@ -22,7 +22,7 @@ class Draenei : Race() {
         override val name: String = "Heroic Presence"
         override val durationMs: Int = -1
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalHitRating = 1.0 * Rating.meleeHitPerPct)
         }
     }
@@ -31,13 +31,13 @@ class Draenei : Race() {
         override val name: String = "Inspiring Presence"
         override val durationMs: Int = -1
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spellHitRating = 1.0 * Rating.spellHitPerPct)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> {
-        val k = sim.subject.klass
+    override fun buffs(sp: SimParticipant): List<Buff> {
+        val k = sp.character.klass
         return if(k is Shaman || k is Mage || k is Priest) {
             listOf(inspiringPresence)
         } else {

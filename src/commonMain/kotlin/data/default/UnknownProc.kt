@@ -4,7 +4,7 @@ import character.Ability
 import character.Proc
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnknownProc : Proc() {
     override val type: Type = Type.STATIC
@@ -12,11 +12,11 @@ class UnknownProc : Proc() {
     override val triggers: List<Trigger>
         get() = Trigger.values().asList()
 
-    override fun shouldProc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+    override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         return true
     }
 
-    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
         val itemStr = items?.map { "item: ${it.name} (${it.id})" }?.joinToString { ", " } ?: ""
         logger.warn { "Unknown proc ${ability?.name} (${ability?.id}) $itemStr" }
     }

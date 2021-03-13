@@ -4,7 +4,7 @@ import character.*
 import data.model.Item
 import mechanics.Rating
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -25,13 +25,13 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
             override val durationMs: Int = 10000
             override val hidden: Boolean = true
 
-            override fun modifyStats(sim: SimIteration): Stats {
+            override fun modifyStats(sp: SimParticipant): Stats {
                 return Stats(physicalCritRating = 3 * Rating.critPerPct)
             }
         }
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(buff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(buff)
         }
     }
 
@@ -40,8 +40,8 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

@@ -3,11 +3,9 @@ package character.classes.warrior.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import data.Constants
-import data.model.Item
 import mechanics.Melee
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -22,14 +20,14 @@ class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             // This doesn't account for dual-wielding different weapon types, since Fury should never take this
-            return if(Melee.isPoleaxe(sim.subject.gear.mainHand)) {
+            return if(Melee.isPoleaxe(sp.character.gear.mainHand)) {
                 val critPct = 1.0 * currentRank
                 return Stats(physicalCritRating = critPct * Rating.critPerPct)
             } else Stats()
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

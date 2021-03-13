@@ -6,7 +6,7 @@ import character.Proc
 import data.Constants
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnstableAfflictionDot : Debuff() {
     companion object {
@@ -22,11 +22,11 @@ class UnstableAfflictionDot : Debuff() {
     val ua = object : Ability() {
         override val id: Int = 30405
         override val name: String = Companion.name
-        override fun gcdMs(sim: SimIteration): Int = 0
+        override fun gcdMs(sp: SimParticipant): Int = 0
 
-        override fun cast(sim: SimIteration) {
+        override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -35,13 +35,13 @@ class UnstableAfflictionDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sim.logEvent(event)
+            sp.logEvent(event)
 
-            sim.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+            sp.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
 
-    override fun tick(sim: SimIteration) {
-        ua.cast(sim)
+    override fun tick(sp: SimParticipant) {
+        ua.cast(sp)
     }
 }

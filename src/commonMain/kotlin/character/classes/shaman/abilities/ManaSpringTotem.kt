@@ -4,11 +4,10 @@ import character.Ability
 import character.Buff
 import character.Mutex
 import character.Stats
-import character.classes.shaman.talents.EnhancingTotems
 import character.classes.shaman.talents.MentalQuickness
 import character.classes.shaman.talents.TotemicFocus
 import mechanics.General
-import sim.SimIteration
+import sim.SimParticipant
 
 class ManaSpringTotem : Ability() {
     companion object {
@@ -18,19 +17,19 @@ class ManaSpringTotem : Ability() {
     override val id: Int = 25570
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.totemGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val tf = sim.subject.klass.talents[TotemicFocus.name] as TotemicFocus?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val tf = sp.character.klass.talents[TotemicFocus.name] as TotemicFocus?
         val tfRed = tf?.totemCostReduction() ?: 0.0
 
-        val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
+        val mq = sp.character.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
         return General.resourceCostReduction(120.0, listOf(tfRed, mqRed))
     }
 
-    override fun available(sim: SimIteration): Boolean {
+    override fun available(sp: SimParticipant): Boolean {
         return true
     }
 
@@ -40,14 +39,14 @@ class ManaSpringTotem : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.WATER_TOTEM)
 
         // TODO: Does anyone care about the Restorative Totems talent?  Probably not
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 manaPer5Seconds = 50
             )
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

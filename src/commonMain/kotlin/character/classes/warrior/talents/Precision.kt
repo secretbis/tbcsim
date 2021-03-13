@@ -4,7 +4,7 @@ import character.Buff
 import character.Stats
 import character.Talent
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class Precision(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,10 +19,10 @@ class Precision(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalHitRating = currentRank * Rating.meleeHitPerPct)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

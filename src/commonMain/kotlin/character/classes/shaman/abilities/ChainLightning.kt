@@ -10,6 +10,7 @@ import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 
 open class ChainLightning : Ability() {
     companion object {
@@ -19,18 +20,18 @@ open class ChainLightning : Ability() {
     override val id: Int = 25442
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun cooldownMs(sim: SimIteration): Int = 6000
+    override fun cooldownMs(sp: SimParticipant): Int = 6000
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val convection = sim.subject.klass.talents[Convection.name] as Convection?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val convection = sp.character.klass.talents[Convection.name] as Convection?
         val cvRed = convection?.lightningAndShockCostReduction() ?: 0.0
 
-        val mq = sim.subject.klass.talents[MentalQuickness.name] as MentalQuickness?
+        val mq = sp.character.klass.talents[MentalQuickness.name] as MentalQuickness?
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
-        val eleFocus = sim.buffs[ElementalFocus.name]
+        val eleFocus = sp.buffs[ElementalFocus.name]
         val elefRed = if(eleFocus != null) { 0.40 } else 0.0
 
         return General.resourceCostReduction(760.0, listOf(cvRed, mqRed, elefRed))
@@ -46,47 +47,47 @@ open class ChainLightning : Ability() {
                 Trigger.SHAMAN_CAST_CHAIN_LIGHTNING
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sim: SimIteration): Double {
-                val lo = sim.subject.klass.talents[LightningOverload.name] as LightningOverload?
+            override fun percentChance(sp: SimParticipant): Double {
+                val lo = sp.character.klass.talents[LightningOverload.name] as LightningOverload?
                 return (lo?.currentRank ?: 0) * 4.0
             }
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                actualCast(sim, true)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                actualCast(sp, true)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
     val baseCastTimeMs = 2000
-    override fun castTimeMs(sim: SimIteration): Int {
-        val lm = sim.subject.klass.talents[LightningMastery.name] as LightningMastery?
+    override fun castTimeMs(sp: SimParticipant): Int {
+        val lm = sp.character.klass.talents[LightningMastery.name] as LightningMastery?
         return baseCastTimeMs - (lm?.lightningCastReductionAmountMs() ?: 0)
     }
 
     val baseDamage = Pair(734.0, 838.0)
-    override fun cast(sim: SimIteration) {
-        actualCast(sim)
+    override fun cast(sp: SimParticipant) {
+        actualCast(sp)
     }
 
-    private fun actualCast(sim: SimIteration, isLoProc: Boolean = false) {
+    private fun actualCast(sp: SimParticipant, isLoProc: Boolean = false) {
         val loMod = if(isLoProc) { 0.5 } else 1.0
 
-        val cot = sim.subject.klass.talents[CallOfThunder.name] as CallOfThunder?
+        val cot = sp.character.klass.talents[CallOfThunder.name] as CallOfThunder?
         val cotAddlCrit = cot?.additionalLightningCritChance() ?: 0.0
 
-        val tm = sim.subject.klass.talents[TidalMastery.name] as TidalMastery?
+        val tm = sp.character.klass.talents[TidalMastery.name] as TidalMastery?
         val tmAddlCrit = tm?.additionalLightningAndHealingCritChance() ?: 0.0
 
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.NATURE
 
-        val concussion = sim.subject.klass.talents[Concussion.name] as Concussion?
+        val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod
-        val result = Spell.attackRoll(sim, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -95,7 +96,7 @@ open class ChainLightning : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off Nature damage
         val baseTriggerTypes = if(isLoProc) { listOf() } else listOf(Proc.Trigger.SHAMAN_CAST_CHAIN_LIGHTNING)
@@ -109,9 +110,9 @@ open class ChainLightning : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
+            sp.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(loBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(loBuff)
 }

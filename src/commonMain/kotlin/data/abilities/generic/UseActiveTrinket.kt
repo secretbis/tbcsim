@@ -2,6 +2,7 @@ package data.abilities.generic
 
 import character.Ability
 import sim.SimIteration
+import sim.SimParticipant
 
 class UseActiveTrinket : Ability() {
     companion object {
@@ -18,37 +19,37 @@ class UseActiveTrinket : Ability() {
 
     override val id: Int = -1
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
     override val sharedCooldown: SharedCooldown = SharedCooldown.ACTIVE_TRINKET
 
-    private fun getActiveTrinkets(sim: SimIteration): List<Ability> {
-        return sim.buffs.values.mapNotNull { it.activeTrinketAbility(sim) }
+    private fun getActiveTrinkets(sp: SimParticipant): List<Ability> {
+        return sp.buffs.values.mapNotNull { it.activeTrinketAbility(sp) }
     }
 
-    override fun available(sim: SimIteration): Boolean {
-        return getActiveTrinkets(sim).isNotEmpty() && super.available(sim)
+    override fun available(sp: SimParticipant): Boolean {
+        return getActiveTrinkets(sp).isNotEmpty() && super.available(sp)
     }
 
-    override fun cooldownMs(sim: SimIteration): Int {
-        val state = state(sim) as TrinketState
+    override fun cooldownMs(sp: SimParticipant): Int {
+        val state = state(sp) as TrinketState
         return state.lastTrinketUsedDurationMs
     }
 
-    override fun cast(sim: SimIteration) {
-        val availableTrinkets = getActiveTrinkets(sim)
+    override fun cast(sp: SimParticipant) {
+        val availableTrinkets = getActiveTrinkets(sp)
 
         // The user can specify a "name" option to select a trinket.  Otherwise, just pick one.
-        val preferredName = sim.castingRule?.options?.name
+        val preferredName = sp.castingRule?.options?.name
         val trinket = availableTrinkets.find { it.name == preferredName } ?: availableTrinkets.firstOrNull()
 
-        if(trinket != null && trinket.available(sim)) {
+        if(trinket != null && trinket.available(sp)) {
             // Set cooldown state according to the trinket duration
-            (state(sim) as TrinketState).lastTrinketUsedDurationMs = trinket.trinketLockoutMs(sim)
+            (state(sp) as TrinketState).lastTrinketUsedDurationMs = trinket.trinketLockoutMs(sp)
 
             // Cast
-            trinket.beforeCast(sim)
-            trinket.cast(sim)
-            trinket.afterCast(sim)
+            trinket.beforeCast(sp)
+            trinket.cast(sp)
+            trinket.afterCast(sp)
         }
     }
 }

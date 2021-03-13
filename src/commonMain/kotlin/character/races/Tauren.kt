@@ -4,7 +4,7 @@ import character.Race
 import character.Ability
 import character.Buff
 import character.Stats
-import sim.SimIteration
+import sim.SimParticipant
 
 class Tauren : Race() {
     override var baseStats: Stats = Stats(
@@ -21,10 +21,10 @@ class Tauren : Race() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats? {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(healthMultiplier = 1.05)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(endurance)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(endurance)
 }

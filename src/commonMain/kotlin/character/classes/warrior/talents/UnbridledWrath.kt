@@ -3,7 +3,7 @@ package character.classes.warrior.talents
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -33,13 +33,13 @@ class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.PPM
             override val ppm: Double = 3.0 * currentRank
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addResource(1, Resource.Type.RAGE)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addResource(1, Resource.Type.RAGE)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

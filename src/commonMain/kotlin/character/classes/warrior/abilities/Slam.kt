@@ -5,7 +5,7 @@ import character.classes.warrior.talents.ImprovedSlam
 import data.Constants
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class Slam : Ability() {
     companion object {
@@ -15,20 +15,20 @@ class Slam : Ability() {
     override val id: Int = 25242
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
-    override fun castTimeMs(sim: SimIteration): Int {
-        val impSlamRanks = sim.subject.klass.talents[ImprovedSlam.name]?.currentRank ?: 0
+    override fun castTimeMs(sp: SimParticipant): Int {
+        val impSlamRanks = sp.character.klass.talents[ImprovedSlam.name]?.currentRank ?: 0
         return 1500 - (500 * impSlamRanks)
     }
 
-    override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sim: SimIteration): Double = 15.0
+    override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+    override fun resourceCost(sp: SimParticipant): Double = 15.0
 
-    override fun cast(sim: SimIteration) {
-        val item = sim.subject.gear.mainHand
-        val damageRoll = Melee.baseDamageRoll(sim, item, isNormalized = false)
-        val result = Melee.attackRoll(sim, damageRoll, item, isWhiteDmg = false)
+    override fun cast(sp: SimParticipant) {
+        val item = sp.character.gear.mainHand
+        val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = false)
+        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(
@@ -38,7 +38,7 @@ class Slam : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
@@ -53,10 +53,10 @@ class Slam : Ability() {
         }
 
         // Reset MH swing timer
-        sim.mhAutoAttack?.resetSwingTimer(sim)
+        sp.mhAutoAttack?.resetSwingTimer(sp)
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

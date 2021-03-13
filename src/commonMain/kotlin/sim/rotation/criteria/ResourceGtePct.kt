@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -15,7 +15,7 @@ class ResourceGtePct(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_GTE_
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
-        return pct != null && sim.resource.currentAmount >= sim.resource.maxAmount * (pct / 100.0)
+    override fun satisfied(sp: SimParticipant): Boolean {
+        return pct != null && sp.resource.currentAmount >= sp.resource.maxAmount * (pct / 100.0)
     }
 }

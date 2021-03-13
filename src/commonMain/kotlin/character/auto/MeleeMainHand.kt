@@ -1,7 +1,7 @@
 package character.auto
 
 import data.model.Item
-import sim.SimIteration
+import sim.SimParticipant
 
 class MeleeMainHand : MeleeBase() {
     companion object {
@@ -11,9 +11,9 @@ class MeleeMainHand : MeleeBase() {
     override val id: Int = 1
     override val name: String = Companion.name
 
-    override fun item(sim: SimIteration): Item = sim.subject.gear.mainHand
+    override fun item(sp: SimParticipant): Item = sp.character.gear.mainHand
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.hasMainHandWeapon() && super.available(sim)
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.hasMainHandWeapon() && super.available(sp)
     }
 }

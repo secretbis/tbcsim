@@ -5,7 +5,7 @@ import character.classes.warrior.talents.ImprovedHeroicStrike
 import data.Constants
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class HeroicStrike : Ability() {
     companion object {
@@ -15,12 +15,12 @@ class HeroicStrike : Ability() {
     override val id: Int = 30324
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true
 
-    override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sim: SimIteration): Double {
-        val impHsRanks = sim.subject.klass.talents[ImprovedHeroicStrike.name]?.currentRank ?: 0
+    override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+    override fun resourceCost(sp: SimParticipant): Double {
+        val impHsRanks = sp.character.klass.talents[ImprovedHeroicStrike.name]?.currentRank ?: 0
         return 15.0 - impHsRanks
     }
 
@@ -30,7 +30,7 @@ class HeroicStrike : Ability() {
         override val durationMs: Int = -1
         override val maxCharges: Int = 1
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(offHandAddlWhiteHitPct = 19.0)
         }
     }
@@ -40,14 +40,14 @@ class HeroicStrike : Ability() {
         override val id: Int = 30324
         override val name: String = Companion.name
 
-        override fun gcdMs(sim: SimIteration): Int = 0
+        override fun gcdMs(sp: SimParticipant): Int = 0
 
-        override fun cast(sim: SimIteration) {
-            sim.consumeBuff(offHandHitBuff)
+        override fun cast(sp: SimParticipant) {
+            sp.consumeBuff(offHandHitBuff)
 
-            val mhItem = sim.subject.gear.mainHand
-            val damage = Melee.baseDamageRoll(sim, mhItem, isNormalized = false) + bonusDamage
-            val result = Melee.attackRoll(sim, damage, mhItem, isWhiteDmg = false)
+            val mhItem = sp.character.gear.mainHand
+            val damage = Melee.baseDamageRoll(sp, mhItem, isNormalized = false) + bonusDamage
+            val result = Melee.attackRoll(sp, damage, mhItem, isWhiteDmg = false)
 
             // Save last hit state and fire event
             val event = Event(
@@ -57,7 +57,7 @@ class HeroicStrike : Ability() {
                 amount = result.first,
                 result = result.second,
             )
-            sim.logEvent(event)
+            sp.logEvent(event)
 
             // Proc anything that can proc off a yellow hit or a replaced auto-attack hit
             val triggerTypes = when(result.second) {
@@ -72,15 +72,15 @@ class HeroicStrike : Ability() {
             }
 
             if(triggerTypes != null) {
-                sim.fireProc(triggerTypes, listOf(mhItem), this, event)
+                sp.fireProc(triggerTypes, listOf(mhItem), this, event)
             }
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.replaceNextMainHandAutoAttack(nextHitAbility)
-        if(sim.isDualWielding()) {
-            sim.addBuff(offHandHitBuff)
+    override fun cast(sp: SimParticipant) {
+        sp.replaceNextMainHandAutoAttack(nextHitAbility)
+        if(sp.isDualWielding()) {
+            sp.addBuff(offHandHitBuff)
         }
     }
 }

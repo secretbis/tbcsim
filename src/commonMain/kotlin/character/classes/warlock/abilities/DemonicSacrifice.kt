@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Stats
 import sim.SimIteration
+import sim.SimParticipant
 
 class DemonicSacrificeImp : DemonicSacrifice("Imp", { Stats(fireDamageMultiplier = 1.15)}) {
     companion object {
@@ -15,32 +16,32 @@ class DemonicSacrificeSuccubus : DemonicSacrifice("Succubus", { Stats(shadowDama
         const val name = "Demonic Sacrifice (Succubus)"
     }
 }
-class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sim -> Stats(shadowDamageMultiplier = 1.15, manaPer5Seconds = (sim.resource.maxAmount * 0.02 * 0.8).toInt())}) {
+class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sp -> Stats(shadowDamageMultiplier = 1.15, manaPer5Seconds = (sp.resource.maxAmount * 0.02 * 0.8).toInt())}) {
     companion object {
         const val name = "Demonic Sacrifice (Felguard)"
     }
 }
 
-open class DemonicSacrifice(suffix: String, stats: (sim: SimIteration) -> Stats) : Ability() {
+open class DemonicSacrifice(suffix: String, stats: (sp: SimParticipant) -> Stats) : Ability() {
     override val id: Int = 18788
     override val name: String = "Demonic Sacrifice ($suffix)"
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.subject.klass.talents[character.classes.warlock.talents.DemonicSacrifice.name]?.currentRank ?: 0  > 0
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.klass.talents[character.classes.warlock.talents.DemonicSacrifice.name]?.currentRank ?: 0  > 0
     }
 
     val buff = object : Buff() {
         override val name: String = "Demonic Sacrifice"
         override val durationMs: Int = 30 * 60 * 1000
 
-        override fun modifyStats(sim: SimIteration): Stats {
-            return stats(sim)
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return stats(sp)
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

@@ -1,10 +1,9 @@
 package character.classes.shaman.talents
 
 import character.Buff
-import character.Proc
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class MentalQuickness(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -14,16 +13,16 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    override fun buffs(sim: SimIteration): List<Buff> {
+    override fun buffs(sp: SimParticipant): List<Buff> {
         return listOf(
             object : Buff() {
                 override val name: String = "Mental Quickness (Spell Damage)"
                 override val durationMs: Int = -1
                 override val hidden: Boolean = true
 
-                override fun modifyStats(sim: SimIteration): Stats {
+                override fun modifyStats(sp: SimParticipant): Stats {
                     val modifier = currentRank * 0.1
-                    val spellDamage = modifier * sim.attackPower()
+                    val spellDamage = modifier * sp.attackPower()
                     return Stats(spellDamage = spellDamage.toInt())
                 }
             }

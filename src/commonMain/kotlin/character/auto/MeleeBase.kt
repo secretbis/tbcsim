@@ -6,38 +6,40 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.Sim
 import sim.SimIteration
+import sim.SimParticipant
 
 abstract class MeleeBase : Ability() {
-    abstract fun item(sim: SimIteration): Item
+    abstract fun item(sp: SimParticipant): Item
 
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     class AutoAttackState : Ability.State() {
         var lastAttackTimeMs = 0
         var count = 0
     }
 
-    fun resetSwingTimer(sim: SimIteration) {
-        (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs
+    fun resetSwingTimer(sp: SimParticipant) {
+        (state(sp) as AutoAttackState).lastAttackTimeMs = sp.sim.elapsedTimeMs
     }
 
     override fun stateFactory(): AutoAttackState {
         return AutoAttackState()
     }
 
-    override fun available(sim: SimIteration): Boolean {
-        val nextAvailableTimeMs = (state(sim) as AutoAttackState).lastAttackTimeMs + sim.weaponSpeed(item(sim))
-        return nextAvailableTimeMs <= sim.elapsedTimeMs
+    override fun available(sp: SimParticipant): Boolean {
+        val nextAvailableTimeMs = (state(sp) as AutoAttackState).lastAttackTimeMs + sp.weaponSpeed(item(sp))
+        return nextAvailableTimeMs <= sp.sim.elapsedTimeMs
     }
 
-    override fun cast(sim: SimIteration) {
-        val damageRoll = Melee.baseDamageRoll(sim, item(sim))
-        val result = Melee.attackRoll(sim, damageRoll, item(sim), isWhiteDmg = true)
+    override fun cast(sp: SimParticipant) {
+        val damageRoll = Melee.baseDamageRoll(sp, item(sp))
+        val result = Melee.attackRoll(sp, damageRoll, item(sp), isWhiteDmg = true)
 
         // Save last hit state and fire event
-        (state(sim) as AutoAttackState).lastAttackTimeMs = sim.elapsedTimeMs
-        (state(sim) as AutoAttackState).count += 1
+        (state(sp) as AutoAttackState).lastAttackTimeMs = sp.sim.elapsedTimeMs
+        (state(sp) as AutoAttackState).count += 1
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -47,7 +49,7 @@ abstract class MeleeBase : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off a white hit
         val triggerTypes = when(result.second) {
@@ -63,7 +65,7 @@ abstract class MeleeBase : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item(sim)), this, event)
+            sp.fireProc(triggerTypes, listOf(item(sp)), this, event)
         }
     }
 }

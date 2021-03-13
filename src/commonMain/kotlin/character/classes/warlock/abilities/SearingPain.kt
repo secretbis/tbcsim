@@ -7,7 +7,7 @@ import data.Constants
 import mechanics.General
 import mechanics.Spell
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class SearingPain : Ability() {
     companion object {
@@ -17,31 +17,31 @@ class SearingPain : Ability() {
     override val id: Int = 27210
     override val name: String = Companion.name
 
-    override fun gcdMs(sim: SimIteration): Int = sim.spellGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double {
-        val cataclysm = sim.subject.klass.talents[Cataclysm.name] as Cataclysm?
+    override fun resourceCost(sp: SimParticipant): Double {
+        val cataclysm = sp.character.klass.talents[Cataclysm.name] as Cataclysm?
         val cataRed = cataclysm?.destructionCostReduction() ?: 0.0
 
         return General.resourceCostReduction(191.0, listOf(cataRed))
     }
 
     val baseCastTimeMs = 1500
-    override fun castTimeMs(sim: SimIteration): Int = baseCastTimeMs
+    override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
 
     val baseDamage = Pair(243.0, 288.0)
-    override fun cast(sim: SimIteration) {
-        val devastation = sim.subject.klass.talents[Devastation.name] as Devastation?
+    override fun cast(sp: SimParticipant) {
+        val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
-        val impSearingPain = sim.subject.klass.talents[ImprovedSearingPain.name] as ImprovedSearingPain?
+        val impSearingPain = sp.character.klass.talents[ImprovedSearingPain.name] as ImprovedSearingPain?
         val impSearingPainAddlCrit = impSearingPain?.searingPainAddlCritPct() ?: 0.0
 
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.FIRE
 
-        val damageRoll = Spell.baseDamageRoll(sim, baseDamage.first, baseDamage.second, spellPowerCoeff, school)
-        val result = Spell.attackRoll(sim, damageRoll, school, isBinary = false, devastationAddlCrit + impSearingPainAddlCrit)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school)
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit + impSearingPainAddlCrit)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -50,7 +50,7 @@ class SearingPain : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {
@@ -63,7 +63,7 @@ class SearingPain : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(), this, event)
+            sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }
 }

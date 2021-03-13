@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -25,8 +25,8 @@ class FightTimeRemainingModuloLte(data: RotationRuleCriterion) : Criterion(Type.
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
+    override fun satisfied(sp: SimParticipant): Boolean {
         if(modulusSeconds == null || seconds == null) return false
-        return sim.elapsedTimeMs % (modulusSeconds * 1000) <= seconds * 1000
+        return sp.sim.elapsedTimeMs % (modulusSeconds * 1000) <= seconds * 1000
     }
 }

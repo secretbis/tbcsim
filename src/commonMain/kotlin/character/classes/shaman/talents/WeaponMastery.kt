@@ -1,10 +1,9 @@
 package character.classes.shaman.talents
 
 import character.Buff
-import character.Proc
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class WeaponMastery(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,8 +18,8 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
-            val talentRanks = sim.subject.klass.talents[WeaponMastery.name]?.currentRank ?: 0
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val talentRanks = sp.character.klass.talents[WeaponMastery.name]?.currentRank ?: 0
 
             val modifier = 1 + (0.02 * talentRanks)
             return Stats(
@@ -30,5 +29,5 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

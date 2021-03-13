@@ -4,7 +4,7 @@ import character.Buff
 import character.Stats
 import character.Talent
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class WeaponMastery(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,11 +19,11 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             // This is slightly wrong when parry is turned on, but that's a scuffed situation anyway
             return Stats(expertiseRating = currentRank * Rating.expertisePerPct)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

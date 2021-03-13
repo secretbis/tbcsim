@@ -9,7 +9,7 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class Stormstrike : Ability() {
     companion object {
@@ -18,15 +18,15 @@ class Stormstrike : Ability() {
 
     override val id: Int = 17364
     override val name: String = Companion.name
-    override fun cooldownMs(sim: SimIteration): Int = 10000
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun cooldownMs(sp: SimParticipant): Int = 10000
+    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
-    override fun resourceCost(sim: SimIteration): Double {
-        return 0.08 * sim.subject.klass.baseMana
+    override fun resourceCost(sp: SimParticipant): Double {
+        return 0.08 * sp.character.klass.baseMana
     }
 
-    override fun available(sim: SimIteration): Boolean {
-        return sim.subject.klass.talents[StormstrikeTalent.name]?.currentRank == 1 && super.available(sim)
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.klass.talents[StormstrikeTalent.name]?.currentRank == 1 && super.available(sp)
     }
 
     val proc = fun(buff: Buff): Proc {
@@ -36,8 +36,8 @@ class Stormstrike : Ability() {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.consumeBuff(buff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.consumeBuff(buff)
             }
         }
     }
@@ -48,26 +48,26 @@ class Stormstrike : Ability() {
         override val maxCharges: Int = 2
 
         // Increase nature damage for as long as we have charges
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(natureDamageMultiplier = 1.2)
         }
 
         val proc = proc(this)
 
         // Proc off of nature damage to reduce our stacks
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun cast(sim: SimIteration) {
+    override fun cast(sp: SimParticipant) {
         // Do attacks
         // Stormstrike is yellow, and not normalized per EJ
-        val mhItem = sim.subject.gear.mainHand
-        val mhAttack = Melee.baseDamageRoll(sim, mhItem, isNormalized = false)
-        val mhResult = Melee.attackRoll(sim, mhAttack, mhItem, isWhiteDmg = false)
+        val mhItem = sp.character.gear.mainHand
+        val mhAttack = Melee.baseDamageRoll(sp, mhItem, isNormalized = false)
+        val mhResult = Melee.attackRoll(sp, mhAttack, mhItem, isWhiteDmg = false)
 
-        val ohItem = sim.subject.gear.offHand
-        val ohAttack = Melee.baseDamageRoll(sim, ohItem, isNormalized = false)
-        val ohResult = Melee.attackRoll(sim, ohAttack, ohItem, isWhiteDmg = false)
+        val ohItem = sp.character.gear.offHand
+        val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false)
+        val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
 
         // TODO: Distinguish MH and OH events in the logs?
         val eventMh = Event(
@@ -77,7 +77,7 @@ class Stormstrike : Ability() {
             amount = mhResult.first,
             result = mhResult.second,
         )
-        sim.logEvent(eventMh)
+        sp.logEvent(eventMh)
 
         val eventOh = Event(
             eventType = Event.Type.DAMAGE,
@@ -86,10 +86,10 @@ class Stormstrike : Ability() {
             amount = ohResult.first,
             result = ohResult.second,
         )
-        sim.logEvent(eventOh)
+        sp.logEvent(eventOh)
 
         // Apply the nature buff
-        sim.addBuff(buff)
+        sp.addBuff(buff)
 
         // Proc anything that can proc off a yellow hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
@@ -101,7 +101,7 @@ class Stormstrike : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
+            sp.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
         }
 
         // TODO: This is modeled as two distint hit events for the purposes of procs
@@ -113,7 +113,7 @@ class Stormstrike : Ability() {
         }
 
         if(triggerTypesOh != null) {
-            sim.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
+            sp.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
         }
     }
 }

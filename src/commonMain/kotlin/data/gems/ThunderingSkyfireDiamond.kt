@@ -9,7 +9,7 @@ import data.model.Gem
 import data.model.Item
 import data.model.Quality
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -19,7 +19,7 @@ class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_mi
         override val name: String = "Thundering Skyfire Diamond"
         override val durationMs: Int = 10000
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalHasteRating = 240.0)
         }
     }
@@ -29,7 +29,7 @@ class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_mi
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return stats
         }
 
@@ -46,14 +46,14 @@ class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_mi
             // https://70.wowfan.net/en/?spell=39958
             override val type: Type = Type.PPM
             override val ppm: Double = 0.7
-            override fun cooldownMs(sim: SimIteration): Int = 40000
+            override fun cooldownMs(sp: SimParticipant): Int = 40000
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addBuff(hasteBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(hasteBuff)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
     override var buffs: List<Buff> = listOf(buff)

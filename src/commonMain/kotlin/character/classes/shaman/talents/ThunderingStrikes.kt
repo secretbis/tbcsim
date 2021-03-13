@@ -4,7 +4,7 @@ import character.Buff
 import character.Stats
 import character.Talent
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class ThunderingStrikes(ranks: Int) : Talent(ranks) {
     companion object {
@@ -19,11 +19,11 @@ class ThunderingStrikes(ranks: Int) : Talent(ranks) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             val critPct = 1.0 * currentRank
             return Stats(physicalCritRating = critPct * Rating.critPerPct)
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

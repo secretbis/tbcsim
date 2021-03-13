@@ -2,10 +2,9 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
-import character.Proc
 import character.Stats
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class ImprovedSealOfTheCrusader : Ability() {
     companion object {
@@ -14,7 +13,7 @@ class ImprovedSealOfTheCrusader : Ability() {
 
     override val id: Int = 27158
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     // Always assume the raid buffer has 3/3 imp seal
     val bonusCritRating = 3.0 * Rating.critPerPct
@@ -24,7 +23,7 @@ class ImprovedSealOfTheCrusader : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 physicalCritRating = bonusCritRating,
                 spellCritRating = bonusCritRating
@@ -32,7 +31,7 @@ class ImprovedSealOfTheCrusader : Ability() {
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

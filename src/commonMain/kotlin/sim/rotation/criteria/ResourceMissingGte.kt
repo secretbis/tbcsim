@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import sim.SimIteration
+import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
@@ -15,7 +15,7 @@ class ResourceMissingGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_
         null
     }
 
-    override fun satisfied(sim: SimIteration): Boolean {
-        return amount != null && sim.resource.currentAmount <= sim.resource.maxAmount - amount
+    override fun satisfied(sp: SimParticipant): Boolean {
+        return amount != null && sp.resource.currentAmount <= sp.resource.maxAmount - amount
     }
 }

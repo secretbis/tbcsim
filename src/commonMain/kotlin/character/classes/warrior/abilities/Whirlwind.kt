@@ -7,6 +7,7 @@ import data.model.Item
 import mechanics.Melee
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 
 class Whirlwind : Ability() {
     companion object {
@@ -16,19 +17,19 @@ class Whirlwind : Ability() {
     override val id: Int = 8989
     override val name: String = Companion.name
 
-    override fun cooldownMs(sim: SimIteration): Int {
-        val impWWRanks = sim.subject.klass.talents[ImprovedWhirlwind.name]?.currentRank ?: 0
+    override fun cooldownMs(sp: SimParticipant): Int {
+        val impWWRanks = sp.character.klass.talents[ImprovedWhirlwind.name]?.currentRank ?: 0
         val discount = 1000 * impWWRanks
         return 6000 - discount
     }
 
-    override fun resourceType(sim: SimIteration): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sim: SimIteration): Double = 30.0
+    override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+    override fun resourceCost(sp: SimParticipant): Double = 30.0
 
-    override fun cast(sim: SimIteration) {
-        val mh = sim.subject.gear.mainHand
-        val mhDamageRoll = Melee.baseDamageRoll(sim, mh, isNormalized = true)
-        val mhResult = Melee.attackRoll(sim, mhDamageRoll, mh)
+    override fun cast(sp: SimParticipant) {
+        val mh = sp.character.gear.mainHand
+        val mhDamageRoll = Melee.baseDamageRoll(sp, mh, isNormalized = true)
+        val mhResult = Melee.attackRoll(sp, mhDamageRoll, mh)
 
         // Save last hit state and fire event
         val mhEvent = Event(
@@ -38,14 +39,14 @@ class Whirlwind : Ability() {
             amount = mhResult.first,
             result = mhResult.second,
         )
-        sim.logEvent(mhEvent)
+        sp.logEvent(mhEvent)
 
-        fireTriggers(sim, mh, mhEvent, mhResult)
+        fireTriggers(sp, mh, mhEvent, mhResult)
 
-        if(sim.isDualWielding()) {
-            val oh = sim.subject.gear.offHand
-            val ohDamageRoll = Melee.baseDamageRoll(sim, oh, isNormalized = true)
-            val ohResult = Melee.attackRoll(sim, ohDamageRoll, oh)
+        if(sp.isDualWielding()) {
+            val oh = sp.character.gear.offHand
+            val ohDamageRoll = Melee.baseDamageRoll(sp, oh, isNormalized = true)
+            val ohResult = Melee.attackRoll(sp, ohDamageRoll, oh)
 
             // Save last hit state and fire event
             val ohEvent = Event(
@@ -55,13 +56,13 @@ class Whirlwind : Ability() {
                 amount = ohResult.first,
                 result = ohResult.second,
             )
-            sim.logEvent(ohEvent)
+            sp.logEvent(ohEvent)
 
-            fireTriggers(sim, oh, ohEvent, ohResult)
+            fireTriggers(sp, oh, ohEvent, ohResult)
         }
     }
 
-    private fun fireTriggers(sim: SimIteration, item: Item, event: Event, result: Pair<Double, Event.Result>) {
+    private fun fireTriggers(sp: SimParticipant, item: Item, event: Event, result: Pair<Double, Event.Result>) {
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -74,9 +75,9 @@ class Whirlwind : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 
-    override fun gcdMs(sim: SimIteration): Int = sim.physicalGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 }

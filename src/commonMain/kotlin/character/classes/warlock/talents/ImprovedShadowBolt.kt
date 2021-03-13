@@ -3,7 +3,7 @@ package character.classes.warlock.talents
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class ImprovedShadowBolt(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -19,8 +19,8 @@ class ImprovedShadowBolt(currentRank: Int) : Talent(currentRank) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.consumeBuff(buff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.consumeBuff(buff)
             }
         }
     }
@@ -36,13 +36,13 @@ class ImprovedShadowBolt(currentRank: Int) : Talent(currentRank) {
             override val durationMs: Int = 12000
             override val maxCharges: Int = 4
 
-            override fun modifyStats(sim: SimIteration): Stats {
+            override fun modifyStats(sp: SimParticipant): Stats {
                 return Stats(shadowDamageMultiplier = 1.2)
             }
 
             val consumeProc = isbConsumeProc(this)
 
-            override fun procs(sim: SimIteration): List<Proc> = listOf(consumeProc)
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(consumeProc)
         }
 
         val proc = object : Proc() {
@@ -51,13 +51,13 @@ class ImprovedShadowBolt(currentRank: Int) : Talent(currentRank) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addBuff(isbBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(isbBuff)
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(procBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(procBuff)
 }

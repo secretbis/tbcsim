@@ -2,9 +2,8 @@ package data.abilities.raid
 
 import character.*
 import data.model.Item
-import mechanics.Rating
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class JudgementOfWisdom : Ability() {
     companion object {
@@ -13,7 +12,7 @@ class JudgementOfWisdom : Ability() {
 
     override val id: Int = 27164
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Judgement of Wisdom"
@@ -35,19 +34,19 @@ class JudgementOfWisdom : Ability() {
                 Trigger.SPELL_CRIT
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sim: SimIteration): Double = 50.0
+            override fun percentChance(sp: SimParticipant): Double = 50.0
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(sim.subject.klass.resourceType == Resource.Type.MANA) {
-                    sim.addResource(74, Resource.Type.MANA)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                if(sp.character.klass.resourceType == Resource.Type.MANA) {
+                    sp.addResource(74, Resource.Type.MANA)
                 }
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

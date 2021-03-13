@@ -6,7 +6,7 @@ import character.Buff
 import character.Stats
 import character.races.abilities.BloodFury
 import mechanics.Rating
-import sim.SimIteration
+import sim.SimParticipant
 
 class Orc : Race() {
     override var baseStats: Stats = Stats(
@@ -22,7 +22,7 @@ class Orc : Race() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             val expertiseRating = 5.0 * Rating.expertiseRatingPerPoint
             return Stats(
                 axeExpertiseRating = expertiseRating
@@ -35,7 +35,7 @@ class Orc : Race() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 petDamageMultiplier = 1.05
             )
@@ -48,5 +48,5 @@ class Orc : Race() {
             else -> null
         }
     }
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(axeSpec, petDmg)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(axeSpec, petDmg)
 }

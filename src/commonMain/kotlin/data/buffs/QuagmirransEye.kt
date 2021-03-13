@@ -6,7 +6,7 @@ import character.Proc
 import character.Stats
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class QuagmirransEye : Buff() {
     companion object {
@@ -22,7 +22,7 @@ class QuagmirransEye : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = 6000
 
-        override fun modifyStats(sim: SimIteration): Stats? {
+        override fun modifyStats(sp: SimParticipant): Stats? {
             return Stats(spellHasteRating = 320.0)
         }
     }
@@ -34,11 +34,11 @@ class QuagmirransEye : Buff() {
             Trigger.SPELL_CRIT
         )
         override val type: Type = Type.PERCENT
-        override fun percentChance(sim: SimIteration): Double = 10.0
-        override fun cooldownMs(sim: SimIteration): Int = 45000
+        override fun percentChance(sp: SimParticipant): Double = 10.0
+        override fun cooldownMs(sp: SimParticipant): Int = 45000
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(buff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(buff)
         }
     }
 }

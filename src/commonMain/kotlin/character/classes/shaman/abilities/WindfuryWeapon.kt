@@ -8,7 +8,7 @@ import data.buffs.TotemOfTheAstralWinds
 import data.model.Item
 import mechanics.Melee
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     companion object {
@@ -16,28 +16,28 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 25505
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
-    override fun available(sim: SimIteration): Boolean {
-        return if(Melee.isOffhand(sim, item)) { sim.isDualWielding() } else true
+    override fun available(sp: SimParticipant): Boolean {
+        return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
     }
 
-    override fun cast(sim: SimIteration) {
+    override fun cast(sp: SimParticipant) {
         // Check for modifying items
-        val totemOfTheAstralWinds = sim.buffs[TotemOfTheAstralWinds.name] as TotemOfTheAstralWinds?
+        val totemOfTheAstralWinds = sp.buffs[TotemOfTheAstralWinds.name] as TotemOfTheAstralWinds?
         val totemApBonus = totemOfTheAstralWinds?.windfuryWeaponApBonus() ?: 0
 
         // Apply talents
-        val elementalWeapons = sim.subject.klass.talents[ElementalWeapons.name] as ElementalWeapons?
+        val elementalWeapons = sp.character.klass.talents[ElementalWeapons.name] as ElementalWeapons?
 
         // Do attacks
         val extraAp = 445 + totemApBonus
-        val attackOne = Melee.baseDamageRoll(sim, item, extraAp)
-        val attackTwo = Melee.baseDamageRoll(sim, item, extraAp)
+        val attackOne = Melee.baseDamageRoll(sp, item, extraAp)
+        val attackTwo = Melee.baseDamageRoll(sp, item, extraAp)
 
         // Per EJ, WF Weapon is yellow damage
         // https://web.archive.org/web/20080811084026/http://elitistjerks.com/f47/t15809-shaman_windfury/
-        val initialResult = Melee.attackRoll(sim, attackOne + attackTwo, item, isWhiteDmg = false)
+        val initialResult = Melee.attackRoll(sp, attackOne + attackTwo, item, isWhiteDmg = false)
 
         // Apply the nuttiest talent ever made
         val elementalWeaponsMod = elementalWeapons?.windfuryApMultiplier() ?: 1.0
@@ -51,7 +51,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
             amount = result.first,
             result = result.second,
         )
-        sim.logEvent(event)
+        sp.logEvent(event)
 
         // Proc anything that can proc off a white hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
@@ -62,7 +62,7 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         }
 
         if(triggerTypes != null) {
-            sim.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }
 }

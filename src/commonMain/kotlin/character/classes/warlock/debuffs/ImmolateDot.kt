@@ -7,7 +7,7 @@ import data.Constants
 import mechanics.Spell
 import sim.Event
 
-import sim.SimIteration
+import sim.SimParticipant
 
 class ImmolateDot : Debuff() {
     companion object {
@@ -20,15 +20,15 @@ class ImmolateDot : Debuff() {
     val immolateDot = object : Ability() {
         override val id: Int = 27215
         override val name: String = Companion.name
-        override fun gcdMs(sim: SimIteration): Int = 0
+        override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 41.0
         val numTicks = 5.0
         val school = Constants.DamageType.FIRE
-        override fun cast(sim: SimIteration) {
+        override fun cast(sp: SimParticipant) {
             // Per lock discord
             val spellPowerCoeff = 0.65 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sim, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -37,12 +37,12 @@ class ImmolateDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sim.logEvent(event)
+            sp.logEvent(event)
 
-            sim.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
+            sp.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
         }
 }
-    override fun tick(sim: SimIteration) {
-        immolateDot.cast(sim)
+    override fun tick(sp: SimParticipant) {
+        immolateDot.cast(sp)
     }
 }

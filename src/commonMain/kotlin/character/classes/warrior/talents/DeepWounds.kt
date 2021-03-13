@@ -4,7 +4,7 @@ import character.*
 import data.Constants
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class DeepWounds(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -18,8 +18,8 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
         override val name: String = "Blood Frenzy (DW)"
         override val durationMs: Int = 12000
 
-        override fun modifyStats(sim: SimIteration): Stats {
-            val bfTalent = sim.subject.klass.talents[BloodFrenzy.name] as BloodFrenzy?
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val bfTalent = sp.character.klass.talents[BloodFrenzy.name] as BloodFrenzy?
             return Stats(physicalDamageMultiplier = 1.0 + ((bfTalent?.currentRank ?: 0) * 0.02))
         }
     }
@@ -29,13 +29,13 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = 12000
         override val tickDeltaMs: Int = 3000
 
-        override fun tick(sim: SimIteration) {
+        override fun tick(sp: SimParticipant) {
             // 20% of average weapon damage per talent point over  full duration
             val tickPct = tickDeltaMs.toDouble() / durationMs.toDouble()
             // TODO: Using the mainhand every time may or may not be an approximation when dual wielding
-            val damageFullDuration = sim.subject.gear.mainHand.avgDmg * 0.2 * currentRank
+            val damageFullDuration = sp.character.gear.mainHand.avgDmg * 0.2 * currentRank
 
-            sim.logEvent(Event(
+            sp.logEvent(Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = name,
@@ -59,18 +59,18 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
 
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.addDebuff(bleedDebuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addDebuff(bleedDebuff)
 
-                val hasBfRanks = sim.subject.klass.talents[BloodFrenzy.name]?.currentRank ?: 0 > 0
+                val hasBfRanks = sp.character.klass.talents[BloodFrenzy.name]?.currentRank ?: 0 > 0
                 if(hasBfRanks) {
-                    sim.addBuff(bloodFrenzy)
+                    sp.addBuff(bloodFrenzy)
                 }
             }
         }
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(staticBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(staticBuff)
 }

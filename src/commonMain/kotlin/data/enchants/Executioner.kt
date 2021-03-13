@@ -6,6 +6,7 @@ import data.model.Enchant
 import data.model.Item
 import sim.Event
 import sim.SimIteration
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 // Fun blog about Goose and Executioner:
@@ -22,7 +23,7 @@ class Executioner(item: Item) : Enchant(item) {
                     override val name: String = "Executioner"
                     override val durationMs: Int = 15000
 
-                    override fun modifyStats(sim: SimIteration): Stats {
+                    override fun modifyStats(sp: SimParticipant): Stats {
                         return Stats(armorPen = 840)
                     }
                 }
@@ -39,17 +40,17 @@ class Executioner(item: Item) : Enchant(item) {
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
 
     private var _procs: List<Proc>? = null
-    private fun makeProcs(sim: SimIteration): List<Proc> {
+    private fun makeProcs(sp: SimParticipant): List<Proc> {
         if(_procs == null) {
             // Find items
             val sourceItems = listOfNotNull(
-                if (sim.subject.gear.mainHand.enchant is Executioner) {
-                    sim.subject.gear.mainHand
+                if (sp.character.gear.mainHand.enchant is Executioner) {
+                    sp.character.gear.mainHand
                 } else {
                     null
                 },
-                if (sim.subject.gear.offHand.enchant is Executioner) {
-                    sim.subject.gear.offHand
+                if (sp.character.gear.offHand.enchant is Executioner) {
+                    sp.character.gear.offHand
                 } else {
                     null
                 }
@@ -70,8 +71,8 @@ class Executioner(item: Item) : Enchant(item) {
                     override val ppm: Double = 1.2
                     override val requiresItem: Boolean = true
 
-                    override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sim.addBuff(singletonBuff(sourceItems))
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(singletonBuff(sourceItems))
                     }
                 }
             )
@@ -80,5 +81,5 @@ class Executioner(item: Item) : Enchant(item) {
         return _procs!!
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = makeProcs(sim)
+    override fun procs(sp: SimParticipant): List<Proc> = makeProcs(sp)
 }

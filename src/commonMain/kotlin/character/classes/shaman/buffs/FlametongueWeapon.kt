@@ -2,14 +2,13 @@ package character.classes.shaman.buffs
 
 import character.classes.shaman.abilities.FlametongueWeapon as FlametongueWeaponAbility
 import character.Ability
-import character.ItemBuff
 import character.ItemProc
 import character.Proc
 import data.Constants
 import data.model.Item
 import data.model.TempEnchant
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     companion object {
@@ -32,21 +31,21 @@ class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
 
         var ftAbility: Ability? = null
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             if (ftAbility == null) {
                 val suffix = when (sourceItem) {
-                    sim.subject.gear.mainHand -> "(MH)"
-                    sim.subject.gear.offHand -> "(OH)"
+                    sp.character.gear.mainHand -> "(MH)"
+                    sp.character.gear.offHand -> "(OH)"
                     else -> "(Unknown)"
                 }
                 val name = "Flametongue Weapon $suffix"
                 ftAbility = FlametongueWeaponAbility(name, sourceItem)
             }
 
-            if (ftAbility!!.available(sim)) {
-                ftAbility!!.cast(sim)
+            if (ftAbility!!.available(sp)) {
+                ftAbility!!.cast(sp)
 
-                sim.logEvent(
+                sp.logEvent(
                     Event(
                         eventType = Event.Type.PROC,
                         abilityName = ftAbility!!.name
@@ -56,5 +55,5 @@ class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
         }
     }
 
-    override fun procs(sim: SimIteration): List<Proc> = listOf(proc)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

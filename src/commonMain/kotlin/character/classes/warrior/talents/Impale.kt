@@ -3,7 +3,7 @@ package character.classes.warrior.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class Impale(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -18,7 +18,7 @@ class Impale(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             val multiplier = 1.0 + currentRank * 0.1
             return Stats(
                 yellowDamageAddlCritMultiplier = multiplier,
@@ -27,5 +27,5 @@ class Impale(currentRank: Int) : Talent(currentRank) {
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(buff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

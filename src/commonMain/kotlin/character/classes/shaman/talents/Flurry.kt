@@ -3,7 +3,7 @@ package character.classes.shaman.talents
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
+import sim.SimParticipant
 
 class Flurry(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -25,8 +25,8 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
             )
             override val type: Type = Type.STATIC
 
-            override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-                sim.consumeBuff(buff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.consumeBuff(buff)
             }
         }
     }
@@ -37,10 +37,10 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         override val maxCharges: Int = 3
 
         // Increase melee haste for as long as we have charges
-        override fun modifyStats(sim: SimIteration): Stats {
-            val talentRanks = sim.subject.klass.talents[Flurry.name]?.currentRank ?: 0
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val talentRanks = sp.character.klass.talents[Flurry.name]?.currentRank ?: 0
 
-            val state = state(sim)
+            val state = state(sp)
             val modifier = if (talentRanks > 0 && state.currentCharges > 0) {
                 1.05 + (0.05 * talentRanks)
             } else 1.0
@@ -51,7 +51,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         val chargeProc = chargeProc(this)
 
         // Proc off of melee auto hits to reduce our stacks
-        override fun procs(sim: SimIteration): List<Proc> = listOf(chargeProc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(chargeProc)
     }
 
     val onCritProc = object : Proc() {
@@ -62,8 +62,8 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         )
         override val type: Type = Type.STATIC
 
-        override fun proc(sim: SimIteration, items: List<Item>?, ability: Ability?, event: Event?) {
-            sim.addBuff(hasteBuff)
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(hasteBuff)
         }
     }
 
@@ -72,8 +72,8 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun procs(sim: SimIteration): List<Proc> = listOf(onCritProc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(onCritProc)
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(wrapper)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(wrapper)
 }

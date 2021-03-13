@@ -3,7 +3,7 @@ package data.abilities.raid
 import character.Ability
 import character.Buff
 import character.Stats
-import sim.SimIteration
+import sim.SimParticipant
 
 class UnleashedRage : Ability() {
     companion object {
@@ -12,7 +12,7 @@ class UnleashedRage : Ability() {
 
     override val id: Int = 25359
     override val name: String = Companion.name
-    override fun gcdMs(sim: SimIteration): Int = 0
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Unleashed Rage"
@@ -21,14 +21,14 @@ class UnleashedRage : Ability() {
         override val hidden: Boolean = true
 
         // Assume uptime of about 90%
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 attackPowerMultiplier = 0.10 * 0.90
             )
         }
     }
 
-    override fun cast(sim: SimIteration) {
-        sim.addBuff(buff)
+    override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
     }
 }

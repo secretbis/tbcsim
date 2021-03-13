@@ -3,7 +3,7 @@ package character.classes.warlock.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import sim.SimIteration
+import sim.SimParticipant
 
 class Emberstorm(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -17,12 +17,12 @@ class Emberstorm(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sim: SimIteration): Stats {
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(fireDamageMultiplier = 1.0 + (0.02 * currentRank))
         }
     }
 
-    override fun buffs(sim: SimIteration): List<Buff> = listOf(fireBuff)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(fireBuff)
 
     fun incinerateCastTimeMultiplier(): Double {
         return 1.0 - 0.02 * currentRank
