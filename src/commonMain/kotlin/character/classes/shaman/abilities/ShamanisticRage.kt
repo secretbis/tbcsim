@@ -36,7 +36,7 @@ class ShamanisticRage : Ability() {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val amount = (sp.attackPower() * 0.30).toInt()
-                sp.addResource(amount, Resource.Type.MANA)
+                sp.addResource(amount, Resource.Type.MANA, name)
             }
         }
 

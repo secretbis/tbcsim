@@ -297,7 +297,6 @@ public object ItemIndex {
       { LongstridersLoop() },
       { ShaardeTheLesser() },
       { EagleCrestedPauldrons() },
-      { ShalassiSentrysEpaulets() },
       { RapscallionsTouch() },
       { ShalassiOraclesSandals() },
       { GladiatorsLinkedArmor() },

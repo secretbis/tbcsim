@@ -182,7 +182,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         // Remove the old expiration
         if(buff.durationMs != -1) {
             val oldTick = buffExpirationTick[buff.name]
-            buffExpirations[oldTick]?.remove(buff)
+            buffExpirations[oldTick]?.removeAll { it.name == buff.name }
 
             // Find the new expiration, and store that in both places
             val newTick = sim.getExpirationTick(buff)
@@ -201,11 +201,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                 val toRemove = buffs.values.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
                 toRemove.forEach {
                     it.reset(this)
-                    logEvent(Event(
-                        eventType = Event.Type.BUFF_END,
-                        buff = it
-                    ))
-                    buffs.remove(it.name)
+                    removeBuffs(listOf(it))
                 }
             }
 
@@ -271,7 +267,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
             val expirationTick = buffExpirationTick[it.name]
             if(expirationTick != null) {
-                buffExpirations[expirationTick]?.remove(it)
+                buffExpirations[expirationTick]?.removeAll { it2 -> it2.name == it.name }
             }
 
             it.reset(this)
@@ -298,7 +294,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         // Remove the old expiration
          if(debuff.durationMs != -1) {
              val oldTick = debuffExpirationTick[debuff.name]
-             debuffExpirations[oldTick]?.remove(debuff)
+             debuffExpirations[oldTick]?.removeAll { it.name == debuff.name }
 
              // Find the new expiration, and store that in both places
              val newTick = sim.getExpirationTick(debuff)
@@ -375,7 +371,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
             val expirationTick = debuffExpirationTick[it.name]
             if(expirationTick != null) {
-                debuffExpirations[expirationTick]?.remove(it)
+                debuffExpirations[expirationTick]?.removeAll { it2 -> it2.name == it.name }
             }
 
             it.reset(this)
@@ -390,7 +386,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
     }
 
     // Resource
-    fun addResource(amount: Int, type: Resource.Type, ability: Ability? = null) {
+    fun addResource(amount: Int, type: Resource.Type, abilityName: String) {
         if(resource.type == type) {
             resource.add(amount)
 
@@ -399,23 +395,23 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                 amount = resource.currentAmount.toDouble(),
                 delta = amount.toDouble(),
                 amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = ability?.name
+                abilityName = abilityName
             ))
         } else {
             logger.warn { "Attempted to add resource type $type but subject resource is ${resource.type}" }
         }
     }
 
-    fun subtractResource(amount: Int, type: Resource.Type, ability: Ability? = null) {
+    fun subtractResource(amount: Int, type: Resource.Type, abilityName: String) {
         if(resource.type == type) {
             resource.subtract(amount)
 
             logEvent(Event(
                 eventType = Event.Type.RESOURCE_CHANGED,
                 amount = resource.currentAmount.toDouble(),
-                delta = amount.toDouble(),
+                delta = -1 * amount.toDouble(),
                 amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = ability?.name
+                abilityName = abilityName
             ))
         } else {
             logger.warn { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }

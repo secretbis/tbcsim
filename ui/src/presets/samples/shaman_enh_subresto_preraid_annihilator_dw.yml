@@ -42,63 +42,55 @@ talents:
     rank: 3
 
 # Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
+# Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
     name: Annihilator
     enchant: Mongoose
   offHand:
     name: Annihilator
-    # No Executioner until ZA
     enchant: Mongoose
   rangedLibramTotem:
     name: Totem of the Astral Winds
   head:
-    name: Helm of Desolation
+    name: Wastewalker Helm
     enchant: Glyph of Ferocity
     gems:
-      - Inscribed Noble Topaz
+      - Sovereign Nightseye
       - Thundering Skyfire Diamond
   neck:
-    name: Natasha's Choker
+    name: Choker of Vile Intent
   shoulders:
-    name: Shalassi Sentry's Epaulets
+    name: Wastewalker Shoulderpads
     enchant: Greater Inscription of Vengeance
     gems:
       - Bold Living Ruby
       - Inscribed Noble Topaz
   back:
-    name: Cloak of the Inciter
+    name: Vengeance Wrap
     enchant: Greater Agility
-  chest:
-    name: Nether Chain Shirt
-    enchant: Exceptional Stats
     gems:
-      - Bold Living Ruby
       - Inscribed Noble Topaz
-      - Sovereign Nightseye
+  chest:
+    name: Primalstrike Vest
+    enchant: Exceptional Stats
   wrists:
-    name: Felstalker Bracers
+    name: Primalstrike Bracers
     enchant: Brawn
-    gems:
-      - Bold Living Ruby
   hands:
     name: Windstrike Gloves
     enchant: Major Strength
   waist:
-    name: Ebon Netherscale Belt
-    gems:
-      - Sovereign Nightseye
-      - Inscribed Noble Topaz
+    name: Primalstrike Belt
   legs:
-    name: Wyrmscale Greaves
+    name: Midnight Legguards
     enchant: Nethercobra Leg Armor
     gems:
       - Bold Living Ruby
       - Bold Living Ruby
-      - Bold Living Ruby
+      - Sovereign Nightseye
   feet:
-    name: Boots of the Endless Hunt
+    name: Shadowstep Striders
     enchant: Cat's Swiftness
   ring1:
     name: Shaffar's Band of Brutality
@@ -107,7 +99,8 @@ gear:
   trinket1:
     name: Hourglass of the Unraveller
   trinket2:
-    name: Bloodlust Brooch
+#    name: Bloodlust Brooch
+    name: "Darkmoon Card: Crusade"
 
 # WIP: Specify additional items to compare
 #      Each will be tested individually, in all combinations, and the sim will rank each setup

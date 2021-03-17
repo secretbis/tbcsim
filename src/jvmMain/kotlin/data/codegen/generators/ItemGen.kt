@@ -34,6 +34,10 @@ object ItemGen {
         )
     )
 
+    val itemIgnore = listOf(
+        25968   // Shalassi Sentry's Epaulets
+    )
+
     private fun load(): List<Map<String, Any?>> {
         return CodeGen.load("/items.json", object : TypeReference<List<Map<String, Any?>>>(){})
     }
@@ -104,7 +108,7 @@ object ItemGen {
             item.sockets = deserializeSockets(it)
 
             Pair(item, it)
-        }
+        }.filter { !itemIgnore.contains(it.first.id) }
 
         // Write individual item files
         protoItems.forEach { itemPair ->

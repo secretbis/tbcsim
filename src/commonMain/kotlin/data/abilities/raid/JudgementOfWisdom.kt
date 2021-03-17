@@ -38,7 +38,7 @@ class JudgementOfWisdom : Ability() {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 if(sp.character.klass.resourceType == Resource.Type.MANA) {
-                    sp.addResource(74, Resource.Type.MANA)
+                    sp.addResource(74, Resource.Type.MANA, name)
                 }
             }
         }

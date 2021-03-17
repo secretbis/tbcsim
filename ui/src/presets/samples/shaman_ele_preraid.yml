@@ -74,7 +74,7 @@ gear:
       - Runed Living Ruby
   wrists:
     name: Netherstrike Bracers
-    enchant: Spellpower (Bracers)
+    enchant: Spellpower (Bracer)
     gems:
       - Runed Living Ruby
   hands:
@@ -183,10 +183,7 @@ raidBuffs:
   - Improved Seal of the Crusader
   # Adjust these based on what you expect your personal group composition to be
   # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
-  - Ferocious Inspiration
-  - Leader of the Pack
-  - Improved Battle Shout
-  - Improved Sanctity Aura
+  - Moonkin Aura
 
 raidDebuffs:
   # Sunder Armor and Imp EA cannot be applied at the same time
@@ -195,3 +192,4 @@ raidDebuffs:
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements
+  - Stormstrike

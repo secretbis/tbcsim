@@ -45,10 +45,10 @@ talents:
 # Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Drakefist Hammer
+    name: Dragonmaw
     enchant: Mongoose
   offHand:
-    name: Drakefist Hammer
+    name: Dragonmaw
     # No Executioner until ZA
     enchant: Mongoose
   rangedLibramTotem:

@@ -34,7 +34,7 @@ class ElementalMastery : Ability() {
 
                 // Refund the resource cost of the triggering ability
                 if(ability != null) {
-                    sp.addResource(ability.resourceCost(sp).toInt(), ability.resourceType(sp))
+                    sp.addResource(ability.resourceCost(sp).toInt(), ability.resourceType(sp), name)
                 }
             }
         }

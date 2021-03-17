@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import _, { trimEnd } from 'lodash';
+import _ from 'lodash';
 import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 
+import * as Constants from '../data/constants';
 import ItemTooltip from './item_tooltip';
 
 import * as tbcsim from 'tbcsim';
@@ -35,6 +36,11 @@ export default function({ type, item, TooltipComponent, inventorySlots, itemClas
           if(itemClasses.itemClasses.includes(itemClass)) {
             const itemSubclass = item.itemSubclass._itemClassOrdinal;
             const subclasses = itemClasses.itemSubclasses[itemClass]
+
+            // Never filter the cloak slot on itemSubclass
+            if(item.inventorySlot == Constants.inventorySlots.back) {
+              return true
+            }
 
             if(subclasses.includes(itemSubclass)) {
               const matchesName = filter ? (item.displayName || item.name).toLowerCase().includes(filter.toLowerCase()) : true

@@ -15,6 +15,17 @@ export function stateReducer(state, action) {
       newState = {
         ...state,
 
+        iterationsCompleted: null,
+        iterationResults: null,
+
+        resultsByAbility: null,
+        resultsByBuff: null,
+        resultsByDebuff: null,
+        resultsByDamageType: null,
+        resultsResourceUsage: null,
+        resultsResourceUsageByAbility: null,
+        resultsDps: null,
+
         character: {
           class: action.value.class,
           description: action.value.description || '',
@@ -88,6 +99,7 @@ export const initialState = {
   resultsByDebuff: null,
   resultsByDamageType: null,
   resultsResourceUsage: null,
+  resultsResourceUsageByAbility: null,
   resultsDps: null,
 
   simOptions: {

@@ -44,7 +44,7 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
                     return
                 }
 
-                sp.addResource(7, Resource.Type.RAGE)
+                sp.addResource(7, Resource.Type.RAGE, name)
             }
         }
     }

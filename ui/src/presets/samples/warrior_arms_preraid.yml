@@ -45,7 +45,7 @@ talents:
 # Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Lionheart Blade
+    name: Lionheart Champion
     enchant: Mongoose
   rangedLibramTotem:
     name: Felsteel Whisper Knives

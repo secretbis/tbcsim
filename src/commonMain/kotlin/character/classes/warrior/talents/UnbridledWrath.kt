@@ -34,7 +34,7 @@ class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
             override val ppm: Double = 3.0 * currentRank
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(1, Resource.Type.RAGE)
+                sp.addResource(1, Resource.Type.RAGE, name)
             }
         }
 

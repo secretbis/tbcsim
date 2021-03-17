@@ -38,7 +38,7 @@ class Execute : Ability() {
         val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
         // Drain rage
-        sp.subtractResource(sp.resource.currentAmount, Resource.Type.RAGE)
+        sp.subtractResource(sp.resource.currentAmount, Resource.Type.RAGE, "Execute (extra)")
 
         // Save last hit state and fire event
         val event = Event(

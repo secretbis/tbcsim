@@ -70,6 +70,9 @@ class TBCSim : CliktCommand() {
                         println("Resource usage for iteration ${resource[idx].iterationIdx}")
                         Chart.print(resource[idx].series, xMax = durationSeconds, yLabel = resourceType.toString())
 
+                        val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
+                        SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
+
                         val buffs = SimStats.resultsByBuff(iterations)
                         SimStatsPrinter.printBuffs("Buffs", buffs)
 

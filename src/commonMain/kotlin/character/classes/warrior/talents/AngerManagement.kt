@@ -24,7 +24,7 @@ class AngerManagement(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(1, Resource.Type.RAGE)
+                sp.addResource(1, Resource.Type.RAGE, name)
             }
         }
     }

@@ -19,6 +19,6 @@ class SuperManaPotion : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val manaRestored = Random.nextInt(1800, 3000)
-        sp.addResource(manaRestored, Resource.Type.MANA)
+        sp.addResource(manaRestored, Resource.Type.MANA, name)
     }
 }

@@ -1,7 +1,6 @@
 package data.abilities.raid
 
 import character.Ability
-import character.classes.shaman.abilities.WrathOfAirTotem
 import kotlin.js.JsExport
 
 // These are spells that are provided by other players in the raid, and may carry some
@@ -20,9 +19,12 @@ object RaidAbilities {
         ImprovedSealOfTheCrusader(),
         LeaderOfThePack(),
         ManaSpringTotem(),
+        MoonkinAura(),
         StrengthOfEarthTotem(),
         TotemOfWrath(),
         UnleashedRage(),
+        VampiricTouch(1000),
+        VampiricTouch(1500),
         WindfuryTotem(),
         WindfuryTotemRank1(),
         WrathOfAirTotem()
@@ -37,8 +39,8 @@ object RaidAbilities {
         ImprovedScorch(),
         JudgementOfWisdom(),
         Misery(),
-        MoonkinAura(),
         ShadowWeaving(),
+        Stormstrike(),
         SunderArmor(),
     )
 

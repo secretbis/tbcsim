@@ -188,4 +188,30 @@ object SimStatsPrinter {
             }.render(StringBuilder())
         )
     }
+
+    fun printResourceUsageByAbility(participants: List<List<ResourceByAbility>>) {
+        participants.forEach { rows ->
+            println(
+                "Resource by Ability Breakdown\n" +
+                table {
+                    header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
+
+                    for(row in rows) {
+                        row(row.name, row.countAvg, row.totalGainAvg, row.gainPerCountAvg)
+                    }
+
+                    hints {
+                        alignment(0, Table.Hints.Alignment.LEFT)
+
+                        for(i in 1..3) {
+                            precision(i, 2)
+                            formatFlag(i, ",")
+                        }
+
+                        borderStyle = Table.BorderStyle.SINGLE_LINE
+                    }
+                }.render(StringBuilder())
+            )
+        }
+    }
 }

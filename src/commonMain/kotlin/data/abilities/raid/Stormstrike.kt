@@ -1,29 +1,25 @@
 package data.abilities.raid
 
-import character.Ability
-import character.Buff
-import character.Stats
+import character.*
 import sim.SimParticipant
 
-class WrathOfAirTotem : Ability() {
+class Stormstrike : Ability() {
     companion object {
-        const val name = "Wrath of Air Totem"
+        const val name = "Stormstrike"
     }
 
-    override val id: Int = 30706
+    override val id: Int = 17364
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Stormstrike"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                spellDamage = 101
-            )
+            return Stats(natureDamageMultiplier = 1.2)
         }
     }
 

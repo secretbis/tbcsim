@@ -61,13 +61,13 @@ class SimIteration(
         }
 
         // MP5
-        allParticipants.forEach {
-            if (it.character.klass.resourceType == Resource.Type.MANA) {
-                if (elapsedTimeMs - lastMp5Tick >= 5000) {
-                    it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA)
-                    lastMp5Tick = elapsedTimeMs
+        if (elapsedTimeMs - lastMp5Tick >= 5000) {
+            allParticipants.forEach {
+                if (it.character.klass.resourceType == Resource.Type.MANA) {
+                    it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA, "MP5")
                 }
             }
+            lastMp5Tick = elapsedTimeMs
         }
 
         // Fire server tick procs

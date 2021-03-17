@@ -37,9 +37,8 @@ open class WindfuryTotem(val baseApBonus: Double, val baseManaCost: Double, val 
     }
 
     val weaponBuff = object : Buff() {
-        override val name: String = "Windfury Totem (Weapon)"
+        override val name: String = "$abilityName (Weapon)"
         override val durationMs: Int = 10000
-        override val hidden: Boolean = true
 
         val wfTotemAbility = object : Ability() {
             override val id: Int = abilityId

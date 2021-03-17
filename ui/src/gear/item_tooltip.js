@@ -23,7 +23,7 @@ export default function({ gear, item, isMetaGem=false, children }) {
 
     return (
       <a
-        href={`https://70.wowfan.net/en?item=${item.id}`}
+        href={`https://www.tbcdb.com/?item=${item.id}`}
         className={itemClass}
         rel={`${itemGems}&amp;${itemEnchant}&amp;${itemSet}`}
         onClick={e => e.preventDefault()}

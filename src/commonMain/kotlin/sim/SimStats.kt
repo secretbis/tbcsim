@@ -68,7 +68,7 @@ object SimStats {
             Event.Type.DEBUFF_START,
             Event.Type.DEBUFF_REFRESH,
             Event.Type.DEBUFF_END,
-            listOf(iterations[0].target)
+            onlyTarget = true
         )
     }
 
@@ -77,16 +77,17 @@ object SimStats {
         buffStart: Event.Type,
         buffRefresh: Event.Type,
         buffEnd: Event.Type,
-        context: List<SimParticipant>? = null
+        onlyTarget: Boolean = false
     ): List<List<BuffBreakdown>> {
         val eventTypes = listOf(buffStart, buffRefresh, buffEnd)
         val showHidden = iterations[0].opts.showHiddenBuffs
-        val participants = context ?: iterations[0].participants
+        val participantCount = if(onlyTarget) { 0 } else (iterations[0].participants.size - 1)
 
         // Aggregate all events for each participant across all iterations
-        return participants.map { sp ->
+        return (0..participantCount).map { idx ->
             val byBuff = iterations.flatMap { iter ->
-                sp.events
+                val context = if(onlyTarget) { iter.target } else iter.participants[idx]
+                context.events
                     .filter { it.buff != null && (!it.buff.hidden || showHidden) && eventTypes.contains(it.eventType) }
                     .filter { it.buff?.name != null }
             }.groupBy { it.buff!!.name }
@@ -204,10 +205,10 @@ object SimStats {
     }
 
     fun resultsByAbility(iterations: List<SimIteration>): List<List<AbilityBreakdown>> {
-        val participants = iterations[0].participants
+        val participantCount = iterations[0].participants.size - 1
 
         // Aggregate all events for each participant across all iterations
-        return participants.mapIndexed { idx, sp ->
+        return (0..participantCount).map { idx ->
             val byAbility = iterations.flatMap { iter ->
                 iter.participants[idx].events
                     .filter { it.eventType == Event.Type.DAMAGE }
@@ -264,8 +265,8 @@ object SimStats {
     }
 
     fun resultsByDamageType(iterations: List<SimIteration>): List<List<DamageTypeBreakdown>> {
-        val participants = iterations[0].participants
-        return participants.mapIndexed { idx, sp ->
+        val participantCount = iterations[0].participants.size - 1
+        return (0..participantCount).map { idx ->
             val byDmgType = iterations.flatMap { iter ->
                 iter.participants[idx].events
                     .filter { it.eventType == Event.Type.DAMAGE }
@@ -298,13 +299,12 @@ object SimStats {
     fun resourceUsage(iterations: List<SimIteration>): List<ResourceBreakdown> {
         // Pick an execution at random
         // TODO: Average and +/- some number of stddevs usage across iterations for each participant
-        //       Multiple lines
+        //       Multiple lines for avg, percentiles?
         val iterationIdx = Random.nextInt(iterations.size)
-        val iteration = iterations[iterationIdx]
-        val participants = iterations[0].participants
+        val participants = iterations[iterationIdx].participants
 
         return participants.mapIndexed { idx, sp ->
-            val series = iteration.participants[idx].events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
+            val series = sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
                 Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
             }
 
@@ -312,6 +312,33 @@ object SimStats {
                 iterationIdx,
                 series
             )
+        }
+    }
+
+    fun resourceUsageByAbility(iterations: List<SimIteration>): List<List<ResourceByAbility>> {
+        val participantCount = iterations[0].participants.size - 1
+        return (0..participantCount).map { idx ->
+            val byAbility = iterations.flatMap { iter ->
+                iter.participants[idx].events
+                    .filter { it.eventType == Event.Type.RESOURCE_CHANGED }
+                    .filter { it.abilityName != null }
+            }.groupBy { it.abilityName!! }
+
+            val keys = byAbility.keys.toList()
+
+            keys.map { key ->
+                val events = byAbility[key]!!
+                val deltas = events.map { it.delta }
+                val countAvg = deltas.size.toDouble() / iterations.size.toDouble()
+                val totalGainAvg = deltas.sum() / iterations.size.toDouble()
+
+                ResourceByAbility(
+                    key,
+                    countAvg,
+                    totalGainAvg,
+                    totalGainAvg / countAvg
+                )
+            }.sortedBy { it.totalGainAvg }.reversed()
         }
     }
 }

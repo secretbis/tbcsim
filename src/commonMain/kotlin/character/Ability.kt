@@ -67,7 +67,7 @@ abstract class Ability {
         val resourceCost = this.resourceCost(sp).toInt()
         val resourceType = this.resourceType(sp)
         if (resourceCost != 0) {
-            sp.subtractResource(resourceCost, resourceType, this)
+            sp.subtractResource(resourceCost, resourceType, name)
         }
     }
 

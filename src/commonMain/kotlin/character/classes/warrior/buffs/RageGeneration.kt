@@ -45,7 +45,7 @@ class RageGeneration : Buff() {
                     damageToRage(sp, damage, item, 3.5)
                 }
 
-                sp.addResource(rage, Resource.Type.RAGE)
+                sp.addResource(rage, Resource.Type.RAGE, "Melee Hit")
             }
         }
     }
@@ -69,7 +69,7 @@ class RageGeneration : Buff() {
                     damageToRage(sp, damage, item, 7.0)
                 }
 
-                sp.addResource(rage, Resource.Type.RAGE)
+                sp.addResource(rage, Resource.Type.RAGE, "Melee Crit")
             }
         }
     }

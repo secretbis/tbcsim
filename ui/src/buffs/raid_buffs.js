@@ -27,8 +27,11 @@ export default function({ state, stateKey, dispatch }) {
   const col1 = Math.ceil(allAbilities.length / 2)
   const col2 = allAbilities.length - col1
 
+  const type = stateKey == 'raidBuffs' ? 'buffs' : 'debuffs';
+
   return (
     <Row>
+      <div style={{ textAlign: 'center' }}><em>Select only {type} provided by *other* members of the raid</em></div>
       <Col xs={12}>
         {_.range(col1).map(key => {
           const name = allAbilities[key]

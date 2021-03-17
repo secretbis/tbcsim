@@ -7,7 +7,7 @@ export default function({ spell, children }) {
 
     return (
       <a
-        href={`https://70.wowfan.net/en?spell=${spell.id}`}
+        href={`https://www.tbcdb.com/?spell=${spell.id}`}
         className={spellClass}
         onClick={e => e.preventDefault()}
         style={{ textDecoration: 'none' }}

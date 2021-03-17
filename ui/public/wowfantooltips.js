@@ -146,7 +146,7 @@ if (void 0 === $WowheadPower)
               ? (domain = params.domain)
               : i0 && url[i0] && (domain = url[i0].split(".")[0]),
             (domain2 = url[i0].split(".")[1]),
-            "wowfan" != domain2)
+            "tbcdb" != domain2)
           )
             return;
           if (

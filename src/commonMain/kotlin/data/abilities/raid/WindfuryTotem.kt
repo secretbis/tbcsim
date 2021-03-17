@@ -17,7 +17,7 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val weaponBuff = object : Buff() {
-        override val name: String = "Windfury Totem (Weapon)"
+        override val name: String = "$abilityName (Weapon)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

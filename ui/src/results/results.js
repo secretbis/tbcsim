@@ -5,11 +5,12 @@ import AbilityResults from './ability';
 import BuffResults from './buffs';
 import DamageTypeResults from './damagetype';
 import ResourceUsage from './resource';
+import ResourceUsageByAbility from './resource_by_ability';
 
 import { toFixed } from './formatters';
 
 export default function({ character, results }) {
-  const { ability, buff, debuff, damageType, resourceUsage, dps } = results
+  const { ability, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results
 
   if(!ability || !buff || !debuff || !damageType || !resourceUsage || !dps) {
     return null;
@@ -30,11 +31,14 @@ export default function({ character, results }) {
       <Row>
         <Col xs={12}>
           <BuffResults title={'Buff Breakdown'} data={buff} />
+          <Container style={{ marginTop: '20px', marginBottom: '20px' }}>
+            <BuffResults title={'Debuff Breakdown'} data={debuff} />
+          </Container>
         </Col>
         <Col xs={12}>
-          <BuffResults title={'Debuff Breakdown'} data={debuff} />
+          <DamageTypeResults data={damageType} />
           <Container style={{ marginTop: '20px', marginBottom: '20px' }}>
-            <DamageTypeResults data={damageType} />
+            <ResourceUsageByAbility data={resourceUsageByAbility} />
           </Container>
           <ResourceUsage character={character} data={resourceUsage} />
         </Col>

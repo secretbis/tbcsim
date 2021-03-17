@@ -40,6 +40,7 @@ function App() {
     debuff: state.resultsByDebuff,
     damageType: state.resultsByDamageType,
     resourceUsage: state.resultsResourceUsage,
+    resourceUsageByAbility: state.resultsResourceUsageByAbility,
     dps: state.resultsDps
   };
 
@@ -78,10 +79,20 @@ function App() {
     function cleanKtList(list) {
       let finalList = list
       if(list && list.toArray) {
-        return list.toArray()
+        finalList = list.toArray()
       }
 
-      return []
+      // Go one level deeper
+      if(finalList.map) {
+        finalList = finalList.map(item => {
+          if(item && item.toArray) {
+            return item.toArray()
+          }
+          return item
+        })
+      }
+
+      return finalList
     }
 
     tbcsim.runSim(config, simOpts,
@@ -94,18 +105,22 @@ function App() {
           dispatch({ type: 'iterationsCompleted', value: null })
           dispatch({ type: 'iterationResults', value: iterList })
 
+          const resourceUsage = cleanKtList(tbcsim.sim.SimStats.resourceUsage(iterList));
+          const resourceUsageByAbility = cleanKtList(tbcsim.sim.SimStats.resourceUsageByAbility(iterList));
           const buffResults = cleanKtList(tbcsim.sim.SimStats.resultsByBuff(iterList));
           const debuffResults = cleanKtList(tbcsim.sim.SimStats.resultsByDebuff(iterList));
           const abilityResults = cleanKtList(tbcsim.sim.SimStats.resultsByAbility(iterList));
           const damageTypeResults = cleanKtList(tbcsim.sim.SimStats.resultsByDamageType(iterList));
+          const dps = cleanKtList(tbcsim.sim.SimStats.dps_0(iterList));
 
           // Compute results
-          dispatch({ type: 'resultsResourceUsage', value: tbcsim.sim.SimStats.resourceUsage(iterList) })
-          dispatch({ type: 'resultsByBuff', value: buffResults })
-          dispatch({ type: 'resultsByDebuff', value: debuffResults })
-          dispatch({ type: 'resultsByDamageType', value: damageTypeResults })
-          dispatch({ type: 'resultsByAbility', value: abilityResults })
-          dispatch({ type: 'resultsDps', value: tbcsim.sim.SimStats.dps_0(iterList) })
+          dispatch({ type: 'resultsResourceUsage', value: resourceUsage[0] })
+          dispatch({ type: 'resultsResourceUsageByAbility', value: resourceUsageByAbility[0] })
+          dispatch({ type: 'resultsByBuff', value: buffResults[0] })
+          dispatch({ type: 'resultsByDebuff', value: debuffResults[0] })
+          dispatch({ type: 'resultsByDamageType', value: damageTypeResults[0] })
+          dispatch({ type: 'resultsByAbility', value: abilityResults[0] })
+          dispatch({ type: 'resultsDps', value: dps.get_35('subject') })
       }
     )
   }
