@@ -17,14 +17,21 @@ class Rotation(
 
     fun castAllPrecombat(sp: SimParticipant) {
         return rules.filter {
-            it.phase == Phase.PRECOMBAT ||
-            it.phase == Phase.RAID_OR_PARTY
+            it.phase == Phase.PRECOMBAT
         }.forEach {
             if(it.ability.available(sp)) {
                 it.ability.cast(sp)
             } else {
                 logger.warn { "Could not cast precombat ability (not available): ${it.ability.name}" }
             }
+        }
+    }
+
+    fun castAllRaidBuffs(sp: SimParticipant) {
+        return rules.filter {
+            it.phase == Phase.RAID_OR_PARTY
+        }.forEach {
+            it.ability.cast(sp)
         }
     }
 

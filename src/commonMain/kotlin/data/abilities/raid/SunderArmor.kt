@@ -12,14 +12,14 @@ class SunderArmor : Ability() {
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val debuff = object : Debuff() {
+    fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Sunder Armor"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats? {
-            val impEaActive = sp.debuffs[ImprovedExposeArmor.name] != null
+            val impEaActive = sp.sim.target.debuffs[ImprovedExposeArmor.name] != null
             return if(impEaActive) {
                 null
             } else {
@@ -31,6 +31,6 @@ class SunderArmor : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.addDebuff(debuff)
+        sp.sim.target.addDebuff(debuff(sp))
     }
 }

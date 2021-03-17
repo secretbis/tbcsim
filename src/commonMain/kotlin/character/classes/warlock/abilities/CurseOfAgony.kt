@@ -19,8 +19,6 @@ class CurseOfAgony : Ability() {
 
     override fun resourceCost(sp: SimParticipant): Double = 265.0
 
-    val dot = CurseOfAgonyDot()
-
     override fun cast(sp: SimParticipant) {
         val suppression = sp.character.klass.talents[Suppression.name] as Suppression?
         val suppressionBonusHit = suppression?.bonusAfflictionHitPct() ?: 0.0
@@ -37,7 +35,7 @@ class CurseOfAgony : Ability() {
         sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
-            sp.addDebuff(dot)
+            sp.sim.target.addDebuff(CurseOfAgonyDot(sp))
         }
     }
 }

@@ -10,6 +10,7 @@ data class Event(
     val buff: Buff? = null,
     val buffStacks: Int = 0,
     val eventType: Type,
+    var target: SimParticipant? = null,
     val damageType: Constants.DamageType? = null,
     val isWhiteDamage: Boolean = false,
     val amount: Double = 0.0,

@@ -9,7 +9,7 @@ import sim.Event
 
 import sim.SimParticipant
 
-class FlameShockDot : Debuff() {
+class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
     override val name: String = "Flame Shock (DoT)"
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
@@ -24,18 +24,18 @@ class FlameShockDot : Debuff() {
         val school = Constants.DamageType.FIRE
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = Event.Result.HIT
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
-            sp.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
         }
     }
 

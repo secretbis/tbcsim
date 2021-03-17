@@ -17,7 +17,7 @@ class ShadowMastery(currentRank: Int) : Talent(currentRank) {
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(shadowDamageMultiplier = 1.0 + (0.1 * currentRank))
+            return Stats(shadowDamageMultiplier = 1.0 + (0.02 * currentRank))
         }
     }
 

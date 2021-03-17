@@ -9,7 +9,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 
-class CurseOfAgonyDot : Debuff() {
+class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Curse of Agony (DoT)"
     }
@@ -29,15 +29,15 @@ class CurseOfAgonyDot : Debuff() {
         val numTicks = 12.0
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
-            val impCoa = sp.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
+            val impCoa = owner.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
             val impCoaMultiplier = impCoa?.damageMultiplier() ?: 1.0
 
-            val contagion = sp.character.klass.talents[Contagion.name] as Contagion?
+            val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
             val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
 
             // Per lock discord
             val spellPowerCoeff = 1.0 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school) * contagionMultiplier * impCoaMultiplier
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school) * contagionMultiplier * impCoaMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -46,13 +46,13 @@ class CurseOfAgonyDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
-            sp.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
 
     override fun tick(sp: SimParticipant) {
-        dot.cast(sp)
+        dot.cast(owner)
     }
 }

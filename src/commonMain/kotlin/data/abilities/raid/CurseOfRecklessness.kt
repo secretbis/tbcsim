@@ -12,7 +12,7 @@ class CurseOfRecklessness : Ability() {
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val debuff = object : Debuff() {
+    fun debuff(owner: SimParticipant) = object : Debuff(owner) {
          override val name: String = "Curse of Recklessness"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
@@ -27,6 +27,6 @@ class CurseOfRecklessness : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.addDebuff(debuff)
+        sp.sim.target.addDebuff(debuff(sp))
     }
 }

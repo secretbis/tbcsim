@@ -34,27 +34,27 @@ object Buffs {
             return GenericBlockValueBuff(amount)
         },
         Regex("Increase Holy Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(19).toInt()
+            val amount = name.drop(18).toInt()
             return GenericHolyDamageBuff(amount)
         },
         Regex("Increase Fire Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(19).toInt()
+            val amount = name.drop(18).toInt()
             return GenericFireDamageBuff(amount)
         },
         Regex("Increase Nature Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(21).toInt()
+            val amount = name.drop(20).toInt()
             return GenericNatureDamageBuff(amount)
         },
         Regex("Increase Frost Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(20).toInt()
+            val amount = name.drop(19).toInt()
             return GenericFrostDamageBuff(amount)
         },
         Regex("Increase Shadow Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(21).toInt()
+            val amount = name.drop(20).toInt()
             return GenericShadowDamageBuff(amount)
         },
         Regex("Increase Arcane Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(21).toInt()
+            val amount = name.drop(20).toInt()
             return GenericArcaneDamageBuff(amount)
         },
         Regex("Increased Dodge \\d+") to fun (name: String): Buff {
@@ -82,7 +82,7 @@ object Buffs {
             return GenericSpellPenBuff(amount)
         },
         Regex("Attack Power - Feral \\(\\+\\d+\\)") to fun (name: String): Buff {
-            val amount = name.drop(23).dropLast(1).toInt()
+            val amount = name.drop(21).dropLast(1).toInt()
             return GenericFeralAttackPowerBuff(amount)
         }
     )

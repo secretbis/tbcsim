@@ -11,11 +11,11 @@ import sim.rotation.Criterion
 import sim.rotation.Rotation
 import sim.rotation.Rule
 
-class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration) {
+open class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration) {
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
-    var resource: Resource
+    lateinit var resource: Resource
 
     var mhAutoAttack: MeleeBase? = null
     var ohAutoAttack: MeleeBase? = null
@@ -48,7 +48,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     // Events
     var events: MutableList<Event> = mutableListOf()
 
-    init {
+    fun init(): SimParticipant {
         // Add auto-attack, if allowed
         if (rotation.autoAttack) {
             if (hasMainHandWeapon()) {
@@ -75,10 +75,13 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         resource = Resource(this)
 
         // Cast any spells flagged in the rotation as precombat
+        rotation.castAllRaidBuffs(this)
         rotation.castAllPrecombat(this)
 
         // Recompute after precombat casts
         recomputeStats()
+
+        return this
     }
 
     fun onGcd(): Boolean {
@@ -118,7 +121,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 logEvent(
                     Event(
                         eventType = Event.Type.SPELL_CAST,
-                        abilityName = castingRule!!.ability.name
+                        abilityName = castingRule!!.ability.name,
+                        target = sim.target
                     )
                 )
 
@@ -307,7 +311,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_START,
                 buff = debuff,
-                buffStacks = stacks
+                buffStacks = stacks,
+                target = sim.target
             ))
 
             // Always recompute after adding a debuff
@@ -316,7 +321,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_REFRESH,
                 buff = debuff,
-                buffStacks = stacks
+                buffStacks = stacks,
+                target = sim.target
             ))
 
             // If a debuff is stackable, then recompute on a refresh as well
@@ -336,7 +342,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     Event(
                         eventType = Event.Type.DEBUFF_CHARGE_CONSUMED,
                         buff = debuff,
-                        buffStacks = state.currentStacks
+                        buffStacks = state.currentStacks,
+                        target = sim.target
                     )
                 )
 
@@ -370,7 +377,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             it.reset(this)
             logEvent(Event(
                 eventType = Event.Type.DEBUFF_END,
-                buff = it
+                buff = it,
+                target = sim.target
             ))
         }
 
@@ -458,6 +466,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             event.timeMs = sim.elapsedTimeMs
         }
 
+        // Auto-set target if we can
+        if(event.eventType == Event.Type.DAMAGE) {
+            event.target = event.target ?: sim.target
+        }
+
         logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
 
         events.add(event)
@@ -524,7 +537,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun spellDamage(): Int {
-        return (stats.spellDamage * stats.spellDamageMultiplier).toInt()
+        return stats.spellDamage
     }
 
     fun meleeHitPct(): Double {

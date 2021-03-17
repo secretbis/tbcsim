@@ -19,8 +19,6 @@ class CurseOfDoom : Ability() {
 
     override fun resourceCost(sp: SimParticipant): Double = 380.0
 
-    val doom = CurseOfDoom()
-
     override fun cast(sp: SimParticipant) {
         val suppression = sp.character.klass.talents[Suppression.name] as Suppression?
         val suppressionBonusHit = suppression?.bonusAfflictionHitPct() ?: 0.0
@@ -37,7 +35,7 @@ class CurseOfDoom : Ability() {
         sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
-            sp.addDebuff(doom)
+            sp.sim.target.addDebuff(CurseOfDoom(sp))
         }
     }
 }

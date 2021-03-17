@@ -35,8 +35,6 @@ class Immolate : Ability() {
         return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
     }
 
-    val dot = ImmolateDot()
-
     val baseDamage = 327.0
     override fun cast(sp: SimParticipant) {
         val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
@@ -62,7 +60,7 @@ class Immolate : Ability() {
         sp.logEvent(event)
 
         // Apply the DoT
-        sp.addDebuff(dot)
+        sp.sim.target.addDebuff(ImmolateDot(sp))
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {

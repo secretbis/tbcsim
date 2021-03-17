@@ -10,7 +10,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 
-class CurseOfDoom : Debuff() {
+class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Curse of Doom"
     }
@@ -28,15 +28,15 @@ class CurseOfDoom : Debuff() {
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
             // Amplify Curse
-            val ampCurseMultiplier = if(sp.buffs[AmplifyCurse.name] != null) { 1.5 } else 1.0
-            sp.consumeBuff(object : Buff() {
+            val ampCurseMultiplier = if(owner.buffs[AmplifyCurse.name] != null) { 1.5 } else 1.0
+            owner.consumeBuff(object : Buff() {
                 override val name: String = AmplifyCurse.name
                 override val durationMs: Int = -1
             })
 
             // Per DBs this is 200% spell damage
             val spellPowerCoeff = 2.0
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school) * ampCurseMultiplier
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school) * ampCurseMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -45,9 +45,9 @@ class CurseOfDoom : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
-            sp.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC), listOf(), this, event)
         }
     }
 

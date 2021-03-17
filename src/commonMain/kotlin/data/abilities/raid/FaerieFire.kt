@@ -13,7 +13,7 @@ class FaerieFire : Ability() {
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val debuff = object : Debuff() {
+    fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Faerie Fire"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
@@ -27,6 +27,6 @@ class FaerieFire : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.addDebuff(debuff)
+        sp.sim.target.addDebuff(debuff(sp))
     }
 }

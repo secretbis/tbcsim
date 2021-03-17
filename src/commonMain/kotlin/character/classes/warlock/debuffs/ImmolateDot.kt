@@ -9,7 +9,7 @@ import sim.Event
 
 import sim.SimParticipant
 
-class ImmolateDot : Debuff() {
+class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Immolate (DoT)"
     }
@@ -28,7 +28,7 @@ class ImmolateDot : Debuff() {
         override fun cast(sp: SimParticipant) {
             // Per lock discord
             val spellPowerCoeff = 0.65 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -37,9 +37,9 @@ class ImmolateDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
-            sp.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
         }
 }
     override fun tick(sp: SimParticipant) {

@@ -32,7 +32,7 @@ class CurseOfTheElements : Ability() {
         }
     }
 
-    val debuff = object : Debuff() {
+    fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Curse of the Elements"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
@@ -50,6 +50,6 @@ class CurseOfTheElements : Ability() {
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)
-        sp.addDebuff(debuff)
+        sp.sim.target.addDebuff(debuff(sp))
     }
 }

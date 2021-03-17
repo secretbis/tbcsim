@@ -16,9 +16,9 @@ class Annihilator : Item() {
     companion object {
         private var singletonDebuff: Debuff? = null
 
-        fun singletonDebuff(): Debuff {
+        fun singletonDebuff(owner: SimParticipant): Debuff {
             if(singletonDebuff == null) {
-                singletonDebuff = object : Debuff() {
+                singletonDebuff = object : Debuff(owner) {
                     override val name: String = "Annihilator"
                     override val durationMs: Int = 45000
                     override val maxStacks: Int = 3
@@ -76,7 +76,7 @@ class Annihilator : Item() {
                 // This proc is Shadow school, and is resistable
                 val result = Spell.attackRoll(sp, 1.0, Constants.DamageType.SHADOW, isBinary = true)
                 if(result.second != Event.Result.RESIST) {
-                    sp.addDebuff(singletonDebuff())
+                    sp.sim.target.addDebuff(singletonDebuff(sp))
                 }
             }
         }

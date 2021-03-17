@@ -44,7 +44,7 @@ class Incinerate : Ability() {
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.FIRE
 
-        val hasImmolate = sp.debuffs[Immolate.name] !== null
+        val hasImmolate = sp.sim.target.debuffs[Immolate.name] !== null
         val damagePair = if(hasImmolate) { baseDamageWithImmolate } else baseDamage
 
         val damageRoll = Spell.baseDamageRoll(sp, damagePair.first, damagePair.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier)

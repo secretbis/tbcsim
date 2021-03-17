@@ -18,10 +18,14 @@ class SimIteration(
 
     // Setup known participants
     val target: SimParticipant = defaultTarget()
-    val subject: SimParticipant = SimParticipant(_subject, _rotation, this)
+    val subject: SimParticipant = SimParticipant(_subject, _rotation, this).init()
     val subjectPet: SimParticipant? = if(subject.character.pet != null) {
-        SimParticipant(subject.character.pet, subject.character.pet.rotation, this)
+        SimParticipant(subject.character.pet, subject.character.pet.rotation, this).init()
     } else null
+
+    // This is basically the non-sim target participants, and is the data needed for output
+    // TODO: The rest of the party and raid
+    val participants = listOfNotNull(subject, subjectPet)
 
     // Universal sim state
     val serverTickMs = 2000
@@ -38,25 +42,18 @@ class SimIteration(
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
 
-    val participants: List<SimParticipant>
 
-    init {
-        participants = listOfNotNull(
-            target,
-            subject,
-            subjectPet
-        )
-
-        // TODO: The rest of the party and raid
-    }
+    private val allParticipants: List<SimParticipant> = listOfNotNull(
+        target,
+    ) + participants
 
     fun tick() {
-        participants.forEach {
+        allParticipants.forEach {
             it.tick()
         }
 
         // Check debuffs
-        participants.forEach {
+        allParticipants.forEach {
             it.debuffs.values.forEach { debuff ->
                 if (debuff.shouldTick(it)) {
                     debuff.tick(it)
@@ -65,7 +62,7 @@ class SimIteration(
         }
 
         // MP5
-        participants.forEach {
+        allParticipants.forEach {
             if (it.character.klass.resourceType == Resource.Type.MANA) {
                 if (elapsedTimeMs - lastMp5Tick >= 5000) {
                     it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA)
@@ -77,20 +74,20 @@ class SimIteration(
         // Fire server tick procs
         if(elapsedTimeMs >= lastServerTickMs + serverTickMs) {
             lastServerTickMs = elapsedTimeMs
-            participants.forEach {
+            allParticipants.forEach {
                 it.fireProc(listOf(Proc.Trigger.SERVER_TICK), null, null, null)
             }
         }
 
         if(elapsedTimeMs >= lastServerSlowTickMs + serverSlowTickMs) {
             lastServerSlowTickMs = elapsedTimeMs
-            participants.forEach {
+            allParticipants.forEach {
                 it.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null)
             }
         }
 
         // Prune any buffs set to expire this tick
-        participants.forEach {
+        allParticipants.forEach {
             it.pruneBuffs()
             it.pruneDebuffs()
         }
@@ -101,7 +98,7 @@ class SimIteration(
     }
 
     fun cleanup() {
-        participants.forEach {
+        allParticipants.forEach {
             it.cleanup()
         }
     }
@@ -115,7 +112,7 @@ class SimIteration(
             opts.targetLevel
         )
 
-        return SimParticipant(char, Rotation(listOf(), false), this)
+        return SimParticipant(char, Rotation(listOf(), false), this).init()
     }
 
     fun isExecutePhase(): Boolean {

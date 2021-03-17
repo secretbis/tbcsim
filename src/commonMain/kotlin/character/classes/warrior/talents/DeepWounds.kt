@@ -24,7 +24,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
         }
     }
 
-    val bleedDebuff = object : Debuff() {
+    fun bleedDebuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Deep Wounds"
         override val durationMs: Int = 12000
         override val tickDeltaMs: Int = 3000
@@ -33,9 +33,9 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
             // 20% of average weapon damage per talent point over  full duration
             val tickPct = tickDeltaMs.toDouble() / durationMs.toDouble()
             // TODO: Using the mainhand every time may or may not be an approximation when dual wielding
-            val damageFullDuration = sp.character.gear.mainHand.avgDmg * 0.2 * currentRank
+            val damageFullDuration = owner.character.gear.mainHand.avgDmg * 0.2 * currentRank
 
-            sp.logEvent(Event(
+            owner.logEvent(Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = name,
@@ -60,7 +60,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addDebuff(bleedDebuff)
+                sp.sim.target.addDebuff(bleedDebuff(sp))
 
                 val hasBfRanks = sp.character.klass.talents[BloodFrenzy.name]?.currentRank ?: 0 > 0
                 if(hasBfRanks) {

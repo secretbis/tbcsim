@@ -63,24 +63,28 @@ class TBCSim : CliktCommand() {
                     // Stats
                     val durationSeconds = (opts.durationMs / 1000.0).toInt()
                     val resourceType = config.character.klass.resourceType
-                    val resource = SimStats.resourceUsage(iterations)
-                    println("Resource usage for iteration ${resource.iterationIdx}")
-                    Chart.print(resource.series, xMax = durationSeconds, yLabel = resourceType.toString())
+                    val participants = iterations[0].participants
+                    participants.forEachIndexed { idx, sp ->
+                        println("Participant #$idx")
+                        val resource = SimStats.resourceUsage(iterations)
+                        println("Resource usage for iteration ${resource[idx].iterationIdx}")
+                        Chart.print(resource[idx].series, xMax = durationSeconds, yLabel = resourceType.toString())
 
-                    val buffs = SimStats.resultsByBuff(iterations)
-                    SimStatsPrinter.printBuffs("Buffs", buffs)
+                        val buffs = SimStats.resultsByBuff(iterations)
+                        SimStatsPrinter.printBuffs("Buffs", buffs)
 
-                    val debuffs = SimStats.resultsByDebuff(iterations)
-                    SimStatsPrinter.printBuffs("Debuffs", debuffs)
+                        val debuffs = SimStats.resultsByDebuff(iterations)
+                        SimStatsPrinter.printBuffs("Debuffs", debuffs)
 
-                    val dmgType = SimStats.resultsByDamageType(iterations)
-                    SimStatsPrinter.printDamage(dmgType)
+                        val dmgType = SimStats.resultsByDamageType(iterations)
+                        SimStatsPrinter.printDamage(dmgType)
 
-                    val abilities = SimStats.resultsByAbility(iterations)
-                    SimStatsPrinter.printAbilities(abilities)
+                        val abilities = SimStats.resultsByAbility(iterations)
+                        SimStatsPrinter.printAbilities(abilities)
 
-                    val dps = SimStats.dps(iterations)
-                    SimStatsPrinter.printDps(dps)
+                        val dps = SimStats.dps(iterations)
+                        SimStatsPrinter.printDps(dps["subject"]!!, dps["subjectPet"])
+                    }
                 }
             } else {
                 println("Please specify a sim config file path as the first positional argument")

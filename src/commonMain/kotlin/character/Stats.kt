@@ -158,11 +158,11 @@ data class Stats(
         dodgeRating += stats.dodgeRating
         parryRating += stats.parryRating
 
-        fireResistance += stats.fireResistance
-        natureResistance += stats.natureResistance
-        frostResistance += stats.frostResistance
-        shadowResistance += stats.shadowResistance
-        arcaneResistance += stats.arcaneResistance
+        fireResistance = (fireResistance + stats.fireResistance).coerceAtLeast(0)
+        natureResistance = (natureResistance + stats.natureResistance).coerceAtLeast(0)
+        frostResistance = (frostResistance + stats.frostResistance).coerceAtLeast(0)
+        shadowResistance = (shadowResistance + stats.shadowResistance).coerceAtLeast(0)
+        arcaneResistance = (arcaneResistance + stats.arcaneResistance).coerceAtLeast(0)
 
         bowCritRating += stats.bowCritRating
         gunCritRating += stats.gunCritRating

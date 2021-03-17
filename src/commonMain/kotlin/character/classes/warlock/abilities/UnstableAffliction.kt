@@ -25,8 +25,6 @@ class UnstableAffliction : Ability() {
         return sp.character.klass.talents[UnstableAffliction.name]?.currentRank ?: 0 > 0
     }
 
-    val dot = UnstableAfflictionDot()
-
     override fun cast(sp: SimParticipant) {
         val suppression = sp.character.klass.talents[Suppression.name] as Suppression?
         val suppressionBonusHit = suppression?.bonusAfflictionHitPct() ?: 0.0
@@ -43,7 +41,7 @@ class UnstableAffliction : Ability() {
         sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
-            sp.addDebuff(dot)
+            sp.sim.target.addDebuff(UnstableAfflictionDot(sp))
         }
     }
 }

@@ -7,7 +7,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 
-class SiphonLifeDot : Debuff() {
+class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Siphon Life (DoT)"
     }
@@ -26,7 +26,7 @@ class SiphonLifeDot : Debuff() {
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = 0.5 / numTicks
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -35,7 +35,7 @@ class SiphonLifeDot : Debuff() {
                 amount = damageRoll,
                 result = Event.Result.HIT,
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
         }
     }
 

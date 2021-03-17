@@ -73,7 +73,7 @@ class Stormstrike : Ability() {
         val eventMh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            abilityName = "$name (MH)",
             amount = mhResult.first,
             result = mhResult.second,
         )
@@ -82,7 +82,7 @@ class Stormstrike : Ability() {
         val eventOh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            abilityName = "$name (OH)",
             amount = ohResult.first,
             result = ohResult.second,
         )

@@ -125,6 +125,18 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Curse of Doom
           seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 61
+    - name: Curse of Agony
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Agony (DoT)
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
     - name: Destruction Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions

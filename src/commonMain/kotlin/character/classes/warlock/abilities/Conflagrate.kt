@@ -24,7 +24,7 @@ class Conflagrate : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 10000
 
     override fun available(sp: SimParticipant): Boolean {
-        return sp.debuffs[ImmolateDot.name] != null && (sp.character.klass.talents[Conflagrate.name]?.currentRank ?: 0) > 0
+        return sp.sim.target.debuffs[ImmolateDot.name] != null && (sp.character.klass.talents[Conflagrate.name]?.currentRank ?: 0) > 0
     }
 
     override fun resourceCost(sp: SimParticipant): Double {
@@ -55,7 +55,7 @@ class Conflagrate : Ability() {
         sp.logEvent(event)
 
         // Remove the Immolate DoT
-        sp.consumeDebuff(ImmolateDot())
+        sp.consumeDebuff(ImmolateDot(sp))
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {

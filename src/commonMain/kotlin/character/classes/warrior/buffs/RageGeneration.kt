@@ -45,7 +45,7 @@ class RageGeneration : Buff() {
                     damageToRage(sp, damage, item, 3.5)
                 }
 
-                sp.addResource(rage.toInt(), Resource.Type.RAGE)
+                sp.addResource(rage, Resource.Type.RAGE)
             }
         }
     }
@@ -74,7 +74,7 @@ class RageGeneration : Buff() {
         }
     }
 
-    // TODO: Refund rage for missed yellow attacks, once I figure out how TBC does that
+    // TODO: Refund rage for mitigated yellow attacks, once I figure out how TBC does that
     //       May need to be implemented per-ability, if it's the same as Classic
     override fun procs(sp: SimParticipant): List<Proc> = listOf(procHit, procCrit)
 }

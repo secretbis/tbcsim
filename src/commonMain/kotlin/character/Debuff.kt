@@ -3,7 +3,7 @@ package character
 import sim.SimIteration
 import sim.SimParticipant
 
-abstract class Debuff : Buff() {
+abstract class Debuff(val owner: SimParticipant) : Buff() {
     open val tickDeltaMs: Int = -1
 
     open fun shouldTick(sp: SimParticipant): Boolean {

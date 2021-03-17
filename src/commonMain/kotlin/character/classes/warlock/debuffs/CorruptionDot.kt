@@ -13,7 +13,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 
-class CorruptionDot : Debuff() {
+class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Corruption (DoT)"
     }
@@ -29,7 +29,7 @@ class CorruptionDot : Debuff() {
         override val type: Type = Type.PERCENT
         override fun percentChance(sp: SimParticipant): Double {
             val nightfallRanks = sp.character.klass.talents[Nightfall.name]?.currentRank ?: 0
-            return 0.02 * nightfallRanks
+            return 2.0 * nightfallRanks
         }
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
@@ -54,25 +54,25 @@ class CorruptionDot : Debuff() {
         val numTicks = 6.0
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
-            val impCorruption = sp.character.klass.talents[EmpoweredCorruption.name] as EmpoweredCorruption?
+            val impCorruption = owner.character.klass.talents[EmpoweredCorruption.name] as EmpoweredCorruption?
             val bonusSpellPowerMultiplier = impCorruption?.corruptionSpellDamageMultiplier() ?: 1.0
 
-            val contagion = sp.character.klass.talents[Contagion.name] as Contagion?
+            val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
             val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
 
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRoll(sp, dmgPerTick, spellPowerCoeff, school, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier
+            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = Event.Result.HIT
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
-            sp.fireProc(
+            owner.fireProc(
                 listOf(Proc.Trigger.WARLOCK_TICK_CORRUPTION, Proc.Trigger.SHADOW_DAMAGE_PERIODIC),
                 listOf(),
                 this,

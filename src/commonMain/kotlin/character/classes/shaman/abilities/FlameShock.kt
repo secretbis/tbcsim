@@ -62,7 +62,7 @@ class FlameShock : Ability() {
         sp.logEvent(event)
 
         // Apply the DoT
-        sp.addDebuff(FlameShockDot())
+        sp.sim.target.addDebuff(FlameShockDot(sp))
 
         // Proc anything that can proc off Fire damage
         val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
