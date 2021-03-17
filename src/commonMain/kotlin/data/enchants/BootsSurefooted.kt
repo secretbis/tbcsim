@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class BootsSurefooted(item: Item) : Enchant(item) {
-    override val id: Int = 35418
+    override val id: Int = 46491
     override val inventorySlot: Int = Constants.InventorySlot.FEET.ordinal
     override val name: String = "Surefooted"
 

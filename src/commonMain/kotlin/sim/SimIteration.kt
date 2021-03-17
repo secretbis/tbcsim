@@ -27,7 +27,7 @@ class SimIteration(
     // TODO: The rest of the party and raid
     val participants = listOfNotNull(subject, subjectPet)
 
-    // Universal sim state
+    // General sim state
     val serverTickMs = 2000
     var lastServerTickMs = 0
 
@@ -41,7 +41,6 @@ class SimIteration(
 
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
-
 
     private val allParticipants: List<SimParticipant> = listOfNotNull(
         target,

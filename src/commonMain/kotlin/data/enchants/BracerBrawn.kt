@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class BracerBrawn(item: Item) : Enchant(item) {
-    override val id: Int = 35420
+    override val id: Int = 46493
     override val inventorySlot: Int = Constants.InventorySlot.WRISTS.ordinal
     override val name: String = "Brawn"
 

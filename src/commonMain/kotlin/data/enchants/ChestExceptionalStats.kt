@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class ChestExceptionalStats(item: Item) : Enchant(item) {
-    override val id: Int = 35429
+    override val id: Int = 46502
     override val inventorySlot: Int = Constants.InventorySlot.CHEST.ordinal
     override val name: String = "Exceptional Stats"
 

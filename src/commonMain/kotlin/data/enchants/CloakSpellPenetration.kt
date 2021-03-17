@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class CloakSpellPenetration(item: Item) : Enchant(item) {
-    override val id: Int = 34003
+    override val id: Int = 46509
     override val inventorySlot: Int = Constants.InventorySlot.BACK.ordinal
     override val name: String = "Spell Penetration"
 

@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class BracerMajorIntellect(item: Item) : Enchant(item) {
-    override val id: Int = 35423
+    override val id: Int = 46496
     override val inventorySlot: Int = Constants.InventorySlot.WRISTS.ordinal
     override val name: String = "Major Intellect"
 

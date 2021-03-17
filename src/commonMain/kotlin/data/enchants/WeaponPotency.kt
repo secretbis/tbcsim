@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 @JsExport
 class WeaponPotency(item: Item) : Enchant(item) {
-    override val id: Int = 27972
+    override val id: Int = 46537
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val name: String = "Potency"
 

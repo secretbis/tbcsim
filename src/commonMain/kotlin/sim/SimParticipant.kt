@@ -180,15 +180,17 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
         // Set expiration tick
         // Remove the old expiration
-        val oldTick = buffExpirationTick[buff.name]
-        buffExpirations[oldTick]?.remove(buff)
+        if(buff.durationMs != -1) {
+            val oldTick = buffExpirationTick[buff.name]
+            buffExpirations[oldTick]?.remove(buff)
 
-        // Find the new expiration, and store that in both places
-        val newTick = sim.getExpirationTick(buff)
-        buffExpirationTick[buff.name] = newTick
+            // Find the new expiration, and store that in both places
+            val newTick = sim.getExpirationTick(buff)
+            buffExpirationTick[buff.name] = newTick
 
-        val expirationSet = buffExpirations.getOrPut(newTick, { mutableSetOf() })
-        expirationSet.add(buff)
+            val expirationSet = buffExpirations.getOrPut(newTick, { mutableSetOf() })
+            expirationSet.add(buff)
+        }
 
         // If this is a new buff, add it
         val exists = buffs[buff.name] != null
@@ -294,15 +296,17 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
         // Set expiration tick
         // Remove the old expiration
-        val oldTick = debuffExpirationTick[debuff.name]
-        debuffExpirations[oldTick]?.remove(debuff)
+         if(debuff.durationMs != -1) {
+             val oldTick = debuffExpirationTick[debuff.name]
+             debuffExpirations[oldTick]?.remove(debuff)
 
-        // Find the new expiration, and store that in both places
-        val newTick = sim.getExpirationTick(debuff)
-        debuffExpirationTick[debuff.name] = newTick
+             // Find the new expiration, and store that in both places
+             val newTick = sim.getExpirationTick(debuff)
+             debuffExpirationTick[debuff.name] = newTick
 
-        val expirationSet = debuffExpirations.getOrPut(newTick, { mutableSetOf() })
-        expirationSet.add(debuff)
+             val expirationSet = debuffExpirations.getOrPut(newTick, { mutableSetOf() })
+             expirationSet.add(debuff)
+         }
 
         // If this is a new debuff, add it
         val exists = debuffs[debuff.name] != null
