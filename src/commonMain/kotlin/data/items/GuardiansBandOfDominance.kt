@@ -49,7 +49,8 @@ public class GuardiansBandOfDominance : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 18,
-      spellHasteRating = 14.0
+      spellHasteRating = 14.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

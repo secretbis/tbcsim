@@ -56,7 +56,8 @@ public class VengefulGladiatorsLeatherTunic : Item() {
       stamina = 64,
       armor = 529,
       physicalCritRating = 17.0,
-      physicalHitRating = 12.0
+      physicalHitRating = 12.0,
+      resilienceRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -54,7 +54,8 @@ public class GuardiansWyrmhideBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 23,
-      armor = 253
+      armor = 253,
+      resilienceRating = 15.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

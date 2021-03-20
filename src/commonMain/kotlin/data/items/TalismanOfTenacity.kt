@@ -46,7 +46,8 @@ public class TalismanOfTenacity : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 30
+      stamina = 30,
+      resilienceRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,7 +55,8 @@ public class GladiatorsOrnamentedChestguard : Item() {
       stamina = 45,
       intellect = 31,
       armor = 1547,
-      spellCritRating = 30.0
+      spellCritRating = 30.0,
+      resilienceRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

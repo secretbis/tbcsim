@@ -60,7 +60,8 @@ public class KharmaasShroudOfHope : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 15,
-      armor = 114
+      armor = 114,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,7 +55,8 @@ public class GrandMarshalsSilkAmice : Item() {
       stamina = 21,
       intellect = 16,
       armor = 117,
-      spellCritRating = 8.0
+      spellCritRating = 8.0,
+      resilienceRating = 15.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

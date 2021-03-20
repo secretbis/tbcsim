@@ -55,7 +55,8 @@ public class GrandMarshalsRingmailChestguard : Item() {
       stamina = 34,
       intellect = 22,
       armor = 652,
-      spellCritRating = 18.0
+      spellCritRating = 18.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

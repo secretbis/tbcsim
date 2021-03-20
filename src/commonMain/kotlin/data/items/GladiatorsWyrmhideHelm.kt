@@ -54,7 +54,8 @@ public class GladiatorsWyrmhideHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       intellect = 25,
-      armor = 356
+      armor = 356,
+      resilienceRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

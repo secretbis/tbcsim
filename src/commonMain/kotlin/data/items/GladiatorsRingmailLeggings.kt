@@ -53,7 +53,8 @@ public class GladiatorsRingmailLeggings : Item() {
       stamina = 54,
       intellect = 26,
       armor = 758,
-      spellCritRating = 21.0
+      spellCritRating = 21.0,
+      resilienceRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -48,7 +48,8 @@ public class BrutalGladiatorsPainsaw : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 68,
-      physicalCritRating = 51.0
+      physicalCritRating = 51.0,
+      resilienceRating = 42.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

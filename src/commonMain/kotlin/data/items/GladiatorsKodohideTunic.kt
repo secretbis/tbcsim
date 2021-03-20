@@ -54,7 +54,8 @@ public class GladiatorsKodohideTunic : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 30,
-      armor = 429
+      armor = 429,
+      resilienceRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

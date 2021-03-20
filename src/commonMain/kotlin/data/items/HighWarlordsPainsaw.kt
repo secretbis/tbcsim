@@ -49,7 +49,8 @@ public class HighWarlordsPainsaw : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       physicalCritRating = 28.0,
-      physicalHitRating = 18.0
+      physicalHitRating = 18.0,
+      resilienceRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

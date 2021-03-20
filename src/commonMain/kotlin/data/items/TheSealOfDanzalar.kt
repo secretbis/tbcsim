@@ -48,7 +48,8 @@ public class TheSealOfDanzalar : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      armor = 295
+      armor = 295,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

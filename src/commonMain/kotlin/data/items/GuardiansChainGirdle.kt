@@ -54,7 +54,8 @@ public class GuardiansChainGirdle : Item() {
       stamina = 52,
       intellect = 27,
       armor = 624,
-      physicalCritRating = 22.0
+      physicalCritRating = 22.0,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

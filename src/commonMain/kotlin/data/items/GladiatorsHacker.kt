@@ -49,7 +49,8 @@ public class GladiatorsHacker : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       physicalCritRating = 15.0,
-      physicalHitRating = 9.0
+      physicalHitRating = 9.0,
+      resilienceRating = 10.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

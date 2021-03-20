@@ -52,7 +52,8 @@ public class GrandMarshalsDreadweaveGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 21,
-      armor = 97
+      armor = 97,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

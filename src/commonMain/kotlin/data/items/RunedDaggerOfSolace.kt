@@ -47,7 +47,8 @@ public class RunedDaggerOfSolace : Item() {
   public override var speed: Double = 1500.0
 
   public override var stats: Stats = Stats(
-      stamina = 24
+      stamina = 24,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

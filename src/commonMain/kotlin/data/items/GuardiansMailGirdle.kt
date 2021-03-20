@@ -53,7 +53,8 @@ public class GuardiansMailGirdle : Item() {
       stamina = 49,
       intellect = 34,
       armor = 624,
-      spellCritRating = 34.0
+      spellCritRating = 34.0,
+      resilienceRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

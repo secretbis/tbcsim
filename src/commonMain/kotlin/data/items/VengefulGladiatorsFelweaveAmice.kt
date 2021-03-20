@@ -55,7 +55,8 @@ public class VengefulGladiatorsFelweaveAmice : Item() {
       stamina = 50,
       intellect = 13,
       armor = 323,
-      spellCritRating = 17.0
+      spellCritRating = 17.0,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

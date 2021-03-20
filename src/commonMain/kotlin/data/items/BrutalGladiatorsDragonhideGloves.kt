@@ -54,7 +54,8 @@ public class BrutalGladiatorsDragonhideGloves : Item() {
       agility = 36,
       stamina = 48,
       intellect = 25,
-      armor = 368
+      armor = 368,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

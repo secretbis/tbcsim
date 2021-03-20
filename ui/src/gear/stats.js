@@ -177,7 +177,7 @@ function DefensiveStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Resilience:</Col>
-        <Col xs={12}>{sp.resiliencePct().toFixed()}%</Col>
+        <Col xs={12}>{sp.resiliencePct().toFixed(2)}%</Col>
       </Row>
     </Col>
   )

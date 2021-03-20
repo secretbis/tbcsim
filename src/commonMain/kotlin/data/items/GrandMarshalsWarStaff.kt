@@ -50,7 +50,8 @@ public class GrandMarshalsWarStaff : Item() {
       stamina = 40,
       intellect = 30,
       spellCritRating = 30.0,
-      spellHitRating = 20.0
+      spellHitRating = 20.0,
+      resilienceRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

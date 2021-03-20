@@ -47,7 +47,8 @@ public class WillOfTheFallenExarch : Item() {
   public override var speed: Double = 1800.0
 
   public override var stats: Stats = Stats(
-      stamina = 19
+      stamina = 19,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

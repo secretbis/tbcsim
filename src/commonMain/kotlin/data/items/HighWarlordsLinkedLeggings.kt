@@ -53,7 +53,8 @@ public class HighWarlordsLinkedLeggings : Item() {
       stamina = 42,
       intellect = 22,
       armor = 570,
-      physicalCritRating = 28.0
+      physicalCritRating = 28.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

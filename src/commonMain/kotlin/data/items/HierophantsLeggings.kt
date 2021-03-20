@@ -51,7 +51,8 @@ public class HierophantsLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 17,
-      armor = 119
+      armor = 119,
+      resilienceRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

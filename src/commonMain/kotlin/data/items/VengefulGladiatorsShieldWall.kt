@@ -47,7 +47,8 @@ public class VengefulGladiatorsShieldWall : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 55,
-      armor = 6132
+      armor = 6132,
+      resilienceRating = 31.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

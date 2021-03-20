@@ -55,7 +55,8 @@ public class BrutalGladiatorsLamellarHelm : Item() {
       stamina = 77,
       intellect = 34,
       armor = 1611,
-      spellCritRating = 34.0
+      spellCritRating = 34.0,
+      resilienceRating = 33.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

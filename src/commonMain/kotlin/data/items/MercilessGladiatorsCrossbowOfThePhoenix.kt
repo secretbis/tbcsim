@@ -48,7 +48,8 @@ public class MercilessGladiatorsCrossbowOfThePhoenix : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      physicalCritRating = 15.0
+      physicalCritRating = 15.0,
+      resilienceRating = 13.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

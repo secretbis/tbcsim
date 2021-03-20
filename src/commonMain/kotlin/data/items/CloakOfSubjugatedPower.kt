@@ -61,7 +61,8 @@ public class CloakOfSubjugatedPower : Item() {
       stamina = 34,
       intellect = 15,
       armor = 114,
-      spellCritRating = 16.0
+      spellCritRating = 16.0,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

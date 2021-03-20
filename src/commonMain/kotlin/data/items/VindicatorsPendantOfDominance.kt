@@ -50,7 +50,8 @@ public class VindicatorsPendantOfDominance : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 35,
-      intellect = 20
+      intellect = 20,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

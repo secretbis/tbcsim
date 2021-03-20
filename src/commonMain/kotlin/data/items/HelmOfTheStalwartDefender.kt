@@ -50,6 +50,7 @@ public class HelmOfTheStalwartDefender : Item() {
   public override var stats: Stats = Stats(
       stamina = 47,
       armor = 1366,
+      resilienceRating = 23.0,
       defenseRating = 23.0
       )
 

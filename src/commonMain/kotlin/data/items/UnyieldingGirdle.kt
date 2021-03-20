@@ -62,7 +62,8 @@ public class UnyieldingGirdle : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      armor = 100
+      armor = 100,
+      resilienceRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -54,7 +54,8 @@ public class GuardiansSilkBelt : Item() {
       stamina = 49,
       intellect = 35,
       armor = 219,
-      spellCritRating = 32.0
+      spellCritRating = 32.0,
+      resilienceRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

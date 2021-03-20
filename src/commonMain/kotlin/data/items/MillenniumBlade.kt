@@ -46,7 +46,8 @@ public class MillenniumBlade : Item() {
   public override var speed: Double = 2000.0
 
   public override var stats: Stats = Stats(
-      stamina = 19
+      stamina = 19,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

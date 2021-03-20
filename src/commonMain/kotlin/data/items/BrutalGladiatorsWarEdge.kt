@@ -48,7 +48,8 @@ public class BrutalGladiatorsWarEdge : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      physicalCritRating = 18.0
+      physicalCritRating = 18.0,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

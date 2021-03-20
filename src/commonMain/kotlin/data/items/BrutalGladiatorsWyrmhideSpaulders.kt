@@ -55,7 +55,8 @@ public class BrutalGladiatorsWyrmhideSpaulders : Item() {
       stamina = 49,
       intellect = 24,
       armor = 416,
-      spellCritRating = 13.0
+      spellCritRating = 13.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

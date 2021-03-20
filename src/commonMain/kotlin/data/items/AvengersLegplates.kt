@@ -51,7 +51,8 @@ public class AvengersLegplates : Item() {
       strength = 34,
       stamina = 33,
       armor = 891,
-      physicalCritRating = 12.0
+      physicalCritRating = 12.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

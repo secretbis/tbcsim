@@ -53,7 +53,8 @@ public class VengefulGladiatorsSilkHandguards : Item() {
       stamina = 50,
       intellect = 18,
       armor = 293,
-      spellCritRating = 22.0
+      spellCritRating = 22.0,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

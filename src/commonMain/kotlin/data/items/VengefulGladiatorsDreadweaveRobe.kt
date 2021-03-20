@@ -54,7 +54,8 @@ public class VengefulGladiatorsDreadweaveRobe : Item() {
   public override var stats: Stats = Stats(
       stamina = 75,
       intellect = 21,
-      armor = 454
+      armor = 454,
+      resilienceRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -52,7 +52,8 @@ public class MarshalsLamellarBracers : Item() {
       stamina = 22,
       intellect = 12,
       armor = 624,
-      spellCritRating = 14.0
+      spellCritRating = 14.0,
+      resilienceRating = 13.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

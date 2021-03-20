@@ -50,7 +50,8 @@ public class VeteransLamellarGreaves : Item() {
       stamina = 39,
       intellect = 27,
       armor = 1172,
-      spellCritRating = 27.0
+      spellCritRating = 27.0,
+      resilienceRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,7 +55,8 @@ public class SeersMailHelm : Item() {
       stamina = 36,
       intellect = 16,
       armor = 530,
-      spellCritRating = 16.0
+      spellCritRating = 16.0,
+      resilienceRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

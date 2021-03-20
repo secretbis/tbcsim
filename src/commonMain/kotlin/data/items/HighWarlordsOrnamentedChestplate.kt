@@ -55,7 +55,8 @@ public class HighWarlordsOrnamentedChestplate : Item() {
       stamina = 37,
       intellect = 24,
       armor = 1164,
-      spellCritRating = 21.0
+      spellCritRating = 21.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

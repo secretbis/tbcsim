@@ -49,7 +49,8 @@ public class BandOfTheExorcist : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       physicalCritRating = 16.0,
-      physicalHitRating = 10.0
+      physicalHitRating = 10.0,
+      resilienceRating = 11.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

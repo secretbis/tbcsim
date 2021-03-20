@@ -53,7 +53,8 @@ public class GrandMarshalsLeatherGloves : Item() {
       agility = 21,
       stamina = 31,
       armor = 183,
-      physicalCritRating = 11.0
+      physicalCritRating = 11.0,
+      resilienceRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

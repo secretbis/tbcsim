@@ -50,7 +50,8 @@ public class VengefulGladiatorsGreatsword : Item() {
       strength = 46,
       stamina = 62,
       physicalCritRating = 46.0,
-      physicalHitRating = 15.0
+      physicalHitRating = 15.0,
+      resilienceRating = 33.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

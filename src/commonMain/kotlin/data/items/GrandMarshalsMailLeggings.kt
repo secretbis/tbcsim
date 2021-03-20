@@ -53,7 +53,8 @@ public class GrandMarshalsMailLeggings : Item() {
       stamina = 42,
       intellect = 18,
       armor = 570,
-      spellCritRating = 22.0
+      spellCritRating = 22.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

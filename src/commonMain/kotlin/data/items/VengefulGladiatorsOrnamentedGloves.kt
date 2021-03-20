@@ -53,7 +53,8 @@ public class VengefulGladiatorsOrnamentedGloves : Item() {
       stamina = 44,
       intellect = 29,
       armor = 1141,
-      spellCritRating = 28.0
+      spellCritRating = 28.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

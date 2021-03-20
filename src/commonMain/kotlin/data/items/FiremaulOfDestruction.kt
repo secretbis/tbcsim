@@ -47,7 +47,8 @@ public class FiremaulOfDestruction : Item() {
 
   public override var stats: Stats = Stats(
       strength = 31,
-      stamina = 50
+      stamina = 50,
+      resilienceRating = 40.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

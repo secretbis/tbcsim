@@ -47,7 +47,8 @@ public class HeavyFelsteelRing : Item() {
 
   public override var stats: Stats = Stats(
       strength = 25,
-      stamina = 21
+      stamina = 21,
+      resilienceRating = 13.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

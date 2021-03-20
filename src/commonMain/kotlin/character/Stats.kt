@@ -351,6 +351,8 @@ data class Stats(
                 healthFlatModifier += value
             StatType.MANA_PER_5_SECONDS ->
                 manaPer5Seconds += value
+            StatType.RESILIENCE_RATING ->
+                resilienceRating += value
             else -> {
                 // Do nothing
             }

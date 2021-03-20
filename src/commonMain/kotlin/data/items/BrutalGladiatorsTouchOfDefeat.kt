@@ -48,7 +48,8 @@ public class BrutalGladiatorsTouchOfDefeat : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 15
+      intellect = 15,
+      resilienceRating = 14.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

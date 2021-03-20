@@ -47,7 +47,8 @@ public class BroxigarsRingOfValor : Item() {
 
   public override var stats: Stats = Stats(
       strength = 21,
-      stamina = 19
+      stamina = 19,
+      resilienceRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

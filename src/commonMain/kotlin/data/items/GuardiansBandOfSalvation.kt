@@ -48,7 +48,8 @@ public class GuardiansBandOfSalvation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 38,
-      intellect = 23
+      intellect = 23,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

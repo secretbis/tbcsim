@@ -54,7 +54,8 @@ public class StalkersChainLeggings : Item() {
       stamina = 42,
       intellect = 8,
       armor = 570,
-      physicalCritRating = 14.0
+      physicalCritRating = 14.0,
+      resilienceRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

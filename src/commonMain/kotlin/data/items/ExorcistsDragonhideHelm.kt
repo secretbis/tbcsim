@@ -52,7 +52,8 @@ public class ExorcistsDragonhideHelm : Item() {
       strength = 23,
       agility = 17,
       stamina = 30,
-      armor = 248
+      armor = 248,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

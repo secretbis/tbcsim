@@ -56,7 +56,8 @@ public class StalkersChainSpaulders : Item() {
       stamina = 31,
       intellect = 4,
       armor = 489,
-      physicalCritRating = 17.0
+      physicalCritRating = 17.0,
+      resilienceRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

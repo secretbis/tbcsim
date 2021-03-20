@@ -51,7 +51,8 @@ public class VindicatorsPendantOfConquest : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 15,
-      spellCritRating = 21.0
+      spellCritRating = 21.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

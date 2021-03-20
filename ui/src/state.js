@@ -145,7 +145,7 @@ initialState.serialize = function() {
       level: this.character.level,
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
-        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
+        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it) : [],
         enchant: it.enchant ? it.enchant.displayName : null
       })),
       rotation: this.character.rotation,
@@ -178,7 +178,7 @@ initialState.makeSimConfig = function() {
       level: this.character.level,
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
-        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
+        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it) : [],
         enchant: it.enchant ? it.enchant.displayName : null
       })),
       rotation: this.character.rotation,

@@ -48,7 +48,8 @@ public class MercilessGladiatorsPainsaw : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 55,
-      physicalCritRating = 42.0
+      physicalCritRating = 42.0,
+      resilienceRating = 42.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

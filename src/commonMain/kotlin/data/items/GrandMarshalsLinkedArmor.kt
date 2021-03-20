@@ -55,7 +55,8 @@ public class GrandMarshalsLinkedArmor : Item() {
       strength = 12,
       stamina = 42,
       armor = 652,
-      physicalCritRating = 14.0
+      physicalCritRating = 14.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

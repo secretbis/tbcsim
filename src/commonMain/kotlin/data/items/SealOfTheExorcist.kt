@@ -48,7 +48,8 @@ public class SealOfTheExorcist : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      spellHitRating = 12.0
+      spellHitRating = 12.0,
+      resilienceRating = 11.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

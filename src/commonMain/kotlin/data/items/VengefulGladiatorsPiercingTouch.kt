@@ -47,7 +47,8 @@ public class VengefulGladiatorsPiercingTouch : Item() {
   public override var speed: Double = 1900.0
 
   public override var stats: Stats = Stats(
-      stamina = 18
+      stamina = 18,
+      resilienceRating = 14.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

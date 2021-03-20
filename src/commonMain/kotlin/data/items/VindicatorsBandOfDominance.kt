@@ -48,7 +48,8 @@ public class VindicatorsBandOfDominance : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      intellect = 15
+      intellect = 15,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

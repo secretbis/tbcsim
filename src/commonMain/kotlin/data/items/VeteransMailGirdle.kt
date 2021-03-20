@@ -50,7 +50,8 @@ public class VeteransMailGirdle : Item() {
       stamina = 39,
       intellect = 27,
       armor = 537,
-      spellCritRating = 26.0
+      spellCritRating = 26.0,
+      resilienceRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

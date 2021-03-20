@@ -48,7 +48,8 @@ public class SindoreiBandOfSalvation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      intellect = 19
+      intellect = 19,
+      resilienceRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

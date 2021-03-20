@@ -55,7 +55,8 @@ public class GladiatorsFelweaveCowl : Item() {
       stamina = 54,
       intellect = 15,
       armor = 168,
-      spellCritRating = 18.0
+      spellCritRating = 18.0,
+      resilienceRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -56,7 +56,8 @@ public class BrutalGladiatorsPlateHelm : Item() {
       stamina = 68,
       armor = 1611,
       physicalCritRating = 41.0,
-      physicalHitRating = 18.0
+      physicalHitRating = 18.0,
+      resilienceRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -49,7 +49,8 @@ public class ReaverOfTheInfinites : Item() {
   public override var speed: Double = 3600.0
 
   public override var stats: Stats = Stats(
-      stamina = 22
+      stamina = 22,
+      resilienceRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

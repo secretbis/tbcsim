@@ -61,7 +61,8 @@ public class GeneralsScaledGreaves : Item() {
       stamina = 33,
       intellect = 23,
       armor = 1063,
-      physicalCritRating = 16.0
+      physicalCritRating = 16.0,
+      resilienceRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

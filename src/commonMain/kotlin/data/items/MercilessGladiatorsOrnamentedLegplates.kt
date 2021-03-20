@@ -53,7 +53,8 @@ public class MercilessGladiatorsOrnamentedLegplates : Item() {
       stamina = 55,
       intellect = 35,
       armor = 1491,
-      spellCritRating = 36.0
+      spellCritRating = 36.0,
+      resilienceRating = 35.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

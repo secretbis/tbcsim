@@ -53,7 +53,8 @@ public class BrutalGladiatorsPlateGauntlets : Item() {
       strength = 42,
       stamina = 59,
       armor = 1239,
-      physicalCritRating = 37.0
+      physicalCritRating = 37.0,
+      resilienceRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

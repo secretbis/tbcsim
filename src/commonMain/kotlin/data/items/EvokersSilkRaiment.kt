@@ -55,7 +55,8 @@ public class EvokersSilkRaiment : Item() {
       stamina = 42,
       intellect = 15,
       armor = 156,
-      spellCritRating = 17.0
+      spellCritRating = 17.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -52,7 +52,8 @@ public class VindicatorsKodohideBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       intellect = 30,
-      armor = 357
+      armor = 357,
+      resilienceRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -53,7 +53,8 @@ public class VengefulGladiatorsRingmailGauntlets : Item() {
       stamina = 47,
       intellect = 23,
       armor = 639,
-      spellCritRating = 25.0
+      spellCritRating = 25.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

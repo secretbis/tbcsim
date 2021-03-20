@@ -50,7 +50,8 @@ public class BrutalGladiatorsStaff : Item() {
       strength = 50,
       stamina = 66,
       physicalCritRating = 50.0,
-      physicalHitRating = 26.0
+      physicalHitRating = 26.0,
+      resilienceRating = 33.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

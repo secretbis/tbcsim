@@ -53,7 +53,8 @@ public class EvokersSilkHandguards : Item() {
       stamina = 33,
       intellect = 12,
       armor = 97,
-      spellCritRating = 17.0
+      spellCritRating = 17.0,
+      resilienceRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

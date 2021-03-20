@@ -55,7 +55,8 @@ public class GrandMarshalsDreadweaveMantle : Item() {
       stamina = 19,
       intellect = 15,
       armor = 117,
-      spellHitRating = 6.0
+      spellHitRating = 6.0,
+      resilienceRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

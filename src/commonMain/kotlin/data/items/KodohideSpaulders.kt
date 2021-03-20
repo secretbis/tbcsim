@@ -54,7 +54,8 @@ public class KodohideSpaulders : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 16,
-      armor = 249
+      armor = 249,
+      resilienceRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

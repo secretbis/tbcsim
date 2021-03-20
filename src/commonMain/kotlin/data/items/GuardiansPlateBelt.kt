@@ -52,7 +52,8 @@ public class GuardiansPlateBelt : Item() {
       strength = 40,
       stamina = 56,
       armor = 1115,
-      physicalCritRating = 40.0
+      physicalCritRating = 40.0,
+      resilienceRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

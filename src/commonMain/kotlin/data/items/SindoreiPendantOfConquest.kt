@@ -51,7 +51,8 @@ public class SindoreiPendantOfConquest : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 19,
-      spellCritRating = 19.0
+      spellCritRating = 19.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

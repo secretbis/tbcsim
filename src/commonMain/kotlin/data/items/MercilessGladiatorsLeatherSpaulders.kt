@@ -55,7 +55,8 @@ public class MercilessGladiatorsLeatherSpaulders : Item() {
       agility = 32,
       stamina = 45,
       armor = 321,
-      physicalCritRating = 24.0
+      physicalCritRating = 24.0,
+      resilienceRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

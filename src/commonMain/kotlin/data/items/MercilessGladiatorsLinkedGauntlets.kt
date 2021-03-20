@@ -53,7 +53,8 @@ public class MercilessGladiatorsLinkedGauntlets : Item() {
       strength = 29,
       stamina = 45,
       armor = 596,
-      physicalCritRating = 29.0
+      physicalCritRating = 29.0,
+      resilienceRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

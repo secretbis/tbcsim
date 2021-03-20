@@ -50,7 +50,8 @@ public class MarshalsMailSabatons : Item() {
       stamina = 34,
       intellect = 23,
       armor = 595,
-      spellCritRating = 24.0
+      spellCritRating = 24.0,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -53,7 +53,8 @@ public class ExorcistsChainHelm : Item() {
       stamina = 35,
       intellect = 15,
       armor = 463,
-      physicalCritRating = 10.0
+      physicalCritRating = 10.0,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

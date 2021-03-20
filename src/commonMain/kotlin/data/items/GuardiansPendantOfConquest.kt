@@ -51,7 +51,8 @@ public class GuardiansPendantOfConquest : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 18,
-      spellCritRating = 24.0
+      spellCritRating = 24.0,
+      resilienceRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

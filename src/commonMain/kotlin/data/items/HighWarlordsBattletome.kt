@@ -48,7 +48,8 @@ public class HighWarlordsBattletome : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 12
+      intellect = 12,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

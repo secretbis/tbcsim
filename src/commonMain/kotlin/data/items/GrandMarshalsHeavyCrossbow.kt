@@ -48,7 +48,8 @@ public class GrandMarshalsHeavyCrossbow : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalCritRating = 9.0
+      physicalCritRating = 9.0,
+      resilienceRating = 9.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

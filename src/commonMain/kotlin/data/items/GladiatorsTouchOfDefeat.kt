@@ -48,7 +48,8 @@ public class GladiatorsTouchOfDefeat : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 11
+      intellect = 11,
+      resilienceRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,7 +52,8 @@ public class ExorcistsLamellarHelm : Item() {
       stamina = 30,
       intellect = 16,
       armor = 827,
-      spellCritRating = 16.0
+      spellCritRating = 16.0,
+      resilienceRating = 11.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

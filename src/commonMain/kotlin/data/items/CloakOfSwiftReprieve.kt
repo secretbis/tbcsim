@@ -61,7 +61,8 @@ public class CloakOfSwiftReprieve : Item() {
       stamina = 34,
       intellect = 15,
       armor = 114,
-      spellHasteRating = 16.0
+      spellHasteRating = 16.0,
+      resilienceRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

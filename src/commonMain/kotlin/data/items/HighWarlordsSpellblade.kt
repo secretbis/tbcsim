@@ -49,7 +49,8 @@ public class HighWarlordsSpellblade : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 13,
-      spellHitRating = 13.0
+      spellHitRating = 13.0,
+      resilienceRating = 13.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

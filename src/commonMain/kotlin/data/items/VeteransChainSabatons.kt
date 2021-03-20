@@ -51,7 +51,8 @@ public class VeteransChainSabatons : Item() {
       stamina = 45,
       intellect = 20,
       armor = 656,
-      physicalCritRating = 16.0
+      physicalCritRating = 16.0,
+      resilienceRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

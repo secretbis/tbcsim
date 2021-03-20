@@ -50,7 +50,8 @@ public class VengefulGladiatorsBattleStaff : Item() {
       stamina = 62,
       intellect = 46,
       spellCritRating = 46.0,
-      spellHitRating = 28.0
+      spellHitRating = 28.0,
+      resilienceRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()
