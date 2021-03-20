@@ -167,3 +167,39 @@ initialState.deserialize = function(serialized) {
 
   return newState;
 };
+
+initialState.makeSimConfig = function() {
+  return tbcsim.sim.config.ConfigMaker.fromJson(
+    JSON.stringify({
+      class: this.character.class,
+      description: this.character.description,
+      spec: this.character.spec,
+      race: this.character.race,
+      level: this.character.level,
+      gear: _.mapValues(this.character.gear, it => ({
+        name: it.name,
+        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
+        enchant: it.enchant ? it.enchant.displayName : null
+      })),
+      rotation: this.character.rotation,
+      talents: this.character.talents,
+
+      raidBuffs: _.keys(_.pickBy(this.raidBuffs, value => !!value)),
+      raidDebuffs: _.keys(_.pickBy(this.raidDebuffs, value => !!value))
+    })
+  )
+}
+
+initialState.makeSimOptions = function() {
+  return new tbcsim.sim.SimOptions(
+    this.simOptions.durationSeconds * 1000,
+    this.simOptions.durationVariabilitySeconds * 1000,
+    this.simOptions.stepMs,
+    this.simOptions.latencyMs,
+    this.simOptions.iterations,
+    this.simOptions.targetLevel,
+    this.simOptions.targetArmor,
+    this.simOptions.allowParryAndBlock,
+    this.simOptions.showHiddenBuffs
+  )
+}

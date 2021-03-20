@@ -7,8 +7,10 @@ import mu.KotlinLogging
 import sim.Event
 import sim.SimIteration
 import sim.SimParticipant
+import kotlin.js.JsExport
 import kotlin.random.Random
 
+@JsExport
 object Melee {
     private val logger = KotlinLogging.logger {}
 

@@ -36,7 +36,7 @@ class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
 
             // Per DBs this is 200% spell damage
             val spellPowerCoeff = 2.0
-            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school) * ampCurseMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school) * ampCurseMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

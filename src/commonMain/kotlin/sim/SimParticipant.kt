@@ -10,7 +10,10 @@ import mu.KotlinLogging
 import sim.rotation.Criterion
 import sim.rotation.Rotation
 import sim.rotation.Rule
+import kotlin.js.JsExport
+import kotlin.math.floor
 
+@JsExport
 open class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration) {
     val logger = KotlinLogging.logger {}
 
@@ -567,12 +570,32 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         return stats.armorPen.coerceAtLeast(0)
     }
 
+    fun defenseSkill(): Int {
+        return floor(stats.defenseRating / Rating.defensePerPoint).toInt()
+    }
+
+    fun dodgePct(): Double {
+        return (stats.dodgeRating / Rating.dodgePerPct) + (0.04 * defenseSkill())
+    }
+
+    fun parryPct(): Double {
+        return (stats.parryRating / Rating.parryPerPct) + (0.04 * defenseSkill())
+    }
+
+    fun blockPct(): Double {
+        return (stats.blockRating / Rating.blockPerPct) + (0.04 * defenseSkill())
+    }
+
+    fun resiliencePct(): Double {
+        return stats.resilienceRating / Rating.resiliencePerPct
+    }
+
     fun meleeHasteMultiplier(): Double {
         return (1.0 + (stats.physicalHasteRating / Rating.hastePerPct / 100.0)) * stats.physicalHasteMultiplier
     }
 
     fun spellHasteMultiplier(): Double {
-        return (1.0 + (stats.physicalHasteRating / Rating.hastePerPct / 100.0)) * stats.spellHasteMultiplier
+        return (1.0 + (stats.spellHasteRating / Rating.hastePerPct / 100.0)) * stats.spellHasteMultiplier
     }
 
     fun physicalGcd(): Double {

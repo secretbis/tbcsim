@@ -68,7 +68,7 @@ object ItemGen {
     }
 
     private fun deserializeStats(itemData: Map<String, Any?>) : Stats {
-        val stats = Stats()
+        val stats = Stats(armor = (itemData["armor"] as Int? ?: 0))
         for(i in 1..5) {
             val type = itemData["stat_type$i"] as Int? ?: 0
             val value = itemData["stat_value$i"] as Int? ?: 0

@@ -46,35 +46,8 @@ function App() {
 
   function sim() {
     // TODO: This serialize-deserialize jump can probably be made more efficient
-    const config = tbcsim.sim.config.ConfigMaker.fromJson(JSON.stringify({
-      class: state.character.class,
-      description: state.character.description,
-      spec: state.character.spec,
-      race: state.character.race,
-      level: state.character.level,
-      gear: _.mapValues(state.character.gear, it => ({
-        name: it.name,
-        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem.name) : [],
-        enchant: it.enchant ? it.enchant.displayName : null
-      })),
-      rotation: state.character.rotation,
-      talents: state.character.talents,
-
-      raidBuffs: _.keys(_.pickBy(state.raidBuffs, value => !!value)),
-      raidDebuffs: _.keys(_.pickBy(state.raidDebuffs, value => !!value))
-    }))
-
-    const simOpts = new tbcsim.sim.SimOptions(
-      state.simOptions.durationSeconds * 1000,
-      state.simOptions.durationVariabilitySeconds * 1000,
-      state.simOptions.stepMs,
-      state.simOptions.latencyMs,
-      state.simOptions.iterations,
-      state.simOptions.targetLevel,
-      state.simOptions.targetArmor,
-      state.simOptions.allowParryAndBlock,
-      state.simOptions.showHiddenBuffs
-    )
+    const config = state.makeSimConfig()
+    const simOpts = state.makeSimOptions()
 
     function cleanKtList(list) {
       let finalList = list
@@ -161,7 +134,7 @@ function App() {
             <Col xs={14} style={{ maxWidth: '750px' }}>
               <Panel header="Gear" bordered>
                 {state.character.class ?
-                  <GearEditor character={state.character} dispatch={dispatch}></GearEditor> :
+                  <GearEditor state={state} character={state.character} dispatch={dispatch}></GearEditor> :
                   <p>Please select a preset above</p>
                 }
               </Panel>

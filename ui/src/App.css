@@ -53,3 +53,7 @@
 td .s0 {
   display: none !important;
 }
+
+.rs-panel, .rs-container, .rs-row, .rs-col {
+  overflow: visible !important;
+}

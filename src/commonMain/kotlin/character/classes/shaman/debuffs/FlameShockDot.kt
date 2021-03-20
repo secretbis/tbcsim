@@ -24,7 +24,7 @@ class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
         val school = Constants.DamageType.FIRE
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

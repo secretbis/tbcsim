@@ -28,7 +28,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
         override fun cast(sp: SimParticipant) {
             // Per lock discord
             val spellPowerCoeff = 0.65 / numTicks
-            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

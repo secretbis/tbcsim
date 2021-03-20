@@ -33,7 +33,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         // TODO: Weapon speed scaling mechanics unconfirmed
         //       Current formula matches testing on pservers
         val speedBasedDamage = baseDamage * item.speed / 1000.0 * mod
-        val damageRoll = Spell.baseDamageRoll(sp, speedBasedDamage, spCoeff, school)
+        val damageRoll = Spell.baseDamageRollSingle(sp, speedBasedDamage, spCoeff, school)
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(

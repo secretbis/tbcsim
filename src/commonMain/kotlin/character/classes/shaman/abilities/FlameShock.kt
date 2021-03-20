@@ -49,7 +49,7 @@ class FlameShock : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage, spellPowerCoeff, school) * concussionMod
+        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, spellPowerCoeff, school) * concussionMod
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(

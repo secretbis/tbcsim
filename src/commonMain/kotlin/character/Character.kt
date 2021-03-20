@@ -1,7 +1,8 @@
 package character
 
-import character.Pet
+import kotlin.js.JsExport
 
+@JsExport
 open class Character(
     val klass: Class,
     val race: Race,

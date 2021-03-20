@@ -61,7 +61,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
             val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
 
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRoll(owner, dmgPerTick, spellPowerCoeff, school, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

@@ -3,8 +3,9 @@ import { Container, Col, Row } from 'rsuite'
 
 import { itemClasses, armorSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classMainHandItemClasses, classOffHandItemClasses } from '../data/constants';
 import GearSlot from './gear_slot';
+import Stats from './stats';
 
-export default function({ character, dispatch }) {
+export default function({ state, character, dispatch }) {
   character = character || {}
 
   if(!character.class) {
@@ -54,6 +55,9 @@ export default function({ character, dispatch }) {
           <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket1' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket2' dispatch={dispatch} />
         </Col>
+      </Row>
+      <Row>
+        <Stats state={state} />
       </Row>
     </Container>
   );

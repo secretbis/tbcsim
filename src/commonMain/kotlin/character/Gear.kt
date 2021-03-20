@@ -4,7 +4,9 @@ import data.buffs.permanent.PermanentBuff
 import data.itemscustom.EmptyItem
 import data.model.Color
 import data.model.Item
+import kotlin.js.JsExport
 
+@JsExport
 class Gear {
     // The same item can be theoretically be equipped in these slots
     var mainHand: Item = EmptyItem()

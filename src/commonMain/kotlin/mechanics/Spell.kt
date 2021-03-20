@@ -6,8 +6,10 @@ import mu.KotlinLogging
 import sim.Event
 import sim.SimIteration
 import sim.SimParticipant
+import kotlin.js.JsExport
 import kotlin.random.Random
 
+@JsExport
 object Spell {
     private val logger = KotlinLogging.logger {}
 
@@ -102,10 +104,10 @@ object Spell {
         val min = minDmg.coerceAtLeast(0.0)
         val max = maxDmg.coerceAtLeast(1.0)
         val dmg = Random.nextDouble(min, max)
-        return baseDamageRoll(sp, dmg, spellDamageCoeff, school, bonusSpellDamage, bonusSpellDamageMultiplier)
+        return baseDamageRollSingle(sp, dmg, spellDamageCoeff, school, bonusSpellDamage, bonusSpellDamageMultiplier)
     }
 
-    fun baseDamageRoll(sp: SimParticipant, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
+    fun baseDamageRollSingle(sp: SimParticipant, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
         val schoolDamage = when(school) {
             Constants.DamageType.HOLY -> sp.stats.holyDamage

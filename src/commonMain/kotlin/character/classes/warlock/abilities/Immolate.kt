@@ -47,7 +47,7 @@ class Immolate : Ability() {
         val spellPowerCoeff = 0.2
         val school = Constants.DamageType.FIRE
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage, spellPowerCoeff, school) * impImmolateInitialMultiplier
+        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, spellPowerCoeff, school) * impImmolateInitialMultiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(

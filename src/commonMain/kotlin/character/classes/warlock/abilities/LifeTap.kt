@@ -23,7 +23,7 @@ class LifeTap : Ability() {
 
         // Per lock discord, coefficient is 0.8
         val spellPowerCoeff = 0.8
-        val withSpellPower = Spell.baseDamageRoll(sp, manaPerCast, spellPowerCoeff, Constants.DamageType.SHADOW)
+        val withSpellPower = Spell.baseDamageRollSingle(sp, manaPerCast, spellPowerCoeff, Constants.DamageType.SHADOW)
 
         val totalAmount = withSpellPower * impLtMultiplier
         sp.addResource(totalAmount.toInt(), Resource.Type.MANA, name)
