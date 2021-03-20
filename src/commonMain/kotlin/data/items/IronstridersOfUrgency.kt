@@ -50,7 +50,8 @@ public class IronstridersOfUrgency : Item() {
   public override var stats: Stats = Stats(
       strength = 33,
       agility = 20,
-      stamina = 28
+      stamina = 28,
+      armor = 997
       )
 
   public override var sockets: Array<Socket> = arrayOf(

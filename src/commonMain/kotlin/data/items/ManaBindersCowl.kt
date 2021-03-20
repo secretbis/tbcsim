@@ -51,6 +51,7 @@ public class ManaBindersCowl : Item() {
   public override var stats: Stats = Stats(
       stamina = 38,
       intellect = 29,
+      armor = 151,
       spellCritRating = 15.0
       )
 

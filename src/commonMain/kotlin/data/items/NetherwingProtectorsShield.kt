@@ -49,6 +49,7 @@ public class NetherwingProtectorsShield : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 22,
+      armor = 3615,
       defenseRating = 15.0
       )
 

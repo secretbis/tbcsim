@@ -62,7 +62,8 @@ public class OakleafSpunHandguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 30,
-      spirit = 30
+      spirit = 30,
+      armor = 277
       )
 
   public override var sockets: Array<Socket> = arrayOf(

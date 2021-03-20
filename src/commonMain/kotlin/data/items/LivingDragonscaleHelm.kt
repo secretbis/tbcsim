@@ -48,7 +48,8 @@ public class LivingDragonscaleHelm : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      intellect = 31
+      intellect = 31,
+      armor = 604
       )
 
   public override var sockets: Array<Socket> = arrayOf()

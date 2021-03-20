@@ -53,6 +53,7 @@ public class WindhawkBelt : Item() {
       stamina = 17,
       intellect = 19,
       spirit = 20,
+      armor = 205,
       spellCritRating = 12.0
       )
 

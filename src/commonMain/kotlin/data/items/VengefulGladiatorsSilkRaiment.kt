@@ -54,6 +54,7 @@ public class VengefulGladiatorsSilkRaiment : Item() {
   public override var stats: Stats = Stats(
       stamina = 61,
       intellect = 15,
+      armor = 454,
       spellCritRating = 33.0
       )
 

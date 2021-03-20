@@ -60,6 +60,7 @@ public class DemonfangRitualHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 30,
+      armor = 127,
       spellHitRating = 19.0
       )
 

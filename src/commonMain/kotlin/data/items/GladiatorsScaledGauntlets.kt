@@ -53,6 +53,7 @@ public class GladiatorsScaledGauntlets : Item() {
       strength = 36,
       stamina = 34,
       intellect = 14,
+      armor = 967,
       physicalCritRating = 16.0
       )
 

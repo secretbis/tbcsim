@@ -50,6 +50,7 @@ public class LegplatesOfTheRighteous : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 24,
+      armor = 1019,
       defenseRating = 26.0
       )
 

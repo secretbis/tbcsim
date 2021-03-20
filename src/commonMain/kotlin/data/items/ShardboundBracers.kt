@@ -50,7 +50,8 @@ public class ShardboundBracers : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
-      stamina = 18
+      stamina = 18,
+      armor = 146
       )
 
   public override var sockets: Array<Socket> = arrayOf(

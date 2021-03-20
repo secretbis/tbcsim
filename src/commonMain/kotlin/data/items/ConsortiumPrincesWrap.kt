@@ -47,6 +47,7 @@ public class ConsortiumPrincesWrap : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 75,
       spellCritRating = 22.0
       )
 

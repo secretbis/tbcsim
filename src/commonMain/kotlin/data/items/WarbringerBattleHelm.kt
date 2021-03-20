@@ -53,6 +53,7 @@ public class WarbringerBattleHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 45,
       stamina = 45,
+      armor = 1227,
       physicalCritRating = 24.0,
       physicalHitRating = 14.0
       )

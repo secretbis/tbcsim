@@ -48,6 +48,7 @@ public class PillagersGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 45,
+      armor = 1103,
       physicalHitRating = 18.0,
       physicalHasteRating = 38.0
       )

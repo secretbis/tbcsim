@@ -54,7 +54,8 @@ public class OnslaughtShoulderblades : Item() {
   public override var stats: Stats = Stats(
       strength = 39,
       agility = 39,
-      stamina = 34
+      stamina = 34,
+      armor = 1369
       )
 
   public override var sockets: Array<Socket> = arrayOf(

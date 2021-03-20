@@ -61,7 +61,8 @@ public class ChestguardOfHiddenPurpose : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      intellect = 31
+      intellect = 31,
+      armor = 1607
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -51,6 +51,7 @@ public class EarthMantleHandwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 18,
+      armor = 397,
       spellCritRating = 16.0
       )
 

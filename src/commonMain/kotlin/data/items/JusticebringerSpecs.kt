@@ -51,6 +51,7 @@ public class JusticebringerSpecs : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 26,
+      armor = 1611,
       spellCritRating = 52.0
       )
 

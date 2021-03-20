@@ -62,7 +62,8 @@ public class ForestlordStriders : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 27,
-      spirit = 16
+      spirit = 16,
+      armor = 250
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -62,6 +62,7 @@ public class WorldstormGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 22,
+      armor = 562,
       spellCritRating = 15.0
       )
 

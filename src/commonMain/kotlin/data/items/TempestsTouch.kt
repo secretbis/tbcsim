@@ -51,7 +51,8 @@ public class TempestsTouch : Item() {
   public override var stats: Stats = Stats(
       stamina = 10,
       intellect = 20,
-      spirit = 6
+      spirit = 6,
+      armor = 88
       )
 
   public override var sockets: Array<Socket> = arrayOf(

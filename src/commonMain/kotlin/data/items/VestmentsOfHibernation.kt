@@ -50,7 +50,8 @@ public class VestmentsOfHibernation : Item() {
       strength = 46,
       agility = 45,
       stamina = 36,
-      intellect = 13
+      intellect = 13,
+      armor = 684
       )
 
   public override var sockets: Array<Socket> = arrayOf()

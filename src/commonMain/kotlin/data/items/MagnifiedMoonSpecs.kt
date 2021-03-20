@@ -51,6 +51,7 @@ public class MagnifiedMoonSpecs : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 24,
+      armor = 326,
       spellCritRating = 41.0
       )
 

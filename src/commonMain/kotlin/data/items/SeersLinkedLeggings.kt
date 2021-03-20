@@ -52,6 +52,7 @@ public class SeersLinkedLeggings : Item() {
       strength = 22,
       stamina = 42,
       intellect = 22,
+      armor = 570,
       physicalCritRating = 28.0
       )
 

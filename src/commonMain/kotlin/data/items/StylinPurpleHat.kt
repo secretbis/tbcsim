@@ -47,7 +47,8 @@ public class StylinPurpleHat : Item() {
 
   public override var stats: Stats = Stats(
       agility = 48,
-      stamina = 45
+      stamina = 45,
+      armor = 232
       )
 
   public override var sockets: Array<Socket> = arrayOf()

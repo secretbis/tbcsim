@@ -48,7 +48,8 @@ public class CloakOfImpulsiveness : Item() {
 
   public override var stats: Stats = Stats(
       agility = 18,
-      stamina = 19
+      stamina = 19,
+      armor = 70
       )
 
   public override var sockets: Array<Socket> = arrayOf()

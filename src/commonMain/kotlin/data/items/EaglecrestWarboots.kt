@@ -60,6 +60,7 @@ public class EaglecrestWarboots : Item() {
       strength = 29,
       agility = 21,
       stamina = 33,
+      armor = 955,
       defenseRating = 24.0
       )
 

@@ -48,7 +48,8 @@ public class TelaariHuntingGirdle : Item() {
 
   public override var stats: Stats = Stats(
       agility = 24,
-      intellect = 17
+      intellect = 17,
+      armor = 367
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,6 +52,7 @@ public class VengefulGladiatorsScaledLegguards : Item() {
       strength = 54,
       stamina = 66,
       intellect = 23,
+      armor = 1597,
       physicalCritRating = 36.0
       )
 

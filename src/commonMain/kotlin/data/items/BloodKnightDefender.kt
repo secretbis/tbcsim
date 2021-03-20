@@ -47,6 +47,7 @@ public class BloodKnightDefender : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 26,
+      armor = 3806,
       blockRating = 18.0
       )
 

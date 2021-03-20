@@ -59,7 +59,8 @@ public class PillarOfFerocity : Item() {
 
   public override var stats: Stats = Stats(
       strength = 47,
-      stamina = 96
+      stamina = 96,
+      armor = 550
       )
 
   public override var sockets: Array<Socket> = arrayOf()

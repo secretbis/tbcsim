@@ -52,7 +52,8 @@ public class GauntletsOfMalorne : Item() {
       strength = 32,
       agility = 24,
       stamina = 28,
-      intellect = 12
+      intellect = 12,
+      armor = 475
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,7 +60,8 @@ public class ShiftingCamouflagePants : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 45,
-      intellect = 30
+      intellect = 30,
+      armor = 787
       )
 
   public override var sockets: Array<Socket> = arrayOf()

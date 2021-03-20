@@ -62,7 +62,8 @@ public class BeltOfTheLongRoad : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       intellect = 18,
-      spirit = 33
+      spirit = 33,
+      armor = 121
       )
 
   public override var sockets: Array<Socket> = arrayOf(

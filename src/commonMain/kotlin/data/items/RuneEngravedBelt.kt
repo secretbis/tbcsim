@@ -48,6 +48,7 @@ public class RuneEngravedBelt : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
+      armor = 364,
       physicalHitRating = 24.0
       )
 

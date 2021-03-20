@@ -61,6 +61,7 @@ public class RobeOfTheShadowCouncil : Item() {
       stamina = 37,
       intellect = 36,
       spirit = 26,
+      armor = 236,
       spellCritRating = 28.0
       )
 

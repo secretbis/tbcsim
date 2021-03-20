@@ -60,7 +60,8 @@ public class WatchersCowl : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 36,
-      spirit = 14
+      spirit = 14,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -59,7 +59,8 @@ public class StaffOfNaturalFury : Item() {
 
   public override var stats: Stats = Stats(
       strength = 35,
-      stamina = 31
+      stamina = 31,
+      armor = 320
       )
 
   public override var sockets: Array<Socket> = arrayOf()

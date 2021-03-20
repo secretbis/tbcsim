@@ -54,6 +54,7 @@ public class HandguardsOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 31,
+      armor = 153,
       spellHitRating = 19.0
       )
 

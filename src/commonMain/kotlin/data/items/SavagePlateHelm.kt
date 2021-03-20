@@ -53,6 +53,7 @@ public class SavagePlateHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       stamina = 34,
+      armor = 946,
       physicalCritRating = 24.0
       )
 

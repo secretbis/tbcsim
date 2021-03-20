@@ -60,6 +60,7 @@ public class CloakOfSwiftReprieve : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 15,
+      armor = 114,
       spellHasteRating = 16.0
       )
 

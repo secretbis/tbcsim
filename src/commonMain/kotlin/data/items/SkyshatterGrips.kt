@@ -54,6 +54,7 @@ public class SkyshatterGrips : Item() {
       strength = 39,
       stamina = 45,
       intellect = 30,
+      armor = 639,
       physicalCritRating = 21.0,
       physicalHitRating = 13.0
       )

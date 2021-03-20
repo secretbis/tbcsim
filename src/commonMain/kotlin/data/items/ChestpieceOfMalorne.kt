@@ -55,6 +55,7 @@ public class ChestpieceOfMalorne : Item() {
       stamina = 28,
       intellect = 27,
       spirit = 19,
+      armor = 379,
       spellHitRating = 19.0
       )
 

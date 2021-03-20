@@ -47,6 +47,7 @@ public class BracersOfTheGreenFortress : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
+      armor = 581,
       defenseRating = 17.0,
       dodgeRating = 10.0
       )

@@ -61,6 +61,7 @@ public class CrimsonGirdleOfTheIndomitable : Item() {
   public override var stats: Stats = Stats(
       strength = 16,
       stamina = 36,
+      armor = 816,
       defenseRating = 24.0,
       blockRating = 20.0
       )

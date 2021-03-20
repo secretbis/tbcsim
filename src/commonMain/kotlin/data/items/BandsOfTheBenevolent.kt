@@ -60,7 +60,8 @@ public class BandsOfTheBenevolent : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 20,
-      spirit = 18
+      spirit = 18,
+      armor = 81
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,6 +55,7 @@ public class LightbringerGreaves : Item() {
       strength = 68,
       stamina = 48,
       intellect = 22,
+      armor = 1597,
       physicalCritRating = 38.0
       )
 

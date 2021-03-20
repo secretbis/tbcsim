@@ -62,6 +62,7 @@ public class ShoulderguardsOfTheBold : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 25,
+      armor = 873,
       defenseRating = 17.0
       )
 

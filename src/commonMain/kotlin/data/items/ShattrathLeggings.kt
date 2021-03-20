@@ -49,6 +49,7 @@ public class ShattrathLeggings : Item() {
       strength = 35,
       agility = 25,
       stamina = 27,
+      armor = 243,
       expertiseRating = 22.0
       )
 

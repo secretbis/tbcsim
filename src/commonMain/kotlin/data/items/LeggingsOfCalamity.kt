@@ -51,6 +51,7 @@ public class LeggingsOfCalamity : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 41,
+      armor = 232,
       spellCritRating = 33.0,
       spellHasteRating = 32.0
       )

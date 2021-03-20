@@ -55,6 +55,7 @@ public class NordrassilChestpiece : Item() {
       stamina = 36,
       intellect = 32,
       spirit = 25,
+      armor = 419,
       spellCritRating = 17.0,
       spellHitRating = 19.0
       )

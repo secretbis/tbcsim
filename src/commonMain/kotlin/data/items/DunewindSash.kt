@@ -50,7 +50,8 @@ public class DunewindSash : Item() {
 
   public override var stats: Stats = Stats(
       agility = 21,
-      stamina = 16
+      stamina = 16,
+      armor = 164
       )
 
   public override var sockets: Array<Socket> = arrayOf(

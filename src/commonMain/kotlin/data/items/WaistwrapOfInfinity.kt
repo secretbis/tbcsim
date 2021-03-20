@@ -60,6 +60,7 @@ public class WaistwrapOfInfinity : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 22,
+      armor = 133,
       spellHasteRating = 32.0
       )
 

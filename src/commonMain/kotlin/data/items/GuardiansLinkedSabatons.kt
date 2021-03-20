@@ -52,6 +52,7 @@ public class GuardiansLinkedSabatons : Item() {
       strength = 38,
       stamina = 55,
       intellect = 27,
+      armor = 763,
       physicalCritRating = 38.0
       )
 

@@ -60,7 +60,8 @@ public class ImbuedNetherweaveBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      intellect = 21
+      intellect = 21,
+      armor = 102
       )
 
   public override var sockets: Array<Socket> = arrayOf()

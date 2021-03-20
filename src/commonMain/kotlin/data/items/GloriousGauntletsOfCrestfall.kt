@@ -62,6 +62,7 @@ public class GloriousGauntletsOfCrestfall : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 26,
+      armor = 1080,
       spellCritRating = 28.0
       )
 

@@ -62,6 +62,7 @@ public class HelmOfTheClaw : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 21,
+      armor = 237,
       physicalHitRating = 14.0
       )
 

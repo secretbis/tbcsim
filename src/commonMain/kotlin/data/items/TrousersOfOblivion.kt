@@ -50,6 +50,7 @@ public class TrousersOfOblivion : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 33,
+      armor = 136,
       spellHitRating = 12.0
       )
 

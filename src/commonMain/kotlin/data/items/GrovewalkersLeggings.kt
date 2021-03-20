@@ -51,7 +51,8 @@ public class GrovewalkersLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 42,
-      spirit = 44
+      spirit = 44,
+      armor = 388
       )
 
   public override var sockets: Array<Socket> = arrayOf(

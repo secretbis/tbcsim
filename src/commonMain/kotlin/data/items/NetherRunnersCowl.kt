@@ -49,7 +49,8 @@ public class NetherRunnersCowl : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
-      intellect = 39
+      intellect = 39,
+      armor = 145
       )
 
   public override var sockets: Array<Socket> = arrayOf(

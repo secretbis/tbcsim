@@ -62,6 +62,7 @@ public class HandwrapsOfFlowingThought : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 22,
+      armor = 121,
       spellHitRating = 14.0
       )
 

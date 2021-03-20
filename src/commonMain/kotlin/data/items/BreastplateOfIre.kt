@@ -61,6 +61,7 @@ public class BreastplateOfIre : Item() {
   public override var stats: Stats = Stats(
       strength = 52,
       stamina = 64,
+      armor = 1765,
       physicalHasteRating = 51.0
       )
 

@@ -54,6 +54,7 @@ public class OpportunistsLeatherTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 42,
+      armor = 292,
       physicalCritRating = 10.0
       )
 

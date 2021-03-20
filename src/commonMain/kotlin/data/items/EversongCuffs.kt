@@ -62,7 +62,8 @@ public class EversongCuffs : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 20,
-      spirit = 15
+      spirit = 15,
+      armor = 159
       )
 
   public override var sockets: Array<Socket> = arrayOf(

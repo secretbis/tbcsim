@@ -55,6 +55,7 @@ public class RiftStalkerHauberk : Item() {
       agility = 40,
       stamina = 40,
       intellect = 19,
+      armor = 934,
       physicalHitRating = 19.0
       )
 

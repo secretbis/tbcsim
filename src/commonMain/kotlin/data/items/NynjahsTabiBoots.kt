@@ -62,6 +62,7 @@ public class NynjahsTabiBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 21,
+      armor = 278,
       physicalHitRating = 22.0
       )
 

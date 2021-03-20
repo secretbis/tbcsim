@@ -61,6 +61,7 @@ public class SabatonsOfTheRighteousDefender : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 1105,
       spellHitRating = 18.0,
       defenseRating = 18.0
       )

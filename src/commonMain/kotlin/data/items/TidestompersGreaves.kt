@@ -50,6 +50,7 @@ public class TidestompersGreaves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 56,
+      armor = 1213,
       defenseRating = 19.0,
       dodgeRating = 29.0
       )

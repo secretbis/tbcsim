@@ -50,6 +50,7 @@ public class VanquishersLegplates : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 36,
+      armor = 1216,
       physicalCritRating = 23.0
       )
 

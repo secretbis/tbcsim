@@ -50,6 +50,7 @@ public class ManaEtchedPantaloons : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 32,
+      armor = 136,
       spellCritRating = 21.0
       )
 

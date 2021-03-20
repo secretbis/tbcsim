@@ -62,7 +62,8 @@ public class FrozenShadoweaveShoulders : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 15
+      intellect = 15,
+      armor = 133
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -59,6 +59,7 @@ public class TheSeekersWristguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 43,
+      armor = 772,
       defenseRating = 21.0,
       blockRating = 28.0
       )

@@ -50,6 +50,7 @@ public class FelsteelLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
+      armor = 1257,
       defenseRating = 33.0
       )
 

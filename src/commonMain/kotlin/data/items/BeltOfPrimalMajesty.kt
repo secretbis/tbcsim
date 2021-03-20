@@ -60,6 +60,7 @@ public class BeltOfPrimalMajesty : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 29,
+      armor = 249,
       spellHasteRating = 37.0
       )
 

@@ -51,6 +51,7 @@ public class MarshalsScaledBracers : Item() {
       strength = 26,
       stamina = 22,
       intellect = 11,
+      armor = 624,
       physicalCritRating = 7.0
       )
 

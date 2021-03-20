@@ -51,7 +51,8 @@ public class BreechesOfNaturalSplendor : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 41,
-      spirit = 49
+      spirit = 49,
+      armor = 436
       )
 
   public override var sockets: Array<Socket> = arrayOf(

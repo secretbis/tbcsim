@@ -48,7 +48,8 @@ public class WatchersTunic : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
-      spirit = 30
+      spirit = 30,
+      armor = 140
       )
 
   public override var sockets: Array<Socket> = arrayOf()

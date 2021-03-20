@@ -47,7 +47,8 @@ public class PauldronsOfTheCrimsonFlight : Item() {
 
   public override var stats: Stats = Stats(
       strength = 40,
-      stamina = 28
+      stamina = 28,
+      armor = 873
       )
 
   public override var sockets: Array<Socket> = arrayOf()

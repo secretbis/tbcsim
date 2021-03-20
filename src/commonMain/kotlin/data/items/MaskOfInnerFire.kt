@@ -49,6 +49,7 @@ public class MaskOfInnerFire : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 33,
+      armor = 516,
       spellCritRating = 22.0
       )
 

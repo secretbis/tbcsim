@@ -60,6 +60,7 @@ public class SwifthealWraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 22,
+      armor = 103,
       spellHasteRating = 28.0
       )
 

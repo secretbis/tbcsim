@@ -50,6 +50,7 @@ public class AuchenaiAnchoritesRobe : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 24,
+      armor = 136,
       spellHitRating = 23.0
       )
 

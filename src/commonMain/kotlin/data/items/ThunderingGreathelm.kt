@@ -59,7 +59,8 @@ public class ThunderingGreathelm : Item() {
   public override var stats: Stats = Stats(
       strength = 50,
       agility = 43,
-      stamina = 49
+      stamina = 49,
+      armor = 1276
       )
 
   public override var sockets: Array<Socket> = arrayOf()

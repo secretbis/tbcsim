@@ -48,7 +48,8 @@ public class GlovesOfPreservation : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 25,
-      spirit = 25
+      spirit = 25,
+      armor = 181
       )
 
   public override var sockets: Array<Socket> = arrayOf()

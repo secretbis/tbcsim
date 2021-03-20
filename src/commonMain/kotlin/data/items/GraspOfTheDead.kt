@@ -60,6 +60,7 @@ public class GraspOfTheDead : Item() {
   public override var stats: Stats = Stats(
       intellect = 24,
       spirit = 21,
+      armor = 121,
       spellHitRating = 17.0
       )
 

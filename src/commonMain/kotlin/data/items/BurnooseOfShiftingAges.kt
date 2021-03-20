@@ -48,6 +48,7 @@ public class BurnooseOfShiftingAges : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
+      armor = 216,
       defenseRating = 26.0
       )
 

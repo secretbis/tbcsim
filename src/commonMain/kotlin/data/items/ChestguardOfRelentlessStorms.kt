@@ -60,6 +60,7 @@ public class ChestguardOfRelentlessStorms : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 30,
+      armor = 988,
       spellCritRating = 46.0
       )
 

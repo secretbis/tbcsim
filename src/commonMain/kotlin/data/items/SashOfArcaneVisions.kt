@@ -61,6 +61,7 @@ public class SashOfArcaneVisions : Item() {
       stamina = 18,
       intellect = 23,
       spirit = 19,
+      armor = 105,
       spellCritRating = 22.0
       )
 

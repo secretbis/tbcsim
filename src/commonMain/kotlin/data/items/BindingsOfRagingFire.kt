@@ -51,6 +51,7 @@ public class BindingsOfRagingFire : Item() {
   public override var stats: Stats = Stats(
       stamina = 9,
       intellect = 10,
+      armor = 68,
       spellHasteRating = 18.0
       )
 

@@ -49,7 +49,8 @@ public class PrimalstrikeBracers : Item() {
 
   public override var stats: Stats = Stats(
       agility = 15,
-      stamina = 21
+      stamina = 21,
+      armor = 159
       )
 
   public override var sockets: Array<Socket> = arrayOf()

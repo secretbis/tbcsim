@@ -61,7 +61,8 @@ public class GauntletsOfRenewedHope : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      intellect = 29
+      intellect = 29,
+      armor = 906
       )
 
   public override var sockets: Array<Socket> = arrayOf(

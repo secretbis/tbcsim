@@ -61,7 +61,8 @@ public class HelmetOfTheSteadfastChampion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 24
+      intellect = 24,
+      armor = 1129
       )
 
   public override var sockets: Array<Socket> = arrayOf(

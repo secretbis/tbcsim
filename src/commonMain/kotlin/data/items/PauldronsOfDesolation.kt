@@ -52,6 +52,7 @@ public class PauldronsOfDesolation : Item() {
       agility = 23,
       stamina = 16,
       intellect = 19,
+      armor = 489,
       physicalHitRating = 17.0
       )
 

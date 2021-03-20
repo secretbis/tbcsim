@@ -63,6 +63,7 @@ public class HauberkOfTheWarBringer : Item() {
       agility = 24,
       stamina = 25,
       intellect = 17,
+      armor = 778,
       physicalHasteRating = 20.0
       )
 

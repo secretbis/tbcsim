@@ -60,7 +60,8 @@ public class ForestWindShoulderpads : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 28,
-      spirit = 24
+      spirit = 24,
+      armor = 273
       )
 
   public override var sockets: Array<Socket> = arrayOf()

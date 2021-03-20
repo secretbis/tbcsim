@@ -50,7 +50,8 @@ public class BeastLordLeggings : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 25,
-      intellect = 19
+      intellect = 19,
+      armor = 570
       )
 
   public override var sockets: Array<Socket> = arrayOf()

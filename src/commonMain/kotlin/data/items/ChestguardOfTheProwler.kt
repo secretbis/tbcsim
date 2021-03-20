@@ -49,6 +49,7 @@ public class ChestguardOfTheProwler : Item() {
   public override var stats: Stats = Stats(
       agility = 31,
       stamina = 26,
+      armor = 292,
       physicalHitRating = 17.0,
       parryRating = 16.0
       )

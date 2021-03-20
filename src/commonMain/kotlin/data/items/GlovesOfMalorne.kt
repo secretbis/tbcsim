@@ -53,6 +53,7 @@ public class GlovesOfMalorne : Item() {
       stamina = 24,
       intellect = 27,
       spirit = 21,
+      armor = 237,
       spellCritRating = 18.0
       )
 

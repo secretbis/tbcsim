@@ -48,7 +48,8 @@ public class GirdleOfGaleForce : Item() {
 
   public override var stats: Stats = Stats(
       agility = 32,
-      intellect = 20
+      intellect = 20,
+      armor = 357
       )
 
   public override var sockets: Array<Socket> = arrayOf()

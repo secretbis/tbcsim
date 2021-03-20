@@ -55,6 +55,7 @@ public class CordOfAbsolution : Item() {
       stamina = 19,
       intellect = 33,
       spirit = 21,
+      armor = 145,
       spellHitRating = 14.0,
       spellHasteRating = 29.0
       )

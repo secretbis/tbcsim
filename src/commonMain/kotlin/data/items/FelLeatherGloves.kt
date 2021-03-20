@@ -50,6 +50,7 @@ public class FelLeatherGloves : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 169,
       physicalCritRating = 24.0,
       physicalHitRating = 17.0
       )

@@ -55,6 +55,7 @@ public class DestroyerLegguards : Item() {
       strength = 18,
       agility = 28,
       stamina = 60,
+      armor = 1459,
       defenseRating = 39.0,
       blockRating = 32.0
       )

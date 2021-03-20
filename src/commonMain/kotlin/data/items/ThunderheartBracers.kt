@@ -55,6 +55,7 @@ public class ThunderheartBracers : Item() {
       stamina = 16,
       intellect = 22,
       spirit = 25,
+      armor = 211,
       spellHasteRating = 12.0
       )
 

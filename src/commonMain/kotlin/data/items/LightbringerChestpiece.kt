@@ -54,6 +54,7 @@ public class LightbringerChestpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 33,
+      armor = 1825,
       spellCritRating = 28.0
       )
 

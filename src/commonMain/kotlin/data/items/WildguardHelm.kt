@@ -47,6 +47,7 @@ public class WildguardHelm : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 58,
+      armor = 1178,
       defenseRating = 28.0
       )
 

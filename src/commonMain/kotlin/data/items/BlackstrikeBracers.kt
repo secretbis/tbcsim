@@ -49,6 +49,7 @@ public class BlackstrikeBracers : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 67,
       spellCritRating = 26.0
       )
 

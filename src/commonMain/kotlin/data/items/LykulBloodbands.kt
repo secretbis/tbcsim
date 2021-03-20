@@ -48,7 +48,8 @@ public class LykulBloodbands : Item() {
 
   public override var stats: Stats = Stats(
       agility = 18,
-      stamina = 18
+      stamina = 18,
+      armor = 236
       )
 
   public override var sockets: Array<Socket> = arrayOf()

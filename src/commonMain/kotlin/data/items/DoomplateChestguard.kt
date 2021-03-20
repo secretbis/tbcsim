@@ -51,6 +51,7 @@ public class DoomplateChestguard : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 27,
+      armor = 1164,
       physicalCritRating = 19.0
       )
 

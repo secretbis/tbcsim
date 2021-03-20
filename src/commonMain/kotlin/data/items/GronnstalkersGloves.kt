@@ -55,6 +55,7 @@ public class GronnstalkersGloves : Item() {
       agility = 35,
       stamina = 31,
       intellect = 21,
+      armor = 639,
       physicalCritRating = 13.0
       )
 

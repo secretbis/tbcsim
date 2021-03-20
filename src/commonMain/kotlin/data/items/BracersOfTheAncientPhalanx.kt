@@ -47,6 +47,7 @@ public class BracersOfTheAncientPhalanx : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 703,
       expertiseRating = 22.0,
       defenseRating = 23.0
       )

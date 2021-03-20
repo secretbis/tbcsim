@@ -61,6 +61,7 @@ public class WarharnessOfRecklessFury : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 67,
+      armor = 1983,
       physicalCritRating = 41.0,
       physicalHasteRating = 32.0
       )

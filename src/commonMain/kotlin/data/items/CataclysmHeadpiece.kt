@@ -54,6 +54,7 @@ public class CataclysmHeadpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 28,
+      armor = 759,
       spellCritRating = 26.0,
       spellHitRating = 18.0
       )

@@ -52,6 +52,7 @@ public class SlippersOfTheSeacaller : Item() {
       stamina = 25,
       intellect = 18,
       spirit = 18,
+      armor = 162,
       spellCritRating = 29.0
       )
 

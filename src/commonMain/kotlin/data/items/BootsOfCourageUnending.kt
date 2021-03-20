@@ -60,6 +60,7 @@ public class BootsOfCourageUnending : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 20,
+      armor = 1105,
       spellCritRating = 31.0
       )
 

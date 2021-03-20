@@ -54,7 +54,8 @@ public class ThunderheartTunic : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 34,
-      spirit = 33
+      spirit = 33,
+      armor = 459
       )
 
   public override var sockets: Array<Socket> = arrayOf(

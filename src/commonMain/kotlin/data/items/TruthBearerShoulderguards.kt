@@ -50,7 +50,8 @@ public class TruthBearerShoulderguards : Item() {
   public override var stats: Stats = Stats(
       strength = 17,
       stamina = 21,
-      intellect = 22
+      intellect = 22,
+      armor = 721
       )
 
   public override var sockets: Array<Socket> = arrayOf(

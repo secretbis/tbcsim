@@ -46,7 +46,8 @@ public class MercilessGladiatorsShieldWall : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 48
+      stamina = 48,
+      armor = 5727
       )
 
   public override var sockets: Array<Socket> = arrayOf()

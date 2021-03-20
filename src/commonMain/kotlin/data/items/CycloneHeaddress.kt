@@ -53,7 +53,8 @@ public class CycloneHeaddress : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      intellect = 41
+      intellect = 41,
+      armor = 687
       )
 
   public override var sockets: Array<Socket> = arrayOf(

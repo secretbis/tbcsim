@@ -48,6 +48,7 @@ public class ShieldOfImpenetrableDarkness : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
+      armor = 4872,
       defenseRating = 22.0
       )
 

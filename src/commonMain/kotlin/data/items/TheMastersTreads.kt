@@ -49,6 +49,7 @@ public class TheMastersTreads : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       stamina = 19,
+      armor = 191,
       physicalHitRating = 16.0
       )
 

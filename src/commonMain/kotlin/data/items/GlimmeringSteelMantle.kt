@@ -62,6 +62,7 @@ public class GlimmeringSteelMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 27,
+      armor = 1324,
       spellCritRating = 29.0
       )
 

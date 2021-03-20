@@ -51,7 +51,8 @@ public class RobesOfHeavenlyPurpose : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
-      spirit = 45
+      spirit = 45,
+      armor = 215
       )
 
   public override var sockets: Array<Socket> = arrayOf(

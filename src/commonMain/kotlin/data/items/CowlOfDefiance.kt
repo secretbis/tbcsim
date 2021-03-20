@@ -60,6 +60,7 @@ public class CowlOfDefiance : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 33,
+      armor = 296,
       physicalHitRating = 24.0
       )
 

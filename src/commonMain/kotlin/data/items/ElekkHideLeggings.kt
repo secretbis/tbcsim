@@ -49,6 +49,7 @@ public class ElekkHideLeggings : Item() {
       strength = 38,
       stamina = 28,
       intellect = 20,
+      armor = 230,
       physicalCritRating = 20.0
       )
 

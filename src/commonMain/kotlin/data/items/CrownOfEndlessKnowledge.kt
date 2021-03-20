@@ -60,7 +60,8 @@ public class CrownOfEndlessKnowledge : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 30,
-      spirit = 23
+      spirit = 23,
+      armor = 114
       )
 
   public override var sockets: Array<Socket> = arrayOf()

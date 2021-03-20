@@ -60,6 +60,7 @@ public class IrontuskGirdle : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 904,
       defenseRating = 21.0,
       dodgeRating = 33.0
       )

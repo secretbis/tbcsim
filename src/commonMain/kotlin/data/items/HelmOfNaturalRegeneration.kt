@@ -62,7 +62,8 @@ public class HelmOfNaturalRegeneration : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 39,
-      spirit = 30
+      spirit = 30,
+      armor = 328
       )
 
   public override var sockets: Array<Socket> = arrayOf(

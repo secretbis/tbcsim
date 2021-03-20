@@ -63,6 +63,7 @@ public class EvokersHelmetOfSecondSight : Item() {
       stamina = 12,
       intellect = 15,
       spirit = 8,
+      armor = 120,
       spellCritRating = 24.0
       )
 

@@ -50,6 +50,7 @@ public class GreavesOfTheShatterer : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 37,
+      armor = 1019,
       defenseRating = 25.0
       )
 

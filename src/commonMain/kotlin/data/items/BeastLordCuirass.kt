@@ -52,7 +52,8 @@ public class BeastLordCuirass : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 30,
-      intellect = 24
+      intellect = 24,
+      armor = 652
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -62,6 +62,7 @@ public class TrousersOfTheScryersRetainer : Item() {
   public override var stats: Stats = Stats(
       agility = 43,
       stamina = 45,
+      armor = 388,
       physicalHitRating = 30.0
       )
 

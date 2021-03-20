@@ -61,7 +61,8 @@ public class CryptstalkerTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 27,
-      intellect = 15
+      intellect = 15,
+      armor = 658
       )
 
   public override var sockets: Array<Socket> = arrayOf()

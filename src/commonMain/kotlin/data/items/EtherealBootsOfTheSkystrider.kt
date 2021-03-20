@@ -50,6 +50,7 @@ public class EtherealBootsOfTheSkystrider : Item() {
       stamina = 19,
       intellect = 19,
       spirit = 12,
+      armor = 91,
       spellCritRating = 17.0
       )
 

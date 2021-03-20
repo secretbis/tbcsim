@@ -52,6 +52,7 @@ public class JusticarGauntlets : Item() {
       strength = 38,
       stamina = 29,
       intellect = 24,
+      armor = 944,
       physicalCritRating = 24.0
       )
 

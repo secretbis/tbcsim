@@ -55,6 +55,7 @@ public class ThunderheartBoots : Item() {
       stamina = 22,
       intellect = 32,
       spirit = 24,
+      armor = 332,
       spellHasteRating = 19.0
       )
 

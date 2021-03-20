@@ -54,6 +54,7 @@ public class CataclysmLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 46,
+      armor = 817,
       spellCritRating = 24.0,
       spellHitRating = 14.0
       )

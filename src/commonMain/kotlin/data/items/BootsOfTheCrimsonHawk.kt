@@ -61,6 +61,7 @@ public class BootsOfTheCrimsonHawk : Item() {
       agility = 28,
       stamina = 28,
       intellect = 27,
+      armor = 619,
       physicalCritRating = 19.0
       )
 

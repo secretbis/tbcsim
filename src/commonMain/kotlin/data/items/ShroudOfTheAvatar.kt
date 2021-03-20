@@ -55,6 +55,7 @@ public class ShroudOfTheAvatar : Item() {
       stamina = 30,
       intellect = 35,
       spirit = 20,
+      armor = 223,
       spellHitRating = 19.0
       )
 

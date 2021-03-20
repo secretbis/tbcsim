@@ -59,6 +59,7 @@ public class GreathelmOfTheUnbreakable : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 48,
+      armor = 922,
       defenseRating = 30.0
       )
 

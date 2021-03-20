@@ -53,6 +53,7 @@ public class DestroyerHandguards : Item() {
       strength = 16,
       agility = 16,
       stamina = 44,
+      armor = 1042,
       defenseRating = 25.0,
       blockRating = 23.0
       )

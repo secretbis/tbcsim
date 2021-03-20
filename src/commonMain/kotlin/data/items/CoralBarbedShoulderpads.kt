@@ -61,7 +61,8 @@ public class CoralBarbedShoulderpads : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 33
+      intellect = 33,
+      armor = 675
       )
 
   public override var sockets: Array<Socket> = arrayOf(

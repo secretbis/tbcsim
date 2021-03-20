@@ -48,7 +48,8 @@ public class BloodKnightWarCloak : Item() {
 
   public override var stats: Stats = Stats(
       agility = 23,
-      stamina = 22
+      stamina = 22,
+      armor = 93
       )
 
   public override var sockets: Array<Socket> = arrayOf()

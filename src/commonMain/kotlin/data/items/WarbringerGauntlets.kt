@@ -52,6 +52,7 @@ public class WarbringerGauntlets : Item() {
       strength = 34,
       agility = 23,
       stamina = 33,
+      armor = 944,
       physicalHitRating = 18.0
       )
 

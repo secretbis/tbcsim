@@ -47,7 +47,8 @@ public class BeltOfFlowingThought : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 32
+      intellect = 32,
+      armor = 367
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,6 +55,7 @@ public class LeggingsOfAbsolution : Item() {
       stamina = 42,
       intellect = 41,
       spirit = 28,
+      armor = 214,
       spellCritRating = 28.0
       )
 

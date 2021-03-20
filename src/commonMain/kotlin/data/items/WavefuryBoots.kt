@@ -48,7 +48,8 @@ public class WavefuryBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      intellect = 24
+      intellect = 24,
+      armor = 448
       )
 
   public override var sockets: Array<Socket> = arrayOf()

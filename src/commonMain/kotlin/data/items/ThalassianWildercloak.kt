@@ -48,7 +48,8 @@ public class ThalassianWildercloak : Item() {
 
   public override var stats: Stats = Stats(
       agility = 28,
-      stamina = 28
+      stamina = 28,
+      armor = 116
       )
 
   public override var sockets: Array<Socket> = arrayOf()

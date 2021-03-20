@@ -61,7 +61,8 @@ public class DreamwalkerTunic : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 29,
-      spirit = 19
+      spirit = 19,
+      armor = 299
       )
 
   public override var sockets: Array<Socket> = arrayOf()

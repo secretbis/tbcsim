@@ -52,7 +52,8 @@ public class GreavesOfMalorne : Item() {
       strength = 42,
       agility = 32,
       stamina = 39,
-      intellect = 26
+      intellect = 26,
+      armor = 640
       )
 
   public override var sockets: Array<Socket> = arrayOf()

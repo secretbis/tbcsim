@@ -89,6 +89,8 @@ class Shaman(talents: Map<String, Talent>) : Class(talents) {
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 2
     override val critPctPerAgility: Double = 1.0 / 25.0
+    override val dodgePctPerAgility: Double = 1.0 / 25.0
+    override val baseDodgePct: Double = 1.67
     override val rangedAttackPowerFromAgility: Int = 1
 
     override val baseMana: Int = 2958

@@ -60,7 +60,8 @@ public class BarkGlovesOfAncientWisdom : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 25,
-      spirit = 33
+      spirit = 33,
+      armor = 252
       )
 
   public override var sockets: Array<Socket> = arrayOf()

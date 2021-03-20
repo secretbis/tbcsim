@@ -49,7 +49,8 @@ public class LifewardensBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 25,
-      spirit = 28
+      spirit = 28,
+      armor = 270
       )
 
   public override var sockets: Array<Socket> = arrayOf()

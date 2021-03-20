@@ -48,7 +48,8 @@ public class BandsOfSyth : Item() {
   public override var stats: Stats = Stats(
       strength = 21,
       agility = 19,
-      stamina = 18
+      stamina = 18,
+      armor = 497
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -61,7 +61,8 @@ public class SunrageTreads : Item() {
 
   public override var stats: Stats = Stats(
       agility = 28,
-      stamina = 28
+      stamina = 28,
+      armor = 240
       )
 
   public override var sockets: Array<Socket> = arrayOf(

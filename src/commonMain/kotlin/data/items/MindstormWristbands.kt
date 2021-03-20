@@ -60,6 +60,7 @@ public class MindstormWristbands : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       intellect = 13,
+      armor = 94,
       spellCritRating = 23.0
       )
 

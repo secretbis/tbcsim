@@ -50,7 +50,8 @@ public class ScorpidStingMantle : Item() {
 
   public override var stats: Stats = Stats(
       agility = 21,
-      stamina = 12
+      stamina = 12,
+      armor = 392
       )
 
   public override var sockets: Array<Socket> = arrayOf(

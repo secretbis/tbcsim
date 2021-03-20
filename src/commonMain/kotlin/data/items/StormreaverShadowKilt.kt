@@ -50,6 +50,7 @@ public class StormreaverShadowKilt : Item() {
       stamina = 19,
       intellect = 26,
       spirit = 14,
+      armor = 123,
       spellCritRating = 25.0
       )
 

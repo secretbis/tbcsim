@@ -55,6 +55,7 @@ public class CrystalforgeGreaves : Item() {
       agility = 27,
       stamina = 42,
       intellect = 23,
+      armor = 1459,
       physicalHitRating = 21.0
       )
 

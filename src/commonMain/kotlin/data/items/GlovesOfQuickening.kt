@@ -62,6 +62,7 @@ public class GlovesOfQuickening : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 24,
+      armor = 507,
       physicalCritRating = 17.0
       )
 

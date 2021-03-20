@@ -63,6 +63,7 @@ public class BarbedGlovesOfTheSage : Item() {
       stamina = 28,
       intellect = 30,
       spirit = 25,
+      armor = 277,
       spellHitRating = 15.0
       )
 

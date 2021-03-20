@@ -55,6 +55,7 @@ public class JusticarShoulderplates : Item() {
       agility = 13,
       stamina = 24,
       intellect = 15,
+      armor = 1133,
       physicalHitRating = 16.0
       )
 

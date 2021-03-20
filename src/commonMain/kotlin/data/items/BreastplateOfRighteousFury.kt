@@ -50,7 +50,8 @@ public class BreastplateOfRighteousFury : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 29,
-      intellect = 28
+      intellect = 28,
+      armor = 1164
       )
 
   public override var sockets: Array<Socket> = arrayOf(

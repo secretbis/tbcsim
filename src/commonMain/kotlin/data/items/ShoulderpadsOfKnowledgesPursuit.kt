@@ -52,6 +52,7 @@ public class ShoulderpadsOfKnowledgesPursuit : Item() {
       stamina = 33,
       intellect = 33,
       spirit = 22,
+      armor = 199,
       spellCritRating = 26.0
       )
 

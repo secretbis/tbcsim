@@ -49,7 +49,8 @@ public class UnyieldingBracers : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 39
+      stamina = 39,
+      armor = 67
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -60,6 +60,7 @@ public class SoftstepBootsOfTracking : Item() {
   public override var stats: Stats = Stats(
       agility = 27,
       intellect = 29,
+      armor = 679,
       physicalCritRating = 26.0,
       physicalHitRating = 17.0
       )

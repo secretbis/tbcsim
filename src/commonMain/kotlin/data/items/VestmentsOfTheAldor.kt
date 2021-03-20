@@ -54,7 +54,8 @@ public class VestmentsOfTheAldor : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 32,
-      spirit = 14
+      spirit = 14,
+      armor = 202
       )
 
   public override var sockets: Array<Socket> = arrayOf(

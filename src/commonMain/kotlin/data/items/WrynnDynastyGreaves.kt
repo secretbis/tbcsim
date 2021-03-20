@@ -61,6 +61,7 @@ public class WrynnDynastyGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 24,
       stamina = 48,
+      armor = 1269,
       defenseRating = 27.0,
       dodgeRating = 29.0
       )

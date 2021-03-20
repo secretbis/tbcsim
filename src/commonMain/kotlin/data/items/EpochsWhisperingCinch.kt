@@ -49,6 +49,7 @@ public class EpochsWhisperingCinch : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 24,
+      armor = 164,
       physicalHitRating = 17.0
       )
 

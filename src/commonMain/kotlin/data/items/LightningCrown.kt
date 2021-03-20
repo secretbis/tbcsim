@@ -47,6 +47,7 @@ public class LightningCrown : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 577,
       spellCritRating = 43.0
       )
 

@@ -54,6 +54,7 @@ public class LightbringerLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 45,
+      armor = 1597,
       spellCritRating = 34.0
       )
 

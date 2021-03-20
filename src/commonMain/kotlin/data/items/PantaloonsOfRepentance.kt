@@ -62,7 +62,8 @@ public class PantaloonsOfRepentance : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 34,
-      spirit = 26
+      spirit = 26,
+      armor = 170
       )
 
   public override var sockets: Array<Socket> = arrayOf(

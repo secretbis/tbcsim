@@ -50,6 +50,7 @@ public class PauldronsOfPerseverance : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 60,
+      armor = 1487,
       defenseRating = 27.0,
       blockRating = 32.0
       )

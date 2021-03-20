@@ -48,7 +48,8 @@ public class BrighthelmOfJustice : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 44
+      intellect = 44,
+      armor = 1306
       )
 
   public override var sockets: Array<Socket> = arrayOf()

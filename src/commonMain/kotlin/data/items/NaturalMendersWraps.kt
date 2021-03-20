@@ -49,7 +49,8 @@ public class NaturalMendersWraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 25,
-      spirit = 18
+      spirit = 18,
+      armor = 183
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,6 +55,7 @@ public class HoodOfTheAvatar : Item() {
       stamina = 30,
       intellect = 36,
       spirit = 24,
+      armor = 181,
       spellHitRating = 24.0
       )
 

@@ -50,6 +50,7 @@ public class CircletOfTheStarcaller : Item() {
       stamina = 27,
       intellect = 18,
       spirit = 17,
+      armor = 226,
       spellCritRating = 18.0
       )
 

@@ -48,6 +48,7 @@ public class PhaseshiftBulwark : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 40,
+      armor = 7313,
       defenseRating = 40.0
       )
 

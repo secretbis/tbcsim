@@ -54,6 +54,7 @@ public class CrystalforgeShoulderbraces : Item() {
       strength = 45,
       stamina = 34,
       intellect = 15,
+      armor = 1251,
       physicalCritRating = 16.0
       )
 

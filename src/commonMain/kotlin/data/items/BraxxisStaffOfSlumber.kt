@@ -47,7 +47,8 @@ public class BraxxisStaffOfSlumber : Item() {
   public override var speed: Double = 3000.0
 
   public override var stats: Stats = Stats(
-      stamina = 39
+      stamina = 39,
+      armor = 550
       )
 
   public override var sockets: Array<Socket> = arrayOf()

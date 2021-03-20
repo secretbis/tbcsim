@@ -53,6 +53,7 @@ public class GlovesOfTheAldor : Item() {
       stamina = 19,
       intellect = 22,
       spirit = 19,
+      armor = 126,
       spellCritRating = 19.0,
       spellHitRating = 17.0
       )

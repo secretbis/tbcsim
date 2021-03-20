@@ -49,6 +49,7 @@ public class MarshalsSilkFootguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 23,
+      armor = 142,
       spellCritRating = 24.0
       )
 

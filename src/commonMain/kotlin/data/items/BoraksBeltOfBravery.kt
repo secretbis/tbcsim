@@ -59,7 +59,8 @@ public class BoraksBeltOfBravery : Item() {
   public override var stats: Stats = Stats(
       strength = 26,
       agility = 26,
-      stamina = 24
+      stamina = 24,
+      armor = 622
       )
 
   public override var sockets: Array<Socket> = arrayOf()

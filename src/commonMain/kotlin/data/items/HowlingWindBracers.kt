@@ -61,7 +61,8 @@ public class HowlingWindBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 29,
-      intellect = 21
+      intellect = 21,
+      armor = 432
       )
 
   public override var sockets: Array<Socket> = arrayOf(

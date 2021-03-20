@@ -62,6 +62,7 @@ public class BeltOfDeepShadow : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 14,
+      armor = 227,
       physicalHitRating = 18.0
       )
 

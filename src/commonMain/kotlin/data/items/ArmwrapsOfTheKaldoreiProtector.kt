@@ -62,6 +62,7 @@ public class ArmwrapsOfTheKaldoreiProtector : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 22,
+      armor = 177,
       spellCritRating = 20.0
       )
 

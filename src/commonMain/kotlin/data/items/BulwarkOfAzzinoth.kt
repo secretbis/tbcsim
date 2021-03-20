@@ -48,6 +48,7 @@ public class BulwarkOfAzzinoth : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 60,
+      armor = 6336,
       defenseRating = 29.0
       )
 

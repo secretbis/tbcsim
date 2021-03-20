@@ -61,6 +61,7 @@ public class PauldronsOfBerserking : Item() {
   public override var stats: Stats = Stats(
       strength = 45,
       stamina = 48,
+      armor = 1487,
       physicalCritRating = 30.0,
       physicalHasteRating = 27.0
       )

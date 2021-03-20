@@ -48,7 +48,8 @@ public class BishopsCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
-      intellect = 17
+      intellect = 17,
+      armor = 93
       )
 
   public override var sockets: Array<Socket> = arrayOf()

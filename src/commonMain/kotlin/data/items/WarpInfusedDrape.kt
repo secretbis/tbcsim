@@ -51,6 +51,7 @@ public class WarpInfusedDrape : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 28,
+      armor = 156,
       spellHitRating = 12.0
       )
 

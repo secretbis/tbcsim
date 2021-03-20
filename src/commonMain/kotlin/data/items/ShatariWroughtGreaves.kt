@@ -50,7 +50,8 @@ public class ShatariWroughtGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 24,
       agility = 21,
-      stamina = 22
+      stamina = 22,
+      armor = 800
       )
 
   public override var sockets: Array<Socket> = arrayOf(

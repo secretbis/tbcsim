@@ -51,7 +51,8 @@ public class KirinTorMastersTrousers : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 29,
-      spirit = 25
+      spirit = 25,
+      armor = 163
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -49,6 +49,7 @@ public class ShroudOfTheHighborne : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 23,
+      armor = 126,
       spellHasteRating = 32.0
       )
 

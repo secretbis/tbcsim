@@ -60,6 +60,7 @@ public class BootsOfBlasting : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 25,
+      armor = 148,
       spellCritRating = 25.0,
       spellHitRating = 18.0
       )

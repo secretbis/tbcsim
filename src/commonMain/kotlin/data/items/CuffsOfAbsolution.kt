@@ -55,6 +55,7 @@ public class CuffsOfAbsolution : Item() {
       stamina = 19,
       intellect = 22,
       spirit = 20,
+      armor = 113,
       spellCritRating = 15.0,
       spellHasteRating = 16.0
       )

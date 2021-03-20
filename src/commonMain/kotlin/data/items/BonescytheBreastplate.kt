@@ -59,7 +59,8 @@ public class BonescytheBreastplate : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 29
+      stamina = 29,
+      armor = 299
       )
 
   public override var sockets: Array<Socket> = arrayOf()

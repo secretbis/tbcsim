@@ -54,6 +54,7 @@ public class LightbringerBreastplate : Item() {
       strength = 56,
       stamina = 48,
       intellect = 31,
+      armor = 1825,
       physicalCritRating = 31.0,
       physicalHitRating = 21.0
       )

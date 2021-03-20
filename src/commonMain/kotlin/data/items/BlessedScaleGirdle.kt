@@ -48,7 +48,8 @@ public class BlessedScaleGirdle : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
-      intellect = 15
+      intellect = 15,
+      armor = 367
       )
 
   public override var sockets: Array<Socket> = arrayOf()

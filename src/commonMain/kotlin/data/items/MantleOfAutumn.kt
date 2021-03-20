@@ -49,7 +49,8 @@ public class MantleOfAutumn : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 22,
-      spirit = 21
+      spirit = 21,
+      armor = 219
       )
 
   public override var sockets: Array<Socket> = arrayOf()

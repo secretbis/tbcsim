@@ -62,7 +62,8 @@ public class FootwrapsOfWildEncroachment : Item() {
       strength = 29,
       agility = 29,
       stamina = 28,
-      intellect = 19
+      intellect = 19,
+      armor = 418
       )
 
   public override var sockets: Array<Socket> = arrayOf(

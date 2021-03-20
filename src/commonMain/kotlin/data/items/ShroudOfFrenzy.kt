@@ -47,6 +47,7 @@ public class ShroudOfFrenzy : Item() {
 
   public override var stats: Stats = Stats(
       strength = 21,
+      armor = 63,
       physicalCritRating = 16.0
       )
 

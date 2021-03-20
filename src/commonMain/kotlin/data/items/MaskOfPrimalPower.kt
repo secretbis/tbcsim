@@ -62,6 +62,7 @@ public class MaskOfPrimalPower : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 39,
+      armor = 328,
       spellCritRating = 30.0
       )
 

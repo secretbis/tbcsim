@@ -55,6 +55,7 @@ public class DestroyerShoulderguards : Item() {
       strength = 13,
       agility = 21,
       stamina = 44,
+      armor = 1251,
       defenseRating = 29.0
       )
 

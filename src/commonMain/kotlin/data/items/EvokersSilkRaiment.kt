@@ -54,6 +54,7 @@ public class EvokersSilkRaiment : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 15,
+      armor = 156,
       spellCritRating = 17.0
       )
 

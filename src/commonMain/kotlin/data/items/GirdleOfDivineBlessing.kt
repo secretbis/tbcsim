@@ -49,6 +49,7 @@ public class GirdleOfDivineBlessing : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 22,
+      armor = 573,
       spellCritRating = 18.0
       )
 

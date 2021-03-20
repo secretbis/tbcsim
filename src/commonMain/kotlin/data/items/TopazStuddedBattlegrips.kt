@@ -49,6 +49,7 @@ public class TopazStuddedBattlegrips : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
+      armor = 944,
       defenseRating = 31.0
       )
 

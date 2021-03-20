@@ -62,7 +62,8 @@ public class StarStriderBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 13,
-      intellect = 18
+      intellect = 18,
+      armor = 619
       )
 
   public override var sockets: Array<Socket> = arrayOf(

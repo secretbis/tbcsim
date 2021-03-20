@@ -48,7 +48,8 @@ public class CoronetOfVerdantFlame : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 40
+      intellect = 40,
+      armor = 138
       )
 
   public override var sockets: Array<Socket> = arrayOf()

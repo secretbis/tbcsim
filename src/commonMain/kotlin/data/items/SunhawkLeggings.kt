@@ -61,7 +61,8 @@ public class SunhawkLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 31
+      intellect = 31,
+      armor = 847
       )
 
   public override var sockets: Array<Socket> = arrayOf(

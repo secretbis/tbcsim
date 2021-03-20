@@ -54,6 +54,7 @@ public class BrutalGladiatorsLinkedHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 74,
+      armor = 902,
       physicalCritRating = 39.0,
       physicalHitRating = 18.0
       )

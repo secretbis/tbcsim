@@ -62,7 +62,8 @@ public class CoifOfTheJungleStalker : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 40,
-      intellect = 35
+      intellect = 35,
+      armor = 759
       )
 
   public override var sockets: Array<Socket> = arrayOf(

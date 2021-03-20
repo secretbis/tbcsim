@@ -52,7 +52,8 @@ public class CrystalforgeGauntlets : Item() {
       strength = 44,
       agility = 25,
       stamina = 35,
-      intellect = 23
+      intellect = 23,
+      armor = 1042
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -49,6 +49,7 @@ public class NomadsWovenCloak : Item() {
       strength = 14,
       agility = 14,
       stamina = 21,
+      armor = 66,
       physicalHitRating = 13.0
       )
 

@@ -50,7 +50,8 @@ public class EnamelledDiscOfMojo : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      intellect = 17
+      intellect = 17,
+      armor = 5400
       )
 
   public override var sockets: Array<Socket> = arrayOf(

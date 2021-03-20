@@ -50,6 +50,7 @@ public class MarshalsChainSabatons : Item() {
       agility = 27,
       stamina = 39,
       intellect = 18,
+      armor = 595,
       physicalCritRating = 14.0
       )
 

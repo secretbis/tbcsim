@@ -48,6 +48,7 @@ public class ChestguardOfNoRemorse : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 35,
+      armor = 285,
       physicalCritRating = 21.0
       )
 

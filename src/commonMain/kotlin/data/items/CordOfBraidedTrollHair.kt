@@ -61,7 +61,8 @@ public class CordOfBraidedTrollHair : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 17,
-      intellect = 34
+      intellect = 34,
+      armor = 121
       )
 
   public override var sockets: Array<Socket> = arrayOf(

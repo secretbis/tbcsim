@@ -54,6 +54,7 @@ public class BracersOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 22,
+      armor = 113,
       spellCritRating = 18.0,
       spellHasteRating = 21.0
       )

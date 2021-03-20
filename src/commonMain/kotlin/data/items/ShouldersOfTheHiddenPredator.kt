@@ -60,6 +60,7 @@ public class ShouldersOfTheHiddenPredator : Item() {
   public override var stats: Stats = Stats(
       agility = 38,
       stamina = 37,
+      armor = 741,
       physicalCritRating = 26.0
       )
 

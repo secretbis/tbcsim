@@ -54,7 +54,8 @@ public class ThunderheartPauldrons : Item() {
       strength = 39,
       agility = 36,
       stamina = 34,
-      intellect = 12
+      intellect = 12,
+      armor = 484
       )
 
   public override var sockets: Array<Socket> = arrayOf(

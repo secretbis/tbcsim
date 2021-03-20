@@ -49,6 +49,7 @@ public class DawnsteelShoulders : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 28,
+      armor = 1324,
       spellHasteRating = 38.0
       )
 

@@ -49,6 +49,7 @@ public class CrownOfDathRemar : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 91,
+      armor = 1611,
       defenseRating = 32.0,
       dodgeRating = 53.0,
       parryRating = 33.0

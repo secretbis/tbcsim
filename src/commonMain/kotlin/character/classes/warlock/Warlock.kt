@@ -84,6 +84,8 @@ class Warlock(talents: Map<String, Talent>) : Class(talents) {
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0
+    override val dodgePctPerAgility: Double = 1.0 / 25.0
+    override val baseDodgePct: Double = 2.03
     override val rangedAttackPowerFromAgility: Int = 0
     override val baseMana: Int = 2871
     override val baseSpellCritChance: Double = 1.701

@@ -51,6 +51,7 @@ public class ExorcistsScaledHelm : Item() {
       strength = 29,
       stamina = 30,
       intellect = 15,
+      armor = 827,
       physicalCritRating = 18.0
       )
 

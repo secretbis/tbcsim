@@ -53,6 +53,7 @@ public class LeggingsOfTheIncarnate : Item() {
       stamina = 37,
       intellect = 38,
       spirit = 27,
+      armor = 177,
       spellCritRating = 25.0
       )
 

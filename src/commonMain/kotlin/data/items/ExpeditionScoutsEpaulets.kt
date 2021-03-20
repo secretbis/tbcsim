@@ -48,6 +48,7 @@ public class ExpeditionScoutsEpaulets : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
+      armor = 217,
       physicalHitRating = 24.0
       )
 

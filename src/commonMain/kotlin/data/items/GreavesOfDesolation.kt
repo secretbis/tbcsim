@@ -50,6 +50,7 @@ public class GreavesOfDesolation : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 33,
+      armor = 570,
       physicalCritRating = 22.0,
       physicalHitRating = 12.0
       )

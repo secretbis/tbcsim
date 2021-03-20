@@ -46,7 +46,8 @@ public class InfernoTemperedLeggings : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 69
+      stamina = 69,
+      armor = 1269
       )
 
   public override var sockets: Array<Socket> = arrayOf()

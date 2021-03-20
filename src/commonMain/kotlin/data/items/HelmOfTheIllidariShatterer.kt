@@ -50,6 +50,7 @@ public class HelmOfTheIllidariShatterer : Item() {
   public override var stats: Stats = Stats(
       strength = 51,
       stamina = 29,
+      armor = 1434,
       physicalCritRating = 42.0,
       physicalHitRating = 34.0
       )

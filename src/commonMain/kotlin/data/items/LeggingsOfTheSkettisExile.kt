@@ -48,7 +48,8 @@ public class LeggingsOfTheSkettisExile : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 33,
-      spirit = 33
+      spirit = 33,
+      armor = 136
       )
 
   public override var sockets: Array<Socket> = arrayOf()

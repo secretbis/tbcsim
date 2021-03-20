@@ -53,6 +53,7 @@ public class VengefulGladiatorsChainLeggings : Item() {
       agility = 34,
       stamina = 64,
       intellect = 18,
+      armor = 894,
       physicalCritRating = 25.0
       )
 

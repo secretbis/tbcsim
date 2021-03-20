@@ -61,7 +61,8 @@ public class DoomplateWarhelm : Item() {
 
   public override var stats: Stats = Stats(
       strength = 34,
-      stamina = 39
+      stamina = 39,
+      armor = 946
       )
 
   public override var sockets: Array<Socket> = arrayOf(

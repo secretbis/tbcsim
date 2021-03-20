@@ -48,6 +48,7 @@ public class RobeOfTheCrimsonOrder : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 23,
+      armor = 152,
       spellHitRating = 30.0
       )
 

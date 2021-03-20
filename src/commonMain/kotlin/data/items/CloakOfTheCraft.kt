@@ -48,6 +48,7 @@ public class CloakOfTheCraft : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
+      armor = 70,
       physicalHitRating = 13.0
       )
 

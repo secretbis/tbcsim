@@ -60,6 +60,7 @@ public class ChestguardOfTheConniver : Item() {
   public override var stats: Stats = Stats(
       agility = 37,
       stamina = 36,
+      armor = 364,
       physicalHitRating = 22.0
       )
 

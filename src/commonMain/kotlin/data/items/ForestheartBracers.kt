@@ -60,7 +60,8 @@ public class ForestheartBracers : Item() {
       strength = 18,
       agility = 18,
       stamina = 27,
-      intellect = 16
+      intellect = 16,
+      armor = 237
       )
 
   public override var sockets: Array<Socket> = arrayOf()

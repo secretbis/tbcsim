@@ -55,6 +55,7 @@ public class CataclysmShoulderplates : Item() {
       strength = 30,
       stamina = 37,
       intellect = 21,
+      armor = 700,
       physicalCritRating = 22.0
       )
 

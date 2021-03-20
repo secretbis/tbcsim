@@ -52,6 +52,7 @@ public class VengefulGladiatorsLamellarLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 70,
       intellect = 29,
+      armor = 1597,
       spellCritRating = 39.0
       )
 

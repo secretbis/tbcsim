@@ -48,6 +48,7 @@ public class NetherfuryCape : Item() {
   public override var stats: Stats = Stats(
       strength = 19,
       stamina = 19,
+      armor = 78,
       physicalCritRating = 21.0
       )
 

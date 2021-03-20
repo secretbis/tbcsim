@@ -48,7 +48,8 @@ public class LeggingsOfTheSacredCrest : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      intellect = 32
+      intellect = 32,
+      armor = 136
       )
 
   public override var sockets: Array<Socket> = arrayOf()

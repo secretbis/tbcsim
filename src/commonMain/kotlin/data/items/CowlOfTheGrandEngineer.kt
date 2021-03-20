@@ -62,6 +62,7 @@ public class CowlOfTheGrandEngineer : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 27,
+      armor = 175,
       spellCritRating = 35.0,
       spellHitRating = 16.0
       )

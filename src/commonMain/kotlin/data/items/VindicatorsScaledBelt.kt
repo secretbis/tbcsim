@@ -52,6 +52,7 @@ public class VindicatorsScaledBelt : Item() {
       strength = 40,
       stamina = 39,
       intellect = 26,
+      armor = 1027,
       physicalCritRating = 27.0
       )
 

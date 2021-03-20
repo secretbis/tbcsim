@@ -53,6 +53,7 @@ public class DemonStalkerGreaves : Item() {
       agility = 40,
       stamina = 30,
       intellect = 30,
+      armor = 740,
       physicalHitRating = 15.0
       )
 

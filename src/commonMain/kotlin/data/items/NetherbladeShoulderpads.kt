@@ -54,6 +54,7 @@ public class NetherbladeShoulderpads : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 38,
+      armor = 284,
       physicalHitRating = 13.0
       )
 

@@ -50,7 +50,8 @@ public class GlovesOfTheUnbound : Item() {
 
   public override var stats: Stats = Stats(
       agility = 27,
-      stamina = 20
+      stamina = 20,
+      armor = 183
       )
 
   public override var sockets: Array<Socket> = arrayOf(

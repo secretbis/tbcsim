@@ -61,6 +61,7 @@ public class RobeOfDepartedSpirits : Item() {
       stamina = 34,
       intellect = 31,
       spirit = 30,
+      armor = 215,
       spellHasteRating = 35.0
       )
 

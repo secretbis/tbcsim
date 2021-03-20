@@ -48,6 +48,7 @@ public class WarbootsOfObliteration : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 29,
+      armor = 1105,
       physicalCritRating = 31.0
       )
 

@@ -52,6 +52,7 @@ public class SpauldersOfDevastation : Item() {
       stamina = 27,
       intellect = 30,
       spirit = 26,
+      armor = 374,
       spellHasteRating = 30.0
       )
 

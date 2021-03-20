@@ -51,7 +51,8 @@ public class ScaledGreavesOfPatience : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 24,
-      intellect = 13
+      intellect = 13,
+      armor = 513
       )
 
   public override var sockets: Array<Socket> = arrayOf(

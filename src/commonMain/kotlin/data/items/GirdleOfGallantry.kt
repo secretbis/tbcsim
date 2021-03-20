@@ -51,7 +51,8 @@ public class GirdleOfGallantry : Item() {
       strength = 27,
       agility = 14,
       stamina = 22,
-      intellect = 13
+      intellect = 13,
+      armor = 655
       )
 
   public override var sockets: Array<Socket> = arrayOf(

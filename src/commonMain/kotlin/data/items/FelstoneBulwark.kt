@@ -49,6 +49,7 @@ public class FelstoneBulwark : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 21,
+      armor = 5930,
       spellCritRating = 27.0
       )
 

@@ -48,7 +48,8 @@ public class CapacitusCloakOfCalibration : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       agility = 18,
-      stamina = 19
+      stamina = 19,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -59,7 +59,8 @@ public class MasqueradeGown : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 34,
-      intellect = 32
+      intellect = 32,
+      armor = 194
       )
 
   public override var sockets: Array<Socket> = arrayOf()

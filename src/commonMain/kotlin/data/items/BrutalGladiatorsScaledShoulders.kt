@@ -54,6 +54,7 @@ public class BrutalGladiatorsScaledShoulders : Item() {
       strength = 37,
       stamina = 45,
       intellect = 25,
+      armor = 1487,
       physicalCritRating = 30.0
       )
 

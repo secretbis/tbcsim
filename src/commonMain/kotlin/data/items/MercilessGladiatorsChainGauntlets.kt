@@ -53,6 +53,7 @@ public class MercilessGladiatorsChainGauntlets : Item() {
       agility = 30,
       stamina = 48,
       intellect = 13,
+      armor = 596,
       physicalCritRating = 17.0
       )
 

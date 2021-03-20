@@ -62,6 +62,7 @@ public class AnetheronsNoose : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 23,
+      armor = 133,
       spellCritRating = 24.0
       )
 

@@ -51,6 +51,7 @@ public class SpellfireRobe : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 17,
+      armor = 178,
       spellCritRating = 28.0
       )
 

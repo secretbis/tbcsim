@@ -59,7 +59,8 @@ public class BindingsOfTheTimewalker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      intellect = 12
+      intellect = 12,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

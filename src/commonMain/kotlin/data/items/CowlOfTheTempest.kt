@@ -55,6 +55,7 @@ public class CowlOfTheTempest : Item() {
       stamina = 30,
       intellect = 40,
       spirit = 28,
+      armor = 199,
       spellCritRating = 29.0,
       spellHitRating = 13.0
       )

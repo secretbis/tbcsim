@@ -62,6 +62,7 @@ public class MonsoonBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 24,
+      armor = 506,
       spellHitRating = 21.0
       )
 

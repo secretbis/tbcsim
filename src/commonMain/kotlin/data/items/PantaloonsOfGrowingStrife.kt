@@ -52,6 +52,7 @@ public class PantaloonsOfGrowingStrife : Item() {
       stamina = 29,
       intellect = 36,
       spirit = 25,
+      armor = 232,
       spellHasteRating = 42.0
       )
 

@@ -51,6 +51,7 @@ public class CursedVisionOfSargeras : Item() {
   public override var stats: Stats = Stats(
       agility = 39,
       stamina = 46,
+      armor = 385,
       physicalCritRating = 38.0,
       physicalHitRating = 21.0
       )

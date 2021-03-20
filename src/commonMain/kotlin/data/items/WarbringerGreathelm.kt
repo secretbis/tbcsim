@@ -55,6 +55,7 @@ public class WarbringerGreathelm : Item() {
       strength = 15,
       agility = 17,
       stamina = 53,
+      armor = 1227,
       defenseRating = 24.0,
       blockRating = 19.0
       )

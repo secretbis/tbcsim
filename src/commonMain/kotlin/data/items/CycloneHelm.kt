@@ -54,7 +54,8 @@ public class CycloneHelm : Item() {
       strength = 36,
       agility = 27,
       stamina = 40,
-      intellect = 27
+      intellect = 27,
+      armor = 687
       )
 
   public override var sockets: Array<Socket> = arrayOf(

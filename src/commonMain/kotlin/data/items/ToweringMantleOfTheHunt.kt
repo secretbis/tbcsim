@@ -49,6 +49,7 @@ public class ToweringMantleOfTheHunt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
+      armor = 489,
       physicalCritRating = 21.0
       )
 

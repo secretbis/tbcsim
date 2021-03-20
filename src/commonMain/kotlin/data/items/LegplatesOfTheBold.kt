@@ -50,6 +50,7 @@ public class LegplatesOfTheBold : Item() {
       strength = 31,
       agility = 19,
       stamina = 45,
+      armor = 1019,
       defenseRating = 26.0
       )
 

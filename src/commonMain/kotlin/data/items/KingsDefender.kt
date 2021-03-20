@@ -47,6 +47,7 @@ public class KingsDefender : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
+      armor = 182,
       physicalHitRating = 17.0,
       defenseRating = 13.0
       )

@@ -52,6 +52,7 @@ public class VindicatorsMailGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       intellect = 30,
+      armor = 575,
       spellCritRating = 29.0
       )
 

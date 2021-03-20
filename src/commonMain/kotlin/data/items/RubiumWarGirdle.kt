@@ -48,6 +48,7 @@ public class RubiumWarGirdle : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 29,
+      armor = 655,
       physicalCritRating = 18.0
       )
 

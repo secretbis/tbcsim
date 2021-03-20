@@ -54,6 +54,7 @@ public class JusticarBreastplate : Item() {
       strength = 42,
       stamina = 24,
       intellect = 33,
+      armor = 1510,
       physicalCritRating = 25.0
       )
 

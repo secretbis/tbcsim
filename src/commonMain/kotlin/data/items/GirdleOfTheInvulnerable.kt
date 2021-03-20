@@ -60,6 +60,7 @@ public class GirdleOfTheInvulnerable : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
+      armor = 904,
       defenseRating = 22.0,
       dodgeRating = 19.0,
       parryRating = 29.0

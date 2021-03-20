@@ -50,6 +50,7 @@ public class BattlewornTuskguard : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 60,
+      armor = 1355,
       defenseRating = 40.0,
       dodgeRating = 23.0
       )

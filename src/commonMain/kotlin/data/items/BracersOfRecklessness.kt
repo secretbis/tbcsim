@@ -47,7 +47,8 @@ public class BracersOfRecklessness : Item() {
 
   public override var stats: Stats = Stats(
       strength = 29,
-      stamina = 18
+      stamina = 18,
+      armor = 484
       )
 
   public override var sockets: Array<Socket> = arrayOf()

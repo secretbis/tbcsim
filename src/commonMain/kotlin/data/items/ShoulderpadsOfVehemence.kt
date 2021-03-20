@@ -60,6 +60,7 @@ public class ShoulderpadsOfVehemence : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 45,
+      armor = 374,
       physicalHitRating = 26.0,
       physicalHasteRating = 30.0
       )

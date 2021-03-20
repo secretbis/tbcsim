@@ -52,7 +52,8 @@ public class LeggingsOfTheImmortalBeast : Item() {
       strength = 44,
       agility = 46,
       stamina = 66,
-      intellect = 25
+      intellect = 25,
+      armor = 800
       )
 
   public override var sockets: Array<Socket> = arrayOf(

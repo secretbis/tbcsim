@@ -63,6 +63,7 @@ public class RobesOfFalteredLight : Item() {
       stamina = 39,
       intellect = 40,
       spirit = 40,
+      armor = 257,
       spellHasteRating = 32.0
       )
 

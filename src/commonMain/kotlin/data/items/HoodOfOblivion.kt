@@ -62,7 +62,8 @@ public class HoodOfOblivion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      intellect = 32
+      intellect = 32,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf(

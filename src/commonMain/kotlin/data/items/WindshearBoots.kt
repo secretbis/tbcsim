@@ -60,6 +60,7 @@ public class WindshearBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 32,
+      armor = 605,
       spellHitRating = 18.0
       )
 

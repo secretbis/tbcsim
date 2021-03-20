@@ -60,6 +60,7 @@ public class LionsHeartGirdle : Item() {
       strength = 26,
       agility = 22,
       stamina = 31,
+      armor = 782,
       defenseRating = 23.0
       )
 

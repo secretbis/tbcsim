@@ -49,6 +49,7 @@ public class ClefthoofHideLeggings : Item() {
       strength = 30,
       agility = 30,
       stamina = 24,
+      armor = 243,
       physicalHitRating = 17.0,
       expertiseRating = 18.0
       )

@@ -51,7 +51,8 @@ public class BarbaricLegstraps : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 13,
-      intellect = 17
+      intellect = 17,
+      armor = 570
       )
 
   public override var sockets: Array<Socket> = arrayOf(

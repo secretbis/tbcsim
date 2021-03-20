@@ -60,6 +60,7 @@ public class BootsOfZealotry : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       intellect = 17,
+      armor = 740,
       physicalCritRating = 21.0
       )
 

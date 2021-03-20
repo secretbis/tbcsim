@@ -51,6 +51,7 @@ public class BladedChaosTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 42,
       stamina = 45,
+      armor = 499,
       physicalCritRating = 38.0
       )
 

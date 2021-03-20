@@ -51,7 +51,8 @@ public class BattlecastHood : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 43,
-      intellect = 28
+      intellect = 28,
+      armor = 145
       )
 
   public override var sockets: Array<Socket> = arrayOf(

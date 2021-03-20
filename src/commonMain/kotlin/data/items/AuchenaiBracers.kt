@@ -49,7 +49,8 @@ public class AuchenaiBracers : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 15
+      intellect = 15,
+      armor = 285
       )
 
   public override var sockets: Array<Socket> = arrayOf(

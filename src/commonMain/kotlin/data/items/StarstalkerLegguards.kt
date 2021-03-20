@@ -63,6 +63,7 @@ public class StarstalkerLegguards : Item() {
       agility = 57,
       stamina = 49,
       intellect = 24,
+      armor = 971,
       physicalHitRating = 20.0
       )
 

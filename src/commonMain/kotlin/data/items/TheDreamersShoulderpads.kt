@@ -61,7 +61,8 @@ public class TheDreamersShoulderpads : Item() {
       agility = 21,
       stamina = 16,
       intellect = 12,
-      spirit = 11
+      spirit = 11,
+      armor = 187
       )
 
   public override var sockets: Array<Socket> = arrayOf()

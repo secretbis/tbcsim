@@ -54,6 +54,7 @@ public class BrutalGladiatorsLamellarHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 77,
       intellect = 34,
+      armor = 1611,
       spellCritRating = 34.0
       )
 

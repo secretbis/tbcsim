@@ -62,7 +62,8 @@ public class PrimalMoonclothBelt : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 12,
-      spirit = 11
+      spirit = 11,
+      armor = 109
       )
 
   public override var sockets: Array<Socket> = arrayOf(

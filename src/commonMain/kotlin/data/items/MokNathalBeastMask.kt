@@ -51,7 +51,8 @@ public class MokNathalBeastMask : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 22,
-      intellect = 15
+      intellect = 15,
+      armor = 463
       )
 
   public override var sockets: Array<Socket> = arrayOf(

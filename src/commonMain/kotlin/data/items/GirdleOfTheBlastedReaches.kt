@@ -51,7 +51,8 @@ public class GirdleOfTheBlastedReaches : Item() {
   public override var stats: Stats = Stats(
       agility = 16,
       stamina = 22,
-      intellect = 20
+      intellect = 20,
+      armor = 367
       )
 
   public override var sockets: Array<Socket> = arrayOf(

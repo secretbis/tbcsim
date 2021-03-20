@@ -51,7 +51,8 @@ public class AnchoritesRobes : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 38,
-      spirit = 18
+      spirit = 18,
+      armor = 156
       )
 
   public override var sockets: Array<Socket> = arrayOf(

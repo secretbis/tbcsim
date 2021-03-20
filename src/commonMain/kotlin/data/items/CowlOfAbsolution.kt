@@ -54,7 +54,8 @@ public class CowlOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 32,
-      spirit = 33
+      spirit = 33,
+      armor = 199
       )
 
   public override var sockets: Array<Socket> = arrayOf(

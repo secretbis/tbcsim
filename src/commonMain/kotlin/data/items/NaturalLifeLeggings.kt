@@ -62,6 +62,7 @@ public class NaturalLifeLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       intellect = 38,
+      armor = 787,
       spellCritRating = 17.0
       )
 

@@ -50,7 +50,8 @@ public class GeneralsDragonhideBoots : Item() {
       strength = 24,
       agility = 24,
       stamina = 33,
-      intellect = 15
+      intellect = 15,
+      armor = 307
       )
 
   public override var sockets: Array<Socket> = arrayOf()

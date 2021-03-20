@@ -51,7 +51,8 @@ public class ShroudOfNaturesHarmony : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 40,
-      spirit = 46
+      spirit = 46,
+      armor = 444
       )
 
   public override var sockets: Array<Socket> = arrayOf(

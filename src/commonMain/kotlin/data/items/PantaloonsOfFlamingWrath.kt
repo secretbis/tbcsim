@@ -48,6 +48,7 @@ public class PantaloonsOfFlamingWrath : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 28,
+      armor = 136,
       spellCritRating = 42.0
       )
 

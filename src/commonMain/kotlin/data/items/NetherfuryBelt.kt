@@ -50,7 +50,8 @@ public class NetherfuryBelt : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 27
+      stamina = 27,
+      armor = 339
       )
 
   public override var sockets: Array<Socket> = arrayOf(

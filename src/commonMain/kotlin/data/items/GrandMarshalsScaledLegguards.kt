@@ -52,6 +52,7 @@ public class GrandMarshalsScaledLegguards : Item() {
       strength = 36,
       stamina = 42,
       intellect = 16,
+      armor = 1019,
       physicalCritRating = 16.0
       )
 

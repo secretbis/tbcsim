@@ -51,7 +51,8 @@ public class BracersOfTheForestStalker : Item() {
   public override var stats: Stats = Stats(
       agility = 16,
       stamina = 10,
-      intellect = 10
+      intellect = 10,
+      armor = 285
       )
 
   public override var sockets: Array<Socket> = arrayOf(

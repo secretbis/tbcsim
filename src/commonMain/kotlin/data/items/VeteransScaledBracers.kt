@@ -51,6 +51,7 @@ public class VeteransScaledBracers : Item() {
       strength = 29,
       stamina = 25,
       intellect = 13,
+      armor = 693,
       physicalCritRating = 8.0
       )
 

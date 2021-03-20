@@ -50,6 +50,7 @@ public class GauntletsOfTheRighteous : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 20,
+      armor = 728,
       defenseRating = 19.0
       )
 

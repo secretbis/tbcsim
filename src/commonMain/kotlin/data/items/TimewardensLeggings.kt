@@ -49,6 +49,7 @@ public class TimewardensLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 57,
+      armor = 1019,
       defenseRating = 18.0,
       dodgeRating = 11.0
       )

@@ -51,6 +51,7 @@ public class KiltOfSpiritualReconstruction : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 41,
+      armor = 971,
       spellHasteRating = 30.0
       )
 

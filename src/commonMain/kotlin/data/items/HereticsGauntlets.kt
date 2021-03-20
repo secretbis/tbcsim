@@ -48,6 +48,7 @@ public class HereticsGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 35,
       stamina = 22,
+      armor = 728,
       physicalCritRating = 20.0
       )
 

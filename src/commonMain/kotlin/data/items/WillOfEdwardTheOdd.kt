@@ -59,6 +59,7 @@ public class WillOfEdwardTheOdd : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 30,
+      armor = 170,
       spellCritRating = 30.0
       )
 

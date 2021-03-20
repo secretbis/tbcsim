@@ -49,7 +49,8 @@ public class FlamebaneHelm : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 19
+      stamina = 19,
+      armor = 930
       )
 
   public override var sockets: Array<Socket> = arrayOf(

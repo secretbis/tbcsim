@@ -61,6 +61,7 @@ public class ChestguardOfTheStoicGuardian : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 60,
+      armor = 1607,
       defenseRating = 22.0,
       dodgeRating = 38.0
       )

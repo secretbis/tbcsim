@@ -52,6 +52,7 @@ public class HandguardsOfTheDawn : Item() {
       stamina = 33,
       intellect = 32,
       spirit = 36,
+      armor = 171,
       spellHasteRating = 27.0
       )
 

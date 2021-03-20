@@ -51,6 +51,7 @@ public class StormsongKilt : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 30,
+      armor = 681,
       spellCritRating = 26.0
       )
 

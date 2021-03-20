@@ -51,6 +51,7 @@ public class MarshalsLeatherBracers : Item() {
   public override var stats: Stats = Stats(
       agility = 19,
       stamina = 25,
+      armor = 157,
       physicalCritRating = 7.0
       )
 

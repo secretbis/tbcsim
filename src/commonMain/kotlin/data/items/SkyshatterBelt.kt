@@ -54,6 +54,7 @@ public class SkyshatterBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 30,
+      armor = 605,
       spellCritRating = 20.0,
       spellHasteRating = 23.0
       )

@@ -62,6 +62,7 @@ public class SunfireRobe : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 34,
+      armor = 266,
       spellCritRating = 40.0,
       spellHasteRating = 40.0
       )

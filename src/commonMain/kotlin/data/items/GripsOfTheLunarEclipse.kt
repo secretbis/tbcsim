@@ -49,7 +49,8 @@ public class GripsOfTheLunarEclipse : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 25,
-      spirit = 18
+      spirit = 18,
+      armor = 183
       )
 
   public override var sockets: Array<Socket> = arrayOf()

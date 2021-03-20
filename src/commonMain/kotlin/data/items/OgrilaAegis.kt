@@ -50,6 +50,7 @@ public class OgrilaAegis : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
+      armor = 3806,
       defenseRating = 23.0
       )
 

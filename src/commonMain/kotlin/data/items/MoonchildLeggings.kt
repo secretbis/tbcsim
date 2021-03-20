@@ -52,6 +52,7 @@ public class MoonchildLeggings : Item() {
       stamina = 26,
       intellect = 20,
       spirit = 19,
+      armor = 256,
       spellCritRating = 21.0
       )
 

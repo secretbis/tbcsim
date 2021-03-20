@@ -54,7 +54,8 @@ public class GlovesOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 31,
-      spirit = 27
+      spirit = 27,
+      armor = 153
       )
 
   public override var sockets: Array<Socket> = arrayOf(

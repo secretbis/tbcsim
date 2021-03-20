@@ -54,6 +54,7 @@ public class HoodOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 55,
       intellect = 36,
+      armor = 199,
       spellCritRating = 32.0,
       spellHitRating = 16.0
       )

@@ -50,6 +50,7 @@ public class WyrmscaleGreaves : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 32,
+      armor = 681,
       physicalCritRating = 26.0
       )
 

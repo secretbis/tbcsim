@@ -60,6 +60,7 @@ public class MaleficGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 26,
+      armor = 109,
       spellCritRating = 21.0
       )
 

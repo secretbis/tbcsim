@@ -51,6 +51,7 @@ public class AvalancheLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 40,
+      armor = 787,
       spellCritRating = 30.0
       )
 

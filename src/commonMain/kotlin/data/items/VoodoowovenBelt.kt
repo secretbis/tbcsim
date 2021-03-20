@@ -60,6 +60,7 @@ public class VoodoowovenBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 22,
+      armor = 121,
       spellCritRating = 33.0,
       spellHitRating = 17.0
       )

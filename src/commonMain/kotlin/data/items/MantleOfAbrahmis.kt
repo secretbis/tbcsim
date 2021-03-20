@@ -61,6 +61,7 @@ public class MantleOfAbrahmis : Item() {
   public override var stats: Stats = Stats(
       strength = 21,
       stamina = 43,
+      armor = 1087,
       defenseRating = 23.0
       )
 

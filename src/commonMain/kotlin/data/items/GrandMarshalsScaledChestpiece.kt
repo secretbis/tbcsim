@@ -54,6 +54,7 @@ public class GrandMarshalsScaledChestpiece : Item() {
       strength = 27,
       stamina = 42,
       intellect = 12,
+      armor = 1164,
       physicalCritRating = 13.0
       )
 

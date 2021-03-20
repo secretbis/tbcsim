@@ -54,7 +54,8 @@ public class BreastplateOfMalorne : Item() {
       strength = 33,
       agility = 34,
       stamina = 36,
-      intellect = 13
+      intellect = 13,
+      armor = 659
       )
 
   public override var sockets: Array<Socket> = arrayOf(

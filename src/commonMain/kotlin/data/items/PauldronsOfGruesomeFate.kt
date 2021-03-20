@@ -49,6 +49,7 @@ public class PauldronsOfGruesomeFate : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 33,
+      armor = 1206,
       physicalHitRating = 23.0
       )
 

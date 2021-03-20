@@ -56,6 +56,7 @@ public class VindicatorsChainBracers : Item() {
       agility = 23,
       stamina = 33,
       intellect = 13,
+      armor = 432,
       physicalCritRating = 11.0
       )
 

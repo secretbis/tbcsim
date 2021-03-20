@@ -58,6 +58,7 @@ public class WildguardBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 1450,
       defenseRating = 14.0
       )
 

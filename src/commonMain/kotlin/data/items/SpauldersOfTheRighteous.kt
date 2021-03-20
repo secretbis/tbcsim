@@ -52,6 +52,7 @@ public class SpauldersOfTheRighteous : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 22,
+      armor = 873,
       defenseRating = 20.0
       )
 

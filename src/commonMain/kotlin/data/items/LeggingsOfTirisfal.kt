@@ -55,6 +55,7 @@ public class LeggingsOfTirisfal : Item() {
       stamina = 37,
       intellect = 36,
       spirit = 26,
+      armor = 195,
       spellCritRating = 17.0,
       spellHitRating = 26.0
       )

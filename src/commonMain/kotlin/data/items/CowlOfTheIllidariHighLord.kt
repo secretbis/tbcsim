@@ -51,6 +51,7 @@ public class CowlOfTheIllidariHighLord : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 31,
+      armor = 205,
       spellCritRating = 47.0,
       spellHitRating = 21.0
       )

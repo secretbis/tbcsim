@@ -54,6 +54,7 @@ public class DestroyerGreathelm : Item() {
       strength = 28,
       agility = 28,
       stamina = 48,
+      armor = 1355,
       defenseRating = 30.0,
       dodgeRating = 33.0
       )

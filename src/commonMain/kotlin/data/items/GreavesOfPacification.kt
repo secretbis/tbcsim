@@ -50,7 +50,8 @@ public class GreavesOfPacification : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 52,
-      intellect = 43
+      intellect = 43,
+      armor = 1544
       )
 
   public override var sockets: Array<Socket> = arrayOf(

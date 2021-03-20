@@ -50,6 +50,7 @@ public class HardKhoriumBattlefists : Item() {
   public override var stats: Stats = Stats(
       strength = 45,
       stamina = 45,
+      armor = 1239,
       physicalHitRating = 23.0,
       physicalHasteRating = 36.0
       )

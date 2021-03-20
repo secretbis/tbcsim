@@ -49,7 +49,8 @@ public class GoldenCenarionGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 12,
-      intellect = 12
+      intellect = 12,
+      armor = 641
       )
 
   public override var sockets: Array<Socket> = arrayOf()

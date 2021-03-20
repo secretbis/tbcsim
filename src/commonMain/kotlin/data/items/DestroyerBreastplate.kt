@@ -53,6 +53,7 @@ public class DestroyerBreastplate : Item() {
   public override var stats: Stats = Stats(
       strength = 50,
       stamina = 48,
+      armor = 1668,
       physicalCritRating = 33.0,
       physicalHitRating = 15.0
       )

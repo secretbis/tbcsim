@@ -59,6 +59,7 @@ public class InfernoWaistCord : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 18,
+      armor = 109,
       spellCritRating = 24.0
       )
 

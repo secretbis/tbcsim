@@ -48,7 +48,8 @@ public class ChestguardOfIllumination : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 19,
-      intellect = 24
+      intellect = 24,
+      armor = 961
       )
 
   public override var sockets: Array<Socket> = arrayOf()

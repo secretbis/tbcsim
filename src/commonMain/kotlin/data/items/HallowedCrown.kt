@@ -63,7 +63,8 @@ public class HallowedCrown : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 24,
-      spirit = 26
+      spirit = 26,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf(

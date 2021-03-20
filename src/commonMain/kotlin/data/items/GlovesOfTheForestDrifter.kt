@@ -52,7 +52,8 @@ public class GlovesOfTheForestDrifter : Item() {
       strength = 34,
       agility = 34,
       stamina = 45,
-      intellect = 20
+      intellect = 20,
+      armor = 564
       )
 
   public override var sockets: Array<Socket> = arrayOf(

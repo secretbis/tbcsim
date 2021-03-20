@@ -60,6 +60,7 @@ public class MantleOfTheTirelessTracker : Item() {
   public override var stats: Stats = Stats(
       agility = 22,
       intellect = 23,
+      armor = 675,
       physicalCritRating = 33.0
       )
 

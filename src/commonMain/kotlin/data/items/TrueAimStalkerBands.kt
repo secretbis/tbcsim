@@ -62,6 +62,7 @@ public class TrueAimStalkerBands : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 12,
+      armor = 394,
       physicalCritRating = 24.0
       )
 

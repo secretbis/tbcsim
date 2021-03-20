@@ -60,6 +60,7 @@ public class FaceguardOfTheEndlessWatch : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
+      armor = 1227,
       defenseRating = 30.0,
       dodgeRating = 37.0
       )

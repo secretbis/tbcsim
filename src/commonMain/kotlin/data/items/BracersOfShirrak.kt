@@ -48,7 +48,8 @@ public class BracersOfShirrak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 17,
-      intellect = 14
+      intellect = 14,
+      armor = 285
       )
 
   public override var sockets: Array<Socket> = arrayOf()

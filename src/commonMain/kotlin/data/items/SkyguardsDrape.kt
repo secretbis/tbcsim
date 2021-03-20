@@ -47,7 +47,8 @@ public class SkyguardsDrape : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      agility = 15
+      agility = 15,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

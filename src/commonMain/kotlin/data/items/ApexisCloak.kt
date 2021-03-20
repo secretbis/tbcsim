@@ -48,7 +48,8 @@ public class ApexisCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 15
+      intellect = 15,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

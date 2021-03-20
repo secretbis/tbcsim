@@ -48,7 +48,8 @@ public class HarnessOfTheDeepCurrents : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      intellect = 30
+      intellect = 30,
+      armor = 652
       )
 
   public override var sockets: Array<Socket> = arrayOf()

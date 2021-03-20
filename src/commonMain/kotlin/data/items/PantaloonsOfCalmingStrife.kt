@@ -52,6 +52,7 @@ public class PantaloonsOfCalmingStrife : Item() {
       stamina = 29,
       intellect = 36,
       spirit = 42,
+      armor = 232,
       spellCritRating = 25.0
       )
 

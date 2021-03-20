@@ -62,7 +62,8 @@ public class EarthsoulLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 30,
-      spirit = 24
+      spirit = 24,
+      armor = 319
       )
 
   public override var sockets: Array<Socket> = arrayOf(

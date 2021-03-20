@@ -49,6 +49,7 @@ public class VermillionRobesOfTheDominant : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 33,
+      armor = 156,
       spellHitRating = 12.0
       )
 

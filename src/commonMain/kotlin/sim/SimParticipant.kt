@@ -517,7 +517,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
     }
 
     fun armor(): Int {
-        return (stats.armor.coerceAtLeast(0) * stats.armorMultiplier).toInt()
+        return (2 * agility()) + (stats.armor.coerceAtLeast(0) * stats.armorMultiplier).toInt()
     }
 
     fun attackPower(): Int {
@@ -575,15 +575,15 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
     }
 
     fun dodgePct(): Double {
-        return (stats.dodgeRating / Rating.dodgePerPct) + (0.04 * defenseSkill())
+        return character.klass.baseDodgePct + (agility() * character.klass.dodgePctPerAgility) + (stats.dodgeRating / Rating.dodgePerPct) + (0.04 * defenseSkill())
     }
 
     fun parryPct(): Double {
-        return (stats.parryRating / Rating.parryPerPct) + (0.04 * defenseSkill())
+        return 5.0 + (stats.parryRating / Rating.parryPerPct) + (0.04 * defenseSkill())
     }
 
     fun blockPct(): Double {
-        return (stats.blockRating / Rating.blockPerPct) + (0.04 * defenseSkill())
+        return 5.0 + (stats.blockRating / Rating.blockPerPct) + (0.04 * defenseSkill())
     }
 
     fun resiliencePct(): Double {

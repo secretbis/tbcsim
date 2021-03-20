@@ -59,7 +59,8 @@ public class WaveCrestStriders : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      intellect = 26
+      intellect = 26,
+      armor = 535
       )
 
   public override var sockets: Array<Socket> = arrayOf()

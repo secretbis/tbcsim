@@ -48,6 +48,7 @@ public class DepletedClothBracers : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 16,
+      armor = 71,
       spellCritRating = 12.0
       )
 

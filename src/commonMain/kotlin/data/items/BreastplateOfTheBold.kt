@@ -52,6 +52,7 @@ public class BreastplateOfTheBold : Item() {
       strength = 23,
       agility = 21,
       stamina = 33,
+      armor = 1164,
       defenseRating = 19.0
       )
 

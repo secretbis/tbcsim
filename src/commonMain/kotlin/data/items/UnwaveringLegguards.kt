@@ -61,6 +61,7 @@ public class UnwaveringLegguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 73,
+      armor = 1406,
       defenseRating = 22.0,
       blockRating = 30.0
       )

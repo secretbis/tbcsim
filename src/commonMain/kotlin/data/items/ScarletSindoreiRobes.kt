@@ -62,6 +62,7 @@ public class ScarletSindoreiRobes : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 22,
+      armor = 210,
       spellCritRating = 36.0
       )
 

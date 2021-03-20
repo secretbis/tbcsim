@@ -60,7 +60,8 @@ public class VestOfMountingAssault : Item() {
   public override var stats: Stats = Stats(
       agility = 58,
       stamina = 27,
-      intellect = 18
+      intellect = 18,
+      armor = 988
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -59,7 +59,8 @@ public class ShadowtoothTrollskinCuirass : Item() {
 
   public override var stats: Stats = Stats(
       agility = 45,
-      stamina = 46
+      stamina = 46,
+      armor = 404
       )
 
   public override var sockets: Array<Socket> = arrayOf()

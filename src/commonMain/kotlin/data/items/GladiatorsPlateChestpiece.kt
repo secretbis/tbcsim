@@ -53,6 +53,7 @@ public class GladiatorsPlateChestpiece : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       stamina = 49,
+      armor = 1547,
       physicalCritRating = 30.0,
       physicalHitRating = 12.0
       )

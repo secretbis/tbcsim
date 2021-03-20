@@ -62,6 +62,7 @@ public class Stormwrap : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 26,
+      armor = 506,
       spellCritRating = 22.0,
       spellHitRating = 13.0
       )

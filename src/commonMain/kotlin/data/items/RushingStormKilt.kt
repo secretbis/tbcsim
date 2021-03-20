@@ -51,6 +51,7 @@ public class RushingStormKilt : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 38,
+      armor = 864,
       spellHasteRating = 38.0
       )
 

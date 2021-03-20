@@ -53,6 +53,7 @@ public class VindicatorsChainSabatons : Item() {
       agility = 33,
       stamina = 48,
       intellect = 23,
+      armor = 702,
       physicalCritRating = 18.0
       )
 

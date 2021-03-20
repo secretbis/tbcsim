@@ -59,6 +59,7 @@ public class WildfuryGreatstaff : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
+      armor = 500,
       dodgeRating = 54.0
       )
 

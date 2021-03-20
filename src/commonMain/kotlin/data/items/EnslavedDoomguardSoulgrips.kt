@@ -51,6 +51,7 @@ public class EnslavedDoomguardSoulgrips : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 27,
+      armor = 148,
       spellCritRating = 30.0
       )
 

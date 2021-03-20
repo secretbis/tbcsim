@@ -48,6 +48,7 @@ public class DauntlessHandguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
+      armor = 722,
       blockRating = 25.0
       )
 

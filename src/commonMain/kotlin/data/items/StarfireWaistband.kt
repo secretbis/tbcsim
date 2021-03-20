@@ -62,6 +62,7 @@ public class StarfireWaistband : Item() {
   public override var stats: Stats = Stats(
       stamina = 20,
       intellect = 23,
+      armor = 227,
       spellCritRating = 22.0
       )
 

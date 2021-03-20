@@ -62,6 +62,7 @@ public class DonAlejandrosMoneyBelt : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 37,
+      armor = 249,
       physicalCritRating = 19.0
       )
 

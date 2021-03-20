@@ -52,6 +52,7 @@ public class GladiatorsRingmailLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 54,
       intellect = 26,
+      armor = 758,
       spellCritRating = 21.0
       )
 

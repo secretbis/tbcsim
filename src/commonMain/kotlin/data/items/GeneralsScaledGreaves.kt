@@ -60,6 +60,7 @@ public class GeneralsScaledGreaves : Item() {
       strength = 36,
       stamina = 33,
       intellect = 23,
+      armor = 1063,
       physicalCritRating = 16.0
       )
 

@@ -63,6 +63,7 @@ public class LeatherGauntletsOfTheSun : Item() {
       stamina = 25,
       intellect = 26,
       spirit = 30,
+      armor = 312,
       spellHasteRating = 38.0
       )
 

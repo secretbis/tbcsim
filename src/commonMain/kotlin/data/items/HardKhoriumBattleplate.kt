@@ -62,6 +62,7 @@ public class HardKhoriumBattleplate : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 55,
+      armor = 1983,
       physicalCritRating = 41.0
       )
 

@@ -61,6 +61,7 @@ public class GauntletsOfTheSunKing : Item() {
       stamina = 28,
       intellect = 29,
       spirit = 20,
+      armor = 145,
       spellCritRating = 28.0
       )
 

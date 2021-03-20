@@ -51,6 +51,7 @@ public class BreechesOfTheOccultist : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 22,
+      armor = 163,
       spellCritRating = 23.0
       )
 

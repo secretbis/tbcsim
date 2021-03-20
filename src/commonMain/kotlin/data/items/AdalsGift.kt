@@ -48,6 +48,7 @@ public class AdalsGift : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 25,
+      armor = 88,
       spellCritRating = 21.0
       )
 

@@ -50,6 +50,7 @@ public class VeteransChainSabatons : Item() {
       agility = 30,
       stamina = 45,
       intellect = 20,
+      armor = 656,
       physicalCritRating = 16.0
       )
 

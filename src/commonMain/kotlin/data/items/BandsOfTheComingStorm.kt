@@ -60,6 +60,7 @@ public class BandsOfTheComingStorm : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 28,
+      armor = 432,
       spellCritRating = 21.0
       )
 

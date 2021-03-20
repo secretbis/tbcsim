@@ -50,6 +50,7 @@ public class VeteransChainGirdle : Item() {
       agility = 30,
       stamina = 45,
       intellect = 20,
+      armor = 537,
       physicalCritRating = 16.0
       )
 

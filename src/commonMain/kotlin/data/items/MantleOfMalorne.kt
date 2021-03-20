@@ -54,7 +54,8 @@ public class MantleOfMalorne : Item() {
       strength = 33,
       agility = 27,
       stamina = 25,
-      intellect = 9
+      intellect = 9,
+      armor = 410
       )
 
   public override var sockets: Array<Socket> = arrayOf(

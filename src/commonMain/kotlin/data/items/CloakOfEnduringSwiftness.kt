@@ -48,6 +48,7 @@ public class CloakOfEnduringSwiftness : Item() {
   public override var stats: Stats = Stats(
       agility = 12,
       stamina = 13,
+      armor = 64,
       dodgeRating = 23.0
       )
 

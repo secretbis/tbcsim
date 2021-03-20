@@ -55,6 +55,7 @@ public class RiftStalkerMantle : Item() {
       agility = 26,
       stamina = 26,
       intellect = 24,
+      armor = 700,
       physicalHitRating = 13.0
       )
 

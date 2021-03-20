@@ -63,6 +63,7 @@ public class CuffsOfDevastation : Item() {
       stamina = 22,
       intellect = 20,
       spirit = 19,
+      armor = 103,
       spellCritRating = 14.0
       )
 

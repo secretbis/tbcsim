@@ -51,7 +51,8 @@ public class StarlightGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 10,
       intellect = 21,
-      spirit = 8
+      spirit = 8,
+      armor = 153
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -49,6 +49,7 @@ public class CobrascaleHood : Item() {
   public override var stats: Stats = Stats(
       agility = 37,
       stamina = 42,
+      armor = 271,
       physicalHitRating = 18.0
       )
 

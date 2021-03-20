@@ -61,6 +61,7 @@ public class BootsOfNaturalGrace : Item() {
       agility = 26,
       stamina = 37,
       intellect = 13,
+      armor = 474,
       physicalHitRating = 14.0
       )
 

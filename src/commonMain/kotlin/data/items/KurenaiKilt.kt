@@ -50,6 +50,7 @@ public class KurenaiKilt : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 11,
+      armor = 256,
       spellCritRating = 18.0
       )
 

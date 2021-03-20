@@ -60,6 +60,7 @@ public class ShoulderpadsOfDancingBlades : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 39,
+      armor = 303,
       physicalHitRating = 16.0
       )
 

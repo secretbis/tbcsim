@@ -59,6 +59,7 @@ public class HeartshatterBreastplate : Item() {
   public override var stats: Stats = Stats(
       strength = 63,
       stamina = 45,
+      armor = 1765,
       physicalCritRating = 44.0,
       physicalHitRating = 30.0
       )

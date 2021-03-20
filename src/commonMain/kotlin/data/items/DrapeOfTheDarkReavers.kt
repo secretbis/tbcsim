@@ -60,6 +60,7 @@ public class DrapeOfTheDarkReavers : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       stamina = 21,
+      armor = 97,
       physicalHitRating = 17.0
       )
 

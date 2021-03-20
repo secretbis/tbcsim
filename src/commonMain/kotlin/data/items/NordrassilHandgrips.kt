@@ -52,7 +52,8 @@ public class NordrassilHandgrips : Item() {
       strength = 35,
       agility = 27,
       stamina = 40,
-      intellect = 18
+      intellect = 18,
+      armor = 514
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -62,6 +62,7 @@ public class NobleJudicatorsChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 52,
       intellect = 52,
+      armor = 1983,
       spellHasteRating = 34.0
       )
 

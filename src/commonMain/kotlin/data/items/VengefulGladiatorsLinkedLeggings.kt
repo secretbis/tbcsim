@@ -53,6 +53,7 @@ public class VengefulGladiatorsLinkedLeggings : Item() {
       strength = 38,
       stamina = 67,
       intellect = 33,
+      armor = 894,
       physicalCritRating = 36.0
       )
 

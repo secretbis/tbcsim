@@ -47,6 +47,7 @@ public class WristguardsOfDetermination : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
+      armor = 703,
       defenseRating = 24.0,
       blockRating = 13.0,
       dodgeRating = 19.0

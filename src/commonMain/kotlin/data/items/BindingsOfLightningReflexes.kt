@@ -61,6 +61,7 @@ public class BindingsOfLightningReflexes : Item() {
       agility = 21,
       stamina = 15,
       intellect = 16,
+      armor = 432,
       physicalHasteRating = 27.0
       )
 

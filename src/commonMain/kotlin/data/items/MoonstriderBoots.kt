@@ -49,6 +49,7 @@ public class MoonstriderBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 22,
+      armor = 196,
       spellCritRating = 20.0
       )
 

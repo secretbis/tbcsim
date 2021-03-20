@@ -54,6 +54,7 @@ public class MantleOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       intellect = 22,
+      armor = 183,
       spellCritRating = 13.0,
       spellHitRating = 21.0
       )

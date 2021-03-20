@@ -60,7 +60,8 @@ public class CollarOfCommand : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 23,
-      spirit = 29
+      spirit = 29,
+      armor = 111
       )
 
   public override var sockets: Array<Socket> = arrayOf()

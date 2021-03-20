@@ -51,7 +51,8 @@ public class RobesOfSummerFlame : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 18,
-      spirit = 26
+      spirit = 26,
+      armor = 292
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -52,6 +52,7 @@ public class HelmOfTheRighteous : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 20,
+      armor = 946,
       defenseRating = 21.0
       )
 

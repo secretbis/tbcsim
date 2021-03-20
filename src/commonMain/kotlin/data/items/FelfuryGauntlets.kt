@@ -50,6 +50,7 @@ public class FelfuryGauntlets : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 465,
       physicalCritRating = 27.0
       )
 

@@ -49,6 +49,7 @@ public class MaghariRitualistsHorns : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 16,
+      armor = 114,
       spellCritRating = 15.0,
       spellHitRating = 12.0
       )

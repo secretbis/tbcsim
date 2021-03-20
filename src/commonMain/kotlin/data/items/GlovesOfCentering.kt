@@ -61,7 +61,8 @@ public class GlovesOfCentering : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 20
+      intellect = 20,
+      armor = 507
       )
 
   public override var sockets: Array<Socket> = arrayOf(

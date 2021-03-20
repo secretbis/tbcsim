@@ -61,6 +61,7 @@ public class SkullshatterWarboots : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 37,
+      armor = 1105,
       physicalCritRating = 29.0
       )
 

@@ -51,6 +51,7 @@ public class ShadowstalkersLeggings : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 33,
+      armor = 224,
       physicalCritRating = 15.0
       )
 

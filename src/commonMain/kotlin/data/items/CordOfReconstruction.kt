@@ -62,7 +62,8 @@ public class CordOfReconstruction : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 16,
-      spirit = 18
+      spirit = 18,
+      armor = 88
       )
 
   public override var sockets: Array<Socket> = arrayOf(

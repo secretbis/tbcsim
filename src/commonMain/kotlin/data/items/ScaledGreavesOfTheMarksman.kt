@@ -61,6 +61,7 @@ public class ScaledGreavesOfTheMarksman : Item() {
 
   public override var stats: Stats = Stats(
       agility = 37,
+      armor = 740,
       physicalHitRating = 16.0
       )
 

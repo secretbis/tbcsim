@@ -59,7 +59,8 @@ public class OrnateBootsOfTheSanctified : Item() {
   public override var stats: Stats = Stats(
       strength = 37,
       stamina = 18,
-      intellect = 20
+      intellect = 20,
+      armor = 780
       )
 
   public override var sockets: Array<Socket> = arrayOf()

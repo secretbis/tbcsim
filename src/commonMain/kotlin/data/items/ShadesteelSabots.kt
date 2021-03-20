@@ -46,7 +46,8 @@ public class ShadesteelSabots : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 40
+      stamina = 40,
+      armor = 1122
       )
 
   public override var sockets: Array<Socket> = arrayOf()

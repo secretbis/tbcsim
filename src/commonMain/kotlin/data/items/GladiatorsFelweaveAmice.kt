@@ -54,6 +54,7 @@ public class GladiatorsFelweaveAmice : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 14,
+      armor = 155,
       spellCritRating = 12.0
       )
 

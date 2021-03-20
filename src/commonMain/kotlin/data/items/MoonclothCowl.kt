@@ -53,7 +53,8 @@ public class MoonclothCowl : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 27
+      intellect = 27,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf(

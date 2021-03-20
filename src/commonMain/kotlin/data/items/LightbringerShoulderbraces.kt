@@ -54,6 +54,7 @@ public class LightbringerShoulderbraces : Item() {
       strength = 50,
       stamina = 37,
       intellect = 17,
+      armor = 1369,
       physicalCritRating = 19.0
       )
 

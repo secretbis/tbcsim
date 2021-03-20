@@ -49,6 +49,7 @@ public class BreastplateOfRapidStriking : Item() {
   public override var stats: Stats = Stats(
       agility = 40,
       intellect = 20,
+      armor = 619,
       physicalHitRating = 20.0
       )
 

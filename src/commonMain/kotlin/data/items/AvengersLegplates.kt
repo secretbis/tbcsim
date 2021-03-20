@@ -50,6 +50,7 @@ public class AvengersLegplates : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 33,
+      armor = 891,
       physicalCritRating = 12.0
       )
 

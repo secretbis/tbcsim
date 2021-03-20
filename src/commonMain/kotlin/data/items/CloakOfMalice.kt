@@ -48,7 +48,8 @@ public class CloakOfMalice : Item() {
 
   public override var stats: Stats = Stats(
       agility = 21,
-      stamina = 18
+      stamina = 18,
+      armor = 76
       )
 
   public override var sockets: Array<Socket> = arrayOf()

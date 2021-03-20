@@ -48,7 +48,8 @@ public class SpellbreakersBuckler : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 10
+      intellect = 10,
+      armor = 3615
       )
 
   public override var sockets: Array<Socket> = arrayOf()

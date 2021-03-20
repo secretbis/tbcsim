@@ -59,6 +59,7 @@ public class DorysEmbrace : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 34,
+      armor = 114,
       physicalCritRating = 20.0
       )
 

@@ -48,7 +48,8 @@ public class BootsOfTheDarkwalker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 25
+      intellect = 25,
+      armor = 107
       )
 
   public override var sockets: Array<Socket> = arrayOf()

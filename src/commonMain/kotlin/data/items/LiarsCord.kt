@@ -50,6 +50,7 @@ public class LiarsCord : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 164,
       physicalCritRating = 18.0
       )
 

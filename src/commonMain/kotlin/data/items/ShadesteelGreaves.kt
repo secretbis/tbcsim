@@ -46,7 +46,8 @@ public class ShadesteelGreaves : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 54
+      stamina = 54,
+      armor = 1428
       )
 
   public override var sockets: Array<Socket> = arrayOf()

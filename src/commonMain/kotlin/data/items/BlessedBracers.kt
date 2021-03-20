@@ -49,6 +49,7 @@ public class BlessedBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 14,
+      armor = 581,
       spellCritRating = 18.0
       )
 

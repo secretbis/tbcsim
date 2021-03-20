@@ -55,6 +55,7 @@ public class VengefulGladiatorsChainArmor : Item() {
       agility = 27,
       stamina = 63,
       intellect = 21,
+      armor = 1022,
       physicalCritRating = 25.0
       )
 

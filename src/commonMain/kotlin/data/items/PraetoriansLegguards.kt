@@ -49,6 +49,7 @@ public class PraetoriansLegguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
+      armor = 1544,
       physicalHitRating = 18.0,
       dodgeRating = 35.0,
       parryRating = 43.0

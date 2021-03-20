@@ -48,7 +48,8 @@ public class ShadowvineCloakOfInfusion : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 21,
-      spirit = 22
+      spirit = 22,
+      armor = 97
       )
 
   public override var sockets: Array<Socket> = arrayOf()

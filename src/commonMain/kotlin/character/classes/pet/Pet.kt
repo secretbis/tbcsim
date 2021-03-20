@@ -63,6 +63,8 @@ abstract class Pet(val owner: Character, override var baseStats: Stats=Stats()) 
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0
+    override val dodgePctPerAgility: Double = 1.0 / 25.0
+    override val baseDodgePct: Double = 0.0
     override var rangedAttackPowerFromAgility: Int = 0
 
     override val baseMana: Int = 0

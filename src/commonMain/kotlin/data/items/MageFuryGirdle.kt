@@ -49,6 +49,7 @@ public class MageFuryGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 23,
+      armor = 88,
       spellCritRating = 20.0
       )
 

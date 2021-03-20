@@ -55,6 +55,7 @@ public class OnslaughtBreastplate : Item() {
       strength = 53,
       agility = 34,
       stamina = 54,
+      armor = 1825,
       physicalHitRating = 16.0
       )
 

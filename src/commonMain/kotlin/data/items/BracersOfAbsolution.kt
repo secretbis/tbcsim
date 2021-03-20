@@ -55,6 +55,7 @@ public class BracersOfAbsolution : Item() {
       stamina = 18,
       intellect = 23,
       spirit = 16,
+      armor = 113,
       spellHasteRating = 20.0
       )
 

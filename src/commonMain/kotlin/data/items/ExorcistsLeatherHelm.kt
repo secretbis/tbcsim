@@ -51,6 +51,7 @@ public class ExorcistsLeatherHelm : Item() {
   public override var stats: Stats = Stats(
       agility = 27,
       stamina = 33,
+      armor = 208,
       physicalCritRating = 10.0
       )
 

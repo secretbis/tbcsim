@@ -62,6 +62,7 @@ public class GlovesOfImmortalDusk : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 33,
+      armor = 312,
       physicalCritRating = 30.0
       )
 

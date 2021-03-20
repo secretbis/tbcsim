@@ -60,6 +60,7 @@ public class SunguardLegplates : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1544,
       expertiseRating = 23.0,
       defenseRating = 43.0,
       dodgeRating = 35.0

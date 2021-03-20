@@ -50,6 +50,7 @@ public class SpauldersOfTheTornheart : Item() {
       stamina = 10,
       intellect = 7,
       spirit = 8,
+      armor = 111,
       spellCritRating = 18.0
       )
 

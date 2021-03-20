@@ -55,6 +55,7 @@ public class GladiatorsChainSpaulders : Item() {
       agility = 27,
       stamina = 39,
       intellect = 8,
+      armor = 649,
       physicalCritRating = 11.0
       )
 

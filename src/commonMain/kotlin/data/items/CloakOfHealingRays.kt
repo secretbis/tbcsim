@@ -49,7 +49,8 @@ public class CloakOfHealingRays : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 13,
-      spirit = 15
+      spirit = 15,
+      armor = 64
       )
 
   public override var sockets: Array<Socket> = arrayOf()

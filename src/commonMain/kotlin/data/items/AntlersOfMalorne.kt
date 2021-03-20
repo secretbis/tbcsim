@@ -55,6 +55,7 @@ public class AntlersOfMalorne : Item() {
       stamina = 28,
       intellect = 29,
       spirit = 22,
+      armor = 308,
       spellCritRating = 24.0
       )
 

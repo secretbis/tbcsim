@@ -51,7 +51,8 @@ public class GrandMarshalsSatinLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 46,
-      intellect = 23
+      intellect = 23,
+      armor = 136
       )
 
   public override var sockets: Array<Socket> = arrayOf()

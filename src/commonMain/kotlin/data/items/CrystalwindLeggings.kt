@@ -52,6 +52,7 @@ public class CrystalwindLeggings : Item() {
       stamina = 36,
       intellect = 40,
       spirit = 32,
+      armor = 388,
       spellCritRating = 28.0
       )
 

@@ -62,6 +62,7 @@ public class EdgewalkerLongboots : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 28,
+      armor = 250,
       physicalHitRating = 13.0
       )
 

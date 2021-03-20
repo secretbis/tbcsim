@@ -48,7 +48,8 @@ public class GreavesOfSpellpower : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 23
+      intellect = 23,
+      armor = 426
       )
 
   public override var sockets: Array<Socket> = arrayOf()

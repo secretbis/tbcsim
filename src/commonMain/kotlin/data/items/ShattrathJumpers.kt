@@ -50,7 +50,8 @@ public class ShattrathJumpers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 17
+      intellect = 17,
+      armor = 107
       )
 
   public override var sockets: Array<Socket> = arrayOf(

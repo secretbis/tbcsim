@@ -52,6 +52,7 @@ public class EbonNetherscaleBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 23,
+      armor = 846,
       physicalCritRating = 31.0
       )
 

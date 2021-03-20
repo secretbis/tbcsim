@@ -48,7 +48,8 @@ public class PauldronsOfSurgingMana : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 24
+      intellect = 24,
+      armor = 477
       )
 
   public override var sockets: Array<Socket> = arrayOf()

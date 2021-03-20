@@ -52,6 +52,7 @@ public class VindicatorsLinkedSabatons : Item() {
       strength = 33,
       stamina = 49,
       intellect = 23,
+      armor = 702,
       physicalCritRating = 34.0
       )
 

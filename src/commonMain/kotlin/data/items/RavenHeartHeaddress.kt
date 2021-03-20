@@ -52,7 +52,8 @@ public class RavenHeartHeaddress : Item() {
       strength = 22,
       stamina = 24,
       intellect = 23,
-      spirit = 16
+      spirit = 16,
+      armor = 208
       )
 
   public override var sockets: Array<Socket> = arrayOf(

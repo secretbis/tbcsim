@@ -60,6 +60,7 @@ public class GirdleOfTheTidalCall : Item() {
       strength = 35,
       stamina = 30,
       intellect = 20,
+      armor = 506,
       physicalCritRating = 33.0
       )
 

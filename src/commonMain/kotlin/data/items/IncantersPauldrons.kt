@@ -52,7 +52,8 @@ public class IncantersPauldrons : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 17,
-      spirit = 16
+      spirit = 16,
+      armor = 117
       )
 
   public override var sockets: Array<Socket> = arrayOf(

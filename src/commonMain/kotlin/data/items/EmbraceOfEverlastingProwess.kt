@@ -52,6 +52,7 @@ public class EmbraceOfEverlastingProwess : Item() {
       agility = 49,
       stamina = 52,
       intellect = 23,
+      armor = 696,
       physicalHasteRating = 20.0
       )
 

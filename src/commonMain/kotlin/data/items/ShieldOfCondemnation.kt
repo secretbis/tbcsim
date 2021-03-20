@@ -48,7 +48,8 @@ public class ShieldOfCondemnation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 10,
-      intellect = 10
+      intellect = 10,
+      armor = 3936
       )
 
   public override var sockets: Array<Socket> = arrayOf()

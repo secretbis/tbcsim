@@ -52,6 +52,7 @@ public class GrandMarshalsOrnamentedGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 20,
+      armor = 728,
       spellCritRating = 19.0
       )
 

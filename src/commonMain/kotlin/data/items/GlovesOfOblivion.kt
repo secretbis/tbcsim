@@ -50,6 +50,7 @@ public class GlovesOfOblivion : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 21,
+      armor = 97,
       spellHitRating = 20.0
       )
 

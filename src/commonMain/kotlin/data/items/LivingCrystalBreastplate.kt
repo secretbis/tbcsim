@@ -49,7 +49,8 @@ public class LivingCrystalBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 23,
-      spirit = 17
+      spirit = 17,
+      armor = 255
       )
 
   public override var sockets: Array<Socket> = arrayOf()

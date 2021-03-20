@@ -62,6 +62,7 @@ public class CordOfScreamingTerrors : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 15,
+      armor = 121,
       spellHitRating = 24.0
       )
 

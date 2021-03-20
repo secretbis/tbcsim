@@ -61,7 +61,8 @@ public class ImplacableGuardianSabatons : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 22
+      intellect = 22,
+      armor = 1105
       )
 
   public override var sockets: Array<Socket> = arrayOf(

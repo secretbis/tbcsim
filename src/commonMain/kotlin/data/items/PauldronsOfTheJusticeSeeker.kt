@@ -60,6 +60,7 @@ public class PauldronsOfTheJusticeSeeker : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 26,
+      armor = 1087,
       spellCritRating = 22.0
       )
 

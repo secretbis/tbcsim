@@ -54,6 +54,7 @@ public class CrystalforgeLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 54,
       intellect = 27,
+      armor = 1459,
       defenseRating = 35.0,
       blockRating = 25.0
       )

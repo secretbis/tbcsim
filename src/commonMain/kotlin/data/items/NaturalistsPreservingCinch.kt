@@ -60,6 +60,7 @@ public class NaturalistsPreservingCinch : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 30,
+      armor = 556,
       spellHasteRating = 37.0
       )
 

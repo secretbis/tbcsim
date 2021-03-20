@@ -62,6 +62,7 @@ public class OverlordsHelmetOfSecondSight : Item() {
   public override var stats: Stats = Stats(
       strength = 29,
       stamina = 22,
+      armor = 898,
       physicalCritRating = 24.0,
       physicalHitRating = 13.0
       )

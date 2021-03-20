@@ -48,7 +48,8 @@ public class TheHandsOfFate : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 21,
-      intellect = 18
+      intellect = 18,
+      armor = 691
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,6 +60,7 @@ public class GripsOfDeftness : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 34,
+      armor = 228,
       expertiseRating = 15.0
       )
 

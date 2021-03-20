@@ -61,7 +61,8 @@ public class TreadsOfTheLifePath : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 33
+      intellect = 33,
+      armor = 619
       )
 
   public override var sockets: Array<Socket> = arrayOf(

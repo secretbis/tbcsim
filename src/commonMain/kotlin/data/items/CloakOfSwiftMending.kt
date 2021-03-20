@@ -48,6 +48,7 @@ public class CloakOfSwiftMending : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 12,
+      armor = 74,
       spellHasteRating = 18.0
       )
 

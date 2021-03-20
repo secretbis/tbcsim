@@ -49,6 +49,7 @@ public class EarthbreakersGreaves : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 20,
+      armor = 381,
       spellCritRating = 8.0
       )
 

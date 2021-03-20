@@ -48,7 +48,8 @@ public class UltraSpectropicDetectionGoggles : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 48,
-      spirit = 47
+      spirit = 47,
+      armor = 124
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -59,6 +59,7 @@ public class RoyalCloakOfArathiKings : Item() {
   public override var stats: Stats = Stats(
       strength = 26,
       stamina = 31,
+      armor = 97,
       physicalHitRating = 16.0
       )
 

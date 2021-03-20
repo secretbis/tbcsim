@@ -51,7 +51,8 @@ public class PontifexKilt : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 29,
-      spirit = 27
+      spirit = 27,
+      armor = 163
       )
 
   public override var sockets: Array<Socket> = arrayOf(

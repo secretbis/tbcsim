@@ -48,7 +48,8 @@ public class CloakOfRevival : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 16
+      intellect = 16,
+      armor = 66
       )
 
   public override var sockets: Array<Socket> = arrayOf()

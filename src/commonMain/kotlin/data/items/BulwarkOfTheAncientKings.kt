@@ -51,6 +51,7 @@ public class BulwarkOfTheAncientKings : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 56,
+      armor = 1825,
       physicalCritRating = 41.0,
       physicalHitRating = 25.0
       )

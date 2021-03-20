@@ -54,6 +54,7 @@ public class CycloneFaceguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 31,
+      armor = 687,
       spellCritRating = 25.0
       )
 

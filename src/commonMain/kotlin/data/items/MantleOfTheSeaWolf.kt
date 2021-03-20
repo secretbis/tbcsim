@@ -48,7 +48,8 @@ public class MantleOfTheSeaWolf : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 25
+      intellect = 25,
+      armor = 489
       )
 
   public override var sockets: Array<Socket> = arrayOf()

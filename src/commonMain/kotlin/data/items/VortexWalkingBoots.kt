@@ -50,6 +50,7 @@ public class VortexWalkingBoots : Item() {
   public override var stats: Stats = Stats(
       strength = 28,
       stamina = 28,
+      armor = 914,
       physicalCritRating = 19.0
       )
 

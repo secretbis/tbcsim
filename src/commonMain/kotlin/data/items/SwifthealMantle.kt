@@ -50,6 +50,7 @@ public class SwifthealMantle : Item() {
       stamina = 21,
       intellect = 16,
       spirit = 28,
+      armor = 177,
       spellHasteRating = 27.0
       )
 

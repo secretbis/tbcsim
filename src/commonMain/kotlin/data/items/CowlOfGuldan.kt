@@ -51,6 +51,7 @@ public class CowlOfGuldan : Item() {
   public override var stats: Stats = Stats(
       stamina = 51,
       intellect = 43,
+      armor = 929,
       spellCritRating = 36.0,
       spellHasteRating = 32.0
       )

@@ -49,6 +49,7 @@ public class AntonidassAegisOfRaptConcentration : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 20,
+      armor = 6336,
       spellCritRating = 20.0
       )
 

@@ -49,6 +49,7 @@ public class NethershadeBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 22,
       stamina = 21,
+      armor = 172,
       parryRating = 15.0
       )
 

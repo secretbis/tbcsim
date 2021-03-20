@@ -53,6 +53,7 @@ public class HandguardsOfTheAvatar : Item() {
       stamina = 31,
       intellect = 27,
       spirit = 25,
+      armor = 140,
       spellHitRating = 18.0
       )
 

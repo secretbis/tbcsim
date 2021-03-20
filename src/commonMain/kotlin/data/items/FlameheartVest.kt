@@ -47,7 +47,8 @@ public class FlameheartVest : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      intellect = 19
+      intellect = 19,
+      armor = 156
       )
 
   public override var sockets: Array<Socket> = arrayOf()

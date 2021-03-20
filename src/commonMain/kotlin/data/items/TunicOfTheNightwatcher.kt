@@ -51,7 +51,8 @@ public class TunicOfTheNightwatcher : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 21,
-      spirit = 18
+      spirit = 18,
+      armor = 244
       )
 
   public override var sockets: Array<Socket> = arrayOf(

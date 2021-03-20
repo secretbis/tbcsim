@@ -54,6 +54,7 @@ public class ThunderheartBands : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 23,
+      armor = 211,
       spellCritRating = 13.0,
       spellHasteRating = 21.0
       )

@@ -49,6 +49,7 @@ public class BloodcursedShoulderpads : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 19,
+      armor = 177,
       spellCritRating = 25.0,
       spellHitRating = 18.0
       )

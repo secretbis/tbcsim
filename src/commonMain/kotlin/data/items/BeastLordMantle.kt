@@ -51,7 +51,8 @@ public class BeastLordMantle : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
-      intellect = 12
+      intellect = 12,
+      armor = 489
       )
 
   public override var sockets: Array<Socket> = arrayOf(

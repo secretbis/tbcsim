@@ -61,6 +61,7 @@ public class FelfuryLegplates : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 48,
+      armor = 1735,
       physicalCritRating = 34.0,
       physicalHasteRating = 50.0
       )

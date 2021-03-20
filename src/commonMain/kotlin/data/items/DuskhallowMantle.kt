@@ -51,6 +51,7 @@ public class DuskhallowMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 10,
+      armor = 117,
       spellCritRating = 24.0
       )
 

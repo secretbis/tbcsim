@@ -63,6 +63,7 @@ public class QuickstriderMoccasins : Item() {
       agility = 28,
       stamina = 30,
       intellect = 31,
+      armor = 679,
       physicalHitRating = 15.0
       )
 

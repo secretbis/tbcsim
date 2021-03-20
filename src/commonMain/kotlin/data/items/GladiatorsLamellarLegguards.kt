@@ -52,6 +52,7 @@ public class GladiatorsLamellarLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 57,
       intellect = 21,
+      armor = 1353,
       spellCritRating = 32.0
       )
 

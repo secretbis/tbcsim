@@ -48,7 +48,8 @@ public class ShacklesOfQuagmirran : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
-      stamina = 18
+      stamina = 18,
+      armor = 128
       )
 
   public override var sockets: Array<Socket> = arrayOf()

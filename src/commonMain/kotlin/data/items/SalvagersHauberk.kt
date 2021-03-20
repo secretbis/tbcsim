@@ -48,6 +48,7 @@ public class SalvagersHauberk : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
+      armor = 652,
       physicalCritRating = 33.0
       )
 

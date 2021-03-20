@@ -62,7 +62,8 @@ public class GargonsBracersOfPeacefulSlumber : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 25,
-      spirit = 17
+      spirit = 17,
+      armor = 177
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -61,6 +61,7 @@ public class FuriousShackles : Item() {
   public override var stats: Stats = Stats(
       strength = 35,
       stamina = 28,
+      armor = 772,
       physicalCritRating = 19.0
       )
 

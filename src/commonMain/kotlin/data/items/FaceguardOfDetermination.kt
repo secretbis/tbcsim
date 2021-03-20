@@ -60,6 +60,7 @@ public class FaceguardOfDetermination : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
+      armor = 1129,
       defenseRating = 32.0,
       blockRating = 24.0,
       dodgeRating = 24.0

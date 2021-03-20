@@ -48,6 +48,7 @@ public class BlackFelsteelBracers : Item() {
   public override var stats: Stats = Stats(
       strength = 26,
       stamina = 15,
+      armor = 581,
       physicalCritRating = 22.0
       )
 

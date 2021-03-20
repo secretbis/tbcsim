@@ -50,6 +50,7 @@ public class BootsOfTheShiftingSands : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 201,
       physicalCritRating = 19.0
       )
 

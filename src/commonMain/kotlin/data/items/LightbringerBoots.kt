@@ -53,6 +53,7 @@ public class LightbringerBoots : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 22,
+      armor = 1322,
       physicalCritRating = 40.0,
       physicalHasteRating = 27.0,
       expertiseRating = 19.0

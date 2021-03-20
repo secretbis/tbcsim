@@ -51,6 +51,7 @@ public class HatefuryMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 18,
+      armor = 177,
       spellCritRating = 24.0
       )
 

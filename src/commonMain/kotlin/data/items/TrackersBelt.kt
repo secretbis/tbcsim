@@ -48,6 +48,7 @@ public class TrackersBelt : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
+      armor = 294,
       physicalCritRating = 21.0,
       physicalHitRating = 14.0
       )

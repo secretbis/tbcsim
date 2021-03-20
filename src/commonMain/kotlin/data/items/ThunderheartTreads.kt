@@ -55,6 +55,7 @@ public class ThunderheartTreads : Item() {
       agility = 35,
       stamina = 54,
       intellect = 18,
+      armor = 542,
       expertiseRating = 20.0
       )
 

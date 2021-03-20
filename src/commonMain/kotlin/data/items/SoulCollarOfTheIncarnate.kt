@@ -55,6 +55,7 @@ public class SoulCollarOfTheIncarnate : Item() {
       stamina = 28,
       intellect = 35,
       spirit = 24,
+      armor = 164,
       spellHitRating = 16.0
       )
 

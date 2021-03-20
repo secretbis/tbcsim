@@ -47,6 +47,7 @@ public class RingOfTheStalwartProtector : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 392,
       dodgeRating = 28.0
       )
 

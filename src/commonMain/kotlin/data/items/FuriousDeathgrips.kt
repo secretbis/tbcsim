@@ -61,6 +61,7 @@ public class FuriousDeathgrips : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 37,
+      armor = 1005,
       physicalHitRating = 25.0
       )
 

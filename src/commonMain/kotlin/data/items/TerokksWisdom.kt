@@ -48,7 +48,8 @@ public class TerokksWisdom : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 16
+      intellect = 16,
+      armor = 89
       )
 
   public override var sockets: Array<Socket> = arrayOf()

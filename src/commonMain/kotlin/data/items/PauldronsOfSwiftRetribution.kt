@@ -49,6 +49,7 @@ public class PauldronsOfSwiftRetribution : Item() {
       strength = 29,
       stamina = 24,
       intellect = 20,
+      armor = 873,
       physicalCritRating = 19.0
       )
 

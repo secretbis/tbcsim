@@ -60,6 +60,7 @@ public class FlashfireGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 26,
+      armor = 556,
       spellCritRating = 18.0,
       spellHasteRating = 37.0
       )

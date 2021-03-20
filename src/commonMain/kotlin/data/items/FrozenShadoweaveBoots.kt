@@ -62,7 +62,8 @@ public class FrozenShadoweaveBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 9
+      intellect = 9,
+      armor = 122
       )
 
   public override var sockets: Array<Socket> = arrayOf(

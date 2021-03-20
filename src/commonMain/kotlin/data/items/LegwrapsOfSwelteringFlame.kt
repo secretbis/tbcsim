@@ -52,6 +52,7 @@ public class LegwrapsOfSwelteringFlame : Item() {
       stamina = 37,
       intellect = 36,
       spirit = 30,
+      armor = 207,
       spellHitRating = 25.0
       )
 

@@ -59,6 +59,7 @@ public class LegguardsOfEndlessRage : Item() {
   public override var stats: Stats = Stats(
       strength = 70,
       stamina = 61,
+      armor = 1650,
       physicalCritRating = 46.0,
       physicalHitRating = 19.0
       )

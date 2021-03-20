@@ -49,7 +49,8 @@ public class SkyHunterSwiftBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 19,
-      intellect = 24
+      intellect = 24,
+      armor = 437
       )
 
   public override var sockets: Array<Socket> = arrayOf()

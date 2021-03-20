@@ -48,7 +48,8 @@ public class Cryomitts : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 22,
-      spirit = 16
+      spirit = 16,
+      armor = 156
       )
 
   public override var sockets: Array<Socket> = arrayOf()

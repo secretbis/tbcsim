@@ -63,6 +63,7 @@ public class FuryOfTheUrsine : Item() {
       stamina = 12,
       intellect = 17,
       spirit = 16,
+      armor = 94,
       spellCritRating = 17.0
       )
 

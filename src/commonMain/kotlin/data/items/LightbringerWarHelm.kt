@@ -54,6 +54,7 @@ public class LightbringerWarHelm : Item() {
       strength = 61,
       stamina = 60,
       intellect = 32,
+      armor = 1483,
       physicalCritRating = 23.0
       )
 

@@ -53,6 +53,7 @@ public class GlovesOfTirisfal : Item() {
       stamina = 26,
       intellect = 27,
       spirit = 18,
+      armor = 140,
       spellCritRating = 27.0
       )
 

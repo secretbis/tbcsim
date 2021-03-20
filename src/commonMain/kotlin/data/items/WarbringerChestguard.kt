@@ -55,6 +55,7 @@ public class WarbringerChestguard : Item() {
       strength = 16,
       agility = 17,
       stamina = 48,
+      armor = 1510,
       defenseRating = 22.0,
       blockRating = 23.0
       )

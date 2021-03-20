@@ -61,7 +61,8 @@ public class HydromancersHeadwrap : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 27
+      intellect = 27,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -48,6 +48,7 @@ public class CrystalweaveCape : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 15,
+      armor = 78,
       physicalHasteRating = 26.0
       )
 

@@ -49,7 +49,8 @@ public class CoverOfRighteousFury : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 34,
-      intellect = 12
+      intellect = 12,
+      armor = 804
       )
 
   public override var sockets: Array<Socket> = arrayOf()

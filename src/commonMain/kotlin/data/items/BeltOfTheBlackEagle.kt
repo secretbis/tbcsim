@@ -63,6 +63,7 @@ public class BeltOfTheBlackEagle : Item() {
       agility = 17,
       stamina = 20,
       intellect = 23,
+      armor = 506,
       physicalCritRating = 17.0
       )
 

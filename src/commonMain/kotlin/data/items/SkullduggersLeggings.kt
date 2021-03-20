@@ -50,6 +50,7 @@ public class SkullduggersLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 214,
       physicalHitRating = 16.0,
       dodgeRating = 21.0
       )

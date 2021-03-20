@@ -61,6 +61,7 @@ public class PauldronsOfStoneResolve : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 43,
+      armor = 1206,
       defenseRating = 20.0,
       blockRating = 28.0
       )

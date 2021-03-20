@@ -49,6 +49,7 @@ public class WarpscaleLeggings : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 31,
+      armor = 256,
       physicalHitRating = 14.0,
       dodgeRating = 21.0
       )

@@ -60,6 +60,7 @@ public class LeggingsOfMurderousIntent : Item() {
   public override var stats: Stats = Stats(
       agility = 45,
       stamina = 31,
+      armor = 380,
       physicalCritRating = 37.0
       )
 

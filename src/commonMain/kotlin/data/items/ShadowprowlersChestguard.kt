@@ -51,6 +51,7 @@ public class ShadowprowlersChestguard : Item() {
       strength = 32,
       agility = 40,
       stamina = 12,
+      armor = 333,
       physicalHitRating = 8.0
       )
 

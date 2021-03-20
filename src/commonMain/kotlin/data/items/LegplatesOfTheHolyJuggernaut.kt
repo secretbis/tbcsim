@@ -51,6 +51,7 @@ public class LegplatesOfTheHolyJuggernaut : Item() {
   public override var stats: Stats = Stats(
       stamina = 49,
       intellect = 41,
+      armor = 1735,
       spellCritRating = 37.0
       )
 

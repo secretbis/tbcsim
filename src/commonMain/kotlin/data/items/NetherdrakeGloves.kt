@@ -49,7 +49,8 @@ public class NetherdrakeGloves : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 24,
-      intellect = 23
+      intellect = 23,
+      armor = 465
       )
 
   public override var sockets: Array<Socket> = arrayOf()

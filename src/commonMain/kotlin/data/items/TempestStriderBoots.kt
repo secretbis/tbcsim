@@ -59,7 +59,8 @@ public class TempestStriderBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 26
+      intellect = 26,
+      armor = 619
       )
 
   public override var sockets: Array<Socket> = arrayOf()

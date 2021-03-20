@@ -50,7 +50,8 @@ public class LivingReplicatorSpecs : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 14,
-      intellect = 38
+      intellect = 38,
+      armor = 726
       )
 
   public override var sockets: Array<Socket> = arrayOf(

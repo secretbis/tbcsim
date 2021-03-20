@@ -60,6 +60,7 @@ public class MankindosBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 26,
+      armor = 506,
       spellHasteRating = 30.0
       )
 

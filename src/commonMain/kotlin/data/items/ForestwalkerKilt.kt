@@ -51,7 +51,8 @@ public class ForestwalkerKilt : Item() {
       strength = 33,
       agility = 26,
       stamina = 24,
-      intellect = 27
+      intellect = 27,
+      armor = 459
       )
 
   public override var sockets: Array<Socket> = arrayOf(

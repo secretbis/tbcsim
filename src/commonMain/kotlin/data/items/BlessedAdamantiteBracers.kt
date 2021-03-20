@@ -62,6 +62,7 @@ public class BlessedAdamantiteBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 22,
+      armor = 772,
       spellCritRating = 21.0
       )
 

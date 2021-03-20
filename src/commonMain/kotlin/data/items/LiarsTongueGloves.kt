@@ -61,6 +61,7 @@ public class LiarsTongueGloves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
+      armor = 247,
       physicalCritRating = 26.0
       )
 

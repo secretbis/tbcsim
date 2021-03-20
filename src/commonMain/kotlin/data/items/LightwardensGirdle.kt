@@ -49,6 +49,7 @@ public class LightwardensGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 14,
+      armor = 622,
       defenseRating = 23.0
       )
 

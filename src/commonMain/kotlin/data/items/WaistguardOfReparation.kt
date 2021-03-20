@@ -62,6 +62,7 @@ public class WaistguardOfReparation : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 34,
+      armor = 993,
       spellCritRating = 28.0
       )
 

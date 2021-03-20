@@ -52,6 +52,7 @@ public class GuardiansLinkedGirdle : Item() {
       strength = 38,
       stamina = 55,
       intellect = 28,
+      armor = 624,
       physicalCritRating = 37.0
       )
 

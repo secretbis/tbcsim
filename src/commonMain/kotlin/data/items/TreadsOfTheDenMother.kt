@@ -60,7 +60,8 @@ public class TreadsOfTheDenMother : Item() {
       strength = 38,
       agility = 32,
       stamina = 47,
-      intellect = 14
+      intellect = 14,
+      armor = 516
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,6 +51,7 @@ public class DestroyerGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 46,
+      armor = 1042,
       physicalCritRating = 30.0
       )
 

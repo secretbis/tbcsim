@@ -48,7 +48,8 @@ public class TriptychShieldOfTheAncients : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      intellect = 21
+      intellect = 21,
+      armor = 4872
       )
 
   public override var sockets: Array<Socket> = arrayOf()

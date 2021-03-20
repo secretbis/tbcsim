@@ -49,7 +49,8 @@ public class ConsortiumPlatedLegguards : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 23
+      intellect = 23,
+      armor = 866
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -53,7 +53,8 @@ public class OracleBeltOfTimelessMystery : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 24,
-      spirit = 17
+      spirit = 17,
+      armor = 205
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,6 +52,7 @@ public class CrystalforgeGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 25,
+      armor = 1042,
       spellCritRating = 24.0
       )
 

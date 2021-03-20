@@ -62,6 +62,7 @@ public class LeggingsOfTheImmortalNight : Item() {
   public override var stats: Stats = Stats(
       agility = 41,
       stamina = 48,
+      armor = 436,
       physicalHitRating = 32.0
       )
 

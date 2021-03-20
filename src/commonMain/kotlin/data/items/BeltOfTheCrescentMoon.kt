@@ -61,6 +61,7 @@ public class BeltOfTheCrescentMoon : Item() {
       stamina = 25,
       intellect = 27,
       spirit = 19,
+      armor = 249,
       spellHasteRating = 36.0
       )
 

@@ -60,7 +60,8 @@ public class BeastmawPauldrons : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       stamina = 22,
-      intellect = 23
+      intellect = 23,
+      armor = 609
       )
 
   public override var sockets: Array<Socket> = arrayOf()

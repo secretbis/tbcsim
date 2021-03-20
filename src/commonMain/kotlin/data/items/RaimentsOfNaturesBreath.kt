@@ -49,7 +49,8 @@ public class RaimentsOfNaturesBreath : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 32,
-      spirit = 18
+      spirit = 18,
+      armor = 292
       )
 
   public override var sockets: Array<Socket> = arrayOf()

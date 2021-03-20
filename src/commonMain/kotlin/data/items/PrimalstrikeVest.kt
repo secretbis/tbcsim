@@ -50,6 +50,7 @@ public class PrimalstrikeVest : Item() {
   public override var stats: Stats = Stats(
       agility = 38,
       stamina = 39,
+      armor = 379,
       physicalHitRating = 12.0
       )
 

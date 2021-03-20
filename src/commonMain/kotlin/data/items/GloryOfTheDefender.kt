@@ -58,6 +58,7 @@ public class GloryOfTheDefender : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
+      armor = 1765,
       physicalHitRating = 34.0,
       defenseRating = 35.0,
       dodgeRating = 51.0

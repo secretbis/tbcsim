@@ -52,6 +52,7 @@ public class HighWarlordsLamellarGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 13,
+      armor = 728,
       spellCritRating = 19.0
       )
 

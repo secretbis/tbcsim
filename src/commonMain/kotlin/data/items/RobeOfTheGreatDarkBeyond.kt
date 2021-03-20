@@ -50,6 +50,7 @@ public class RobeOfTheGreatDarkBeyond : Item() {
       stamina = 25,
       intellect = 30,
       spirit = 18,
+      armor = 156,
       spellCritRating = 23.0
       )
 

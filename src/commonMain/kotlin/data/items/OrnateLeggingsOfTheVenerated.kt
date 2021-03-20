@@ -50,7 +50,8 @@ public class OrnateLeggingsOfTheVenerated : Item() {
   public override var stats: Stats = Stats(
       strength = 35,
       stamina = 21,
-      intellect = 25
+      intellect = 25,
+      armor = 993
       )
 
   public override var sockets: Array<Socket> = arrayOf(

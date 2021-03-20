@@ -55,6 +55,7 @@ public class BrutalGladiatorsChainHelm : Item() {
       agility = 37,
       stamina = 67,
       intellect = 27,
+      armor = 902,
       physicalCritRating = 30.0
       )
 

@@ -49,6 +49,7 @@ public class AngerSparkGloves : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 126,
       spellCritRating = 25.0,
       spellHitRating = 20.0
       )

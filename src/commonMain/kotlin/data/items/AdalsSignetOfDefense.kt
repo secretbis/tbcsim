@@ -47,6 +47,7 @@ public class AdalsSignetOfDefense : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 34,
+      armor = 367,
       defenseRating = 20.0
       )
 

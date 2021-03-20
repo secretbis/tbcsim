@@ -48,7 +48,8 @@ public class ShroudOfSpiritualPurity : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 30,
-      spirit = 32
+      spirit = 32,
+      armor = 144
       )
 
   public override var sockets: Array<Socket> = arrayOf()

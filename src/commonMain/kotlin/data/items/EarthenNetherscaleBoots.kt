@@ -49,7 +49,8 @@ public class EarthenNetherscaleBoots : Item() {
   public override var stats: Stats = Stats(
       strength = 28,
       stamina = 27,
-      intellect = 18
+      intellect = 18,
+      armor = 511
       )
 
   public override var sockets: Array<Socket> = arrayOf()

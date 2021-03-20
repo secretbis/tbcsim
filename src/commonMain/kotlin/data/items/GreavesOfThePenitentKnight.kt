@@ -61,7 +61,8 @@ public class GreavesOfThePenitentKnight : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 25
+      intellect = 25,
+      armor = 1080
       )
 
   public override var sockets: Array<Socket> = arrayOf(

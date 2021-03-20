@@ -48,6 +48,7 @@ public class VirtueBearersVambraces : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 16,
+      armor = 509,
       spellCritRating = 15.0
       )
 

@@ -54,6 +54,7 @@ public class SkyshatterHeadguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 37,
+      armor = 830,
       spellCritRating = 36.0
       )
 

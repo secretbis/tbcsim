@@ -150,15 +150,18 @@ function SpellStats({ simParticipant: sp }) {
 }
 
 function DefensiveStats({ simParticipant: sp }) {
+  const armor = sp.armor_0();
+  const armorMit = ((armor / (armor + (467.5 * 70 - 22167.5))) * 100).toFixed(2)
+
   return (
     <Col>
       <Row>
         <Col xs={12}>Armor:</Col>
-        <Col xs={12}>{sp.armor_0()}</Col>
+        <Col xs={12}>{armor} ({armorMit}%)</Col>
       </Row>
       <Row>
         <Col xs={12}>Defense:</Col>
-        <Col xs={12}>{sp.defenseSkill()}</Col>
+        <Col xs={12}>{350 + sp.defenseSkill()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Dodge %:</Col>
@@ -174,7 +177,7 @@ function DefensiveStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Resilience:</Col>
-        <Col xs={12}>{sp.stats._resilience}</Col>
+        <Col xs={12}>{sp.resiliencePct().toFixed()}%</Col>
       </Row>
     </Col>
   )

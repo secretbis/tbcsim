@@ -60,7 +60,8 @@ public class SteadyingBracers : Item() {
   public override var stats: Stats = Stats(
       agility = 18,
       stamina = 21,
-      intellect = 19
+      intellect = 19,
+      armor = 394
       )
 
   public override var sockets: Array<Socket> = arrayOf()

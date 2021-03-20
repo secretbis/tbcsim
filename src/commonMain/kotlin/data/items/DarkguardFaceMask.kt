@@ -60,6 +60,7 @@ public class DarkguardFaceMask : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 30,
+      armor = 208,
       physicalHitRating = 20.0
       )
 

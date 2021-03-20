@@ -52,6 +52,7 @@ public class SpellstrikePants : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 8,
+      armor = 156,
       spellCritRating = 26.0,
       spellHitRating = 22.0
       )

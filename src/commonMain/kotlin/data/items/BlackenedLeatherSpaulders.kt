@@ -48,6 +48,7 @@ public class BlackenedLeatherSpaulders : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
+      armor = 219,
       physicalHitRating = 15.0
       )
 

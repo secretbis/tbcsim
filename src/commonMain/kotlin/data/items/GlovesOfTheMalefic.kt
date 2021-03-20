@@ -54,6 +54,7 @@ public class GlovesOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 57,
       intellect = 27,
+      armor = 153,
       spellCritRating = 19.0,
       spellHitRating = 11.0
       )

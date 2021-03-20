@@ -50,6 +50,7 @@ public class SouthshoreSneakers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
+      armor = 181,
       dodgeRating = 23.0
       )
 

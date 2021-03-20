@@ -62,6 +62,7 @@ public class GauntletsOfTheAncientShadowmoon : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 32,
+      armor = 672,
       spellCritRating = 28.0,
       spellHasteRating = 24.0
       )

@@ -50,6 +50,7 @@ public class BreastplateOfKings : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 46,
+      armor = 1353,
       physicalCritRating = 31.0,
       physicalHitRating = 20.0
       )

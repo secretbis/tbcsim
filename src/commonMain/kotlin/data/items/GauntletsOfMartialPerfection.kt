@@ -61,6 +61,7 @@ public class GauntletsOfMartialPerfection : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 34,
+      armor = 982,
       physicalCritRating = 23.0
       )
 

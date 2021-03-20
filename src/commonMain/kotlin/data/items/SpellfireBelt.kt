@@ -62,6 +62,7 @@ public class SpellfireBelt : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 18,
+      armor = 100,
       spellCritRating = 18.0
       )
 

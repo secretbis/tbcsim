@@ -62,7 +62,8 @@ public class ViciousHawkstriderHauberk : Item() {
   public override var stats: Stats = Stats(
       agility = 47,
       stamina = 64,
-      intellect = 30
+      intellect = 30,
+      armor = 1110
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -55,6 +55,7 @@ public class NordrassilHeadpiece : Item() {
       stamina = 35,
       intellect = 28,
       spirit = 24,
+      armor = 341,
       spellCritRating = 25.0,
       spellHitRating = 10.0
       )

@@ -52,6 +52,7 @@ public class JusticarLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 46,
       intellect = 31,
+      armor = 1322,
       defenseRating = 31.0,
       parryRating = 31.0
       )

@@ -54,6 +54,7 @@ public class HighWarlordsSilkAmice : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 16,
+      armor = 117,
       spellCritRating = 8.0
       )
 

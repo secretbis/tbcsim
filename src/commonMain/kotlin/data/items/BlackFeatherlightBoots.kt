@@ -59,6 +59,7 @@ public class BlackFeatherlightBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 41,
+      armor = 305,
       physicalHitRating = 34.0
       )
 

@@ -55,6 +55,7 @@ public class BeltOfAbsolution : Item() {
       stamina = 21,
       intellect = 29,
       spirit = 33,
+      armor = 145,
       spellHasteRating = 14.0
       )
 

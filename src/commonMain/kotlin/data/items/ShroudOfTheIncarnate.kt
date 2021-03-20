@@ -55,6 +55,7 @@ public class ShroudOfTheIncarnate : Item() {
       stamina = 28,
       intellect = 25,
       spirit = 21,
+      armor = 202,
       spellHitRating = 17.0
       )
 

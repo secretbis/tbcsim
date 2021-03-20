@@ -61,6 +61,7 @@ public class BluesGreavesOfTheRighteousGuardian : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 58,
+      armor = 1213,
       spellHitRating = 23.0,
       blockRating = 34.0
       )

@@ -62,6 +62,7 @@ public class GirdleOfRuination : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 13,
+      armor = 100,
       spellCritRating = 20.0
       )
 

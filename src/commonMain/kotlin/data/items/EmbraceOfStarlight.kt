@@ -52,6 +52,7 @@ public class EmbraceOfStarlight : Item() {
       stamina = 34,
       intellect = 38,
       spirit = 26,
+      armor = 444,
       spellCritRating = 36.0
       )
 

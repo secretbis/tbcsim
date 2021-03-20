@@ -50,7 +50,8 @@ public class StylinJungleHat : Item() {
       strength = 24,
       agility = 24,
       stamina = 24,
-      intellect = 24
+      intellect = 24,
+      armor = 232
       )
 
   public override var sockets: Array<Socket> = arrayOf()

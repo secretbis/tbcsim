@@ -49,7 +49,8 @@ public class AkamasSash : Item() {
   public override var stats: Stats = Stats(
       stamina = 10,
       intellect = 7,
-      spirit = 18
+      spirit = 18,
+      armor = 195
       )
 
   public override var sockets: Array<Socket> = arrayOf()

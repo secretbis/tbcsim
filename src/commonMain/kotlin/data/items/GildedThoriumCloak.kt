@@ -58,6 +58,7 @@ public class GildedThoriumCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 385,
       defenseRating = 24.0
       )
 

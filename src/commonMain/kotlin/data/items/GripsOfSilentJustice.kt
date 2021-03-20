@@ -62,6 +62,7 @@ public class GripsOfSilentJustice : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 37,
+      armor = 1103,
       physicalHitRating = 15.0
       )
 

@@ -52,6 +52,7 @@ public class GuardiansScaledGreaves : Item() {
       strength = 44,
       stamina = 45,
       intellect = 30,
+      armor = 1363,
       physicalCritRating = 31.0
       )
 

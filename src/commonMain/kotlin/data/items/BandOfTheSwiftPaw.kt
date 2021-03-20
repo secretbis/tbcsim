@@ -62,7 +62,8 @@ public class BandOfTheSwiftPaw : Item() {
       strength = 21,
       agility = 22,
       stamina = 31,
-      intellect = 10
+      intellect = 10,
+      armor = 317
       )
 
   public override var sockets: Array<Socket> = arrayOf(

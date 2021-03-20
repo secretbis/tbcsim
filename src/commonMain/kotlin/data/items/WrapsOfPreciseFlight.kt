@@ -61,6 +61,7 @@ public class WrapsOfPreciseFlight : Item() {
       agility = 18,
       stamina = 28,
       intellect = 20,
+      armor = 432,
       physicalCritRating = 19.0
       )
 

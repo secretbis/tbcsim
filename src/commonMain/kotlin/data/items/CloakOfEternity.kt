@@ -47,6 +47,7 @@ public class CloakOfEternity : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
+      armor = 76,
       defenseRating = 23.0
       )
 

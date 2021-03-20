@@ -59,6 +59,7 @@ public class BloodstainedPauldrons : Item() {
   public override var stats: Stats = Stats(
       strength = 47,
       stamina = 34,
+      armor = 1324,
       physicalCritRating = 32.0,
       physicalHitRating = 23.0
       )

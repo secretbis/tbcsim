@@ -51,6 +51,7 @@ public class GauntletsOfTheTranquilWaves : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 10,
+      armor = 407,
       spellHasteRating = 24.0
       )
 

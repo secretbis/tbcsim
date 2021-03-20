@@ -49,6 +49,7 @@ public class SashOfSerpentra : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 21,
+      armor = 88,
       spellHitRating = 17.0
       )
 

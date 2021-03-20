@@ -48,6 +48,7 @@ public class AzureShieldOfColdarra : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
+      armor = 4668,
       defenseRating = 22.0
       )
 

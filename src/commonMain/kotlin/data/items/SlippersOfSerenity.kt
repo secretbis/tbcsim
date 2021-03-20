@@ -51,7 +51,8 @@ public class SlippersOfSerenity : Item() {
   public override var stats: Stats = Stats(
       stamina = 10,
       intellect = 22,
-      spirit = 15
+      spirit = 15,
+      armor = 94
       )
 
   public override var sockets: Array<Socket> = arrayOf(

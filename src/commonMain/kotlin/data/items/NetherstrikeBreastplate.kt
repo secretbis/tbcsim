@@ -52,6 +52,7 @@ public class NetherstrikeBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 23,
+      armor = 846,
       spellCritRating = 32.0
       )
 

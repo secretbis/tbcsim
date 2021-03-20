@@ -60,7 +60,8 @@ public class WarFeatheredLoop : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 36,
-      intellect = 28
+      intellect = 28,
+      armor = 506
       )
 
   public override var sockets: Array<Socket> = arrayOf()

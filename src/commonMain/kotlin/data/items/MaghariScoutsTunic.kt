@@ -49,6 +49,7 @@ public class MaghariScoutsTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 18,
+      armor = 263,
       physicalHitRating = 12.0
       )
 

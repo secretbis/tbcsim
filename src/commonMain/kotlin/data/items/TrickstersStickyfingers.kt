@@ -60,6 +60,7 @@ public class TrickstersStickyfingers : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 28,
+      armor = 252,
       physicalHasteRating = 25.0
       )
 

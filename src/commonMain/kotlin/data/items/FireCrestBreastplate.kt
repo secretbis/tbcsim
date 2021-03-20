@@ -60,6 +60,7 @@ public class FireCrestBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 34,
+      armor = 900,
       spellCritRating = 34.0
       )
 

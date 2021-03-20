@@ -61,6 +61,7 @@ public class ShattrathProtectoratesBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1765,
       spellHitRating = 34.0,
       defenseRating = 26.0
       )

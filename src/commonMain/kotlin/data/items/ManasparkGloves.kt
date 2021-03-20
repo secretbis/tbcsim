@@ -52,6 +52,7 @@ public class ManasparkGloves : Item() {
       stamina = 14,
       intellect = 14,
       spirit = 10,
+      armor = 81,
       spellHitRating = 15.0
       )
 

@@ -54,6 +54,7 @@ public class BeltOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 29,
+      armor = 145,
       spellCritRating = 20.0,
       spellHitRating = 20.0,
       spellHasteRating = 29.0

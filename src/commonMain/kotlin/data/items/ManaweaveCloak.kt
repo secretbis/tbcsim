@@ -48,7 +48,8 @@ public class ManaweaveCloak : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 20,
-      spirit = 21
+      spirit = 21,
+      armor = 89
       )
 
   public override var sockets: Array<Socket> = arrayOf()

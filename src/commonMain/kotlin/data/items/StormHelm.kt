@@ -51,6 +51,7 @@ public class StormHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 28,
+      armor = 604,
       physicalCritRating = 22.0
       )
 

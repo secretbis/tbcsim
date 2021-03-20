@@ -61,6 +61,7 @@ public class MantleOfTheElvenKings : Item() {
       stamina = 27,
       intellect = 18,
       spirit = 17,
+      armor = 161,
       spellCritRating = 25.0,
       spellHitRating = 18.0
       )

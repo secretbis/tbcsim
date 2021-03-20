@@ -51,6 +51,7 @@ public class HeroicJudicatorsChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 78,
       intellect = 22,
+      armor = 1983,
       defenseRating = 29.0,
       dodgeRating = 44.0
       )

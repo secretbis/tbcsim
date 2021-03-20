@@ -51,7 +51,8 @@ public class TunicOfAssassination : Item() {
 
   public override var stats: Stats = Stats(
       agility = 28,
-      stamina = 21
+      stamina = 21,
+      armor = 292
       )
 
   public override var sockets: Array<Socket> = arrayOf(

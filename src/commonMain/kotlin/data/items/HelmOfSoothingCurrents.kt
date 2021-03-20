@@ -50,7 +50,8 @@ public class HelmOfSoothingCurrents : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 40,
-      intellect = 42
+      intellect = 42,
+      armor = 803
       )
 
   public override var sockets: Array<Socket> = arrayOf(

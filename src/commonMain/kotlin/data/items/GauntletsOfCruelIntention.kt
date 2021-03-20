@@ -48,6 +48,7 @@ public class GauntletsOfCruelIntention : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 25,
+      armor = 728,
       physicalCritRating = 21.0
       )
 

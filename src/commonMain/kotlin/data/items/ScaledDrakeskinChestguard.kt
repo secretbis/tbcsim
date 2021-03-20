@@ -63,6 +63,7 @@ public class ScaledDrakeskinChestguard : Item() {
       agility = 47,
       stamina = 39,
       intellect = 26,
+      armor = 988,
       physicalHasteRating = 25.0
       )
 

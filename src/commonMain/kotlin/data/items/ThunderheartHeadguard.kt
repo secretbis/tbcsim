@@ -55,6 +55,7 @@ public class ThunderheartHeadguard : Item() {
       stamina = 30,
       intellect = 32,
       spirit = 28,
+      armor = 373,
       spellCritRating = 29.0,
       spellHitRating = 13.0
       )

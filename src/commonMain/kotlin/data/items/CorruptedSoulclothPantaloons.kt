@@ -51,6 +51,7 @@ public class CorruptedSoulclothPantaloons : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 33,
+      armor = 207,
       spellCritRating = 43.0
       )
 

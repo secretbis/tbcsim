@@ -48,6 +48,7 @@ public class RetainersLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
+      armor = 256,
       physicalHitRating = 26.0
       )
 

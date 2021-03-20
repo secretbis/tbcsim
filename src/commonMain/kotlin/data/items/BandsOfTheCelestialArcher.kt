@@ -60,6 +60,7 @@ public class BandsOfTheCelestialArcher : Item() {
   public override var stats: Stats = Stats(
       agility = 17,
       intellect = 24,
+      armor = 394,
       physicalCritRating = 17.0
       )
 

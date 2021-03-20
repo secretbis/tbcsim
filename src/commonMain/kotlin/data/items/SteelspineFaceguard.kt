@@ -60,7 +60,8 @@ public class SteelspineFaceguard : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 34,
-      intellect = 34
+      intellect = 34,
+      armor = 659
       )
 
   public override var sockets: Array<Socket> = arrayOf()

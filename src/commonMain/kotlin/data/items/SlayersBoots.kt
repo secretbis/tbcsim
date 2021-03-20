@@ -54,6 +54,7 @@ public class SlayersBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 24,
+      armor = 332,
       physicalCritRating = 16.0,
       physicalHitRating = 28.0,
       expertiseRating = 24.0

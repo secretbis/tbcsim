@@ -48,6 +48,7 @@ public class GauntletsOfTheSkullsplitter : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       agility = 18,
+      armor = 619,
       physicalHitRating = 12.0
       )
 

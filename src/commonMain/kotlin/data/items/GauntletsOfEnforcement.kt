@@ -48,6 +48,7 @@ public class GauntletsOfEnforcement : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 70,
+      armor = 1103,
       expertiseRating = 21.0,
       defenseRating = 32.0
       )

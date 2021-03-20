@@ -49,6 +49,7 @@ public class DoomplateLegguards : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 33,
+      armor = 1019,
       physicalCritRating = 27.0,
       physicalHitRating = 17.0
       )

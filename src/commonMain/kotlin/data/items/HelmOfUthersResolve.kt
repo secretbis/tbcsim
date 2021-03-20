@@ -51,6 +51,7 @@ public class HelmOfUthersResolve : Item() {
   public override var stats: Stats = Stats(
       stamina = 91,
       intellect = 20,
+      armor = 1611,
       defenseRating = 32.0,
       dodgeRating = 41.0
       )

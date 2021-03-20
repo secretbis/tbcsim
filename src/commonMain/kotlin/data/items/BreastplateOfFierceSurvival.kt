@@ -51,6 +51,7 @@ public class BreastplateOfFierceSurvival : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 32,
+      armor = 1450,
       spellCritRating = 22.0
       )
 

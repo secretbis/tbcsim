@@ -49,6 +49,7 @@ public class ExtravagantBootsOfMalice : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 24,
+      armor = 107,
       spellHitRating = 14.0
       )
 

@@ -52,7 +52,8 @@ public class TrousersOfTheIncarnate : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 37,
-      spirit = 36
+      spirit = 36,
+      armor = 177
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -54,6 +54,7 @@ public class SeersRingmailHeadpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 21,
+      armor = 530,
       spellCritRating = 16.0
       )
 

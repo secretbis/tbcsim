@@ -49,7 +49,8 @@ public class LightScribeBands : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 15,
-      spirit = 22
+      spirit = 22,
+      armor = 68
       )
 
   public override var sockets: Array<Socket> = arrayOf()

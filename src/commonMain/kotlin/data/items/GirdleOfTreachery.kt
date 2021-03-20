@@ -61,7 +61,8 @@ public class GirdleOfTreachery : Item() {
 
   public override var stats: Stats = Stats(
       agility = 18,
-      stamina = 37
+      stamina = 37,
+      armor = 205
       )
 
   public override var sockets: Array<Socket> = arrayOf(

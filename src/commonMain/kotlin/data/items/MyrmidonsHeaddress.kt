@@ -50,6 +50,7 @@ public class MyrmidonsHeaddress : Item() {
   public override var stats: Stats = Stats(
       strength = 17,
       stamina = 37,
+      armor = 946,
       defenseRating = 33.0
       )
 

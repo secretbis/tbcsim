@@ -49,6 +49,7 @@ public class WindscaleHood : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 18,
+      armor = 271,
       spellCritRating = 37.0
       )
 

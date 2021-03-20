@@ -51,6 +51,7 @@ public class SigilLacedBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 18,
+      armor = 107,
       spellCritRating = 17.0
       )
 

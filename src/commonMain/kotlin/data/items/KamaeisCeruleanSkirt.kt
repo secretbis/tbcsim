@@ -48,7 +48,8 @@ public class KamaeisCeruleanSkirt : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 25,
-      spirit = 21
+      spirit = 21,
+      armor = 149
       )
 
   public override var sockets: Array<Socket> = arrayOf()

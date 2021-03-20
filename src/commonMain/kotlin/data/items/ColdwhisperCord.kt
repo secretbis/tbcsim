@@ -50,6 +50,7 @@ public class ColdwhisperCord : Item() {
       stamina = 19,
       intellect = 23,
       spirit = 12,
+      armor = 88,
       spellCritRating = 16.0
       )
 

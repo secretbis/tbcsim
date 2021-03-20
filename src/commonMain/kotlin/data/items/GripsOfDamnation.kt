@@ -60,6 +60,7 @@ public class GripsOfDamnation : Item() {
   public override var stats: Stats = Stats(
       agility = 27,
       stamina = 38,
+      armor = 277,
       physicalHasteRating = 37.0
       )
 

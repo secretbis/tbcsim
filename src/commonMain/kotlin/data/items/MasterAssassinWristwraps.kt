@@ -62,6 +62,7 @@ public class MasterAssassinWristwraps : Item() {
   public override var stats: Stats = Stats(
       agility = 17,
       stamina = 22,
+      armor = 177,
       physicalCritRating = 18.0
       )
 

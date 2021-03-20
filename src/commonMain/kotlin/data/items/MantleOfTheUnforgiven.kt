@@ -48,6 +48,7 @@ public class MantleOfTheUnforgiven : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
+      armor = 219,
       physicalCritRating = 21.0,
       physicalHitRating = 12.0
       )

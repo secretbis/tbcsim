@@ -51,6 +51,7 @@ public class MaskOfIntrospection : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 39,
+      armor = 1306,
       spellCritRating = 31.0
       )
 

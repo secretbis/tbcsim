@@ -50,6 +50,7 @@ public class LeggingsOfTheSeventhCircle : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 22,
+      armor = 177,
       spellCritRating = 25.0,
       spellHitRating = 18.0
       )

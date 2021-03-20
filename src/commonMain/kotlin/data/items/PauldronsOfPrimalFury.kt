@@ -62,6 +62,7 @@ public class PauldronsOfPrimalFury : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 30,
+      armor = 675,
       physicalHitRating = 20.0
       )
 

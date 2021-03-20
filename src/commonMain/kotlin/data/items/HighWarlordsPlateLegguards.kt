@@ -51,6 +51,7 @@ public class HighWarlordsPlateLegguards : Item() {
   public override var stats: Stats = Stats(
       strength = 28,
       stamina = 46,
+      armor = 1019,
       physicalCritRating = 28.0
       )
 

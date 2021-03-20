@@ -58,7 +58,8 @@ public class FlameheartBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      intellect = 8
+      intellect = 8,
+      armor = 67
       )
 
   public override var sockets: Array<Socket> = arrayOf()

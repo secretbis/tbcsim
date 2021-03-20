@@ -61,6 +61,7 @@ public class ArrowfallChestguard : Item() {
       agility = 39,
       stamina = 25,
       intellect = 38,
+      armor = 900,
       physicalHasteRating = 30.0
       )
 

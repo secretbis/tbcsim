@@ -49,6 +49,7 @@ public class GlovesOfTheDeadwatcher : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 24,
+      armor = 97,
       spellHitRating = 18.0
       )
 

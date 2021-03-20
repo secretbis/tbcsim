@@ -52,6 +52,7 @@ public class SpellstrikeHood : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 12,
+      armor = 145,
       spellCritRating = 24.0,
       spellHitRating = 16.0
       )

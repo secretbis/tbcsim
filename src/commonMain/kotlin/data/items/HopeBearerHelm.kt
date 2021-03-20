@@ -62,6 +62,7 @@ public class HopeBearerHelm : Item() {
       strength = 30,
       agility = 23,
       stamina = 19,
+      armor = 827,
       physicalHitRating = 13.0
       )
 

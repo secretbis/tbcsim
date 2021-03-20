@@ -54,7 +54,8 @@ public class NordrassilFeralMantle : Item() {
       strength = 35,
       agility = 34,
       stamina = 28,
-      intellect = 11
+      intellect = 11,
+      armor = 468
       )
 
   public override var sockets: Array<Socket> = arrayOf(

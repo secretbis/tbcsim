@@ -50,6 +50,7 @@ public class GirdleOfTheImmovable : Item() {
   public override var stats: Stats = Stats(
       strength = 17,
       stamina = 33,
+      armor = 655,
       defenseRating = 18.0,
       blockRating = 12.0
       )

@@ -49,6 +49,7 @@ public class FelstrengthLegplates : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1735,
       expertiseRating = 40.0,
       defenseRating = 40.0,
       dodgeRating = 50.0

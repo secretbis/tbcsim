@@ -52,6 +52,7 @@ public class FletchersGlovesOfThePhoenix : Item() {
       agility = 30,
       stamina = 33,
       intellect = 25,
+      armor = 694,
       physicalHasteRating = 34.0
       )
 

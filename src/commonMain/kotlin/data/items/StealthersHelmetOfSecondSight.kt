@@ -51,6 +51,7 @@ public class StealthersHelmetOfSecondSight : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       stamina = 18,
+      armor = 226,
       physicalHitRating = 13.0
       )
 

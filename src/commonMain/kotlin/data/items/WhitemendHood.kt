@@ -51,7 +51,8 @@ public class WhitemendHood : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 15
+      intellect = 15,
+      armor = 145
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -49,7 +49,8 @@ public class GlovesOfTheLivingTouch : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 18,
-      spirit = 22
+      spirit = 22,
+      armor = 208
       )
 
   public override var sockets: Array<Socket> = arrayOf()

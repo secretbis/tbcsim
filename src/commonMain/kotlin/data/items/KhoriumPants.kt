@@ -60,7 +60,8 @@ public class KhoriumPants : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 42,
-      intellect = 28
+      intellect = 28,
+      armor = 1010
       )
 
   public override var sockets: Array<Socket> = arrayOf()

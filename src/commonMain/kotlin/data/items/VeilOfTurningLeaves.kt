@@ -49,7 +49,8 @@ public class VeilOfTurningLeaves : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 29,
-      spirit = 38
+      spirit = 38,
+      armor = 333
       )
 
   public override var sockets: Array<Socket> = arrayOf()

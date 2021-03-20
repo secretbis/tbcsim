@@ -50,6 +50,7 @@ public class LightningEtchedSpecs : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 47,
+      armor = 902,
       spellCritRating = 53.0,
       spellHitRating = 25.0
       )

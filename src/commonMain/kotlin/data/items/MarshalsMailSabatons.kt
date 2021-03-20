@@ -49,6 +49,7 @@ public class MarshalsMailSabatons : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 23,
+      armor = 595,
       spellCritRating = 24.0
       )
 

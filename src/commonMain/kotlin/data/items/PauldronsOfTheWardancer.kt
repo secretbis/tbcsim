@@ -61,6 +61,7 @@ public class PauldronsOfTheWardancer : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 21,
+      armor = 1206,
       physicalCritRating = 29.0
       )
 

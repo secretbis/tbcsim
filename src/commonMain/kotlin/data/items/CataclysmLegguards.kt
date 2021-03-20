@@ -53,7 +53,8 @@ public class CataclysmLegguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 48,
-      intellect = 47
+      intellect = 47,
+      armor = 817
       )
 
   public override var sockets: Array<Socket> = arrayOf(

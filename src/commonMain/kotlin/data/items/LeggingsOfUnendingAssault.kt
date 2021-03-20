@@ -48,7 +48,8 @@ public class LeggingsOfUnendingAssault : Item() {
 
   public override var stats: Stats = Stats(
       agility = 30,
-      stamina = 45
+      stamina = 45,
+      armor = 230
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,6 +52,7 @@ public class EbonNetherscaleBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 14,
+      armor = 457,
       physicalCritRating = 22.0
       )
 

@@ -51,7 +51,8 @@ public class FelstalkerBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       agility = 26,
-      intellect = 26
+      intellect = 26,
+      armor = 646
       )
 
   public override var sockets: Array<Socket> = arrayOf(

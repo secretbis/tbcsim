@@ -60,7 +60,8 @@ public class BootsOfTheIncorrupt : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 24,
-      spirit = 23
+      spirit = 23,
+      armor = 134
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -47,7 +47,8 @@ public class StylinCrimsonHat : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 30
+      intellect = 30,
+      armor = 516
       )
 
   public override var sockets: Array<Socket> = arrayOf()

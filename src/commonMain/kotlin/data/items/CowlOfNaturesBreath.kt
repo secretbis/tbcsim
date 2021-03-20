@@ -60,7 +60,8 @@ public class CowlOfNaturesBreath : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 42,
-      spirit = 34
+      spirit = 34,
+      armor = 321
       )
 
   public override var sockets: Array<Socket> = arrayOf()

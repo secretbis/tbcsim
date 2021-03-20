@@ -62,6 +62,7 @@ public class SkulkersGreaves : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 28,
+      armor = 319,
       physicalHitRating = 28.0
       )
 

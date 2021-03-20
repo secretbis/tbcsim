@@ -58,7 +58,8 @@ public class ArcanoweaveBracers : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 31
+      stamina = 31,
+      armor = 67
       )
 
   public override var sockets: Array<Socket> = arrayOf()

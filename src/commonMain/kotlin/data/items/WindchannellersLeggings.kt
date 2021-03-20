@@ -46,7 +46,7 @@ public class WindchannellersLeggings : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-
+      armor = 136
       )
 
   public override var sockets: Array<Socket> = arrayOf()

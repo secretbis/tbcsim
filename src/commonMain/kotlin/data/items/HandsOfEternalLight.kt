@@ -51,7 +51,8 @@ public class HandsOfEternalLight : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 30,
-      spirit = 37
+      spirit = 37,
+      armor = 166
       )
 
   public override var sockets: Array<Socket> = arrayOf(

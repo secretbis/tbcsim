@@ -51,7 +51,8 @@ public class WonderhealXtShades : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 51,
-      spirit = 35
+      spirit = 35,
+      armor = 405
       )
 
   public override var sockets: Array<Socket> = arrayOf(

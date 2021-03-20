@@ -60,6 +60,7 @@ public class BootsOfRighteousFortitude : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 14,
+      armor = 800,
       defenseRating = 19.0
       )
 

@@ -51,6 +51,7 @@ public class HeavyEarthforgedBreastplate : Item() {
       strength = 30,
       agility = 11,
       stamina = 36,
+      armor = 1018,
       defenseRating = 11.0
       )
 

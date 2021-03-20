@@ -61,7 +61,8 @@ public class RobeOfFaith : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 27,
-      spirit = 21
+      spirit = 21,
+      armor = 158
       )
 
   public override var sockets: Array<Socket> = arrayOf()

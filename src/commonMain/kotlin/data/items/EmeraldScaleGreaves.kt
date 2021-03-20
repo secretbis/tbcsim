@@ -50,7 +50,8 @@ public class EmeraldScaleGreaves : Item() {
 
   public override var stats: Stats = Stats(
       agility = 28,
-      intellect = 20
+      intellect = 20,
+      armor = 570
       )
 
   public override var sockets: Array<Socket> = arrayOf(

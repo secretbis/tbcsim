@@ -61,6 +61,7 @@ public class BladespireWarbands : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       stamina = 16,
+      armor = 687,
       physicalCritRating = 24.0
       )
 

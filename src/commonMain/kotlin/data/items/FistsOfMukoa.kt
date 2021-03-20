@@ -50,6 +50,7 @@ public class FistsOfMukoa : Item() {
       agility = 25,
       stamina = 24,
       intellect = 17,
+      armor = 617,
       physicalHasteRating = 37.0
       )
 

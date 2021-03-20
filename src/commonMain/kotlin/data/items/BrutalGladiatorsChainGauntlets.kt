@@ -53,6 +53,7 @@ public class BrutalGladiatorsChainGauntlets : Item() {
       agility = 37,
       stamina = 56,
       intellect = 19,
+      armor = 694,
       physicalCritRating = 23.0
       )
 

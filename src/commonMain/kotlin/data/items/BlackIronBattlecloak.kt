@@ -47,6 +47,7 @@ public class BlackIronBattlecloak : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 101,
       physicalCritRating = 30.0
       )
 

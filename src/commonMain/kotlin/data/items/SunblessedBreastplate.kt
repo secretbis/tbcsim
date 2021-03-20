@@ -62,6 +62,7 @@ public class SunblessedBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 51,
+      armor = 1983,
       spellCritRating = 34.0
       )
 

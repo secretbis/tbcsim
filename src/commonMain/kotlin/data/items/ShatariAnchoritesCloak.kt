@@ -47,7 +47,8 @@ public class ShatariAnchoritesCloak : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 27
+      intellect = 27,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

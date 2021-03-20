@@ -55,6 +55,7 @@ public class GrandMarshalsChainSpaulders : Item() {
       agility = 14,
       stamina = 31,
       intellect = 4,
+      armor = 489,
       physicalCritRating = 17.0
       )
 

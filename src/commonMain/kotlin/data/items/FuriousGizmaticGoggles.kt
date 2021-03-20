@@ -51,6 +51,7 @@ public class FuriousGizmaticGoggles : Item() {
   public override var stats: Stats = Stats(
       strength = 48,
       stamina = 28,
+      armor = 1296,
       physicalCritRating = 38.0,
       physicalHitRating = 13.0
       )

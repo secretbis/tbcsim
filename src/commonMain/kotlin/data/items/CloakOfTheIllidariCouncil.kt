@@ -60,6 +60,7 @@ public class CloakOfTheIllidariCouncil : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 16,
+      armor = 118,
       spellCritRating = 25.0
       )
 

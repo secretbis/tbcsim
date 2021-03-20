@@ -50,6 +50,7 @@ public class BracersOfSlaughter : Item() {
   public override var stats: Stats = Stats(
       strength = 19,
       stamina = 15,
+      armor = 509,
       physicalCritRating = 18.0
       )
 

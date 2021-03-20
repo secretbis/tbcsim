@@ -53,6 +53,7 @@ public class StalkersChainGauntlets : Item() {
       agility = 21,
       stamina = 31,
       intellect = 6,
+      armor = 407,
       physicalCritRating = 11.0
       )
 

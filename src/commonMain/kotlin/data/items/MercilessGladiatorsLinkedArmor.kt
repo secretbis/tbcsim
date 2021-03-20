@@ -54,6 +54,7 @@ public class MercilessGladiatorsLinkedArmor : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 57,
+      armor = 954,
       physicalCritRating = 30.0
       )
 

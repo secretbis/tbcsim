@@ -53,6 +53,7 @@ public class GladiatorsChainLeggings : Item() {
       agility = 35,
       stamina = 53,
       intellect = 14,
+      armor = 758,
       physicalCritRating = 19.0
       )
 

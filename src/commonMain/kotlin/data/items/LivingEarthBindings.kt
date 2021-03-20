@@ -60,6 +60,7 @@ public class LivingEarthBindings : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 20,
+      armor = 432,
       spellHasteRating = 28.0
       )
 

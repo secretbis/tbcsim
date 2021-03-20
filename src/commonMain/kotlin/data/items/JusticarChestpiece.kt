@@ -54,6 +54,7 @@ public class JusticarChestpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 35,
+      armor = 1510,
       spellCritRating = 17.0
       )
 

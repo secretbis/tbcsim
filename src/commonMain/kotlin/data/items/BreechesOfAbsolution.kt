@@ -54,7 +54,8 @@ public class BreechesOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 33,
-      spirit = 34
+      spirit = 34,
+      armor = 214
       )
 
   public override var sockets: Array<Socket> = arrayOf(

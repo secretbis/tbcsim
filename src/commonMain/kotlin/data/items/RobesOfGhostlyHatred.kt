@@ -63,6 +63,7 @@ public class RobesOfGhostlyHatred : Item() {
       stamina = 39,
       intellect = 40,
       spirit = 32,
+      armor = 266,
       spellCritRating = 26.0,
       spellHasteRating = 27.0
       )

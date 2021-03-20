@@ -54,6 +54,7 @@ public class HighWarlordsLinkedArmor : Item() {
   public override var stats: Stats = Stats(
       strength = 12,
       stamina = 42,
+      armor = 652,
       physicalCritRating = 14.0
       )
 

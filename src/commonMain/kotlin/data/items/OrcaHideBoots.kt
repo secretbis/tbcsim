@@ -62,7 +62,8 @@ public class OrcaHideBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 27,
-      spirit = 19
+      spirit = 19,
+      armor = 278
       )
 
   public override var sockets: Array<Socket> = arrayOf(

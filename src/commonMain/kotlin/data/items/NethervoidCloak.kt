@@ -60,6 +60,7 @@ public class NethervoidCloak : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 18,
+      armor = 118,
       spellHitRating = 18.0
       )
 

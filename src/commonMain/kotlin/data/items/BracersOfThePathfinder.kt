@@ -62,7 +62,8 @@ public class BracersOfThePathfinder : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 24,
-      intellect = 24
+      intellect = 24,
+      armor = 432
       )
 
   public override var sockets: Array<Socket> = arrayOf(

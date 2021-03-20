@@ -60,6 +60,7 @@ public class GeneralsScaledBelt : Item() {
       strength = 36,
       stamina = 33,
       intellect = 23,
+      armor = 870,
       physicalCritRating = 16.0
       )
 

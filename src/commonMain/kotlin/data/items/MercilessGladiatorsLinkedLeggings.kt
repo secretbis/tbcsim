@@ -52,6 +52,7 @@ public class MercilessGladiatorsLinkedLeggings : Item() {
       strength = 34,
       stamina = 60,
       intellect = 29,
+      armor = 835,
       physicalCritRating = 40.0
       )
 

@@ -49,7 +49,8 @@ public class HaramadsLegWraps : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      spirit = 29
+      spirit = 29,
+      armor = 116
       )
 
   public override var sockets: Array<Socket> = arrayOf(

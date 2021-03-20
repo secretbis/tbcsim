@@ -62,6 +62,7 @@ public class FeltingedMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 20,
+      armor = 146,
       spellCritRating = 21.0
       )
 

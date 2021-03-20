@@ -51,6 +51,7 @@ public class HighJusticarsLegplates : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 37,
+      armor = 1406,
       spellCritRating = 23.0
       )
 

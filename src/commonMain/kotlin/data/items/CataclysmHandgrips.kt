@@ -52,6 +52,7 @@ public class CataclysmHandgrips : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 27,
+      armor = 583,
       spellCritRating = 19.0,
       spellHitRating = 19.0
       )

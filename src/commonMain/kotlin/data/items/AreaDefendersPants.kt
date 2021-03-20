@@ -49,6 +49,7 @@ public class AreaDefendersPants : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 24,
+      armor = 527,
       spellCritRating = 21.0
       )
 

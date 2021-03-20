@@ -49,6 +49,7 @@ public class WorldsEndBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 19,
+      armor = 285,
       spellCritRating = 17.0
       )
 

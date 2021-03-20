@@ -53,6 +53,7 @@ public class VindicatorsChainGirdle : Item() {
       agility = 33,
       stamina = 48,
       intellect = 23,
+      armor = 575,
       physicalCritRating = 18.0
       )
 

@@ -54,6 +54,7 @@ public class DemonStalkerShoulderguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 23,
+      armor = 634,
       physicalCritRating = 19.0
       )
 

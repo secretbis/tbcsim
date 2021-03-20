@@ -53,7 +53,8 @@ public class SkyshatterLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 55,
-      intellect = 44
+      intellect = 44,
+      armor = 894
       )
 
   public override var sockets: Array<Socket> = arrayOf(

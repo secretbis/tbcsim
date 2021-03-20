@@ -59,7 +59,8 @@ public class IrondrakeFaceguard : Item() {
   public override var stats: Stats = Stats(
       strength = 39,
       agility = 32,
-      stamina = 37
+      stamina = 37,
+      armor = 946
       )
 
   public override var sockets: Array<Socket> = arrayOf()

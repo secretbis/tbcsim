@@ -51,6 +51,7 @@ public class AnnihilatorHoloGogs : Item() {
   public override var stats: Stats = Stats(
       stamina = 41,
       intellect = 37,
+      armor = 216,
       spellCritRating = 42.0
       )
 

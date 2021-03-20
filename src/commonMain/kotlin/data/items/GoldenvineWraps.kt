@@ -49,7 +49,8 @@ public class GoldenvineWraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 13,
-      spirit = 13
+      spirit = 13,
+      armor = 56
       )
 
   public override var sockets: Array<Socket> = arrayOf()

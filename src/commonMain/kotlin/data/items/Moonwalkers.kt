@@ -62,6 +62,7 @@ public class Moonwalkers : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 28,
+      armor = 278,
       spellHitRating = 20.0
       )
 

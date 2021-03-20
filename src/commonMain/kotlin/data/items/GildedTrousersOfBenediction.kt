@@ -50,7 +50,8 @@ public class GildedTrousersOfBenediction : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 16
+      intellect = 16,
+      armor = 177
       )
 
   public override var sockets: Array<Socket> = arrayOf(

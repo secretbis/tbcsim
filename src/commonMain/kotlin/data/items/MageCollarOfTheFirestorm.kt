@@ -60,6 +60,7 @@ public class MageCollarOfTheFirestorm : Item() {
   public override var stats: Stats = Stats(
       stamina = 32,
       intellect = 33,
+      armor = 127,
       spellCritRating = 23.0
       )
 

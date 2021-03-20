@@ -53,6 +53,7 @@ public class WindhawkHauberk : Item() {
       stamina = 28,
       intellect = 29,
       spirit = 29,
+      armor = 379,
       spellCritRating = 19.0
       )
 

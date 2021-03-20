@@ -62,6 +62,7 @@ public class BeltOfTheSilentPath : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 33,
+      armor = 249,
       physicalHitRating = 23.0
       )
 

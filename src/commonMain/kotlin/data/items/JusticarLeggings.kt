@@ -51,7 +51,8 @@ public class JusticarLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 43,
-      intellect = 42
+      intellect = 42,
+      armor = 1322
       )
 
   public override var sockets: Array<Socket> = arrayOf()

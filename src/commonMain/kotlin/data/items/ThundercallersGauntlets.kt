@@ -49,6 +49,7 @@ public class ThundercallersGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 16,
+      armor = 377,
       spellCritRating = 18.0
       )
 

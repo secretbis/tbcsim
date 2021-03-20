@@ -49,7 +49,8 @@ public class MalefactorsEyepatch : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 24,
-      intellect = 18
+      intellect = 18,
+      armor = 503
       )
 
   public override var sockets: Array<Socket> = arrayOf()

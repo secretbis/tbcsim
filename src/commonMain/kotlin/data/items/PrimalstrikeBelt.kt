@@ -49,7 +49,8 @@ public class PrimalstrikeBelt : Item() {
 
   public override var stats: Stats = Stats(
       agility = 20,
-      stamina = 32
+      stamina = 32,
+      armor = 205
       )
 
   public override var sockets: Array<Socket> = arrayOf()

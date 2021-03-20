@@ -49,6 +49,7 @@ public class BigBadWolfsHead : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 40,
+      armor = 659,
       spellCritRating = 28.0
       )
 

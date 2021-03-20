@@ -60,7 +60,8 @@ public class CordOfNaturesSustenance : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 30,
-      spirit = 16
+      spirit = 16,
+      armor = 205
       )
 
   public override var sockets: Array<Socket> = arrayOf()

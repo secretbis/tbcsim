@@ -48,6 +48,7 @@ public class NimblefootTreads : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 24,
+      armor = 201,
       dodgeRating = 25.0
       )
 

@@ -55,6 +55,7 @@ public class MantleOfTheTempest : Item() {
       stamina = 27,
       intellect = 27,
       spirit = 21,
+      armor = 183,
       spellCritRating = 21.0
       )
 

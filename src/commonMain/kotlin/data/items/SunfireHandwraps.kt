@@ -51,6 +51,7 @@ public class SunfireHandwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 30,
+      armor = 166,
       spellCritRating = 37.0
       )
 

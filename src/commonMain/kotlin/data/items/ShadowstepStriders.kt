@@ -59,7 +59,8 @@ public class ShadowstepStriders : Item() {
 
   public override var stats: Stats = Stats(
       agility = 31,
-      stamina = 30
+      stamina = 30,
+      armor = 240
       )
 
   public override var sockets: Array<Socket> = arrayOf()

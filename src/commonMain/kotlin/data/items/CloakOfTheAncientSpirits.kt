@@ -48,7 +48,8 @@ public class CloakOfTheAncientSpirits : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 26
+      intellect = 26,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,7 +60,8 @@ public class BracersOfTheHunt : Item() {
   public override var stats: Stats = Stats(
       agility = 19,
       stamina = 16,
-      intellect = 17
+      intellect = 17,
+      armor = 340
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -50,7 +50,8 @@ public class EagleCrestedPauldrons : Item() {
   public override var stats: Stats = Stats(
       strength = 15,
       stamina = 31,
-      intellect = 15
+      intellect = 15,
+      armor = 699
       )
 
   public override var sockets: Array<Socket> = arrayOf(

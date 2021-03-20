@@ -51,7 +51,8 @@ public class CowlOfBeastlyRage : Item() {
       strength = 29,
       agility = 26,
       stamina = 27,
-      intellect = 20
+      intellect = 20,
+      armor = 423
       )
 
   public override var sockets: Array<Socket> = arrayOf(

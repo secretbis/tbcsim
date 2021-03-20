@@ -50,7 +50,8 @@ public class SteelgripGauntlets : Item() {
 
   public override var stats: Stats = Stats(
       strength = 28,
-      stamina = 36
+      stamina = 36,
+      armor = 831
       )
 
   public override var sockets: Array<Socket> = arrayOf(

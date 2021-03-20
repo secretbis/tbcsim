@@ -51,6 +51,7 @@ public class JudicatorsLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 78,
       intellect = 22,
+      armor = 1735,
       defenseRating = 40.0,
       dodgeRating = 34.0
       )

@@ -49,7 +49,8 @@ public class HungarhideGauntlets : Item() {
   public override var stats: Stats = Stats(
       agility = 27,
       stamina = 21,
-      intellect = 20
+      intellect = 20,
+      armor = 407
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,6 +60,7 @@ public class MaulgarsWarhelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       intellect = 31,
+      armor = 715,
       physicalCritRating = 42.0
       )
 

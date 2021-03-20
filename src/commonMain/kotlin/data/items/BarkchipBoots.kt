@@ -60,7 +60,8 @@ public class BarkchipBoots : Item() {
       strength = 24,
       agility = 24,
       stamina = 36,
-      intellect = 21
+      intellect = 21,
+      armor = 352
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -53,6 +53,7 @@ public class GuardiansChainSabatons : Item() {
       agility = 37,
       stamina = 52,
       intellect = 27,
+      armor = 763,
       physicalCritRating = 22.0
       )
 

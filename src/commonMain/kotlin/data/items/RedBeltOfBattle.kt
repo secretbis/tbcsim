@@ -61,6 +61,7 @@ public class RedBeltOfBattle : Item() {
   public override var stats: Stats = Stats(
       strength = 41,
       stamina = 21,
+      armor = 904,
       physicalCritRating = 24.0,
       physicalHitRating = 14.0
       )

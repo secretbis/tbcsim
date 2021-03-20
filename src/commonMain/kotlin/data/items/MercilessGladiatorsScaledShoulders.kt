@@ -54,6 +54,7 @@ public class MercilessGladiatorsScaledShoulders : Item() {
       strength = 36,
       stamina = 39,
       intellect = 18,
+      armor = 1278,
       physicalCritRating = 18.0
       )
 

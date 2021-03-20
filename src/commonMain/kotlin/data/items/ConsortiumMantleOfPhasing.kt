@@ -47,6 +47,7 @@ public class ConsortiumMantleOfPhasing : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 416,
       physicalCritRating = 21.0
       )
 

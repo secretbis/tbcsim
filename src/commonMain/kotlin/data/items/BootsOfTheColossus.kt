@@ -61,6 +61,7 @@ public class BootsOfTheColossus : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       stamina = 27,
+      armor = 800,
       defenseRating = 19.0
       )
 

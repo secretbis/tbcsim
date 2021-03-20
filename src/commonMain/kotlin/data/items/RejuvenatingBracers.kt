@@ -62,7 +62,8 @@ public class RejuvenatingBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 20,
-      spirit = 28
+      spirit = 28,
+      armor = 194
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -61,6 +61,7 @@ public class LegplatesOfUnendingFury : Item() {
   public override var stats: Stats = Stats(
       strength = 52,
       stamina = 48,
+      armor = 1544,
       physicalHitRating = 25.0,
       physicalHasteRating = 43.0
       )

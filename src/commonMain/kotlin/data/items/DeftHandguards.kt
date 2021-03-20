@@ -50,6 +50,7 @@ public class DeftHandguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
+      armor = 149,
       physicalCritRating = 12.0
       )
 

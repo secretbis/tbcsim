@@ -52,6 +52,7 @@ public class HelmOfDesolation : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 25,
+      armor = 530,
       physicalCritRating = 14.0
       )
 

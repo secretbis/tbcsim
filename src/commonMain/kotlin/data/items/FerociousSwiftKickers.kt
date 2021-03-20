@@ -62,6 +62,7 @@ public class FerociousSwiftKickers : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 21,
+      armor = 558,
       physicalCritRating = 16.0
       )
 

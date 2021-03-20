@@ -60,6 +60,7 @@ public class BracersOfRenewedLife : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 20,
+      armor = 194,
       spellHasteRating = 28.0
       )
 

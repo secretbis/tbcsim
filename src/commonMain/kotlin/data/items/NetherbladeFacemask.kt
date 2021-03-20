@@ -54,6 +54,7 @@ public class NetherbladeFacemask : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 39,
+      armor = 308,
       physicalHitRating = 14.0
       )
 

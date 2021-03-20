@@ -47,6 +47,7 @@ public class IceguardHelm : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 64,
+      armor = 1030,
       defenseRating = 20.0
       )
 

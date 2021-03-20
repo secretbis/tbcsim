@@ -51,6 +51,7 @@ public class OathkeepersHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 22,
+      armor = 1080,
       defenseRating = 15.0
       )
 

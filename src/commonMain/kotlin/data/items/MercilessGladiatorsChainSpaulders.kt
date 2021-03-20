@@ -55,6 +55,7 @@ public class MercilessGladiatorsChainSpaulders : Item() {
       agility = 32,
       stamina = 45,
       intellect = 10,
+      armor = 715,
       physicalCritRating = 14.0
       )
 

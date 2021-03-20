@@ -55,6 +55,7 @@ public class LeggingsOfTheTempest : Item() {
       stamina = 36,
       intellect = 47,
       spirit = 29,
+      armor = 214,
       spellCritRating = 29.0,
       spellHitRating = 20.0
       )

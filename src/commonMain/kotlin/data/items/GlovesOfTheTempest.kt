@@ -55,6 +55,7 @@ public class GlovesOfTheTempest : Item() {
       stamina = 30,
       intellect = 26,
       spirit = 21,
+      armor = 153,
       spellCritRating = 19.0,
       spellHitRating = 20.0
       )

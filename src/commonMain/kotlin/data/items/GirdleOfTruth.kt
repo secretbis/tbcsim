@@ -59,7 +59,8 @@ public class GirdleOfTruth : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      intellect = 29
+      intellect = 29,
+      armor = 816
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -48,6 +48,7 @@ public class DraeneiHonorGuardShield : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 16,
+      armor = 3615,
       spellCritRating = 21.0
       )
 

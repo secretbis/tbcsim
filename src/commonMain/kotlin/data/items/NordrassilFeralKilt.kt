@@ -55,6 +55,7 @@ public class NordrassilFeralKilt : Item() {
       agility = 37,
       stamina = 42,
       intellect = 17,
+      armor = 703,
       physicalHitRating = 18.0
       )
 

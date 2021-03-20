@@ -52,6 +52,7 @@ public class WarbringerLegguards : Item() {
       strength = 24,
       agility = 24,
       stamina = 55,
+      armor = 1322,
       defenseRating = 33.0,
       dodgeRating = 35.0
       )

@@ -49,6 +49,7 @@ public class HandsOfTheSun : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 23,
+      armor = 97,
       spellCritRating = 21.0
       )
 

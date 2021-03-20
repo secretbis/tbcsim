@@ -61,7 +61,8 @@ public class BlackBeltOfKnowledge : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 18,
-      spirit = 21
+      spirit = 21,
+      armor = 100
       )
 
   public override var sockets: Array<Socket> = arrayOf(

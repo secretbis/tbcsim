@@ -60,6 +60,7 @@ public class RubySlippers : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 29,
+      armor = 134,
       spellHitRating = 16.0
       )
 

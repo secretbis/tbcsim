@@ -62,7 +62,8 @@ public class CobraLashBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 25,
-      intellect = 25
+      intellect = 25,
+      armor = 665
       )
 
   public override var sockets: Array<Socket> = arrayOf(

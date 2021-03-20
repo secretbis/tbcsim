@@ -53,6 +53,7 @@ public class DemontoothShoulderpads : Item() {
       agility = 38,
       stamina = 38,
       intellect = 19,
+      armor = 514,
       physicalCritRating = 20.0
       )
 

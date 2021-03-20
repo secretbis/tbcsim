@@ -50,6 +50,7 @@ public class ShatariWroughtArmguards : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       stamina = 18,
+      armor = 509,
       defenseRating = 12.0
       )
 

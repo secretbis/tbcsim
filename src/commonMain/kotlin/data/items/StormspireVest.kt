@@ -47,7 +47,8 @@ public class StormspireVest : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 49
+      stamina = 49,
+      armor = 156
       )
 
   public override var sockets: Array<Socket> = arrayOf()

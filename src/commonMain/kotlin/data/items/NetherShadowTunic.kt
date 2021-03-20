@@ -51,6 +51,7 @@ public class NetherShadowTunic : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 52,
+      armor = 444,
       physicalHitRating = 35.0
       )
 

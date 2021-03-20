@@ -50,6 +50,7 @@ public class FanbladePauldrons : Item() {
   public override var stats: Stats = Stats(
       strength = 16,
       stamina = 22,
+      armor = 873,
       defenseRating = 20.0,
       parryRating = 15.0
       )

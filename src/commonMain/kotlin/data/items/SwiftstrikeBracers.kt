@@ -60,6 +60,7 @@ public class SwiftstrikeBracers : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 34,
+      armor = 194,
       physicalHasteRating = 27.0
       )
 

@@ -60,6 +60,7 @@ public class BeltOfDepravity : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 27,
+      armor = 105,
       spellHitRating = 17.0
       )
 

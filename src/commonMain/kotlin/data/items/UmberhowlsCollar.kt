@@ -48,7 +48,8 @@ public class UmberhowlsCollar : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       agility = 10,
-      stamina = 22
+      stamina = 22,
+      armor = 281
       )
 
   public override var sockets: Array<Socket> = arrayOf()

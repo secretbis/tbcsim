@@ -60,7 +60,8 @@ public class ShadowhuntersTreads : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 26,
-      intellect = 25
+      intellect = 25,
+      armor = 619
       )
 
   public override var sockets: Array<Socket> = arrayOf()

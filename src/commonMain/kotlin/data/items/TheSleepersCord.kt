@@ -49,7 +49,8 @@ public class TheSleepersCord : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 24,
-      spirit = 21
+      spirit = 21,
+      armor = 164
       )
 
   public override var sockets: Array<Socket> = arrayOf()

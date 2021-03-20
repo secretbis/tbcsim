@@ -52,6 +52,7 @@ public class GuardiansLamellarBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 49,
       intellect = 35,
+      armor = 1115,
       spellCritRating = 34.0
       )
 

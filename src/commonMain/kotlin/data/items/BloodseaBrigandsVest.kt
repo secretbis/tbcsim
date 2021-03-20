@@ -61,6 +61,7 @@ public class BloodseaBrigandsVest : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 404,
       physicalCritRating = 36.0,
       physicalHitRating = 27.0
       )

@@ -54,7 +54,8 @@ public class ThunderheartHelmet : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 42,
-      spirit = 28
+      spirit = 28,
+      armor = 373
       )
 
   public override var sockets: Array<Socket> = arrayOf(

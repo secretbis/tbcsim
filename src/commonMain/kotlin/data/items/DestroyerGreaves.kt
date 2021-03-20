@@ -53,6 +53,7 @@ public class DestroyerGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 52,
       stamina = 57,
+      armor = 1459,
       physicalCritRating = 32.0,
       physicalHitRating = 22.0
       )

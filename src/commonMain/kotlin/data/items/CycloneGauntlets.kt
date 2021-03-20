@@ -54,6 +54,7 @@ public class CycloneGauntlets : Item() {
       agility = 21,
       stamina = 26,
       intellect = 24,
+      armor = 528,
       physicalHitRating = 19.0
       )
 

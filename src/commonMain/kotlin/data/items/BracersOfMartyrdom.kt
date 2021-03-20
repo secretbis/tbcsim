@@ -62,7 +62,8 @@ public class BracersOfMartyrdom : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 20,
-      spirit = 28
+      spirit = 28,
+      armor = 103
       )
 
   public override var sockets: Array<Socket> = arrayOf(

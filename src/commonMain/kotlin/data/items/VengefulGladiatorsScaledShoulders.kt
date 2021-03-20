@@ -54,6 +54,7 @@ public class VengefulGladiatorsScaledShoulders : Item() {
       strength = 33,
       stamina = 39,
       intellect = 20,
+      armor = 1369,
       physicalCritRating = 26.0
       )
 

@@ -61,6 +61,7 @@ public class GreavesOfTheBloodwarder : Item() {
   public override var stats: Stats = Stats(
       strength = 49,
       stamina = 46,
+      armor = 1406,
       physicalCritRating = 31.0
       )
 

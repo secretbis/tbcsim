@@ -58,6 +58,7 @@ public class PhoenixWingCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
+      armor = 108,
       defenseRating = 22.0,
       dodgeRating = 27.0
       )

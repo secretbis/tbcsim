@@ -59,6 +59,7 @@ public class RapscallionBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 26,
+      armor = 250,
       physicalCritRating = 24.0
       )
 

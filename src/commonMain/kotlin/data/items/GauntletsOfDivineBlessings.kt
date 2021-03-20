@@ -51,6 +51,7 @@ public class GauntletsOfDivineBlessings : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 17,
+      armor = 728,
       spellHasteRating = 16.0
       )
 

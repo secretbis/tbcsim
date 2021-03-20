@@ -53,6 +53,7 @@ public class GrandMarshalsLinkedHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       stamina = 30,
+      armor = 530,
       physicalCritRating = 24.0
       )
 

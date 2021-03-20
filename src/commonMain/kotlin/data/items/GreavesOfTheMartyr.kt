@@ -51,7 +51,8 @@ public class GreavesOfTheMartyr : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 30,
-      intellect = 27
+      intellect = 27,
+      armor = 1216
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -60,7 +60,8 @@ public class ScintillatingHeaddressOfSecondSight : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 27,
-      spirit = 32
+      spirit = 32,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf()

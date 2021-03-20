@@ -47,6 +47,7 @@ public class FleshBeastsMetalGreaves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
+      armor = 680,
       defenseRating = 18.0,
       dodgeRating = 28.0
       )

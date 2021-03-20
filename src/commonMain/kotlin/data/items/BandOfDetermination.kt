@@ -47,6 +47,7 @@ public class BandOfDetermination : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 35,
+      armor = 252,
       expertiseRating = 17.0
       )
 

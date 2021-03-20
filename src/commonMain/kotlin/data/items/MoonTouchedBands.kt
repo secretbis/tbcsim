@@ -49,7 +49,8 @@ public class MoonTouchedBands : Item() {
   public override var stats: Stats = Stats(
       stamina = 17,
       intellect = 20,
-      spirit = 12
+      spirit = 12,
+      armor = 128
       )
 
   public override var sockets: Array<Socket> = arrayOf()

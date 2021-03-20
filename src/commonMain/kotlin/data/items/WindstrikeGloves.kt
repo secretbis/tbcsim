@@ -49,6 +49,7 @@ public class WindstrikeGloves : Item() {
       strength = 36,
       agility = 18,
       stamina = 25,
+      armor = 465,
       physicalHitRating = 17.0
       )
 

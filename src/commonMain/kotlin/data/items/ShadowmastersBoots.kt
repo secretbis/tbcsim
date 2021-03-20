@@ -62,6 +62,7 @@ public class ShadowmastersBoots : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 38,
+      armor = 305,
       physicalCritRating = 17.0
       )
 

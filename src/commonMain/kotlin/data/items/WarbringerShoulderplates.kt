@@ -54,6 +54,7 @@ public class WarbringerShoulderplates : Item() {
       strength = 32,
       agility = 22,
       stamina = 33,
+      armor = 1133,
       physicalHitRating = 13.0
       )
 

@@ -51,6 +51,7 @@ public class GeneralsLinkedBracers : Item() {
       strength = 19,
       stamina = 25,
       intellect = 9,
+      armor = 349,
       physicalCritRating = 15.0
       )
 

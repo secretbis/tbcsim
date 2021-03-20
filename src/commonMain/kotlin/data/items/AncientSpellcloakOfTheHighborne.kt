@@ -48,6 +48,7 @@ public class AncientSpellcloakOfTheHighborne : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 15,
+      armor = 101,
       spellCritRating = 19.0
       )
 

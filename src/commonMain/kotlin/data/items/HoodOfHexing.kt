@@ -62,6 +62,7 @@ public class HoodOfHexing : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 33,
+      armor = 181,
       spellCritRating = 24.0,
       spellHitRating = 31.0
       )

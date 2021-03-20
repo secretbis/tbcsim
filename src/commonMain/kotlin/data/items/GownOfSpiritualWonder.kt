@@ -51,7 +51,8 @@ public class GownOfSpiritualWonder : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 35,
-      spirit = 50
+      spirit = 50,
+      armor = 236
       )
 
   public override var sockets: Array<Socket> = arrayOf(

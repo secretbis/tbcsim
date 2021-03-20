@@ -53,6 +53,7 @@ public class JusticarGreaves : Item() {
       agility = 24,
       stamina = 34,
       intellect = 24,
+      armor = 1322,
       physicalHitRating = 23.0
       )
 

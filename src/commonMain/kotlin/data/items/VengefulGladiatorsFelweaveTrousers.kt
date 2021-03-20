@@ -52,6 +52,7 @@ public class VengefulGladiatorsFelweaveTrousers : Item() {
   public override var stats: Stats = Stats(
       stamina = 67,
       intellect = 24,
+      armor = 424,
       spellCritRating = 33.0
       )
 

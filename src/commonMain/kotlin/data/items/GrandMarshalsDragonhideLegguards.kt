@@ -53,7 +53,8 @@ public class GrandMarshalsDragonhideLegguards : Item() {
       strength = 23,
       agility = 22,
       stamina = 30,
-      intellect = 22
+      intellect = 22,
+      armor = 306
       )
 
   public override var sockets: Array<Socket> = arrayOf()

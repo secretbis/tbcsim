@@ -51,7 +51,8 @@ public class LaughingSkullBattleHarness : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 29,
-      intellect = 20
+      intellect = 20,
+      armor = 635
       )
 
   public override var sockets: Array<Socket> = arrayOf(

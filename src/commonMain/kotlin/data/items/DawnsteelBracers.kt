@@ -60,6 +60,7 @@ public class DawnsteelBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
+      armor = 772,
       spellHasteRating = 28.0
       )
 

@@ -48,6 +48,7 @@ public class SpauldersOfSlaughter : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 22,
+      armor = 873,
       physicalCritRating = 27.0
       )
 

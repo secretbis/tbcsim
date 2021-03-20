@@ -54,7 +54,8 @@ public class DemonStalkerHarness : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 24,
-      intellect = 35
+      intellect = 35,
+      armor = 846
       )
 
   public override var sockets: Array<Socket> = arrayOf(

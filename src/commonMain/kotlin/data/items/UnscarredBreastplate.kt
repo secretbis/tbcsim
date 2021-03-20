@@ -50,7 +50,8 @@ public class UnscarredBreastplate : Item() {
   public override var stats: Stats = Stats(
       strength = 26,
       agility = 21,
-      stamina = 23
+      stamina = 23,
+      armor = 932
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -54,6 +54,7 @@ public class GladiatorsOrnamentedChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       intellect = 31,
+      armor = 1547,
       spellCritRating = 30.0
       )
 

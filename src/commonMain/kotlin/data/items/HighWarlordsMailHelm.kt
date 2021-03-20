@@ -54,6 +54,7 @@ public class HighWarlordsMailHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 16,
+      armor = 530,
       spellCritRating = 16.0
       )
 

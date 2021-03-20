@@ -47,6 +47,7 @@ public class IronBandOfTheUnbreakable : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
+      armor = 170,
       defenseRating = 17.0
       )
 

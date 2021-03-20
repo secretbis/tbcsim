@@ -55,6 +55,7 @@ public class HoodOfAbsolution : Item() {
       stamina = 36,
       intellect = 39,
       spirit = 27,
+      armor = 199,
       spellCritRating = 17.0
       )
 

@@ -51,6 +51,7 @@ public class VeteransLamellarBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 14,
+      armor = 693,
       spellCritRating = 16.0
       )
 

@@ -48,6 +48,7 @@ public class Earthwarden : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
+      armor = 500,
       expertiseRating = 24.0,
       defenseRating = 27.0
       )

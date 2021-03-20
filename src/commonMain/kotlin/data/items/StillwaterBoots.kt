@@ -59,7 +59,8 @@ public class StillwaterBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 36
+      intellect = 36,
+      armor = 679
       )
 
   public override var sockets: Array<Socket> = arrayOf()

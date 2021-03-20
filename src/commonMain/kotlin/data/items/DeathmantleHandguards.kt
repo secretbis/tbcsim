@@ -52,6 +52,7 @@ public class DeathmantleHandguards : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 34,
+      armor = 262,
       physicalHitRating = 24.0
       )
 

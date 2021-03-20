@@ -59,7 +59,8 @@ public class ZierhutsLostTreads : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       agility = 28,
-      stamina = 33
+      stamina = 33,
+      armor = 390
       )
 
   public override var sockets: Array<Socket> = arrayOf()

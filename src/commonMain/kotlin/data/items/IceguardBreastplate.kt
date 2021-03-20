@@ -58,6 +58,7 @@ public class IceguardBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
+      armor = 1450,
       defenseRating = 10.0
       )
 

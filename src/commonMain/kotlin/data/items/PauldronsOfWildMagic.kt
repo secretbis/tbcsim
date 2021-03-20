@@ -49,6 +49,7 @@ public class PauldronsOfWildMagic : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 28,
+      armor = 583,
       spellCritRating = 23.0
       )
 

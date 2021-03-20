@@ -60,6 +60,7 @@ public class MyrmidonsTreads : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 56,
+      armor = 1213,
       physicalHitRating = 17.0,
       defenseRating = 30.0,
       dodgeRating = 26.0

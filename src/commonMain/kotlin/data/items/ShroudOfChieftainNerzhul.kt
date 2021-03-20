@@ -51,6 +51,7 @@ public class ShroudOfChieftainNerzhul : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 41,
+      armor = 902,
       spellHasteRating = 33.0
       )
 

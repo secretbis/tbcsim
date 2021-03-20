@@ -51,7 +51,8 @@ public class PontiffsPantaloonsOfProphecy : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 27,
-      spirit = 24
+      spirit = 24,
+      armor = 136
       )
 
   public override var sockets: Array<Socket> = arrayOf(

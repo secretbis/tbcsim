@@ -48,7 +48,8 @@ public class WeatherBeatenFishingHat : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 40,
-      spirit = 40
+      spirit = 40,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf()

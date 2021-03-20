@@ -52,6 +52,7 @@ public class WarbringerHandguards : Item() {
       strength = 17,
       agility = 20,
       stamina = 38,
+      armor = 944,
       defenseRating = 23.0,
       parryRating = 29.0
       )

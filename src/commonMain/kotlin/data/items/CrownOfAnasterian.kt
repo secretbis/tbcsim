@@ -51,6 +51,7 @@ public class CrownOfAnasterian : Item() {
   public override var stats: Stats = Stats(
       strength = 61,
       stamina = 67,
+      armor = 1660,
       physicalCritRating = 40.0
       )
 

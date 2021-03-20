@@ -49,6 +49,7 @@ public class OutlandStriders : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 24,
+      armor = 448,
       physicalCritRating = 21.0
       )
 

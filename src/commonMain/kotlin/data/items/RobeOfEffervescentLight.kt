@@ -49,7 +49,8 @@ public class RobeOfEffervescentLight : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 33,
-      spirit = 18
+      spirit = 18,
+      armor = 156
       )
 
   public override var sockets: Array<Socket> = arrayOf()

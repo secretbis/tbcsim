@@ -49,6 +49,7 @@ public class ShadowcastersDrape : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 20,
+      armor = 108,
       spellHasteRating = 25.0
       )
 

@@ -53,7 +53,8 @@ public class VengefulGladiatorsSatinMantle : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
-      intellect = 22
+      intellect = 22,
+      armor = 323
       )
 
   public override var sockets: Array<Socket> = arrayOf(

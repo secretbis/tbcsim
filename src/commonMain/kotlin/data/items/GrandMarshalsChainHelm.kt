@@ -55,6 +55,7 @@ public class GrandMarshalsChainHelm : Item() {
       agility = 20,
       stamina = 30,
       intellect = 14,
+      armor = 530,
       physicalCritRating = 14.0
       )
 

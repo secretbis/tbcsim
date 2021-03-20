@@ -54,6 +54,7 @@ public class SlayersBelt : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 21,
+      armor = 272,
       physicalCritRating = 13.0,
       physicalHitRating = 30.0,
       physicalHasteRating = 27.0

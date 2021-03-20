@@ -49,7 +49,8 @@ public class SunshowerLightCloak : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 24,
-      spirit = 20
+      spirit = 20,
+      armor = 116
       )
 
   public override var sockets: Array<Socket> = arrayOf()

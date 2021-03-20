@@ -51,7 +51,8 @@ public class FaithBearersGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 24,
       stamina = 18,
-      intellect = 19
+      intellect = 19,
+      armor = 619
       )
 
   public override var sockets: Array<Socket> = arrayOf(

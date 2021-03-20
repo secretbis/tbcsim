@@ -48,7 +48,8 @@ public class ArcaniumSignetBands : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 14,
-      intellect = 15
+      intellect = 15,
+      armor = 68
       )
 
   public override var sockets: Array<Socket> = arrayOf()

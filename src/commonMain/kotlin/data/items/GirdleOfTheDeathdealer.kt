@@ -60,6 +60,7 @@ public class GirdleOfTheDeathdealer : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 28,
+      armor = 196,
       physicalHitRating = 20.0
       )
 

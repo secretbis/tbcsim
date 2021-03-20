@@ -55,6 +55,7 @@ public class ThunderheartShoulderpads : Item() {
       stamina = 30,
       intellect = 31,
       spirit = 19,
+      armor = 344,
       spellCritRating = 13.0,
       spellHitRating = 14.0
       )

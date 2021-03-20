@@ -52,6 +52,7 @@ public class ThalassianRangerGauntlets : Item() {
       agility = 40,
       stamina = 43,
       intellect = 27,
+      armor = 715,
       physicalCritRating = 23.0
       )
 

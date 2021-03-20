@@ -54,7 +54,8 @@ public class RiftStalkerHelm : Item() {
   public override var stats: Stats = Stats(
       agility = 40,
       stamina = 36,
-      intellect = 25
+      intellect = 25,
+      armor = 759
       )
 
   public override var sockets: Array<Socket> = arrayOf(

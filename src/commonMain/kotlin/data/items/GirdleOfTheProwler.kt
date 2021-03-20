@@ -61,6 +61,7 @@ public class GirdleOfTheProwler : Item() {
       agility = 25,
       stamina = 21,
       intellect = 22,
+      armor = 457,
       physicalHitRating = 17.0
       )
 

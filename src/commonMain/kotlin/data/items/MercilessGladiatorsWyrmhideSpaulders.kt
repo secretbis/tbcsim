@@ -53,7 +53,8 @@ public class MercilessGladiatorsWyrmhideSpaulders : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 17
+      intellect = 17,
+      armor = 363
       )
 
   public override var sockets: Array<Socket> = arrayOf(

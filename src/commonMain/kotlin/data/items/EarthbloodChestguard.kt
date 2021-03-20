@@ -59,7 +59,8 @@ public class EarthbloodChestguard : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 40,
-      intellect = 41
+      intellect = 41,
+      armor = 812
       )
 
   public override var sockets: Array<Socket> = arrayOf()

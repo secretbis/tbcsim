@@ -61,7 +61,8 @@ public class MantleOfTheGoldenForest : Item() {
 
   public override var stats: Stats = Stats(
       agility = 40,
-      stamina = 40
+      stamina = 40,
+      armor = 832
       )
 
   public override var sockets: Array<Socket> = arrayOf(

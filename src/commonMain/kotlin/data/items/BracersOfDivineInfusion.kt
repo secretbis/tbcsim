@@ -50,7 +50,8 @@ public class BracersOfDivineInfusion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      intellect = 12
+      intellect = 12,
+      armor = 68
       )
 
   public override var sockets: Array<Socket> = arrayOf(

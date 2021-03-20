@@ -54,7 +54,8 @@ public class LightCollarOfTheIncarnate : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 34,
-      spirit = 25
+      spirit = 25,
+      armor = 164
       )
 
   public override var sockets: Array<Socket> = arrayOf(

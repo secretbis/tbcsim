@@ -54,6 +54,7 @@ public class BrutalGladiatorsDreadweaveMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 55,
       intellect = 18,
+      armor = 339,
       spellHitRating = 20.0
       )
 

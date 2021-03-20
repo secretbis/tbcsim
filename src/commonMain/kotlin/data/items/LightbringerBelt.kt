@@ -54,6 +54,7 @@ public class LightbringerBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 29,
+      armor = 1081,
       spellCritRating = 17.0,
       spellHasteRating = 24.0
       )

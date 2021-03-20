@@ -50,7 +50,8 @@ public class LeggingsOfEternity : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
-      intellect = 38
+      intellect = 38,
+      armor = 221
       )
 
   public override var sockets: Array<Socket> = arrayOf(

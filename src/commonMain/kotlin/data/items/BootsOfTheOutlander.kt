@@ -49,7 +49,8 @@ public class BootsOfTheOutlander : Item() {
   public override var stats: Stats = Stats(
       agility = 22,
       stamina = 21,
-      intellect = 15
+      intellect = 15,
+      armor = 381
       )
 
   public override var sockets: Array<Socket> = arrayOf()

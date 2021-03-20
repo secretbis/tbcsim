@@ -54,6 +54,7 @@ public class RobeOfTheMalefic : Item() {
   public override var stats: Stats = Stats(
       stamina = 66,
       intellect = 29,
+      armor = 244,
       spellHitRating = 28.0
       )
 

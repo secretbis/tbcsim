@@ -62,6 +62,7 @@ public class FelConquererRaiments : Item() {
   public override var stats: Stats = Stats(
       stamina = 60,
       intellect = 41,
+      armor = 266,
       spellCritRating = 24.0,
       spellHasteRating = 33.0
       )

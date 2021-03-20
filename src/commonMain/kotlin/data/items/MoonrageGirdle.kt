@@ -49,6 +49,7 @@ public class MoonrageGirdle : Item() {
   public override var stats: Stats = Stats(
       intellect = 22,
       spirit = 21,
+      armor = 160,
       spellCritRating = 20.0
       )
 

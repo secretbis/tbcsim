@@ -53,6 +53,7 @@ public class SkyshatterGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 43,
       intellect = 20,
+      armor = 740,
       physicalCritRating = 30.0,
       physicalHasteRating = 20.0,
       expertiseRating = 29.0

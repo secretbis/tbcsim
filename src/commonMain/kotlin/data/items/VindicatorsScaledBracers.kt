@@ -54,6 +54,7 @@ public class VindicatorsScaledBracers : Item() {
       strength = 29,
       stamina = 28,
       intellect = 15,
+      armor = 772,
       physicalCritRating = 15.0
       )
 

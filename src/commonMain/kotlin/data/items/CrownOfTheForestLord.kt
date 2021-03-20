@@ -60,7 +60,8 @@ public class CrownOfTheForestLord : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 30,
-      spirit = 27
+      spirit = 27,
+      armor = 237
       )
 
   public override var sockets: Array<Socket> = arrayOf()

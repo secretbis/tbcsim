@@ -54,6 +54,7 @@ public class CrystalforgeBreastplate : Item() {
       strength = 56,
       stamina = 40,
       intellect = 20,
+      armor = 1668,
       physicalCritRating = 21.0,
       physicalHitRating = 23.0
       )

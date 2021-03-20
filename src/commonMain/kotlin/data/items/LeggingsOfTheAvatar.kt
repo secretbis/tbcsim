@@ -55,6 +55,7 @@ public class LeggingsOfTheAvatar : Item() {
       stamina = 37,
       intellect = 36,
       spirit = 26,
+      armor = 195,
       spellCritRating = 18.0,
       spellHitRating = 25.0
       )

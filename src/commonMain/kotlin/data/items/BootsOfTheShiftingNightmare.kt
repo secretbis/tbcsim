@@ -49,6 +49,7 @@ public class BootsOfTheShiftingNightmare : Item() {
   public override var stats: Stats = Stats(
       stamina = 41,
       intellect = 22,
+      armor = 148,
       spellHitRating = 18.0
       )
 

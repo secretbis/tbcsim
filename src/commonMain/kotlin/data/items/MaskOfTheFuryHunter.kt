@@ -52,6 +52,7 @@ public class MaskOfTheFuryHunter : Item() {
       agility = 50,
       stamina = 58,
       intellect = 20,
+      armor = 643,
       physicalCritRating = 30.0
       )
 

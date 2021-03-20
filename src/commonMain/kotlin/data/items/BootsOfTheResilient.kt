@@ -60,6 +60,7 @@ public class BootsOfTheResilient : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 51,
+      armor = 1105,
       defenseRating = 25.0,
       blockRating = 25.0
       )

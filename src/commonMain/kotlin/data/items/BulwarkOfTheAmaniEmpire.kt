@@ -50,6 +50,7 @@ public class BulwarkOfTheAmaniEmpire : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 42,
+      armor = 5400,
       blockRating = 19.0
       )
 

@@ -55,6 +55,7 @@ public class GronnstalkersBoots : Item() {
       agility = 30,
       stamina = 21,
       intellect = 21,
+      armor = 740,
       physicalCritRating = 21.0,
       physicalHitRating = 14.0
       )

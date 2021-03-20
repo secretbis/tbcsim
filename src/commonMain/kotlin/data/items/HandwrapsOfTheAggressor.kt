@@ -63,6 +63,7 @@ public class HandwrapsOfTheAggressor : Item() {
       agility = 35,
       stamina = 36,
       intellect = 19,
+      armor = 473,
       physicalHasteRating = 13.0
       )
 

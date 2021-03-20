@@ -49,6 +49,7 @@ public class GirdleOfManyBlessings : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 22,
+      armor = 655,
       spellCritRating = 21.0
       )
 

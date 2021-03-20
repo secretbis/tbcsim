@@ -49,6 +49,7 @@ public class PrimalstormBreastplate : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 27,
+      armor = 255,
       physicalHitRating = 17.0
       )
 

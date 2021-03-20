@@ -49,6 +49,7 @@ public class WildStalkerBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 17,
+      armor = 448,
       physicalHitRating = 17.0
       )
 

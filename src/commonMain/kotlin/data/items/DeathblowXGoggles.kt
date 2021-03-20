@@ -51,6 +51,7 @@ public class DeathblowXGoggles : Item() {
   public override var stats: Stats = Stats(
       agility = 48,
       stamina = 28,
+      armor = 326,
       physicalHitRating = 11.0
       )
 

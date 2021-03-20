@@ -48,7 +48,8 @@ public class XPilotsLeggings : Item() {
 
   public override var stats: Stats = Stats(
       agility = 31,
-      stamina = 46
+      stamina = 46,
+      armor = 236
       )
 
   public override var sockets: Array<Socket> = arrayOf()

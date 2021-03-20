@@ -61,7 +61,8 @@ public class AdamantiteBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       strength = 34,
-      stamina = 40
+      stamina = 40,
+      armor = 1077
       )
 
   public override var sockets: Array<Socket> = arrayOf(

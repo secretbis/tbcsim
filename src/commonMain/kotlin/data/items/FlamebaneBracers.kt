@@ -49,7 +49,8 @@ public class FlamebaneBracers : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 15
+      stamina = 15,
+      armor = 497
       )
 
   public override var sockets: Array<Socket> = arrayOf(

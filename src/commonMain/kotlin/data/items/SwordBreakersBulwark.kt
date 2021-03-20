@@ -50,6 +50,7 @@ public class SwordBreakersBulwark : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 49,
+      armor = 6459,
       defenseRating = 20.0,
       blockRating = 16.0
       )

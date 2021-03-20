@@ -62,6 +62,7 @@ public class ShadowedGauntletsOfParoxysm : Item() {
   public override var stats: Stats = Stats(
       agility = 41,
       stamina = 33,
+      armor = 312,
       physicalHasteRating = 30.0
       )
 

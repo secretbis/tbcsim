@@ -59,7 +59,8 @@ public class CordOfBelief : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 23,
-      spirit = 20
+      spirit = 20,
+      armor = 88
       )
 
   public override var sockets: Array<Socket> = arrayOf()

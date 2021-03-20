@@ -47,6 +47,7 @@ public class CrystalbladeOfTheDraenei : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
+      armor = 195,
       defenseRating = 13.0
       )
 

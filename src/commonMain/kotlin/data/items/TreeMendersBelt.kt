@@ -60,7 +60,8 @@ public class TreeMendersBelt : Item() {
       strength = 27,
       agility = 27,
       stamina = 22,
-      intellect = 21
+      intellect = 21,
+      armor = 406
       )
 
   public override var sockets: Array<Socket> = arrayOf()

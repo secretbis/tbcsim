@@ -52,6 +52,7 @@ public class SpauldersOfReclamation : Item() {
       stamina = 27,
       intellect = 26,
       spirit = 30,
+      armor = 374,
       spellHasteRating = 30.0
       )
 

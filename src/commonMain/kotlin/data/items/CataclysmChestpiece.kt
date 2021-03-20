@@ -54,6 +54,7 @@ public class CataclysmChestpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 28,
+      armor = 934,
       spellCritRating = 24.0
       )
 

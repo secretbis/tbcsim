@@ -50,7 +50,8 @@ public class SunstriderWarboots : Item() {
 
   public override var stats: Stats = Stats(
       strength = 29,
-      stamina = 30
+      stamina = 30,
+      armor = 955
       )
 
   public override var sockets: Array<Socket> = arrayOf(

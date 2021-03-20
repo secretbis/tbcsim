@@ -47,6 +47,7 @@ public class BogstrokScaleCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
+      armor = 271,
       defenseRating = 16.0
       )
 

@@ -52,6 +52,7 @@ public class GauntletsOfDesolation : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 16,
+      armor = 407,
       physicalCritRating = 17.0
       )
 

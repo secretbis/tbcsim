@@ -52,6 +52,7 @@ public class WastewalkerShoulderpads : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 13,
+      armor = 219,
       physicalHitRating = 16.0
       )
 

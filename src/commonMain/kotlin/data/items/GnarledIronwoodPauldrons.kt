@@ -62,7 +62,8 @@ public class GnarledIronwoodPauldrons : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
-      spirit = 26
+      spirit = 26,
+      armor = 303
       )
 
   public override var sockets: Array<Socket> = arrayOf(

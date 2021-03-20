@@ -62,6 +62,7 @@ public class EquilibriumEpaulets : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 30,
+      armor = 832,
       spellHasteRating = 24.0
       )
 

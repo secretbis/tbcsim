@@ -60,7 +60,8 @@ public class GnarledChestpieceOfTheAncients : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 32,
-      spirit = 34
+      spirit = 34,
+      armor = 404
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,6 +60,7 @@ public class GeneralsLinkedGirdle : Item() {
       strength = 27,
       stamina = 39,
       intellect = 18,
+      armor = 487,
       physicalCritRating = 27.0
       )
 

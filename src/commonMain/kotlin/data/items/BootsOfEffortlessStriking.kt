@@ -59,7 +59,8 @@ public class BootsOfEffortlessStriking : Item() {
 
   public override var stats: Stats = Stats(
       agility = 42,
-      stamina = 41
+      stamina = 41,
+      armor = 278
       )
 
   public override var sockets: Array<Socket> = arrayOf()

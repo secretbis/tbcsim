@@ -51,6 +51,7 @@ public class ExorcistsSilkHood : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 14,
+      armor = 111,
       spellCritRating = 25.0
       )
 

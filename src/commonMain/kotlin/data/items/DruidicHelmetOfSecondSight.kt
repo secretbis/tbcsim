@@ -51,6 +51,7 @@ public class DruidicHelmetOfSecondSight : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 15,
+      armor = 226,
       spellCritRating = 24.0
       )
 

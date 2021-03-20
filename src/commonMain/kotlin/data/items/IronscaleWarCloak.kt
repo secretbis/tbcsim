@@ -48,6 +48,7 @@ public class IronscaleWarCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 26,
+      armor = 78,
       blockRating = 19.0
       )
 

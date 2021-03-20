@@ -49,6 +49,7 @@ public class VeteransLinkedGirdle : Item() {
       strength = 31,
       stamina = 45,
       intellect = 20,
+      armor = 537,
       physicalCritRating = 30.0
       )
 

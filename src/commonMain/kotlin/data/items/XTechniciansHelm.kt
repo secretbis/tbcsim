@@ -50,6 +50,7 @@ public class XTechniciansHelm : Item() {
       strength = 38,
       stamina = 36,
       intellect = 16,
+      armor = 875,
       defenseRating = 16.0
       )
 

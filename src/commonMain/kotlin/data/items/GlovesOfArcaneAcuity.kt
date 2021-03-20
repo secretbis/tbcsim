@@ -51,6 +51,7 @@ public class GlovesOfArcaneAcuity : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 20,
+      armor = 116,
       spellHitRating = 18.0
       )
 

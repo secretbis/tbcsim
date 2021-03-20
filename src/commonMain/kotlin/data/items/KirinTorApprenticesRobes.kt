@@ -50,6 +50,7 @@ public class KirinTorApprenticesRobes : Item() {
       stamina = 19,
       intellect = 26,
       spirit = 17,
+      armor = 148,
       spellHitRating = 14.0
       )
 

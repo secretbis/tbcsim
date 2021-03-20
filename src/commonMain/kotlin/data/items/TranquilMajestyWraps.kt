@@ -62,7 +62,8 @@ public class TranquilMajestyWraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 28,
-      spirit = 30
+      spirit = 30,
+      armor = 302
       )
 
   public override var sockets: Array<Socket> = arrayOf(

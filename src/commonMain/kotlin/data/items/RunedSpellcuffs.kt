@@ -60,6 +60,7 @@ public class RunedSpellcuffs : Item() {
   public override var stats: Stats = Stats(
       stamina = 20,
       intellect = 18,
+      armor = 94,
       spellHasteRating = 25.0
       )
 

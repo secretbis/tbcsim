@@ -48,7 +48,8 @@ public class ImbuedNetherweaveTunic : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 28
+      stamina = 28,
+      armor = 155
       )
 
   public override var sockets: Array<Socket> = arrayOf()

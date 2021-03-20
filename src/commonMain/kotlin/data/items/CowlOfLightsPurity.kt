@@ -63,6 +63,7 @@ public class CowlOfLightsPurity : Item() {
       stamina = 51,
       intellect = 42,
       spirit = 38,
+      armor = 222,
       spellHasteRating = 30.0
       )
 

@@ -49,6 +49,7 @@ public class AvengersWaistguard : Item() {
       strength = 25,
       stamina = 24,
       intellect = 11,
+      armor = 573,
       physicalCritRating = 12.0
       )
 

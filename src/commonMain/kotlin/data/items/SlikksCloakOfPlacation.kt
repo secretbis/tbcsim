@@ -47,6 +47,7 @@ public class SlikksCloakOfPlacation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
+      armor = 346,
       defenseRating = 16.0,
       dodgeRating = 25.0
       )

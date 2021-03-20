@@ -52,6 +52,7 @@ public class MarksmansLegguards : Item() {
       agility = 25,
       stamina = 39,
       intellect = 13,
+      armor = 499,
       physicalCritRating = 11.0
       )
 

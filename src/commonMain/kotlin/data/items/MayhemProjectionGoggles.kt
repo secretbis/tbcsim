@@ -51,6 +51,7 @@ public class MayhemProjectionGoggles : Item() {
   public override var stats: Stats = Stats(
       strength = 62,
       stamina = 47,
+      armor = 1611,
       physicalCritRating = 51.0,
       physicalHitRating = 26.0
       )

@@ -62,6 +62,7 @@ public class GauntletsOfTheAncientFrostwolf : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 32,
+      armor = 694,
       spellHasteRating = 28.0
       )
 

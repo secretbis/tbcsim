@@ -59,7 +59,8 @@ public class GleamingEarthenBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 20
+      intellect = 20,
+      armor = 394
       )
 
   public override var sockets: Array<Socket> = arrayOf()

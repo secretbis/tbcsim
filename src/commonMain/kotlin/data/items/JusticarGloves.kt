@@ -52,6 +52,7 @@ public class JusticarGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 30,
+      armor = 944,
       spellCritRating = 22.0
       )
 

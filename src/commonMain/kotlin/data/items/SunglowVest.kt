@@ -51,6 +51,7 @@ public class SunglowVest : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 41,
+      armor = 499,
       spellHasteRating = 33.0
       )
 

@@ -60,6 +60,7 @@ public class BracersOfDignity : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 12,
+      armor = 608,
       defenseRating = 21.0
       )
 

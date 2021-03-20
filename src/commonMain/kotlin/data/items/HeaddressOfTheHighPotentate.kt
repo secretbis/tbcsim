@@ -60,7 +60,8 @@ public class HeaddressOfTheHighPotentate : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 38,
-      spirit = 32
+      spirit = 32,
+      armor = 158
       )
 
   public override var sockets: Array<Socket> = arrayOf()

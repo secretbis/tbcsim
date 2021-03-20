@@ -55,6 +55,7 @@ public class NordrassilWrathMantle : Item() {
       stamina = 26,
       intellect = 27,
       spirit = 16,
+      armor = 314,
       spellHitRating = 15.0
       )
 

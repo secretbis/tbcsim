@@ -49,6 +49,7 @@ public class BruteCloakOfTheOgreMagi : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 20,
+      armor = 105,
       spellCritRating = 23.0
       )
 

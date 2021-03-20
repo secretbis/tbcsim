@@ -55,6 +55,7 @@ public class OnslaughtGreathelm : Item() {
       strength = 23,
       agility = 28,
       stamina = 48,
+      armor = 1483,
       defenseRating = 36.0,
       blockRating = 30.0
       )

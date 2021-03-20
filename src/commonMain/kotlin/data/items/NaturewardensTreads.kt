@@ -62,6 +62,7 @@ public class NaturewardensTreads : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 18,
+      armor = 305,
       spellCritRating = 26.0
       )
 

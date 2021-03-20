@@ -52,7 +52,8 @@ public class HandguardsOfMalorne : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 25,
-      spirit = 24
+      spirit = 24,
+      armor = 237
       )
 
   public override var sockets: Array<Socket> = arrayOf()

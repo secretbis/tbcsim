@@ -51,7 +51,8 @@ public class CoverOfUrsolTheWise : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 42,
-      spirit = 40
+      spirit = 40,
+      armor = 418
       )
 
   public override var sockets: Array<Socket> = arrayOf(

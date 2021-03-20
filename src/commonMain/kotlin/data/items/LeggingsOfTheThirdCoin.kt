@@ -49,6 +49,7 @@ public class LeggingsOfTheThirdCoin : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 26,
+      armor = 219,
       spellCritRating = 12.0
       )
 

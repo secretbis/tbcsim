@@ -60,7 +60,8 @@ public class FeralStaffOfLashing : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       agility = 35,
-      stamina = 34
+      stamina = 34,
+      armor = 300
       )
 
   public override var sockets: Array<Socket> = arrayOf()

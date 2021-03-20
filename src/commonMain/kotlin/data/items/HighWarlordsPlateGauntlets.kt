@@ -52,6 +52,7 @@ public class HighWarlordsPlateGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       stamina = 30,
+      armor = 728,
       physicalCritRating = 21.0
       )
 

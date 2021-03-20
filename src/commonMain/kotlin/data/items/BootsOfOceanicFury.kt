@@ -60,6 +60,7 @@ public class BootsOfOceanicFury : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 36,
+      armor = 679,
       spellCritRating = 26.0
       )
 

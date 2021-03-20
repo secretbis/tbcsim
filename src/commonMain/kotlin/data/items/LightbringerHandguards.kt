@@ -54,6 +54,7 @@ public class LightbringerHandguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 44,
       intellect = 28,
+      armor = 1141,
       defenseRating = 30.0,
       dodgeRating = 22.0,
       parryRating = 30.0

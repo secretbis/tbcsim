@@ -59,7 +59,8 @@ public class ShroudOfTheFinalStand : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      intellect = 22
+      intellect = 22,
+      armor = 118
       )
 
   public override var sockets: Array<Socket> = arrayOf()

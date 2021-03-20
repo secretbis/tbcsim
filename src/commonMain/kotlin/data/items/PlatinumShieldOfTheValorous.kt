@@ -47,6 +47,7 @@ public class PlatinumShieldOfTheValorous : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
+      armor = 3711,
       defenseRating = 24.0
       )
 

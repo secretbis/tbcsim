@@ -55,6 +55,7 @@ public class RobesOfTheTempest : Item() {
       stamina = 36,
       intellect = 39,
       spirit = 31,
+      armor = 244,
       spellCritRating = 23.0,
       spellHitRating = 13.0
       )

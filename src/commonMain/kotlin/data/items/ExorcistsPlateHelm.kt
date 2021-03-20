@@ -50,6 +50,7 @@ public class ExorcistsPlateHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 30,
+      armor = 827,
       physicalCritRating = 25.0
       )
 

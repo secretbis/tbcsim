@@ -61,6 +61,7 @@ public class BattlescarBoots : Item() {
   public override var stats: Stats = Stats(
       strength = 18,
       stamina = 28,
+      armor = 997,
       defenseRating = 23.0,
       parryRating = 21.0
       )

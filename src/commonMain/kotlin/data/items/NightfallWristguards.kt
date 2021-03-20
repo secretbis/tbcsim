@@ -59,7 +59,8 @@ public class NightfallWristguards : Item() {
 
   public override var stats: Stats = Stats(
       agility = 24,
-      stamina = 22
+      stamina = 22,
+      armor = 153
       )
 
   public override var sockets: Array<Socket> = arrayOf()

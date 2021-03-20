@@ -60,6 +60,7 @@ public class GirdleOfTheRighteousPath : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 33,
+      armor = 904,
       spellCritRating = 27.0
       )
 

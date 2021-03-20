@@ -61,6 +61,7 @@ public class ShouldersOfLightningReflexes : Item() {
       agility = 27,
       stamina = 19,
       intellect = 21,
+      armor = 741,
       physicalHasteRating = 37.0
       )
 

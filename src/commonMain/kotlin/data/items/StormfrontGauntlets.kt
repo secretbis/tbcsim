@@ -50,7 +50,8 @@ public class StormfrontGauntlets : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 16
+      intellect = 16,
+      armor = 367
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -62,6 +62,7 @@ public class GarmentsOfSereneShores : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 41,
+      armor = 1110,
       spellCritRating = 25.0
       )
 

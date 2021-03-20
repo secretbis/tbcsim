@@ -51,6 +51,7 @@ public class TheHorsemansHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 46,
+      armor = 1129,
       physicalCritRating = 30.0
       )
 

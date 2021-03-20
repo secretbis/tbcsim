@@ -50,6 +50,7 @@ public class DreadbootsOfTheLegion : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 40,
+      armor = 1213,
       physicalCritRating = 30.0,
       physicalHitRating = 18.0
       )

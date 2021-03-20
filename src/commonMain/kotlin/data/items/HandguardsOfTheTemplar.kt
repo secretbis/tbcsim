@@ -60,6 +60,7 @@ public class HandguardsOfTheTemplar : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 28,
+      armor = 1005,
       spellHasteRating = 25.0
       )
 

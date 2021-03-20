@@ -62,6 +62,7 @@ public class SoulEatersHandwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 24,
+      armor = 132,
       spellCritRating = 21.0
       )
 

@@ -49,7 +49,8 @@ public class HoodOfPrimalLife : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 37,
-      spirit = 31
+      spirit = 31,
+      armor = 271
       )
 
   public override var sockets: Array<Socket> = arrayOf()

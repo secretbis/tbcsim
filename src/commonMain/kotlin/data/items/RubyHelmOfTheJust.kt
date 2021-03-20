@@ -50,6 +50,7 @@ public class RubyHelmOfTheJust : Item() {
       strength = 36,
       stamina = 24,
       intellect = 25,
+      armor = 946,
       physicalCritRating = 16.0
       )
 

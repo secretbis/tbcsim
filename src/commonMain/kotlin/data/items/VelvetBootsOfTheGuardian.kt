@@ -50,6 +50,7 @@ public class VelvetBootsOfTheGuardian : Item() {
       stamina = 21,
       intellect = 21,
       spirit = 15,
+      armor = 148,
       spellCritRating = 24.0
       )
 

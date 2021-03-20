@@ -51,7 +51,8 @@ public class TidefuryShoulderguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 23
+      intellect = 23,
+      armor = 489
       )
 
   public override var sockets: Array<Socket> = arrayOf(

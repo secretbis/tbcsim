@@ -50,6 +50,7 @@ public class NetherforceChestplate : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 42,
+      armor = 1571,
       physicalCritRating = 30.0,
       physicalHitRating = 18.0
       )

@@ -61,6 +61,7 @@ public class JungleStompers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 43,
+      armor = 1105,
       defenseRating = 20.0,
       blockRating = 28.0
       )

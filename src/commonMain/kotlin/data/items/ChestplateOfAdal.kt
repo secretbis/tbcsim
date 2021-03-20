@@ -48,6 +48,7 @@ public class ChestplateOfAdal : Item() {
   public override var stats: Stats = Stats(
       strength = 35,
       stamina = 27,
+      armor = 1106,
       physicalCritRating = 25.0,
       physicalHitRating = 22.0
       )

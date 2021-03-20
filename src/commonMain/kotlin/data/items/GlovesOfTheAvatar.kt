@@ -52,7 +52,8 @@ public class GlovesOfTheAvatar : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 27,
-      spirit = 29
+      spirit = 29,
+      armor = 140
       )
 
   public override var sockets: Array<Socket> = arrayOf()

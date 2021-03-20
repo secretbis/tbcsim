@@ -48,6 +48,7 @@ public class ShatariVindicatorsWaistguard : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
+      armor = 655,
       defenseRating = 20.0,
       blockRating = 24.0
       )

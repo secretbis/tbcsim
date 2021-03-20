@@ -60,6 +60,7 @@ public class UniMindHeaddress : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 40,
+      armor = 158,
       spellCritRating = 25.0,
       spellHitRating = 19.0
       )

@@ -61,6 +61,7 @@ public class SpellslingersProtector : Item() {
       stamina = 15,
       intellect = 14,
       spirit = 9,
+      armor = 66,
       spellCritRating = 13.0
       )
 

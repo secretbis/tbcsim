@@ -54,6 +54,7 @@ public class ShoulderpadsOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 27,
+      armor = 183,
       spellCritRating = 17.0,
       spellHitRating = 12.0
       )

@@ -49,6 +49,7 @@ public class CassockOfTheLoyal : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 34,
+      armor = 1019,
       spellCritRating = 25.0
       )
 

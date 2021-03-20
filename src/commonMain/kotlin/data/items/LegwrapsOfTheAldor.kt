@@ -53,6 +53,7 @@ public class LegwrapsOfTheAldor : Item() {
       stamina = 31,
       intellect = 40,
       spirit = 23,
+      armor = 177,
       spellHitRating = 24.0
       )
 

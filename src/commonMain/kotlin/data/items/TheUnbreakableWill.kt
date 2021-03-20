@@ -47,6 +47,7 @@ public class TheUnbreakableWill : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
+      armor = 308,
       defenseRating = 21.0
       )
 

@@ -61,7 +61,8 @@ public class VambracesOfTheNaaru : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      intellect = 25
+      intellect = 25,
+      armor = 703
       )
 
   public override var sockets: Array<Socket> = arrayOf(

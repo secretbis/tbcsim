@@ -52,6 +52,7 @@ public class BrutalGladiatorsOrnamentedLegplates : Item() {
   public override var stats: Stats = Stats(
       stamina = 69,
       intellect = 45,
+      armor = 1735,
       spellCritRating = 46.0
       )
 

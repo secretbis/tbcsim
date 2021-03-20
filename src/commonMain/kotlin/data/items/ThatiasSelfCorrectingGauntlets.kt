@@ -49,6 +49,7 @@ public class ThatiasSelfCorrectingGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 16,
       stamina = 35,
+      armor = 728,
       defenseRating = 18.0
       )
 

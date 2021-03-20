@@ -49,6 +49,7 @@ public class GoldenDragonstrikeBreastplate : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 17,
+      armor = 570,
       physicalCritRating = 25.0
       )
 

@@ -62,7 +62,8 @@ public class BeltOfNaturalPower : Item() {
       strength = 29,
       agility = 20,
       stamina = 38,
-      intellect = 12
+      intellect = 12,
+      armor = 423
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -63,6 +63,7 @@ public class HelmOfArcanePurity : Item() {
       stamina = 51,
       intellect = 42,
       spirit = 38,
+      armor = 222,
       spellCritRating = 30.0
       )
 

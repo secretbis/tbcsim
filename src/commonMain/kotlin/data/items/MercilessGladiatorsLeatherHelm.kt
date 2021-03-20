@@ -54,6 +54,7 @@ public class MercilessGladiatorsLeatherHelm : Item() {
   public override var stats: Stats = Stats(
       agility = 37,
       stamina = 58,
+      armor = 348,
       physicalCritRating = 17.0
       )
 

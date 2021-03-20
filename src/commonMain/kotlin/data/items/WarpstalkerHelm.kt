@@ -51,7 +51,8 @@ public class WarpstalkerHelm : Item() {
   public override var stats: Stats = Stats(
       agility = 24,
       stamina = 36,
-      intellect = 32
+      intellect = 32,
+      armor = 632
       )
 
   public override var sockets: Array<Socket> = arrayOf(

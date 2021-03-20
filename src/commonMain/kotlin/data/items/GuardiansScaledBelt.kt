@@ -52,6 +52,7 @@ public class GuardiansScaledBelt : Item() {
       strength = 44,
       stamina = 45,
       intellect = 31,
+      armor = 1115,
       physicalCritRating = 31.0
       )
 

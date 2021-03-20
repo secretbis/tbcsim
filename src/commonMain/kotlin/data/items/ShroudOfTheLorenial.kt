@@ -63,6 +63,7 @@ public class ShroudOfTheLorenial : Item() {
       stamina = 34,
       intellect = 35,
       spirit = 33,
+      armor = 236,
       spellHitRating = 29.0
       )
 

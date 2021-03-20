@@ -48,6 +48,7 @@ public class GlovesOfPandemonium : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 15,
+      armor = 78,
       spellCritRating = 22.0,
       spellHitRating = 10.0
       )

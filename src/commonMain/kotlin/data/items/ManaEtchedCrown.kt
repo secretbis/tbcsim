@@ -62,7 +62,8 @@ public class ManaEtchedCrown : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      intellect = 20
+      intellect = 20,
+      armor = 127
       )
 
   public override var sockets: Array<Socket> = arrayOf(

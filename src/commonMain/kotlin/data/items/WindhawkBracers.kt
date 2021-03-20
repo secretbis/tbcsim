@@ -53,6 +53,7 @@ public class WindhawkBracers : Item() {
       stamina = 22,
       intellect = 17,
       spirit = 7,
+      armor = 159,
       spellCritRating = 16.0
       )
 

@@ -51,7 +51,8 @@ public class KhadgarsKiltOfAbjuration : Item() {
   public override var stats: Stats = Stats(
       stamina = 20,
       intellect = 22,
-      spirit = 15
+      spirit = 15,
+      armor = 133
       )
 
   public override var sockets: Array<Socket> = arrayOf(

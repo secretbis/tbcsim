@@ -59,7 +59,8 @@ public class EterniumRageshackles : Item() {
 
   public override var stats: Stats = Stats(
       strength = 32,
-      stamina = 32
+      stamina = 32,
+      armor = 703
       )
 
   public override var sockets: Array<Socket> = arrayOf()

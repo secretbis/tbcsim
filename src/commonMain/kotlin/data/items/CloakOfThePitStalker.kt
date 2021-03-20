@@ -48,6 +48,7 @@ public class CloakOfThePitStalker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
+      armor = 105,
       physicalCritRating = 24.0
       )
 

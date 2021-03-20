@@ -62,7 +62,8 @@ public class VoidReaverGreaves : Item() {
   public override var stats: Stats = Stats(
       agility = 37,
       stamina = 33,
-      intellect = 24
+      intellect = 24,
+      armor = 787
       )
 
   public override var sockets: Array<Socket> = arrayOf(

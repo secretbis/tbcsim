@@ -61,6 +61,7 @@ public class PanzarTharBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 51,
+      armor = 1450,
       defenseRating = 26.0,
       blockRating = 24.0
       )

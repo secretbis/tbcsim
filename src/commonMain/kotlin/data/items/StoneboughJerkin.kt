@@ -60,7 +60,8 @@ public class StoneboughJerkin : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 35,
-      spirit = 31
+      spirit = 31,
+      armor = 364
       )
 
   public override var sockets: Array<Socket> = arrayOf()

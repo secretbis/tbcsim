@@ -50,6 +50,7 @@ public class MarshalsChainGirdle : Item() {
       agility = 27,
       stamina = 39,
       intellect = 18,
+      armor = 487,
       physicalCritRating = 14.0
       )
 

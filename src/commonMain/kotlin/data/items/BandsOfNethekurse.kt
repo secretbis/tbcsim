@@ -48,7 +48,8 @@ public class BandsOfNethekurse : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 18,
-      spirit = 13
+      spirit = 13,
+      armor = 67
       )
 
   public override var sockets: Array<Socket> = arrayOf()

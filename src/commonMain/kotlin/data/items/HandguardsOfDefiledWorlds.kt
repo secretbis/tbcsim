@@ -51,6 +51,7 @@ public class HandguardsOfDefiledWorlds : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 32,
+      armor = 171,
       spellHitRating = 27.0,
       spellHasteRating = 36.0
       )

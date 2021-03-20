@@ -52,6 +52,7 @@ public class SeersLinkedGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 21,
       stamina = 33,
+      armor = 407,
       physicalCritRating = 18.0
       )
 

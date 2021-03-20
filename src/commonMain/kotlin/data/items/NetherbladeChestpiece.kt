@@ -54,6 +54,7 @@ public class NetherbladeChestpiece : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 39,
+      armor = 379,
       physicalHitRating = 11.0
       )
 

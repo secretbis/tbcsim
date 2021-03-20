@@ -60,7 +60,8 @@ public class BandsOfRarefiedMagic : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 21,
-      spirit = 16
+      spirit = 16,
+      armor = 81
       )
 
   public override var sockets: Array<Socket> = arrayOf()

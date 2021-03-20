@@ -46,7 +46,8 @@ public class WildguardLeggings : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 55
+      stamina = 55,
+      armor = 1269
       )
 
   public override var sockets: Array<Socket> = arrayOf()

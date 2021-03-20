@@ -55,6 +55,7 @@ public class CycloneShoulderplates : Item() {
       agility = 18,
       stamina = 31,
       intellect = 18,
+      armor = 634,
       physicalHitRating = 14.0
       )
 

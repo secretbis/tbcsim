@@ -54,6 +54,7 @@ public class MercilessGladiatorsSilkAmice : Item() {
   public override var stats: Stats = Stats(
       stamina = 46,
       intellect = 15,
+      armor = 171,
       spellCritRating = 14.0
       )
 

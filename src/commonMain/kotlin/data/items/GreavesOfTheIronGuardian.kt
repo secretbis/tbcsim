@@ -50,6 +50,7 @@ public class GreavesOfTheIronGuardian : Item() {
   public override var stats: Stats = Stats(
       strength = 32,
       stamina = 33,
+      armor = 841,
       physicalHitRating = 7.0
       )
 

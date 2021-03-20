@@ -55,7 +55,8 @@ public class ThunderheartWristguards : Item() {
       strength = 28,
       agility = 28,
       stamina = 39,
-      intellect = 13
+      intellect = 13,
+      armor = 281
       )
 
   public override var sockets: Array<Socket> = arrayOf(

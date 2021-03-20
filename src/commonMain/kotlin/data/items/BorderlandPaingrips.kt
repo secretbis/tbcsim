@@ -51,6 +51,7 @@ public class BorderlandPaingrips : Item() {
   public override var stats: Stats = Stats(
       strength = 47,
       stamina = 48,
+      armor = 1277,
       physicalCritRating = 39.0
       )
 

@@ -49,7 +49,8 @@ public class WyrmfuryPauldrons : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 18,
-      intellect = 20
+      intellect = 20,
+      armor = 489
       )
 
   public override var sockets: Array<Socket> = arrayOf()

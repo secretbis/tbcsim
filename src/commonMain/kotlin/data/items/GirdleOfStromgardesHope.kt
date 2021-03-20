@@ -62,6 +62,7 @@ public class GirdleOfStromgardesHope : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 26,
+      armor = 904,
       spellCritRating = 16.0
       )
 

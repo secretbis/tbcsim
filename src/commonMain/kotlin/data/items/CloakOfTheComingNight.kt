@@ -48,6 +48,7 @@ public class CloakOfTheComingNight : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
+      armor = 78,
       physicalHitRating = 12.0,
       physicalHasteRating = 18.0
       )

@@ -50,6 +50,7 @@ public class TourmalineCrown : Item() {
       stamina = 24,
       intellect = 18,
       spirit = 17,
+      armor = 120,
       spellCritRating = 30.0
       )
 

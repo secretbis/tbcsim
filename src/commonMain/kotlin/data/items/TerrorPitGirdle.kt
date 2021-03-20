@@ -62,6 +62,7 @@ public class TerrorPitGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 22,
+      armor = 495,
       physicalCritRating = 21.0
       )
 

@@ -54,6 +54,7 @@ public class DestroyerChestguard : Item() {
       strength = 25,
       agility = 26,
       stamina = 57,
+      armor = 1668,
       defenseRating = 27.0,
       dodgeRating = 24.0
       )

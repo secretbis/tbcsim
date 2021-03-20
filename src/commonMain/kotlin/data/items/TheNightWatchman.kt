@@ -48,7 +48,8 @@ public class TheNightWatchman : Item() {
 
   public override var stats: Stats = Stats(
       agility = 45,
-      stamina = 27
+      stamina = 27,
+      armor = 259
       )
 
   public override var sockets: Array<Socket> = arrayOf()

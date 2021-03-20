@@ -53,7 +53,8 @@ public class WyrmhideHelm : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      intellect = 18
+      intellect = 18,
+      armor = 267
       )
 
   public override var sockets: Array<Socket> = arrayOf(

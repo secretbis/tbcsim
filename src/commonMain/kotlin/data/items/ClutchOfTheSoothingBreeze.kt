@@ -61,7 +61,8 @@ public class ClutchOfTheSoothingBreeze : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      intellect = 34
+      intellect = 34,
+      armor = 556
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -54,7 +54,8 @@ public class CrystalforgeWarHelm : Item() {
       strength = 56,
       agility = 24,
       stamina = 46,
-      intellect = 23
+      intellect = 23,
+      armor = 1355
       )
 
   public override var sockets: Array<Socket> = arrayOf(

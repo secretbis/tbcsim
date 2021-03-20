@@ -55,6 +55,7 @@ public class ThunderheartLeggings : Item() {
       agility = 41,
       stamina = 49,
       intellect = 12,
+      armor = 737,
       physicalHitRating = 27.0
       )
 

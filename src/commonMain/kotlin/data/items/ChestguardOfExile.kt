@@ -59,6 +59,7 @@ public class ChestguardOfExile : Item() {
   public override var stats: Stats = Stats(
       strength = 44,
       stamina = 33,
+      armor = 1268,
       physicalCritRating = 36.0
       )
 

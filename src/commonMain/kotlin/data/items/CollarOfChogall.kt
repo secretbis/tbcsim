@@ -59,7 +59,8 @@ public class CollarOfChogall : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 42,
-      intellect = 36
+      intellect = 36,
+      armor = 171
       )
 
   public override var sockets: Array<Socket> = arrayOf()

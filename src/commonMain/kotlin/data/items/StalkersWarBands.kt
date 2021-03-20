@@ -60,7 +60,8 @@ public class StalkersWarBands : Item() {
   public override var stats: Stats = Stats(
       agility = 21,
       stamina = 18,
-      intellect = 17
+      intellect = 17,
+      armor = 355
       )
 
   public override var sockets: Array<Socket> = arrayOf()

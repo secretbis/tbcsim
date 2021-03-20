@@ -52,6 +52,7 @@ public class MercilessGladiatorsFelweaveTrousers : Item() {
   public override var stats: Stats = Stats(
       stamina = 60,
       intellect = 20,
+      armor = 410,
       spellCritRating = 29.0
       )
 

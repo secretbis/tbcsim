@@ -62,6 +62,7 @@ public class BeltOfTheGuardian : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 13,
+      armor = 904,
       defenseRating = 19.0
       )
 

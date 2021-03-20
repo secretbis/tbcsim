@@ -55,6 +55,7 @@ public class MantleOfTirisfal : Item() {
       stamina = 22,
       intellect = 24,
       spirit = 24,
+      armor = 168,
       spellCritRating = 17.0
       )
 

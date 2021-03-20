@@ -59,6 +59,7 @@ public class BeltOfSeethingFury : Item() {
   public override var stats: Stats = Stats(
       strength = 48,
       stamina = 37,
+      armor = 993,
       physicalHasteRating = 38.0
       )
 

@@ -52,6 +52,7 @@ public class OnslaughtBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 64,
+      armor = 1322,
       expertiseRating = 26.0,
       defenseRating = 25.0,
       dodgeRating = 30.0,

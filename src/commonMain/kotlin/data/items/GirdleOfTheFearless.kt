@@ -60,6 +60,7 @@ public class GirdleOfTheFearless : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 58,
+      armor = 993,
       physicalHitRating = 23.0,
       expertiseRating = 22.0,
       defenseRating = 34.0

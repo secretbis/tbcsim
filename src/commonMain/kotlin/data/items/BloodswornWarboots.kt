@@ -59,6 +59,7 @@ public class BloodswornWarboots : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 29,
+      armor = 780,
       physicalHitRating = 17.0
       )
 

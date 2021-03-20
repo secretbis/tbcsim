@@ -49,6 +49,7 @@ public class WindslayerWraps : Item() {
       strength = 36,
       agility = 18,
       stamina = 25,
+      armor = 208,
       physicalHitRating = 17.0
       )
 

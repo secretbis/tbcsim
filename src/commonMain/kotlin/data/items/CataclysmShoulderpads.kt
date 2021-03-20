@@ -54,6 +54,7 @@ public class CataclysmShoulderpads : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 19,
+      armor = 700,
       spellCritRating = 24.0
       )
 

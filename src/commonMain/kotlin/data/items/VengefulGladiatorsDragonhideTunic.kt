@@ -55,7 +55,8 @@ public class VengefulGladiatorsDragonhideTunic : Item() {
       strength = 30,
       agility = 31,
       stamina = 54,
-      intellect = 22
+      intellect = 22,
+      armor = 529
       )
 
   public override var sockets: Array<Socket> = arrayOf(

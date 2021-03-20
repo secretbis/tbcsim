@@ -50,6 +50,7 @@ public class HardKhoriumGoggles : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 86,
+      armor = 1611,
       physicalHitRating = 27.0,
       defenseRating = 51.0,
       dodgeRating = 35.0

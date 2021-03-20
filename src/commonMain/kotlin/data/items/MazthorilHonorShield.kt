@@ -49,6 +49,7 @@ public class MazthorilHonorShield : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 17,
+      armor = 4668,
       spellCritRating = 21.0
       )
 

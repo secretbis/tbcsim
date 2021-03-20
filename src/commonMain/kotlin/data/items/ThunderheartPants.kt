@@ -55,6 +55,7 @@ public class ThunderheartPants : Item() {
       stamina = 39,
       intellect = 48,
       spirit = 27,
+      armor = 401,
       spellCritRating = 21.0,
       spellHitRating = 20.0
       )

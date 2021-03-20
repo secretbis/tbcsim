@@ -48,7 +48,8 @@ public class StormshieldOfRenewal : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      intellect = 16
+      intellect = 16,
+      armor = 3806
       )
 
   public override var sockets: Array<Socket> = arrayOf()

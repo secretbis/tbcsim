@@ -49,6 +49,7 @@ public class VolcanicPauldrons : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 25,
+      armor = 489,
       spellCritRating = 18.0
       )
 

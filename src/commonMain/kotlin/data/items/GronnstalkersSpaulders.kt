@@ -54,7 +54,8 @@ public class GronnstalkersSpaulders : Item() {
   public override var stats: Stats = Stats(
       agility = 34,
       stamina = 39,
-      intellect = 17
+      intellect = 17,
+      armor = 766
       )
 
   public override var sockets: Array<Socket> = arrayOf(

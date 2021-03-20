@@ -47,7 +47,8 @@ public class GnomishBattleGoggles : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 21
+      stamina = 21,
+      armor = 249
       )
 
   public override var sockets: Array<Socket> = arrayOf()

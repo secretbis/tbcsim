@@ -50,6 +50,7 @@ public class GadgetstormGoggles : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
+      armor = 726,
       spellCritRating = 40.0,
       spellHitRating = 12.0
       )

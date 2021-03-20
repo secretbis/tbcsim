@@ -54,7 +54,8 @@ public class NordrassilChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 33,
-      spirit = 31
+      spirit = 31,
+      armor = 419
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -50,6 +50,7 @@ public class DurotansBattleHarness : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 34,
+      armor = 1048,
       physicalCritRating = 16.0
       )
 

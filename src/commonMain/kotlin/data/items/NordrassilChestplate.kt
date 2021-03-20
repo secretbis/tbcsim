@@ -54,7 +54,8 @@ public class NordrassilChestplate : Item() {
       strength = 46,
       agility = 30,
       stamina = 43,
-      intellect = 17
+      intellect = 17,
+      armor = 727
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -62,6 +62,7 @@ public class InsidiousBands : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 28,
+      armor = 194,
       physicalHitRating = 12.0
       )
 

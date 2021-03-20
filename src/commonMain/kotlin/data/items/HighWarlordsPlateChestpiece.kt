@@ -53,6 +53,7 @@ public class HighWarlordsPlateChestpiece : Item() {
   public override var stats: Stats = Stats(
       strength = 12,
       stamina = 46,
+      armor = 1164,
       physicalCritRating = 24.0
       )
 

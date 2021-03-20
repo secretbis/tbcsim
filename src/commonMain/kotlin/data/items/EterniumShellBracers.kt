@@ -58,6 +58,7 @@ public class EterniumShellBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 52,
+      armor = 772,
       defenseRating = 24.0,
       dodgeRating = 26.0
       )

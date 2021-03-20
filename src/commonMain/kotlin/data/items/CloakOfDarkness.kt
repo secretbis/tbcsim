@@ -50,6 +50,7 @@ public class CloakOfDarkness : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       stamina = 25,
+      armor = 101,
       physicalCritRating = 24.0
       )
 

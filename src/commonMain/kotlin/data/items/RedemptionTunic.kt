@@ -60,7 +60,8 @@ public class RedemptionTunic : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 31
+      intellect = 31,
+      armor = 1172
       )
 
   public override var sockets: Array<Socket> = arrayOf()

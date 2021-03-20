@@ -60,6 +60,7 @@ public class SpiritwalkerGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 38,
       intellect = 27,
+      armor = 617,
       spellHasteRating = 37.0
       )
 

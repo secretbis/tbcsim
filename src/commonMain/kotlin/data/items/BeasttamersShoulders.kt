@@ -59,7 +59,8 @@ public class BeasttamersShoulders : Item() {
 
   public override var stats: Stats = Stats(
       agility = 39,
-      stamina = 38
+      stamina = 38,
+      armor = 741
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -62,6 +62,7 @@ public class BootsOfForetelling : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 23,
+      armor = 134,
       spellCritRating = 19.0
       )
 

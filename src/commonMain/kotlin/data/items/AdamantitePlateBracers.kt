@@ -50,7 +50,8 @@ public class AdamantitePlateBracers : Item() {
 
   public override var stats: Stats = Stats(
       strength = 22,
-      stamina = 24
+      stamina = 24,
+      armor = 458
       )
 
   public override var sockets: Array<Socket> = arrayOf(

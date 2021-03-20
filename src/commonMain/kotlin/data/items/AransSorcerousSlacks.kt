@@ -51,6 +51,7 @@ public class AransSorcerousSlacks : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 28,
+      armor = 136,
       spellCritRating = 21.0
       )
 

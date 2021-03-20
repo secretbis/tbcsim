@@ -63,6 +63,7 @@ public class TranquilMoonlightWraps : Item() {
       stamina = 30,
       intellect = 28,
       spirit = 20,
+      armor = 302,
       spellCritRating = 30.0
       )
 

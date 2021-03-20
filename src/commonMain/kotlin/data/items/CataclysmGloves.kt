@@ -52,6 +52,7 @@ public class CataclysmGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 34,
+      armor = 583,
       spellCritRating = 17.0
       )
 

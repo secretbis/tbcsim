@@ -48,7 +48,8 @@ public class EnchantedFelscaleGloves : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 27
+      stamina = 27,
+      armor = 397
       )
 
   public override var sockets: Array<Socket> = arrayOf(

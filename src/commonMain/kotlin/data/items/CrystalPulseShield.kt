@@ -47,7 +47,8 @@ public class CrystalPulseShield : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 24
+      intellect = 24,
+      armor = 3711
       )
 
   public override var sockets: Array<Socket> = arrayOf()

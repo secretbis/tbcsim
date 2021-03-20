@@ -53,6 +53,7 @@ public class HighWarlordsChainLeggings : Item() {
       agility = 28,
       stamina = 42,
       intellect = 8,
+      armor = 570,
       physicalCritRating = 14.0
       )
 

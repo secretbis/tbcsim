@@ -60,6 +60,7 @@ public class HauberkOfTheFuriousElements : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 34,
+      armor = 900,
       spellCritRating = 23.0,
       spellHasteRating = 35.0
       )

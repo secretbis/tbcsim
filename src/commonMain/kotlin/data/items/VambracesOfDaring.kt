@@ -49,6 +49,7 @@ public class VambracesOfDaring : Item() {
   public override var stats: Stats = Stats(
       strength = 18,
       stamina = 26,
+      armor = 509,
       defenseRating = 11.0
       )
 

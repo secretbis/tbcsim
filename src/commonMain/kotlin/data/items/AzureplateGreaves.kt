@@ -49,7 +49,8 @@ public class AzureplateGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 33,
       stamina = 27,
-      intellect = 26
+      intellect = 26,
+      armor = 815
       )
 
   public override var sockets: Array<Socket> = arrayOf()

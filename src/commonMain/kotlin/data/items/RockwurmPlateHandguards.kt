@@ -46,7 +46,7 @@ public class RockwurmPlateHandguards : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-
+      armor = 582
       )
 
   public override var sockets: Array<Socket> = arrayOf()

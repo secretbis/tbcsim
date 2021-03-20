@@ -49,6 +49,7 @@ public class ShoulderpadsOfTheSilvermoonRetainer : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 32,
+      armor = 296,
       physicalHitRating = 23.0
       )
 

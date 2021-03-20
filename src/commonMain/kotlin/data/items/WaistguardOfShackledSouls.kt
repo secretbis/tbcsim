@@ -46,7 +46,8 @@ public class WaistguardOfShackledSouls : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 40
+      stamina = 40,
+      armor = 514
       )
 
   public override var sockets: Array<Socket> = arrayOf()

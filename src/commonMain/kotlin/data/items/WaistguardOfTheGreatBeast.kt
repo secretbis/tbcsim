@@ -62,6 +62,7 @@ public class WaistguardOfTheGreatBeast : Item() {
       strength = 29,
       agility = 28,
       stamina = 30,
+      armor = 367,
       physicalHitRating = 18.0
       )
 

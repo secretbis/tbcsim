@@ -50,7 +50,8 @@ public class PrimalAttunedGoggles : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 32,
-      intellect = 51
+      intellect = 51,
+      armor = 902
       )
 
   public override var sockets: Array<Socket> = arrayOf(

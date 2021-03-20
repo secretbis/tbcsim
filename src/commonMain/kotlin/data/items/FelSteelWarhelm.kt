@@ -48,6 +48,7 @@ public class FelSteelWarhelm : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 46,
+      armor = 1306,
       physicalCritRating = 44.0,
       physicalHitRating = 30.0
       )

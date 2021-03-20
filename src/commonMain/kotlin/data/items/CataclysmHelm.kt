@@ -55,6 +55,7 @@ public class CataclysmHelm : Item() {
       agility = 32,
       stamina = 46,
       intellect = 23,
+      armor = 759,
       physicalHitRating = 21.0
       )
 

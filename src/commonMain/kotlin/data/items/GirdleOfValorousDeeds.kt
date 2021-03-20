@@ -60,6 +60,7 @@ public class GirdleOfValorousDeeds : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 22,
+      armor = 782,
       defenseRating = 24.0,
       blockRating = 16.0
       )

@@ -51,7 +51,8 @@ public class SoulclothVest : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 20,
-      spirit = 16
+      spirit = 16,
+      armor = 170
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -54,6 +54,7 @@ public class BeltOfTheTempest : Item() {
   public override var stats: Stats = Stats(
       intellect = 29,
       spirit = 20,
+      armor = 145,
       spellCritRating = 17.0,
       spellHitRating = 14.0,
       spellHasteRating = 29.0

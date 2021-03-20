@@ -63,6 +63,7 @@ public class RangerGeneralsChestguard : Item() {
       agility = 36,
       stamina = 19,
       intellect = 30,
+      armor = 900,
       physicalCritRating = 14.0
       )
 

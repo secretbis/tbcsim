@@ -62,6 +62,7 @@ public class HauberkOfWhirlingFury : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 34,
+      armor = 988,
       spellHasteRating = 51.0
       )
 

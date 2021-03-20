@@ -62,6 +62,7 @@ public class IllidariShoulderpads : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 23,
+      armor = 161,
       spellCritRating = 16.0
       )
 

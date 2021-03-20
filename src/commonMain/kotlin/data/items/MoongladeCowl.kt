@@ -54,7 +54,8 @@ public class MoongladeCowl : Item() {
       agility = 8,
       stamina = 18,
       intellect = 25,
-      spirit = 13
+      spirit = 13,
+      armor = 237
       )
 
   public override var sockets: Array<Socket> = arrayOf(

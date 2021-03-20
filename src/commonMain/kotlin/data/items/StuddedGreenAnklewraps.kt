@@ -49,6 +49,7 @@ public class StuddedGreenAnklewraps : Item() {
       strength = 30,
       agility = 12,
       stamina = 13,
+      armor = 163,
       physicalHitRating = 8.0,
       dodgeRating = 8.0
       )

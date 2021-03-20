@@ -60,6 +60,7 @@ public class GlovesOfTheSearingGrip : Item() {
   public override var stats: Stats = Stats(
       agility = 33,
       stamina = 37,
+      armor = 252,
       expertiseRating = 18.0
       )
 

@@ -61,7 +61,8 @@ public class VambracesOfEnding : Item() {
 
   public override var stats: Stats = Stats(
       agility = 24,
-      stamina = 24
+      stamina = 24,
+      armor = 177
       )
 
   public override var sockets: Array<Socket> = arrayOf(

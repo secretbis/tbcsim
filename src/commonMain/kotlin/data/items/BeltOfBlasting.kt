@@ -60,6 +60,7 @@ public class BeltOfBlasting : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
+      armor = 121,
       spellCritRating = 30.0,
       spellHitRating = 23.0
       )

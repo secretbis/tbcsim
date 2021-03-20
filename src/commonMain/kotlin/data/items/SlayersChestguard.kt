@@ -54,6 +54,7 @@ public class SlayersChestguard : Item() {
   public override var stats: Stats = Stats(
       agility = 45,
       stamina = 55,
+      armor = 459,
       physicalCritRating = 28.0,
       physicalHitRating = 15.0
       )

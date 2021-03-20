@@ -50,7 +50,8 @@ public class HeaddressOfTheSleeper : Item() {
       agility = 25,
       stamina = 24,
       intellect = 14,
-      spirit = 11
+      spirit = 11,
+      armor = 193
       )
 
   public override var sockets: Array<Socket> = arrayOf()

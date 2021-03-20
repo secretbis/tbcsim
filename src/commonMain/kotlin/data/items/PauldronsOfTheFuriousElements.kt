@@ -60,6 +60,7 @@ public class PauldronsOfTheFuriousElements : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 24,
+      armor = 675,
       spellHasteRating = 33.0
       )
 

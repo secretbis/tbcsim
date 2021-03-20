@@ -61,7 +61,8 @@ public class CrystalhideHandwraps : Item() {
 
   public override var stats: Stats = Stats(
       agility = 11,
-      intellect = 27
+      intellect = 27,
+      armor = 465
       )
 
   public override var sockets: Array<Socket> = arrayOf(

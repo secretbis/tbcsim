@@ -48,6 +48,7 @@ public class GirdleOfSiege : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 18,
+      armor = 540,
       physicalCritRating = 18.0
       )
 

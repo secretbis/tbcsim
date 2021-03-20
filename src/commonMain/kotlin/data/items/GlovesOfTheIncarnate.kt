@@ -53,6 +53,7 @@ public class GlovesOfTheIncarnate : Item() {
       stamina = 28,
       intellect = 26,
       spirit = 21,
+      armor = 126,
       spellCritRating = 24.0
       )
 

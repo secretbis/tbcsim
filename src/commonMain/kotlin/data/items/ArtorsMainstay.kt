@@ -48,7 +48,8 @@ public class ArtorsMainstay : Item() {
 
   public override var stats: Stats = Stats(
       agility = 18,
-      intellect = 11
+      intellect = 11,
+      armor = 387
       )
 
   public override var sockets: Array<Socket> = arrayOf()

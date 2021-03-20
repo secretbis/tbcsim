@@ -48,7 +48,8 @@ public class ForemansEnchantedHelmet : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 48,
-      intellect = 30
+      intellect = 30,
+      armor = 132
       )
 
   public override var sockets: Array<Socket> = arrayOf()

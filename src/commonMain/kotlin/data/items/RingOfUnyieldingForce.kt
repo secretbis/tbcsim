@@ -47,6 +47,7 @@ public class RingOfUnyieldingForce : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
+      armor = 294,
       defenseRating = 22.0
       )
 

@@ -49,6 +49,7 @@ public class VeteransScaledBelt : Item() {
       strength = 41,
       stamina = 39,
       intellect = 27,
+      armor = 959,
       physicalCritRating = 18.0
       )
 

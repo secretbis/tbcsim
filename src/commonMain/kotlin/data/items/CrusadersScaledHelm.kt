@@ -54,6 +54,7 @@ public class CrusadersScaledHelm : Item() {
       strength = 28,
       stamina = 30,
       intellect = 16,
+      armor = 946,
       physicalCritRating = 13.0
       )
 

@@ -50,7 +50,8 @@ public class FarSeersHelm : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
-      intellect = 25
+      intellect = 25,
+      armor = 530
       )
 
   public override var sockets: Array<Socket> = arrayOf(

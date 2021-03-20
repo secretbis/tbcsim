@@ -50,6 +50,7 @@ public class WarchiefsMantle : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       stamina = 27,
+      armor = 786,
       parryRating = 18.0
       )
 

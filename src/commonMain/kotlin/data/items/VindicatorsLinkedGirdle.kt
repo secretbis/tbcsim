@@ -52,6 +52,7 @@ public class VindicatorsLinkedGirdle : Item() {
       strength = 34,
       stamina = 49,
       intellect = 23,
+      armor = 575,
       physicalCritRating = 33.0
       )
 

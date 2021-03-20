@@ -52,6 +52,7 @@ public class VindicatorsOrnamentedGreaves : Item() {
   public override var stats: Stats = Stats(
       stamina = 43,
       intellect = 30,
+      armor = 1255,
       spellCritRating = 30.0
       )
 

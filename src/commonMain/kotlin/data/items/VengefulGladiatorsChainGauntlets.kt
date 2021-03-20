@@ -53,6 +53,7 @@ public class VengefulGladiatorsChainGauntlets : Item() {
       agility = 33,
       stamina = 52,
       intellect = 15,
+      armor = 639,
       physicalCritRating = 19.0
       )
 

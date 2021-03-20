@@ -55,6 +55,7 @@ public class CowlOfTirisfal : Item() {
       stamina = 30,
       intellect = 36,
       spirit = 24,
+      armor = 181,
       spellCritRating = 24.0
       )
 

@@ -62,6 +62,7 @@ public class ChainOfUnleashedRage : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 37,
+      armor = 904,
       physicalHitRating = 14.0
       )
 

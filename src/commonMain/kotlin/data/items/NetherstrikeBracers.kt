@@ -52,6 +52,7 @@ public class NetherstrikeBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       intellect = 13,
+      armor = 355,
       spellCritRating = 17.0
       )
 

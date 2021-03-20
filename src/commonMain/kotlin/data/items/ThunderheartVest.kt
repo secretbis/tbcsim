@@ -55,6 +55,7 @@ public class ThunderheartVest : Item() {
       stamina = 42,
       intellect = 40,
       spirit = 27,
+      armor = 459,
       spellCritRating = 25.0,
       spellHitRating = 17.0
       )

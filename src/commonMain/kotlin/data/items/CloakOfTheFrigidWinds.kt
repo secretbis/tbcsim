@@ -49,6 +49,7 @@ public class CloakOfTheFrigidWinds : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 16,
+      armor = 93,
       spellCritRating = 22.0
       )
 

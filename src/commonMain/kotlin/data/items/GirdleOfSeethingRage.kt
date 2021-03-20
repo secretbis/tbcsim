@@ -61,6 +61,7 @@ public class GirdleOfSeethingRage : Item() {
   public override var stats: Stats = Stats(
       strength = 40,
       stamina = 55,
+      armor = 993,
       physicalHasteRating = 30.0
       )
 

@@ -55,6 +55,7 @@ public class CycloneBreastplate : Item() {
       strength = 33,
       stamina = 31,
       intellect = 23,
+      armor = 846,
       physicalCritRating = 25.0
       )
 

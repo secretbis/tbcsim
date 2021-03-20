@@ -59,6 +59,7 @@ public class CowlOfTheGuiltless : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
+      armor = 237,
       dodgeRating = 30.0
       )
 

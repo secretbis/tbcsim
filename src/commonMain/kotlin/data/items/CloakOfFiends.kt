@@ -49,6 +49,7 @@ public class CloakOfFiends : Item() {
   public override var stats: Stats = Stats(
       agility = 20,
       stamina = 22,
+      armor = 108,
       physicalHasteRating = 25.0
       )
 

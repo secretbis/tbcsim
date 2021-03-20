@@ -61,6 +61,7 @@ public class RobeOfTheElderScribes : Item() {
       stamina = 27,
       intellect = 29,
       spirit = 24,
+      armor = 194,
       spellCritRating = 24.0
       )
 

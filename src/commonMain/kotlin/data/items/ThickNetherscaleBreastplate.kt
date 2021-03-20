@@ -49,7 +49,8 @@ public class ThickNetherscaleBreastplate : Item() {
   public override var stats: Stats = Stats(
       agility = 36,
       stamina = 36,
-      intellect = 25
+      intellect = 25,
+      armor = 744
       )
 
   public override var sockets: Array<Socket> = arrayOf()

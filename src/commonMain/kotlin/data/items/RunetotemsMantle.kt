@@ -60,7 +60,8 @@ public class RunetotemsMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 31,
       intellect = 22,
-      spirit = 32
+      spirit = 32,
+      armor = 326
       )
 
   public override var sockets: Array<Socket> = arrayOf()

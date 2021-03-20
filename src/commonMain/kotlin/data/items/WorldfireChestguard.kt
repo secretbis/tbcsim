@@ -49,6 +49,7 @@ public class WorldfireChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 32,
+      armor = 652,
       spellCritRating = 22.0
       )
 

@@ -47,6 +47,7 @@ public class VindicatorsHauberk : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
+      armor = 1164,
       defenseRating = 46.0,
       dodgeRating = 19.0
       )

@@ -87,6 +87,8 @@ class Warrior(talents: Map<String, Talent>) : Class(talents) {
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 2
     override val critPctPerAgility: Double = 1.0 / 33.0
+    override val dodgePctPerAgility: Double = 1.0 / 30.0
+    override val baseDodgePct: Double = 0.75
     override val rangedAttackPowerFromAgility: Int = 0
     override val baseMana: Int = 0
     override val baseSpellCritChance: Double = 0.0

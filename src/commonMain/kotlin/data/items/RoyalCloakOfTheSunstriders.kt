@@ -59,7 +59,8 @@ public class RoyalCloakOfTheSunstriders : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      intellect = 22
+      intellect = 22,
+      armor = 116
       )
 
   public override var sockets: Array<Socket> = arrayOf()

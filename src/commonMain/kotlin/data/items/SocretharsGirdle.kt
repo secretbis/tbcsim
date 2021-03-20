@@ -60,6 +60,7 @@ public class SocretharsGirdle : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 21,
+      armor = 156,
       physicalHitRating = 20.0
       )
 

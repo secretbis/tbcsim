@@ -51,6 +51,7 @@ public class EluniteImbuedLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 40,
+      armor = 353,
       spellCritRating = 31.0
       )
 

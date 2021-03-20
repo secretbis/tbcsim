@@ -63,6 +63,7 @@ public class WarhelmOfTheBold : Item() {
       strength = 24,
       agility = 22,
       stamina = 23,
+      armor = 946,
       defenseRating = 20.0
       )
 

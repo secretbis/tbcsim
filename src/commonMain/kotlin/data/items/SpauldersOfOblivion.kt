@@ -51,7 +51,8 @@ public class SpauldersOfOblivion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 17
+      intellect = 17,
+      armor = 117
       )
 
   public override var sockets: Array<Socket> = arrayOf(

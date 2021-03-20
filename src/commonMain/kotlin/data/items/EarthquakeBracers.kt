@@ -61,7 +61,8 @@ public class EarthquakeBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      intellect = 21
+      intellect = 21,
+      armor = 394
       )
 
   public override var sockets: Array<Socket> = arrayOf(

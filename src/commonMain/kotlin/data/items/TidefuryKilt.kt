@@ -50,6 +50,7 @@ public class TidefuryKilt : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 31,
+      armor = 570,
       spellCritRating = 19.0
       )
 

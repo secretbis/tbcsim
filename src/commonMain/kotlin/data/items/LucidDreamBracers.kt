@@ -49,7 +49,8 @@ public class LucidDreamBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       intellect = 15,
-      spirit = 17
+      spirit = 17,
+      armor = 128
       )
 
   public override var sockets: Array<Socket> = arrayOf()

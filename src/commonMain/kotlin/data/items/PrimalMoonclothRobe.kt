@@ -51,7 +51,8 @@ public class PrimalMoonclothRobe : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 20,
-      spirit = 20
+      spirit = 20,
+      armor = 202
       )
 
   public override var sockets: Array<Socket> = arrayOf(

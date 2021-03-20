@@ -60,6 +60,7 @@ public class BoneweaveGirdle : Item() {
   public override var stats: Stats = Stats(
       agility = 38,
       intellect = 26,
+      armor = 556,
       physicalCritRating = 24.0,
       physicalHitRating = 17.0
       )

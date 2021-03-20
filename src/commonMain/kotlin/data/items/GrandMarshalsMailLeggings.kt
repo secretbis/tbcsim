@@ -52,6 +52,7 @@ public class GrandMarshalsMailLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 18,
+      armor = 570,
       spellCritRating = 22.0
       )
 

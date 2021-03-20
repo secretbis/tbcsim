@@ -49,6 +49,7 @@ public class CrimsonBracersOfGloom : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 18,
+      armor = 68,
       spellHitRating = 12.0
       )
 

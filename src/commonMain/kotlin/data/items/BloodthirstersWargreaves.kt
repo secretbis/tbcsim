@@ -61,6 +61,7 @@ public class BloodthirstersWargreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 43,
+      armor = 1406,
       physicalHitRating = 38.0
       )
 

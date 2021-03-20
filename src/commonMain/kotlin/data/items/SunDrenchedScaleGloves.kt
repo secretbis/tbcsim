@@ -62,6 +62,7 @@ public class SunDrenchedScaleGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       intellect = 36,
+      armor = 694,
       spellHasteRating = 32.0
       )
 

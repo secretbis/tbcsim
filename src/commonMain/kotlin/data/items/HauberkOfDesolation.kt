@@ -52,6 +52,7 @@ public class HauberkOfDesolation : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 25,
+      armor = 652,
       physicalCritRating = 16.0
       )
 

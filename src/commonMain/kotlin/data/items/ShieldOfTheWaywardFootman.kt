@@ -47,6 +47,7 @@ public class ShieldOfTheWaywardFootman : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 3329,
       defenseRating = 16.0,
       blockRating = 18.0
       )

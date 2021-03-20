@@ -51,7 +51,8 @@ public class FelstalkerBracers : Item() {
 
   public override var stats: Stats = Stats(
       agility = 18,
-      intellect = 11
+      intellect = 11,
+      armor = 283
       )
 
   public override var sockets: Array<Socket> = arrayOf(

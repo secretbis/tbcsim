@@ -52,6 +52,7 @@ public class VeteransChainBracers : Item() {
       agility = 20,
       stamina = 29,
       intellect = 10,
+      armor = 388,
       physicalCritRating = 8.0
       )
 

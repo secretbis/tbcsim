@@ -60,6 +60,7 @@ public class HurricaneBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 26,
+      armor = 619,
       spellCritRating = 26.0
       )
 

@@ -48,7 +48,8 @@ public class WrathInfusedGauntlets : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 34,
-      intellect = 28
+      intellect = 28,
+      armor = 486
       )
 
   public override var sockets: Array<Socket> = arrayOf()

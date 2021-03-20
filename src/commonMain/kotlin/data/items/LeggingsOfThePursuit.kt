@@ -63,6 +63,7 @@ public class LeggingsOfThePursuit : Item() {
       agility = 44,
       stamina = 36,
       intellect = 30,
+      armor = 864,
       physicalHitRating = 15.0
       )
 

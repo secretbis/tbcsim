@@ -60,6 +60,7 @@ public class ShoulderpadsOfRenewedLife : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 29,
+      armor = 333,
       spellHasteRating = 38.0
       )
 

@@ -48,7 +48,8 @@ public class LightTouchedStoleOfAltruism : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
-      intellect = 21
+      intellect = 21,
+      armor = 93
       )
 
   public override var sockets: Array<Socket> = arrayOf()

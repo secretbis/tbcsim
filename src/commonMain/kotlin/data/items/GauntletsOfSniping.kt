@@ -63,6 +63,7 @@ public class GauntletsOfSniping : Item() {
       agility = 20,
       stamina = 27,
       intellect = 20,
+      armor = 562,
       physicalHitRating = 19.0
       )
 

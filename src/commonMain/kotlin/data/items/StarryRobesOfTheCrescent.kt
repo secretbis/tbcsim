@@ -50,6 +50,7 @@ public class StarryRobesOfTheCrescent : Item() {
       stamina = 23,
       intellect = 30,
       spirit = 24,
+      armor = 292,
       spellCritRating = 19.0
       )
 

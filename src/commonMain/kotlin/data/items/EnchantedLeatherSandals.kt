@@ -60,7 +60,8 @@ public class EnchantedLeatherSandals : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 29,
-      spirit = 37
+      spirit = 37,
+      armor = 305
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -60,6 +60,7 @@ public class SavageMaskOfTheLynxLord : Item() {
   public override var stats: Stats = Stats(
       agility = 35,
       stamina = 34,
+      armor = 237,
       physicalHitRating = 15.0
       )
 

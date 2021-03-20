@@ -54,7 +54,8 @@ public class ThunderheartLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 40,
-      spirit = 36
+      spirit = 36,
+      armor = 401
       )
 
   public override var sockets: Array<Socket> = arrayOf(

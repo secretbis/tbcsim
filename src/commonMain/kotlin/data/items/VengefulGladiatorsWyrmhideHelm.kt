@@ -54,6 +54,7 @@ public class VengefulGladiatorsWyrmhideHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 58,
       intellect = 30,
+      armor = 415,
       spellCritRating = 17.0
       )
 

@@ -60,7 +60,8 @@ public class ObsidianClodstompers : Item() {
 
   public override var stats: Stats = Stats(
       strength = 34,
-      stamina = 30
+      stamina = 30,
+      armor = 800
       )
 
   public override var sockets: Array<Socket> = arrayOf(

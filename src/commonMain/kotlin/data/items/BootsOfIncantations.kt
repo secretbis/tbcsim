@@ -63,6 +63,7 @@ public class BootsOfIncantations : Item() {
       stamina = 37,
       intellect = 26,
       spirit = 23,
+      armor = 162,
       spellHitRating = 17.0
       )
 

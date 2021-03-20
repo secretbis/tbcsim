@@ -50,7 +50,8 @@ public class HoodOfTheThirdEye : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 40
+      intellect = 40,
+      armor = 181
       )
 
   public override var sockets: Array<Socket> = arrayOf(

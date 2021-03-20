@@ -53,6 +53,7 @@ public class NordrassilGauntlets : Item() {
       stamina = 26,
       intellect = 27,
       spirit = 23,
+      armor = 262,
       spellCritRating = 24.0
       )
 

@@ -49,6 +49,7 @@ public class ArcheryBeltOfTheBroken : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 19,
+      armor = 367,
       physicalCritRating = 18.0
       )
 

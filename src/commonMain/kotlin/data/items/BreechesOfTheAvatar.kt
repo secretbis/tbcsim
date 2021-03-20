@@ -54,7 +54,8 @@ public class BreechesOfTheAvatar : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 36,
-      spirit = 27
+      spirit = 27,
+      armor = 195
       )
 
   public override var sockets: Array<Socket> = arrayOf(

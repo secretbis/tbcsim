@@ -60,7 +60,8 @@ public class StarSoulBreeches : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 27,
-      spirit = 52
+      spirit = 52,
+      armor = 188
       )
 
   public override var sockets: Array<Socket> = arrayOf()

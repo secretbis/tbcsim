@@ -50,7 +50,8 @@ public class VestOfLivingLightning : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      intellect = 15
+      intellect = 15,
+      armor = 523
       )
 
   public override var sockets: Array<Socket> = arrayOf(

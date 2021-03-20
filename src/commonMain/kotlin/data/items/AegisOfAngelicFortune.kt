@@ -48,7 +48,8 @@ public class AegisOfAngelicFortune : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      intellect = 21
+      intellect = 21,
+      armor = 6459
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -50,7 +50,8 @@ public class BeltOfTheRavenLord : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       agility = 17,
-      stamina = 22
+      stamina = 22,
+      armor = 234
       )
 
   public override var sockets: Array<Socket> = arrayOf(

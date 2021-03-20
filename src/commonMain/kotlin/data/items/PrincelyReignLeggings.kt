@@ -50,6 +50,7 @@ public class PrincelyReignLeggings : Item() {
       stamina = 18,
       intellect = 28,
       spirit = 12,
+      armor = 110,
       spellHitRating = 18.0
       )
 

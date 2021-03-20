@@ -49,6 +49,7 @@ public class SunGildedShouldercaps : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 26,
+      armor = 214,
       physicalHitRating = 15.0
       )
 

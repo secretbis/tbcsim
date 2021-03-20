@@ -47,6 +47,7 @@ public class VioletSignetOfTheGreatProtector : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 37,
+      armor = 392,
       defenseRating = 19.0
       )
 

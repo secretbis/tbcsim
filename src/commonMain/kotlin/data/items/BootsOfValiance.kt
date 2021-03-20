@@ -60,6 +60,7 @@ public class BootsOfValiance : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 28,
+      armor = 997,
       spellCritRating = 25.0
       )
 

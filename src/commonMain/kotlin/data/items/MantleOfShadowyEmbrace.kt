@@ -48,7 +48,8 @@ public class MantleOfShadowyEmbrace : Item() {
 
   public override var stats: Stats = Stats(
       agility = 39,
-      stamina = 33
+      stamina = 33,
+      armor = 262
       )
 
   public override var sockets: Array<Socket> = arrayOf()

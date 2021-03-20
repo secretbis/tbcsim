@@ -52,6 +52,7 @@ public class GladiatorsLinkedLeggings : Item() {
       strength = 30,
       stamina = 54,
       intellect = 25,
+      armor = 758,
       physicalCritRating = 36.0
       )
 

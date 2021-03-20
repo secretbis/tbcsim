@@ -61,6 +61,7 @@ public class GirdleOfMightyResolve : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 56,
+      armor = 993,
       defenseRating = 26.0,
       blockRating = 25.0
       )

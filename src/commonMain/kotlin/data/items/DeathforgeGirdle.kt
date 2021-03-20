@@ -50,6 +50,7 @@ public class DeathforgeGirdle : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       stamina = 25,
+      armor = 655,
       physicalCritRating = 20.0
       )
 

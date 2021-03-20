@@ -46,7 +46,8 @@ public class InfernoForgedGloves : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 52
+      stamina = 52,
+      armor = 507
       )
 
   public override var sockets: Array<Socket> = arrayOf()

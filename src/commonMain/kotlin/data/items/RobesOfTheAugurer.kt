@@ -51,7 +51,8 @@ public class RobesOfTheAugurer : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 18,
-      spirit = 11
+      spirit = 11,
+      armor = 129
       )
 
   public override var sockets: Array<Socket> = arrayOf(

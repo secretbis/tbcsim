@@ -49,6 +49,7 @@ public class GauntletsOfTheVanquisher : Item() {
       strength = 24,
       agility = 23,
       stamina = 30,
+      armor = 691,
       physicalHitRating = 14.0
       )
 

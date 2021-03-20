@@ -27,6 +27,8 @@ class Druid : Class(mapOf()) {
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0
+    override val dodgePctPerAgility: Double = 1.0 / 14.7
+    override val baseDodgePct: Double = -1.87
     override var rangedAttackPowerFromAgility: Int = 0
 
     override val baseMana: Int = 2370

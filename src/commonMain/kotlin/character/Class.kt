@@ -38,6 +38,8 @@ abstract class Class(
     abstract val attackPowerFromStrength: Int
     abstract val critPctPerAgility: Double
     abstract val rangedAttackPowerFromAgility: Int
+    abstract val dodgePctPerAgility: Double
+    abstract val baseDodgePct: Double
 
     // Class-specific constant
     // Druid 2370

@@ -54,6 +54,7 @@ public class BootsOfTheTempest : Item() {
   public override var stats: Stats = Stats(
       intellect = 29,
       spirit = 20,
+      armor = 177,
       spellCritRating = 20.0,
       spellHitRating = 15.0,
       spellHasteRating = 25.0

@@ -47,7 +47,8 @@ public class SilvermoonCrestShield : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 20
+      intellect = 20,
+      armor = 3806
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -54,6 +54,7 @@ public class GuardiansLinkedBracers : Item() {
       strength = 28,
       stamina = 37,
       intellect = 17,
+      armor = 471,
       physicalCritRating = 24.0
       )
 

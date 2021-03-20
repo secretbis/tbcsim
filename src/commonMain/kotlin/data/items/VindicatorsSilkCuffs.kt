@@ -55,6 +55,7 @@ public class VindicatorsSilkCuffs : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 22,
+      armor = 173,
       spellCritRating = 15.0
       )
 

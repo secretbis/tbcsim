@@ -50,6 +50,7 @@ public class CrystalweaveBracers : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 16,
+      armor = 78,
       spellCritRating = 12.0
       )
 

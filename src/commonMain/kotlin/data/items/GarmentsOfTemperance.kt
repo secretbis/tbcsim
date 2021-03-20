@@ -48,7 +48,8 @@ public class GarmentsOfTemperance : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 51,
-      intellect = 34
+      intellect = 34,
+      armor = 236
       )
 
   public override var sockets: Array<Socket> = arrayOf()

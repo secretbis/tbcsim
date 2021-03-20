@@ -48,7 +48,8 @@ public class SilentStriderKneeboots : Item() {
 
   public override var stats: Stats = Stats(
       agility = 27,
-      stamina = 30
+      stamina = 30,
+      armor = 201
       )
 
   public override var sockets: Array<Socket> = arrayOf()

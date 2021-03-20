@@ -50,7 +50,8 @@ public class HallowedHandwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 20,
-      spirit = 26
+      spirit = 26,
+      armor = 97
       )
 
   public override var sockets: Array<Socket> = arrayOf()

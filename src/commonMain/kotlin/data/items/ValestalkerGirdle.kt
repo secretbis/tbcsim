@@ -61,6 +61,7 @@ public class ValestalkerGirdle : Item() {
       agility = 27,
       stamina = 25,
       intellect = 18,
+      armor = 556,
       physicalHasteRating = 36.0
       )
 

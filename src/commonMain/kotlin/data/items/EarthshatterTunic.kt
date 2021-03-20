@@ -60,7 +60,8 @@ public class EarthshatterTunic : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 26,
-      intellect = 32
+      intellect = 32,
+      armor = 658
       )
 
   public override var sockets: Array<Socket> = arrayOf()

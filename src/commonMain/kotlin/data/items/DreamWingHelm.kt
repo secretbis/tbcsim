@@ -49,6 +49,7 @@ public class DreamWingHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 25,
+      armor = 516,
       physicalCritRating = 20.0,
       physicalHitRating = 13.0
       )

@@ -60,6 +60,7 @@ public class HexLordsVoodooPauldrons : Item() {
   public override var stats: Stats = Stats(
       stamina = 17,
       intellect = 30,
+      armor = 700,
       spellHasteRating = 30.0
       )
 

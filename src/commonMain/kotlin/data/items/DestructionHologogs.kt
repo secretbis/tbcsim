@@ -51,6 +51,7 @@ public class DestructionHologogs : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 24,
+      armor = 174,
       spellCritRating = 29.0
       )
 

@@ -55,6 +55,7 @@ public class ThunderheartWaistguard : Item() {
       agility = 40,
       stamina = 33,
       intellect = 20,
+      armor = 342,
       physicalHitRating = 23.0
       )
 

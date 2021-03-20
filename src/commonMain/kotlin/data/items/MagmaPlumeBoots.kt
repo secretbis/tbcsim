@@ -49,6 +49,7 @@ public class MagmaPlumeBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 26,
+      armor = 448,
       spellHitRating = 14.0
       )
 

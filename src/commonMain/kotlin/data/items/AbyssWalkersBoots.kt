@@ -48,6 +48,7 @@ public class AbyssWalkersBoots : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 94,
       spellCritRating = 22.0
       )
 

@@ -51,6 +51,7 @@ public class ShamblehideChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 16,
       intellect = 19,
+      armor = 539,
       physicalCritRating = 21.0
       )
 

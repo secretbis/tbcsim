@@ -53,7 +53,8 @@ public class LightbringerGloves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 35,
-      intellect = 29
+      intellect = 29,
+      armor = 1141
       )
 
   public override var sockets: Array<Socket> = arrayOf(

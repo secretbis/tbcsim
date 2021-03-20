@@ -49,6 +49,7 @@ public class GauntletsOfTheIronTower : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 831,
       defenseRating = 20.0
       )
 

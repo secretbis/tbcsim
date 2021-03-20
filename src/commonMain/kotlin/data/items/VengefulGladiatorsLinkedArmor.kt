@@ -54,6 +54,7 @@ public class VengefulGladiatorsLinkedArmor : Item() {
   public override var stats: Stats = Stats(
       strength = 27,
       stamina = 64,
+      armor = 1022,
       physicalCritRating = 30.0,
       physicalHitRating = 12.0
       )

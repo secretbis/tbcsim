@@ -51,7 +51,8 @@ public class LightBlessedBonds : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 22,
-      spirit = 25
+      spirit = 25,
+      armor = 135
       )
 
   public override var sockets: Array<Socket> = arrayOf(

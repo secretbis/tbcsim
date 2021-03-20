@@ -60,6 +60,7 @@ public class BloodstainedElvenBattlevest : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 69,
+      armor = 1607,
       physicalCritRating = 35.0
       )
 

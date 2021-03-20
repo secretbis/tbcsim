@@ -52,6 +52,7 @@ public class GauntletsOfTheBold : Item() {
       strength = 17,
       agility = 16,
       stamina = 31,
+      armor = 728,
       defenseRating = 14.0
       )
 

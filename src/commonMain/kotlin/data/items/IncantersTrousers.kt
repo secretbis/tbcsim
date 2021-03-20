@@ -51,6 +51,7 @@ public class IncantersTrousers : Item() {
       stamina = 25,
       intellect = 30,
       spirit = 17,
+      armor = 136,
       spellCritRating = 18.0
       )
 

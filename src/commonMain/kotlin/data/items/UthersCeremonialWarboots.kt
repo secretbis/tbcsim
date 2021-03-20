@@ -60,7 +60,8 @@ public class UthersCeremonialWarboots : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 21,
-      intellect = 20
+      intellect = 20,
+      armor = 720
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,6 +55,7 @@ public class PauldronsOfTheAldor : Item() {
       stamina = 25,
       intellect = 26,
       spirit = 16,
+      armor = 152,
       spellCritRating = 15.0
       )
 

@@ -54,7 +54,8 @@ public class LightMantleOfTheIncarnate : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 30,
-      spirit = 22
+      spirit = 22,
+      armor = 152
       )
 
   public override var sockets: Array<Socket> = arrayOf(

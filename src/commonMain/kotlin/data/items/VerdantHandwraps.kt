@@ -49,6 +49,7 @@ public class VerdantHandwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 13,
       intellect = 12,
+      armor = 327,
       spellCritRating = 8.0
       )
 

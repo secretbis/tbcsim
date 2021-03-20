@@ -50,6 +50,7 @@ public class GlovesOfTheHighMagus : Item() {
       stamina = 13,
       intellect = 18,
       spirit = 10,
+      armor = 90,
       spellCritRating = 22.0
       )
 

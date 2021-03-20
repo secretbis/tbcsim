@@ -60,7 +60,8 @@ public class CinctureOfWill : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 28,
-      spirit = 25
+      spirit = 25,
+      armor = 109
       )
 
   public override var sockets: Array<Socket> = arrayOf()

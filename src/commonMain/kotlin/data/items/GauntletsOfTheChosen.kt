@@ -48,6 +48,7 @@ public class GauntletsOfTheChosen : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 30,
+      armor = 728,
       defenseRating = 35.0
       )
 

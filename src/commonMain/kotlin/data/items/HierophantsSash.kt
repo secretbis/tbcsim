@@ -48,7 +48,8 @@ public class HierophantsSash : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      intellect = 19
+      intellect = 19,
+      armor = 77
       )
 
   public override var sockets: Array<Socket> = arrayOf()

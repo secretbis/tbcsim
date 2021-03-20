@@ -49,7 +49,8 @@ public class LunarClawPauldrons : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 26,
-      spirit = 17
+      spirit = 17,
+      armor = 219
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,6 +52,7 @@ public class NetherstrikeBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 10,
       intellect = 17,
+      armor = 457,
       spellCritRating = 16.0
       )
 

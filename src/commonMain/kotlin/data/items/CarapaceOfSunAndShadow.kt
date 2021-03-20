@@ -51,6 +51,7 @@ public class CarapaceOfSunAndShadow : Item() {
   public override var stats: Stats = Stats(
       agility = 42,
       stamina = 45,
+      armor = 499,
       physicalHitRating = 30.0,
       physicalHasteRating = 38.0
       )

@@ -60,7 +60,8 @@ public class GroveBandsOfRemulos : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 14,
-      spirit = 21
+      spirit = 21,
+      armor = 177
       )
 
   public override var sockets: Array<Socket> = arrayOf()

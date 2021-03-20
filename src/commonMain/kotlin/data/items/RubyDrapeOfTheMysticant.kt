@@ -60,6 +60,7 @@ public class RubyDrapeOfTheMysticant : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 21,
+      armor = 105,
       spellHitRating = 18.0
       )
 

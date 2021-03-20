@@ -60,6 +60,7 @@ public class SpauldersOfDementia : Item() {
       strength = 25,
       agility = 24,
       stamina = 34,
+      armor = 1042,
       defenseRating = 23.0
       )
 

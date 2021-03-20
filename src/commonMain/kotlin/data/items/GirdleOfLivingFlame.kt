@@ -51,6 +51,7 @@ public class GirdleOfLivingFlame : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 17,
+      armor = 367,
       spellHitRating = 16.0
       )
 

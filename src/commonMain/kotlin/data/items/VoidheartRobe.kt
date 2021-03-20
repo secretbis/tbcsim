@@ -54,6 +54,7 @@ public class VoidheartRobe : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 33,
+      armor = 202,
       spellHitRating = 13.0
       )
 

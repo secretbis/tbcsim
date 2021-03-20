@@ -60,6 +60,7 @@ public class SaviorsGrasp : Item() {
   public override var stats: Stats = Stats(
       stamina = 69,
       intellect = 48,
+      armor = 1886,
       spellCritRating = 46.0
       )
 

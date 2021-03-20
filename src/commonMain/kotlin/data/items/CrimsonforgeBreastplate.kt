@@ -48,6 +48,7 @@ public class CrimsonforgeBreastplate : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 45,
+      armor = 1164,
       physicalCritRating = 26.0,
       physicalHitRating = 16.0
       )

@@ -51,6 +51,7 @@ public class SpauldersOfTheThalassianDefender : Item() {
   public override var stats: Stats = Stats(
       stamina = 60,
       intellect = 24,
+      armor = 1487,
       defenseRating = 27.0
       )
 

@@ -52,6 +52,7 @@ public class OnslaughtTreads : Item() {
 
   public override var stats: Stats = Stats(
       strength = 44,
+      armor = 1322,
       physicalCritRating = 36.0,
       physicalHitRating = 25.0,
       physicalHasteRating = 30.0

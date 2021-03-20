@@ -62,6 +62,7 @@ public class GripsOfNaturesWrath : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 27,
+      armor = 562,
       spellCritRating = 21.0
       )
 

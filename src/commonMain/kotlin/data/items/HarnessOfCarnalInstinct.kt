@@ -52,7 +52,8 @@ public class HarnessOfCarnalInstinct : Item() {
       strength = 52,
       agility = 44,
       stamina = 64,
-      intellect = 22
+      intellect = 22,
+      armor = 807
       )
 
   public override var sockets: Array<Socket> = arrayOf(

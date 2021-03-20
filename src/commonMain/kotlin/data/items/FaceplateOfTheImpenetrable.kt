@@ -50,6 +50,7 @@ public class FaceplateOfTheImpenetrable : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 82,
+      armor = 1532,
       defenseRating = 30.0,
       blockRating = 29.0,
       dodgeRating = 38.0

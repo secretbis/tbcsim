@@ -51,6 +51,7 @@ public class EmbraceOfTheTwistingNether : Item() {
   public override var stats: Stats = Stats(
       stamina = 56,
       intellect = 27,
+      armor = 1022,
       physicalCritRating = 35.0
       )
 

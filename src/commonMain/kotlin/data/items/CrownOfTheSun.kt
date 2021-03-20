@@ -60,7 +60,8 @@ public class CrownOfTheSun : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 38,
-      spirit = 49
+      spirit = 49,
+      armor = 188
       )
 
   public override var sockets: Array<Socket> = arrayOf()

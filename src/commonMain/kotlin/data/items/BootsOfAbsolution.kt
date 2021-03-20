@@ -55,6 +55,7 @@ public class BootsOfAbsolution : Item() {
       stamina = 27,
       intellect = 30,
       spirit = 29,
+      armor = 177,
       spellHasteRating = 19.0
       )
 

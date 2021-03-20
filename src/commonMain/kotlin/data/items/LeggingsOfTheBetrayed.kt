@@ -51,6 +51,7 @@ public class LeggingsOfTheBetrayed : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 25,
+      armor = 256,
       physicalHasteRating = 18.0
       )
 

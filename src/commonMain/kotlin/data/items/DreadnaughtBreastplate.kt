@@ -60,7 +60,8 @@ public class DreadnaughtBreastplate : Item() {
 
   public override var stats: Stats = Stats(
       strength = 21,
-      stamina = 43
+      stamina = 43,
+      armor = 1172
       )
 
   public override var sockets: Array<Socket> = arrayOf()

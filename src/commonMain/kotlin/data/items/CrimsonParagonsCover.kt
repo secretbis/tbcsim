@@ -47,6 +47,7 @@ public class CrimsonParagonsCover : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 61,
+      armor = 129,
       expertiseRating = 28.0,
       dodgeRating = 28.0
       )

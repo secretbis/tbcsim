@@ -55,6 +55,7 @@ public class CataclysmChestplate : Item() {
       agility = 32,
       stamina = 46,
       intellect = 28,
+      armor = 934,
       physicalHitRating = 19.0
       )
 

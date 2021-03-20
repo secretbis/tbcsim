@@ -63,6 +63,7 @@ public class ForestProwlersHelm : Item() {
       agility = 42,
       stamina = 29,
       intellect = 28,
+      armor = 803,
       physicalCritRating = 20.0
       )
 

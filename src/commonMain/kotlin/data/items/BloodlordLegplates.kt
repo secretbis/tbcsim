@@ -50,6 +50,7 @@ public class BloodlordLegplates : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 27,
+      armor = 1019,
       physicalCritRating = 11.0
       )
 

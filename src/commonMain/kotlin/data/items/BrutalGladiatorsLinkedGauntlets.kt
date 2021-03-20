@@ -52,6 +52,7 @@ public class BrutalGladiatorsLinkedGauntlets : Item() {
   public override var stats: Stats = Stats(
       strength = 38,
       stamina = 58,
+      armor = 694,
       physicalCritRating = 37.0
       )
 

@@ -48,6 +48,7 @@ public class ShieldOfTheVoid : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 3234,
       defenseRating = 16.0
       )
 

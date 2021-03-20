@@ -54,7 +54,8 @@ public class StagHelmOfMalorne : Item() {
       strength = 41,
       agility = 33,
       stamina = 30,
-      intellect = 19
+      intellect = 19,
+      armor = 490
       )
 
   public override var sockets: Array<Socket> = arrayOf(

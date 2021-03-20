@@ -62,7 +62,8 @@ public class TrousersOfTheAstromancer : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 36,
-      spirit = 22
+      spirit = 22,
+      armor = 188
       )
 
   public override var sockets: Array<Socket> = arrayOf(

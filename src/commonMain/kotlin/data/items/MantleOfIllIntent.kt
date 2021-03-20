@@ -60,6 +60,7 @@ public class MantleOfIllIntent : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 24,
+      armor = 161,
       spellHasteRating = 33.0
       )
 

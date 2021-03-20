@@ -52,6 +52,7 @@ public class VengefulGladiatorsMailLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 64,
       intellect = 33,
+      armor = 894,
       spellCritRating = 29.0
       )
 

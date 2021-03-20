@@ -53,6 +53,7 @@ public class BrutalGladiatorsLinkedLeggings : Item() {
       strength = 43,
       stamina = 74,
       intellect = 38,
+      armor = 971,
       physicalCritRating = 41.0
       )
 

@@ -49,6 +49,7 @@ public class GauntletsOfDissension : Item() {
       strength = 24,
       agility = 23,
       stamina = 36,
+      armor = 868,
       defenseRating = 24.0
       )
 

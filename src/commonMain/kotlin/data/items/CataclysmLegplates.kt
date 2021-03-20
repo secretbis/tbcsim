@@ -55,6 +55,7 @@ public class CataclysmLegplates : Item() {
       agility = 32,
       stamina = 58,
       intellect = 31,
+      armor = 817,
       physicalHitRating = 21.0
       )
 

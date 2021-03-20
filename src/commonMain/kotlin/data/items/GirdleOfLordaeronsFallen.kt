@@ -60,6 +60,7 @@ public class GirdleOfLordaeronsFallen : Item() {
   public override var stats: Stats = Stats(
       stamina = 32,
       intellect = 32,
+      armor = 993,
       spellHasteRating = 38.0
       )
 

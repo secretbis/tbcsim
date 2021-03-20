@@ -50,6 +50,7 @@ public class ShalassiOraclesSandals : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 21,
+      armor = 86,
       spellCritRating = 15.0
       )
 

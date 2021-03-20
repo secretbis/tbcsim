@@ -51,7 +51,8 @@ public class CowlOfNaaruBlessings : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 29,
-      spirit = 23
+      spirit = 23,
+      armor = 151
       )
 
   public override var sockets: Array<Socket> = arrayOf(

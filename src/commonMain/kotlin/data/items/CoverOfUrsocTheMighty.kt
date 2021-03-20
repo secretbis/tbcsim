@@ -52,6 +52,7 @@ public class CoverOfUrsocTheMighty : Item() {
       stamina = 45,
       intellect = 41,
       spirit = 30,
+      armor = 405,
       spellCritRating = 37.0
       )
 

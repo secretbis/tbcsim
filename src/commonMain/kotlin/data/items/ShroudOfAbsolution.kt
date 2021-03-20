@@ -54,6 +54,7 @@ public class ShroudOfAbsolution : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 39,
+      armor = 244,
       spellCritRating = 21.0,
       spellHitRating = 20.0
       )

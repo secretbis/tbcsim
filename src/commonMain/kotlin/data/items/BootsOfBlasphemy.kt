@@ -59,7 +59,8 @@ public class BootsOfBlasphemy : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 29
+      intellect = 29,
+      armor = 128
       )
 
   public override var sockets: Array<Socket> = arrayOf()

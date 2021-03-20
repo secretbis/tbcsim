@@ -60,6 +60,7 @@ public class PearlInlaidBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 27,
+      armor = 1213,
       spellCritRating = 28.0
       )
 

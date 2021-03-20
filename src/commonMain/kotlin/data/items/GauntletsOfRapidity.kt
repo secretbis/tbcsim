@@ -63,6 +63,7 @@ public class GauntletsOfRapidity : Item() {
       agility = 34,
       stamina = 30,
       intellect = 19,
+      armor = 617,
       physicalCritRating = 16.0
       )
 

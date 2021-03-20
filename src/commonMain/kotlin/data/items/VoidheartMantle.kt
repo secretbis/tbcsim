@@ -54,6 +54,7 @@ public class VoidheartMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 22,
+      armor = 152,
       spellHitRating = 14.0
       )
 

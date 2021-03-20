@@ -51,7 +51,8 @@ public class StuddedGirdleOfVirtue : Item() {
   public override var stats: Stats = Stats(
       strength = 19,
       stamina = 18,
-      intellect = 14
+      intellect = 14,
+      armor = 540
       )
 
   public override var sockets: Array<Socket> = arrayOf(

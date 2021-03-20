@@ -49,7 +49,8 @@ public class ShroudOfForgiveness : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 19,
-      spirit = 20
+      spirit = 20,
+      armor = 118
       )
 
   public override var sockets: Array<Socket> = arrayOf()

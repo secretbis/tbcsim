@@ -60,6 +60,7 @@ public class SpauldersOfTheAdvocate : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 28,
+      armor = 1206,
       spellCritRating = 21.0
       )
 

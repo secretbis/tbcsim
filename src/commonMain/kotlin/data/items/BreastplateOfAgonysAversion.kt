@@ -60,6 +60,7 @@ public class BreastplateOfAgonysAversion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1983,
       physicalHasteRating = 40.0,
       defenseRating = 36.0,
       dodgeRating = 52.0

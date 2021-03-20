@@ -50,6 +50,7 @@ public class EterniumGreathelm : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 48,
+      armor = 1178,
       defenseRating = 34.0
       )
 

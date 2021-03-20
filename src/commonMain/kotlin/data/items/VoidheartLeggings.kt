@@ -52,6 +52,7 @@ public class VoidheartLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 38,
+      armor = 177,
       spellCritRating = 25.0,
       spellHitRating = 17.0
       )

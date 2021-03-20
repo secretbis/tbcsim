@@ -52,6 +52,7 @@ public class TidefuryChestpiece : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 22,
+      armor = 652,
       spellHitRating = 10.0
       )
 

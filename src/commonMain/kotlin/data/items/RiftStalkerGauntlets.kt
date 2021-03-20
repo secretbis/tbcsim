@@ -53,6 +53,7 @@ public class RiftStalkerGauntlets : Item() {
       agility = 34,
       stamina = 29,
       intellect = 20,
+      armor = 583,
       physicalHitRating = 19.0
       )
 

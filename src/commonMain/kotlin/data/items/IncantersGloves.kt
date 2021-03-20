@@ -51,6 +51,7 @@ public class IncantersGloves : Item() {
       stamina = 21,
       intellect = 24,
       spirit = 12,
+      armor = 97,
       spellCritRating = 14.0
       )
 

@@ -54,7 +54,8 @@ public class MantleOfTheAvatar : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 26,
-      spirit = 20
+      spirit = 20,
+      armor = 168
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -51,6 +51,7 @@ public class DuplicitousGuise : Item() {
   public override var stats: Stats = Stats(
       agility = 43,
       stamina = 57,
+      armor = 418,
       physicalHitRating = 30.0,
       physicalHasteRating = 34.0
       )

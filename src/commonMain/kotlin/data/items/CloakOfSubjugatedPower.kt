@@ -60,6 +60,7 @@ public class CloakOfSubjugatedPower : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 15,
+      armor = 114,
       spellCritRating = 16.0
       )
 

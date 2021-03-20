@@ -59,7 +59,8 @@ public class DragonQuakeShoulderguards : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      intellect = 28
+      intellect = 28,
+      armor = 609
       )
 
   public override var sockets: Array<Socket> = arrayOf()

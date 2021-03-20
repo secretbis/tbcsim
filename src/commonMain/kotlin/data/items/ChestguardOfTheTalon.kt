@@ -48,7 +48,8 @@ public class ChestguardOfTheTalon : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       agility = 34,
-      stamina = 24
+      stamina = 24,
+      armor = 378
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -61,6 +61,7 @@ public class TunicOfTheRangerLord : Item() {
       agility = 45,
       stamina = 34,
       intellect = 23,
+      armor = 879,
       physicalCritRating = 23.0
       )
 

@@ -55,6 +55,7 @@ public class TreadsOfAbsolution : Item() {
       stamina = 24,
       intellect = 30,
       spirit = 22,
+      armor = 177,
       spellCritRating = 16.0,
       spellHasteRating = 30.0
       )

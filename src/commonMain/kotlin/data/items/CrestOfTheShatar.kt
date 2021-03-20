@@ -50,6 +50,7 @@ public class CrestOfTheShatar : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
+      armor = 4465,
       defenseRating = 13.0
       )
 

@@ -49,7 +49,8 @@ public class GauntletsOfTheRedeemedVindicator : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 21,
-      intellect = 20
+      intellect = 20,
+      armor = 387
       )
 
   public override var sockets: Array<Socket> = arrayOf()

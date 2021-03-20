@@ -59,6 +59,7 @@ public class PauldronsOfTheArgentSentinel : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 34,
+      armor = 1206,
       spellCritRating = 32.0
       )
 

@@ -60,6 +60,7 @@ public class CloakOfWovenEnergy : Item() {
       stamina = 6,
       intellect = 13,
       spirit = 3,
+      armor = 72,
       spellCritRating = 6.0
       )
 

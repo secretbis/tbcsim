@@ -52,7 +52,8 @@ public class LegguardsOfMalorne : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 38,
-      spirit = 26
+      spirit = 26,
+      armor = 332
       )
 
   public override var sockets: Array<Socket> = arrayOf()

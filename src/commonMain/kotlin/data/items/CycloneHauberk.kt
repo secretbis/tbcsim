@@ -53,7 +53,8 @@ public class CycloneHauberk : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 36,
-      intellect = 30
+      intellect = 30,
+      armor = 846
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -50,6 +50,7 @@ public class MokNathalMaskOfBattle : Item() {
       agility = 23,
       stamina = 21,
       intellect = 21,
+      armor = 530,
       physicalHitRating = 19.0
       )
 

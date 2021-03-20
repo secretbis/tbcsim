@@ -62,6 +62,7 @@ public class PauldronsOfTribalFury : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
+      armor = 303,
       spellHitRating = 26.0
       )
 

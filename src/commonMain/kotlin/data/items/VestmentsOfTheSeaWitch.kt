@@ -62,6 +62,7 @@ public class VestmentsOfTheSeaWitch : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 28,
+      armor = 231,
       spellCritRating = 31.0,
       spellHitRating = 27.0
       )

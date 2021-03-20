@@ -53,6 +53,7 @@ public class OnslaughtChestguard : Item() {
   public override var stats: Stats = Stats(
       agility = 37,
       stamina = 69,
+      armor = 1825,
       defenseRating = 37.0,
       blockRating = 23.0,
       parryRating = 28.0

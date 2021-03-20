@@ -53,6 +53,7 @@ public class VengefulGladiatorsScaledGauntlets : Item() {
       strength = 40,
       stamina = 40,
       intellect = 22,
+      armor = 1141,
       physicalCritRating = 26.0
       )
 

@@ -52,6 +52,7 @@ public class TamelessBreeches : Item() {
       agility = 45,
       stamina = 52,
       intellect = 20,
+      armor = 654,
       physicalHasteRating = 17.0
       )
 

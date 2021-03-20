@@ -51,6 +51,7 @@ public class CloakOfTheBetrayed : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 12,
+      armor = 78,
       spellHitRating = 13.0
       )
 

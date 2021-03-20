@@ -55,6 +55,7 @@ public class RiftStalkerLeggings : Item() {
       agility = 40,
       stamina = 39,
       intellect = 26,
+      armor = 817,
       physicalHitRating = 18.0
       )
 

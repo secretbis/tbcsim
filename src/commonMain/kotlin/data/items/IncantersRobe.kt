@@ -53,6 +53,7 @@ public class IncantersRobe : Item() {
       stamina = 24,
       intellect = 22,
       spirit = 22,
+      armor = 156,
       spellCritRating = 8.0
       )
 

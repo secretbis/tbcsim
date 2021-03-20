@@ -60,6 +60,7 @@ public class MarshalsLinkedSabatons : Item() {
       agility = 27,
       stamina = 39,
       intellect = 18,
+      armor = 595,
       physicalCritRating = 27.0
       )
 

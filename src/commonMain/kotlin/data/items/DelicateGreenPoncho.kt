@@ -49,6 +49,7 @@ public class DelicateGreenPoncho : Item() {
   public override var stats: Stats = Stats(
       agility = 14,
       stamina = 19,
+      armor = 66,
       physicalHitRating = 14.0
       )
 

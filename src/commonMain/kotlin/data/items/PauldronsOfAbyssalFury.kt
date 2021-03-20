@@ -47,6 +47,7 @@ public class PauldronsOfAbyssalFury : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 72,
+      armor = 1324,
       defenseRating = 28.0,
       dodgeRating = 36.0
       )

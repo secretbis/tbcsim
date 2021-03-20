@@ -48,7 +48,8 @@ public class SunfuryLegguards : Item() {
 
   public override var stats: Stats = Stats(
       agility = 25,
-      intellect = 12
+      intellect = 12,
+      armor = 542
       )
 
   public override var sockets: Array<Socket> = arrayOf()

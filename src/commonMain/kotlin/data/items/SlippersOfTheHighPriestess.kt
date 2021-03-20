@@ -49,7 +49,8 @@ public class SlippersOfTheHighPriestess : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
-      spirit = 20
+      spirit = 20,
+      armor = 102
       )
 
   public override var sockets: Array<Socket> = arrayOf()

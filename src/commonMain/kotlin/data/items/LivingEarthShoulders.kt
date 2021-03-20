@@ -60,6 +60,7 @@ public class LivingEarthShoulders : Item() {
   public override var stats: Stats = Stats(
       stamina = 32,
       intellect = 28,
+      armor = 741,
       spellHasteRating = 37.0
       )
 

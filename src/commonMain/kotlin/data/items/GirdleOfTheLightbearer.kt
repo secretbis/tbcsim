@@ -60,6 +60,7 @@ public class GirdleOfTheLightbearer : Item() {
       strength = 49,
       stamina = 33,
       intellect = 21,
+      armor = 993,
       physicalHasteRating = 32.0
       )
 

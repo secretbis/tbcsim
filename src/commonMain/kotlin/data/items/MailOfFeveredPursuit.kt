@@ -60,6 +60,7 @@ public class MailOfFeveredPursuit : Item() {
   public override var stats: Stats = Stats(
       agility = 49,
       stamina = 66,
+      armor = 1055,
       physicalCritRating = 29.0
       )
 

@@ -63,6 +63,7 @@ public class CoifOfAlleria : Item() {
       agility = 43,
       stamina = 45,
       intellect = 25,
+      armor = 929,
       physicalCritRating = 34.0
       )
 

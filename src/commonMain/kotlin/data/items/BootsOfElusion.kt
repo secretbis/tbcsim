@@ -47,6 +47,7 @@ public class BootsOfElusion : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 34,
+      armor = 997,
       defenseRating = 23.0,
       dodgeRating = 38.0
       )

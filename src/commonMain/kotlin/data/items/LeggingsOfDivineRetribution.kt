@@ -49,6 +49,7 @@ public class LeggingsOfDivineRetribution : Item() {
   public override var stats: Stats = Stats(
       strength = 51,
       stamina = 51,
+      armor = 1544,
       physicalCritRating = 35.0
       )
 

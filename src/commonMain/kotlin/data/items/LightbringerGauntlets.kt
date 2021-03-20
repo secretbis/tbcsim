@@ -54,6 +54,7 @@ public class LightbringerGauntlets : Item() {
       strength = 51,
       stamina = 37,
       intellect = 25,
+      armor = 1141,
       physicalCritRating = 19.0
       )
 

@@ -54,6 +54,7 @@ public class VoidheartCrown : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 36,
+      armor = 164,
       spellCritRating = 19.0
       )
 

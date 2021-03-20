@@ -47,6 +47,7 @@ public class BurningBladeDevoteesCinch : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
+      armor = 141,
       physicalCritRating = 22.0,
       physicalHitRating = 22.0
       )

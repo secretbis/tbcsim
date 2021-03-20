@@ -54,6 +54,7 @@ public class VindicatorsMailBracers : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 17,
+      armor = 432,
       spellCritRating = 21.0
       )
 

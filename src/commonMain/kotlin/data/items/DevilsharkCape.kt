@@ -48,6 +48,7 @@ public class DevilsharkCape : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 22,
+      armor = 78,
       defenseRating = 20.0,
       dodgeRating = 18.0
       )

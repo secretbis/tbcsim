@@ -63,6 +63,7 @@ public class FiendSlayerBoots : Item() {
       agility = 26,
       stamina = 24,
       intellect = 16,
+      armor = 558,
       physicalHitRating = 17.0
       )
 

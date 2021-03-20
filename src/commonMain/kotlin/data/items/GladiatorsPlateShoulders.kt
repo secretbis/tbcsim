@@ -53,6 +53,7 @@ public class GladiatorsPlateShoulders : Item() {
   public override var stats: Stats = Stats(
       strength = 22,
       stamina = 45,
+      armor = 1160,
       physicalCritRating = 23.0
       )
 

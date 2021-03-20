@@ -62,6 +62,7 @@ public class GrimgrinFaceguard : Item() {
   public override var stats: Stats = Stats(
       agility = 40,
       stamina = 48,
+      armor = 341,
       physicalHitRating = 24.0
       )
 

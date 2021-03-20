@@ -49,6 +49,7 @@ public class AuchenaiDeathShroud : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       stamina = 15,
+      armor = 78,
       physicalHitRating = 17.0
       )
 

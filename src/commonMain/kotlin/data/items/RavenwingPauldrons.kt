@@ -52,7 +52,8 @@ public class RavenwingPauldrons : Item() {
       strength = 19,
       stamina = 19,
       intellect = 13,
-      spirit = 14
+      spirit = 14,
+      armor = 197
       )
 
   public override var sockets: Array<Socket> = arrayOf(

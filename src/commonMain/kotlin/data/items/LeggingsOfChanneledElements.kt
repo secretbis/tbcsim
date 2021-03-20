@@ -52,6 +52,7 @@ public class LeggingsOfChanneledElements : Item() {
       stamina = 25,
       intellect = 28,
       spirit = 28,
+      armor = 207,
       spellCritRating = 34.0,
       spellHitRating = 18.0
       )

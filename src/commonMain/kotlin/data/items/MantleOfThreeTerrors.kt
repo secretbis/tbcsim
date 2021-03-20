@@ -49,6 +49,7 @@ public class MantleOfThreeTerrors : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 25,
+      armor = 114,
       spellHitRating = 12.0
       )
 

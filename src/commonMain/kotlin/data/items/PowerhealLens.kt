@@ -51,7 +51,8 @@ public class PowerhealLens : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 51,
-      spirit = 41
+      spirit = 41,
+      armor = 216
       )
 
   public override var sockets: Array<Socket> = arrayOf(

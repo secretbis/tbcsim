@@ -49,6 +49,7 @@ public class LifeBearersGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 23,
       intellect = 25,
+      armor = 728,
       spellCritRating = 18.0
       )
 

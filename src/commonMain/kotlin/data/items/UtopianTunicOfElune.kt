@@ -52,6 +52,7 @@ public class UtopianTunicOfElune : Item() {
       stamina = 48,
       intellect = 41,
       spirit = 32,
+      armor = 499,
       spellHasteRating = 33.0
       )
 

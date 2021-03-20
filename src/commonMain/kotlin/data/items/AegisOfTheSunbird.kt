@@ -48,6 +48,7 @@ public class AegisOfTheSunbird : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
+      armor = 3806,
       defenseRating = 19.0
       )
 

@@ -48,7 +48,8 @@ public class PrismaticMittensOfMending : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 23,
-      intellect = 26
+      intellect = 26,
+      armor = 97
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -50,6 +50,7 @@ public class MaghariHuntsmansLeggings : Item() {
       agility = 16,
       stamina = 18,
       intellect = 12,
+      armor = 513,
       physicalHitRating = 15.0
       )
 

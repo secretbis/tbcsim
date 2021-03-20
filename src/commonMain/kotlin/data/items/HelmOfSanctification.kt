@@ -50,7 +50,8 @@ public class HelmOfSanctification : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 16
+      intellect = 16,
+      armor = 946
       )
 
   public override var sockets: Array<Socket> = arrayOf(

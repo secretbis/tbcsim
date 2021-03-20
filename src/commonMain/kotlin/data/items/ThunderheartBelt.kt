@@ -55,6 +55,7 @@ public class ThunderheartBelt : Item() {
       stamina = 21,
       intellect = 30,
       spirit = 29,
+      armor = 272,
       spellHasteRating = 13.0
       )
 

@@ -50,6 +50,7 @@ public class HeavyClefthoofVest : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 45,
+      armor = 500,
       defenseRating = 24.0
       )
 

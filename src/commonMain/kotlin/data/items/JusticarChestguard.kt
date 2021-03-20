@@ -54,6 +54,7 @@ public class JusticarChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 30,
+      armor = 1510,
       defenseRating = 23.0,
       blockRating = 23.0
       )

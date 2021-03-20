@@ -61,6 +61,7 @@ public class IronGauntletsOfTheMaiden : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
+      armor = 906,
       defenseRating = 16.0,
       blockRating = 17.0
       )

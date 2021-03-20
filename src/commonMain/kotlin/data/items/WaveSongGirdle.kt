@@ -60,6 +60,7 @@ public class WaveSongGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 25,
+      armor = 438,
       spellCritRating = 23.0
       )
 

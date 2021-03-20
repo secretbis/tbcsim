@@ -53,6 +53,7 @@ public class CrusadersScaledGauntlets : Item() {
       strength = 28,
       stamina = 25,
       intellect = 12,
+      armor = 728,
       physicalCritRating = 12.0
       )
 

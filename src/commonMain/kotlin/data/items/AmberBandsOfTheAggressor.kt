@@ -60,6 +60,7 @@ public class AmberBandsOfTheAggressor : Item() {
       strength = 22,
       agility = 18,
       stamina = 25,
+      armor = 608,
       defenseRating = 15.0
       )
 

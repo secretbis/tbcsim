@@ -60,7 +60,8 @@ public class LightWovenSlippers : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 24,
-      spirit = 13
+      spirit = 13,
+      armor = 105
       )
 
   public override var sockets: Array<Socket> = arrayOf()

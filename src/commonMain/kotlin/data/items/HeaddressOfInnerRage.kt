@@ -49,7 +49,8 @@ public class HeaddressOfInnerRage : Item() {
   public override var stats: Stats = Stats(
       strength = 32,
       agility = 28,
-      intellect = 20
+      intellect = 20,
+      armor = 463
       )
 
   public override var sockets: Array<Socket> = arrayOf()

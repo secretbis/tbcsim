@@ -47,7 +47,8 @@ public class DrapeOfTheRighteous : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      intellect = 13
+      intellect = 13,
+      armor = 97
       )
 
   public override var sockets: Array<Socket> = arrayOf()

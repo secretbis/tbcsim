@@ -60,6 +60,7 @@ public class AngelistasSash : Item() {
   public override var stats: Stats = Stats(
       stamina = 29,
       intellect = 30,
+      armor = 133,
       spellHasteRating = 37.0
       )
 

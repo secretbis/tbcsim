@@ -62,6 +62,7 @@ public class LegplatesOfTheInnocent : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 32,
+      armor = 1269,
       spellCritRating = 21.0
       )
 

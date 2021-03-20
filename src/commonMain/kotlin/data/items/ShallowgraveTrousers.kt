@@ -49,6 +49,7 @@ public class ShallowgraveTrousers : Item() {
   public override var stats: Stats = Stats(
       agility = 45,
       stamina = 46,
+      armor = 353,
       physicalHasteRating = 30.0
       )
 

@@ -55,6 +55,7 @@ public class VengefulGladiatorsChainSpaulders : Item() {
       agility = 35,
       stamina = 49,
       intellect = 12,
+      armor = 766,
       physicalCritRating = 16.0
       )
 

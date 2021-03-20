@@ -62,7 +62,8 @@ public class SoulStriderBoots : Item() {
   public override var stats: Stats = Stats(
       stamina = 20,
       intellect = 19,
-      spirit = 33
+      spirit = 33,
+      armor = 148
       )
 
   public override var sockets: Array<Socket> = arrayOf(

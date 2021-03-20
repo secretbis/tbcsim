@@ -48,7 +48,8 @@ public class NexusBracersOfVigor : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       agility = 13,
-      stamina = 13
+      stamina = 13,
+      armor = 433
       )
 
   public override var sockets: Array<Socket> = arrayOf()

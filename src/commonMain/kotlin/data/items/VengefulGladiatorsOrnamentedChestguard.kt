@@ -54,6 +54,7 @@ public class VengefulGladiatorsOrnamentedChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 58,
       intellect = 37,
+      armor = 1825,
       spellCritRating = 36.0
       )
 

@@ -49,7 +49,8 @@ public class SilentSlippersOfMeditation : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       intellect = 25,
-      spirit = 21
+      spirit = 21,
+      armor = 107
       )
 
   public override var sockets: Array<Socket> = arrayOf()

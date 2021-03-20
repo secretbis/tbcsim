@@ -49,6 +49,7 @@ public class FootpadsOfMadness : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 22,
+      armor = 148,
       spellHasteRating = 25.0
       )
 

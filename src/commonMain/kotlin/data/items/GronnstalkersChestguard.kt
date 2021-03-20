@@ -55,6 +55,7 @@ public class GronnstalkersChestguard : Item() {
       agility = 40,
       stamina = 52,
       intellect = 37,
+      armor = 1022,
       physicalCritRating = 19.0
       )
 

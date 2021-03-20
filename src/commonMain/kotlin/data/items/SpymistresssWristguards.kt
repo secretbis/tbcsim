@@ -50,6 +50,7 @@ public class SpymistresssWristguards : Item() {
   public override var stats: Stats = Stats(
       agility = 18,
       stamina = 15,
+      armor = 128,
       physicalHitRating = 15.0
       )
 

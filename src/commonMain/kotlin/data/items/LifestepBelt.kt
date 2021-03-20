@@ -62,7 +62,8 @@ public class LifestepBelt : Item() {
   public override var stats: Stats = Stats(
       stamina = 20,
       intellect = 23,
-      spirit = 22
+      spirit = 22,
+      armor = 227
       )
 
   public override var sockets: Array<Socket> = arrayOf(

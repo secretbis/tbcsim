@@ -60,6 +60,7 @@ public class StarcallersPlatedLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 18,
+      armor = 968,
       spellCritRating = 17.0
       )
 

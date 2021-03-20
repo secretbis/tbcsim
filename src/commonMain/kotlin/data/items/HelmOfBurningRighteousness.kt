@@ -51,6 +51,7 @@ public class HelmOfBurningRighteousness : Item() {
   public override var stats: Stats = Stats(
       stamina = 51,
       intellect = 43,
+      armor = 1660,
       spellCritRating = 34.0
       )
 

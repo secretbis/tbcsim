@@ -48,6 +48,7 @@ public class SashOfSealedFate : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 15,
+      armor = 81,
       spellCritRating = 23.0
       )
 

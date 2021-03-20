@@ -62,7 +62,8 @@ public class BeltOfDivineGuidance : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       intellect = 24,
-      spirit = 32
+      spirit = 32,
+      armor = 133
       )
 
   public override var sockets: Array<Socket> = arrayOf(

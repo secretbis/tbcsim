@@ -54,6 +54,7 @@ public class WarbringerShoulderguards : Item() {
       strength = 14,
       agility = 15,
       stamina = 38,
+      armor = 1133,
       defenseRating = 17.0,
       dodgeRating = 26.0
       )

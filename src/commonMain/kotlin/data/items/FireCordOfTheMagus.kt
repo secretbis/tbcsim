@@ -60,6 +60,7 @@ public class FireCordOfTheMagus : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
+      armor = 121,
       spellCritRating = 30.0
       )
 

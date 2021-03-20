@@ -50,6 +50,7 @@ public class ShoulderplatesOfEverlastingPain : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 33,
+      armor = 1087,
       physicalHasteRating = 21.0
       )
 

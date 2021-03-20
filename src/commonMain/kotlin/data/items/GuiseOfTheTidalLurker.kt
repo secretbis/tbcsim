@@ -50,7 +50,8 @@ public class GuiseOfTheTidalLurker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 35
+      intellect = 35,
+      armor = 360
       )
 
   public override var sockets: Array<Socket> = arrayOf(

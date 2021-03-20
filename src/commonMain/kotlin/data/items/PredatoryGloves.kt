@@ -48,6 +48,7 @@ public class PredatoryGloves : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
+      armor = 183,
       physicalCritRating = 21.0,
       physicalHitRating = 19.0
       )

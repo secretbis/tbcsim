@@ -54,6 +54,7 @@ public class GrandMarshalsSilkCowl : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 16,
+      armor = 127,
       spellCritRating = 17.0
       )
 

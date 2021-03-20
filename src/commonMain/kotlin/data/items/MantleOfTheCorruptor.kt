@@ -54,6 +54,7 @@ public class MantleOfTheCorruptor : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 24,
+      armor = 168,
       spellHitRating = 18.0
       )
 

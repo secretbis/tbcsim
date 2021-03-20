@@ -49,7 +49,8 @@ public class PantsOfTheNaaru : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 22,
-      spirit = 25
+      spirit = 25,
+      armor = 130
       )
 
   public override var sockets: Array<Socket> = arrayOf()

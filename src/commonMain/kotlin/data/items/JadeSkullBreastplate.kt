@@ -48,6 +48,7 @@ public class JadeSkullBreastplate : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       stamina = 50,
+      armor = 1164,
       defenseRating = 25.0,
       blockRating = 23.0
       )

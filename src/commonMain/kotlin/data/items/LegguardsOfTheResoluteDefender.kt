@@ -49,6 +49,7 @@ public class LegguardsOfTheResoluteDefender : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 42,
+      armor = 942,
       defenseRating = 31.0
       )
 

@@ -52,6 +52,7 @@ public class BreastplateOfTheRighteous : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 28,
+      armor = 1164,
       defenseRating = 20.0
       )
 

@@ -60,6 +60,7 @@ public class WickedWitchsHat : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 38,
+      armor = 158,
       spellCritRating = 32.0
       )
 

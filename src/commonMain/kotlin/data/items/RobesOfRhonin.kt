@@ -60,6 +60,7 @@ public class RobesOfRhonin : Item() {
   public override var stats: Stats = Stats(
       stamina = 55,
       intellect = 38,
+      armor = 253,
       spellCritRating = 24.0,
       spellHitRating = 27.0
       )

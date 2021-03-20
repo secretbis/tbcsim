@@ -51,6 +51,7 @@ public class CloakOfUnforgivableSin : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 25,
+      armor = 137,
       physicalHasteRating = 32.0
       )
 

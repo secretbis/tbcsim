@@ -61,7 +61,8 @@ public class WaveOfLifeChestguard : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 51
+      intellect = 51,
+      armor = 988
       )
 
   public override var sockets: Array<Socket> = arrayOf(

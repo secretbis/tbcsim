@@ -62,6 +62,7 @@ public class RipFlayerLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       intellect = 30,
+      armor = 710,
       physicalCritRating = 28.0
       )
 

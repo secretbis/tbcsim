@@ -51,7 +51,8 @@ public class MaskOfTheHowlingStorm : Item() {
   public override var stats: Stats = Stats(
       strength = 20,
       stamina = 28,
-      intellect = 21
+      intellect = 21,
+      armor = 451
       )
 
   public override var sockets: Array<Socket> = arrayOf(

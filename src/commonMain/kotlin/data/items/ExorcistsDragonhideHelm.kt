@@ -51,7 +51,8 @@ public class ExorcistsDragonhideHelm : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       agility = 17,
-      stamina = 30
+      stamina = 30,
+      armor = 248
       )
 
   public override var sockets: Array<Socket> = arrayOf(

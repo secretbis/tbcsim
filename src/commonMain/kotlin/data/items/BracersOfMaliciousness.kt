@@ -59,6 +59,7 @@ public class BracersOfMaliciousness : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
+      armor = 159,
       physicalCritRating = 22.0
       )
 

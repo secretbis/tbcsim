@@ -60,7 +60,8 @@ public class BootsOfTheEndlessHunt : Item() {
   public override var stats: Stats = Stats(
       agility = 26,
       stamina = 19,
-      intellect = 23
+      intellect = 23,
+      armor = 535
       )
 
   public override var sockets: Array<Socket> = arrayOf()

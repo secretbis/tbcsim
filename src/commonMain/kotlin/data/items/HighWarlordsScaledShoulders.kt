@@ -54,6 +54,7 @@ public class HighWarlordsScaledShoulders : Item() {
       strength = 25,
       stamina = 33,
       intellect = 8,
+      armor = 873,
       physicalCritRating = 9.0
       )
 

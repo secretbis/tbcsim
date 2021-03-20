@@ -51,6 +51,7 @@ public class AmiceOfTheConvoker : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 28,
+      armor = 199,
       spellCritRating = 22.0,
       spellHasteRating = 30.0
       )

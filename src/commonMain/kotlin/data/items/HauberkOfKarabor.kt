@@ -49,6 +49,7 @@ public class HauberkOfKarabor : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 18,
+      armor = 278,
       physicalHitRating = 12.0
       )
 

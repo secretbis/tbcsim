@@ -60,6 +60,7 @@ public class KrakkenHeartBreastplate : Item() {
       strength = 61,
       agility = 43,
       stamina = 42,
+      armor = 1728,
       physicalHitRating = 30.0
       )
 

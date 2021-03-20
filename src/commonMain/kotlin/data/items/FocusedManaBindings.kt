@@ -60,6 +60,7 @@ public class FocusedManaBindings : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 20,
+      armor = 103,
       spellHitRating = 19.0
       )
 

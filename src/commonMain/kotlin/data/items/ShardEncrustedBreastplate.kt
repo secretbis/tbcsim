@@ -49,7 +49,8 @@ public class ShardEncrustedBreastplate : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 24,
-      intellect = 23
+      intellect = 23,
+      armor = 652
       )
 
   public override var sockets: Array<Socket> = arrayOf()

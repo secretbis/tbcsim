@@ -50,6 +50,7 @@ public class AmaniMaskOfDeath : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 51,
+      armor = 1306,
       physicalHitRating = 33.0
       )
 

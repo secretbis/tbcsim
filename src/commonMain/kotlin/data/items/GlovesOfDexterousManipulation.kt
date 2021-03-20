@@ -61,7 +61,8 @@ public class GlovesOfDexterousManipulation : Item() {
 
   public override var stats: Stats = Stats(
       agility = 35,
-      stamina = 22
+      stamina = 22,
+      armor = 228
       )
 
   public override var sockets: Array<Socket> = arrayOf(

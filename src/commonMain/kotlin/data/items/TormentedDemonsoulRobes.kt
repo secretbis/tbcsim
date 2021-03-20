@@ -62,6 +62,7 @@ public class TormentedDemonsoulRobes : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 38,
+      armor = 236,
       spellCritRating = 50.0
       )
 

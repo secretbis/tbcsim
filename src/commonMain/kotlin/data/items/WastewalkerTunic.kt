@@ -51,7 +51,8 @@ public class WastewalkerTunic : Item() {
 
   public override var stats: Stats = Stats(
       agility = 28,
-      stamina = 36
+      stamina = 36,
+      armor = 292
       )
 
   public override var sockets: Array<Socket> = arrayOf(

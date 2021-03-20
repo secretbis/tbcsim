@@ -60,6 +60,7 @@ public class ChestguardOfTheWarlord : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 60,
+      armor = 1668,
       physicalHitRating = 26.0,
       defenseRating = 27.0,
       dodgeRating = 40.0

@@ -62,6 +62,7 @@ public class TatteredCapeOfAntonidas : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       intellect = 26,
+      armor = 137,
       spellHasteRating = 32.0
       )
 

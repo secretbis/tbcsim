@@ -53,6 +53,7 @@ public class CataclysmGauntlets : Item() {
       agility = 24,
       stamina = 34,
       intellect = 23,
+      armor = 583,
       physicalHitRating = 24.0
       )
 

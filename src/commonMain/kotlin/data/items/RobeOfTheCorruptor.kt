@@ -54,6 +54,7 @@ public class RobeOfTheCorruptor : Item() {
   public override var stats: Stats = Stats(
       stamina = 48,
       intellect = 33,
+      armor = 223,
       spellHitRating = 23.0
       )
 

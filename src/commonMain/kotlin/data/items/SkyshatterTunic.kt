@@ -55,6 +55,7 @@ public class SkyshatterTunic : Item() {
       strength = 46,
       stamina = 67,
       intellect = 23,
+      armor = 1022,
       physicalCritRating = 27.0,
       physicalHitRating = 15.0
       )

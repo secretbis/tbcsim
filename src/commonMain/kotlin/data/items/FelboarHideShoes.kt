@@ -49,6 +49,7 @@ public class FelboarHideShoes : Item() {
   public override var stats: Stats = Stats(
       agility = 18,
       stamina = 15,
+      armor = 191,
       physicalHitRating = 9.0
       )
 

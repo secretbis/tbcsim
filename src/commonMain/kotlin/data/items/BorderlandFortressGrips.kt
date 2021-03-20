@@ -49,6 +49,7 @@ public class BorderlandFortressGrips : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 66,
+      armor = 1217,
       defenseRating = 22.0,
       dodgeRating = 36.0,
       parryRating = 29.0

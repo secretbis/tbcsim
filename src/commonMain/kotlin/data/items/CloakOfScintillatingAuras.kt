@@ -49,7 +49,8 @@ public class CloakOfScintillatingAuras : Item() {
   public override var stats: Stats = Stats(
       stamina = 12,
       intellect = 16,
-      spirit = 18
+      spirit = 18,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

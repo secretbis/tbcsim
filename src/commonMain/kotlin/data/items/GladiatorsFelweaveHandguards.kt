@@ -52,6 +52,7 @@ public class GladiatorsFelweaveHandguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 14,
+      armor = 129,
       spellCritRating = 21.0
       )
 

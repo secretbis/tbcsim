@@ -49,6 +49,7 @@ public class BlackenedChestplate : Item() {
       strength = 30,
       agility = 30,
       stamina = 27,
+      armor = 1106,
       physicalHitRating = 25.0
       )
 

@@ -48,7 +48,8 @@ public class DarkCloakOfTheMarsh : Item() {
 
   public override var stats: Stats = Stats(
       agility = 16,
-      stamina = 24
+      stamina = 24,
+      armor = 64
       )
 
   public override var sockets: Array<Socket> = arrayOf()

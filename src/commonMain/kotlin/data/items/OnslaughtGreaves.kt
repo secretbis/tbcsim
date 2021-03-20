@@ -55,6 +55,7 @@ public class OnslaughtGreaves : Item() {
       strength = 62,
       agility = 41,
       stamina = 55,
+      armor = 1597,
       physicalHitRating = 14.0
       )
 

@@ -59,7 +59,8 @@ public class BeltOfGaleForce : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      intellect = 28
+      intellect = 28,
+      armor = 457
       )
 
   public override var sockets: Array<Socket> = arrayOf()

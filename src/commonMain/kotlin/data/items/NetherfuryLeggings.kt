@@ -50,7 +50,8 @@ public class NetherfuryLeggings : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      stamina = 37
+      stamina = 37,
+      armor = 527
       )
 
   public override var sockets: Array<Socket> = arrayOf(

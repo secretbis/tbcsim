@@ -62,6 +62,7 @@ public class SunblessedGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 31,
+      armor = 1239,
       spellCritRating = 36.0
       )
 

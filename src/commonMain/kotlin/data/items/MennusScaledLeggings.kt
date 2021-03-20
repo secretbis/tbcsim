@@ -50,6 +50,7 @@ public class MennusScaledLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
+      armor = 256,
       physicalCritRating = 32.0
       )
 

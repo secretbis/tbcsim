@@ -54,6 +54,7 @@ public class SkyshatterCord : Item() {
   public override var stats: Stats = Stats(
       stamina = 19,
       intellect = 30,
+      armor = 605,
       spellCritRating = 29.0,
       spellHasteRating = 27.0
       )

@@ -61,7 +61,8 @@ public class GirdleOfFallenStars : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 26,
-      intellect = 18
+      intellect = 18,
+      armor = 506
       )
 
   public override var sockets: Array<Socket> = arrayOf(

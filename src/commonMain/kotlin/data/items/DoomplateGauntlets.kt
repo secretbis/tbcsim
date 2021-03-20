@@ -50,7 +50,8 @@ public class DoomplateGauntlets : Item() {
 
   public override var stats: Stats = Stats(
       strength = 31,
-      stamina = 25
+      stamina = 25,
+      armor = 728
       )
 
   public override var sockets: Array<Socket> = arrayOf(

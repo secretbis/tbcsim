@@ -62,6 +62,7 @@ public class RobeOfEternalLight : Item() {
   public override var stats: Stats = Stats(
       stamina = 36,
       intellect = 34,
+      armor = 266,
       spellHasteRating = 40.0
       )
 

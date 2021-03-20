@@ -62,6 +62,7 @@ public class TreadsOfBoomingThunder : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 33,
+      armor = 619,
       spellCritRating = 14.0
       )
 

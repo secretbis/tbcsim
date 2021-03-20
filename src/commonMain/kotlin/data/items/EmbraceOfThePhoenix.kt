@@ -63,6 +63,7 @@ public class EmbraceOfThePhoenix : Item() {
       agility = 44,
       stamina = 43,
       intellect = 30,
+      armor = 1110,
       physicalHasteRating = 44.0
       )
 

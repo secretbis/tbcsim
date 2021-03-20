@@ -48,6 +48,7 @@ public class LegguardsOfTheShatteredHand : Item() {
   public override var stats: Stats = Stats(
       strength = 39,
       agility = 32,
+      armor = 1019,
       physicalHitRating = 24.0
       )
 

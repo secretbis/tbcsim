@@ -64,6 +64,7 @@ public class IncantersCowl : Item() {
       stamina = 15,
       intellect = 27,
       spirit = 17,
+      armor = 127,
       spellCritRating = 19.0
       )
 

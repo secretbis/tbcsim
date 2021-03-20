@@ -62,7 +62,8 @@ public class BootsOfTheDivineLight : Item() {
   public override var stats: Stats = Stats(
       stamina = 47,
       intellect = 24,
-      spirit = 24
+      spirit = 24,
+      armor = 162
       )
 
   public override var sockets: Array<Socket> = arrayOf(

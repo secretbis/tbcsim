@@ -48,7 +48,8 @@ public class CleansedFelPauldrons : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       agility = 18,
-      stamina = 21
+      stamina = 21,
+      armor = 208
       )
 
   public override var sockets: Array<Socket> = arrayOf()

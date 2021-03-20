@@ -52,6 +52,7 @@ public class GlovesOfTyrisPower : Item() {
       stamina = 33,
       intellect = 32,
       spirit = 27,
+      armor = 171,
       spellHasteRating = 36.0
       )
 

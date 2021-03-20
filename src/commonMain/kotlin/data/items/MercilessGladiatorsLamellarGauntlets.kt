@@ -52,6 +52,7 @@ public class MercilessGladiatorsLamellarGauntlets : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 27,
+      armor = 1065,
       spellCritRating = 26.0
       )
 

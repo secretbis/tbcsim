@@ -62,6 +62,7 @@ public class GauntletsOfTheSoothedSoul : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 33,
+      armor = 1239,
       spellHasteRating = 30.0
       )
 

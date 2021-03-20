@@ -48,7 +48,8 @@ public class EmbroideredCapeOfMysteries : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      intellect = 20
+      intellect = 20,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

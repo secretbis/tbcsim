@@ -51,6 +51,7 @@ public class BreechesOfNaturalAggression : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 41,
+      armor = 436,
       spellCritRating = 49.0
       )
 

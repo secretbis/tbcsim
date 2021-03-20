@@ -62,6 +62,7 @@ public class DarkConjurorsCollar : Item() {
   public override var stats: Stats = Stats(
       stamina = 51,
       intellect = 42,
+      armor = 222,
       spellCritRating = 38.0,
       spellHasteRating = 30.0
       )

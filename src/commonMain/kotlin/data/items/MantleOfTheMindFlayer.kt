@@ -59,7 +59,8 @@ public class MantleOfTheMindFlayer : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      intellect = 29
+      intellect = 29,
+      armor = 146
       )
 
   public override var sockets: Array<Socket> = arrayOf()

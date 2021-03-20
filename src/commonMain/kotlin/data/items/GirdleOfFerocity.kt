@@ -61,6 +61,7 @@ public class GirdleOfFerocity : Item() {
       agility = 28,
       stamina = 21,
       intellect = 22,
+      armor = 438,
       physicalHitRating = 14.0
       )
 

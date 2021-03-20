@@ -48,7 +48,8 @@ public class PetrifiedLichenGuard : Item() {
 
   public override var stats: Stats = Stats(
       strength = 15,
-      stamina = 24
+      stamina = 24,
+      armor = 3043
       )
 
   public override var sockets: Array<Socket> = arrayOf()

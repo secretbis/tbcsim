@@ -61,6 +61,7 @@ public class GirdleOfStability : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 56,
+      armor = 993,
       defenseRating = 19.0,
       dodgeRating = 18.0
       )

@@ -47,6 +47,7 @@ public class LieutenantsSignetOfLordaeron : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 143,
       dodgeRating = 21.0
       )
 

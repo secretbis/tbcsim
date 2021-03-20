@@ -63,6 +63,7 @@ public class BowstitchedLeggings : Item() {
       agility = 42,
       stamina = 28,
       intellect = 28,
+      armor = 864,
       physicalCritRating = 20.0
       )
 

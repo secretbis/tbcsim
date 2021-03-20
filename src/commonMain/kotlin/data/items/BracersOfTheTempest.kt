@@ -55,6 +55,7 @@ public class BracersOfTheTempest : Item() {
       stamina = 18,
       intellect = 17,
       spirit = 14,
+      armor = 113,
       spellCritRating = 11.0,
       spellHasteRating = 26.0
       )

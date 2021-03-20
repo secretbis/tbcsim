@@ -47,6 +47,7 @@ public class IceboundCloak : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 267,
       defenseRating = 25.0
       )
 

@@ -48,7 +48,8 @@ public class LifebloodBelt : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
-      intellect = 11
+      intellect = 11,
+      armor = 84
       )
 
   public override var sockets: Array<Socket> = arrayOf()

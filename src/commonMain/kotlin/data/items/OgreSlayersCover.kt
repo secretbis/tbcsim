@@ -49,6 +49,7 @@ public class OgreSlayersCover : Item() {
   public override var stats: Stats = Stats(
       intellect = 18,
       spirit = 11,
+      armor = 68,
       spellCritRating = 16.0
       )
 

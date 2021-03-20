@@ -60,6 +60,7 @@ public class GlowingBreastplateOfTruth : Item() {
   public override var stats: Stats = Stats(
       stamina = 39,
       intellect = 40,
+      armor = 1607,
       spellCritRating = 42.0
       )
 

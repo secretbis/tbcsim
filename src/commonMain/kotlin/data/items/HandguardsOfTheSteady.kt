@@ -49,7 +49,8 @@ public class HandguardsOfTheSteady : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 22,
-      intellect = 21
+      intellect = 21,
+      armor = 486
       )
 
   public override var sockets: Array<Socket> = arrayOf()

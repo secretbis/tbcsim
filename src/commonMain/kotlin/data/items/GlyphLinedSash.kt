@@ -51,6 +51,7 @@ public class GlyphLinedSash : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 23,
+      armor = 88,
       spellCritRating = 9.0
       )
 

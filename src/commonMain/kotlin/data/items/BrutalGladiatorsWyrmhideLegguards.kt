@@ -52,6 +52,7 @@ public class BrutalGladiatorsWyrmhideLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 65,
       intellect = 40,
+      armor = 492,
       spellCritRating = 27.0
       )
 

@@ -48,6 +48,7 @@ public class SunwardCrest : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
+      armor = 4872,
       spellHitRating = 13.0,
       blockRating = 18.0
       )

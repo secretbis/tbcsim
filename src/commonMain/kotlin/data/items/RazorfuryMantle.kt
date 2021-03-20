@@ -60,6 +60,7 @@ public class RazorfuryMantle : Item() {
   public override var stats: Stats = Stats(
       agility = 28,
       stamina = 55,
+      armor = 333,
       physicalCritRating = 23.0
       )
 

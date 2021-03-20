@@ -48,6 +48,7 @@ public class RingOfHardenedResolve : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 48,
+      armor = 308,
       expertiseRating = 22.0,
       defenseRating = 32.0
       )

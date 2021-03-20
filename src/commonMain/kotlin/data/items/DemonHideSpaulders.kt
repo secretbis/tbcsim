@@ -49,6 +49,7 @@ public class DemonHideSpaulders : Item() {
   public override var stats: Stats = Stats(
       agility = 23,
       stamina = 18,
+      armor = 178,
       physicalHitRating = 11.0,
       dodgeRating = 13.0
       )

@@ -54,6 +54,7 @@ public class ThunderheartCord : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 30,
+      armor = 272,
       spellCritRating = 29.0,
       spellHitRating = 13.0,
       spellHasteRating = 27.0

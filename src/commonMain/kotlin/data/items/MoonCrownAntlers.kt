@@ -61,6 +61,7 @@ public class MoonCrownAntlers : Item() {
       stamina = 25,
       intellect = 31,
       spirit = 20,
+      armor = 237,
       spellHitRating = 16.0
       )
 

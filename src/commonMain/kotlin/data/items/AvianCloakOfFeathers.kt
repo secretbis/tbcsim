@@ -48,7 +48,8 @@ public class AvianCloakOfFeathers : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 18,
-      spirit = 12
+      spirit = 12,
+      armor = 78
       )
 
   public override var sockets: Array<Socket> = arrayOf()

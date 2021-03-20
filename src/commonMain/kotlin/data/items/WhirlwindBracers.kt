@@ -59,7 +59,8 @@ public class WhirlwindBracers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      intellect = 20
+      intellect = 20,
+      armor = 355
       )
 
   public override var sockets: Array<Socket> = arrayOf()

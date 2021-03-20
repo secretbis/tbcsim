@@ -51,6 +51,7 @@ public class RagesteelShoulders : Item() {
   public override var stats: Stats = Stats(
       strength = 32,
       stamina = 12,
+      armor = 873,
       physicalCritRating = 17.0,
       physicalHitRating = 9.0
       )

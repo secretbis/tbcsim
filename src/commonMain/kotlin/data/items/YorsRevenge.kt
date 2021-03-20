@@ -47,6 +47,7 @@ public class YorsRevenge : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
+      armor = 190,
       defenseRating = 20.0
       )
 

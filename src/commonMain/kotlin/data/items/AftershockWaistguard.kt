@@ -62,6 +62,7 @@ public class AftershockWaistguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 27,
+      armor = 556,
       spellHasteRating = 34.0
       )
 

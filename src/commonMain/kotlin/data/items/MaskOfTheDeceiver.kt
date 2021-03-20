@@ -62,6 +62,7 @@ public class MaskOfTheDeceiver : Item() {
   public override var stats: Stats = Stats(
       agility = 32,
       stamina = 36,
+      armor = 283,
       physicalHitRating = 16.0
       )
 

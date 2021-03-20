@@ -49,7 +49,8 @@ public class ScalesOfTheBeast : Item() {
   public override var stats: Stats = Stats(
       agility = 30,
       stamina = 22,
-      intellect = 23
+      intellect = 23,
+      armor = 513
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,6 +51,7 @@ public class TunicOfTheDarkHour : Item() {
   public override var stats: Stats = Stats(
       agility = 44,
       stamina = 51,
+      armor = 444,
       physicalHitRating = 34.0
       )
 

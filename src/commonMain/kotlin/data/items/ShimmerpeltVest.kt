@@ -49,7 +49,8 @@ public class ShimmerpeltVest : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 35,
-      spirit = 30
+      spirit = 30,
+      armor = 404
       )
 
   public override var sockets: Array<Socket> = arrayOf()

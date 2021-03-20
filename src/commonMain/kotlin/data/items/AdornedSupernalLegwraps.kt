@@ -51,7 +51,8 @@ public class AdornedSupernalLegwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       intellect = 40,
-      spirit = 42
+      spirit = 42,
+      armor = 207
       )
 
   public override var sockets: Array<Socket> = arrayOf(

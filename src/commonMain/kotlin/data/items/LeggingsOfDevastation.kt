@@ -51,6 +51,7 @@ public class LeggingsOfDevastation : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 42,
+      armor = 207,
       spellHitRating = 26.0
       )
 

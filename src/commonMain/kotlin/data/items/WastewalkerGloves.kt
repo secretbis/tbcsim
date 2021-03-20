@@ -51,7 +51,8 @@ public class WastewalkerGloves : Item() {
 
   public override var stats: Stats = Stats(
       agility = 32,
-      stamina = 33
+      stamina = 33,
+      armor = 183
       )
 
   public override var sockets: Array<Socket> = arrayOf(

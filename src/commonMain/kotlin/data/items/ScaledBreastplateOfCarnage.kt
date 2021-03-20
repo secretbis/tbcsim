@@ -60,6 +60,7 @@ public class ScaledBreastplateOfCarnage : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 38,
+      armor = 812,
       physicalCritRating = 24.0
       )
 

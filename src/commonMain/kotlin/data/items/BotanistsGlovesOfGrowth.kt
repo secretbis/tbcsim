@@ -62,6 +62,7 @@ public class BotanistsGlovesOfGrowth : Item() {
   public override var stats: Stats = Stats(
       stamina = 22,
       intellect = 21,
+      armor = 277,
       spellHasteRating = 37.0
       )
 

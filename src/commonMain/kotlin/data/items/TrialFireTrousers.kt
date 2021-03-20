@@ -61,7 +61,8 @@ public class TrialFireTrousers : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 42,
-      intellect = 40
+      intellect = 40,
+      armor = 170
       )
 
   public override var sockets: Array<Socket> = arrayOf(

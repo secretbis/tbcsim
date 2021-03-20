@@ -61,6 +61,7 @@ public class ChestplateOfStoicism : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1765,
       defenseRating = 51.0,
       dodgeRating = 34.0
       )

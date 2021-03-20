@@ -54,6 +54,7 @@ public class JusticarDiadem : Item() {
   public override var stats: Stats = Stats(
       stamina = 32,
       intellect = 33,
+      armor = 1227,
       spellCritRating = 28.0
       )
 

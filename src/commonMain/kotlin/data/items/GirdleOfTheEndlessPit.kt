@@ -61,6 +61,7 @@ public class GirdleOfTheEndlessPit : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 30,
+      armor = 884,
       physicalCritRating = 28.0
       )
 

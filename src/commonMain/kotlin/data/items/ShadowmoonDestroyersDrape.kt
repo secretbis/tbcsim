@@ -48,6 +48,7 @@ public class ShadowmoonDestroyersDrape : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
+      armor = 118,
       physicalCritRating = 24.0,
       physicalHitRating = 17.0
       )

@@ -49,6 +49,7 @@ public class SporeSoakedVaneer : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       intellect = 15,
+      armor = 63,
       spellCritRating = 11.0
       )
 

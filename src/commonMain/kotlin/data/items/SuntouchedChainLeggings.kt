@@ -61,7 +61,8 @@ public class SuntouchedChainLeggings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 39,
-      intellect = 28
+      intellect = 28,
+      armor = 864
       )
 
   public override var sockets: Array<Socket> = arrayOf(

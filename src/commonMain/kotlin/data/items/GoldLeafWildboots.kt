@@ -61,7 +61,8 @@ public class GoldLeafWildboots : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 19,
-      spirit = 18
+      spirit = 18,
+      armor = 261
       )
 
   public override var sockets: Array<Socket> = arrayOf(

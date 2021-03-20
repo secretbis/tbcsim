@@ -48,7 +48,8 @@ public class CoifOfTheWicked : Item() {
 
   public override var stats: Stats = Stats(
       agility = 26,
-      stamina = 39
+      stamina = 39,
+      armor = 490
       )
 
   public override var sockets: Array<Socket> = arrayOf()

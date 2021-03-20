@@ -61,6 +61,7 @@ public class DestroyersMantle : Item() {
       stamina = 12,
       intellect = 12,
       spirit = 8,
+      armor = 94,
       spellCritRating = 9.0
       )
 

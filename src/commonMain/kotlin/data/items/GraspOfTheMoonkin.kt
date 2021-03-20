@@ -60,6 +60,7 @@ public class GraspOfTheMoonkin : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       intellect = 30,
+      armor = 252,
       spellHasteRating = 25.0
       )
 

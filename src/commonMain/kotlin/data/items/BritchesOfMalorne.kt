@@ -53,6 +53,7 @@ public class BritchesOfMalorne : Item() {
       stamina = 32,
       intellect = 35,
       spirit = 18,
+      armor = 332,
       spellCritRating = 25.0
       )
 

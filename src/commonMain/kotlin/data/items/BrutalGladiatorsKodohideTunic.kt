@@ -53,7 +53,8 @@ public class BrutalGladiatorsKodohideTunic : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 69,
-      intellect = 40
+      intellect = 40,
+      armor = 541
       )
 
   public override var sockets: Array<Socket> = arrayOf(

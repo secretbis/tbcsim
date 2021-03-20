@@ -53,6 +53,7 @@ public class GuardiansSilkFootguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 49,
       intellect = 35,
+      armor = 253,
       spellCritRating = 32.0
       )
 

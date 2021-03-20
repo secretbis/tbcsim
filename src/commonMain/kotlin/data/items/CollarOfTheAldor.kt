@@ -55,6 +55,7 @@ public class CollarOfTheAldor : Item() {
       stamina = 24,
       intellect = 35,
       spirit = 17,
+      armor = 164,
       spellCritRating = 27.0
       )
 

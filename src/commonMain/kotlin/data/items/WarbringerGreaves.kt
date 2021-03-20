@@ -51,6 +51,7 @@ public class WarbringerGreaves : Item() {
   public override var stats: Stats = Stats(
       strength = 51,
       stamina = 54,
+      armor = 1322,
       physicalCritRating = 37.0
       )
 

@@ -62,6 +62,7 @@ public class EcclesiasticalCuirass : Item() {
   public override var stats: Stats = Stats(
       stamina = 52,
       intellect = 44,
+      armor = 1765,
       spellCritRating = 43.0
       )
 

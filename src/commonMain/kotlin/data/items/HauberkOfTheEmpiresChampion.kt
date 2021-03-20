@@ -60,6 +60,7 @@ public class HauberkOfTheEmpiresChampion : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       intellect = 40,
+      armor = 934,
       spellHasteRating = 40.0
       )
 

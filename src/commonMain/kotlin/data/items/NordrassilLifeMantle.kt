@@ -54,7 +54,8 @@ public class NordrassilLifeMantle : Item() {
   public override var stats: Stats = Stats(
       stamina = 26,
       intellect = 27,
-      spirit = 16
+      spirit = 16,
+      armor = 314
       )
 
   public override var sockets: Array<Socket> = arrayOf(

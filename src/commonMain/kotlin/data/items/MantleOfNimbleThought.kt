@@ -49,6 +49,7 @@ public class MantleOfNimbleThought : Item() {
   public override var stats: Stats = Stats(
       stamina = 37,
       intellect = 26,
+      armor = 177,
       spellHasteRating = 38.0
       )
 

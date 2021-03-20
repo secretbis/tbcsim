@@ -51,6 +51,7 @@ public class BlessedEluniteCoverings : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 34,
+      armor = 404,
       spellCritRating = 22.0
       )
 

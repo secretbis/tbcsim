@@ -55,6 +55,7 @@ public class SkyshatterPauldrons : Item() {
       strength = 34,
       stamina = 48,
       intellect = 19,
+      armor = 766,
       physicalCritRating = 26.0,
       physicalHitRating = 11.0
       )

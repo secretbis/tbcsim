@@ -49,6 +49,7 @@ public class AchromicTrousersOfTheNaaru : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       intellect = 35,
+      armor = 188,
       spellHasteRating = 45.0
       )
 

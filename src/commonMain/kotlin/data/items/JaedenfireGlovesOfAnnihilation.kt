@@ -48,7 +48,8 @@ public class JaedenfireGlovesOfAnnihilation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 25,
-      intellect = 25
+      intellect = 25,
+      armor = 95
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,6 +51,7 @@ public class NetherChainShirt : Item() {
   public override var stats: Stats = Stats(
       stamina = 40,
       intellect = 18,
+      armor = 757,
       physicalCritRating = 28.0
       )
 

@@ -48,7 +48,8 @@ public class NomadsLeggings : Item() {
 
   public override var stats: Stats = Stats(
       agility = 33,
-      stamina = 49
+      stamina = 49,
+      armor = 256
       )
 
   public override var sockets: Array<Socket> = arrayOf()

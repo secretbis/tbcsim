@@ -48,6 +48,7 @@ public class TalonOfAzshara : Item() {
 
   public override var stats: Stats = Stats(
       agility = 15,
+      armor = 168,
       physicalHitRating = 20.0
       )
 

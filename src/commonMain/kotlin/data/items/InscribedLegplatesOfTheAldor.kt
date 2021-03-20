@@ -61,6 +61,7 @@ public class InscribedLegplatesOfTheAldor : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 78,
+      armor = 1544,
       defenseRating = 25.0,
       dodgeRating = 43.0
       )

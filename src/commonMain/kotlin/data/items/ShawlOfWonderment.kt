@@ -51,6 +51,7 @@ public class ShawlOfWonderment : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       intellect = 26,
+      armor = 199,
       spellHasteRating = 33.0
       )
 

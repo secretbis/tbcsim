@@ -62,6 +62,7 @@ public class BeltOfOneHundredDeaths : Item() {
   public override var stats: Stats = Stats(
       agility = 29,
       stamina = 25,
+      armor = 244,
       expertiseRating = 25.0
       )
 

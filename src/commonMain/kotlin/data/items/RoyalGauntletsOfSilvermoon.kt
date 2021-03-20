@@ -60,6 +60,7 @@ public class RoyalGauntletsOfSilvermoon : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 57,
+      armor = 1080,
       defenseRating = 24.0,
       dodgeRating = 32.0
       )

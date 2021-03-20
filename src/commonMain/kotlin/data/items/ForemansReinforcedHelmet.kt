@@ -48,7 +48,8 @@ public class ForemansReinforcedHelmet : Item() {
 
   public override var stats: Stats = Stats(
       agility = 30,
-      stamina = 48
+      stamina = 48,
+      armor = 550
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -54,6 +54,7 @@ public class LightbringerGreathelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 42,
       intellect = 37,
+      armor = 1483,
       spellCritRating = 36.0
       )
 

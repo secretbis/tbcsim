@@ -48,7 +48,8 @@ public class GreatstaffOfTheLeviathan : Item() {
 
   public override var stats: Stats = Stats(
       strength = 39,
-      stamina = 36
+      stamina = 36,
+      armor = 360
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,6 +55,7 @@ public class NordrassilWrathKilt : Item() {
       stamina = 37,
       intellect = 36,
       spirit = 26,
+      armor = 367,
       spellCritRating = 26.0
       )
 

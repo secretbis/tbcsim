@@ -49,7 +49,8 @@ public class BootsOfTheGladeKeeper : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 24,
-      spirit = 20
+      spirit = 20,
+      armor = 201
       )
 
   public override var sockets: Array<Socket> = arrayOf()

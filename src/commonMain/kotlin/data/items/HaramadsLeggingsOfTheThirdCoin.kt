@@ -50,6 +50,7 @@ public class HaramadsLeggingsOfTheThirdCoin : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 29,
+      armor = 219,
       spellCritRating = 16.0
       )
 

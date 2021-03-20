@@ -54,6 +54,7 @@ public class ThunderheartFootwraps : Item() {
   public override var stats: Stats = Stats(
       stamina = 21,
       intellect = 30,
+      armor = 332,
       spellCritRating = 28.0,
       spellHasteRating = 13.0
       )

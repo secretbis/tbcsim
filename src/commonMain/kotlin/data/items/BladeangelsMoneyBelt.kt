@@ -62,6 +62,7 @@ public class BladeangelsMoneyBelt : Item() {
   public override var stats: Stats = Stats(
       agility = 25,
       stamina = 27,
+      armor = 227,
       physicalCritRating = 21.0
       )
 
