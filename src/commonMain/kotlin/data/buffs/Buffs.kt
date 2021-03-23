@@ -107,6 +107,10 @@ object Buffs {
             35166 -> BloodlustBrooch()
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
+            42083 -> TsunamiTalisman()
+            33807 -> AbacusOfViolentOdds()
+            34106 -> IconOfUnyieldingCourage()
+
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
