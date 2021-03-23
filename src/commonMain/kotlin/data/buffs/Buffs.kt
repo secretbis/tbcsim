@@ -110,7 +110,13 @@ object Buffs {
             42083 -> TsunamiTalisman()
             33807 -> AbacusOfViolentOdds()
             34106 -> IconOfUnyieldingCourage()
-
+            35163 -> IconOfTheSilverCrescent()
+            35337 -> XirisGift()
+            34320 -> ShiffarsNexusHorn()
+            35337 -> ScryersBloodgem()
+            31040 -> FigurineLivingRubySerpent()
+            31047 -> FigurineNightseyePanther()
+            34000 -> ArcanistsStone()
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
