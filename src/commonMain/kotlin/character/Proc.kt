@@ -41,6 +41,7 @@ abstract class Proc {
         SPELL_HIT,
         SPELL_CRIT,
         SPELL_RESIST,
+        SPELL_CAST,
 
         // Damage types
         PHYSICAL_DAMAGE,
@@ -57,12 +58,30 @@ abstract class Proc {
         SERVER_SLOW_TICK,  // 3s
 
         // Specifics
+        HUNTER_CAST_KILL_COMMAND,
+
+        PRIEST_TICK_SHADOW_WORD_PAIN,
+
+        ROGUE_CAST_CHEAP_SHOT,
+        ROGUE_CAST_KIDNEY_SHOT,
+        ROGUE_CAST_EVISCERATE,
+        ROGUE_CAST_ENVENOM,
+        ROGUE_CAST_RUPTURE,
+        ROGUE_CAST_SLICE_AND_DICE,
+
         SHAMAN_CAST_SHOCK,
         SHAMAN_CAST_LIGHTNING_BOLT,
         SHAMAN_CAST_CHAIN_LIGHTNING,
+        SHAMAN_CAST_STORMSTRIKE,
+        SHAMAN_CRIT_LIGHTNING_BOLT,
 
+        WARLOCK_CRIT_INCINERATE,
         WARLOCK_CRIT_SHADOW_BOLT,
-        WARLOCK_TICK_CORRUPTION
+        WARLOCK_HIT_INCINERATE,
+        WARLOCK_HIT_SHADOW_BOLT,
+        WARLOCK_TICK_CORRUPTION,
+
+        WARRIOR_CAST_OVERPOWER
     }
 
     enum class Type {

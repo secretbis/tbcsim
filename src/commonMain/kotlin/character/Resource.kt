@@ -9,7 +9,8 @@ class Resource(
         MANA,
         RAGE,
         ENERGY,
-        FOCUS
+        FOCUS,
+        COMBO_POINT
     }
 
     val type: Type = sp.character.klass.resourceType
@@ -51,6 +52,7 @@ class Resource(
             Type.RAGE -> 100
             Type.ENERGY -> 100
             Type.FOCUS -> 100
+            Type.COMBO_POINT -> 5
         }
     }
 

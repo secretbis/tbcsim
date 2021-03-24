@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import data.codegen.generators.ItemGen
-import data.codegen.generators.ItemSetGen
-import data.codegen.generators.SocketBonusGen
 
 object CodeGen {
     private val mapper = ObjectMapper().registerKotlinModule()
@@ -19,8 +17,6 @@ object CodeGen {
     }
 
     fun generate() {
-        SocketBonusGen.generate()
-        ItemSetGen.generate()
         ItemGen.generate()
     }
 }

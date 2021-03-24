@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.classes.shaman.talents.*
 import data.Constants
+import data.itemsets.SkyshatterRegalia
 import data.model.Item
 import mechanics.General
 import mechanics.Spell
@@ -84,7 +85,11 @@ open class LightningBolt : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod
+        // Check T6 set bonus
+        val t6Bonus = sp.buffs[SkyshatterRegalia.FOUR_SET_BUFF_NAME] != null
+        val t6Multiplier = if(t6Bonus) { SkyshatterRegalia.fourSetLBDamageMultiplier() } else 1.0
+
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(
@@ -101,10 +106,10 @@ open class LightningBolt : Ability() {
         val baseTriggerTypes = if(isLoProc) { listOf() } else listOf(Proc.Trigger.SHAMAN_CAST_LIGHTNING_BOLT)
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            Event.Result.CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
             Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
             Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
             else -> null
         }
 

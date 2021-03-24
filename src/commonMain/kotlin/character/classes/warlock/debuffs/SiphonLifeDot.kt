@@ -21,7 +21,7 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 63.0
-        val numTicks = 10.0
+        val numTicks = durationMs / tickDeltaMs
         // TODO: What the heck school is this spell anyway
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {

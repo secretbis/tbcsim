@@ -1,6 +1,8 @@
 package mechanics
 
+import sim.SimParticipant
 import kotlin.js.JsExport
+import kotlin.math.sqrt
 
 @JsExport
 object General {
@@ -10,5 +12,10 @@ object General {
         return reductions.fold(baseCost) { acc, reduction ->
             acc - acc * reduction
         }.coerceAtLeast(0.0)
+    }
+
+    fun mp5FromSpiritNotCasting(sp: SimParticipant): Int {
+        val regen = 0.001 + (sp.spirit() * sqrt(sp.intellect().toDouble()) * 0.005596) * 5
+        return regen.toInt()
     }
 }

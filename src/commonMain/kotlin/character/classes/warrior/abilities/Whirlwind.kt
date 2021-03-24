@@ -3,6 +3,7 @@ package character.classes.warrior.abilities
 import character.*
 import character.classes.warrior.talents.ImprovedWhirlwind
 import data.Constants
+import data.itemsets.WarbringerBattlegear
 import data.model.Item
 import mechanics.Melee
 import sim.Event
@@ -24,7 +25,15 @@ class Whirlwind : Ability() {
     }
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sp: SimParticipant): Double = 30.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val baseCost = 25.0
+
+        // Check T4 set bonus
+        val t4Bonus = sp.buffs[WarbringerBattlegear.TWO_SET_BUFF_NAME] != null
+        val t4CostReduction = if(t4Bonus) { WarbringerBattlegear.twoSetWhirlwindCostReduction() } else 0.0
+
+        return baseCost - t4CostReduction
+    }
 
     override fun cast(sp: SimParticipant) {
         val mh = sp.character.gear.mainHand

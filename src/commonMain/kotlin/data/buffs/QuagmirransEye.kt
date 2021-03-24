@@ -10,11 +10,9 @@ import sim.SimParticipant
 
 class QuagmirransEye : Buff() {
 
-    override val name: String = "Quagmirrans Eye (static)"
+    override val name: String = "Quagmirran's Eye (static)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
-
-
 
     val proc = object : Proc() {
         // TODO: Does this trigger on DoTs
@@ -28,7 +26,7 @@ class QuagmirransEye : Buff() {
 
         val buff = object : Buff() {
             override val id: Int = 33297
-            override val name: String = "Quagmirrans Eye"
+            override val name: String = "Quagmirran's Eye"
             override val durationMs: Int = 6000
 
             override fun modifyStats(sp: SimParticipant): Stats? {
@@ -39,5 +37,6 @@ class QuagmirransEye : Buff() {
             sp.addBuff(buff)
         }
     }
+
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

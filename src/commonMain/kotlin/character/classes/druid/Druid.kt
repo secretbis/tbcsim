@@ -5,6 +5,11 @@ import character.Class
 import data.model.Item
 
 class Druid : Class(mapOf()) {
+    companion object {
+        const val BEAR_FORM_BUFF_NAME = "Bear Form"
+        const val DIRE_BEAR_FORM_BUFF_NAME = "Dire Bear Form"
+        const val CAT_FORM_BUFF_NAME = "Cat Form"
+    }
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }

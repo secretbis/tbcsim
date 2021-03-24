@@ -1,6 +1,8 @@
 package character.classes.shaman.talents
 
 import character.*
+import character.classes.shaman.Shaman
+import data.itemsets.CataclysmHarness
 import data.model.Item
 import sim.Event
 import sim.SimParticipant
@@ -45,7 +47,15 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                 1.05 + (0.05 * talentRanks)
             } else 1.0
 
-            return Stats(physicalHasteMultiplier = modifier)
+            // If this is Shaman flurry, check the T5 bonus
+            var shamanT5BonusHaste = 0.0
+            if(sp.character.klass is Shaman) {
+                if(sp.buffs[CataclysmHarness.FOUR_SET_BUFF_NAME] != null) {
+                    shamanT5BonusHaste = CataclysmHarness.fourSetAdditionalFlurryHaste()
+                }
+            }
+
+            return Stats(physicalHasteMultiplier = modifier + shamanT5BonusHaste)
         }
 
         val chargeProc = chargeProc(this)

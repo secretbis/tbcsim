@@ -5,6 +5,8 @@ import character.Proc
 import character.Resource
 import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import data.Constants
+import data.itemsets.DestroyerBattlegear
+import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
@@ -21,7 +23,15 @@ class Bloodthirst : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
-    override fun resourceCost(sp: SimParticipant): Double = 30.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val baseCost = 30.0
+
+        // Check T5 set bonus
+        val t5Bonus = sp.buffs[DestroyerBattlegear.FOUR_SET_BUFF_NAME] != null
+        val t5CostReduction = if(t5Bonus) { DestroyerBattlegear.fourSetBTMSCostReduction() } else 0.0
+
+        return baseCost - t5CostReduction
+    }
 
     override fun available(sp: SimParticipant): Boolean {
         return sp.character.klass.talents[BloodthirstTalent.name]?.currentRank == 1 && super.available(sp)
@@ -32,7 +42,11 @@ class Bloodthirst : Ability() {
         //       since that would allow things like Sword Spec to proc off of BT, which I presume it can
         val item = sp.character.gear.mainHand
 
-        val damage = sp.attackPower() * 0.45
+        // Check T6 set bonus
+        val t6Bonus = sp.buffs[OnslaughtBattlegear.FOUR_SET_BUFF_NAME] != null
+        val t6Multiplier = if(t6Bonus) { OnslaughtBattlegear.fourSetMSBTDamageMultiplier() } else 1.0
+
+        val damage = sp.attackPower() * 0.45 * t6Multiplier
         val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
         // Save last hit state and fire event

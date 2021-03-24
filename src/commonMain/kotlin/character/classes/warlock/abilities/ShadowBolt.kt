@@ -4,6 +4,7 @@ import character.Ability
 import character.Proc
 import character.classes.warlock.talents.*
 import data.Constants
+import data.itemsets.MaleficRaiment
 import mechanics.General
 import mechanics.Spell
 import sim.Event
@@ -49,10 +50,13 @@ open class ShadowBolt : Ability() {
         val shadowAndFlame = sp.character.klass.talents[ShadowAndFlame.name] as ShadowAndFlame?
         val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 1.0
 
+        val t6Bonus = sp.buffs[MaleficRaiment.FOUR_SET_BUFF_NAME] != null
+        val t6Multiplier = if(t6Bonus) { MaleficRaiment.fourSetSBIncinerateDamageMultiplier() } else 1.0
+
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.SHADOW
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier) * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
@@ -67,11 +71,11 @@ open class ShadowBolt : Ability() {
         // Proc anything that can proc off non-periodic Shadow damage
         val baseTriggerTypes = if(result.second == Event.Result.CRIT) { listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT) } else listOf()
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            Event.Result.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            Event.Result.CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
             Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
             else -> null
         }
 
