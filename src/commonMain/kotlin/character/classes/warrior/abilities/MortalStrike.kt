@@ -4,6 +4,7 @@ import character.*
 import character.classes.warrior.talents.ImprovedMortalStrike
 import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import data.Constants
+import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
@@ -35,8 +36,12 @@ class MortalStrike : Ability() {
         val impMSRanks = sp.character.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
         val dmgMult = 1.0 + (0.01 * impMSRanks)
 
+        // Check T6 set bonus
+        val t6Bonus = sp.buffs[OnslaughtBattlegear.FOUR_SET_BUFF_NAME] != null
+        val t6Multiplier = if(t6Bonus) { OnslaughtBattlegear.fourSetMSBTDamageMultiplier() } else 1.0
+
         val item = sp.character.gear.mainHand
-        val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMult
+        val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMult * t6Multiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event

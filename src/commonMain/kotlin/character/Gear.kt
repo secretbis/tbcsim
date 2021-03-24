@@ -101,6 +101,17 @@ class Gear {
                 }
             }
         }
+
+        // Add any item set buffs
+        val allItemSets = all().mapNotNull { it.itemSet }.distinctBy { it.id }
+        allItemSets.forEach { set ->
+            set.bonuses.forEach { bonus ->
+                if(bonus.isActive(this)) {
+                    buffs.add(bonus.buff)
+                }
+            }
+        }
+
         return buffs
     }
 

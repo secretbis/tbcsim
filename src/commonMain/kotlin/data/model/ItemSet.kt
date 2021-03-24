@@ -2,6 +2,7 @@ package data.model
 
 import character.Buff
 import character.Character
+import character.Gear
 
 open class ItemSet {
     data class Bonus(
@@ -9,8 +10,8 @@ open class ItemSet {
         val requiredSetItems: Int,
         val buff: Buff
     ) {
-        fun isActive(character: Character): Boolean {
-            return character.gear.all().filter {
+        fun isActive(gear: Gear): Boolean {
+            return gear.all().filter {
                 it.itemSet?.id == setId
             }.size >= requiredSetItems
         }

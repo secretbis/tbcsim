@@ -7,6 +7,7 @@ import character.Stats
 import character.classes.shaman.talents.EnhancingTotems
 import character.classes.shaman.talents.MentalQuickness
 import character.classes.shaman.talents.TotemicFocus
+import data.itemsets.CycloneHarness
 import mechanics.General
 import sim.SimParticipant
 
@@ -40,9 +41,16 @@ class StrengthOfEarthTotem: Ability() {
 
         val baseStr = 86.0
         override fun modifyStats(sp: SimParticipant): Stats {
+            // Extra str from T4 set
+            val t4BonusBuff = sp.buffs[CycloneHarness.TWO_SET_BUFF_NAME] != null
+            val t4BonusStr = if(t4BonusBuff) { CycloneHarness.twoSetStrengthOfEarthBonus() } else 0
+
+            // Enhancing Totems
             val etTalent = sp.character.klass.talents[EnhancingTotems.name] as EnhancingTotems?
             val multiplier = 1.0 * (etTalent?.strengthOfEarthMultiplier() ?: 1.0)
-            return Stats(strength = (baseStr * multiplier).toInt())
+
+            val totalStr = baseStr + t4BonusStr
+            return Stats(strength = (totalStr * multiplier).toInt())
         }
     }
 

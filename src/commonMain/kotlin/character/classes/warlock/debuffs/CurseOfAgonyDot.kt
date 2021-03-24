@@ -26,7 +26,7 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 113.0
-        val numTicks = 12.0
+        val numTicks = durationMs / tickDeltaMs
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
             val impCoa = owner.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?

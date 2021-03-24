@@ -121,13 +121,15 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                 castingRule!!.ability.afterCast(this)
 
                 // Log cast event
-                logEvent(
-                    Event(
-                        eventType = Event.Type.SPELL_CAST,
-                        abilityName = castingRule!!.ability.name,
-                        target = sim.target
-                    )
+                val castEvent = Event(
+                    eventType = Event.Type.SPELL_CAST,
+                    abilityName = castingRule!!.ability.name,
+                    target = sim.target
                 )
+                logEvent(castEvent)
+
+                // Fire cast procs
+                fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
 
                 // Reset casting state
                 castingRule = null

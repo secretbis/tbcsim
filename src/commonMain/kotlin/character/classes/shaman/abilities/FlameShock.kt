@@ -5,6 +5,7 @@ import character.Proc
 import character.classes.shaman.debuffs.FlameShockDot
 import character.classes.shaman.talents.*
 import data.Constants
+import data.itemsets.SkyshatterHarness
 import mechanics.General
 import mechanics.Spell
 import sim.Event
@@ -38,7 +39,11 @@ class FlameShock : Ability() {
         val eleFocus = sp.buffs[ElementalFocus.name]
         val elefRed = if(eleFocus != null) { 0.40 } else 0.0
 
-        return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed, elefRed))
+        // Check T6 set bonus
+        val t6Bonus = sp.buffs[SkyshatterHarness.TWO_SET_BUFF_NAME] != null
+        val t6Discount = if(t6Bonus) { SkyshatterHarness.twoSetShockCostReductionPct() } else 0.0
+
+        return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed, elefRed, t6Discount))
     }
 
     val baseDamage = 377.0

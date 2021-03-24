@@ -6,6 +6,7 @@ import character.Proc
 import character.Stats
 import character.classes.shaman.talents.Stormstrike as StormstrikeTalent
 import data.Constants
+import data.itemsets.CycloneHarness
 import data.model.Item
 import mechanics.Melee
 import sim.Event
@@ -59,17 +60,20 @@ class Stormstrike : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
+        // Extra damage from T4 set
+        val t4BonusBuff = sp.buffs[CycloneHarness.FOUR_SET_BUFF_NAME] != null
+        val t4BonusDmg = if(t4BonusBuff) { CycloneHarness.fourSetStormstrikeBonus() } else 0
+
         // Do attacks
         // Stormstrike is yellow, and not normalized per EJ
         val mhItem = sp.character.gear.mainHand
-        val mhAttack = Melee.baseDamageRoll(sp, mhItem, isNormalized = false)
+        val mhAttack = Melee.baseDamageRoll(sp, mhItem, isNormalized = false) + t4BonusDmg
         val mhResult = Melee.attackRoll(sp, mhAttack, mhItem, isWhiteDmg = false)
 
         val ohItem = sp.character.gear.offHand
-        val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false)
+        val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false) + t4BonusDmg
         val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
 
-        // TODO: Distinguish MH and OH events in the logs?
         val eventMh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
@@ -104,7 +108,7 @@ class Stormstrike : Ability() {
             sp.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
         }
 
-        // TODO: This is modeled as two distint hit events for the purposes of procs
+        // TODO: This is modeled as two distinct hit events for the purposes of procs
         //       Confirm if that is correct behavior
         val triggerTypesOh = when(ohResult.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -115,5 +119,8 @@ class Stormstrike : Ability() {
         if(triggerTypesOh != null) {
             sp.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
         }
+
+        // Fire a general Stormstrike proc
+        sp.fireProc(listOf(Proc.Trigger.SHAMAN_CAST_STORMSTRIKE), listOf(mhItem, ohItem), this, null)
     }
 }

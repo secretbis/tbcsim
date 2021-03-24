@@ -23,7 +23,7 @@ class Berserking : Ability() {
             Resource.Type.MANA -> 0.06 * sp.character.klass.baseMana
             Resource.Type.ENERGY -> 10.0
             Resource.Type.RAGE -> 5.0
-            Resource.Type.FOCUS -> 0.0
+            else -> 0.0
         }
     }
 

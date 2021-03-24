@@ -2,6 +2,8 @@
 
 This is a simulation of WoW: TBC DPS - items, abilities, and mechanics.
 
+Web version here: https://tbcsim.com
+
 This information is not very cleanly available, and requires a fair amount of archaeology to discover.
 As such, I'm sure there are a thousand subtle bugs.  Please report any if you find them! 
 
@@ -25,10 +27,10 @@ Implemented:
 - Raid buffs/debuffs
 - Consumables
 - Racial abilities
+- Item set bonuses, including all tier sets
 
 Not yet implemented:
 - All specs not listed above
-- Item set bonuses
 - Automated gear comparison
 
 ## Example output
@@ -112,10 +114,10 @@ STDDEV DPS: 130.06
 
 ## Usage
 
-This has only a command-line interface.
+This section applies to the command line interface.
 
 ```
-./tbcsim ./samples/shaman_enh_subresto_preraid.yml
+./tbcsim
 
 ------------------------------------------------
 
@@ -154,7 +156,7 @@ Target Level:  73
 Parry/Block:   false
 ```
 
-The first run will take awhile, since compiling the sim plus every item in TBC takes a hot minute.
+The first run will take awhile, since compiling the sim plus every item, buff, and proc in TBC takes a hot minute.
 
 ## Configuration
 
@@ -164,4 +166,4 @@ Tbcsim accepts a yml file as its configuration.  This contains:
 - Rotation
 - Raid buffs and consumables
 
-[Click here to see a full example](src/commonMain/resources/samples/shaman_enh_subresto_preraid.yml)
+[Click here to see a full example](ui/src/presets/samples/shaman_enh_subresto_preraid.yml)

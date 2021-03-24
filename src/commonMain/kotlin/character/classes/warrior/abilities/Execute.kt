@@ -3,6 +3,7 @@ package character.classes.warrior.abilities
 import character.*
 import character.classes.warrior.talents.ImprovedExecute
 import data.Constants
+import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
@@ -24,12 +25,17 @@ class Execute : Ability() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sp: SimParticipant): Double {
         val impExRanks = sp.character.klass.talents[ImprovedExecute.name]?.currentRank
-        val discount = when(impExRanks) {
+        val impExDiscount = when(impExRanks) {
             1 -> 2
             2 -> 5
             else -> 0
         }
-        return 15.0 - discount
+
+        // Check T6 set bonus
+        val t6Bonus = sp.buffs[OnslaughtBattlegear.TWO_SET_BUFF_NAME] != null
+        val t6Discount = if(t6Bonus) { OnslaughtBattlegear.twoSetExecuteCostReduction() } else 0.0
+
+        return 15.0 - impExDiscount - t6Discount
     }
 
     override fun cast(sp: SimParticipant) {

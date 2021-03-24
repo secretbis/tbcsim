@@ -17,7 +17,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
     override val tickDeltaMs: Int = 3000
 
     val dmgPerTick = 175.0
-    val numTicks = 6.0
+    val numTicks = durationMs / tickDeltaMs
     val school = Constants.DamageType.SHADOW
     val ua = object : Ability() {
         override val id: Int = 30405
