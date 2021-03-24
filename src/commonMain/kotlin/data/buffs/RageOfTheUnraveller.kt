@@ -21,8 +21,8 @@ class RageOfTheUnraveller : Buff() {
             Trigger.MELEE_YELLOW_CRIT
         )
 
-        override val type: Type = Type.PPM
-        override val ppm: Double = 1.0
+        override val type: Type = Type.PERCENT
+        override fun percentChance(sp: SimParticipant): Double = 10.0
         override fun cooldownMs(sp: SimParticipant): Int = 50000
         //TODO: check if this has an ICD, conflicting information in wowhead comments (might of been nerfed in 2.2)
         //50 sec ICD data in wow.tools 2.5.1 build
