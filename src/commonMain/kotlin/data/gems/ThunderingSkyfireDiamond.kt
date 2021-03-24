@@ -41,6 +41,8 @@ class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_mi
                 Trigger.MELEE_WHITE_CRIT,
                 Trigger.MELEE_YELLOW_HIT,
                 Trigger.MELEE_YELLOW_CRIT,
+                Trigger.MELEE_BLOCK,
+                Trigger.MELEE_GLANCE
             )
 
             // https://70.wowfan.net/en/?spell=39958

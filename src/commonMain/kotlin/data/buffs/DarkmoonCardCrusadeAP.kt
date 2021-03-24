@@ -36,6 +36,7 @@ class DarkmoonCardCrusadeAP : Buff() {
             Trigger.MELEE_WHITE_CRIT,
             Trigger.MELEE_YELLOW_HIT,
             Trigger.MELEE_YELLOW_CRIT,
+            Trigger.MELEE_BLOCK,
             Trigger.MELEE_GLANCE
         )
         override val type: Type = Type.STATIC
