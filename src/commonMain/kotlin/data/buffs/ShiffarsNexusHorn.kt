@@ -14,8 +14,6 @@ class ShiffarsNexusHorn : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-
-
     val proc = object : Proc() {
 
         override val triggers: List<Trigger> = listOf(

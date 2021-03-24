@@ -10,8 +10,9 @@ import sim.SimParticipant
 
 class DragonspineTrophy : Buff() {
     override val id: Int = 34774
-    override val name: String = "Dragonspine Trophy"
+    override val name: String = "Dragonspine Trophy (static)"
     override val durationMs: Int = -1
+    override val hidden: Boolean = true
 
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -30,7 +31,6 @@ class DragonspineTrophy : Buff() {
         override fun cooldownMs(sp: SimParticipant): Int = 20000
         //TODO: check if this has an ICD, conflicting information in wowhead comments (might of been nerfed in 2.2)
         //20 sec ICD data in wow.tools 2.5.1 build
-
 
         val buff = object : Buff() {
             override val name: String = "Dragonspine Trophy"

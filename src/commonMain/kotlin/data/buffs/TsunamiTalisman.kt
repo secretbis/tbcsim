@@ -9,12 +9,9 @@ import sim.Event
 import sim.SimParticipant
 
 class TsunamiTalisman : Buff() {
-
     override val name: String = "Tsunami Talisman (static)"
     override val durationMs: Int = -1
-   override val hidden: Boolean = true
-
-
+    override val hidden: Boolean = true
 
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -39,5 +36,6 @@ class TsunamiTalisman : Buff() {
             sp.addBuff(buff)
         }
     }
+
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }
