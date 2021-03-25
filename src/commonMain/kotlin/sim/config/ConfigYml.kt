@@ -86,7 +86,8 @@ data class RotationRuleCriterion(
     val modulusSeconds: Int? = null,
     val pct: Int? = null,
     val oncePerSwing: Boolean? = null,
-    val amount: Int? = null
+    val amount: Int? = null,
+    val bool: Boolean? = null
 )
 
 @JsExport

@@ -22,6 +22,7 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
         MAIN_HAND_SWING_TIMER_GTE,
         FIGHT_TIME_REMAINING_GTE,
         FIGHT_TIME_REMAINING_LTE,
+        IS_EXECUTE_PHASE
     }
 
     companion object {
@@ -45,6 +46,7 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
                 Type.MAIN_HAND_SWING_TIMER_GTE -> MainHandSwingTimerGte(data)
                 Type.FIGHT_TIME_REMAINING_GTE -> FightTimeRemainingGte(data)
                 Type.FIGHT_TIME_REMAINING_LTE -> FightTimeRemainingLte(data)
+                Type.IS_EXECUTE_PHASE -> IsExecutePhase(data)
                 else -> {
                     logger.warn { "Unknown rotation criterion: $typeName" }
                     null
