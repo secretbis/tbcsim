@@ -14,7 +14,7 @@ class MysticalSkyfireDiamond : Gem(25893, "Mystical Skyfire Diamond", "inv_misc_
 
     val hasteBuff = object : Buff() {
         override val name: String = "Mystical Skyfire Diamond"
-        override val durationMs: Int = 10000
+        override val durationMs: Int = 4000
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spellHasteRating = 320.0)
