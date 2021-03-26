@@ -18,7 +18,8 @@ class SwiftSkyfireDiamond : Gem(25894, "Swift Skyfire Diamond", "inv_misc_gem_di
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPower = 24
+                attackPower = 24,
+                rangedAttackPower = 24
             )
         }
     }
