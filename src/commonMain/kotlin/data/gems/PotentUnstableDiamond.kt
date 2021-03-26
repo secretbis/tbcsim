@@ -18,7 +18,8 @@ class PotentUnstableDiamond : Gem(32640, "Potent Unstable Diamond", "inv_misc_ge
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPower = 24
+                attackPower = 24,
+                rangedAttackPower = 24
             )
         }
     }
