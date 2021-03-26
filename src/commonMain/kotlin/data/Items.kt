@@ -28,11 +28,6 @@ object Items {
         { ImbuedUnstableDiamond() },
         { EmberSkyfireDiamond() },
 
-
-
-
-
-
         // Red gems
         { BloodGarnet(23095, Prefix.BOLD) },
         { LivingRuby(24027, Prefix.BOLD) },
