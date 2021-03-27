@@ -117,13 +117,13 @@ data class Stats(
         agility += stats.agility
         stamina += stats.stamina
         intellect += stats.intellect
-        spirit += stats.intellect
+        spirit += stats.spirit
 
         strengthMultiplier *= stats.strengthMultiplier
         agilityMultiplier *= stats.agilityMultiplier
         staminaMultiplier *= stats.staminaMultiplier
         intellectMultiplier *= stats.intellectMultiplier
-        spiritMultiplier *= stats.intellectMultiplier
+        spiritMultiplier *= stats.spiritMultiplier
 
         armor += stats.armor
 
@@ -172,6 +172,9 @@ data class Stats(
 
         armorMultiplier *= stats.armorMultiplier
 
+        attackPowerMultiplier *= stats.attackPowerMultiplier
+        rangedAttackPowerMultiplier *= stats.rangedAttackPowerMultiplier
+
         physicalHasteMultiplier *= stats.physicalHasteMultiplier
         spellHasteMultiplier *= stats.spellHasteMultiplier
 
@@ -205,103 +208,6 @@ data class Stats(
         manaPer5Seconds += stats.manaPer5Seconds
 
         offHandAddlWhiteHitPct += stats.offHandAddlWhiteHitPct
-
-        return this
-    }
-
-    fun subtract(stats: Stats) : Stats {
-        strength -= stats.strength
-        agility -= stats.agility
-        stamina -= stats.stamina
-        intellect -= stats.intellect
-        spirit -= stats.intellect
-
-        strengthMultiplier /= stats.strengthMultiplier
-        agilityMultiplier /= stats.agilityMultiplier
-        staminaMultiplier /= stats.staminaMultiplier
-        intellectMultiplier /= stats.intellectMultiplier
-        spiritMultiplier /= stats.intellectMultiplier
-
-        armor -= stats.armor
-
-        attackPower -= stats.attackPower
-        rangedAttackPower -= stats.rangedAttackPower
-        feralAttackPower -= stats.feralAttackPower
-
-        physicalCritRating -= stats.physicalCritRating
-        physicalHitRating -= stats.physicalHitRating
-        physicalHasteRating -= stats.physicalHasteRating
-        expertiseRating -= stats.expertiseRating
-        armorPen -= stats.armorPen
-
-        spellCritRating -= stats.spellCritRating
-        spellHitRating -= stats.spellHitRating
-        spellHasteRating -= stats.spellHasteRating
-        spellDamage -= stats.spellDamage
-        spellHealing -= stats.spellHealing
-        spellPen -= stats.spellPen
-
-        holyDamage -= stats.holyDamage
-        fireDamage -= stats.fireDamage
-        natureDamage -= stats.natureDamage
-        frostDamage -= stats.frostDamage
-        shadowDamage -= stats.shadowDamage
-        arcaneDamage -= stats.arcaneDamage
-
-        resilienceRating -= stats.resilienceRating
-        defenseRating -= stats.defenseRating
-        blockValue -= stats.blockValue
-        blockRating -= stats.blockRating
-        dodgeRating -= stats.dodgeRating
-        parryRating -= stats.parryRating
-
-        fireResistance = (fireResistance - stats.fireResistance).coerceAtLeast(0)
-        natureResistance = (natureResistance - stats.natureResistance).coerceAtLeast(0)
-        frostResistance = (frostResistance - stats.frostResistance).coerceAtLeast(0)
-        shadowResistance = (shadowResistance - stats.shadowResistance).coerceAtLeast(0)
-        arcaneResistance = (arcaneResistance - stats.arcaneResistance).coerceAtLeast(0)
-
-        bowCritRating -= stats.bowCritRating
-        gunCritRating -= stats.gunCritRating
-        swordExpertiseRating -= stats.swordExpertiseRating
-        maceExpertiseRating -= stats.maceExpertiseRating
-        axeExpertiseRating -= stats.axeExpertiseRating
-
-        armorMultiplier /= stats.armorMultiplier
-
-        physicalHasteMultiplier /= stats.physicalHasteMultiplier
-        spellHasteMultiplier /= stats.spellHasteMultiplier
-
-        whiteDamageFlatModifier -= stats.whiteDamageFlatModifier
-        whiteDamageMultiplier /= stats.whiteDamageMultiplier
-        whiteDamageAddlCritMultiplier /= stats.whiteDamageAddlCritMultiplier
-        whiteDamageAddlOffHandPenaltyModifier -= stats.whiteDamageAddlOffHandPenaltyModifier
-
-        yellowDamageFlatModifier -= stats.yellowDamageFlatModifier
-        yellowDamageMultiplier /= stats.yellowDamageMultiplier
-        yellowDamageAddlCritMultiplier /= stats.yellowDamageAddlCritMultiplier
-        yellowDamageAddlOffHandPenaltyModifier -= stats.yellowDamageAddlOffHandPenaltyModifier
-
-        spellDamageFlatModifier -= stats.spellDamageFlatModifier
-        spellDamageMultiplier /= stats.spellDamageMultiplier
-        spellDamageAddlCritMultiplier /= stats.spellDamageAddlCritMultiplier
-
-        physicalDamageMultiplier /= stats.physicalDamageMultiplier
-        holyDamageMultiplier /= stats.holyDamageMultiplier
-        fireDamageMultiplier /= stats.fireDamageMultiplier
-        natureDamageMultiplier /= stats.natureDamageMultiplier
-        frostDamageMultiplier /= stats.frostDamageMultiplier
-        shadowDamageMultiplier /= stats.shadowDamageMultiplier
-        arcaneDamageMultiplier /= stats.arcaneDamageMultiplier
-        petDamageMultiplier /= stats.petDamageMultiplier
-
-        healthMultiplier /= stats.healthMultiplier
-        healthFlatModifier -= stats.healthFlatModifier
-        manaMultiplier /= stats.manaMultiplier
-        manaFlatModifier -= stats.manaFlatModifier
-        manaPer5Seconds -= stats.manaPer5Seconds
-
-        offHandAddlWhiteHitPct -= offHandAddlWhiteHitPct
 
         return this
     }

@@ -20,6 +20,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
+                Trigger.MELEE_AUTO_CRIT,
                 Trigger.MELEE_WHITE_CRIT,
                 Trigger.MELEE_YELLOW_CRIT
             )
@@ -32,7 +33,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
                 override fun modifyStats(sp: SimParticipant): Stats {
                     val talentRanks = sp.character.klass.talents[UnleashedRage.name]?.currentRank ?: 0
 
-                    val modifier = 1.0 + (0.2 * talentRanks)
+                    val modifier = 1.0 + (0.02 * talentRanks)
                     return Stats(
                         attackPowerMultiplier = modifier,
                         rangedAttackPowerMultiplier = modifier
