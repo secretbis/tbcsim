@@ -194,11 +194,17 @@ export default function({ state }) {
     simConfig.character,
     simConfig.rotation,
     // Shim any parts of the sim object we need
+    // FIXME: This really needs a better solution, it's mega jank
     {
       _tickNum: 0,
       _elapsedTimeMs: 0,
       getExpirationTick: function() { return 0; },
       _target_0: {
+        _character: {
+          _subTypes: {
+            contains_61: function() { return false; }
+          }
+        },
         addDebuff: function() {},
       }
     }
