@@ -18,7 +18,10 @@ class FlaskOfRelentlessAssault : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR, Mutex.GUARDIAN_ELIXIR)
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(attackPower = 120)
+            return Stats(
+                attackPower = 120,
+                rangedAttackPower = 120
+            )
         }
     }
 

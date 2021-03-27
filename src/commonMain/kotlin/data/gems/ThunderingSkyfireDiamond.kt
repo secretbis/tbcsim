@@ -17,8 +17,8 @@ class ThunderingSkyfireDiamond : Gem(32410,"Thundering Skyfire Diamond", "inv_mi
 
     val hasteBuff = object : Buff() {
         override val name: String = "Thundering Skyfire Diamond"
-        override val durationMs: Int = 10000
-
+        override val durationMs: Int = 6000
+        //https://tbc.wowhead.com/spell=39959/skyfire-swiftness 6 seconds in 2.5.1 data
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalHasteRating = 240.0)
         }

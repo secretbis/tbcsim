@@ -20,7 +20,10 @@ class FigurineNightseyePanther : Buff() {
         override val durationMs: Int = buffDurationMs
 
         override fun modifyStats(sp: SimParticipant): Stats? {
-            return Stats(attackPower = 320)
+            return Stats(
+                attackPower = 320,
+                rangedAttackPower = 320
+            )
         }
     }
 

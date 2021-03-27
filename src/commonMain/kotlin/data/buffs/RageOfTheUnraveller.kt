@@ -33,7 +33,10 @@ class RageOfTheUnraveller : Buff() {
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {
-                return Stats(attackPower = 300)
+                return Stats(
+                    attackPower = 300,
+                    rangedAttackPower = 300
+                )
             }
         }
 
