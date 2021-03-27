@@ -29,7 +29,10 @@ class TsunamiTalisman : Buff() {
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats? {
-                return Stats(attackPower = 340)
+                return Stats(
+                    attackPower = 340,
+                    rangedAttackPower = 340
+                )
             }
         }
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {

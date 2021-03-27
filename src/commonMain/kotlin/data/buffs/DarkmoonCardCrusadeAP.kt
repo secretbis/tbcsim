@@ -24,7 +24,10 @@ class DarkmoonCardCrusadeAP : Buff() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             val stacks = state(sp).currentStacks
-            return Stats(attackPower = 6 * stacks)
+            return Stats(
+                attackPower = 6 * stacks,
+                rangedAttackPower = 6 * stacks
+            )
         }
     }
 

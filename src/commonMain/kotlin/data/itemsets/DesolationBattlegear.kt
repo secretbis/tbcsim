@@ -36,7 +36,10 @@ class DesolationBattlegear : ItemSet() {
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats {
-                return Stats(attackPower = 160)
+                return Stats(
+                    attackPower = 160,
+                    rangedAttackPower = 160
+                )
             }
         }
 
