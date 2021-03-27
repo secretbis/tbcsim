@@ -133,8 +133,8 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Rampage
           seconds: 7
-    - name: Execute
     - name: Bloodthirst
+    - name: Execute
     - name: Whirlwind
     - name: Heroic Strike
       criteria:
