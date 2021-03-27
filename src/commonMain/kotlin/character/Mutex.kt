@@ -11,5 +11,8 @@ enum class Mutex {
     POTION,
     FOOD,
     WEAPON_TEMP_ENH_MH,
-    WEAPON_TEMP_ENH_OH
+    WEAPON_TEMP_ENH_OH,
+
+    // Stacking buffs/debuffs
+    DEBUFF_MAJOR_ARMOR
 }

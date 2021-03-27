@@ -18,6 +18,11 @@ class ImprovedExposeArmor : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
+        override val mutex: List<Mutex> = listOf(Mutex.DEBUFF_MAJOR_ARMOR)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf(
+            Mutex.DEBUFF_MAJOR_ARMOR to (2050 * 1.5).toInt()
+        )
+
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 armor = -1 * (2050 * 1.5).toInt()

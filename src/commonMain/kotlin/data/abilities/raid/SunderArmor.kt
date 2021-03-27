@@ -18,15 +18,13 @@ class SunderArmor : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
+        override val mutex: List<Mutex> = listOf(Mutex.DEBUFF_MAJOR_ARMOR)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf(
+            Mutex.DEBUFF_MAJOR_ARMOR to (5 * 520)
+        )
+
         override fun modifyStats(sp: SimParticipant): Stats? {
-            val impEaActive = sp.sim.target.debuffs[ImprovedExposeArmor.name] != null
-            return if(impEaActive) {
-                null
-            } else {
-                Stats(
-                    armor = -1 * 520 * 5
-                )
-            }
+            return Stats(armor = -1 * 5 * 520)
         }
     }
 

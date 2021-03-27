@@ -174,8 +174,51 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         this.mainHandAutoReplacement = ability
     }
 
+    // Determine the priority of an incoming mutex buff/debuff against already-present mutex buffs/debuffs of the same type
+    private fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
+        // If this buff is mutex with others, compare priority and remove the weaker one(s)
+        // If they are equal, choose the most recent (this one)
+        return if(buffDebuff.mutex.contains(Mutex.NONE)) {
+            true
+        } else {
+            buffDebuff.mutex.map { mutex ->
+                val allMutex = buffsDebuffs.values
+                    .filter { existing -> buffDebuff.mutex.any { existing.mutex.contains(it) } }
+
+                if(allMutex.isNotEmpty()) {
+                    val highestPriority = allMutex.map { it.mutexPriority(this)[mutex] ?: 0 }.last()
+
+                    // If this incoming buff is the highest or equal priority, keep it and remove the others
+                    // Otherwise, do not apply the buff
+                    val incomingBuffPriority = buffDebuff.mutexPriority(this)[mutex] ?: 0
+                    // We should add the buff if it is highest in *any* mutex category
+                    incomingBuffPriority >= highestPriority
+                } else true
+            }.any { it }
+        }
+    }
+
+    private fun <T : Buff> pruneByPriority(newBuff: T, buffsDebuffs: Map<String, T>, removeDelegate: (List<T>) -> Unit) {
+        // Remove all buffs in each mutex category
+        newBuff.mutex.forEach { mutex ->
+            if(mutex != Mutex.NONE) {
+                val toRemove = buffsDebuffs.values.filter { it.mutex.contains(mutex) }
+                toRemove.forEach {
+                    it.reset(this)
+                    removeDelegate(listOf(it))
+                }
+            }
+        }
+    }
+
     // Buffs
     fun addBuff(buff: Buff) {
+        // Check mutex
+        val shouldAddBuff = shouldApplyBuff(buff, buffs)
+        if(shouldAddBuff) {
+            pruneByPriority(buff, buffs, ::removeBuffs)
+        } else return
+
         buff.refresh(this)
 
         // If this buff stacks, track stacks
@@ -200,16 +243,6 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         // If this is a new buff, add it
         val exists = buffs[buff.name] != null
         if(!exists) {
-            // If this buff is mutex with others, remove any existing with that class
-            if(!buff.mutex.contains(Mutex.NONE)) {
-                // A buff should be removed if it matches any of the incoming buff's mutex categories
-                val toRemove = buffs.values.filter { existing -> buff.mutex.any { existing.mutex.contains(it) } }
-                toRemove.forEach {
-                    it.reset(this)
-                    removeBuffs(listOf(it))
-                }
-            }
-
             buffs[buff.name] = buff
             logEvent(Event(
                 eventType = Event.Type.BUFF_START,
@@ -288,6 +321,12 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
      // Debuffs
     fun addDebuff(debuff: Debuff) {
+        // Check mutex
+        val shouldApplyDebuff = shouldApplyBuff(debuff, debuffs)
+        if(shouldApplyDebuff) {
+            pruneByPriority(debuff, debuffs, ::removeDebuffs)
+        } else return
+
         debuff.refresh(this)
 
         // If this debuff stacks, track stacks

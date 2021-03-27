@@ -29,6 +29,9 @@ abstract class Buff {
     abstract val name: String
     abstract val durationMs: Int
     open val mutex: List<Mutex> = listOf(Mutex.NONE)
+    // Higher wins
+    // This is typically the value of the buff/debuff - stronger should naturally take priority over weaker
+    open fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf()
 
     open val hidden: Boolean = false
     open val maxStacks: Int = 0
