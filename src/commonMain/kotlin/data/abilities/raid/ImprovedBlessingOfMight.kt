@@ -17,7 +17,7 @@ class ImprovedBlessingOfMight : Ability() {
     // Always assume the raid buffer has 5/5 imp might
     val bonusAp = 220.0 * 1.2
     val buff = object : Buff() {
-        override val name: String = "Improved Blessing of Might"
+        override val name: String = "Blessing of Might"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

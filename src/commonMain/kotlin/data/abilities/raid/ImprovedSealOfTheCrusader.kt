@@ -18,7 +18,7 @@ class ImprovedSealOfTheCrusader : Ability() {
     // Always assume the raid buffer has 3/3 imp seal
     val bonusCritRating = 3.0 * Rating.critPerPct
     val buff = object : Buff() {
-        override val name: String = "Improved Seal of the Crusader"
+        override val name: String = "Judgement of the Crusader"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

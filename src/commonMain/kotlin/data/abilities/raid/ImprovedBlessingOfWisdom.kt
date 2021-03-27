@@ -15,7 +15,7 @@ class ImprovedBlessingOfWisdom : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = Companion.name
+        override val name: String = "Blessing of Wisdom"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

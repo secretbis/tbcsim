@@ -21,7 +21,7 @@ class ImprovedMarkOfTheWild : Ability() {
     val resist = (25 * multiplier).toInt()
 
     val buff = object : Buff() {
-        override val name: String = "Improved Mark of the Wild"
+        override val name: String = "Mark of the Wild"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
