@@ -18,6 +18,15 @@ object Items {
         { ChaoticSkyfireDiamond() },
         { RelentlessEarthstormDiamond() },
         { ThunderingSkyfireDiamond() },
+        { SwiftSkyfireDiamond() },
+        { DestructiveSkyfireDiamond() },
+        { MysticalSkyfireDiamond() },
+        { EnigmaticSkyfireDiamond() },
+        { SwiftWindfireDiamond() },
+        { SwiftStarfireDiamond() },
+        { PotentUnstableDiamond() },
+        { ImbuedUnstableDiamond() },
+        { EmberSkyfireDiamond() },
 
         // Red gems
         { BloodGarnet(23095, Prefix.BOLD) },

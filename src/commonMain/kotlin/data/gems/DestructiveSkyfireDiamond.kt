@@ -5,24 +5,24 @@ import character.Stats
 import data.model.Color
 import data.model.Gem
 import data.model.Quality
+import data.model.Socket
 import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
-class RelentlessEarthstormDiamond : Gem(32409, "Relentless Earthstorm Diamond", "inv_misc_gem_diamond_06.jpg", null, Color.META, Quality.META) {
+class DestructiveSkyfireDiamond : Gem(25890, "Destructive Skyfire Diamond", "inv_misc_gem_diamond_07.jpg", null, Color.META, Quality.META) {
     val buff = object : Buff() {
-        override val name: String = "Relentless Earthstorm Diamond"
+        override val name: String = "Destructive Skyfire Diamond"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                agility = 12,
-                whiteDamageAddlCritMultiplier = 1.03,
-                yellowDamageAddlCritMultiplier = 1.03
+                spellCritRating = 14.0
             )
         }
     }
+
 
     override var buffs: List<Buff> = listOf(buff)
 }
