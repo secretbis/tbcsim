@@ -32,7 +32,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
                 override fun modifyStats(sp: SimParticipant): Stats {
                     val talentRanks = sp.character.klass.talents[UnleashedRage.name]?.currentRank ?: 0
 
-                    val modifier = 1 * (0.2 * talentRanks)
+                    val modifier = 1.0 + (0.2 * talentRanks)
                     return Stats(
                         attackPowerMultiplier = modifier,
                         rangedAttackPowerMultiplier = modifier

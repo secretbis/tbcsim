@@ -20,10 +20,9 @@ class UnleashedRage : Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        // Assume uptime of about 90%
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPowerMultiplier = 0.10 * 0.90
+                attackPowerMultiplier = 1.1
             )
         }
     }

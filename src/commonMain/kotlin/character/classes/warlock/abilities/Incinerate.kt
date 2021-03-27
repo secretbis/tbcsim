@@ -40,7 +40,7 @@ class Incinerate : Ability() {
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
 
         val shadowAndFlame = sp.character.klass.talents[ShadowAndFlame.name] as ShadowAndFlame?
-        val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 0.0
+        val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 1.0
 
         val t6Bonus = sp.buffs[MaleficRaiment.FOUR_SET_BUFF_NAME] != null
         val t6Multiplier = if(t6Bonus) { MaleficRaiment.fourSetSBIncinerateDamageMultiplier() } else 1.0
