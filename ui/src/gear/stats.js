@@ -195,6 +195,7 @@ export default function({ state }) {
     simConfig.rotation,
     // Shim any parts of the sim object we need
     {
+      _tickNum: 0,
       _elapsedTimeMs: 0,
       getExpirationTick: function() { return 0; },
       _target_0: {

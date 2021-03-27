@@ -16,17 +16,6 @@ class SimIteration(
 ) {
     val logger = KotlinLogging.logger {}
 
-    // Setup known participants
-    val target: SimParticipant = defaultTarget()
-    val subject: SimParticipant = SimParticipant(_subject, _rotation, this).init()
-    val subjectPet: SimParticipant? = if(subject.character.pet != null) {
-        SimParticipant(subject.character.pet, subject.character.pet.rotation, this).init()
-    } else null
-
-    // This is basically the non-sim target participants, and is the data needed for output
-    // TODO: The rest of the party and raid
-    val participants = listOfNotNull(subject, subjectPet)
-
     // General sim state
     val serverTickMs = 2000
     var lastServerTickMs = 0
@@ -41,6 +30,17 @@ class SimIteration(
 
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
+
+    // Setup known participants
+    val target: SimParticipant = defaultTarget()
+    val subject: SimParticipant = SimParticipant(_subject, _rotation, this).init()
+    val subjectPet: SimParticipant? = if(subject.character.pet != null) {
+        SimParticipant(subject.character.pet, subject.character.pet.rotation, this).init()
+    } else null
+
+    // This is basically the non-sim target participants, and is the data needed for output
+    // TODO: The rest of the party and raid
+    val participants = listOfNotNull(subject, subjectPet)
 
     private val allParticipants: List<SimParticipant> = listOfNotNull(
         target,
