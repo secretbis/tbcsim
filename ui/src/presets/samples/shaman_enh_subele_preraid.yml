@@ -190,6 +190,7 @@ raidBuffs:
   # Consider your raid composition when selecting which buffs to apply
   # e.g. if you don't have two paladins, you can't have two blessings
   - Blessing of Kings
+  - Drums of Battle
   - Improved Blessing of Might
   - Improved Mark of the Wild
   - Improved Seal of the Crusader
