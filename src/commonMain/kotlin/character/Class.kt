@@ -40,6 +40,8 @@ abstract class Class(
     abstract val rangedAttackPowerFromAgility: Int
     abstract val dodgePctPerAgility: Double
     abstract val baseDodgePct: Double
+    // https://wow.gamepedia.com/Spell_critical_strike
+    open val spellCritPctPerInt: Double = 1.0 / 80.0
 
     // Class-specific constant
     // Druid 2370

@@ -1,0 +1,207 @@
+class: Hunter
+spec: Beast Mastery
+description: Beast Mastery Hunter (pre-raid)
+race: Draenei
+level: 70
+
+talents:
+  # BM talents
+  - name: Improved Aspect of the Hawk
+    rank: 5
+  - name: Focused Fire
+    rank: 2
+  - name: Unleashed Fury
+    rank: 5
+  - name: Ferocity
+    rank: 5
+  - name: Bestial Discipline
+    rank: 2
+  - name: Frenzy
+    rank: 4
+  - name: Animal Handler
+    rank: 2
+  - name: Ferocious Inspiration
+    rank: 3
+  - name: Bestial Wrath
+    rank: 1
+  - name: Serpent's Swiftness
+    rank: 5
+  - name: The Beast Within
+    rank: 1
+  # Marks talents
+  - name: Lethal Shots
+    rank: 5
+  - name: Efficiency
+    rank: 5
+  - name: Go for the Throat
+    rank: 2
+  - name: Aimed Shot
+    rank: 1
+  - name: Rapid Killing
+    rank: 2
+  - name: Mortal Shots
+    rank: 5
+
+gear:
+  mainHand:
+    name: Sonic Spear
+    enchant: Major Agility
+  rangedLibramTotem:
+    name: Marksman's Bow
+    enchant: Stabilized Eternium Scope
+  quiver:
+    name: Smuggler's Ammo Pouch
+  head:
+    name: Beast Lord Helm
+    enchant: Glyph of Ferocity
+    gems:
+      - Delicate Living Ruby
+      - Relentless Earthstorm Diamond
+  neck:
+    name: Choker of Vile Intent
+  shoulders:
+    name: Beast Lord Mantle
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  back:
+    name: Vengeance Wrap
+    enchant: Greater Agility
+    gems:
+      - Inscribed Noble Topaz
+  chest:
+    name: Ebon Netherscale Breastplate
+    enchant: Exceptional Stats
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  wrists:
+    name: Ebon Netherscale Bracers
+    enchant: Assault
+    gems:
+    - Rigid Dawnstone
+  hands:
+    name: Beast Lord Handguards
+    enchant: Superior Agility
+    gems:
+      - Delicate Living Ruby
+      - Shifting Nightseye
+  waist:
+    name: Ebon Netherscale Belt
+    gems:
+      - Shifting Nightseye
+      - Rigid Dawnstone
+  legs:
+    name: Beast Lord Leggings
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Bold Living Ruby
+      - Bold Living Ruby
+      - Sovereign Nightseye
+  feet:
+    name: Boots of the Endless Hunt
+    enchant: Dexterity
+  ring1:
+    name: Shaffar's Band of Brutality
+  ring2:
+    name: Truestrike Ring
+  trinket1:
+    name: Hourglass of the Unraveller
+  trinket2:
+#    name: Bloodlust Brooch
+    name: "Darkmoon Card: Crusade"
+
+
+rotation:
+  precombat:
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
+
+    # Abilities
+    - name: Windfury Weapon (MH)
+    - name: Windfury Weapon (OH)
+#    - name: Flametongue Weapon (OH)
+    - name: Strength of Earth Totem
+    - name: Windfury Totem (Rank 1)
+    - name: Water Shield
+
+  combat:
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+    - name: Shamanistic Rage
+      criteria:
+        # If our mana is 30% or lower, cast Shamanistic Rage
+        - type: RESOURCE_LTE_PCT
+          pct: 30
+    - name: Stormstrike
+    - name: Windfury Totem (Rank 1)
+      criteria:
+        # If GoA has existed for 9+ seconds, refresh WFT for party
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 111
+        # But not if we already have a WFT active
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem (Rank 1)
+          seconds: 0
+    - name: Grace of Air Totem
+      criteria:
+        # Replace Windfury Totem as quickly as possible
+        - type: BUFF_DURATION_LTE
+          buff: Windfury Totem
+          seconds: 120
+        # But not if we already have a GoAT active
+        - type: BUFF_DURATION_LTE
+          buff: Grace of Air Totem
+          seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using trinkets
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Strength of Earth Totem
+      criteria:
+        # Refresh SoE if expired
+        - type: BUFF_DURATION_LTE
+          buff: Strength of Earth Totem
+          seconds: 0
+    - name: Flame Shock
+      criteria:
+        # Apply Flame Shock if the DoT is missing
+        - type: DEBUFF_DURATION_LTE
+          debuff: Flame Shock (DoT)
+          seconds: 0
+    - name: Earth Shock
+
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Improved Sanctity Aura
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

@@ -23,7 +23,7 @@ class Draenei : Race() {
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHitRating = 1.0 * Rating.meleeHitPerPct)
+            return Stats(physicalHitRating = 1.0 * Rating.physicalHitPerPct)
         }
     }
 

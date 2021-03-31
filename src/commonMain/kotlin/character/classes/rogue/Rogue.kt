@@ -11,8 +11,7 @@ class Rogue(talents: Map<String, Talent>) : Class(talents) {
         stamina = 154,
         spirit = 92
     )
-    override val buffs: List<Buff>
-        get() = TODO("Not yet implemented")
+    override val buffs: List<Buff> = listOf()
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         TODO("Not yet implemented")
@@ -36,8 +35,7 @@ class Rogue(talents: Map<String, Talent>) : Class(talents) {
         get() = TODO("Not yet implemented")
     override val baseMana: Int
         get() = TODO("Not yet implemented")
-    override val baseSpellCritChance: Double
-        get() = TODO("Not yet implemented")
+    override val baseSpellCritChance: Double = 0.0
     override val dodgePctPerAgility: Double = 1.0 / 20.0
     override val baseDodgePct: Double = -0.59
 }

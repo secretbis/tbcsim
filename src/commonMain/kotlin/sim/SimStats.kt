@@ -24,11 +24,11 @@ object SimStats {
     }
 
     fun dps(iterations: List<SimIteration>): Map<String, DpsBreakdown?> {
-        val hasPet = iterations[0].subjectPet != null
+        val hasPet = iterations[0].subject.pet != null
         val perIteration = iterations.map {
             mapOf(
                 "subject" to dpsForParticipant(it.subject),
-                "subjectPet" to if(hasPet) { dpsForParticipant(it.subjectPet!!) } else null
+                "subjectPet" to if(hasPet) { dpsForParticipant(it.subject.pet!!) } else null
             )
         }
 

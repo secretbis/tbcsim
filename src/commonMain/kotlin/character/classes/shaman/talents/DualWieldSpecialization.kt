@@ -22,7 +22,7 @@ class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
         override fun modifyStats(sp: SimParticipant): Stats? {
             // 2% hit per rank
             val modifier = currentRank
-            val physicalHitRating = modifier * 2 * Rating.meleeHitPerPct
+            val physicalHitRating = modifier * 2 * Rating.physicalHitPerPct
 
             // Only when dual wielding
             return if(sp.isDualWielding()) {

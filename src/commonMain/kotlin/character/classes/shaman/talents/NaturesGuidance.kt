@@ -20,7 +20,7 @@ class NaturesGuidance(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val physicalHitRating = currentRank * Rating.meleeHitPerPct
+            val physicalHitRating = currentRank * Rating.physicalHitPerPct
             val spellHitRating = currentRank * Rating.spellHitPerPct
             return Stats(
                 physicalHitRating = physicalHitRating,

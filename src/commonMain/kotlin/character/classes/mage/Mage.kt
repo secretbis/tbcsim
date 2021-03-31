@@ -34,10 +34,8 @@ class Mage(talents: Map<String, Talent>) : Class(talents) {
         get() = TODO("Not yet implemented")
     override val rangedAttackPowerFromAgility: Int
         get() = TODO("Not yet implemented")
-    override val baseMana: Int
-        get() = TODO("Not yet implemented")
-    override val baseSpellCritChance: Double
-        get() = TODO("Not yet implemented")
+    override val baseMana: Int = 2241
+    override val baseSpellCritChance: Double = 0.91
     override val dodgePctPerAgility: Double = 1.0 / 25.0
     override val baseDodgePct: Double = 3.45
 }

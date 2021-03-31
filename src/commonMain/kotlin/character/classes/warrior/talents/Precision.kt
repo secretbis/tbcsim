@@ -20,7 +20,7 @@ class Precision(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHitRating = currentRank * Rating.meleeHitPerPct)
+            return Stats(physicalHitRating = currentRank * Rating.physicalHitPerPct)
         }
     }
 

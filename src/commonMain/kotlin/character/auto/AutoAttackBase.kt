@@ -10,7 +10,7 @@ import sim.Sim
 import sim.SimIteration
 import sim.SimParticipant
 
-abstract class MeleeBase : Ability() {
+abstract class AutoAttackBase : Ability() {
     abstract fun item(sp: SimParticipant): Item
 
     override fun gcdMs(sp: SimParticipant): Int = 0

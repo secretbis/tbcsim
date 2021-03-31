@@ -9,5 +9,5 @@ open class Character(
     val level: Int = 70,
     var gear: Gear = Gear(),
     val pet: Pet? = null,
-    val subTypes: List<CharacterType> = listOf()
+    val subTypes: Set<CharacterType> = setOf()
 )

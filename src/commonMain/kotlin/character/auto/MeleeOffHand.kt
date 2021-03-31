@@ -1,10 +1,9 @@
 package character.auto
 
 import data.model.Item
-import sim.SimIteration
 import sim.SimParticipant
 
-class MeleeOffHand : MeleeBase() {
+class MeleeOffHand : AutoAttackBase() {
     companion object {
         const val name = "Melee (OH)"
     }

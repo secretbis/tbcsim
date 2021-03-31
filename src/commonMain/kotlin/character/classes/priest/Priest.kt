@@ -34,8 +34,7 @@ class Priest(talents: Map<String, Talent>) : Class(talents) {
         get() = TODO("Not yet implemented")
     override val rangedAttackPowerFromAgility: Int
         get() = TODO("Not yet implemented")
-    override val baseMana: Int
-        get() = TODO("Not yet implemented")
+    override val baseMana: Int = 2620
     override val baseSpellCritChance: Double
         get() = TODO("Not yet implemented")
     override val dodgePctPerAgility: Double = 1.0 / 25.0

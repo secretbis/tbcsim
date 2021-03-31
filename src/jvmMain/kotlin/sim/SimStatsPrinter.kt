@@ -134,9 +134,9 @@ object SimStatsPrinter {
         println(
             "PLAYER STATS\n" +
             table {
-                row("Strength:", iteration.subject.strength(), "Phys. Hit:", iteration.subject.meleeHitPct())
-                row("Agility:", iteration.subject.agility(), "Phys. Crit:", iteration.subject.meleeCritPct())
-                row("Intellect:", iteration.subject.intellect(), "Phys. Haste:", iteration.subject.meleeHasteMultiplier() - 1.0)
+                row("Strength:", iteration.subject.strength(), "Phys. Hit:", iteration.subject.physicalHitPct())
+                row("Agility:", iteration.subject.agility(), "Phys. Crit:", iteration.subject.physicalCritPct())
+                row("Intellect:", iteration.subject.intellect(), "Phys. Haste:", iteration.subject.physicalHasteMultiplier() - 1.0)
                 row("Stamina:", iteration.subject.stamina(), "Spell Hit:", iteration.subject.spellHitPct())
                 row("Spirit:", iteration.subject.spirit(), "Spell Crit:", iteration.subject.spellCritPct())
                 row("Armor Pen:", iteration.subject.armorPen(), "Spell Haste:", iteration.subject.spellHasteMultiplier() - 1.0)

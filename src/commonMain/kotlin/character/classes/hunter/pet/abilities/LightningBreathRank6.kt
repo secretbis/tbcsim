@@ -1,4 +1,4 @@
-package character.classes.pet.abilities
+package character.classes.hunter.pet.abilities
 
 import character.Ability
 import character.Resource

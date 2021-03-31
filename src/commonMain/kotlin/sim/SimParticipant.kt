@@ -1,9 +1,13 @@
 package sim
 
 import character.*
-import character.auto.MeleeBase
+import character.auto.AutoAttackBase
+import character.auto.AutoShot
 import character.auto.MeleeMainHand
 import character.auto.MeleeOffHand
+import character.classes.hunter.Hunter
+import character.classes.hunter.pet.HunterPet
+import character.classes.hunter.pet.abilities.PetMelee
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
@@ -14,14 +18,15 @@ import kotlin.js.JsExport
 import kotlin.math.floor
 
 @JsExport
-open class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration) {
+class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null) {
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
     lateinit var resource: Resource
 
-    var mhAutoAttack: MeleeBase? = null
-    var ohAutoAttack: MeleeBase? = null
+    var mhAutoAttack: AutoAttackBase? = null
+    var ohAutoAttack: AutoAttackBase? = null
+    var rangedAutoAttack: AutoShot? = null
 
     var buffs: MutableMap<String, Buff> = mutableMapOf()
     var debuffs: MutableMap<String, Debuff> = mutableMapOf()
@@ -51,14 +56,25 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
     // Events
     var events: MutableList<Event> = mutableListOf()
 
+    // Pet
+    val pet: SimParticipant? = if(character.pet != null) {
+        SimParticipant(character.pet, character.pet.rotation, sim, this)
+    } else null
+
     fun init(): SimParticipant {
         // Add auto-attack, if allowed
         if (rotation.autoAttack) {
-            if (hasMainHandWeapon()) {
-                mhAutoAttack = MeleeMainHand()
-            }
-            if (hasOffHandWeapon()) {
-                ohAutoAttack = MeleeOffHand()
+            if(character.klass is Hunter) {
+                rangedAutoAttack = AutoShot()
+            } else if(character.klass is HunterPet) {
+                mhAutoAttack = PetMelee()
+            } else {
+                if (hasMainHandWeapon()) {
+                    mhAutoAttack = MeleeMainHand()
+                }
+                if (hasOffHandWeapon()) {
+                    ohAutoAttack = MeleeOffHand()
+                }
             }
         }
 
@@ -83,6 +99,9 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
         // Recompute after precombat casts
         recomputeStats()
+
+        // Init pet
+        pet?.init()
 
         return this
     }
@@ -160,7 +179,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                         mainHandAutoReplacement = null
 
                         // Mark our MH auto attack as having occurred
-                        val mhState = mhAutoAttack?.state(this) as MeleeBase.AutoAttackState?
+                        val mhState = mhAutoAttack?.state(this) as AutoAttackBase.AutoAttackState?
                         mhState?.lastAttackTimeMs = sim.elapsedTimeMs
                     } else mhAutoAttack?.cast(this)
                 } else if (ohAutoAttack?.available(this) == true) {
@@ -431,6 +450,8 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
 
     // Resource
     fun addResource(amount: Int, type: Resource.Type, abilityName: String) {
+        if(amount == 0) return
+
         if(resource.type == type) {
             resource.add(amount)
 
@@ -442,7 +463,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                 abilityName = abilityName
             ))
         } else {
-            logger.warn { "Attempted to add resource type $type but subject resource is ${resource.type}" }
+            logger.debug { "Attempted to add resource type $type but subject resource is ${resource.type}" }
         }
     }
 
@@ -458,7 +479,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
                 abilityName = abilityName
             ))
         } else {
-            logger.warn { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }
+            logger.debug { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }
         }
     }
 
@@ -534,7 +555,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
     }
 
     fun weaponSpeed(item: Item): Double {
-        return (item.speed / meleeHasteMultiplier()).coerceAtLeast(0.01)
+        return (item.speed / physicalHasteMultiplier()).coerceAtLeast(0.01)
     }
 
     fun strength(): Int {
@@ -584,8 +605,8 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         return stats.spellDamage
     }
 
-    fun meleeHitPct(): Double {
-        return stats.physicalHitRating / Rating.meleeHitPerPct
+    fun physicalHitPct(): Double {
+        return stats.physicalHitRating / Rating.physicalHitPerPct
     }
 
     fun spellHitPct(): Double {
@@ -596,14 +617,12 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
-    fun meleeCritPct(): Double {
+    fun physicalCritPct(): Double {
         return stats.physicalCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
-        // https://wow.gamepedia.com/Spell_critical_strike
-        val intPerCrit = 80.0
-        val critFromInt = intellect() / intPerCrit
+        val critFromInt = intellect() * character.klass.spellCritPctPerInt
         return stats.spellCritRating / Rating.critPerPct + critFromInt + character.klass.baseSpellCritChance
     }
 
@@ -631,7 +650,7 @@ open class SimParticipant(val character: Character, val rotation: Rotation, val 
         return stats.resilienceRating / Rating.resiliencePerPct
     }
 
-    fun meleeHasteMultiplier(): Double {
+    fun physicalHasteMultiplier(): Double {
         return (1.0 + (stats.physicalHasteRating / Rating.hastePerPct / 100.0)) * stats.physicalHasteMultiplier
     }
 

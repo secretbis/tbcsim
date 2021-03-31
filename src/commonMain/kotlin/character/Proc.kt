@@ -31,6 +31,16 @@ abstract class Proc {
         MELEE_REPLACED_AUTO_ATTACK_HIT,
         MELEE_REPLACED_AUTO_ATTACK_CRIT,
 
+        // Ranged
+        RANGED_AUTO_HIT,
+        RANGED_AUTO_CRIT,
+        RANGED_WHITE_HIT,
+        RANGED_WHITE_CRIT,
+        RANGED_YELLOW_HIT,
+        RANGED_YELLOW_CRIT,
+        RANGED_MISS,
+        RANGED_BLOCK,
+
         // Pets
         PET_MELEE_HIT,
         PET_MELEE_CRIT,

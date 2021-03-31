@@ -85,6 +85,6 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(weaponBuff)
+        sp.sim.addRaidBuff(weaponBuff)
     }
 }

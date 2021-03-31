@@ -45,6 +45,6 @@ class ImprovedMarkOfTheWild : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(buff)
+        sp.sim.addRaidBuff(buff)
     }
 }

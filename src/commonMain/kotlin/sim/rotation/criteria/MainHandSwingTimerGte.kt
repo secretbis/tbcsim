@@ -1,6 +1,6 @@
 package sim.rotation.criteria
 
-import character.auto.MeleeBase
+import character.auto.AutoAttackBase
 import character.auto.MeleeMainHand
 import sim.SimParticipant
 import sim.config.RotationRuleCriterion
@@ -42,7 +42,7 @@ class MainHandSwingTimerGte(data: RotationRuleCriterion) : Criterion(Type.MAIN_H
         val timerState = state(sp) as TimerState
 
         // Check the state of our mainhaind weapon
-        val abilityState = sp.abilityState[MeleeMainHand.name] as MeleeBase.AutoAttackState?
+        val abilityState = sp.abilityState[MeleeMainHand.name] as AutoAttackBase.AutoAttackState?
         val speed = sp.weaponSpeed(sp.character.gear.mainHand)
 
         return if(abilityState != null) {
