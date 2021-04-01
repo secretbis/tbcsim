@@ -7,8 +7,8 @@ class RiftStalkerArmor : ItemSet() {
     companion object {
         const val FOUR_SET_BUFF_NAME = "Rift Stalker Armor (4 set)"
 
-        fun fourSetSteadyShotBonusCritPct(): Int {
-            return 5
+        fun fourSetSteadyShotBonusCritPct(): Double {
+            return 0.05
         }
     }
 
@@ -16,7 +16,6 @@ class RiftStalkerArmor : ItemSet() {
 
     // The two-set is not relevant
 
-    // TODO: Steady Shot should check this buff once it exists
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1

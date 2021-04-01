@@ -154,6 +154,18 @@ export const classOffHandInvSlots = {
   warrior: [inv.weapon, inv.shield, inv.off_hand, inv.holdable_tome]
 };
 
+export const classRangedInvSlots = {
+  druid: [inv.relic],
+  hunter: [inv.ranged, inv.ranged_right],
+  mage: [inv.ranged_right],
+  paladin: [inv.relic],
+  priest: [inv.ranged_right],
+  rogue: [inv.ranged, inv.ranged_right, inv.thrown],
+  shaman: [inv.relic],
+  warlock: [inv.ranged_right],
+  warrior: [inv.ranged, inv.ranged_right, inv.thrown]
+};
+
 export const classMainHandItemClasses = {
   druid: {
     itemClasses: [ic.weapon],
@@ -267,6 +279,63 @@ export const classOffHandItemClasses = {
     itemSubclasses: {
       [ic.weapon]: [wsc.axe_1h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h],
       [ic.armor]: [asc.misc, asc.shield]
+    }
+  }
+};
+
+export const classRangedItemClasses = {
+  druid: {
+    itemClasses: [ic.armor],
+    itemSubclasses: {
+      [ic.armor]: [asc.idol]
+    }
+  },
+  hunter: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun]
+    }
+  },
+  mage: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [asc.wand]
+    }
+  },
+  paladin: {
+    itemClasses: [ic.armor],
+    itemSubclasses: {
+      [ic.armor]: [asc.libram]
+    }
+  },
+  priest: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [asc.wand]
+    }
+  },
+  rogue: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
+    }
+  },
+  shaman: {
+    itemClasses: [ic.armor],
+    itemSubclasses: {
+      [ic.armor]: [asc.totem]
+    }
+  },
+  warlock: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [asc.wand]
+    }
+  },
+  warrior: {
+    itemClasses: [ic.weapon],
+    itemSubclasses: {
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
     }
   }
 };

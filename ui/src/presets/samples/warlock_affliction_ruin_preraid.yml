@@ -45,7 +45,7 @@ gear:
     enchant: Major Spellpower (Weapon)
   offHand:
     name: Orb of the Soul-Eater
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Nether Core's Control Rod
   head:
     name: Spellstrike Hood

@@ -50,7 +50,7 @@ gear:
   offHand:
     name: Dragonmaw
     enchant: Mongoose
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Totem of the Astral Winds
   head:
     name: Wastewalker Helm

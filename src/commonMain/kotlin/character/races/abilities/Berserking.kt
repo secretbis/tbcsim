@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Resource
 import character.Stats
+import mechanics.Rating
 import sim.SimParticipant
 
 class Berserking : Ability() {
@@ -28,14 +29,14 @@ class Berserking : Ability() {
     }
 
     val buff = object : Buff() {
-        override val name: String = "Blood Fury"
-        override val durationMs: Int = 15000
+        override val name: String = "Berserking"
+        override val durationMs: Int = 12000
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val hasteRating = Rating.hastePerPct * 10.0
             return Stats(
-                attackPower = 6 + 4 * sp.character.level,
-                rangedAttackPower = 6 + 4 * sp.character.level,
-                spellDamage = 5 + 2 * sp.character.level
+                physicalHasteRating = hasteRating,
+                spellHasteRating = hasteRating
             )
         }
     }

@@ -19,7 +19,8 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
         DEBUFF_DURATION_LTE,
         FIGHT_TIME_ELAPSED_GTE,
         FIGHT_TIME_REMAINING_MODULO_LTE,
-        MAIN_HAND_SWING_TIMER_GTE,
+        SWING_TIMER_ELAPSED_LTE,
+        SWING_TIMER_REMAINING_GTE,
         FIGHT_TIME_REMAINING_GTE,
         FIGHT_TIME_REMAINING_LTE,
         IS_EXECUTE_PHASE
@@ -43,7 +44,8 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
                 Type.DEBUFF_DURATION_LTE -> DebuffDurationLte(data)
                 Type.FIGHT_TIME_ELAPSED_GTE -> FightTimeElapsedGte(data)
                 Type.FIGHT_TIME_REMAINING_MODULO_LTE -> FightTimeRemainingModuloLte(data)
-                Type.MAIN_HAND_SWING_TIMER_GTE -> MainHandSwingTimerGte(data)
+                Type.SWING_TIMER_ELAPSED_LTE -> SwingTimerElapsedLte(data)
+                Type.SWING_TIMER_REMAINING_GTE -> SwingTimerRemainingGte(data)
                 Type.FIGHT_TIME_REMAINING_GTE -> FightTimeRemainingGte(data)
                 Type.FIGHT_TIME_REMAINING_LTE -> FightTimeRemainingLte(data)
                 Type.IS_EXECUTE_PHASE -> IsExecutePhase(data)

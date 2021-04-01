@@ -14,7 +14,7 @@ data class PartyYml(
 data class GearYml(
     val mainHand: GearItemYml? = null,
     val offHand: GearItemYml? = null,
-    val rangedLibramTotem: GearItemYml? = null,
+    val rangedTotemLibram: GearItemYml? = null,
     val ammo: GearItemYml? = null,
     val head: GearItemYml? = null,
     val neck: GearItemYml? = null,
@@ -87,7 +87,8 @@ data class RotationRuleCriterion(
     val pct: Int? = null,
     val oncePerSwing: Boolean? = null,
     val amount: Int? = null,
-    val bool: Boolean? = null
+    val bool: Boolean? = null,
+    val swingType: String? = null
 )
 
 @JsExport
@@ -104,6 +105,13 @@ data class SimOptionsYml(
 
 @JsExport
 @Serializable
+data class PetYml(
+    val type: String,
+    val rotation: RotationYml? = null
+)
+
+@JsExport
+@Serializable
 data class ConfigYml(
     val `class`: String,
     val race: String,
@@ -116,5 +124,6 @@ data class ConfigYml(
     val rotation: RotationYml? = null,
     val raidBuffs: List<String>? = null,
     val raidDebuffs: List<String>? = null,
-    val simOpts: SimOptionsYml? = null
+    val simOpts: SimOptionsYml? = null,
+    val pet: PetYml? = null
 )

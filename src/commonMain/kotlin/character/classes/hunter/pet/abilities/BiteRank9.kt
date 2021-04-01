@@ -8,21 +8,20 @@ import data.Constants
 import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
-import kotlin.random.Random
 
-class GoreRank9 : Ability() {
-    override val id: Int = 35298
-    override val name: String = "Gore (Rank 9)"
+class BiteRank9 : Ability() {
+    override val id: Int = 27050
+    override val name: String = "Bite (Rank 9)"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.FOCUS
-    override fun resourceCost(sp: SimParticipant): Double = 25.0
+    override fun resourceCost(sp: SimParticipant): Double = 35.0
+    override fun cooldownMs(sp: SimParticipant): Int = 10000
 
     // Pets have no gear, so each attack is modeled as an item with the same damage range
-    val item = HunterPet.makePetAttackItem(name, 37.0, 61.0)
+    val item = HunterPet.makePetAttackItem(name, 108.0, 132.0)
     override fun cast(sp: SimParticipant) {
-        val goreMultiplier = if(Random.nextBoolean()) { 2.0 } else 1.0
-        val damageRoll = Melee.baseDamageRoll(sp, item) * goreMultiplier
+        val damageRoll = Melee.baseDamageRoll(sp, item)
         val result = Melee.attackRoll(sp, damageRoll, item)
 
         // Save last hit state and fire event

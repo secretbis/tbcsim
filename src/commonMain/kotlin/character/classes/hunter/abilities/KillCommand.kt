@@ -3,7 +3,11 @@ package character.classes.hunter.abilities
 import character.Ability
 import character.Buff
 import character.Proc
+import character.classes.hunter.talents.TheBeastWithin
+import data.Constants
 import data.model.Item
+import mechanics.General
+import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
 
@@ -22,9 +26,15 @@ class KillCommand : Ability() {
 
     override val id: Int = 34026
     override val name: String = Companion.name
-    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
+    override fun gcdMs(sp: SimParticipant): Int = 0
     override fun cooldownMs(sp: SimParticipant): Int = 5000
-    override fun resourceCost(sp: SimParticipant): Double = 75.0
+
+    val baseCost = 75.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val tbwDiscount = if(sp.buffs[TheBeastWithin.name] != null) { 0.2 } else 0.0
+
+        return General.resourceCostReduction(baseCost, listOf(tbwDiscount))
+    }
 
     override fun available(sp: SimParticipant): Boolean {
         val hasTriggerBuff = sp.buffs[flagBuffName] != null
@@ -53,7 +63,40 @@ class KillCommand : Ability() {
         override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
+    val bonusDmg = 127.0
     override fun cast(sp: SimParticipant) {
-        TODO("Not yet implemented")
+        if(sp.pet?.mhAutoAttack != null) {
+            val petItem = sp.pet.mhAutoAttack!!.item(sp.pet)
+            val petDmg = Melee.baseDamageRoll(sp.pet, petItem) + bonusDmg
+            val result = Melee.attackRoll(sp.pet, petDmg, petItem)
+
+            val event = Event(
+                eventType = Event.Type.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                isWhiteDamage = true,
+                abilityName = name,
+                amount = result.first,
+                result = result.second,
+            )
+            sp.logEvent(event)
+
+            val baseTypes = listOf(Proc.Trigger.HUNTER_CAST_KILL_COMMAND)
+            val triggerTypes = when(result.second) {
+                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+                Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+                Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+                Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
+
+            if(triggerTypes != null) {
+                sp.fireProc(baseTypes + triggerTypes, listOf(petItem), this, event)
+            }
+        }
     }
+
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

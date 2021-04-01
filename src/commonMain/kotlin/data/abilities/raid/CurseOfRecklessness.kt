@@ -21,7 +21,8 @@ class CurseOfRecklessness : Ability() {
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 armor = -800,
-                attackPower = 135
+                attackPower = 135,
+                rangedAttackPower = 135
             )
         }
     }

@@ -6,6 +6,8 @@ import GearSelector from './gear_selector';
 import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 
+import { inventorySlots as inv } from '../data/constants';
+
 const defaultWidth = '55px';
 const bgImages = {
   head: 'head.jpg',
@@ -24,7 +26,7 @@ const bgImages = {
   ring2: 'ring.jpg',
   trinket1: 'trinket.jpg',
   trinket2: 'trinket.jpg',
-  ranged: 'ranged.jpg',
+  rangedTotemLibram: 'ranged.jpg',
   ammo: 'ranged.jpg',
 };
 
@@ -45,7 +47,7 @@ const titles = {
   ring2: 'RING 2',
   trinket1: 'TRINKET 1',
   trinket2: 'TRINKET 2',
-  ranged: 'RANGED',
+  rangedTotemLibram: 'RANGED/RELIC',
   ammo: 'AMMO',
 };
 
@@ -65,7 +67,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     // Clean sockets and enchants
     item.sockets.forEach(sk => sk.gem = null);
     item.enchant = null;
-    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item }, slotName, item })
   }
 
   function onGemSelect(gem, idx) {
@@ -89,6 +91,9 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
   }
 
   function renderItem() {
+    const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName)
+    const itemCanEnchant = slotName == 'rangedTotemLibram' && ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot)
+
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
         <Col xs={5}>
@@ -104,7 +109,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
             {item.sockets.map((sk, idx) => {
               return <GemSlot key={idx} socket={sk} gear={character.gear} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
-            {!['trinket1', 'trinket2', 'neck', 'waist'].includes(slotName) ?
+            {slotCanEnchant && itemCanEnchant ?
               <EnchantSlot item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
             : null}
           </Row>

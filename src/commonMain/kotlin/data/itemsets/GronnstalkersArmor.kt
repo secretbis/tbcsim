@@ -24,7 +24,6 @@ class GronnstalkersArmor : ItemSet() {
         override val durationMs: Int = -1
     }
 
-    // TODO: Steady shot should check this buff once it exists
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1

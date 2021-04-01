@@ -30,6 +30,13 @@ class JudgementOfWisdom : Ability() {
                 Trigger.MELEE_YELLOW_CRIT,
                 Trigger.MELEE_BLOCK,
                 Trigger.MELEE_GLANCE,
+                Trigger.RANGED_AUTO_HIT,
+                Trigger.RANGED_AUTO_CRIT,
+                Trigger.RANGED_WHITE_HIT,
+                Trigger.RANGED_WHITE_CRIT,
+                Trigger.RANGED_YELLOW_HIT,
+                Trigger.RANGED_YELLOW_CRIT,
+                Trigger.RANGED_BLOCK,
                 Trigger.SPELL_HIT,
                 Trigger.SPELL_CRIT
             )

@@ -20,8 +20,9 @@ const bannerTitle = 'Hello!  This is a work in progress.'
 function bannerMsg() {
   return (
     <div>
-      <p>At this moment, only a few specs are available:</p>
+      <p>At this moment, only the following specs are available:</p>
       <ul>
+        <li>BM/Survival Hunter</li>
         <li>Enhancement/Elemental Shaman</li>
         <li>Affliction/Destruction Warlock</li>
         <li>Arms/Fury Warrior</li>
@@ -87,13 +88,13 @@ function App() {
           const dps = cleanKtList(tbcsim.sim.SimStats.dps_0(iterList));
 
           // Compute results
-          dispatch({ type: 'resultsResourceUsage', value: resourceUsage[0] })
-          dispatch({ type: 'resultsResourceUsageByAbility', value: resourceUsageByAbility[0] })
-          dispatch({ type: 'resultsByBuff', value: buffResults[0] })
-          dispatch({ type: 'resultsByDebuff', value: debuffResults[0] })
-          dispatch({ type: 'resultsByDamageType', value: damageTypeResults[0] })
-          dispatch({ type: 'resultsByAbility', value: abilityResults[0] })
-          dispatch({ type: 'resultsDps', value: dps.get_35('subject') })
+          dispatch({ type: 'resultsResourceUsage', value: resourceUsage })
+          dispatch({ type: 'resultsResourceUsageByAbility', value: resourceUsageByAbility })
+          dispatch({ type: 'resultsByBuff', value: buffResults })
+          dispatch({ type: 'resultsByDebuff', value: debuffResults })
+          dispatch({ type: 'resultsByDamageType', value: damageTypeResults })
+          dispatch({ type: 'resultsByAbility', value: abilityResults })
+          dispatch({ type: 'resultsDps', value: dps })
       }
     )
   }

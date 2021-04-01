@@ -22,7 +22,7 @@ class EmptyItem : Item() {
     override var itemSubclass: Constants.ItemSubclass? = null
     override var allowableClasses: Array<Constants.AllowableClass>? = null
     override var minDmg: Double = 0.0
-    override var maxDmg: Double = 0.0
+    override var maxDmg: Double = 1.0
     override var speed: Double = 1.0
     override var stats: Stats = Stats()
     override var sockets: Array<Socket> = arrayOf()

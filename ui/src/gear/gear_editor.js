@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Col, Row } from 'rsuite'
 
-import { itemClasses, armorSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classMainHandItemClasses, classOffHandItemClasses } from '../data/constants';
+import { itemClasses, armorSubclasses, weaponSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classRangedInvSlots, classMainHandItemClasses, classOffHandItemClasses, classRangedItemClasses } from '../data/constants';
 import GearSlot from './gear_slot';
 import Stats from './stats';
 
@@ -28,9 +28,32 @@ export default function({ state, character, dispatch }) {
 
   const mainHandSlotIC = classMainHandItemClasses[character.class.toLowerCase()];
   const offHandSlotIC = classOffHandItemClasses[character.class.toLowerCase()];
+  const rangedSlotIC = classRangedItemClasses[character.class.toLowerCase()];
 
   const mainHandInvSlots = classMainHandInvSlots[character.class.toLowerCase()];
   const offHandInvSlots = classOffHandInvSlots[character.class.toLowerCase()];
+  const rangedInvSlots = classRangedInvSlots[character.class.toLowerCase()];
+
+  // Build ammo item classes according to the ranged type, if any
+  const rangedItem = character.gear.rangedTotemLibram
+  const projectileISCs = []
+
+  if(rangedItem) {
+    if([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(rangedItem.itemSubclass._itemClassOrdinal)) {
+      projectileISCs.push(2)  // Arrow
+    }
+    if(weaponSubclasses.gun === rangedItem.itemSubclass._itemClassOrdinal) {
+      projectileISCs.push(3)  // Bullet
+    }
+  }
+
+  const hasAmmo = !!projectileISCs.length
+  const ammoSlotIC = {
+    itemClasses: [itemClasses.projectile],
+    itemSubclasses: {
+      [itemClasses.projectile]: projectileISCs
+    }
+  };
 
   return (
     <Container style={{ maxWidth: '750px', minWidth: '500px' }}>
@@ -44,6 +67,7 @@ export default function({ state, character, dispatch }) {
           <GearSlot character={character} inventorySlots={[9]} itemClasses={armorSlotIC} slotName='wrists' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={mainHandInvSlots} itemClasses={mainHandSlotIC} slotName='mainHand' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={offHandInvSlots} itemClasses={offHandSlotIC} slotName='offHand' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={rangedInvSlots} itemClasses={rangedSlotIC} slotName='rangedTotemLibram' dispatch={dispatch} />
         </Col>
         <Col xs={12}>
           <GearSlot character={character} inventorySlots={[10]} itemClasses={armorSlotIC} slotName='hands' dispatch={dispatch} />
@@ -54,6 +78,7 @@ export default function({ state, character, dispatch }) {
           <GearSlot character={character} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring2' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket1' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket2' dispatch={dispatch} />
+          {hasAmmo ? <GearSlot character={character} inventorySlots={[24]} itemClasses={ammoSlotIC} slotName='ammo' dispatch={dispatch} /> : null }
         </Col>
       </Row>
       <Row>

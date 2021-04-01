@@ -1,5 +1,6 @@
 package mechanics
 
+import data.model.Item
 import mu.KotlinLogging
 import sim.SimParticipant
 import kotlin.js.JsExport
@@ -38,6 +39,10 @@ object General {
             }
             else -> table[levelDiff]!!
         }
+    }
+
+    fun dpsToAp(dps: Double): Int {
+        return (14.0 * dps).toInt()
     }
 
     fun physicalBlockChance(sp: SimParticipant): Double {

@@ -1,5 +1,6 @@
 package character
 
+import character.classes.hunter.Hunter
 import character.classes.shaman.Shaman
 import character.classes.warlock.Warlock
 import character.classes.warrior.Warrior
@@ -11,6 +12,7 @@ abstract class Class(
     companion object {
         fun fromString(name: String, talents: Map<String, Talent> = mapOf()): Class? {
             return when(name.toLowerCase().trim()) {
+                "hunter" -> Hunter(talents)
                 "shaman" -> Shaman(talents)
                 "warlock" -> Warlock(talents)
                 "warrior" -> Warrior(talents)

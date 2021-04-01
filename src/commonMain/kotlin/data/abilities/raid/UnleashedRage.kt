@@ -22,7 +22,8 @@ class UnleashedRage : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPowerMultiplier = 1.1
+                attackPowerMultiplier = 1.1,
+                rangedAttackPowerMultiplier = 1.1
             )
         }
     }

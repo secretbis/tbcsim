@@ -69,22 +69,26 @@ const ResourceLineChart = ({ character, data }) => (
 
 // TODO: Druid specs
 function resourceTypeForClass(character) {
-  const cls = character.class.toLowerCase()
+  const cls = (character.class || 'hunterpet').toLowerCase()
   if(cls == 'warrior') {
     return 'Rage';
   } else if(cls == 'rogue') {
     return 'Energy';
+  } else if(cls == 'hunterpet') {
+    return 'Focus';
   } else {
     return 'Mana'
   }
 }
 
 function lineColorForClass(character) {
-  const cls = character.class.toLowerCase()
+  const cls = (character.class || 'hunterpet').toLowerCase()
   if(cls == 'warrior') {
     return '#FF0000';
   } else if(cls == 'rogue') {
     return '#FFFF00';
+  } else if(cls == 'hunterpet') {
+    return '#FFA500';
   } else {
     return '#0000FF'
   }

@@ -22,6 +22,7 @@ object GenericAbilities {
             SuperiorWizardOil.name -> SuperiorWizardOil()
             SuperManaPotion.name -> SuperManaPotion()
             UseActiveTrinket.name -> UseActiveTrinket()
+            WarpBurger.name -> WarpBurger()
             else -> null
         }
     }

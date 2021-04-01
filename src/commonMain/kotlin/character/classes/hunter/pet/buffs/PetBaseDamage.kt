@@ -10,13 +10,7 @@ class PetBaseDamage(val multiplier: Double) : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    // TODO: How does the "base" "high" DPS pet buff interact with Unleashed Fury?
-    //      For now, presume multiplicative
     override fun modifyStats(sp: SimParticipant): Stats {
-        val unleashedFury = sp.owner?.character?.klass?.talents?.get(UnleashedFury.name) as UnleashedFury?
-        val ufMultiplier = unleashedFury?.petDamageMultiplier() ?: 1.0
-        val totalMultiplier = multiplier * ufMultiplier
-
         // Various stats scale with the owner
         val meleeAp = (sp.owner?.rangedAttackPower() ?: 0) * 0.22
         val spellDamage = (sp.owner?.rangedAttackPower()?: 0) * 0.125
@@ -30,8 +24,8 @@ class PetBaseDamage(val multiplier: Double) : Buff() {
         val arcaneResistance = sp.owner?.stats?.arcaneResistance ?: 0
 
         return Stats(
-            physicalDamageMultiplier = totalMultiplier,
-            spellDamageMultiplier = totalMultiplier,
+            physicalDamageMultiplier = multiplier,
+            spellDamageMultiplier = multiplier,
 
             attackPower = meleeAp.toInt(),
             spellDamage = spellDamage.toInt(),

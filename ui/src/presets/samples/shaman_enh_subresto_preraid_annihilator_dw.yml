@@ -50,7 +50,7 @@ gear:
   offHand:
     name: Annihilator
     enchant: Mongoose
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Totem of the Astral Winds
   head:
     name: Wastewalker Helm

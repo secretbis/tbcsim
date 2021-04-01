@@ -47,7 +47,7 @@ gear:
   mainHand:
     name: Lionheart Champion
     enchant: Mongoose
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Felsteel Whisper Knives
   head:
     name: Wastewalker Helm
@@ -126,11 +126,15 @@ rotation:
           modulusSeconds: 180
           seconds: 30
     - name: Execute
-    # Avoid clipping autos, only cast Slam if the swing timer has very recently reset
+    # Avoid clipping autos as much as possible - only cast Slam if the swing timer has very recently reset
     - name: Slam
       criteria:
-        - type: MAIN_HAND_SWING_TIMER_GTE
+        - type: SWING_TIMER_ELAPSED_LTE
           seconds: 0.51
+          # Don't Slam more than once per autoattack opportunity
+          oncePerSwing: true
+          # Other options: Melee (OH), Auto Shot
+          swingType: Melee (MH)
     - name: Mortal Strike
     - name: Whirlwind
     - name: Battle Shout

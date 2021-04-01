@@ -1,33 +1,27 @@
 class: Hunter
-spec: Beast Mastery
-description: Beast Mastery Hunter (pre-raid)
+spec: Survival
+description: Survival Hunter (pre-raid)
 race: Draenei
 level: 70
 
 talents:
-  # BM talents
-  - name: Improved Aspect of the Hawk
-    rank: 5
-  - name: Focused Fire
-    rank: 2
-  - name: Unleashed Fury
-    rank: 5
-  - name: Ferocity
-    rank: 5
-  - name: Bestial Discipline
-    rank: 2
-  - name: Frenzy
-    rank: 4
-  - name: Animal Handler
-    rank: 2
-  - name: Ferocious Inspiration
+  # Surv talents
+  - name: Monster Slaying
     rank: 3
-  - name: Bestial Wrath
-    rank: 1
-  - name: Serpent's Swiftness
+  - name: Humanoid Slaying
+    rank: 3
+  - name: Surefooted
+    rank: 3
+  - name: Killer Instinct
+    rank: 3
+  - name: Lightning Reflexes
     rank: 5
-  - name: The Beast Within
-    rank: 1
+  - name: Expose Weakness
+    rank: 3
+  - name: Thrill of the Hunt
+    rank: 2
+  - name: Master Tactician
+    rank: 5
   # Marks talents
   - name: Lethal Shots
     rank: 5
@@ -81,7 +75,7 @@ gear:
     name: Ebon Netherscale Bracers
     enchant: Assault
     gems:
-    - Rigid Dawnstone
+    - Smooth Dawnstone
   hands:
     name: Beast Lord Handguards
     enchant: Superior Agility
@@ -92,7 +86,7 @@ gear:
     name: Ebon Netherscale Belt
     gems:
       - Shifting Nightseye
-      - Rigid Dawnstone
+      - Smooth Dawnstone
   legs:
     name: Beast Lord Leggings
     enchant: Nethercobra Leg Armor
@@ -118,7 +112,6 @@ rotation:
     - name: Hunter's Mark
 
   combat:
-    - name: Bestial Wrath
     - name: Rapid Fire
     - name: Haste Potion
     - name: Use Active Trinket
@@ -131,6 +124,8 @@ rotation:
           seconds: 1.01
           swingType: Auto Shot
           oncePerSwing: false
+    - name: Multi Shot
+    - name: Arcane Shot
 
 pet:
   type: Ravager

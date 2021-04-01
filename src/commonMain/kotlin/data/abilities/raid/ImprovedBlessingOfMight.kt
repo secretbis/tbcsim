@@ -23,7 +23,10 @@ class ImprovedBlessingOfMight : Ability() {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(attackPower = bonusAp.toInt())
+            return Stats(
+                attackPower = bonusAp.toInt(),
+                rangedAttackPower = bonusAp.toInt()
+            )
         }
     }
 

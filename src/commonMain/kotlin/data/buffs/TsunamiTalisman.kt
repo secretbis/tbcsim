@@ -17,7 +17,10 @@ class TsunamiTalisman : Buff() {
         override val triggers: List<Trigger> = listOf(
             Trigger.MELEE_AUTO_CRIT,
             Trigger.MELEE_WHITE_CRIT,
-            Trigger.MELEE_YELLOW_CRIT
+            Trigger.MELEE_YELLOW_CRIT,
+            Trigger.RANGED_AUTO_CRIT,
+            Trigger.RANGED_WHITE_CRIT,
+            Trigger.RANGED_YELLOW_CRIT,
         )
         override val type: Type = Type.PERCENT
         override fun percentChance(sp: SimParticipant): Double = 10.0

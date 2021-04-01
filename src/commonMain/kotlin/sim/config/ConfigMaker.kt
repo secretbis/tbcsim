@@ -1,9 +1,7 @@
 package sim.config
 
-import character.Character
-import character.Class
-import character.Gear
-import character.Race
+import character.*
+import character.classes.hunter.Hunter
 import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
@@ -98,6 +96,17 @@ object ConfigMaker {
         )
     }
 
+    private fun createPetRotation(yml: ConfigYml, pet: Character): Rotation {
+        val precombatRules = makeRules(yml.pet?.rotation?.precombat, pet, Rotation.Phase.PRECOMBAT)
+        val combatRules = makeRules(yml.pet?.rotation?.combat, pet, Rotation.Phase.COMBAT)
+
+        // Raid and party buffs will be applied from the parent, if they apply to parties and/or raids
+        return Rotation(
+            precombatRules + combatRules,
+            true
+        )
+    }
+
     private fun createItemFromGear(itemYml: GearItemYml?, equippedSlot: String): Item {
         return if(itemYml != null) {
             var item: Item? = Items.byName[itemYml.name]?.invoke()
@@ -167,7 +176,7 @@ object ConfigMaker {
         val gear = Gear()
         gear.mainHand = createItemFromGear(yml.gear?.mainHand, "mainHand")
         gear.offHand = createItemFromGear(yml.gear?.offHand, "offHand")
-        gear.rangedTotemLibram = createItemFromGear(yml.gear?.rangedLibramTotem, "rangedLibramTotem")
+        gear.rangedTotemLibram = createItemFromGear(yml.gear?.rangedTotemLibram, "rangedTotemLibram")
         gear.ammo = createItemFromGear(yml.gear?.ammo, "ammo")
         gear.head = createItemFromGear(yml.gear?.head, "head")
         gear.neck = createItemFromGear(yml.gear?.neck, "neck")
@@ -189,11 +198,24 @@ object ConfigMaker {
             logger.warn { "Meta gem is not active - consider adjusting your gems in gear" }
         }
 
+        // Pet
+        var pet: Pet? = null
+        var petRotation: Rotation? = null
+
+        if(yml.pet != null) {
+            if(characterClass is Hunter) {
+                pet = Pet(yml.pet.type)
+                petRotation = this.createPetRotation(yml, pet)
+            }
+        }
+
         return Character(
             klass = characterClass,
             race = race,
             level = yml.level,
-            gear = gear
+            gear = gear,
+            pet = pet,
+            petRotation = petRotation
         )
     }
 }

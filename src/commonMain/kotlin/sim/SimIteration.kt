@@ -33,20 +33,33 @@ class SimIteration(
 
     // Setup known participants
     val target: SimParticipant = defaultTarget()
-    val subject: SimParticipant = SimParticipant(_subject, _rotation, this).init()
+    val subject: SimParticipant = SimParticipant(_subject, _rotation, this)
 
     // This is basically the non-sim target participants, and is the data needed for output
     // TODO: The rest of the party and raid
-    val participants = listOfNotNull(subject)
+    val participants = listOfNotNull(subject, subject.pet)
 
     private val allParticipants: List<SimParticipant> = listOfNotNull(
         target,
     ) + participants
 
+    // Initialize all non-target participants
+    init {
+        participants.forEach {
+            it.init()
+
+            // Cast any spells flagged in the rotation as precombat
+            it.rotation.castAllRaidBuffs(it)
+            it.rotation.castAllPrecombat(it)
+
+            // Recompute after precombat casts
+            it.recomputeStats()
+        }
+    }
+
     fun tick() {
         allParticipants.forEach {
             it.tick()
-            it.pet?.tick()
         }
 
         // Check debuffs
@@ -81,23 +94,19 @@ class SimIteration(
             lastServerSlowTickMs = elapsedTimeMs
             allParticipants.forEach {
                 it.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null)
-                it.pet?.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null)
             }
         }
 
         // Prune any buffs set to expire this tick
         allParticipants.forEach {
             it.pruneBuffs()
-            it.pet?.pruneBuffs()
             it.pruneDebuffs()
-            it.pet?.pruneDebuffs()
         }
     }
 
     fun addRaidBuff(buff: Buff) {
         participants.forEach {
             it.addBuff(buff)
-            it.pet?.addBuff(buff)
         }
     }
 
@@ -108,7 +117,6 @@ class SimIteration(
     fun cleanup() {
         allParticipants.forEach {
             it.cleanup()
-            it.pet?.cleanup()
         }
     }
 

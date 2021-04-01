@@ -3,12 +3,17 @@ package character.auto
 import character.Proc
 import data.Constants
 import data.model.Item
+import mechanics.General
 import mechanics.Ranged
 import sim.Event
 import sim.SimParticipant
 
 
 class AutoShot : AutoAttackBase() {
+    companion object {
+        const val name = "Auto Shot"
+    }
+
     override fun item(sp: SimParticipant): Item {
         return sp.character.gear.rangedTotemLibram
     }
@@ -17,7 +22,9 @@ class AutoShot : AutoAttackBase() {
     override val name: String = "Auto Shot"
 
     override fun cast(sp: SimParticipant) {
-        val damageRoll = Ranged.baseDamageRoll(sp, item(sp))
+        // Ammo adds DPS, so we can just model it as bonus AP
+        val ammoBonusAp = General.dpsToAp(sp.character.gear.ammo.maxDmg)
+        val damageRoll = Ranged.baseDamageRoll(sp, item(sp), bonusAp = ammoBonusAp)
         val result = Ranged.attackRoll(sp, damageRoll, item(sp), isWhiteDmg = true)
 
         // Save last hit state and fire event

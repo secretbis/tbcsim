@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Col, Dropdown, Row } from 'rsuite';
 import _ from 'lodash';
 
+import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
+import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
 import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
@@ -18,6 +20,10 @@ import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
 import * as tbcsim from 'tbcsim';
 
 const presets = {
+  hunter: [
+    hunterBmPreraid,
+    hunterSurvPreraid
+  ],
   shaman: [
     shamanElePreraid,
     shamanEnhSubElePreraid,
@@ -96,6 +102,9 @@ export default ({ value, dispatch }) => {
           onMouseLeave={() => setIsOpen(false)}
           open={isOpen}
         >
+          <Dropdown.Menu title="Hunter">
+            {presetsFor("hunter")}
+          </Dropdown.Menu>
           <Dropdown.Menu title="Shaman">
             {presetsFor("shaman")}
           </Dropdown.Menu>

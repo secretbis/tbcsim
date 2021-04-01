@@ -46,7 +46,7 @@ gear:
     enchant: Major Spellpower (Weapon)
   offHand:
     name: Lamp of Peaceful Radiance
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Totem of the Void
   head:
     name: Spellstrike Hood

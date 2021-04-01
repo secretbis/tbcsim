@@ -16,6 +16,8 @@ Implemented:
     - Fire and Shadow variants
   - Arms Warrior
   - Fury Warrior
+  - Hunter
+    - BM and Survival variants
 - All items ilvl >= 91 (except some unique on-use/procs)
   - Including gems, socket bonuses, and meta gems
 - Full stats breakdowns

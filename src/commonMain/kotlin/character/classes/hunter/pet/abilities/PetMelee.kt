@@ -26,7 +26,7 @@ class PetMelee : AutoAttackBase() {
             override var inventorySlot: Int = 21
             override var itemClass: Constants.ItemClass? = null
             override var itemSubclass: Constants.ItemSubclass? = null
-            override var minDmg: Double = 1.0
+            override var minDmg: Double = 0.0
             override var maxDmg: Double = 1.0
             override var speed: Double = basePetAttackSpeed
             override var stats: Stats = Stats()

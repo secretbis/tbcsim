@@ -28,7 +28,10 @@ class BattleShout : Ability() {
             val cmdPres = sp.character.klass.talents[CommandingPresence.name] as CommandingPresence?
             val ap = 305.0 * (cmdPres?.shoutMultiplier() ?: 1.0)
 
-            return Stats(attackPower = ap.toInt())
+            return Stats(
+                attackPower = ap.toInt(),
+                rangedAttackPower = ap.toInt()
+            )
         }
     }
 

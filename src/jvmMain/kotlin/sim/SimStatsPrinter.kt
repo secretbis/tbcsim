@@ -113,20 +113,20 @@ object SimStatsPrinter {
 
     // The player's pet is considered "their" DPS, so merge them if present
     fun printDps(subjectDps: DpsBreakdown, subjectPetDps: DpsBreakdown?) {
-        val petMeanPct = subjectPetDps?.mean ?: 0.0 / subjectDps.mean
-        val petMedianPct = subjectPetDps?.median ?: 0.0 / subjectDps.median
+        val petMeanPct = (subjectDps.mean + (subjectPetDps?.mean ?: 0.0)) / subjectDps.mean * 100.0
+        val petMedianPct = (subjectDps.median + (subjectPetDps?.median ?: 0.0)) / subjectDps.median * 100.0
 
         println(
             "AVERAGE DPS: ${df.format(subjectDps.mean)}" +
-            if(subjectPetDps != null) { " - PET: ${subjectPetDps.mean} ($petMeanPct%)" } else ""
+            if(subjectPetDps != null) { " - PET: ${df.format(subjectPetDps.mean)} (${df.format(petMeanPct)}%) - TOTAL: ${df.format(subjectDps.mean + subjectPetDps.mean)}" } else ""
         )
         println(
             "MEDIAN DPS: ${df.format(subjectDps.median)}" +
-            if(subjectPetDps != null) { " - PET: ${subjectPetDps.median} ($petMedianPct%)" } else ""
+            if(subjectPetDps != null) { " - PET: ${df.format(subjectPetDps.median)} (${df.format(petMedianPct)}%) - TOTAL: ${df.format(subjectDps.median + subjectPetDps.median)}" } else ""
         )
         println(
             "STDDEV DPS: ${df.format(subjectDps.sd)}" +
-            if(subjectPetDps != null) { " - PET: ${subjectPetDps.sd}" } else ""
+            if(subjectPetDps != null) { " - PET: ${df.format(subjectPetDps.sd)}" } else ""
         )
     }
 

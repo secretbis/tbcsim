@@ -1,11 +1,14 @@
 package character.classes.hunter.pet
 
 import character.Ability
+import character.classes.hunter.pet.abilities.LightningBreathRank6
 import data.model.Item
-import sim.SimParticipant
 
-class WindSerpent(owner: SimParticipant) : HunterPet(owner, petDamageMultiplier = 1.1) {
+class WindSerpent : HunterPet(petDamageMultiplier = 1.1) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return super.abilityFromString(name, item)
+        return when(name) {
+            "Lightning Breath" -> LightningBreathRank6()
+            else -> super.abilityFromString(name, item)
+        }
     }
 }

@@ -1,6 +1,7 @@
 package mechanics
 
 import character.Stats
+import data.Constants
 import data.model.Item
 import sim.Event
 import sim.SimParticipant
@@ -9,6 +10,23 @@ import kotlin.random.Random
 
 @JsExport
 object Ranged {
+    fun isGun(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.GUN
+    }
+
+    fun isBow(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.BOW
+    }
+
+    fun rangedCritChance(sp: SimParticipant, item: Item): Double {
+        val itemBonusCritPct = when {
+            isGun(item) -> sp.stats.gunCritRating
+            isBow(item) -> sp.stats.bowCritRating
+            else -> 0.0
+        } / Rating.critPerPct
+
+        return (itemBonusCritPct / 100.0) + General.physicalCritChance(sp)
+    }
 
     fun baseMiss(sp: SimParticipant): Double {
         return General.valueByLevelDiff(sp, General.baseMissChance)
@@ -47,7 +65,7 @@ object Ranged {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sp: SimParticipant, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
             sp.stats.whiteDamageAddlCritMultiplier
@@ -59,10 +77,10 @@ object Ranged {
         val missChance = rangedMissChance(sp)
         val blockChance = General.physicalBlockChance(sp) + missChance
         val critChance = if(isWhiteDmg) {
-            General.physicalCritChance(sp) + blockChance
+            rangedCritChance(sp, item) + blockChance
         } else {
             blockChance
-        }
+        } + bonusCritChance
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
@@ -77,7 +95,7 @@ object Ranged {
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
-                    hitRoll2 < General.physicalCritChance(sp) -> Pair(
+                    hitRoll2 < rangedCritChance(sp, item) -> Pair(
                         finalResult.first * critMultiplier,
                         Event.Result.CRIT
                     )

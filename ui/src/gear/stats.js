@@ -43,7 +43,7 @@ function MeleeStats({ simParticipant: sp }) {
     const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.mainHand);
     damageMhLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageMhHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
-    speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.meleeHasteMultiplier()).toFixed(2);
+    speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
   }
 
   const hasOffhand = sp && sp.character && sp.character.gear && sp.character.gear.offHand && sp.character.gear.offHand.itemClass;
@@ -51,7 +51,7 @@ function MeleeStats({ simParticipant: sp }) {
     const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.offHand);
     damageOhLow = ((sp.character.gear.offHand.minDmg + dmgFromAp) / 2).toFixed(1);
     damageOhHigh = ((sp.character.gear.offHand.maxDmg + dmgFromAp) / 2).toFixed(1);
-    speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.meleeHasteMultiplier()).toFixed(2);
+    speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
   }
 
   return (
@@ -70,11 +70,11 @@ function MeleeStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
-        <Col xs={12}>{sp.meleeHitPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.physicalHitPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Crit %:</Col>
-        <Col xs={12}>{sp.meleeCritPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.physicalCritPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Expertise %:</Col>
@@ -89,26 +89,35 @@ function MeleeStats({ simParticipant: sp }) {
 }
 
 function RangedStats({ simParticipant: sp }) {
-  const damage = 0.0;
-  const speed = 1.0;
+  let damageRangedLow = 0.0
+  let damageRangedHigh = 0.0
+  let speedRanged = 1.0
+
+  const hasRanged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram && sp.character.gear.rangedTotemLibram.itemClass;
+  if(hasRanged) {
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.rangedTotemLibram);
+    damageRangedLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
+    damageRangedHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
+    speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
+  }
 
   return (
     <Col>
-      <Row>
-        <Col xs={12}>Damage:</Col>
-        <Col xs={12}>{damage} ({speed})</Col>
-      </Row>
+      {hasRanged ? <Row>
+        <Col xs={12}>Damage (R):</Col>
+        <Col xs={12}>{damageRangedLow}-{damageRangedHigh} ({speedRanged})</Col>
+      </Row> : null}
       <Row>
         <Col xs={12}>Attack Power:</Col>
         <Col xs={12}>{sp.rangedAttackPower_0()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
-        <Col xs={12}>{sp.meleeHitPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.physicalHitPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Crit %:</Col>
-        <Col xs={12}>{sp.meleeCritPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.physicalCritPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Armor Pen:</Col>
@@ -202,13 +211,26 @@ export default function({ state }) {
       _target_0: {
         _character: {
           _subTypes: {
-            contains_61: function() { return false; }
+            contains_61: function() { return false; },
+            iterator_70: function() {
+              return {
+                hasNext_52: function() { return false; }
+              }
+            }
           }
         },
-        addDebuff: function() {},
+        addDebuff: function() {}
+      },
+      addRaidBuff: function(buff) {
+        simParticipant.addBuff(buff)
       }
     }
   ).init()
+
+  // Boofs
+  simParticipant.rotation.castAllRaidBuffs(simParticipant)
+  simParticipant.rotation.castAllPrecombat(simParticipant)
+  simParticipant.recomputeStats()
 
   const panels = {
     baseStats: {

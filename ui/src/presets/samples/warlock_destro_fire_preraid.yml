@@ -42,7 +42,7 @@ gear:
     enchant: Major Spellpower (Weapon)
   offHand:
     name: Flametongue Seal
-  rangedLibramTotem:
+  rangedTotemLibram:
     name: Nether Core's Control Rod
   head:
     name: Spellstrike Hood

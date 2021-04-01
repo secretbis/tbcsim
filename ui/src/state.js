@@ -2,6 +2,8 @@ import _ from 'lodash';
 
 import simDefaults from './data/sim_defaults';
 
+import { inventorySlots } from './data/constants';
+
 import * as tbcsim from 'tbcsim';
 
 export function stateReducer(state, action) {
@@ -35,6 +37,7 @@ export function stateReducer(state, action) {
           gear: action.value.gear,
           rotation: action.value.rotation,
           talents: action.value.talents,
+          pet: action.value.pet
         },
 
         raidBuffs: _.reduce(action.value.raidBuffs, (acc, buff) => {
@@ -55,6 +58,20 @@ export function stateReducer(state, action) {
             ...state.character.gear,
             ...action.value
           }
+        }
+      }
+
+      // If a 2H is being equipped, remove the offhand slot
+      if(action.slotName == 'mainHand' && action.item) {
+        if(action.item.inventorySlot == inventorySlots.two_hand) {
+          delete newState.character.gear.offHand
+        }
+      }
+
+      // If a 1H is being equipped in the OH, and a 2H is currently equipped, remove the 2H
+      if(action.slotName == 'offHand' && action.item && state.character.gear.mainHand) {
+        if(state.character.gear.mainHand.inventorySlot == inventorySlots.two_hand) {
+          delete newState.character.gear.mainHand
         }
       }
     } else if(action.type == 'setRaidBuff') {
@@ -123,6 +140,7 @@ export const initialState = {
     gear: null,
     rotation: null,
     talents: null,
+    pet: null
   },
 
   raidBuffs: _.reduce(tbcsim.data.abilities.raid.RaidAbilities.buffNames, (acc, buff) => {
@@ -150,6 +168,7 @@ initialState.serialize = function() {
       })),
       rotation: this.character.rotation,
       talents: this.character.talents,
+      pet: this.character.pet
     },
 
     raidBuffs: this.raidBuffs,
@@ -183,6 +202,7 @@ initialState.makeSimConfig = function() {
       })),
       rotation: this.character.rotation,
       talents: this.character.talents,
+      pet: this.character.pet,
 
       raidBuffs: _.keys(_.pickBy(this.raidBuffs, value => !!value)),
       raidDebuffs: _.keys(_.pickBy(this.raidDebuffs, value => !!value))

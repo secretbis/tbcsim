@@ -3,8 +3,11 @@ package character.classes.hunter
 import character.*
 import character.classes.hunter.abilities.*
 import character.classes.hunter.talents.*
+import character.classes.hunter.talents.AimedShot as AimedShotTalent
 import character.classes.hunter.talents.BestialWrath as BestialWrathTalent
 import data.model.Item
+import mechanics.Rating
+import sim.SimParticipant
 
 class Hunter(talents: Map<String, Talent>) : Class(talents){
     override val baseStats: Stats = Stats(
@@ -14,7 +17,19 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
         stamina = 154,
         spirit = 123
     )
-    override val buffs: List<Buff> = listOf()
+
+    // Every quiver adds 15% haste, so there's no point in selecting it
+    val quiverHaste = object : Buff() {
+        override val name: String = "Quiver Haste"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return Stats(physicalHasteRating = 15.0 * Rating.hastePerPct)
+        }
+    }
+
+    override val buffs: List<Buff> = listOf(quiverHaste)
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
@@ -22,6 +37,7 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
             BestialWrath.name -> BestialWrath()
             HuntersMark.name -> HuntersMark()
             KillCommand.name -> KillCommand()
+            MultiShot.name -> MultiShot()
             RapidFire.name -> RapidFire()
             SteadyShot.name -> SteadyShot()
             else -> null
@@ -30,6 +46,7 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name) {
+            AimedShotTalent.name -> AimedShotTalent(ranks)
             AnimalHandler.name -> AnimalHandler(ranks)
             Barrage.name -> Barrage(ranks)
             BestialDiscipline.name -> BestialDiscipline(ranks)
@@ -40,6 +57,7 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
             ExposeWeakness.name -> ExposeWeakness(ranks)
             FerociousInspiration.name -> FerociousInspiration(ranks)
             Ferocity.name -> Ferocity(ranks)
+            FocusedFire.name -> FocusedFire(ranks)
             Frenzy.name -> Frenzy(ranks)
             GoForTheThroat.name -> GoForTheThroat(ranks)
             HumanoidSlaying.name -> HumanoidSlaying(ranks)
@@ -50,6 +68,7 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
             LethalShots.name -> LethalShots(ranks)
             LightningReflexes.name -> LightningReflexes(ranks)
             MasterMarksman.name -> MasterMarksman(ranks)
+            MasterTactician.name -> MasterTactician(ranks)
             MonsterSlaying.name -> MonsterSlaying(ranks)
             MortalShots.name -> MortalShots(ranks)
             RangedWeaponSpecialization.name -> RangedWeaponSpecialization(ranks)
@@ -58,6 +77,7 @@ class Hunter(talents: Map<String, Talent>) : Class(talents){
             Surefooted.name -> Surefooted(ranks)
             SurvivalInstincts.name -> SurvivalInstincts(ranks)
             TheBeastWithin.name -> TheBeastWithin(ranks)
+            ThrillOfTheHunt.name -> ThrillOfTheHunt(ranks)
             TrueshotAura.name -> TrueshotAura(ranks)
             UnleashedFury.name -> UnleashedFury(ranks)
             else -> null

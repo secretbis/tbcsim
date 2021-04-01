@@ -21,7 +21,6 @@ class Gear {
         }
 
     var rangedTotemLibram: Item = EmptyItem()
-    var quiver: Item = EmptyItem()
     var ammo: Item = EmptyItem()
     var head: Item = EmptyItem()
     var neck: Item = EmptyItem()
@@ -61,7 +60,6 @@ class Gear {
             mainHand,
             offHand,
             rangedTotemLibram,
-            quiver,
             ammo,
             head,
             neck,

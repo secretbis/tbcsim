@@ -16,7 +16,10 @@ class LatrosFlurry : ItemSet() {
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(attackPower = 30)
+            return Stats(
+                attackPower = 30,
+                rangedAttackPower = 30
+            )
         }
     }
 

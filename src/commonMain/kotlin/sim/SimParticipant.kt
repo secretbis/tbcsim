@@ -57,8 +57,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     var events: MutableList<Event> = mutableListOf()
 
     // Pet
-    val pet: SimParticipant? = if(character.pet != null) {
-        SimParticipant(character.pet, character.pet.rotation, sim, this)
+    val pet: SimParticipant? = if(character.pet != null && character.petRotation != null) {
+        SimParticipant(character.pet, character.petRotation, sim, this)
     } else null
 
     fun init(): SimParticipant {
@@ -92,16 +92,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
         // Initialize our subject resource
         resource = Resource(this)
-
-        // Cast any spells flagged in the rotation as precombat
-        rotation.castAllRaidBuffs(this)
-        rotation.castAllPrecombat(this)
-
-        // Recompute after precombat casts
-        recomputeStats()
-
-        // Init pet
-        pet?.init()
 
         return this
     }
@@ -166,7 +156,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             // Double check casting, since we could have just started
             // Do auto attacks
             if (!isCasting()) {
-                if (mhAutoAttack?.available(this) == true) {
+                if(rangedAutoAttack?.available(this) == true) {
+                    rangedAutoAttack?.cast(this)
+                } else if (mhAutoAttack?.available(this) == true) {
                     // Check to see if we have a replacement ability
                     // Be sure to double check the cost, since our resource may have changed since we requested the replacement
                     if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
@@ -586,8 +578,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.attackPower.coerceAtLeast(0) +
-                strength() * character.klass.attackPowerFromStrength +
-                agility() * character.klass.attackPowerFromAgility
+                strength() * character.klass.attackPowerFromStrength
             ) * stats.attackPowerMultiplier
         ).toInt()
     }
@@ -595,7 +586,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     fun rangedAttackPower(): Int {
         return (
             (
-                stats.attackPower.coerceAtLeast(0) +
+                stats.rangedAttackPower.coerceAtLeast(0) +
                 agility() * character.klass.rangedAttackPowerFromAgility
             ) * stats.rangedAttackPowerMultiplier
         ).toInt()
