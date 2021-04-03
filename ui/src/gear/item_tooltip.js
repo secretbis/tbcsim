@@ -20,12 +20,13 @@ export default function({ gear, item, isMetaGem=false, children }) {
     const itemGems = 'gems=' + item.sockets.map(sk => sk.gem && sk.gem.id).join(':')
     const itemEnchant = item.enchant ? `ench=${item.enchant.id}` : ''
     const itemSet = 'pcs=' + _.values(gear).map(it => it.id).join(':')
+    const suffixStr = `${itemGems}&${itemEnchant}&${itemSet}`
 
     return (
       <a
-        href={`https://www.tbcdb.com/?item=${item.id}`}
+        href={`https://tbc.wowhead.com/?item=${item.id}&${suffixStr}`}
         className={itemClass}
-        rel={`${itemGems}&amp;${itemEnchant}&amp;${itemSet}`}
+        rel={suffixStr}
         onClick={e => e.preventDefault()}
         style={{ textDecoration: 'none' }}
       >

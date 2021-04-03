@@ -92,7 +92,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
 
   function renderItem() {
     const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName)
-    const itemCanEnchant = slotName == 'rangedTotemLibram' && ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot)
+    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) : true
 
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
