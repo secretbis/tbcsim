@@ -14,9 +14,9 @@ export default function({ talents, dispatch }) {
     setTalentsStr(stringifyTalents(talents));
   }, [talents])
 
-  function saveTalents(value) {
+  function saveTalents(evt) {
     try {
-      const parsed = JSON.parse(value);
+      const parsed = JSON.parse(talentsStr);
       setJsonValid(true);
       dispatch({ type: 'character.talents', value: parsed });
     } catch(e) {

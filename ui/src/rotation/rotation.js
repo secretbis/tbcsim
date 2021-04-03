@@ -14,9 +14,9 @@ export default function({ rotation, dispatch }) {
     setRotationStr(stringifyRotation(rotation));
   }, [rotation])
 
-  function saveRotation(value) {
+  function saveRotation(evt) {
     try {
-      const parsed = JSON.parse(value);
+      const parsed = JSON.parse(rotationStr);
       setJsonValid(true);
       dispatch({ type: 'character.rotation', value: parsed });
     } catch(e) {

@@ -83,6 +83,15 @@ export default ({ value, dispatch }) => {
     })
     dispatch({ type: 'loadCharacterPreset', value: clone })
     setIsOpen(false)
+
+    // Track preset + class interest
+    if(window.gtag) {
+      window.gtag('event', 'load', {
+        'event_category': 'characterPreset',
+        'event_label': clone.description || 'unknown preset',
+        'event_value': 1
+      });
+    }
   }
 
   function presetsFor(klass) {
