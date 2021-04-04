@@ -1,5 +1,6 @@
 package sim
 
+import character.Stats
 import kotlinx.coroutines.*
 import mu.KotlinLogging
 import sim.config.Config
@@ -9,6 +10,7 @@ import kotlin.random.Random
 class Sim (
     val config: Config,
     val opts: SimOptions,
+    val epStatMod: Stats? = null,
     val progressCb:(SimProgress) -> Unit
 ) {
     val logger = KotlinLogging.logger {}
@@ -40,7 +42,7 @@ class Sim (
 
     private fun iterate(num: Int) : SimIteration {
         // Simulate
-        val iteration = SimIteration(config.character, config.rotation, opts)
+        val iteration = SimIteration(config.character, config.rotation, opts, epStatMod)
 
         // Randomly alter the fight duration, if configured
         val dvms = opts.durationVaribilityMs

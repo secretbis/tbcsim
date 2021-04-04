@@ -30,7 +30,7 @@ class Incinerate : Ability() {
     val baseCastTimeMs = 2500
     override fun castTimeMs(sp: SimParticipant): Int {
         val emberstorm = sp.character.klass.talents[Emberstorm.name] as Emberstorm?
-        return (baseCastTimeMs * (emberstorm?.incinerateCastTimeMultiplier() ?: 1.0)).toInt()
+        return ((baseCastTimeMs * (emberstorm?.incinerateCastTimeMultiplier() ?: 1.0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseDamage = Pair(444.0, 515.0)

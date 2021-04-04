@@ -18,7 +18,7 @@ import kotlin.js.JsExport
 import kotlin.math.floor
 
 @JsExport
-class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null) {
+class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null, val epStatMod: Stats? = null) {
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
@@ -109,6 +109,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             .add(character.klass.baseStats)
             .add(character.race.baseStats)
             .add(character.gear.totalStats())
+            .add(epStatMod ?: Stats())
             .let {
                 (buffs.values + debuffs.values).forEach { buff ->
                     val stats = buff.modifyStats(this)

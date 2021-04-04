@@ -6,10 +6,14 @@ import data.model.Item
 import sim.Event
 import sim.SimParticipant
 import kotlin.js.JsExport
-import kotlin.random.Random
 
 @JsExport
 object Ranged {
+    fun rngSuffix(sp: SimParticipant, item: Item): String {
+        val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
+        return "$castingAbility ${item.name}"
+    }
+
     fun isGun(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.GUN
     }
@@ -61,7 +65,7 @@ object Ranged {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item) + flatModifier) * allMultiplier
+        return (sp.sim.random("Ranged Damage ${rngSuffix(sp, item)}").nextDouble(min, max) + apToDamage(sp, totalAp, item) + flatModifier) * allMultiplier
     }
 
     // Performs an attack roll given an initial unmitigated damage value
@@ -77,12 +81,12 @@ object Ranged {
         val missChance = rangedMissChance(sp)
         val blockChance = General.physicalBlockChance(sp) + missChance
         val critChance = if(isWhiteDmg) {
-            rangedCritChance(sp, item) + blockChance
+            rangedCritChance(sp, item) + bonusCritChance + blockChance
         } else {
             blockChance
-        } + bonusCritChance
+        }
 
-        val attackRoll = Random.nextDouble()
+        val attackRoll = sp.sim.random("Ranged Attack ${rngSuffix(sp, item)}").nextDouble()
         var finalResult = when {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
@@ -93,9 +97,9 @@ object Ranged {
         if(!isWhiteDmg) {
             // Two-roll yellow hit
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
-                val hitRoll2 = Random.nextDouble()
+                val hitRoll2 = sp.sim.random("Ranged Second Roll ${rngSuffix(sp, item)}").nextDouble()
                 finalResult = when {
-                    hitRoll2 < rangedCritChance(sp, item) -> Pair(
+                    hitRoll2 < (rangedCritChance(sp, item) + bonusCritChance) -> Pair(
                         finalResult.first * critMultiplier,
                         Event.Result.CRIT
                     )

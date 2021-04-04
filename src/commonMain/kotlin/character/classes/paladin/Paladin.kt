@@ -3,7 +3,7 @@ package character.classes.paladin
 import character.*
 import data.model.Item
 
-class Paladin(talents: Map<String, Talent>) : Class(talents) {
+class Paladin(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
         agility = 79,
         intellect = 180,

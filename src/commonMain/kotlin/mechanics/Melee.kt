@@ -7,7 +7,6 @@ import mu.KotlinLogging
 import sim.Event
 import sim.SimParticipant
 import kotlin.js.JsExport
-import kotlin.random.Random
 
 @JsExport
 object Melee {
@@ -48,6 +47,12 @@ object Melee {
         Constants.ItemSubclass.FIST to 2400.0,
         // TODO: Druid weirdness
     )
+
+    fun rngSuffix(sp: SimParticipant, item: Item): String {
+        val handSuffix = if(isOffhand(sp, item)) { "OH" } else "MH"
+        val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
+        return "$handSuffix $castingAbility ${item.name}"
+    }
 
     fun is2H(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
@@ -140,12 +145,12 @@ object Melee {
         return valueByLevelDiff(sp, baseGlancingChance)
     }
 
-    fun meleeGlanceReduction(sp: SimParticipant): Double {
+    fun meleeGlanceReduction(sp: SimParticipant, item: Item): Double {
         val defDifference: Int = (sp.sim.target.character.level - sp.character.level).coerceAtLeast(0) * 5
         val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.6).coerceAtLeast(0.0)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
 
-        return Random.nextDouble(low, high)
+        return sp.sim.random("Melee Glance ${rngSuffix(sp, item)}").nextDouble(low, high)
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
@@ -186,7 +191,7 @@ object Melee {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
+        return (sp.sim.random("Melee Damage ${rngSuffix(sp, item)}").nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
     }
 
     // Performs an attack roll given an initial unmitigated damage value
@@ -214,12 +219,12 @@ object Melee {
             blockChance
         }
 
-        val attackRoll = Random.nextDouble()
+        val attackRoll = sp.sim.random("Melee Attack ${rngSuffix(sp, item)}").nextDouble()
         var finalResult = when {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
             attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sp)), Event.Result.GLANCE)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sp, item)), Event.Result.GLANCE)
             attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
             isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
             else -> Pair(damageRoll, Event.Result.HIT)
@@ -228,7 +233,7 @@ object Melee {
         if(!isWhiteDmg) {
             // Two-roll yellow hit
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
-                val hitRoll2 = Random.nextDouble()
+                val hitRoll2 = sp.sim.random("Melee Second Roll ${rngSuffix(sp, item)}").nextDouble()
                 finalResult = when {
                     hitRoll2 < General.physicalCritChance(sp) -> Pair(
                         finalResult.first * critMultiplier,

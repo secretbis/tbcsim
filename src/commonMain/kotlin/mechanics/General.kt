@@ -1,6 +1,5 @@
 package mechanics
 
-import data.model.Item
 import mu.KotlinLogging
 import sim.SimParticipant
 import kotlin.js.JsExport

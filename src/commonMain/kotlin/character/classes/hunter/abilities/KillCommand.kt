@@ -78,9 +78,8 @@ class KillCommand : Ability() {
                 amount = result.first,
                 result = result.second,
             )
-            sp.logEvent(event)
+            sp.pet.logEvent(event)
 
-            val baseTypes = listOf(Proc.Trigger.HUNTER_CAST_KILL_COMMAND)
             val triggerTypes = when(result.second) {
                 Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
                 Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
@@ -93,7 +92,8 @@ class KillCommand : Ability() {
             }
 
             if(triggerTypes != null) {
-                sp.fireProc(baseTypes + triggerTypes, listOf(petItem), this, event)
+                sp.fireProc(listOf(Proc.Trigger.HUNTER_CAST_KILL_COMMAND), null, this, null)
+                sp.pet.fireProc(triggerTypes, listOf(petItem), this, event)
             }
         }
     }

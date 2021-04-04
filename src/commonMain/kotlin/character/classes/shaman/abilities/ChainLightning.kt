@@ -63,7 +63,7 @@ open class ChainLightning : Ability() {
     val baseCastTimeMs = 2000
     override fun castTimeMs(sp: SimParticipant): Int {
         val lm = sp.character.klass.talents[LightningMastery.name] as LightningMastery?
-        return baseCastTimeMs - (lm?.lightningCastReductionAmountMs() ?: 0)
+        return ((baseCastTimeMs - (lm?.lightningCastReductionAmountMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseDamage = Pair(734.0, 838.0)

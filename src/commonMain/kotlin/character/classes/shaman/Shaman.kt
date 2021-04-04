@@ -9,7 +9,7 @@ import character.classes.shaman.talents.Stormstrike as StormstrikeTalent
 import character.classes.shaman.talents.TotemOfWrath as TotemOfWrathTalent
 import data.model.Item
 
-class Shaman(talents: Map<String, Talent>) : Class(talents) {
+class Shaman(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name.trim()) {
             AncestralKnowledge.name -> AncestralKnowledge(ranks)

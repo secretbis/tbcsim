@@ -39,7 +39,7 @@ open class ShadowBolt : Ability() {
 
         // Otherwise cast normally
         val bane = sp.character.klass.talents[Bane.name] as Bane?
-        return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
+        return ((baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseDamage = Pair(541.0, 603.0)

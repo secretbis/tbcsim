@@ -27,7 +27,7 @@ class SearingPain : Ability() {
     }
 
     val baseCastTimeMs = 1500
-    override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
+    override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     val baseDamage = Pair(243.0, 288.0)
     override fun cast(sp: SimParticipant) {

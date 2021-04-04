@@ -137,6 +137,8 @@ abstract class Proc {
         state.cooldownStartMs = sp.sim.elapsedTimeMs
     }
 
+    open val identifier: Long = Random.nextLong()
+
     open fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
         val chances: MutableList<Double> = mutableListOf()
 
@@ -184,7 +186,7 @@ abstract class Proc {
         }
 
         // RNG according to configuration
-        val roll = Random.nextDouble()
+        val roll = sp.sim.random("Proc $identifier").nextDouble()
         return chances.any { roll < it }
     }
 

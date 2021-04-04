@@ -5,6 +5,7 @@ import mu.KotlinLogging
 import sim.rotation.Rotation
 import kotlin.js.JsExport
 import kotlin.math.ceil
+import kotlin.random.Random
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 
@@ -12,7 +13,8 @@ import character.races.Boss as BossRace
 class SimIteration(
     _subject: Character,
     _rotation: Rotation,
-    val opts: SimOptions
+    val opts: SimOptions,
+    epStatMod: Stats? = null
 ) {
     val logger = KotlinLogging.logger {}
 
@@ -33,11 +35,21 @@ class SimIteration(
 
     // Setup known participants
     val target: SimParticipant = defaultTarget()
-    val subject: SimParticipant = SimParticipant(_subject, _rotation, this)
+    val subject: SimParticipant = SimParticipant(_subject, _rotation, this, epStatMod = epStatMod)
 
     // This is basically the non-sim target participants, and is the data needed for output
     // TODO: The rest of the party and raid
     val participants = listOfNotNull(subject, subject.pet)
+
+    // Controllable randomness
+    val randomCache: MutableMap<String, Random> = mutableMapOf()
+    fun random(key: String): Random {
+//        if(opts.randomSeed != null) {
+//            return randomCache.getOrPut(key, { Random(opts.randomSeed!!) })
+//        }
+
+        return Random.Default
+    }
 
     private val allParticipants: List<SimParticipant> = listOfNotNull(
         target,

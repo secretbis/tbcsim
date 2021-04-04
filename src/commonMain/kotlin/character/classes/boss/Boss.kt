@@ -1,9 +1,10 @@
 package character.classes.boss
 
 import character.*
+import character.classes.boss.specs.BossSpec
 import data.model.Item
 
-class Boss(override var baseStats: Stats) : Class(mapOf()) {
+class Boss(override var baseStats: Stats) : Class(mapOf(), BossSpec()) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }

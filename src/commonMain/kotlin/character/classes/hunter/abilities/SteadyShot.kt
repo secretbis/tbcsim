@@ -11,7 +11,6 @@ import mechanics.General
 import mechanics.Ranged
 import sim.Event
 import sim.SimParticipant
-import kotlin.random.Random
 
 class SteadyShot : Ability() {
     companion object {
@@ -20,8 +19,8 @@ class SteadyShot : Ability() {
     override val id: Int = 34120
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
+//    override fun castTimeMs(sp: SimParticipant): Int = (1000 / sp.physicalHasteMultiplier()).toInt()
     override fun castTimeMs(sp: SimParticipant): Int = 1000
-
     val baseCost = 110.0
     override fun resourceCost(sp: SimParticipant): Double {
         val efficiency = sp.character.klass.talents[Efficiency.name] as Efficiency?
@@ -44,7 +43,7 @@ class SteadyShot : Ability() {
 
         // This shot does not benefit from ammo DPS
         // TODO: This was *technically* a bug, so we should keep an eye on testing
-        val damage = Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2) * t6BonusMultiplier
+        val damage = sp.sim.random(name).nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2) * t6BonusMultiplier
         val result = Ranged.attackRoll(sp, damage, item, bonusCritChance = t5BonusCrit)
 
         val event = Event(

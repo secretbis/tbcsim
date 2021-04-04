@@ -151,9 +151,9 @@ object ConfigMaker {
     }
 
     private fun createCharacter(yml: ConfigYml): Character {
-        // Class
-        val characterClass = Class.fromString(yml.`class`)
-            ?: throw IllegalArgumentException("Unknown character class: ${yml.`class`}")
+        // Class/spec
+        val characterClass = Class.fromString(yml.`class`, yml.spec)
+            ?: throw IllegalArgumentException("Unknown character class/spec: ${yml.`class`} - ${yml.spec}")
 
         // Race
         val race = Race.fromString(yml.race)

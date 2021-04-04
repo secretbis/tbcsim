@@ -9,7 +9,7 @@ import data.model.Item
 import mechanics.Rating
 import sim.SimParticipant
 
-class Hunter(talents: Map<String, Talent>) : Class(talents){
+class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
     override val baseStats: Stats = Stats(
         agility = 222,
         intellect = 147,

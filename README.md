@@ -9,15 +9,20 @@ As such, I'm sure there are a thousand subtle bugs.  Please report any if you fi
 
 Implemented:
 - Specs
-  - Enhancement Shaman
-  - Affliction Warlock
-    - UA, Ruin, and DS variants
-  - Destruction Warlock
-    - Fire and Shadow variants
-  - Arms Warrior
-  - Fury Warrior
+  - Shaman
+    - Enhancement
+    - Elemental
+  - Warlock
+    - Affliction
+      - UA, Ruin, and DS variants
+    - Destruction
+      - Fire and Shadow variants
+  - Warrior
+    - Arms
+    - Fury
   - Hunter
-    - BM and Survival variants
+    - Beast Mastery
+    - Survival
 - All items ilvl >= 91 (except some unique on-use/procs)
   - Including gems, socket bonuses, and meta gems
 - Full stats breakdowns

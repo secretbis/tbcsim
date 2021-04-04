@@ -11,7 +11,7 @@ import data.model.Socket
 import data.model.SocketBonus
 
 // petDamageMultiplier is the +10% or -10% or whatever modifier the specific pet type gets
-abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultiplier: Double) : Class(mapOf()) {
+abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultiplier: Double) : Class(mapOf(), HunterPetSpec()) {
     companion object {
         fun makePetAttackItem(name: String, minDmg: Double, maxDmg: Double): Item {
             return object : Item() {

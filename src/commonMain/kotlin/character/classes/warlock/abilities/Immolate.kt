@@ -32,7 +32,7 @@ class Immolate : Ability() {
     val baseCastTimeMs = 2000
     override fun castTimeMs(sp: SimParticipant): Int {
         val bane = sp.character.klass.talents[Bane.name] as Bane?
-        return baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)
+        return ((baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseDamage = 327.0

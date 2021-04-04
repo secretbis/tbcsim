@@ -3,7 +3,7 @@ package character.classes.rogue
 import character.*
 import data.model.Item
 
-class Rogue(talents: Map<String, Talent>) : Class(talents) {
+class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
         agility = 222,
         intellect = 123,

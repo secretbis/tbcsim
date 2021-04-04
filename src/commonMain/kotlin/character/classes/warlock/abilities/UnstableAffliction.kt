@@ -17,7 +17,7 @@ class UnstableAffliction : Ability() {
     override val name: String = Companion.name
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
-    override fun castTimeMs(sp: SimParticipant): Int = 1500
+    override fun castTimeMs(sp: SimParticipant): Int = (1500 / sp.spellHasteMultiplier()).toInt()
 
     override fun resourceCost(sp: SimParticipant): Double = 400.0
 

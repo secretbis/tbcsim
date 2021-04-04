@@ -4,7 +4,7 @@ import character.*
 import character.Class
 import data.model.Item
 
-class Druid : Class(mapOf()) {
+class Druid(talents: Map<String, Talent>, spec: Spec)  : Class(talents, spec) {
     companion object {
         const val BEAR_FORM_BUFF_NAME = "Bear Form"
         const val DIRE_BEAR_FORM_BUFF_NAME = "Dire Bear Form"

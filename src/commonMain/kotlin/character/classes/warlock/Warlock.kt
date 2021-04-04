@@ -12,7 +12,7 @@ import character.classes.warlock.talents.SiphonLife as SiphonLifeTalent
 import character.classes.warlock.talents.UnstableAffliction as UnstableAfflictionTalent
 import data.model.Item
 
-class Warlock(talents: Map<String, Talent>) : Class(talents) {
+class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
         agility = 170,
         intellect = 180,
