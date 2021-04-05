@@ -3,13 +3,14 @@ import _ from 'lodash';
 import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 
 import * as Constants from '../data/constants';
+import { itemEp } from '../ep/ep_stats';
 import ItemTooltip from './item_tooltip';
 
 import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
+export default function({ character, type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState(null);
 
   TooltipComponent = TooltipComponent || ItemTooltip
@@ -62,7 +63,16 @@ export default function({ type, item, TooltipComponent, inventorySlots, itemClas
         return true;
       });
 
-    return _.sortBy(filtered, 'itemLevel').reverse()
+    // Add item EP if we have a reference point
+    if(character) {
+      items = items.forEach(i => {
+        const ep = itemEp(i, character.epCategory, character.epSpec)
+        i.ep = ep
+      })
+    }
+
+    const sortKey = character ? 'ep' : 'itemLevel';
+    return _.sortBy(filtered, sortKey).reverse()
   }
 
   function onRowClick(item, e) {
@@ -120,6 +130,15 @@ export default function({ type, item, TooltipComponent, inventorySlots, itemClas
     )
   }
 
+  function EpCell({ rowData, dataKey, ...props }) {
+    const cellValue = rowData[dataKey]
+    return (
+      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+        <p>{cellValue}</p>
+      </Cell>
+    )
+  }
+
   return (
     <Modal show={visible} onHide={onHide}>
       <Modal.Header>
@@ -142,6 +161,12 @@ export default function({ type, item, TooltipComponent, inventorySlots, itemClas
             <HeaderCell>Name</HeaderCell>
             <NameCell dataKey="name" />
           </Column>
+          {character ?
+            <Column flexGrow={1}>
+              <HeaderCell>EP</HeaderCell>
+              <EpCell dataKey="ep" />
+            </Column>
+          : null}
           <Column flexGrow={1}>
             <HeaderCell>ilvl</HeaderCell>
             <ItemLevelCell dataKey="itemLevel" />

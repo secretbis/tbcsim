@@ -1,24 +1,8 @@
 import React from 'react';
 import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite';
 
+import { statDisplayNames } from './ep_stats';
 import epData from './data/ep_all.json';
-
-const statDisplayNames = {
-  attackPower: 'Attack Power',
-  rangedAttackPower: 'Ranged Attack Power',
-  agility: 'Agility',
-  intellect: 'Intellect',
-  strength: 'Strength',
-  physicalCritRating: 'Crit Rating',
-  physicalHasteRating: 'Haste Rating',
-  physicalHitRating: 'Hit Rating',
-  armorPen: 'Armor Pen',
-  expertiseRating: 'Expertise Rating',
-  spellDamage: 'Spell Damage',
-  spellCritRating: 'Crit Rating',
-  spellHasteRating: 'Haste Rating',
-  spellHitRating: 'Hit Rating'
-}
 
 const bannerTitle = 'EP values are very beta!'
 function bannerMsg() {
@@ -42,8 +26,9 @@ function HowItWorks() {
         </ul>
         <h5>Notes and Caveats</h5>
         <ul>
-          <li>Hit EPs are only calculated for dual-wielding classes and casters.  For others, it's not interesting - it's the best stat until cap, every time.  Later tiers will likely not include casters either, but it's not trivial to hit cap in many lower gear level situations</li>
+          <li>Hit EPs are only calculated for dual-wielding classes and (for low gear levels) casters.  For others, it's not interesting - it's the best stat until cap, basically every time</li>
           <li>Armor pen scaling is not linear, and the EP values listed are the values relative to the preset's current level of armor pen</li>
+          <li>Item procs and set bonuses are not currently included in total item EP when selecting items in the UI.  Procs and sets are fully modeled in the sim, however</li>
         </ul>
       </Row>
     </Container>

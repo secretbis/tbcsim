@@ -57,18 +57,6 @@ class TBCSim : CliktCommand() {
             "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
             "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
         )
-
-//            "Hunter (Beast Mastery, pre-raid)" to File(presetPath + "hunter_bm_preraid.yml"),
-//            "Hunter (Survival, pre-raid)" to File(presetPath + "hunter_surv_preraid.yml"),
-//            "Shaman (Elemental, pre-raid)" to File(presetPath + "shaman_ele_preraid.yml"),
-//            // Enhance weights aren't appreciably different between the two sub-specs
-//            "Shaman (Enhance, sub-Resto, pre-raid)" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
-//            "Warlock (Affliction, Ruin, pre-raid)" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
-//            "Warlock (Affliction, UA, pre-raid)" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
-//            "Warlock (Destruction, Fire, pre-raid)" to File(presetPath + "warlock_destro_fire_preraid.yml"),
-//            "Warlock (Destruction, Shadow, pre-raid)" to File(presetPath + "warlock_destro_shadow_preraid.yml"),
-//            "Warrior (Arms, pre-raid)" to File(presetPath + "warrior_arms_preraid.yml"),
-//            "Warrior (Fury, pre-raid)" to File(presetPath + "warrior_fury_preraid.yml"),
     )
 
     fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {

@@ -107,7 +107,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </ItemTooltip>
             {item.sockets.map((sk, idx) => {
-              return <GemSlot key={idx} socket={sk} gear={character.gear} onSelect={(gem) => onGemSelect(gem, idx)} />
+              return <GemSlot key={idx} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?
               <EnchantSlot item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
@@ -136,6 +136,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     <>
       {item ? renderItem() : renderBlank()}
       <GearSelector
+        character={character}
         allowableClasses={[character.class]}
         inventorySlots={inventorySlots}
         itemClasses={itemClasses}

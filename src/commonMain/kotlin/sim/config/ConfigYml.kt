@@ -118,6 +118,8 @@ data class ConfigYml(
     val spec: String,
     val description: String,
     val level: Int = 70,
+    val epCategory: String? = null,
+    val epSpec: String? = null,
     val talents: List<TalentYml>?,
     val gear: GearYml? = null,
     val gearCompare: GearCompareYml? = null,

@@ -4,7 +4,7 @@ description: Affliction UA Warlock (pre-raid)
 race: Human
 level: 70
 epCategory: pre_raid
-epType: warlock_affliction_ua
+epSpec: warlock_affliction_ua
 
 talents:
   # Affliction talents

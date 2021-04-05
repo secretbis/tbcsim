@@ -25,7 +25,7 @@ const metaIC = {
   }
 }
 
-export default function({ socket, gear, onSelect }) {
+export default function({ socket, character, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   const color = socket._color_0._name_2.toLowerCase();
@@ -46,9 +46,10 @@ export default function({ socket, gear, onSelect }) {
   const isMetaGem = color == 'meta'
   return (
     <span onClick={onGemClick}>
-      <ItemTooltip item={gem} isMetaGem={isMetaGem} gear={gear}>
+      <ItemTooltip item={gem} isMetaGem={isMetaGem} gear={character.gear}>
         <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
         <GearSelector
+          character={character}
           inventorySlots={[0]}
           itemClasses={isMetaGem ? metaIC : nonMetaIC}
           visible={selectorVisible}

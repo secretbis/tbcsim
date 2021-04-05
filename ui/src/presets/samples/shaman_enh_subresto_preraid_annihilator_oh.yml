@@ -4,7 +4,7 @@ description: Enhancement Shaman (pre-raid, sub-Resto, Anni OH)
 race: Draenei
 level: 70
 epCategory: pre_raid
-epType: shaman_enh
+epSpec: shaman_enh
 
 # Stock sub-resto Enhancement
 talents:

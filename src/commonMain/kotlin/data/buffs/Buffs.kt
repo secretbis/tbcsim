@@ -82,7 +82,7 @@ object Buffs {
             return GenericSpellPenBuff(amount)
         },
         Regex("Attack Power - Feral \\(\\+\\d+\\)") to fun (name: String): Buff {
-            val amount = name.drop(21).dropLast(1).toInt()
+            val amount = name.drop(24).dropLast(1).toInt()
             return GenericFeralAttackPowerBuff(amount)
         }
     )
