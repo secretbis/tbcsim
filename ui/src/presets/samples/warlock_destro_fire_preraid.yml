@@ -3,6 +3,8 @@ spec: Destruction
 description: Destruction Fire Warlock (pre-raid)
 race: Human
 level: 70
+epCategory: pre_raid
+epType: warlock_destro_fire
 
 talents:
   # Destro talents

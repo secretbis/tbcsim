@@ -3,6 +3,7 @@ package data.abilities.generic
 import character.Ability
 import character.Resource
 import sim.SimParticipant
+import kotlin.random.Random
 
 class SuperManaPotion : Ability() {
     companion object {
@@ -17,7 +18,7 @@ class SuperManaPotion : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 120000
 
     override fun cast(sp: SimParticipant) {
-        val manaRestored = sp.sim.random(name).nextInt(1800, 3000)
+        val manaRestored = Random.nextInt(1800, 3000)
         sp.addResource(manaRestored, Resource.Type.MANA, name)
     }
 }

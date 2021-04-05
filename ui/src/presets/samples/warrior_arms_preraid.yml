@@ -3,6 +3,8 @@ spec: Arms
 description: Arms Warrior (pre-raid)
 race: Human
 level: 70
+epCategory: pre_raid
+epType: warrior_arms
 
 # Stock Arms
 talents:

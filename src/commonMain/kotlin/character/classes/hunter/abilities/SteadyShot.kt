@@ -11,6 +11,7 @@ import mechanics.General
 import mechanics.Ranged
 import sim.Event
 import sim.SimParticipant
+import kotlin.random.Random
 
 class SteadyShot : Ability() {
     companion object {
@@ -43,7 +44,7 @@ class SteadyShot : Ability() {
 
         // This shot does not benefit from ammo DPS
         // TODO: This was *technically* a bug, so we should keep an eye on testing
-        val damage = sp.sim.random(name).nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2) * t6BonusMultiplier
+        val damage = Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2) * t6BonusMultiplier
         val result = Ranged.attackRoll(sp, damage, item, bonusCritChance = t5BonusCrit)
 
         val event = Event(

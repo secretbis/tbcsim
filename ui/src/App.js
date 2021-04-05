@@ -1,10 +1,17 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import _ from 'lodash';
 import { Container, Content, Header, Grid, Footer, Row, Col, Button, Panel, Navbar, Nav, Icon, Message } from 'rsuite';
 
 import { initialState, stateReducer } from './state';
 
 import RaidBuffs from './buffs/raid_buffs';
+import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
 import SimResults from './results/results';
@@ -33,7 +40,6 @@ function bannerMsg() {
 
 function App() {
   const [state, dispatch] = useReducer(stateReducer, initialState)
-  const [gearExpanded, setGearExpanded] = useState(true);
 
   const resultsData = {
     ability: state.resultsByAbility,
@@ -106,27 +112,8 @@ function App() {
 
   const simDisabled = state.character.class == null || state.iterationsCompleted != null;
 
-  // App
-  return (
-    <Container style={{ height: '100%' }}>
-      <Header>
-        <Navbar>
-          <Navbar.Header>
-            <h4 style={{ padding: '15px' }}>TBCSim</h4>
-          </Navbar.Header>
-          <Navbar.Body>
-            <Nav pullRight>
-              <Nav.Item
-                icon={<Icon icon='github' />}
-                style={{ color: '#e9ebf0', textDecoration: 'none' }}
-                href='https://github.com/marisa-ashkandi/tbcsim/issues/new'
-                target='_blank'
-                rel='noreferrer noopener'>Report a Bug
-              </Nav.Item>
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
-      </Header>
+  function renderSimulator() {
+    return (
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
@@ -171,17 +158,66 @@ function App() {
           }
         </Grid>
       </Content>
-      <Footer>
-        <Navbar className='justify-content-center'>
-          <Navbar.Body>
-            <Nav>
-              <Nav.Item></Nav.Item>
-              Footer KEKW
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
-      </Footer>
-    </Container>
+    )
+  }
+
+  // Passing Nav.Item to Link doesn't work as expected, so make something that looks like it but is dumber
+  const FakeNavItem = React.forwardRef((props, ref) => (
+    <li className='rs-nav-item'>
+      <a className='rs-nav-item-content' ref={ref} {...props}>{props.children}</a>
+    </li>
+  ))
+
+  // App
+  return (
+    <Router>
+      <Container style={{ height: '100%' }}>
+        <Header>
+          <Navbar>
+            <Navbar.Header>
+              <h4 style={{ padding: '15px' }}>TBCSim</h4>
+            </Navbar.Header>
+            <Navbar.Body>
+              <Nav>
+                <Link to="/">
+                  <Nav.Item>Simulator</Nav.Item>
+                </Link>
+                <Link to="/ep">
+                  <Nav.Item>Equivalence Points</Nav.Item>
+                </Link>
+              </Nav>
+              <Nav pullRight>
+                <Nav.Item
+                  icon={<Icon icon='github' />}
+                  style={{ color: '#e9ebf0', textDecoration: 'none' }}
+                  href='https://github.com/marisa-ashkandi/tbcsim/issues/new'
+                  target='_blank'
+                  rel='noreferrer noopener'>Report a Bug
+                </Nav.Item>
+              </Nav>
+            </Navbar.Body>
+          </Navbar>
+        </Header>
+        <Switch>
+          <Route exact path="/">
+            {renderSimulator()}
+          </Route>
+          <Route path="/ep">
+            <EquivalencePoints />
+          </Route>
+        </Switch>
+        <Footer>
+          <Navbar className='justify-content-center'>
+            <Navbar.Body>
+              <Nav>
+                <Nav.Item></Nav.Item>
+                Footer KEKW
+              </Nav>
+            </Navbar.Body>
+          </Navbar>
+        </Footer>
+      </Container>
+    </Router>
   );
 }
 

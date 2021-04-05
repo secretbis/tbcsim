@@ -16,7 +16,6 @@ module.exports = {
         test: /\.ya?ml$/,
         use: ['json-loader', 'yaml-loader']
       };
-
       addBeforeLoader(webpackConfig, loaderByName("file-loader"), yamlLoader);
 
       return webpackConfig;

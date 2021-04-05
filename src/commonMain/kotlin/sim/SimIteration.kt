@@ -41,16 +41,6 @@ class SimIteration(
     // TODO: The rest of the party and raid
     val participants = listOfNotNull(subject, subject.pet)
 
-    // Controllable randomness
-    val randomCache: MutableMap<String, Random> = mutableMapOf()
-    fun random(key: String): Random {
-//        if(opts.randomSeed != null) {
-//            return randomCache.getOrPut(key, { Random(opts.randomSeed!!) })
-//        }
-
-        return Random.Default
-    }
-
     private val allParticipants: List<SimParticipant> = listOfNotNull(
         target,
     ) + participants

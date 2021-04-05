@@ -3,6 +3,8 @@ spec: Fury
 description: Fury Warrior (pre-raid)
 race: Human
 level: 70
+epCategory: pre_raid
+epType: warrior_fury
 
 # Stock Fury
 talents:

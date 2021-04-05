@@ -1,0 +1,85 @@
+{
+  "pre_raid": {
+    "hunter_bm": {
+      "rangedAttackPower": 1,
+      "agility": 1.97,
+      "physicalCritRating": 1.56,
+      "physicalHasteRating": 1.03,
+      "armorPen": 0.26
+    },
+    "hunter_surv": {
+      "rangedAttackPower": 1,
+      "agility": 2.72,
+      "physicalCritRating": 1.47,
+      "physicalHasteRating": 2.05,
+      "armorPen": 0.3
+    },
+    "shaman_ele": {
+      "spellDamage": 1,
+      "intellect": 0.39,
+      "spellHasteRating": 0.9,
+      "spellCritRating": 0.7,
+      "spellHitRating": 0.0
+    },
+    "shaman_enh": {
+      "attackPower": 1,
+      "strength": 2.35,
+      "agility": 1.47,
+      "physicalCritRating": 1.56,
+      "physicalHasteRating": 1.61,
+      "expertiseRating": 3.12,
+      "armorPen": 0.28,
+      "physicalHitRating": 2.23,
+      "spellCritRating": 0.2,
+      "spellHitRating": 0.5,
+      "spellDamage": 0.4
+    },
+    "warlock_affliction_ruin": {
+      "spellDamage": 1,
+      "intellect": 0.26,
+      "spellHasteRating": 0.83,
+      "spellCritRating": 0.58,
+      "spellHitRating": 1.25
+    },
+    "warlock_affliction_ua": {
+      "spellDamage": 1,
+      "intellect": 0.27,
+      "spellHasteRating": 0.98,
+      "spellCritRating": 0.34,
+      "spellHitRating": 1.2
+    },
+    "warlock_destruction_fire": {
+      "spellDamage": 1,
+      "intellect": 0.31,
+      "spellHasteRating": 1.14,
+      "spellCritRating": 0.61,
+      "spellHitRating": 0.84
+    },
+    "warlock_destruction_shadow": {
+      "spellDamage": 1,
+      "intellect": 0.3,
+      "spellHasteRating": 1.1,
+      "spellCritRating": 0.84,
+      "spellHitRating": 1.51
+    },
+    "warrior_arms": {
+      "attackPower": 1,
+      "strength": 2.31,
+      "agility": 1.6,
+      "physicalCritRating": 2.28,
+      "physicalHasteRating": 2.2,
+      "expertiseRating": 4.29,
+      "armorPen": 0.3
+    },
+    "warrior_fury": {
+      "attackPower": 1,
+      "strength": 2.14,
+      "agility": 1.54,
+      "physicalCritRating": 2.14,
+      "physicalHasteRating": 1.35,
+      "expertiseRating": 3.36,
+      "armorPen": 0.28,
+      "physicalHitRating": 1.7
+    }
+  }
+}

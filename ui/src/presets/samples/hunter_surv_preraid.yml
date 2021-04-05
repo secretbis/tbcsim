@@ -3,6 +3,8 @@ spec: Survival
 description: Survival Hunter (pre-raid)
 race: Draenei
 level: 70
+epCategory: pre_raid
+epType: hunter_surv
 
 talents:
   # Surv talents

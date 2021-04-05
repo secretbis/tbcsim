@@ -7,6 +7,7 @@ import mu.KotlinLogging
 import sim.Event
 import sim.SimParticipant
 import kotlin.js.JsExport
+import kotlin.random.Random
 
 @JsExport
 object Melee {
@@ -150,7 +151,7 @@ object Melee {
         val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.6).coerceAtLeast(0.0)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
 
-        return sp.sim.random("Melee Glance ${rngSuffix(sp, item)}").nextDouble(low, high)
+        return Random.nextDouble(low, high)
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
@@ -191,7 +192,7 @@ object Melee {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (sp.sim.random("Melee Damage ${rngSuffix(sp, item)}").nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
+        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
     }
 
     // Performs an attack roll given an initial unmitigated damage value
@@ -219,7 +220,7 @@ object Melee {
             blockChance
         }
 
-        val attackRoll = sp.sim.random("Melee Attack ${rngSuffix(sp, item)}").nextDouble()
+        val attackRoll = Random.nextDouble()
         var finalResult = when {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
@@ -233,7 +234,7 @@ object Melee {
         if(!isWhiteDmg) {
             // Two-roll yellow hit
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
-                val hitRoll2 = sp.sim.random("Melee Second Roll ${rngSuffix(sp, item)}").nextDouble()
+                val hitRoll2 = Random.nextDouble()
                 finalResult = when {
                     hitRoll2 < General.physicalCritChance(sp) -> Pair(
                         finalResult.first * critMultiplier,

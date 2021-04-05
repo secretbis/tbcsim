@@ -186,7 +186,7 @@ abstract class Proc {
         }
 
         // RNG according to configuration
-        val roll = sp.sim.random("Proc $identifier").nextDouble()
+        val roll = Random.nextDouble()
         return chances.any { roll < it }
     }
 

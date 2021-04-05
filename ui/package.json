@@ -12,13 +12,14 @@
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "rsuite": "^4.8.9",
     "tbcsim": "file:../build/js/packages/tbcsim",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "craco --max_old_space_size=8192 start",
+    "start": "craco --max_old_space_size=10240 start",
     "build": "GENERATE_SOURCEMAP=false craco --max_old_space_size=6144 build",
     "test": "craco --max_old_space_size=6144 test",
     "eject": "craco --max_old_space_size=6144 eject"

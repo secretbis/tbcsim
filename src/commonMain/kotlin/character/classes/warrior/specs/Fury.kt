@@ -6,5 +6,5 @@ import character.SpecEpDelta
 class Fury : Spec() {
     override val name: String = "Fury"
     override val epBaseStat: SpecEpDelta = attackPowerBase
-    override val epStatDeltas: List<SpecEpDelta> = defaultMeleeDeltas
+    override val epStatDeltas: List<SpecEpDelta> = dualWieldMeleeDeltas
 }

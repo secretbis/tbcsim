@@ -3,6 +3,8 @@ spec: Elemental
 description: Elemental Shaman (pre-raid)
 race: Draenei
 level: 70
+epCategory: pre_raid
+epType: shaman_ele
 
 # Stock sub-resto Enhancement
 talents:

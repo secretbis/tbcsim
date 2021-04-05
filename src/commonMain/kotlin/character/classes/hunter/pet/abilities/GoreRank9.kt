@@ -8,6 +8,7 @@ import data.Constants
 import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
+import kotlin.random.Random
 
 class GoreRank9 : Ability() {
     override val id: Int = 35298
@@ -20,7 +21,7 @@ class GoreRank9 : Ability() {
     // Pets have no gear, so each attack is modeled as an item with the same damage range
     val item = HunterPet.makePetAttackItem(name, 37.0, 61.0)
     override fun cast(sp: SimParticipant) {
-        val goreMultiplier = if(sp.sim.random(name).nextBoolean()) { 2.0 } else 1.0
+        val goreMultiplier = if(Random.nextBoolean()) { 2.0 } else 1.0
         val damageRoll = Melee.baseDamageRoll(sp, item) * goreMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item)
 

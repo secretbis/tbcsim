@@ -3,6 +3,8 @@ spec: Enhancement
 description: Enhancement Shaman (pre-raid, sub-Ele)
 race: Draenei
 level: 70
+epCategory: pre_raid
+epType: shaman_enh
 
 # Stock sub-resto Enhancement
 talents:

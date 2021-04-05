@@ -3,6 +3,7 @@ package data.abilities.generic
 import character.Ability
 import character.Resource
 import sim.SimParticipant
+import kotlin.random.Random
 
 class DarkRune : Ability() {
     companion object {
@@ -17,7 +18,7 @@ class DarkRune : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 120000
 
     override fun cast(sp: SimParticipant) {
-        val manaRestored = sp.sim.random(name).nextInt(900, 1500)
+        val manaRestored = Random.nextInt(900, 1500)
         sp.addResource(manaRestored, Resource.Type.MANA, name)
     }
 }

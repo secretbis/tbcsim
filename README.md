@@ -35,12 +35,23 @@ Implemented:
 - Consumables
 - Racial abilities
 - Item set bonuses, including all tier sets
+- Equivalence points for quick gear comparison
 
 Not yet implemented:
 - All specs not listed above
 - Automated gear comparison
 
-## Example output
+## Calculating EP
+
+To calculate EPs for a single character definition, use the following command:
+
+`./tbcsim --calc-ep-single <path_to_character_definition_file>`
+
+This uses the sim defaults of a step interval of 10ms and an iteration count of 10,000 - both can be adjusted to your preference.  See the CLI usage below, or just run `./tbcsim`.
+
+Higher iteration counts will give more accurate EPs.  Smaller step intervals will provide a higher resolution, which can be useful in some situations like extremely high haste.  Generally speaking, intervals smaller than 10ms are probably not relevant.  
+
+## Example CLI Output
 
 ```
 Completed 100 iterations in 12 seconds

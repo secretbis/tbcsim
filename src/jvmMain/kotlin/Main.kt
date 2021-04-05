@@ -1,3 +1,4 @@
+import character.SpecEpDelta
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
@@ -5,10 +6,15 @@ import com.github.ajalt.clikt.parameters.options.*
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
 import data.codegen.CodeGen
+import kotlin.math.max
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import sim.*
+import sim.config.Config
 import sim.config.ConfigMaker
 import java.io.File
+import java.math.RoundingMode
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
@@ -36,21 +42,78 @@ class TBCSim : CliktCommand() {
     val debug: Boolean by option("--debug").flag(default = false)
 
     val presetPath = "./ui/src/presets/samples/"
-    val epPresetsByCategory = mapOf(
-        "Pre-Raid" to mapOf(
-            "Hunter (Beast Mastery, pre-raid)" to File(presetPath + "hunter_bm_preraid.yml"),
-            "Hunter (Survival, pre-raid)" to File(presetPath + "hunter_surv_preraid.yml"),
-            "Shaman (Elemental, pre-raid)" to File(presetPath + "shaman_ele_preraid.yml"),
-            "Shaman (Enhance, sub-Ele, pre-raid)" to File(presetPath + "shaman_enh_subele_preraid.yml"),
-            "Shaman (Enhance, sub-Resto, pre-raid)" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
-            "Warlock (Affliction, Ruin, pre-raid)" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
-            "Warlock (Affliction, UA, pre-raid)" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
-            "Warlock (Destruction, Fire, pre-raid)" to File(presetPath + "warlock_destro_fire_preraid.yml"),
-            "Warlock (Destruction, Shadow, pre-raid)" to File(presetPath + "warlock_destro_shadow_preraid.yml"),
-            "Warrior (Arms, pre-raid)" to File(presetPath + "warrior_arms_preraid.yml"),
-            "Warrior (Fury, pre-raid)" to File(presetPath + "warrior_fury_preraid.yml"),
+    val epOutputPath = "./ui/src/ep/data/ep_all.json"
+    val epPresetsByCategory = listOf(
+        "pre_raid" to mapOf(
+            "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
+            "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
+            "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
+            // Enhance weights aren't appreciably different between the two sub-specs
+            "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
+            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
+            "warlock_affliction_ua" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
+            "warlock_destruction_fire" to File(presetPath + "warlock_destro_fire_preraid.yml"),
+            "warlock_destruction_shadow" to File(presetPath + "warlock_destro_shadow_preraid.yml"),
+            "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
+            "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
         )
+
+//            "Hunter (Beast Mastery, pre-raid)" to File(presetPath + "hunter_bm_preraid.yml"),
+//            "Hunter (Survival, pre-raid)" to File(presetPath + "hunter_surv_preraid.yml"),
+//            "Shaman (Elemental, pre-raid)" to File(presetPath + "shaman_ele_preraid.yml"),
+//            // Enhance weights aren't appreciably different between the two sub-specs
+//            "Shaman (Enhance, sub-Resto, pre-raid)" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
+//            "Warlock (Affliction, Ruin, pre-raid)" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
+//            "Warlock (Affliction, UA, pre-raid)" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
+//            "Warlock (Destruction, Fire, pre-raid)" to File(presetPath + "warlock_destro_fire_preraid.yml"),
+//            "Warlock (Destruction, Shadow, pre-raid)" to File(presetPath + "warlock_destro_shadow_preraid.yml"),
+//            "Warrior (Arms, pre-raid)" to File(presetPath + "warrior_arms_preraid.yml"),
+//            "Warrior (Fury, pre-raid)" to File(presetPath + "warrior_fury_preraid.yml"),
     )
+
+    fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {
+        val iterations = runBlocking { Sim(config, opts, epDelta?.second) {}.sim() }
+        return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.mean ?: 0.0 })
+    }
+
+    fun formatEp(dps: Double): Double {
+        return dps.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
+    }
+
+    fun computeEpDeltas(config: Config, opts: SimOptions): Map<String, Double> {
+        // Run a baseline
+        println("EP baseline")
+        val baselineDpsMean = singleEpSim(config, opts)
+
+        val results: MutableMap<String, Double> = mutableMapOf()
+
+        // Run the base equivalence delta
+        val spec = config.character.klass.spec
+        println("EP base equivalence (${spec.epBaseStat.first})")
+        val baseEquivalenceDpsMean = singleEpSim(config, opts, spec.epBaseStat)
+
+        // Amount of DPS gained by one of our base equivalence unit
+        val epBaseDpsMean = ((baseEquivalenceDpsMean.second - baselineDpsMean.second) / spec.epBaseStat.third)
+        val epBaseDpsFactor = 1 / epBaseDpsMean
+
+        // Store our base
+        results[spec.epBaseStat.first] = formatEp(epBaseDpsMean * epBaseDpsFactor)
+
+        // The rest of the stats
+        spec.epStatDeltas.forEach { delta ->
+            println("EP for ${delta.first}")
+            val dps = singleEpSim(config, opts, delta)
+            // If the sim comes out with a negative value, it's just worth zero and that run got unluckier than baseline
+            val dpsDelta = max((dps.second - baselineDpsMean.second) / delta.third * epBaseDpsFactor, 0.0)
+            results[delta.first] = formatEp(dpsDelta)
+        }
+
+        results.forEach {
+            println("EP of one ${it.key}: ${it.value}")
+        }
+
+        return results
+    }
 
     override fun run() {
         setupLogging(debug)
@@ -74,53 +137,39 @@ class TBCSim : CliktCommand() {
 
         if (calcEP) {
             // EP calculation sim
-            val epCategories = epPresetsByCategory.map { categoryEntry ->
-                val categoryResults = categoryEntry.value.map { categorySpecEntry ->
+            // Output looks like this:
+            // {
+            //   "pre_raid": {
+            //     "hunter_bm": {
+            //       "rangedAttackPower": 1,
+            //        ...
+            //     },
+            //     ...
+            //   }
+            // }
+            val epCategories = epPresetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
+                acc[categoryEntry.first] = categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
                     // Make config
                     val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-
                     println("Starting EP run for ${categorySpecEntry.key}")
-
-                    // Run a baseline
-                    println("EP baseline")
-                    val baselineIterations = runBlocking { Sim(config, opts) {}.sim() }
-
-                    // Run the base equivalence delta
-                    val spec = config.character.klass.spec
-                    println("EP base equivalence (${spec.epBaseStat.first})")
-                    val baseEquivalenceIterations = runBlocking { Sim(config, opts, spec.epBaseStat.second) {}.sim() }
-
-                    // Run the deltas for each stat we care about
-                    val epDeltaIterations = spec.epStatDeltas.map {
-                        println("EP for ${it.first}")
-                        it to runBlocking { Sim(config, opts, it.second) {}.sim() }
-                    }.toMap()
-
-                    // Compute the deepz
-                    val baselineDps = SimStats.dps(baselineIterations)
-                    val baseEquivalenceDps = SimStats.dps(baseEquivalenceIterations)
-
-                    val baselineMean = baselineDps.entries.sumByDouble { it.value?.mean ?: 0.0 }
-                    val baseEquivalenceMean = baseEquivalenceDps.entries.sumByDouble { it.value?.mean ?: 0.0 }
-
-                    // Amount of DPS gained by one of our base equivalence unit
-                    val epBaseDpsMean = (baseEquivalenceMean - baselineMean) / spec.epBaseStat.third
-                    val epBaseDpsFactor = 1 / epBaseDpsMean
-
-                    // The rest of the stats
-                    val epDeltaDpsMeans = epDeltaIterations.map { delta ->
-                        val dps = SimStats.dps(delta.value)
-                        val mean = dps.entries.sumByDouble { it.value?.mean ?: 0.0 }
-                        val dpsDelta = (mean - baselineMean) / delta.key.third * epBaseDpsFactor
-                        delta.key to dpsDelta
-                    }.toMap()
-
-                    println("EP of one ${spec.epBaseStat.first}: ${epBaseDpsMean * epBaseDpsFactor}")
-                    epDeltaDpsMeans.forEach {
-                        println("EP of one ${it.key.first}: ${it.value}")
-                    }
+                    acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                    acc2
                 }
+                acc
             }
+
+            // Output
+            File(epOutputPath).writeText(Json.encodeToString(epCategories))
+        } else if(calcEPSingle) {
+            if (configFile == null) {
+                println("Please specify a sim config file path as the first positional argument")
+                println(this.getFormattedHelp())
+                return
+            }
+
+            val config = ConfigMaker.fromYml(configFile!!.readText())
+            println("Starting EP run for ${configFile!!.name}")
+            computeEpDeltas(config, opts)
         } else {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")

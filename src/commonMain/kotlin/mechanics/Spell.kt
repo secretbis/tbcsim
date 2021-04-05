@@ -6,6 +6,7 @@ import mu.KotlinLogging
 import sim.Event
 import sim.SimParticipant
 import kotlin.js.JsExport
+import kotlin.random.Random
 
 @JsExport
 object Spell {
@@ -101,7 +102,7 @@ object Spell {
     fun baseDamageRoll(sp: SimParticipant, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         val min = minDmg.coerceAtLeast(0.0)
         val max = maxDmg.coerceAtLeast(1.0)
-        val dmg = sp.sim.random("Spell Damage").nextDouble(min, max)
+        val dmg = Random.nextDouble(min, max)
         return baseDamageRollSingle(sp, dmg, spellDamageCoeff, school, bonusSpellDamage, bonusSpellDamageMultiplier)
     }
 
@@ -139,7 +140,7 @@ object Spell {
         val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
         val critChance = spellCritChance(sp) + bonusCritChance
 
-        val attackRoll = sp.sim.random("Spell Attack").nextDouble()
+        val attackRoll = Random.nextDouble()
         var finalResult = when {
             attackRoll < missChance -> Pair(0.0, Event.Result.RESIST)
             else -> Pair(finalDamageRoll, Event.Result.HIT)
@@ -147,7 +148,7 @@ object Spell {
 
         // Two-roll all spells
         if(finalResult.second == Event.Result.HIT) {
-            val hitRoll2 = sp.sim.random("Spell Second Roll").nextDouble()
+            val hitRoll2 = Random.nextDouble()
             finalResult = when {
                 hitRoll2 < critChance -> Pair(
                     finalResult.first * critMultiplier,
@@ -161,7 +162,7 @@ object Spell {
         val resistAvgReduction = spellResistReduction(sp, school)
         if(isBinary) {
             // Make a third roll for full resist or not
-            val fullResistRoll = sp.sim.random("Spell Resist").nextDouble()
+            val fullResistRoll = Random.nextDouble()
             val fullResistMod = if(fullResistRoll < resistAvgReduction) { 0.0 } else { 1.0 }
             finalResult = Pair(finalResult.first * fullResistMod, finalResult.second)
         } else {

@@ -3,6 +3,8 @@ spec: Beast Mastery
 description: Beast Mastery Hunter (pre-raid)
 race: Draenei
 level: 70
+epCategory: pre_raid
+epType: hunter_bm
 
 talents:
   # BM talents

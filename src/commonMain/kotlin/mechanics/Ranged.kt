@@ -6,6 +6,7 @@ import data.model.Item
 import sim.Event
 import sim.SimParticipant
 import kotlin.js.JsExport
+import kotlin.random.Random
 
 @JsExport
 object Ranged {
@@ -65,7 +66,7 @@ object Ranged {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (sp.sim.random("Ranged Damage ${rngSuffix(sp, item)}").nextDouble(min, max) + apToDamage(sp, totalAp, item) + flatModifier) * allMultiplier
+        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item) + flatModifier) * allMultiplier
     }
 
     // Performs an attack roll given an initial unmitigated damage value
@@ -86,7 +87,7 @@ object Ranged {
             blockChance
         }
 
-        val attackRoll = sp.sim.random("Ranged Attack ${rngSuffix(sp, item)}").nextDouble()
+        val attackRoll = Random.nextDouble()
         var finalResult = when {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
@@ -97,7 +98,7 @@ object Ranged {
         if(!isWhiteDmg) {
             // Two-roll yellow hit
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
-                val hitRoll2 = sp.sim.random("Ranged Second Roll ${rngSuffix(sp, item)}").nextDouble()
+                val hitRoll2 = Random.nextDouble()
                 finalResult = when {
                     hitRoll2 < (rangedCritChance(sp, item) + bonusCritChance) -> Pair(
                         finalResult.first * critMultiplier,

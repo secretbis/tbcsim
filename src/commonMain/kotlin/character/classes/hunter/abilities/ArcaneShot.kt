@@ -10,6 +10,7 @@ import mechanics.General
 import mechanics.Ranged
 import sim.Event
 import sim.SimParticipant
+import kotlin.random.Random
 
 class ArcaneShot : Ability() {
     companion object {
@@ -40,7 +41,7 @@ class ArcaneShot : Ability() {
         val item = sp.character.gear.rangedTotemLibram
         // TODO: Spellpower doesn't affect this anymore right?
         // Ammo does not affect this shot
-        val damage = sp.sim.random(name).nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.15)
+        val damage = Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.15)
         val result = Ranged.attackRoll(sp, damage, item)
 
         val event = Event(
