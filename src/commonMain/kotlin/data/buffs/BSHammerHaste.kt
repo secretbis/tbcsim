@@ -51,7 +51,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                     )
 
                     override val type: Type = Type.PPM
-                    override val ppm: Double = 1.0
+                    override val ppm: Double = 0.8
                     override val requiresItem: Boolean = true
 
                     override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
