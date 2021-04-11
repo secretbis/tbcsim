@@ -38,7 +38,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     private fun makeProcs(sp: SimParticipant): List<Proc> {
         if(_procs == null) {
             _procs = listOf(
-                object : Proc() {
+                object : ItemProc(listOf(sourceItem)) {
                     override val triggers: List<Trigger> = listOf(
                         Trigger.MELEE_AUTO_HIT,
                         Trigger.MELEE_AUTO_CRIT,
