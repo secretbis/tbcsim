@@ -3,7 +3,7 @@ spec: Affliction
 description: Affliction Ruin Warlock (pre-raid)
 race: Human
 level: 70
-epCategory: pre_raid
+epCategory: preraid
 epSpec: warlock_affliction_ruin
 
 talents:

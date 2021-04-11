@@ -49,4 +49,6 @@ abstract class Spec {
     // Format is Name, Stat modifier, EP divisor
     abstract val epBaseStat: SpecEpDelta
     abstract val epStatDeltas: List<SpecEpDelta>
+    open val benefitsFromMeleeWeaponDps: Boolean = false
+    open val benefitsFromRangedWeaponDps: Boolean = false
 }

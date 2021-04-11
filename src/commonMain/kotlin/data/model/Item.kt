@@ -59,7 +59,7 @@ abstract class Item {
     open val avgDmg: Double
         get() { return (minDmg + maxDmg) / 2.0 }
     open val dps: Double
-        get() { return avgDmg / speed }
+        get() { return avgDmg / (speed / 1000.0) }
     val uniqueName: String
         get() { return name + equippedSlot }
 }

@@ -12,10 +12,11 @@ export default function({ state, character, dispatch }) {
     return null;
   }
 
+  const charClass = character.class.toLowerCase();
   const armorSlotIC = {
     itemClasses: [itemClasses.armor],
     itemSubclasses: {
-      [itemClasses.armor]: classArmorSubclasses[character.class.toLowerCase()]
+      [itemClasses.armor]: classArmorSubclasses[charClass]
     }
   };
 
@@ -26,13 +27,13 @@ export default function({ state, character, dispatch }) {
     }
   };
 
-  const mainHandSlotIC = classMainHandItemClasses[character.class.toLowerCase()];
-  const offHandSlotIC = classOffHandItemClasses[character.class.toLowerCase()];
-  const rangedSlotIC = classRangedItemClasses[character.class.toLowerCase()];
+  const mainHandSlotIC = classMainHandItemClasses[charClass];
+  const offHandSlotIC = classOffHandItemClasses[charClass];
+  const rangedSlotIC = classRangedItemClasses[charClass];
 
-  const mainHandInvSlots = classMainHandInvSlots[character.class.toLowerCase()];
-  const offHandInvSlots = classOffHandInvSlots[character.class.toLowerCase()];
-  const rangedInvSlots = classRangedInvSlots[character.class.toLowerCase()];
+  const mainHandInvSlots = classMainHandInvSlots[charClass];
+  const offHandInvSlots = classOffHandInvSlots[charClass];
+  const rangedInvSlots = classRangedInvSlots[charClass];
 
   // Build ammo item classes according to the ranged type, if any
   const rangedItem = character.gear.rangedTotemLibram

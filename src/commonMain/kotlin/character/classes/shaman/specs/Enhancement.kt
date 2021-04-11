@@ -8,4 +8,5 @@ class Enhancement : Spec() {
     override val epBaseStat: SpecEpDelta = attackPowerBase
     // Enhance can theoretically make use of basically every stat
     override val epStatDeltas: List<SpecEpDelta> = dualWieldMeleeDeltas + casterHybridDeltas + spellPowerBase
+    override val benefitsFromMeleeWeaponDps = true
 }

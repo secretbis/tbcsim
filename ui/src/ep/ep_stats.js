@@ -1,4 +1,7 @@
+import _ from 'lodash';
 import epData from './data/ep_all.json';
+
+import { isMeleeWeapon, isRangedWeapon } from '../data/constants';
 
 export const allStats = [
   'attackPower',
@@ -35,13 +38,14 @@ export const statDisplayNames = {
 }
 
 export function itemEp(item, category, spec) {
-  const data = (epData[category] || {})[spec]
+  const data = _.get(epData, `categories[${category}][${spec}]`, {})
+  const options = _.get(epData, `options[${spec}]`, {})
 
   if(!data || !item || !item.stats) {
     return 0
   }
 
-  const itemEp = allStats.reduce((acc, current) => {
+  let itemEp = allStats.reduce((acc, current) => {
     const currentStatEp = data[current]
     if(currentStatEp) {
       const baseStatsEp = (item.stats['_' + current] || 0) * currentStatEp
@@ -59,6 +63,11 @@ export function itemEp(item, category, spec) {
 
     return acc
   }, 0)
+
+  // Add in weapon DPS, if applicable
+  if((options.benefitsFromMeleeWeaponDps && isMeleeWeapon(item)) || (options.benefitsFromRangedWeaponDps && isRangedWeapon(item))) {
+    itemEp += (14 * item.dps) || 0
+  }
 
   return parseFloat((itemEp || 0).toFixed(2))
 }

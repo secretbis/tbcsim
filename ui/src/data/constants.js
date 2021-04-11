@@ -340,6 +340,22 @@ export const classRangedItemClasses = {
   }
 };
 
+export function isMeleeWeapon(item) {
+  if(!item) return false
+
+  const validSubclasses = [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.polearm, wsc.staff, wsc.sword_1h, wsc.sword_2h]
+  return item.itemClass._ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass._itemClassOrdinal)
+}
+
+export function isRangedWeapon(item) {
+  if(!item) return false
+
+  const validSubclasses = [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
+  return item.itemClass._ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass._itemClassOrdinal)
+}
+
 export const classes = {
   druid: {
     name: 'Druid',

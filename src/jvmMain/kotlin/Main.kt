@@ -1,4 +1,12 @@
 import character.SpecEpDelta
+import character.classes.hunter.specs.BeastMastery
+import character.classes.hunter.specs.Survival
+import character.classes.shaman.specs.Elemental
+import character.classes.shaman.specs.Enhancement
+import character.classes.warlock.specs.Affliction
+import character.classes.warlock.specs.Destruction
+import character.classes.warrior.specs.Arms
+import character.classes.warrior.specs.Fury
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
@@ -41,10 +49,23 @@ class TBCSim : CliktCommand() {
     val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = SimDefaults.showHiddenBuffs)
     val debug: Boolean by option("--debug").flag(default = false)
 
+    val specs = mapOf(
+        "hunter_bm" to BeastMastery(),
+        "hunter_surv" to Survival(),
+        "shaman_ele" to Elemental(),
+        // Enhance weights aren't appreciably different between the two sub-specs
+        "shaman_enh" to Enhancement(),
+        "warlock_affliction_ruin" to Affliction(),
+        "warlock_affliction_ua" to Affliction(),
+        "warlock_destruction_fire" to Destruction(),
+        "warlock_destruction_shadow" to Destruction(),
+        "warrior_arms" to Arms(),
+        "warrior_fury" to Fury(),
+    )
     val presetPath = "./ui/src/presets/samples/"
     val epOutputPath = "./ui/src/ep/data/ep_all.json"
     val epPresetsByCategory = listOf(
-        "pre_raid" to mapOf(
+        "preraid" to mapOf(
             "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
             "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
@@ -127,12 +148,14 @@ class TBCSim : CliktCommand() {
             // EP calculation sim
             // Output looks like this:
             // {
-            //   "pre_raid": {
-            //     "hunter_bm": {
-            //       "rangedAttackPower": 1,
-            //        ...
-            //     },
-            //     ...
+            //   "categories": {
+            //     "preraid": {
+            //       "hunter_bm": {
+            //         "rangedAttackPower": 1,
+            //          ...
+            //       },
+            //       ...
+            //     }
             //   }
             // }
             val epCategories = epPresetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
@@ -146,8 +169,21 @@ class TBCSim : CliktCommand() {
                 acc
             }
 
+            // Generate options/metadata
+            val epOptions = specs.entries.fold(mutableMapOf<String, Any?>()) { acc, entry ->
+                acc[entry.key] = mapOf(
+                    "benefitsFromMeleeWeaponDps" to entry.value.benefitsFromMeleeWeaponDps,
+                    "benefitsFromRangedWeaponDps" to entry.value.benefitsFromRangedWeaponDps
+                )
+                acc
+            }
+
             // Output
-            File(epOutputPath).writeText(Json.encodeToString(epCategories))
+            val fullOutput = mapOf(
+                "categories" to epCategories,
+                "options" to epOptions
+            )
+            File(epOutputPath).writeText(Json.encodeToString(fullOutput))
         } else if(calcEPSingle) {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")

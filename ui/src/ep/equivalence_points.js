@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite';
 
 import { statDisplayNames } from './ep_stats';
@@ -26,9 +27,10 @@ function HowItWorks() {
         </ul>
         <h5>Notes and Caveats</h5>
         <ul>
-          <li>Hit EPs are only calculated for dual-wielding classes and (for low gear levels) casters.  For others, it's not interesting - it's the best stat until cap, basically every time</li>
-          <li>Armor pen scaling is not linear, and the EP values listed are the values relative to the preset's current level of armor pen</li>
+          <li>Hit EPs are only calculated for dual-wielding classes and (for low gear levels) casters.  For others, it's not interesting - it's the best stat until cap, so get capped.</li>
+          <li>Armor pen scaling is not linear, and the EP values listed are the values relative to the preset's current level of armor pen.  More armor pen will increase the value of each point of armor pen</li>
           <li>Item procs and set bonuses are not currently included in total item EP when selecting items in the UI.  Procs and sets are fully modeled in the sim, however</li>
+          <li>1 weapon DPS is worth 14 attack power, by definition.  Item EPs include this for melee specs, and also include ranged weapon DPS for hunters.  Weapon speed is relevant, of course, but the difference there is too dynamic and needs to be simmed</li>
         </ul>
       </Row>
     </Container>
@@ -52,7 +54,7 @@ function WrapperEpPanel({ name, collapsible=true, children }) {
 }
 
 function SpecEpPanel({ name, specKey, category }) {
-  const specData = ((epData[category] || {})[specKey]) || {}
+  const specData = _.get(epData, `categories[${category}][${specKey}]`, {})
   return (
     <Panel header={name} bordered style={{ display: 'inline-block', width: 400, marginLeft: 20 }}>
       <Col>
@@ -77,22 +79,22 @@ export default function() {
         <HowItWorks />
         <WrapperEpPanel name='Pre-raid'>
           <WrapperEpPanel name='Hunter'>
-            <SpecEpPanel name='Beast Mastery' specKey='hunter_bm' category='pre_raid' />
-            <SpecEpPanel name='Survival' specKey='hunter_surv' category='pre_raid' />
+            <SpecEpPanel name='Beast Mastery' specKey='hunter_bm' category='preraid' />
+            <SpecEpPanel name='Survival' specKey='hunter_surv' category='preraid' />
           </WrapperEpPanel>
           <WrapperEpPanel name='Shaman'>
-            <SpecEpPanel name='Enhancement' specKey='shaman_enh' category='pre_raid' />
-            <SpecEpPanel name='Elemental' specKey='shaman_ele' category='pre_raid' />
+            <SpecEpPanel name='Enhancement' specKey='shaman_enh' category='preraid' />
+            <SpecEpPanel name='Elemental' specKey='shaman_ele' category='preraid' />
           </WrapperEpPanel>
           <WrapperEpPanel name='Warlock'>
-            <SpecEpPanel name='Affliction (Ruin)' specKey='warlock_affliction_ruin' category='pre_raid' />
-            <SpecEpPanel name='Affliction (UA)' specKey='warlock_affliction_ua' category='pre_raid' />
-            <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destro_fire' category='pre_raid' />
-            <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destro_shadow' category='pre_raid' />
+            <SpecEpPanel name='Affliction (Ruin)' specKey='warlock_affliction_ruin' category='preraid' />
+            <SpecEpPanel name='Affliction (UA)' specKey='warlock_affliction_ua' category='preraid' />
+            <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destro_fire' category='preraid' />
+            <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destro_shadow' category='preraid' />
           </WrapperEpPanel>
           <WrapperEpPanel name='Warrior'>
-            <SpecEpPanel name='Arms' specKey='warrior_arms' category='pre_raid' />
-            <SpecEpPanel name='Fury' specKey='warrior_fury' category='pre_raid' />
+            <SpecEpPanel name='Arms' specKey='warrior_arms' category='preraid' />
+            <SpecEpPanel name='Fury' specKey='warrior_fury' category='preraid' />
           </WrapperEpPanel>
         </WrapperEpPanel>
       </Grid>
