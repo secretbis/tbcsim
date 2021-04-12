@@ -85,7 +85,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             it.value.buffs(this).forEach { buff -> addBuff(buff) }
         }
         character.gear.buffs().forEach { addBuff(it) }
-        rotation.combat(this).forEach { it.buffs(this).forEach { buff -> addBuff(buff) } }
+        rotation.combatAbilities.forEach { it.buffs(this).forEach { buff -> addBuff(buff) } }
 
         // Compute initial stats
         recomputeStats()

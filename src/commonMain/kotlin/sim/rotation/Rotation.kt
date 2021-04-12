@@ -15,10 +15,16 @@ class Rotation(
         RAID_OR_PARTY
     }
 
+    val raidOrParty: List<Rule> = rules.filter { it.phase == Phase.RAID_OR_PARTY }
+    val precombat: List<Rule> = rules.filter { it.phase == Phase.PRECOMBAT }
+    val combat: List<Rule> = rules.filter { it.phase == Phase.COMBAT }
+
+    val raidOrPartyAbilities: List<Ability> = raidOrParty.map { it.ability }
+    val precombatAbilities: List<Ability> = precombat.map { it.ability }
+    val combatAbilities: List<Ability> = combat.map { it.ability }
+
     fun castAllPrecombat(sp: SimParticipant) {
-        return rules.filter {
-            it.phase == Phase.PRECOMBAT
-        }.forEach {
+        return precombat.forEach {
             if(it.ability.available(sp)) {
                 it.ability.cast(sp)
             } else {
@@ -28,30 +34,16 @@ class Rotation(
     }
 
     fun castAllRaidBuffs(sp: SimParticipant) {
-        return rules.filter {
-            it.phase == Phase.RAID_OR_PARTY
-        }.forEach {
+        return raidOrParty.forEach {
             it.ability.cast(sp)
         }
     }
 
-    fun raidOrParty(sp: SimParticipant): List<Ability> {
-        return rules.filter { it.phase == Phase.RAID_OR_PARTY }.map { it.ability }
-    }
-
-    fun precombat(sp: SimParticipant): List<Ability> {
-        return rules.filter { it.phase == Phase.PRECOMBAT }.map { it.ability }
-    }
-
-    fun combat(sp: SimParticipant): List<Ability> {
-        return rules.filter { it.phase == Phase.COMBAT }.map { it.ability }
-    }
-
     fun next(sp: SimParticipant, onGcd: Boolean = false): Rule? {
-        return rules.filter { it.phase == Phase.COMBAT }.firstOrNull {
+        return combat.firstOrNull {
+            (!onGcd || (onGcd && it.ability.castableOnGcd)) &&
             it.ability.available(sp) &&
             it.satisfied(sp) &&
-            (!onGcd || (onGcd && it.ability.castableOnGcd)) &&
             it.ability.resourceCost(sp) <= sp.resource.currentAmount
         }
     }
