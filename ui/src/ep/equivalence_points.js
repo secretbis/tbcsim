@@ -10,7 +10,7 @@ function bannerMsg() {
   return (
     <div>
       <p>These values have not been cross-referenced with other work, and may be anywhere from exactly right to wildly incorrect.</p>
-      <p>These values are very likey to change as TBC behavior is tested further, and sim issues are resolved.</p>
+      <p>These values are very likely to change as TBC behavior is tested further, and sim issues are resolved.</p>
       <p>Please consume these values with an appropriate amount of sodium!</p>
     </div>
   );
