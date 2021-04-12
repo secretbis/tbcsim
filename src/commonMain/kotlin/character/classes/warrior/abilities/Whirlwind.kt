@@ -21,7 +21,7 @@ class Whirlwind : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int {
         val impWWRanks = sp.character.klass.talents[ImprovedWhirlwind.name]?.currentRank ?: 0
         val discount = 1000 * impWWRanks
-        return 6000 - discount
+        return 10000 - discount
     }
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
