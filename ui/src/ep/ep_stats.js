@@ -6,6 +6,7 @@ import { isMeleeWeapon, isRangedWeapon } from '../data/constants';
 export const allStats = [
   'attackPower',
   'rangedAttackPower',
+  'spellDamage',
   'agility',
   'intellect',
   'strength',
@@ -14,15 +15,19 @@ export const allStats = [
   'physicalHitRating',
   'armorPen',
   'expertiseRating',
-  'spellDamage',
   'spellCritRating',
   'spellHasteRating',
-  'spellHitRating'
+  'spellHitRating',
+  'redSocket',
+  'yellowSocket',
+  'blueSocket',
+  'metaSocket'
 ]
 
 export const statDisplayNames = {
   attackPower: 'Attack Power',
   rangedAttackPower: 'Ranged Attack Power',
+  spellDamage: 'Spell Damage',
   agility: 'Agility',
   intellect: 'Intellect',
   strength: 'Strength',
@@ -31,10 +36,12 @@ export const statDisplayNames = {
   physicalHitRating: 'Hit Rating',
   armorPen: 'Armor Pen',
   expertiseRating: 'Expertise Rating',
-  spellDamage: 'Spell Damage',
   spellCritRating: 'Spell Crit Rating',
   spellHasteRating: 'Spell Haste Rating',
-  spellHitRating: 'Spell Hit Rating'
+  spellHitRating: 'Spell Hit Rating',
+  redSocket: 'Red Socket',
+  yellowSocket: 'Yellow Socket',
+  blueSocket: 'Blue Socket',
 }
 
 export function itemEp(item, category, spec) {
@@ -47,6 +54,40 @@ export function itemEp(item, category, spec) {
 
   let itemEp = allStats.reduce((acc, current) => {
     const currentStatEp = data[current]
+
+    // Socket EPs are already computed
+    if(current === 'redSocket') {
+      const numSockets = (item.sockets || []).filter(it => {
+        return it && it.color && it.color._name_2 === 'RED'
+      }).length
+
+      return acc + (currentStatEp * numSockets)
+    }
+
+    if(current === 'yellowSocket') {
+      const numSockets = (item.sockets || []).filter(it => {
+        return it && it.color && it.color._name_2 === 'YELLOW'
+      }).length
+
+      return acc + (currentStatEp * numSockets)
+    }
+
+    if(current === 'blueSocket') {
+      const numSockets = (item.sockets || []).filter(it => {
+        return it && it.color && it.color._name_2 === 'BLUE'
+      }).length
+
+      return acc + (currentStatEp * numSockets)
+    }
+
+    if(current === 'metaSocket') {
+      const numSockets = (item.sockets || []).filter(it => {
+        return it && it.color && it.color._name_2 === 'META'
+      }).length
+
+      return acc + (currentStatEp * numSockets)
+    }
+
     if(currentStatEp) {
       const baseStatsEp = (item.stats['_' + current] || 0) * currentStatEp
       const buffsEp = item.buffs && item.buffs._array_3 && item.buffs._array_3.reduce((acc2, buff) => {
@@ -54,7 +95,6 @@ export function itemEp(item, category, spec) {
         const permanentStatsEp = permanentStats ? (permanentStats['_' + current] || 0) * currentStatEp : 0
 
         // TODO: Have a static EP estimate for other item procs, and etc.
-        // TODO: Socket EP
 
         return acc2 + permanentStatsEp
       }, 0) || 0

@@ -51,4 +51,11 @@ abstract class Spec {
     abstract val epStatDeltas: List<SpecEpDelta>
     open val benefitsFromMeleeWeaponDps: Boolean = false
     open val benefitsFromRangedWeaponDps: Boolean = false
+
+    // Socket
+    abstract fun redSocketEp(deltas: Map<String, Double>): Double
+    abstract fun yellowSocketEp(deltas: Map<String, Double>): Double
+    abstract fun blueSocketEp(deltas: Map<String, Double>): Double
+    // TODO: This should be simmed, but it gets a little weird depending on the gem selected
+    open fun metaSocketEp(deltas: Map<String, Double>): Double = 100.0
 }

@@ -11,7 +11,8 @@ import * as tbcsim from 'tbcsim';
 const { Column, HeaderCell, Cell } = Table;
 
 export default function({ character, type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [modalFullyShown, setModalFullyShown] = useState('');
 
   TooltipComponent = TooltipComponent || ItemTooltip
 
@@ -76,19 +77,28 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
   }
 
   function onRowClick(item, e) {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
 
-    setVisible(false)
-    onSelect(item)
+    setModalFullyShown(false);
+    setVisible(false);
+    setFilter('');
+
+    onSelect(item);
   }
 
   function onHide(e) {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
 
+    setModalFullyShown(false);
     setVisible(false);
-    setFilter(null);
+    setFilter('');
+  }
+
+  function onEntered() {
+    // For some reason, the table doesn't render right if the modal isn't fully rendered
+    setModalFullyShown(true);
   }
 
   if(!inventorySlots || !visible) {
@@ -139,12 +149,10 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
     )
   }
 
-  return (
-    <Modal show={visible} onHide={onHide}>
-      <Modal.Header>
-        <Modal.Title>Select an Item</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+  function renderModalBody() {
+    const allRowData = getItemsForSlot()
+    return (
+      <>
         <InputGroup inside style={{ margin: '15px 0 15px 0' }}>
           <Input onChange={value => setFilter(value)} />
           <InputGroup.Button>
@@ -152,7 +160,7 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
           </InputGroup.Button>
         </InputGroup>
 
-        <Table height={400} rowHeight={60} data={getItemsForSlot()}>
+        <Table height={400} rowHeight={60} data={allRowData} affixHorizontalScrollbar={-1000}>
           <Column width={55}>
             <HeaderCell></HeaderCell>
             <IconCell dataKey="icon" />
@@ -172,6 +180,19 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
             <ItemLevelCell dataKey="itemLevel" />
           </Column>
         </Table>
+      </>
+    )
+  }
+
+  if(!visible) return null
+
+  return (
+    <Modal show={true} height={600} onEntered={onEntered} onHide={onHide}>
+      <Modal.Header>
+        <Modal.Title>Select an Item</Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ maxHeight: 500 }}>
+        {modalFullyShown ? renderModalBody() : null}
       </Modal.Body>
     </Modal>
   );

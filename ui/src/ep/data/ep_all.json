@@ -6,21 +6,33 @@
         "agility": 1.97,
         "physicalCritRating": 1.56,
         "physicalHasteRating": 1.03,
-        "armorPen": 0.26
+        "armorPen": 0.26,
+        "redSocket": 19.7,
+        "yellowSocket": 15.6,
+        "blueSocket": 9.85,
+        "metaSocket": 100.0
       },
       "hunter_surv": {
         "rangedAttackPower": 1,
         "agility": 2.72,
         "physicalCritRating": 1.47,
         "physicalHasteRating": 2.05,
-        "armorPen": 0.3
+        "armorPen": 0.3,
+        "redSocket": 19.7,
+        "yellowSocket": 15.6,
+        "blueSocket": 9.85,
+        "metaSocket": 100.0
       },
       "shaman_ele": {
         "spellDamage": 1,
         "intellect": 0.39,
         "spellHasteRating": 0.9,
         "spellCritRating": 0.7,
-        "spellHitRating": 0.0
+        "spellHitRating": 0.0,
+        "redSocket": 12.0,
+        "yellowSocket": 13.0,
+        "blueSocket": 6.0,
+        "metaSocket": 100.0
       },
       "shaman_enh": {
         "attackPower": 1,
@@ -33,35 +45,55 @@
         "physicalHitRating": 2.23,
         "spellCritRating": 0.2,
         "spellHitRating": 0.5,
-        "spellDamage": 0.4
+        "spellDamage": 0.4,
+        "redSocket": 23.5,
+        "yellowSocket": 19.55,
+        "blueSocket": 11.75,
+        "metaSocket": 100.0
       },
       "warlock_affliction_ruin": {
         "spellDamage": 1,
         "intellect": 0.26,
         "spellHasteRating": 0.83,
         "spellCritRating": 0.58,
-        "spellHitRating": 1.25
+        "spellHitRating": 1.25,
+        "redSocket": 12.0,
+        "yellowSocket": 12.25,
+        "blueSocket": 6.0,
+        "metaSocket": 100.0
       },
       "warlock_affliction_ua": {
         "spellDamage": 1,
         "intellect": 0.27,
         "spellHasteRating": 0.98,
         "spellCritRating": 0.34,
-        "spellHitRating": 1.2
+        "spellHitRating": 1.2,
+        "redSocket": 12.0,
+        "yellowSocket": 12.0,
+        "blueSocket": 6.0,
+        "metaSocket": 100.0
       },
       "warlock_destruction_fire": {
         "spellDamage": 1,
         "intellect": 0.31,
         "spellHasteRating": 1.14,
         "spellCritRating": 0.61,
-        "spellHitRating": 0.84
+        "spellHitRating": 0.84,
+        "redSocket": 12.0,
+        "yellowSocket": 10.2,
+        "blueSocket": 6.0,
+        "metaSocket": 100.0
       },
       "warlock_destruction_shadow": {
         "spellDamage": 1,
         "intellect": 0.3,
         "spellHasteRating": 1.1,
         "spellCritRating": 0.84,
-        "spellHitRating": 1.51
+        "spellHitRating": 1.51,
+        "redSocket": 12.0,
+        "yellowSocket": 10.2,
+        "blueSocket": 6.0,
+        "metaSocket": 100.0
       },
       "warrior_arms": {
         "attackPower": 1,
@@ -70,7 +102,11 @@
         "physicalCritRating": 2.28,
         "physicalHasteRating": 2.2,
         "expertiseRating": 4.29,
-        "armorPen": 0.3
+        "armorPen": 0.3,
+        "redSocket": 23.1,
+        "yellowSocket": 22.95,
+        "blueSocket": 11.55,
+        "metaSocket": 100.0
       },
       "warrior_fury": {
         "attackPower": 1,
@@ -80,7 +116,11 @@
         "physicalHasteRating": 1.35,
         "expertiseRating": 3.36,
         "armorPen": 0.28,
-        "physicalHitRating": 1.7
+        "physicalHitRating": 1.7,
+        "redSocket": 21.4,
+        "yellowSocket": 12.4,
+        "blueSocket": 10.7,
+        "metaSocket": 100.0
       }
     }
   },

@@ -119,6 +119,12 @@ class TBCSim : CliktCommand() {
             results[delta.first] = formatEp(dpsDelta)
         }
 
+        // Use those deltas to compute socket deltas
+        results["redSocket"] = formatEp(spec.redSocketEp(results))
+        results["yellowSocket"] = formatEp(spec.yellowSocketEp(results))
+        results["blueSocket"] = formatEp(spec.blueSocketEp(results))
+        results["metaSocket"] = formatEp(spec.metaSocketEp(results))
+
         results.forEach {
             println("EP of one ${it.key}: ${it.value}")
         }
