@@ -6,7 +6,6 @@ import data.Constants
 import data.model.Item
 import data.model.TempEnchant
 import sim.Event
-import sim.SimIteration
 import sim.SimParticipant
 
 class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
@@ -45,7 +44,12 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
         )
 
         override val type: Type = Type.PERCENT
-        override fun percentChance(sp: SimParticipant): Double = 20.0
+        override fun percentChance(sp: SimParticipant): Double {
+            val mhWf = sp.character.gear.mainHand.temporaryEnhancement?.name?.startsWith("Windfury Weapon") == true
+            val ohWf = sp.character.gear.offHand.temporaryEnhancement?.name?.startsWith("Windfury Weapon") == true
+
+            return if(mhWf && ohWf) 36.0 else 20.0
+        }
 
         override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
             // Check shared WF ICD state

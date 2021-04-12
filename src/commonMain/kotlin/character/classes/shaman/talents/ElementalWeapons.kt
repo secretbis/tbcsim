@@ -21,7 +21,6 @@ class ElementalWeapons(currentRank: Int) : Talent(currentRank) {
         }
     }
 
-    // TODO: Apply this to Flametongue Weapon
     fun flametongueDamageMultiplier(): Double {
         return 1.0 + 0.05 * currentRank
     }
