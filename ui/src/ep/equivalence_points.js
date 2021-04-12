@@ -22,13 +22,13 @@ function HowItWorks() {
       <Row>
         <h5>How are these values calculated?</h5>
         <ul>
-          <li>Each specialization is simulated for 10,000 iterations at 10ms resolution, with full raid buffs</li>
+          <li>Each specialization is simulated for 15,000 iterations at 10ms resolution, with full raid buffs</li>
           <li>The gear, buff and rotation setups for each of these specializations are the presets selectable on the simulator page</li>
           <li>EP values are per-tier.  Each preset has a tier-specific BIS or BIS-adjacent gear set (if it isn't BIS/BIS-adjacent, please file a bug!)</li>
         </ul>
         <h5>Notes and Caveats</h5>
         <ul>
-          <li>Hit EPs are only calculated for dual-wielding classes and (for low gear levels) casters.  For others, it's not interesting - it's the best stat until cap</li>
+          <li>Hit EPs are only calculated for dual-wielding classes and some casters.  For others, it's the best stat until cap</li>
           <li>Armor pen scaling is not linear, and the EP values listed are the values relative to the preset's current level of armor pen.  More armor pen will increase the value of each point of armor pen</li>
           <li>Item procs and set bonuses are not currently included in total item EP when selecting items in the UI (Procs and sets are fully modeled in the sim)</li>
           <li>1 weapon DPS is worth 14 attack power, by definition.  Item EPs include this for melee specs, and also include ranged weapon DPS for hunters.  Weapon speed is relevant, of course, but the difference there is too dynamic and needs to be simmed</li>
