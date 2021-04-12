@@ -12,8 +12,8 @@ import shamanEnhSubRestoPreraidAnniOh from './samples/shaman_enh_subresto_prerai
 import warlockAfflictionUAPreraid from './samples/warlock_affliction_ua_preraid.yml'
 import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
 import warlockAfflictionDSPreraid from './samples/warlock_affliction_ds_preraid.yml'
-import warlockDestroFirePreraid from './samples/warlock_destro_fire_preraid.yml'
-import warlockDestroShadowPreraid from './samples/warlock_destro_shadow_preraid.yml'
+import warlockDestructionFirePreraid from './samples/warlock_destruction_fire_preraid.yml'
+import warlockDestructionShadowPreraid from './samples/warlock_destruction_shadow_preraid.yml'
 import warriorArmsPreraid from './samples/warrior_arms_preraid.yml'
 import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
 
@@ -32,8 +32,8 @@ const presets = {
     shamanEnhSubRestoPreraidAnniOh,
   ],
   warlock: [
-    warlockDestroFirePreraid,
-    warlockDestroShadowPreraid,
+    warlockDestructionFirePreraid,
+    warlockDestructionShadowPreraid,
     warlockAfflictionUAPreraid,
     warlockAfflictionRuinPreraid,
     warlockAfflictionDSPreraid

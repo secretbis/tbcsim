@@ -89,8 +89,8 @@ export default function() {
           <WrapperEpPanel name='Warlock'>
             <SpecEpPanel name='Affliction (Ruin)' specKey='warlock_affliction_ruin' category='preraid' />
             <SpecEpPanel name='Affliction (UA)' specKey='warlock_affliction_ua' category='preraid' />
-            <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destro_fire' category='preraid' />
-            <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destro_shadow' category='preraid' />
+            <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destruction_fire' category='preraid' />
+            <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destruction_shadow' category='preraid' />
           </WrapperEpPanel>
           <WrapperEpPanel name='Warrior'>
             <SpecEpPanel name='Arms' specKey='warrior_arms' category='preraid' />

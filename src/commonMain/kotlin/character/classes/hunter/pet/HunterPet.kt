@@ -11,7 +11,7 @@ import data.model.Socket
 import data.model.SocketBonus
 
 // petDamageMultiplier is the +10% or -10% or whatever modifier the specific pet type gets
-abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultiplier: Double) : Class(mapOf(), HunterPetSpec()) {
+abstract class HunterPet(petDamageMultiplier: Double) : Class(mapOf(), HunterPetSpec()) {
     companion object {
         fun makePetAttackItem(name: String, minDmg: Double, maxDmg: Double): Item {
             return object : Item() {
@@ -34,6 +34,16 @@ abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultipl
             }
         }
     }
+
+    // TODO: These are base cat stats from a random pserver, needs updating from live
+    override var baseStats: Stats = Stats(
+        strength = 162,
+        agility = 128,
+        stamina = 373,
+        intellect = 60,
+        spirit = 99
+    )
+
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }
@@ -49,6 +59,7 @@ abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultipl
     override var buffs: List<Buff> = listOf(
         PetAnimalHandler(),
         PetBaseDamage(petDamageMultiplier),
+        PetCobraReflexes(),
         PetFerociousInspiration(),
         PetFerocity(),
         PetFocusRegen(),
@@ -60,8 +71,8 @@ abstract class HunterPet(override var baseStats: Stats=Stats(), petDamageMultipl
     override var resourceType: Resource.Type = Resource.Type.FOCUS
     override var canDualWield: Boolean = false
     override var attackPowerFromAgility: Int = 0
-    override var attackPowerFromStrength: Int = 0
-    override val critPctPerAgility: Double = 0.0
+    override var attackPowerFromStrength: Int = 2
+    override val critPctPerAgility: Double = 1.0 / 25.5
     override val dodgePctPerAgility: Double = 1.0 / 25.0
     override val baseDodgePct: Double = 0.0
     override var rangedAttackPowerFromAgility: Int = 0

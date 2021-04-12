@@ -113,8 +113,8 @@ object SimStatsPrinter {
 
     // The player's pet is considered "their" DPS, so merge them if present
     fun printDps(subjectDps: DpsBreakdown, subjectPetDps: DpsBreakdown?) {
-        val petMeanPct = (subjectDps.mean + (subjectPetDps?.mean ?: 0.0)) / subjectDps.mean * 100.0
-        val petMedianPct = (subjectDps.median + (subjectPetDps?.median ?: 0.0)) / subjectDps.median * 100.0
+        val petMeanPct =  (subjectPetDps?.mean ?: 0.0) / (subjectDps.mean + (subjectPetDps?.mean ?: 0.0)) * 100.0
+        val petMedianPct = (subjectPetDps?.mean ?: 0.0) / (subjectDps.median + (subjectPetDps?.median ?: 0.0)) * 100.0
 
         println(
             "AVERAGE DPS: ${df.format(subjectDps.mean)}" +

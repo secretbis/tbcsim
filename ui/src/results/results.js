@@ -22,26 +22,39 @@ export default function({ character, results }) {
     const subjectDps = dps.get_35('subject')
     const subjectPetDps = dps.get_35('subjectPet')
 
-    function petSuffix(type) {
-      if(subjectPetDps) {
-        const subjectValue = subjectDps[type]
-        const petValue = subjectPetDps[type]
-        const totalValue = subjectValue + petValue
-        const petPct = petValue / totalValue * 100.0
+    function withPet(type) {
+      const subjectValue = subjectDps[type]
+      const petValue = subjectPetDps[type]
+      const totalValue = subjectValue + petValue
 
-        return <span> | PET: {toFixed()(petValue)}{type !== 'sd' ? <> ({toFixedPct()(petPct)}) | TOTAL: {toFixed()(totalValue)}</> : null }</span>
+      return {
+        total: subjectValue + petValue,
+        petPct: petValue / totalValue * 100.0,
+        youPct: subjectValue / totalValue * 100.0
       }
-
-      return null
     }
 
-    return (
-      <Row>
-        <h4><b>AVERAGE DPS: {toFixed()(subjectDps.mean)}{petSuffix('mean')}</b></h4>
-        <p>MEDIAN DPS: {toFixed()(subjectDps.median)}{petSuffix('median')}</p>
-        <p>STDDEV DPS: {toFixed()(subjectDps.sd)}{petSuffix('sd')}</p>
-      </Row>
-    );
+    if(subjectPetDps) {
+      const mean = withPet('mean')
+      const median = withPet('median')
+      const sd = withPet('sd')
+
+      return (
+        <Row>
+          <p style={{ fontSize: 22 }}><b>AVERAGE DPS: {toFixed()(mean.total)}</b> | YOU: {toFixed()(subjectDps.mean)} ({toFixedPct()(mean.youPct)}) | PET: {toFixed()(subjectPetDps.mean)} ({toFixedPct()(mean.petPct)})</p>
+          <p>MEDIAN DPS: {toFixed()(median.total)} | YOU: {toFixed()(subjectDps.median)} ({toFixedPct()(median.youPct)}) | PET: {toFixed()(subjectPetDps.median)} ({toFixedPct()(median.petPct)})</p>
+          <p>STDDEV DPS: {toFixed()(subjectDps.sd)}</p>
+        </Row>
+      );
+    } else {
+      return (
+        <Row>
+          <h4><b>AVERAGE DPS: {toFixed()(subjectDps.mean)}</b></h4>
+          <p>MEDIAN DPS: {toFixed()(subjectDps.median)}</p>
+          <p>STDDEV DPS: {toFixed()(subjectDps.sd)}</p>
+        </Row>
+      );
+    }
   }
 
   function renderTab() {

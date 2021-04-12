@@ -32,9 +32,9 @@ export const statDisplayNames = {
   armorPen: 'Armor Pen',
   expertiseRating: 'Expertise Rating',
   spellDamage: 'Spell Damage',
-  spellCritRating: 'Crit Rating',
-  spellHasteRating: 'Haste Rating',
-  spellHitRating: 'Hit Rating'
+  spellCritRating: 'Spell Crit Rating',
+  spellHasteRating: 'Spell Haste Rating',
+  spellHitRating: 'Spell Hit Rating'
 }
 
 export function itemEp(item, category, spec) {

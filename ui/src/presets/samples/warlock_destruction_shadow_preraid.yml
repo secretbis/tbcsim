@@ -4,7 +4,7 @@ description: Destruction Shadow Warlock (pre-raid)
 race: Human
 level: 70
 epCategory: preraid
-epSpec: warlock_destro_shadow
+epSpec: warlock_destruction_shadow
 
 talents:
   # Destro talents

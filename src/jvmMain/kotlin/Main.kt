@@ -14,6 +14,8 @@ import com.github.ajalt.clikt.parameters.options.*
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
 import data.codegen.CodeGen
+import ep.EpOutput
+import ep.EpOutputOptions
 import kotlin.math.max
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
@@ -73,8 +75,8 @@ class TBCSim : CliktCommand() {
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
             "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
             "warlock_affliction_ua" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
-            "warlock_destruction_fire" to File(presetPath + "warlock_destro_fire_preraid.yml"),
-            "warlock_destruction_shadow" to File(presetPath + "warlock_destro_shadow_preraid.yml"),
+            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_preraid.yml"),
+            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_preraid.yml"),
             "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
             "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
         )
@@ -170,18 +172,18 @@ class TBCSim : CliktCommand() {
             }
 
             // Generate options/metadata
-            val epOptions = specs.entries.fold(mutableMapOf<String, Any?>()) { acc, entry ->
-                acc[entry.key] = mapOf(
-                    "benefitsFromMeleeWeaponDps" to entry.value.benefitsFromMeleeWeaponDps,
-                    "benefitsFromRangedWeaponDps" to entry.value.benefitsFromRangedWeaponDps
+            val epOptions = specs.entries.fold(mutableMapOf<String, EpOutputOptions>()) { acc, entry ->
+                acc[entry.key] = EpOutputOptions(
+                    entry.value.benefitsFromMeleeWeaponDps,
+                    entry.value.benefitsFromRangedWeaponDps
                 )
                 acc
             }
 
             // Output
-            val fullOutput = mapOf(
-                "categories" to epCategories,
-                "options" to epOptions
+            val fullOutput = EpOutput(
+                epCategories,
+                epOptions
             )
             File(epOutputPath).writeText(Json.encodeToString(fullOutput))
         } else if(calcEPSingle) {
