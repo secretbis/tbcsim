@@ -64,6 +64,7 @@ abstract class HunterPet(petDamageMultiplier: Double) : Class(mapOf(), HunterPet
         PetFerocity(),
         PetFocusRegen(),
         PetFrenzy(),
+        PetHappiness(),
         PetSerpentsSwiftness(),
         PetUnleashedFury()
     )
