@@ -28,6 +28,7 @@ class KillCommand : Ability() {
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun cooldownMs(sp: SimParticipant): Int = 5000
+    override val castableOnGcd: Boolean = true
 
     val baseCost = 75.0
     override fun resourceCost(sp: SimParticipant): Double {

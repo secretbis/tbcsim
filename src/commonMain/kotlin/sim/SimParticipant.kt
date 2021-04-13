@@ -122,62 +122,69 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun tick() {
-        // Find and cast next rotation ability
+        // Find next rotation ability, if we are not currently casting something
+        if(!isCasting() && castingRule == null) {
+            val rotationRule = rotation.next(this, onGcd())
+            val rotationAbility = rotationRule?.ability
+            if (rotationAbility != null) {
+                // Set next cast times, and add latency if configured
+                castingRule = rotationRule
+                gcdEndMs = sim.elapsedTimeMs + rotationAbility.gcdMs(this) + sim.opts.latencyMs
+                castEndMs = sim.elapsedTimeMs + rotationAbility.castTimeMs(this) + sim.opts.latencyMs
+            }
+        }
+
+        // Double check isCasting here, in case we just picked an instant cast spell
+        // An instant spell is never "casting", as it has a cast time of zero
+        // So, make sure to cast it on the same tick to avoid adding artificial latency of <step_size> ms
         if(!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
             if(castingRule != null) {
-                castingRule!!.ability.beforeCast(this)
-                castingRule!!.ability.cast(this)
-                castingRule!!.ability.afterCast(this)
+                // Double check resource, since it could have changed since the start of the attack
+                if(castingRule!!.ability.resourceCost(this) <= resource.currentAmount) {
+                    castingRule!!.ability.beforeCast(this)
+                    castingRule!!.ability.cast(this)
+                    castingRule!!.ability.afterCast(this)
 
-                // Log cast event
-                val castEvent = Event(
-                    eventType = Event.Type.SPELL_CAST,
-                    abilityName = castingRule!!.ability.name,
-                    target = sim.target
-                )
-                logEvent(castEvent)
+                    // Log cast event
+                    val castEvent = Event(
+                        eventType = Event.Type.SPELL_CAST,
+                        abilityName = castingRule!!.ability.name,
+                        target = sim.target
+                    )
+                    logEvent(castEvent)
 
-                // Fire cast procs
-                fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
+                    // Fire cast procs
+                    fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
+                } else {
+                    logger.info("Canceled queued cast of ${castingRule!!.ability.name} - low resource")
+                }
 
                 // Reset casting state
                 castingRule = null
-            } else {
-                val rotationRule = rotation.next(this, onGcd())
-                val rotationAbility = rotationRule?.ability
-                if (rotationAbility != null) {
-                    // Set next cast times, and add latency if configured
-                    castingRule = rotationRule
-                    gcdEndMs = sim.elapsedTimeMs + rotationAbility.gcdMs(this) + sim.opts.latencyMs
-                    castEndMs = sim.elapsedTimeMs + rotationAbility.castTimeMs(this) + sim.opts.latencyMs
-                }
             }
 
-            // Double check casting, since we could have just started
             // Do auto attacks
-            if (!isCasting()) {
-                if(rangedAutoAttack?.available(this) == true) {
-                    rangedAutoAttack?.cast(this)
-                } else if (mhAutoAttack?.available(this) == true) {
-                    // Check to see if we have a replacement ability
-                    // Be sure to double check the cost, since our resource may have changed since we requested the replacement
-                    if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
-                        // If we can cast it, do so
-                        if(mainHandAutoReplacement?.available(this) == true) {
-                            mainHandAutoReplacement!!.cast(this)
-                        } else mhAutoAttack?.cast(this)
-
-                        // Reset our requested ability, regardless if we were able to use it or not
-                        mainHandAutoReplacement = null
-
-                        // Mark our MH auto attack as having occurred
-                        val mhState = mhAutoAttack?.state(this) as AutoAttackBase.AutoAttackState?
-                        mhState?.lastAttackTimeMs = sim.elapsedTimeMs
+            if(rangedAutoAttack?.available(this) == true) {
+                rangedAutoAttack?.cast(this)
+            } else if (mhAutoAttack?.available(this) == true) {
+                // Check to see if we have a replacement ability
+                // Be sure to double check the cost, since our resource may have changed since we requested the replacement
+                if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
+                    // If we can cast it, do so
+                    if(mainHandAutoReplacement?.available(this) == true) {
+                        mainHandAutoReplacement!!.cast(this)
                     } else mhAutoAttack?.cast(this)
-                } else if (ohAutoAttack?.available(this) == true) {
-                    ohAutoAttack?.cast(this)
-                }
+
+                    // Reset our requested ability, regardless if we were able to use it or not
+                    mainHandAutoReplacement = null
+
+                    // Mark our MH auto attack as having occurred
+                    val mhState = mhAutoAttack?.state(this) as AutoAttackBase.AutoAttackState?
+                    mhState?.lastAttackTimeMs = sim.elapsedTimeMs
+                } else mhAutoAttack?.cast(this)
+            } else if (ohAutoAttack?.available(this) == true) {
+                ohAutoAttack?.cast(this)
             }
         }
     }

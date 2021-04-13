@@ -20,7 +20,6 @@ class SteadyShot : Ability() {
     override val id: Int = 34120
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
-//    override fun castTimeMs(sp: SimParticipant): Int = (1000 / sp.physicalHasteMultiplier()).toInt()
     override fun castTimeMs(sp: SimParticipant): Int = 1000
     val baseCost = 110.0
     override fun resourceCost(sp: SimParticipant): Double {
@@ -44,7 +43,7 @@ class SteadyShot : Ability() {
 
         // This shot does not benefit from ammo DPS
         // TODO: This was *technically* a bug, so we should keep an eye on testing
-        val damage = Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2) * t6BonusMultiplier
+        val damage = (Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2)) * t6BonusMultiplier
         val result = Ranged.attackRoll(sp, damage, item, bonusCritChance = t5BonusCrit)
 
         val event = Event(
