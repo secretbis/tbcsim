@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Dropdown, Row } from 'rsuite';
 
+import { isAxe, isMace, isSword, isBow, isGun } from '../data/constants';
 import * as tbcsim from 'tbcsim';
 
 function BaseStats({ simParticipant: sp }) {
@@ -38,7 +39,8 @@ function MeleeStats({ simParticipant: sp }) {
   let speedMh = '-';
   let speedOh = '-';
 
-  const hasMainhand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand && sp.character.gear.mainHand.itemClass;
+  const mainHand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand
+  const hasMainhand = mainHand && sp.character.gear.mainHand.itemClass;
   if(hasMainhand) {
     const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.mainHand);
     damageMhLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
@@ -46,13 +48,19 @@ function MeleeStats({ simParticipant: sp }) {
     speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
   }
 
-  const hasOffhand = sp && sp.character && sp.character.gear && sp.character.gear.offHand && sp.character.gear.offHand.itemClass;
+  const offHand = sp && sp.character && sp.character.gear && sp.character.gear.offHand
+  const hasOffhand = offHand && sp.character.gear.offHand.itemClass;
   if(hasOffhand) {
     const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.offHand);
     damageOhLow = ((sp.character.gear.offHand.minDmg + dmgFromAp) / 2).toFixed(1);
     damageOhHigh = ((sp.character.gear.offHand.maxDmg + dmgFromAp) / 2).toFixed(1);
     speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
   }
+
+  // Special stats
+  const swordExpertisePct = sp.stats._swordExpertiseRating / 15.77
+  const maceExpertisePct = sp.stats._maceExpertiseRating / 15.77
+  const axeExpertisePct = sp.stats._axeExpertiseRating / 15.77
 
   return (
     <Col>
@@ -80,6 +88,18 @@ function MeleeStats({ simParticipant: sp }) {
         <Col xs={12}>Expertise %:</Col>
         <Col xs={12}>{sp.expertisePct().toFixed(2)}%</Col>
       </Row>
+      {(isAxe(mainHand) || isAxe(offHand)) && axeExpertisePct > 0 ? <Row>
+        <Col xs={12}>Expertise % (Axe):</Col>
+        <Col xs={12}>{(sp.expertisePct() + axeExpertisePct).toFixed(2)}%</Col>
+      </Row> : null}
+      {(isMace(mainHand) || isMace(offHand)) && maceExpertisePct > 0? <Row>
+        <Col xs={12}>Expertise % (Mace):</Col>
+        <Col xs={12}>{(sp.expertisePct() + maceExpertisePct).toFixed(2)}%</Col>
+      </Row> : null}
+      {(isSword(mainHand) || isSword(offHand)) && swordExpertisePct > 0 ? <Row>
+        <Col xs={12}>Expertise % (Sword):</Col>
+        <Col xs={12}>{(sp.expertisePct() + swordExpertisePct).toFixed(2)}%</Col>
+      </Row> : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
         <Col xs={12}>{sp.armorPen_0()}</Col>
@@ -93,13 +113,18 @@ function RangedStats({ simParticipant: sp }) {
   let damageRangedHigh = 0.0
   let speedRanged = 1.0
 
-  const hasRanged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram && sp.character.gear.rangedTotemLibram.itemClass;
+  const ranged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram
+  const hasRanged = ranged && sp.character.gear.rangedTotemLibram.itemClass;
   if(hasRanged) {
     const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.rangedTotemLibram);
     damageRangedLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageRangedHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
     speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
   }
+
+  // Special stats
+  const bowCritPct =  sp.stats._bowCritRating / 22.08
+  const gunCritPct =  sp.stats._gunCritRating / 22.08
 
   return (
     <Col>
@@ -119,6 +144,14 @@ function RangedStats({ simParticipant: sp }) {
         <Col xs={12}>Crit %:</Col>
         <Col xs={12}>{sp.physicalCritPct().toFixed(2)}%</Col>
       </Row>
+      {isBow(ranged) && bowCritPct > 0 ? <Row>
+        <Col xs={12}>Crit % (Bow):</Col>
+        <Col xs={12}>{(sp.physicalCritPct() + bowCritPct).toFixed(2)}%</Col>
+      </Row> : null}
+      {isGun(ranged) && gunCritPct > 0 ? <Row>
+        <Col xs={12}>Crit % (Gun):</Col>
+        <Col xs={12}>{(sp.physicalCritPct() + gunCritPct).toFixed(2)}%</Col>
+      </Row> : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
         <Col xs={12}>{sp.armorPen_0()}</Col>
@@ -280,7 +313,7 @@ export default function({ state }) {
   const PanelRight = panels[dropdownRight].component
 
   return (
-    <Row style={{ maxHeight: 400, maxWidth: 500, margin: 'auto' }}>
+    <Row style={{ maxHeight: 400, maxWidth: 600, margin: 'auto' }}>
       <Col xs={12}>
         <Dropdown trigger={['click', 'click']} title={titleLeft} activeKey={dropdownLeft}>
           {renderOptions(setDropdownLeft)}
