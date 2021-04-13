@@ -181,7 +181,7 @@ function SpellStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Haste %:</Col>
-        <Col>{(sp.spellHasteMultiplier_0() - 1).toFixed(2)}%</Col>
+        <Col>{((sp.spellHasteMultiplier_0() - 1) * 100).toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>MP5:</Col>
