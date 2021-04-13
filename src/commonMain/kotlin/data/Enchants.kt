@@ -33,6 +33,7 @@ object Enchants {
         { item: Item -> GreaterInscriptionOfTheBlade(item) },
         { item: Item -> GreaterInscriptionOfTheOrb(item) },
         { item: Item -> GreaterInscriptionOfVengeance(item) },
+        { item: Item -> KhoriumScope(item) },
         { item: Item -> MightOfTheScourge(item) },
         { item: Item -> Mongoose(item) },
         { item: Item -> MysticSpellthread(item) },
