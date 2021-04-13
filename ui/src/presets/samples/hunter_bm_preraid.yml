@@ -133,6 +133,8 @@ rotation:
           seconds: 1.01
           swingType: Auto Shot
           oncePerSwing: false
+    # Fill excess swing time with Multi, without disrupting Steady too much
+    - name: Multi Shot
 
 pet:
   type: Ravager
