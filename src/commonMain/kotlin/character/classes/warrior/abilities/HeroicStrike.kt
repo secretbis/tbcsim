@@ -12,7 +12,8 @@ class HeroicStrike : Ability() {
         const val name = "Heroic Strike"
     }
 
-    override val id: Int = 30324
+    override val id: Int = 29707
+    //Rank 11 Heroic Strike is unavailable to players despite being on the DB
     override val name: String = Companion.name
 
     override fun gcdMs(sp: SimParticipant): Int = 0
@@ -35,9 +36,9 @@ class HeroicStrike : Ability() {
         }
     }
 
-    val bonusDamage = 208.0
+    val bonusDamage = 176.0
     val nextHitAbility = object : Ability() {
-        override val id: Int = 30324
+        override val id: Int = 29707
         override val name: String = Companion.name
 
         override fun gcdMs(sp: SimParticipant): Int = 0
