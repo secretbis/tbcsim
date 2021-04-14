@@ -28,13 +28,23 @@ class ImprovedFaerieFire : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                armor = -610,
-                physicalHitRating = 3.0 * Rating.physicalHitPerPct
+                armor = -610
             )
         }
     }
 
+    val buff = object : Buff() {
+        override val name: String = "Improved Faerie Fire"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return Stats(physicalHitRating = 3.0 * Rating.physicalHitPerPct)
+        }
+    }
+
     override fun cast(sp: SimParticipant) {
+        sp.addBuff(buff)
         sp.sim.target.addDebuff(debuff(sp))
     }
 }
