@@ -41,7 +41,7 @@ talents:
 gear:
   mainHand:
     name: Sonic Spear
-    enchant: Major Agility
+    enchant: Major Agility (2H)
     tempEnchant: Bugged? Hunter Adamantite Stone
   rangedTotemLibram:
     name: Marksman's Bow

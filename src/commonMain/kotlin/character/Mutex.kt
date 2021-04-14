@@ -15,5 +15,6 @@ enum class Mutex {
 
     // Stacking buffs/debuffs
     DEBUFF_MAJOR_ARMOR,
-    BUFF_EXPOSE_WEAKNESS
+    BUFF_EXPOSE_WEAKNESS,
+    BUFF_FEROCIOUS_INSPIRATION
 }

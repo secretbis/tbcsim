@@ -169,11 +169,16 @@ object Melee {
         return attackPower / 14 * (speed / 1000.0)
     }
 
-    fun baseDamageRoll(sp: SimParticipant, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false, isWhiteDmg: Boolean = false): Double {
+    fun baseDamageRoll(sp: SimParticipant, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
         val totalAp = sp.attackPower() + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
+        return Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized)
+    }
+
+    // Performs an attack roll given an initial unmitigated damage value
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
         val offHandMultiplier = if(isOffhand(sp, item)) {
             Stats.offHandPenalty + if(isWhiteDmg) {
                 sp.stats.whiteDamageAddlOffHandPenaltyModifier
@@ -196,11 +201,8 @@ object Melee {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized) + flatModifier) * offHandMultiplier * allMultiplier
-    }
+        val damageRoll = (_damageRoll + flatModifier) * offHandMultiplier * allMultiplier
 
-    // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
             sp.stats.whiteDamageAddlCritMultiplier

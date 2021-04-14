@@ -55,6 +55,11 @@ object Ranged {
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
+        return Random.nextDouble(min, max) + apToDamage(sp, totalAp, item)
+    }
+
+    // Performs an attack roll given an initial unmitigated damage value
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
         val flatModifier = if(isWhiteDmg) {
             sp.stats.whiteDamageFlatModifier
         } else {
@@ -67,11 +72,8 @@ object Ranged {
             sp.stats.yellowDamageMultiplier
         } * sp.stats.physicalDamageMultiplier
 
-        return (Random.nextDouble(min, max) + apToDamage(sp, totalAp, item) + flatModifier) * allMultiplier
-    }
+        val damageRoll = (_damageRoll + flatModifier) * allMultiplier
 
-    // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, item: Item, isWhiteDmg: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
         val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
             sp.stats.whiteDamageAddlCritMultiplier

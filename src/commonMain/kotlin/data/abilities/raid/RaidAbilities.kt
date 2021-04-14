@@ -10,7 +10,9 @@ object RaidAbilities {
     val raidBuffs: Array<Ability> = arrayOf(
         BlessingOfKings(),
         DrumsOfBattle(),
-        FerociousInspiration(),
+        FerociousInspiration(1),
+        FerociousInspiration(2),
+        FerociousInspiration(3),
         GraceOfAirTotem(),
         ImprovedBattleShout(),
         ImprovedBlessingOfMight(),

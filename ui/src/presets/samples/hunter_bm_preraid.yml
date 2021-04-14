@@ -47,7 +47,7 @@ talents:
 gear:
   mainHand:
     name: Sonic Spear
-    enchant: Major Agility
+    enchant: Major Agility (2H)
     tempEnchant: Bugged? Hunter Adamantite Stone
   rangedTotemLibram:
     name: Marksman's Bow
@@ -152,8 +152,7 @@ raidBuffs:
   - Improved Seal of the Crusader
 
   - Leader of the Pack
-  - Improved Battle Shout
-  - Improved Sanctity Aura
+  - Ferocious Inspiration (x2)
   - Grace of Air Totem
   - Strength of Earth Totem
   - Unleashed Rage
