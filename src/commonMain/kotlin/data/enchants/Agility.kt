@@ -8,14 +8,14 @@ import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
-class TwoHandMajorAgility(item: Item) : Enchant(item) {
+class Agility(item: Item) : Enchant(item) {
     override val id: Int = 46461
-    override val inventorySlot: Int = Constants.InventorySlot.TWO_HAND.ordinal
-    override val name: String = "Major Agility (2H)"
+    override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
+    override val name: String = "Agility (1H)"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
-            agility = 35
+            agility = 15
         )
     }
 }
