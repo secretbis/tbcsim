@@ -47,7 +47,8 @@ public class Bloodmoon : Item() {
   public override var speed: Double = 3700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 56.0
+      meleeCritRating = 56.0,
+      rangedCritRating = 56.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

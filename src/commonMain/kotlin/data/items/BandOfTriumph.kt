@@ -48,7 +48,8 @@ public class BandOfTriumph : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 16.0
       )
 

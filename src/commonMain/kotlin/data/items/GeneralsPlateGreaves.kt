@@ -49,7 +49,8 @@ public class GeneralsPlateGreaves : Item() {
       strength = 27,
       stamina = 40,
       armor = 1063,
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       resilienceRating = 27.0
       )
 

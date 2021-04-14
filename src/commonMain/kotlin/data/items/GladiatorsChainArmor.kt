@@ -56,7 +56,8 @@ public class GladiatorsChainArmor : Item() {
       stamina = 51,
       intellect = 17,
       armor = 866,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       resilienceRating = 20.0
       )
 

@@ -52,7 +52,8 @@ public class VindicatorsPlateBelt : Item() {
       strength = 35,
       stamina = 49,
       armor = 1027,
-      physicalCritRating = 35.0,
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0,
       resilienceRating = 30.0
       )
 

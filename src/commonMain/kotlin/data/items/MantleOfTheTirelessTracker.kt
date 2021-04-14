@@ -61,7 +61,8 @@ public class MantleOfTheTirelessTracker : Item() {
       agility = 22,
       intellect = 23,
       armor = 675,
-      physicalCritRating = 33.0
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

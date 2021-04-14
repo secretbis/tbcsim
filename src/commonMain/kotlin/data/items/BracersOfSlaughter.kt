@@ -51,7 +51,8 @@ public class BracersOfSlaughter : Item() {
       strength = 19,
       stamina = 15,
       armor = 509,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

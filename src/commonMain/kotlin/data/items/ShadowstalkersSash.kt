@@ -50,7 +50,8 @@ public class ShadowstalkersSash : Item() {
       agility = 17,
       stamina = 24,
       armor = 144,
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       resilienceRating = 16.0
       )
 

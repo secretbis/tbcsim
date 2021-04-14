@@ -55,7 +55,8 @@ public class OpportunistsLeatherHelm : Item() {
       agility = 20,
       stamina = 36,
       armor = 237,
-      physicalCritRating = 10.0,
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0,
       resilienceRating = 24.0
       )
 

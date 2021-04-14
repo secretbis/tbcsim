@@ -46,7 +46,8 @@ public class XavianStiletto : Item() {
   public override var speed: Double = 1400.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 12.0
       )
 

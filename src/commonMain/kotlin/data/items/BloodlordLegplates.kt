@@ -51,7 +51,8 @@ public class BloodlordLegplates : Item() {
       strength = 38,
       stamina = 27,
       armor = 1019,
-      physicalCritRating = 11.0
+      meleeCritRating = 11.0,
+      rangedCritRating = 11.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

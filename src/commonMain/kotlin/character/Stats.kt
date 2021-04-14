@@ -23,7 +23,9 @@ data class Stats(
     var rangedAttackPower: Int = 0,
     var feralAttackPower: Int = 0,
 
-    var physicalCritRating: Double = 0.0,
+    var meleeCritRating: Double = 0.0,
+    var rangedCritRating: Double = 0.0,
+
     var physicalHitRating: Double = 0.0,
     var physicalHasteRating: Double = 0.0,
     var expertiseRating: Double = 0.0,
@@ -131,7 +133,9 @@ data class Stats(
         rangedAttackPower += stats.rangedAttackPower
         feralAttackPower += stats.feralAttackPower
 
-        physicalCritRating += stats.physicalCritRating
+        meleeCritRating += stats.meleeCritRating
+        rangedCritRating += stats.rangedCritRating
+
         physicalHitRating += stats.physicalHitRating
         physicalHasteRating += stats.physicalHasteRating
         expertiseRating += stats.expertiseRating
@@ -219,8 +223,14 @@ data class Stats(
         when (statType) {
             StatType.AGILITY ->
                 agility += value
-            StatType.CRIT_RATING,StatType.CRIT_MELEE_RATING, StatType.CRIT_RANGED_RATING ->
-                physicalCritRating += value
+            StatType.CRIT_RATING -> {
+                meleeCritRating += value
+                rangedCritRating += value
+            }
+            StatType.CRIT_MELEE_RATING ->
+                meleeCritRating += value
+            StatType.CRIT_RANGED_RATING ->
+                rangedCritRating
             StatType.CRIT_SPELL_RATING ->
                 spellCritRating += value
             StatType.EXPERTISE_RATING ->

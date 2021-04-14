@@ -48,7 +48,8 @@ public class AmaniVenomAxe : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      physicalCritRating = 15.0
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

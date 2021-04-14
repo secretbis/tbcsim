@@ -55,7 +55,8 @@ public class SlayersChestguard : Item() {
       agility = 45,
       stamina = 55,
       armor = 459,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       physicalHitRating = 15.0
       )
 

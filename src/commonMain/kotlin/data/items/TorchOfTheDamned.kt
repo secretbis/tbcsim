@@ -48,7 +48,8 @@ public class TorchOfTheDamned : Item() {
   public override var stats: Stats = Stats(
       strength = 51,
       stamina = 45,
-      physicalCritRating = 38.0,
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0,
       physicalHasteRating = 50.0
       )
 

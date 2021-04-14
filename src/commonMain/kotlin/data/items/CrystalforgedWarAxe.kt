@@ -48,7 +48,8 @@ public class CrystalforgedWarAxe : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 50,
-      physicalCritRating = 27.0
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

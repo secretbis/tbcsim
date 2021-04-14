@@ -56,7 +56,8 @@ public class MercilessGladiatorsChainHelm : Item() {
       stamina = 55,
       intellect = 19,
       armor = 775,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       resilienceRating = 22.0
       )
 

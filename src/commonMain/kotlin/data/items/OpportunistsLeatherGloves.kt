@@ -53,7 +53,8 @@ public class OpportunistsLeatherGloves : Item() {
       agility = 21,
       stamina = 31,
       armor = 183,
-      physicalCritRating = 11.0,
+      meleeCritRating = 11.0,
+      rangedCritRating = 11.0,
       resilienceRating = 16.0
       )
 

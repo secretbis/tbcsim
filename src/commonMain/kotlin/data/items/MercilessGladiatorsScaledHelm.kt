@@ -55,7 +55,8 @@ public class MercilessGladiatorsScaledHelm : Item() {
       stamina = 54,
       intellect = 26,
       armor = 1385,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       resilienceRating = 19.0
       )
 

@@ -50,7 +50,8 @@ public class PendantOfTriumph : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      physicalCritRating = 10.0,
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0,
       resilienceRating = 17.0
       )
 

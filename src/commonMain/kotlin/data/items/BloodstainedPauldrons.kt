@@ -60,7 +60,8 @@ public class BloodstainedPauldrons : Item() {
       strength = 47,
       stamina = 34,
       armor = 1324,
-      physicalCritRating = 32.0,
+      meleeCritRating = 32.0,
+      rangedCritRating = 32.0,
       physicalHitRating = 23.0
       )
 

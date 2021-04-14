@@ -55,7 +55,8 @@ public class SeersLinkedSpaulders : Item() {
       stamina = 33,
       intellect = 8,
       armor = 489,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 13.0
       )
 

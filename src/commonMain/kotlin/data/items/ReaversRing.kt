@@ -48,7 +48,8 @@ public class ReaversRing : Item() {
   public override var stats: Stats = Stats(
       strength = 23,
       stamina = 18,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

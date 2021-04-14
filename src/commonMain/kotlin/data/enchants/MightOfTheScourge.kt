@@ -17,7 +17,8 @@ class MightOfTheScourge(item: Item) : Enchant(item) {
         return Stats(
             attackPower = 26,
             rangedAttackPower = 26,
-            physicalCritRating = 14.0
+            meleeCritRating = 14.0,
+            rangedCritRating = 14.0
         )
     }
 }

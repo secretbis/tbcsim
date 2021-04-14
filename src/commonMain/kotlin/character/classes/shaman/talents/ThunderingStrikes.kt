@@ -21,7 +21,10 @@ class ThunderingStrikes(ranks: Int) : Talent(ranks) {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             val critPct = 1.0 * currentRank
-            return Stats(physicalCritRating = critPct * Rating.critPerPct)
+            return Stats(
+                meleeCritRating = critPct * Rating.critPerPct,
+                rangedCritRating = critPct * Rating.critPerPct
+            )
         }
     }
 

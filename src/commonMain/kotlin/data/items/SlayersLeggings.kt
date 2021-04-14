@@ -51,7 +51,8 @@ public class SlayersLeggings : Item() {
       strength = 25,
       stamina = 39,
       armor = 891,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 25.0
       )
 

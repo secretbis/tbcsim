@@ -55,7 +55,8 @@ public class GuardiansScaledBracers : Item() {
       stamina = 32,
       intellect = 18,
       armor = 841,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       resilienceRating = 19.0
       )
 

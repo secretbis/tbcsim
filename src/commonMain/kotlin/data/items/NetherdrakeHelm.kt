@@ -50,7 +50,8 @@ public class NetherdrakeHelm : Item() {
       stamina = 16,
       intellect = 26,
       armor = 604,
-      physicalCritRating = 31.0
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

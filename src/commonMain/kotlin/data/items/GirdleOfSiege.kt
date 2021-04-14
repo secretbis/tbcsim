@@ -49,7 +49,8 @@ public class GirdleOfSiege : Item() {
       strength = 30,
       stamina = 18,
       armor = 540,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

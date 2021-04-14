@@ -50,7 +50,8 @@ public class DreamWingHelm : Item() {
       stamina = 16,
       intellect = 25,
       armor = 516,
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 13.0
       )
 

@@ -63,7 +63,8 @@ public class ShoulderpadsOfTheStranger : Item() {
       agility = 33,
       stamina = 28,
       armor = 303,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       expertiseRating = 10.0
       )
 

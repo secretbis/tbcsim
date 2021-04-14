@@ -52,7 +52,8 @@ public class FuriousGizmaticGoggles : Item() {
       strength = 48,
       stamina = 28,
       armor = 1296,
-      physicalCritRating = 38.0,
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0,
       physicalHitRating = 13.0
       )
 

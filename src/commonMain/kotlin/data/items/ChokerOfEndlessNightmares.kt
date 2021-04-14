@@ -47,7 +47,8 @@ public class ChokerOfEndlessNightmares : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       physicalHitRating = 21.0
       )
 

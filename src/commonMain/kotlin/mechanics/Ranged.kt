@@ -30,7 +30,8 @@ object Ranged {
             else -> 0.0
         } / Rating.critPerPct
 
-        return (itemBonusCritPct / 100.0) + General.physicalCritChance(sp)
+        val baseRangedCritChance = sp.rangedCritPct() / 100.0 - General.valueByLevelDiff(sp, General.critSuppression)
+        return ((itemBonusCritPct / 100.0) + baseRangedCritChance).coerceAtLeast(0.0)
     }
 
     fun baseMiss(sp: SimParticipant): Double {

@@ -17,7 +17,8 @@ class CobrahideLegArmor(item: Item) : Enchant(item) {
         return Stats(
             attackPower = 40,
             rangedAttackPower = 40,
-            physicalCritRating = 10.0
+            meleeCritRating = 10.0,
+            rangedCritRating = 10.0
         )
     }
 }

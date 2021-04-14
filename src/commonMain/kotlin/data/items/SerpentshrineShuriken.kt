@@ -47,7 +47,8 @@ public class SerpentshrineShuriken : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 14,
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 12.0
       )
 

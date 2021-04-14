@@ -53,7 +53,8 @@ public class VengefulGladiatorsLeatherGloves : Item() {
       agility = 33,
       stamina = 49,
       armor = 343,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       resilienceRating = 24.0
       )
 

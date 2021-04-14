@@ -51,7 +51,8 @@ public class MennusScaledLeggings : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       armor = 256,
-      physicalCritRating = 32.0
+      meleeCritRating = 32.0,
+      rangedCritRating = 32.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -48,7 +48,8 @@ public class PhosphorescentBlade : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalCritRating = 11.0
+      meleeCritRating = 11.0,
+      rangedCritRating = 11.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

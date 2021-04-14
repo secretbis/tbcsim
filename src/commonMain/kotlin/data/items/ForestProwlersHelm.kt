@@ -64,7 +64,8 @@ public class ForestProwlersHelm : Item() {
       stamina = 29,
       intellect = 28,
       armor = 803,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

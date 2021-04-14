@@ -58,7 +58,8 @@ public class TrackersBlade : Item() {
   public override var speed: Double = 1500.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 23.0,
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0,
       physicalHitRating = 20.0
       )
 

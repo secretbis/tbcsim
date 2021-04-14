@@ -50,7 +50,8 @@ public class MarshalsScaledGreaves : Item() {
       stamina = 33,
       intellect = 23,
       armor = 1063,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 16.0
       )
 

@@ -51,7 +51,8 @@ public class MantleOfPerenolde : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       armor = 197,
-      physicalCritRating = 23.0,
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0,
       physicalHitRating = 23.0
       )
 

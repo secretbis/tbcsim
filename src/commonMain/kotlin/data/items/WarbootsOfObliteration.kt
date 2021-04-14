@@ -49,7 +49,8 @@ public class WarbootsOfObliteration : Item() {
       strength = 44,
       stamina = 29,
       armor = 1105,
-      physicalCritRating = 31.0
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -52,7 +52,8 @@ public class RagesteelShoulders : Item() {
       strength = 32,
       stamina = 12,
       armor = 873,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       physicalHitRating = 9.0
       )
 

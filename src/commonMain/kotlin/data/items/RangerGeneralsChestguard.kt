@@ -64,7 +64,8 @@ public class RangerGeneralsChestguard : Item() {
       stamina = 19,
       intellect = 30,
       armor = 900,
-      physicalCritRating = 14.0
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -48,7 +48,8 @@ public class AxeOfTheNexusKings : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 33,
-      physicalCritRating = 35.0
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

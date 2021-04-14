@@ -52,7 +52,8 @@ public class MarshalsLeatherBracers : Item() {
       agility = 19,
       stamina = 25,
       armor = 157,
-      physicalCritRating = 7.0,
+      meleeCritRating = 7.0,
+      rangedCritRating = 7.0,
       resilienceRating = 13.0
       )
 

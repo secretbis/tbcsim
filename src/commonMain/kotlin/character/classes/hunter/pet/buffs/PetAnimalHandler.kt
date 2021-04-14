@@ -14,11 +14,11 @@ class PetAnimalHandler : Buff() {
     override fun modifyStats(sp: SimParticipant): Stats {
         val animalHandler = sp.owner?.character?.klass?.talents?.get(AnimalHandler.name) as AnimalHandler?
         val ahHit = animalHandler?.petAdditionalHitChance() ?: 0.0
-        val ahHitRating = Rating.critPerPct * ahHit
+        val ahHitRating = Rating.physicalHitPerPct * ahHit
 
         return Stats(
-            physicalCritRating = ahHitRating,
-            spellCritRating = ahHitRating
+            physicalHitRating = ahHitRating,
+            spellHitRating = ahHitRating
         )
     }
 }

@@ -52,7 +52,8 @@ public class NetherbladeGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       armor = 237,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       physicalHitRating = 17.0
       )
 

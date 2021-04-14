@@ -48,7 +48,8 @@ public class TraitorsNoose : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       physicalHitRating = 12.0
       )
 

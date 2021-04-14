@@ -61,7 +61,8 @@ public class MailOfFeveredPursuit : Item() {
       agility = 49,
       stamina = 66,
       armor = 1055,
-      physicalCritRating = 29.0
+      meleeCritRating = 29.0,
+      rangedCritRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

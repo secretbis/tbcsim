@@ -53,7 +53,8 @@ public class JusticarGauntlets : Item() {
       stamina = 29,
       intellect = 24,
       armor = 944,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -49,7 +49,8 @@ public class NetherfuryCape : Item() {
       strength = 19,
       stamina = 19,
       armor = 78,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

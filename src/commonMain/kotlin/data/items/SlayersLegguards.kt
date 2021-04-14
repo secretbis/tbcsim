@@ -55,7 +55,8 @@ public class SlayersLegguards : Item() {
       agility = 46,
       stamina = 54,
       armor = 401,
-      physicalCritRating = 45.0
+      meleeCritRating = 45.0,
+      rangedCritRating = 45.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

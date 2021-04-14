@@ -49,7 +49,8 @@ public class CloakOfTheInciter : Item() {
   public override var stats: Stats = Stats(
       stamina = 15,
       armor = 76,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       physicalHitRating = 16.0
       )
 

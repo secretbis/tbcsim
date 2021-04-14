@@ -17,7 +17,7 @@ class Enhancement : Spec() {
 
     override fun yellowSocketEp(deltas: Map<String, Double>): Double {
         // 5 crit rating / 5 str
-        return ((deltas["physicalCritRating"] ?: 0.0) * 5.0) + ((deltas["strength"] ?: 0.0) * 5.0)
+        return ((deltas["meleeCritRating"] ?: 0.0) * 5.0) + ((deltas["strength"] ?: 0.0) * 5.0)
     }
 
     override fun blueSocketEp(deltas: Map<String, Double>): Double {

@@ -48,7 +48,8 @@ public class MercilessGladiatorsDecapitator : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 55,
-      physicalCritRating = 42.0,
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0,
       physicalHitRating = 18.0,
       resilienceRating = 33.0
       )

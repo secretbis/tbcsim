@@ -63,7 +63,8 @@ public class ShadowmastersBoots : Item() {
       agility = 30,
       stamina = 38,
       armor = 305,
-      physicalCritRating = 17.0
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

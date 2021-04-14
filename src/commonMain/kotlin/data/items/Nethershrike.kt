@@ -47,7 +47,8 @@ public class Nethershrike : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 15,
-      physicalCritRating = 16.0
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

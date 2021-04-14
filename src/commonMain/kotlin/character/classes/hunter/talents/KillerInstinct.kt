@@ -19,7 +19,10 @@ class KillerInstinct(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalCritRating = Rating.critPerPct * currentRank)
+            return Stats(
+                meleeCritRating = Rating.critPerPct * currentRank,
+                rangedCritRating = Rating.critPerPct * currentRank
+            )
         }
     }
 

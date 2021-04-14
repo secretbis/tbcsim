@@ -88,8 +88,8 @@ class Gear {
                 buffs.add(it.enchant!!)
             }
 
-            if(it.temporaryEnhancement != null) {
-                buffs.add(it.temporaryEnhancement!!)
+            if(it.tempEnchant != null) {
+                buffs.add(it.tempEnchant!!)
             }
 
             // Only meta gems provide dynamic buffs

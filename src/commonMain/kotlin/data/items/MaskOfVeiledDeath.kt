@@ -59,7 +59,8 @@ public class MaskOfVeiledDeath : Item() {
 
   public override var stats: Stats = Stats(
       armor = 220,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHitRating = 19.0
       )
 

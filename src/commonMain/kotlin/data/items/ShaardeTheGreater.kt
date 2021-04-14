@@ -48,7 +48,8 @@ public class ShaardeTheGreater : Item() {
   public override var stats: Stats = Stats(
       strength = 34,
       stamina = 33,
-      physicalCritRating = 29.0
+      meleeCritRating = 29.0,
+      rangedCritRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

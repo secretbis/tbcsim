@@ -55,7 +55,8 @@ public class GladiatorsLeatherTunic : Item() {
       agility = 33,
       stamina = 50,
       armor = 389,
-      physicalCritRating = 12.0,
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0,
       resilienceRating = 23.0
       )
 

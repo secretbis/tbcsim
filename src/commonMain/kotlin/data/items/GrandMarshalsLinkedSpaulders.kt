@@ -55,7 +55,8 @@ public class GrandMarshalsLinkedSpaulders : Item() {
       strength = 13,
       stamina = 33,
       armor = 489,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 13.0
       )
 

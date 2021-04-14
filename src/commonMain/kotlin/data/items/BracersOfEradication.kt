@@ -51,7 +51,8 @@ public class BracersOfEradication : Item() {
       strength = 25,
       stamina = 12,
       armor = 703,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       physicalHitRating = 17.0
       )
 

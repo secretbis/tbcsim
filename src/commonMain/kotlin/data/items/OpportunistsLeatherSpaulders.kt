@@ -55,7 +55,8 @@ public class OpportunistsLeatherSpaulders : Item() {
       agility = 13,
       stamina = 31,
       armor = 219,
-      physicalCritRating = 11.0,
+      meleeCritRating = 11.0,
+      rangedCritRating = 11.0,
       resilienceRating = 13.0
       )
 

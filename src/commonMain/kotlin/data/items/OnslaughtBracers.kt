@@ -54,7 +54,8 @@ public class OnslaughtBracers : Item() {
   public override var stats: Stats = Stats(
       strength = 33,
       armor = 841,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHitRating = 16.0
       )
 

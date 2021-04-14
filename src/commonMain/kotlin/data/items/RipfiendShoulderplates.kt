@@ -50,7 +50,8 @@ public class RipfiendShoulderplates : Item() {
   public override var stats: Stats = Stats(
       strength = 39,
       armor = 1133,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       physicalHitRating = 13.0
       )
 

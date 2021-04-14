@@ -48,7 +48,8 @@ public class Legionfoe : Item() {
   public override var stats: Stats = Stats(
       strength = 31,
       stamina = 45,
-      physicalCritRating = 26.0,
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0,
       expertiseRating = 19.0
       )
 

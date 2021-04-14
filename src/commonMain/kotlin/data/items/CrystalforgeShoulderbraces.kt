@@ -55,7 +55,8 @@ public class CrystalforgeShoulderbraces : Item() {
       stamina = 34,
       intellect = 15,
       armor = 1251,
-      physicalCritRating = 16.0
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

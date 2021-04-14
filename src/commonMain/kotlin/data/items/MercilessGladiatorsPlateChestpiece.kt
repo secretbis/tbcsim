@@ -54,7 +54,8 @@ public class MercilessGladiatorsPlateChestpiece : Item() {
       strength = 35,
       stamina = 60,
       armor = 1704,
-      physicalCritRating = 35.0,
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0,
       physicalHitRating = 14.0,
       resilienceRating = 24.0
       )

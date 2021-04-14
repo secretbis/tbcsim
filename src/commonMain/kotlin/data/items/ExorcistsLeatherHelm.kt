@@ -52,7 +52,8 @@ public class ExorcistsLeatherHelm : Item() {
       agility = 27,
       stamina = 33,
       armor = 208,
-      physicalCritRating = 10.0,
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0,
       resilienceRating = 14.0
       )
 

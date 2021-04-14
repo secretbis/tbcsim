@@ -64,7 +64,8 @@ public class CoifOfAlleria : Item() {
       stamina = 45,
       intellect = 25,
       armor = 929,
-      physicalCritRating = 34.0
+      meleeCritRating = 34.0,
+      rangedCritRating = 34.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

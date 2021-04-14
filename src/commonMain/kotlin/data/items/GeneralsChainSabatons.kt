@@ -51,7 +51,8 @@ public class GeneralsChainSabatons : Item() {
       stamina = 39,
       intellect = 18,
       armor = 595,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 18.0
       )
 

@@ -50,7 +50,8 @@ public class LeggingsOfDivineRetribution : Item() {
       strength = 51,
       stamina = 51,
       armor = 1544,
-      physicalCritRating = 35.0
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

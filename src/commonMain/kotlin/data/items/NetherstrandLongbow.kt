@@ -50,8 +50,7 @@ public class NetherstrandLongbow : Item() {
   public override var speed: Double = 2900.0
 
   public override var stats: Stats = Stats(
-      stamina = 20,
-      physicalCritRating = 50.0
+      stamina = 20
       )
 
   public override var sockets: Array<Socket> = arrayOf()

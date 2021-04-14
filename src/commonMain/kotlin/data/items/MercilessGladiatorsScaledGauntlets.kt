@@ -54,7 +54,8 @@ public class MercilessGladiatorsScaledGauntlets : Item() {
       stamina = 39,
       intellect = 19,
       armor = 1065,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 18.0
       )
 

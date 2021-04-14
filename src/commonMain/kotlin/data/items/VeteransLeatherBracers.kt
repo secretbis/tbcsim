@@ -52,7 +52,8 @@ public class VeteransLeatherBracers : Item() {
       agility = 21,
       stamina = 29,
       armor = 174,
-      physicalCritRating = 9.0,
+      meleeCritRating = 9.0,
+      rangedCritRating = 9.0,
       resilienceRating = 15.0
       )
 

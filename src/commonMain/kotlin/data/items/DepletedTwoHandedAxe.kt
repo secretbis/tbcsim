@@ -49,7 +49,8 @@ public class DepletedTwoHandedAxe : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 39,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -61,7 +61,8 @@ public class BoneweaveGirdle : Item() {
       agility = 38,
       intellect = 26,
       armor = 556,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       physicalHitRating = 17.0
       )
 

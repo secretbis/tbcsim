@@ -47,7 +47,8 @@ public class SunforgedCleaver : Item() {
   public override var speed: Double = 2600.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       physicalHasteRating = 15.0
       )
 

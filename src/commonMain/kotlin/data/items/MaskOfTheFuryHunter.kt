@@ -53,7 +53,8 @@ public class MaskOfTheFuryHunter : Item() {
       stamina = 58,
       intellect = 20,
       armor = 643,
-      physicalCritRating = 30.0
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -63,7 +63,8 @@ public class MarshalsLinkedBracers : Item() {
       stamina = 25,
       intellect = 9,
       armor = 349,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 10.0
       )
 

@@ -48,7 +48,8 @@ public class ValanosLongbow : Item() {
 
   public override var stats: Stats = Stats(
       intellect = 10,
-      physicalCritRating = 10.0
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

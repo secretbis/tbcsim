@@ -49,7 +49,8 @@ public class ShattrathsChampionBelt : Item() {
   public override var stats: Stats = Stats(
       intellect = 22,
       armor = 367,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       physicalHitRating = 15.0
       )
 

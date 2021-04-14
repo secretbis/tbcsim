@@ -54,7 +54,8 @@ public class GladiatorsPlateShoulders : Item() {
       strength = 22,
       stamina = 45,
       armor = 1160,
-      physicalCritRating = 23.0,
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0,
       resilienceRating = 19.0
       )
 

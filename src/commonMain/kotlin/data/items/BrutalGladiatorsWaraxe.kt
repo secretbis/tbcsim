@@ -51,7 +51,8 @@ public class BrutalGladiatorsWaraxe : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 9.0,
       resilienceRating = 14.0
       )

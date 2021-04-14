@@ -61,7 +61,8 @@ public class LeggingsOfMurderousIntent : Item() {
       agility = 45,
       stamina = 31,
       armor = 380,
-      physicalCritRating = 37.0
+      meleeCritRating = 37.0,
+      rangedCritRating = 37.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

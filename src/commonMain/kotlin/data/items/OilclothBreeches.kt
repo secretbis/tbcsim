@@ -49,7 +49,8 @@ public class OilclothBreeches : Item() {
   public override var stats: Stats = Stats(
       stamina = 24,
       armor = 243,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHitRating = 25.0
       )
 

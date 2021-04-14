@@ -55,7 +55,8 @@ public class VindicatorsLinkedBracers : Item() {
       stamina = 33,
       intellect = 14,
       armor = 432,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 12.0
       )
 

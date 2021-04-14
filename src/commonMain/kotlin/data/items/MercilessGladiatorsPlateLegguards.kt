@@ -52,7 +52,8 @@ public class MercilessGladiatorsPlateLegguards : Item() {
       strength = 47,
       stamina = 63,
       armor = 1491,
-      physicalCritRating = 43.0,
+      meleeCritRating = 43.0,
+      rangedCritRating = 43.0,
       physicalHitRating = 14.0,
       resilienceRating = 22.0
       )

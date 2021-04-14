@@ -62,7 +62,8 @@ public class BootsOfTheCrimsonHawk : Item() {
       stamina = 28,
       intellect = 27,
       armor = 619,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

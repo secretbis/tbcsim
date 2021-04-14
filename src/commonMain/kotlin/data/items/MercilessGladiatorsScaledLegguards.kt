@@ -53,7 +53,8 @@ public class MercilessGladiatorsScaledLegguards : Item() {
       stamina = 60,
       intellect = 23,
       armor = 1491,
-      physicalCritRating = 23.0,
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0,
       resilienceRating = 24.0
       )
 

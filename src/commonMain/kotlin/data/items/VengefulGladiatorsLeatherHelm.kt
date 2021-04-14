@@ -55,7 +55,8 @@ public class VengefulGladiatorsLeatherHelm : Item() {
       agility = 31,
       stamina = 65,
       armor = 443,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       physicalHitRating = 12.0,
       resilienceRating = 25.0
       )

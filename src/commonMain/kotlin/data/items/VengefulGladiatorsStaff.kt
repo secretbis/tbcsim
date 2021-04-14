@@ -49,7 +49,8 @@ public class VengefulGladiatorsStaff : Item() {
   public override var stats: Stats = Stats(
       strength = 46,
       stamina = 62,
-      physicalCritRating = 46.0,
+      meleeCritRating = 46.0,
+      rangedCritRating = 46.0,
       physicalHitRating = 22.0,
       resilienceRating = 33.0
       )

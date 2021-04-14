@@ -51,7 +51,8 @@ public class ExorcistsPlateHelm : Item() {
       strength = 25,
       stamina = 30,
       armor = 827,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       resilienceRating = 11.0
       )
 

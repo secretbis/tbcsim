@@ -54,7 +54,8 @@ public class SkyshatterGreaves : Item() {
       strength = 43,
       intellect = 20,
       armor = 740,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHasteRating = 20.0,
       expertiseRating = 29.0
       )

@@ -51,7 +51,8 @@ public class BootsOfTheShiftingSands : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       armor = 201,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

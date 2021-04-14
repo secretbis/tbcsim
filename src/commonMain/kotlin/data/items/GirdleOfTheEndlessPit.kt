@@ -62,7 +62,8 @@ public class GirdleOfTheEndlessPit : Item() {
       strength = 34,
       stamina = 30,
       armor = 884,
-      physicalCritRating = 28.0
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -60,7 +60,8 @@ public class HeartshatterBreastplate : Item() {
       strength = 63,
       stamina = 45,
       armor = 1765,
-      physicalCritRating = 44.0,
+      meleeCritRating = 44.0,
+      rangedCritRating = 44.0,
       physicalHitRating = 30.0
       )
 

@@ -135,13 +135,13 @@ object SimStatsPrinter {
             "PLAYER STATS\n" +
             table {
                 row("Strength:", iteration.subject.strength(), "Phys. Hit:", iteration.subject.physicalHitPct())
-                row("Agility:", iteration.subject.agility(), "Phys. Crit:", iteration.subject.physicalCritPct())
-                row("Intellect:", iteration.subject.intellect(), "Phys. Haste:", iteration.subject.physicalHasteMultiplier() - 1.0)
-                row("Stamina:", iteration.subject.stamina(), "Spell Hit:", iteration.subject.spellHitPct())
-                row("Spirit:", iteration.subject.spirit(), "Spell Crit:", iteration.subject.spellCritPct())
-                row("Armor Pen:", iteration.subject.armorPen(), "Spell Haste:", iteration.subject.spellHasteMultiplier() - 1.0)
-                row("Attack Power", iteration.subject.attackPower(), "Expertise:", iteration.subject.expertisePct())
-                row("R. Attack Power", iteration.subject.rangedAttackPower())
+                row("Agility:", iteration.subject.agility(), "Melee Crit:", iteration.subject.meleeCritPct())
+                row("Intellect:", iteration.subject.intellect(), "Ranged Crit:", iteration.subject.rangedCritPct())
+                row("Stamina:", iteration.subject.stamina(), "Phys. Haste:", iteration.subject.physicalHasteMultiplier() - 1.0)
+                row("Spirit:", iteration.subject.spirit(), "Spell Hit:", iteration.subject.spellHitPct())
+                row("Armor Pen:", iteration.subject.armorPen(), "Spell Crit:", iteration.subject.spellCritPct())
+                row("Attack Power", iteration.subject.attackPower(), "Spell Haste:", iteration.subject.spellHasteMultiplier() - 1.0)
+                row("R. Attack Power", iteration.subject.rangedAttackPower(), "Expertise:", iteration.subject.expertisePct())
                 row("MP5", iteration.subject.stats.manaPer5Seconds)
                 row("Spell Power", iteration.subject.spellDamage())
 

@@ -17,7 +17,8 @@ class NethercobraLegArmor(item: Item) : Enchant(item) {
         return Stats(
             attackPower = 50,
             rangedAttackPower = 50,
-            physicalCritRating = 12.0
+            meleeCritRating = 12.0,
+            rangedCritRating = 12.0
         )
     }
 }

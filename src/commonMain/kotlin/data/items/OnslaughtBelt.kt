@@ -53,7 +53,8 @@ public class OnslaughtBelt : Item() {
   public override var stats: Stats = Stats(
       strength = 43,
       armor = 1081,
-      physicalCritRating = 40.0,
+      meleeCritRating = 40.0,
+      rangedCritRating = 40.0,
       physicalHasteRating = 26.0,
       expertiseRating = 26.0
       )

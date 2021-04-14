@@ -55,7 +55,8 @@ public class BrutalGladiatorsLeatherHelm : Item() {
       agility = 36,
       stamina = 72,
       armor = 475,
-      physicalCritRating = 26.0,
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0,
       physicalHitRating = 17.0,
       resilienceRating = 25.0
       )

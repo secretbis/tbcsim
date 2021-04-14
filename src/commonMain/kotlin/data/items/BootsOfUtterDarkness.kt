@@ -60,7 +60,8 @@ public class BootsOfUtterDarkness : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       armor = 278,
-      physicalCritRating = 32.0,
+      meleeCritRating = 32.0,
+      rangedCritRating = 32.0,
       physicalHitRating = 23.0
       )
 

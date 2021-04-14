@@ -55,7 +55,8 @@ public class BrutalGladiatorsScaledHelm : Item() {
       stamina = 61,
       intellect = 32,
       armor = 1611,
-      physicalCritRating = 33.0,
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0,
       resilienceRating = 36.0
       )
 

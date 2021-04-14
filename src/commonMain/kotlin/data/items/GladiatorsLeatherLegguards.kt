@@ -53,7 +53,8 @@ public class GladiatorsLeatherLegguards : Item() {
       agility = 36,
       stamina = 54,
       armor = 340,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       resilienceRating = 36.0
       )
 

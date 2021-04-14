@@ -48,7 +48,8 @@ public class ConsortiumMantleOfPhasing : Item() {
 
   public override var stats: Stats = Stats(
       armor = 416,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

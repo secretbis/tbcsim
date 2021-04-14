@@ -54,7 +54,8 @@ public class DemontoothShoulderpads : Item() {
       stamina = 38,
       intellect = 19,
       armor = 514,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

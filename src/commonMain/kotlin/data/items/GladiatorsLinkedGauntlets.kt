@@ -53,7 +53,8 @@ public class GladiatorsLinkedGauntlets : Item() {
       strength = 25,
       stamina = 40,
       armor = 541,
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       resilienceRating = 21.0
       )
 

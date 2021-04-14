@@ -51,7 +51,8 @@ public class MarshalsPlateBracers : Item() {
       strength = 19,
       stamina = 25,
       armor = 624,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 14.0
       )
 

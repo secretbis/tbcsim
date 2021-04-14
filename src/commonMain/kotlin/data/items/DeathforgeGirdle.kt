@@ -51,7 +51,8 @@ public class DeathforgeGirdle : Item() {
       strength = 22,
       stamina = 25,
       armor = 655,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

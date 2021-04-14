@@ -47,7 +47,8 @@ public class Mooncleaver : Item() {
   public override var speed: Double = 3700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 52.0
+      meleeCritRating = 52.0,
+      rangedCritRating = 52.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -47,7 +47,8 @@ public class EtherealWarpBow : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 13,
-      physicalCritRating = 14.0
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

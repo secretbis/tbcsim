@@ -54,7 +54,8 @@ public class WarbringerBattleHelm : Item() {
       strength = 45,
       stamina = 45,
       armor = 1227,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       physicalHitRating = 14.0
       )
 

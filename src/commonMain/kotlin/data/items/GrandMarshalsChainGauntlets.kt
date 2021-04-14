@@ -54,7 +54,8 @@ public class GrandMarshalsChainGauntlets : Item() {
       stamina = 31,
       intellect = 6,
       armor = 407,
-      physicalCritRating = 11.0,
+      meleeCritRating = 11.0,
+      rangedCritRating = 11.0,
       resilienceRating = 14.0
       )
 

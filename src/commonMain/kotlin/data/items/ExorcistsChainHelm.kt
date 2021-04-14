@@ -53,7 +53,8 @@ public class ExorcistsChainHelm : Item() {
       stamina = 35,
       intellect = 15,
       armor = 463,
-      physicalCritRating = 10.0,
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0,
       resilienceRating = 12.0
       )
 

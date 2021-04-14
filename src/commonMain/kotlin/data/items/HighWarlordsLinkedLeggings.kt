@@ -53,7 +53,8 @@ public class HighWarlordsLinkedLeggings : Item() {
       stamina = 42,
       intellect = 22,
       armor = 570,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       resilienceRating = 22.0
       )
 

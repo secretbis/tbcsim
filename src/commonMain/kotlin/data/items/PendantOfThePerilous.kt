@@ -59,7 +59,8 @@ public class PendantOfThePerilous : Item() {
   public override var stats: Stats = Stats(
       strength = 32,
       stamina = 24,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

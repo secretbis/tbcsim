@@ -157,7 +157,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     // Fire cast procs
                     fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
                 } else {
-                    logger.info("Canceled queued cast of ${castingRule!!.ability.name} - low resource")
+                    logger.info { "Canceled queued cast of ${castingRule!!.ability.name} - low resource" }
                 }
 
                 // Reset casting state
@@ -616,8 +616,12 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
-    fun physicalCritPct(): Double {
-        return stats.physicalCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+    fun meleeCritPct(): Double {
+        return stats.meleeCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+    }
+
+    fun rangedCritPct(): Double {
+        return stats.rangedCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {

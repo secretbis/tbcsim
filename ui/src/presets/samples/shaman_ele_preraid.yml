@@ -46,6 +46,7 @@ gear:
   mainHand:
     name: Eternium Runed Blade
     enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
   offHand:
     name: Lamp of Peaceful Radiance
   rangedTotemLibram:
@@ -129,7 +130,6 @@ rotation:
     - name: Crunchy Serpent
 
     # Abilities
-    - name: Superior Wizard Oil
     - name: Wrath of Air Totem
     - name: Totem of Wrath
     - name: Mana Spring Totem

@@ -53,7 +53,7 @@ abstract class Item {
     open val buffs: List<Buff> by lazy { listOf() }
 
     var enchant: Enchant? = null
-    var temporaryEnhancement: TempEnchant? = null
+    var tempEnchant: TempEnchant? = null
 
     // Helpers
     open val avgDmg: Double

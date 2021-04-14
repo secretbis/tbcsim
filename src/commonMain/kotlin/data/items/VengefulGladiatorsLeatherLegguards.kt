@@ -53,7 +53,8 @@ public class VengefulGladiatorsLeatherLegguards : Item() {
       agility = 35,
       stamina = 67,
       armor = 471,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       physicalHitRating = 12.0,
       resilienceRating = 40.0
       )

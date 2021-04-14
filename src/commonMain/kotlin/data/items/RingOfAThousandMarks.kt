@@ -59,7 +59,8 @@ public class RingOfAThousandMarks : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      physicalCritRating = 23.0,
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0,
       physicalHitRating = 19.0
       )
 

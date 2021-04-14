@@ -48,7 +48,8 @@ public class MercilessGladiatorsCrossbowOfThePhoenix : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 13.0
       )
 

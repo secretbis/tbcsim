@@ -20,6 +20,9 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
   if(type === "enchants") {
     baseData = tbcsim.data.Enchants
   }
+  if(type === "tempEnchants") {
+    baseData = tbcsim.data.TempEnchants
+  }
 
   function getItemsForSlot() {
     let items = [];

@@ -51,7 +51,7 @@ public class CloakOfDarkness : Item() {
       strength = 23,
       stamina = 25,
       armor = 101,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

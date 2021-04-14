@@ -82,7 +82,7 @@ function MeleeStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Crit %:</Col>
-        <Col xs={12}>{sp.physicalCritPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.meleeCritPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Expertise %:</Col>
@@ -142,15 +142,15 @@ function RangedStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Crit %:</Col>
-        <Col xs={12}>{sp.physicalCritPct().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.rangedCritPct().toFixed(2)}%</Col>
       </Row>
       {isBow(ranged) && bowCritPct > 0 ? <Row>
         <Col xs={12}>Crit % (Bow):</Col>
-        <Col xs={12}>{(sp.physicalCritPct() + bowCritPct).toFixed(2)}%</Col>
+        <Col xs={12}>{(sp.rangedCritPct() + bowCritPct).toFixed(2)}%</Col>
       </Row> : null}
       {isGun(ranged) && gunCritPct > 0 ? <Row>
         <Col xs={12}>Crit % (Gun):</Col>
-        <Col xs={12}>{(sp.physicalCritPct() + gunCritPct).toFixed(2)}%</Col>
+        <Col xs={12}>{(sp.rangedCritPct() + gunCritPct).toFixed(2)}%</Col>
       </Row> : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>

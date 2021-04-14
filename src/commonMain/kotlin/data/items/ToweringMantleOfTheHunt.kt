@@ -50,7 +50,8 @@ public class ToweringMantleOfTheHunt : Item() {
       stamina = 21,
       intellect = 23,
       armor = 489,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -16,7 +16,7 @@ class Arms : Spec() {
 
     override fun yellowSocketEp(deltas: Map<String, Double>): Double {
         // 10 crit rating
-        return (deltas["physicalCritRating"] ?: 0.0) * 10.0
+        return (deltas["meleeCritRating"] ?: 0.0) * 10.0
     }
 
     override fun blueSocketEp(deltas: Map<String, Double>): Double {

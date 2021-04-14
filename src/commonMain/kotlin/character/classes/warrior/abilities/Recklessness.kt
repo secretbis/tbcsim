@@ -21,7 +21,7 @@ class Recklessness : Ability() {
         override val durationMs: Int = 15000
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalCritRating = 100.0 * Rating.critPerPct)
+            return Stats(meleeCritRating = 100.0 * Rating.critPerPct)
         }
     }
 

@@ -48,7 +48,8 @@ public class BandOfTheRangerGeneral : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       physicalHitRating = 18.0
       )
 

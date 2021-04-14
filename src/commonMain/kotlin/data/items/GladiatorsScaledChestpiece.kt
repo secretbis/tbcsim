@@ -55,7 +55,8 @@ public class GladiatorsScaledChestpiece : Item() {
       stamina = 45,
       intellect = 23,
       armor = 1547,
-      physicalCritRating = 26.0,
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0,
       resilienceRating = 25.0
       )
 

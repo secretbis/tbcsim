@@ -24,7 +24,10 @@ class MasterTactician(currentRank: Int) : Talent(currentRank) {
             override val durationMs: Int = 8000
 
             override fun modifyStats(sp: SimParticipant): Stats {
-                return Stats(physicalCritRating = 2.0 * currentRank * Rating.critPerPct)
+                return Stats(
+                    meleeCritRating = 2.0 * currentRank * Rating.critPerPct,
+                    rangedCritRating = 2.0 * currentRank * Rating.critPerPct
+                )
             }
         }
 

@@ -49,7 +49,8 @@ public class ChestguardOfNoRemorse : Item() {
   public override var stats: Stats = Stats(
       stamina = 35,
       armor = 285,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

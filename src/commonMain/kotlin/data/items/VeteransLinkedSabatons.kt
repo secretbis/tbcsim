@@ -50,7 +50,8 @@ public class VeteransLinkedSabatons : Item() {
       stamina = 45,
       intellect = 20,
       armor = 656,
-      physicalCritRating = 31.0,
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0,
       resilienceRating = 21.0
       )
 

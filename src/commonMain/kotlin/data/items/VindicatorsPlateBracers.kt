@@ -54,7 +54,8 @@ public class VindicatorsPlateBracers : Item() {
       strength = 25,
       stamina = 36,
       armor = 772,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 17.0
       )
 

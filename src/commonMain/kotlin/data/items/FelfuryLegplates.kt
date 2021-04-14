@@ -62,7 +62,8 @@ public class FelfuryLegplates : Item() {
       strength = 61,
       stamina = 48,
       armor = 1735,
-      physicalCritRating = 34.0,
+      meleeCritRating = 34.0,
+      rangedCritRating = 34.0,
       physicalHasteRating = 50.0
       )
 

@@ -49,7 +49,8 @@ public class BrutalGladiatorsGreatsword : Item() {
   public override var stats: Stats = Stats(
       strength = 50,
       stamina = 66,
-      physicalCritRating = 50.0,
+      meleeCritRating = 50.0,
+      rangedCritRating = 50.0,
       physicalHitRating = 19.0,
       resilienceRating = 33.0
       )

@@ -53,7 +53,8 @@ public class MarshalsChainBracers : Item() {
       stamina = 25,
       intellect = 9,
       armor = 349,
-      physicalCritRating = 7.0,
+      meleeCritRating = 7.0,
+      rangedCritRating = 7.0,
       resilienceRating = 11.0
       )
 

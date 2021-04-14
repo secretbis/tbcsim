@@ -62,7 +62,8 @@ public class DeadlyCuffs : Item() {
   public override var stats: Stats = Stats(
       stamina = 28,
       armor = 194,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       physicalHitRating = 12.0
       )
 

@@ -48,7 +48,8 @@ public class BigBadWolfsPaw : Item() {
   public override var stats: Stats = Stats(
       agility = 17,
       stamina = 18,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

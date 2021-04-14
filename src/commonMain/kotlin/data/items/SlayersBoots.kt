@@ -55,7 +55,8 @@ public class SlayersBoots : Item() {
       agility = 30,
       stamina = 24,
       armor = 332,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       physicalHitRating = 28.0,
       expertiseRating = 24.0
       )

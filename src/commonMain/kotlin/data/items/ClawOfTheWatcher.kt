@@ -49,7 +49,8 @@ public class ClawOfTheWatcher : Item() {
   public override var speed: Double = 2500.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 12.0
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

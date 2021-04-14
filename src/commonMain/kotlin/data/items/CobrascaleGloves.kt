@@ -49,7 +49,8 @@ public class CobrascaleGloves : Item() {
   public override var stats: Stats = Stats(
       stamina = 33,
       armor = 208,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       physicalHitRating = 20.0
       )
 

@@ -51,7 +51,8 @@ public class MidnightLegguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       armor = 305,
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       physicalHitRating = 17.0
       )
 

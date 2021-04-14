@@ -49,7 +49,8 @@ public class HereticsGauntlets : Item() {
       strength = 35,
       stamina = 22,
       armor = 728,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

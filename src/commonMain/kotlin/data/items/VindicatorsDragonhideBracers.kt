@@ -55,7 +55,8 @@ public class VindicatorsDragonhideBracers : Item() {
       agility = 22,
       stamina = 29,
       armor = 236,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 17.0
       )
 

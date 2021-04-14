@@ -55,7 +55,8 @@ public class MercilessGladiatorsLeatherHelm : Item() {
       agility = 37,
       stamina = 58,
       armor = 348,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 25.0
       )
 

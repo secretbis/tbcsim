@@ -51,7 +51,8 @@ public class FelLeatherBoots : Item() {
 
   public override var stats: Stats = Stats(
       armor = 196,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       physicalHitRating = 25.0
       )
 

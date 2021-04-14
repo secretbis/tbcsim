@@ -48,7 +48,8 @@ public class VengefulGladiatorsDecapitator : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 62,
-      physicalCritRating = 46.0,
+      meleeCritRating = 46.0,
+      rangedCritRating = 46.0,
       physicalHitRating = 15.0,
       resilienceRating = 33.0
       )

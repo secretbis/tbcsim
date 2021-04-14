@@ -24,7 +24,8 @@ class LeaderOfThePack : Ability() {
         val bonusCritRating = 5.0 * Rating.critPerPct
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalCritRating = bonusCritRating
+                meleeCritRating = bonusCritRating,
+                rangedCritRating = bonusCritRating
             )
         }
     }

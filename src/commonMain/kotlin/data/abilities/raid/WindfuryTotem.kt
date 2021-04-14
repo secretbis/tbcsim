@@ -72,7 +72,7 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
 
             override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 val isMhWeapon = items?.first() === sp.character.gear.mainHand
-                val mhHasNoTempEnh = sp.character.gear.mainHand.temporaryEnhancement == null
+                val mhHasNoTempEnh = sp.character.gear.mainHand.tempEnchant == null
                 return isMhWeapon && mhHasNoTempEnh && super.shouldProc(sp, items, ability, event)
             }
 

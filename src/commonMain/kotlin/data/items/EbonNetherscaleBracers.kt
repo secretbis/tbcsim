@@ -53,7 +53,8 @@ public class EbonNetherscaleBracers : Item() {
       stamina = 25,
       intellect = 8,
       armor = 325,
-      physicalCritRating = 17.0
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

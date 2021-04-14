@@ -62,7 +62,8 @@ public class BladedShoulderpadsOfTheMerciless : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       armor = 273,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       physicalHitRating = 13.0
       )
 

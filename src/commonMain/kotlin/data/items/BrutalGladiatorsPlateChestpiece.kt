@@ -55,7 +55,8 @@ public class BrutalGladiatorsPlateChestpiece : Item() {
       strength = 45,
       stamina = 76,
       armor = 1983,
-      physicalCritRating = 45.0,
+      meleeCritRating = 45.0,
+      rangedCritRating = 45.0,
       physicalHitRating = 18.0,
       resilienceRating = 24.0
       )

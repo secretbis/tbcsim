@@ -55,7 +55,8 @@ public class BrutalGladiatorsLinkedSpaulders : Item() {
       strength = 30,
       stamina = 58,
       armor = 832,
-      physicalCritRating = 31.0,
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0,
       resilienceRating = 21.0
       )
 

@@ -63,7 +63,8 @@ public class DoomplateShoulderguards : Item() {
       strength = 19,
       stamina = 22,
       armor = 873,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -47,7 +47,8 @@ public class NatashasChoker : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       physicalHitRating = 10.0
       )
 

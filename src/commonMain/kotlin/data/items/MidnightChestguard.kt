@@ -51,7 +51,8 @@ public class MidnightChestguard : Item() {
   public override var stats: Stats = Stats(
       stamina = 64,
       armor = 474,
-      physicalCritRating = 46.0,
+      meleeCritRating = 46.0,
+      rangedCritRating = 46.0,
       physicalHitRating = 29.0
       )
 

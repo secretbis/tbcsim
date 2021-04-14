@@ -55,7 +55,8 @@ public class GrandMarshalsLinkedArmor : Item() {
       strength = 12,
       stamina = 42,
       armor = 652,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 22.0
       )
 

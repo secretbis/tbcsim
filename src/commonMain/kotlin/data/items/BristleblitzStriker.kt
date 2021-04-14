@@ -47,7 +47,8 @@ public class BristleblitzStriker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 28,
-      physicalCritRating = 25.0
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

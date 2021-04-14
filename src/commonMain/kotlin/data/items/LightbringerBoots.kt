@@ -54,7 +54,8 @@ public class LightbringerBoots : Item() {
       strength = 42,
       stamina = 22,
       armor = 1322,
-      physicalCritRating = 40.0,
+      meleeCritRating = 40.0,
+      rangedCritRating = 40.0,
       physicalHasteRating = 27.0,
       expertiseRating = 19.0
       )

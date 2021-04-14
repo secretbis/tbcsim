@@ -53,7 +53,8 @@ public class GladiatorsLeatherGloves : Item() {
       agility = 27,
       stamina = 39,
       armor = 243,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 23.0
       )
 

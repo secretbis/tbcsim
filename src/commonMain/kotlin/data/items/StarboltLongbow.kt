@@ -47,7 +47,8 @@ public class StarboltLongbow : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      physicalCritRating = 15.0
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

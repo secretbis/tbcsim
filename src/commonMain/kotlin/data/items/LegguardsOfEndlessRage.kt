@@ -60,7 +60,8 @@ public class LegguardsOfEndlessRage : Item() {
       strength = 70,
       stamina = 61,
       armor = 1650,
-      physicalCritRating = 46.0,
+      meleeCritRating = 46.0,
+      rangedCritRating = 46.0,
       physicalHitRating = 19.0
       )
 

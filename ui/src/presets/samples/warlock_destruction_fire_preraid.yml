@@ -42,6 +42,7 @@ gear:
   mainHand:
     name: Eternium Runed Blade
     enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
   offHand:
     name: Flametongue Seal
   rangedTotemLibram:
@@ -106,7 +107,6 @@ rotation:
   precombat:
     - name: Flask of Pure Death
     - name: Crunchy Serpent
-    - name: Superior Wizard Oil
     - name: Fel Armor
     - name: Demonic Sacrifice (Imp)
 

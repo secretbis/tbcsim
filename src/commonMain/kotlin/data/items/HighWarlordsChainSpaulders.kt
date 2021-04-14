@@ -56,7 +56,8 @@ public class HighWarlordsChainSpaulders : Item() {
       stamina = 31,
       intellect = 4,
       armor = 489,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 16.0
       )
 

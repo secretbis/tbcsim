@@ -51,7 +51,8 @@ public class DreadbootsOfTheLegion : Item() {
       strength = 38,
       stamina = 40,
       armor = 1213,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHitRating = 18.0
       )
 

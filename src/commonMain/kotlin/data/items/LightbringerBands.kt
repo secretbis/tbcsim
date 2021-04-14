@@ -54,7 +54,8 @@ public class LightbringerBands : Item() {
       strength = 33,
       stamina = 15,
       armor = 841,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHasteRating = 17.0,
       expertiseRating = 16.0
       )

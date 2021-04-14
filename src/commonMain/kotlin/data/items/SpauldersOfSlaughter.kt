@@ -49,7 +49,8 @@ public class SpauldersOfSlaughter : Item() {
       strength = 30,
       stamina = 22,
       armor = 873,
-      physicalCritRating = 27.0
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

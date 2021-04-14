@@ -51,7 +51,8 @@ public class VanquishersLegplates : Item() {
       strength = 36,
       stamina = 36,
       armor = 1216,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

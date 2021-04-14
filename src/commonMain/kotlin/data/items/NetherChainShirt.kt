@@ -52,7 +52,8 @@ public class NetherChainShirt : Item() {
       stamina = 40,
       intellect = 18,
       armor = 757,
-      physicalCritRating = 28.0
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

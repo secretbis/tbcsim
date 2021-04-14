@@ -56,7 +56,8 @@ public class GronnstalkersBelt : Item() {
       stamina = 21,
       intellect = 17,
       armor = 605,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       physicalHitRating = 24.0
       )
 

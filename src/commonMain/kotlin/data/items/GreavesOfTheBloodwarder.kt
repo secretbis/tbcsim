@@ -62,7 +62,8 @@ public class GreavesOfTheBloodwarder : Item() {
       strength = 49,
       stamina = 46,
       armor = 1406,
-      physicalCritRating = 31.0
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

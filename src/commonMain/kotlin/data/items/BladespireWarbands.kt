@@ -62,7 +62,8 @@ public class BladespireWarbands : Item() {
       strength = 20,
       stamina = 16,
       armor = 687,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

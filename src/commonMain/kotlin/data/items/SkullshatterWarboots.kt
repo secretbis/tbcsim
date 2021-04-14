@@ -62,7 +62,8 @@ public class SkullshatterWarboots : Item() {
       strength = 30,
       stamina = 37,
       armor = 1105,
-      physicalCritRating = 29.0
+      meleeCritRating = 29.0,
+      rangedCritRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

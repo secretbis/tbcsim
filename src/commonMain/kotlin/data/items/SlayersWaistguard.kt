@@ -49,7 +49,7 @@ public class SlayersWaistguard : Item() {
       strength = 22,
       stamina = 24,
       armor = 573,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
       resilienceRating = 19.0
       )
 

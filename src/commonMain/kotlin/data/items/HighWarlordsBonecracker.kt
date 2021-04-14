@@ -48,7 +48,8 @@ public class HighWarlordsBonecracker : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 18,
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       physicalHitRating = 8.0,
       resilienceRating = 9.0
       )

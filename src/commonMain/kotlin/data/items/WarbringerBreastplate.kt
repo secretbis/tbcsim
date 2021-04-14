@@ -54,7 +54,8 @@ public class WarbringerBreastplate : Item() {
       strength = 44,
       stamina = 39,
       armor = 1510,
-      physicalCritRating = 26.0
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

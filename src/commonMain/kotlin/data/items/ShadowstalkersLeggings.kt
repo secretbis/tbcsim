@@ -52,7 +52,8 @@ public class ShadowstalkersLeggings : Item() {
       agility = 23,
       stamina = 33,
       armor = 224,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 17.0
       )
 

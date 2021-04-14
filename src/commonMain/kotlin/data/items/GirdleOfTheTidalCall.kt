@@ -61,7 +61,8 @@ public class GirdleOfTheTidalCall : Item() {
       stamina = 30,
       intellect = 20,
       armor = 506,
-      physicalCritRating = 33.0
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

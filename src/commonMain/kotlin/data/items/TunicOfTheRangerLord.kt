@@ -62,7 +62,8 @@ public class TunicOfTheRangerLord : Item() {
       stamina = 34,
       intellect = 23,
       armor = 879,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

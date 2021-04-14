@@ -26,7 +26,7 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
             override val hidden: Boolean = true
 
             override fun modifyStats(sp: SimParticipant): Stats {
-                return Stats(physicalCritRating = 3 * Rating.critPerPct)
+                return Stats(meleeCritRating = 3 * Rating.critPerPct)
             }
         }
 

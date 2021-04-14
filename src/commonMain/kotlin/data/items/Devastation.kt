@@ -48,7 +48,8 @@ public class Devastation : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
-      physicalCritRating = 50.0
+      meleeCritRating = 50.0,
+      rangedCritRating = 50.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,7 +51,8 @@ public class MarksmansBelt : Item() {
       stamina = 28,
       intellect = 12,
       armor = 321,
-      physicalCritRating = 9.0,
+      meleeCritRating = 9.0,
+      rangedCritRating = 9.0,
       resilienceRating = 13.0
       )
 

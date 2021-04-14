@@ -53,6 +53,7 @@ gear:
     name: Dragonmaw
     # No Executioner until ZA
     enchant: Mongoose
+    tempEnchant: Adamantite Stone
   rangedTotemLibram:
     name: Felsteel Whisper Knives
   head:

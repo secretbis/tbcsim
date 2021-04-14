@@ -51,7 +51,8 @@ public class SurestrikeGogglesV : Item() {
   public override var stats: Stats = Stats(
       stamina = 47,
       armor = 902,
-      physicalCritRating = 51.0,
+      meleeCritRating = 51.0,
+      rangedCritRating = 51.0,
       physicalHitRating = 26.0
       )
 

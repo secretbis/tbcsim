@@ -55,7 +55,8 @@ public class GladiatorsScaledHelm : Item() {
       stamina = 48,
       intellect = 21,
       armor = 1257,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 16.0
       )
 

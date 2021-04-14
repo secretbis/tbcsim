@@ -49,7 +49,8 @@ public class EmeraldEyeBracer : Item() {
   public override var stats: Stats = Stats(
       intellect = 12,
       armor = 285,
-      physicalCritRating = 13.0
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

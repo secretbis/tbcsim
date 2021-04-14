@@ -54,7 +54,8 @@ public class BrutalGladiatorsScaledGauntlets : Item() {
       stamina = 46,
       intellect = 27,
       armor = 1239,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       resilienceRating = 26.0
       )
 

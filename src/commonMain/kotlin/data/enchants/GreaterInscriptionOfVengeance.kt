@@ -17,7 +17,8 @@ class GreaterInscriptionOfVengeance(item: Item) : Enchant(item) {
         return Stats(
             attackPower = 30,
             rangedAttackPower = 30,
-            physicalCritRating = 10.0
+            meleeCritRating = 10.0,
+            rangedCritRating = 10.0
         )
     }
 }

@@ -52,7 +52,8 @@ public class StormHelm : Item() {
       stamina = 21,
       intellect = 28,
       armor = 604,
-      physicalCritRating = 22.0
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

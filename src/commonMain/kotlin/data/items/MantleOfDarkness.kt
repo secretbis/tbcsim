@@ -60,7 +60,8 @@ public class MantleOfDarkness : Item() {
   public override var stats: Stats = Stats(
       stamina = 34,
       armor = 333,
-      physicalCritRating = 33.0,
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0,
       physicalHitRating = 22.0
       )
 

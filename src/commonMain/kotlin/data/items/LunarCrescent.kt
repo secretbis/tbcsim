@@ -47,7 +47,8 @@ public class LunarCrescent : Item() {
   public override var speed: Double = 3700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 47.0
+      meleeCritRating = 47.0,
+      rangedCritRating = 47.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -54,7 +54,8 @@ public class HighWarlordsLinkedHelm : Item() {
       strength = 20,
       stamina = 30,
       armor = 530,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 24.0
       )
 

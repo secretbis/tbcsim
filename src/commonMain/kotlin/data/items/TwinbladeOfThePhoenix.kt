@@ -61,7 +61,8 @@ public class TwinbladeOfThePhoenix : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 53,
-      physicalCritRating = 37.0
+      meleeCritRating = 37.0,
+      rangedCritRating = 37.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

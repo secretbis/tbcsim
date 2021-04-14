@@ -48,7 +48,8 @@ public class PlasmaRatsHyperScythe : Item() {
   public override var stats: Stats = Stats(
       strength = 42,
       stamina = 45,
-      physicalCritRating = 26.0
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

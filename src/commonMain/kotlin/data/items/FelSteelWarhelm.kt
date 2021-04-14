@@ -49,7 +49,8 @@ public class FelSteelWarhelm : Item() {
       strength = 46,
       stamina = 46,
       armor = 1306,
-      physicalCritRating = 44.0,
+      meleeCritRating = 44.0,
+      rangedCritRating = 44.0,
       physicalHitRating = 30.0
       )
 

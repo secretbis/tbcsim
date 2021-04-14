@@ -47,7 +47,8 @@ public class BoundlessAgony : Item() {
   public override var speed: Double = 1800.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

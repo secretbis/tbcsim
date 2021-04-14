@@ -49,7 +49,8 @@ public class CrimsonforgeBreastplate : Item() {
       strength = 36,
       stamina = 45,
       armor = 1164,
-      physicalCritRating = 26.0,
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0,
       physicalHitRating = 16.0
       )
 

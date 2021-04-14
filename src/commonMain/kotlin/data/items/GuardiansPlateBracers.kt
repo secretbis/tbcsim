@@ -54,7 +54,8 @@ public class GuardiansPlateBracers : Item() {
       strength = 28,
       stamina = 40,
       armor = 841,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 17.0
       )
 

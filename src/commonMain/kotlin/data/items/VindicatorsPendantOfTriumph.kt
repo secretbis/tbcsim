@@ -50,7 +50,8 @@ public class VindicatorsPendantOfTriumph : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 35,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       resilienceRating = 18.0
       )
 

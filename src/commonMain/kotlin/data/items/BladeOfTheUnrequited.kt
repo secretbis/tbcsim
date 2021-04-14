@@ -61,7 +61,8 @@ public class BladeOfTheUnrequited : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 13,
-      physicalCritRating = 9.0
+      meleeCritRating = 9.0,
+      rangedCritRating = 9.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

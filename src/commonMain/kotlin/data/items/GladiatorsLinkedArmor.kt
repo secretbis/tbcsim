@@ -55,7 +55,8 @@ public class GladiatorsLinkedArmor : Item() {
       strength = 29,
       stamina = 51,
       armor = 866,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       resilienceRating = 26.0
       )
 

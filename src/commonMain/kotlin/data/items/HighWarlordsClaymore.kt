@@ -48,7 +48,8 @@ public class HighWarlordsClaymore : Item() {
   public override var stats: Stats = Stats(
       strength = 28,
       stamina = 42,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       physicalHitRating = 18.0,
       resilienceRating = 19.0
       )

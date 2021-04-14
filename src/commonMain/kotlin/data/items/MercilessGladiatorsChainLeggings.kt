@@ -54,7 +54,8 @@ public class MercilessGladiatorsChainLeggings : Item() {
       stamina = 58,
       intellect = 15,
       armor = 835,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 33.0
       )
 

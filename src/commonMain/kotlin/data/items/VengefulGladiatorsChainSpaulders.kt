@@ -56,7 +56,8 @@ public class VengefulGladiatorsChainSpaulders : Item() {
       stamina = 49,
       intellect = 12,
       armor = 766,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 21.0
       )
 

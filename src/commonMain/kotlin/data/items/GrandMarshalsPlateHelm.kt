@@ -54,7 +54,8 @@ public class GrandMarshalsPlateHelm : Item() {
       strength = 20,
       stamina = 34,
       armor = 946,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 19.0
       )
 

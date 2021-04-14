@@ -50,7 +50,8 @@ public class TheExarchsProtector : Item() {
   public override var stats: Stats = Stats(
       strength = 30,
       armor = 1018,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       defenseRating = 23.0
       )
 

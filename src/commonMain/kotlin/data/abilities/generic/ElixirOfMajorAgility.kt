@@ -18,7 +18,7 @@ class ElixirOfMajorAgility : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR)
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(agility = 35, physicalCritRating = 20.0)
+            return Stats(agility = 35, meleeCritRating = 20.0, rangedCritRating = 20.0)
         }
     }
 

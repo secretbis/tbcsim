@@ -6,6 +6,7 @@ import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
 import data.Enchants
+import data.TempEnchants
 import data.itemscustom.EmptyItem
 import data.model.Gem
 import data.model.Item
@@ -123,6 +124,15 @@ object ConfigMaker {
                     logger.warn { "Could not find enchant with name: ${itemYml.enchant}" }
                 } else {
                     item.enchant = enchant
+                }
+            }
+
+            if(itemYml.tempEnchant != null) {
+                val tempEnchant = TempEnchants.byName[itemYml.tempEnchant]?.invoke(item)
+                if(tempEnchant == null) {
+                    logger.warn { "Could not find tempEnchant with name: ${itemYml.tempEnchant}" }
+                } else {
+                    item.tempEnchant = tempEnchant
                 }
             }
 

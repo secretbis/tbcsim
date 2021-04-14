@@ -52,7 +52,8 @@ public class EmbraceOfTheTwistingNether : Item() {
       stamina = 56,
       intellect = 27,
       armor = 1022,
-      physicalCritRating = 35.0
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

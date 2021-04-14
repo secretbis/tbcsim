@@ -18,7 +18,8 @@ class ChaoticSkyfireDiamond : Gem(34220, "Chaotic Skyfire Diamond", "inv_misc_ge
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalCritRating = 12.0,
+                meleeCritRating = 12.0,
+                rangedCritRating = 12.0,
                 whiteDamageAddlCritMultiplier = 1.03,
                 yellowDamageAddlCritMultiplier = 1.03
             )

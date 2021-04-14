@@ -55,7 +55,8 @@ public class OpportunistsLeatherTunic : Item() {
       agility = 20,
       stamina = 42,
       armor = 292,
-      physicalCritRating = 10.0,
+      meleeCritRating = 10.0,
+      rangedCritRating = 10.0,
       resilienceRating = 24.0
       )
 

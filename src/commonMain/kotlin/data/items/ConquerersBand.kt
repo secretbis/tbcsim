@@ -48,7 +48,8 @@ public class ConquerersBand : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 27,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

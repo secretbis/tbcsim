@@ -63,7 +63,8 @@ public class RipFlayerLeggings : Item() {
       stamina = 18,
       intellect = 30,
       armor = 710,
-      physicalCritRating = 28.0
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

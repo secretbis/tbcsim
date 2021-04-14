@@ -62,7 +62,8 @@ public class GronnStitchedGirdle : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       armor = 222,
-      physicalCritRating = 25.0
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -63,7 +63,8 @@ public class TrueAimStalkerBands : Item() {
       stamina = 18,
       intellect = 12,
       armor = 394,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

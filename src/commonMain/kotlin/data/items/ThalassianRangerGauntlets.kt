@@ -53,7 +53,8 @@ public class ThalassianRangerGauntlets : Item() {
       stamina = 43,
       intellect = 27,
       armor = 715,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

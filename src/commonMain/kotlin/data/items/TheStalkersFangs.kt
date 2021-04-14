@@ -48,7 +48,8 @@ public class TheStalkersFangs : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 16,
-      physicalCritRating = 15.0
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

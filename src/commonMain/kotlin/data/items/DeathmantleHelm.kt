@@ -55,7 +55,8 @@ public class DeathmantleHelm : Item() {
       agility = 39,
       stamina = 48,
       armor = 341,
-      physicalCritRating = 25.0
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

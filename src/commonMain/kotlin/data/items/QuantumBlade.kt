@@ -48,7 +48,8 @@ public class QuantumBlade : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 31,
-      physicalCritRating = 30.0
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SpellTooltip from './spell_tooltip';
 import GearSelector from './gear_selector';
 
-export default function({ item, enchant, inventorySlots, onSelect }) {
+export default function({ item, enchant, enchantType, inventorySlots, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   function onEnchantClick(e) {
@@ -22,11 +22,12 @@ export default function({ item, enchant, inventorySlots, onSelect }) {
   }
 
   if(!enchant) {
+    const missingMsg = enchantType === 'tempEnchants' ? 'No temp enchant' : 'No enchant'
     return (
       <div onClick={onEnchantClick}>
-          <span style={{ cursor: 'pointer' }}>No enchant</span>
+          <span style={{ cursor: 'pointer' }}>{missingMsg}</span>
           <GearSelector
-            type='enchants'
+            type={enchantType}
             item={item}
             TooltipComponent={SpellTooltip}
             inventorySlots={inventorySlots}
@@ -43,7 +44,7 @@ export default function({ item, enchant, inventorySlots, onSelect }) {
       <SpellTooltip spell={enchant}>
         <span className="q2">{enchant.displayName}</span>
         <GearSelector
-          type='enchants'
+          type={enchantType}
           item={item}
           TooltipComponent={SpellTooltip}
           inventorySlots={inventorySlots}

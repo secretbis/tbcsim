@@ -53,7 +53,8 @@ public class GrandMarshalsPlateGauntlets : Item() {
       strength = 22,
       stamina = 30,
       armor = 728,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 17.0
       )
 

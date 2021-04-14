@@ -50,7 +50,8 @@ public class OutlandStriders : Item() {
       stamina = 18,
       intellect = 24,
       armor = 448,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

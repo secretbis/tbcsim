@@ -47,7 +47,8 @@ public class BlackPlanarEdge : Item() {
   public override var speed: Double = 2700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,7 +51,8 @@ public class DeftHandguards : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       armor = 149,
-      physicalCritRating = 12.0
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

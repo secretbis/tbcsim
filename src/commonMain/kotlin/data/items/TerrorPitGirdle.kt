@@ -63,7 +63,8 @@ public class TerrorPitGirdle : Item() {
       stamina = 18,
       intellect = 22,
       armor = 495,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

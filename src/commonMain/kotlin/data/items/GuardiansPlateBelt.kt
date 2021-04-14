@@ -52,7 +52,8 @@ public class GuardiansPlateBelt : Item() {
       strength = 40,
       stamina = 56,
       armor = 1115,
-      physicalCritRating = 40.0,
+      meleeCritRating = 40.0,
+      rangedCritRating = 40.0,
       resilienceRating = 30.0
       )
 

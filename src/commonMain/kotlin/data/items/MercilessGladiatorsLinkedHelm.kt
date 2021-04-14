@@ -54,7 +54,8 @@ public class MercilessGladiatorsLinkedHelm : Item() {
       strength = 37,
       stamina = 60,
       armor = 775,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       resilienceRating = 33.0
       )
 

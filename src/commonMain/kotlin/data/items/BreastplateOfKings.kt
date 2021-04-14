@@ -51,7 +51,8 @@ public class BreastplateOfKings : Item() {
       strength = 31,
       stamina = 46,
       armor = 1353,
-      physicalCritRating = 31.0,
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0,
       physicalHitRating = 20.0
       )
 

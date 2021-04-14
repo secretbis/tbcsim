@@ -56,7 +56,8 @@ public class GrandMarshalsChainArmor : Item() {
       stamina = 42,
       intellect = 15,
       armor = 652,
-      physicalCritRating = 12.0,
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0,
       resilienceRating = 16.0
       )
 

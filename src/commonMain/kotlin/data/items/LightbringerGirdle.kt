@@ -54,7 +54,8 @@ public class LightbringerGirdle : Item() {
       strength = 44,
       stamina = 24,
       armor = 1081,
-      physicalCritRating = 42.0,
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0,
       physicalHasteRating = 29.0,
       expertiseRating = 25.0
       )

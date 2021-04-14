@@ -47,7 +47,8 @@ public class TheBladeOfHarbingers : Item() {
   public override var speed: Double = 3500.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 55.0,
+      meleeCritRating = 55.0,
+      rangedCritRating = 55.0,
       physicalHasteRating = 53.0
       )
 

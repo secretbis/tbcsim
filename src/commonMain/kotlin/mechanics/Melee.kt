@@ -154,6 +154,10 @@ object Melee {
         return Random.nextDouble(low, high)
     }
 
+    fun meleeCritChance(sp: SimParticipant): Double {
+        return (sp.meleeCritPct() / 100.0 - valueByLevelDiff(sp, General.critSuppression)).coerceAtLeast(0.0)
+    }
+
     // Converts an attack power value into a flat damage modifier for a particular item
     @Suppress("UNUSED_PARAMETER")
     fun apToDamage(sp: SimParticipant, attackPower: Int, item: Item, isNormalized: Boolean = false): Double {
@@ -215,7 +219,7 @@ object Melee {
         }
         val blockChance = General.physicalBlockChance(sp) + glanceChance
         val critChance = if(isWhiteDmg) {
-            General.physicalCritChance(sp) + blockChance
+            meleeCritChance(sp) + blockChance
         } else {
             blockChance
         }
@@ -236,7 +240,7 @@ object Melee {
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
-                    hitRoll2 < General.physicalCritChance(sp) -> Pair(
+                    hitRoll2 < meleeCritChance(sp) -> Pair(
                         finalResult.first * critMultiplier,
                         Event.Result.CRIT
                     )

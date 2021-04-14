@@ -53,7 +53,8 @@ public class SeersLinkedGauntlets : Item() {
       strength = 21,
       stamina = 33,
       armor = 407,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       resilienceRating = 17.0
       )
 

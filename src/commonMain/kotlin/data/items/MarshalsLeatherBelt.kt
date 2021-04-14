@@ -61,7 +61,8 @@ public class MarshalsLeatherBelt : Item() {
       agility = 27,
       stamina = 39,
       armor = 219,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 26.0
       )
 

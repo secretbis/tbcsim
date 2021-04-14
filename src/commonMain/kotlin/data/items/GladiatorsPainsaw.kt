@@ -48,7 +48,8 @@ public class GladiatorsPainsaw : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 48,
-      physicalCritRating = 35.0,
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0,
       resilienceRating = 36.0
       )
 

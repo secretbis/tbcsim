@@ -53,7 +53,8 @@ public class BrutalGladiatorsLinkedGauntlets : Item() {
       strength = 38,
       stamina = 58,
       armor = 694,
-      physicalCritRating = 37.0,
+      meleeCritRating = 37.0,
+      rangedCritRating = 37.0,
       resilienceRating = 22.0
       )
 

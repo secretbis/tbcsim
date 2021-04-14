@@ -56,7 +56,8 @@ public class SkyshatterPants : Item() {
       stamina = 67,
       intellect = 31,
       armor = 894,
-      physicalCritRating = 39.0,
+      meleeCritRating = 39.0,
+      rangedCritRating = 39.0,
       physicalHitRating = 21.0
       )
 

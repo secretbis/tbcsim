@@ -47,7 +47,8 @@ public class BattlemastersCruelty : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 40.0
+      meleeCritRating = 40.0,
+      rangedCritRating = 40.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -51,7 +51,8 @@ public class AvengersLegplates : Item() {
       strength = 34,
       stamina = 33,
       armor = 891,
-      physicalCritRating = 12.0,
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0,
       resilienceRating = 22.0
       )
 

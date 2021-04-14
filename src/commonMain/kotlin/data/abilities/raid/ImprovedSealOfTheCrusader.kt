@@ -25,7 +25,8 @@ class ImprovedSealOfTheCrusader : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalCritRating = bonusCritRating,
+                meleeCritRating = bonusCritRating,
+                rangedCritRating = bonusCritRating,
                 spellCritRating = bonusCritRating
             )
         }

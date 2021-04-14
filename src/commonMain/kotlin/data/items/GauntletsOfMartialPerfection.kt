@@ -62,7 +62,8 @@ public class GauntletsOfMartialPerfection : Item() {
       strength = 36,
       stamina = 34,
       armor = 982,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

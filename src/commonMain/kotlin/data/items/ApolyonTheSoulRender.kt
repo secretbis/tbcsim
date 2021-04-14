@@ -50,7 +50,8 @@ public class ApolyonTheSoulRender : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 75,
-      physicalCritRating = 42.0,
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0,
       physicalHasteRating = 32.0
       )
 

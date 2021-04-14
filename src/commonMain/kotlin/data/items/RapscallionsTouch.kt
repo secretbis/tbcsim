@@ -50,7 +50,8 @@ public class RapscallionsTouch : Item() {
   public override var stats: Stats = Stats(
       agility = 15,
       armor = 149,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       physicalHitRating = 15.0
       )
 

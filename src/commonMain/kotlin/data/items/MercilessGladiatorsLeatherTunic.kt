@@ -55,7 +55,8 @@ public class MercilessGladiatorsLeatherTunic : Item() {
       agility = 37,
       stamina = 57,
       armor = 428,
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       resilienceRating = 25.0
       )
 

@@ -64,7 +64,8 @@ public class BeltOfTheBlackEagle : Item() {
       stamina = 20,
       intellect = 23,
       armor = 506,
-      physicalCritRating = 17.0
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

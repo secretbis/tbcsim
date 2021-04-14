@@ -53,7 +53,8 @@ public class VeteransChainBracers : Item() {
       stamina = 29,
       intellect = 10,
       armor = 388,
-      physicalCritRating = 8.0,
+      meleeCritRating = 8.0,
+      rangedCritRating = 8.0,
       resilienceRating = 13.0
       )
 

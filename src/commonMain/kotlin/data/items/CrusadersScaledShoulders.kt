@@ -55,7 +55,8 @@ public class CrusadersScaledShoulders : Item() {
       stamina = 33,
       intellect = 8,
       armor = 873,
-      physicalCritRating = 9.0,
+      meleeCritRating = 9.0,
+      rangedCritRating = 9.0,
       resilienceRating = 10.0
       )
 

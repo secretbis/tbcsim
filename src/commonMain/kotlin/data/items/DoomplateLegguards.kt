@@ -50,7 +50,8 @@ public class DoomplateLegguards : Item() {
       strength = 36,
       stamina = 33,
       armor = 1019,
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       physicalHitRating = 17.0
       )
 

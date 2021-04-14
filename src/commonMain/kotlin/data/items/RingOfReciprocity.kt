@@ -47,7 +47,8 @@ public class RingOfReciprocity : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       physicalHitRating = 15.0
       )
 

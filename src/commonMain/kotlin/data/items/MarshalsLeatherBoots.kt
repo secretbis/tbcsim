@@ -50,7 +50,8 @@ public class MarshalsLeatherBoots : Item() {
       agility = 27,
       stamina = 39,
       armor = 267,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 26.0
       )
 

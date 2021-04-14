@@ -52,7 +52,8 @@ public class BladedChaosTunic : Item() {
       agility = 42,
       stamina = 45,
       armor = 499,
-      physicalCritRating = 38.0
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

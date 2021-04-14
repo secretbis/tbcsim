@@ -47,7 +47,8 @@ public class WickedEdgeOfThePlanes : Item() {
   public override var speed: Double = 2700.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

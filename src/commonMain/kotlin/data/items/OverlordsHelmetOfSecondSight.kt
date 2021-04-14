@@ -63,7 +63,8 @@ public class OverlordsHelmetOfSecondSight : Item() {
       strength = 29,
       stamina = 22,
       armor = 898,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       physicalHitRating = 13.0
       )
 

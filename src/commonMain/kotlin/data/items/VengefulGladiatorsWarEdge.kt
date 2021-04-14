@@ -48,7 +48,8 @@ public class VengefulGladiatorsWarEdge : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 12.0
       )
 

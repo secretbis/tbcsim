@@ -54,7 +54,8 @@ public class DestroyerBattleHelm : Item() {
       strength = 47,
       stamina = 45,
       armor = 1355,
-      physicalCritRating = 36.0,
+      meleeCritRating = 36.0,
+      rangedCritRating = 36.0,
       physicalHitRating = 21.0
       )
 

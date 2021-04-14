@@ -53,7 +53,8 @@ public class GrandMarshalsLeatherLegguards : Item() {
       agility = 28,
       stamina = 42,
       armor = 256,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 28.0
       )
 

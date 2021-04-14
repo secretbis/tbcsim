@@ -60,7 +60,8 @@ public class MaleficMaskOfTheShadows : Item() {
   public override var stats: Stats = Stats(
       stamina = 45,
       armor = 321,
-      physicalCritRating = 42.0,
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0,
       physicalHitRating = 31.0
       )
 

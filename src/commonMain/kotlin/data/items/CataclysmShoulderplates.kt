@@ -56,7 +56,8 @@ public class CataclysmShoulderplates : Item() {
       stamina = 37,
       intellect = 21,
       armor = 700,
-      physicalCritRating = 22.0
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

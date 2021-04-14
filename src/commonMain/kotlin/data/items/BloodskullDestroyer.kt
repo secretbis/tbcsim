@@ -48,7 +48,8 @@ public class BloodskullDestroyer : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 12,
-      physicalCritRating = 21.0
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

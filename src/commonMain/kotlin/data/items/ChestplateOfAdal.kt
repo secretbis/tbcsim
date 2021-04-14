@@ -49,7 +49,8 @@ public class ChestplateOfAdal : Item() {
       strength = 35,
       stamina = 27,
       armor = 1106,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       physicalHitRating = 22.0
       )
 

@@ -63,7 +63,8 @@ public class MasterAssassinWristwraps : Item() {
       agility = 17,
       stamina = 22,
       armor = 177,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

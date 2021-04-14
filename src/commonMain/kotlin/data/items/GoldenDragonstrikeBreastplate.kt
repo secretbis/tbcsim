@@ -50,7 +50,8 @@ public class GoldenDragonstrikeBreastplate : Item() {
       stamina = 25,
       intellect = 17,
       armor = 570,
-      physicalCritRating = 25.0
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

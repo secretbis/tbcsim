@@ -50,7 +50,8 @@ public class VeteransScaledGreaves : Item() {
       stamina = 39,
       intellect = 27,
       armor = 1172,
-      physicalCritRating = 18.0,
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0,
       resilienceRating = 18.0
       )
 

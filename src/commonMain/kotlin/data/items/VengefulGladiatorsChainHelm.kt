@@ -56,7 +56,8 @@ public class VengefulGladiatorsChainHelm : Item() {
       stamina = 61,
       intellect = 22,
       armor = 830,
-      physicalCritRating = 26.0,
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0,
       resilienceRating = 22.0
       )
 

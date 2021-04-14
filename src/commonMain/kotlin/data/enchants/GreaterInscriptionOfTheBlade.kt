@@ -17,7 +17,8 @@ class GreaterInscriptionOfTheBlade(item: Item) : Enchant(item) {
         return Stats(
             attackPower = 20,
             rangedAttackPower = 20,
-            physicalCritRating = 15.0
+            meleeCritRating = 15.0,
+            rangedCritRating = 15.0
         )
     }
 }

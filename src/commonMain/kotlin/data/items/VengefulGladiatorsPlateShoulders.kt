@@ -54,7 +54,8 @@ public class VengefulGladiatorsPlateShoulders : Item() {
       strength = 33,
       stamina = 57,
       armor = 1369,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       resilienceRating = 20.0
       )
 

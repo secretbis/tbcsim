@@ -47,7 +47,8 @@ public class DepletedMace : Item() {
   public override var speed: Double = 1800.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 8.0
       )
 

@@ -50,7 +50,8 @@ public class TerrorweaveTunic : Item() {
 
   public override var stats: Stats = Stats(
       armor = 379,
-      physicalCritRating = 25.0,
+      meleeCritRating = 25.0,
+      rangedCritRating = 25.0,
       physicalHitRating = 21.0
       )
 

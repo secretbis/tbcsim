@@ -50,7 +50,8 @@ public class Hatebringer : Item() {
   public override var stats: Stats = Stats(
       strength = 25,
       stamina = 21,
-      physicalCritRating = 22.0
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

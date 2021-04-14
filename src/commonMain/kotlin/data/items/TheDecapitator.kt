@@ -47,7 +47,8 @@ public class TheDecapitator : Item() {
   public override var speed: Double = 2600.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 27.0
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

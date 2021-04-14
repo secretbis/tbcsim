@@ -54,7 +54,8 @@ public class MercilessGladiatorsPlateHelm : Item() {
       strength = 35,
       stamina = 54,
       armor = 1385,
-      physicalCritRating = 31.0,
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0,
       physicalHitRating = 14.0,
       resilienceRating = 25.0
       )

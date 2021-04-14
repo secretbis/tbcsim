@@ -25,7 +25,7 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     override fun modifyStats(sp: SimParticipant): Stats? {
         // Mark each mainhand weapon as having this instead
         // FIXME: This needs to be removed if this buff expires or is otherwise removed
-        sourceItems.first().temporaryEnhancement = this
+        sourceItems.first().tempEnchant = this
         return null
     }
 
@@ -45,8 +45,8 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
 
         override val type: Type = Type.PERCENT
         override fun percentChance(sp: SimParticipant): Double {
-            val mhWf = sp.character.gear.mainHand.temporaryEnhancement?.name?.startsWith("Windfury Weapon") == true
-            val ohWf = sp.character.gear.offHand.temporaryEnhancement?.name?.startsWith("Windfury Weapon") == true
+            val mhWf = sp.character.gear.mainHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
+            val ohWf = sp.character.gear.offHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
 
             return if(mhWf && ohWf) 36.0 else 20.0
         }

@@ -55,7 +55,8 @@ public class GladiatorsScaledShoulders : Item() {
       stamina = 34,
       intellect = 15,
       armor = 1160,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 16.0
       )
 

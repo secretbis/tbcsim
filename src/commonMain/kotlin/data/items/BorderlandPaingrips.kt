@@ -52,7 +52,8 @@ public class BorderlandPaingrips : Item() {
       strength = 47,
       stamina = 48,
       armor = 1277,
-      physicalCritRating = 39.0
+      meleeCritRating = 39.0,
+      rangedCritRating = 39.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

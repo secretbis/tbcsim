@@ -49,7 +49,8 @@ public class ScepterOfShatar : Item() {
       strength = 31,
       stamina = 28,
       intellect = 26,
-      physicalCritRating = 30.0
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

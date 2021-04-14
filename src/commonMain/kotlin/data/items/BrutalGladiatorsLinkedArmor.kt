@@ -55,7 +55,8 @@ public class BrutalGladiatorsLinkedArmor : Item() {
       strength = 32,
       stamina = 71,
       armor = 1110,
-      physicalCritRating = 35.0,
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0,
       physicalHitRating = 17.0,
       resilienceRating = 31.0
       )

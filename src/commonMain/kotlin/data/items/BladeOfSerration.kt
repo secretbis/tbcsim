@@ -59,7 +59,8 @@ public class BladeOfSerration : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 30,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

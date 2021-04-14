@@ -52,7 +52,8 @@ public class MayhemProjectionGoggles : Item() {
       strength = 62,
       stamina = 47,
       armor = 1611,
-      physicalCritRating = 51.0,
+      meleeCritRating = 51.0,
+      rangedCritRating = 51.0,
       physicalHitRating = 26.0
       )
 

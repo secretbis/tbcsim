@@ -48,6 +48,7 @@ gear:
   mainHand:
     name: Sonic Spear
     enchant: Major Agility
+    tempEnchant: Bugged? Hunter Adamantite Stone
   rangedTotemLibram:
     name: Marksman's Bow
     enchant: Stabilized Eternium Scope

@@ -56,7 +56,8 @@ public class HighWarlordsChainHelm : Item() {
       stamina = 30,
       intellect = 14,
       armor = 530,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 15.0
       )
 

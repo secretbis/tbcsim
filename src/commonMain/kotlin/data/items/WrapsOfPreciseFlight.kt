@@ -62,7 +62,8 @@ public class WrapsOfPreciseFlight : Item() {
       stamina = 28,
       intellect = 20,
       armor = 432,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

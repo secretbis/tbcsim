@@ -63,7 +63,8 @@ public class GlovesOfQuickening : Item() {
       stamina = 22,
       intellect = 24,
       armor = 507,
-      physicalCritRating = 17.0
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

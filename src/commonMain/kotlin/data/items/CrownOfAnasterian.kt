@@ -52,7 +52,8 @@ public class CrownOfAnasterian : Item() {
       strength = 61,
       stamina = 67,
       armor = 1660,
-      physicalCritRating = 40.0
+      meleeCritRating = 40.0,
+      rangedCritRating = 40.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

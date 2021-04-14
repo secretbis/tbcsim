@@ -56,7 +56,8 @@ public class SkyshatterCover : Item() {
       stamina = 55,
       intellect = 27,
       armor = 830,
-      physicalCritRating = 28.0,
+      meleeCritRating = 28.0,
+      rangedCritRating = 28.0,
       physicalHitRating = 20.0
       )
 

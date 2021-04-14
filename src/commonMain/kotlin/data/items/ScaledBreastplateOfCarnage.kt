@@ -61,7 +61,8 @@ public class ScaledBreastplateOfCarnage : Item() {
       stamina = 33,
       intellect = 38,
       armor = 812,
-      physicalCritRating = 24.0
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

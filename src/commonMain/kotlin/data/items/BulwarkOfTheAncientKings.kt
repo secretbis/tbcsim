@@ -52,7 +52,8 @@ public class BulwarkOfTheAncientKings : Item() {
       strength = 40,
       stamina = 56,
       armor = 1825,
-      physicalCritRating = 41.0,
+      meleeCritRating = 41.0,
+      rangedCritRating = 41.0,
       physicalHitRating = 25.0
       )
 

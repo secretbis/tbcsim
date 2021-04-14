@@ -50,7 +50,8 @@ public class ElekkHideLeggings : Item() {
       stamina = 28,
       intellect = 20,
       armor = 230,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

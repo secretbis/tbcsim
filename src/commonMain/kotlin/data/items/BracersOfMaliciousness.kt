@@ -60,7 +60,8 @@ public class BracersOfMaliciousness : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       armor = 159,
-      physicalCritRating = 22.0
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

@@ -55,7 +55,8 @@ public class GuardiansLeatherBracers : Item() {
       agility = 28,
       stamina = 37,
       armor = 211,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       resilienceRating = 15.0
       )
 

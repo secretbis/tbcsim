@@ -51,7 +51,8 @@ public class HelmOfTheIllidariShatterer : Item() {
       strength = 51,
       stamina = 29,
       armor = 1434,
-      physicalCritRating = 42.0,
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0,
       physicalHitRating = 34.0
       )
 

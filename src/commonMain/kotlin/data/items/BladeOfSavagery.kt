@@ -48,7 +48,8 @@ public class BladeOfSavagery : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 19,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       physicalHitRating = 15.0
       )
 

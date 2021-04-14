@@ -52,7 +52,8 @@ public class CursedVisionOfSargeras : Item() {
       agility = 39,
       stamina = 46,
       armor = 385,
-      physicalCritRating = 38.0,
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0,
       physicalHitRating = 21.0
       )
 

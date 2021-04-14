@@ -55,7 +55,8 @@ public class GladiatorsLeatherSpaulders : Item() {
       agility = 29,
       stamina = 39,
       armor = 291,
-      physicalCritRating = 21.0,
+      meleeCritRating = 21.0,
+      rangedCritRating = 21.0,
       resilienceRating = 23.0
       )
 

@@ -55,7 +55,8 @@ public class VengefulGladiatorsPlateHelm : Item() {
       strength = 39,
       stamina = 61,
       armor = 1483,
-      physicalCritRating = 35.0,
+      meleeCritRating = 35.0,
+      rangedCritRating = 35.0,
       physicalHitRating = 12.0,
       resilienceRating = 25.0
       )

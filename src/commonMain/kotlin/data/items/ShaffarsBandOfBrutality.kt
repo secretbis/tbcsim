@@ -47,7 +47,8 @@ public class ShaffarsBandOfBrutality : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 19.0
       )
 

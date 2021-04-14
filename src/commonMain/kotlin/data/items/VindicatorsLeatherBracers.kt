@@ -55,7 +55,8 @@ public class VindicatorsLeatherBracers : Item() {
       agility = 25,
       stamina = 33,
       armor = 194,
-      physicalCritRating = 12.0,
+      meleeCritRating = 12.0,
+      rangedCritRating = 12.0,
       resilienceRating = 15.0
       )
 

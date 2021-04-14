@@ -61,7 +61,8 @@ public class ShouldersOfTheHiddenPredator : Item() {
       agility = 38,
       stamina = 37,
       armor = 741,
-      physicalCritRating = 26.0
+      meleeCritRating = 26.0,
+      rangedCritRating = 26.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

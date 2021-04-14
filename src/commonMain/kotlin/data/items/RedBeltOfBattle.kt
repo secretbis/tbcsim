@@ -62,7 +62,8 @@ public class RedBeltOfBattle : Item() {
       strength = 41,
       stamina = 21,
       armor = 904,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       physicalHitRating = 14.0
       )
 

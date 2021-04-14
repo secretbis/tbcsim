@@ -47,7 +47,8 @@ public class TsunamiTalisman : Item() {
   public override var speed: Double = 0.0
 
   public override var stats: Stats = Stats(
-      physicalCritRating = 38.0,
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0,
       physicalHitRating = 10.0
       )
 

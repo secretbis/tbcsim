@@ -49,7 +49,8 @@ public class ArmwrapsOfDisdain : Item() {
   public override var stats: Stats = Stats(
       stamina = 18,
       armor = 128,
-      physicalCritRating = 20.0
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

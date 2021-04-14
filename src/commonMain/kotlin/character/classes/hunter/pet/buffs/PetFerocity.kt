@@ -17,7 +17,8 @@ class PetFerocity: Buff() {
         val ferocityCritRating = Rating.critPerPct * ferocityCrit
 
         return Stats(
-            physicalCritRating = ferocityCritRating,
+            meleeCritRating = ferocityCritRating,
+            rangedCritRating = ferocityCritRating,
             spellCritRating = ferocityCritRating
         )
     }

@@ -59,7 +59,8 @@ public class TerokksMask : Item() {
 
   public override var stats: Stats = Stats(
       armor = 237,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       dodgeRating = 36.0
       )
 

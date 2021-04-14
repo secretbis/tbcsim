@@ -18,7 +18,8 @@ class EnigmaticSkyfireDiamond : Gem(25895, "Enigmatic Skyfire Diamond", "inv_mis
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalCritRating = 12.0
+                meleeCritRating = 12.0,
+                rangedCritRating = 12.0
             )
         }
     }

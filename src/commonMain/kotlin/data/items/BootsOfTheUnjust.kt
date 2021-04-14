@@ -49,7 +49,8 @@ public class BootsOfTheUnjust : Item() {
   public override var stats: Stats = Stats(
       stamina = 25,
       armor = 201,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       physicalHitRating = 13.0
       )
 

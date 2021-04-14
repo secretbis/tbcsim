@@ -54,7 +54,8 @@ public class GrandMarshalsPlateShoulders : Item() {
       strength = 14,
       stamina = 36,
       armor = 873,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       resilienceRating = 13.0
       )
 

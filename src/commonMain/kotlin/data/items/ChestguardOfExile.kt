@@ -60,7 +60,8 @@ public class ChestguardOfExile : Item() {
       strength = 44,
       stamina = 33,
       armor = 1268,
-      physicalCritRating = 36.0
+      meleeCritRating = 36.0,
+      rangedCritRating = 36.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

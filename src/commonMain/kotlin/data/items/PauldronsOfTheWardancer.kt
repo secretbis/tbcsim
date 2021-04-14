@@ -62,7 +62,8 @@ public class PauldronsOfTheWardancer : Item() {
       strength = 38,
       stamina = 21,
       armor = 1206,
-      physicalCritRating = 29.0
+      meleeCritRating = 29.0,
+      rangedCritRating = 29.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

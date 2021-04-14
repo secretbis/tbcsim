@@ -61,7 +61,8 @@ public class MaulgarsWarhelm : Item() {
       stamina = 43,
       intellect = 31,
       armor = 715,
-      physicalCritRating = 42.0
+      meleeCritRating = 42.0,
+      rangedCritRating = 42.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

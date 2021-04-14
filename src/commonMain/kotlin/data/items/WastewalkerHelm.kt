@@ -63,7 +63,8 @@ public class WastewalkerHelm : Item() {
   public override var stats: Stats = Stats(
       stamina = 30,
       armor = 237,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       physicalHitRating = 18.0
       )
 

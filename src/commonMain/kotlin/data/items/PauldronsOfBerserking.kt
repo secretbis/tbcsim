@@ -62,7 +62,8 @@ public class PauldronsOfBerserking : Item() {
       strength = 45,
       stamina = 48,
       armor = 1487,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       physicalHasteRating = 27.0
       )
 

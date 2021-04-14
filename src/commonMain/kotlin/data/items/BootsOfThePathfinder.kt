@@ -49,7 +49,8 @@ public class BootsOfThePathfinder : Item() {
   public override var stats: Stats = Stats(
       intellect = 23,
       armor = 381,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

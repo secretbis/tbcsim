@@ -37,6 +37,7 @@ data class GearYml(
 data class GearItemYml(
     val name: String,
     val enchant: String? = null,
+    val tempEnchant: String? = null,
     val gems: List<String>? = null
 )
 

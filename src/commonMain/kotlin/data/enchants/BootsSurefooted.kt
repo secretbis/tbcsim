@@ -15,7 +15,8 @@ class BootsSurefooted(item: Item) : Enchant(item) {
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
-            physicalCritRating = 10.0,
+            meleeCritRating = 10.0,
+            rangedCritRating = 10.0,
             physicalHitRating = 10.0
         )
     }

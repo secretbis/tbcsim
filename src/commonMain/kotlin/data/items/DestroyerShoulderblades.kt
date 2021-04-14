@@ -54,7 +54,8 @@ public class DestroyerShoulderblades : Item() {
       strength = 36,
       stamina = 38,
       armor = 1251,
-      physicalCritRating = 20.0,
+      meleeCritRating = 20.0,
+      rangedCritRating = 20.0,
       physicalHitRating = 18.0
       )
 

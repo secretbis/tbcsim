@@ -61,7 +61,8 @@ public class RazorfuryMantle : Item() {
       agility = 28,
       stamina = 55,
       armor = 333,
-      physicalCritRating = 23.0
+      meleeCritRating = 23.0,
+      rangedCritRating = 23.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

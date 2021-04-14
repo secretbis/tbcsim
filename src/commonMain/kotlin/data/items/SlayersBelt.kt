@@ -55,7 +55,8 @@ public class SlayersBelt : Item() {
       agility = 29,
       stamina = 21,
       armor = 272,
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       physicalHitRating = 30.0,
       physicalHasteRating = 27.0
       )

@@ -54,7 +54,8 @@ public class DestroyerBreastplate : Item() {
       strength = 50,
       stamina = 48,
       armor = 1668,
-      physicalCritRating = 33.0,
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0,
       physicalHitRating = 15.0
       )
 

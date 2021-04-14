@@ -63,7 +63,8 @@ public class DonAlejandrosMoneyBelt : Item() {
       agility = 29,
       stamina = 37,
       armor = 249,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

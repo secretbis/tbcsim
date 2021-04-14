@@ -55,7 +55,8 @@ public class BrutalGladiatorsPlateHelm : Item() {
       strength = 45,
       stamina = 68,
       armor = 1611,
-      physicalCritRating = 41.0,
+      meleeCritRating = 41.0,
+      rangedCritRating = 41.0,
       physicalHitRating = 18.0,
       resilienceRating = 25.0
       )

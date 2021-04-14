@@ -11,7 +11,7 @@ abstract class Spec {
         val defaultMeleeDeltas: List<SpecEpDelta> = listOf(
             Triple("strength", Stats(strength = 50), 50.0),
             Triple("agility", Stats(agility = 50), 50.0),
-            Triple("physicalCritRating", Stats(physicalCritRating = Rating.critPerPct), Rating.critPerPct),
+            Triple("meleeCritRating", Stats(meleeCritRating = Rating.critPerPct), Rating.critPerPct),
             Triple("physicalHasteRating", Stats(physicalHasteRating = Rating.hastePerPct), Rating.hastePerPct),
             Triple("expertiseRating", Stats(expertiseRating = Rating.expertisePerPct), Rating.expertisePerPct),
             Triple("armorPen", Stats(armorPen = 100), 100.0)
@@ -26,7 +26,7 @@ abstract class Spec {
         val defaultRangedDeltas: List<SpecEpDelta> = listOf(
             // Hit rating is omitted, since it's not difficult to get 9%
             Triple("agility", Stats(agility = 50), 50.0),
-            Triple("physicalCritRating", Stats(physicalCritRating = Rating.critPerPct), Rating.critPerPct),
+            Triple("rangedCritRating", Stats(rangedCritRating = Rating.critPerPct), Rating.critPerPct),
             Triple("physicalHasteRating", Stats(physicalHasteRating = Rating.hastePerPct), Rating.hastePerPct),
             Triple("armorPen", Stats(armorPen = 100), 100.0)
         )

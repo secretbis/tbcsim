@@ -48,7 +48,8 @@ public class GladiatorsLeftRipper : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 21,
-      physicalCritRating = 15.0,
+      meleeCritRating = 15.0,
+      rangedCritRating = 15.0,
       physicalHitRating = 9.0,
       resilienceRating = 10.0
       )

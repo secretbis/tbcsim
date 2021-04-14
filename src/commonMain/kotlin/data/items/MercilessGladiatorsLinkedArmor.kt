@@ -55,7 +55,8 @@ public class MercilessGladiatorsLinkedArmor : Item() {
       strength = 31,
       stamina = 57,
       armor = 954,
-      physicalCritRating = 30.0,
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0,
       resilienceRating = 27.0
       )
 

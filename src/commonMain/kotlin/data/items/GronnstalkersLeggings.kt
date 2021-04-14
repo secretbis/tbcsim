@@ -56,7 +56,8 @@ public class GronnstalkersLeggings : Item() {
       stamina = 43,
       intellect = 28,
       armor = 894,
-      physicalCritRating = 19.0
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

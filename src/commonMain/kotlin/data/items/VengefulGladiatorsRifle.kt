@@ -48,7 +48,8 @@ public class VengefulGladiatorsRifle : Item() {
 
   public override var stats: Stats = Stats(
       stamina = 24,
-      physicalCritRating = 16.0,
+      meleeCritRating = 16.0,
+      rangedCritRating = 16.0,
       resilienceRating = 13.0
       )
 

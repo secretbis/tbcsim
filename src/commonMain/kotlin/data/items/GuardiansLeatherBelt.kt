@@ -53,7 +53,8 @@ public class GuardiansLeatherBelt : Item() {
       agility = 37,
       stamina = 55,
       armor = 280,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 30.0
       )
 

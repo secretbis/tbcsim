@@ -55,7 +55,8 @@ public class GuardiansDragonhideBracers : Item() {
       agility = 25,
       stamina = 33,
       armor = 253,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 17.0
       )
 

@@ -53,7 +53,8 @@ public class VengefulGladiatorsPlateGauntlets : Item() {
       strength = 37,
       stamina = 52,
       armor = 1141,
-      physicalCritRating = 32.0,
+      meleeCritRating = 32.0,
+      rangedCritRating = 32.0,
       resilienceRating = 24.0
       )
 

@@ -48,7 +48,8 @@ public class UnstoppableAggressorsRing : Item() {
   public override var stats: Stats = Stats(
       strength = 36,
       stamina = 28,
-      physicalCritRating = 30.0
+      meleeCritRating = 30.0,
+      rangedCritRating = 30.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

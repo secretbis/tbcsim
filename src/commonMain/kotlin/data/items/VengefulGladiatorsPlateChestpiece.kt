@@ -55,7 +55,8 @@ public class VengefulGladiatorsPlateChestpiece : Item() {
       strength = 39,
       stamina = 67,
       armor = 1825,
-      physicalCritRating = 39.0,
+      meleeCritRating = 39.0,
+      rangedCritRating = 39.0,
       physicalHitRating = 12.0,
       resilienceRating = 24.0
       )

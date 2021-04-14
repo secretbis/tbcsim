@@ -51,7 +51,8 @@ public class GreavesOfDesolation : Item() {
       stamina = 24,
       intellect = 33,
       armor = 570,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       physicalHitRating = 12.0
       )
 

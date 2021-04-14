@@ -55,7 +55,8 @@ public class MercilessGladiatorsScaledChestpiece : Item() {
       stamina = 54,
       intellect = 27,
       armor = 1704,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 24.0
       )
 

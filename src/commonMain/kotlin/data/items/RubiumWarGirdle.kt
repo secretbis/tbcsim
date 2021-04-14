@@ -49,7 +49,8 @@ public class RubiumWarGirdle : Item() {
       strength = 31,
       stamina = 29,
       armor = 655,
-      physicalCritRating = 18.0
+      meleeCritRating = 18.0,
+      rangedCritRating = 18.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

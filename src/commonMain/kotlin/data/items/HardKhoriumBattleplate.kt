@@ -63,7 +63,8 @@ public class HardKhoriumBattleplate : Item() {
       strength = 61,
       stamina = 55,
       armor = 1983,
-      physicalCritRating = 41.0
+      meleeCritRating = 41.0,
+      rangedCritRating = 41.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

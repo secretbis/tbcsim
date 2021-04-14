@@ -72,10 +72,10 @@ export default ({ value, dispatch }) => {
         }
       }
 
-      if(rawItem.temporaryEnhancement) {
-        const tmpEnchant = tbcsim.data.TempEnchants.byName.get_35(rawItem.temporaryEnhancement)
+      if(rawItem.tempEnchant) {
+        const tmpEnchant = tbcsim.data.TempEnchants.byName.get_35(rawItem.tempEnchant)
         if(tmpEnchant) {
-          item.temporaryEnhancement = tmpEnchant(item)
+          item.tempEnchant = tmpEnchant(item)
         }
       }
 

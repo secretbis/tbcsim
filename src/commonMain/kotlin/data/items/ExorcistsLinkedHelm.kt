@@ -52,7 +52,8 @@ public class ExorcistsLinkedHelm : Item() {
       stamina = 30,
       intellect = 13,
       armor = 463,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       resilienceRating = 13.0
       )
 

@@ -49,7 +49,8 @@ public class TornheartAxeOfBattle : Item() {
       strength = 30,
       stamina = 27,
       intellect = 30,
-      physicalCritRating = 17.0,
+      meleeCritRating = 17.0,
+      rangedCritRating = 17.0,
       spellCritRating = 17.0
       )
 

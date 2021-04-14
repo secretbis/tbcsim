@@ -55,7 +55,8 @@ public class BrutalGladiatorsLeatherTunic : Item() {
       agility = 36,
       stamina = 71,
       armor = 569,
-      physicalCritRating = 22.0,
+      meleeCritRating = 22.0,
+      rangedCritRating = 22.0,
       physicalHitRating = 17.0,
       resilienceRating = 25.0
       )

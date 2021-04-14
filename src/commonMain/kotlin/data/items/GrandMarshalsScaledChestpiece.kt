@@ -55,7 +55,8 @@ public class GrandMarshalsScaledChestpiece : Item() {
       stamina = 42,
       intellect = 12,
       armor = 1164,
-      physicalCritRating = 13.0,
+      meleeCritRating = 13.0,
+      rangedCritRating = 13.0,
       resilienceRating = 14.0
       )
 

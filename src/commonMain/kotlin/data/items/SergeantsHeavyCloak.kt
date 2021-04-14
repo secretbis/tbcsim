@@ -49,7 +49,8 @@ public class SergeantsHeavyCloak : Item() {
   public override var stats: Stats = Stats(
       stamina = 27,
       armor = 104,
-      physicalCritRating = 19.0,
+      meleeCritRating = 19.0,
+      rangedCritRating = 19.0,
       resilienceRating = 19.0
       )
 

@@ -55,7 +55,8 @@ public class MercilessGladiatorsLeatherSpaulders : Item() {
       agility = 32,
       stamina = 45,
       armor = 321,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 25.0
       )
 

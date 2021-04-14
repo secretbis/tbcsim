@@ -24,7 +24,7 @@ class AutoShot : AutoAttackBase() {
     override fun cast(sp: SimParticipant) {
         // Ammo adds DPS, so we can just model it as bonus AP
         val ammoBonusAp = General.dpsToAp(sp.character.gear.ammo.maxDmg)
-        val damageRoll = Ranged.baseDamageRoll(sp, item(sp), bonusAp = ammoBonusAp)
+        val damageRoll = Ranged.baseDamageRoll(sp, item(sp), bonusAp = ammoBonusAp, isWhiteDmg = true)
         val result = Ranged.attackRoll(sp, damageRoll, item(sp), isWhiteDmg = true)
 
         // Save last hit state and fire event

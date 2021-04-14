@@ -56,7 +56,8 @@ public class LightbringerGreaves : Item() {
       stamina = 48,
       intellect = 22,
       armor = 1597,
-      physicalCritRating = 38.0
+      meleeCritRating = 38.0,
+      rangedCritRating = 38.0
       )
 
   public override var sockets: Array<Socket> = arrayOf(

@@ -53,7 +53,8 @@ public class VindicatorsScaledGreaves : Item() {
       stamina = 39,
       intellect = 26,
       armor = 1255,
-      physicalCritRating = 27.0,
+      meleeCritRating = 27.0,
+      rangedCritRating = 27.0,
       resilienceRating = 26.0
       )
 

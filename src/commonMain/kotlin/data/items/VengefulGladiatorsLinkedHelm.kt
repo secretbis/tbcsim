@@ -55,7 +55,8 @@ public class VengefulGladiatorsLinkedHelm : Item() {
       strength = 34,
       stamina = 67,
       armor = 830,
-      physicalCritRating = 33.0,
+      meleeCritRating = 33.0,
+      rangedCritRating = 33.0,
       physicalHitRating = 12.0,
       resilienceRating = 33.0
       )

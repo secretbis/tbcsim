@@ -6,7 +6,7 @@ import GearSelector from './gear_selector';
 import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 
-import { inventorySlots as inv } from '../data/constants';
+import { inventorySlots as inv, itemClasses as ic } from '../data/constants';
 
 const defaultWidth = '55px';
 const bgImages = {
@@ -67,6 +67,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
     // Clean sockets and enchants
     item.sockets.forEach(sk => sk.gem = null);
     item.enchant = null;
+    item.tempEnchant = null;
     dispatch({ type: 'updateGearSlot', value: { [slotName]: item }, slotName, item })
   }
 
@@ -77,6 +78,11 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
 
   function onEnchantSelect(enchant) {
     item.enchant = enchant
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+  }
+
+  function onTempEnchantSelect(enchant) {
+    item.tempEnchant = enchant
     dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
   }
 
@@ -91,8 +97,9 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
   }
 
   function renderItem() {
-    const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName)
-    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) : true
+    const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName);
+    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) : item.inventorySlot !== inv.holdable_tome;
+    const itemCanTempEnchant = (slotName == 'mainHand' || slotName == 'offHand') && item.itemClass && item.itemClass._ordinal === ic.weapon;
 
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
@@ -110,7 +117,10 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
               return <GemSlot key={idx} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?
-              <EnchantSlot item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
+              <EnchantSlot enchantType={'enchants'} item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
+            : null}
+            {itemCanTempEnchant ?
+              <EnchantSlot enchantType={'tempEnchants'} item={item} enchant={item && item.tempEnchant} inventorySlots={inventorySlots} onSelect={onTempEnchantSelect} />
             : null}
           </Row>
         </Col>

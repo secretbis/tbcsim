@@ -54,7 +54,8 @@ public class GrandMarshalsChainLeggings : Item() {
       stamina = 42,
       intellect = 8,
       armor = 570,
-      physicalCritRating = 14.0,
+      meleeCritRating = 14.0,
+      rangedCritRating = 14.0,
       resilienceRating = 25.0
       )
 

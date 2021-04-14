@@ -52,7 +52,8 @@ public class WarbringerGreaves : Item() {
       strength = 51,
       stamina = 54,
       armor = 1322,
-      physicalCritRating = 37.0
+      meleeCritRating = 37.0,
+      rangedCritRating = 37.0
       )
 
   public override var sockets: Array<Socket> = arrayOf()

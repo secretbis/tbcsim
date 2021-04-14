@@ -54,7 +54,8 @@ public class GrandMarshalsPlateChestpiece : Item() {
       strength = 12,
       stamina = 46,
       armor = 1164,
-      physicalCritRating = 24.0,
+      meleeCritRating = 24.0,
+      rangedCritRating = 24.0,
       resilienceRating = 19.0
       )
 

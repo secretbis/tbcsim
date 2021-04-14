@@ -54,7 +54,8 @@ public class DestroyerGreaves : Item() {
       strength = 52,
       stamina = 57,
       armor = 1459,
-      physicalCritRating = 32.0,
+      meleeCritRating = 32.0,
+      rangedCritRating = 32.0,
       physicalHitRating = 22.0
       )
 

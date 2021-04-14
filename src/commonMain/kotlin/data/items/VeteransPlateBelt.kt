@@ -49,7 +49,8 @@ public class VeteransPlateBelt : Item() {
       strength = 31,
       stamina = 45,
       armor = 959,
-      physicalCritRating = 31.0,
+      meleeCritRating = 31.0,
+      rangedCritRating = 31.0,
       resilienceRating = 30.0
       )
 
