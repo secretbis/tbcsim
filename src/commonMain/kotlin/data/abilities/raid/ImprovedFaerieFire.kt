@@ -1,12 +1,12 @@
 package data.abilities.raid
 
 import character.*
+import mechanics.Rating
 import sim.SimParticipant
 
-// Since this is a deep Balance talent, it's not quite reasonable to assume 3/3 Improved
-class FaerieFire : Ability() {
+class ImprovedFaerieFire : Ability() {
     companion object {
-        const val name = "Faerie Fire"
+        const val name = "Improved Faerie Fire"
     }
 
     override val id: Int = 26993
@@ -14,7 +14,7 @@ class FaerieFire : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     fun debuff(owner: SimParticipant) = object : Debuff(owner) {
-        override val name: String = "Faerie Fire"
+        override val name: String = "Improved Faerie Fire"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false
@@ -22,13 +22,14 @@ class FaerieFire : Ability() {
         override val mutex: List<Mutex> = listOf(Mutex.BUFF_FAERIE_FIRE)
         override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
             return mapOf(
-                Mutex.BUFF_FAERIE_FIRE to 0
+                Mutex.BUFF_FAERIE_FIRE to 3
             )
         }
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                armor = -610
+                armor = -610,
+                physicalHitRating = 3.0 * Rating.physicalHitPerPct
             )
         }
     }

@@ -16,7 +16,7 @@ class ImprovedExposeArmor : Ability() {
         override val name: String = "Expose Armor"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
-        override val hidden: Boolean = true
+        override val hidden: Boolean = false
 
         override val mutex: List<Mutex> = listOf(Mutex.DEBUFF_MAJOR_ARMOR)
         override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf(

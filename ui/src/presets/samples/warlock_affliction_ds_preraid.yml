@@ -182,9 +182,6 @@ raidBuffs:
   - Mana Spring Totem
 
 raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements

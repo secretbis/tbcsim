@@ -182,9 +182,6 @@ raidBuffs:
   - Unleashed Rage
 
 raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
   - Sunder Armor
   - Improved Expose Armor
   - Faerie Fire
