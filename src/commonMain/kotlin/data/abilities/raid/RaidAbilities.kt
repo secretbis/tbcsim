@@ -42,6 +42,7 @@ object RaidAbilities {
         ExposeWeakness(1250),
         FaerieFire(),
         ImprovedExposeArmor(),
+        ImprovedFaerieFire(),
         ImprovedScorch(),
         JudgementOfWisdom(),
         Misery(),
