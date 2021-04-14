@@ -102,7 +102,9 @@ export default function({ character, results }) {
       <Nav appearance='subtle' activeKey={activeTab} onSelect={onSelect}>
         {ability.map((_, idx) => {
           return (
-            <Nav.Item key={idx} eventKey={idx}>{titles[idx]}</Nav.Item>
+            <Nav.Item key={idx} eventKey={idx}>
+              <span style={{ fontSize: 20 }}>{titles[idx]}</span>
+            </Nav.Item>
           );
         })}
       </Nav>
