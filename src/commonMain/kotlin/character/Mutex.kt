@@ -14,5 +14,6 @@ enum class Mutex {
     WEAPON_TEMP_ENH_OH,
 
     // Stacking buffs/debuffs
-    DEBUFF_MAJOR_ARMOR
+    DEBUFF_MAJOR_ARMOR,
+    BUFF_EXPOSE_WEAKNESS
 }

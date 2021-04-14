@@ -2,6 +2,7 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
+import character.Mutex
 import character.Stats
 import sim.SimParticipant
 
@@ -15,6 +16,12 @@ class ExposeWeakness(val agility: Int): Ability() {
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val mutex: List<Mutex> = listOf(Mutex.BUFF_EXPOSE_WEAKNESS)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+            return mapOf(
+                Mutex.BUFF_EXPOSE_WEAKNESS to agility
+            )
+        }
 
         // Assume a GoA uptime of about 80% when twisting
         // Also assume the caster has Enhancing Totems

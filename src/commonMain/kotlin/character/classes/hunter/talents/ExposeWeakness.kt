@@ -22,6 +22,13 @@ class ExposeWeakness(currentRank: Int) : Talent(currentRank) {
             override val name: String = Companion.name
             override val durationMs: Int = 7000
 
+            override val mutex: List<Mutex> = listOf(Mutex.BUFF_EXPOSE_WEAKNESS)
+            override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+                return mapOf(
+                    Mutex.BUFF_EXPOSE_WEAKNESS to sp.agility()
+                )
+            }
+
             override fun modifyStats(sp: SimParticipant): Stats {
                 val totalAp = (0.25 * sp.agility()).toInt()
                 return Stats(
