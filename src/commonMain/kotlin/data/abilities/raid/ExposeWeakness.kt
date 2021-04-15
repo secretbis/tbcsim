@@ -23,8 +23,6 @@ class ExposeWeakness(val agility: Int): Ability() {
             )
         }
 
-        // Assume a GoA uptime of about 80% when twisting
-        // Also assume the caster has Enhancing Totems
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 attackPower = (0.25 * agility).toInt(),
