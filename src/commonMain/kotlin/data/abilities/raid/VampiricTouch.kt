@@ -16,11 +16,9 @@ class VampiricTouch(val dps: Int): Ability() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        // Assume a GoA uptime of about 80% when twisting
-        // Also assume the caster has Enhancing Totems
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                manaPer5Seconds = (0.05 * dps).toInt()
+                manaPer5Seconds = (0.05 * dps * 5.0).toInt()
             )
         }
     }
