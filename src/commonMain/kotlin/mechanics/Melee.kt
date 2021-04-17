@@ -46,6 +46,7 @@ object Melee {
         Constants.ItemSubclass.MACE_1H to 2400.0,
         Constants.ItemSubclass.SWORD_1H to 2400.0,
         Constants.ItemSubclass.FIST to 2400.0,
+        Constants.ItemSubclass.POLEARM to 3300.00,
         // TODO: Druid weirdness
     )
 
