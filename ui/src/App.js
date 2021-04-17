@@ -14,6 +14,7 @@ import RaidBuffs from './buffs/raid_buffs';
 import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
+import Rankings from './rankings/rankings';
 import SimResults from './results/results';
 import Rotation from './rotation/rotation';
 import SimOptions from './sim/options';
@@ -185,6 +186,9 @@ function App() {
                 <Link to="/ep">
                   <Nav.Item>Equivalence Points</Nav.Item>
                 </Link>
+                <Link to="/rankings">
+                  <Nav.Item>Rankings</Nav.Item>
+                </Link>
               </Nav>
               <Nav pullRight>
                 <Nav.Item
@@ -204,6 +208,9 @@ function App() {
           </Route>
           <Route path="/ep">
             <EquivalencePoints />
+          </Route>
+          <Route path="/rankings">
+            <Rankings />
           </Route>
         </Switch>
         <Footer>

@@ -34,6 +34,17 @@ const ResourceLineChart = ({ character, data }) => (
           legendOffset: -40,
           legendPosition: 'middle'
       }}
+      tooltip={({ point }) => {
+        const isMana = point.serieId === 'Mana';
+        let value = isMana ? point.data.y.toFixed(2) : point.data.y;
+        const suffix = isMana ? '%' : '';
+
+        return (
+          <strong style={{ color: 'white' }}>
+            {point.serieId}: {value}{suffix}
+          </strong>
+        )
+      }}
       enablePoints={false}
       enableGridX={false}
       colors={lineColorForClass(character)}

@@ -23,8 +23,10 @@ import kotlinx.serialization.json.Json
 import sim.*
 import sim.config.Config
 import sim.config.ConfigMaker
+import sim.statsmodel.DpsBreakdown
 import java.io.File
 import java.math.RoundingMode
+import kotlin.random.Random
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
@@ -39,6 +41,7 @@ class TBCSim : CliktCommand() {
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
     val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
     val calcEPSingle: Boolean by option("--calc-ep-single", help="Calculate EP values a single character definition").flag(default = false)
+    val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
 
     val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
     val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
@@ -65,8 +68,10 @@ class TBCSim : CliktCommand() {
         "warrior_fury" to Fury(),
     )
     val presetPath = "./ui/src/presets/samples/"
+    val rankingOutputPath = "./ui/src/rankings/data/ranks_all.json"
     val epOutputPath = "./ui/src/ep/data/ep_all.json"
-    val epPresetsByCategory = listOf(
+
+    val presetsByCategory = listOf(
         "preraid" to mapOf(
             "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
             "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
@@ -132,6 +137,35 @@ class TBCSim : CliktCommand() {
         return results
     }
 
+    fun singleRankingSim(config: Config, opts: SimOptions) : Map<String, Double> {
+        val iterations = runBlocking { Sim(config, opts) {}.sim() }
+
+        val dps = SimStats.dps(iterations)
+        val subjectMean = dps["subject"]!!.mean
+        val petMean = dps["subjectPet"]?.mean ?: 0.0
+        val totalMean = subjectMean + petMean
+
+        val subjectMedian = dps["subject"]!!.median
+        val petMedian = dps["subjectPet"]?.median ?: 0.0
+        val totalMedian = subjectMedian + petMedian
+
+        val subjectSd = dps["subject"]!!.sd
+        val petSd = dps["subjectPet"]?.sd ?: 0.0
+
+        return mapOf(
+            "subjectMean" to subjectMean,
+            "subjectPetMean" to petMean,
+            "totalMean" to totalMean,
+
+            "subjectMedian" to subjectMedian,
+            "subjectPetMedian" to petMedian,
+            "totalMedian" to totalMedian,
+
+            "subjectSd" to subjectSd,
+            "petSd" to petSd
+        )
+    }
+
     override fun run() {
         setupLogging(debug)
 
@@ -166,16 +200,18 @@ class TBCSim : CliktCommand() {
             //     }
             //   }
             // }
-            val epCategories = epPresetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
-                acc[categoryEntry.first] = categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                    // Make config
-                    val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                    println("Starting EP run for ${categorySpecEntry.key}")
-                    acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
-                    acc2
+            val epCategories =
+                presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
+                    acc[categoryEntry.first] =
+                        categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
+                            // Make config
+                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                            println("Starting EP run for ${categorySpecEntry.key}")
+                            acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                            acc2
+                        }
+                    acc
                 }
-                acc
-            }
 
             // Generate options/metadata
             val epOptions = specs.entries.fold(mutableMapOf<String, EpOutputOptions>()) { acc, entry ->
@@ -186,13 +222,13 @@ class TBCSim : CliktCommand() {
                 acc
             }
 
-            // Output
+            // Output EPs
             val fullOutput = EpOutput(
                 epCategories,
                 epOptions
             )
             File(epOutputPath).writeText(Json.encodeToString(fullOutput))
-        } else if(calcEPSingle) {
+        } else if (calcEPSingle) {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")
                 println(this.getFormattedHelp())
@@ -202,6 +238,22 @@ class TBCSim : CliktCommand() {
             val config = ConfigMaker.fromYml(configFile!!.readText())
             println("Starting EP run for ${configFile!!.name}")
             computeEpDeltas(config, opts)
+        } else if (calcRankings) {
+            val rankingCategories =
+                presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
+                    acc[categoryEntry.first] =
+                        categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
+                            // Make config
+                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                            println("Starting ranking run for ${categorySpecEntry.key}")
+                            acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                            acc2
+                        }
+                    acc
+                }
+
+            // Output rankings
+            File(rankingOutputPath).writeText(Json.encodeToString(rankingCategories))
         } else {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")
@@ -222,31 +274,29 @@ class TBCSim : CliktCommand() {
                 // Stats
                 val durationSeconds = (opts.durationMs / 1000.0).toInt()
                 val resourceType = config.character.klass.resourceType
-                val participants = iterations[0].participants
-                participants.forEachIndexed { idx, sp ->
-                    println("Participant #$idx")
-                    val resource = SimStats.resourceUsage(iterations)
-                    println("Resource usage for iteration ${resource[idx].iterationIdx}")
-                    Chart.print(resource[idx].series, xMax = durationSeconds, yLabel = resourceType.toString())
 
-                    val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
-                    SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
+                // Only print the big chart for the main subject - others arent interesting
+                val resource = SimStats.resourceUsage(iterations)
+                println("Resource usage for iteration ${resource[0].iterationIdx}")
+                Chart.print(resource[0].series, xMax = durationSeconds, yLabel = resourceType.toString())
 
-                    val buffs = SimStats.resultsByBuff(iterations)
-                    SimStatsPrinter.printBuffs("Buffs", buffs)
+                val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
+                SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
 
-                    val debuffs = SimStats.resultsByDebuff(iterations)
-                    SimStatsPrinter.printBuffs("Debuffs", debuffs)
+                val buffs = SimStats.resultsByBuff(iterations)
+                SimStatsPrinter.printBuffs("Buffs", buffs)
 
-                    val dmgType = SimStats.resultsByDamageType(iterations)
-                    SimStatsPrinter.printDamage(dmgType)
+                val debuffs = SimStats.resultsByDebuff(iterations)
+                SimStatsPrinter.printBuffs("Debuffs", debuffs)
 
-                    val abilities = SimStats.resultsByAbility(iterations)
-                    SimStatsPrinter.printAbilities(abilities)
+                val dmgType = SimStats.resultsByDamageType(iterations)
+                SimStatsPrinter.printDamage(dmgType)
 
-                    val dps = SimStats.dps(iterations)
-                    SimStatsPrinter.printDps(dps["subject"]!!, dps["subjectPet"])
-                }
+                val abilities = SimStats.resultsByAbility(iterations)
+                SimStatsPrinter.printAbilities(abilities)
+
+                val dps = SimStats.dps(iterations)
+                SimStatsPrinter.printDps(dps["subject"]!!, dps["subjectPet"])
             }
         }
     }
