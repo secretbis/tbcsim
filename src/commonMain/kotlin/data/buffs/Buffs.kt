@@ -116,6 +116,16 @@ object Buffs {
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
             42083 -> TsunamiTalisman()
+            34513 -> Lionheart(item)
+            34696 -> GlaiveOfThePit(item)
+            34580 -> Despair(item)
+            35131 -> TheBladefist(item)
+            33489 -> BlackoutTruncheon(item)
+            34107 -> Revenger(item)
+            16916 -> KhoriumChampion(item)
+            38282 -> SingingCrystalAxe(item)
+            38284 -> TheHammerOfDestiny(item)
+            38307 -> TheNightBlade(item)
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
