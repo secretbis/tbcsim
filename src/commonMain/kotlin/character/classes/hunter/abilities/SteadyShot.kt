@@ -20,7 +20,10 @@ class SteadyShot : Ability() {
     override val id: Int = 34120
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
-    override fun castTimeMs(sp: SimParticipant): Int = 1000
+    // Tooltip value is 1s, but hunters have a secret 0.5s additional cast/wind-up time
+    override fun castTimeMs(sp: SimParticipant): Int {
+        return (1500.0 / sp.physicalHasteMultiplier()).toInt()
+    }
     val baseCost = 110.0
     override fun resourceCost(sp: SimParticipant): Double {
         val efficiency = sp.character.klass.talents[Efficiency.name] as Efficiency?

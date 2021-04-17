@@ -40,12 +40,43 @@ class SwingTimerRemainingGte(data: RotationRuleCriterion) : Criterion(Type.SWING
         null
     }
 
+    val ability: String? = try {
+        data.ability as String
+    } catch (e: NullPointerException) {
+        null
+    } catch(e: Exception) {
+        logger.warn { "Field 'ability' must be a String value for criterion $type" }
+        null
+    }
+
+    val maxClipSeconds: Double = try {
+        (data.maxClipSeconds as Double).coerceAtLeast(0.0)
+    } catch (e: NullPointerException) {
+        // Default to zero
+        0.0
+    } catch(e: Exception) {
+        logger.warn { "Field 'maxClipSeconds' must be an integer for criterion $type" }
+        0.0
+    }
+
     override fun stateFactory(): State {
         return TimerState()
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
-        if(seconds == null) return false
+        if(seconds == null && ability == null) return false
+
+        val minSwingTimerRemaining = seconds
+            ?: if(ability != null) {
+                val actualAbility = sp.character.klass.abilityFromString(ability)
+                if(actualAbility == null) {
+                    return false
+                } else {
+                    actualAbility.castTimeMs(sp).toDouble() / 1000.0
+                }
+            } else {
+                return false
+            }
 
         // Check our own state, to make sure we don't trigger this twice per mainhand swing
         val timerState = state(sp) as TimerState
@@ -64,7 +95,7 @@ class SwingTimerRemainingGte(data: RotationRuleCriterion) : Criterion(Type.SWING
             val lastAttackTime = abilityState.lastAttackTimeMs
             val nextAttackTime = lastAttackTime + speed
             val remainingSwingTimer = (nextAttackTime - sp.sim.elapsedTimeMs).coerceAtLeast(0.0)
-            val withinBounds = remainingSwingTimer >= seconds * 1000.0
+            val withinBounds = remainingSwingTimer >= (minSwingTimerRemaining * 1000.0) - (maxClipSeconds * 1000.0)
 
             // Only satisfied if we have not swung yet, or if the swing counter has changed
             if(oncePerSwing) {

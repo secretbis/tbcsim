@@ -128,10 +128,12 @@ rotation:
     - name: Kill Command
     - name: Steady Shot
       # This tries to squeeze as many Steadies as possible while never clipping
-      # It is possible that some amount of clipping may be superior - test this by setting the timer criteria to less than 1.0
       criteria:
         - type: SWING_TIMER_REMAINING_GTE
-          seconds: 1.01
+          # If an ability is specified instead of fixed seconds, this criterion will succeed if the remaining swing time is GTE the cast time of that ability
+          ability: Steady Shot
+          # This specifies the maximum auto-attack clipping amount
+          maxClipSeconds: 0.3
           swingType: Auto Shot
           oncePerSwing: false
     # Fill excess swing time with Multi, without disrupting Steady too much

@@ -20,6 +20,11 @@ class MultiShot : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 10000
 
+    // Includes the 0.5 wind up time plus the 0.5s cast time
+    override fun castTimeMs(sp: SimParticipant): Int {
+        return (1000.0 / sp.physicalHasteMultiplier()).toInt()
+    }
+
     val baseCost = 275.0
     override fun resourceCost(sp: SimParticipant): Double {
         val efficiency = sp.character.klass.talents[Efficiency.name] as Efficiency?

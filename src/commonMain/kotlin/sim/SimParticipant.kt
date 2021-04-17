@@ -166,7 +166,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
             // Do auto attacks
             if(rangedAutoAttack?.available(this) == true) {
-                rangedAutoAttack?.cast(this)
+                // Auto shot has a cast time, unlike other auto-attack abilities
+                rangedAutoAttack!!.cast(this)
+                castEndMs = sim.elapsedTimeMs + rangedAutoAttack!!.castTimeMs(this) + sim.opts.latencyMs
             } else if (mhAutoAttack?.available(this) == true) {
                 // Check to see if we have a replacement ability
                 // Be sure to double check the cost, since our resource may have changed since we requested the replacement
@@ -555,6 +557,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun weaponSpeed(item: Item): Double {
+        // Note that this does not need the hunter Auto Shot cast time accounted for - Auto Shot starts cooldown on start cast to simplify
         return (item.speed / physicalHasteMultiplier()).coerceAtLeast(0.01)
     }
 

@@ -20,6 +20,9 @@ class AutoShot : AutoAttackBase() {
 
     override val id: Int = 1
     override val name: String = "Auto Shot"
+    override fun castTimeMs(sp: SimParticipant): Int {
+        return (500.0 / sp.physicalHasteMultiplier()).toInt()
+    }
 
     override fun cast(sp: SimParticipant) {
         // Ammo adds DPS, so we can just model it as bonus AP
