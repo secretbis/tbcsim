@@ -115,6 +115,11 @@ rotation:
     - name: Hunter's Mark
 
   combat:
+    - name: Hunter's Mark
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Hunter's Mark
+          seconds: 0
     - name: Rapid Fire
     - name: Haste Potion
     - name: Use Active Trinket

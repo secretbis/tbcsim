@@ -121,6 +121,11 @@ rotation:
     - name: Hunter's Mark
 
   combat:
+    - name: Hunter's Mark
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Hunter's Mark
+          seconds: 0
     - name: Bestial Wrath
     - name: Rapid Fire
     - name: Haste Potion

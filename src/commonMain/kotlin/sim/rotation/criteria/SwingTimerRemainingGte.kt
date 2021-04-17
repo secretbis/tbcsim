@@ -16,7 +16,6 @@ class SwingTimerRemainingGte(data: RotationRuleCriterion) : Criterion(Type.SWING
     val seconds: Double? = try {
         (data.seconds as Double).coerceAtLeast(0.0)
     } catch (e: NullPointerException) {
-        logger.warn { "Field 'seconds' is required for criterion $type" }
         null
     } catch(e: Exception) {
         logger.warn { "Field 'seconds' must be an integer for criterion $type" }
@@ -64,7 +63,10 @@ class SwingTimerRemainingGte(data: RotationRuleCriterion) : Criterion(Type.SWING
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
-        if(seconds == null && ability == null) return false
+        if(seconds == null && ability == null) {
+            logger.warn { "Either of fields 'ability' or 'seconds' are required for criterion $type" }
+            return false
+        }
 
         val minSwingTimerRemaining = seconds
             ?: if(ability != null) {
