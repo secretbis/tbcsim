@@ -6,26 +6,21 @@ import character.Stats
 import mechanics.Rating
 import sim.SimParticipant
 
-class LeaderOfThePack : Ability() {
+class HeroicPresence : Ability() {
     companion object {
-        const val name = "Leader of the Pack"
+        const val name = "Heroic Presence"
     }
 
-    override val id: Int = 17007
+    override val id: Int = 28878
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
-        override val name: String = "Leader of the Pack"
+        override val name: String = Companion.name
         override val durationMs: Int = -1
-        override val hidden: Boolean = true
 
-        val bonusCritRating = 5.0 * Rating.critPerPct
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                meleeCritRating = bonusCritRating,
-                rangedCritRating = bonusCritRating
-            )
+            return Stats(physicalHitRating = 1.0 * Rating.physicalHitPerPct)
         }
     }
 
