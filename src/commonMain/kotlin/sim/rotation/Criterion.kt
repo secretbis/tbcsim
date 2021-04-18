@@ -1,15 +1,14 @@
 package sim.rotation
 
 import mu.KotlinLogging
-import sim.SimIteration
 import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.criteria.*
 
 abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
     enum class Type {
-        RESOURCE_GTE_PCT,
-        RESOURCE_LTE_PCT,
+        RESOURCE_PCT_GTE,
+        RESOURCE_PCT_LTE,
         RESOURCE_MISSING_GTE,
         ABILITY_COOLDOWN_GTE,
         ABILITY_COOLDOWN_LTE,
@@ -33,8 +32,8 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
 
             val type = Type.values().asList().find { it.name == typeName }
             return when(type) {
-                Type.RESOURCE_GTE_PCT -> ResourceGtePct(data)
-                Type.RESOURCE_LTE_PCT -> ResourceLtePct(data)
+                Type.RESOURCE_PCT_GTE -> ResourcePctGte(data)
+                Type.RESOURCE_PCT_LTE -> ResourcePctLte(data)
                 Type.RESOURCE_MISSING_GTE -> ResourceMissingGte(data)
                 Type.ABILITY_COOLDOWN_GTE -> AbilityCooldownGte(data)
                 Type.ABILITY_COOLDOWN_LTE -> AbilityCooldownLte(data)

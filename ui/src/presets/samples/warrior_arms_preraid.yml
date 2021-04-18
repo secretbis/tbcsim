@@ -157,7 +157,7 @@ rotation:
     - name: Heroic Strike
       criteria:
         # Cast HS if we have excess rage
-        - type: RESOURCE_GTE_PCT
+        - type: RESOURCE_PCT_GTE
           pct: 90
 
 # Raid and group setup

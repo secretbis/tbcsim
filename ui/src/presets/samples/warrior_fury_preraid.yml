@@ -142,7 +142,7 @@ rotation:
     - name: Heroic Strike
       criteria:
         # Cast HS if we have 60 rage or more
-        - type: RESOURCE_GTE_PCT
+        - type: RESOURCE_PCT_GTE
           pct: 60
     - name: Battle Shout
       criteria:

@@ -52,14 +52,22 @@ abstract class Ability {
         return state
     }
 
-    open fun available(sp: SimParticipant): Boolean {
+    open fun currentCooldownMs(sp: SimParticipant): Int {
         val state = if(sharedCooldown == SharedCooldown.NONE) {
             state(sp)
         } else {
             sharedState(sharedCooldown, sp)
         }
 
-        return state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sp) <= sp.sim.elapsedTimeMs)
+        return if(state.cooldownStartMs == -1) {
+            -1
+        } else {
+             state.cooldownStartMs + cooldownMs(sp) - sp.sim.elapsedTimeMs
+        }
+    }
+
+    open fun available(sp: SimParticipant): Boolean {
+        return currentCooldownMs(sp) <= 0
     }
 
     open fun beforeCast(sp: SimParticipant) {

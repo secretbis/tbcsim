@@ -4,9 +4,9 @@ import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
 
-class ResourceLtePct(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_LTE_PCT, data) {
+class ResourcePctGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_PCT_GTE, data) {
     val pct: Int? = try {
-        (data.pct as Int).coerceAtLeast(0)
+        (data.pct as Int).toInt().coerceAtLeast(0)
     } catch (e: NullPointerException) {
         logger.warn { "Field 'pct' is required for criterion $type" }
         null
@@ -16,6 +16,6 @@ class ResourceLtePct(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_LTE_
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
-        return pct != null && sp.resource.currentAmount <= sp.resource.maxAmount * (pct / 100.0)
+        return pct != null && sp.resource.currentAmount >= sp.resource.maxAmount * (pct / 100.0)
     }
 }

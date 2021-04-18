@@ -48,7 +48,7 @@ gear:
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
   offHand:
-    name: Lamp of Peaceful Radiance
+    name: Khadgar's Knapsack
   rangedTotemLibram:
     name: Totem of the Void
   head:
@@ -59,15 +59,12 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Brooch of Heightened Potential
+    name: Natasha's Ember Necklace
   shoulders:
-    name: Mana-Etched Spaulders
+    name: Pauldrons of Wild Magic
     enchant: Greater Inscription of the Orb
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   back:
-    name: Ogre Slayer's Cover
+    name: Shawl of Shifting Probabilities
   chest:
     name: Netherstrike Breastplate
     enchant: Exceptional Stats
@@ -81,7 +78,7 @@ gear:
     gems:
       - Runed Living Ruby
   hands:
-    name: Mana-Etched Gloves
+    name: Earth Mantle Handwraps
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
@@ -105,7 +102,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   ring1:
-    name: Sparking Arcanite Ring
+    name: Ring of Cryptic Dreams
     enchant: Spellpower (Ring)
   ring2:
     name: Ryngo's Band of Ingenuity
@@ -149,28 +146,60 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Wrath of Air Totem
           seconds: 0
-    # Use a Dark Rune if we've used at least 1500 mana
-    - name: Dark Rune
+    # Use a Dark Rune if we've used at least 1500 mana and our potion is on cooldown, or if it's a long fight
+    - name: Demonic Rune
       criteria:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
-    # Mana pot over DPS pot if we're low on mana
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Super Mana Potion
+          seconds: 1
+    - name: Demonic Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 90
+    # Mana pot if we've used enough mana an there's a lot of fight left
     - name: Super Mana Potion
       criteria:
-        - type: RESOURCE_LTE_PCT
-          pct: 30
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 135
+        - type: RESOURCE_MISSING_GTE
+          amount: 3000
     - name: Destruction Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
+        # Only use Destruction on short fights, or if the remaining duration is short and our mana is good
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: RESOURCE_PCT_GTE
+          pct: 60
     - name: Elemental Mastery
-    # Ele OOMs real quick with CL, so only try to cast this with an EF proc active
+    # Always cast CL with EM up
     - name: Chain Lightning
       criteria:
         - type: BUFF_DURATION_GTE
+          buff: Elemental Mastery
+          seconds: 0
+    # Ele OOMs real quick with CL, so only try to cast this with an EF proc active
+    # Don't cast it at all on very long fights until we're getting close to the end
+    - name: Chain Lightning
+      criteria:
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 180
+        - type: BUFF_DURATION_GTE
           buff: Elemental Focus
           seconds: 0
+    # We can be a little greedier with CL on short fights without EF
+    - name: Chain Lightning
+      criteria:
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: RESOURCE_PCT_GTE
+          pct: 60
     - name: Lightning Bolt
 
 # Raid and group setup

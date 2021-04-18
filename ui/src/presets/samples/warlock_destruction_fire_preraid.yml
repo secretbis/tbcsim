@@ -118,7 +118,7 @@ rotation:
           amount: 1500
     - name: Life Tap
       criteria:
-        - type: RESOURCE_LTE_PCT
+        - type: RESOURCE_PCT_LTE
           pct: 10
     - name: Curse of Doom
       criteria:

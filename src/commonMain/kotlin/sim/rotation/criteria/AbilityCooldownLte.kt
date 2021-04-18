@@ -1,5 +1,6 @@
 package sim.rotation.criteria
 
+import data.abilities.generic.GenericAbilities
 import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.Criterion
@@ -25,7 +26,8 @@ class AbilityCooldownLte(data: RotationRuleCriterion) : Criterion(Type.ABILITY_C
     override fun satisfied(sp: SimParticipant): Boolean {
         if(ability == null || seconds == null) return false
 
-        val abilityState = sp.abilityState[ability]
-        return abilityState != null && (sp.sim.elapsedTimeMs - abilityState.cooldownStartMs).coerceAtLeast(0) <= seconds * 1000.0
+        val actualAbility = sp.character.klass.abilityFromString(ability) ?: sp.character.race.racialByName(ability) ?: GenericAbilities.byName(ability)
+        val abilityCdMs = actualAbility?.currentCooldownMs(sp)
+        return abilityCdMs != null && abilityCdMs <= seconds * 1000.0
     }
 }
