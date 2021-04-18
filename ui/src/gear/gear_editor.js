@@ -64,7 +64,7 @@ export default function({ state, character, dispatch }) {
           <GearSlot character={character} inventorySlots={[2]} itemClasses={jewelrySlotIC} slotName='neck' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[3]} itemClasses={armorSlotIC} slotName='shoulders' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[16]} itemClasses={armorSlotIC} slotName='back' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[5]} itemClasses={armorSlotIC} slotName='chest' dispatch={dispatch} />
+          <GearSlot character={character} inventorySlots={[5, 20]} itemClasses={armorSlotIC} slotName='chest' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={[9]} itemClasses={armorSlotIC} slotName='wrists' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={mainHandInvSlots} itemClasses={mainHandSlotIC} slotName='mainHand' dispatch={dispatch} />
           <GearSlot character={character} inventorySlots={offHandInvSlots} itemClasses={offHandSlotIC} slotName='offHand' dispatch={dispatch} />
