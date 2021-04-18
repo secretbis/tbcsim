@@ -35,7 +35,10 @@ object ItemGen {
     )
 
     val itemIgnore = listOf(
-        25968   // Shalassi Sentry's Epaulets
+        25967,   // Eagle Crested Pauldrons
+        25968,   // Shalassi Sentry's Epaulets
+        25969,   // Rapscallion's Touch
+        25970,   // Shalassi Oracle's Sandals
     )
 
     private fun load(): List<Map<String, Any?>> {
