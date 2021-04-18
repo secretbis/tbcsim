@@ -6,6 +6,7 @@ import character.Proc
 import character.Stats
 import character.classes.shaman.talents.Stormstrike as StormstrikeTalent
 import data.Constants
+import data.itemscustom.EmptyItem
 import data.itemsets.CycloneHarness
 import data.model.Item
 import mechanics.Melee
@@ -70,10 +71,6 @@ class Stormstrike : Ability() {
         val mhAttack = Melee.baseDamageRoll(sp, mhItem, isNormalized = false) + t4BonusDmg
         val mhResult = Melee.attackRoll(sp, mhAttack, mhItem, isWhiteDmg = false)
 
-        val ohItem = sp.character.gear.offHand
-        val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false) + t4BonusDmg
-        val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
-
         val eventMh = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
@@ -83,14 +80,32 @@ class Stormstrike : Ability() {
         )
         sp.logEvent(eventMh)
 
-        val eventOh = Event(
-            eventType = Event.Type.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            abilityName = "$name (OH)",
-            amount = ohResult.first,
-            result = ohResult.second,
-        )
-        sp.logEvent(eventOh)
+        val ohItem = sp.character.gear.offHand
+        if(ohItem !is EmptyItem) {
+            val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false) + t4BonusDmg
+            val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
+
+            val eventOh = Event(
+                eventType = Event.Type.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                abilityName = "$name (OH)",
+                amount = ohResult.first,
+                result = ohResult.second,
+            )
+            sp.logEvent(eventOh)
+
+            // TODO: This is modeled as two distinct hit events for the purposes of procs
+            //       Confirm if that is correct behavior
+            val triggerTypesOh = when(ohResult.second) {
+                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
+
+            if(triggerTypesOh != null) {
+                sp.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
+            }
+        }
 
         // Apply the nature buff
         sp.addBuff(buff)
@@ -106,18 +121,6 @@ class Stormstrike : Ability() {
 
         if(triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
-        }
-
-        // TODO: This is modeled as two distinct hit events for the purposes of procs
-        //       Confirm if that is correct behavior
-        val triggerTypesOh = when(ohResult.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
-
-        if(triggerTypesOh != null) {
-            sp.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
         }
 
         // Fire a general Stormstrike proc
