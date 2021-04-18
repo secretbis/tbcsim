@@ -61,7 +61,7 @@ const RankingBarChart = ({ data }) => (
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'DPS',
+        legend: 'DPS (3 minutes)',
         itemTextColor: '#fff',
         legendPosition: 'middle',
         legendOffset: -40

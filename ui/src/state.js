@@ -92,7 +92,23 @@ export function stateReducer(state, action) {
           [action.value.name]: action.value.value
         }
       }
-  } else {
+    } else if(action.type == 'setRotation') {
+      newState = {
+        ...state,
+        character: {
+          ...state.character,
+          rotation: action.value
+        }
+      }
+    } else if(action.type == 'setTalents') {
+      newState = {
+        ...state,
+        character: {
+          ...state.character,
+          talents: action.value
+        }
+      }
+    } else {
       console.warn(`Unhandled action type: ${action.type}`);
     }
   }

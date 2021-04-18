@@ -108,6 +108,12 @@ function App() {
 
   function onSimClick() {
     dispatch({ type: 'iterationResults', value: null })
+    dispatch({ type: 'resultsResourceUsageByAbility', value: null })
+    dispatch({ type: 'resultsByBuff', value: null })
+    dispatch({ type: 'resultsByDebuff', value: null })
+    dispatch({ type: 'resultsByDamageType', value: null })
+    dispatch({ type: 'resultsByAbility', value: null })
+    dispatch({ type: 'resultsDps', value: null })
     sim()
   }
 
