@@ -10,6 +10,8 @@ import kotlin.random.Random
 
 @JsExport
 object Ranged {
+    const val NORMALIZED_SPEED = 2800.0
+
     fun rngSuffix(sp: SimParticipant, item: Item): String {
         val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
         return "$castingAbility ${item.name}"
@@ -46,16 +48,17 @@ object Ranged {
 
     // Converts an attack power value into a flat damage modifier for a particular item
     @Suppress("UNUSED_PARAMETER")
-    fun apToDamage(sp: SimParticipant, attackPower: Int, item: Item): Double {
-        return attackPower / 14 * (item.speed / 1000.0)
+    fun apToDamage(sp: SimParticipant, attackPower: Int, item: Item, isNormalized: Boolean = false): Double {
+        val weaponSpeed = (if(isNormalized) { NORMALIZED_SPEED } else item.speed) / 1000.0
+        return attackPower / 14 * weaponSpeed
     }
 
-    fun baseDamageRoll(sp: SimParticipant, item: Item, bonusAp: Int = 0, isWhiteDmg: Boolean = false): Double {
+    fun baseDamageRoll(sp: SimParticipant, item: Item, bonusAp: Int = 0, isNormalized: Boolean = false): Double {
         val totalAp = sp.rangedAttackPower() + bonusAp
         val min = item.minDmg.coerceAtLeast(0.0)
         val max = item.maxDmg.coerceAtLeast(1.0)
 
-        return Random.nextDouble(min, max) + apToDamage(sp, totalAp, item)
+        return Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized)
     }
 
     // Performs an attack roll given an initial unmitigated damage value

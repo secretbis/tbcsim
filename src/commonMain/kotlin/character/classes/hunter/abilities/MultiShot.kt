@@ -44,7 +44,7 @@ class MultiShot : Ability() {
 
         // Ammo adds DPS, so we can just model it as bonus AP
         val ammoBonusAp = General.dpsToAp(sp.character.gear.ammo.maxDmg)
-        val damage = Ranged.baseDamageRoll(sp, item, bonusAp = ammoBonusAp) + bonusDmg
+        val damage = Ranged.baseDamageRoll(sp, item, isNormalized = true, bonusAp = ammoBonusAp) + bonusDmg
         val result = Ranged.attackRoll(sp, damage, item)
 
         val event = Event(

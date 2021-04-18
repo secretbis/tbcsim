@@ -46,7 +46,9 @@ class SteadyShot : Ability() {
 
         // This shot does not benefit from ammo DPS
         // TODO: This was *technically* a bug, so we should keep an eye on testing
-        val damage = (Random.nextDouble(item.minDmg, item.maxDmg) + flatBonusDmg + (sp.rangedAttackPower() * 0.2)) * t6BonusMultiplier
+        // According to testing, this is unusually normalized as follows
+        val weaponDamage = Random.nextDouble(item.minDmg, item.maxDmg) * 2.8 / (item.speed / 1000.0)
+        val damage = (weaponDamage + flatBonusDmg + (sp.rangedAttackPower() * 0.2)) * t6BonusMultiplier
         val result = Ranged.attackRoll(sp, damage, item, bonusCritChance = t5BonusCrit)
 
         val event = Event(
