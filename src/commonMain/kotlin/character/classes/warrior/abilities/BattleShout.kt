@@ -29,8 +29,7 @@ class BattleShout : Ability() {
             val ap = 305.0 * (cmdPres?.shoutMultiplier() ?: 1.0)
 
             return Stats(
-                attackPower = ap.toInt(),
-                rangedAttackPower = ap.toInt()
+                attackPower = ap.toInt()
             )
         }
     }

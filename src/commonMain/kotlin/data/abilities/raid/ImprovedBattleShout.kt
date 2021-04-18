@@ -24,8 +24,7 @@ class ImprovedBattleShout : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPower = bonusAp.toInt(),
-                rangedAttackPower = bonusAp.toInt()
+                attackPower = bonusAp.toInt()
             )
         }
     }
