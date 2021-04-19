@@ -42,7 +42,7 @@ function MeleeStats({ simParticipant: sp }) {
   const mainHand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand
   const hasMainhand = mainHand && sp.character.gear.mainHand.itemClass;
   if(hasMainhand) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.mainHand);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.mainHand);
     damageMhLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageMhHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
     speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
@@ -51,7 +51,7 @@ function MeleeStats({ simParticipant: sp }) {
   const offHand = sp && sp.character && sp.character.gear && sp.character.gear.offHand
   const hasOffhand = offHand && sp.character.gear.offHand.itemClass;
   if(hasOffhand) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.offHand);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.offHand);
     damageOhLow = ((sp.character.gear.offHand.minDmg + dmgFromAp) / 2).toFixed(1);
     damageOhHigh = ((sp.character.gear.offHand.maxDmg + dmgFromAp) / 2).toFixed(1);
     speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
@@ -116,7 +116,7 @@ function RangedStats({ simParticipant: sp }) {
   const ranged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram
   const hasRanged = ranged && sp.character.gear.rangedTotemLibram.itemClass;
   if(hasRanged) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower_0(), sp.character.gear.rangedTotemLibram);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.rangedTotemLibram);
     damageRangedLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageRangedHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
     speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
