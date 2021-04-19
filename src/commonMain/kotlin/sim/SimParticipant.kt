@@ -465,18 +465,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             return
         }
 
-        if(res.type == type) {
-            res.add(amount)
+        res.add(amount)
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = res.currentAmount.toDouble(),
-                delta = amount.toDouble(),
-                amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
-                resourceType = res.type,
-                abilityName = abilityName
-            ))
-        }
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
     }
 
     fun subtractResource(amount: Int, type: Resource.Type, abilityName: String) {
@@ -487,18 +485,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             return
         }
 
-        if(res.type == type) {
-            res.subtract(amount)
+        res.subtract(amount)
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = res.currentAmount.toDouble(),
-                delta = amount.toDouble(),
-                amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
-                resourceType = res.type,
-                abilityName = abilityName
-            ))
-        }
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
     }
 
     fun hasEnoughResource(type: Resource.Type, amount: Double) : Boolean {
