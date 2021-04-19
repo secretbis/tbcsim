@@ -121,10 +121,12 @@ rotation:
       criteria:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
+          resourceType: MANA
     - name: Life Tap
       criteria:
         - type: RESOURCE_PCT_LTE
           pct: 10
+          resourceType: MANA
     - name: Curse of Doom
       criteria:
         - type: DEBUFF_DURATION_LTE

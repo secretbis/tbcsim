@@ -159,6 +159,7 @@ rotation:
         # Cast HS if we have excess rage
         - type: RESOURCE_PCT_GTE
           pct: 90
+          resourceType: RAGE
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying

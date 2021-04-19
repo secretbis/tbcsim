@@ -2,12 +2,14 @@ package sim
 
 import character.Buff
 import data.Constants
+import character.Resource
 
 data class Event(
     var tick: Int = -1,
     var timeMs: Int = -1,
     val abilityName: String? = null,
     val buff: Buff? = null,
+    val resourceType: Resource.Type? = null,
     val buffStacks: Int = 0,
     val eventType: Type,
     var target: SimParticipant? = null,

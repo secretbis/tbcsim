@@ -79,7 +79,7 @@ class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         }
     }
 
-    override val resourceType: Resource.Type = Resource.Type.MANA
+    override val resourceType: MutableList<Resource.Type> = mutableListOf(Resource.Type.MANA)
     override val canDualWield: Boolean = false
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 0
