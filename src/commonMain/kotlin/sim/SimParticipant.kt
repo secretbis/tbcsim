@@ -22,7 +22,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
-    lateinit var resource: Resource
+    lateinit var resource: MutableMap<Resource.Type, Resource>
 
     var mhAutoAttack: AutoAttackBase? = null
     var ohAutoAttack: AutoAttackBase? = null
@@ -90,8 +90,12 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         // Compute initial stats
         recomputeStats()
 
-        // Initialize our subject resource
-        resource = Resource(this)
+        // Initialize our subject resource(s)
+        resource = mutableMapOf()
+        character.klass.resourceType.forEach { 
+            var res = Resource(this, it)
+            resource.put(res.type, res) 
+        }
 
         return this
     }
@@ -141,7 +145,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             // If we are not casting, and have an ability queued up, actually cast it
             if(castingRule != null) {
                 // Double check resource, since it could have changed since the start of the attack
-                if(castingRule!!.ability.resourceCost(this) <= resource.currentAmount) {
+                if(hasEnoughResource(castingRule!!.ability.resourceType(this), castingRule!!.ability.resourceCost(this))){
                     castingRule!!.ability.beforeCast(this)
                     castingRule!!.ability.cast(this)
                     castingRule!!.ability.afterCast(this)
@@ -454,35 +458,56 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     fun addResource(amount: Int, type: Resource.Type, abilityName: String) {
         if(amount == 0) return
 
-        if(resource.type == type) {
-            resource.add(amount)
+        var res = resource[type]
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = resource.currentAmount.toDouble(),
-                delta = amount.toDouble(),
-                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = abilityName
-            ))
-        } else {
-            logger.debug { "Attempted to add resource type $type but subject resource is ${resource.type}" }
+        if(res == null) {
+            logger.debug { "Attempted to add resource type $type that is not present for participant" }
+            return
         }
+
+        res.add(amount)
+
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
     }
 
     fun subtractResource(amount: Int, type: Resource.Type, abilityName: String) {
-        if(resource.type == type) {
-            resource.subtract(amount)
+        var res = resource[type]
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = resource.currentAmount.toDouble(),
-                delta = -1 * amount.toDouble(),
-                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = abilityName
-            ))
-        } else {
-            logger.debug { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }
+        if(res == null) {
+            logger.debug { "Attempted to subtract resource type $type that is not present for participant" }
+            return
         }
+
+        res.subtract(amount)
+
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
+    }
+
+    fun hasEnoughResource(type: Resource.Type, amount: Double) : Boolean {
+        if(amount == 0.0){return false} // for trinkets and other items that have MANA as the default
+
+        if(amount <= getResource(type).currentAmount) { 
+            return true 
+        }
+        return false
+    }
+
+    fun getResource(type: Resource.Type) : Resource {
+        return resource[type] ?: throw Exception("Tried to access a resource that is not present for participant")
     }
 
     fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>?, ability: Ability?, event: Event?) {
@@ -539,7 +564,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         }
 
         logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
-
         events.add(event)
     }
 

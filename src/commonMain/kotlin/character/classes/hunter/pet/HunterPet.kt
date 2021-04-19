@@ -69,7 +69,7 @@ abstract class HunterPet(petDamageMultiplier: Double) : Class(mapOf(), HunterPet
         PetUnleashedFury()
     )
 
-    override var resourceType: Resource.Type = Resource.Type.FOCUS
+    override val resourceType: MutableList<Resource.Type> = mutableListOf(Resource.Type.FOCUS)
     override var canDualWield: Boolean = false
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 2

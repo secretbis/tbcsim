@@ -91,6 +91,7 @@ data class RotationRuleCriterion(
     val bool: Boolean? = null,
     val swingType: String? = null,
     val maxClipSeconds: Double? = null,
+    val resourceType: String? = null
 )
 
 @JsExport

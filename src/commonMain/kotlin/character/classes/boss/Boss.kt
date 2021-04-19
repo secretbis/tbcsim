@@ -14,7 +14,7 @@ class Boss(override var baseStats: Stats) : Class(mapOf(), BossSpec()) {
     }
 
     override var buffs: List<Buff> = listOf()
-    override var resourceType: Resource.Type = Resource.Type.MANA
+    override val resourceType: MutableList<Resource.Type> = mutableListOf(Resource.Type.MANA)
     override var canDualWield: Boolean = false
     override var attackPowerFromAgility: Int = 0
     override var attackPowerFromStrength: Int = 0
