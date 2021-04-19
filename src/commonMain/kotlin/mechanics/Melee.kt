@@ -41,6 +41,7 @@ object Melee {
         Constants.ItemSubclass.AXE_2H to 3300.0,
         Constants.ItemSubclass.MACE_2H to 3300.0,
         Constants.ItemSubclass.SWORD_2H to 3300.0,
+        Constants.ItemSubclass.POLEARM to 3300.0,
         Constants.ItemSubclass.DAGGER to 1700.0,
         Constants.ItemSubclass.AXE_1H to 2400.0,
         Constants.ItemSubclass.MACE_1H to 2400.0,
