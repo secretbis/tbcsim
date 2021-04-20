@@ -17,7 +17,7 @@ class ResourceMissingGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_
     }
 
     val resourceType: Resource.Type? = try {
-        Resource.Type.valueOf((data.resourceType as String))
+        enumValueOf<Resource.Type>((data.resourceType as String))
     } catch (e: NullPointerException) {
         logger.warn { "Field 'resourceType' is required for criterion $type" }
         null
