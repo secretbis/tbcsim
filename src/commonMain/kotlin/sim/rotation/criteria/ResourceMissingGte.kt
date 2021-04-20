@@ -30,8 +30,14 @@ class ResourceMissingGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
+        if(amount == null || resourceType == null) {return false}
+        
         val res = sp.resources[resourceType]
-        if(amount == null || resourceType == null || res == null) {return false}
+        if(res == null) { 
+            logger.warn { "The participant does not have the resource of type $resourceType (${this.type})" } 
+            return false
+        }
+        
         return res.currentAmount <= res.maxAmount - amount
     }
 }

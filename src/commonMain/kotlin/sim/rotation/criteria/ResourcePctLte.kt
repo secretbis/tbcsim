@@ -30,8 +30,14 @@ class ResourcePctLte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_PCT_
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
+        if(pct == null || resourceType == null) {return false}
+        
         val res = sp.resources[resourceType]
-        if(pct == null || resourceType == null || res == null) {return false}
+        if(res == null) { 
+            logger.warn { "The participant does not have the resource of type $resourceType (${this.type})" } 
+            return false
+        }
+
         return res.currentAmount <= res.maxAmount * (pct / 100.0)
     }
 }

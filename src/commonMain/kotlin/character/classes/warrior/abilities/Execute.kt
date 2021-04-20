@@ -40,8 +40,7 @@ class Execute : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val item = sp.character.gear.mainHand
-        val res = sp.resources[resourceType(sp)]
-        if(res == null) return
+        val res = sp.resources[resourceType(sp)]!!
         val damage = 925.0 + res.currentAmount * 21
         val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
