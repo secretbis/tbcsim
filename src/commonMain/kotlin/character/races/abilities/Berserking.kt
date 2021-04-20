@@ -16,9 +16,9 @@ class Berserking : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type {
-        if(sp.resource.containsKey(Resource.Type.MANA)) return Resource.Type.MANA 
-        if(sp.resource.containsKey(Resource.Type.ENERGY)) return Resource.Type.ENERGY
-        if(sp.resource.containsKey(Resource.Type.RAGE)) return Resource.Type.RAGE
+        if(sp.resources.containsKey(Resource.Type.MANA)) return Resource.Type.MANA 
+        if(sp.resources.containsKey(Resource.Type.ENERGY)) return Resource.Type.ENERGY
+        if(sp.resources.containsKey(Resource.Type.RAGE)) return Resource.Type.RAGE
 
         return Resource.Type.MANA
     }

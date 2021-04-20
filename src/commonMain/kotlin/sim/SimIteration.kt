@@ -76,7 +76,7 @@ class SimIteration(
         // MP5
         if (elapsedTimeMs - lastMp5Tick >= 5000) {
             allParticipants.forEach {
-                if (it.resource.containsKey(Resource.Type.MANA)) {
+                if (it.resources.containsKey(Resource.Type.MANA)) {
                     it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA, "MP5")
                 }
             }
