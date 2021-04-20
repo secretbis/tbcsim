@@ -17,7 +17,7 @@ class DemonicSacrificeSuccubus : DemonicSacrifice("Succubus", { Stats(shadowDama
         const val name = "Demonic Sacrifice (Succubus)"
     }
 }
-class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sp -> Stats(shadowDamageMultiplier = 1.15, manaPer5Seconds = (sp.getResource((Resource.Type.MANA)).maxAmount * 0.02 * 0.8).toInt())}) {
+class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sp -> Stats(shadowDamageMultiplier = 1.15, manaPer5Seconds = ((sp.resources[Resource.Type.MANA]?.maxAmount ?: 0) * 0.02 * 0.8).toInt())}) {
     companion object {
         const val name = "Demonic Sacrifice (Felguard)"
     }

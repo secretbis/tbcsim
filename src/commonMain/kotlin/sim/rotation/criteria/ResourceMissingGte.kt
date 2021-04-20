@@ -16,12 +16,8 @@ class ResourceMissingGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_
         null
     }
 
-    inline fun <reified T : Enum<T>> valueOf(type: String): T? {
-        return java.lang.Enum.valueOf(T::class.java, type)
-    }
-
     val resourceType: Resource.Type? = try {
-        valueOf<Resource.Type>((data.resourceType as String))
+        Resource.Type.valueOf((data.resourceType as String))
     } catch (e: NullPointerException) {
         logger.warn { "Field 'resourceType' is required for criterion $type" }
         null
@@ -34,7 +30,8 @@ class ResourceMissingGte(data: RotationRuleCriterion) : Criterion(Type.RESOURCE_
     }
 
     override fun satisfied(sp: SimParticipant): Boolean {
-        if(amount == null || resourceType == null) {return false}
-        return sp.getResource(resourceType).currentAmount <= sp.getResource(resourceType).maxAmount - amount
+        val res = sp.resources[resourceType]
+        if(amount == null || resourceType == null || res == null) {return false}
+        return res.currentAmount <= res.maxAmount - amount
     }
 }
