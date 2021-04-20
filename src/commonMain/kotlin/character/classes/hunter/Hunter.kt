@@ -84,7 +84,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
         }
     }
 
-    override val resourceType: Resource.Type = Resource.Type.MANA
+    override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)
     override val canDualWield: Boolean = true
     override val attackPowerFromAgility: Int = 1
     override val attackPowerFromStrength: Int = 1

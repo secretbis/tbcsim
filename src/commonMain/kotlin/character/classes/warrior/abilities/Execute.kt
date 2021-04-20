@@ -40,11 +40,12 @@ class Execute : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val item = sp.character.gear.mainHand
-        val damage = 925.0 + sp.resource.currentAmount * 21
+        val res = sp.resources[resourceType(sp)]!!
+        val damage = 925.0 + res.currentAmount * 21
         val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
         // Drain rage
-        sp.subtractResource(sp.resource.currentAmount, Resource.Type.RAGE, "Execute (extra)")
+        sp.subtractResource(res.currentAmount, Resource.Type.RAGE, "Execute (extra)")
 
         // Save last hit state and fire event
         val event = Event(

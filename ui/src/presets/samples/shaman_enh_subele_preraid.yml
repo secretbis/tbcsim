@@ -140,6 +140,7 @@ rotation:
         # If our mana is 30% or lower, cast Shamanistic Rage
         - type: RESOURCE_PCT_LTE
           pct: 30
+          resourceType: MANA
     - name: Stormstrike
     - name: Windfury Totem (Rank 1)
       criteria:

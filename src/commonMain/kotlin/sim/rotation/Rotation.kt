@@ -44,7 +44,7 @@ class Rotation(
             (!onGcd || (onGcd && it.ability.castableOnGcd)) &&
             it.ability.available(sp) &&
             it.satisfied(sp) &&
-            it.ability.resourceCost(sp) <= sp.resource.currentAmount
+            sp.hasEnoughResource(it.ability.resourceType(sp), it.ability.resourceCost(sp))
         }
     }
 }

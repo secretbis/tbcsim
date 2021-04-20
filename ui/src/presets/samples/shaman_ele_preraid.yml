@@ -151,6 +151,7 @@ rotation:
       criteria:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
+          resourceType: MANA
         - type: ABILITY_COOLDOWN_GTE
           ability: Super Mana Potion
           seconds: 1
@@ -158,6 +159,7 @@ rotation:
       criteria:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
+          resourceType: MANA
         - type: FIGHT_TIME_REMAINING_GTE
           seconds: 90
     # Mana pot if we've used enough mana an there's a lot of fight left
@@ -167,6 +169,7 @@ rotation:
           seconds: 135
         - type: RESOURCE_MISSING_GTE
           amount: 3000
+          resourceType: MANA
     - name: Destruction Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions
@@ -177,6 +180,7 @@ rotation:
           seconds: 60
         - type: RESOURCE_PCT_GTE
           pct: 60
+          resourceType: MANA
     - name: Elemental Mastery
     # Always cast CL with EM up
     - name: Chain Lightning
@@ -200,6 +204,7 @@ rotation:
           seconds: 60
         - type: RESOURCE_PCT_GTE
           pct: 60
+          resourceType: MANA
     - name: Lightning Bolt
 
 # Raid and group setup

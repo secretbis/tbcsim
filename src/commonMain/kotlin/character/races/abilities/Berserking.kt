@@ -16,11 +16,15 @@ class Berserking : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type {
-        return sp.character.klass.resourceType
+        if(sp.resources.containsKey(Resource.Type.MANA)) return Resource.Type.MANA 
+        if(sp.resources.containsKey(Resource.Type.ENERGY)) return Resource.Type.ENERGY
+        if(sp.resources.containsKey(Resource.Type.RAGE)) return Resource.Type.RAGE
+
+        return Resource.Type.MANA
     }
 
     override fun resourceCost(sp: SimParticipant): Double {
-        return when(sp.character.klass.resourceType) {
+        return when(resourceType(sp)) {
             Resource.Type.MANA -> 0.06 * sp.character.klass.baseMana
             Resource.Type.ENERGY -> 10.0
             Resource.Type.RAGE -> 5.0

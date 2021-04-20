@@ -144,6 +144,7 @@ rotation:
         # Cast HS if we have 60 rage or more
         - type: RESOURCE_PCT_GTE
           pct: 60
+          resourceType: RAGE
     - name: Battle Shout
       criteria:
         - type: BUFF_DURATION_LTE

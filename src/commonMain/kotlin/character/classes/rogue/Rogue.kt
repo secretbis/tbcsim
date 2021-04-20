@@ -21,20 +21,13 @@ class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         TODO("Not yet implemented")
     }
 
-    override val resourceType: Resource.Type
-        get() = TODO("Not yet implemented")
-    override val canDualWield: Boolean
-        get() = TODO("Not yet implemented")
-    override val attackPowerFromAgility: Int
-        get() = TODO("Not yet implemented")
-    override val attackPowerFromStrength: Int
-        get() = TODO("Not yet implemented")
-    override val critPctPerAgility: Double
-        get() = TODO("Not yet implemented")
-    override val rangedAttackPowerFromAgility: Int
-        get() = TODO("Not yet implemented")
-    override val baseMana: Int
-        get() = TODO("Not yet implemented")
+    override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.ENERGY, Resource.Type.COMBO_POINT)
+    override val canDualWield: Boolean = true
+    override val attackPowerFromAgility: Int = 1
+    override val attackPowerFromStrength: Int = 1
+    override val critPctPerAgility: Double = 1.0 / 40
+    override val rangedAttackPowerFromAgility: Int = 1
+    override val baseMana: Int = 0
     override val baseSpellCritChance: Double = 0.0
     override val dodgePctPerAgility: Double = 1.0 / 20.0
     override val baseDodgePct: Double = -0.59

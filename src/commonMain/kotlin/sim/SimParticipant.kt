@@ -22,7 +22,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
-    lateinit var resource: Resource
+    lateinit var resources: Map<Resource.Type, Resource>
 
     var mhAutoAttack: AutoAttackBase? = null
     var ohAutoAttack: AutoAttackBase? = null
@@ -90,8 +90,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         // Compute initial stats
         recomputeStats()
 
-        // Initialize our subject resource
-        resource = Resource(this)
+        // Initialize our subject resources(s)
+        resources = character.klass.resourceTypes.map { it to Resource(this, it) }.toMap()
 
         return this
     }
@@ -140,8 +140,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         if(!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
             if(castingRule != null) {
-                // Double check resource, since it could have changed since the start of the attack
-                if(castingRule!!.ability.resourceCost(this) <= resource.currentAmount) {
+                // Double check resources, since it could have changed since the start of the attack
+                if(hasEnoughResource(castingRule!!.ability.resourceType(this), castingRule!!.ability.resourceCost(this))){
                     castingRule!!.ability.beforeCast(this)
                     castingRule!!.ability.cast(this)
                     castingRule!!.ability.afterCast(this)
@@ -157,7 +157,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     // Fire cast procs
                     fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
                 } else {
-                    logger.info { "Canceled queued cast of ${castingRule!!.ability.name} - low resource" }
+                    logger.info { "Canceled queued cast of ${castingRule!!.ability.name} - low resources" }
                 }
 
                 // Reset casting state
@@ -171,7 +171,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 castEndMs = sim.elapsedTimeMs + rangedAutoAttack!!.castTimeMs(this) + sim.opts.latencyMs
             } else if (mhAutoAttack?.available(this) == true) {
                 // Check to see if we have a replacement ability
-                // Be sure to double check the cost, since our resource may have changed since we requested the replacement
+                // Be sure to double check the cost, since our resources may have changed since we requested the replacement
                 if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
                     // If we can cast it, do so
                     if(mainHandAutoReplacement?.available(this) == true) {
@@ -454,34 +454,54 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     fun addResource(amount: Int, type: Resource.Type, abilityName: String) {
         if(amount == 0) return
 
-        if(resource.type == type) {
-            resource.add(amount)
+        var res = resources[type]
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = resource.currentAmount.toDouble(),
-                delta = amount.toDouble(),
-                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = abilityName
-            ))
-        } else {
-            logger.debug { "Attempted to add resource type $type but subject resource is ${resource.type}" }
+        if(res == null) {
+            logger.debug { "Attempted to add resources type $type that is not present for participant" }
+            return
         }
+
+        res.add(amount)
+
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
     }
 
     fun subtractResource(amount: Int, type: Resource.Type, abilityName: String) {
-        if(resource.type == type) {
-            resource.subtract(amount)
+        var res = resources[type]
 
-            logEvent(Event(
-                eventType = Event.Type.RESOURCE_CHANGED,
-                amount = resource.currentAmount.toDouble(),
-                delta = -1 * amount.toDouble(),
-                amountPct = resource.currentAmount / resource.maxAmount.toDouble() * 100.0,
-                abilityName = abilityName
-            ))
+        if(res == null) {
+            logger.debug { "Attempted to subtract resources type $type that is not present for participant" }
+            return
+        }
+
+        res.subtract(amount)
+
+        logEvent(Event(
+            eventType = Event.Type.RESOURCE_CHANGED,
+            amount = res.currentAmount.toDouble(),
+            delta = amount.toDouble(),
+            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+            resourceType = res.type,
+            abilityName = abilityName
+        ))
+    }
+
+    fun hasEnoughResource(type: Resource.Type, amount: Double) : Boolean {
+        if(amount == 0.0){return true} // for trinkets and other items that have MANA as the default
+
+        var res = resources[type]
+        if(res != null){
+            return amount <= res.currentAmount
         } else {
-            logger.debug { "Attempted to subtract resource type $type but subject resource is ${resource.type}" }
+            logger.debug { "Attempted to access resources type $type that is not present for participant" }
+            return false
         }
     }
 
@@ -539,7 +559,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         }
 
         logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
-
         events.add(event)
     }
 

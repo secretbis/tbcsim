@@ -44,7 +44,7 @@ class JudgementOfWisdom : Ability() {
             override fun percentChance(sp: SimParticipant): Double = 50.0
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(sp.character.klass.resourceType == Resource.Type.MANA) {
+                if(sp.resources.containsKey(Resource.Type.MANA)) {
                     sp.addResource(74, Resource.Type.MANA, name)
                 }
             }

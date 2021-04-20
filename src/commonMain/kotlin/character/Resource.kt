@@ -3,7 +3,8 @@ package character
 import sim.SimParticipant
 
 class Resource(
-    val sp: SimParticipant
+    val sp: SimParticipant,
+    val type: Type
 ) {
     enum class Type {
         MANA,
@@ -12,8 +13,6 @@ class Resource(
         FOCUS,
         COMBO_POINT
     }
-
-    val type: Type = sp.character.klass.resourceType
 
     val initialAmount: Int
     var maxAmount: Int
