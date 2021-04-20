@@ -273,12 +273,13 @@ class TBCSim : CliktCommand() {
 
                 // Stats
                 val durationSeconds = (opts.durationMs / 1000.0).toInt()
-                val resourceType = config.character.klass.resourceType
+                val resourceTypes = config.character.klass.resourceTypes
 
                 // Only print the big chart for the main subject - others arent interesting
+                // TODO this doesn't differentiate between resources now if a participant uses more than 1 resource
                 val resource = SimStats.resourceUsage(iterations)
                 println("Resource usage for iteration ${resource[0].iterationIdx}")
-                Chart.print(resource[0].series, xMax = durationSeconds, yLabel = resourceType.toString())
+                Chart.print(resource[0].series, xMax = durationSeconds, yLabel = resourceTypes.first().toString())
 
                 val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
                 SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)

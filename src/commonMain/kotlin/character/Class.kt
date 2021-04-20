@@ -74,7 +74,7 @@ abstract class Class(
     abstract fun talentFromString(name: String, ranks: Int): Talent?
 
     // Class resource
-    abstract val resourceType: List<Resource.Type>
+    abstract val resourceTypes: List<Resource.Type>
 
     abstract val canDualWield: Boolean
 

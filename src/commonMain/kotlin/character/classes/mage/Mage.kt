@@ -22,7 +22,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         TODO("Not yet implemented")
     }
 
-    override val resourceType: MutableList<Resource.Type>
+    override val resourceTypes: List<Resource.Type>
         get() = TODO("Not yet implemented")
     override val canDualWield: Boolean
         get() = TODO("Not yet implemented")

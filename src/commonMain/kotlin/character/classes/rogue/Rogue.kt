@@ -21,7 +21,7 @@ class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         TODO("Not yet implemented")
     }
 
-    override val resourceType: MutableList<Resource.Type> = mutableListOf(Resource.Type.ENERGY, Resource.Type.COMBO_POINT)
+    override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.ENERGY, Resource.Type.COMBO_POINT)
     override val canDualWield: Boolean = true
     override val attackPowerFromAgility: Int = 1
     override val attackPowerFromStrength: Int = 1
