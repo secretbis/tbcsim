@@ -10,17 +10,17 @@ class Combat : Spec() {
     override val benefitsFromMeleeWeaponDps = true
 
     override fun redSocketEp(deltas: Map<String, Double>): Double {
-        // 10 str
-        return (deltas["strength"] ?: 0.0) * 10.0
+        // 10 agi
+        return (deltas["agility"] ?: 0.0) * 10.0
     }
 
     override fun yellowSocketEp(deltas: Map<String, Double>): Double {
-        // 10 crit rating
-        return (deltas["meleeCritRating"] ?: 0.0) * 10.0
+        // 5 agi / 5 hit
+        return (deltas["meleeHitRating"] ?: 0.0) * 5 + (deltas["agility"] ?: 0.0) * 5
     }
 
     override fun blueSocketEp(deltas: Map<String, Double>): Double {
-        // 5 str
-        return (deltas["strength"] ?: 0.0) * 5.0
+        // 5 agi
+        return (deltas["agility"] ?: 0.0) * 5.0
     }
 }
