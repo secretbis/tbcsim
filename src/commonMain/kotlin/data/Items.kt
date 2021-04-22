@@ -3,6 +3,8 @@ package data
 import data.gems.*
 import data.items.ItemIndex
 import data.itemscustom.Annihilator
+import data.itemscustom.MamasInsurance
+import data.itemscustom.MarkOfTheChampion
 import data.model.Prefix
 import kotlin.js.JsExport
 
@@ -12,6 +14,8 @@ object Items {
     val items = arrayOf(
         // Manually added items
         { Annihilator() },
+        { MamasInsurance() },
+        { MarkOfTheChampion() },
 
         // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
         // Meta gems
