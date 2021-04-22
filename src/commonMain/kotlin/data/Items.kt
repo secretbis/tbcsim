@@ -23,8 +23,6 @@ object Items {
         { MindQuickeningGem() },
         { TheRestrainedEssenceOfSapphiron() },
 
-
-
         // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
         // Meta gems
         { ChaoticSkyfireDiamond() },
