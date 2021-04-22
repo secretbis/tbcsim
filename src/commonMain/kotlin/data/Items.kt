@@ -3,6 +3,7 @@ package data
 import data.gems.*
 import data.items.ItemIndex
 import data.itemscustom.Annihilator
+import data.itemscustom.FleshHandlersGauntlets
 import data.itemscustom.MamasInsurance
 import data.itemscustom.MarkOfTheChampion
 import data.model.Prefix
@@ -14,6 +15,7 @@ object Items {
     val items = arrayOf(
         // Manually added items
         { Annihilator() },
+        { FleshHandlersGauntlets() },
         { MamasInsurance() },
         { MarkOfTheChampion() },
 
