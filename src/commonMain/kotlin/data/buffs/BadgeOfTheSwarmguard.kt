@@ -22,6 +22,13 @@ class BadgeOfTheSwarmguard : Buff() {
         override val name: String  = "Badge of the Swarmguard"
         override val durationMs: Int = buffDurationMs
 
+        val stackBuff = object : Buff() {
+            override val name: String = "Insight of the Qiraji"
+            override val durationMs: Int = -1
+            override val maxStacks: Int = 6
+            override val hidden: Boolean = false
+        }
+
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
                 Trigger.MELEE_AUTO_HIT,
@@ -45,10 +52,7 @@ class BadgeOfTheSwarmguard : Buff() {
             //from fightclub discord
             override fun cooldownMs(sp: SimParticipant): Int = 0
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?){
-                val state = stackBuff.state(sp)
-                if (state.currentStacks < stackBuff.maxStacks) {
                     sp.addBuff(stackBuff)
-                }
             }
         }
 
@@ -59,28 +63,17 @@ class BadgeOfTheSwarmguard : Buff() {
 
         override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
-    val stackBuff = object : Buff() {
-        override val name: String = "Arp Buff"
-        override val durationMs: Int = -1
-        override val maxStacks: Int = 6
-        override val hidden: Boolean = true
-    }
+
 
     val ability = object : Ability() {
         override val id: Int = 26480
         override val name: String = "Badge of the Swarmguard"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 180000
-
        //no trinket lockout
 
         override fun cast(sp: SimParticipant) {
-            val state = stackBuff.state(sp)
             sp.addBuff(buff)
-            if(state.currentStacks > 1){
-                sp.consumeBuff(stackBuff)
-                //remove stacks from previous application when the trinket is used
-            }
         }
     }
 

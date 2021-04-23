@@ -59,9 +59,9 @@ class RomulosPoisonVial : Buff() {
         //TODO: test proc rate on live, value based on wowhead comments with a sample size of 1k
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                natureAbility.cast(sp)
-             }
+            natureAbility.cast(sp)
         }
+    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }
