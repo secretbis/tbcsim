@@ -2,10 +2,7 @@ package data
 
 import data.gems.*
 import data.items.ItemIndex
-import data.itemscustom.Annihilator
-import data.itemscustom.FleshHandlersGauntlets
-import data.itemscustom.MamasInsurance
-import data.itemscustom.MarkOfTheChampion
+import data.itemscustom.*
 import data.model.Prefix
 import kotlin.js.JsExport
 
@@ -18,6 +15,13 @@ object Items {
         { FleshHandlersGauntlets() },
         { MamasInsurance() },
         { MarkOfTheChampion() },
+        { BadgeOfTheSwarmguard() },
+        { KissOfTheSpider() },
+        { SlayersCrest() },
+        { NeltharionsTear() },
+        { DrakeFangTalisman () },
+        { MindQuickeningGem() },
+        { TheRestrainedEssenceOfSapphiron() },
 
         // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
         // Meta gems
