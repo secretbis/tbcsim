@@ -4,7 +4,8 @@ import character.*
 import character.auto.AutoAttackBase
 import character.auto.AutoShot
 import character.auto.MeleeMainHand
-import character.auto.MeleeOffHand
+import character.auto.*
+import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
@@ -69,6 +70,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
             } else {
+                if(character.klass is Rogue) {
+                    if (hasMainHandWeapon()) {
+                        mhAutoAttack = MeleeMainHandRogue()
+                    }
+                    if (hasOffHandWeapon()) {
+                        ohAutoAttack = MeleeOffHandRogue()
+                    }
+                }
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHand()
                 }
@@ -196,7 +205,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     // Determine the priority of an incoming mutex buff/debuff against already-present mutex buffs/debuffs of the same type
-    private fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
+    fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
         // If this buff is mutex with others, compare priority and remove the weaker one(s)
         // If they are equal, choose the most recent (this one)
         return if(buffDebuff.mutex.contains(Mutex.NONE)) {

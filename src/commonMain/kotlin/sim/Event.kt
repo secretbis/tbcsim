@@ -19,7 +19,8 @@ data class Event(
     val amountPct: Double = 0.0,
     val delta: Double = 0.0,
     val result: Result = Result.NONE,
-    val partialAmount: Double = 0.0
+    val partialAmount: Double = 0.0,
+    var comboPointsSpent: Int = 0
 ) {
     enum class Type {
         DAMAGE,

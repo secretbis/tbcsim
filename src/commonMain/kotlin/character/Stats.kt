@@ -107,6 +107,11 @@ data class Stats(
 
     // Weird abilities
     var offHandAddlWhiteHitPct: Double = 0.0
+    var yellowHitsAdditionalCritPct: Double = 0.0
+
+    // per weapontype crit increase
+    var daggerAdditionalCritChancePercent: Double = 0.0
+    var fistWeaponAdditionalCritChancePercent: Double = 0.0
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -212,6 +217,9 @@ data class Stats(
         manaPer5Seconds += stats.manaPer5Seconds
 
         offHandAddlWhiteHitPct += stats.offHandAddlWhiteHitPct
+
+        daggerAdditionalCritChancePercent += stats.daggerAdditionalCritChancePercent
+        fistWeaponAdditionalCritChancePercent += stats.fistWeaponAdditionalCritChancePercent
 
         return this
     }

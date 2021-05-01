@@ -2,6 +2,9 @@ package character.classes.rogue
 
 import character.*
 import data.model.Item
+import character.classes.rogue.abilities.*
+import character.classes.rogue.talents.*
+import character.classes.rogue.buffs.*
 
 class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
@@ -11,14 +14,23 @@ class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         stamina = 154,
         spirit = 92
     )
-    override val buffs: List<Buff> = listOf()
+    override val buffs: List<Buff> = listOf(
+        BaseEnergyGeneneration(),
+        Stealth(), // start stealthed
+    )
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        TODO("Not yet implemented")
+        return when(name) {
+            SinisterStrike.name -> SinisterStrike()
+            else -> null
+        }
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        TODO("Not yet implemented")
+        return when(name) {
+            CombatPotency.name -> CombatPotency(ranks)
+            else -> null
+        }
     }
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.ENERGY, Resource.Type.COMBO_POINT)
