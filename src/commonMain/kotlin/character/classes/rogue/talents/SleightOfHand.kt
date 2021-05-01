@@ -9,3 +9,4 @@ class SleightOfHand(currentRank: Int) : Talent(currentRank) {
 
     override val name: String = Companion.name
     override val maxRank: Int = 2
+}

@@ -10,7 +10,7 @@ class MasterPoisoner(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    fun additionalPoisonResistReduction: Double {
+    fun additionalPoisonResistReduction(): Double {
         return currentRank * 0.05
     }
 

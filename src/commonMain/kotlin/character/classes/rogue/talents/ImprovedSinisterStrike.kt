@@ -12,8 +12,8 @@ class ImprovedSinisterStrike(currentRank: Int) : Talent(currentRank) {
 
     fun reducedEnergy(): Double {
         return when(currentRank){
-            1 -> 3.0,
-            2 -> 5.0,
+            1 -> 3.0
+            2 -> 5.0
             else -> 0.0
         }
     }

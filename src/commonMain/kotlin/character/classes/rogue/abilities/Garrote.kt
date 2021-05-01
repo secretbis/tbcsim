@@ -29,7 +29,7 @@ class Garrote : Ability() {
         return 50.0 - reduction
     }
 
-    fun available(sp: SimParticipant): Boolean {
+    override fun available(sp: SimParticipant): Boolean {
         val inStealth = sp.buffs[Stealth.name] != null
         return inStealth && super.available(sp)
     }

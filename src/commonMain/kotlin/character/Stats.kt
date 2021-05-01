@@ -106,11 +106,11 @@ data class Stats(
     var manaPer5Seconds: Int = 0,
 
     // Weird abilities
-    var offHandAddlWhiteHitPct: Double = 0.0
-    var yellowHitsAdditionalCritPct: Double = 0.0
+    var offHandAddlWhiteHitPct: Double = 0.0,
+    var yellowHitsAdditionalCritPct: Double = 0.0,
 
     // per weapontype crit increase
-    var daggerAdditionalCritChancePercent: Double = 0.0
+    var daggerAdditionalCritChancePercent: Double = 0.0,
     var fistWeaponAdditionalCritChancePercent: Double = 0.0
 ) {
     companion object {

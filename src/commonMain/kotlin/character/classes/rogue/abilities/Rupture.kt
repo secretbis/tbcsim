@@ -10,7 +10,6 @@ import character.classes.rogue.talents.*
 import character.classes.rogue.debuffs.*
 import mechanics.Rating
 import mechanics.Spell
-import io.kotest.mpp.timeInMillis
 
 class Rupture : FinisherAbility() {
     companion object {

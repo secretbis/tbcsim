@@ -18,7 +18,6 @@ class Hemorrhage(owner: SimParticipant) : Debuff(owner) {
     // TODO: maybe reduce this to a number that represents something realistic with other raid members consuming charges, 
     //       otherwise the personal damage increase will be highly inflated.
     override val maxCharges = 10 - 1
-    this.state().currentCharges = maxCharges
 
     val physicalDmgIncrease = 42.0
 
