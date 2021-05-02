@@ -149,9 +149,11 @@ object Melee {
         return valueByLevelDiff(sp, baseGlancingChance)
     }
 
-    fun meleeGlanceReduction(sp: SimParticipant, item: Item?): Double {
+    // this is actually the meleeGlanceMultiplier and not the reduction.
+    // also, the max "low" for melee is 0.91 and not 0.6
+    fun meleeGlanceMultiplier(sp: SimParticipant, item: Item?): Double {
         val defDifference: Int = (sp.sim.target.character.level - sp.character.level).coerceAtLeast(0) * 5
-        val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.6).coerceAtLeast(0.0)
+        val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.91).coerceAtLeast(0.01)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
 
         return Random.nextDouble(low, high)
@@ -263,7 +265,7 @@ object Melee {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
             attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sp, item)), Event.Result.GLANCE)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), Event.Result.GLANCE)
             attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
             isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
             else -> Pair(damageRoll, Event.Result.HIT)
