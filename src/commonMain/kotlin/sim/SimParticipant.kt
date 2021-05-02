@@ -69,15 +69,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 rangedAutoAttack = AutoShot()
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
-            } else {
-                if(character.klass is Rogue) {
-                    if (hasMainHandWeapon()) {
-                        mhAutoAttack = MeleeMainHandRogue()
-                    }
-                    if (hasOffHandWeapon()) {
-                        ohAutoAttack = MeleeOffHandRogue()
-                    }
+            } else if(character.klass is Rogue) {
+                if (hasMainHandWeapon()) {
+                    mhAutoAttack = MeleeMainHandRogue()
                 }
+                if (hasOffHandWeapon()) {
+                    ohAutoAttack = MeleeOffHandRogue()
+                }
+            } else {
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHand()
                 }
@@ -617,7 +616,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.attackPower.coerceAtLeast(0) +
-                strength() * character.klass.attackPowerFromStrength
+                strength() * character.klass.attackPowerFromStrength +
+                agility() * character.klass.attackPowerFromAgility
             ) * stats.attackPowerMultiplier
         ).toInt()
     }

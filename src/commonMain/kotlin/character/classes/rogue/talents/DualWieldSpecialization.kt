@@ -1,4 +1,4 @@
-package character.classes.warrior.talents
+package character.classes.rogue.talents
 
 import character.Buff
 import character.Stats

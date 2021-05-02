@@ -5,7 +5,7 @@ import character.Buff
 import character.classes.rogue.buffs.*
 import sim.SimParticipant
 
-class WoundPoisonMainHand : Ability() {
+class WoundPoisonMainhand : Ability() {
     companion object {
         const val name = "Wound Poison (MH)"
     }

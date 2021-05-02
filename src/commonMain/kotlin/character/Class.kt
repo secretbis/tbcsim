@@ -11,6 +11,8 @@ import character.classes.warlock.specs.Destruction
 import character.classes.warrior.Warrior
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
+import character.classes.rogue.specs.Combat
+import character.classes.rogue.Rogue
 import data.model.Item
 
 abstract class Class(
@@ -28,6 +30,7 @@ abstract class Class(
                 "shaman" -> Shaman(talents, spec)
                 "warlock" -> Warlock(talents, spec)
                 "warrior" -> Warrior(talents, spec)
+                "rogue" -> Rogue(talents, spec)
                 else -> null
             }
         }
@@ -56,6 +59,10 @@ abstract class Class(
                 "warrior" -> when(specName) {
                     "arms" -> Arms()
                     "fury" -> Fury()
+                    else -> null
+                }
+                "rogue" -> when(specName) {
+                    "combat" -> Combat()
                     else -> null
                 }
                 else -> null

@@ -5,7 +5,7 @@ import character.Buff
 import character.classes.rogue.buffs.*
 import sim.SimParticipant
 
-class DeadlyPoisonMainHand : Ability() {
+class DeadlyPoisonMainhand : Ability() {
     companion object {
         const val name = "Deadly Poison (MH)"
     }
@@ -20,7 +20,6 @@ class DeadlyPoisonMainHand : Ability() {
 
     var buff: Buff? = null
 
-    // not adding the healing debuff since it's irrelevant for sims
     override fun cast(sp: SimParticipant) {
         if(buff == null) {
             buff = DeadlyPoison(sp.character.gear.mainHand)

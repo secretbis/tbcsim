@@ -31,7 +31,7 @@ class SinisterStrike : Ability() {
 
         var increasedDamagePercent = 0.0
         
-        val aggression = sp.character.klass.talents[Aggression.name] as ImprovedEviscerate?
+        val aggression = sp.character.klass.talents[Aggression.name] as Aggression?
         increasedDamagePercent += aggression?.damageIncreasePercent() ?: 0.0
         val surprise = sp.character.klass.talents[SurpriseAttacks.name] as SurpriseAttacks?
         increasedDamagePercent += surprise?.damageIncreasePercent() ?: 0.0

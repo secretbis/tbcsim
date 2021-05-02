@@ -4,7 +4,7 @@ import character.*
 
 class SurpriseAttacks(currentRank: Int) : Talent(currentRank) {
     companion object {
-        const val name = "SurpriseAttacks"
+        const val name = "Surprise Attacks"
     }
 
     override val name: String = Companion.name
