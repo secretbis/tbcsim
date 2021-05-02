@@ -54,8 +54,10 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
                     return
                 }
 
-                val damageRoll = Melee.baseDamageRoll(sp, item)
-                val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = true)
+                // the additional attack is always carried out by the mainhand
+                val attackItem = sp.character.gear.mainHand
+                val damageRoll = Melee.baseDamageRoll(sp, attackItem)
+                val result = Melee.attackRoll(sp, damageRoll, attackItem, isWhiteDmg = true)
 
                 sp.logEvent(Event(
                     eventType = Event.Type.DAMAGE,
