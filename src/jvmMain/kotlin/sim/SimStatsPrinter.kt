@@ -54,22 +54,22 @@ object SimStatsPrinter {
             println(
                 "Ability Breakdown\n" +
                 table {
-                    header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "AvgHit", "AvgCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
+                    header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "MinHit", "AvgHit", "MaxHit", "MinCrit", "AvgCrit", "MaxCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                     for(row in rows) {
-                        row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.avgHit, row.avgCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                        row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.minHit, row.avgHit, row.maxHit, row.minCrit, row.avgCrit, row.maxCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                     }
 
                     hints {
                         alignment(0, Table.Hints.Alignment.LEFT)
 
-                        for(i in 1..11) {
+                        for(i in 1..15) {
                             precision(i, 2)
                             formatFlag(i, ",")
                         }
 
                         postfix(3, "%")
-                        for(i in 6..11) {
+                        for(i in 10..15) {
                             postfix(i, "%")
                         }
 
