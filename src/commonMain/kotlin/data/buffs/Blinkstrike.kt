@@ -16,37 +16,6 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    val consumeProc = fun(buff: Buff): Proc{
-        return object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.MELEE_AUTO_HIT,
-                Trigger.MELEE_AUTO_CRIT,
-                Trigger.MELEE_REPLACED_AUTO_ATTACK_HIT,
-                Trigger.MELEE_REPLACED_AUTO_ATTACK_CRIT
-            )
-
-            override val type: Type = Type.STATIC
-
-            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
-                val isMhWeapon = items?.first() === sp.character.gear.mainHand
-                return isMhWeapon && super.shouldProc(sp, items, ability, event)
-            }
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                extraAttack.cast(sp)
-                sp.consumeBuff(buff)
-            }
-        }
-    }
-
-    val buff = object : Buff() {
-        override val name: String = "Blinkstrike"
-        override val durationMs: Int = -1
-        val proc = consumeProc(this)
-
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
-
     val extraAttack = object : Ability() {
         override val id: Int = 38308
         override val name: String = "Blinkstrike Extra Attack"
@@ -94,10 +63,10 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override val type: Type = Type.PPM
         override val ppm: Double = 1.0
-        //TODO: confirm proc rate
+        //TODO: confirm proc rate, check that there is no reset on MH swing (unlikely as other similar procs had the swing time reset removed)
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addBuff(buff)
+            extraAttack.cast(sp)
         }
     }
     override fun procs(sp: SimParticipant): List<Proc> = listOf(weaponProc)
