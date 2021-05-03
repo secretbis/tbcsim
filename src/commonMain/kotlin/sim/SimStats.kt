@@ -5,6 +5,7 @@ import sim.statsmodel.*
 import kotlin.js.JsExport
 import kotlin.math.sqrt
 import kotlin.random.Random
+import character.*
 
 @JsExport
 object SimStats {
@@ -304,7 +305,7 @@ object SimStats {
         }
     }
 
-    fun resourceUsage(iterations: List<SimIteration>): List<ResourceBreakdown> {
+    fun resourceUsage(iterations: List<SimIteration>, resourceType: Resource.Type): List<ResourceBreakdown> {
         // Pick an execution at random
         // TODO: Average and +/- some number of stddevs usage across iterations for each participant
         //       Multiple lines for avg, percentiles?
@@ -312,7 +313,7 @@ object SimStats {
         val participants = iterations[iterationIdx].participants
 
         return participants.mapIndexed { idx, sp ->
-            val series = sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
+            val series = sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED && it.resourceType == resourceType }.map {
                 Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
             }
 
@@ -323,13 +324,14 @@ object SimStats {
         }
     }
 
-    fun resourceUsageByAbility(iterations: List<SimIteration>): List<List<ResourceByAbility>> {
+    fun resourceUsageByAbility(iterations: List<SimIteration>, resourceType: Resource.Type): List<List<ResourceByAbility>> {
         val participantCount = iterations[0].participants.size - 1
         return (0..participantCount).map { idx ->
             val byAbility = iterations.flatMap { iter ->
                 iter.participants[idx].events
                     .filter { it.eventType == Event.Type.RESOURCE_CHANGED }
                     .filter { it.abilityName != null }
+                    .filter { it.resourceType == resourceType }
             }.groupBy { it.abilityName!! }
 
             val keys = byAbility.keys.toList()
@@ -344,7 +346,8 @@ object SimStats {
                     key,
                     countAvg,
                     totalGainAvg,
-                    totalGainAvg / countAvg
+                    totalGainAvg / countAvg,
+                    resourceType
                 )
             }.sortedBy { it.totalGainAvg }.reversed()
         }

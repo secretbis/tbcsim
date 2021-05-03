@@ -189,10 +189,10 @@ object SimStatsPrinter {
         )
     }
 
-    fun printResourceUsageByAbility(participants: List<List<ResourceByAbility>>) {
+    fun printResourceUsageByAbility(participants: List<List<ResourceByAbility>>, resource: String) {
         participants.forEach { rows ->
             println(
-                "Resource by Ability Breakdown\n" +
+                "Resource by Ability Breakdown ($resource)\n" +
                 table {
                     header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
 

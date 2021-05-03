@@ -21,6 +21,7 @@ class Resource(
     init {
         currentAmount = when(type) {
             Type.RAGE -> 0
+            Type.COMBO_POINT -> 0
             else -> max()
         }
         initialAmount = currentAmount

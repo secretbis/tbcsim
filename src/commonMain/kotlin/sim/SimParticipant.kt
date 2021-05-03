@@ -494,7 +494,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         logEvent(Event(
             eventType = Event.Type.RESOURCE_CHANGED,
             amount = res.currentAmount.toDouble(),
-            delta = amount.toDouble(),
+            delta = -1 * amount.toDouble(),
             amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
             resourceType = res.type,
             abilityName = abilityName

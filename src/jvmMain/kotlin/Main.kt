@@ -277,12 +277,16 @@ class TBCSim : CliktCommand() {
 
                 // Only print the big chart for the main subject - others arent interesting
                 // TODO this doesn't differentiate between resources now if a participant uses more than 1 resource
-                val resource = SimStats.resourceUsage(iterations)
-                println("Resource usage for iteration ${resource[0].iterationIdx}")
-                Chart.print(resource[0].series, xMax = durationSeconds, yLabel = resourceTypes.first().toString())
+                resourceTypes.forEach {
+                    val resource = SimStats.resourceUsage(iterations, it)
+                    println("Resource usage for iteration ${resource[0].iterationIdx}")
+                    Chart.print(resource[0].series, xMax = durationSeconds, yLabel = it.toString())
+                }
 
-                val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
-                SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
+                resourceTypes.forEach {
+                    val resourceByAbility = SimStats.resourceUsageByAbility(iterations, it)
+                    SimStatsPrinter.printResourceUsageByAbility(resourceByAbility, it.toString())
+                }
 
                 val buffs = SimStats.resultsByBuff(iterations)
                 SimStatsPrinter.printBuffs("Buffs", buffs)
