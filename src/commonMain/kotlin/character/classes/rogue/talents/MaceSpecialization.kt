@@ -10,5 +10,5 @@ class MaceSpecialization(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    // not implemented, I don't think any mainstream spec uses this anyways in PvE
+    // TODO: implement for Dragonmaw I guess, I don't think there are any other PvE maces
 }

@@ -78,9 +78,12 @@ object Spell {
             else -> 0
         }
 
+        // theres a base 8 resist per level which can not be negated by spellpen
+        val baseResistance = (sp.sim.target.character.level - sp.character.level) * 8
+
         // TODO: Model partial resists as 0/25/50/75
         //       There seems to be no real formula for that, though, so just going with avg every time for now
-        val totalResistance = (targetResistance - sp.stats.spellPen).coerceAtLeast(0) + targetResistance
+        val totalResistance = (targetResistance - sp.stats.spellPen).coerceAtLeast(0) + baseResistance
         return (0.75 * totalResistance / (5 * sp.character.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 

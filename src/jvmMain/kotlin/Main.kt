@@ -276,7 +276,6 @@ class TBCSim : CliktCommand() {
                 val resourceTypes = config.character.klass.resourceTypes
 
                 // Only print the big chart for the main subject - others arent interesting
-                // TODO this doesn't differentiate between resources now if a participant uses more than 1 resource
                 resourceTypes.forEach {
                     val resource = SimStats.resourceUsage(iterations, it)
                     println("Resource usage for iteration ${resource[0].iterationIdx}")

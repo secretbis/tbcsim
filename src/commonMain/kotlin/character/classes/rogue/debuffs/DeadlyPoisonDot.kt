@@ -17,7 +17,7 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
     val totalTicks = durationMs / tickDeltaMs
-    override val maxStacks: Int = 5
+    override val maxStacks: Int = 4
 
     fun dmgPerStack(sp: SimParticipant): Double {
         val vp = sp.character.klass.talents[VilePoisons.name] as VilePoisons?
@@ -25,7 +25,8 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
 
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
         
-        return 180.0 * dmgMultiplier
+        //return 180.0 * dmgMultiplier  // VII, max at 70
+        return 108.0 * dmgMultiplier    // IV to test since its the one you get on beta premades
     }
 
     fun getAbility(debuff: Debuff): Ability {
@@ -36,7 +37,8 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
             override val castableOnGcd: Boolean = true
     
             override fun cast(sp: SimParticipant) {
-                val dmgPerTick = ((debuff.state(sp).currentStacks+1) * dmgPerStack(sp)) / totalTicks
+                val stacks = sp.sim.target.debuffState[debuff.name]?.currentStacks ?: 0
+                val dmgPerTick = ((stacks+1) * dmgPerStack(sp)) / totalTicks
                 val event = Event(
                     eventType = Event.Type.DAMAGE,
                     damageType = Constants.DamageType.NATURE,

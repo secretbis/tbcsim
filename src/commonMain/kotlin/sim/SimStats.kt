@@ -232,11 +232,11 @@ object SimStats {
                 val allCrits =
                     events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }
                 val avgHit = allHits.map { it.amount }.sum() / allHits.size.toDouble()
-                val minHit = allHits.map { it.amount }.minOrNull()!!
-                val maxHit = allHits.map { it.amount }.maxOrNull()!!
+                val minHit = allHits.map { it.amount }.minOrNull() ?: Double.NaN
+                val maxHit = allHits.map { it.amount }.maxOrNull() ?: Double.NaN
                 val avgCrit = allCrits.map { it.amount }.sum() / allCrits.size.toDouble()
-                val minCrit = allCrits.map { it.amount }.minOrNull()!!
-                val maxCrit = allCrits.map { it.amount }.maxOrNull()!!
+                val minCrit = allCrits.map { it.amount }.minOrNull() ?: Double.NaN
+                val maxCrit = allCrits.map { it.amount }.maxOrNull() ?: Double.NaN
 
                 // Compute result distributions with the entire set of events
                 // Count blocked hits/crits as hits/crits, since the block value is very small
@@ -346,8 +346,7 @@ object SimStats {
                     key,
                     countAvg,
                     totalGainAvg,
-                    totalGainAvg / countAvg,
-                    resourceType
+                    totalGainAvg / countAvg
                 )
             }.sortedBy { it.totalGainAvg }.reversed()
         }

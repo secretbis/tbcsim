@@ -5,6 +5,7 @@ import character.Proc
 import data.Constants
 import data.model.Item
 import mechanics.Melee
+import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 import character.classes.rogue.talents.*
@@ -22,7 +23,8 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
         return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
     }
 
-    val baseDamage = Pair(146.0, 194.0)
+    // val baseDamage = Pair(146.0, 194.0)  // VII
+    val baseDamage = Pair(92.0, 118.0)      // V to test since its the one you get on beta premades
 
     override fun cast(sp: SimParticipant) {
         val vp = sp.character.klass.talents[VilePoisons.name] as VilePoisons?
@@ -30,16 +32,14 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
 
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
 
-        // TODO: this needs to be casted so it can be resisted.
-        //       can't use Spell.attackRoll though because it uses spellcrit/hit etc.
-
         val damage = Melee.baseDamageRollPure(baseDamage.first, baseDamage.second) * dmgMultiplier
+        val result = Spell.attackRoll(sp, damage, school = Constants.DamageType.NATURE, bonusHitChance = 100.0)
         val event = Event(
             eventType = Event.Type.DAMAGE,
             damageType = Constants.DamageType.NATURE,
             abilityName = name,
-            amount = damage,
-            result = Event.Result.HIT
+            amount = result.first,
+            result = result.second
         )
         sp.logEvent(event)
     

@@ -2,6 +2,7 @@ package character.classes.rogue.debuffs
 
 import character.Ability
 import character.*
+import character.classes.rogue.talents.*
 import data.Constants
 import sim.Event
 import sim.SimParticipant
@@ -9,10 +10,10 @@ import character.Proc
 
 class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner) {
     companion object {
-        const val name = "Garrote (DoT)"
+        const val name = "Rupture (DoT)"
     }
 
-    override val name: String = "${Companion.name} (DoT)"
+    override val name: String = Companion.name
     override val durationMs: Int = getDurationForCombopoints(owner, consumedComboPoints)
     override val tickDeltaMs: Int = 2000
     
@@ -28,26 +29,32 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
 
     fun getDurationForCombopoints(sp: SimParticipant, consumedComboPoints: Int): Int {
         val timeMs: Int = when(consumedComboPoints){
-            1 -> 8
-            2 -> 10
-            3 -> 12
-            4 -> 14
-            5 -> 16
+            1 -> 8000
+            2 -> 10000
+            3 -> 12000
+            4 -> 14000
+            5 -> 16000
             else -> 0
         }
         return timeMs
     }
 
     fun getDamageForCombopoints(sp: SimParticipant, consumedComboPoints: Int): Double {
+
+        val sb = sp.character.klass.talents[SerratedBlades.name] as SerratedBlades?
+        val increasedDamagePercent = sb?.increasedDamagePercent() ?: 0.0
+        
+        val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
+
         val damage: Double = when(consumedComboPoints){
-            1 -> 324.0
-            2 -> 460.0
-            3 -> 618.0
-            4 -> 798.0
-            5 -> 1000.0
+            1 -> 324.0 + sp.attackPower() * 0.04
+            2 -> 460.0 + sp.attackPower() * 0.10
+            3 -> 618.0 + sp.attackPower() * 0.18
+            4 -> 798.0 + sp.attackPower() * 0.21
+            5 -> 1000.0 + sp.attackPower() * 0.24
             else -> 0.0
         }
-        return damage
+        return damage * dmgMultiplier
     }
         
     val dot = object : Ability() {

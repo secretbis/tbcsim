@@ -12,7 +12,7 @@ import mechanics.Rating
 
 class SliceAndDice : FinisherAbility() {
     companion object {
-        const val name = "Slice And Dice"
+        const val name = "Slice and Dice"
     }
 
     override val id: Int = 6774
