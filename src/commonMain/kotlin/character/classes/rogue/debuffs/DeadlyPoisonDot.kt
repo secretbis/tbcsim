@@ -25,8 +25,8 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
 
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
         
-        //return 180.0 * dmgMultiplier  // VII, max at 70
-        return 108.0 * dmgMultiplier    // IV to test since its the one you get on beta premades
+        return 180.0 * dmgMultiplier      // VII, max at 70
+        //return 108.0 * dmgMultiplier    // IV to test since its the one you get on beta premades
     }
 
     fun getAbility(debuff: Debuff): Ability {
