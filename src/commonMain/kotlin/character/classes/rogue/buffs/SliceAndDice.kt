@@ -44,15 +44,8 @@ class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
     }
     
     override fun modifyStats(sp: SimParticipant): Stats {  
-        val hasteRating = Rating.hastePerPct * hastePercent
         return Stats(
-            physicalHasteRating = hasteRating
+            physicalHasteMultiplier = 1.3
         )
-    
-        // above or below? difference? Troll racial berserking uses the above, but I think it should be the following
-    
-        //return Stats(
-        //    physicalHasteMultiplier = 1.3
-        //)
     }
 }

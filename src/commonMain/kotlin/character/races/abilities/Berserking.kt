@@ -37,10 +37,8 @@ class Berserking : Ability() {
         override val durationMs: Int = 10000
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val hasteRating = Rating.hastePerPct * 10.0 // TODO: add proper haste-scaling from 10-30%, characters need to have an HP pool first (as a resource?).
             return Stats(
-                physicalHasteRating = hasteRating,
-                spellHasteRating = hasteRating
+                physicalHasteMultiplier = 1.1
             )
         }
     }
