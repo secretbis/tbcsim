@@ -39,7 +39,9 @@ class SinisterStrike : Ability() {
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
 
+        // TODO:
         // unsure if dmg calculation is correct with the multiplier
+        // from testing this seems to do slightly too much dmg.
         val item = sp.character.gear.mainHand
         val damageRoll = (Melee.baseDamageRoll(sp, item, isNormalized = true) + bonusDamage) * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)

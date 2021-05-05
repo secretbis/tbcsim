@@ -28,7 +28,7 @@ class GarroteDot(owner: SimParticipant) : Debuff(owner) {
         
             val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
-            return 135.0 * dmgMultiplier
+            return (810.0 * dmgMultiplier + sp.attackPower() * 0.18) / 6
         }
 
         override fun cast(sp: SimParticipant) {

@@ -20,11 +20,10 @@ class Shiv : Ability() {
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
     override fun resourceCost(sp: SimParticipant): Double {
-        return (sp.character.gear.offHand.speed * 10.0) + 20.0
+        return (sp.character.gear.offHand.speed/1000.0) * 10.0 + 20.0
     }
 
     override fun cast(sp: SimParticipant) {
-
         val lethality = sp.character.klass.talents[Lethality.name] as Lethality?
         val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
 
@@ -33,7 +32,7 @@ class Shiv : Ability() {
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
         val item = sp.character.gear.offHand
-        val damageRoll = Melee.baseDamageRoll(sp, item) * dmgMultiplier
+        val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
         if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
