@@ -42,7 +42,12 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
     fun getDamageForCombopoints(sp: SimParticipant, consumedComboPoints: Int): Double {
 
         val sb = sp.character.klass.talents[SerratedBlades.name] as SerratedBlades?
-        val increasedDamagePercent = sb?.increasedDamagePercent() ?: 0.0
+        var increasedDamagePercent = sb?.increasedDamagePercent() ?: 0.0
+
+        val mangle = sp.sim.target.debuffs[data.abilities.raid.Mangle.name]
+        if (mangle != null) {
+            increasedDamagePercent += 30.0
+        }
         
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 

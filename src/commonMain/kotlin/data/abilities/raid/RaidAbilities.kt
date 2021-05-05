@@ -51,6 +51,7 @@ object RaidAbilities {
         ShadowWeaving(),
         Stormstrike(),
         SunderArmor(),
+        Mangle()
     )
 
     val buffNames: Array<String> = raidBuffs.map { it.name }.toTypedArray()
