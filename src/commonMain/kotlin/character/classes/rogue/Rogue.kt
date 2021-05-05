@@ -8,15 +8,16 @@ import character.classes.rogue.buffs.*
 
 class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
-        agility = 160 - 10,
-        intellect = 35,
-        strength = 96 - 10,
+        agility = 158,
+        intellect = 39,
+        strength = 95,
         stamina = 90,
-        spirit = 59,
+        spirit = 58,
         attackPower = 140
     )
     override val buffs: List<Buff> = listOf(
-        BaseEnergyGeneneration()
+        BaseEnergyGeneneration(),
+        Stealth()
     )
 
     override fun abilityFromString(name: String, item: Item?): Ability? {

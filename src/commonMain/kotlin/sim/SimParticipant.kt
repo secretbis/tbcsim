@@ -616,8 +616,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.attackPower.coerceAtLeast(0) +
-                strength() * character.klass.attackPowerFromStrength +
-                agility() * character.klass.attackPowerFromAgility
+                strength()-10 * character.klass.attackPowerFromStrength +
+                agility()-10 * character.klass.attackPowerFromAgility
             ) * stats.attackPowerMultiplier
         ).toInt()
     }
@@ -647,12 +647,13 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
+    // from the numbers that are displayed ingame, you also have to subtract the race-specific agility bonuses from this to get an accurate result
     fun meleeCritPct(): Double {
-        return stats.meleeCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+        return stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun rangedCritPct(): Double {
-        return stats.rangedCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+        return stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
