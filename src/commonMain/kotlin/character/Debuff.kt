@@ -1,6 +1,5 @@
 package character
 
-import sim.SimIteration
 import sim.SimParticipant
 
 abstract class Debuff(val owner: SimParticipant) : Buff() {

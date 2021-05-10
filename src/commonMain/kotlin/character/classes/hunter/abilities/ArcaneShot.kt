@@ -9,6 +9,8 @@ import data.Constants
 import mechanics.General
 import mechanics.Ranged
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 import kotlin.random.Random
 
@@ -45,7 +47,7 @@ class ArcaneShot : Ability() {
         val result = Ranged.attackRoll(sp, damage, item)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.ARCANE,
             abilityName = name,
             amount = result.first,
@@ -55,11 +57,11 @@ class ArcaneShot : Ability() {
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.RANGED_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.RANGED_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.RANGED_MISS)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.RANGED_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.RANGED_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.RANGED_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.RANGED_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.RANGED_MISS)
+            EventResult.BLOCK -> listOf(Proc.Trigger.RANGED_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.RANGED_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

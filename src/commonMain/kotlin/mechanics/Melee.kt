@@ -5,6 +5,7 @@ import data.Constants
 import data.model.Item
 import mu.KotlinLogging
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
@@ -179,7 +180,7 @@ object Melee {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, EventResult> {
         val offHandMultiplier = if(isOffhand(sp, item)) {
             Stats.offHandPenalty + if(isWhiteDmg) {
                 sp.stats.whiteDamageAddlOffHandPenaltyModifier
@@ -229,23 +230,23 @@ object Melee {
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
-            attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
-            attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sp, item)), Event.Result.GLANCE)
-            attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
-            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
-            else -> Pair(damageRoll, Event.Result.HIT)
+            attackRoll < missChance -> Pair(0.0, EventResult.MISS)
+            attackRoll < dodgeChance -> Pair(0.0, EventResult.DODGE)
+            attackRoll < parryChance -> Pair(0.0, EventResult.PARRY)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceReduction(sp, item), EventResult.GLANCE)
+            attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
+            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
+            else -> Pair(damageRoll, EventResult.HIT)
         }
 
         if(!isWhiteDmg) {
             // Two-roll yellow hit
-            if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
+            if(finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
                     hitRoll2 < meleeCritChance(sp) -> Pair(
                         finalResult.first * critMultiplier,
-                        Event.Result.CRIT
+                        EventResult.CRIT
                     )
                     else -> finalResult
                 }
@@ -256,7 +257,7 @@ object Melee {
         finalResult = Pair(finalResult.first * (1 - General.physicalArmorMitigation(sp)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
-        if(finalResult.second == Event.Result.BLOCK || finalResult.second == Event.Result.BLOCKED_CRIT) {
+        if(finalResult.second == EventResult.BLOCK || finalResult.second == EventResult.BLOCKED_CRIT) {
             finalResult = Pair(finalResult.first - General.physicalBlockReduction(sp), finalResult.second)
         }
 

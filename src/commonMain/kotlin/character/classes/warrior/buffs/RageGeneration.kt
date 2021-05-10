@@ -8,6 +8,7 @@ import character.classes.warrior.talents.EndlessRage
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventType
 import sim.SimIteration
 import sim.SimParticipant
 
@@ -37,7 +38,7 @@ class RageGeneration : Buff() {
             val item = items?.get(0) ?: return
             val isOffhand = Melee.isOffhand(sp, item)
 
-            if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
+            if(event?.eventType == EventType.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount
                 val rage = if (isOffhand) {
                     damageToRage(sp, damage, item, 1.75)
@@ -61,7 +62,7 @@ class RageGeneration : Buff() {
             val item = items?.get(0) ?: return
             val isOffhand = Melee.isOffhand(sp, item)
 
-            if(event?.eventType == Event.Type.DAMAGE && event.isWhiteDamage) {
+            if(event?.eventType == EventType.DAMAGE && event.isWhiteDamage) {
                 val damage = event.amount
                 val rage = if (isOffhand) {
                     damageToRage(sp, damage, item, 3.5)

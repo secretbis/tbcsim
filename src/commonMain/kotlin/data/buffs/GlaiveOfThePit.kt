@@ -5,6 +5,7 @@ import data.Constants
 import data.model.Item
 import mechanics.Spell
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
@@ -25,7 +26,7 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 val result = Spell.attackRoll(sp, damageRoll, school)
 
                 val damageEvent = Event(
-                    eventType = Event.Type.DAMAGE,
+                    eventType = EventType.DAMAGE,
                     damageType = school,
                     abilityName = name,
                     amount = result.first,
@@ -56,4 +57,3 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override fun procs(sp: SimParticipant): List<Proc> = listOf(shadowProc)
 }
-

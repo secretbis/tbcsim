@@ -6,9 +6,7 @@ import data.Constants
 import data.itemsets.WarbringerBattlegear
 import data.model.Item
 import mechanics.Melee
-import sim.Event
-import sim.SimIteration
-import sim.SimParticipant
+import sim.*
 
 class Whirlwind : Ability() {
     companion object {
@@ -42,7 +40,7 @@ class Whirlwind : Ability() {
 
         // Save last hit state and fire event
         val mhEvent = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = "$name (MH)",
             amount = mhResult.first,
@@ -59,7 +57,7 @@ class Whirlwind : Ability() {
 
             // Save last hit state and fire event
             val ohEvent = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = "$name (OH)",
                 amount = ohResult.first,
@@ -71,15 +69,15 @@ class Whirlwind : Ability() {
         }
     }
 
-    private fun fireTriggers(sp: SimParticipant, item: Item, event: Event, result: Pair<Double, Event.Result>) {
+    private fun fireTriggers(sp: SimParticipant, item: Item, event: Event, result: Pair<Double, EventResult>) {
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

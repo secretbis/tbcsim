@@ -8,6 +8,8 @@ import data.itemsets.MaleficRaiment
 import mechanics.General
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 open class ShadowBolt : Ability() {
@@ -60,7 +62,7 @@ open class ShadowBolt : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -69,13 +71,13 @@ open class ShadowBolt : Ability() {
         sp.logEvent(event)
 
         // Proc anything that can proc off non-periodic Shadow damage
-        val baseTriggerTypes = if(result.second == Event.Result.CRIT) { listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT) } else listOf()
+        val baseTriggerTypes = if(result.second == EventResult.CRIT) { listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT) } else listOf()
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            Event.Result.CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            EventResult.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            EventResult.CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_SHADOW_BOLT, Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.WARLOCK_CRIT_SHADOW_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

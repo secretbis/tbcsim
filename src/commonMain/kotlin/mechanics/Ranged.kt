@@ -4,6 +4,7 @@ import character.Stats
 import data.Constants
 import data.model.Item
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
@@ -62,7 +63,7 @@ object Ranged {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, Event.Result> {
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false, bonusCritChance: Double = 0.0) : Pair<Double, EventResult> {
         val flatModifier = if(isWhiteDmg) {
             sp.stats.whiteDamageFlatModifier
         } else {
@@ -95,20 +96,20 @@ object Ranged {
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
-            attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
-            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
-            else -> Pair(damageRoll, Event.Result.HIT)
+            attackRoll < missChance -> Pair(0.0, EventResult.MISS)
+            attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
+            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
+            else -> Pair(damageRoll, EventResult.HIT)
         }
 
         if(!isWhiteDmg) {
             // Two-roll yellow hit
-            if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
+            if(finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
                     hitRoll2 < (rangedCritChance(sp, item) + bonusCritChance) -> Pair(
                         finalResult.first * critMultiplier,
-                        Event.Result.CRIT
+                        EventResult.CRIT
                     )
                     else -> finalResult
                 }
@@ -119,7 +120,7 @@ object Ranged {
         finalResult = Pair(finalResult.first * (1 - General.physicalArmorMitigation(sp)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
-        if(finalResult.second == Event.Result.BLOCK || finalResult.second == Event.Result.BLOCKED_CRIT) {
+        if(finalResult.second == EventResult.BLOCK || finalResult.second == EventResult.BLOCKED_CRIT) {
             finalResult = Pair(finalResult.first - General.physicalBlockReduction(sp), finalResult.second)
         }
 

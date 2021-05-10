@@ -6,6 +6,7 @@ import data.Constants
 import data.model.Item
 import data.model.TempEnchant
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
@@ -83,7 +84,7 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
 
                 sp.logEvent(
                     Event(
-                        eventType = Event.Type.PROC,
+                        eventType = EventType.PROC,
                         abilityName = wfAbility!!.name
                     )
                 )

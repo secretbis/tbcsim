@@ -9,9 +9,7 @@ import data.itemsets.SkyshatterRegalia
 import data.model.Item
 import mechanics.General
 import mechanics.Spell
-import sim.Event
-import sim.SimIteration
-import sim.SimParticipant
+import sim.*
 
 open class LightningBolt : Ability() {
     companion object {
@@ -93,7 +91,7 @@ open class LightningBolt : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = if(isLoProc) { "Lightning Overload (LB)" } else name,
             amount = result.first,
@@ -105,11 +103,11 @@ open class LightningBolt : Ability() {
         // Ensure we can't proc LO off of LO
         val baseTriggerTypes = if(isLoProc) { listOf() } else listOf(Proc.Trigger.SHAMAN_CAST_LIGHTNING_BOLT)
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SHAMAN_CRIT_LIGHTNING_BOLT, Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
             else -> null
         }
 

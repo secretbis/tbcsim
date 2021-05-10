@@ -5,6 +5,7 @@ import data.Constants
 import mechanics.Spell
 import data.model.Item
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class RomulosPoisonVial : Buff() {
@@ -25,7 +26,7 @@ class RomulosPoisonVial : Buff() {
             //TODO: check if the damage proc scales with increased nature debuffs e.g. stormstrike and check if it consumes SS
             val result = Spell.attackRoll(sp, damageRoll, school)
             val damageEvent = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = result.first,

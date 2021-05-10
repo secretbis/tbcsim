@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Col, Container, Dropdown, Row } from 'rsuite';
 
 import { isAxe, isMace, isSword, isBow, isGun } from '../data/constants';
+import { kprop } from '../util/util';
+
 import * as tbcsim from 'tbcsim';
 
 function BaseStats({ simParticipant: sp }) {
@@ -58,9 +60,9 @@ function MeleeStats({ simParticipant: sp }) {
   }
 
   // Special stats
-  const swordExpertisePct = sp.stats._swordExpertiseRating / 15.77
-  const maceExpertisePct = sp.stats._maceExpertiseRating / 15.77
-  const axeExpertisePct = sp.stats._axeExpertiseRating / 15.77
+  const swordExpertisePct = kprop(sp.stats, 'swordExpertiseRating') / 15.77
+  const maceExpertisePct = kprop(sp.stats, 'maceExpertiseRating') / 15.77
+  const axeExpertisePct = kprop(sp.stats, 'axeExpertiseRating') / 15.77
 
   return (
     <Col>
@@ -123,8 +125,8 @@ function RangedStats({ simParticipant: sp }) {
   }
 
   // Special stats
-  const bowCritPct =  sp.stats._bowCritRating / 22.08
-  const gunCritPct =  sp.stats._gunCritRating / 22.08
+  const bowCritPct =  kprop(sp.stats, 'bowCritRating') / 22.08
+  const gunCritPct =  kprop(sp.stats, 'gunCritRating') / 22.08
 
   return (
     <Col>
@@ -169,7 +171,7 @@ function SpellStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Spell Pen:</Col>
-        <Col>{sp.stats._spellPen}</Col>
+        <Col>{kprop(sp.stats, 'spellPen')}</Col>
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
@@ -185,7 +187,7 @@ function SpellStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>MP5:</Col>
-        <Col>{sp.stats._manaPer5Seconds}</Col>
+        <Col>{kprop(sp.stats, 'manaPer5Seconds')}</Col>
       </Row>
     </Col>
   )

@@ -8,6 +8,7 @@ import data.model.Socket
 import data.model.SocketBonus
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
 
@@ -75,7 +76,7 @@ class Annihilator : Item() {
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 // This proc is Shadow school, and is resistable
                 val result = Spell.attackRoll(sp, 1.0, Constants.DamageType.SHADOW, isBinary = true)
-                if(result.second != Event.Result.RESIST) {
+                if(result.second != EventResult.RESIST) {
                     sp.sim.target.addDebuff(singletonDebuff(sp))
                 }
             }

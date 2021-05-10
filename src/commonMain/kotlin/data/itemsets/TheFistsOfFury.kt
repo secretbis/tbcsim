@@ -8,6 +8,7 @@ import data.model.Item
 import data.model.ItemSet
 import mechanics.Spell
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class TheFistsOfFury : ItemSet() {
@@ -32,7 +33,7 @@ class TheFistsOfFury : ItemSet() {
                 val result = Spell.attackRoll(sp, damageRoll, school)
 
                 val damageEvent = Event(
-                    eventType = Event.Type.DAMAGE,
+                    eventType = EventType.DAMAGE,
                     damageType = school,
                     abilityName = name,
                     amount = result.first,

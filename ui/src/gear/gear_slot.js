@@ -5,6 +5,7 @@ import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
 import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
+import { kprop } from '../util/util';
 
 import { inventorySlots as inv, itemClasses as ic } from '../data/constants';
 
@@ -65,7 +66,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
 
   function onItemSelect(item) {
     // Clean sockets and enchants
-    item.sockets.forEach(sk => sk.gem = null);
+    item.sockets && item.sockets.forEach(sk => sk.gem = null);
     item.enchant = null;
     item.tempEnchant = null;
     dispatch({ type: 'updateGearSlot', value: { [slotName]: item }, slotName, item })
@@ -99,7 +100,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
   function renderItem() {
     const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName);
     const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) : item.inventorySlot !== inv.holdable_tome;
-    const itemCanTempEnchant = (slotName == 'mainHand' || slotName == 'offHand') && item.itemClass && item.itemClass._ordinal === ic.weapon;
+    const itemCanTempEnchant = (slotName == 'mainHand' || slotName == 'offHand') && item.itemClass && kprop(item.itemClass, 'ordinal') === ic.weapon;
 
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
@@ -113,7 +114,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
             <ItemTooltip item={item} gear={character.gear}>
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </ItemTooltip>
-            {item.sockets.map((sk, idx) => {
+            {item.sockets && item.sockets.map((sk, idx) => {
               return <GemSlot key={idx} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?

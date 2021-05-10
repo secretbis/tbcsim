@@ -4,6 +4,7 @@ import character.Stats
 import data.Constants
 import mu.KotlinLogging
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
@@ -123,7 +124,7 @@ object Spell {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0) : Pair<Double, Event.Result> {
+    fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0) : Pair<Double, EventResult> {
         // Find all our possible damage mods from buffs and so on
         val critMultiplier = Stats.spellCritMultiplier + (sp.stats.spellDamageAddlCritMultiplier - 1)
 
@@ -142,17 +143,17 @@ object Spell {
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, Event.Result.RESIST)
-            else -> Pair(finalDamageRoll, Event.Result.HIT)
+            attackRoll < missChance -> Pair(0.0, EventResult.RESIST)
+            else -> Pair(finalDamageRoll, EventResult.HIT)
         }
 
         // Two-roll all spells
-        if(finalResult.second == Event.Result.HIT) {
+        if(finalResult.second == EventResult.HIT) {
             val hitRoll2 = Random.nextDouble()
             finalResult = when {
                 hitRoll2 < critChance -> Pair(
                     finalResult.first * critMultiplier,
-                    Event.Result.CRIT
+                    EventResult.CRIT
                 )
                 else -> finalResult
             }

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import epData from './data/ep_all.json';
 
 import { isMeleeWeapon, isRangedWeapon } from '../data/constants';
+import { kprop } from '../util/util';
 
 export const allStats = [
   'attackPower',
@@ -60,7 +61,7 @@ export function itemEp(item, category, spec) {
     // Socket EPs are already computed
     if(current === 'redSocket') {
       const numSockets = (item.sockets || []).filter(it => {
-        return it && it.color && it.color._name_2 === 'RED'
+        return it && it.color && kprop(it.color, 'name') === 'RED'
       }).length
 
       return acc + (currentStatEp * numSockets)
@@ -68,7 +69,7 @@ export function itemEp(item, category, spec) {
 
     if(current === 'yellowSocket') {
       const numSockets = (item.sockets || []).filter(it => {
-        return it && it.color && it.color._name_2 === 'YELLOW'
+        return it && it.color && kprop(it.color, 'name') === 'YELLOW'
       }).length
 
       return acc + (currentStatEp * numSockets)
@@ -76,7 +77,7 @@ export function itemEp(item, category, spec) {
 
     if(current === 'blueSocket') {
       const numSockets = (item.sockets || []).filter(it => {
-        return it && it.color && it.color._name_2 === 'BLUE'
+        return it && it.color && kprop(it.color, 'name') === 'BLUE'
       }).length
 
       return acc + (currentStatEp * numSockets)
@@ -84,7 +85,7 @@ export function itemEp(item, category, spec) {
 
     if(current === 'metaSocket') {
       const numSockets = (item.sockets || []).filter(it => {
-        return it && it.color && it.color._name_2 === 'META'
+        return it && it.color && kprop(it.color, 'name') === 'META'
       }).length
 
       return acc + (currentStatEp * numSockets)
@@ -92,7 +93,7 @@ export function itemEp(item, category, spec) {
 
     if(currentStatEp) {
       const baseStatsEp = (item.stats['_' + current] || 0) * currentStatEp
-      const buffsEp = item.buffs && item.buffs._array_3 && item.buffs._array_3.reduce((acc2, buff) => {
+      const buffsEp = item.buffs && kprop(item.buffs, 'array') && kprop(item.buffs, 'array').reduce((acc2, buff) => {
         const permanentStats = buff.permanentStats_18 && buff.permanentStats_18()
         const permanentStatsEp = permanentStats ? (permanentStats['_' + current] || 0) * currentStatEp : 0
 

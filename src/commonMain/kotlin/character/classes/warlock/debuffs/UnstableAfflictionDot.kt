@@ -6,6 +6,8 @@ import character.Proc
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
@@ -29,11 +31,11 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
 

@@ -4,6 +4,8 @@ import _ from 'lodash';
 import { ResponsiveLine } from '@nivo/line'
 import { Container } from 'rsuite'
 
+import { kprop } from '../util/util';
+
 const ResourceLineChart = ({ character, data }) => (
   <ResponsiveLine
       theme={{
@@ -111,8 +113,8 @@ export default function({ character, data }) {
   const actualData = [{
     id: resourceTypeForClass(character),
     data: _.uniqBy(data.series.toArray().map(d => ({
-      x: d._first,
-      y: d._second
+      x: kprop(d, 'first'),
+      y: kprop(d, 'second')
     })), 'x')
   }]
 

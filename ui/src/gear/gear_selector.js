@@ -5,6 +5,7 @@ import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 import * as Constants from '../data/constants';
 import { itemEp } from '../ep/ep_stats';
 import ItemTooltip from './item_tooltip';
+import { kprop } from '../util/util';
 
 import * as tbcsim from 'tbcsim';
 
@@ -36,10 +37,10 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
     const filtered = _.filter(
       _.filter(items, item => {
         if(itemClasses) {
-          const itemClass = item.itemClass._ordinal;
+          const itemClass = kprop(item.itemClass, 'ordinal');
 
           if(itemClasses.itemClasses.includes(itemClass)) {
-            const itemSubclass = item.itemSubclass._itemClassOrdinal;
+            const itemSubclass = kprop(item.itemSubclass, 'itemClassOrdinal');
             const subclasses = itemClasses.itemSubclasses[itemClass]
 
             // Never filter the cloak slot on itemSubclass
@@ -61,7 +62,7 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
         // Filter by allowable classes
         if(allowableClasses) {
           return item.allowableClasses == null || item.allowableClasses.some(it => {
-            return allowableClasses.map(it => it.toUpperCase()).includes(it._name_2.toUpperCase());
+            return allowableClasses.map(it => it.toUpperCase()).includes(kprop(it, 'name', '').toUpperCase());
           })
         }
         return true;

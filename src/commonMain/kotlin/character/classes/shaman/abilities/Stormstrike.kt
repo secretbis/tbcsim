@@ -11,6 +11,8 @@ import data.itemsets.CycloneHarness
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Stormstrike : Ability() {
@@ -72,7 +74,7 @@ class Stormstrike : Ability() {
         val mhResult = Melee.attackRoll(sp, mhAttack, mhItem, isWhiteDmg = false)
 
         val eventMh = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = "$name (MH)",
             amount = mhResult.first,
@@ -86,7 +88,7 @@ class Stormstrike : Ability() {
             val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
 
             val eventOh = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = "$name (OH)",
                 amount = ohResult.first,
@@ -97,8 +99,8 @@ class Stormstrike : Ability() {
             // TODO: This is modeled as two distinct hit events for the purposes of procs
             //       Confirm if that is correct behavior
             val triggerTypesOh = when(ohResult.second) {
-                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
                 else -> null
             }
 
@@ -114,8 +116,8 @@ class Stormstrike : Ability() {
         // TODO: Should I fire procs off miss/dodge/parry/etc?
         //       Would need to create new events to distinguish yellow-mitigation, to avoid consuming things like Flurry charges
         val triggerTypes = when(mhResult.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

@@ -128,9 +128,20 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             val rotationAbility = rotationRule?.ability
             if (rotationAbility != null) {
                 // Set next cast times, and add latency if configured
+                val castTimeMs = rotationAbility.castTimeMs(this)
                 castingRule = rotationRule
                 gcdEndMs = sim.elapsedTimeMs + rotationAbility.gcdMs(this) + sim.opts.latencyMs
-                castEndMs = sim.elapsedTimeMs + rotationAbility.castTimeMs(this) + sim.opts.latencyMs
+                castEndMs = sim.elapsedTimeMs + castTimeMs + sim.opts.latencyMs
+
+                // Log cast start if it's not instant
+                if(castTimeMs > 0) {
+                    val castEvent = Event(
+                        eventType = EventType.SPELL_START_CAST,
+                        abilityName = castingRule!!.ability.name,
+                        target = sim.target
+                    )
+                    logEvent(castEvent)
+                }
             }
         }
 
@@ -148,7 +159,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
                     // Log cast event
                     val castEvent = Event(
-                        eventType = Event.Type.SPELL_CAST,
+                        eventType = EventType.SPELL_CAST,
                         abilityName = castingRule!!.ability.name,
                         target = sim.target
                     )
@@ -247,6 +258,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             buffState[buff.name]?.currentStacks ?: 0
         } else 0
 
+        val charges = if(buff.maxCharges > 0) {
+            buffState[buff.name]?.currentCharges ?: 0
+        } else 0
+
         // Set expiration tick
         // Remove the old expiration
         if(buff.durationMs != -1) {
@@ -266,18 +281,20 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         if(!exists) {
             buffs[buff.name] = buff
             logEvent(Event(
-                eventType = Event.Type.BUFF_START,
+                eventType = EventType.BUFF_START,
                 buff = buff,
-                buffStacks = stacks
+                buffStacks = stacks,
+                buffCharges = charges
             ))
 
             // Always recompute after adding a buff
             recomputeStats()
         } else {
             logEvent(Event(
-                eventType = Event.Type.BUFF_REFRESH,
+                eventType = EventType.BUFF_REFRESH,
                 buff = buff,
-                buffStacks = stacks
+                buffStacks = stacks,
+                buffCharges = charges
             ))
 
             // If a buff is stackable, then recompute on a refresh as well
@@ -295,8 +312,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
                 logEvent(
                     Event(
-                        eventType = Event.Type.BUFF_CHARGE_CONSUMED,
+                        eventType = EventType.BUFF_CHARGE_CONSUMED,
                         buff = buff,
+                        buffCharges = state.currentCharges,
                         buffStacks = state.currentStacks
                     )
                 )
@@ -332,7 +350,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             it.reset(this)
 
             logEvent(Event(
-                eventType = Event.Type.BUFF_END,
+                eventType = EventType.BUFF_END,
                 buff = it
             ))
         }
@@ -355,6 +373,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             debuffState[debuff.name]?.currentStacks ?: 0
         } else 0
 
+         val charges = if(debuff.maxCharges > 0) {
+            buffState[debuff.name]?.currentCharges ?: 0
+        } else 0
+
         // Set expiration tick
         // Remove the old expiration
          if(debuff.durationMs != -1) {
@@ -374,9 +396,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         if(!exists) {
             debuffs[debuff.name] = debuff
             logEvent(Event(
-                eventType = Event.Type.DEBUFF_START,
+                eventType = EventType.DEBUFF_START,
                 buff = debuff,
                 buffStacks = stacks,
+                buffCharges = charges,
                 target = sim.target
             ))
 
@@ -384,9 +407,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             recomputeStats()
         } else {
             logEvent(Event(
-                eventType = Event.Type.DEBUFF_REFRESH,
+                eventType = EventType.DEBUFF_REFRESH,
                 buff = debuff,
                 buffStacks = stacks,
+                buffCharges = charges,
                 target = sim.target
             ))
 
@@ -405,9 +429,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
                 logEvent(
                     Event(
-                        eventType = Event.Type.DEBUFF_CHARGE_CONSUMED,
+                        eventType = EventType.DEBUFF_CHARGE_CONSUMED,
                         buff = debuff,
                         buffStacks = state.currentStacks,
+                        buffCharges = state.currentCharges,
                         target = sim.target
                     )
                 )
@@ -441,7 +466,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
             it.reset(this)
             logEvent(Event(
-                eventType = Event.Type.DEBUFF_END,
+                eventType = EventType.DEBUFF_END,
                 buff = it,
                 target = sim.target
             ))
@@ -464,7 +489,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         res.add(amount)
 
         logEvent(Event(
-            eventType = Event.Type.RESOURCE_CHANGED,
+            eventType = EventType.RESOURCE_CHANGED,
             amount = res.currentAmount.toDouble(),
             delta = amount.toDouble(),
             amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
@@ -484,9 +509,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         res.subtract(amount)
 
         logEvent(Event(
-            eventType = Event.Type.RESOURCE_CHANGED,
+            eventType = EventType.RESOURCE_CHANGED,
             amount = res.currentAmount.toDouble(),
-            delta = amount.toDouble(),
+            delta = -1 * amount.toDouble(),
             amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
             resourceType = res.type,
             abilityName = abilityName
@@ -530,14 +555,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         // Log end for all buffs/debuffs
         buffs.values.forEach { buff ->
             logEvent(Event(
-                eventType = Event.Type.BUFF_END,
+                eventType = EventType.BUFF_END,
                 buff = buff
            ))
         }
 
         debuffs.values.forEach { debuff ->
             logEvent(Event(
-                eventType = Event.Type.DEBUFF_END,
+                eventType = EventType.DEBUFF_END,
                 buff = debuff
             ))
         }
@@ -554,11 +579,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         }
 
         // Auto-set target if we can
-        if(event.eventType == Event.Type.DAMAGE) {
+        if(event.eventType == EventType.DAMAGE) {
             event.target = event.target ?: sim.target
         }
 
-        logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.result} - ${event.amount}" }
+        logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.eventType} - ${event.amount}" }
         events.add(event)
     }
 
