@@ -43,7 +43,7 @@ class Mutilate : Ability() {
         return available && usesDaggers && super.available(sp)
     }
 
-    fun castMainhand(sp: SimParticipant, bonusDamage: Double) {
+    fun castMainhand(sp: SimParticipant, bonusDamage: Double, poisonMultiplier: Double) {
 
         val pw = sp.character.klass.talents[PuncturingWounds.name] as PuncturingWounds?
         val increasedCritChance = pw?.additionalCritChanceMutilate() ?: 0.0
@@ -51,8 +51,15 @@ class Mutilate : Ability() {
         val lethality = sp.character.klass.talents[Lethality.name] as Lethality?
         val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
 
+        val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
+        val increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
+
+        val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
+
+        // TODO: not sure if correct with the multiplier
+        // also unsure about the poisonMultiplier (additive/multiplicative)
         val item = sp.character.gear.mainHand
-        val damageRoll = Melee.baseDamageRoll(sp, item) + bonusDamage
+        val damageRoll = (Melee.baseDamageRoll(sp, item) + bonusDamage) * dmgMultiplier * poisonMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
         if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
@@ -85,16 +92,23 @@ class Mutilate : Ability() {
         }
     }
 
-    fun castOffhand(sp: SimParticipant, bonusDamage: Double) {
+    fun castOffhand(sp: SimParticipant, bonusDamage: Double, poisonMultiplier: Double) {
+        val pw = sp.character.klass.talents[PuncturingWounds.name] as PuncturingWounds?
+        val increasedCritChance = pw?.additionalCritChanceMutilate() ?: 0.0
+
+        val lethality = sp.character.klass.talents[Lethality.name] as Lethality?
+        val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
+
         val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
         val increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
         
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
         // TODO: not sure if correct with the multiplier
+        // also unsure about the poisonMultiplier (additive/multiplicative)
         val item = sp.character.gear.offHand
-        val damageRoll = Melee.baseDamageRoll(sp, item) + bonusDamage * dmgMultiplier
-        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
+        val damageRoll = (Melee.baseDamageRoll(sp, item) + bonusDamage) * dmgMultiplier * poisonMultiplier
+        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier))
 
         val event = Event(
             eventType = Event.Type.DAMAGE,
@@ -129,10 +143,10 @@ class Mutilate : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        val poisonBonus = if(poisonsPresentOnTarget(sp)) { 1.5 } else { 1.0 }
-        val bonusDamage = 110.0 * poisonBonus
-        castMainhand(sp, bonusDamage)
-        castOffhand(sp, bonusDamage)
+        val poisonMultiplier = if(poisonsPresentOnTarget(sp)) { 1.5 } else { 1.0 }
+        val bonusDamage = 110.0
+        castMainhand(sp, bonusDamage, poisonMultiplier)
+        castOffhand(sp, bonusDamage, poisonMultiplier)
         sp.addResource(2, Resource.Type.COMBO_POINT, name)
     }
 }
