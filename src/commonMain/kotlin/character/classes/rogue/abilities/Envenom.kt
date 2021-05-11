@@ -84,7 +84,7 @@ class Envenom : FinisherAbility() {
     fun maxPoisonDosesAvailable(sp: SimParticipant): Int {
         val debuffState = sp.sim.target.debuffState[DeadlyPoisonDot.name]
         if(debuffState == null) {
-            KotlinLogging.logger{}.warn{ "Tried to cast $name but there was no deadly poison debuff present" }
+            KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
             return 0
         }
         return debuffState.currentStacks+1
@@ -93,7 +93,7 @@ class Envenom : FinisherAbility() {
     fun removePoisonStacks(sp: SimParticipant, stacks: Int) {
         val debuffState = sp.sim.target.debuffState[DeadlyPoisonDot.name]
         if(debuffState == null) {
-            KotlinLogging.logger{}.warn{ "Tried to cast $name but there was no deadly poison debuff present" }
+            KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
             return
         }
         

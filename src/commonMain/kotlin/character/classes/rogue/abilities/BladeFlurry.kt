@@ -30,7 +30,7 @@ class BladeFlurry : Ability() {
         val bf = sp.character.klass.talents[character.classes.rogue.talents.BladeFlurry.name] as character.classes.rogue.talents.BladeFlurry?
         val available = if(bf != null){ bf.currentRank == bf.maxRank } else { false }
         if (!available) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having the corresponding talent" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having the corresponding talent" }
         }
 
         return available && super.available(sp)

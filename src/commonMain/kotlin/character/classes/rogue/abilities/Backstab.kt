@@ -24,7 +24,7 @@ class Backstab : Ability() {
     override fun available(sp: SimParticipant): Boolean {
         val usesDagger = sp.character.gear.mainHand.itemSubclass == Constants.ItemSubclass.DAGGER
         if (!usesDagger) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having a dagger in the mainhand" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having a dagger in the mainhand" }
         }
         return usesDagger && super.available(sp)
     }

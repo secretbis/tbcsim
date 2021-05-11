@@ -28,7 +28,7 @@ class Mutilate : Ability() {
         val mutilate = sp.character.klass.talents[character.classes.rogue.talents.Mutilate.name] as character.classes.rogue.talents.Mutilate?
         val available = if(mutilate != null){ mutilate.currentRank == mutilate.maxRank } else { false }
         if (!available) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having the corresponding talent" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having the corresponding talent" }
         }
 
         val usesDaggers = if(sp.isDualWielding()) {
@@ -37,7 +37,7 @@ class Mutilate : Ability() {
             false
         }
         if (!usesDaggers) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having a daggers in both hands" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having a daggers in both hands" }
         }
 
         return available && usesDaggers && super.available(sp)

@@ -31,7 +31,7 @@ class ColdBlood : Ability() {
         val cb = sp.character.klass.talents[character.classes.rogue.talents.ColdBlood.name] as character.classes.rogue.talents.ColdBlood?
         val available = if(cb != null){ cb.currentRank == cb.maxRank } else { false }
         if (!available) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having the corresponding talent" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having the corresponding talent" }
         }
 
         return available && super.available(sp)

@@ -26,7 +26,7 @@ class Hemorrhage : Ability() {
         val hemo = sp.character.klass.talents[character.classes.rogue.talents.Hemorrhage.name] as character.classes.rogue.talents.Hemorrhage?
         val available = if(hemo != null){ hemo.currentRank == hemo.maxRank } else { false }
         if (!available) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having the corresponding talent" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having the corresponding talent" }
         }
 
         return available && super.available(sp)

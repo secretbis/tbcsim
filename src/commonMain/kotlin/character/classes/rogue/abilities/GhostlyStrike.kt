@@ -26,7 +26,7 @@ class GhostlyStrike : Ability() {
         val gs = sp.character.klass.talents[character.classes.rogue.talents.GhostlyStrike.name] as character.classes.rogue.talents.GhostlyStrike?
         val available = if(gs != null){ gs.currentRank == gs.maxRank } else { false }
         if (!available) {
-            KotlinLogging.logger{}.warn{ "Tried to use ability $name without having the corresponding talent" }
+            KotlinLogging.logger{}.debug{ "Tried to use ability $name without having the corresponding talent" }
         }
 
         return available && super.available(sp)
