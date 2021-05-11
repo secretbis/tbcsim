@@ -45,7 +45,7 @@ class Garrote : Ability() {
             amount = 0.0,
             result = result.second,
         )
-        sp.logEvent(event)
+        //sp.logEvent(event)
 
         if(result.second != Event.Result.MISS) {
             sp.sim.target.addDebuff(GarroteDot(sp))
