@@ -1,19 +1,15 @@
-package `data`.items
+package data.itemscustom
 
-import `data`.Constants
-import `data`.buffs.Buffs
-import `data`.model.Item
-import `data`.model.ItemSet
-import `data`.model.Socket
-import `data`.model.SocketBonus
 import character.Buff
+import character.CharacterType
 import character.Stats
-import kotlin.Array
-import kotlin.Boolean
-import kotlin.Double
-import kotlin.Int
-import kotlin.String
-import kotlin.collections.List
+import data.Constants
+import data.buffs.Buffs
+import data.model.Item
+import data.model.ItemSet
+import data.model.Socket
+import data.model.SocketBonus
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport

@@ -3873,8 +3873,7 @@ public object ItemIndex {
       { BrightbrewCharm() },
       { DirebrewsShanker() },
       { BalebrewCharm() },
-      { TheHorsemansBlade() },
-      { NightstalkersWristguards() }
+      { TheHorsemansBlade() }
       )
 
 }
