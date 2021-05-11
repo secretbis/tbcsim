@@ -17,8 +17,4 @@ abstract class Poison(sourceItem: Item) : TempEnchant(sourceItem) {
     }
 
     public var poisonAbility: Ability? = null
-
-    fun testlol() {
-        
-    }
 }
