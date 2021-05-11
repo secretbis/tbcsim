@@ -21,7 +21,7 @@ class ExposeArmor(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owne
     override val mutex: List<Mutex> = listOf(Mutex.DEBUFF_EXPOSE_ARMOR)
     override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
         return mapOf(
-            Mutex.DEBUFF_EXPOSE_ARMOR to armorReduce
+            Mutex.DEBUFF_MAJOR_ARMOR to armorReduce
         )
     }
 
