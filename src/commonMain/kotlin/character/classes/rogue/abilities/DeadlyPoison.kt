@@ -22,8 +22,6 @@ class DeadlyPoison(override val name: String, val item: Item) : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        // TODO: this needs to be casted so it can be resisted.
-        //       can't use Spell.attackRoll though because it uses spellcrit/hit etc.
         sp.sim.target.addDebuff(character.classes.rogue.debuffs.DeadlyPoisonDot(sp))
     }
 }

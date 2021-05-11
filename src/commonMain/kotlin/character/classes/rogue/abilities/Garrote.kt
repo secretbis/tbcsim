@@ -24,7 +24,7 @@ class Garrote : Ability() {
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
     override fun resourceCost(sp: SimParticipant): Double {
-        val dd = sp.character.klass.talents[DirtyDeeds.name] as DirtyDeeds?
+        val dd = sp.character.klass.talents[character.classes.rogue.talents.DirtyDeeds.name] as character.classes.rogue.talents.DirtyDeeds?
         val reduction = dd?.energyReduction() ?: 0.0
         return 50.0 - reduction
     }
