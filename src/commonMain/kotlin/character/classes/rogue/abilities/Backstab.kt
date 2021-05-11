@@ -39,7 +39,7 @@ class Backstab : Ability() {
         val lethality = sp.character.klass.talents[Lethality.name] as Lethality?
         val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
 
-        val aggression = sp.character.klass.talents[Aggression.name] as ImprovedEviscerate?
+        val aggression = sp.character.klass.talents[Aggression.name] as Aggression?
         var increasedDamagePercent = aggression?.damageIncreasePercent() ?: 0.0
         val surprise = sp.character.klass.talents[SurpriseAttacks.name] as SurpriseAttacks?
         increasedDamagePercent += surprise?.damageIncreasePercent() ?: 0.0
