@@ -46,7 +46,7 @@ class Rupture : FinisherAbility() {
         )
         //sp.logEvent(event)
 
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
+        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
             sp.sim.target.addDebuff(character.classes.rogue.debuffs.RuptureDot(sp, consumedComboPoints))
         }
 

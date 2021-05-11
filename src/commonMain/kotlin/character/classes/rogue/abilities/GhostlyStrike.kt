@@ -42,7 +42,7 @@ class GhostlyStrike : Ability() {
         val damageRoll = Melee.baseDamageRoll(sp, item) * weaponDamageMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
         
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
+        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
             sp.addResource(1, Resource.Type.COMBO_POINT, name)
         }
 

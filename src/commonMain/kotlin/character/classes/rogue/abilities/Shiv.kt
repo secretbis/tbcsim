@@ -35,8 +35,7 @@ class Shiv : Ability() {
         val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
-            // TODO: unsure if best way to do this
+        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
             val poison = sp.character.gear.offHand.tempEnchant as? Poison
             if(poison != null) {
                 poison.poisonAbility?.cast(sp)

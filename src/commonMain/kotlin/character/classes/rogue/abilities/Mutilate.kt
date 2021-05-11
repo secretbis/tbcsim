@@ -55,7 +55,7 @@ class Mutilate : Ability() {
         val damageRoll = Melee.baseDamageRoll(sp, item) + bonusDamage
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
+        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
             sp.addResource(2, Resource.Type.COMBO_POINT, name)
         }
 
