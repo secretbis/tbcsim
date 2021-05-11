@@ -50,7 +50,11 @@ class Resource(
         return when(type) {
             Type.MANA -> maxMana()
             Type.RAGE -> 100
-            Type.ENERGY -> 100
+            Type.ENERGY -> {
+                val vigor = sp.character.klass.talents[character.classes.rogue.talents.Vigor.name] as character.classes.rogue.talents.Vigor?
+                val bonus = vigor?.maxEnergyIncrease() ?: 0
+                100 + bonus
+            }
             Type.FOCUS -> 100
             Type.COMBO_POINT -> 5
         }
