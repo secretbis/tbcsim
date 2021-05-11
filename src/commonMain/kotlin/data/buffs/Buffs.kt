@@ -138,6 +138,7 @@ object Buffs {
             38282 -> SingingCrystalAxe(item)
             38284 -> TheHammerOfDestiny(item)
             38307 -> TheNightBlade(item)
+            38308 -> Blinkstrike(item)
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)

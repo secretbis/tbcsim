@@ -24,10 +24,8 @@ class Lionheart(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         )
 
         override val type: Type = Type.PPM
-        override val ppm: Double = 3.0
+        override val ppm: Double = 1.0
         override fun cooldownMs(sp: SimParticipant): Int = 1000
-        //TODO: confirm its 3.0 PPM and 1 second ICD (only present in wowhead data can't see it on wow.tools)
-
 
         val buff = object : Buff() {
             override val name: String = "Lionheart"
