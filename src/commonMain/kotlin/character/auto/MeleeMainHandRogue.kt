@@ -4,7 +4,7 @@ import data.model.Item
 import sim.SimParticipant
 import character.classes.rogue.buffs.*
 
-class MeleeMainHandRogue : AutoAttackBase() {
+class MeleeMainHandRogue : MeleeMainHand() {
     companion object {
         const val name = "Melee (MH)"
     }
@@ -17,6 +17,6 @@ class MeleeMainHandRogue : AutoAttackBase() {
     override fun available(sp: SimParticipant): Boolean {
         val stealthBuff = sp.buffs[Stealth.name]
         val inStealth = stealthBuff != null
-        return !inStealth && sp.hasMainHandWeapon() && super.available(sp)
+        return !inStealth && super.available(sp)
     }
 }

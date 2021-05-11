@@ -3,7 +3,7 @@ package character.auto
 import data.model.Item
 import sim.SimParticipant
 
-class MeleeMainHand : AutoAttackBase() {
+open class MeleeMainHand : AutoAttackBase() {
     companion object {
         const val name = "Melee (MH)"
     }
