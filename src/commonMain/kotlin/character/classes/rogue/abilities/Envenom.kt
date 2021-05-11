@@ -50,6 +50,7 @@ class Envenom : FinisherAbility() {
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
 
         // TODO: not sure if this really is just a flat increase on the final damage
+        // TODO: this needs to be "cast" for resistance purposes, but use melee hit/crit
         val damageRoll = damage * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, null, isWhiteDmg = false, noDodgeAllowed = noDodgeAllowed(sp))
 
@@ -87,7 +88,7 @@ class Envenom : FinisherAbility() {
             KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
             return 0
         }
-        return debuffState.currentStacks+1
+        return debuffState.currentStacks
     }
 
     fun removePoisonStacks(sp: SimParticipant, stacks: Int) {
@@ -97,7 +98,7 @@ class Envenom : FinisherAbility() {
             return
         }
         
-        if((debuffState.currentStacks+1) > stacks) {
+        if((debuffState.currentStacks) > stacks) {
             debuffState.currentStacks -= stacks
         } else {
             sp.sim.target.consumeDebuff(sp.sim.target.debuffs[DeadlyPoisonDot.name]!!)

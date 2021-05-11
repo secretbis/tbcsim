@@ -17,7 +17,7 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
     val totalTicks = durationMs / tickDeltaMs
-    override val maxStacks: Int = 4
+    override val maxStacks: Int = 5
 
     fun dmgPerStack(sp: SimParticipant): Double {
         val vp = sp.character.klass.talents[VilePoisons.name] as VilePoisons?
