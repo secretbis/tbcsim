@@ -6,6 +6,7 @@ import sim.Event
 import sim.SimParticipant
 import data.Constants
 import character.classes.rogue.talents.*
+import data.itemsets.SlayersArmor
 
 class SinisterStrike : Ability() {
     companion object {
@@ -35,6 +36,8 @@ class SinisterStrike : Ability() {
         increasedDamagePercent += aggression?.damageIncreasePercent() ?: 0.0
         val surprise = sp.character.klass.talents[SurpriseAttacks.name] as SurpriseAttacks?
         increasedDamagePercent += surprise?.damageIncreasePercent() ?: 0.0
+        val slayers = sp.buffs[SlayersArmor.FOUR_SET_BUFF_NAME]
+        increasedDamagePercent += if (slayers != null) { SlayersArmor.fourSetGeneratorDamageIncreasePercent() } else 0.0
         
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 

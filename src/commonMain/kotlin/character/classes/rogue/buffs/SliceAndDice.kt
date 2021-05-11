@@ -8,6 +8,8 @@ import sim.Event
 import sim.SimParticipant
 import data.model.Item
 import mechanics.Rating
+import data.itemsets.Netherblade
+import data.itemsets.SlayersArmor
 
 class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
     companion object {
@@ -28,12 +30,16 @@ class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
     val hastePercent = 30.0
 
     fun getDurationForCombopoints(sp: SimParticipant, consumedComboPoints: Int): Int {
+
+        val netherblade = sp.buffs[Netherblade.TWO_SET_BUFF_NAME]
+        val durationBonus = if (netherblade != null) { Netherblade.twoSetSnDDurationIncreaseMs() } else 0
+
         val baseDuration: Int = when(consumedComboPoints){
-            1 -> 9000
-            2 -> 12000
-            3 -> 15000
-            4 -> 18000
-            5 -> 21000
+            1 -> 9000 + durationBonus
+            2 -> 12000 + durationBonus
+            3 -> 15000 + durationBonus
+            4 -> 18000 + durationBonus
+            5 -> 21000 + durationBonus
             else -> 0
         }
 
@@ -44,8 +50,12 @@ class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
     }
     
     override fun modifyStats(sp: SimParticipant): Stats {  
+        val slayers = sp.buffs[Netherblade.TWO_SET_BUFF_NAME]
+        val hasteBonus = if (slayers != null) { SlayersArmor.twoSetAdditionalSnDHaste() } else 0.0
+
+        // TODO: might be multiplicative
         return Stats(
-            physicalHasteMultiplier = 1.3
+            physicalHasteMultiplier = 1.3 + hasteBonus
         )
     }
 }

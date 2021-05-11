@@ -9,11 +9,14 @@ import sim.SimParticipant
 class Netherblade : ItemSet() {
     companion object {
         const val TWO_SET_BUFF_NAME = "Netherblade (2 set)"
+
+        fun twoSetSnDDurationIncreaseMs(): Int {
+            return 3000
+        }
     }
 
     override val id: Int = 621
 
-    // TODO: When SnD exists, it should check this buff to compute its duration
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
@@ -26,15 +29,12 @@ class Netherblade : ItemSet() {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.ROGUE_CAST_KIDNEY_SHOT,
-                Trigger.ROGUE_CAST_EVISCERATE,
-                Trigger.ROGUE_CAST_ENVENOM,
-                Trigger.ROGUE_CAST_RUPTURE,
-                Trigger.ROGUE_CAST_SLICE_AND_DICE,
+                Trigger.ROGUE_CAST_FINISHER
             )
             override val type: Type = Type.PERCENT
             override fun percentChance(sp: SimParticipant): Double = 15.0
 
+            // TODO: does this also happen on misses/dodges/parry etc? otherwise we have to check here for a hit
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.addResource(1, Resource.Type.COMBO_POINT, name)
             }

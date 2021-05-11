@@ -7,6 +7,7 @@ import sim.SimParticipant
 import data.Constants
 import character.classes.rogue.talents.*
 import mu.KotlinLogging
+import data.itemsets.SlayersArmor
 
 class Backstab : Ability() {
     companion object {
@@ -45,6 +46,8 @@ class Backstab : Ability() {
         increasedDamagePercent += surprise?.damageIncreasePercent() ?: 0.0
         val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
         increasedDamagePercent += opportunity?.damageIncreasePercent() ?: 0.0
+        val slayers = sp.buffs[SlayersArmor.FOUR_SET_BUFF_NAME]
+        increasedDamagePercent += if (slayers != null) { SlayersArmor.fourSetGeneratorDamageIncreasePercent() } else 0.0
         
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 

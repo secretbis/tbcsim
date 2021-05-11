@@ -8,6 +8,7 @@ import data.Constants
 import character.classes.rogue.talents.*
 import character.classes.rogue.debuffs.*
 import mu.KotlinLogging
+import data.itemsets.SlayersArmor
 
 class Mutilate : Ability() {
     companion object {
@@ -52,7 +53,9 @@ class Mutilate : Ability() {
         val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
 
         val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
-        val increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
+        var increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
+        val slayers = sp.buffs[SlayersArmor.FOUR_SET_BUFF_NAME]
+        increasedDamagePercent += if (slayers != null) { SlayersArmor.fourSetGeneratorDamageIncreasePercent() } else 0.0
 
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
@@ -100,7 +103,9 @@ class Mutilate : Ability() {
         val critDmgMultiplier = lethality?.critDamageMultiplier() ?: 1.0
 
         val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
-        val increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
+        var increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
+        val slayers = sp.buffs[SlayersArmor.FOUR_SET_BUFF_NAME]
+        increasedDamagePercent += if (slayers != null) { SlayersArmor.fourSetGeneratorDamageIncreasePercent() } else 0.0
         
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
@@ -108,7 +113,7 @@ class Mutilate : Ability() {
         // also unsure about the poisonMultiplier (additive/multiplicative)
         val item = sp.character.gear.offHand
         val damageRoll = (Melee.baseDamageRoll(sp, item) + bonusDamage) * dmgMultiplier * poisonMultiplier
-        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier))
+        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
         val event = Event(
             eventType = Event.Type.DAMAGE,

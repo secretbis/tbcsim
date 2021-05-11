@@ -9,7 +9,8 @@ import data.model.Item
 import character.classes.rogue.talents.*
 import mechanics.Rating
 import mechanics.Spell
-import kotlinx.coroutines.channels.consumesAll
+import data.itemsets.AssassinationArmor
+import data.itemsets.Deathmantle
 
 class Eviscerate : FinisherAbility() {
     companion object {
@@ -22,7 +23,12 @@ class Eviscerate : FinisherAbility() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
-    override fun resourceCost(sp: SimParticipant): Double = 35.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val assArmor = sp.buffs[AssassinationArmor.FOUR_SET_BUFF_NAME]
+        var reduction = if (assArmor != null) { AssassinationArmor.fourSetEnergyReduction() } else 0.0
+
+        return 35.0 - reduction
+    }
 
     override fun cast(sp: SimParticipant) {
         var increasedDamagePercent = 0.0
@@ -64,13 +70,17 @@ class Eviscerate : FinisherAbility() {
     }
 
     fun damage(sp: SimParticipant, cps: Int, dmgMultiplier: Double): Pair<Double, Double> {
+
+        val deathmantle = sp.buffs[Deathmantle.TWO_SET_BUFF_NAME]
+        val bonusDamagePerCP = if (deathmantle != null) { Deathmantle.twoSetBonusDamagePerCP() } else 0.0
+
         val modifier = sp.attackPower() * (cps * 0.03)
         return when(consumedComboPoints){
-            1 -> Pair(60*dmgMultiplier + 185 + modifier, 180*dmgMultiplier + 185 + modifier)
-            2 -> Pair(60*dmgMultiplier + 370 + modifier, 180*dmgMultiplier + 370 + modifier)
-            3 -> Pair(60*dmgMultiplier + 555 + modifier, 180*dmgMultiplier + 555 + modifier)
-            4 -> Pair(60*dmgMultiplier + 740 + modifier, 180*dmgMultiplier + 740 + modifier)
-            5 -> Pair(60*dmgMultiplier + 925 + modifier, 180*dmgMultiplier + 925 + modifier)
+            1 -> Pair(60*dmgMultiplier + 185 + modifier + (bonusDamagePerCP * 1), 180*dmgMultiplier + 185 + modifier + (bonusDamagePerCP * 1))
+            2 -> Pair(60*dmgMultiplier + 370 + modifier + (bonusDamagePerCP * 2), 180*dmgMultiplier + 370 + modifier + (bonusDamagePerCP * 2))
+            3 -> Pair(60*dmgMultiplier + 555 + modifier + (bonusDamagePerCP * 3), 180*dmgMultiplier + 555 + modifier + (bonusDamagePerCP * 3))
+            4 -> Pair(60*dmgMultiplier + 740 + modifier + (bonusDamagePerCP * 4), 180*dmgMultiplier + 740 + modifier + (bonusDamagePerCP * 4))
+            5 -> Pair(60*dmgMultiplier + 925 + modifier + (bonusDamagePerCP * 5), 180*dmgMultiplier + 925 + modifier + (bonusDamagePerCP * 5))
             else -> Pair(0.0, 0.0)
         }
 
