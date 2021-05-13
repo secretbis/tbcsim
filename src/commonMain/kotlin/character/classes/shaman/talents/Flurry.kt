@@ -26,6 +26,8 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
                 Trigger.MELEE_GLANCE
             )
             override val type: Type = Type.STATIC
+            // Shaman Flurry stacks are not consumed on every hit - a small ICD is observed on the beta
+            override fun cooldownMs(sp: SimParticipant): Int = 500
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.consumeBuff(buff)
