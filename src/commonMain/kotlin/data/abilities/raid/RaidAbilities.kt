@@ -9,6 +9,7 @@ import kotlin.js.JsExport
 object RaidAbilities {
     val raidBuffs: Array<Ability> = arrayOf(
         BlessingOfKings(),
+        Bloodlust(),
         DrumsOfBattle(),
         FerociousInspiration(1),
         FerociousInspiration(2),
