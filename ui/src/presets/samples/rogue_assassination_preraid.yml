@@ -1,0 +1,252 @@
+class: Rogue
+spec: Assassination
+description: Assassination Rogue (Preraid)
+race: Human
+level: 70
+epCategory: preraid
+epSpec: rogue_assassination
+
+# dagger/dagger
+talents:
+  # Assassination talents
+  - name: Malice
+    rank: 5
+  - name: Ruthlessness
+    rank: 3
+  - name: Puncturing Wounds
+    rank: 3
+  - name: Murder
+    rank: 2
+  - name: Relentless Strikes
+    rank: 1
+  - name: Lethality
+    rank: 5
+  - name: Improved Expose Armor
+    rank: 2
+  - name: Vile Poisons
+    rank: 5
+  - name: Cold Blood
+    rank: 1
+  - name: Quick Recovery
+    rank: 2
+  - name: Seal Fate
+    rank: 5
+  - name: Vigor
+    rank: 1
+  - name: Find Weakness
+    rank: 5
+  - name: Mutilate
+    rank: 1
+
+  # Combat talents
+  - name: Lightning Reflexes
+    rank: 5
+  - name: Improved Slice and Dice
+    rank: 3
+  - name: Precision
+    rank: 5
+
+  # Sub talents
+  - name: Opportunity
+    rank: 5
+
+gear:
+  mainHand:
+    name: Gladiator's Shanker
+    enchant: Mongoose
+  offHand:
+    name: Gladiator's Shanker
+    enchant: Mongoose
+  rangedTotemLibram:
+    name: Marksman's Bow
+  head:
+    name: Wastewalker Helm
+    enchant: Glyph of Ferocity
+    gems:
+      - Delicate Living Ruby
+      - Swift Skyfire Diamond
+  neck:
+    name: Choker of Vile Intent
+  shoulders:
+    name: Wastewalker Shoulderpads
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  back:
+    name: Vengeance Wrap
+    enchant: Greater Agility
+    gems:
+      - Delicate Living Ruby
+  chest:
+    name: Wastewalker Tunic
+    enchant: Exceptional Stats
+    gems:
+      - Glinting Noble Topaz
+      - Glinting Noble Topaz
+      - Glinting Noble Topaz
+  wrists:
+    name: Nightfall Wristguards
+    enchant: Assault
+  hands:
+    name: Fel Leather Gloves
+    enchant: Superior Agility
+    gems:
+      - Rigid Dawnstone
+      - Glinting Noble Topaz
+  waist:
+    name: Girdle of the Deathdealer
+  legs:
+    name: Wastewalker Leggings
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Rigid Dawnstone
+      - Rigid Dawnstone
+      - Rigid Dawnstone
+  feet:
+    name: Fel Leather Boots
+    enchant: Dexterity
+    gems:
+      - Rigid Dawnstone
+      - Glinting Noble Topaz
+  ring1:
+    name: Slayer's Mark of the Redemption
+  ring2:
+    name: Kaylaan's Signet
+  trinket1:
+    name: Abacus of Violent Odds
+  trinket2:
+    name: Bloodlust Brooch
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Elixir of Major Agility
+    - name: Spicy Hot Talbuk
+
+    # Abilities
+#    - name: Instant Poison (MH)
+    - name: Deadly Poison (OH)
+  combat:
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+
+    # Stealth ability
+    - name: Garrote
+
+    # Consumables, Trinkets and Cooldowns, only use after Slice and Dice is applied.
+    - name: Haste Potion
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+    - name: Use Active Trinket
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+    - name: Blade Flurry
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+
+    # Rupture if we have 5 CP and SnD has enough time left to refresh it as the next finisher
+    - name: Rupture
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 5
+          resourceType: COMBO_POINT
+        - type: DEBUFF_DURATION_LTE
+          debuff: Rupture (DoT)
+          seconds: 2
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 3
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 15
+
+    # SnD if we have 5 CP and it's about to run out
+    - name: Slice and Dice
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 5
+          resourceType: COMBO_POINT
+        - type: BUFF_DURATION_LTE
+          buff: Slice and Dice
+          seconds: 4
+
+    - name: Cold Blood
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 0
+          resourceType: COMBO_POINT
+        - type: RESOURCE_PCT_GTE
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+
+    # Mutilate otherwise, but only if we are not CP capped
+    - name: Mutilate
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1
+          resourceType: COMBO_POINT
+
+    - name: Eviscerate
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 5
+          resourceType: COMBO_POINT
+        - type: RESOURCE_PCT_GTE
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+        # Eviscerate unless we're very close to the end
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 15
+
+    - name: Envenom
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 5
+          resourceType: COMBO_POINT
+        - type: RESOURCE_PCT_GTE
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior and Enhancement Shaman
+  - Ferocious Inspiration (x1)
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Windfury Totem
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Improved Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Expose Weakness (750 Agi)
+  - Mangle

@@ -28,15 +28,15 @@ class Envenom : FinisherAbility() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
     override fun resourceCost(sp: SimParticipant): Double {
         val assArmor = sp.buffs[AssassinationArmor.FOUR_SET_BUFF_NAME]
-        var reduction = if (assArmor != null) { AssassinationArmor.fourSetEnergyReduction() } else 0.0
+        val reduction = if (assArmor != null) { AssassinationArmor.fourSetEnergyReduction() } else 0.0
 
         return 35.0 - reduction
     }
 
     override fun available(sp: SimParticipant): Boolean {
         // there has to be at least one deadly poison debuff available
-        val dosesAvailable = sp.sim.target.debuffState[DeadlyPoisonDot.name] != null
-        
+        val dosesAvailable = sp.sim.target.debuffState[DeadlyPoisonDot.name] != null && sp.sim.target.debuffs[DeadlyPoisonDot.name] != null
+
         return dosesAvailable && super.available(sp)
     }
 
@@ -108,7 +108,7 @@ class Envenom : FinisherAbility() {
             KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
             return
         }
-        
+
         if((debuffState.currentStacks) > stacks) {
             debuffState.currentStacks -= stacks
         } else {

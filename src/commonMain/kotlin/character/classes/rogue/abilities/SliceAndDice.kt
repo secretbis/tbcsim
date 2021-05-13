@@ -23,18 +23,19 @@ class SliceAndDice : FinisherAbility() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
     override fun resourceCost(sp: SimParticipant): Double = 25.0
 
-    override fun available(sp: SimParticipant): Boolean {
-        // make sure we are allowed to replace existing buff
-        val wouldBeCombopoints = sp.resources[Resource.Type.COMBO_POINT]!!.currentAmount
-        val wouldBeBuff = character.classes.rogue.buffs.SliceAndDice(sp, wouldBeCombopoints)
-        val canAddBuff = sp.shouldApplyBuff(wouldBeBuff, sp.buffs)
-        
-        return canAddBuff && super.available(sp)
-    }
+//    TODO: This has a very large performance impact - the rotation should handle all of these cases, practically speaking
+//    override fun available(sp: SimParticipant): Boolean {
+//        // make sure we are allowed to replace existing buff
+//        val wouldBeCombopoints = sp.resources[Resource.Type.COMBO_POINT]!!.currentAmount
+//        val wouldBeBuff = character.classes.rogue.buffs.SliceAndDice(sp, wouldBeCombopoints)
+//        val canAddBuff = sp.shouldApplyBuff(wouldBeBuff, sp.buffs)
+//
+//        return canAddBuff && super.available(sp)
+//    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(character.classes.rogue.buffs.SliceAndDice(sp, consumedComboPoints))
-        
+
         val event = Event(
             eventType = Event.Type.SPELL_CAST,
             comboPointsSpent = consumedComboPoints

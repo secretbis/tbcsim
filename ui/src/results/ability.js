@@ -22,12 +22,28 @@ const columnInfo = [
     key: 'pctOfTotal',
     formatter: toFixedPct()
   },{
+    title: 'MinHit',
+    key: 'minHit',
+    formatter: toFixed()
+  },{
     title: 'AvgHit',
     key: 'avgHit',
     formatter: toFixed()
   },{
+    title: 'MaxHit',
+    key: 'maxHit',
+    formatter: toFixed()
+  },{
+    title: 'MinCrit',
+    key: 'minCrit',
+    formatter: toFixed()
+  },{
     title: 'AvgCrit',
     key: 'avgCrit',
+    formatter: toFixed()
+  },{
+    title: 'MaxCrit',
+    key: 'maxCrit',
     formatter: toFixed()
   },{
     title: 'Hit%',

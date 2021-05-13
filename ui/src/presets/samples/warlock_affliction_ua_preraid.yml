@@ -188,6 +188,7 @@ raidBuffs:
   - Wrath of Air Totem
   - Totem of Wrath
   - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
 
 raidDebuffs:
   # Sunder Armor and Imp EA cannot be applied at the same time

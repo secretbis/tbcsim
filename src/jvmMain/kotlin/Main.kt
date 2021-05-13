@@ -1,6 +1,8 @@
 import character.SpecEpDelta
 import character.classes.hunter.specs.BeastMastery
 import character.classes.hunter.specs.Survival
+import character.classes.rogue.specs.Assassination
+import character.classes.rogue.specs.Combat
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
 import character.classes.warlock.specs.Affliction
@@ -57,6 +59,8 @@ class TBCSim : CliktCommand() {
     val specs = mapOf(
         "hunter_bm" to BeastMastery(),
         "hunter_surv" to Survival(),
+        "rogue_assassination" to Assassination(),
+        "rogue_combat" to Combat(),
         "shaman_ele" to Elemental(),
         // Enhance weights aren't appreciably different between the two sub-specs
         "shaman_enh" to Enhancement(),
@@ -75,6 +79,8 @@ class TBCSim : CliktCommand() {
         "preraid" to mapOf(
             "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
             "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
+            "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
+            "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
             // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
@@ -276,15 +282,15 @@ class TBCSim : CliktCommand() {
                 val resourceTypes = config.character.klass.resourceTypes
 
                 // Only print the big chart for the main subject - others arent interesting
+                val resource = SimStats.resourceUsage(iterations)
                 resourceTypes.forEach {
-                    val resource = SimStats.resourceUsage(iterations, it)
-                    println("Resource usage for iteration ${resource[0].iterationIdx}")
-                    Chart.print(resource[0].series, xMax = durationSeconds, yLabel = it.toString())
+                    println("Resource usage for iteration ${resource[0][it.name]!!.iterationIdx}")
+                    Chart.print(resource[0][it.name]!!.series, xMax = durationSeconds, yLabel = it.toString())
                 }
 
                 resourceTypes.forEach {
-                    val resourceByAbility = SimStats.resourceUsageByAbility(iterations, it)
-                    SimStatsPrinter.printResourceUsageByAbility(resourceByAbility, it.toString())
+                    val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
+                    SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
                 }
 
                 val buffs = SimStats.resultsByBuff(iterations)

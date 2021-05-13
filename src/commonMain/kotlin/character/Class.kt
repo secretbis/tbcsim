@@ -13,6 +13,7 @@ import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
 import character.classes.rogue.specs.Combat
 import character.classes.rogue.Rogue
+import character.classes.rogue.specs.Assassination
 import data.model.Item
 
 abstract class Class(
@@ -62,6 +63,7 @@ abstract class Class(
                     else -> null
                 }
                 "rogue" -> when(specName) {
+                    "assassination" -> Assassination()
                     "combat" -> Combat()
                     else -> null
                 }

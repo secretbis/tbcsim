@@ -31,6 +31,7 @@ function bannerMsg() {
       <p>At this moment, only the following specs are available:</p>
       <ul>
         <li>BM/Survival Hunter</li>
+        <li>Assassination/Combat Rogue</li>
         <li>Enhancement/Elemental Shaman</li>
         <li>Affliction/Destruction Warlock</li>
         <li>Arms/Fury Warrior</li>

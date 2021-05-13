@@ -24,14 +24,15 @@ class Rupture : FinisherAbility() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
     override fun resourceCost(sp: SimParticipant): Double = 25.0
 
-    override fun available(sp: SimParticipant): Boolean {
-        // make sure we are allowed to replace existing debuff
-        val wouldBeCombopoints = sp.resources[Resource.Type.COMBO_POINT]!!.currentAmount
-        val wouldBeDebuff = character.classes.rogue.debuffs.RuptureDot(sp, wouldBeCombopoints)
-        val canAddDebuff = sp.shouldApplyBuff(wouldBeDebuff, sp.buffs)
-        
-        return canAddDebuff && super.available(sp)
-    }
+//    TODO: This has a very large performance impact - the rotation should handle all of these cases, practically speaking
+//    override fun available(sp: SimParticipant): Boolean {
+//        // make sure we are allowed to replace existing debuff
+//        val wouldBeCombopoints = sp.resources[Resource.Type.COMBO_POINT]!!.currentAmount
+//        val wouldBeDebuff = character.classes.rogue.debuffs.RuptureDot(sp, wouldBeCombopoints)
+//        val canAddDebuff = sp.shouldApplyBuff(wouldBeDebuff, sp.buffs)
+//
+//        return canAddDebuff && super.available(sp)
+//    }
 
     override fun cast(sp: SimParticipant) {
         val result = Melee.attackRoll(sp, 0.0, null, isWhiteDmg = false, noDodgeAllowed = noDodgeAllowed(sp))

@@ -189,29 +189,32 @@ object SimStatsPrinter {
         )
     }
 
-    fun printResourceUsageByAbility(participants: List<List<ResourceByAbility>>, resource: String) {
-        participants.forEach { rows ->
-            println(
-                "Resource by Ability Breakdown ($resource)\n" +
-                table {
-                    header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
+    fun printResourceUsageByAbility(participants: List<Map<String, List<ResourceByAbility>>>) {
+        participants.forEach { resourceType ->
+            resourceType.entries.forEach { resourceData ->
+                val rows = resourceData.value
+                println(
+                    "Resource by Ability Breakdown (${resourceData.key})\n" +
+                    table {
+                        header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
 
-                    for(row in rows) {
-                        row(row.name, row.countAvg, row.totalGainAvg, row.gainPerCountAvg)
-                    }
-
-                    hints {
-                        alignment(0, Table.Hints.Alignment.LEFT)
-
-                        for(i in 1..3) {
-                            precision(i, 2)
-                            formatFlag(i, ",")
+                        for(row in rows) {
+                            row(row.name, row.countAvg, row.totalGainAvg, row.gainPerCountAvg)
                         }
 
-                        borderStyle = Table.BorderStyle.SINGLE_LINE
-                    }
-                }.render(StringBuilder())
-            )
+                        hints {
+                            alignment(0, Table.Hints.Alignment.LEFT)
+
+                            for(i in 1..3) {
+                                precision(i, 2)
+                                formatFlag(i, ",")
+                            }
+
+                            borderStyle = Table.BorderStyle.SINGLE_LINE
+                        }
+                    }.render(StringBuilder())
+                )
+            }
         }
     }
 }
