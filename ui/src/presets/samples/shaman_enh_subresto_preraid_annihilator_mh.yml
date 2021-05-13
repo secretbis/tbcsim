@@ -47,10 +47,10 @@ talents:
 # Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Dragonmaw
+    name: Annihilator
     enchant: Mongoose
   offHand:
-    name: Annihilator
+    name: Gladiator's Cleaver
     enchant: Mongoose
   rangedTotemLibram:
     name: Totem of the Astral Winds

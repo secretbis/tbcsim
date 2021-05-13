@@ -5,6 +5,7 @@ import sim.statsmodel.*
 import kotlin.js.JsExport
 import kotlin.math.sqrt
 import kotlin.random.Random
+import character.*
 
 @JsExport
 object SimStats {
@@ -231,7 +232,11 @@ object SimStats {
                 val allCrits =
                     events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }
                 val avgHit = allHits.map { it.amount }.sum() / allHits.size.toDouble()
+                val minHit = allHits.map { it.amount }.minOrNull() ?: Double.NaN
+                val maxHit = allHits.map { it.amount }.maxOrNull() ?: Double.NaN
                 val avgCrit = allCrits.map { it.amount }.sum() / allCrits.size.toDouble()
+                val minCrit = allCrits.map { it.amount }.minOrNull() ?: Double.NaN
+                val maxCrit = allCrits.map { it.amount }.maxOrNull() ?: Double.NaN
 
                 // Compute result distributions with the entire set of events
                 // Count blocked hits/crits as hits/crits, since the block value is very small
@@ -251,8 +256,12 @@ object SimStats {
                     countAvg,
                     totalAvg,
                     pctOfTotal,
+                    minHit,
                     avgHit,
+                    maxHit,
+                    minCrit,
                     avgCrit,
+                    maxCrit,
                     hitPct,
                     critPct,
                     missPct,
@@ -296,49 +305,64 @@ object SimStats {
         }
     }
 
-    fun resourceUsage(iterations: List<SimIteration>): List<ResourceBreakdown> {
+    fun resourceUsage(iterations: List<SimIteration>): List<Map<String, ResourceBreakdown>> {
         // Pick an execution at random
         // TODO: Average and +/- some number of stddevs usage across iterations for each participant
         //       Multiple lines for avg, percentiles?
         val iterationIdx = Random.nextInt(iterations.size)
         val participants = iterations[iterationIdx].participants
 
-        return participants.mapIndexed { idx, sp ->
-            val series = sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED }.map {
-                Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
-            }
+        return participants.mapIndexed { _, sp ->
+            val resourceTypes = sp.character.klass.resourceTypes
 
-            ResourceBreakdown(
-                iterationIdx,
-                series
-            )
+            resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
+                val series =
+                    sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED && it.resourceType == resourceType }
+                        .map {
+                            Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
+                        }
+
+                acc[resourceType.name] = ResourceBreakdown(
+                    iterationIdx,
+                    series
+                )
+                acc
+            }
         }
     }
 
-    fun resourceUsageByAbility(iterations: List<SimIteration>): List<List<ResourceByAbility>> {
+    fun resourceUsageByAbility(iterations: List<SimIteration>): List<Map<String, List<ResourceByAbility>>> {
         val participantCount = iterations[0].participants.size - 1
         return (0..participantCount).map { idx ->
-            val byAbility = iterations.flatMap { iter ->
-                iter.participants[idx].events
-                    .filter { it.eventType == Event.Type.RESOURCE_CHANGED }
-                    .filter { it.abilityName != null }
-            }.groupBy { it.abilityName!! }
+            val sp = iterations[0].participants[idx]
+            val resourceTypes = sp.character.klass.resourceTypes
 
-            val keys = byAbility.keys.toList()
+            // Also group by resource type
+            resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
+                val byAbility = iterations.flatMap { iter ->
+                    iter.participants[idx].events
+                        .filter { it.eventType == Event.Type.RESOURCE_CHANGED }
+                        .filter { it.abilityName != null }
+                        .filter { it.resourceType == resourceType }
+                }.groupBy { it.abilityName!! }
 
-            keys.map { key ->
-                val events = byAbility[key]!!
-                val deltas = events.map { it.delta }
-                val countAvg = deltas.size.toDouble() / iterations.size.toDouble()
-                val totalGainAvg = deltas.sum() / iterations.size.toDouble()
+                val keys = byAbility.keys.toList()
 
-                ResourceByAbility(
-                    key,
-                    countAvg,
-                    totalGainAvg,
-                    totalGainAvg / countAvg
-                )
-            }.sortedBy { it.totalGainAvg }.reversed()
+                acc[resourceType.name] = keys.map { key ->
+                    val events = byAbility[key]!!
+                    val deltas = events.map { it.delta }
+                    val countAvg = deltas.size.toDouble() / iterations.size.toDouble()
+                    val totalGainAvg = deltas.sum() / iterations.size.toDouble()
+
+                    ResourceByAbility(
+                        key,
+                        countAvg,
+                        totalGainAvg,
+                        totalGainAvg / countAvg
+                    )
+                }.sortedBy { it.totalGainAvg }.reversed()
+                acc
+            }
         }
     }
 }

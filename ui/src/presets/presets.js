@@ -4,11 +4,12 @@ import _ from 'lodash';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
+import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
+import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
 import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
-import shamanEnhSubRestoPreraidAnniDw from './samples/shaman_enh_subresto_preraid_annihilator_dw.yml'
-import shamanEnhSubRestoPreraidAnniOh from './samples/shaman_enh_subresto_preraid_annihilator_oh.yml'
+import shamanEnhSubRestoPreraidAnniMh from './samples/shaman_enh_subresto_preraid_annihilator_mh.yml'
 import warlockAfflictionUAPreraid from './samples/warlock_affliction_ua_preraid.yml'
 import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
 import warlockAfflictionDSPreraid from './samples/warlock_affliction_ds_preraid.yml'
@@ -24,12 +25,15 @@ const presets = {
     hunterBmPreraid,
     hunterSurvPreraid
   ],
+  rogue: [
+    rogueAssassinationPreraid,
+    rogueCombatPreraid
+  ],
   shaman: [
     shamanElePreraid,
     shamanEnhSubElePreraid,
     shamanEnhSubRestoPreraid,
-    shamanEnhSubRestoPreraidAnniDw,
-    shamanEnhSubRestoPreraidAnniOh,
+    shamanEnhSubRestoPreraidAnniMh,
   ],
   warlock: [
     warlockDestructionFirePreraid,
@@ -113,6 +117,9 @@ export default ({ value, dispatch }) => {
         >
           <Dropdown.Menu title="Hunter">
             {presetsFor("hunter")}
+          </Dropdown.Menu>
+          <Dropdown.Menu title="Rogue">
+            {presetsFor("rogue")}
           </Dropdown.Menu>
           <Dropdown.Menu title="Shaman">
             {presetsFor("shaman")}

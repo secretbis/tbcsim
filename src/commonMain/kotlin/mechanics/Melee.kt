@@ -84,7 +84,8 @@ object Melee {
     }
 
     // Computes additional item-specific expertise, i.e. racial abilities
-    fun expertisePctForItem(sp: SimParticipant, item: Item): Double {
+    fun expertisePctForItem(sp: SimParticipant, item: Item?): Double {
+        if(item == null) return 0.0
         return when {
             isAxe(item) -> sp.stats.axeExpertiseRating
             isMace(item) -> sp.stats.maceExpertiseRating
@@ -109,11 +110,12 @@ object Melee {
         }
     }
 
-    fun isOffhand(sp: SimParticipant, item: Item): Boolean {
+    fun isOffhand(sp: SimParticipant, item: Item?): Boolean {
+        if(item == null) return false
         return item === sp.character.gear.offHand
     }
 
-    fun baseMiss(sp: SimParticipant, item: Item, isWhiteHit: Boolean): Double {
+    fun baseMiss(sp: SimParticipant, item: Item?, isWhiteHit: Boolean): Double {
         val baseMissForLevel = valueByLevelDiff(sp, General.baseMissChance)
 
         // The heroic strike nonsense only eliminates the dual-wield penalty, and nothing further
@@ -125,13 +127,13 @@ object Melee {
         } else baseMissForLevel
     }
 
-    fun meleeMissChance(sp: SimParticipant, item: Item, isWhiteHit: Boolean): Double {
+    fun meleeMissChance(sp: SimParticipant, item: Item?, isWhiteHit: Boolean): Double {
         val baseMiss = baseMiss(sp, item, isWhiteHit)
         val meleeHitChance = sp.physicalHitPct() / 100.0
         return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
     }
 
-    fun meleeParryChance(sp: SimParticipant, item: Item): Double {
+    fun meleeParryChance(sp: SimParticipant, item: Item?): Double {
         return if(sp.sim.opts.allowParryAndBlock) {
             (valueByLevelDiff(sp, baseParryChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
         } else {
@@ -139,7 +141,7 @@ object Melee {
         }
     }
 
-    fun meleeDodgeChance(sp: SimParticipant, item: Item): Double {
+    fun meleeDodgeChance(sp: SimParticipant, item: Item?): Double {
         return (valueByLevelDiff(sp, baseDodgeChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
     }
 
@@ -147,9 +149,11 @@ object Melee {
         return valueByLevelDiff(sp, baseGlancingChance)
     }
 
-    fun meleeGlanceReduction(sp: SimParticipant, item: Item): Double {
+    // this is actually the meleeGlanceMultiplier and not the reduction.
+    // also, the max "low" for melee is 0.91 and not 0.6
+    fun meleeGlanceMultiplier(sp: SimParticipant, item: Item?): Double {
         val defDifference: Int = (sp.sim.target.character.level - sp.character.level).coerceAtLeast(0) * 5
-        val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.6).coerceAtLeast(0.0)
+        val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.91).coerceAtLeast(0.01)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
 
         return Random.nextDouble(low, high)
@@ -178,14 +182,40 @@ object Melee {
         return Random.nextDouble(min, max) + apToDamage(sp, totalAp, item, isNormalized)
     }
 
+    fun baseDamageRollPure(minDmg: Double, maxDmg: Double): Double {
+        val min = minDmg.coerceAtLeast(0.0)
+        val max = maxDmg.coerceAtLeast(1.0)
+
+        return Random.nextDouble(min, max)
+    }
+
+    fun additionalWeaponTypeCritChance(sp: SimParticipant, item: Item?): Double {
+        return when(item?.itemSubclass) {
+            Constants.ItemSubclass.DAGGER -> sp.stats.daggerAdditionalCritChancePercent
+            Constants.ItemSubclass.FIST -> sp.stats.fistWeaponAdditionalCritChancePercent
+            else -> 0.0
+        }
+    }
+
+    /*  maybe do this instead of the optional arguments I added below for crit, critdmg and dodge?
+        would be a more general version although I don't know if there would be any side-effects
+    
+    fun attackRollWithTemporaryStats(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, temporaryStats: Stats){
+        sp.stats.add(temporaryStats)
+        attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false)
+        sp.recomputeStats()
+    }
+    */
+
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item, isWhiteDmg: Boolean = false) : Pair<Double, Event.Result> {
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, abilityAdditionalCritDamageMultiplier: Double = 1.0, bonusCritChance: Double = 0.0, noDodgeAllowed: Boolean = false) : Pair<Double, Event.Result> {
+        // this has to be multiplied, not added
         val offHandMultiplier = if(isOffhand(sp, item)) {
-            Stats.offHandPenalty + if(isWhiteDmg) {
+            Stats.offHandPenalty * (if(isWhiteDmg) {
                 sp.stats.whiteDamageAddlOffHandPenaltyModifier
             } else {
                 sp.stats.yellowDamageAddlOffHandPenaltyModifier
-            }
+            } + 1)
         } else {
             1.0
         }
@@ -203,17 +233,20 @@ object Melee {
         } * sp.stats.physicalDamageMultiplier
 
         val damageRoll = (_damageRoll + flatModifier) * offHandMultiplier * allMultiplier
-
+        
         // Find all our possible damage mods from buffs and so on
-        val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
+        // old version was technically correct but only worked because the base crit multiplier is 2.0. general formula should be this
+        val additionalCritMultiplier = (if(isWhiteDmg) {
             sp.stats.whiteDamageAddlCritMultiplier
         } else {
             sp.stats.yellowDamageAddlCritMultiplier
-        } - 1)
+        })
+        val critMultiplier = (Stats.physicalCritMultiplier - 1.0) * (additionalCritMultiplier * abilityAdditionalCritDamageMultiplier) + 1
 
         // Get the attack result
         val missChance = meleeMissChance(sp, item, isWhiteDmg)
-        val dodgeChance = meleeDodgeChance(sp, item) + missChance
+        val actualCritChance = meleeCritChance(sp) + bonusCritChance + additionalWeaponTypeCritChance(sp, item) + sp.stats.yellowHitsAdditionalCritPct
+        val dodgeChance = if(noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance 
         val parryChance = meleeParryChance(sp, item) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
             meleeGlanceChance(sp) + parryChance
@@ -222,7 +255,7 @@ object Melee {
         }
         val blockChance = General.physicalBlockChance(sp) + glanceChance
         val critChance = if(isWhiteDmg) {
-            meleeCritChance(sp) + blockChance
+            actualCritChance + blockChance
         } else {
             blockChance
         }
@@ -232,7 +265,7 @@ object Melee {
             attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
             attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
             attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * (1 - meleeGlanceReduction(sp, item)), Event.Result.GLANCE)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), Event.Result.GLANCE)
             attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
             isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
             else -> Pair(damageRoll, Event.Result.HIT)
@@ -243,7 +276,7 @@ object Melee {
             if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
-                    hitRoll2 < meleeCritChance(sp) -> Pair(
+                    hitRoll2 < actualCritChance -> Pair(
                         finalResult.first * critMultiplier,
                         Event.Result.CRIT
                     )

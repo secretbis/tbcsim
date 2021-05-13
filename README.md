@@ -12,6 +12,9 @@ Implemented:
   - Shaman
     - Enhancement
     - Elemental
+  - Rogue
+    - Assassination
+    - Elemental
   - Warlock
     - Affliction
       - UA, Ruin, and DS variants

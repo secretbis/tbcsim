@@ -22,6 +22,29 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
     }
 
+    fun fireEvents(sp: SimParticipant, result: Pair<Double, Event.Result>) {
+        val event = Event(
+            eventType = Event.Type.DAMAGE,
+            damageType = Constants.DamageType.PHYSICAL,
+            abilityName = name,
+            amount = result.first,
+            result = result.second,
+        )
+        sp.logEvent(event)
+
+        // Proc anything that can proc off a white hit
+        // TODO: Should I fire procs off miss/dodge/parry/etc?
+        val triggerTypes = when (result.second) {
+            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            else -> null
+        }
+
+        if (triggerTypes != null) {
+            sp.fireProc(triggerTypes, listOf(item), this, event)
+        }
+    }
+
     override fun cast(sp: SimParticipant) {
         // Check for modifying items
         val totemOfTheAstralWinds = sp.buffs[TotemOfTheAstralWinds.name] as TotemOfTheAstralWinds?
@@ -37,32 +60,15 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
 
         // Per EJ, WF Weapon is yellow damage
         // https://web.archive.org/web/20080811084026/http://elitistjerks.com/f47/t15809-shaman_windfury/
-        val initialResult = Melee.attackRoll(sp, attackOne + attackTwo, item, isWhiteDmg = false)
+        val resultOne = Melee.attackRoll(sp, attackOne, item, isWhiteDmg = false)
+        val resultTwo = Melee.attackRoll(sp, attackTwo, item, isWhiteDmg = false)
 
         // Apply the nuttiest talent ever made
         val elementalWeaponsMod = elementalWeapons?.windfuryApMultiplier() ?: 1.0
-        val result = Pair(initialResult.first * elementalWeaponsMod, initialResult.second)
+        val finalResultOne = Pair(resultOne.first * elementalWeaponsMod, resultOne.second)
+        val finalResultTwo = Pair(resultTwo.first * elementalWeaponsMod, resultTwo.second)
 
-        // TODO: Is this considered one damage event or two, for the purposes of procs?
-        val event = Event(
-            eventType = Event.Type.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
-            amount = result.first,
-            result = result.second,
-        )
-        sp.logEvent(event)
-
-        // Proc anything that can proc off a white hit
-        // TODO: Should I fire procs off miss/dodge/parry/etc?
-        val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
-
-        if(triggerTypes != null) {
-            sp.fireProc(triggerTypes, listOf(item), this, event)
-        }
+        fireEvents(sp, finalResultOne)
+        fireEvents(sp, finalResultTwo)
     }
 }

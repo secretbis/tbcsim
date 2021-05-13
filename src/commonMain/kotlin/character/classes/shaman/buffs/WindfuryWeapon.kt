@@ -75,11 +75,11 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
             }
 
             if(wfAbility!!.available(sp)) {
-                wfAbility!!.cast(sp)
-
                 // Update ICD state
                 val state = buffState(sp)
                 state.lastWindfuryWeaponProcMs = sp.sim.elapsedTimeMs
+
+                wfAbility!!.cast(sp)
 
                 sp.logEvent(
                     Event(

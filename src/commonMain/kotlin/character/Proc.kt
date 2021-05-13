@@ -61,6 +61,7 @@ abstract class Proc {
         FROST_DAMAGE,
         SHADOW_DAMAGE_PERIODIC,
         SHADOW_DAMAGE_NON_PERIODIC,
+        PHYSICAL_DAMAGE_PERIODIC,
         ARCANE_DAMAGE,
 
         // Mechanics
@@ -78,6 +79,7 @@ abstract class Proc {
         ROGUE_CAST_ENVENOM,
         ROGUE_CAST_RUPTURE,
         ROGUE_CAST_SLICE_AND_DICE,
+        ROGUE_CAST_FINISHER,
 
         SHAMAN_CAST_SHOCK,
         SHAMAN_CAST_LIGHTNING_BOLT,

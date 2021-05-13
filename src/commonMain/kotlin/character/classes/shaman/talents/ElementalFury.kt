@@ -19,7 +19,7 @@ class ElementalFury(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spellDamageAddlCritMultiplier = 1.5)
+            return Stats(spellDamageAddlCritMultiplier = 2.0)
         }
     }
 

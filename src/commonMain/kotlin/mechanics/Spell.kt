@@ -78,9 +78,12 @@ object Spell {
             else -> 0
         }
 
+        // theres a base 8 resist per level which can not be negated by spellpen
+        val baseResistance = (sp.sim.target.character.level - sp.character.level) * 8
+
         // TODO: Model partial resists as 0/25/50/75
         //       There seems to be no real formula for that, though, so just going with avg every time for now
-        val totalResistance = (targetResistance - sp.stats.spellPen).coerceAtLeast(0) + targetResistance
+        val totalResistance = (targetResistance - sp.stats.spellPen).coerceAtLeast(0) + baseResistance
         return (0.75 * totalResistance / (5 * sp.character.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 
@@ -125,7 +128,8 @@ object Spell {
     // Performs an attack roll given an initial unmitigated damage value
     fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0) : Pair<Double, Event.Result> {
         // Find all our possible damage mods from buffs and so on
-        val critMultiplier = Stats.spellCritMultiplier + (sp.stats.spellDamageAddlCritMultiplier - 1)
+        // this formula was wrong, bonus should only apply to the critbonus part of the damage, this is the general version
+        val critMultiplier = (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) + 1
 
         // School damage multiplier
         val schoolDamageMultiplier = spellSchoolDamageMultiplier(sp, school)

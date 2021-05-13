@@ -34,13 +34,11 @@ class Berserking : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Berserking"
-        override val durationMs: Int = 12000
+        override val durationMs: Int = 10000
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val hasteRating = Rating.hastePerPct * 10.0
             return Stats(
-                physicalHasteRating = hasteRating,
-                spellHasteRating = hasteRating
+                physicalHasteMultiplier = 1.1
             )
         }
     }

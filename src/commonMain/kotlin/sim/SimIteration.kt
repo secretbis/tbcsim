@@ -134,8 +134,9 @@ class SimIteration(
         return SimParticipant(char, Rotation(listOf(), false), this).init()
     }
 
-    fun isExecutePhase(): Boolean {
+    fun isExecutePhase(thresholdPercent: Double = 20.0): Boolean {
         // The last 20% of the duration is considered to be Execute phase
-        return elapsedTimeMs >= 0.8 * opts.durationMs
+        val durLimit = (thresholdPercent / 100.0).coerceAtLeast(0.0)
+        return elapsedTimeMs >= (1 - durLimit) * opts.durationMs
     }
 }

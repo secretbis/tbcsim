@@ -78,11 +78,13 @@ object Ranged {
         val damageRoll = (_damageRoll + flatModifier) * allMultiplier
 
         // Find all our possible damage mods from buffs and so on
-        val critMultiplier = Stats.physicalCritMultiplier + (if(isWhiteDmg) {
+        // old version was technically correct but only worked because the base crit multiplier is 2.0. general formula should be this
+        val additionalCritMultiplier = (if(isWhiteDmg) {
             sp.stats.whiteDamageAddlCritMultiplier
         } else {
             sp.stats.yellowDamageAddlCritMultiplier
-        } - 1)
+        })
+        val critMultiplier = (Stats.physicalCritMultiplier - 1.0) * (additionalCritMultiplier) + 1
 
         // Get the attack result
         val missChance = rangedMissChance(sp)

@@ -22,6 +22,7 @@ object Items {
         { DrakeFangTalisman () },
         { MindQuickeningGem() },
         { TheRestrainedEssenceOfSapphiron() },
+        { NightstalkersWristguards() },
 
         // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
         // Meta gems

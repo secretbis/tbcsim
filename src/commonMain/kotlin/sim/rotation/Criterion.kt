@@ -9,6 +9,7 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
     enum class Type {
         RESOURCE_PCT_GTE,
         RESOURCE_PCT_LTE,
+        RESOURCE_GTE,
         RESOURCE_MISSING_GTE,
         ABILITY_COOLDOWN_GTE,
         ABILITY_COOLDOWN_LTE,
@@ -34,6 +35,7 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
             return when(type) {
                 Type.RESOURCE_PCT_GTE -> ResourcePctGte(data)
                 Type.RESOURCE_PCT_LTE -> ResourcePctLte(data)
+                Type.RESOURCE_GTE -> ResourceGte(data)
                 Type.RESOURCE_MISSING_GTE -> ResourceMissingGte(data)
                 Type.ABILITY_COOLDOWN_GTE -> AbilityCooldownGte(data)
                 Type.ABILITY_COOLDOWN_LTE -> AbilityCooldownLte(data)
