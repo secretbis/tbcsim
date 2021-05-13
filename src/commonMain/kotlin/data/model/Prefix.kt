@@ -7,7 +7,10 @@ enum class Prefix(val stat: List<GemStat>) {
     DELICATE(listOf(GemStat(Constants.StatType.AGILITY, 6, 8, 10))),
     BOLD(listOf(GemStat(Constants.StatType.STRENGTH, 6, 8, 10))),
     BRIGHT(listOf(GemStat(Constants.StatType.ATTACK_POWER, 12, 14, 16))),
-    TEARDROP(listOf(GemStat(Constants.StatType.SPELL_DAMAGE, 7, 9, 12))),
+    TEARDROP(listOf(
+        GemStat(Constants.StatType.SPELL_HEALING, 13, 18, 22),
+        GemStat(Constants.StatType.SPELL_DAMAGE, 5, 6, 8)
+    )),
     RUNED(listOf(GemStat(Constants.StatType.SPELL_DAMAGE, 7, 9, 12))),
     FLASHING(listOf(GemStat(Constants.StatType.PARRY_RATING, 0, 8, 10))),
     SUBTLE(listOf(GemStat(Constants.StatType.DODGE_RATING, 0, 8, 10))),
@@ -50,7 +53,8 @@ enum class Prefix(val stat: List<GemStat>) {
         GemStat(Constants.StatType.HIT_RATING, 3, 4, 5)
     )),
     LUMINOUS(listOf(
-        GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
+        GemStat(Constants.StatType.SPELL_HEALING, 7, 9, 11),
+        GemStat(Constants.StatType.SPELL_DAMAGE, 3, 3, 4),
         GemStat(Constants.StatType.INTELLECT, 3, 4, 5)
     )),
     RECKLESS(listOf(
@@ -98,7 +102,8 @@ enum class Prefix(val stat: List<GemStat>) {
         GemStat(Constants.StatType.STAMINA, 4, 6, 7)
     )),
     ROYAL(listOf(
-        GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
+        GemStat(Constants.StatType.SPELL_HEALING, 7, 9, 11),
+        GemStat(Constants.StatType.SPELL_DAMAGE, 3, 3, 4),
         GemStat(Constants.StatType.MANA_PER_5_SECONDS, 1, 2, 3)
     )),
     INFUSED(listOf(
@@ -106,7 +111,8 @@ enum class Prefix(val stat: List<GemStat>) {
         GemStat(Constants.StatType.MANA_PER_5_SECONDS, 1, 2, 2)
     )),
     PURIFIED(listOf(
-        GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
+        GemStat(Constants.StatType.SPELL_HEALING, 7, 9, 11),
+        GemStat(Constants.StatType.SPELL_DAMAGE, 3, 3, 4),
         GemStat(Constants.StatType.SPIRIT, 3, 4, 5)
     )),
     REGAL(listOf(

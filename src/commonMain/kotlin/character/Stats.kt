@@ -251,6 +251,18 @@ data class Stats(
                 physicalHitRating += value
             StatType.HIT_SPELL_RATING ->
                 spellHitRating += value
+            StatType.SPELL_PEN ->
+                spellPen += value
+            StatType.SPELL_DAMAGE ->
+                spellDamage += value
+            StatType.ARMOR_PEN ->
+                armorPen += value
+            StatType.ATTACK_POWER -> {
+                attackPower += value
+                rangedAttackPower += value
+            }
+            StatType.SPELL_HEALING ->
+                spellHealing += value
             StatType.INTELLECT ->
                 intellect += value
             StatType.SPIRIT ->
