@@ -106,7 +106,7 @@ gear:
   trinket1:
     name: Quagmirran's Eye
   trinket2:
-    name: "Darkmoon Card: Crusade"
+    name: Icon of the Silver Crescent
 
 rotation:
   autoAttack: false

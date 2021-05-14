@@ -110,7 +110,7 @@ gear:
   trinket1:
     name: Quagmirran's Eye
   trinket2:
-    name: "Darkmoon Card: Crusade"
+    name: Icon of the Silver Crescent
 
 # WIP: Specify additional items to compare
 #      Each will be tested individually, in all combinations, and the sim will rank each setup
