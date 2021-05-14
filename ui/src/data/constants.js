@@ -399,38 +399,108 @@ export function isGun(item) {
 export const classes = {
   druid: {
     name: 'Druid',
-    icon: 'classes/druid.png'
+    icon: 'classes/druid.png',
+    races: [
+      'Night Elf',
+      'Tauren'
+    ]
   },
   hunter: {
     name: 'Hunter',
-    icon: 'classes/hunter.png'
+    icon: 'classes/hunter.png',
+    races: [
+      'Blood Elf',
+      'Draenei',
+      'Dwarf',
+      'Night Elf',
+      'Orc',
+      'Tauren',
+      'Troll'
+    ]
   },
   mage: {
     name: 'Mage',
-    icon: 'classes/mage.png'
+    icon: 'classes/mage.png',
+    races: [
+      'Blood Elf',
+      'Draenei',
+      'Gnome',
+      'Human',
+      'Troll',
+      'Undead'
+    ]
   },
   paladin: {
     name: 'Paladin',
-    icon: 'classes/paladin.png'
+    icon: 'classes/paladin.png',
+    races: [
+      'Blood Elf',
+      'Draenei',
+      'Dwarf',
+      'Human'
+    ]
   },
   priest: {
     name: 'Priest',
-    icon: 'classes/priest.png'
+    icon: 'classes/priest.png',
+    races: [
+      'Blood Elf',
+      'Draenei',
+      'Dwarf',
+      'Human',
+      'Night Elf',
+      'Troll',
+      'Undead'
+    ]
   },
   rogue: {
     name: 'Rogue',
-    icon: 'classes/rogue.png'
+    icon: 'classes/rogue.png',
+    races: [
+      'Blood Elf',
+      'Dwarf',
+      'Gnome',
+      'Humans',
+      'Night Elf',
+      'Orc',
+      'Troll',
+      'Undead'
+    ]
   },
   shaman: {
     name: 'Shaman',
-    icon: 'classes/shaman.png'
+    icon: 'classes/shaman.png',
+    races: [
+      'Draenei',
+      'Orc',
+      'Tauren',
+      'Troll'
+    ]
   },
   warlock: {
     name: 'Warlock',
-    icon: 'classes/warlock.png'
+    icon: 'classes/warlock.png',
+    races: [
+      'Blood Elf',
+      'Gnome',
+      'Human',
+      'Tauren',
+      'Troll'
+    ]
   },
   warrior: {
     name: 'Warrior',
-    icon: 'classes/warrior.png'
+    icon: 'classes/warrior.png',
+    races: [
+      'Draenei',
+      'Dwarf',
+      'Gnome',
+      'Human',
+      'Night Elf',
+      'Orc',
+      'Tauren',
+      'Troll',
+      'Undead'
+    ]
   },
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Col, Dropdown, Row } from 'rsuite';
 import _ from 'lodash';
 
+import { classes } from '../data/constants';
+
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
@@ -46,6 +48,29 @@ const presets = {
     warriorArmsPreraid,
     warriorFuryPreraid,
   ]
+}
+
+function RaceSelect({ character, dispatch }) {
+  if(!character || !character.class) return null;
+
+  const classData = classes[character.class.toLowerCase()]
+  const racesForClass = classData && classData.races;
+  if(!racesForClass) return null;
+
+  function onSelect(race) {
+    dispatch({ type: 'character.race', value: race })
+  }
+
+  return (
+    <>
+      <Dropdown title="Race">
+        {racesForClass.map(race => {
+          return <Dropdown.Item key={race} eventKey={race} onSelect={onSelect}>{race}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{character.race}</span>
+    </>
+  );
 }
 
 export default ({ value, dispatch }) => {
@@ -109,7 +134,7 @@ export default ({ value, dispatch }) => {
 
   return (
     <Row style={{padding: '10px 0px', fontWeight: 800}}>
-      <Col>
+      <Col style={{ display: 'inline-block' }}>
         <Dropdown title="Presets"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
@@ -133,9 +158,12 @@ export default ({ value, dispatch }) => {
         </Dropdown>
 
         {value && value.description ?
-          <span>Selected Preset: {value.description}</span> :
+          <span>{value.description}</span> :
           <span>Please select a preset</span>
         }
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <RaceSelect character={value} dispatch={dispatch} />
       </Col>
     </Row>
   )

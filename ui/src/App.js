@@ -10,14 +10,14 @@ import { Container, Content, Header, Grid, Footer, Row, Col, Button, Panel, Navb
 
 import { initialState, stateReducer } from './state';
 
-import RaidBuffs from './buffs/raid_buffs';
 import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
+import RaidBuffs from './buffs/raid_buffs';
 import Rankings from './rankings/rankings';
-import SimResults from './results/results';
 import Rotation from './rotation/rotation';
 import SimOptions from './sim/options';
+import SimResults from './results/results';
 import Talents from './talents/talents';
 
 import * as tbcsim from 'tbcsim';
