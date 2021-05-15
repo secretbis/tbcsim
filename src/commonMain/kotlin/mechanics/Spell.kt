@@ -102,14 +102,14 @@ object Spell {
         return (sp.spellCritPct() / 100.0).coerceAtLeast(0.0)
     }
 
-    fun baseDamageRoll(sp: SimParticipant, minDmg: Double, maxDmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
+    fun baseDamageRoll(sp: SimParticipant, minDmg: Double, maxDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         val min = minDmg.coerceAtLeast(0.0)
         val max = maxDmg.coerceAtLeast(1.0)
         val dmg = Random.nextDouble(min, max)
-        return baseDamageRollSingle(sp, dmg, spellDamageCoeff, school, bonusSpellDamage, bonusSpellDamageMultiplier)
+        return baseDamageRollSingle(sp, dmg, school, spellDamageCoeff, bonusSpellDamage, bonusSpellDamageMultiplier)
     }
 
-    fun baseDamageRollSingle(sp: SimParticipant, dmg: Double, spellDamageCoeff: Double = 1.0, school: Constants.DamageType, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
+    fun baseDamageRollSingle(sp: SimParticipant, dmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
         val schoolDamage = when(school) {
             Constants.DamageType.HOLY -> sp.stats.holyDamage

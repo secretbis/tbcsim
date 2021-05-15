@@ -71,6 +71,8 @@ abstract class Proc {
         // Specifics
         HUNTER_CAST_KILL_COMMAND,
 
+        MAGE_ANY_SCORCH,
+
         PRIEST_TICK_SHADOW_WORD_PAIN,
 
         ROGUE_CAST_CHEAP_SHOT,

@@ -2,6 +2,10 @@ package character
 
 import character.classes.hunter.Hunter
 import character.classes.hunter.specs.*
+import character.classes.mage.Mage
+import character.classes.mage.specs.Arcane
+import character.classes.mage.specs.Fire
+import character.classes.mage.specs.Frost
 import character.classes.shaman.Shaman
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
@@ -15,6 +19,7 @@ import character.classes.rogue.specs.Combat
 import character.classes.rogue.Rogue
 import character.classes.rogue.specs.Assassination
 import data.model.Item
+import kotlin.reflect.KClass
 
 abstract class Class(
     var talents: Map<String, Talent>,
@@ -28,6 +33,7 @@ abstract class Class(
             val spec = specFromString(className, specName) ?: throw Exception("Invalid class + spec: $className - $specName")
             return when(className) {
                 "hunter" -> Hunter(talents, spec)
+                "mage" -> Mage(talents, spec)
                 "shaman" -> Shaman(talents, spec)
                 "warlock" -> Warlock(talents, spec)
                 "warrior" -> Warrior(talents, spec)
@@ -45,6 +51,12 @@ abstract class Class(
                     "beast mastery" -> BeastMastery()
                     "marksmanship" -> Marksmanship()
                     "survival" -> Survival()
+                    else -> null
+                }
+                "mage" -> when(specName) {
+                    "arcane" -> Arcane()
+                    "fire" -> Fire()
+                    "frost" -> Frost()
                     else -> null
                 }
                 "shaman" -> when(specName) {
@@ -114,4 +126,16 @@ abstract class Class(
     // Shaman 2.2
     // Warlock 1.701
     abstract val baseSpellCritChance: Double
+
+    open fun <T : Talent> talentInstance(name: String): T? {
+        return talents[name] as? T?
+    }
+
+    open fun talentRanks(name: String): Int {
+        return talents[name]?.currentRank ?: 0
+    }
+
+    open fun hasTalentRanks(name: String, minRanks: Int = 1): Boolean {
+        return talentRanks(name) >= minRanks
+    }
 }
