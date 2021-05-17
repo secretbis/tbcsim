@@ -9,6 +9,6 @@ class Pyromaniac(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    fun fireSpellAddlCritPct(): Double = 1.0 * currentRank
-    fun fireSpellManaCostReduction(): Double = 1.0 * currentRank
+    fun fireSpellAddlCritPct(): Double = 0.01 * currentRank
+    fun fireSpellManaCostReduction(): Double = 0.01 * currentRank
 }

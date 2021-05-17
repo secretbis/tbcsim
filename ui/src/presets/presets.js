@@ -6,6 +6,9 @@ import { classes } from '../data/constants';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
+import mageArcanePreraid from './samples/mage_arcane_preraid.yml'
+import mageFirePreraid from './samples/mage_fire_preraid.yml'
+import mageFrostPreraid from './samples/mage_frost_preraid.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
 import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
@@ -26,6 +29,11 @@ const presets = {
   hunter: [
     hunterBmPreraid,
     hunterSurvPreraid
+  ],
+  mage: [
+    mageArcanePreraid,
+    mageFirePreraid,
+    mageFrostPreraid
   ],
   rogue: [
     rogueAssassinationPreraid,
@@ -142,6 +150,9 @@ export default ({ value, dispatch }) => {
         >
           <Dropdown.Menu title="Hunter">
             {presetsFor("hunter")}
+          </Dropdown.Menu>
+          <Dropdown.Menu title="Mage">
+            {presetsFor("mage")}
           </Dropdown.Menu>
           <Dropdown.Menu title="Rogue">
             {presetsFor("rogue")}

@@ -78,7 +78,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
             val t5BonusMultiplier = if(t5Bonus) { CorruptorRaiment.fourSetDotDamageIncreaseMultiplier() } else 1.0
 
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier * t5BonusMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier * t5BonusMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

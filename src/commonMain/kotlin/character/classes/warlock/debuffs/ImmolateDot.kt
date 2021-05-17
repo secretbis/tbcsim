@@ -45,7 +45,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
 
             // Per lock discord
             val spellPowerCoeff = 0.65 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school) * t5BonusMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * t5BonusMultiplier
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,
@@ -56,7 +56,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
             )
             owner.logEvent(event)
 
-            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE_PERIODIC), listOf(), this, event)
         }
 }
     override fun tick(sp: SimParticipant) {

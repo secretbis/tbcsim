@@ -9,5 +9,5 @@ class Incineration(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    fun fireBlastScorchAddlCritPct(): Double = 2.0 * currentRank
+    fun fireBlastScorchAddlCritPct(): Double = 0.02 * currentRank
 }

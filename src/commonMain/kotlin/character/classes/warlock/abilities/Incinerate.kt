@@ -51,7 +51,7 @@ class Incinerate : Ability() {
         val hasImmolate = sp.sim.target.debuffs[Immolate.name] !== null
         val damagePair = if(hasImmolate) { baseDamageWithImmolate } else baseDamage
 
-        val damageRoll = Spell.baseDamageRoll(sp, damagePair.first, damagePair.second, spellPowerCoeff, school, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier) * t6Multiplier
+        val damageRoll = Spell.baseDamageRoll(sp, damagePair.first, damagePair.second, school, spellPowerCoeff, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier) * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
@@ -65,11 +65,11 @@ class Incinerate : Ability() {
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

@@ -114,6 +114,9 @@ const RankingBarChart = ({ data }) => (
 const specDisplayNames = {
   hunter_bm: 'Beast Mastery Hunter',
   hunter_surv: 'Survival Hunter',
+  mage_arcane: 'Arcane Mage',
+  mage_fire: 'Fire Mage',
+  mage_frost: 'Frost Mage',
   rogue_assassination: 'Assassination Rogue',
   rogue_combat: 'Combat Rogue',
   shaman_ele: 'Elemental Shaman',
@@ -135,6 +138,9 @@ const specDisplayNames = {
 const specColors = {
   hunter_bm: '#AAD372',
   hunter_surv: '#AAD372',
+  mage_arcane: '#3FC7EB',
+  mage_fire: '#3FC7EB',
+  mage_frost: '#3FC7EB',
   rogue_assassination: '#FFF468',
   rogue_combat: '#FFF468',
   shaman_ele: '#0070DD',
@@ -149,7 +155,8 @@ const specColors = {
 
 const specPetColors = {
   hunter_bm: '#64BDC8',
-  hunter_surv: '#64BDC8'
+  hunter_surv: '#64BDC8',
+  mage_frost: '#64BDC8',
 }
 
 function SpecRankingPanel({ name, category, collapsible=true }) {

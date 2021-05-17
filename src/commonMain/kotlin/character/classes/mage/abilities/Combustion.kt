@@ -1,5 +1,6 @@
 package character.classes.mage.abilities
 
+import character.classes.mage.buffs.Combustion as CombustionBuff
 import character.Ability
 import sim.SimParticipant
 
@@ -14,6 +15,6 @@ class Combustion : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 
     override fun cast(sp: SimParticipant) {
-        TODO("Not yet implemented")
+        sp.addBuff(CombustionBuff())
     }
 }

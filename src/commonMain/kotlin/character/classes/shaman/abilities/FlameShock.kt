@@ -54,7 +54,7 @@ class FlameShock : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, spellPowerCoeff, school) * concussionMod
+        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff) * concussionMod
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(
@@ -72,11 +72,11 @@ class FlameShock : Ability() {
         // Proc anything that can proc off Fire damage
         val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

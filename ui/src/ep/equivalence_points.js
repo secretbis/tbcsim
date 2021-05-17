@@ -95,6 +95,11 @@ export default function() {
             <SpecEpPanel name='Beast Mastery' specKey='hunter_bm' category='preraid' />
             <SpecEpPanel name='Survival' specKey='hunter_surv' category='preraid' />
           </WrapperEpPanel>
+          <WrapperEpPanel name='Mage'>
+            <SpecEpPanel name='Arcane' specKey='mage_arcane' category='preraid' />
+            <SpecEpPanel name='Fire' specKey='mage_fire' category='preraid' />
+            <SpecEpPanel name='Frost' specKey='mage_frost' category='preraid' />
+          </WrapperEpPanel>
           <WrapperEpPanel name='Rogue'>
             <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='preraid' />
             <SpecEpPanel name='Combat' specKey='rogue_combat' category='preraid' />

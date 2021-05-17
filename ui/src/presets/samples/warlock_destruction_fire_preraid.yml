@@ -1,7 +1,7 @@
 class: Warlock
 spec: Destruction
 description: Destruction Fire Warlock (pre-raid)
-race: Human
+race: Gnome
 level: 70
 epCategory: preraid
 epSpec: warlock_destruction_fire
@@ -146,6 +146,7 @@ rotation:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
+    - name: Use Active Trinket
     - name: Incinerate
       criteria:
         - type: DEBUFF_DURATION_GTE
@@ -157,12 +158,7 @@ rotation:
           debuff: Immolate (DoT)
           seconds: 1.999
 
-# Raid and group setup
-# These are buffs/debuffs you are not personally responsible for applying
-# These are assumed to be up the entire fight
 raidBuffs:
-  # Consider your raid composition when selecting which buffs to apply
-  # e.g. if you don't have two paladins, you can't have two blessings
   - Blessing of Kings
   - Drums of Battle
   - Improved Blessing of Wisdom
@@ -176,9 +172,6 @@ raidBuffs:
   - Vampiric Touch (1000 DPS)
 
 raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements

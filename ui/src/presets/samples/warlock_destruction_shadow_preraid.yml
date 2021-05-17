@@ -1,7 +1,7 @@
 class: Warlock
 spec: Destruction
 description: Destruction Shadow Warlock (pre-raid)
-race: Human
+race: Gnome
 level: 70
 epCategory: preraid
 epSpec: warlock_destruction_shadow
@@ -36,7 +36,6 @@ talents:
     rank: 1
 
 # Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
 gear:
   mainHand:
     name: Eternium Runed Blade
@@ -152,6 +151,7 @@ rotation:
 #        - type: DEBUFF_DURATION_LTE
 #          debuff: Immolate (DoT)
 #          seconds: 0
+    - name: Use Active Trinket
     - name: Shadow Bolt
 
 # Raid and group setup

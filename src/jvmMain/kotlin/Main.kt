@@ -1,6 +1,9 @@
 import character.SpecEpDelta
 import character.classes.hunter.specs.BeastMastery
 import character.classes.hunter.specs.Survival
+import character.classes.mage.specs.Arcane
+import character.classes.mage.specs.Fire
+import character.classes.mage.specs.Frost
 import character.classes.rogue.specs.Assassination
 import character.classes.rogue.specs.Combat
 import character.classes.shaman.specs.Elemental
@@ -59,6 +62,9 @@ class TBCSim : CliktCommand() {
     val specs = mapOf(
         "hunter_bm" to BeastMastery(),
         "hunter_surv" to Survival(),
+        "mage_arcane" to Arcane(),
+        "mage_fire" to Fire(),
+        "mage_frost" to Frost(),
         "rogue_assassination" to Assassination(),
         "rogue_combat" to Combat(),
         "shaman_ele" to Elemental(),
@@ -79,6 +85,9 @@ class TBCSim : CliktCommand() {
         "preraid" to mapOf(
             "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
             "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
+            "mage_arcane" to File(presetPath + "mage_arcane_preraid.yml"),
+            "mage_fire" to File(presetPath + "mage_fire_preraid.yml"),
+            "mage_frost" to File(presetPath + "mage_frost_preraid.yml"),
             "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),

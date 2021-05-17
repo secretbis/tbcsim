@@ -21,7 +21,7 @@ class RomulosPoisonVial : Buff() {
 
         val school = Constants.DamageType.NATURE
         override fun cast(sp: SimParticipant) {
-            val damageRoll = Spell.baseDamageRoll(sp, 222.0, 332.0, 0.0, school)
+            val damageRoll = Spell.baseDamageRoll(sp, 222.0, 332.0, school, 0.0)
             //TODO: check if the damage proc scales with increased nature debuffs e.g. stormstrike and check if it consumes SS
             val result = Spell.attackRoll(sp, damageRoll, school)
             val damageEvent = Event(

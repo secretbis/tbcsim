@@ -24,6 +24,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
             ArcaneBlast.name -> ArcaneBlast()
+            ArcaneIntellect.name -> ArcaneIntellect()
             ArcanePower.name -> ArcanePower()
             ColdSnap.name -> ColdSnap()
             Combustion.name -> Combustion()
@@ -31,6 +32,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             FireBlast.name -> FireBlast()
             Frostbolt.name -> Frostbolt()
             IcyVeins.name -> IcyVeins()
+            MoltenArmor.name -> MoltenArmor()
             PresenceOfMind.name -> PresenceOfMind()
             Scorch.name -> Scorch()
             SummonWaterElemental.name -> SummonWaterElemental()

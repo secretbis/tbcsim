@@ -25,7 +25,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.FIRE_DAMAGE
+                Trigger.FIRE_DAMAGE_NON_PERIODIC
             )
             override val type: Type = Type.STATIC
 
@@ -53,6 +53,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
                         eventType = Event.Type.DAMAGE,
                         damageType = Constants.DamageType.FIRE,
                         abilityName = Companion.name,
+                        result = Event.Result.HIT,
                         amount = igniteTickDamage
                     ))
 
@@ -63,8 +64,8 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 if(event?.result == Event.Result.CRIT) {
-                    val debuff = igniteDebuff(sp)
-                    val debuffState = debuff.state(sp) as IgniteState
+                    val debuff = sp.sim.target.debuffs[Companion.name] ?: igniteDebuff(sp)
+                    val debuffState = debuff.state(sp.sim.target) as IgniteState
                     debuffState.damageEvents.add(Pair(event.amount, sp.sim.elapsedTimeMs))
                     sp.sim.target.addDebuff(debuff)
                 }

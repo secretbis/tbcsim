@@ -8,4 +8,6 @@ class FrostChanneling(currentRank: Int) : Talent(currentRank) {
     }
     override val name: String = Companion.name
     override val maxRank: Int = 3
+
+    fun frostSpellManaCostReductionMultiplier(): Double = 1.0 - (currentRank * 0.05)
 }

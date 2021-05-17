@@ -9,5 +9,5 @@ class ArcanePotency(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    fun addlClearcastingCritPct(): Double = 10.0 * currentRank
+    fun addlClearcastingCritPct(): Double = 0.10 * currentRank
 }

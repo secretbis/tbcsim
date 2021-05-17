@@ -19,7 +19,7 @@ class MasterOfElements(currentRank: Int) : Talent(currentRank) {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.FIRE_DAMAGE,
+                Trigger.FIRE_DAMAGE_NON_PERIODIC,
                 Trigger.FROST_DAMAGE
             )
             override val type: Type = Type.STATIC
@@ -28,7 +28,7 @@ class MasterOfElements(currentRank: Int) : Talent(currentRank) {
                 if(event?.result == Event.Result.CRIT) {
                     val resourceCost = ability?.resourceCost(sp)
                     if(resourceCost != null) {
-                        sp.addResource((event.amount * 0.1 * currentRank).toInt(), Resource.Type.MANA, Companion.name)
+                        sp.addResource((resourceCost * 0.1 * currentRank).toInt(), Resource.Type.MANA, Companion.name)
                     }
                 }
             }

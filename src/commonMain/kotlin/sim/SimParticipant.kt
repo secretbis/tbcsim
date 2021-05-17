@@ -54,6 +54,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     var castingRule: Rule? = null
     var mainHandAutoReplacement: Ability? = null
 
+    // Participant state
+    private var isActive = true
+
     // Events
     var events: MutableList<Event> = mutableListOf()
 
@@ -101,6 +104,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         // Initialize our subject resources(s)
         resources = character.klass.resourceTypes.map { it to Resource(this, it) }.toMap()
 
+        // Check to see if our pet starts active or not
+        if(character.pet?.startsActive == false) {
+            pet?.deactivate()
+        }
+
         return this
     }
 
@@ -129,7 +137,42 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             }
     }
 
+    fun isActive(): Boolean {
+        return isActive
+    }
+
+    fun activate() {
+        isActive = true
+    }
+
+    fun deactivate(resetAllState: Boolean = false) {
+        isActive = false
+        castingRule = null
+
+        if(resetAllState) {
+            buffs.clear()
+            debuffs.clear()
+
+            buffExpirations.clear()
+            buffExpirationTick.clear()
+            debuffExpirations.clear()
+            debuffExpirationTick.clear()
+
+            buffState.clear()
+            debuffState.clear()
+            abilityState.clear()
+            sharedAbilityState.clear()
+            procState.clear()
+            rotationState.clear()
+
+            recomputeStats()
+        }
+    }
+
     fun tick() {
+        // If this participant is inactive, do nothing
+        if(!isActive) return
+
         // Find next rotation ability, if we are not currently casting something
         if(!isCasting() && castingRule == null) {
             val rotationRule = rotation.next(this, onGcd())

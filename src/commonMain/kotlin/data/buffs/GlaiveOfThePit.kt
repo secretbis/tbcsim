@@ -19,7 +19,7 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
             val school = Constants.DamageType.SHADOW
             override fun cast(sp: SimParticipant) {
-                val damageRoll = Spell.baseDamageRoll(sp, 285.00, 315.0, 0.0, school)
+                val damageRoll = Spell.baseDamageRoll(sp, 285.00, 315.0, school, 0.0)
                 //Doesn't appear to have a spell damage coeff (some life steal effects do)
                 //TODO: check if the damage proc scales with increased shadow damage debuffs e.g. shadow weaving
                 val result = Spell.attackRoll(sp, damageRoll, school)
@@ -56,4 +56,3 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override fun procs(sp: SimParticipant): List<Proc> = listOf(shadowProc)
 }
-

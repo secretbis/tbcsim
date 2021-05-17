@@ -33,7 +33,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         // TODO: Weapon speed scaling mechanics unconfirmed
         //       Current formula matches testing on pservers
         val speedBasedDamage = baseDamage * item.speed / 1000.0 * mod
-        val damageRoll = Spell.baseDamageRollSingle(sp, speedBasedDamage, spCoeff, school)
+        val damageRoll = Spell.baseDamageRollSingle(sp, speedBasedDamage, school, spCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(
@@ -47,10 +47,10 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
 
         // Proc anything that can proc off Fire damage
         val triggerTypes = when (result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE)
+            Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

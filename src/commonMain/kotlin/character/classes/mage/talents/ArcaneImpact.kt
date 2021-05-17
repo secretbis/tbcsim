@@ -9,5 +9,5 @@ class ArcaneImpact(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    fun arcaneBlastExplosionAddlCritChance(): Double = 2.0 * currentRank
+    fun arcaneBlastExplosionAddlCritChance(): Double = 0.02 * currentRank
 }

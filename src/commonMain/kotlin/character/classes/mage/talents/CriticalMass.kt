@@ -9,5 +9,5 @@ class CriticalMass(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    fun fireSpellAddlCritPct(): Double = 2.0 * currentRank
+    fun fireSpellAddlCritPct(): Double = 0.02 * currentRank
 }

@@ -9,6 +9,7 @@ import sim.SimParticipant
 class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Arcane Concentration"
+        const val buffName = "Clearcasting"
     }
     override val name: String = Companion.name
     override val maxRank: Int = 5
@@ -19,8 +20,9 @@ class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         val ccBuff = object : Buff() {
-            override val name: String = "Clearcasting"
+            override val name: String = buffName
             override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
             val consumeProc = ccConsumeProc(this)
 
@@ -34,7 +36,7 @@ class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(ability?.resourceCost(sp)?.toInt() ?: 0, Resource.Type.MANA, "Clearcasting")
+                sp.addResource(ability?.resourceCost(sp)?.toInt() ?: 0, Resource.Type.MANA, buffName)
                 sp.consumeBuff(buff)
             }
         }

@@ -9,5 +9,5 @@ class IceShards(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    fun frostCritDamageBonusPct(): Double = 20.0 * currentRank
+    fun frostCritDamageBonusMult(): Double = 1.0 + (0.2 * currentRank)
 }

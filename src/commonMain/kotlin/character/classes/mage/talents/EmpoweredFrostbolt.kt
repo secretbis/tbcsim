@@ -14,5 +14,5 @@ class EmpoweredFrostbolt(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     fun frostboltBonusSpellDamageMultiplier(): Double = 1.0 + (currentRank * 0.02)
-    fun frostboltAddlCritPct(): Double = currentRank * 1.0
+    fun frostboltAddlCritPct(): Double = currentRank * 0.01
 }

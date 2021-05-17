@@ -22,7 +22,7 @@ class WintersChill(currentRank: Int) : Talent(currentRank) {
                 Trigger.FROST_DAMAGE
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sp: SimParticipant): Double = currentRank * 0.2
+            override fun percentChance(sp: SimParticipant): Double = currentRank * 20.0
 
             fun critBuff(sp: SimParticipant): Debuff = object : Debuff(sp) {
                 override val name: String = Companion.name

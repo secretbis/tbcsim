@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.classes.mage.buffs.ArcanePower
 import character.classes.mage.buffs.PresenceOfMind
+import character.classes.mage.talents.ArcaneConcentration
 import character.classes.mage.talents.ArcaneFocus
 import character.classes.mage.talents.ArcaneImpact
 import data.Constants
@@ -41,13 +42,12 @@ class ArcaneBlast : Ability() {
         val apMult = apBuff?.manaCostMultiplier() ?: 1.0
 
         // From testing, these stack based on the base mana cost
-        return baseResourceCost * abMult + baseResourceCost * apMult
+        return baseResourceCost + (baseResourceCost * (abMult - 1.0)) + (baseResourceCost * (apMult - 1.0))
     }
 
     class ArcaneBlastBuff : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = 8000
-        override val hidden: Boolean = true
         override val maxStacks: Int = 3
 
         fun manaCostMultiplier(sp: SimParticipant): Double {
@@ -88,7 +88,9 @@ class ArcaneBlast : Ability() {
         )
         sp.logEvent(event)
 
-        // Proc anything that can proc off non-periodic Shadow damage
+        sp.addBuff(ArcaneBlastBuff())
+
+        // Fire procs
         val triggerTypes = when(result.second) {
             Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.ARCANE_DAMAGE)
             Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.ARCANE_DAMAGE)

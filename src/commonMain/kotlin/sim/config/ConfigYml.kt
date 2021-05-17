@@ -91,7 +91,8 @@ data class RotationRuleCriterion(
     val bool: Boolean? = null,
     val swingType: String? = null,
     val maxClipSeconds: Double? = null,
-    val resourceType: String? = null
+    val resourceType: String? = null,
+    val stacks: Int? = null
 )
 
 @JsExport
@@ -110,6 +111,7 @@ data class SimOptionsYml(
 @Serializable
 data class PetYml(
     val type: String,
+    val startsActive: Boolean = true,
     val rotation: RotationYml? = null
 )
 

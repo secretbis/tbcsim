@@ -1,6 +1,8 @@
 package character.classes.mage.abilities
 
 import character.Ability
+import character.Buff
+import character.classes.mage.talents.FrostChanneling
 import sim.SimParticipant
 
 class SummonWaterElemental : Ability() {
@@ -15,11 +17,25 @@ class SummonWaterElemental : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 
     override fun resourceCost(sp: SimParticipant): Double {
-        return sp.character.klass.baseMana * 0.16
+        val frostChanneling: FrostChanneling? = sp.character.klass.talentInstance(FrostChanneling.name)
+        val fcMult = frostChanneling?.frostSpellManaCostReductionMultiplier() ?: 1.0
+
+        return sp.character.klass.baseMana * 0.16 * fcMult
     }
 
-    val baseDamage = Pair(668, 772)
+    val buff = object : Buff() {
+        override val name: String = Companion.name
+        override val durationMs: Int = 45000
+        override val hidden: Boolean = true
+
+        override fun reset(sp: SimParticipant) {
+            sp.pet?.deactivate(true)
+            super.reset(sp)
+        }
+    }
+
     override fun cast(sp: SimParticipant) {
-        TODO("Not yet implemented")
+        sp.pet?.activate()
+        sp.addBuff(buff)
     }
 }

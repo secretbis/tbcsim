@@ -20,6 +20,6 @@ class IsExecutePhase(data: RotationRuleCriterion) : Criterion(Type.IS_EXECUTE_PH
         if (bool == false) {
             return !sp.sim.isExecutePhase()
         }
-        return  bool != null && sp.sim.isExecutePhase()
+        return bool != null && sp.sim.isExecutePhase()
     }
 }

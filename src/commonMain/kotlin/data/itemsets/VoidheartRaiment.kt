@@ -57,7 +57,7 @@ class VoidheartRaiment : ItemSet() {
 
         val fireProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.FIRE_DAMAGE
+                Trigger.FIRE_DAMAGE_NON_PERIODIC
             )
             // TODO: Proc rate unknown, assuming 1PPM for now
             override val type: Type = Type.PPM

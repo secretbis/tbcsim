@@ -7,7 +7,7 @@ import sim.SimParticipant
 
 class MindMastery(currentRank: Int) : Talent(currentRank) {
     companion object {
-        const val name = "MindMastery"
+        const val name = "Mind Mastery"
     }
     override val name: String = Companion.name
     override val maxRank: Int = 5

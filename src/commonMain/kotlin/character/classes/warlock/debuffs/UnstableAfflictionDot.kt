@@ -26,7 +26,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
 
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
 
             val event = Event(
                 eventType = Event.Type.DAMAGE,

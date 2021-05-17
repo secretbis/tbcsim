@@ -21,7 +21,7 @@ class TheLightningCapacitor : Buff() {
 
         val school = Constants.DamageType.NATURE
         override fun cast(sp: SimParticipant) {
-            val damageRoll = Spell.baseDamageRoll(sp, 694.0, 806.0, 0.0, school)
+            val damageRoll = Spell.baseDamageRoll(sp, 694.0, 806.0, school, 0.0)
             //TODO: check if the damage proc scales with increased nature debuffs e.g. stormstrike and check if it consumes SS
             sp.consumeBuff(stackBuff)
             val result = Spell.attackRoll(sp, damageRoll, school)

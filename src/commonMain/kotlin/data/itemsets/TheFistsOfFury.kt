@@ -28,7 +28,7 @@ class TheFistsOfFury : ItemSet() {
 
             val school = Constants.DamageType.FIRE
             override fun cast(sp: SimParticipant) {
-                val damageRoll = Spell.baseDamageRoll(sp, 100.0, 150.0, 0.0, school)
+                val damageRoll = Spell.baseDamageRoll(sp, 100.0, 150.0, school, 0.0)
                 val result = Spell.attackRoll(sp, damageRoll, school)
 
                 val damageEvent = Event(

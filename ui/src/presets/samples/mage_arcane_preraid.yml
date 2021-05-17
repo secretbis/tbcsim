@@ -1,0 +1,189 @@
+class: Mage
+spec: Arcane
+description: Arcane Mage (pre-raid)
+race: Gnome
+level: 70
+epCategory: preraid
+epSpec: mage_arcane
+
+talents:
+  # Frost talents
+  - name: Elemental Precision
+    rank: 3
+  - name: Improved Frostbolt
+    rank: 5
+  - name: Ice Shards
+    rank: 5
+  - name: Piercing Ice
+    rank: 3
+  - name: Icy Veins
+    rank: 1
+  - name: Frost Channeling
+    rank: 3
+  - name: Cold Snap
+    rank: 1
+
+  # Arcane talents
+  - name: Arcane Subtlety
+    rank: 2
+  - name: Arcane Focus
+    rank: 5
+  - name: Arcane Concentration
+    rank: 5
+  - name: Arcane Impact
+    rank: 3
+  - name: Arcane Meditation
+    rank: 3
+  - name: Presence of Mind
+    rank: 1
+  - name: Arcane Mind
+    rank: 5
+  - name: Arcane Potency
+    rank: 3
+  - name: Arcane Instability
+    rank: 3
+  - name: Arcane Power
+    rank: 1
+  - name: Spell Power
+    rank: 2
+  - name: Mind Mastery
+    rank: 5
+
+# Pre-raid BIS-ish
+gear:
+  mainHand:
+    name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  offHand:
+    name: Lamp of Peaceful Radiance
+  rangedTotemLibram:
+    name: Nether Core's Control Rod
+  head:
+    name: Spellstrike Hood
+    enchant: Glyph of Power
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  neck:
+    name: Hydra-fang Necklace
+  shoulders:
+    name: Mantle of Three Terrors
+    enchant: Greater Inscription of the Orb
+  back:
+    name: Sethekk Oracle Cloak
+  chest:
+    name: Spellfire Robe
+    enchant: Exceptional Stats
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Crimson Bracers of Gloom
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Spellfire Gloves
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  waist:
+    name: Spellfire Belt
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  feet:
+    name: Extravagant Boots of Malice
+    enchant: Boar's Speed
+  ring1:
+    name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ashyen's Gift
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Blinding Light
+    - name: Crunchy Serpent
+    - name: Arcane Intellect
+    - name: Molten Armor
+
+  combat:
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Cold Snap
+      criteria:
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Icy Veins
+          seconds: 1
+    - name: Icy Veins
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Arcane Power
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Presence of Mind
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+    # Cast AB if we're using cooldowns or have low stacks
+    - name: Arcane Blast
+      criteria:
+        - type: BUFF_STACKS_LTE
+          buff: Arcane Blast
+          stacks: 2
+    - name: Arcane Blast
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Icy Veins
+          seconds: 1
+    - name: Arcane Blast
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Arcane Power
+          seconds: 1
+    - name: Frostbolt
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
