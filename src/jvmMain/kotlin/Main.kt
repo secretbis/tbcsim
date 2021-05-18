@@ -111,7 +111,7 @@ class TBCSim : CliktCommand() {
         // Most presets are hit capped, so apply a universal -2% hit buff so the hit has something to sim against
         val hitReduction = Stats(
             physicalHitRating = -2.0 * Rating.physicalHitPerPct,
-            spellHitRating = -2.0 * Rating.spellHitPerPct,
+            spellHitRating = -5.0 * Rating.spellHitPerPct,
         )
 
         val epStatMod = epDelta?.second ?: Stats()
@@ -264,7 +264,7 @@ class TBCSim : CliktCommand() {
                 epCategories,
                 epOptions
             )
-            File(epOutputPath).writeText(Json.encodeToString(fullOutput))
+            File(epOutputPath).writeText(Json { prettyPrint = true }.encodeToString(fullOutput))
         } else if (calcRankings) {
             val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
             val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
@@ -286,7 +286,7 @@ class TBCSim : CliktCommand() {
                 }
 
             // Output rankings
-            File(rankingOutputPath).writeText(Json.encodeToString(rankingCategories))
+            File(rankingOutputPath).writeText(Json { prettyPrint = true }.encodeToString(rankingCategories))
         } else {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")

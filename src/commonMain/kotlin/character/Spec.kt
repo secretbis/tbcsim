@@ -33,7 +33,7 @@ abstract class Spec {
         // AKA Enhancement Shaman
         val casterHybridDeltas = listOf(
             Triple("spellCritRating", Stats(spellCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
-            Triple("spellHitRating", Stats(spellHitRating = 2.0 * Rating.spellHitPerPct), 2.0 * Rating.spellHitPerPct)
+            Triple("spellHitRating", Stats(spellHitRating = 5.0 * Rating.spellHitPerPct), 5.0 * Rating.spellHitPerPct)
         )
         val defaultCasterDeltas: List<SpecEpDelta> = listOf(
             Triple("intellect", Stats(intellect = 50), 50.0),
