@@ -26,7 +26,7 @@ class Frostbolt : Ability() {
             0
         } else {
             val impFb: ImprovedFrostbolt? = sp.character.klass.talentInstance(ImprovedFrostbolt.name)
-            return baseCastTimeMs - (impFb?.frostboltCastTimeReductionMs() ?: 0)
+            return ((baseCastTimeMs - (impFb?.frostboltCastTimeReductionMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
         }
     }
 

@@ -27,7 +27,7 @@ class Fireball : Ability() {
             0
         } else {
             val impFb: ImprovedFireball? = sp.character.klass.talentInstance(ImprovedFireball.name)
-            return baseCastTimeMs - (impFb?.fireballCastTimeReductionMs() ?: 0)
+            return ((baseCastTimeMs - (impFb?.fireballCastTimeReductionMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
         }
     }
 

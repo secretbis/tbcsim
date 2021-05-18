@@ -29,7 +29,7 @@ class ArcaneBlast : Ability() {
             0
         } else {
             val abBuff = sp.buffs[Companion.name] as ArcaneBlastBuff?
-            return baseCastTimeMs - (abBuff?.castTimeReductionMs(sp) ?: 0)
+            return ((baseCastTimeMs - (abBuff?.castTimeReductionMs(sp) ?: 0)) / sp.spellHasteMultiplier()).toInt()
         }
     }
 

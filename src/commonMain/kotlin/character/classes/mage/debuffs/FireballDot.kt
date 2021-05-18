@@ -32,10 +32,10 @@ class FireballDot(owner: SimParticipant) : Debuff(owner) {
                 amount = dmgPerTick,
                 result = Event.Result.HIT,
             )
-            sp.logEvent(event)
+            owner.logEvent(event)
 
             val triggerTypes = listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_PERIODIC)
-            sp.fireProc(triggerTypes, listOf(), this, event)
+            owner.fireProc(triggerTypes, listOf(), this, event)
         }
     }
 

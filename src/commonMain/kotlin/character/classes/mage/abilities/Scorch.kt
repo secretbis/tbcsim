@@ -23,7 +23,7 @@ class Scorch : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 1500
-    override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
+    override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     val baseResourceCost = 180.0
     override fun resourceCost(sp: SimParticipant): Double {
