@@ -74,6 +74,8 @@ public class GauntletsOfTheAncientShadowmoon : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3152)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(17280, "Increase Spell Dam 43", this)

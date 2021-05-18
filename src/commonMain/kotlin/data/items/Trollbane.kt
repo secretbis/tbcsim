@@ -60,6 +60,8 @@ public class Trollbane : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(29524, "Attack Power 94", this)

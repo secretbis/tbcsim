@@ -65,6 +65,8 @@ public class LibramOfZeal : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(33557, "Improved Seal of the Crusader", this)

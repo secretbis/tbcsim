@@ -65,6 +65,8 @@ public class SkyshatterHeadguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(34760, "Increase Spell Dam 62", this),

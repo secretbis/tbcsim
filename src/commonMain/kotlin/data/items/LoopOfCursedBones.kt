@@ -56,6 +56,8 @@ public class LoopOfCursedBones : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)

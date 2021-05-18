@@ -61,6 +61,8 @@ public class MyrmidonsHeaddress : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

@@ -33,12 +33,11 @@ class SlayersCrest : Item() {
     )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
+    override var phase = 1
 
     override val buffs: List<Buff> by lazy {
         listOfNotNull(
             Buffs.byIdOrName(28777, "Slayer's Crest", this)
         )
     }
-
-
 }

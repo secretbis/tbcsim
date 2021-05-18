@@ -58,6 +58,8 @@ public class TalonOfAnzu : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14089, "Attack Power 36", this)

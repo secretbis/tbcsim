@@ -55,6 +55,8 @@ public class JinrohkTheGreatApocalypse : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(40933, "Attack Power 120", this)

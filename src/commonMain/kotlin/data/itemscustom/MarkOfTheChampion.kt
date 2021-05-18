@@ -29,6 +29,7 @@ class MarkOfTheChampion : Item() {
     override var stats: Stats = Stats()
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
+    override var phase = 1
 
     val apBuff = object : Buff() {
         override val name: String = "Mark of the Champion (AP)"

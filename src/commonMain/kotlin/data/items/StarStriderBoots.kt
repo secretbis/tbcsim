@@ -73,6 +73,8 @@ public class StarStriderBoots : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2973)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15818, "Attack Power 66", this),

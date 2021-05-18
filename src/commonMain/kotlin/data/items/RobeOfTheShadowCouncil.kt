@@ -69,6 +69,8 @@ public class RobeOfTheShadowCouncil : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42108, "Increase Spell Dam 68", this)

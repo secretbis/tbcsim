@@ -65,6 +65,8 @@ public class StormragesTalismanOfSeething : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(7598, "Increased Critical 28", this),

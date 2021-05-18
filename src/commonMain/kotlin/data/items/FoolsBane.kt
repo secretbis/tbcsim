@@ -70,6 +70,8 @@ public class FoolsBane : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9336, "Attack Power 30", this)

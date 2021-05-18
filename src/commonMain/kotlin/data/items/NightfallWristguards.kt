@@ -67,6 +67,8 @@ public class NightfallWristguards : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15811, "Attack Power 46", this)

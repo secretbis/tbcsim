@@ -60,6 +60,8 @@ public class BattlemaceOfTheHighPriestess : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2881)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(35338, "Increase Healing 228", this)

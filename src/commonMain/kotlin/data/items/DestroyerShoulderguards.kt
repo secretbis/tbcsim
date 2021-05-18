@@ -66,6 +66,8 @@ public class DestroyerShoulderguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3017)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(28325, "Block Value 32", this)

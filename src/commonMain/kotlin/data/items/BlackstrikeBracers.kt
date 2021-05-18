@@ -59,6 +59,8 @@ public class BlackstrikeBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(21363, "Increased Mana Regen", this)

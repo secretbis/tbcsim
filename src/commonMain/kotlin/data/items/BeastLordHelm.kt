@@ -63,6 +63,8 @@ public class BeastLordHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14056, "Attack Power 50", this)

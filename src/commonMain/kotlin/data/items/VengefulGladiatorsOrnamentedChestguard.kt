@@ -67,6 +67,8 @@ public class VengefulGladiatorsOrnamentedChestguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18036, "Increase Healing 55", this)

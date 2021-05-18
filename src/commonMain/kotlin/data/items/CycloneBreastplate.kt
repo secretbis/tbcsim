@@ -68,6 +68,8 @@ public class CycloneBreastplate : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18378, "Increased Mana Regen", this)

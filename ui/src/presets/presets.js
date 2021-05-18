@@ -81,7 +81,28 @@ function RaceSelect({ character, dispatch }) {
   );
 }
 
-export default ({ value, dispatch }) => {
+function PhaseSelect({ phase, dispatch }) {
+  if(phase == null) return null;
+
+  const allPhases = [1, 2, 3, 4, 5, 6]
+
+  function onSelect(phase) {
+    dispatch({ type: 'phase', value: phase })
+  }
+
+  return (
+    <>
+      <Dropdown title="Phase">
+        {allPhases.map(phase => {
+          return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>{phase}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{phase}</span>
+    </>
+  );
+}
+
+export default ({ value, phase, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function onSelect(key, evt) {
@@ -175,6 +196,9 @@ export default ({ value, dispatch }) => {
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <RaceSelect character={value} dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <PhaseSelect phase={phase} dispatch={dispatch} />
       </Col>
     </Row>
   )

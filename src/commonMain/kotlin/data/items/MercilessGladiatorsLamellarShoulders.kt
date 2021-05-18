@@ -66,6 +66,8 @@ public class MercilessGladiatorsLamellarShoulders : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15715, "Increase Spell Dam 25", this)

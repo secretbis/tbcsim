@@ -61,6 +61,8 @@ public class BracersOfSlaughter : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3015)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

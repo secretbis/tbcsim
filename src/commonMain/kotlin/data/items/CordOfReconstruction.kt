@@ -73,6 +73,8 @@ public class CordOfReconstruction : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18036, "Increase Healing 55", this)

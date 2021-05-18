@@ -75,6 +75,8 @@ public class HoodOfHexing : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(23732, "Increase Spell Dam 56", this)

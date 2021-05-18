@@ -61,6 +61,8 @@ public class VindicatorsPendantOfSubjugation : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3164)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15715, "Increase Spell Dam 25", this)

@@ -61,6 +61,8 @@ public class GownOfSpiritualWonder : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3097)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(25179, "Increase Healing 112", this)

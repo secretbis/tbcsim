@@ -54,6 +54,8 @@ public class QuagmirransEye : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),

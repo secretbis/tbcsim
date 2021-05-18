@@ -66,6 +66,8 @@ public class StaffOfPrimalFury : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(44913, "Attack Power - Feral (+0973)", this),

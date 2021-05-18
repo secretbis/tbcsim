@@ -66,6 +66,8 @@ public class GronnstalkersGloves : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2902)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15816, "Attack Power 62", this),

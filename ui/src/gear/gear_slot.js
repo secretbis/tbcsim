@@ -51,7 +51,7 @@ const titles = {
   ammo: 'AMMO',
 };
 
-export default function({ character, slotName, inventorySlots, itemClasses, width=defaultWidth, dispatch }) {
+export default function({ character, phase, slotName, inventorySlots, itemClasses, width=defaultWidth, dispatch }) {
   const item = character && character.gear && character.gear[slotName];
   const itemImgStyles = { border: '1px solid #AAA', height: width, width }
 
@@ -147,6 +147,7 @@ export default function({ character, slotName, inventorySlots, itemClasses, widt
       {item ? renderItem() : renderBlank()}
       <GearSelector
         character={character}
+        phase={phase}
         allowableClasses={[character.class]}
         inventorySlots={inventorySlots}
         itemClasses={itemClasses}

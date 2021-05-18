@@ -55,6 +55,8 @@ public class DirebrewsShanker : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14089, "Attack Power 36", this)

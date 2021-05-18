@@ -72,6 +72,8 @@ public class GargonsBracersOfPeacefulSlumber : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18036, "Increase Healing 55", this)

@@ -62,6 +62,8 @@ public class SuninfusedFocusStaff : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(33250, "Increase Spell Dam 121", this)

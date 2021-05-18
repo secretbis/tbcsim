@@ -64,6 +64,8 @@ public class BladedChaosTunic : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(40933, "Attack Power 120", this),

@@ -72,6 +72,8 @@ public class EversongCuffs : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3097)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18035, "Increase Healing 51", this)

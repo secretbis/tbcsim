@@ -125,12 +125,12 @@ function App() {
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
-          <Presets value={state.character} dispatch={dispatch} />
+          <Presets value={state.character} phase={state.phase} dispatch={dispatch} />
           <Row>
             <Col xs={14} style={{ maxWidth: '750px' }}>
               <Panel header="Gear" bordered>
                 {state.character.class ?
-                  <GearEditor state={state} character={state.character} dispatch={dispatch}></GearEditor> :
+                  <GearEditor state={state} character={state.character} phase={state.phase} dispatch={dispatch}></GearEditor> :
                   <p>Please select a preset above</p>
                 }
               </Panel>

@@ -67,6 +67,8 @@ public class WrapsOfPurification : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15696, "Increase Healing 53", this),

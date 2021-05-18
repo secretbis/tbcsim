@@ -5,7 +5,7 @@ import { itemClasses, armorSubclasses, weaponSubclasses, classArmorSubclasses, c
 import GearSlot from './gear_slot';
 import Stats from './stats';
 
-export default function({ state, character, dispatch }) {
+export default function({ state, character, phase, dispatch }) {
   character = character || {}
 
   if(!character.class) {
@@ -60,26 +60,26 @@ export default function({ state, character, dispatch }) {
     <Container style={{ maxWidth: '750px', minWidth: '500px' }}>
       <Row>
         <Col xs={12}>
-          <GearSlot character={character} inventorySlots={[1]} itemClasses={armorSlotIC} slotName='head' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[2]} itemClasses={jewelrySlotIC} slotName='neck' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[3]} itemClasses={armorSlotIC} slotName='shoulders' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[16]} itemClasses={armorSlotIC} slotName='back' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[5, 20]} itemClasses={armorSlotIC} slotName='chest' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[9]} itemClasses={armorSlotIC} slotName='wrists' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={mainHandInvSlots} itemClasses={mainHandSlotIC} slotName='mainHand' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={offHandInvSlots} itemClasses={offHandSlotIC} slotName='offHand' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={rangedInvSlots} itemClasses={rangedSlotIC} slotName='rangedTotemLibram' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[1]} itemClasses={armorSlotIC} slotName='head' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[2]} itemClasses={jewelrySlotIC} slotName='neck' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[3]} itemClasses={armorSlotIC} slotName='shoulders' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[16]} itemClasses={armorSlotIC} slotName='back' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[5, 20]} itemClasses={armorSlotIC} slotName='chest' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[9]} itemClasses={armorSlotIC} slotName='wrists' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={mainHandInvSlots} itemClasses={mainHandSlotIC} slotName='mainHand' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={offHandInvSlots} itemClasses={offHandSlotIC} slotName='offHand' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={rangedInvSlots} itemClasses={rangedSlotIC} slotName='rangedTotemLibram' dispatch={dispatch} />
         </Col>
         <Col xs={12}>
-          <GearSlot character={character} inventorySlots={[10]} itemClasses={armorSlotIC} slotName='hands' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[6]} itemClasses={armorSlotIC} slotName='waist' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[7]} itemClasses={armorSlotIC} slotName='legs' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[8]} itemClasses={armorSlotIC} slotName='feet' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring1' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring2' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket1' dispatch={dispatch} />
-          <GearSlot character={character} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket2' dispatch={dispatch} />
-          {hasAmmo ? <GearSlot character={character} inventorySlots={[24]} itemClasses={ammoSlotIC} slotName='ammo' dispatch={dispatch} /> : null }
+          <GearSlot character={character} phase={phase} inventorySlots={[10]} itemClasses={armorSlotIC} slotName='hands' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[6]} itemClasses={armorSlotIC} slotName='waist' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[7]} itemClasses={armorSlotIC} slotName='legs' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[8]} itemClasses={armorSlotIC} slotName='feet' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring1' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[11]} itemClasses={jewelrySlotIC} slotName='ring2' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket1' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} inventorySlots={[12]} itemClasses={jewelrySlotIC} slotName='trinket2' dispatch={dispatch} />
+          {hasAmmo ? <GearSlot character={character} phase={phase} inventorySlots={[24]} itemClasses={ammoSlotIC} slotName='ammo' dispatch={dispatch} /> : null }
         </Col>
       </Row>
       <Row>

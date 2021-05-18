@@ -65,6 +65,8 @@ public class ThunderheartWristguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42094, "Armor Penetration 91", this)

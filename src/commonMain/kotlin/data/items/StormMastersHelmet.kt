@@ -62,6 +62,8 @@ public class StormMastersHelmet : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2864)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18054, "Increase Spell Dam 37", this)

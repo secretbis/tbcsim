@@ -59,6 +59,8 @@ public class EnchantedFelscaleGloves : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(1584)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

@@ -42,6 +42,9 @@ abstract class Item {
     abstract var sockets: Array<Socket>
     abstract var socketBonus: SocketBonus?
 
+    // Phase zero means unknown, just to distinguish from known-phase-one
+    abstract var phase: Int
+
     open val socketBonusActive: Boolean
         get() {
             return sockets.all {

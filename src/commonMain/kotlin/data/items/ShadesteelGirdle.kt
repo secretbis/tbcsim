@@ -54,6 +54,8 @@ public class ShadesteelGirdle : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

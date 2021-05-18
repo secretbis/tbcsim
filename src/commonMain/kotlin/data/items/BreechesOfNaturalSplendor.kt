@@ -63,6 +63,8 @@ public class BreechesOfNaturalSplendor : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(29369, "Increase Healing 134", this)

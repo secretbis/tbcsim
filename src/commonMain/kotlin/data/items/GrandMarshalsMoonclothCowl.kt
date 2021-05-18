@@ -65,6 +65,8 @@ public class GrandMarshalsMoonclothCowl : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9318, "Increase Healing 33", this)

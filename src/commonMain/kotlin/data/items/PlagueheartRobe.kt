@@ -68,6 +68,8 @@ public class PlagueheartRobe : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(23727, "Increased Spell Hit Chance 8", this),

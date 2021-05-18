@@ -72,6 +72,8 @@ public class GlovesOfDexterousManipulation : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3092)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15809, "Attack Power 42", this)

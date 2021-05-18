@@ -56,6 +56,8 @@ public class IronstaffOfRegeneration : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(26461, "Increase Healing 143", this)

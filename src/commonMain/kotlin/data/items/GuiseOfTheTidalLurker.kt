@@ -61,6 +61,8 @@ public class GuiseOfTheTidalLurker : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42089, "Increase Healing 103", this),

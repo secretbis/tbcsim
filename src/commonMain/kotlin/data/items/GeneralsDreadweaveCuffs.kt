@@ -61,6 +61,8 @@ public class GeneralsDreadweaveCuffs : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2953)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15714, "Increase Spell Dam 22", this)

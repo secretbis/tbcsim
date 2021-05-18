@@ -55,6 +55,8 @@ public class TheDecapitator : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(37208, "The Decapitator", this)

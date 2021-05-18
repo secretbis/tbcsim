@@ -59,6 +59,8 @@ public class CleaverOfTheUnforgiving : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2925)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

@@ -53,6 +53,10 @@ object ItemGen {
         return CodeGen.load("/item_icons.json", object : TypeReference<Map<String, String?>>(){})
     }
 
+    private fun loadPhases(): Map<String, Int?> {
+        return CodeGen.load("/item_phases.json", object : TypeReference<Map<String, Int?>>(){})
+    }
+
     private fun deserializeSockets(itemData: Map<String, Any?>): Array<Socket> {
         return (1..3).mapNotNull { i ->
             val socketColor = itemData["socketColor_$i"] as Int
@@ -86,6 +90,7 @@ object ItemGen {
         val itemsData = load()
         val itemBuffsData = loadBuffs()
         val itemIcons = loadIcons()
+        val itemPhases = loadPhases()
 
         val protoItems = itemsData.map {
             val item = EmptyItem()
@@ -109,6 +114,9 @@ object ItemGen {
             item.speed = (it["delay"] as Number? ?: item.speed).toDouble()
             item.stats = deserializeStats(it)
             item.sockets = deserializeSockets(it)
+
+            val phase = itemPhases[item.id.toString()] ?: 0
+            item.phase = phase
 
             Pair(item, it)
         }.filter { !itemIgnore.contains(it.first.id) }
@@ -404,6 +412,13 @@ object ItemGen {
                                 .addModifiers(KModifier.OVERRIDE)
                                 .mutable(true)
                                 .initializer("%L", renderSocketBonus(item, itemData))
+                                .build()
+                        )
+                        .addProperty(
+                            PropertySpec.builder("phase", Int::class)
+                                .addModifiers(KModifier.OVERRIDE)
+                                .mutable(true)
+                                .initializer("%L", item.phase)
                                 .build()
                         )
                         .addProperty(

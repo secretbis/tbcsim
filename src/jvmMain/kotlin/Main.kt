@@ -12,6 +12,9 @@ import character.classes.warlock.specs.Affliction
 import character.classes.warlock.specs.Destruction
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
@@ -28,10 +31,8 @@ import kotlinx.serialization.json.Json
 import sim.*
 import sim.config.Config
 import sim.config.ConfigMaker
-import sim.statsmodel.DpsBreakdown
 import java.io.File
 import java.math.RoundingMode
-import kotlin.random.Random
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
@@ -41,12 +42,15 @@ fun setupLogging(debug: Boolean) {
     }
 }
 
+private val mapper = ObjectMapper().registerKotlinModule()
+
 class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
     val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
     val calcEPSingle: Boolean by option("--calc-ep-single", help="Calculate EP values a single character definition").flag(default = false)
     val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
+    val specFilterStr: String? by option("--specs", help="Limit rankings/ep calc by spec (comma-separated")
 
     val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
     val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
@@ -201,7 +205,11 @@ class TBCSim : CliktCommand() {
             showHiddenBuffs = showHiddenBuffs
         )
 
+        val specFilter = specFilterStr?.split(",")
+
         if (calcEP) {
+            val epTypeRef = object : TypeReference<EpOutput>(){}
+            val existing = mapper.readValue(File(epOutputPath).readText(), epTypeRef)
             // EP calculation sim
             // Output looks like this:
             // {
@@ -219,10 +227,14 @@ class TBCSim : CliktCommand() {
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
                     acc[categoryEntry.first] =
                         categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                            // Make config
-                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                            println("Starting EP run for ${categorySpecEntry.key}")
-                            acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                            if(specFilter == null || existing == null || existing.categories[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
+                                // Make config
+                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                println("Starting EP run for ${categorySpecEntry.key}")
+                                acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                            } else {
+                                acc2[categorySpecEntry.key] = existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                            }
                             acc2
                         }
                     acc
@@ -254,14 +266,20 @@ class TBCSim : CliktCommand() {
             println("Starting EP run for ${configFile!!.name}")
             computeEpDeltas(config, opts)
         } else if (calcRankings) {
+            val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
+            val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
             val rankingCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
                     acc[categoryEntry.first] =
                         categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
                             // Make config
-                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                            println("Starting ranking run for ${categorySpecEntry.key}")
-                            acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                            if(specFilter == null || existing == null || existing[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
+                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                println("Starting ranking run for ${categorySpecEntry.key}")
+                                acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                            } else {
+                                acc2[categorySpecEntry.key] = existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                            }
                             acc2
                         }
                     acc

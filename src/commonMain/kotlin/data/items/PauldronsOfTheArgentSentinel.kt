@@ -67,6 +67,8 @@ public class PauldronsOfTheArgentSentinel : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18045, "Increase Healing 75", this)

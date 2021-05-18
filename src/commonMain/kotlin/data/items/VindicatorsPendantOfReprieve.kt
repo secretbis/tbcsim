@@ -61,6 +61,8 @@ public class VindicatorsPendantOfReprieve : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3164)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18035, "Increase Healing 51", this)

@@ -65,6 +65,8 @@ public class VengefulGladiatorsSatinMantle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(17367, "Increase Spell Dam 32", this)

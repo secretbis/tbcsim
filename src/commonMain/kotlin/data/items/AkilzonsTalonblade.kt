@@ -55,6 +55,8 @@ public class AkilzonsTalonblade : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15812, "Attack Power 52", this)

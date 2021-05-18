@@ -64,6 +64,8 @@ public class ThunderheartGloves : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
+  public override var phase: Int = 0
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(36062, "Increase Healing 86", this),

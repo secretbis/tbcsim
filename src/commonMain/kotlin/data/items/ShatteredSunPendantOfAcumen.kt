@@ -55,6 +55,8 @@ public class ShatteredSunPendantOfAcumen : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18054, "Increase Spell Dam 37", this),
