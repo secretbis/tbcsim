@@ -196,7 +196,7 @@ export default function({ character, phase, type, item, TooltipComponent, invent
   return (
     <Modal show={true} height={600} onEntered={onEntered} onHide={onHide}>
       <Modal.Header>
-        <Modal.Title>Select an Item</Modal.Title>
+        <Modal.Title>Select an Item (Phase {phase})</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ maxHeight: 500 }}>
         {modalFullyShown ? renderModalBody() : null}

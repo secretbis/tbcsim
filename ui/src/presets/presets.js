@@ -84,7 +84,7 @@ function RaceSelect({ character, dispatch }) {
 function PhaseSelect({ phase, dispatch }) {
   if(phase == null) return null;
 
-  const allPhases = [1, 2, 3, 4, 5, 6]
+  const allPhases = [1, 2, 3, 4, 5]
 
   function onSelect(phase) {
     dispatch({ type: 'phase', value: phase })
