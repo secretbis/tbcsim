@@ -39,6 +39,7 @@ object ItemGen {
         25968,   // Shalassi Sentry's Epaulets
         25969,   // Rapscallion's Touch
         25970,   // Shalassi Oracle's Sandals
+//        22736,   // Andonsius, Reaper of Souls
     )
 
     private fun load(): List<Map<String, Any?>> {
@@ -55,6 +56,12 @@ object ItemGen {
 
     private fun loadPhases(): Map<String, Int?> {
         return CodeGen.load("/item_phases.json", object : TypeReference<Map<String, Int?>>(){})
+    }
+
+    // These are all the itemIds that wowhead did not have data for at the time of writing
+    // The phase numbers for these are guessed
+    private fun loadPhasesApprox(): Map<String, Int?> {
+        return CodeGen.load("/item_phases_approx.json", object : TypeReference<Map<String, Int?>>(){})
     }
 
     private fun deserializeSockets(itemData: Map<String, Any?>): Array<Socket> {
@@ -91,6 +98,7 @@ object ItemGen {
         val itemBuffsData = loadBuffs()
         val itemIcons = loadIcons()
         val itemPhases = loadPhases()
+        val itemPhasesApprox = loadPhasesApprox()
 
         val protoItems = itemsData.map {
             val item = EmptyItem()
@@ -115,7 +123,7 @@ object ItemGen {
             item.stats = deserializeStats(it)
             item.sockets = deserializeSockets(it)
 
-            val phase = itemPhases[item.id.toString()] ?: 0
+            val phase = itemPhases[item.id.toString()] ?: itemPhasesApprox[item.id.toString()] ?: 0
             item.phase = phase
 
             Pair(item, it)

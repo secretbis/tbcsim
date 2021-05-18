@@ -63,7 +63,7 @@ public class ShoulderpadsOfKnowledgesPursuit : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
-  public override var phase: Int = 0
+  public override var phase: Int = 5
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(

@@ -7,8 +7,7 @@ _parse_phase_html() {
     local phaseNum=$(echo "${BASH_REMATCH[1]}" | awk '{print tolower($0)}')
     echo "\"$1\": $phaseNum,"
   else
-    # On failure, emit phase 0 aka unknown
-    echo "\"$1\": 0,"
+    echo "Failed ID $1" >&2
   fi
 }
 
@@ -19,7 +18,6 @@ _fetch_phase() {
 export -f _fetch_phase
 export -f _parse_phase_html
 
-# Fetch every ID from the items.json file, then fetch its image
 results='{'
 results+=$(jq -r '.[] | "\(.entry)"' 'src/jvmMain/resources/items.json' | xargs -I{}  bash -c "_fetch_phase {}")
 #echo 28437 | xargs -I{}  bash -c "_fetch_phase {}"

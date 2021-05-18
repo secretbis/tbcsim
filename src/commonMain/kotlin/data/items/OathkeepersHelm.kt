@@ -63,7 +63,7 @@ public class OathkeepersHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2908)
 
-  public override var phase: Int = 0
+  public override var phase: Int = 2
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
