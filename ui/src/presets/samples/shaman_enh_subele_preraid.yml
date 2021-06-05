@@ -51,10 +51,10 @@ talents:
 # Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Dragonmaw
+    name: Gladiator's Cleaver
     enchant: Mongoose
   offHand:
-    name: Dragonmaw
+    name: Gladiator's Cleaver
     enchant: Mongoose
   rangedTotemLibram:
     name: Totem of the Astral Winds
@@ -105,8 +105,7 @@ gear:
   trinket1:
     name: Hourglass of the Unraveller
   trinket2:
-#    name: Bloodlust Brooch
-    name: "Darkmoon Card: Crusade"
+    name: Bloodlust Brooch
 
 # WIP: Specify additional items to compare
 #      Each will be tested individually, in all combinations, and the sim will rank each setup

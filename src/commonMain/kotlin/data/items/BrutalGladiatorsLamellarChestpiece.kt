@@ -67,6 +67,8 @@ public class BrutalGladiatorsLamellarChestpiece : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2951)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18054, "Increase Spell Dam 37", this)

@@ -26,7 +26,7 @@ class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
         val school = Constants.DamageType.FIRE
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
 
             val event = Event(
                 eventType = EventType.DAMAGE,
@@ -37,7 +37,7 @@ class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
             )
             owner.logEvent(event)
 
-            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
 

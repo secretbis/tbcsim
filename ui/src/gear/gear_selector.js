@@ -11,7 +11,7 @@ import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ character, type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
+export default function({ character, phase, type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState('');
   const [modalFullyShown, setModalFullyShown] = useState('');
 
@@ -36,6 +36,10 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
     // Filter again by equippable item subclasses, if provided
     const filtered = _.filter(
       _.filter(items, item => {
+        // Check phase first
+        const isInPhase = (item.phase || 1) <= phase
+        if(!isInPhase) return false
+
         if(itemClasses) {
           const itemClass = kprop(item.itemClass, 'ordinal');
 
@@ -193,7 +197,7 @@ export default function({ character, type, item, TooltipComponent, inventorySlot
   return (
     <Modal show={true} height={600} onEntered={onEntered} onHide={onHide}>
       <Modal.Header>
-        <Modal.Title>Select an Item</Modal.Title>
+        <Modal.Title>Select an Item (Phase {phase})</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ maxHeight: 500 }}>
         {modalFullyShown ? renderModalBody() : null}

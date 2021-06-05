@@ -65,6 +65,8 @@ public class CycloneHauberk : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2869)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18042, "Increase Healing 68", this),

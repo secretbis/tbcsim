@@ -22,5 +22,37 @@ data class Event(
     val amountPct: Double = 0.0,
     val delta: Double = 0.0,
     val result: EventResult = EventResult.NONE,
-    val partialAmount: Double = 0.0
-)
+    val partialAmount: Double = 0.0,
+    var comboPointsSpent: Int = 0
+) {
+    enum class Type {
+        DAMAGE,
+        SPELL_CAST,
+        BUFF_START,
+        BUFF_REFRESH,
+        BUFF_CHARGE_CONSUMED,
+        BUFF_END,
+        DEBUFF_START,
+        DEBUFF_REFRESH,
+        DEBUFF_CHARGE_CONSUMED,
+        DEBUFF_END,
+        PROC,
+        RESOURCE_CHANGED
+    }
+
+    enum class Result {
+        RESIST,
+        PARTIAL_RESIST_CRIT,
+        PARTIAL_RESIST_HIT,
+        MISS,
+        DODGE,
+        PARRY,
+        GLANCE,
+        BLOCK,
+        BLOCKED_CRIT,
+        CRIT,
+        CRUSH,
+        HIT,
+        NONE
+    }
+}

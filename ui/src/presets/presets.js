@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { Col, Dropdown, Row } from 'rsuite';
 import _ from 'lodash';
 
+import { classes } from '../data/constants';
+
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
+import mageArcanePreraid from './samples/mage_arcane_preraid.yml'
+import mageFirePreraid from './samples/mage_fire_preraid.yml'
+import mageFrostPreraid from './samples/mage_frost_preraid.yml'
+import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
+import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
 import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
-import shamanEnhSubRestoPreraidAnniDw from './samples/shaman_enh_subresto_preraid_annihilator_dw.yml'
-import shamanEnhSubRestoPreraidAnniOh from './samples/shaman_enh_subresto_preraid_annihilator_oh.yml'
+import shamanEnhSubRestoPreraidAnniMh from './samples/shaman_enh_subresto_preraid_annihilator_mh.yml'
 import warlockAfflictionUAPreraid from './samples/warlock_affliction_ua_preraid.yml'
 import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
 import warlockAfflictionDSPreraid from './samples/warlock_affliction_ds_preraid.yml'
@@ -24,12 +30,20 @@ const presets = {
     hunterBmPreraid,
     hunterSurvPreraid
   ],
+  mage: [
+    mageArcanePreraid,
+    mageFirePreraid,
+    mageFrostPreraid
+  ],
+  rogue: [
+    rogueAssassinationPreraid,
+    rogueCombatPreraid
+  ],
   shaman: [
     shamanElePreraid,
     shamanEnhSubElePreraid,
     shamanEnhSubRestoPreraid,
-    shamanEnhSubRestoPreraidAnniDw,
-    shamanEnhSubRestoPreraidAnniOh,
+    shamanEnhSubRestoPreraidAnniMh,
   ],
   warlock: [
     warlockDestructionFirePreraid,
@@ -44,7 +58,51 @@ const presets = {
   ]
 }
 
-export default ({ value, dispatch }) => {
+function RaceSelect({ character, dispatch }) {
+  if(!character || !character.class) return null;
+
+  const classData = classes[character.class.toLowerCase()]
+  const racesForClass = classData && classData.races;
+  if(!racesForClass) return null;
+
+  function onSelect(race) {
+    dispatch({ type: 'character.race', value: race })
+  }
+
+  return (
+    <>
+      <Dropdown title="Race">
+        {racesForClass.map(race => {
+          return <Dropdown.Item key={race} eventKey={race} onSelect={onSelect}>{race}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{character.race}</span>
+    </>
+  );
+}
+
+function PhaseSelect({ phase, dispatch }) {
+  if(phase == null) return null;
+
+  const allPhases = [1, 2, 3, 4, 5]
+
+  function onSelect(phase) {
+    dispatch({ type: 'phase', value: phase })
+  }
+
+  return (
+    <>
+      <Dropdown title="Phase">
+        {allPhases.map(phase => {
+          return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>{phase}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{phase}</span>
+    </>
+  );
+}
+
+export default ({ value, phase, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function onSelect(key, evt) {
@@ -105,7 +163,7 @@ export default ({ value, dispatch }) => {
 
   return (
     <Row style={{padding: '10px 0px', fontWeight: 800}}>
-      <Col>
+      <Col style={{ display: 'inline-block' }}>
         <Dropdown title="Presets"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
@@ -113,6 +171,12 @@ export default ({ value, dispatch }) => {
         >
           <Dropdown.Menu title="Hunter">
             {presetsFor("hunter")}
+          </Dropdown.Menu>
+          <Dropdown.Menu title="Mage">
+            {presetsFor("mage")}
+          </Dropdown.Menu>
+          <Dropdown.Menu title="Rogue">
+            {presetsFor("rogue")}
           </Dropdown.Menu>
           <Dropdown.Menu title="Shaman">
             {presetsFor("shaman")}
@@ -126,9 +190,15 @@ export default ({ value, dispatch }) => {
         </Dropdown>
 
         {value && value.description ?
-          <span>Selected Preset: {value.description}</span> :
+          <span>{value.description}</span> :
           <span>Please select a preset</span>
         }
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <RaceSelect character={value} dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <PhaseSelect phase={phase} dispatch={dispatch} />
       </Col>
     </Row>
   )

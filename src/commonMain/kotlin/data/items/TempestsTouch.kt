@@ -62,6 +62,8 @@ public class TempestsTouch : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2875)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14054, "Increase Spell Dam 27", this),

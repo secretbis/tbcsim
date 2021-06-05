@@ -63,6 +63,8 @@ public class CrownOfAnasterian : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3263)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(44983, "Armor Penetration 231", this)

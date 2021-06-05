@@ -57,7 +57,7 @@ class EarthShock : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff) * concussionMod
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(

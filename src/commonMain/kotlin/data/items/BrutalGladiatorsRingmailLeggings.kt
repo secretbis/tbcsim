@@ -61,6 +61,8 @@ public class BrutalGladiatorsRingmailLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(26690, "Increase Healing 110", this),

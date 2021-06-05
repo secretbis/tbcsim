@@ -258,6 +258,9 @@ export default function({ state }) {
       },
       addRaidBuff: function(buff) {
         simParticipant.addBuff(buff)
+      },
+      isExecutePhase$default: function() {
+        return false;
       }
     }
   ).init()

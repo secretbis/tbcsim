@@ -62,6 +62,8 @@ public class GeneralsDragonhideBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(7680, "Increase Healing 13", this)

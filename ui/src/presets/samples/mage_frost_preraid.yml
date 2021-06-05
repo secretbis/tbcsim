@@ -1,0 +1,177 @@
+class: Mage
+spec: Frost
+description: Frost Mage (pre-raid)
+race: Gnome
+level: 70
+epCategory: preraid
+epSpec: mage_frost
+
+talents:
+  # Frost talents
+  - name: Elemental Precision
+    rank: 3
+  - name: Improved Frostbolt
+    rank: 5
+  - name: Ice Shards
+    rank: 5
+  - name: Piercing Ice
+    rank: 3
+  - name: Icy Veins
+    rank: 1
+  - name: Frost Channeling
+    rank: 3
+  - name: Cold Snap
+    rank: 1
+  - name: Ice Floes
+    rank: 2
+  - name: Improved Cone of Cold
+    rank: 3
+  - name: Winter's Chill
+    rank: 5
+  - name: Arctic Winds
+    rank: 5
+  - name: Empowered Frostbolt
+    rank: 5
+  - name: Summon Water Elemental
+    rank: 1
+
+  # Arcane talents
+  - name: Arcane Subtlety
+    rank: 2
+  - name: Arcane Focus
+    rank: 3
+  - name: Arcane Concentration
+    rank: 5
+  - name: Arcane Meditation
+    rank: 1
+
+# Pre-raid BIS-ish
+gear:
+  mainHand:
+    name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  offHand:
+    name: Lamp of Peaceful Radiance
+  rangedTotemLibram:
+    name: Nether Core's Control Rod
+  head:
+    name: Spellstrike Hood
+    enchant: Glyph of Power
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  neck:
+    name: Hydra-fang Necklace
+  shoulders:
+    name: Frozen Shadoweave Shoulders
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  back:
+    name: Sethekk Oracle Cloak
+  chest:
+    name: Frozen Shadoweave Robe
+    enchant: Exceptional Stats
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Crimson Bracers of Gloom
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Gloves of the Deadwatcher
+    enchant: Major Spellpower (Gloves)
+  waist:
+    name: Girdle of Ruination
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  feet:
+    name: Frozen Shadoweave Boots
+    enchant: Boar's Speed
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  ring1:
+    name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ashyen's Gift
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Pure Death
+    - name: Crunchy Serpent
+    - name: Arcane Intellect
+    - name: Molten Armor
+
+  combat:
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Cold Snap
+      criteria:
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Summon Water Elemental
+          seconds: 1
+        - type: PET_ACTIVE
+          bool: false
+    - name: Summon Water Elemental
+      criteria:
+        - type: PET_ACTIVE
+          bool: false
+    - name: Icy Veins
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+    - name: Frostbolt
+
+pet:
+  type: Water Elemental
+  startsActive: false
+  rotation:
+    combat:
+      - name: Waterbolt
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

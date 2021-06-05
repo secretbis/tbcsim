@@ -62,6 +62,8 @@ public class AmaniDiviningStaff : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(44075, "Increase Spell Dam 217", this)

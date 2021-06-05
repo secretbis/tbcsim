@@ -72,6 +72,8 @@ public class JungleStompers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2975)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(39987, "Block Value 42", this)

@@ -61,6 +61,8 @@ public class HammerOfTheNaaru : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2869)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

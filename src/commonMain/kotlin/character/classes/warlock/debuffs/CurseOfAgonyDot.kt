@@ -39,7 +39,7 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
 
             // Per lock discord
             val spellPowerCoeff = 1.0 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school) * contagionMultiplier * impCoaMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * contagionMultiplier * impCoaMultiplier
 
             val event = Event(
                 eventType = EventType.DAMAGE,

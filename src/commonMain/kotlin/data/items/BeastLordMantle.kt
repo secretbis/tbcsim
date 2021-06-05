@@ -62,6 +62,8 @@ public class BeastLordMantle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15806, "Attack Power 34", this),

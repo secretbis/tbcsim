@@ -74,6 +74,8 @@ public class GreavesOfTheBloodwarder : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2927)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

@@ -84,7 +84,7 @@ open class ChainLightning : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff) * concussionMod * loMod
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(

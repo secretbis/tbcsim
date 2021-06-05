@@ -1,0 +1,171 @@
+class: Mage
+spec: Fire
+description: Fire Mage (pre-raid)
+race: Gnome
+level: 70
+epCategory: preraid
+epSpec: mage_fire
+
+talents:
+  # Frost talents
+  - name: Elemental Precision
+    rank: 3
+  - name: Improved Frostbolt
+    rank: 5
+  - name: Icy Veins
+    rank: 1
+
+  # Fire talents
+  - name: Improved Fireball
+    rank: 5
+  - name: Ignite
+    rank: 5
+  - name: Improved Fire Blast
+    rank: 1
+  - name: Incineration
+    rank: 2
+  - name: Improved Scorch
+    rank: 3
+  - name: Master of Elements
+    rank: 3
+  - name: Playing With Fire
+    rank: 3
+  - name: Critical Mass
+    rank: 3
+  - name: Fire Power
+    rank: 5
+  - name: Pyromaniac
+    rank: 5
+  - name: Combustion
+    rank: 1
+  - name: Molten Fury
+    rank: 2
+  - name: Empowered Fireball
+    rank: 5
+
+  # Arcane talents
+  - name: Arcane Subtlety
+    rank: 2
+
+# Pre-raid BIS-ish
+gear:
+  mainHand:
+    name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  offHand:
+    name: Flametongue Seal
+  rangedTotemLibram:
+    name: Nether Core's Control Rod
+  head:
+    name: Spellstrike Hood
+    enchant: Glyph of Power
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  neck:
+    name: Hydra-fang Necklace
+  shoulders:
+    name: Mantle of Three Terrors
+    enchant: Greater Inscription of the Orb
+  back:
+    name: Sethekk Oracle Cloak
+  chest:
+    name: Spellfire Robe
+    enchant: Exceptional Stats
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Crimson Bracers of Gloom
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Spellfire Gloves
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  waist:
+    name: Spellfire Belt
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  feet:
+    name: Extravagant Boots of Malice
+    enchant: Boar's Speed
+  ring1:
+    name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ashyen's Gift
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Pure Death
+    - name: Crunchy Serpent
+    - name: Arcane Intellect
+    - name: Molten Armor
+
+  combat:
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    # Scorch up to 5
+    - name: Scorch
+      criteria:
+        - type: BUFF_STACKS_LTE
+          buff: Improved Scorch
+          stacks: 4
+    # Refresh Scorch if about to expire
+    - name: Scorch
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Improved Scorch
+          seconds: 5
+    - name: Combustion
+    - name: Icy Veins
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+    - name: Fireball
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

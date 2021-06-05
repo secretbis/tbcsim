@@ -1,7 +1,7 @@
 class: Warlock
 spec: Affliction
 description: Affliction UA Warlock (pre-raid)
-race: Human
+race: Gnome
 level: 70
 epCategory: preraid
 epSpec: warlock_affliction_ua
@@ -106,7 +106,7 @@ gear:
   trinket1:
     name: Quagmirran's Eye
   trinket2:
-    name: "Darkmoon Card: Crusade"
+    name: Icon of the Silver Crescent
 
 rotation:
   autoAttack: false
@@ -149,6 +149,7 @@ rotation:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 2
+    - name: Use Active Trinket
     - name: Unstable Affliction
       criteria:
         - type: DEBUFF_DURATION_LTE
@@ -188,6 +189,7 @@ raidBuffs:
   - Wrath of Air Totem
   - Totem of Wrath
   - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
 
 raidDebuffs:
   # Sunder Armor and Imp EA cannot be applied at the same time

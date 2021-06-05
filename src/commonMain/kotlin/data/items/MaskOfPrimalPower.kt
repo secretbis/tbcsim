@@ -74,6 +74,8 @@ public class MaskOfPrimalPower : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2889)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(28264, "Increase Spell Dam 46", this)

@@ -4,7 +4,8 @@ import character.*
 import character.auto.AutoAttackBase
 import character.auto.AutoShot
 import character.auto.MeleeMainHand
-import character.auto.MeleeOffHand
+import character.auto.*
+import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
@@ -53,6 +54,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     var castingRule: Rule? = null
     var mainHandAutoReplacement: Ability? = null
 
+    // Participant state
+    private var isActive = true
+
     // Events
     var events: MutableList<Event> = mutableListOf()
 
@@ -68,6 +72,13 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 rangedAutoAttack = AutoShot()
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
+            } else if(character.klass is Rogue) {
+                if (hasMainHandWeapon()) {
+                    mhAutoAttack = MeleeMainHandRogue()
+                }
+                if (hasOffHandWeapon()) {
+                    ohAutoAttack = MeleeOffHandRogue()
+                }
             } else {
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHand()
@@ -92,6 +103,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
         // Initialize our subject resources(s)
         resources = character.klass.resourceTypes.map { it to Resource(this, it) }.toMap()
+
+        // Check to see if our pet starts active or not
+        if(character.pet?.startsActive == false) {
+            pet?.deactivate()
+        }
 
         return this
     }
@@ -121,7 +137,42 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             }
     }
 
+    fun isActive(): Boolean {
+        return isActive
+    }
+
+    fun activate() {
+        isActive = true
+    }
+
+    fun deactivate(resetAllState: Boolean = false) {
+        isActive = false
+        castingRule = null
+
+        if(resetAllState) {
+            buffs.clear()
+            debuffs.clear()
+
+            buffExpirations.clear()
+            buffExpirationTick.clear()
+            debuffExpirations.clear()
+            debuffExpirationTick.clear()
+
+            buffState.clear()
+            debuffState.clear()
+            abilityState.clear()
+            sharedAbilityState.clear()
+            procState.clear()
+            rotationState.clear()
+
+            recomputeStats()
+        }
+    }
+
     fun tick() {
+        // If this participant is inactive, do nothing
+        if(!isActive) return
+
         // Find next rotation ability, if we are not currently casting something
         if(!isCasting() && castingRule == null) {
             val rotationRule = rotation.next(this, onGcd())
@@ -207,7 +258,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     // Determine the priority of an incoming mutex buff/debuff against already-present mutex buffs/debuffs of the same type
-    private fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
+    fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
         // If this buff is mutex with others, compare priority and remove the weaker one(s)
         // If they are equal, choose the most recent (this one)
         return if(buffDebuff.mutex.contains(Mutex.NONE)) {
@@ -633,7 +684,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.attackPower.coerceAtLeast(0) +
-                strength() * character.klass.attackPowerFromStrength
+                strength()-10 * character.klass.attackPowerFromStrength +
+                agility()-10 * character.klass.attackPowerFromAgility
             ) * stats.attackPowerMultiplier
         ).toInt()
     }
@@ -663,12 +715,13 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
+    // from the numbers that are displayed ingame, you also have to subtract the race-specific agility bonuses from this to get an accurate result
     fun meleeCritPct(): Double {
-        return stats.meleeCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+        return stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun rangedCritPct(): Double {
-        return stats.rangedCritRating / Rating.critPerPct + agility() * character.klass.critPctPerAgility
+        return stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {

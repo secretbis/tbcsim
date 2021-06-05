@@ -56,6 +56,8 @@ public class SunforgedCleaver : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9335, "Attack Power 28", this)

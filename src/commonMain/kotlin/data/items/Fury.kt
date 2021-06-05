@@ -59,6 +59,8 @@ public class Fury : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9334, "Attack Power 26", this)

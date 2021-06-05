@@ -12,6 +12,10 @@ import sim.SimParticipant
 class AssassinationArmor : ItemSet() {
     companion object {
         const val FOUR_SET_BUFF_NAME = "Assassination Armor (4 set)"
+
+        fun fourSetEnergyReduction(): Double {
+            return 10.0
+        }
     }
 
     override val id: Int = 620

@@ -67,6 +67,8 @@ public class SkyshatterPants : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3015)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(21631, "Increased Mana Regen", this)

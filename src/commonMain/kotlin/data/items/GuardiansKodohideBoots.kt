@@ -60,6 +60,8 @@ public class GuardiansKodohideBoots : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(17320, "Increase Healing 84", this),

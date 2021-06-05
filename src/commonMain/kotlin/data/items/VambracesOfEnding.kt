@@ -71,6 +71,8 @@ public class VambracesOfEnding : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15812, "Attack Power 52", this)

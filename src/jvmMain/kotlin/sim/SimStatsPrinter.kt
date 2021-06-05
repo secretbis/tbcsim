@@ -54,22 +54,22 @@ object SimStatsPrinter {
             println(
                 "Ability Breakdown\n" +
                 table {
-                    header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "AvgHit", "AvgCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
+                    header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "MinHit", "AvgHit", "MaxHit", "MinCrit", "AvgCrit", "MaxCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
                     for(row in rows) {
-                        row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.avgHit, row.avgCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
+                        row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.minHit, row.avgHit, row.maxHit, row.minCrit, row.avgCrit, row.maxCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                     }
 
                     hints {
                         alignment(0, Table.Hints.Alignment.LEFT)
 
-                        for(i in 1..11) {
+                        for(i in 1..15) {
                             precision(i, 2)
                             formatFlag(i, ",")
                         }
 
                         postfix(3, "%")
-                        for(i in 6..11) {
+                        for(i in 10..15) {
                             postfix(i, "%")
                         }
 
@@ -189,29 +189,32 @@ object SimStatsPrinter {
         )
     }
 
-    fun printResourceUsageByAbility(participants: List<List<ResourceByAbility>>) {
-        participants.forEach { rows ->
-            println(
-                "Resource by Ability Breakdown\n" +
-                table {
-                    header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
+    fun printResourceUsageByAbility(participants: List<Map<String, List<ResourceByAbility>>>) {
+        participants.forEach { resourceType ->
+            resourceType.entries.forEach { resourceData ->
+                val rows = resourceData.value
+                println(
+                    "Resource by Ability Breakdown (${resourceData.key})\n" +
+                    table {
+                        header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
 
-                    for(row in rows) {
-                        row(row.name, row.countAvg, row.totalGainAvg, row.gainPerCountAvg)
-                    }
-
-                    hints {
-                        alignment(0, Table.Hints.Alignment.LEFT)
-
-                        for(i in 1..3) {
-                            precision(i, 2)
-                            formatFlag(i, ",")
+                        for(row in rows) {
+                            row(row.name, row.countAvg, row.totalGainAvg, row.gainPerCountAvg)
                         }
 
-                        borderStyle = Table.BorderStyle.SINGLE_LINE
-                    }
-                }.render(StringBuilder())
-            )
+                        hints {
+                            alignment(0, Table.Hints.Alignment.LEFT)
+
+                            for(i in 1..3) {
+                                precision(i, 2)
+                                formatFlag(i, ",")
+                            }
+
+                            borderStyle = Table.BorderStyle.SINGLE_LINE
+                        }
+                    }.render(StringBuilder())
+                )
+            }
         }
     }
 }

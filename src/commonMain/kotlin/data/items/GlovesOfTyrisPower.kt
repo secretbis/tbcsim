@@ -63,6 +63,8 @@ public class GlovesOfTyrisPower : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(24196, "Increase Spell Dam 47", this)

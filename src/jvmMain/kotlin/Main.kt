@@ -1,12 +1,21 @@
 import character.SpecEpDelta
+import character.Stats
 import character.classes.hunter.specs.BeastMastery
 import character.classes.hunter.specs.Survival
+import character.classes.mage.specs.Arcane
+import character.classes.mage.specs.Fire
+import character.classes.mage.specs.Frost
+import character.classes.rogue.specs.Assassination
+import character.classes.rogue.specs.Combat
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
 import character.classes.warlock.specs.Affliction
 import character.classes.warlock.specs.Destruction
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
@@ -20,13 +29,12 @@ import kotlin.math.max
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import mechanics.Rating
 import sim.*
 import sim.config.Config
 import sim.config.ConfigMaker
-import sim.statsmodel.DpsBreakdown
 import java.io.File
 import java.math.RoundingMode
-import kotlin.random.Random
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
@@ -36,12 +44,14 @@ fun setupLogging(debug: Boolean) {
     }
 }
 
+private val mapper = ObjectMapper().registerKotlinModule()
+
 class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
     val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
-    val calcEPSingle: Boolean by option("--calc-ep-single", help="Calculate EP values a single character definition").flag(default = false)
     val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
+    val specFilterStr: String? by option("--specs", help="Limit rankings/ep calc by spec (comma-separated")
 
     val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
     val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
@@ -57,6 +67,11 @@ class TBCSim : CliktCommand() {
     val specs = mapOf(
         "hunter_bm" to BeastMastery(),
         "hunter_surv" to Survival(),
+        "mage_arcane" to Arcane(),
+        "mage_fire" to Fire(),
+        "mage_frost" to Frost(),
+        "rogue_assassination" to Assassination(),
+        "rogue_combat" to Combat(),
         "shaman_ele" to Elemental(),
         // Enhance weights aren't appreciably different between the two sub-specs
         "shaman_enh" to Enhancement(),
@@ -75,6 +90,11 @@ class TBCSim : CliktCommand() {
         "preraid" to mapOf(
             "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
             "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
+            "mage_arcane" to File(presetPath + "mage_arcane_preraid.yml"),
+            "mage_fire" to File(presetPath + "mage_fire_preraid.yml"),
+            "mage_frost" to File(presetPath + "mage_frost_preraid.yml"),
+            "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
+            "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
             // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
@@ -88,7 +108,16 @@ class TBCSim : CliktCommand() {
     )
 
     fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {
-        val iterations = runBlocking { Sim(config, opts, epDelta?.second) {}.sim() }
+        // Most presets are hit capped, so apply a universal -2% hit buff so the hit has something to sim against
+        val hitReduction = Stats(
+            physicalHitRating = -2.0 * Rating.physicalHitPerPct,
+            spellHitRating = -5.0 * Rating.spellHitPerPct,
+        )
+
+        val epStatMod = epDelta?.second ?: Stats()
+        val totalStatMod = Stats().add(epStatMod).add(hitReduction)
+
+        val iterations = runBlocking { Sim(config, opts, totalStatMod) {}.sim() }
         return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.mean ?: 0.0 })
     }
 
@@ -186,7 +215,11 @@ class TBCSim : CliktCommand() {
             showHiddenBuffs = showHiddenBuffs
         )
 
+        val specFilter = specFilterStr?.split(",")
+
         if (calcEP) {
+            val epTypeRef = object : TypeReference<EpOutput>(){}
+            val existing = mapper.readValue(File(epOutputPath).readText(), epTypeRef)
             // EP calculation sim
             // Output looks like this:
             // {
@@ -204,10 +237,14 @@ class TBCSim : CliktCommand() {
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
                     acc[categoryEntry.first] =
                         categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                            // Make config
-                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                            println("Starting EP run for ${categorySpecEntry.key}")
-                            acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                            if(specFilter == null || existing == null || existing.categories[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
+                                // Make config
+                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                println("Starting EP run for ${categorySpecEntry.key}")
+                                acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                            } else {
+                                acc2[categorySpecEntry.key] = existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                            }
                             acc2
                         }
                     acc
@@ -227,33 +264,29 @@ class TBCSim : CliktCommand() {
                 epCategories,
                 epOptions
             )
-            File(epOutputPath).writeText(Json.encodeToString(fullOutput))
-        } else if (calcEPSingle) {
-            if (configFile == null) {
-                println("Please specify a sim config file path as the first positional argument")
-                println(this.getFormattedHelp())
-                return
-            }
-
-            val config = ConfigMaker.fromYml(configFile!!.readText())
-            println("Starting EP run for ${configFile!!.name}")
-            computeEpDeltas(config, opts)
+            File(epOutputPath).writeText(Json { prettyPrint = true }.encodeToString(fullOutput))
         } else if (calcRankings) {
+            val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
+            val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
             val rankingCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
                     acc[categoryEntry.first] =
                         categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
                             // Make config
-                            val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                            println("Starting ranking run for ${categorySpecEntry.key}")
-                            acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                            if(specFilter == null || existing == null || existing[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
+                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                println("Starting ranking run for ${categorySpecEntry.key}")
+                                acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                            } else {
+                                acc2[categorySpecEntry.key] = existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                            }
                             acc2
                         }
                     acc
                 }
 
             // Output rankings
-            File(rankingOutputPath).writeText(Json.encodeToString(rankingCategories))
+            File(rankingOutputPath).writeText(Json { prettyPrint = true }.encodeToString(rankingCategories))
         } else {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")
@@ -276,13 +309,16 @@ class TBCSim : CliktCommand() {
                 val resourceTypes = config.character.klass.resourceTypes
 
                 // Only print the big chart for the main subject - others arent interesting
-                // TODO this doesn't differentiate between resources now if a participant uses more than 1 resource
                 val resource = SimStats.resourceUsage(iterations)
-                println("Resource usage for iteration ${resource[0].iterationIdx}")
-                Chart.print(resource[0].series, xMax = durationSeconds, yLabel = resourceTypes.first().toString())
+                resourceTypes.forEach {
+                    println("Resource usage for iteration ${resource[0][it.name]!!.iterationIdx}")
+                    Chart.print(resource[0][it.name]!!.series, xMax = durationSeconds, yLabel = it.toString())
+                }
 
-                val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
-                SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
+                resourceTypes.forEach {
+                    val resourceByAbility = SimStats.resourceUsageByAbility(iterations)
+                    SimStatsPrinter.printResourceUsageByAbility(resourceByAbility)
+                }
 
                 val buffs = SimStats.resultsByBuff(iterations)
                 SimStatsPrinter.printBuffs("Buffs", buffs)

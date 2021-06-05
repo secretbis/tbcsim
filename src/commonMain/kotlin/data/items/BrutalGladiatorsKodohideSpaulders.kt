@@ -65,6 +65,8 @@ public class BrutalGladiatorsKodohideSpaulders : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2859)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18041, "Increase Healing 66", this),

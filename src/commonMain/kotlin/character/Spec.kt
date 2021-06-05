@@ -11,23 +11,20 @@ abstract class Spec {
         val defaultMeleeDeltas: List<SpecEpDelta> = listOf(
             Triple("strength", Stats(strength = 50), 50.0),
             Triple("agility", Stats(agility = 50), 50.0),
-            Triple("meleeCritRating", Stats(meleeCritRating = Rating.critPerPct), Rating.critPerPct),
-            Triple("physicalHasteRating", Stats(physicalHasteRating = Rating.hastePerPct), Rating.hastePerPct),
-            Triple("expertiseRating", Stats(expertiseRating = Rating.expertisePerPct), Rating.expertisePerPct),
-            Triple("armorPen", Stats(armorPen = 100), 100.0)
+            Triple("meleeCritRating", Stats(meleeCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
+            Triple("physicalHitRating", Stats(physicalHitRating = 2.0 * Rating.physicalHitPerPct), 2.0 * Rating.physicalHitPerPct),
+            Triple("physicalHasteRating", Stats(physicalHasteRating = 5.0 * Rating.hastePerPct), 5.0 * Rating.hastePerPct),
+            Triple("expertiseRating", Stats(expertiseRating = 2.0 * Rating.expertisePerPct), 2.0 * Rating.expertisePerPct),
+            Triple("armorPen", Stats(armorPen = 100), 100.0),
         )
-
-        // Hit rating is only really interesting for dual-wield classes.  Other specs get cap and never think about it.
-        val dualWieldMeleeDeltas = defaultMeleeDeltas +
-                Triple("physicalHitRating", Stats(physicalHitRating = Rating.physicalHitPerPct), Rating.physicalHitPerPct)
 
         // Hunters
         val rangedAttackPowerBase: SpecEpDelta = Triple("rangedAttackPower", Stats(rangedAttackPower = 100), 100.0)
         val defaultRangedDeltas: List<SpecEpDelta> = listOf(
-            // Hit rating is omitted, since it's not difficult to get 9%
             Triple("agility", Stats(agility = 50), 50.0),
-            Triple("rangedCritRating", Stats(rangedCritRating = Rating.critPerPct), Rating.critPerPct),
-            Triple("physicalHasteRating", Stats(physicalHasteRating = Rating.hastePerPct), Rating.hastePerPct),
+            Triple("rangedCritRating", Stats(rangedCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
+            Triple("physicalHitRating", Stats(physicalHitRating = 2.0 * Rating.physicalHitPerPct), 2.0 * Rating.physicalHitPerPct),
+            Triple("physicalHasteRating", Stats(physicalHasteRating = 5.0 * Rating.hastePerPct), 5.0 * Rating.hastePerPct),
             Triple("armorPen", Stats(armorPen = 100), 100.0)
         )
 
@@ -35,12 +32,12 @@ abstract class Spec {
         val spellPowerBase: SpecEpDelta = Triple("spellDamage", Stats(spellDamage = 100), 100.0)
         // AKA Enhancement Shaman
         val casterHybridDeltas = listOf(
-            Triple("spellCritRating", Stats(spellCritRating = Rating.critPerPct), Rating.critPerPct),
-            Triple("spellHitRating", Stats(spellHitRating = Rating.spellHitPerPct), Rating.spellHitPerPct)
+            Triple("spellCritRating", Stats(spellCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
+            Triple("spellHitRating", Stats(spellHitRating = 5.0 * Rating.spellHitPerPct), 5.0 * Rating.spellHitPerPct)
         )
         val defaultCasterDeltas: List<SpecEpDelta> = listOf(
             Triple("intellect", Stats(intellect = 50), 50.0),
-            Triple("spellHasteRating", Stats(spellHasteRating = Rating.hastePerPct), Rating.hastePerPct),
+            Triple("spellHasteRating", Stats(spellHasteRating = 10.0 * Rating.hastePerPct), 10.0 * Rating.hastePerPct),
         ) + casterHybridDeltas
     }
     abstract val name: String

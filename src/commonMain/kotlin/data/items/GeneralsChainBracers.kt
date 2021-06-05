@@ -64,6 +64,8 @@ public class GeneralsChainBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2867)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9329, "Attack Power 16", this)

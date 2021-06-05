@@ -65,6 +65,8 @@ public class TomeOfTheLightbringer : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(41042, "Judgement Block Value", this)

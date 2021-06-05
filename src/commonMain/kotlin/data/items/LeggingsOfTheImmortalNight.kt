@@ -74,6 +74,8 @@ public class LeggingsOfTheImmortalNight : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42039, "Attack Power 124", this),

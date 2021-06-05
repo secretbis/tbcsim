@@ -73,6 +73,8 @@ public class OrcaHideBoots : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2866)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18044, "Increase Healing 73", this)

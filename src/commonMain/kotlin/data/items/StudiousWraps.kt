@@ -62,6 +62,8 @@ public class StudiousWraps : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18056, "Increase Spell Dam 40", this)

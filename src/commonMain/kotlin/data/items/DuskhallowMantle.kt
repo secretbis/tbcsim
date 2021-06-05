@@ -62,6 +62,8 @@ public class DuskhallowMantle : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2900)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(13881, "Increase Spell Dam 29", this)

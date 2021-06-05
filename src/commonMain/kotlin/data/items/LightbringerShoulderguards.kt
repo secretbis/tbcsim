@@ -66,6 +66,8 @@ public class LightbringerShoulderguards : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2876)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14054, "Increase Spell Dam 27", this)

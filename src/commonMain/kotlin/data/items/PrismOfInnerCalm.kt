@@ -54,6 +54,8 @@ public class PrismOfInnerCalm : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(38326, "Crit Threat Reduction Melee", this),

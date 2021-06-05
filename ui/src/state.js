@@ -126,6 +126,8 @@ export function stateReducer(state, action) {
 }
 
 export const initialState = {
+  phase: 1,
+
   iterationsCompleted: null,
   iterationResults: null,
 
@@ -175,6 +177,7 @@ export const initialState = {
 
 initialState.serialize = function() {
   return JSON.stringify({
+    phase: this.phase,
     character: {
       class: this.character.class,
       description: this.character.description || '',

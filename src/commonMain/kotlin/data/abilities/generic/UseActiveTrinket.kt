@@ -40,9 +40,13 @@ class UseActiveTrinket : Ability() {
 
         // The user can specify a "name" option to select a trinket.  Otherwise, just pick one.
         val preferredName = sp.castingRule?.options?.name
-        val trinket = availableTrinkets.find { it.name == preferredName } ?: availableTrinkets.firstOrNull()
+        val trinket = if(preferredName == null) {
+            availableTrinkets.find { it.available(sp) }
+        } else {
+            availableTrinkets.find { it.name == preferredName && it.available(sp) }
+        }
 
-        if(trinket != null && trinket.available(sp)) {
+        if(trinket != null) {
             // Set cooldown state according to the trinket duration
             (state(sp) as TrinketState).lastTrinketUsedDurationMs = trinket.trinketLockoutMs(sp)
 

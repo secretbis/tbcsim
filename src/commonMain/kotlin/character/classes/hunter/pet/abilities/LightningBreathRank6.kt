@@ -23,7 +23,7 @@ class LightningBreathRank6 : Ability() {
     val spCoeff = 1.0
     val school = Constants.DamageType.NATURE
     override fun cast(sp: SimParticipant) {
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spCoeff, school)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false)
 
         val event = Event(

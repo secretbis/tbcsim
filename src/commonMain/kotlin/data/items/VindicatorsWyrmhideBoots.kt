@@ -60,6 +60,8 @@ public class VindicatorsWyrmhideBoots : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18056, "Increase Spell Dam 40", this),

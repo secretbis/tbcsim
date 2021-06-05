@@ -60,6 +60,8 @@ public class ExodarLifeStaff : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2865)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42125, "Increase Healing 364", this),

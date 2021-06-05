@@ -61,6 +61,8 @@ public class BrutalGladiatorsMailLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(26155, "Increase Spell Dam 59", this),

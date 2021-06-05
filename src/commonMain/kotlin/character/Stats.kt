@@ -106,7 +106,12 @@ data class Stats(
     var manaPer5Seconds: Int = 0,
 
     // Weird abilities
-    var offHandAddlWhiteHitPct: Double = 0.0
+    var offHandAddlWhiteHitPct: Double = 0.0,
+    var yellowHitsAdditionalCritPct: Double = 0.0,
+
+    // per weapontype crit increase
+    var daggerAdditionalCritChancePercent: Double = 0.0,
+    var fistWeaponAdditionalCritChancePercent: Double = 0.0
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -213,6 +218,9 @@ data class Stats(
 
         offHandAddlWhiteHitPct += stats.offHandAddlWhiteHitPct
 
+        daggerAdditionalCritChancePercent += stats.daggerAdditionalCritChancePercent
+        fistWeaponAdditionalCritChancePercent += stats.fistWeaponAdditionalCritChancePercent
+
         return this
     }
 
@@ -243,6 +251,18 @@ data class Stats(
                 physicalHitRating += value
             StatType.HIT_SPELL_RATING ->
                 spellHitRating += value
+            StatType.SPELL_PEN ->
+                spellPen += value
+            StatType.SPELL_DAMAGE ->
+                spellDamage += value
+            StatType.ARMOR_PEN ->
+                armorPen += value
+            StatType.ATTACK_POWER -> {
+                attackPower += value
+                rangedAttackPower += value
+            }
+            StatType.SPELL_HEALING ->
+                spellHealing += value
             StatType.INTELLECT ->
                 intellect += value
             StatType.SPIRIT ->

@@ -73,6 +73,8 @@ public class GauntletsOfTheDragonslayer : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2863)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9333, "Attack Power 48", this)

@@ -67,6 +67,8 @@ public class GladiatorsScaledHelm : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2878)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

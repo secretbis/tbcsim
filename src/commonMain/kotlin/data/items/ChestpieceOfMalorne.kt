@@ -67,6 +67,8 @@ public class ChestpieceOfMalorne : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2908)
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(28264, "Increase Spell Dam 46", this)

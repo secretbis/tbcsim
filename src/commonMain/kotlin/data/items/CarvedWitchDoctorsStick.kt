@@ -59,6 +59,8 @@ public class CarvedWitchDoctorsStick : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9346, "Increase Spell Dam 18", this)

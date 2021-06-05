@@ -28,7 +28,7 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = 0.5 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, spellPowerCoeff, school)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
 
             val event = Event(
                 eventType = EventType.DAMAGE,

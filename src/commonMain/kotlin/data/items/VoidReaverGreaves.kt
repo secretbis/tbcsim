@@ -74,6 +74,8 @@ public class VoidReaverGreaves : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15830, "Attack Power 88", this)

@@ -2,6 +2,10 @@ package character
 
 import character.classes.hunter.Hunter
 import character.classes.hunter.specs.*
+import character.classes.mage.Mage
+import character.classes.mage.specs.Arcane
+import character.classes.mage.specs.Fire
+import character.classes.mage.specs.Frost
 import character.classes.shaman.Shaman
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
@@ -11,7 +15,11 @@ import character.classes.warlock.specs.Destruction
 import character.classes.warrior.Warrior
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
+import character.classes.rogue.specs.Combat
+import character.classes.rogue.Rogue
+import character.classes.rogue.specs.Assassination
 import data.model.Item
+import kotlin.reflect.KClass
 
 abstract class Class(
     var talents: Map<String, Talent>,
@@ -25,9 +33,11 @@ abstract class Class(
             val spec = specFromString(className, specName) ?: throw Exception("Invalid class + spec: $className - $specName")
             return when(className) {
                 "hunter" -> Hunter(talents, spec)
+                "mage" -> Mage(talents, spec)
                 "shaman" -> Shaman(talents, spec)
                 "warlock" -> Warlock(talents, spec)
                 "warrior" -> Warrior(talents, spec)
+                "rogue" -> Rogue(talents, spec)
                 else -> null
             }
         }
@@ -43,6 +53,12 @@ abstract class Class(
                     "survival" -> Survival()
                     else -> null
                 }
+                "mage" -> when(specName) {
+                    "arcane" -> Arcane()
+                    "fire" -> Fire()
+                    "frost" -> Frost()
+                    else -> null
+                }
                 "shaman" -> when(specName) {
                     "enhancement" -> Enhancement()
                     "elemental" -> Elemental()
@@ -56,6 +72,11 @@ abstract class Class(
                 "warrior" -> when(specName) {
                     "arms" -> Arms()
                     "fury" -> Fury()
+                    else -> null
+                }
+                "rogue" -> when(specName) {
+                    "assassination" -> Assassination()
+                    "combat" -> Combat()
                     else -> null
                 }
                 else -> null
@@ -105,4 +126,16 @@ abstract class Class(
     // Shaman 2.2
     // Warlock 1.701
     abstract val baseSpellCritChance: Double
+
+    open fun <T : Talent> talentInstance(name: String): T? {
+        return talents[name] as? T?
+    }
+
+    open fun talentRanks(name: String): Int {
+        return talents[name]?.currentRank ?: 0
+    }
+
+    open fun hasTalentRanks(name: String, minRanks: Int = 1): Boolean {
+        return talentRanks(name) >= minRanks
+    }
 }

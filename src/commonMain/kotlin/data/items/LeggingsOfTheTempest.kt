@@ -66,6 +66,8 @@ public class LeggingsOfTheTempest : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(34760, "Increase Spell Dam 62", this)

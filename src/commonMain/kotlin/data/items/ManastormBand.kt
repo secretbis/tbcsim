@@ -55,6 +55,8 @@ public class ManastormBand : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 1
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(13881, "Increase Spell Dam 29", this)

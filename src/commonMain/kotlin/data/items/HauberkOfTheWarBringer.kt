@@ -75,6 +75,8 @@ public class HauberkOfTheWarBringer : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2936)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15824, "Attack Power 76", this)

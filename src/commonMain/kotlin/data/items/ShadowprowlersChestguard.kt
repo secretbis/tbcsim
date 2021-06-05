@@ -63,6 +63,8 @@ public class ShadowprowlersChestguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOf()}
 

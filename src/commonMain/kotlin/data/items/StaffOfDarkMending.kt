@@ -61,6 +61,8 @@ public class StaffOfDarkMending : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(44077, "Increase Healing 407", this),

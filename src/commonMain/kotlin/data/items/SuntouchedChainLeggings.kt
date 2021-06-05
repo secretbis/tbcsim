@@ -73,6 +73,8 @@ public class SuntouchedChainLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2872)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(26690, "Increase Healing 110", this),

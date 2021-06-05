@@ -10,15 +10,15 @@ import { Container, Content, Header, Grid, Footer, Row, Col, Button, Panel, Navb
 
 import { initialState, stateReducer } from './state';
 
-import RaidBuffs from './buffs/raid_buffs';
 import CombatLog from './combat_log/combat_log';
 import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
+import RaidBuffs from './buffs/raid_buffs';
 import Rankings from './rankings/rankings';
-import SimResults from './results/results';
 import Rotation from './rotation/rotation';
 import SimOptions from './sim/options';
+import SimResults from './results/results';
 import Talents from './talents/talents';
 
 import * as tbcsim from 'tbcsim';
@@ -32,6 +32,7 @@ function bannerMsg() {
       <p>At this moment, only the following specs are available:</p>
       <ul>
         <li>BM/Survival Hunter</li>
+        <li>Assassination/Combat Rogue</li>
         <li>Enhancement/Elemental Shaman</li>
         <li>Affliction/Destruction Warlock</li>
         <li>Arms/Fury Warrior</li>
@@ -125,12 +126,12 @@ function App() {
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} />
-          <Presets value={state.character} dispatch={dispatch} />
+          <Presets value={state.character} phase={state.phase} dispatch={dispatch} />
           <Row>
             <Col xs={14} style={{ maxWidth: '750px' }}>
               <Panel header="Gear" bordered>
                 {state.character.class ?
-                  <GearEditor state={state} character={state.character} dispatch={dispatch}></GearEditor> :
+                  <GearEditor state={state} character={state.character} phase={state.phase} dispatch={dispatch}></GearEditor> :
                   <p>Please select a preset above</p>
                 }
               </Panel>

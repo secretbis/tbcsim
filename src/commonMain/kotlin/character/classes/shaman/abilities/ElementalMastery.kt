@@ -22,7 +22,7 @@ class ElementalMastery : Ability() {
     private fun makeProc(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.FIRE_DAMAGE,
+                Trigger.FIRE_DAMAGE_NON_PERIODIC,
                 Trigger.FROST_DAMAGE,
                 Trigger.NATURE_DAMAGE,
             )

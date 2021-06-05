@@ -1,7 +1,10 @@
 import React from 'react';
+import { Container } from 'rsuite'
 
 import { toFixed } from './formatters';
 import Table from './table';
+
+import { linkedHashMapKeys } from '../util/util';
 
 const columnInfo = [
   {
@@ -25,11 +28,19 @@ const columnInfo = [
 ]
 
 export default (props) => {
-  return (
-    <Table
-      title={'Resource Gain/Usage By Ability'}
-      data={props.data}
-      columnInfo={columnInfo}
-    />
-  )
+  return linkedHashMapKeys(props.data).map(key => {
+    const data = props.data.get_35(key)
+    if(data == null) return null;
+
+    return (
+      <Container style={{ marginBottom: '20px' }}>
+        <Table
+          key={key}
+          title={`Resource Gain/Usage By Ability (${key})`}
+          data={data._array_3}
+          columnInfo={columnInfo}
+        />
+      </Container>
+    )
+  })
 }

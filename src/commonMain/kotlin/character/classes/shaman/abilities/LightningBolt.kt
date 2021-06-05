@@ -87,7 +87,7 @@ open class LightningBolt : Ability() {
         val t6Bonus = sp.buffs[SkyshatterRegalia.FOUR_SET_BUFF_NAME] != null
         val t6Multiplier = if(t6Bonus) { SkyshatterRegalia.fourSetLBDamageMultiplier() } else 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school) * concussionMod * loMod * t6Multiplier
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff) * concussionMod * loMod * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(

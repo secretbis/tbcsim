@@ -65,6 +65,8 @@ public class BracersOfAbsolution : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3153)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18055, "Increase Spell Dam 39", this),

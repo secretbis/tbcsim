@@ -20,7 +20,7 @@ class Revenger(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
             val school = Constants.DamageType.SHADOW
             override fun cast(sp: SimParticipant) {
-                val damageRoll = Spell.baseDamageRoll(sp, 105.00, 125.0, 1.0, school)
+                val damageRoll = Spell.baseDamageRoll(sp, 105.00, 125.0, school, 1.0)
                 //Has 100% Spell Damage scaling (from the wow Armaments Discord)
                 //TODO: check if the damage proc scales with increased shadow damage debuffs e.g. shadow weaving
                 val result = Spell.attackRoll(sp, damageRoll, school)

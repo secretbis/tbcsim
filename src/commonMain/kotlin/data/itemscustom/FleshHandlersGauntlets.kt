@@ -33,4 +33,5 @@ class FleshHandlersGauntlets : Item() {
     )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
+    override var phase = 1
 }

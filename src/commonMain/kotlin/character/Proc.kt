@@ -56,11 +56,13 @@ abstract class Proc {
         // Damage types
         PHYSICAL_DAMAGE,
         HOLY_DAMAGE,
-        FIRE_DAMAGE,
+        FIRE_DAMAGE_NON_PERIODIC,
+        FIRE_DAMAGE_PERIODIC,
         NATURE_DAMAGE,
         FROST_DAMAGE,
         SHADOW_DAMAGE_PERIODIC,
         SHADOW_DAMAGE_NON_PERIODIC,
+        PHYSICAL_DAMAGE_PERIODIC,
         ARCANE_DAMAGE,
 
         // Mechanics
@@ -70,6 +72,8 @@ abstract class Proc {
         // Specifics
         HUNTER_CAST_KILL_COMMAND,
 
+        MAGE_ANY_SCORCH,
+
         PRIEST_TICK_SHADOW_WORD_PAIN,
 
         ROGUE_CAST_CHEAP_SHOT,
@@ -78,6 +82,7 @@ abstract class Proc {
         ROGUE_CAST_ENVENOM,
         ROGUE_CAST_RUPTURE,
         ROGUE_CAST_SLICE_AND_DICE,
+        ROGUE_CAST_FINISHER,
 
         SHAMAN_CAST_SHOCK,
         SHAMAN_CAST_LIGHTNING_BOLT,

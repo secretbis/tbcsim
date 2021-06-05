@@ -56,6 +56,8 @@ public class ReignOfMisery : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(44751, "Increase Spell Dam 266", this)

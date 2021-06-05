@@ -4,6 +4,7 @@ import character.Race
 import character.Ability
 import character.Buff
 import character.Stats
+import character.CharacterType
 import character.races.abilities.Berserking
 import mechanics.Rating
 import sim.SimParticipant
@@ -23,7 +24,20 @@ class Troll : Race() {
         }
     }
 
-    // TODO: Beast slaying racial, and target types in general
+    val beastSlaying = object : Buff() {
+        override val name: String = "Beast Slaying"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sp: SimParticipant): Stats? {
+            return if(sp.sim.target.character.subTypes.intersect(setOf(CharacterType.BEAST)).isNotEmpty()) {
+                Stats(
+                    physicalDamageMultiplier = 1.05,
+                )
+            } else null
+        }
+    }
+
     val bowSpec = object : Buff() {
         override val name: String = "Bow Specialization"
         override val durationMs: Int = -1
@@ -34,5 +48,5 @@ class Troll : Race() {
         }
     }
 
-    override fun buffs(sp: SimParticipant): List<Buff> = listOf(bowSpec)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(beastSlaying, bowSpec)
 }

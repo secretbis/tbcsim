@@ -43,7 +43,7 @@ class Shadowburn : Ability() {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.SHADOW
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, spellPowerCoeff, school)
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(

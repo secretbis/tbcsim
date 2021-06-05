@@ -33,6 +33,13 @@ class SimIteration(
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
 
+    val forceRecomputeThresholds = mutableMapOf(
+        // 20% Execute/etc
+        opts.durationMs * 0.20 to false,
+        // 35% Dirty Deeds
+        opts.durationMs * 0.35 to false
+    )
+
     // Setup known participants
     val target: SimParticipant = defaultTarget()
     val subject: SimParticipant = SimParticipant(_subject, _rotation, this, epStatMod = epStatMod)
@@ -60,6 +67,16 @@ class SimIteration(
     }
 
     fun tick() {
+        // Force a recompute at predefined thresholds, e.g. execute talents
+        forceRecomputeThresholds.forEach {
+            if(!it.value && elapsedTimeMs < it.key) {
+                forceRecomputeThresholds[it.key] = true
+                allParticipants.forEach { sp ->
+                    sp.recomputeStats()
+                }
+            }
+        }
+
         allParticipants.forEach {
             it.tick()
         }
@@ -134,8 +151,9 @@ class SimIteration(
         return SimParticipant(char, Rotation(listOf(), false), this).init()
     }
 
-    fun isExecutePhase(): Boolean {
+    fun isExecutePhase(thresholdPercent: Double = 20.0): Boolean {
         // The last 20% of the duration is considered to be Execute phase
-        return elapsedTimeMs >= 0.8 * opts.durationMs
+        val durLimit = (thresholdPercent / 100.0).coerceAtLeast(0.0)
+        return elapsedTimeMs >= (1 - durLimit) * opts.durationMs
     }
 }

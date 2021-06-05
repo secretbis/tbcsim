@@ -63,6 +63,8 @@ public class BattlewornTuskguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2868)
 
+  public override var phase: Int = 4
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(35168, "Block Value 51", this)

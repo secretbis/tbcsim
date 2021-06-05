@@ -64,6 +64,8 @@ public class LightbringerLeggings : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3151)
 
+  public override var phase: Int = 3
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42093, "Healing 114", this),

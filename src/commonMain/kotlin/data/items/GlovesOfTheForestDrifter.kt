@@ -63,6 +63,8 @@ public class GlovesOfTheForestDrifter : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2893)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(42098, "Armor Penetration 140", this)

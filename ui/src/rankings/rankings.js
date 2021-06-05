@@ -28,7 +28,7 @@ function HowItWorks() {
         </ul>
         <h5>Notes and Caveats</h5>
         <ul>
-          <li>Each class is simulated in "ideal" conditions.  For example, supporting 10 Rogues/Fury Warriors with perfect melee groups is not possible - a 25-man raid would max out at approximately two.</li>
+          <li>Each class is simulated in "ideal" conditions.  For example, supporting 10 Rogues/Fury Warriors with perfect melee groups is not possible - a 25-man raid would max out at approximately one or two.</li>
           <li>If you are interested in how these classes perform in different conditions, head over to the Simulator tab and subtract some buffs!</li>
         </ul>
       </Row>
@@ -114,6 +114,11 @@ const RankingBarChart = ({ data }) => (
 const specDisplayNames = {
   hunter_bm: 'Beast Mastery Hunter',
   hunter_surv: 'Survival Hunter',
+  mage_arcane: 'Arcane Mage',
+  mage_fire: 'Fire Mage',
+  mage_frost: 'Frost Mage',
+  rogue_assassination: 'Assassination Rogue',
+  rogue_combat: 'Combat Rogue',
   shaman_ele: 'Elemental Shaman',
   shaman_enh: 'Enhancement Shaman',
   warlock_affliction_ruin: 'Affliction Warlock (Ruin)',
@@ -133,6 +138,11 @@ const specDisplayNames = {
 const specColors = {
   hunter_bm: '#AAD372',
   hunter_surv: '#AAD372',
+  mage_arcane: '#3FC7EB',
+  mage_fire: '#3FC7EB',
+  mage_frost: '#3FC7EB',
+  rogue_assassination: '#FFF468',
+  rogue_combat: '#FFF468',
   shaman_ele: '#0070DD',
   shaman_enh: '#0070DD',
   warlock_affliction_ruin: '#8788EE',
@@ -145,7 +155,8 @@ const specColors = {
 
 const specPetColors = {
   hunter_bm: '#64BDC8',
-  hunter_surv: '#64BDC8'
+  hunter_surv: '#64BDC8',
+  mage_frost: '#64BDC8',
 }
 
 function SpecRankingPanel({ name, category, collapsible=true }) {

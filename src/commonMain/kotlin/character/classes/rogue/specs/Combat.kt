@@ -6,7 +6,7 @@ import character.SpecEpDelta
 class Combat : Spec() {
     override val name: String = "Combat"
     override val epBaseStat: SpecEpDelta = attackPowerBase
-    override val epStatDeltas: List<SpecEpDelta> = dualWieldMeleeDeltas
+    override val epStatDeltas: List<SpecEpDelta> = defaultMeleeDeltas
     override val benefitsFromMeleeWeaponDps = true
 
     override fun redSocketEp(deltas: Map<String, Double>): Double {

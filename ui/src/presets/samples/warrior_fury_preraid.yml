@@ -50,7 +50,7 @@ gear:
     name: Dragonmaw
     enchant: Mongoose
   offHand:
-    name: Dragonmaw
+    name: Gladiator's Slicer
     # No Executioner until ZA
     enchant: Mongoose
     tempEnchant: Adamantite Stone

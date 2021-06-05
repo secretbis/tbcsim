@@ -62,6 +62,8 @@ public class QuadDeathblowXGoggles : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2877)
 
+  public override var phase: Int = 5
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(36068, " Attack Power 104", this),

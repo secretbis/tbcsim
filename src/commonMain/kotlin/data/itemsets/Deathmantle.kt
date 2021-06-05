@@ -10,11 +10,14 @@ class Deathmantle : ItemSet() {
     companion object {
         const val TWO_SET_BUFF_NAME = "Deathmantle (2 set)"
         const val FOUR_SET_BUFF_NAME = "Deathmantle (4 set)"
+
+        fun twoSetBonusDamagePerCP(): Double {
+            return 40.0
+        }
     }
 
     override val id: Int = 622
 
-    // TODO: When Envenom and Eviscerate exist, they should check this buff to compute their damage
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
@@ -23,14 +26,12 @@ class Deathmantle : ItemSet() {
     fun noCostConsumeProc(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.ROGUE_CAST_KIDNEY_SHOT,
-                Trigger.ROGUE_CAST_EVISCERATE,
-                Trigger.ROGUE_CAST_ENVENOM,
-                Trigger.ROGUE_CAST_RUPTURE,
-                Trigger.ROGUE_CAST_SLICE_AND_DICE,
+                Trigger.ROGUE_CAST_FINISHER
             )
             override val type: Type = Type.STATIC
 
+            // TODO: is this also consumed on misses/dodges/parry etc? otherwise we have to check here for a hit
+            // if it does consume on a miss/etc. we need to check interactions with the "Quick Recovery" talent.
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 // Remove the crit buff
                 sp.consumeBuff(buff)
@@ -64,6 +65,7 @@ class Deathmantle : ItemSet() {
             override val type: Type = Type.PPM
             override val ppm: Double = 1.0
 
+            // TODO: does this also happen on misses/dodges/parry etc? otherwise we have to check here for a hit
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.addBuff(freeFinisherBuff)
             }

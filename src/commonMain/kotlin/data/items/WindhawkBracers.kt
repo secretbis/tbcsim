@@ -63,6 +63,8 @@ public class WindhawkBracers : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3016)
 
+  public override var phase: Int = 2
+
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(9345, "Increase Spell Dam 16", this),
