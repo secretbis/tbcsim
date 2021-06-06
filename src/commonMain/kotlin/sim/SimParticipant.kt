@@ -684,8 +684,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.attackPower.coerceAtLeast(0) +
-                strength()-10 * character.klass.attackPowerFromStrength +
-                agility()-10 * character.klass.attackPowerFromAgility
+                ((strength() - 10) * character.klass.attackPowerFromStrength) +
+                ((agility() - 10) * character.klass.attackPowerFromAgility)
             ) * stats.attackPowerMultiplier
         ).toInt()
     }
@@ -694,7 +694,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return (
             (
                 stats.rangedAttackPower.coerceAtLeast(0) +
-                agility() * character.klass.rangedAttackPowerFromAgility
+                (agility() * character.klass.rangedAttackPowerFromAgility)
             ) * stats.rangedAttackPowerMultiplier
         ).toInt()
     }
