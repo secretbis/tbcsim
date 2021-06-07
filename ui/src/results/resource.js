@@ -116,16 +116,6 @@ function chartConfig(character, resourceType) {
 }
 
 export default function({ character, data }) {
-  // Transform the data how the chart lib wants it
-  // We only have one resource line
-  const actualData = [{
-    id: resourceTypeForClass(character),
-    data: _.uniqBy(data.series.toArray().map(d => ({
-      x: kprop(d, 'first'),
-      y: kprop(d, 'second')
-    })), 'x')
-  }]
-
   return (
     <Container>
       {linkedHashMapKeys(data).map(key => {
