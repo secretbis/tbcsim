@@ -115,7 +115,7 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </ItemTooltip>
             {item.sockets && item.sockets.map((sk, idx) => {
-              return <GemSlot key={idx} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
+              return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?
               <EnchantSlot enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />

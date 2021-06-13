@@ -26,7 +26,7 @@ const metaIC = {
   }
 }
 
-export default function({ socket, character, onSelect }) {
+export default function({ phase, socket, character, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   const color = kprop(kprop(socket, 'color'), 'name', '').toLowerCase();
@@ -51,6 +51,7 @@ export default function({ socket, character, onSelect }) {
         <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
         <GearSelector
           character={character}
+          phase={phase}
           inventorySlots={[0]}
           itemClasses={isMetaGem ? metaIC : nonMetaIC}
           visible={selectorVisible}
