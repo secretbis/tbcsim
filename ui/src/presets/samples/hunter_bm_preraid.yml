@@ -126,6 +126,8 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Hunter's Mark
           seconds: 0
+    - name: Blood Fury
+    - name: Berserking
     - name: Bestial Wrath
     - name: Rapid Fire
     - name: Haste Potion

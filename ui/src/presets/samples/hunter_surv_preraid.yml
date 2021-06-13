@@ -120,6 +120,8 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Hunter's Mark
           seconds: 0
+    - name: Blood Fury
+    - name: Berserking
     - name: Rapid Fire
     - name: Haste Potion
     - name: Use Active Trinket

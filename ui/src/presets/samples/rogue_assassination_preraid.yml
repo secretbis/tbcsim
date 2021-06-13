@@ -131,6 +131,8 @@ rotation:
 #    - name: Instant Poison (MH)
     - name: Deadly Poison (OH)
   combat:
+    - name: Blood Fury
+    - name: Berserking
     # All rotation items have the following implied criteria:
     # - It won't cast while it's on cooldown
     # - It won't cast if there is not enough resource to do so

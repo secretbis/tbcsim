@@ -133,6 +133,7 @@ rotation:
     - name: Water Shield
 
   combat:
+    - name: Berserking
     # All rotation items have the following implied criteria:
     # - It won't cast while it's on cooldown
     # - It won't cast if there is not enough resource to do so

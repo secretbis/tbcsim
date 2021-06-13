@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Resource
 import character.Stats
+import character.races.Troll
 import mechanics.Rating
 import sim.SimParticipant
 
@@ -16,7 +17,7 @@ class Berserking : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type {
-        if(sp.resources.containsKey(Resource.Type.MANA)) return Resource.Type.MANA 
+        if(sp.resources.containsKey(Resource.Type.MANA)) return Resource.Type.MANA
         if(sp.resources.containsKey(Resource.Type.ENERGY)) return Resource.Type.ENERGY
         if(sp.resources.containsKey(Resource.Type.RAGE)) return Resource.Type.RAGE
 
@@ -41,6 +42,10 @@ class Berserking : Ability() {
                 physicalHasteMultiplier = 1.1
             )
         }
+    }
+
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.race is Troll && super.available(sp)
     }
 
     override fun cast(sp: SimParticipant) {

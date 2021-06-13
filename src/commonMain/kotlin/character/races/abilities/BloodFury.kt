@@ -3,6 +3,7 @@ package character.races.abilities
 import character.Ability
 import character.Buff
 import character.Stats
+import character.races.Orc
 import sim.SimParticipant
 
 class BloodFury : Ability() {
@@ -24,6 +25,10 @@ class BloodFury : Ability() {
                 spellDamage = 5 + 2 * sp.character.level
             )
         }
+    }
+
+    override fun available(sp: SimParticipant): Boolean {
+        return sp.character.race is Orc && super.available(sp)
     }
 
     override fun cast(sp: SimParticipant) {

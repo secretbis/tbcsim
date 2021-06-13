@@ -123,6 +123,7 @@ rotation:
     - name: Molten Armor
 
   combat:
+    - name: Berserking
     # Use a Dark Rune if we've used at least 1500 mana
     - name: Dark Rune
       criteria:

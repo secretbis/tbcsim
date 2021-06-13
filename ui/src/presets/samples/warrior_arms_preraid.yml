@@ -121,6 +121,8 @@ rotation:
 #    - name: Spicy Hot Talbuk
 
   combat:
+    - name: Blood Fury
+    - name: Berserking
     - name: Bloodrage
     - name: Death Wish
       criteria:

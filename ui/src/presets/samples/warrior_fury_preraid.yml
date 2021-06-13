@@ -1,7 +1,7 @@
 class: Warrior
 spec: Fury
 description: Fury Warrior (pre-raid)
-race: Human
+race: Orc
 level: 70
 epCategory: preraid
 epSpec: warrior_fury
@@ -130,6 +130,8 @@ rotation:
     - name: Bloodrage
 
   combat:
+    - name: Blood Fury
+    - name: Berserking
     - name: Bloodrage
     - name: Rampage
       criteria:
