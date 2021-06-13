@@ -18,7 +18,7 @@ export default function({ talents, dispatch }) {
     try {
       const parsed = JSON.parse(talentsStr);
       setJsonValid(true);
-      dispatch({ type: 'setRotation', value: parsed });
+      dispatch({ type: 'setTalents', value: parsed });
     } catch(e) {
       setJsonValid(false);
     }

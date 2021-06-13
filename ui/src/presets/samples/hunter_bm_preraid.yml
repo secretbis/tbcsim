@@ -74,17 +74,11 @@ gear:
     gems:
       - Delicate Living Ruby
   chest:
-    name: Ebon Netherscale Breastplate
+    name: Primalstrike Vest
     enchant: Exceptional Stats
-    gems:
-      - Delicate Living Ruby
-      - Delicate Living Ruby
-      - Delicate Living Ruby
   wrists:
-    name: Ebon Netherscale Bracers
+    name: Primalstrike Bracers
     enchant: Assault
-    gems:
-    - Rigid Dawnstone
   hands:
     name: Beast Lord Handguards
     enchant: Superior Agility
@@ -92,10 +86,7 @@ gear:
       - Delicate Living Ruby
       - Shifting Nightseye
   waist:
-    name: Ebon Netherscale Belt
-    gems:
-      - Shifting Nightseye
-      - Rigid Dawnstone
+    name: Primalstrike Belt
   legs:
     name: Beast Lord Leggings
     enchant: Nethercobra Leg Armor
