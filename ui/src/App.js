@@ -29,13 +29,11 @@ const bannerTitle = 'Hello!  This is a work in progress.'
 function bannerMsg() {
   return (
     <div>
-      <p>At this moment, only the following specs are available:</p>
+      <p>At this moment, the following specs are not implemented:</p>
       <ul>
-        <li>BM/Survival Hunter</li>
-        <li>Assassination/Combat Rogue</li>
-        <li>Enhancement/Elemental Shaman</li>
-        <li>Affliction/Destruction Warlock</li>
-        <li>Arms/Fury Warrior</li>
+        <li>Ret Paladin</li>
+        <li>Shadow Priest</li>
+        <li>Balance/Feral Druid</li>
       </ul>
     </div>
   );

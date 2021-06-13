@@ -5,10 +5,17 @@ This is a simulation of WoW: TBC DPS - items, abilities, and mechanics.
 Web version here: https://tbcsim.com
 
 This information is not very cleanly available, and requires a fair amount of archaeology to discover.
-As such, I'm sure there are a thousand subtle bugs.  Please report any if you find them! 
+As such, I'm sure there are a thousand subtle bugs.  Please report any if you find them!
 
 Implemented:
 - Specs
+  - Hunter
+    - Beast Mastery
+    - Survival
+  - Mage
+    - Arcane
+    - Fire
+    - Frost
   - Shaman
     - Enhancement
     - Elemental
@@ -52,25 +59,25 @@ To calculate EPs for a single character definition, use the following command:
 
 This uses the sim defaults of a step interval of 10ms and an iteration count of 10,000 - both can be adjusted to your preference.  See the CLI usage below, or just run `./tbcsim`.
 
-Higher iteration counts will give more accurate EPs.  Smaller step intervals will provide a higher resolution, which can be useful in some situations like extremely high haste.  Generally speaking, intervals smaller than 10ms are probably not relevant.  
+Higher iteration counts will give more accurate EPs.  Smaller step intervals will provide a higher resolution, which can be useful in some situations like extremely high haste.  Generally speaking, intervals smaller than 10ms are probably not relevant.
 
 ## Example CLI Output
 
 ```
 Completed 100 iterations in 12 seconds
 Resource usage for iteration 71
- 100% |***  *  *                                                                                                                                                                           
-      |          *** **    *                                                                                                                                                               
-      |                    **** *   **                                                                                                                                                     
-M     |                              ***  *    *                                       *                                                                                                   
-A     |                                         *** *   **                            *** *** *  *                                                                                         
-N     |                                                  ***  *    *                  *          *  ***    *                                                                               
-A     |                                                             *** * *  *   **  *                      * *** *  *                                                                     
-      |                                                                        *                                        ***    *                                                           
-      |                                                                                                                         *****    *                                                 
-   0% |                                                                                                                                *  * ***    *    *    *    *    *    *    *    *    
+ 100% |***  *  *
+      |          *** **    *
+      |                    **** *   **
+M     |                              ***  *    *                                       *
+A     |                                         *** *   **                            *** *** *  *
+N     |                                                  ***  *    *                  *          *  ***    *
+A     |                                                             *** * *  *   **  *                      * *** *  *
+      |                                                                        *                                        ***    *
+      |                                                                                                                         *****    *
+   0% |                                                                                                                                *  * ***    *    *    *    *    *    *    *    *
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                                         Time (s)                                                                                          
+                                                                                         Time (s)
 Buffs
 Name                        | AppliedCountAvg | RefreshedCountAvg | UptimePct | AvgDurationSeconds
 ----------------------------|-----------------|-------------------|-----------|-------------------

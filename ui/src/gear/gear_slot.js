@@ -118,10 +118,10 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
               return <GemSlot key={idx} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?
-              <EnchantSlot enchantType={'enchants'} item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
+              <EnchantSlot enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
             : null}
             {itemCanTempEnchant ?
-              <EnchantSlot enchantType={'tempEnchants'} item={item} enchant={item && item.tempEnchant} inventorySlots={inventorySlots} onSelect={onTempEnchantSelect} />
+              <EnchantSlot enchantType={'tempEnchants'} phase={phase} item={item} enchant={item && item.tempEnchant} inventorySlots={inventorySlots} onSelect={onTempEnchantSelect} />
             : null}
           </Row>
         </Col>

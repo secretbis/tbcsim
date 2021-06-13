@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SpellTooltip from './spell_tooltip';
 import GearSelector from './gear_selector';
 
-export default function({ item, enchant, enchantType, inventorySlots, onSelect }) {
+export default function({ item, phase, enchant, enchantType, inventorySlots, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   function onEnchantClick(e) {
@@ -45,6 +45,7 @@ export default function({ item, enchant, enchantType, inventorySlots, onSelect }
         <span className="q2">{enchant.displayName}</span>
         <GearSelector
           type={enchantType}
+          phase={phase}
           item={item}
           TooltipComponent={SpellTooltip}
           inventorySlots={inventorySlots}
