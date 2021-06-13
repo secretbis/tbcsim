@@ -3,6 +3,7 @@ package character.classes.mage.talents
 import character.*
 import data.model.Item
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 
 class MasterOfElements(currentRank: Int) : Talent(currentRank) {
@@ -25,7 +26,7 @@ class MasterOfElements(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(event?.result == Event.Result.CRIT) {
+                if(event?.result == EventResult.CRIT) {
                     val resourceCost = ability?.resourceCost(sp)
                     if(resourceCost != null) {
                         sp.addResource((resourceCost * 0.1 * currentRank).toInt(), Resource.Type.MANA, Companion.name)

@@ -6,6 +6,8 @@ import character.Resource
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class LightningBreathRank6 : Ability() {
@@ -25,7 +27,7 @@ class LightningBreathRank6 : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -34,11 +36,11 @@ class LightningBreathRank6 : Ability() {
         sp.logEvent(event)
 
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.NATURE_DAMAGE)
             else -> null
         }
 

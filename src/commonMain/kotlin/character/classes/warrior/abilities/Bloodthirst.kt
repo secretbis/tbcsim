@@ -9,6 +9,8 @@ import data.itemsets.DestroyerBattlegear
 import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Bloodthirst : Ability() {
@@ -51,7 +53,7 @@ class Bloodthirst : Ability() {
 
         // Save last hit state and fire event
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
@@ -61,13 +63,13 @@ class Bloodthirst : Ability() {
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

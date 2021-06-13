@@ -8,6 +8,8 @@ import mechanics.Melee
 import sim.Event
 import sim.SimParticipant
 import character.classes.rogue.talents.*
+import sim.EventResult
+import sim.EventType
 
 class WoundPoison(override val name: String, val item: Item) : Ability() {
     companion object {
@@ -30,22 +32,22 @@ class WoundPoison(override val name: String, val item: Item) : Ability() {
         val dmgIncrease = vp?.damageIncreasePercentEnvenom() ?: 0.0
 
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
-    
+
         // TODO: this needs to be casted so it can be resisted.
         //       can't use Spell.attackRoll though because it uses spellcrit/hit etc.
         val damage = baseDamage * dmgMultiplier
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
             abilityName = name,
             amount = damage,
-            result = Event.Result.HIT
+            result = EventResult.HIT
         )
         sp.logEvent(event)
 
         sp.sim.target.addDebuff(character.classes.rogue.debuffs.WoundPoison(sp))
-    
+
         sp.fireProc(listOf(Proc.Trigger.NATURE_DAMAGE), listOf(), this, event)
     }
 }

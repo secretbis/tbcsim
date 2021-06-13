@@ -11,6 +11,8 @@ import character.classes.mage.talents.ArcaneImpact
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class ArcaneBlast : Ability() {
@@ -80,7 +82,7 @@ class ArcaneBlast : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = aiCrit, bonusHitChance = afHit)
 
          val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -92,11 +94,11 @@ class ArcaneBlast : Ability() {
 
         // Fire procs
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.ARCANE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.ARCANE_DAMAGE)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.ARCANE_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.ARCANE_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.ARCANE_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.ARCANE_DAMAGE)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.ARCANE_DAMAGE)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.ARCANE_DAMAGE)
             else -> null
         }
 

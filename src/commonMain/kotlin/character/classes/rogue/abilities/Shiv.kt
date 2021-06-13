@@ -7,6 +7,8 @@ import sim.SimParticipant
 import data.Constants
 import character.classes.rogue.talents.*
 import character.classes.rogue.buffs.*
+import sim.EventResult
+import sim.EventType
 
 class Shiv : Ability() {
     companion object {
@@ -35,17 +37,17 @@ class Shiv : Ability() {
         val damageRoll = Melee.baseDamageRoll(sp, item, isNormalized = true) * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE && result.second != Event.Result.PARRY) {
+        if(result.second != EventResult.MISS && result.second != EventResult.DODGE && result.second != EventResult.PARRY) {
             val poison = sp.character.gear.offHand.tempEnchant as? Poison
             if(poison != null) {
                 poison.poisonAbility?.cast(sp)
             }
-            
+
             sp.addResource(1, Resource.Type.COMBO_POINT, name)
         }
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
@@ -55,13 +57,13 @@ class Shiv : Ability() {
 
         // Proc anything that can proc off a yellow hit
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

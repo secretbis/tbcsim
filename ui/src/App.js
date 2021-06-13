@@ -10,6 +10,7 @@ import { Container, Content, Header, Grid, Footer, Row, Col, Button, Panel, Navb
 
 import { initialState, stateReducer } from './state';
 
+import CombatLog from './combat_log/combat_log';
 import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
 import Presets from './presets/presets';
@@ -155,6 +156,9 @@ function App() {
           </Row>
           <Row style={{ margin: '10px 0 0 0' }}>
             <Button appearance='ghost' disabled={simDisabled} onClick={onSimClick}>Sim!</Button>
+            {state.iterationsCompleted == null &&
+              <CombatLog iterations={state.iterationResults} />
+            }
             {state.iterationsCompleted != null &&
               <span style={{ marginLeft: '10px' }}>Iterations completed: {state.iterationsCompleted} of {state.simOptions.iterations}</span>
             }
@@ -168,13 +172,6 @@ function App() {
       </Content>
     )
   }
-
-  // Passing Nav.Item to Link doesn't work as expected, so make something that looks like it but is dumber
-  const FakeNavItem = React.forwardRef((props, ref) => (
-    <li className='rs-nav-item'>
-      <a className='rs-nav-item-content' ref={ref} {...props}>{props.children}</a>
-    </li>
-  ))
 
   // App
   return (

@@ -3,7 +3,9 @@ package sim
 import character.Buff
 import data.Constants
 import character.Resource
+import kotlin.js.JsExport
 
+@JsExport
 data class Event(
     var tick: Int = -1,
     var timeMs: Int = -1,
@@ -11,45 +13,15 @@ data class Event(
     val buff: Buff? = null,
     val resourceType: Resource.Type? = null,
     val buffStacks: Int = 0,
-    val eventType: Type,
+    val buffCharges: Int = 0,
+    val eventType: EventType,
     var target: SimParticipant? = null,
     val damageType: Constants.DamageType? = null,
     val isWhiteDamage: Boolean = false,
     val amount: Double = 0.0,
     val amountPct: Double = 0.0,
     val delta: Double = 0.0,
-    val result: Result = Result.NONE,
+    val result: EventResult = EventResult.NONE,
     val partialAmount: Double = 0.0,
     var comboPointsSpent: Int = 0
-) {
-    enum class Type {
-        DAMAGE,
-        SPELL_CAST,
-        BUFF_START,
-        BUFF_REFRESH,
-        BUFF_CHARGE_CONSUMED,
-        BUFF_END,
-        DEBUFF_START,
-        DEBUFF_REFRESH,
-        DEBUFF_CHARGE_CONSUMED,
-        DEBUFF_END,
-        PROC,
-        RESOURCE_CHANGED
-    }
-
-    enum class Result {
-        RESIST,
-        PARTIAL_RESIST_CRIT,
-        PARTIAL_RESIST_HIT,
-        MISS,
-        DODGE,
-        PARRY,
-        GLANCE,
-        BLOCK,
-        BLOCKED_CRIT,
-        CRIT,
-        CRUSH,
-        HIT,
-        NONE
-    }
-}
+)

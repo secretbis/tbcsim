@@ -5,6 +5,7 @@ import data.Constants
 import data.model.Item
 import mu.KotlinLogging
 import sim.Event
+import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
@@ -199,7 +200,7 @@ object Melee {
 
     /*  maybe do this instead of the optional arguments I added below for crit, critdmg and dodge?
         would be a more general version although I don't know if there would be any side-effects
-    
+
     fun attackRollWithTemporaryStats(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, temporaryStats: Stats){
         sp.stats.add(temporaryStats)
         attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false)
@@ -208,8 +209,7 @@ object Melee {
     */
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, abilityAdditionalCritDamageMultiplier: Double = 1.0, bonusCritChance: Double = 0.0, noDodgeAllowed: Boolean = false) : Pair<Double, Event.Result> {
-        // this has to be multiplied, not added
+    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, abilityAdditionalCritDamageMultiplier: Double = 1.0, bonusCritChance: Double = 0.0, noDodgeAllowed: Boolean = false) : Pair<Double, EventResult> {
         val offHandMultiplier = if(isOffhand(sp, item)) {
             Stats.offHandPenalty * (if(isWhiteDmg) {
                 sp.stats.whiteDamageAddlOffHandPenaltyModifier
@@ -233,7 +233,7 @@ object Melee {
         } * sp.stats.physicalDamageMultiplier
 
         val damageRoll = (_damageRoll + flatModifier) * offHandMultiplier * allMultiplier
-        
+
         // Find all our possible damage mods from buffs and so on
         // old version was technically correct but only worked because the base crit multiplier is 2.0. general formula should be this
         val additionalCritMultiplier = (if(isWhiteDmg) {
@@ -246,7 +246,7 @@ object Melee {
         // Get the attack result
         val missChance = meleeMissChance(sp, item, isWhiteDmg)
         val actualCritChance = meleeCritChance(sp) + bonusCritChance + additionalWeaponTypeCritChance(sp, item) + sp.stats.yellowHitsAdditionalCritPct
-        val dodgeChance = if(noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance 
+        val dodgeChance = if(noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance
         val parryChance = meleeParryChance(sp, item) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
             meleeGlanceChance(sp) + parryChance
@@ -262,23 +262,23 @@ object Melee {
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, Event.Result.MISS)
-            attackRoll < dodgeChance -> Pair(0.0, Event.Result.DODGE)
-            attackRoll < parryChance -> Pair(0.0, Event.Result.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), Event.Result.GLANCE)
-            attackRoll < blockChance -> Pair(damageRoll, Event.Result.BLOCK) // Blocked damage is reduced later
-            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, Event.Result.CRIT)
-            else -> Pair(damageRoll, Event.Result.HIT)
+            attackRoll < missChance -> Pair(0.0, EventResult.MISS)
+            attackRoll < dodgeChance -> Pair(0.0, EventResult.DODGE)
+            attackRoll < parryChance -> Pair(0.0, EventResult.PARRY)
+            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), EventResult.GLANCE)
+            attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
+            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
+            else -> Pair(damageRoll, EventResult.HIT)
         }
 
         if(!isWhiteDmg) {
             // Two-roll yellow hit
-            if(finalResult.second == Event.Result.HIT || finalResult.second == Event.Result.BLOCK) {
+            if(finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
                     hitRoll2 < actualCritChance -> Pair(
                         finalResult.first * critMultiplier,
-                        Event.Result.CRIT
+                        EventResult.CRIT
                     )
                     else -> finalResult
                 }
@@ -289,7 +289,7 @@ object Melee {
         finalResult = Pair(finalResult.first * (1 - General.physicalArmorMitigation(sp)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
-        if(finalResult.second == Event.Result.BLOCK || finalResult.second == Event.Result.BLOCKED_CRIT) {
+        if(finalResult.second == EventResult.BLOCK || finalResult.second == EventResult.BLOCKED_CRIT) {
             finalResult = Pair(finalResult.first - General.physicalBlockReduction(sp), finalResult.second)
         }
 

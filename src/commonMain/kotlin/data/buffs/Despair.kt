@@ -5,6 +5,7 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class Despair(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
@@ -21,7 +22,7 @@ class Despair(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 val result = Melee.attackRoll(sp, 600.0, item , isWhiteDmg = false)
 
                 val damageEvent = Event(
-                    eventType = Event.Type.DAMAGE,
+                    eventType = EventType.DAMAGE,
                     damageType = Constants.DamageType.PHYSICAL_IGNORE_ARMOR,
                     abilityName = name,
                     amount = result.first,
@@ -53,4 +54,3 @@ class Despair(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }
-

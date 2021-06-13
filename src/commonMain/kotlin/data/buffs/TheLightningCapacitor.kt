@@ -5,6 +5,7 @@ import data.Constants
 import mechanics.Spell
 import data.model.Item
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class TheLightningCapacitor : Buff() {
@@ -27,7 +28,7 @@ class TheLightningCapacitor : Buff() {
             val result = Spell.attackRoll(sp, damageRoll, school)
 
             val damageEvent = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = result.first,

@@ -4,6 +4,7 @@ import { Container, Col, Row } from 'rsuite'
 import { itemClasses, armorSubclasses, weaponSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classRangedInvSlots, classMainHandItemClasses, classOffHandItemClasses, classRangedItemClasses } from '../data/constants';
 import GearSlot from './gear_slot';
 import Stats from './stats';
+import { kprop } from '../util/util';
 
 export default function({ state, character, phase, dispatch }) {
   character = character || {}
@@ -40,10 +41,10 @@ export default function({ state, character, phase, dispatch }) {
   const projectileISCs = []
 
   if(rangedItem) {
-    if([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(rangedItem.itemSubclass._itemClassOrdinal)) {
+    if([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(kprop(rangedItem.itemSubclass, 'itemClassOrdinal'))) {
       projectileISCs.push(2)  // Arrow
     }
-    if(weaponSubclasses.gun === rangedItem.itemSubclass._itemClassOrdinal) {
+    if(weaponSubclasses.gun === kprop(rangedItem.itemSubclass, 'itemClassOrdinal')) {
       projectileISCs.push(3)  // Bullet
     }
   }
@@ -58,6 +59,7 @@ export default function({ state, character, phase, dispatch }) {
 
   return (
     <Container style={{ maxWidth: '750px', minWidth: '500px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 10, marginTop: -25 }}><em>Click any slot, gem, or enchant to change it!</em></div>
       <Row>
         <Col xs={12}>
           <GearSlot character={character} phase={phase} inventorySlots={[1]} itemClasses={armorSlotIC} slotName='head' dispatch={dispatch} />

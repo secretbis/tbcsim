@@ -1,0 +1,17 @@
+package sim
+
+enum class EventType {
+    DAMAGE,
+    SPELL_START_CAST,
+    SPELL_CAST,
+    BUFF_START,
+    BUFF_REFRESH,
+    BUFF_CHARGE_CONSUMED,
+    BUFF_END,
+    DEBUFF_START,
+    DEBUFF_REFRESH,
+    DEBUFF_CHARGE_CONSUMED,
+    DEBUFF_END,
+    PROC,
+    RESOURCE_CHANGED
+}

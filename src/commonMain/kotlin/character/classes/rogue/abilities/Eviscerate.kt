@@ -11,6 +11,8 @@ import mechanics.Rating
 import mechanics.Spell
 import data.itemsets.AssassinationArmor
 import data.itemsets.Deathmantle
+import sim.EventResult
+import sim.EventType
 
 class Eviscerate : FinisherAbility() {
     companion object {
@@ -46,7 +48,7 @@ class Eviscerate : FinisherAbility() {
         val result = Melee.attackRoll(sp, damageRoll, null, isWhiteDmg = false, noDodgeAllowed = noDodgeAllowed(sp))
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             comboPointsSpent = consumedComboPoints,
@@ -56,13 +58,13 @@ class Eviscerate : FinisherAbility() {
         sp.logEvent(event)
 
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

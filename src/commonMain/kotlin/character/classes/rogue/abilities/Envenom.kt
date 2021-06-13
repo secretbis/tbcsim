@@ -14,6 +14,8 @@ import mu.KotlinLogging
 import kotlin.math.*
 import data.itemsets.AssassinationArmor
 import data.itemsets.Deathmantle
+import sim.EventResult
+import sim.EventType
 
 class Envenom : FinisherAbility() {
     companion object {
@@ -66,7 +68,7 @@ class Envenom : FinisherAbility() {
         val result = Melee.attackRoll(sp, damageRoll, null, isWhiteDmg = false, noDodgeAllowed = noDodgeAllowed(sp))
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
             abilityName = name,
             comboPointsSpent = consumedComboPoints,
@@ -75,18 +77,18 @@ class Envenom : FinisherAbility() {
         )
         sp.logEvent(event)
 
-        if(result.second != Event.Result.MISS && result.second != Event.Result.DODGE) {
+        if(result.second != EventResult.MISS && result.second != EventResult.DODGE) {
             removePoisonStacks(sp, consumedPoisonDoses)
         }
 
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
             else -> null
         }
 

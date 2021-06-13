@@ -13,6 +13,8 @@ import data.itemsets.VoidheartRaiment
 import data.model.Item
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 import kotlin.reflect.KProperty
 
@@ -47,7 +49,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             sp.logEvent(Event(
-                eventType = Event.Type.PROC,
+                eventType = EventType.PROC,
                 abilityName = Nightfall.name
             ))
 
@@ -81,11 +83,11 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier * t5BonusMultiplier
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT
+                result = EventResult.HIT
             )
             owner.logEvent(event)
 

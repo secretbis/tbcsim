@@ -19,7 +19,7 @@ object SimStats {
     fun sd(l: List<Double>, mean: Double) = sqrt(l.map { (it - mean) * (it - mean) }.average())
 
     private fun dpsForParticipant(sp: SimParticipant): Double {
-        return sp.events.filter { evt -> evt.eventType == Event.Type.DAMAGE }.fold(0.0) { acc, event ->
+        return sp.events.filter { evt -> evt.eventType == EventType.DAMAGE }.fold(0.0) { acc, event ->
             acc + event.amount
         } / (sp.sim.opts.durationMs / 1000.0)
     }
@@ -57,27 +57,27 @@ object SimStats {
     fun resultsByBuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
         return processBuffs(
             iterations,
-            Event.Type.BUFF_START,
-            Event.Type.BUFF_REFRESH,
-            Event.Type.BUFF_END
+            EventType.BUFF_START,
+            EventType.BUFF_REFRESH,
+            EventType.BUFF_END
         )
     }
 
     fun resultsByDebuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
         return processBuffs(
             iterations,
-            Event.Type.DEBUFF_START,
-            Event.Type.DEBUFF_REFRESH,
-            Event.Type.DEBUFF_END,
+            EventType.DEBUFF_START,
+            EventType.DEBUFF_REFRESH,
+            EventType.DEBUFF_END,
             onlyTarget = true
         )
     }
 
     private fun processBuffs(
         iterations: List<SimIteration>,
-        buffStart: Event.Type,
-        buffRefresh: Event.Type,
-        buffEnd: Event.Type,
+        buffStart: EventType,
+        buffRefresh: EventType,
+        buffEnd: EventType,
         onlyTarget: Boolean = false
     ): List<List<BuffBreakdown>> {
         val eventTypes = listOf(buffStart, buffRefresh, buffEnd)
@@ -212,7 +212,7 @@ object SimStats {
         return (0..participantCount).map { idx ->
             val byAbility = iterations.flatMap { iter ->
                 iter.participants[idx].events
-                    .filter { it.eventType == Event.Type.DAMAGE }
+                    .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.abilityName != null }
             }.groupBy { it.abilityName!! }
 
@@ -228,9 +228,9 @@ object SimStats {
                 val totalAvg = amounts.sum() / iterations.size.toDouble()
 
                 val allHits =
-                    events.filter { it.result == Event.Result.HIT || it.result == Event.Result.BLOCK || it.result == Event.Result.PARTIAL_RESIST_HIT }
+                    events.filter { it.result == EventResult.HIT || it.result == EventResult.BLOCK || it.result == EventResult.PARTIAL_RESIST_HIT }
                 val allCrits =
-                    events.filter { it.result == Event.Result.CRIT || it.result == Event.Result.BLOCKED_CRIT || it.result == Event.Result.PARTIAL_RESIST_CRIT }
+                    events.filter { it.result == EventResult.CRIT || it.result == EventResult.BLOCKED_CRIT || it.result == EventResult.PARTIAL_RESIST_CRIT }
                 val avgHit = allHits.map { it.amount }.sum() / allHits.size.toDouble()
                 val minHit = allHits.map { it.amount }.minOrNull() ?: Double.NaN
                 val maxHit = allHits.map { it.amount }.maxOrNull() ?: Double.NaN
@@ -243,11 +243,11 @@ object SimStats {
                 val hitPct = allHits.size / amounts.size.toDouble() * 100.0
                 val critPct = allCrits.size / amounts.size.toDouble() * 100.0
                 val missPct =
-                    events.filter { it.result == Event.Result.MISS || it.result == Event.Result.RESIST }.size / amounts.size.toDouble() * 100.0
-                val dodgePct = events.filter { it.result == Event.Result.DODGE }.size / amounts.size.toDouble() * 100.0
-                val parryPct = events.filter { it.result == Event.Result.PARRY }.size / amounts.size.toDouble() * 100.0
+                    events.filter { it.result == EventResult.MISS || it.result == EventResult.RESIST }.size / amounts.size.toDouble() * 100.0
+                val dodgePct = events.filter { it.result == EventResult.DODGE }.size / amounts.size.toDouble() * 100.0
+                val parryPct = events.filter { it.result == EventResult.PARRY }.size / amounts.size.toDouble() * 100.0
                 val glancePct =
-                    events.filter { it.result == Event.Result.GLANCE }.size / amounts.size.toDouble() * 100.0
+                    events.filter { it.result == EventResult.GLANCE }.size / amounts.size.toDouble() * 100.0
 
                 val pctOfTotal = totalAvg / grandTotal * 100.0
 
@@ -278,7 +278,7 @@ object SimStats {
         return (0..participantCount).map { idx ->
             val byDmgType = iterations.flatMap { iter ->
                 iter.participants[idx].events
-                    .filter { it.eventType == Event.Type.DAMAGE }
+                    .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.damageType != null }
             }.groupBy { it.damageType!! }
 
@@ -317,7 +317,7 @@ object SimStats {
 
             resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
                 val series =
-                    sp.events.filter { it.eventType == Event.Type.RESOURCE_CHANGED && it.resourceType == resourceType }
+                    sp.events.filter { it.eventType == EventType.RESOURCE_CHANGED && it.resourceType == resourceType }
                         .map {
                             Pair((it.timeMs / 1000.0).toInt(), it.amountPct)
                         }
@@ -341,7 +341,7 @@ object SimStats {
             resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
                 val byAbility = iterations.flatMap { iter ->
                     iter.participants[idx].events
-                        .filter { it.eventType == Event.Type.RESOURCE_CHANGED }
+                        .filter { it.eventType == EventType.RESOURCE_CHANGED }
                         .filter { it.abilityName != null }
                         .filter { it.resourceType == resourceType }
                 }.groupBy { it.abilityName!! }

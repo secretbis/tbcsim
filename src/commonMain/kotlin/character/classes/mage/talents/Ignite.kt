@@ -4,6 +4,8 @@ import character.*
 import data.Constants
 import data.model.Item
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Ignite(currentRank: Int) : Talent(currentRank) {
@@ -50,10 +52,10 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
 
                     // Log event
                     owner.logEvent(Event(
-                        eventType = Event.Type.DAMAGE,
+                        eventType = EventType.DAMAGE,
                         damageType = Constants.DamageType.FIRE,
                         abilityName = Companion.name,
-                        result = Event.Result.HIT,
+                        result = EventResult.HIT,
                         amount = igniteTickDamage
                     ))
 
@@ -63,7 +65,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
             }
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(event?.result == Event.Result.CRIT) {
+                if(event?.result == EventResult.CRIT) {
                     val debuff = sp.sim.target.debuffs[Companion.name] ?: igniteDebuff(sp)
                     val debuffState = debuff.state(sp.sim.target) as IgniteState
                     debuffState.damageEvents.add(Pair(event.amount, sp.sim.elapsedTimeMs))

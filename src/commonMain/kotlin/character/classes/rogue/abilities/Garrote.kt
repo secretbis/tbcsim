@@ -11,6 +11,8 @@ import character.classes.rogue.debuffs.*
 import character.classes.rogue.buffs.*
 import mechanics.Rating
 import mechanics.Spell
+import sim.EventResult
+import sim.EventType
 
 class Garrote : Ability() {
     companion object {
@@ -39,7 +41,7 @@ class Garrote : Ability() {
         val result = Melee.attackRoll(sp, 0.0, null, isWhiteDmg = false, noDodgeAllowed = true)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = 0.0,
@@ -47,18 +49,18 @@ class Garrote : Ability() {
         )
         //sp.logEvent(event)
 
-        if(result.second != Event.Result.MISS) {
+        if(result.second != EventResult.MISS) {
             sp.sim.target.addDebuff(GarroteDot(sp))
             sp.addResource(1, Resource.Type.COMBO_POINT, name)
         }
 
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT) // can't crit
-            Event.Result.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            Event.Result.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT) 
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT) // can't crit
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT) // can't crit
+            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT) // can't crit
             else -> null
         }
 

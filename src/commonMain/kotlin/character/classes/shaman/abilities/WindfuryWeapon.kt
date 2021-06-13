@@ -8,6 +8,8 @@ import data.buffs.TotemOfTheAstralWinds
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
@@ -22,9 +24,9 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
     }
 
-    fun fireEvents(sp: SimParticipant, result: Pair<Double, Event.Result>) {
+    fun fireEvents(sp: SimParticipant, result: Pair<Double, EventResult>) {
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             abilityName = name,
             amount = result.first,
@@ -35,8 +37,8 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
         // Proc anything that can proc off a white hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
         val triggerTypes = when (result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

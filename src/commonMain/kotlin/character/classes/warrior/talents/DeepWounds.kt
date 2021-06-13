@@ -4,6 +4,8 @@ import character.*
 import data.Constants
 import data.model.Item
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class DeepWounds(currentRank: Int) : Talent(currentRank) {
@@ -36,11 +38,11 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
             val damageFullDuration = owner.character.gear.mainHand.avgDmg * 0.2 * currentRank
 
             owner.logEvent(Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = name,
                 amount = damageFullDuration * tickPct,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             ))
         }
     }

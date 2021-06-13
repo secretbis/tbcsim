@@ -6,6 +6,7 @@ import character.classes.mage.talents.WintersChill
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class Waterbolt : Ability() {
@@ -33,7 +34,7 @@ class Waterbolt : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = wintersChillCrit)
 
          val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,

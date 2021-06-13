@@ -6,6 +6,8 @@ import data.model.Item
 import mechanics.General
 import mechanics.Ranged
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 
@@ -35,7 +37,7 @@ class AutoShot : AutoAttackBase() {
         (state(sp) as AutoAttackState).count += 1
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             isWhiteDamage = true,
             abilityName = name,
@@ -45,11 +47,11 @@ class AutoShot : AutoAttackBase() {
         sp.logEvent(event)
 
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.RANGED_AUTO_HIT, Proc.Trigger.RANGED_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.RANGED_AUTO_CRIT, Proc.Trigger.RANGED_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.MISS -> listOf(Proc.Trigger.RANGED_MISS)
-            Event.Result.BLOCK -> listOf(Proc.Trigger.RANGED_AUTO_HIT, Proc.Trigger.RANGED_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            Event.Result.BLOCKED_CRIT -> listOf(Proc.Trigger.RANGED_AUTO_CRIT, Proc.Trigger.RANGED_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.RANGED_AUTO_HIT, Proc.Trigger.RANGED_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.RANGED_AUTO_CRIT, Proc.Trigger.RANGED_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.MISS -> listOf(Proc.Trigger.RANGED_MISS)
+            EventResult.BLOCK -> listOf(Proc.Trigger.RANGED_AUTO_HIT, Proc.Trigger.RANGED_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.RANGED_AUTO_CRIT, Proc.Trigger.RANGED_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
             else -> null
         }
 

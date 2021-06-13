@@ -9,6 +9,7 @@ import mechanics.Spell
 import sim.Event
 import sim.SimParticipant
 import character.classes.rogue.talents.*
+import sim.EventType
 
 class InstantPoison(override val name: String, val item: Item) : Ability() {
     companion object {
@@ -35,14 +36,14 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
         val damage = Melee.baseDamageRollPure(baseDamage.first, baseDamage.second) * dmgMultiplier
         val result = Spell.attackRoll(sp, damage, school = Constants.DamageType.NATURE, bonusHitChance = 100.0)
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
             abilityName = name,
             amount = result.first,
             result = result.second
         )
         sp.logEvent(event)
-    
+
         sp.fireProc(listOf(Proc.Trigger.NATURE_DAMAGE), listOf(), this, event)
     }
 }

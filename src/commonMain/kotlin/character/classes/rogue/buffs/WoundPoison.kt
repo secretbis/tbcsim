@@ -8,6 +8,7 @@ import data.model.TempEnchant
 import sim.Event
 import sim.SimParticipant
 import character.classes.rogue.talents.*
+import sim.EventType
 
 class WoundPoison(sourceItem: Item) : Poison(sourceItem) {
 
@@ -47,7 +48,7 @@ class WoundPoison(sourceItem: Item) : Poison(sourceItem) {
 
                 sp.logEvent(
                     Event(
-                        eventType = Event.Type.PROC,
+                        eventType = EventType.PROC,
                         abilityName = poisonAbility!!.name
                     )
                 )

@@ -9,6 +9,7 @@ import data.model.Item
 import character.classes.rogue.talents.*
 import character.classes.rogue.buffs.*
 import mechanics.Rating
+import sim.EventType
 
 class SliceAndDice : FinisherAbility() {
     companion object {
@@ -37,7 +38,7 @@ class SliceAndDice : FinisherAbility() {
         sp.addBuff(character.classes.rogue.buffs.SliceAndDice(sp, consumedComboPoints))
 
         val event = Event(
-            eventType = Event.Type.SPELL_CAST,
+            eventType = EventType.SPELL_CAST,
             comboPointsSpent = consumedComboPoints
         )
         fireProcAsFinisher(sp, null, null, event)

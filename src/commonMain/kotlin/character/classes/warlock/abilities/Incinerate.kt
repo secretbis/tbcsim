@@ -8,6 +8,8 @@ import data.itemsets.MaleficRaiment
 import mechanics.General
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Incinerate : Ability() {
@@ -55,7 +57,7 @@ class Incinerate : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -65,11 +67,11 @@ class Incinerate : Ability() {
 
         // Proc anything that can proc off non-periodic Fire damage
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

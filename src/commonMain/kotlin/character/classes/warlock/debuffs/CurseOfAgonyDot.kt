@@ -7,6 +7,8 @@ import character.classes.warlock.talents.*
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
@@ -40,11 +42,11 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * contagionMultiplier * impCoaMultiplier
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
 

@@ -6,6 +6,8 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
@@ -27,7 +29,7 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
             val result = Melee.attackRoll(sp, attack, mh, isWhiteDmg = true)
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 isWhiteDamage = true,
                 abilityName = name,
@@ -38,8 +40,8 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
             // Proc anything that can proc off a white hit
             val triggerTypes = when (result.second) {
-                Event.Result.HIT -> listOf(Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                Event.Result.CRIT -> listOf(Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
                 else -> null
             }
 

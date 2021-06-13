@@ -7,6 +7,8 @@ import sim.Event
 import sim.SimParticipant
 import character.Proc
 import character.classes.rogue.talents.*
+import sim.EventResult
+import sim.EventType
 
 class GarroteDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
@@ -25,7 +27,7 @@ class GarroteDot(owner: SimParticipant) : Debuff(owner) {
         fun dmgPerTick(sp: SimParticipant): Double{
             val opportunity = sp.character.klass.talents[Opportunity.name] as Opportunity?
             val increasedDamagePercent = opportunity?.damageIncreasePercent() ?: 0.0
-        
+
             val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
             return (810.0 * dmgMultiplier + sp.attackPower() * 0.18) / 6
@@ -33,11 +35,11 @@ class GarroteDot(owner: SimParticipant) : Debuff(owner) {
 
         override fun cast(sp: SimParticipant) {
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = name,
                 amount = dmgPerTick(sp),
-                result = Event.Result.HIT
+                result = EventResult.HIT
             )
             owner.logEvent(event)
 

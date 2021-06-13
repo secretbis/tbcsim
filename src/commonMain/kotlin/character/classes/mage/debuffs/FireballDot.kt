@@ -5,6 +5,8 @@ import character.Debuff
 import character.Proc
 import data.Constants
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class FireballDot(owner: SimParticipant) : Debuff(owner) {
@@ -26,11 +28,11 @@ class FireballDot(owner: SimParticipant) : Debuff(owner) {
 
         override fun cast(sp: SimParticipant) {
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.FIRE,
                 abilityName = name,
                 amount = dmgPerTick,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
 

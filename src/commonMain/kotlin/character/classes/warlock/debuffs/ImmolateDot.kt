@@ -8,6 +8,8 @@ import data.itemsets.CorruptorRaiment
 import data.itemsets.VoidheartRaiment
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 
 import sim.SimParticipant
 import kotlin.reflect.KProperty
@@ -48,11 +50,11 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * t5BonusMultiplier
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
 

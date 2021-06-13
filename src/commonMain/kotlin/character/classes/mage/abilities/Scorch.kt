@@ -12,6 +12,8 @@ import character.classes.mage.talents.Pyromaniac
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Scorch : Ability() {
@@ -70,7 +72,7 @@ class Scorch : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = cmCrit + pyroCrit + combustionCrit + incCrit, bonusHitChance = emHit)
 
          val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -78,17 +80,17 @@ class Scorch : Ability() {
         )
         sp.logEvent(event)
 
-        if(result.second != Event.Result.RESIST) {
+        if(result.second != EventResult.RESIST) {
             sp.sim.addRaidBuff(buff)
         }
 
         // Fire procs
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

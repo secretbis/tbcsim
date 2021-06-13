@@ -8,6 +8,8 @@ import data.model.Item
 import mechanics.Melee
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
@@ -37,7 +39,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school)
 
         val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -47,10 +49,10 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
 
         // Proc anything that can proc off Fire damage
         val triggerTypes = when (result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
             else -> null
         }
 

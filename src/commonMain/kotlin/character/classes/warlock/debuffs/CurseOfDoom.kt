@@ -8,6 +8,8 @@ import character.classes.warlock.abilities.AmplifyCurse
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
@@ -39,11 +41,11 @@ class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * ampCurseMultiplier
 
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
                 amount = damageRoll,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
 

@@ -6,6 +6,8 @@ import character.classes.warlock.talents.Suppression
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Corruption : Ability() {
@@ -27,14 +29,14 @@ class Corruption : Ability() {
         val result = Spell.attackRoll(sp, 0.0, school, true, 0.0, suppressionBonusHit)
 
         val event = Event(
-            eventType = Event.Type.SPELL_CAST,
+            eventType = EventType.SPELL_CAST,
             damageType = school,
             abilityName = name,
             result = result.second,
         )
         sp.logEvent(event)
 
-        if(result.second != Event.Result.MISS) {
+        if(result.second != EventResult.MISS) {
             sp.sim.target.addDebuff(CorruptionDot(sp))
         }
     }

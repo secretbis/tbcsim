@@ -8,6 +8,7 @@ import data.Constants
 import data.model.Item
 import mechanics.Melee
 import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
@@ -60,7 +61,7 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
                 val result = Melee.attackRoll(sp, damageRoll, attackItem, isWhiteDmg = true)
 
                 sp.logEvent(Event(
-                    eventType = Event.Type.DAMAGE,
+                    eventType = EventType.DAMAGE,
                     damageType = Constants.DamageType.PHYSICAL,
                     abilityName = name,
                     amount = result.first,

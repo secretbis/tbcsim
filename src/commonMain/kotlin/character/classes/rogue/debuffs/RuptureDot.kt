@@ -7,6 +7,8 @@ import data.Constants
 import sim.Event
 import sim.SimParticipant
 import character.Proc
+import sim.EventResult
+import sim.EventType
 
 class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner) {
     companion object {
@@ -16,7 +18,7 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
     override val name: String = Companion.name
     override val durationMs: Int = getDurationForCombopoints(owner, consumedComboPoints)
     override val tickDeltaMs: Int = 2000
-    
+
     val dmgPerTick = getDamageForCombopoints(owner, consumedComboPoints) / (durationMs / tickDeltaMs)
 
     // can only replace if it has higher dmg
@@ -48,7 +50,7 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
         if (mangle != null) {
             increasedDamagePercent += 30.0
         }
-        
+
         val dmgMultiplier = 1 + (increasedDamagePercent / 100.0).coerceAtLeast(0.0)
 
         val damage: Double = when(consumedComboPoints){
@@ -61,26 +63,26 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
         }
         return damage * dmgMultiplier
     }
-        
+
     val dot = object : Ability() {
         override val id: Int = 26867
         override val name: String = Companion.name
         override fun gcdMs(sp: SimParticipant): Int = 0
-        
+
         override fun cast(sp: SimParticipant) {
             val event = Event(
-                eventType = Event.Type.DAMAGE,
+                eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 abilityName = name,
                 amount = dmgPerTick,
-                result = Event.Result.HIT,
+                result = EventResult.HIT,
             )
             owner.logEvent(event)
-        
+
             owner.fireProc(listOf(Proc.Trigger.PHYSICAL_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
-        
+
     override fun tick(sp: SimParticipant) {
         dot.cast(owner)
     }

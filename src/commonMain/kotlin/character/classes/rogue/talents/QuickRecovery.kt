@@ -4,6 +4,7 @@ import character.*
 import sim.SimParticipant
 import sim.Event
 import data.model.Item
+import sim.EventResult
 
 class QuickRecovery(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -29,7 +30,7 @@ class QuickRecovery(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(event?.result == Event.Result.MISS || event?.result == Event.Result.DODGE) {
+                if(event?.result == EventResult.MISS || event?.result == EventResult.DODGE) {
                     val cost = ability?.resourceCost(sp) ?: 0.0
                     sp.addResource((cost * finisherMissCostRefundFraction()).toInt(), Resource.Type.ENERGY, name)
                 }

@@ -8,6 +8,8 @@ import character.classes.mage.talents.*
 import data.Constants
 import mechanics.Spell
 import sim.Event
+import sim.EventResult
+import sim.EventType
 import sim.SimParticipant
 
 class Frostbolt : Ability() {
@@ -65,7 +67,7 @@ class Frostbolt : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = bonusFbCrit + wintersChillCrit, bonusHitChance = emHit, bonusCritMultiplier = iceShardsCritBonusMult)
 
          val event = Event(
-            eventType = Event.Type.DAMAGE,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             amount = result.first,
@@ -75,11 +77,11 @@ class Frostbolt : Ability() {
 
         // Frost procs
         val triggerTypes = when(result.second) {
-            Event.Result.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
-            Event.Result.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
-            Event.Result.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            Event.Result.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
-            Event.Result.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
+            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
             else -> null
         }
 

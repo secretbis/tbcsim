@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { itemClasses, gemSubclasses as gsc } from '../data/constants';
 import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
+import { kprop } from '../util/util';
 
 const socketImages = {
   blue: 'sockets/blue.png',
@@ -28,7 +29,7 @@ const metaIC = {
 export default function({ socket, character, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
-  const color = socket._color_0._name_2.toLowerCase();
+  const color = kprop(kprop(socket, 'color'), 'name', '').toLowerCase();
   const gem = socket.gem;
   const icon = gem ? `icons/${gem.icon}` : socketImages[color];
 
