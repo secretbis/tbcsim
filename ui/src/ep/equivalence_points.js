@@ -88,7 +88,7 @@ export default function() {
   return (
     <Content style={{ padding: '20px' }}>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} />
+        <Message type='warning' title={bannerTitle} description={bannerMsg()} closeable />
         <HowItWorks />
         <WrapperEpPanel name='Pre-raid'>
           <WrapperEpPanel name='Hunter'>
