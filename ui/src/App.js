@@ -125,7 +125,7 @@ function App() {
     return (
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
-          <Message type='warning' title={bannerTitle} description={bannerMsg()} />
+          <Message type='warning' title={bannerTitle} description={bannerMsg()} closeable />
           <Presets value={state.character} phase={state.phase} dispatch={dispatch} />
           <Row>
             <Col xs={14} style={{ maxWidth: '750px' }}>
