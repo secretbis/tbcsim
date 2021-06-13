@@ -4,7 +4,7 @@ import * as tbcsim from 'tbcsim';
 const simDefaults = {
   durationSeconds: tbcsim.sim.SimDefaults.durationMs / 1000,
   durationVariabilitySeconds: tbcsim.sim.SimDefaults.durationVaribilityMs / 1000,
-  stepMs: 10,
+  stepMs: 100,
   latencyMs: tbcsim.sim.SimDefaults.latencyMs,
   iterations: 10,
   targetLevel: tbcsim.sim.SimDefaults.targetLevel,
