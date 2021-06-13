@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.classes.shaman.talents.*
 import data.Constants
+import data.buffs.TotemOfTheVoid
 import data.model.Item
 import mechanics.General
 import mechanics.Spell
@@ -84,7 +85,10 @@ open class ChainLightning : Ability() {
         val concussion = sp.character.klass.talents[Concussion.name] as Concussion?
         val concussionMod = concussion?.shockAndLightningMultiplier() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff) * concussionMod * loMod
+        val totemOfTheVoid = sp.buffs[TotemOfTheVoid.name] as TotemOfTheVoid?
+        val totemSpellDmgBonus = totemOfTheVoid?.lightningDamageBonus() ?: 0
+
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff, totemSpellDmgBonus) * concussionMod * loMod
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(

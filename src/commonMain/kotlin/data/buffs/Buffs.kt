@@ -113,6 +113,7 @@ object Buffs {
             33807 -> AbacusOfViolentOdds()
             34000 -> ArcanistsStone()
             34106 -> IconOfUnyieldingCourage()
+            34230 -> TotemOfTheVoid()
             34244 -> TotemOfTheAstralWinds()
             34320 -> ShiffarsNexusHorn()
             34586 -> RomulosPoisonVial()
