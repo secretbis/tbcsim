@@ -129,6 +129,12 @@ class SimIteration(
         }
     }
 
+    fun addRaidDebuff(debuff: Debuff) {
+        participants.forEach {
+            it.addDebuff(debuff)
+        }
+    }
+
     fun getExpirationTick(buff: Buff): Int {
         return ceil((elapsedTimeMs + buff.durationMs) / opts.stepMs.toDouble()).toInt()
     }

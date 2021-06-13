@@ -2,7 +2,9 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
+import character.Debuff
 import character.Stats
+import data.debuffs.Tinnitus
 import sim.SimParticipant
 
 class DrumsOfBattle : Ability() {
@@ -20,9 +22,10 @@ class DrumsOfBattle : Ability() {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
+            // With Tinnitus, this only gets 25% uptime
             return Stats(
-                physicalHasteRating = 80.0,
-                spellHasteRating = 80.0
+                physicalHasteRating = 20.0,
+                spellHasteRating = 20.0
             )
         }
     }
