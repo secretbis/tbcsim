@@ -55,7 +55,8 @@ abstract class Proc {
 
         // Damage types
         PHYSICAL_DAMAGE,
-        HOLY_DAMAGE,
+        HOLY_DAMAGE_NON_PERIODIC,
+        HOLY_DAMAGE_PERIODIC,
         FIRE_DAMAGE_NON_PERIODIC,
         FIRE_DAMAGE_PERIODIC,
         NATURE_DAMAGE,

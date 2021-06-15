@@ -18,6 +18,8 @@ import character.classes.warrior.specs.Fury
 import character.classes.rogue.specs.Combat
 import character.classes.rogue.Rogue
 import character.classes.rogue.specs.Assassination
+import character.classes.priest.Priest
+import character.classes.priest.specs.Smite
 import data.model.Item
 import kotlin.reflect.KClass
 
@@ -38,6 +40,7 @@ abstract class Class(
                 "warlock" -> Warlock(talents, spec)
                 "warrior" -> Warrior(talents, spec)
                 "rogue" -> Rogue(talents, spec)
+                "priest" -> Priest(talents, spec)
                 else -> null
             }
         }
@@ -77,6 +80,10 @@ abstract class Class(
                 "rogue" -> when(specName) {
                     "assassination" -> Assassination()
                     "combat" -> Combat()
+                    else -> null
+                }
+                "priest" -> when(specName) {
+                    "smite" -> Smite()
                     else -> null
                 }
                 else -> null

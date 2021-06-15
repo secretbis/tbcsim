@@ -18,6 +18,7 @@ object Enchants {
         { item: Item -> BracerMajorIntellect(item) },
         { item: Item -> BracerSpellpower(item) },
         { item: Item -> ChestExceptionalStats(item) },
+        { item: Item -> ChestMajorSpirit(item) },
         { item: Item -> CloakGreaterAgility(item) },
         { item: Item -> CloakSpellPenetration(item) },
         { item: Item -> CobrahideLegArmor(item) },
