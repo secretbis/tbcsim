@@ -135,7 +135,7 @@ pet:
   startsActive: false
   rotation:
     combat:
-      - name: ShadowMelee
+      - name: Melee
 
 raidBuffs:
   - Blessing of Kings

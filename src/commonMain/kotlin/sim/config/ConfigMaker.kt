@@ -3,6 +3,7 @@ package sim.config
 import character.*
 import character.classes.hunter.Hunter
 import character.classes.mage.Mage
+import character.classes.priest.Priest
 import data.Items
 import data.abilities.generic.GenericAbilities
 import data.abilities.raid.RaidAbilities
@@ -214,7 +215,7 @@ object ConfigMaker {
         var petRotation: Rotation? = null
 
         if(yml.pet != null) {
-            if(characterClass is Hunter || characterClass is Mage) {
+            if(characterClass is Hunter || characterClass is Mage || characterClass is Priest) {
                 pet = Pet(yml.pet.type, yml.pet.startsActive)
                 petRotation = this.createPetRotation(yml, pet)
             }
