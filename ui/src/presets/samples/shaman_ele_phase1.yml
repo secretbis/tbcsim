@@ -1,9 +1,9 @@
 class: Shaman
 spec: Elemental
-description: Elemental Shaman (pre-raid)
+description: Elemental Shaman (phase 1)
 race: Draenei
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: shaman_ele
 
 # Stock sub-resto Enhancement
@@ -44,27 +44,30 @@ talents:
 # Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
 gear:
   mainHand:
-    name: Eternium Runed Blade
+    name: Nathrezim Mindblade
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
   offHand:
-    name: Khadgar's Knapsack
+    name: Mazthoril Honor Shield
+    enchant: Intellect (Shield)
   rangedTotemLibram:
     name: Totem of the Void
   head:
-    name: Spellstrike Hood
+    name: Cyclone Faceguard
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Potent Noble Topaz
   neck:
-    name: Natasha's Ember Necklace
+    name: Adornment of Stolen Souls
   shoulders:
-    name: Pauldrons of Wild Magic
+    name: Cyclone Shoulderguards
     enchant: Greater Inscription of the Orb
+    gems:
+      - Potent Noble Topaz
+      - Potent Noble Topaz
   back:
-    name: Shawl of Shifting Probabilities
+    name: Brute Cloak of the Ogre-Magi
   chest:
     name: Netherstrike Breastplate
     enchant: Exceptional Stats
@@ -78,16 +81,16 @@ gear:
     gems:
       - Runed Living Ruby
   hands:
-    name: Earth Mantle Handwraps
+    name: Soul-Eater's Handwraps
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
-      - Runed Living Ruby
+      - Glowing Nightseye
   waist:
     name: Netherstrike Belt
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Shifting Nightseye
+      - Potent Noble Topaz
   legs:
     name: Spellstrike Pants
     enchant: Runic Spellthread
@@ -96,19 +99,19 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   feet:
-    name: Sigil-Laced Boots
+    name: Boots of Foretelling
     enchant: Boar's Speed
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   ring1:
-    name: Ring of Cryptic Dreams
+    name: Ring of Unrelenting Storms
     enchant: Spellpower (Ring)
   ring2:
-    name: Ryngo's Band of Ingenuity
+    name: Seer's Signet
     enchant: Spellpower (Ring)
   trinket1:
-    name: Quagmirran's Eye
+    name: The Lightning Capacitor
   trinket2:
     name: Icon of the Silver Crescent
 

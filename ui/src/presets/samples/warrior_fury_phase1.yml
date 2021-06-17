@@ -1,12 +1,12 @@
 class: Warrior
-spec: Arms
-description: Arms Warrior (pre-raid)
-race: Human
+spec: Fury
+description: Fury Warrior (phase 1)
+race: Orc
 level: 70
-epCategory: preraid
-epSpec: warrior_arms
+epCategory: phase1
+epSpec: warrior_fury
 
-# Stock Arms
+# Stock Fury
 talents:
   # Fury talents
   - name: Cruelty
@@ -15,14 +15,24 @@ talents:
     rank: 5
   - name: Commanding Presence
     rank: 5
-  - name: Improved Slam
-    rank: 2
+  - name: Dual Wield Specialization
+    rank: 5
   - name: Weapon Mastery
     rank: 2
+  - name: Flurry
+    rank: 5
+  - name: Improved Whirlwind
+    rank: 1
+  - name: Precision
+    rank: 3
   - name: Sweeping Strikes
     rank: 1
-  - name: Flurry
-    rank: 3
+  - name: Bloodthirst
+    rank: 1
+  - name: Improved Berserker Stance
+    rank: 5
+  - name: Rampage
+    rank: 1
   # Arms talents
   - name: Improved Heroic Strike
     rank: 3
@@ -32,76 +42,78 @@ talents:
     rank: 3
   - name: Impale
     rank: 2
-  - name: Two-Handed Weapon Specialization
-    rank: 5
-  - name: Death Wish
-    rank: 1
-  - name: Sword Specialization
-    rank: 5
-  - name: Mortal Strike
-    rank: 1
-  - name: Blood Frenzy
-    rank: 2
 
-# Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Lionheart Champion
+    name: Dragonmaw
     enchant: Mongoose
+  offHand:
+    name: Gladiator's Slicer
+    # No Executioner until ZA
+    enchant: Mongoose
+    tempEnchant: Adamantite Stone
   rangedTotemLibram:
     name: Mama's Insurance
   head:
-    name: Wastewalker Helm
+    name: Warbringer Battle-Helm
     enchant: Glyph of Ferocity
     gems:
-      - Sovereign Nightseye
       - Relentless Earthstorm Diamond
+      - Inscribed Noble Topaz
   neck:
     name: Traitor's Noose
   shoulders:
-    name: Ragesteel Shoulders
+    name: Warbringer Shoulderplates
     enchant: Greater Inscription of Vengeance
     gems:
-      - Rigid Dawnstone
-      - Smooth Dawnstone
+      - Inscribed Noble Topaz
+      - Sovereign Nightseye
   back:
     name: Vengeance Wrap
     enchant: Greater Agility
     gems:
       - Bold Living Ruby
   chest:
-    name: Chestguard of Exile
+    name: Warbringer Breastplate
     enchant: Exceptional Stats
-  wrists:
-    name: Black Felsteel Bracers
-    enchant: Brawn
-  hands:
-    name: Ragesteel Gloves
-    enchant: Major Strength
-  waist:
-    name: Girdle of the Deathdealer
-  legs:
-    name: Fel Leather Leggings
-    enchant: Nethercobra Leg Armor
     gems:
       - Bold Living Ruby
-      - Smooth Dawnstone
-      - Smooth Dawnstone
+      - Bold Living Ruby
+      - Bold Living Ruby
+  wrists:
+    name: Bladespire Warbands
+    enchant: Brawn
+    gems:
+      - Sovereign Nightseye
+      - Bold Living Ruby
+  hands:
+    name: Gauntlets of Martial Perfection
+    enchant: Major Strength
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  waist:
+    name: Girdle of the Endless Pit
+    gems:
+      - Bold Living Ruby
+      - Sovereign Nightseye
+  legs:
+    name: Warbringer Greaves
+    enchant: Nethercobra Leg Armor
   feet:
-    name: Fel Leather Boots
+    name: Ironstriders of Urgency
     enchant: Cat's Swiftness
     gems:
-      - Jagged Talasite
       - Bold Living Ruby
+      - Inscribed Noble Topaz
   ring1:
-    name: Shaffar's Band of Brutality
+    name: Ring of a Thousand Marks
     enchant: Stats (Ring)
   ring2:
-    name: Ring of Umbral Doom
+    name: Mithril Band of the Unscarred
     enchant: Stats (Ring)
   trinket1:
-    name: Hourglass of the Unraveller
+    name: Dragonspine Trophy
   trinket2:
     name: Bloodlust Brooch
 
@@ -120,33 +132,34 @@ rotation:
     - name: Roasted Clefthoof
 #    - name: Spicy Hot Talbuk
 
+    # Abilities
+    - name: Battle Shout
+    - name: Bloodrage
+
   combat:
     - name: Blood Fury
     - name: Berserking
     - name: Bloodrage
-    - name: Death Wish
+    - name: Rampage
       criteria:
-        - type: FIGHT_TIME_REMAINING_MODULO_LTE
-          modulusSeconds: 180
-          seconds: 30
+        - type: BUFF_DURATION_LTE
+          buff: Rampage
+          seconds: 7
+    - name: Bloodthirst
     - name: Execute
-    # Avoid clipping autos as much as possible - only cast Slam if the swing timer has very recently reset
-    - name: Slam
-      criteria:
-        - type: SWING_TIMER_ELAPSED_LTE
-          seconds: 0.51
-          # Don't Slam more than once per autoattack opportunity
-          oncePerSwing: true
-          # Other options: Melee (OH), Auto Shot
-          swingType: Melee (MH)
-    - name: Mortal Strike
     - name: Whirlwind
+    - name: Heroic Strike
+      criteria:
+        # Cast HS if we have 60 rage or more
+        - type: RESOURCE_PCT_GTE
+          pct: 60
+          resourceType: RAGE
     - name: Battle Shout
       criteria:
         - type: BUFF_DURATION_LTE
           buff: Battle Shout
           seconds: 0
-    - name: Insane Strength Potion
+    - name: Haste Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
@@ -156,12 +169,6 @@ rotation:
         # Allow some slush time for debuffs to get rolling before using trinkets
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
-    - name: Heroic Strike
-      criteria:
-        # Cast HS if we have excess rage
-        - type: RESOURCE_PCT_GTE
-          pct: 90
-          resourceType: RAGE
 
 # Raid and group setup
 # These are buffs/debuffs you are not personally responsible for applying
@@ -187,6 +194,7 @@ raidBuffs:
 raidDebuffs:
   - Sunder Armor
   - Improved Expose Armor
-  - Faerie Fire
+  - Improved Faerie Fire
   - Curse of Recklessness
+  - Blood Frenzy
   - Expose Weakness (750 Agi)

@@ -1,10 +1,10 @@
 class: Warlock
 spec: Affliction
-description: Affliction DS Warlock (pre-raid)
+description: Affliction Ruin Warlock (phase 1)
 race: Gnome
 level: 70
-epCategory: preraid
-epSpec: warlock_affliction_ua
+epCategory: phase1
+epSpec: warlock_affliction_ruin
 
 talents:
   # Affliction talents
@@ -29,53 +29,55 @@ talents:
   - name: Malediction
     rank: 3
 
-  # Demo talents
-  - name: Fel Intellect
-    rank: 3
-  - name: Demonic Aegis
-    rank: 3
-  - name: Demonic Sacrifice
+  # Destro talents
+  - name: Improved Shadow Bolt
+    rank: 5
+  - name: Bane
+    rank: 5
+  - name: Devastation
+    rank: 5
+  - name: Ruin
     rank: 1
 
-# Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear, and not yoinking Beast Lord from hunters
 gear:
   mainHand:
-    name: Eternium Runed Blade
+    name: Bloodmaw Magus-Blade
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
   offHand:
-    name: Orb of the Soul-Eater
+    name: Khadgar's Knapsack
   rangedTotemLibram:
-    name: Nether Core's Control Rod
+    name: Tirisfal Wand of Ascendancy
   head:
-    name: Spellstrike Hood
+    name: Voidheart Crown
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Veiled Noble Topaz
   neck:
-    name: Hydra-fang Necklace
+    name: Ritssyn's Lost Pendant
   shoulders:
-    name: Frozen Shadoweave Shoulders
+    name: Voidheart Mantle
     enchant: Greater Inscription of the Orb
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Glowing Nightseye
+      - Great Dawnstone
   back:
-    name: Sethekk Oracle Cloak
+    name: Ruby Drape of the Mysticant
   chest:
-    name: Frozen Shadoweave Robe
+    name: Voidheart Robe
     enchant: Exceptional Stats
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Great Dawnstone
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
   wrists:
-    name: Crimson Bracers of Gloom
+    name: Bracers of Havok
     enchant: Spellpower (Bracer)
+    gems:
+      - Great Dawnstone
   hands:
-    name: Gloves of the Deadwatcher
+    name: Voidheart Gloves
     enchant: Major Spellpower (Gloves)
   waist:
     name: Girdle of Ruination
@@ -93,13 +95,13 @@ gear:
     name: Frozen Shadoweave Boots
     enchant: Boar's Speed
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Veiled Noble Topaz
+      - Glowing Nightseye
   ring1:
-    name: Sparking Arcanite Ring
+    name: Ring of Recurrence
     enchant: Spellpower (Ring)
   ring2:
-    name: Ashyen's Gift
+    name: Band of Crimson Fury
     enchant: Spellpower (Ring)
   trinket1:
     name: Quagmirran's Eye
@@ -112,9 +114,10 @@ rotation:
     - name: Flask of Pure Death
     - name: Crunchy Serpent
     - name: Fel Armor
-    - name: Demonic Sacrifice (Succubus)
 
   combat:
+    - name: Blood Fury
+    - name: Berserking
     # Use a Dark Rune if we've used at least 1500 mana
     - name: Dark Rune
       criteria:
@@ -186,6 +189,9 @@ raidBuffs:
   - Vampiric Touch (1000 DPS)
 
 raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements

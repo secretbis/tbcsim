@@ -1,9 +1,9 @@
 class: Warlock
 spec: Destruction
-description: Destruction Shadow Warlock (pre-raid)
+description: Destruction Shadow Warlock (phase 1)
 race: Gnome
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: warlock_destruction_shadow
 
 talents:
@@ -35,44 +35,45 @@ talents:
   - name: Demonic Sacrifice
     rank: 1
 
-# Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Eternium Runed Blade
+    name: Bloodmaw Magus-Blade
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
   offHand:
-    name: Orb of the Soul-Eater
+    name: Khadgar's Knapsack
   rangedTotemLibram:
-    name: Nether Core's Control Rod
+    name: Tirisfal Wand of Ascendancy
   head:
-    name: Spellstrike Hood
+    name: Voidheart Crown
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Veiled Noble Topaz
   neck:
-    name: Hydra-fang Necklace
+    name: Adornment of Stolen Souls
   shoulders:
-    name: Frozen Shadoweave Shoulders
+    name: Voidheart Mantle
     enchant: Greater Inscription of the Orb
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Glowing Nightseye
+      - Great Dawnstone
   back:
-    name: Sethekk Oracle Cloak
+    name: Ruby Drape of the Mysticant
   chest:
-    name: Frozen Shadoweave Robe
+    name: Voidheart Robe
     enchant: Exceptional Stats
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Great Dawnstone
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
   wrists:
-    name: Crimson Bracers of Gloom
+    name: Bracers of Havok
     enchant: Spellpower (Bracer)
+    gems:
+      - Great Dawnstone
   hands:
-    name: Gloves of the Deadwatcher
+    name: Voidheart Gloves
     enchant: Major Spellpower (Gloves)
   waist:
     name: Girdle of Ruination
@@ -90,13 +91,13 @@ gear:
     name: Frozen Shadoweave Boots
     enchant: Boar's Speed
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Veiled Noble Topaz
+      - Glowing Nightseye
   ring1:
-    name: Sparking Arcanite Ring
+    name: Ring of Recurrence
     enchant: Spellpower (Ring)
   ring2:
-    name: Ashyen's Gift
+    name: Band of Crimson Fury
     enchant: Spellpower (Ring)
   trinket1:
     name: Quagmirran's Eye

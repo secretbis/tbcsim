@@ -1,35 +1,29 @@
 class: Hunter
-spec: Beast Mastery
-description: Beast Mastery Hunter (pre-raid)
+spec: Survival
+description: Survival Hunter (phase 1)
 race: Night Elf
 level: 70
-epCategory: preraid
-epSpec: hunter_bm
+epCategory: phase1
+epSpec: hunter_surv
 
 talents:
-  # BM talents
-  - name: Improved Aspect of the Hawk
-    rank: 5
-  - name: Focused Fire
-    rank: 2
-  - name: Unleashed Fury
-    rank: 5
-  - name: Ferocity
-    rank: 5
-  - name: Bestial Discipline
-    rank: 2
-  - name: Frenzy
-    rank: 4
-  - name: Animal Handler
-    rank: 2
-  - name: Ferocious Inspiration
+  # Surv talents
+  - name: Monster Slaying
     rank: 3
-  - name: Bestial Wrath
-    rank: 1
-  - name: Serpent's Swiftness
+  - name: Humanoid Slaying
+    rank: 3
+  - name: Surefooted
+    rank: 3
+  - name: Killer Instinct
+    rank: 3
+  - name: Lightning Reflexes
     rank: 5
-  - name: The Beast Within
-    rank: 1
+  - name: Expose Weakness
+    rank: 3
+  - name: Thrill of the Hunt
+    rank: 2
+  - name: Master Tactician
+    rank: 5
   # Marks talents
   - name: Lethal Shots
     rank: 5
@@ -49,7 +43,7 @@ gear:
     name: Sonic Spear
     enchant: Major Agility (2H)
   rangedTotemLibram:
-    name: Marksman's Bow
+    name: Sunfury Bow of the Phoenix
     enchant: Stabilized Eternium Scope
   ammo:
     name: Warden's Arrow
@@ -60,7 +54,7 @@ gear:
       - Delicate Living Ruby
       - Relentless Earthstorm Diamond
   neck:
-    name: Choker of Vile Intent
+    name: Jagged Bark Pendant
   shoulders:
     name: Beast Lord Mantle
     enchant: Greater Inscription of Vengeance
@@ -68,15 +62,17 @@ gear:
       - Delicate Living Ruby
       - Delicate Living Ruby
   back:
-    name: Vengeance Wrap
+    name: Drape of the Dark Reavers
     enchant: Greater Agility
-    gems:
-      - Glinting Noble Topaz
   chest:
-    name: Primalstrike Vest
+    name: Beast Lord Cuirass
     enchant: Exceptional Stats
+    gems:
+      - Delicate Living Ruby
+      - Glinting Noble Topaz
+      - Shifting Nightseye
   wrists:
-    name: Primalstrike Bracers
+    name: Nightfall Wristguards
     enchant: Assault
   hands:
     name: Beast Lord Handguards
@@ -85,24 +81,31 @@ gear:
       - Delicate Living Ruby
       - Shifting Nightseye
   waist:
-    name: Primalstrike Belt
+    name: Girdle of Treachery
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   legs:
-    name: Beast Lord Leggings
+    name: Scaled Greaves of the Marksman
     enchant: Nethercobra Leg Armor
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   feet:
-    name: Fel Leather Boots
+    name: Edgewalker Longboots
     enchant: Dexterity
     gems:
+      - Delicate Living Ruby
       - Glinting Noble Topaz
-      - Shifting Nightseye
   ring1:
-    name: Kaylaan's Signet
+    name: Pathfinder's Band
   ring2:
-    name: Slayer's Mark of the Redemption
+    name: Ring of the Recalcitrant
   trinket1:
-    name: Bloodlust Brooch
+    name: Dragonspine Trophy
   trinket2:
-    name: Abacus of Violent Odds
+    name: Bloodlust Brooch
 
 rotation:
   precombat:
@@ -121,23 +124,20 @@ rotation:
           seconds: 0
     - name: Blood Fury
     - name: Berserking
-    - name: Bestial Wrath
     - name: Rapid Fire
     - name: Haste Potion
     - name: Use Active Trinket
     - name: Kill Command
     - name: Steady Shot
       # This tries to squeeze as many Steadies as possible while never clipping
+      # It is possible that some amount of clipping may be superior - test this by setting the timer criteria to less than 1.0
       criteria:
         - type: SWING_TIMER_REMAINING_GTE
-          # If an ability is specified instead of fixed seconds, this criterion will succeed if the remaining swing time is GTE the cast time of that ability
-          ability: Steady Shot
-          # This specifies the maximum auto-attack clipping amount
-          maxClipSeconds: 0.3
+          seconds: 1.01
           swingType: Auto Shot
           oncePerSwing: false
-    # Fill excess swing time with Multi, without disrupting Steady too much
     - name: Multi Shot
+    - name: Arcane Shot
 
 pet:
   type: Ravager
@@ -154,7 +154,8 @@ raidBuffs:
   - Improved Seal of the Crusader
 
   - Leader of the Pack
-  - Ferocious Inspiration (x2)
+  - Improved Battle Shout
+  - Improved Sanctity Aura
   - Grace of Air Totem
   - Strength of Earth Totem
   - Unleashed Rage
@@ -169,4 +170,3 @@ raidDebuffs:
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements
-  - Expose Weakness (750 Agi)

@@ -1,7 +1,7 @@
 class: Hunter
 spec: Survival
 description: Survival Hunter (pre-raid)
-race: Draenei
+race: Night Elf
 level: 70
 epCategory: preraid
 epSpec: hunter_surv
@@ -42,7 +42,6 @@ gear:
   mainHand:
     name: Sonic Spear
     enchant: Major Agility (2H)
-    tempEnchant: Bugged? Hunter Adamantite Stone
   rangedTotemLibram:
     name: Marksman's Bow
     enchant: Stabilized Eternium Scope
@@ -66,19 +65,13 @@ gear:
     name: Vengeance Wrap
     enchant: Greater Agility
     gems:
-      - Delicate Living Ruby
+      - Glinting Noble Topaz
   chest:
-    name: Ebon Netherscale Breastplate
+    name: Primalstrike Vest
     enchant: Exceptional Stats
-    gems:
-      - Delicate Living Ruby
-      - Delicate Living Ruby
-      - Delicate Living Ruby
   wrists:
-    name: Ebon Netherscale Bracers
+    name: Primalstrike Bracers
     enchant: Assault
-    gems:
-    - Smooth Dawnstone
   hands:
     name: Beast Lord Handguards
     enchant: Superior Agility
@@ -86,24 +79,24 @@ gear:
       - Delicate Living Ruby
       - Shifting Nightseye
   waist:
-    name: Ebon Netherscale Belt
-    gems:
-      - Shifting Nightseye
-      - Smooth Dawnstone
+    name: Primalstrike Belt
   legs:
     name: Beast Lord Leggings
     enchant: Nethercobra Leg Armor
   feet:
-    name: Boots of the Endless Hunt
+    name: Fel Leather Boots
     enchant: Dexterity
+    gems:
+      - Glinting Noble Topaz
+      - Shifting Nightseye
   ring1:
-    name: Shaffar's Band of Brutality
+    name: Kaylaan's Signet
   ring2:
-    name: Truestrike Ring
+    name: Slayer's Mark of the Redemption
   trinket1:
     name: Bloodlust Brooch
   trinket2:
-    name: Hourglass of the Unraveller
+    name: Abacus of Violent Odds
 
 rotation:
   precombat:

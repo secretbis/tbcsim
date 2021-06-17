@@ -63,7 +63,7 @@ public class WhitemendPants : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(94)
 
-  public override var phase: Int = 2
+  public override var phase: Int = 1
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(

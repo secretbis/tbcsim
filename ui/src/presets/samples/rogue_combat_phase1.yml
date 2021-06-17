@@ -1,9 +1,9 @@
 class: Rogue
 spec: Combat
-description: Combat Rogue (pre-raid)
+description: Combat Rogue (phase 1)
 race: Human
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: rogue_combat
 
 # theres only about 2% difference between 3s/3r, 3s/5r, 4s/5r, 5s/5r or other combinations, doesn't seem to matter much.
@@ -61,19 +61,19 @@ talents:
 
 gear:
   mainHand:
-    name: Gladiator's Slicer
+    name: Dragonmaw
     enchant: Mongoose
   offHand:
     name: Latro's Shifting Sword
     enchant: Mongoose
   rangedTotemLibram:
-    name: Marksman's Bow
+    name: Veteran's Musket
   head:
-    name: Wastewalker Helm
+    name: Netherblade Facemask
     enchant: Glyph of Ferocity
     gems:
+      - Relentless Earthstorm Diamond
       - Delicate Living Ruby
-      - Swift Skyfire Diamond
   neck:
     name: Choker of Vile Intent
   shoulders:
@@ -81,49 +81,47 @@ gear:
     enchant: Greater Inscription of Vengeance
     gems:
       - Delicate Living Ruby
-      - Delicate Living Ruby
+      - Shifting Nightseye
   back:
-    name: Vengeance Wrap
+    name: Drape of the Dark Reavers
     enchant: Greater Agility
-    gems:
-      - Delicate Living Ruby
   chest:
-    name: Wastewalker Tunic
+    name: Netherblade Chestpiece
     enchant: Exceptional Stats
     gems:
+      - Delicate Living Ruby
       - Glinting Noble Topaz
-      - Glinting Noble Topaz
-      - Glinting Noble Topaz
+      - Shifting Nightseye
   wrists:
     name: Nightfall Wristguards
     enchant: Assault
   hands:
-    name: Fel Leather Gloves
+    name: Wastewalker Gloves
     enchant: Superior Agility
     gems:
-      - Rigid Dawnstone
-      - Glinting Noble Topaz
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   waist:
     name: Girdle of the Deathdealer
   legs:
-    name: Wastewalker Leggings
+    name: Skulker's Greaves
     enchant: Nethercobra Leg Armor
     gems:
-      - Rigid Dawnstone
-      - Rigid Dawnstone
-      - Rigid Dawnstone
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   feet:
-    name: Fel Leather Boots
+    name: Edgewalker Longboots
     enchant: Dexterity
     gems:
-      - Rigid Dawnstone
+      - Delicate Living Ruby
       - Glinting Noble Topaz
   ring1:
-    name: Slayer's Mark of the Redemption
+    name: Ring of a Thousand Marks
   ring2:
-    name: Kaylaan's Signet
+    name: Garona's Signet Ring
   trinket1:
-    name: Abacus of Violent Odds
+    name: Dragonspine Trophy
   trinket2:
     name: Bloodlust Brooch
 

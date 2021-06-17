@@ -88,7 +88,7 @@ export default function() {
   return (
     <Content style={{ padding: '20px' }}>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} closeable />
+        <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
         <WrapperEpPanel name='Pre-raid'>
           <WrapperEpPanel name='Hunter'>
@@ -110,7 +110,6 @@ export default function() {
           </WrapperEpPanel>
           <WrapperEpPanel name='Warlock'>
             <SpecEpPanel name='Affliction (Ruin)' specKey='warlock_affliction_ruin' category='preraid' />
-            <SpecEpPanel name='Affliction (UA)' specKey='warlock_affliction_ua' category='preraid' />
             <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destruction_fire' category='preraid' />
             <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destruction_shadow' category='preraid' />
           </WrapperEpPanel>

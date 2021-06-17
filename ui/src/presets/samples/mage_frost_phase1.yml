@@ -1,50 +1,62 @@
-class: Warlock
-spec: Destruction
-description: Destruction Shadow Warlock (pre-raid)
+class: Mage
+spec: Frost
+description: Frost Mage (phase 1)
 race: Gnome
 level: 70
-epCategory: preraid
-epSpec: warlock_destruction_shadow
+epCategory: phase1
+epSpec: mage_frost
 
 talents:
-  # Destro talents
-  - name: Improved Shadow Bolt
-    rank: 5
-  - name: Cataclysm
-    rank: 5
-  - name: Bane
-    rank: 5
-  - name: Devastation
-    rank: 5
-  - name: Shadowburn
-    rank: 1
-  - name: Ruin
-    rank: 1
-  - name: Emberstorm
-    rank: 1
-  - name: Backlash
+  # Frost talents
+  - name: Elemental Precision
     rank: 3
-  - name: Shadow and Flame
+  - name: Improved Frostbolt
     rank: 5
+  - name: Ice Shards
+    rank: 5
+  - name: Piercing Ice
+    rank: 3
+  - name: Icy Veins
+    rank: 1
+  - name: Frost Channeling
+    rank: 3
+  - name: Cold Snap
+    rank: 1
+  - name: Ice Floes
+    rank: 2
+  - name: Improved Cone of Cold
+    rank: 3
+  - name: Winter's Chill
+    rank: 5
+  - name: Arctic Winds
+    rank: 5
+  - name: Empowered Frostbolt
+    rank: 5
+  - name: Summon Water Elemental
+    rank: 1
 
-  # Demo talents
-  - name: Fel Intellect
+  # Arcane talents
+  - name: Arcane Subtlety
+    rank: 2
+  - name: Arcane Focus
     rank: 3
-  - name: Demonic Aegis
-    rank: 3
-  - name: Demonic Sacrifice
+  - name: Arcane Concentration
+    rank: 5
+  - name: Arcane Meditation
     rank: 1
 
-# Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Eternium Runed Blade
+    name: Talon of the Tempest
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   offHand:
-    name: Orb of the Soul-Eater
+    name: Khadgar's Knapsack
   rangedTotemLibram:
-    name: Nether Core's Control Rod
+    name: Tirisfal Wand of Ascendancy
   head:
     name: Spellstrike Hood
     enchant: Glyph of Power
@@ -53,7 +65,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Hydra-fang Necklace
+    name: Brooch of Unquenchable Fury
   shoulders:
     name: Frozen Shadoweave Shoulders
     enchant: Greater Inscription of the Orb
@@ -61,7 +73,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   back:
-    name: Sethekk Oracle Cloak
+    name: Ruby Drape of the Mysticant
   chest:
     name: Frozen Shadoweave Robe
     enchant: Exceptional Stats
@@ -69,11 +81,16 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   wrists:
-    name: Crimson Bracers of Gloom
+    name: Bracers of Havok
     enchant: Spellpower (Bracer)
+    gems:
+      - Runed Living Ruby
   hands:
-    name: Gloves of the Deadwatcher
+    name: Anger-Spark Gloves
     enchant: Major Spellpower (Gloves)
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   waist:
     name: Girdle of Ruination
     gems:
@@ -93,13 +110,13 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   ring1:
-    name: Sparking Arcanite Ring
+    name: Band of Crimson Fury
     enchant: Spellpower (Ring)
   ring2:
     name: Ashyen's Gift
     enchant: Spellpower (Ring)
   trinket1:
-    name: Quagmirran's Eye
+    name: Scryer's Bloodgem
   trinket2:
     name: Icon of the Silver Crescent
 
@@ -108,8 +125,8 @@ rotation:
   precombat:
     - name: Flask of Pure Death
     - name: Crunchy Serpent
-    - name: Fel Armor
-    - name: Demonic Sacrifice (Succubus)
+    - name: Arcane Intellect
+    - name: Molten Armor
 
   combat:
     - name: Blood Fury
@@ -120,48 +137,37 @@ rotation:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
           resourceType: MANA
-    - name: Life Tap
+    - name: Cold Snap
       criteria:
-        - type: RESOURCE_PCT_LTE
-          pct: 10
-          resourceType: MANA
-    - name: Curse of Doom
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Summon Water Elemental
+          seconds: 1
+        - type: PET_ACTIVE
+          bool: false
+    - name: Summon Water Elemental
       criteria:
-        - type: DEBUFF_DURATION_LTE
-          debuff: Curse of Doom
-          seconds: 0
-        - type: FIGHT_TIME_REMAINING_GTE
-          seconds: 61
-    - name: Curse of Agony
+        - type: PET_ACTIVE
+          bool: false
+    - name: Icy Veins
       criteria:
-        - type: DEBUFF_DURATION_LTE
-          debuff: Curse of Agony (DoT)
-          seconds: 0
-        - type: FIGHT_TIME_REMAINING_LTE
-          seconds: 60
-        - type: DEBUFF_DURATION_LTE
-          debuff: Curse of Doom
-          seconds: 0
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
     - name: Destruction Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
-# TODO: Some internet guides say to do this, but it doesn't seem to be an improvement
-#    - name: Immolate
-#      criteria:
-#        - type: DEBUFF_DURATION_LTE
-#          debuff: Immolate (DoT)
-#          seconds: 0
     - name: Use Active Trinket
-    - name: Shadow Bolt
+    - name: Frostbolt
 
-# Raid and group setup
-# These are buffs/debuffs you are not personally responsible for applying
-# These are assumed to be up the entire fight
+pet:
+  type: Water Elemental
+  startsActive: false
+  rotation:
+    combat:
+      - name: Waterbolt
+
 raidBuffs:
-  # Consider your raid composition when selecting which buffs to apply
-  # e.g. if you don't have two paladins, you can't have two blessings
   - Blessing of Kings
   - Drums of Battle
   - Improved Blessing of Wisdom
@@ -175,11 +181,6 @@ raidBuffs:
   - Vampiric Touch (1000 DPS)
 
 raidDebuffs:
-  # Sunder Armor and Imp EA cannot be applied at the same time
-  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
-  # To test with Sunder, comment out Imp EA
   - Misery
   - Judgement of Wisdom
   - Curse of the Elements
-  - Improved Scorch
-  - Shadow Weaving

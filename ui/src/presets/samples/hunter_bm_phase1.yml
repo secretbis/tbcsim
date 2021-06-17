@@ -1,9 +1,9 @@
 class: Hunter
 spec: Beast Mastery
-description: Beast Mastery Hunter (pre-raid)
+description: Beast Mastery Hunter (phase 1)
 race: Night Elf
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: hunter_bm
 
 talents:
@@ -49,7 +49,7 @@ gear:
     name: Sonic Spear
     enchant: Major Agility (2H)
   rangedTotemLibram:
-    name: Marksman's Bow
+    name: Sunfury Bow of the Phoenix
     enchant: Stabilized Eternium Scope
   ammo:
     name: Warden's Arrow
@@ -73,36 +73,47 @@ gear:
     gems:
       - Glinting Noble Topaz
   chest:
-    name: Primalstrike Vest
+    name: Beast Lord Cuirass
     enchant: Exceptional Stats
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Shifting Nightseye
   wrists:
-    name: Primalstrike Bracers
+    name: Nightfall Wristguards
     enchant: Assault
   hands:
     name: Beast Lord Handguards
     enchant: Superior Agility
     gems:
       - Delicate Living Ruby
-      - Shifting Nightseye
+      - Delicate Living Ruby
   waist:
-    name: Primalstrike Belt
+    name: Gronn-Stitched Girdle
+    gems:
+      - Shifting Nightseye
+      - Glinting Noble Topaz
   legs:
-    name: Beast Lord Leggings
+    name: Scaled Greaves of the Marksman
     enchant: Nethercobra Leg Armor
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   feet:
-    name: Fel Leather Boots
+    name: Edgewalker Longboots
     enchant: Dexterity
     gems:
+      - Delicate Living Ruby
       - Glinting Noble Topaz
-      - Shifting Nightseye
   ring1:
-    name: Kaylaan's Signet
+    name: Ring of a Thousand Marks
   ring2:
-    name: Slayer's Mark of the Redemption
+    name: Ring of the Recalcitrant
   trinket1:
-    name: Bloodlust Brooch
+    name: Dragonspine Trophy
   trinket2:
-    name: Abacus of Violent Odds
+    name: Bloodlust Brooch
 
 rotation:
   precombat:

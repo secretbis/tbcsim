@@ -1,22 +1,19 @@
 class: Rogue
-spec: Combat
-description: Combat Rogue (pre-raid)
+spec: Assassination
+description: Assassination Rogue (phase 1)
 race: Human
 level: 70
-epCategory: preraid
-epSpec: rogue_combat
+epCategory: phase1
+epSpec: rogue_assassination
 
-# theres only about 2% difference between 3s/3r, 3s/5r, 4s/5r, 5s/5r or other combinations, doesn't seem to matter much.
-# 3s/3r seems to sim the best.
-# completely replacing rupture with eviscerate is also only about 1%, if no Mangle is present on the target.
-# using shiv when a 5 stack deadly poison stack is about to drop seems to be a very slight dps *loss*
-
-# sword/sword
+# dagger/dagger
 talents:
   # Assassination talents
   - name: Malice
     rank: 5
   - name: Ruthlessness
+    rank: 3
+  - name: Puncturing Wounds
     rank: 3
   - name: Murder
     rank: 2
@@ -24,56 +21,50 @@ talents:
     rank: 1
   - name: Lethality
     rank: 5
+  - name: Improved Expose Armor
+    rank: 2
   - name: Vile Poisons
-    rank: 4
+    rank: 5
+  - name: Cold Blood
+    rank: 1
+  - name: Quick Recovery
+    rank: 2
+  - name: Seal Fate
+    rank: 5
+  - name: Vigor
+    rank: 1
+  - name: Find Weakness
+    rank: 5
+  - name: Mutilate
+    rank: 1
 
   # Combat talents
-  - name: Improved Sinister Strike
-    rank: 2
   - name: Lightning Reflexes
-    rank: 3
+    rank: 5
   - name: Improved Slice and Dice
     rank: 3
   - name: Precision
     rank: 5
-  - name: Improved Sprint
-    rank: 2
-  - name: Dual Wield Specialization
+
+  # Sub talents
+  - name: Opportunity
     rank: 5
-  - name: Blade Flurry
-    rank: 1
-  - name: Sword Specialization
-    rank: 5
-  - name: Weapon Expertise
-    rank: 2
-  - name: Aggression
-    rank: 3
-  - name: Vitality
-    rank: 2
-  - name: Adrenaline Rush
-    rank: 1
-  - name: Nerves of Steel
-    rank: 1
-  - name: Combat Potency
-    rank: 5
-  - name: Surprise Attacks
-    rank: 1
 
 gear:
   mainHand:
-    name: Gladiator's Slicer
+    name: Malchazeen
     enchant: Mongoose
   offHand:
-    name: Latro's Shifting Sword
+    name: Gladiator's Shanker
     enchant: Mongoose
   rangedTotemLibram:
-    name: Marksman's Bow
+    name: Veteran's Musket
   head:
-    name: Wastewalker Helm
+    name: Netherblade Facemask
     enchant: Glyph of Ferocity
     gems:
+      - Relentless Earthstorm Diamond
       - Delicate Living Ruby
-      - Swift Skyfire Diamond
   neck:
     name: Choker of Vile Intent
   shoulders:
@@ -81,49 +72,47 @@ gear:
     enchant: Greater Inscription of Vengeance
     gems:
       - Delicate Living Ruby
-      - Delicate Living Ruby
+      - Shifting Nightseye
   back:
-    name: Vengeance Wrap
+    name: Drape of the Dark Reavers
     enchant: Greater Agility
-    gems:
-      - Delicate Living Ruby
   chest:
-    name: Wastewalker Tunic
+    name: Netherblade Chestpiece
     enchant: Exceptional Stats
     gems:
-      - Glinting Noble Topaz
-      - Glinting Noble Topaz
-      - Glinting Noble Topaz
+      - Delicate Living Ruby
+      - Smooth Dawnstone
+      - Shifting Nightseye
   wrists:
     name: Nightfall Wristguards
     enchant: Assault
   hands:
-    name: Fel Leather Gloves
+    name: Wastewalker Gloves
     enchant: Superior Agility
     gems:
-      - Rigid Dawnstone
-      - Glinting Noble Topaz
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   waist:
     name: Girdle of the Deathdealer
   legs:
-    name: Wastewalker Leggings
+    name: Skulker's Greaves
     enchant: Nethercobra Leg Armor
     gems:
-      - Rigid Dawnstone
-      - Rigid Dawnstone
-      - Rigid Dawnstone
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+      - Delicate Living Ruby
   feet:
-    name: Fel Leather Boots
+    name: Edgewalker Longboots
     enchant: Dexterity
     gems:
-      - Rigid Dawnstone
-      - Glinting Noble Topaz
+      - Delicate Living Ruby
+      - Smooth Dawnstone
   ring1:
-    name: Slayer's Mark of the Redemption
+    name: Ring of a Thousand Marks
   ring2:
-    name: Kaylaan's Signet
+    name: Garona's Signet Ring
   trinket1:
-    name: Abacus of Violent Odds
+    name: Dragonspine Trophy
   trinket2:
     name: Bloodlust Brooch
 
@@ -139,7 +128,6 @@ rotation:
     # Abilities
 #    - name: Instant Poison (MH)
     - name: Deadly Poison (OH)
-  # 3s/5r
   combat:
     - name: Blood Fury
     - name: Berserking
@@ -167,48 +155,63 @@ rotation:
           buff: Slice and Dice
           seconds: 0
 
-    # AR at low energy
-    - name: Adrenaline Rush
-      criteria:
-        - type: RESOURCE_PCT_LTE
-          pct: 30
-          resourceType: ENERGY
-
-    # Rupture if we have 3+ CP and SnD has enough time left to refresh it as the next finisher
+    # Rupture if we have 5 CP and SnD has enough time left to refresh it as the next finisher
     - name: Rupture
       criteria:
         - type: RESOURCE_GTE
-          amount: 3
+          amount: 5
           resourceType: COMBO_POINT
         - type: DEBUFF_DURATION_LTE
           debuff: Rupture (DoT)
           seconds: 2
         - type: BUFF_DURATION_GTE
           buff: Slice and Dice
-          seconds: 8 # takes about this long to build 3 CPs for a new SnD
+          seconds: 3
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 15
 
-    # SnD if we have 3+ CP and it's about to run out
+    # SnD if we have 5 CP and it's about to run out
     - name: Slice and Dice
       criteria:
         - type: RESOURCE_GTE
-          amount: 3
+          amount: 5
           resourceType: COMBO_POINT
         - type: BUFF_DURATION_LTE
           buff: Slice and Dice
           seconds: 4
 
-    # SS otherwise, but only if we are not CP capped
-    - name: Sinister Strike
+    - name: Cold Blood
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 0
+          resourceType: COMBO_POINT
+        - type: RESOURCE_PCT_GTE
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+
+    # Mutilate otherwise, but only if we are not CP capped
+    - name: Mutilate
       criteria:
         - type: RESOURCE_MISSING_GTE
           amount: 1
           resourceType: COMBO_POINT
 
-    # If we are CP capped, use Eviscerate, but only if we are at high energy, otherwise we wait
     - name: Eviscerate
       criteria:
+        - type: RESOURCE_GTE
+          amount: 5
+          resourceType: COMBO_POINT
         - type: RESOURCE_PCT_GTE
-          pct: 100
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+        # Eviscerate unless we're very close to the end
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 15
+
+    - name: Envenom
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 5
           resourceType: COMBO_POINT
         - type: RESOURCE_PCT_GTE
           pct: 80 # so we dont waste energy if we are right before a new tick

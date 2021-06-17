@@ -1,9 +1,9 @@
 class: Shaman
 spec: Enhancement
-description: Enhancement Shaman (pre-raid, sub-Resto, Anni MH)
+description: Enhancement Shaman (phase 1, sub-Resto)
 race: Draenei
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: shaman_enh
 
 # Stock sub-resto Enhancement
@@ -43,11 +43,9 @@ talents:
   - name: Nature's Guidance
     rank: 3
 
-# Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
-    name: Annihilator
+    name: Gladiator's Cleaver
     enchant: Mongoose
   offHand:
     name: Gladiator's Cleaver
@@ -55,15 +53,15 @@ gear:
   rangedTotemLibram:
     name: Totem of the Astral Winds
   head:
-    name: Wastewalker Helm
+    name: Cyclone Helm
     enchant: Glyph of Ferocity
     gems:
-      - Sovereign Nightseye
-      - Thundering Skyfire Diamond
+      - Relentless Earthstorm Diamond
+      - Bold Living Ruby
   neck:
     name: Choker of Vile Intent
   shoulders:
-    name: Wastewalker Shoulderpads
+    name: Cyclone Shoulderplates
     enchant: Greater Inscription of Vengeance
     gems:
       - Bold Living Ruby
@@ -74,16 +72,23 @@ gear:
     gems:
       - Inscribed Noble Topaz
   chest:
-    name: Primalstrike Vest
+    name: Cyclone Breastplate
     enchant: Exceptional Stats
+    gems:
+      - Bold Living Ruby
+      - Bold Living Ruby
+      - Inscribed Noble Topaz
   wrists:
-    name: Primalstrike Bracers
+    name: Bracers of Maliciousness
     enchant: Brawn
   hands:
-    name: Windstrike Gloves
+    name: Grips of Deftness
     enchant: Major Strength
   waist:
-    name: Primalstrike Belt
+    name: Gronn-Stitched Girdle
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
   legs:
     name: Midnight Legguards
     enchant: Nethercobra Leg Armor
@@ -92,14 +97,17 @@ gear:
       - Bold Living Ruby
       - Sovereign Nightseye
   feet:
-    name: Shadowstep Striders
+    name: Edgewalker Longboots
     enchant: Cat's Swiftness
+    gems:
+      - Bold Living Ruby
+      - Inscribed Noble Topaz
   ring1:
-    name: Shaffar's Band of Brutality
+    name: Ring of a Thousand Marks
   ring2:
-    name: Ring of the Overseer
+    name: Garona's Signet Ring
   trinket1:
-    name: Hourglass of the Unraveller
+    name: Dragonspine Trophy
   trinket2:
     name: Bloodlust Brooch
 
@@ -120,8 +128,8 @@ rotation:
 
     # Abilities
     - name: Windfury Weapon (MH)
-#    - name: Windfury Weapon (OH)
-    - name: Flametongue Weapon (OH)
+    - name: Windfury Weapon (OH)
+#    - name: Flametongue Weapon (OH)
     - name: Strength of Earth Totem
     - name: Windfury Totem (Rank 1)
     - name: Water Shield

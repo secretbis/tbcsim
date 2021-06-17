@@ -1,9 +1,9 @@
 class: Mage
 spec: Arcane
-description: Arcane Mage (pre-raid)
+description: Arcane Mage (phase 1)
 race: Gnome
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: mage_arcane
 
 talents:
@@ -49,16 +49,18 @@ talents:
   - name: Mind Mastery
     rank: 5
 
-# Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Eternium Runed Blade
+    name: Talon of the Tempest
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   offHand:
-    name: Lamp of Peaceful Radiance
+    name: Khadgar's Knapsack
   rangedTotemLibram:
-    name: Nether Core's Control Rod
+    name: Tirisfal Wand of Ascendancy
   head:
     name: Spellstrike Hood
     enchant: Glyph of Power
@@ -67,12 +69,15 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Hydra-fang Necklace
+    name: Brooch of Unquenchable Fury
   shoulders:
-    name: Mantle of Three Terrors
+    name: Pauldrons of the Aldor
     enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   back:
-    name: Sethekk Oracle Cloak
+    name: Ruby Drape of the Mysticant
   chest:
     name: Spellfire Robe
     enchant: Exceptional Stats
@@ -80,8 +85,10 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   wrists:
-    name: Crimson Bracers of Gloom
+    name: Bracers of Havok
     enchant: Spellpower (Bracer)
+    gems:
+      - Runed Living Ruby
   hands:
     name: Spellfire Gloves
     enchant: Major Spellpower (Gloves)
@@ -101,16 +108,16 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   feet:
-    name: Extravagant Boots of Malice
+    name: Ruby Slippers
     enchant: Boar's Speed
   ring1:
-    name: Sparking Arcanite Ring
+    name: Band of Crimson Fury
     enchant: Spellpower (Ring)
   ring2:
     name: Ashyen's Gift
     enchant: Spellpower (Ring)
   trinket1:
-    name: Quagmirran's Eye
+    name: Scryer's Bloodgem
   trinket2:
     name: Icon of the Silver Crescent
 

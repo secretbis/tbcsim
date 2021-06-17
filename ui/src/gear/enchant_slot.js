@@ -28,6 +28,7 @@ export default function({ item, phase, enchant, enchantType, inventorySlots, onS
           <span style={{ cursor: 'pointer' }}>{missingMsg}</span>
           <GearSelector
             type={enchantType}
+            phase={phase}
             item={item}
             TooltipComponent={SpellTooltip}
             inventorySlots={inventorySlots}

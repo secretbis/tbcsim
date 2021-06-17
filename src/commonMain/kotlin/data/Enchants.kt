@@ -44,6 +44,7 @@ object Enchants {
         { item: Item -> RingStats(item) },
         { item: Item -> RingStriking(item) },
         { item: Item -> RunicSpellthread(item) },
+        { item: Item -> ShieldIntellect(item) },
         { item: Item -> Soulfrost(item) },
         { item: Item -> StabilizedEterniumScope(item) },
         { item: Item -> Sunfire(item) },

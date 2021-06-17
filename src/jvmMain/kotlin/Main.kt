@@ -52,6 +52,7 @@ class TBCSim : CliktCommand() {
     val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
     val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
     val specFilterStr: String? by option("--specs", help="Limit rankings/ep calc by spec (comma-separated")
+    val categoryFilterStr: String? by option("--categories", help="Limit rankings/ep calc by category (comma-separated")
 
     val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
     val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
@@ -76,7 +77,6 @@ class TBCSim : CliktCommand() {
         // Enhance weights aren't appreciably different between the two sub-specs
         "shaman_enh" to Enhancement(),
         "warlock_affliction_ruin" to Affliction(),
-        "warlock_affliction_ua" to Affliction(),
         "warlock_destruction_fire" to Destruction(),
         "warlock_destruction_shadow" to Destruction(),
         "warrior_arms" to Arms(),
@@ -99,11 +99,27 @@ class TBCSim : CliktCommand() {
             // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
             "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
-            "warlock_affliction_ua" to File(presetPath + "warlock_affliction_ua_preraid.yml"),
             "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_preraid.yml"),
             "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_preraid.yml"),
             "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
             "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
+        ),
+        "phase1" to mapOf(
+            "hunter_bm" to File(presetPath + "hunter_bm_phase1.yml"),
+            "hunter_surv" to File(presetPath + "hunter_surv_phase1.yml"),
+            "mage_arcane" to File(presetPath + "mage_arcane_phase1.yml"),
+            "mage_fire" to File(presetPath + "mage_fire_phase1.yml"),
+            "mage_frost" to File(presetPath + "mage_frost_phase1.yml"),
+            "rogue_assassination" to File(presetPath + "rogue_assassination_phase1.yml"),
+            "rogue_combat" to File(presetPath + "rogue_combat_phase1.yml"),
+            "shaman_ele" to File(presetPath + "shaman_ele_phase1.yml"),
+            // Enhance weights aren't appreciably different between the two sub-specs
+            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase1.yml"),
+            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase1.yml"),
+            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase1.yml"),
+            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase1.yml"),
+            "warrior_arms" to File(presetPath + "warrior_arms_phase1.yml"),
+            "warrior_fury" to File(presetPath + "warrior_fury_phase1.yml"),
         )
     )
 
@@ -216,6 +232,7 @@ class TBCSim : CliktCommand() {
         )
 
         val specFilter = specFilterStr?.split(",")
+        val categoryFilter = categoryFilterStr?.split(",")
 
         if (calcEP) {
             val epTypeRef = object : TypeReference<EpOutput>(){}
@@ -235,19 +252,28 @@ class TBCSim : CliktCommand() {
             // }
             val epCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
-                    acc[categoryEntry.first] =
-                        categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                            if(specFilter == null || existing == null || existing.categories[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
-                                // Make config
-                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                                println("Starting EP run for ${categorySpecEntry.key}")
-                                acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
-                            } else {
-                                acc2[categorySpecEntry.key] = existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                    if(categoryFilter == null || existing == null || existing.categories[categoryEntry.first] == null || categoryFilter.contains(categoryEntry.first)) {
+                        acc[categoryEntry.first] =
+                            categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
+                                if (specFilter == null || existing == null || existing.categories[categoryEntry.first] == null || specFilter.contains(
+                                        categorySpecEntry.key
+                                    )
+                                ) {
+                                    // Make config
+                                    val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                    println("Starting EP run for ${categoryEntry.first}/${categorySpecEntry.key}")
+                                    acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
+                                } else {
+                                    acc2[categorySpecEntry.key] =
+                                        existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                                }
+                                acc2
                             }
-                            acc2
-                        }
-                    acc
+                        acc
+                    } else {
+                        acc[categoryEntry.first] = existing.categories[categoryEntry.first]!!
+                        acc
+                    }
                 }
 
             // Generate options/metadata
@@ -270,19 +296,28 @@ class TBCSim : CliktCommand() {
             val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
             val rankingCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
-                    acc[categoryEntry.first] =
-                        categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                            // Make config
-                            if(specFilter == null || existing == null || existing[categoryEntry.first] == null || specFilter.contains(categorySpecEntry.key)) {
-                                val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
-                                println("Starting ranking run for ${categorySpecEntry.key}")
-                                acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
-                            } else {
-                                acc2[categorySpecEntry.key] = existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                    if(categoryFilter == null || existing == null || existing[categoryEntry.first] == null || categoryFilter.contains(categoryEntry.first)) {
+                        acc[categoryEntry.first] =
+                            categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
+                                // Make config
+                                if (specFilter == null || existing == null || existing[categoryEntry.first] == null || specFilter.contains(
+                                        categorySpecEntry.key
+                                    )
+                                ) {
+                                    val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
+                                    println("Starting ranking run for ${categoryEntry.first}/${categorySpecEntry.key}")
+                                    acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
+                                } else {
+                                    acc2[categorySpecEntry.key] =
+                                        existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                                }
+                                acc2
                             }
-                            acc2
-                        }
-                    acc
+                        acc
+                    } else {
+                        acc[categoryEntry.first] = existing[categoryEntry.first]!!
+                        acc
+                    }
                 }
 
             // Output rankings

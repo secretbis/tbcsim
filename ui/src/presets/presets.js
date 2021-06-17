@@ -5,57 +5,109 @@ import _ from 'lodash';
 import { classes } from '../data/constants';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
+import hunterBmPhase1 from './samples/hunter_bm_phase1.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
+import hunterSurvPhase1 from './samples/hunter_surv_phase1.yml'
 import mageArcanePreraid from './samples/mage_arcane_preraid.yml'
+import mageArcanePhase1 from './samples/mage_arcane_phase1.yml'
 import mageFirePreraid from './samples/mage_fire_preraid.yml'
+import mageFirePhase1 from './samples/mage_fire_phase1.yml'
 import mageFrostPreraid from './samples/mage_frost_preraid.yml'
+import mageFrostPhase1 from './samples/mage_frost_phase1.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
+import rogueAssassinationPhase1 from './samples/rogue_assassination_phase1.yml'
 import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
+import rogueCombatPhase1 from './samples/rogue_combat_phase1.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
+import shamanElePhase1 from './samples/shaman_ele_phase1.yml'
 import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
+import shamanEnhSubElePhase1 from './samples/shaman_enh_subele_phase1.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
+import shamanEnhSubRestoPhase1 from './samples/shaman_enh_subresto_phase1.yml'
 import shamanEnhSubRestoPreraidAnniMh from './samples/shaman_enh_subresto_preraid_annihilator_mh.yml'
-import warlockAfflictionUAPreraid from './samples/warlock_affliction_ua_preraid.yml'
+import shamanEnhSubRestoPhase1AnniMh from './samples/shaman_enh_subresto_phase1_annihilator_mh.yml'
 import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
-import warlockAfflictionDSPreraid from './samples/warlock_affliction_ds_preraid.yml'
+import warlockAfflictionRuinPhase1 from './samples/warlock_affliction_ruin_phase1.yml'
 import warlockDestructionFirePreraid from './samples/warlock_destruction_fire_preraid.yml'
+import warlockDestructionFirePhase1 from './samples/warlock_destruction_fire_phase1.yml'
 import warlockDestructionShadowPreraid from './samples/warlock_destruction_shadow_preraid.yml'
+import warlockDestructionShadowPhase1 from './samples/warlock_destruction_shadow_phase1.yml'
 import warriorArmsPreraid from './samples/warrior_arms_preraid.yml'
+import warriorArmsPhase1 from './samples/warrior_arms_phase1.yml'
 import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
+import warriorFuryPhase1 from './samples/warrior_fury_phase1.yml'
 
 import * as tbcsim from 'tbcsim';
 
 const presets = {
-  hunter: [
-    hunterBmPreraid,
-    hunterSurvPreraid
-  ],
-  mage: [
-    mageArcanePreraid,
-    mageFirePreraid,
-    mageFrostPreraid
-  ],
-  rogue: [
-    rogueAssassinationPreraid,
-    rogueCombatPreraid
-  ],
-  shaman: [
-    shamanElePreraid,
-    shamanEnhSubElePreraid,
-    shamanEnhSubRestoPreraid,
-    shamanEnhSubRestoPreraidAnniMh,
-  ],
-  warlock: [
-    warlockDestructionFirePreraid,
-    warlockDestructionShadowPreraid,
-    warlockAfflictionUAPreraid,
-    warlockAfflictionRuinPreraid,
-    warlockAfflictionDSPreraid
-  ],
-  warrior: [
-    warriorArmsPreraid,
-    warriorFuryPreraid,
-  ]
+  hunter: {
+    preraid: [
+      hunterBmPreraid,
+      hunterSurvPreraid
+    ],
+    phase1: [
+      hunterBmPhase1,
+      hunterSurvPhase1
+    ]
+  },
+  mage: {
+    preraid: [
+      mageArcanePreraid,
+      mageFirePreraid,
+      mageFrostPreraid
+    ],
+    phase1: [
+      mageArcanePhase1,
+      mageFirePhase1,
+      mageFrostPhase1
+    ]
+  },
+  rogue: {
+    preraid: [
+      rogueAssassinationPreraid,
+      rogueCombatPreraid
+    ],
+    phase1: [
+      rogueAssassinationPhase1,
+      rogueCombatPhase1
+    ]
+  },
+  shaman: {
+    preraid: [
+      shamanElePreraid,
+      shamanEnhSubElePreraid,
+      shamanEnhSubRestoPreraid,
+      shamanEnhSubRestoPreraidAnniMh
+    ],
+    phase1: [
+      shamanElePhase1,
+      shamanEnhSubElePhase1,
+      shamanEnhSubRestoPhase1,
+      shamanEnhSubRestoPhase1AnniMh
+    ]
+  },
+  warlock: {
+    preraid: [
+      warlockDestructionFirePreraid,
+      warlockDestructionShadowPreraid,
+      warlockAfflictionRuinPreraid
+    ],
+    phase1: [
+      warlockDestructionFirePhase1,
+      warlockDestructionShadowPhase1,
+      warlockAfflictionRuinPhase1
+    ]
+  },
+  warrior: {
+    preraid: [
+      warriorArmsPreraid,
+      warriorFuryPreraid
+    ],
+    phase1: [
+      warriorArmsPhase1,
+      warriorFuryPhase1
+    ]
+  }
 }
 
 function RaceSelect({ character, dispatch }) {
@@ -106,8 +158,8 @@ export default ({ value, phase, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function onSelect(key, evt) {
-    const [klass, idx] = key.split('-')
-    const clone = JSON.parse(JSON.stringify(presets[klass][idx]))
+    const [klass, category, idx] = key.split('-')
+    const clone = JSON.parse(JSON.stringify(presets[klass][category][idx]))
     clone.gear = _.mapValues(clone.gear, rawItem => {
       // TODO: This method is code generator internals, and possibly fragile
       let item = tbcsim.data.Items.byName.get_35(rawItem.name)
@@ -152,10 +204,10 @@ export default ({ value, phase, dispatch }) => {
     }
   }
 
-  function presetsFor(klass) {
+  function presetsFor(klass, category) {
     return <>
-      {presets[klass].map((p, idx) => {
-        const key = `${klass}-${idx}`;
+      {(presets[klass][category] || []).filter(it => it && (it.epCategory === category)).map((p, idx) => {
+        const key = `${klass}-${category}-${idx}`;
         return <Dropdown.Item key={key} eventKey={key} onSelect={onSelect}>{p.description}</Dropdown.Item>
       })}
     </>
@@ -164,28 +216,58 @@ export default ({ value, phase, dispatch }) => {
   return (
     <Row style={{padding: '10px 0px', fontWeight: 800}}>
       <Col style={{ display: 'inline-block' }}>
-        <Dropdown title="Presets"
+        <Dropdown title='Presets'
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
           open={isOpen}
         >
-          <Dropdown.Menu title="Hunter">
-            {presetsFor("hunter")}
+          <Dropdown.Menu title='Hunter'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('hunter', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('hunter', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
-          <Dropdown.Menu title="Mage">
-            {presetsFor("mage")}
+          <Dropdown.Menu title='Mage'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('mage', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('mage', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
-          <Dropdown.Menu title="Rogue">
-            {presetsFor("rogue")}
+          <Dropdown.Menu title='Rogue'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('rogue', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('rogue', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
-          <Dropdown.Menu title="Shaman">
-            {presetsFor("shaman")}
+          <Dropdown.Menu title='Shaman'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('shaman', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('shaman', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
-          <Dropdown.Menu title="Warlock">
-            {presetsFor("warlock")}
+          <Dropdown.Menu title='Warlock'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('warlock', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('warlock', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
-          <Dropdown.Menu title="Warrior">
-            {presetsFor("warrior")}
+          <Dropdown.Menu title='Warrior'>
+            <Dropdown.Menu key={'phase1'} title='Phase 1'>
+              {presetsFor('warrior', 'phase1')}
+            </Dropdown.Menu>
+            <Dropdown.Menu key={'preraid'} title='Pre-raid'>
+              {presetsFor('warrior', 'preraid')}
+            </Dropdown.Menu>
           </Dropdown.Menu>
         </Dropdown>
 

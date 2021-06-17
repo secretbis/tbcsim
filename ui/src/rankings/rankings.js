@@ -122,7 +122,6 @@ const specDisplayNames = {
   shaman_ele: 'Elemental Shaman',
   shaman_enh: 'Enhancement Shaman',
   warlock_affliction_ruin: 'Affliction Warlock (Ruin)',
-  warlock_affliction_ua: 'Affliction Warlock (UA)',
   warlock_destruction_fire: 'Destruction Warlock (Fire)',
   warlock_destruction_shadow: 'Destruction Warlock (Shadow)',
   warrior_arms: 'Arms Warrior',
@@ -146,7 +145,6 @@ const specColors = {
   shaman_ele: '#0070DD',
   shaman_enh: '#0070DD',
   warlock_affliction_ruin: '#8788EE',
-  warlock_affliction_ua: '#8788EE',
   warlock_destruction_fire: '#8788EE',
   warlock_destruction_shadow: '#8788EE',
   warrior_arms: '#C69B6D',
@@ -194,8 +192,9 @@ export default function() {
   return (
     <Content style={{ padding: '20px' }}>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} closeable />
+        <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
+        <SpecRankingPanel name='Phase 1' category='phase1' />
         <SpecRankingPanel name='Pre-raid' category='preraid' />
       </Grid>
     </Content>

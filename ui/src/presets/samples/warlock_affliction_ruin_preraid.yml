@@ -116,6 +116,8 @@ rotation:
     - name: Fel Armor
 
   combat:
+    - name: Blood Fury
+    - name: Berserking
     # Use a Dark Rune if we've used at least 1500 mana
     - name: Dark Rune
       criteria:

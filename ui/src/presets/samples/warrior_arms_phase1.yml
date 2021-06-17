@@ -1,9 +1,9 @@
 class: Warrior
 spec: Arms
-description: Arms Warrior (pre-raid)
+description: Arms Warrior (phase 1)
 race: Human
 level: 70
-epCategory: preraid
+epCategory: phase1
 epSpec: warrior_arms
 
 # Stock Arms
@@ -43,8 +43,6 @@ talents:
   - name: Blood Frenzy
     rank: 2
 
-# Pre-raid BIS-ish
-# Assumes BS/LW professions, no PvP gear
 gear:
   mainHand:
     name: Lionheart Champion
@@ -52,56 +50,65 @@ gear:
   rangedTotemLibram:
     name: Mama's Insurance
   head:
-    name: Wastewalker Helm
+    name: Warbringer Battle-Helm
     enchant: Glyph of Ferocity
     gems:
-      - Sovereign Nightseye
       - Relentless Earthstorm Diamond
+      - Inscribed Noble Topaz
   neck:
     name: Traitor's Noose
   shoulders:
-    name: Ragesteel Shoulders
+    name: Warbringer Shoulderplates
     enchant: Greater Inscription of Vengeance
     gems:
-      - Rigid Dawnstone
-      - Smooth Dawnstone
+      - Inscribed Noble Topaz
+      - Sovereign Nightseye
   back:
     name: Vengeance Wrap
     enchant: Greater Agility
     gems:
       - Bold Living Ruby
   chest:
-    name: Chestguard of Exile
+    name: Warbringer Breastplate
     enchant: Exceptional Stats
-  wrists:
-    name: Black Felsteel Bracers
-    enchant: Brawn
-  hands:
-    name: Ragesteel Gloves
-    enchant: Major Strength
-  waist:
-    name: Girdle of the Deathdealer
-  legs:
-    name: Fel Leather Leggings
-    enchant: Nethercobra Leg Armor
     gems:
       - Bold Living Ruby
-      - Smooth Dawnstone
-      - Smooth Dawnstone
+      - Bold Living Ruby
+      - Bold Living Ruby
+  wrists:
+    name: Bladespire Warbands
+    enchant: Brawn
+    gems:
+      - Sovereign Nightseye
+      - Bold Living Ruby
+  hands:
+    name: Gauntlets of Martial Perfection
+    enchant: Major Strength
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  waist:
+    name: Girdle of the Endless Pit
+    gems:
+      - Bold Living Ruby
+      - Sovereign Nightseye
+  legs:
+    name: Warbringer Greaves
+    enchant: Nethercobra Leg Armor
   feet:
-    name: Fel Leather Boots
+    name: Ironstriders of Urgency
     enchant: Cat's Swiftness
     gems:
-      - Jagged Talasite
       - Bold Living Ruby
+      - Inscribed Noble Topaz
   ring1:
-    name: Shaffar's Band of Brutality
+    name: Ring of a Thousand Marks
     enchant: Stats (Ring)
   ring2:
-    name: Ring of Umbral Doom
+    name: Mithril Band of the Unscarred
     enchant: Stats (Ring)
   trinket1:
-    name: Hourglass of the Unraveller
+    name: Dragonspine Trophy
   trinket2:
     name: Bloodlust Brooch
 
@@ -187,6 +194,6 @@ raidBuffs:
 raidDebuffs:
   - Sunder Armor
   - Improved Expose Armor
-  - Faerie Fire
+  - Improved Faerie Fire
   - Curse of Recklessness
   - Expose Weakness (750 Agi)

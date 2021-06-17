@@ -19,7 +19,7 @@ export default function({ gear, item, isMetaGem=false, children }) {
     const itemClass = `q${item.quality}`
     const itemGems = 'gems=' + item.sockets.map(sk => sk.gem && sk.gem.id).join(':')
     const itemEnchant = item.enchant ? `ench=${item.enchant.id}` : ''
-    const itemSet = 'pcs=' + _.values(gear).map(it => it.id).join(':')
+    const itemSet = 'pcs=' + _.values(gear).filter(it => !!it).map(it => it.id).join(':')
     const suffixStr = `${itemGems}&${itemEnchant}&${itemSet}`
 
     return (
