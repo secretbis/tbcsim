@@ -2,6 +2,7 @@ package character.classes.priest.buffs
 
 import character.Buff
 import character.Stats
+import mechanics.Rating
 import sim.SimParticipant
 
 class PowerInfusion : Buff() {
@@ -16,6 +17,6 @@ class PowerInfusion : Buff() {
     fun spellHasteMultiplier(): Double = 0.8
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(spellDamageMultiplier = 0.8, spellHasteMultiplier = 0.8)
+        return Stats(spellHasteRating = 20.0 * Rating.hastePerPct)
     }
 }

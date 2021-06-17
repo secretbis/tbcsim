@@ -8,9 +8,11 @@ import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.InnerFocus as InnerFocusTalent
 import character.classes.priest.talents.SurgeOfLight as SurgeOfLightTalent
 import character.classes.priest.talents.FocusedPower
+import character.classes.priest.talents.SearingLight
 import character.classes.priest.talents.HolySpecialization
 import character.classes.priest.talents.DivineFury
 import data.Constants
+import data.itemsets.IncarnateRegalia
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -27,7 +29,6 @@ class Smite : Ability() {
 
     val baseCastTimeMs = 2500
     override fun castTimeMs(sp: SimParticipant): Int {
-        val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val divineFury: DivineFury? = sp.character.klass.talentInstance(DivineFury.name)
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
         if (solProc != null){
@@ -61,8 +62,16 @@ class Smite : Ability() {
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
         val solCritModifier = solProc?.critChanceModifier() ?: 0.0
 
+        val searingLight: SearingLight? = sp.character.klass.talentInstance(SearingLight.name)
+        val searingLightMultiplier = searingLight?.smiteHolyFireDamageMultiplier() ?: 1.0
+
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = hsCrit + ifCrit - solCritModifier, bonusHitChance = fpHit)
+
+        // Check T4 set bonus
+        val t4Bonus = sp.buffs[IncarnateRegalia.FOUR_SET_BUFF_NAME] != null
+        val t4DmgIncrease = if(t4Bonus) { IncarnateRegalia.fourSetDmgMultiplierPct() } else 0.0
+
+        val result = Spell.attackRoll(sp, damageRoll * (searingLightMultiplier + t4DmgIncrease), school, bonusCritChance = hsCrit + ifCrit - solCritModifier, bonusHitChance = fpHit)
 
         val event = Event(
             eventType = EventType.DAMAGE,

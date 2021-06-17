@@ -1,7 +1,9 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.talents.*
 import character.Ability
 import character.Buff
+import data.itemsets.IncarnateRegalia
 import sim.SimParticipant
 
 class Shadowfiend : Ability() {
@@ -16,7 +18,9 @@ class Shadowfiend : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 300000
 
     override fun resourceCost(sp: SimParticipant): Double {
-        return sp.character.klass.baseMana * 0.06
+        val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
+        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 0.0
+        return sp.character.klass.baseMana * 0.06 * mentalAgilityManaCostMultiplier
     }
 
     val buff = object : Buff() {
@@ -30,8 +34,25 @@ class Shadowfiend : Ability() {
         }
     }
 
-    override fun cast(sp: SimParticipant) {
+    val t4Buff = object : Buff() {
+        override val name: String = Companion.name
+        override val durationMs: Int = 18000
+        override val hidden: Boolean = true
+
+        override fun reset(sp: SimParticipant) {
+            sp.pet?.deactivate(true)
+            super.reset(sp)
+        }
+    }
+
+    override fun cast(sp: SimParticipant) {        
         sp.pet?.activate()
-        sp.addBuff(buff)
+
+        val t4Bonus = sp.buffs[IncarnateRegalia.TWO_SET_BUFF_NAME] != null
+        if(t4Bonus) {
+            sp.addBuff(t4Buff)
+        } else {
+           sp.addBuff(buff)
+        }        
     }
 }

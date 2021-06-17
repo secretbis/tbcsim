@@ -7,6 +7,14 @@ class IncarnateRegalia : ItemSet() {
     companion object {
         const val TWO_SET_BUFF_NAME = "Incarnate Regalia (2 set)"
         const val FOUR_SET_BUFF_NAME = "Incarnate Regalia (4 set)"
+
+        fun twoSetDurationIncreaseMs(): Int {
+            return 3000
+        }
+
+        fun fourSetDmgMultiplierPct(): Double {
+            return 0.05
+        }
     }
     override val id: Int = 664
 

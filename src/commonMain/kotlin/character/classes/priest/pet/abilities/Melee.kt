@@ -12,6 +12,7 @@ import sim.SimParticipant
 class Melee : Ability() {
     companion object {
         const val name = "Melee"
+        const val manaRestoreName = "Shadowfiend"
     }
     override val id: Int = 1
     override val name: String = Companion.name
@@ -28,7 +29,7 @@ class Melee : Ability() {
     override fun cast(sp: SimParticipant) {
         val result = Spell.attackRoll(sp, sp.spellDamage().toDouble(), school)
 
-        sp.owner?.addResource((result.first).toInt() * 3, Resource.Type.MANA, name)
+        sp.owner?.addResource((result.first).toInt() * 3, Resource.Type.MANA, Companion.manaRestoreName)
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
