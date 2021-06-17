@@ -21,6 +21,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
             Smite.name -> Smite()
+            HolyFire.name -> HolyFire()
             ShadowWordPain.name -> ShadowWordPain()
             Shadowfiend.name -> Shadowfiend()
             PowerInfusion.name -> PowerInfusion()

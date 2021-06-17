@@ -114,7 +114,7 @@ rotation:
     - name: Shadowfiend
       criteria:
         - type: RESOURCE_PCT_LTE 
-          pct: 40
+          pct: 35
           resourceType: MANA
     - name: Power Infusion
     - name: Destruction Potion
@@ -128,6 +128,11 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Shadow Word Pain (DoT)
           seconds: 0
+    - name: Holy Fire
+      criteria:
+        -type: DEBUFF_DURATION_LTE
+         debuff: Holy Fire (DoT)
+         seconds: 3
     - name: Smite
 
 pet:
