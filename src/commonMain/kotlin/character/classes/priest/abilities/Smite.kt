@@ -31,18 +31,25 @@ class Smite : Ability() {
     override fun castTimeMs(sp: SimParticipant): Int {
         val divineFury: DivineFury? = sp.character.klass.talentInstance(DivineFury.name)
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
-        if (solProc != null){
             return 1500
         }
-        return ((baseCastTimeMs - (divineFury?.smiteHolyFireCastTimeReductionMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()   
+        return ((baseCastTimeMs - (divineFury?.smiteHolyFireCastTimeReductionMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseResourceCost = 385.0
     override fun resourceCost(sp: SimParticipant): Double {
-        val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
-        val piMult = piBuff?.manaCostMultiplier() ?: 1.0
-        
-        return baseResourceCost * piMult
+        val innerFocus: InnerFocusTalent? = sp.character.klass.talentInstance(InnerFocusTalent.name)
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if(innerFocusBuff != null){
+            return 0.0
+        }
+        else{
+            val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
+            val piMult = piBuff?.manaCostMultiplier() ?: 1.0
+
+            return baseResourceCost * piMult
+        }
     }
 
     val baseDamage = Pair(549.0, 616.0)
@@ -57,7 +64,7 @@ class Smite : Ability() {
 
         val innerFocus: InnerFocusTalent? = sp.character.klass.talentInstance(InnerFocusTalent.name)
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
-        val ifCrit = innerFocusBuff?.critPct() ?: 0.0      
+        val ifCrit = innerFocusBuff?.critPct() ?: 0.0
 
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
         val solCritModifier = solProc?.critChanceModifier() ?: 0.0
