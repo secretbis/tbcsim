@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.PowerInfusion
 import character.classes.priest.talents.*
 import character.Ability
 import character.Buff
@@ -20,7 +21,11 @@ class Shadowfiend : Ability() {
     override fun resourceCost(sp: SimParticipant): Double {
         val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
         val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 0.0
-        return sp.character.klass.baseMana * 0.06 * mentalAgilityManaCostMultiplier
+
+        val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
+        val piMult = piBuff?.manaCostMultiplier() ?: 1.0
+
+        return sp.character.klass.baseMana * 0.06 * mentalAgilityManaCostMultiplier * piMult
     }
 
     val buff = object : Buff() {
