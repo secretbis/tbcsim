@@ -34,7 +34,7 @@ class HolyFire : Ability() {
 
     val baseResourceCost = 290.0
     val school = Constants.DamageType.HOLY
-    val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
+    val spellPowerCoeff = 0.857
     override fun resourceCost(sp: SimParticipant): Double {
         val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val piMult = piBuff?.manaCostMultiplier() ?: 1.0
