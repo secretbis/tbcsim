@@ -11,13 +11,15 @@ class ShadowfiendBase: Buff() {
 
     override fun modifyStats(sp: SimParticipant): Stats {
         // Inherit stats from the caster
-        val ownerSpellDamage = sp?.owner?.spellDamage() ?: 0.0
+        val ownerSpellDamage = sp.owner?.spellDamage() ?: 0.0
 
         return Stats(
             armor = (0.35 * sp.armor()).toInt(),
             stamina = (0.3 * sp.stamina()).toInt(),
             intellect = (0.3 * sp.intellect()).toInt(),
-            spellDamage = (ownerSpellDamage.toInt() / 4).toInt()
+            spellDamage = (ownerSpellDamage.toInt() / 4).toInt(),
+            attackPower = (ownerSpellDamage.toInt() / 4).toInt(),
+            physicalHitRating = (sp.owner?.stats?.spellHitRating ?: 0.0)
         )
     }
 }

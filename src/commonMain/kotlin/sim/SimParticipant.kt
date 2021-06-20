@@ -9,6 +9,8 @@ import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
+import character.classes.priest.pet.Shadowfiend as ShadowfiendPet
+import character.classes.priest.pet.abilities.Melee
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
@@ -72,6 +74,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 rangedAutoAttack = AutoShot()
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
+            } else if(character.klass is ShadowfiendPet){
+                mhAutoAttack = Melee()
             } else if(character.klass is Rogue) {
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHandRogue()

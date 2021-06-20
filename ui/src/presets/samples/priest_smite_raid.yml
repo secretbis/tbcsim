@@ -44,12 +44,11 @@ gear:
   rangedTotemLibram:
     name: Tirisfal Wand of Ascendancy
   head:
-    name: Spellstrike Hood
+    name: Soul-Collar of the Incarnate
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Ember Skyfire Diamond
+      - Great Dawnstone
   neck:
     name: Brooch of Unquenchable Fury
   shoulders:
@@ -128,19 +127,12 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Shadow Word Pain (DoT)
           seconds: 0
-    - name: Holy Fire
-      criteria:
-        -type: DEBUFF_DURATION_LTE
-         debuff: Holy Fire (DoT)
-         seconds: 3
+    - name: Mind Blast
     - name: Smite
 
 pet:
   type: Shadowfiend
   startsActive: false
-  rotation:
-    combat:
-      - name: Melee
 
 raidBuffs:
   - Blessing of Kings
