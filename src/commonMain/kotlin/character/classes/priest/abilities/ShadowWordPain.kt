@@ -21,7 +21,6 @@ class ShadowWordPain : Ability() {
     override val id: Int = 10894
     override val name: String = Companion.name
 
-    override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseResourceCost = 575.0
@@ -37,7 +36,11 @@ class ShadowWordPain : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val school = Constants.DamageType.SHADOW
-        var result = Spell.attackRoll(sp, 0.0, school, true, 0.0)
+
+        val shadowFocus: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = shadowFocus?.shadowHitIncreasePct() ?: 0.0 
+
+        var result = Spell.attackRoll(sp, 0.0, school, true, 0.0, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.DAMAGE,
