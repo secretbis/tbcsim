@@ -20,6 +20,7 @@ import character.classes.rogue.Rogue
 import character.classes.rogue.specs.Assassination
 import character.classes.priest.Priest
 import character.classes.priest.specs.Smite
+import character.classes.priest.specs.Shadow
 import data.model.Item
 import kotlin.reflect.KClass
 
@@ -84,6 +85,7 @@ abstract class Class(
                 }
                 "priest" -> when(specName) {
                     "smite" -> Smite()
+                    "shadow" -> Shadow()
                     else -> null
                 }
                 else -> null

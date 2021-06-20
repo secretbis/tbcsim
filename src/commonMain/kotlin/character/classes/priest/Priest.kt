@@ -2,10 +2,12 @@ package character.classes.priest
 
 import character.*
 import character.classes.priest.abilities.*
+import character.classes.priest.abilities.VampiricTouch as VampiricTouchAbility
 import character.classes.priest.talents.*
-import character.classes.priest.abilities.Shadowfiend as Shadowfiend
 import character.classes.priest.talents.PowerInfusion as PowerInfusionTalent
 import character.classes.priest.talents.InnerFocus as InnerFocusTalent
+import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
+import character.classes.priest.talents.MindFlay as MindFlayTalent
 import data.model.Item
 
 class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
@@ -20,31 +22,45 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
-            Smite.name -> Smite()
             HolyFire.name -> HolyFire()
+            InnerFocus.name -> InnerFocus()
+            MindBlast.name -> MindBlast()
+            PowerInfusion.name -> PowerInfusion()
             ShadowWordPain.name -> ShadowWordPain()
             Shadowfiend.name -> Shadowfiend()
-            PowerInfusion.name -> PowerInfusion()
-            InnerFocus.name -> InnerFocus()
+            Smite.name -> Smite()
+            VampiricTouchAbility.name -> VampiricTouchAbility()
+            ShadowWordDeath.name -> ShadowWordDeath()
+            MindFlay2.name -> MindFlay2()
+            MindFlay3.name -> MindFlay3()
             else -> null
         }
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name) {
+            Darkness.name -> Darkness(ranks)
             DivineFury.name -> DivineFury(ranks)
             FocusedPower.name -> FocusedPower(ranks)
+            FocusedMind.name -> FocusedMind(ranks)
             ForceOfWill.name -> ForceOfWill(ranks)
             HolySpecialization.name -> HolySpecialization(ranks)
+            ImprovedMindBlast.name -> ImprovedMindBlast(ranks)
+            ImprovedShadowWordPain.name -> ImprovedShadowWordPain(ranks)
             InnerFocusTalent.name -> InnerFocusTalent(ranks)
             Meditation.name -> Meditation(ranks)
             MentalAgility.name -> MentalAgility(ranks)
             MentalStrength.name -> MentalStrength(ranks)
+            MindFlayTalent.name -> MindFlayTalent(ranks)
             PowerInfusionTalent.name -> PowerInfusionTalent(ranks)
             SearingLight.name -> SearingLight(ranks)
             SpiritOfRedemption.name -> SpiritOfRedemption(ranks)
             SpiritualGuidance.name -> SpiritualGuidance(ranks)
             SurgeOfLight.name -> SurgeOfLight(ranks)
+            ShadowFocus.name -> ShadowFocus(ranks)
+            Shadowform.name -> Shadowform(ranks)
+            ShadowPower.name -> ShadowPower(ranks)
+            VampiricTouchTalent.name -> VampiricTouchTalent(ranks)
             else -> null
         }
     }
