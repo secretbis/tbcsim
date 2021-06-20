@@ -1,0 +1,163 @@
+class: Priest
+spec: Shadow
+description: Shadow Priest (raid)
+race: Human
+level: 70
+epCategory: raid
+epSpec: priest_shadow
+
+talents:
+  # Disc talents
+  - name: Meditation
+    rank: 3
+  - name: Inner Focus
+    rank: 1
+
+  # Shadow talents
+  - name: Improved Shadow Word Pain
+    rank: 2
+  - name: Shadow Focus
+    rank: 5
+  - name: Improved Mind Blast
+    rank: 5
+  - name: Mind Flay
+    rank: 1
+  - name: Focused Mind
+    rank: 3
+  - name: Darkness
+    rank: 5
+  - name: Shadow Power
+    rank: 3
+  - name: Vampiric Touch
+    rank: 1
+  - name: Shadowform
+    rank: 1
+
+# Pre-raid BIS-ish
+gear:
+  mainHand:
+    name: Nathrezim Mindblade
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  offHand:
+    name: Jewel of Infinite Possibilities
+  rangedTotemLibram:
+    name: Tirisfal Wand of Ascendancy
+  head:
+    name: Soul-Collar of the Incarnate
+    enchant: Glyph of Power
+    gems:
+      - Ember Skyfire Diamond
+      - Great Dawnstone
+  neck:
+    name: Brooch of Unquenchable Fury
+  shoulders:
+    name: Soul-Mantle of the Incarnate
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Sparkling Star of Elune
+  back:
+    name: Ruby Drape of the Mysticant
+  chest:
+    name: Shroud of the Incarnate
+    enchant: Major Spirit
+    gems:
+      - Veiled Noble Topaz
+      - Sparkling Star of Elune
+      - Sparkling Star of Elune
+  wrists:
+    name: Bands of Rarefied Magic
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Handwraps of Flowing Thought
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Great Dawnstone
+      - Sparkling Star of Elune
+  waist:
+    name: Sash of Arcane Visions
+  legs:
+    name: Leggings of the Incarnate
+    enchant: Runic Spellthread
+  feet:
+    name: Boots of Foretelling
+    enchant: Boar's Speed
+    gems:
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
+  ring1:
+    name: Sparking Arcanite Ring
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Band of Crimson Fury
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Eye of Magtheridon
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Blinding Light
+    - name: Crunchy Serpent
+
+  combat:
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Shadowfiend
+      criteria:
+        - type: RESOURCE_PCT_LTE 
+          pct: 35
+          resourceType: MANA
+    - name: Power Infusion
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+    - name: Vampiric Touch
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 1
+    - name: Shadow Word Pain
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 0
+    - name: Mind Blast
+    - name: Shadow Word Death
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 2
+    - name: Mind Flay (3 ticks)
+
+pet:
+  type: Shadowfiend
+  startsActive: false
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
