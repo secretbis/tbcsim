@@ -47,7 +47,6 @@ class HolyFire : Ability() {
         val hs: HolySpecialization? = sp.character.klass.talentInstance(HolySpecialization.name)
         val hsCrit = hs?.holySpellsCrit() ?: 0.0
 
-        val innerFocus: InnerFocusTalent? = sp.character.klass.talentInstance(InnerFocusTalent.name)
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
         val ifCrit = innerFocusBuff?.critPct() ?: 0.0      
 
@@ -70,7 +69,6 @@ class HolyFire : Ability() {
             sp.sim.target.addDebuff(HolyFireDot(sp))
         }
 
-        // Fire procs
         val triggerTypes = when(result.second) {
             EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)
             EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)

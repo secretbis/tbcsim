@@ -31,6 +31,7 @@ class Smite : Ability() {
     override fun castTimeMs(sp: SimParticipant): Int {
         val divineFury: DivineFury? = sp.character.klass.talentInstance(DivineFury.name)
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
+        if (solProc != null) {
             return 1500
         }
         return ((baseCastTimeMs - (divineFury?.smiteHolyFireCastTimeReductionMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
@@ -62,7 +63,6 @@ class Smite : Ability() {
         val hs: HolySpecialization? = sp.character.klass.talentInstance(HolySpecialization.name)
         val hsCrit = hs?.holySpellsCrit() ?: 0.0
 
-        val innerFocus: InnerFocusTalent? = sp.character.klass.talentInstance(InnerFocusTalent.name)
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
         val ifCrit = innerFocusBuff?.critPct() ?: 0.0
 
