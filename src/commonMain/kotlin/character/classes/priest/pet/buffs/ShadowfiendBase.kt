@@ -14,12 +14,15 @@ class ShadowfiendBase: Buff() {
         val ownerSpellDamage = sp.owner?.spellDamage() ?: 0.0
 
         return Stats(
-            armor = (0.35 * sp.armor()).toInt(),
-            stamina = (0.3 * sp.stamina()).toInt(),
-            intellect = (0.3 * sp.intellect()).toInt(),
-            spellDamage = (ownerSpellDamage.toInt() / 4).toInt(),
-            attackPower = (ownerSpellDamage.toInt() / 4).toInt(),
-            physicalHitRating = (sp.owner?.stats?.spellHitRating ?: 0.0)
+            armor = 5474 + (0.35 * sp.armor()).toInt(),
+            stamina = (280.0 + 0.3 * sp.stamina()).toInt(),
+            intellect = (133 + 0.3 * sp.intellect()).toInt(),
+            strength = 153,
+            agility = 108,
+            spirit = 122,
+            attackPower = (286.0 + 0.57 * ownerSpellDamage.toInt()).toInt(),
+            physicalHitRating = (sp.owner?.stats?.spellHitRating ?: 0.0),
+            meleeCritRating = (sp.owner?.stats?.spellCritRating ?: 0.0)
         )
     }
 }

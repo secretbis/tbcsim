@@ -26,7 +26,6 @@ class Melee : AutoAttackBase() {
     override val name: String = Companion.name
     override fun gcdMs(sp: SimParticipant): Int = 1500
 
-    val baseCastTimeMs = 2500
     override fun castTimeMs(sp: SimParticipant): Int = 0
     override fun resourceCost(sp: SimParticipant): Double {
         return sp.character.klass.baseMana * 0.01
@@ -45,8 +44,8 @@ class Melee : AutoAttackBase() {
             override var inventorySlot: Int = 21
             override var itemClass: Constants.ItemClass? = null
             override var itemSubclass: Constants.ItemSubclass? = null
-            override var minDmg: Double = sp.stats.spellDamage.toDouble()
-            override var maxDmg: Double = sp.stats.spellDamage.toDouble() + 1
+            override var minDmg: Double = 99.0 + 0.12 * (sp.stats.attackPower.toDouble() - 286.0)
+            override var maxDmg: Double = 123.0 + 0.12 * (sp.stats.attackPower.toDouble() - 286.0)
             override var speed: Double = basePetAttackSpeed
             override var stats: Stats = Stats()
             override var sockets: Array<Socket> = arrayOf()
@@ -55,7 +54,7 @@ class Melee : AutoAttackBase() {
         }
     }
 
-    val basePetAttackSpeed: Double = 2000.0
+    val basePetAttackSpeed: Double = 1500.0
     override fun cast(sp: SimParticipant) {
         val damageRoll = Melee.baseDamageRoll(sp, item(sp))
         val result = Melee.attackRoll(sp, damageRoll, item(sp), isWhiteDmg = true)
@@ -74,7 +73,10 @@ class Melee : AutoAttackBase() {
         )
         sp.logEvent(event)
 
-        sp.owner?.addResource((result.first).toInt() * 3, Resource.Type.MANA, Companion.manaRestoreName)
+        // Mana restored seems to be roughly 2.5 times the dmg. 
+        // https://web.archive.org/web/20071201221602/http://www.shadowpriest.com/viewtopic.php?t=7616
+        // Also tested with 1.9k dmg which returned 4.7k mana
+        sp.owner?.addResource((result.first * 2.5).toInt(), Resource.Type.MANA, Companion.manaRestoreName)
 
         // Proc anything that can proc off a white hit
         val triggerTypes = when(result.second) {
