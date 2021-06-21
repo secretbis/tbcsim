@@ -66,7 +66,10 @@ class MindBlast : Ability() {
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
 
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = ifCrit + shadowPowerCritIncrease, bonusHitChance = fpHit + sfHit)
+        val shadowWeaving = sp.sim.target.debuffs.get(ShadowWeaving.name) as ShadowWeavingDebuff?
+        val swMult = shadowWeaving?.shadowDamageMultiplierPct() ?: 1.0
+
+        val result = Spell.attackRoll(sp, damageRoll * swMult, school, bonusCritChance = ifCrit + shadowPowerCritIncrease, bonusHitChance = fpHit + sfHit)
 
         val event = Event(
             eventType = EventType.DAMAGE,

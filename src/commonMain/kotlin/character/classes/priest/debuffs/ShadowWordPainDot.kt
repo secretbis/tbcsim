@@ -39,13 +39,17 @@ class ShadowWordPainDot(owner: SimParticipant) : Debuff(owner) {
         val school = Constants.DamageType.SHADOW
         override fun cast(sp: SimParticipant) {
             val spellPowerCoeff = Spell.spellPowerCoeff(0, 18000) / numTicks
+
             val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
+
+            val shadowWeaving = sp.sim.target.debuffs.get(ShadowWeaving.name) as ShadowWeavingDebuff?
+            val swMult = shadowWeaving?.shadowDamageMultiplierPct() ?: 1.0
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = damageRoll,
+                amount = damageRoll * swMult,
                 result = EventResult.HIT
             )
             owner.logEvent(event)

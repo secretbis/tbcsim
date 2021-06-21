@@ -41,16 +41,20 @@ class MindFlay3 : Ability() {
     }
 
     val dmgPerTick = 172.0
-    val numberOfTicks = 3.0
-    val baseDamage = dmgPerTick * numberOfTicks
     val school = Constants.DamageType.SHADOW
     val spellPowerCoeff = 0.19 // Per tick
     override fun cast(sp: SimParticipant) {
         val shadowFocus: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = shadowFocus?.shadowHitIncreasePct() ?: 0.0 
 
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff * numberOfTicks)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, canCrit = false)
+        val damageRoll = Spell.baseDamageRollSingle(sp, dmgPerTick, school, spellPowerCoeff)
+        val damageRoll2 = Spell.baseDamageRollSingle(sp, dmgPerTick, school, spellPowerCoeff)
+        val damageRoll3 = Spell.baseDamageRollSingle(sp, dmgPerTick, school, spellPowerCoeff)
+
+        val shadowWeaving = sp.sim.target.debuffs.get(ShadowWeaving.name) as ShadowWeavingDebuff?
+        val swMult = shadowWeaving?.shadowDamageMultiplierPct() ?: 1.0
+
+        val result = Spell.attackRoll(sp, (damageRoll + damageRoll2 + damageRoll3) * swMult, school, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.DAMAGE,
