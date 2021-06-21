@@ -9,17 +9,17 @@ class Smite : Spec() {
     override val epStatDeltas: List<SpecEpDelta> = defaultCasterDeltas
 
     override fun redSocketEp(deltas: Map<String, Double>): Double {
-        // 12 spell dmg
-        return 12.0
+        // 9 spell dmg
+        return 9.0
     }
 
     override fun yellowSocketEp(deltas: Map<String, Double>): Double {
-        // 5 spell haste rating / 6 spell damage
-        return ((deltas["spellHasteRating"] ?: 0.0) * 5.0) + 6.0
+        // 4 spell hit + 5 spell dmg
+        return 11.16
     }
 
     override fun blueSocketEp(deltas: Map<String, Double>): Double {
-        // 6 spell dmg
-        return 9.0
+        // 8 spirit
+        return 8.712
     }
 }
