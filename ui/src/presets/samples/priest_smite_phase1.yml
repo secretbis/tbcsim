@@ -7,7 +7,7 @@ epCategory: raid
 epSpec: priest_smite
 
 talents:
-  # Frost talents
+  # Disc talents
   - name: Meditation
     rank: 3
   - name: Inner Focus
@@ -21,7 +21,7 @@ talents:
   - name: Power Infusion
     rank: 1
 
-  # Fire talents
+  # Holy talents
   - name: Holy Specialization
     rank: 5
   - name: Divine Fury
@@ -33,7 +33,7 @@ talents:
   - name: Surge of Light
     rank: 2
 
-# Pre-raid BIS-ish
+# Raid BIS-ish
 gear:
   mainHand:
     name: Talon of the Tempest

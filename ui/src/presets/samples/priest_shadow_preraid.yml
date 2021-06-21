@@ -111,7 +111,7 @@ gear:
 rotation:
   autoAttack: false
   precombat:
-    - name: Flask of Blinding Light
+    - name: Flask of Pure Death
     - name: Crunchy Serpent
 
   combat:

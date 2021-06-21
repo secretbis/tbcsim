@@ -14,6 +14,9 @@ import mageFirePreraid from './samples/mage_fire_preraid.yml'
 import mageFirePhase1 from './samples/mage_fire_phase1.yml'
 import mageFrostPreraid from './samples/mage_frost_preraid.yml'
 import mageFrostPhase1 from './samples/mage_frost_phase1.yml'
+import priestSmitePhase1 from './samples/priest_smite_phase1.yml'
+import priestShadowPreraid from './samples/priest_shadow_preraid.yml'
+import priestShadowPhase1 from './samples/priest_shadow_phase1.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
 import rogueAssassinationPhase1 from './samples/rogue_assassination_phase1.yml'
 import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
@@ -60,6 +63,15 @@ const presets = {
       mageArcanePhase1,
       mageFirePhase1,
       mageFrostPhase1
+    ]
+  },
+  priest: {
+    preraid: [
+      priestShadowPreraid,
+    ],
+    phase1: [
+      priestShadowPhase1,
+      priestSmitePhase1
     ]
   },
   rogue: {
