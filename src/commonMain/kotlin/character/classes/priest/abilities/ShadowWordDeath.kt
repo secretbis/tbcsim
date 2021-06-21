@@ -27,11 +27,16 @@ class ShadowWordDeath : Ability() {
 
     val baseResourceCost = 309.0
     override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+        if(innerFocusBuff != null){
+            return 0.0
+        }
+
         val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val piMult = piBuff?.manaCostMultiplier() ?: 1.0
 
         val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
-        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 0.0
+        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 1.0
         
         return baseResourceCost * piMult * mentalAgilityManaCostMultiplier
     }
@@ -65,11 +70,14 @@ class ShadowWordDeath : Ability() {
         )
         sp.logEvent(event)
 
+        if(innerFocusBuff != null){
+            sp.consumeBuff(innerFocusBuff)
+        }
+
         // Return VT mana
-        val owner = sp.owner
-        val vtdDebuff = owner?.sim?.target?.debuffs?.get(VampiricTouchDot.name)
+        val vtdDebuff = sp.sim.target.debuffs.get(VampiricTouchDot.name)
         if(vtdDebuff != null){
-            owner.addResource((result.first * 0.05).toInt(), Resource.Type.MANA, VampiricTouchDot.manaRestoreName)
+            sp.addResource((result.first * 0.05).toInt(), Resource.Type.MANA, VampiricTouchDot.manaRestoreName)
         }
 
         val triggerTypes = when(result.second) {

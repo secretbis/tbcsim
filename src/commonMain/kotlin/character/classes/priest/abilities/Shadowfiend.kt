@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.buffs.PowerInfusion
 import character.classes.priest.talents.*
 import character.Ability
@@ -19,6 +20,12 @@ class Shadowfiend : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 300000
 
     override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+        if(innerFocusBuff != null){
+            sp.consumeBuff(innerFocusBuff)
+            return 0.0
+        }
+
         val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
         val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 0.0
 

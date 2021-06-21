@@ -36,6 +36,11 @@ class HolyFire : Ability() {
     val school = Constants.DamageType.HOLY
     val spellPowerCoeff = 0.857
     override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+        if(innerFocusBuff != null){
+            return 0.0
+        }
+
         val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val piMult = piBuff?.manaCostMultiplier() ?: 1.0
 
@@ -64,6 +69,10 @@ class HolyFire : Ability() {
             result = result.second,
         )
         sp.logEvent(event)
+
+        if(innerFocusBuff != null){
+            sp.consumeBuff(innerFocusBuff)
+        }   
 
         if(result.second != EventResult.RESIST) {
             sp.sim.target.addDebuff(HolyFireDot(sp))

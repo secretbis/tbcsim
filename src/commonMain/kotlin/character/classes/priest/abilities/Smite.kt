@@ -39,18 +39,15 @@ class Smite : Ability() {
 
     val baseResourceCost = 385.0
     override fun resourceCost(sp: SimParticipant): Double {
-        val innerFocus: InnerFocusTalent? = sp.character.klass.talentInstance(InnerFocusTalent.name)
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
-
         if(innerFocusBuff != null){
             return 0.0
         }
-        else{
-            val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
-            val piMult = piBuff?.manaCostMultiplier() ?: 1.0
+        
+        val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
+        val piMult = piBuff?.manaCostMultiplier() ?: 1.0
 
-            return baseResourceCost * piMult
-        }
+        return baseResourceCost * piMult        
     }
 
     val baseDamage = Pair(549.0, 616.0)
@@ -67,6 +64,7 @@ class Smite : Ability() {
         val ifCrit = innerFocusBuff?.critPct() ?: 0.0
 
         val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
+        val solBuff = sp.buffs[SurgeOfLightTalent.buffName]
         val solCritModifier = solProc?.critChanceModifier() ?: 0.0
 
         val searingLight: SearingLight? = sp.character.klass.talentInstance(SearingLight.name)
@@ -88,6 +86,14 @@ class Smite : Ability() {
             result = result.second,
         )
         sp.logEvent(event)
+
+        if(solBuff == null){
+            if(innerFocusBuff != null){
+                sp.consumeBuff(innerFocusBuff)
+            }
+        } else{
+            sp.consumeBuff(solBuff)
+        }
 
         // Fire procs
         val triggerTypes = when(result.second) {

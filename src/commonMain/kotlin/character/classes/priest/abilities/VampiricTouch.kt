@@ -3,6 +3,7 @@ package character.classes.priest.abilities
 import character.Ability
 import character.Proc
 import character.classes.priest.buffs.PowerInfusion
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.debuffs.VampiricTouchDot
 import character.classes.priest.talents.*
 import data.Constants
@@ -25,6 +26,12 @@ class VampiricTouch : Ability() {
 
     val baseResourceCost = 425.0
     override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+        if(innerFocusBuff != null){
+            sp.consumeBuff(innerFocusBuff)
+            return 0.0
+        }
+
         val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val piMult = piBuff?.manaCostMultiplier() ?: 1.0
 

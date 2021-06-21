@@ -3,6 +3,7 @@ package character.classes.priest.abilities
 import character.Ability
 import character.Proc
 import character.classes.priest.buffs.PowerInfusion
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.debuffs.ShadowWordPainDot
 import character.classes.priest.talents.*
 import data.Constants
@@ -25,8 +26,14 @@ class ShadowWordPain : Ability() {
 
     val baseResourceCost = 575.0
     override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+        if(innerFocusBuff != null){
+            sp.consumeBuff(innerFocusBuff)
+            return 0.0
+        }
+
         val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
-        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 0.0
+        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 1.0
 
         val piBuff = sp.buffs[PowerInfusion.name] as PowerInfusion?
         val piMult = piBuff?.manaCostMultiplier() ?: 1.0
