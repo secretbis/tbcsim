@@ -1,9 +1,9 @@
 class: Priest
 spec: Shadow
-description: Shadow Priest (raid)
+description: Shadow Priest (phase1)
 race: Human
 level: 70
-epCategory: raid
+epCategory: phase1
 epSpec: priest_shadow
 
 talents:
@@ -22,12 +22,14 @@ talents:
     rank: 5
   - name: Mind Flay
     rank: 1
+  - name: Shadow Weaving
+    rank: 4
   - name: Focused Mind
     rank: 3
   - name: Darkness
     rank: 5
   - name: Shadow Power
-    rank: 3
+    rank: 4
   - name: Vampiric Touch
     rank: 1
   - name: Shadowform
@@ -36,61 +38,73 @@ talents:
 # Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Nathrezim Mindblade
-    enchant: Major Spellpower (Weapon)
+    name: Talon of the Tempest
+    enchant: Soulfrost
     tempEnchant: Superior Wizard Oil
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   offHand:
-    name: Jewel of Infinite Possibilities
+    name: Orb of the Souleater
   rangedTotemLibram:
-    name: Tirisfal Wand of Ascendancy
+    name: The Black Stalk
   head:
-    name: Soul-Collar of the Incarnate
+    name: Spellstrike Hood
     enchant: Glyph of Power
     gems:
-      - Ember Skyfire Diamond
-      - Great Dawnstone
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
   neck:
-    name: Brooch of Unquenchable Fury
+    name: Ritssyn's Lost Pendant
   shoulders:
-    name: Soul-Mantle of the Incarnate
+    name: Frozen Shadoweave Shoulders
     enchant: Greater Inscription of the Orb
     gems:
       - Runed Living Ruby
-      - Sparkling Star of Elune
+      - Runed Living Ruby
   back:
-    name: Ruby Drape of the Mysticant
+    name: Ancient Spellcloak of the Highborne
   chest:
-    name: Shroud of the Incarnate
+    name: Frozen Shadoweave Robe
     enchant: Major Spirit
     gems:
-      - Veiled Noble Topaz
-      - Sparkling Star of Elune
-      - Sparkling Star of Elune
+      - Runed Living Ruby
+      - Runed Living Ruby
   wrists:
-    name: Bands of Rarefied Magic
+    name: Bracers of Havok
     enchant: Spellpower (Bracer)
+    gems:
+      - Runed Living Ruby
   hands:
-    name: Handwraps of Flowing Thought
+    name: Soul-Eater's Handwraps
     enchant: Major Spellpower (Gloves)
     gems:
-      - Great Dawnstone
-      - Sparkling Star of Elune
+      - Runed Living Ruby
+      - Runed Living Ruby
   waist:
-    name: Sash of Arcane Visions
+    name: Belt of Divine Inspiration
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   legs:
-    name: Leggings of the Incarnate
+    name: Leggings of the Seventh Circle
     enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
   feet:
-    name: Boots of Foretelling
+    name: Frozen Shadoweave Boots
     enchant: Boar's Speed
     gems:
-      - Veiled Noble Topaz
-      - Veiled Noble Topaz
+      - Runed Living Ruby
+      - Runed Living Ruby
   ring1:
-    name: Sparking Arcanite Ring
+    name: Seer's Signet
     enchant: Spellpower (Ring)
   ring2:
-    name: Band of Crimson Fury
+    name: Cobalt Band of Tyrigosa
     enchant: Spellpower (Ring)
   trinket1:
     name: Eye of Magtheridon
