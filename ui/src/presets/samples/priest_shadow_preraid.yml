@@ -1,9 +1,9 @@
 class: Priest
 spec: Shadow
-description: Shadow Priest (phase1)
+description: Shadow Priest (pre-raid)
 race: Human
 level: 70
-epCategory: phase1
+epCategory: preraid
 epSpec: priest_shadow
 
 talents:
@@ -38,12 +38,9 @@ talents:
 # Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Talon of the Tempest
-    enchant: Soulfrost
+    name: Eternium Runed Blade
+    enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   offHand:
     name: Orb of the Souleater
   rangedTotemLibram:
@@ -56,7 +53,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Ritssyn's Lost Pendant
+    name: Natasha's Ember Necklace
   shoulders:
     name: Frozen Shadoweave Shoulders
     enchant: Greater Inscription of the Orb
@@ -64,7 +61,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   back:
-    name: Ancient Spellcloak of the Highborne
+    name: CLoak of the Black Void
   chest:
     name: Frozen Shadoweave Robe
     enchant: Major Spirit
@@ -77,13 +74,13 @@ gear:
     gems:
       - Runed Living Ruby
   hands:
-    name: Soul-Eater's Handwraps
+    name: Tempest's Touch
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   waist:
-    name: Belt of Divine Inspiration
+    name: Girdle of Ruination
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -107,7 +104,7 @@ gear:
     name: Cobalt Band of Tyrigosa
     enchant: Spellpower (Ring)
   trinket1:
-    name: Eye of Magtheridon
+    name: Quagmirran's Eye
   trinket2:
     name: Icon of the Silver Crescent
 
