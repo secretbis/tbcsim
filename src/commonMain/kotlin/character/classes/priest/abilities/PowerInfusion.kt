@@ -4,6 +4,7 @@ import character.Ability
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.buffs.PowerInfusion as PowerInfusionBuff
 import character.classes.priest.talents.PowerInfusion as PowerInfusionTalent
+import character.classes.priest.talents.*
 import sim.SimParticipant
 
 class PowerInfusion : Ability() {
@@ -23,7 +24,10 @@ class PowerInfusion : Ability() {
             return 0.0
         }
 
-        return sp.character.klass.baseMana * 0.16
+        val mentalAgility = sp.character.klass.talents[MentalAgility.name] as MentalAgility?
+        val mentalAgilityManaCostMultiplier = mentalAgility?.instantSpellManaCostReductionMultiplier() ?: 1.0
+
+        return sp.character.klass.baseMana * 0.16 * mentalAgilityManaCostMultiplier
     }
 
     override fun available(sp: SimParticipant): Boolean {

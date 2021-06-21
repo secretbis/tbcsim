@@ -36,19 +36,23 @@ talents:
 # Pre-raid BIS-ish
 gear:
   mainHand:
-    name: Nathrezim Mindblade
+    name: Talon of the Tempest
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
+    gems:
+      - Sparkling Star of Elune
+      - Sparkling Star of Elune
   offHand:
     name: Jewel of Infinite Possibilities
   rangedTotemLibram:
-    name: Tirisfal Wand of Ascendancy
+    name: Eredar Wand of Obliteration
   head:
-    name: Soul-Collar of the Incarnate
+    name: Spellstrike Hood
     enchant: Glyph of Power
     gems:
-      - Ember Skyfire Diamond
-      - Great Dawnstone
+      - Sparkling Star of Elune
+      - Veiled Noble Topaz
+      - Runed Living Ruby
   neck:
     name: Brooch of Unquenchable Fury
   shoulders:
@@ -58,7 +62,7 @@ gear:
       - Runed Living Ruby
       - Sparkling Star of Elune
   back:
-    name: Ruby Drape of the Mysticant
+    name: Drape of the Righteous
   chest:
     name: Shroud of the Incarnate
     enchant: Major Spirit
@@ -70,24 +74,31 @@ gear:
     name: Bands of Rarefied Magic
     enchant: Spellpower (Bracer)
   hands:
-    name: Handwraps of Flowing Thought
+    name: Anger-Spark Gloves
     enchant: Major Spellpower (Gloves)
     gems:
-      - Great Dawnstone
-      - Sparkling Star of Elune
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
   waist:
-    name: Sash of Arcane Visions
+    name: Girdle of Ruination
+    gems:
+      - Veiled Noble Topaz
+      - Sparkling Star of Elune
   legs:
-    name: Leggings of the Incarnate
+    name: Spellstrike Pants
     enchant: Runic Spellthread
+    gems:
+      - Sparkling Star of Elune
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
   feet:
     name: Boots of Foretelling
     enchant: Boar's Speed
     gems:
-      - Veiled Noble Topaz
-      - Veiled Noble Topaz
+      - Sparkling Star of Elune
+      - Sparkling Star of Elune
   ring1:
-    name: Sparking Arcanite Ring
+    name: Ring of Recurrence
     enchant: Spellpower (Ring)
   ring2:
     name: Band of Crimson Fury
@@ -128,6 +139,7 @@ rotation:
           debuff: Shadow Word Pain (DoT)
           seconds: 0
     - name: Mind Blast
+    - name: Inner Focus
     - name: Smite
 
 pet:

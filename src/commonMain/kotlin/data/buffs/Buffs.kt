@@ -37,6 +37,10 @@ object Buffs {
             val amount = name.drop(18).toInt()
             return GenericHolyDamageBuff(amount)
         },
+        Regex("Holy Damage Bonus \\d+") to fun (name: String): Buff {
+            val amount = name.drop(18).toInt()
+            return GenericHolyDamageBuff(amount)
+        },
         Regex("Increase Fire Dam \\d+") to fun (name: String): Buff {
             val amount = name.drop(18).toInt()
             return GenericFireDamageBuff(amount)
