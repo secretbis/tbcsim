@@ -6,7 +6,7 @@ import character.Proc
 import character.classes.priest.buffs.PowerInfusion
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.InnerFocus as InnerFocusTalent
-import character.classes.priest.talents.SurgeOfLight as SurgeOfLightTalent
+import character.classes.priest.talents.SurgeOfLight
 import character.classes.priest.talents.FocusedPower
 import character.classes.priest.talents.SearingLight
 import character.classes.priest.talents.HolySpecialization
@@ -30,7 +30,7 @@ class Smite : Ability() {
     val baseCastTimeMs = 2500
     override fun castTimeMs(sp: SimParticipant): Int {
         val divineFury: DivineFury? = sp.character.klass.talentInstance(DivineFury.name)
-        val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
+        val solProc = sp.buffs[SurgeOfLight.buffName]
         if (solProc != null) {
             return 1500
         }
@@ -63,9 +63,11 @@ class Smite : Ability() {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
         val ifCrit = innerFocusBuff?.critPct() ?: 0.0
 
-        val solProc = sp.buffs[SurgeOfLightTalent.buffName] as SurgeOfLightTalent?
-        val solBuff = sp.buffs[SurgeOfLightTalent.buffName]
-        val solCritModifier = solProc?.critChanceModifier() ?: 0.0
+        val solBuff = sp.buffs[SurgeOfLight.buffName]
+        var solCritModifier = 0.0   
+        if(solBuff != null){
+            solCritModifier = 100.0
+        }
 
         val searingLight: SearingLight? = sp.character.klass.talentInstance(SearingLight.name)
         val searingLightMultiplier = searingLight?.smiteHolyFireDamageMultiplier() ?: 1.0
@@ -87,18 +89,16 @@ class Smite : Ability() {
         )
         sp.logEvent(event)
 
+        // Inner Focus is not consumed by smite if Surge of Light is active
         if(solBuff == null){
             if(innerFocusBuff != null){
                 sp.consumeBuff(innerFocusBuff)
             }
-        } else{
-            sp.consumeBuff(solBuff)
         }
 
-        // Fire procs
         val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)
+            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC, Proc.Trigger.SMITE_CAST)
+            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC, Proc.Trigger.SMITE_CAST)
             EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
             else -> null
         }

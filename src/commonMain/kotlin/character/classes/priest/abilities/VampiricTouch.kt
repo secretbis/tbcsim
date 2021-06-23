@@ -61,7 +61,7 @@ class VampiricTouch : Ability() {
         sp.logEvent(event)
 
         // Apply the DoT
-        if(result.second != EventResult.MISS){
+        if(result.second != EventResult.RESIST){
             sp.sim.target.addDebuff(VampiricTouchDot(sp))
         }        
     }

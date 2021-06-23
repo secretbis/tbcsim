@@ -75,6 +75,8 @@ abstract class Proc {
 
         MAGE_ANY_SCORCH,
 
+        SMITE_CAST,
+
         PRIEST_TICK_SHADOW_WORD_PAIN,
 
         ROGUE_CAST_CHEAP_SHOT,

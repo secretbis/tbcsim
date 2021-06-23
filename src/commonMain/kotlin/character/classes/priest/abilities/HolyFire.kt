@@ -81,6 +81,7 @@ class HolyFire : Ability() {
         val triggerTypes = when(result.second) {
             EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)
             EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.HOLY_DAMAGE_NON_PERIODIC)
+            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
             else -> null
         }
 
