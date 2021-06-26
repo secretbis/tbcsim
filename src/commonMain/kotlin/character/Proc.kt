@@ -64,6 +64,7 @@ abstract class Proc {
         SHADOW_DAMAGE_PERIODIC,
         SHADOW_DAMAGE_NON_PERIODIC,
         PHYSICAL_DAMAGE_PERIODIC,
+        ARCANE_DAMAGE_PERIODIC,
         ARCANE_DAMAGE,
 
         // Mechanics

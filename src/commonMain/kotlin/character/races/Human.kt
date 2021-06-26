@@ -25,6 +25,18 @@ class Human : Race() {
         }
     }
 
+    val theHumanSpirit = object : Buff() {
+        override val name: String = "The Human Spirit"
+        override val durationMs: Int = -1
+        override val hidden: Boolean = true
+
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return Stats(
+                spiritMultiplier = 1.1
+            )
+        }
+    }
+
     override fun racialByName(name: String): Ability? = null
-    override fun buffs(sp: SimParticipant): List<Buff> = listOf(swordMaceSpec)
+    override fun buffs(sp: SimParticipant): List<Buff> = listOf(swordMaceSpec, theHumanSpirit)
 }
