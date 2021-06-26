@@ -1,7 +1,7 @@
 class: Priest
 spec: Shadow
 description: Shadow Priest (pre-raid)
-race: Human
+race: Night Elf
 level: 70
 epCategory: preraid
 epSpec: priest_shadow
@@ -133,6 +133,9 @@ rotation:
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
     - name: Use Active Trinket
+        - name: Berserking
+    - name: Devouring Plague
+    - name: Starshards
     - name: Vampiric Touch
       criteria:
         - type: DEBUFF_DURATION_LTE
@@ -163,6 +166,7 @@ raidBuffs:
   - Improved Blessing of Wisdom
   - Improved Mark of the Wild
   - Improved Seal of the Crusader
+  - Improved Divine Spirit
 
   - Moonkin Aura
   - Wrath of Air Totem
