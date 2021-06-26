@@ -33,7 +33,8 @@ object RaidAbilities {
         VampiricTouch(1500),
         WindfuryTotem(),
         WindfuryTotemRank1(),
-        WrathOfAirTotem()
+        WrathOfAirTotem(),
+        ImprovedDivineSpirit()
     )
 
     val raidDebuffs: Array<Ability> = arrayOf(

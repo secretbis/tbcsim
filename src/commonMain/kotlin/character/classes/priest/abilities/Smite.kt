@@ -64,9 +64,9 @@ class Smite : Ability() {
         val ifCrit = innerFocusBuff?.critPct() ?: 0.0
 
         val solBuff = sp.buffs[SurgeOfLight.buffName]
-        var solCritModifier = 0.0   
+        var crit = true  
         if(solBuff != null){
-            solCritModifier = 100.0
+            crit = false
         }
 
         val searingLight: SearingLight? = sp.character.klass.talentInstance(SearingLight.name)
@@ -78,7 +78,7 @@ class Smite : Ability() {
         val t4Bonus = sp.buffs[IncarnateRegalia.FOUR_SET_BUFF_NAME] != null
         val t4DmgIncrease = if(t4Bonus) { IncarnateRegalia.fourSetDmgMultiplierPct() } else 0.0
 
-        val result = Spell.attackRoll(sp, damageRoll * (searingLightMultiplier + t4DmgIncrease), school, bonusCritChance = hsCrit + ifCrit - solCritModifier, bonusHitChance = fpHit)
+        val result = Spell.attackRoll(sp, damageRoll * (searingLightMultiplier + t4DmgIncrease), school, bonusCritChance = hsCrit + ifCrit, bonusHitChance = fpHit, canCrit = crit)
 
         val event = Event(
             eventType = EventType.DAMAGE,
