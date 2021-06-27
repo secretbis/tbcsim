@@ -154,7 +154,38 @@ function PhaseSelect({ phase, dispatch }) {
   );
 }
 
-export default ({ value, phase, dispatch }) => {
+function EpSelect({ epCategoryKey, dispatch }) {
+  if(epCategoryKey == null) return null;
+
+  const allEpCategories = [{
+    name: 'Pre-raid',
+    key: 'preraid'
+  },{
+    name: 'Phase 1',
+    key: 'phase1'
+  }]
+  const epCategoryEntry = allEpCategories.find(epc => epc.key == epCategoryKey)
+  if(epCategoryEntry == null) return null;
+
+  const epCategoryName = epCategoryEntry.name;
+
+  function onSelect(epCategory) {
+    dispatch({ type: 'character.epCategory', value: epCategory })
+  }
+
+  return (
+    <>
+      <Dropdown title="EP Category">
+        {allEpCategories.map(epCategory => {
+          return <Dropdown.Item key={epCategory.key} eventKey={epCategory.key} onSelect={onSelect}>{epCategory.name}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{epCategoryName}</span>
+    </>
+  );
+}
+
+export default ({ character, phase, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function onSelect(key, evt) {
@@ -271,16 +302,19 @@ export default ({ value, phase, dispatch }) => {
           </Dropdown.Menu>
         </Dropdown>
 
-        {value && value.description ?
-          <span>{value.description}</span> :
+        {character && character.description ?
+          <span>{character.description}</span> :
           <span>Please select a preset</span>
         }
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <RaceSelect character={value} dispatch={dispatch} />
+        <RaceSelect character={character} dispatch={dispatch} />
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <PhaseSelect phase={phase} dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <EpSelect epCategoryKey={character && character.epCategory} dispatch={dispatch} />
       </Col>
     </Row>
   )
