@@ -55,7 +55,7 @@ class Frostbolt : Ability() {
         val bonusFbSpellDmg = empFb?.frostboltBonusSpellDamageMultiplier() ?: 1.0
 
         val wintersChill = sp.sim.target.debuffs[WintersChill.name]
-        val wintersChillCrit = (wintersChill?.state(sp)?.currentStacks ?: 0) * 0.02
+        val wintersChillCrit = (wintersChill?.state(sp.sim.target)?.currentStacks ?: 0) * 0.02
 
         val piercingIce: PiercingIce? = sp.character.klass.talentInstance(PiercingIce.name)
         val piercingIceMult = piercingIce?.frostDamageMultiplier() ?: 1.0

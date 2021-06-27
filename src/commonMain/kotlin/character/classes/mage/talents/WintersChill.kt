@@ -24,14 +24,14 @@ class WintersChill(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.PERCENT
             override fun percentChance(sp: SimParticipant): Double = currentRank * 20.0
 
-            fun critBuff(sp: SimParticipant): Debuff = object : Debuff(sp) {
+            fun critDebuff(sp: SimParticipant): Debuff = object : Debuff(sp) {
                 override val name: String = Companion.name
                 override val durationMs: Int = 15000
                 override val maxStacks: Int = 5
             }
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.sim.target.addDebuff(critBuff(sp))
+                sp.sim.target.addDebuff(critDebuff(sp))
             }
         }
 

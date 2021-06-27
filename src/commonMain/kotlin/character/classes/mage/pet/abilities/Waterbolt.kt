@@ -28,7 +28,7 @@ class Waterbolt : Ability() {
     val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
     override fun cast(sp: SimParticipant) {
         val wintersChill = sp.sim.target.debuffs[WintersChill.name]
-        val wintersChillCrit = (wintersChill?.state(sp)?.currentStacks ?: 0) * 0.02
+        val wintersChillCrit = (wintersChill?.state(sp.sim.target)?.currentStacks ?: 0) * 0.02
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = wintersChillCrit)
