@@ -388,7 +388,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         }
     }
 
-    private fun removeBuffs(buffsList: List<Buff>) {
+    fun removeBuffs(buffsList: List<Buff>) {
         buffsList.forEach {
             buffs.remove(it.name)
             buffState.remove(it.name)

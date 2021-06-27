@@ -122,10 +122,15 @@ object Buffs {
             35163 -> IconOfTheSilverCrescent()
             35166 -> BloodlustBrooch()
             35337 -> ScryersBloodgemXirisGift(item.name)
+            37173 -> WarpSpringCoil()
             37657 -> TheLightningCapacitor()
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
+            40475 -> MadnessOfTheBetrayer()
             42083 -> TsunamiTalisman()
+            43716 -> BerserkersCall()
+            45354 -> ShardOfContempt()
+            45355 -> BlackenedNaaruSliver()
 
             //Weapons
             16916 -> KhoriumChampion(item)
