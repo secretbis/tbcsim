@@ -486,7 +486,7 @@ export const classes = {
       'Blood Elf',
       'Gnome',
       'Human',
-      'Tauren',
+      'Orc',
       'Troll'
     ]
   },
