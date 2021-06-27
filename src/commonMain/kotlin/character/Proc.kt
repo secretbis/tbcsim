@@ -175,7 +175,9 @@ abstract class Proc {
                 when (type) {
                     Type.PPM -> {
                         // Try to use the procced item if it is a weapon
-                        val itemFromProc = items?.find { it === sp.character.gear.mainHand  } ?: items?.find { it === sp.character.gear.offHand }
+                        val itemFromProc = items?.find { it === sp.character.gear.mainHand  }
+                            ?: items?.find { it === sp.character.gear.offHand }
+                            ?: items?.find { it === sp.character.gear.rangedTotemLibram }
 
                         if(itemFromProc == null) {
                             logger.debug { "Attempted to compute a PPM without an Item from ability: ${ability?.name}" }
