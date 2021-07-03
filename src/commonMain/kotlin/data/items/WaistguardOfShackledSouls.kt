@@ -54,7 +54,7 @@ public class WaistguardOfShackledSouls : Item() {
 
   public override var socketBonus: SocketBonus? = null
 
-  public override var phase: Int = 2
+  public override var phase: Int = 3
 
   public override val buffs: List<Buff> by lazy {
         listOf()}

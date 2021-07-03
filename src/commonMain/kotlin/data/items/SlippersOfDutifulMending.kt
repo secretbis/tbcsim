@@ -72,7 +72,7 @@ public class SlippersOfDutifulMending : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3097)
 
-  public override var phase: Int = 2
+  public override var phase: Int = 5
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(

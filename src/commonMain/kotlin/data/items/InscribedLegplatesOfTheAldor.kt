@@ -73,7 +73,7 @@ public class InscribedLegplatesOfTheAldor : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(2895)
 
-  public override var phase: Int = 2
+  public override var phase: Int = 3
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(

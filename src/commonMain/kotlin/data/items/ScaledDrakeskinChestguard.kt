@@ -73,7 +73,7 @@ public class ScaledDrakeskinChestguard : Item() {
 
   public override var socketBonus: SocketBonus? = SocketBonuses.byId(3114)
 
-  public override var phase: Int = 2
+  public override var phase: Int = 5
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
