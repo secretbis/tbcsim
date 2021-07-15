@@ -301,7 +301,7 @@ export const classRangedItemClasses = {
   mage: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [asc.wand]
+      [ic.weapon]: [wsc.wand]
     }
   },
   paladin: {
@@ -313,7 +313,7 @@ export const classRangedItemClasses = {
   priest: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [asc.wand]
+      [ic.weapon]: [wsc.wand]
     }
   },
   rogue: {
@@ -331,7 +331,7 @@ export const classRangedItemClasses = {
   warlock: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [asc.wand]
+      [ic.weapon]: [wsc.wand]
     }
   },
   warrior: {
