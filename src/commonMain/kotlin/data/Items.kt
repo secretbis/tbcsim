@@ -25,7 +25,16 @@ object Items {
         { NightstalkersWristguards() },
         { FistOfReckoning() },
 
-        // TODO: Weird one-off dungeon gems.  Just sub an epic gem that's close for now.
+        // Honor gems
+        { BoldOrnateRuby() },
+        { RunedOrnateRuby() },
+        { SmoothOrnateDawnstone() },
+        { GleamingOrnateDawnstone() },
+        { PotentOrnateTopaz() },
+        { InscribedOrnateTopaz() },
+
+        // TODO: Dungeon epic gems, there are ~45 of these
+
         // Meta gems
         { ChaoticSkyfireDiamond() },
         { RelentlessEarthstormDiamond() },

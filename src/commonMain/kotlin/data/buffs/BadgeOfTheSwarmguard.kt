@@ -24,7 +24,7 @@ class BadgeOfTheSwarmguard : Buff() {
 
         val stackBuff = object : Buff() {
             override val name: String = "Insight of the Qiraji"
-            override val durationMs: Int = -1
+            override val durationMs: Int = buffDurationMs
             override val maxStacks: Int = 6
             override val hidden: Boolean = false
         }

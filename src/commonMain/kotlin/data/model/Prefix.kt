@@ -16,14 +16,14 @@ enum class Prefix(val stat: List<GemStat>) {
     SUBTLE(listOf(GemStat(Constants.StatType.DODGE_RATING, 0, 8, 10))),
 
     // Yellow
-    GLEAMING(listOf(GemStat(Constants.StatType.CRIT_RATING, 6, 8, 10))),
+    GLEAMING(listOf(GemStat(Constants.StatType.CRIT_SPELL_RATING, 6, 8, 10))),
     SMOOTH(listOf(GemStat(Constants.StatType.CRIT_RATING, 6, 8, 10))),
     BRILLIANT(listOf(GemStat(Constants.StatType.INTELLECT, 6, 8, 10))),
     THICK(listOf(GemStat(Constants.StatType.DEFENSE_SKILL_RATING, 6, 8, 10))),
-    GREAT(listOf(GemStat(Constants.StatType.HIT_RATING, 6, 8, 10))),
+    GREAT(listOf(GemStat(Constants.StatType.HIT_SPELL_RATING, 6, 8, 10))),
     RIGID(listOf(GemStat(Constants.StatType.HIT_RATING, 6, 8, 10))),
     MYSTIC(listOf(GemStat(Constants.StatType.RESILIENCE_RATING, 6, 8, 10))),
-    QUICK(listOf(GemStat(Constants.StatType.HASTE_RATING, 6, 8, 10))),
+    QUICK(listOf(GemStat(Constants.StatType.HASTE_SPELL_RATING, 6, 8, 10))),
 
     // Blue
     SOLID(listOf(GemStat(Constants.StatType.STAMINA, 9, 12, 15))),
@@ -42,7 +42,7 @@ enum class Prefix(val stat: List<GemStat>) {
     )),
     POTENT(listOf(
         GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
-        GemStat(Constants.StatType.CRIT_RATING, 3, 4, 5)
+        GemStat(Constants.StatType.CRIT_SPELL_RATING, 3, 4, 5)
     )),
     WICKED(listOf(
         GemStat(Constants.StatType.ATTACK_POWER, 6, 8, 10),
@@ -50,7 +50,7 @@ enum class Prefix(val stat: List<GemStat>) {
     )),
     VEILED(listOf(
         GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
-        GemStat(Constants.StatType.HIT_RATING, 3, 4, 5)
+        GemStat(Constants.StatType.HIT_SPELL_RATING, 3, 4, 5)
     )),
     LUMINOUS(listOf(
         GemStat(Constants.StatType.SPELL_HEALING, 7, 9, 11),
@@ -59,7 +59,7 @@ enum class Prefix(val stat: List<GemStat>) {
     )),
     RECKLESS(listOf(
         GemStat(Constants.StatType.SPELL_DAMAGE, 4, 5, 6),
-        GemStat(Constants.StatType.HASTE_RATING, 3, 4, 5)
+        GemStat(Constants.StatType.HASTE_SPELL_RATING, 3, 4, 5)
     )),
 
     //Green
@@ -76,7 +76,7 @@ enum class Prefix(val stat: List<GemStat>) {
         GemStat(Constants.StatType.MANA_PER_5_SECONDS, 1, 2, 3)
     )),
     RADIANT(listOf(
-        GemStat(Constants.StatType.CRIT_RATING, 3, 4, 5),
+        GemStat(Constants.StatType.CRIT_SPELL_RATING, 3, 4, 5),
         GemStat(Constants.StatType.SPELL_PEN, 4, 5, 6)
     )),
     STEADY(listOf(
