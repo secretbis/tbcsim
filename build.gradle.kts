@@ -16,11 +16,8 @@ plugins {
 group = "com.tbcsim"
 
 repositories {
-    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
-    maven(url = "https://kotlin.bintray.com/kotlinx/")
     mavenCentral()
     jcenter()
-    maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
 }
 
 kotlin {

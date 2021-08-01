@@ -21,6 +21,7 @@ object Enchants {
         { item: Item -> CloakGreaterAgility(item) },
         { item: Item -> CloakSpellPenetration(item) },
         { item: Item -> CobrahideLegArmor(item) },
+        { item: Item -> Crusader(item) },
         { item: Item -> Executioner(item) },
         { item: Item -> GlovesBlasting(item) },
         { item: Item -> GlovesMajorSpellpower(item) },
