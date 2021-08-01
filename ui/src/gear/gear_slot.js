@@ -7,7 +7,7 @@ import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 import { kprop } from '../util/util';
 
-import { inventorySlots as inv, itemClasses as ic } from '../data/constants';
+import { inventorySlots as inv, itemClasses as ic, weaponSubclasses as wsc } from '../data/constants';
 
 const defaultWidth = '55px';
 const bgImages = {
@@ -99,7 +99,8 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
 
   function renderItem() {
     const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName);
-    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) : item.inventorySlot !== inv.holdable_tome;
+    // Guns are slot RANGED_RIGHT and bows are slot RANGED for whatever reason.  Wands are also RANGED_RIGHT, and those can't have enchants, so single out guns specifically
+    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) || kprop(item.itemSubclass, 'itemClassOrdinal') == wsc.gun : item.inventorySlot !== inv.holdable_tome;
     const itemCanTempEnchant = (slotName == 'mainHand' || slotName == 'offHand') && item.itemClass && kprop(item.itemClass, 'ordinal') === ic.weapon;
 
     return (
