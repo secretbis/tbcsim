@@ -9,16 +9,15 @@ import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
-class KhoriumScope(item: Item) : Enchant(item) {
-    override val id: Int = 23808
+class BiznicksAccurascope(item: Item) : Enchant(item) {
+    override val id: Int = 18283
     override val inventorySlot: Int = Constants.InventorySlot.RANGED.ordinal
-    override val name: String = "Khorium Scope"
+    override val name: String = "Biznicks 247x128 Accurascope"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return if(sp.character.klass is Hunter) {
             Stats(
-                whiteDamageFlatModifier = 12.0,
-                yellowDamageFlatModifier = 12.0
+                physicalHitRating = 30.0
             )
         } else Stats()
     }

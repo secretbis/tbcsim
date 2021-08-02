@@ -9,6 +9,7 @@ import kotlin.js.JsExport
 object Enchants {
     val enchants = arrayOf(
         { item: Item -> Agility(item) },
+        { item: Item -> BiznicksAccurascope(item) },
         { item: Item -> BootsCatsSwiftness(item) },
         { item: Item -> BootsDexterity(item) },
         { item: Item -> BootsBoarsSpeed(item) },
