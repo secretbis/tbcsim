@@ -26,10 +26,15 @@ object Ranged {
         return item.itemSubclass == Constants.ItemSubclass.BOW
     }
 
+    fun isCrossbow(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.CROSSBOW
+    }
+
     fun rangedCritChance(sp: SimParticipant, item: Item): Double {
         val itemBonusCritPct = when {
             isGun(item) -> sp.stats.gunCritRating
             isBow(item) -> sp.stats.bowCritRating
+            isCrossbow(item) -> sp.stats.bowCritRating
             else -> 0.0
         } / Rating.critPerPct
 
