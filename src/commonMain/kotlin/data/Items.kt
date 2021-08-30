@@ -13,6 +13,7 @@ object Items {
         // Manually added items
         { Annihilator() },
         { BadgeOfTheSwarmguard() },
+        { BandOfTheInevitable() },
         { DrakeFangTalisman () },
         { EmpyreanDemolisher() },
         { FistOfReckoning() },
@@ -24,6 +25,7 @@ object Items {
         { MindQuickeningGem() },
         { NeltharionsTear() },
         { NightstalkersWristguards() },
+        { RingOfTheFallenGod() },
         { SlayersCrest() },
         { TheCastigator() },
         { TheHungeringCold() },
