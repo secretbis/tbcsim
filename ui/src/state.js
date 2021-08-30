@@ -29,6 +29,7 @@ export function stateReducer(state, action) {
         resultsDps: null,
 
         character: {
+          filename: action.value.filename,
           class: action.value.class,
           description: action.value.description || '',
           spec: action.value.spec,
@@ -152,6 +153,7 @@ export const initialState = {
   },
 
   character: {
+    filename: null,
     class: null,
     description: null,
     spec: null,

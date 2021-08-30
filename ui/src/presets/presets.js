@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, Row } from 'rsuite';
+import { Col, Dropdown, Row, Button, Uploader, Notification } from 'rsuite';
 import _ from 'lodash';
+import filesaver from 'file-saver';
 
 import { classes } from '../data/constants';
+import * as impex from './importexport';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterBmPhase1 from './samples/hunter_bm_phase1.yml'
@@ -188,14 +190,76 @@ function EpSelect({ epCategoryKey, dispatch }) {
 export default ({ character, phase, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  function onSelect(key, evt) {
-    const [klass, category, idx] = key.split('-')
-    const clone = JSON.parse(JSON.stringify(presets[klass][category][idx]))
+  function Import({ dispatch }) {
+    const importPreset = (file) => {
+      try {
+        const reader = new FileReader()
+
+        reader.onload = (evt) => {
+          try {
+            const presetObj = impex.importPreset(evt.target.result)
+            presetObj['filename'] = file.name
+            return loadPreset(presetObj, dispatch);
+          } catch(e) {
+            Notification['error']({
+              title: 'Import Error',
+              duration: 5000,
+              description: (
+                <div>
+                  <p>Error processing uploaded file, please make sure it is a valid preset YAML file.</p>
+                </div>
+              )
+            });
+          }
+        };
+
+        reader.readAsText(file.blobFile)
+      } catch(e) {
+        Notification['error']({
+          title: 'Import Error',
+          duration: 5000,
+          description: (
+            <div>
+              <p>Error uploading file, please try again.</p>
+            </div>
+          )
+        });
+      }
+    }
+
+    return <Uploader draggable={true} accept='yaml, yml' fileListVisible={false} disabledFileItem={true} onUpload={importPreset} />
+  }
+
+  function Export({ dispatch }) {
+    const exportPreset = () => {
+      try {
+        const filename = character.filename || "exported-preset.yaml";
+        const exported = impex.exportPreset(character);
+        const blob = new Blob([exported], {type: "text/yaml;charset=utf-8"});
+        filesaver.saveAs(blob, filename);
+      } catch(e) {
+        Notification['error']({
+          title: 'Export Error',
+          duration: 5000,
+          description: (
+            <div>
+              <p>Error saving file, please try again.</p>
+            </div>
+          )
+        });
+      }
+    }
+
+    return <Button disabled={!character.class} onClick={exportPreset}>Export</Button>
+  }
+
+  function loadPreset(presetObj, dispatch) {
+    const clone = JSON.parse(JSON.stringify(presetObj))
     clone.gear = _.mapValues(clone.gear, rawItem => {
       // TODO: This method is code generator internals, and possibly fragile
       let item = tbcsim.data.Items.byName.get_35(rawItem.name)
       if(!item) {
-         return;
+        return;
       }
       item = item()
 
@@ -233,6 +297,11 @@ export default ({ character, phase, dispatch }) => {
         'event_value': 1
       });
     }
+  }
+
+  function onSelect(key, evt) {
+    const [klass, category, idx] = key.split('-');
+    return loadPreset(presets[klass][category][idx], dispatch);
   }
 
   function presetsFor(klass, category) {
@@ -315,6 +384,12 @@ export default ({ character, phase, dispatch }) => {
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <EpSelect epCategoryKey={character && character.epCategory} dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <Import dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <Export dispatch={dispatch} />
       </Col>
     </Row>
   )
