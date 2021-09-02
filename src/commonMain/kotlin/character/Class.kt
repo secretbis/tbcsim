@@ -6,6 +6,8 @@ import character.classes.mage.Mage
 import character.classes.mage.specs.Arcane
 import character.classes.mage.specs.Fire
 import character.classes.mage.specs.Frost
+import character.classes.priest.Priest
+import character.classes.priest.specs.Shadow
 import character.classes.shaman.Shaman
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
@@ -35,6 +37,7 @@ abstract class Class(
             return when(className) {
                 "hunter" -> Hunter(talents, spec)
                 "mage" -> Mage(talents, spec)
+                "priest" -> Priest(talents, spec)
                 "shaman" -> Shaman(talents, spec)
                 "warlock" -> Warlock(talents, spec)
                 "warrior" -> Warrior(talents, spec)
@@ -58,6 +61,10 @@ abstract class Class(
                     "arcane" -> Arcane()
                     "fire" -> Fire()
                     "frost" -> Frost()
+                    else -> null
+                }
+                "priest" -> when(specName) {
+                    "shadow" -> Shadow()
                     else -> null
                 }
                 "shaman" -> when(specName) {

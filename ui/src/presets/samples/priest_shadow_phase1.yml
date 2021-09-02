@@ -1,0 +1,106 @@
+class: Priest
+spec: Shadow
+description: Shadow Priest (phase 1)
+race: Troll
+level: 70
+epCategory: phase1
+epSpec: priest_shadow
+
+talents:
+
+gear:
+  mainHand:
+    name: Nathrezim Mindblade
+    enchant: Soulfrost
+    tempEnchant: Superior Wizard Oil
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  offHand:
+    name: Orb of the Soul-Eater
+  rangedTotemLibram:
+    name: The Black Stalk
+  head:
+    name: Spellstrike Hood
+    enchant: Glyph of Power
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  neck:
+    name: Ritssyn's Lost Pendant
+  shoulders:
+    name: Frozen Shadoweave Shoulders
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  back:
+    name: Shadow-Cloak of Dalaran
+  chest:
+    name: Frozen Shadoweave Robe
+    enchant: Major Spirit
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Bracers of Havok
+    enchant: Spellpower (Bracer)
+    gems:
+      - Runed Living Ruby
+  hands:
+    name: Handwraps of Flowing Thought
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  waist:
+    name: Belt of Divine Inspiration
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  feet:
+    name: Frozen Shadoweave Boots
+    enchant: Boar's Speed
+    gems:
+      - Runed Ornate Ruby
+      - Runed Living Ruby
+  ring1:
+    name: Band of Crimson Fury
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Cobalt Band of Tyrigosa
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Eye of Magtheridon
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Blackened Basilisk
+    - name: Flask of Pure Death
+  combat:
+    - name: Mind Blast
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  - Wrath of Air Totem
+  - Mana Spring Totem
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

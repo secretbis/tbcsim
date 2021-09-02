@@ -5,6 +5,7 @@ import character.classes.hunter.specs.Survival
 import character.classes.mage.specs.Arcane
 import character.classes.mage.specs.Fire
 import character.classes.mage.specs.Frost
+import character.classes.priest.specs.Shadow
 import character.classes.rogue.specs.Assassination
 import character.classes.rogue.specs.Combat
 import character.classes.shaman.specs.Elemental
@@ -72,6 +73,7 @@ class TBCSim : CliktCommand() {
         "mage_arcane" to Arcane(),
         "mage_fire" to Fire(),
         "mage_frost" to Frost(),
+        "priest_shadow" to Shadow(),
         "rogue_assassination" to Assassination(),
         "rogue_combat" to Combat(),
         "shaman_ele" to Elemental(),
