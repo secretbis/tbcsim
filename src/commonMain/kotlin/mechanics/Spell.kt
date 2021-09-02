@@ -127,7 +127,7 @@ object Spell {
     }
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0, bonusCritMultiplier: Double = 1.0) : Pair<Double, EventResult> {
+    fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0, bonusCritMultiplier: Double = 1.0, canCrit: Boolean = true) : Pair<Double, EventResult> {
         // Find all our possible damage mods from buffs and so on
         val critMultiplier = (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) * bonusCritMultiplier + 1
 
@@ -142,7 +142,6 @@ object Spell {
 
         // Get the attack result
         val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
-        val critChance = spellCritChance(sp) + bonusCritChance
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
@@ -150,8 +149,9 @@ object Spell {
             else -> Pair(finalDamageRoll, EventResult.HIT)
         }
 
-        // Two-roll all spells
-        if(finalResult.second == EventResult.HIT) {
+        // Two-roll all spells if applicable with critable spells
+        if(canCrit && finalResult.second == EventResult.HIT) {
+            val critChance = spellCritChance(sp) + bonusCritChance
             val hitRoll2 = Random.nextDouble()
             finalResult = when {
                 hitRoll2 < critChance -> Pair(

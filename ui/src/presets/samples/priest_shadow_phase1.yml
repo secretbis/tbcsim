@@ -13,9 +13,6 @@ gear:
     name: Nathrezim Mindblade
     enchant: Soulfrost
     tempEnchant: Superior Wizard Oil
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   offHand:
     name: Orb of the Soul-Eater
   rangedTotemLibram:
@@ -39,7 +36,7 @@ gear:
     name: Shadow-Cloak of Dalaran
   chest:
     name: Frozen Shadoweave Robe
-    enchant: Major Spirit
+    enchant: Exceptional Stats
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -89,6 +86,11 @@ rotation:
     - name: Blackened Basilisk
     - name: Flask of Pure Death
   combat:
+    - name: Shadow Word Pain
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 0
     - name: Mind Blast
     - name: Shadow Word Death
 
