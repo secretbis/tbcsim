@@ -19,6 +19,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             MindBlast.name -> MindBlast()
             ShadowWordDeath.name -> ShadowWordDeath()
             ShadowWordPain.name -> ShadowWordPain()
+            VampiricTouch.name -> VampiricTouch()
             else -> null
         }
     }

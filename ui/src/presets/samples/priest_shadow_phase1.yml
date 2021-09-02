@@ -86,6 +86,11 @@ rotation:
     - name: Blackened Basilisk
     - name: Flask of Pure Death
   combat:
+    - name: Vampiric Touch
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 0
     - name: Shadow Word Pain
       criteria:
         - type: DEBUFF_DURATION_LTE
