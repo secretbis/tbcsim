@@ -90,6 +90,7 @@ rotation:
     - name: Flask of Pure Death
   combat:
     - name: Mind Blast
+    - name: Shadow Word Death
 
 raidBuffs:
   - Blessing of Kings
