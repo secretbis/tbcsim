@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Buff
 import character.Proc
@@ -28,7 +29,16 @@ class ShadowWordDeath : Ability() {
 
     override fun cooldownMs(sp: SimParticipant): Int = 12000
 
-    override fun resourceCost(sp: SimParticipant): Double = 309.0
+    val baseResourceCost = 309.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if (innerFocusBuff != null) {
+            return 0.0
+        }
+
+        return baseResourceCost
+    }
     
     override fun cast(sp: SimParticipant) {    
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)

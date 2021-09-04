@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
 import character.classes.priest.*
@@ -30,7 +31,16 @@ class ShadowWordPain : Ability() {
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sp: SimParticipant): Double = 575.0
+    val baseResourceCost = 575.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if (innerFocusBuff != null) {
+            return 0.0
+        }
+
+        return baseResourceCost
+    }
 
     override fun cast(sp: SimParticipant) {
         // snapshot damage on initial cast

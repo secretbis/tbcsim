@@ -95,6 +95,7 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
+    - name: Inner Focus
     - name: Shadow Word Pain
       criteria:
         - type: DEBUFF_DURATION_LTE

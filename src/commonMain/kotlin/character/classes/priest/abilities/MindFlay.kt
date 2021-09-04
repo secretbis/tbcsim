@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Buff
 import character.Proc
@@ -20,7 +21,6 @@ abstract class MindFlay : Ability() {
     open val tickCount = 3
 
     var baseDamage = 528.0
-    val baseResourceCost = 230.0
     val school = Constants.DamageType.SHADOW
     // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
     val spellPowerCoeff = 0.57
@@ -57,7 +57,16 @@ abstract class MindFlay : Ability() {
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sp: SimParticipant): Double = baseResourceCost
+    val baseResourceCost = 230.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if (innerFocusBuff != null) {
+            return 0.0
+        }
+
+        return baseResourceCost
+    }
 
     override fun cast(sp: SimParticipant) {
         // Overall damage is determined before doing tick damage

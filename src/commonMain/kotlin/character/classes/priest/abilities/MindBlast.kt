@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Buff
 import character.Proc
@@ -29,7 +30,16 @@ class MindBlast : Ability() {
     
     override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
 
-    override fun resourceCost(sp: SimParticipant): Double = 450.0    
+    val baseResourceCost = 450.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if (innerFocusBuff != null) {
+            return 0.0
+        }
+
+        return baseResourceCost
+    }
     
     override fun cast(sp: SimParticipant) {
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)

@@ -1,5 +1,6 @@
 package character.classes.priest.abilities
 
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
 import character.classes.priest.*
@@ -29,7 +30,16 @@ class VampiricTouch : Ability() {
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun resourceCost(sp: SimParticipant): Double = 425.0
+    val baseResourceCost = 425.0
+    override fun resourceCost(sp: SimParticipant): Double {
+        val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
+
+        if (innerFocusBuff != null) {
+            return 0.0
+        }
+
+        return baseResourceCost
+    }
 
     override fun castTimeMs(sp: SimParticipant): Int = 1500
 
