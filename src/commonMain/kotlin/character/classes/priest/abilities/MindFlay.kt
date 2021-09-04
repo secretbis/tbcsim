@@ -4,7 +4,7 @@ import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Buff
 import character.Proc
-import character.classes.priest.talents.*
+import character.classes.priest.talents.MindFlay as MindFlayTalent
 import character.classes.priest.debuffs.*
 import character.Resource
 import data.Constants
@@ -66,6 +66,10 @@ abstract class MindFlay : Ability() {
         }
 
         return baseResourceCost
+    }
+
+    override fun available(sp: SimParticipant): Boolean {
+        return super.available(sp) && sp.character.klass.hasTalentRanks(MindFlayTalent.name)
     }
 
     override fun cast(sp: SimParticipant) {

@@ -27,7 +27,6 @@ class InnerFocus : Buff() {
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             if (ability == null || ability.name == name) return
 
-            sp.sim.logger.debug{"Inner Focus consumed by ${ability.name}"}
             sp.consumeBuff(ifBuff)
         }
     }

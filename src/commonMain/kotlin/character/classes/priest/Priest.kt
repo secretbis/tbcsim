@@ -2,6 +2,10 @@ package character.classes.priest
 
 import character.*
 import character.classes.priest.abilities.*
+import character.classes.priest.talents.*
+import character.classes.priest.talents.InnerFocus as InnerFocusTalent
+import character.classes.priest.talents.MindFlay as MindFlayTalent
+import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import data.model.Item
 
 class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
@@ -30,12 +34,18 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name) {
+            Darkness.name -> Darkness(ranks)
+            InnerFocusTalent.name -> InnerFocusTalent(ranks)
+            Meditation.name -> Meditation(ranks)
+            MindFlayTalent.name -> MindFlayTalent(ranks)
+            Shadowform.name -> Shadowform(ranks)
+            VampiricTouchTalent.name -> VampiricTouchTalent(ranks)
             else -> null
         }
     }
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)
-    override val canDualWield: Boolean = false;
+    override val canDualWield: Boolean = false
     override val attackPowerFromAgility: Int = 0
     override val attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0

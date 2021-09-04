@@ -3,8 +3,8 @@ package character.classes.priest.abilities
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
-import character.classes.priest.*
 import character.classes.priest.debuffs.VampiricTouchDot
+import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import data.Constants
 import mechanics.General
 import mechanics.Spell
@@ -42,6 +42,10 @@ class VampiricTouch : Ability() {
     }
 
     override fun castTimeMs(sp: SimParticipant): Int = 1500
+
+    override fun available(sp: SimParticipant): Boolean {
+        return super.available(sp) && sp.character.klass.hasTalentRanks(VampiricTouchTalent.name)
+    }
 
     override fun cast(sp: SimParticipant) {
         // snapshot damage on initial cast

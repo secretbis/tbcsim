@@ -7,6 +7,21 @@ epCategory: phase1
 epSpec: priest_shadow
 
 talents:
+  # Disc Talents
+  - name: Meditation
+    rank: 3
+  - name: Inner Focus
+    rank: 1
+
+  # Shadow Talents
+  - name: Darkness
+    rank: 5
+  - name: Mind Flay
+    rank: 1
+  - name: Shadowform
+    rank: 1
+  - name: Vampiric Touch
+    rank: 1
 
 gear:
   mainHand:

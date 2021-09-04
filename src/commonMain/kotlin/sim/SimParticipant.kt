@@ -75,7 +75,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
             } else if(character.klass is ShadowfiendPet){
-                sim.logger.debug{"Registering Shadowfiend Auto"}
                 mhAutoAttack = ShadowfiendMelee()
             } else if(character.klass is Rogue) {
                 if (hasMainHandWeapon()) {

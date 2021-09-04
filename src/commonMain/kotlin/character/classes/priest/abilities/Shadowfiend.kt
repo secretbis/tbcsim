@@ -41,7 +41,6 @@ class Shadowfiend : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {    
-        sp.sim.logger.debug{"Casting Shadowfiend ${sp.pet}"}
         sp.pet?.activate()
 
         sp.addBuff(fiendUpBuff)    
