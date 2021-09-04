@@ -42,9 +42,11 @@ class ShadowWordDeath : Ability() {
     override fun cast(sp: SimParticipant) {
         val spTalent: ShadowPower? = sp.character.klass.talentInstance(ShadowPower.name)
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
+        val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = spCrit)
+        val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, bonusCritChance = spCrit)
 
         val event = Event(
             eventType = EventType.DAMAGE,

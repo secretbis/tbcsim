@@ -1,12 +1,12 @@
 package character.classes.priest.abilities
 
-import character.classes.priest.talents.FocusedMind
+import character.classes.priest.debuffs.*
+import character.classes.priest.talents.*
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.MindFlay as MindFlayTalent
 import character.Ability
 import character.Buff
 import character.Proc
-import character.classes.priest.debuffs.*
 import character.Resource
 import data.Constants
 import data.model.Item
@@ -77,6 +77,9 @@ abstract class MindFlay : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
+        val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
+
         // Overall damage is determined before doing tick damage
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
         val resultTick = Spell.attackRoll(
@@ -84,6 +87,7 @@ abstract class MindFlay : Ability() {
             damageRoll,
             school,
             isBinary = true,
+            bonusHitChance = sfHit,
             canCrit = false,
         )
         val initialCast = Event(

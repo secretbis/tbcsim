@@ -3,9 +3,8 @@ package character.classes.priest.abilities
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
-import character.classes.priest.*
 import character.classes.priest.debuffs.ShadowWordPainDot
-import character.classes.priest.talents.ImprovedShadowWordPain
+import character.classes.priest.talents.*
 import data.Constants
 import mechanics.General
 import mechanics.Spell
@@ -46,11 +45,13 @@ class ShadowWordPain : Ability() {
     override fun cast(sp: SimParticipant) {
         val iswp: ImprovedShadowWordPain? = sp.character.klass.talentInstance(ImprovedShadowWordPain.name)
         val iswpTicks = iswp?.currentRank ?: 0
+        val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
         // snapshot damage on initial cast
         var tickCount = baseDotTickCount + iswpTicks
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, canCrit = false)
+        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.SPELL_CAST,

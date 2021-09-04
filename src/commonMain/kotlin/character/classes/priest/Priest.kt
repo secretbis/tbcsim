@@ -41,6 +41,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             InnerFocusTalent.name -> InnerFocusTalent(ranks)
             Meditation.name -> Meditation(ranks)
             MindFlayTalent.name -> MindFlayTalent(ranks)
+            ShadowFocus.name -> ShadowFocus(ranks)
             Shadowform.name -> Shadowform(ranks)
             ShadowPower.name -> ShadowPower(ranks)
             VampiricTouchTalent.name -> VampiricTouchTalent(ranks)

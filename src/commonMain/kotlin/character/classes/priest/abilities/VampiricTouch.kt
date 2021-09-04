@@ -5,6 +5,7 @@ import character.Ability
 import character.Proc
 import character.classes.priest.debuffs.VampiricTouchDot
 import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
+import character.classes.priest.talents.*
 import data.Constants
 import mechanics.General
 import mechanics.Spell
@@ -48,9 +49,12 @@ class VampiricTouch : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
+        val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
+
         // snapshot damage on initial cast
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, canCrit = false)
+        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
         var tickCount = baseDotTickCount;
 
         val event = Event(

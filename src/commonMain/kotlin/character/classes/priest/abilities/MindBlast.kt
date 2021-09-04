@@ -1,9 +1,7 @@
 package character.classes.priest.abilities
 
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
-import character.classes.priest.talents.FocusedMind
-import character.classes.priest.talents.ImprovedMindBlast
-import character.classes.priest.talents.ShadowPower
+import character.classes.priest.talents.*
 import character.Ability
 import character.Buff
 import character.Proc
@@ -56,9 +54,11 @@ class MindBlast : Ability() {
     override fun cast(sp: SimParticipant) {
         val spTalent: ShadowPower? = sp.character.klass.talentInstance(ShadowPower.name)
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
+        val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
+        val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = spCrit)
+        val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, bonusCritChance = spCrit)
 
         val event = Event(
             eventType = EventType.DAMAGE,

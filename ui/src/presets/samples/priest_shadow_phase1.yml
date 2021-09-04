@@ -16,6 +16,8 @@ talents:
   # Shadow Talents
   - name: Improved Shadow Word Pain
     rank: 2
+  - name: Shadow Focus
+    rank: 5
   - name: Improved Mind Blast
     rank: 5
   - name: Mind Flay
