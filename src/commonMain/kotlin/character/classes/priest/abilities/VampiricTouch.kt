@@ -31,6 +31,8 @@ class VampiricTouch : Ability() {
 
     override fun resourceCost(sp: SimParticipant): Double = 425.0
 
+    override fun castTimeMs(sp: SimParticipant): Int = 1500
+
     override fun cast(sp: SimParticipant) {
         // snapshot damage on initial cast
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)

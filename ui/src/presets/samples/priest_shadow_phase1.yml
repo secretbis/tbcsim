@@ -80,6 +80,7 @@ gear:
   trinket2:
     name: Icon of the Silver Crescent
 
+# In general Mind Flay will not be clipped before 2 ticks on most spells for Shadow
 rotation:
   autoAttack: false
   precombat:
@@ -91,13 +92,40 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Vampiric Touch (DoT)
           seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
     - name: Shadow Word Pain
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Shadow Word Pain (DoT)
           seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
     - name: Mind Blast
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
     - name: Shadow Word Death
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 2
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
 
 raidBuffs:
   - Blessing of Kings

@@ -51,6 +51,8 @@ abstract class Proc {
         SPELL_HIT,
         SPELL_CRIT,
         SPELL_RESIST,
+        SPELL_START_CAST,
+        SPELL_CAST,
 
         // Damage types
         PHYSICAL_DAMAGE,

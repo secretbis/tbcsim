@@ -17,6 +17,8 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
             MindBlast.name -> MindBlast()
+            MindFlay2.name -> MindFlay2()
+            MindFlay3.name -> MindFlay3()
             ShadowWordDeath.name -> ShadowWordDeath()
             ShadowWordPain.name -> ShadowWordPain()
             VampiricTouch.name -> VampiricTouch()

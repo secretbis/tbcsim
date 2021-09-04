@@ -192,6 +192,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         target = sim.target
                     )
                     logEvent(castEvent)
+
+                    fireProc(listOf(Proc.Trigger.SPELL_START_CAST), null, castingRule!!.ability, castEvent)
                 }
             }
         }

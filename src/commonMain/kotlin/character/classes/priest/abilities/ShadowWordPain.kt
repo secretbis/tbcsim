@@ -46,7 +46,6 @@ class ShadowWordPain : Ability() {
         )
         sp.logEvent(event)
         
-        // Apply the DoT
         if(result.second == EventResult.RESIST){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
