@@ -24,37 +24,7 @@ abstract class MindFlay : Ability() {
     var baseDamage = 528.0
     val school = Constants.DamageType.SHADOW
     // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
-    val spellPowerCoeff = 0.57
-
-    // TODO: Move to talent instead of re-applying each cast
-    val interruptWatch = object : Buff(){
-        override val name = "Mind Flay (Static)"
-        override val hidden = true
-        override val durationMs = -1
-
-        // In general only the GCD prevents another spell from being cast for channeled spells
-        // When another spell is cast, mind flay "dot" should stop ticking
-        val interruptProc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_START_CAST,
-                Trigger.SPELL_CAST
-            )
-            override val type: Type = Type.STATIC
-    
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                // Mind Flay will refresh the dot if cast again, so we skip removing it
-                if (ability == null || ability.name.startsWith("Mind Flay")) return
-
-                val dot = sp.sim.target.debuffs.get(MindFlayDot.name)
-
-                if (dot != null ){
-                    sp.sim.target.consumeDebuff(dot);
-                }
-            }
-        }
-
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(interruptProc)
-    }
+    val spellPowerCoeff = 0.57   
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -106,7 +76,6 @@ abstract class MindFlay : Ability() {
 
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, initialCast)
 
-        sp.addBuff(interruptWatch)
         sp.sim.target.addDebuff(MindFlayDot(sp, resultTick.first / 3, tickCount));
     }
 }
