@@ -1,0 +1,175 @@
+class: Hunter
+spec: Survival
+description: Survival Hunter (phase 2)
+race: Night Elf
+level: 70
+epCategory: phase2
+epSpec: hunter_surv
+
+talents:
+  # Surv talents
+  - name: Monster Slaying
+    rank: 3
+  - name: Humanoid Slaying
+    rank: 3
+  - name: Surefooted
+    rank: 3
+  - name: Killer Instinct
+    rank: 3
+  - name: Lightning Reflexes
+    rank: 5
+  - name: Expose Weakness
+    rank: 3
+  - name: Thrill of the Hunt
+    rank: 2
+  - name: Master Tactician
+    rank: 5
+  # Marks talents
+  - name: Lethal Shots
+    rank: 5
+  - name: Efficiency
+    rank: 5
+  - name: Go for the Throat
+    rank: 2
+  - name: Aimed Shot
+    rank: 1
+  - name: Rapid Killing
+    rank: 2
+  - name: Mortal Shots
+    rank: 5
+
+gear:
+  mainHand:
+    name: Netherbane
+    enchant: Agility (1H)
+  offHand:
+    name: Claw of the Phoenix
+    enchant: Agility (1H)
+  rangedTotemLibram:
+    name: Serpent Spine Longbow
+    enchant: Stabilized Eternium Scope
+  ammo:
+    name: Warden's Arrow
+  head:
+    name: Rift Stalker Helm
+    enchant: Glyph of Ferocity
+    gems:
+      - Delicate Living Ruby
+      - Relentless Earthstorm Diamond
+  neck:
+    name: Telonicus's Pendant of Mayhem
+  shoulders:
+    name: Rift Stalker Mantle
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  back:
+    name: Thalassian Wildercloak
+    enchant: Greater Agility
+  chest:
+    name: Rift Stalker Hauberk
+    enchant: Exceptional Stats
+    gems:
+      - Shifting Nightseye
+      - Glinting Noble Topaz
+      - Glinting Noble Topaz
+  wrists:
+    name: Vambraces of Ending
+    enchant: Assault
+    gems:
+      - Delicate Living Ruby
+  hands:
+    name: Gloves of Dexterous Manipulation
+    enchant: Superior Agility
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  waist:
+    name: Belt of Deep Shadow
+    gems:
+      - Delicate Living Ruby
+      - Delicate Living Ruby
+  legs:
+    name: Rift Stalker Leggings
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Delicate Living Ruby
+  feet:
+    name: Cobra-Lash Boots
+    enchant: Dexterity
+    gems:
+      - Shifting Nightseye
+      - Delicate Living Ruby
+  ring1:
+    name: Ring of Lethality
+  ring2:
+    name: Ring of the Recalcitrant
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Bloodlust Brooch
+
+rotation:
+  precombat:
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Warp Burger
+
+    # Abilities
+    - name: Hunter's Mark
+
+  combat:
+    - name: Hunter's Mark
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Hunter's Mark
+          seconds: 0
+    - name: Blood Fury
+    - name: Berserking
+    - name: Rapid Fire
+    - name: Haste Potion
+    - name: Use Active Trinket
+    - name: Kill Command
+    - name: Steady Shot
+      # This tries to squeeze as many Steadies as possible while never clipping
+      # It is possible that some amount of clipping may be superior - test this by setting the timer criteria to less than 1.0
+      criteria:
+        - type: SWING_TIMER_REMAINING_GTE
+          seconds: 1.01
+          swingType: Auto Shot
+          oncePerSwing: false
+    - name: Multi Shot
+    - name: Arcane Shot
+
+pet:
+  type: Ravager
+  rotation:
+    combat:
+      - name: Bite
+      - name: Gore
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Improved Sanctity Aura
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

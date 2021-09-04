@@ -215,9 +215,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         target = sim.target
                     )
                     logEvent(castEvent)
-
-                    // Fire cast procs
-                    fireProc(listOf(Proc.Trigger.SPELL_CAST), null, castingRule!!.ability, castEvent)
                 } else {
                     logger.info { "Canceled queued cast of ${castingRule!!.ability.name} - low resources" }
                 }

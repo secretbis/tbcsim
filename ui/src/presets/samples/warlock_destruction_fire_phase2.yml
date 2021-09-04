@@ -1,0 +1,183 @@
+class: Warlock
+spec: Destruction
+description: Destruction Fire Warlock (phase 2)
+race: Gnome
+level: 70
+epCategory: phase2
+epSpec: warlock_destruction_fire
+
+talents:
+  # Destro talents
+  - name: Cataclysm
+    rank: 5
+  - name: Bane
+    rank: 5
+  - name: Devastation
+    rank: 5
+  - name: Shadowburn
+    rank: 1
+  - name: Ruin
+    rank: 1
+  - name: Improved Immolate
+    rank: 5
+  - name: Emberstorm
+    rank: 5
+  - name: Backlash
+    rank: 3
+  - name: Conflagrate
+    rank: 1
+  - name: Shadow and Flame
+    rank: 5
+
+  # Demo talents
+  - name: Fel Intellect
+    rank: 3
+  - name: Demonic Aegis
+    rank: 3
+  - name: Demonic Sacrifice
+    rank: 1
+
+gear:
+  mainHand:
+    name: Fang of the Leviathan
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  offHand:
+    name: Flametongue Seal
+  rangedTotemLibram:
+    name: Wand of the Forgotten Star
+  head:
+    name: Voidheart Crown
+    enchant: Glyph of Power
+    gems:
+      - Chaotic Skyfire Diamond
+      - Runed Ornate Ruby
+  neck:
+    name: The Sun King's Talisman
+  shoulders:
+    name: Voidheart Mantle
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Glowing Nightseye
+      - Veiled Noble Topaz
+  back:
+    name: Royal Cloak of the Sunstriders
+  chest:
+    name: Vestments of the Sea-Witch
+    enchant: Exceptional Stats
+    gems:
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
+      - Glowing Nightseye
+  wrists:
+    name: Mindstorm Wristbands
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Spellfire Gloves
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
+  waist:
+    name: Belt of Blasting
+    gems:
+      - Veiled Noble Topaz
+      - Veiled Noble Topaz
+  legs:
+    name: Spellstrike Pants
+    enchant: Runic Spellthread
+    gems:
+      - Runed Ornate Ruby
+      - Runed Ornate Ruby
+      - Runed Ornate Ruby
+  feet:
+    name: Boots of Blasting
+    enchant: Boar's Speed
+  ring1:
+    name: Ring of Recurrence
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ring of Endless Coils
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: Icon of the Silver Crescent
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Pure Death
+    - name: Crunchy Serpent
+    - name: Fel Armor
+    - name: Demonic Sacrifice (Imp)
+
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Life Tap
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 10
+          resourceType: MANA
+    - name: Curse of Doom
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 61
+    - name: Curse of Agony
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Agony (DoT)
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+    - name: Immolate
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Immolate (DoT)
+          seconds: 0
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+    - name: Incinerate
+      criteria:
+        - type: DEBUFF_DURATION_GTE
+          debuff: Immolate (DoT)
+          seconds: 2
+    - name: Conflagrate
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Immolate (DoT)
+          seconds: 1.999
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Improved Scorch
+  - Shadow Weaving

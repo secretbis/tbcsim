@@ -51,7 +51,6 @@ abstract class Proc {
         SPELL_HIT,
         SPELL_CRIT,
         SPELL_RESIST,
-        SPELL_CAST,
 
         // Damage types
         PHYSICAL_DAMAGE,
@@ -73,6 +72,7 @@ abstract class Proc {
         HUNTER_CAST_KILL_COMMAND,
 
         MAGE_ANY_SCORCH,
+        MAGE_MANA_GEM,
 
         PRIEST_TICK_SHADOW_WORD_PAIN,
 

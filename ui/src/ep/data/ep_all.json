@@ -351,6 +351,196 @@
                 "blueSocket": 11.15,
                 "metaSocket": 100.0
             }
+        },
+        "phase2": {
+            "hunter_bm": {
+                "rangedAttackPower": 1.0,
+                "agility": 1.99,
+                "rangedCritRating": 1.5,
+                "physicalHitRating": 3.2,
+                "physicalHasteRating": 1.34,
+                "armorPen": 0.28,
+                "redSocket": 19.9,
+                "yellowSocket": 15.0,
+                "blueSocket": 9.95,
+                "metaSocket": 100.0
+            },
+            "hunter_surv": {
+                "rangedAttackPower": 1.0,
+                "agility": 2.78,
+                "rangedCritRating": 1.56,
+                "physicalHitRating": 1.86,
+                "physicalHasteRating": 1.47,
+                "armorPen": 0.34,
+                "redSocket": 27.8,
+                "yellowSocket": 15.61,
+                "blueSocket": 13.9,
+                "metaSocket": 100.0
+            },
+            "mage_arcane": {
+                "spellDamage": 1.0,
+                "intellect": 0.63,
+                "spellHasteRating": 1.51,
+                "spellCritRating": 0.8,
+                "spellHitRating": 1.27,
+                "redSocket": 12.0,
+                "yellowSocket": 13.55,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "mage_fire": {
+                "spellDamage": 1.0,
+                "intellect": 0.19,
+                "spellHasteRating": 1.35,
+                "spellCritRating": 0.64,
+                "spellHitRating": 0.68,
+                "redSocket": 12.0,
+                "yellowSocket": 12.75,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "mage_frost": {
+                "spellDamage": 1.0,
+                "intellect": 0.22,
+                "spellHasteRating": 1.35,
+                "spellCritRating": 0.69,
+                "spellHitRating": 0.77,
+                "redSocket": 12.0,
+                "yellowSocket": 12.75,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "rogue_assassination": {
+                "attackPower": 1.0,
+                "strength": 1.01,
+                "agility": 2.24,
+                "meleeCritRating": 1.79,
+                "physicalHitRating": 2.1,
+                "physicalHasteRating": 1.97,
+                "expertiseRating": 3.84,
+                "armorPen": 0.3,
+                "redSocket": 22.41,
+                "yellowSocket": 11.21,
+                "blueSocket": 11.21,
+                "metaSocket": 100.0
+            },
+            "rogue_combat": {
+                "attackPower": 1.0,
+                "strength": 1.12,
+                "agility": 2.16,
+                "meleeCritRating": 1.6,
+                "physicalHitRating": 2.21,
+                "physicalHasteRating": 2.0,
+                "expertiseRating": 2.07,
+                "armorPen": 0.28,
+                "redSocket": 21.6,
+                "yellowSocket": 10.8,
+                "blueSocket": 10.8,
+                "metaSocket": 100.0
+            },
+            "shaman_ele": {
+                "spellDamage": 1.0,
+                "intellect": 0.18,
+                "spellHasteRating": 1.47,
+                "spellCritRating": 0.8,
+                "spellHitRating": 1.62,
+                "redSocket": 12.0,
+                "yellowSocket": 10.0,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "shaman_enh": {
+                "attackPower": 1.0,
+                "strength": 2.32,
+                "agility": 1.7,
+                "meleeCritRating": 1.67,
+                "physicalHitRating": 2.07,
+                "physicalHasteRating": 1.93,
+                "expertiseRating": 3.3,
+                "armorPen": 0.32,
+                "spellCritRating": 0.11,
+                "spellHitRating": 0.48,
+                "spellDamage": 0.33,
+                "redSocket": 23.2,
+                "yellowSocket": 19.95,
+                "blueSocket": 11.6,
+                "metaSocket": 100.0
+            },
+            "warlock_affliction_ruin": {
+                "spellDamage": 1.0,
+                "intellect": 0.47,
+                "spellHasteRating": 1.15,
+                "spellCritRating": 0.6,
+                "spellHitRating": 1.37,
+                "redSocket": 12.0,
+                "yellowSocket": 12.86,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "warlock_destruction_fire": {
+                "spellDamage": 1.0,
+                "intellect": 0.28,
+                "spellHasteRating": 1.16,
+                "spellCritRating": 0.65,
+                "spellHitRating": 1.71,
+                "redSocket": 12.0,
+                "yellowSocket": 14.55,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "warlock_destruction_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.52,
+                "spellHasteRating": 1.2,
+                "spellCritRating": 0.76,
+                "spellHitRating": 1.74,
+                "redSocket": 12.0,
+                "yellowSocket": 14.7,
+                "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "warrior_arms": {
+                "attackPower": 1.0,
+                "strength": 2.34,
+                "agility": 1.62,
+                "meleeCritRating": 2.3,
+                "physicalHitRating": 2.44,
+                "physicalHasteRating": 2.49,
+                "expertiseRating": 0.0,
+                "armorPen": 0.41,
+                "redSocket": 23.4,
+                "yellowSocket": 23.0,
+                "blueSocket": 11.7,
+                "metaSocket": 100.0
+            },
+            "warrior_kebab": {
+                "attackPower": 1.0,
+                "strength": 2.08,
+                "agility": 1.73,
+                "meleeCritRating": 2.27,
+                "physicalHitRating": 1.82,
+                "physicalHasteRating": 2.28,
+                "expertiseRating": 0.0,
+                "armorPen": 0.34,
+                "redSocket": 20.8,
+                "yellowSocket": 22.7,
+                "blueSocket": 10.4,
+                "metaSocket": 100.0
+            },
+            "warrior_fury": {
+                "attackPower": 1.0,
+                "strength": 2.21,
+                "agility": 1.43,
+                "meleeCritRating": 1.93,
+                "physicalHitRating": 1.42,
+                "physicalHasteRating": 1.89,
+                "expertiseRating": 0.0,
+                "armorPen": 0.27,
+                "redSocket": 22.1,
+                "yellowSocket": 19.3,
+                "blueSocket": 11.05,
+                "metaSocket": 100.0
+            }
         }
     },
     "options": {
@@ -403,6 +593,10 @@
             "benefitsFromRangedWeaponDps": false
         },
         "warrior_arms": {
+            "benefitsFromMeleeWeaponDps": true,
+            "benefitsFromRangedWeaponDps": false
+        },
+        "warrior_kebab": {
             "benefitsFromMeleeWeaponDps": true,
             "benefitsFromRangedWeaponDps": false
         },

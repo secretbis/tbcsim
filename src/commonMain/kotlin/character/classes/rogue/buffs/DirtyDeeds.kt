@@ -34,7 +34,7 @@ class DirtyDeeds() : Buff() {
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {  
+        override fun modifyStats(sp: SimParticipant): Stats {
             val dd = sp.character.klass.talents[character.classes.rogue.talents.DirtyDeeds.name] as character.classes.rogue.talents.DirtyDeeds?
             val increasedDmg = dd?.damageIncreaseMultiplierExecute() ?: 1.0
 
@@ -62,7 +62,6 @@ class DirtyDeeds() : Buff() {
             Trigger.SPELL_HIT,
             Trigger.SPELL_CRIT,
             Trigger.SPELL_RESIST,
-            Trigger.SPELL_CAST,
             Trigger.PHYSICAL_DAMAGE,
             Trigger.SERVER_TICK,
             Trigger.SERVER_SLOW_TICK,

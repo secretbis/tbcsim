@@ -8,7 +8,9 @@ import character.classes.mage.buffs.PresenceOfMind
 import character.classes.mage.talents.ArcaneConcentration
 import character.classes.mage.talents.ArcaneFocus
 import character.classes.mage.talents.ArcaneImpact
+import character.classes.mage.talents.ArcanePotency
 import data.Constants
+import data.itemsets.TirisfalRegalia
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -43,8 +45,11 @@ class ArcaneBlast : Ability() {
         val apBuff = sp.buffs[ArcanePower.name] as ArcanePower?
         val apMult = apBuff?.manaCostMultiplier() ?: 1.0
 
+        val t5Buff = sp.buffs[TirisfalRegalia.TWO_SET_BUFF_NAME]
+        val t5Mult = if(t5Buff != null) { TirisfalRegalia.twoSetArcaneBlastDamageAndCostMultiplier() } else 1.0
+
         // From testing, these stack based on the base mana cost
-        return baseResourceCost + (baseResourceCost * (abMult - 1.0)) + (baseResourceCost * (apMult - 1.0))
+        return baseResourceCost + (baseResourceCost * (abMult - 1.0)) + (baseResourceCost * (apMult - 1.0)) + (baseResourceCost * (t5Mult - 1.0))
     }
 
     class ArcaneBlastBuff : Buff() {
@@ -78,8 +83,15 @@ class ArcaneBlast : Ability() {
         val arcaneImpact: ArcaneImpact? = sp.character.klass.talentInstance(ArcaneImpact.name)
         val aiCrit = arcaneImpact?.arcaneBlastExplosionAddlCritChance() ?: 0.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = aiCrit, bonusHitChance = afHit)
+        val arcanePotency: ArcanePotency? = sp.character.klass.talentInstance(ArcanePotency.name)
+        val clearcasting = sp.buffs[ArcaneConcentration.buffName]
+        val ccCrit = if(clearcasting != null) { arcanePotency?.addlClearcastingCritPct() ?: 0.0 } else 0.0
+
+        val t5Buff = sp.buffs[TirisfalRegalia.TWO_SET_BUFF_NAME]
+        val t5Mult = if(t5Buff != null) { TirisfalRegalia.twoSetArcaneBlastDamageAndCostMultiplier() } else 1.0
+
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff) * t5Mult
+        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = aiCrit + ccCrit, bonusHitChance = afHit)
 
          val event = Event(
             eventType = EventType.DAMAGE,

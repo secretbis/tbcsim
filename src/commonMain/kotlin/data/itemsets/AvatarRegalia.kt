@@ -18,7 +18,9 @@ class AvatarRegalia : ItemSet() {
     fun twoSetConsumeProc(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
             override val type: Type = Type.STATIC
 
@@ -51,7 +53,9 @@ class AvatarRegalia : ItemSet() {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
             override val type: Type = Type.PERCENT
             override fun percentChance(sp: SimParticipant): Double = 6.0
@@ -67,7 +71,9 @@ class AvatarRegalia : ItemSet() {
     fun fourSetConsumeProc(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
             override val type: Type = Type.STATIC
 

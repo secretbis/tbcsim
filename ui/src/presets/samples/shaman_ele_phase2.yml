@@ -1,0 +1,223 @@
+class: Shaman
+spec: Elemental
+description: Elemental Shaman (phase 2)
+race: Draenei
+level: 70
+epCategory: phase2
+epSpec: shaman_ele
+
+# Stock sub-resto Enhancement
+talents:
+  # Ele talents
+  - name: Convection
+    rank: 5
+  - name: Concussion
+    rank: 5
+  - name: Call of Thunder
+    rank: 5
+  - name: Elemental Focus
+    rank: 1
+  - name: Unrelenting Storm
+    rank: 5
+  - name: Elemental Fury
+    rank: 1
+  - name: Elemental Precision
+    rank: 3
+  - name: Lightning Mastery
+    rank: 5
+  - name: Elemental Mastery
+    rank: 1
+  - name: Lightning Overload
+    rank: 5
+  - name: Totem of Wrath
+    rank: 1
+
+  # Resto talents
+  - name: Totemic Focus
+    rank: 5
+  - name: Nature's Guidance
+    rank: 3
+  - name: Tidal Mastery
+    rank: 5
+
+gear:
+  mainHand:
+    name: The Nexus Key
+    enchant: Major Spellpower (Weapon)
+    tempEnchant: Superior Wizard Oil
+  rangedTotemLibram:
+    name: Totem of the Void
+  head:
+    name: Cyclone Faceguard
+    enchant: Glyph of Power
+    gems:
+      - Chaotic Skyfire Diamond
+      - Potent Noble Topaz
+  neck:
+    name: The Sun King's Talisman
+  shoulders:
+    name: Cyclone Shoulderguards
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Potent Noble Topaz
+      - Potent Noble Topaz
+  back:
+    name: Brute Cloak of the Ogre-Magi
+  chest:
+    name: Cataclysm Chestpiece
+    enchant: Exceptional Stats
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
+      - Runed Living Ruby
+  wrists:
+    name: Mindstorm Wristbands
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Soul-Eater's Handwraps
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Potent Noble Topaz
+      - Glowing Nightseye
+  waist:
+    name: Belt of Blasting
+    gems:
+      - Shifting Nightseye
+      - Potent Noble Topaz
+  legs:
+    name: Cataclysm Leggings
+    enchant: Runic Spellthread
+    gems:
+      - Potent Noble Topaz
+  feet:
+    name: Velvet Boots of the Guardian
+    enchant: Boar's Speed
+  ring1:
+    name: Ring of Unrelenting Storms
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ring of Endless Coils
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: The Lightning Capacitor
+  trinket2:
+    name: Icon of the Silver Crescent
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  autoAttack: false
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Blinding Light
+    - name: Crunchy Serpent
+
+    # Abilities
+    - name: Wrath of Air Totem
+    - name: Totem of Wrath
+    - name: Mana Spring Totem
+    - name: Water Shield
+
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+    - name: Totem of Wrath
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Totem of Wrath
+          seconds: 0
+    - name: Wrath of Air Totem
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Wrath of Air Totem
+          seconds: 0
+    # Use a Dark Rune if we've used at least 1500 mana and our potion is on cooldown, or if it's a long fight
+    - name: Demonic Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Super Mana Potion
+          seconds: 1
+    - name: Demonic Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 90
+    # Mana pot if we've used enough mana an there's a lot of fight left
+    - name: Super Mana Potion
+      criteria:
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 135
+        - type: RESOURCE_MISSING_GTE
+          amount: 3000
+          resourceType: MANA
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+        # Only use Destruction on short fights, or if the remaining duration is short and our mana is good
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: RESOURCE_PCT_GTE
+          pct: 60
+          resourceType: MANA
+    - name: Elemental Mastery
+    # Always cast CL with EM up
+    - name: Chain Lightning
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Elemental Mastery
+          seconds: 0
+    # Ele OOMs real quick with CL, so only try to cast this with an EF proc active
+    # Don't cast it at all on very long fights until we're getting close to the end
+    - name: Chain Lightning
+      criteria:
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 180
+        - type: BUFF_DURATION_GTE
+          buff: Elemental Focus
+          seconds: 0
+    # We can be a little greedier with CL on short fights without EF
+    - name: Chain Lightning
+      criteria:
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: RESOURCE_PCT_GTE
+          pct: 60
+          resourceType: MANA
+    - name: Lightning Bolt
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior, and Ret Paladin
+  - Moonkin Aura
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Stormstrike

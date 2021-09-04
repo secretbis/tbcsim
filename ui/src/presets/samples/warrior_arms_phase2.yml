@@ -1,0 +1,199 @@
+class: Warrior
+spec: Arms
+description: Arms Warrior (phase 2)
+race: Human
+level: 70
+epCategory: phase2
+epSpec: warrior_arms
+
+# Stock Arms
+talents:
+  # Fury talents
+  - name: Cruelty
+    rank: 5
+  - name: Unbridled Wrath
+    rank: 5
+  - name: Commanding Presence
+    rank: 5
+  - name: Improved Slam
+    rank: 2
+  - name: Weapon Mastery
+    rank: 2
+  - name: Sweeping Strikes
+    rank: 1
+  - name: Flurry
+    rank: 3
+  # Arms talents
+  - name: Improved Heroic Strike
+    rank: 3
+  - name: Anger Management
+    rank: 1
+  - name: Deep Wounds
+    rank: 3
+  - name: Impale
+    rank: 2
+  - name: Two-Handed Weapon Specialization
+    rank: 5
+  - name: Death Wish
+    rank: 1
+  - name: Sword Specialization
+    rank: 5
+  - name: Mortal Strike
+    rank: 1
+  - name: Blood Frenzy
+    rank: 2
+
+gear:
+  # mainHand:
+  #   name: Twinblade of the Phoenix
+  #   enchant: Mongoose
+  #   gems:
+  #     - Smooth Dawnstone
+  #     - Smooth Dawnstone
+  #     - Smooth Dawnstone
+  mainHand:
+    name: Lionheart Executioner
+    enchant: Mongoose
+  rangedTotemLibram:
+    name: Serpent Spine Longbow
+  head:
+    name: Destroyer Battle-Helm
+    enchant: Glyph of Ferocity
+    gems:
+      - Relentless Earthstorm Diamond
+      - Jagged Talasite
+  neck:
+    name: Pendant of the Perilous
+  shoulders:
+    name: Shoulderpads of the Stranger
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Inscribed Noble Topaz
+  back:
+    name: Vengeance Wrap
+    enchant: Greater Agility
+    gems:
+      - Inscribed Noble Topaz
+  chest:
+    name: Bloodsea Brigand's Vest
+    enchant: Exceptional Stats
+    gems:
+      - Smooth Dawnstone
+      - Smooth Dawnstone
+      - Jagged Talasite
+  wrists:
+    name: Bladespire Warbands
+    enchant: Brawn
+    gems:
+      - Sovereign Nightseye
+      - Inscribed Noble Topaz
+  hands:
+    name: Gloves of the Searing Grip
+    enchant: Major Strength
+  waist:
+    name: Belt of One-Hundred Deaths
+    gems:
+      - Smooth Dawnstone
+      - Smooth Dawnstone
+  legs:
+    name: Leggings of Murderous Intent
+    enchant: Nethercobra Leg Armor
+  feet:
+    name: Warboots of Obliteration
+    enchant: Cat's Swiftness
+  ring1:
+    name: Band of the Ranger-General
+    enchant: Stats (Ring)
+  ring2:
+    name: Ring of Reciprocity
+    enchant: Stats (Ring)
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Tsunami Talisman
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
+
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    - name: Bloodrage
+    - name: Death Wish
+      criteria:
+        - type: FIGHT_TIME_REMAINING_MODULO_LTE
+          modulusSeconds: 180
+          seconds: 30
+    - name: Execute
+    # Avoid clipping autos as much as possible - only cast Slam if the swing timer has very recently reset
+    - name: Slam
+      criteria:
+        - type: SWING_TIMER_ELAPSED_LTE
+          seconds: 0.51
+          # Don't Slam more than once per autoattack opportunity
+          oncePerSwing: true
+          # Other options: Melee (OH), Auto Shot
+          swingType: Melee (MH)
+    - name: Mortal Strike
+    - name: Whirlwind
+    - name: Battle Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Battle Shout
+          seconds: 0
+    - name: Insane Strength Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using trinkets
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Heroic Strike
+      criteria:
+        # Cast HS if we have excess rage
+        - type: RESOURCE_PCT_GTE
+          pct: 90
+          resourceType: RAGE
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Enhancement Shaman and Ret Paladin
+  - Ferocious Inspiration (x1)
+  - Leader of the Pack
+  - Improved Sanctity Aura
+  - Windfury Totem
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Improved Faerie Fire
+  - Curse of Recklessness
+  - Expose Weakness (750 Agi)

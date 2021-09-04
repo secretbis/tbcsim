@@ -18,6 +18,7 @@ object Items {
         { EmpyreanDemolisher() },
         { FistOfReckoning() },
         { FleshHandlersGauntlets() },
+        { GauntletsOfAnnihilation() },
         { GressilDawnOfRuin() },
         { KissOfTheSpider() },
         { MamasInsurance() },

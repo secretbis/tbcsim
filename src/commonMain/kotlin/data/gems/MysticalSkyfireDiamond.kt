@@ -32,7 +32,9 @@ class MysticalSkyfireDiamond : Gem(25893, "Mystical Skyfire Diamond", "inv_misc_
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
 
             // https://70.wowfan.net/en/?spell=32837

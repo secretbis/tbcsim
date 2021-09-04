@@ -3,6 +3,7 @@ package character.classes.mage
 import character.*
 import character.classes.mage.abilities.*
 import character.classes.mage.talents.*
+import data.abilities.generic.ManaEmerald
 import character.classes.mage.talents.ArcanePower as ArcanePowerTalent
 import character.classes.mage.talents.ColdSnap as ColdSnapTalent
 import character.classes.mage.talents.Combustion as CombustionTalent
@@ -28,10 +29,12 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             ArcanePower.name -> ArcanePower()
             ColdSnap.name -> ColdSnap()
             Combustion.name -> Combustion()
+            Evocation.name -> Evocation()
             Fireball.name -> Fireball()
             FireBlast.name -> FireBlast()
             Frostbolt.name -> Frostbolt()
             IcyVeins.name -> IcyVeins()
+            ManaEmerald.name -> ManaEmerald()
             MoltenArmor.name -> MoltenArmor()
             PresenceOfMind.name -> PresenceOfMind()
             Scorch.name -> Scorch()

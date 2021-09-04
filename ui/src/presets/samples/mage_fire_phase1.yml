@@ -130,12 +130,19 @@ rotation:
   combat:
     - name: Blood Fury
     - name: Berserking
-    # Use a Dark Rune if we've used at least 1500 mana
-    - name: Dark Rune
+    - name: Mana Emerald
       criteria:
         - type: RESOURCE_MISSING_GTE
-          amount: 1500
+          # Account for Serpent-Coil Braid bonus potential over the regular mana gem amount
+          amount: 3125
           resourceType: MANA
+    - name: Evocation
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 20
+          resourceType: MANA
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 30
     # Scorch up to 5
     - name: Scorch
       criteria:

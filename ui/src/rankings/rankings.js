@@ -126,6 +126,7 @@ const specDisplayNames = {
   warlock_destruction_shadow: 'Destruction Warlock (Shadow)',
   warrior_arms: 'Arms Warrior',
   warrior_fury: 'Fury Warrior',
+  warrior_kebab: 'Kebab Warrior',
 }
 
 // Other colors for later:
@@ -149,6 +150,7 @@ const specColors = {
   warlock_destruction_shadow: '#8788EE',
   warrior_arms: '#C69B6D',
   warrior_fury: '#C69B6D',
+  warrior_kebab: '#C69B6D',
 }
 
 const specPetColors = {
@@ -194,6 +196,7 @@ export default function() {
       <Grid fluid={true}>
         <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
+        <SpecRankingPanel name='Phase 2' category='phase2' />
         <SpecRankingPanel name='Phase 1' category='phase1' />
         <SpecRankingPanel name='Pre-raid' category='preraid' />
       </Grid>

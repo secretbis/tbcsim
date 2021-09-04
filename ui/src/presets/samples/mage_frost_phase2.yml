@@ -1,10 +1,10 @@
 class: Mage
-spec: Arcane
-description: Arcane Mage (phase 1)
+spec: Frost
+description: Frost Mage (phase 2)
 race: Gnome
 level: 70
-epCategory: phase1
-epSpec: mage_arcane
+epCategory: phase2
+epSpec: mage_frost
 
 talents:
   # Frost talents
@@ -22,45 +22,38 @@ talents:
     rank: 3
   - name: Cold Snap
     rank: 1
+  - name: Ice Floes
+    rank: 2
+  - name: Improved Cone of Cold
+    rank: 3
+  - name: Winter's Chill
+    rank: 5
+  - name: Arctic Winds
+    rank: 5
+  - name: Empowered Frostbolt
+    rank: 5
+  - name: Summon Water Elemental
+    rank: 1
 
   # Arcane talents
   - name: Arcane Subtlety
     rank: 2
   - name: Arcane Focus
-    rank: 5
+    rank: 3
   - name: Arcane Concentration
     rank: 5
-  - name: Arcane Impact
-    rank: 3
   - name: Arcane Meditation
-    rank: 3
-  - name: Presence of Mind
     rank: 1
-  - name: Arcane Mind
-    rank: 5
-  - name: Arcane Potency
-    rank: 3
-  - name: Arcane Instability
-    rank: 3
-  - name: Arcane Power
-    rank: 1
-  - name: Spell Power
-    rank: 2
-  - name: Mind Mastery
-    rank: 5
 
 gear:
   mainHand:
-    name: Talon of the Tempest
+    name: Fang of the Leviathan
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   offHand:
-    name: Khadgar's Knapsack
+    name: Sapphiron's Wing Bone
   rangedTotemLibram:
-    name: Tirisfal Wand of Ascendancy
+    name: Wand of the Forgotten Star
   head:
     name: Spellstrike Hood
     enchant: Glyph of Power
@@ -69,9 +62,9 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Adornment of Stolen Souls
+    name: The Sun King's Talisman
   shoulders:
-    name: Pauldrons of the Aldor
+    name: Mantle of Tirisfal
     enchant: Greater Inscription of the Orb
     gems:
       - Runed Living Ruby
@@ -79,24 +72,23 @@ gear:
   back:
     name: Ruby Drape of the Mysticant
   chest:
-    name: Spellfire Robe
+    name: Vestments of the Sea-Witch
     enchant: Exceptional Stats
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
-  wrists:
-    name: Bracers of Havok
-    enchant: Spellpower (Bracer)
-    gems:
       - Runed Living Ruby
+  wrists:
+    name: Mindstorm Wristbands
+    enchant: Spellpower (Bracer)
   hands:
-    name: Spellfire Gloves
+    name: Anger-Spark Gloves
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   waist:
-    name: Spellfire Belt
+    name: Belt of Blasting
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -108,23 +100,26 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   feet:
-    name: Ruby Slippers
+    name: Frozen Shadoweave Boots
     enchant: Boar's Speed
+    gems:
+      - Runed Living Ruby
+      - Runed Living Ruby
   ring1:
-    name: Band of Crimson Fury
+    name: Ring of Endless Coils
     enchant: Spellpower (Ring)
   ring2:
-    name: Ashyen's Gift
+    name: Ring of Recurrence
     enchant: Spellpower (Ring)
   trinket1:
-    name: Scryer's Bloodgem
+    name: "Darkmoon Card: Crusade"
   trinket2:
     name: Icon of the Silver Crescent
 
 rotation:
   autoAttack: false
   precombat:
-    - name: Flask of Blinding Light
+    - name: Flask of Pure Death
     - name: Crunchy Serpent
     - name: Arcane Intellect
     - name: Molten Armor
@@ -138,11 +133,6 @@ rotation:
           # Account for Serpent-Coil Braid bonus potential over the regular mana gem amount
           amount: 3125
           resourceType: MANA
-    - name: Super Mana Potion
-      criteria:
-        - type: RESOURCE_MISSING_GTE
-          amount: 3000
-          resourceType: MANA
     - name: Evocation
       criteria:
         - type: RESOURCE_PCT_LTE
@@ -153,46 +143,32 @@ rotation:
     - name: Cold Snap
       criteria:
         - type: ABILITY_COOLDOWN_GTE
-          ability: Icy Veins
+          ability: Summon Water Elemental
           seconds: 1
+        - type: PET_ACTIVE
+          bool: false
+    - name: Summon Water Elemental
+      criteria:
+        - type: PET_ACTIVE
+          bool: false
     - name: Icy Veins
       criteria:
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
-    - name: Arcane Power
+    - name: Destruction Potion
       criteria:
-        - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
-    - name: Presence of Mind
-      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
     - name: Use Active Trinket
-    # Cast AB if we're using cooldowns, have high mana, or have low mana and low stacks
-    - name: Arcane Blast
-      criteria:
-        - type: BUFF_DURATION_GTE
-          buff: Icy Veins
-          seconds: 1
-    - name: Arcane Blast
-      criteria:
-        - type: BUFF_DURATION_GTE
-          buff: Arcane Power
-          seconds: 1
-    - name: Arcane Blast
-      criteria:
-        - type: RESOURCE_PCT_GTE
-          pct: 20
-          resourceType: MANA
-    - name: Arcane Blast
-      criteria:
-        - type: BUFF_STACKS_LTE
-          buff: Arcane Blast
-          stacks: 2
-        - type: RESOURCE_PCT_LTE
-          pct: 20
-          resourceType: MANA
     - name: Frostbolt
+
+pet:
+  type: Water Elemental
+  startsActive: false
+  rotation:
+    combat:
+      - name: Waterbolt
 
 raidBuffs:
   - Blessing of Kings

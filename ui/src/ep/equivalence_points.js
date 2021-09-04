@@ -90,6 +90,35 @@ export default function() {
       <Grid fluid={true}>
         <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
+        <WrapperEpPanel name='Phase 2'>
+          <WrapperEpPanel name='Hunter'>
+            <SpecEpPanel name='Beast Mastery' specKey='hunter_bm' category='phase2' />
+            <SpecEpPanel name='Survival' specKey='hunter_surv' category='phase2' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Mage'>
+            <SpecEpPanel name='Arcane' specKey='mage_arcane' category='phase2' />
+            <SpecEpPanel name='Fire' specKey='mage_fire' category='phase2' />
+            <SpecEpPanel name='Frost' specKey='mage_frost' category='phase2' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Rogue'>
+            <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='phase2' />
+            <SpecEpPanel name='Combat' specKey='rogue_combat' category='phase2' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Shaman'>
+            <SpecEpPanel name='Enhancement' specKey='shaman_enh' category='phase2' />
+            <SpecEpPanel name='Elemental' specKey='shaman_ele' category='phase2' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Warlock'>
+            <SpecEpPanel name='Affliction (Ruin)' specKey='warlock_affliction_ruin' category='phase2' />
+            <SpecEpPanel name='Destruction (Fire)' specKey='warlock_destruction_fire' category='phase2' />
+            <SpecEpPanel name='Destruction (Shadow)' specKey='warlock_destruction_shadow' category='phase2' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Warrior'>
+            <SpecEpPanel name='Arms' specKey='warrior_arms' category='phase2' />
+            <SpecEpPanel name='Fury' specKey='warrior_fury' category='phase2' />
+            <SpecEpPanel name='Kebab' specKey='warrior_kebab' category='phase2' />
+          </WrapperEpPanel>
+        </WrapperEpPanel>
         <WrapperEpPanel name='Phase 1'>
           <WrapperEpPanel name='Hunter'>
             <SpecEpPanel name='Beast Mastery' specKey='hunter_bm' category='phase1' />

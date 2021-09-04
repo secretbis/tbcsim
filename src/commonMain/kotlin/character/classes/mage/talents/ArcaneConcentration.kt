@@ -31,7 +31,9 @@ class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
 
         fun ccConsumeProc(buff: Buff) = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
             override val type: Type = Type.STATIC
 

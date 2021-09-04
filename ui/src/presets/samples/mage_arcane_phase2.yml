@@ -1,9 +1,9 @@
 class: Mage
 spec: Arcane
-description: Arcane Mage (phase 1)
+description: Arcane Mage (phase 2)
 race: Gnome
 level: 70
-epCategory: phase1
+epCategory: phase2
 epSpec: mage_arcane
 
 talents:
@@ -51,73 +51,61 @@ talents:
 
 gear:
   mainHand:
-    name: Talon of the Tempest
+    name: The Nexus Key
     enchant: Major Spellpower (Weapon)
     tempEnchant: Superior Wizard Oil
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-  offHand:
-    name: Khadgar's Knapsack
   rangedTotemLibram:
-    name: Tirisfal Wand of Ascendancy
+    name: Eredar Wand of Obliteration
   head:
-    name: Spellstrike Hood
+    name: Cowl of Tirisfal
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Brilliant Dawnstone
   neck:
-    name: Adornment of Stolen Souls
+    name: The Sun King's Talisman
   shoulders:
-    name: Pauldrons of the Aldor
+    name: Mantle of Tirisfal
     enchant: Greater Inscription of the Orb
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Brilliant Dawnstone
+      - Glowing Nightseye
   back:
-    name: Ruby Drape of the Mysticant
+    name: Royal Cloak of the Sunstriders
   chest:
-    name: Spellfire Robe
+    name: Vestments of the Sea-Witch
     enchant: Exceptional Stats
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Brilliant Dawnstone
+      - Brilliant Dawnstone
+      - Glowing Nightseye
   wrists:
-    name: Bracers of Havok
+    name: Mindstorm Wristbands
     enchant: Spellpower (Bracer)
-    gems:
-      - Runed Living Ruby
   hands:
-    name: Spellfire Gloves
+    name: Gloves of Tirisfal
     enchant: Major Spellpower (Gloves)
-    gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
   waist:
     name: Spellfire Belt
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Brilliant Dawnstone
+      - Brilliant Dawnstone
   legs:
-    name: Spellstrike Pants
+    name: Leggings of Tirisfal
     enchant: Runic Spellthread
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Brilliant Dawnstone
   feet:
-    name: Ruby Slippers
+    name: Velvet Boots of the Guardian
     enchant: Boar's Speed
   ring1:
-    name: Band of Crimson Fury
+    name: Band of Al'ar
     enchant: Spellpower (Ring)
   ring2:
-    name: Ashyen's Gift
+    name: Violet Signet of the Archmage
     enchant: Spellpower (Ring)
   trinket1:
-    name: Scryer's Bloodgem
+    name: Serpent-Coil Braid
   trinket2:
     name: Icon of the Silver Crescent
 

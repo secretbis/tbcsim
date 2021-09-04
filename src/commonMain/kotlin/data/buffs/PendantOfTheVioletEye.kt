@@ -31,12 +31,14 @@ class PendantOfTheVioletEye : Buff() {
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
+                Trigger.SPELL_RESIST
             )
             override val type: Type = Type.STATIC
             override fun cooldownMs(sp: SimParticipant): Int = 0
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?){
-                    sp.addBuff(stackBuff)
+                sp.addBuff(stackBuff)
             }
         }
 

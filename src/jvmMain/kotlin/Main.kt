@@ -13,6 +13,7 @@ import character.classes.warlock.specs.Affliction
 import character.classes.warlock.specs.Destruction
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
+import character.classes.warrior.specs.Kebab
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -81,6 +82,7 @@ class TBCSim : CliktCommand() {
         "warlock_destruction_shadow" to Destruction(),
         "warrior_arms" to Arms(),
         "warrior_fury" to Fury(),
+        "warrior_kebab" to Kebab()
     )
     val presetPath = "./ui/src/presets/samples/"
     val rankingOutputPath = "./ui/src/rankings/data/ranks_all.json"
@@ -120,6 +122,24 @@ class TBCSim : CliktCommand() {
             "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase1.yml"),
             "warrior_arms" to File(presetPath + "warrior_arms_phase1.yml"),
             "warrior_fury" to File(presetPath + "warrior_fury_phase1.yml"),
+        ),
+        "phase2" to mapOf(
+            "hunter_bm" to File(presetPath + "hunter_bm_phase2.yml"),
+            "hunter_surv" to File(presetPath + "hunter_surv_phase2.yml"),
+            "mage_arcane" to File(presetPath + "mage_arcane_phase2.yml"),
+            "mage_fire" to File(presetPath + "mage_fire_phase2.yml"),
+            "mage_frost" to File(presetPath + "mage_frost_phase2.yml"),
+            "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
+            "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
+            "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),
+            // Enhance weights aren't appreciably different between the two sub-specs
+            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase2.yml"),
+            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase2.yml"),
+            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase2.yml"),
+            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase2.yml"),
+            "warrior_arms" to File(presetPath + "warrior_arms_phase2.yml"),
+            "warrior_fury" to File(presetPath + "warrior_fury_phase2.yml"),
+            "warrior_kebab" to File(presetPath + "warrior_kebab_phase2.yml"),
         )
     )
 
