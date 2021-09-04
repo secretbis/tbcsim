@@ -39,9 +39,12 @@ class ShadowWordDeath : Ability() {
         return baseResourceCost
     }
     
-    override fun cast(sp: SimParticipant) {    
+    override fun cast(sp: SimParticipant) {
+        val spTalent: ShadowPower? = sp.character.klass.talentInstance(ShadowPower.name)
+        val spCrit = spTalent?.critIncreasePct() ?: 0.0
+
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school)
+        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = spCrit)
 
         val event = Event(
             eventType = EventType.DAMAGE,

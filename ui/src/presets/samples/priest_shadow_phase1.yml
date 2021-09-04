@@ -26,6 +26,8 @@ talents:
     rank: 3
   - name: Shadowform
     rank: 1
+  - name: Shadow Power
+    rank: 4
   - name: Vampiric Touch
     rank: 1
 
