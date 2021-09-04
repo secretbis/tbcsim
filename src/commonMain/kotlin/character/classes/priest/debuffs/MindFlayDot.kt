@@ -16,7 +16,7 @@ class MindFlayDot(owner: SimParticipant, val damageRoll: Double, ticks: Int) : D
         const val name = "Mind Flay (DoT)"
     }
     override val name: String = Companion.name
-    override val durationMs = ticks.coerceAtLeast(1).coerceAtMost(3) * 1000
+    override val durationMs = (ticks.coerceAtLeast(1).coerceAtMost(3) * 1000 / owner.spellHasteMultiplier()).toInt()
     override val tickDeltaMs: Int = durationMs / ticks
 
     val school = Constants.DamageType.SHADOW

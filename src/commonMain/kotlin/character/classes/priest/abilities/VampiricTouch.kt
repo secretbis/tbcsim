@@ -27,7 +27,8 @@ class VampiricTouch : Ability() {
     var baseDamage = 650.0
     val baseDotTickCount = 5
     val baseDotDurationMs = 15000
-    var dotDmgPerTick = 130
+    val dotDmgPerTick = 130
+    val baseCastTimeMs = 1500
     val spellPowerCoeff = Spell.spellPowerCoeff(0, baseDotDurationMs)
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
@@ -43,7 +44,7 @@ class VampiricTouch : Ability() {
         return baseResourceCost
     }
 
-    override fun castTimeMs(sp: SimParticipant): Int = 1500
+    override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     override fun available(sp: SimParticipant): Boolean {
         return super.available(sp) && sp.character.klass.hasTalentRanks(VampiricTouchTalent.name)
@@ -65,8 +66,7 @@ class VampiricTouch : Ability() {
             result = result.second,
         )
         sp.logEvent(event)
-        
-        // Apply the DoT
+
         if(result.first == 0.0){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return

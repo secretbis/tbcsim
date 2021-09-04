@@ -21,7 +21,7 @@ abstract class MindFlay : Ability() {
     override val id: Int = 25387
     open val tickCount = 3
 
-    var baseDamage = 528.0
+    val baseDamage = 528.0
     val school = Constants.DamageType.SHADOW
     // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
     val spellPowerCoeff = 0.57   

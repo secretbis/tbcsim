@@ -35,7 +35,7 @@ class MindBlast : Ability() {
         return baseCooldownMs - impMbCooldownReductionMs
     }
     
-    override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
+    override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     val baseResourceCost = 450.0
     override fun resourceCost(sp: SimParticipant): Double {
