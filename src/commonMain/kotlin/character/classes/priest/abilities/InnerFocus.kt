@@ -23,7 +23,6 @@ class InnerFocus : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        // Add buff that other stuff checks
         sp.addBuff(InnerFocusBuff())
     }
 }

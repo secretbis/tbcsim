@@ -21,9 +21,9 @@ class ShadowWordPainDot(owner: SimParticipant, damageRoll: Double, tickCount: In
     override val tickDeltaMs: Int = 3000
     override val durationMs: Int = tickCount * tickDeltaMs
     
-    var baseTickCount = 6
     val school = Constants.DamageType.SHADOW
-    var baseDamage = damageRoll / baseTickCount
+    val baseTickCount = 6
+    val baseDamage = damageRoll / baseTickCount
 
     val ability = object : Ability() {
         override val id: Int = 25368

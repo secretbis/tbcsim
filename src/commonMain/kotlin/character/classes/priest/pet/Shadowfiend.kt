@@ -13,7 +13,7 @@ import data.model.SocketBonus
 class Shadowfiend : Class(mapOf(), ShadowfiendSpec()) {
     // https://web.archive.org/web/20071201221602/http://www.shadowpriest.com/viewtopic.php?t=7616
     // Derived from http://elitistjerks.com/506359-post39.html
-    override var baseStats: Stats = Stats(
+    override val baseStats: Stats = Stats(
         armor = 5474,
         stamina = 280,
         intellect = 133,
@@ -38,13 +38,13 @@ class Shadowfiend : Class(mapOf(), ShadowfiendSpec()) {
     )
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)
-    override var canDualWield: Boolean = false
-    override var attackPowerFromAgility: Int = 0
-    override var attackPowerFromStrength: Int = 0
+    override val canDualWield: Boolean = false
+    override val attackPowerFromAgility: Int = 0
+    override val attackPowerFromStrength: Int = 0
     override val critPctPerAgility: Double = 0.0
     override val dodgePctPerAgility: Double = 0.0
     override val baseDodgePct: Double = 0.0
-    override var rangedAttackPowerFromAgility: Int = 0
+    override val rangedAttackPowerFromAgility: Int = 0
     override val baseMana: Int = 2241
     override val baseSpellCritChance: Double = 0.0
 }

@@ -39,8 +39,8 @@ class ShadowfiendMelee : AutoAttackBase() {
             override var inventorySlot: Int = 21
             override var itemClass: Constants.ItemClass? = null
             override var itemSubclass: Constants.ItemSubclass? = null
-            override var minDmg: Double = 99.0 + 0.12 * (sp.stats.attackPower.toDouble() - 286.0)
-            override var maxDmg: Double = 123.0 + 0.12 * (sp.stats.attackPower.toDouble() - 286.0)
+            override var minDmg: Double = 99.0 + 0.12 * (sp.stats.attackPower.toDouble().coerceAtLeast(286.0) - 286.0)
+            override var maxDmg: Double = 123.0 + 0.12 * (sp.stats.attackPower.toDouble().coerceAtLeast(286.0) - 286.0)
             override var speed: Double = basePetAttackSpeed
             override var stats: Stats = Stats()
             override var sockets: Array<Socket> = arrayOf()

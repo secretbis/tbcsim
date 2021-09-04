@@ -19,10 +19,11 @@ class VampiricTouchDot(owner: SimParticipant, damageRoll: Double, tickCount: Int
 
     override val name: String = Companion.name
     override val tickDeltaMs: Int = 3000
-    override val durationMs: Int = 15000
+    override val durationMs: Int = tickCount * tickDeltaMs
     
     val school = Constants.DamageType.SHADOW
-    var baseDamage = damageRoll / tickCount
+    val baseTickCount = 6
+    val baseDamage = damageRoll / baseTickCount
 
     val ability = object : Ability() {
         override val id: Int = 34917

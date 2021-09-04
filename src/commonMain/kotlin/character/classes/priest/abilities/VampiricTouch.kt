@@ -24,10 +24,9 @@ class VampiricTouch : Ability() {
     override val name: String = Companion.name
 
     val school = Constants.DamageType.SHADOW
-    var baseDamage = 650.0
+    val baseDamage = 650.0
     val baseDotTickCount = 5
     val baseDotDurationMs = 15000
-    val dotDmgPerTick = 130
     val baseCastTimeMs = 1500
     val spellPowerCoeff = Spell.spellPowerCoeff(0, baseDotDurationMs)
 
@@ -56,8 +55,7 @@ class VampiricTouch : Ability() {
 
         // snapshot damage on initial cast
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
-        var tickCount = baseDotTickCount;
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.SPELL_CAST,
@@ -75,6 +73,6 @@ class VampiricTouch : Ability() {
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
         sp.addBuff(VampiricTouchBuff())
-        sp.sim.target.addDebuff(VampiricTouchDot(sp, result.first, tickCount))
+        sp.sim.target.addDebuff(VampiricTouchDot(sp, result.first, baseDotTickCount))
     }
 }

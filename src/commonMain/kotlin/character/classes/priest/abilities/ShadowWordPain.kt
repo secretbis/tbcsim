@@ -22,10 +22,8 @@ class ShadowWordPain : Ability() {
     override val name: String = Companion.name
 
     val school = Constants.DamageType.SHADOW
-    var baseDamage = 1236.0
+    val baseDamage = 1236.0
     val baseDotTickCount = 6
-    val baseDotDurationMs = 18000
-    var dotDmgPerTick = 206.0
     // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
     val spellPowerCoeff = 1.1
 
@@ -49,9 +47,9 @@ class ShadowWordPain : Ability() {
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
         // snapshot damage on initial cast
-        var tickCount = baseDotTickCount + iswpTicks
+        val tickCount = baseDotTickCount + iswpTicks
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
+        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.SPELL_CAST,
