@@ -3,6 +3,7 @@ package character.classes.priest.abilities
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
+import character.classes.priest.buffs.VampiricTouchBuff
 import character.classes.priest.debuffs.VampiricTouchDot
 import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import character.classes.priest.talents.*
@@ -73,6 +74,7 @@ class VampiricTouch : Ability() {
 
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
+        sp.addBuff(VampiricTouchBuff())
         sp.sim.target.addDebuff(VampiricTouchDot(sp, result.first, tickCount))
     }
 }
