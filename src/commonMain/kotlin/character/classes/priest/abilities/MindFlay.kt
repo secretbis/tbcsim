@@ -104,8 +104,7 @@ abstract class MindFlay : Ability() {
             return;
         }
 
-        // Initial cast needs to have a chance to proc Shadow Weaving, etc. Subsequent damage is considered periodic
-        sp.fireProc(listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC), listOf(), this, initialCast)
+        sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, initialCast)
 
         sp.addBuff(interruptWatch)
         sp.sim.target.addDebuff(MindFlayDot(sp, resultTick.first / 3, tickCount));

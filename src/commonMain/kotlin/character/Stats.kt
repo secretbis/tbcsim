@@ -1,6 +1,7 @@
 package character
 
 import data.Constants.StatType
+import data.Constants.DamageType
 
 data class Stats(
     // Base stats
@@ -98,6 +99,10 @@ data class Stats(
     var shadowDamageMultiplier: Double = 1.0,
     var arcaneDamageMultiplier: Double = 1.0,
     var petDamageMultiplier: Double = 1.0,
+
+    // Spell school damage taken increases
+    var spellDamageTakenMultiplier: Double = 1.0,
+    var shadowDamageTakenMultiplier: Double = 1.0,
 
     var healthMultiplier: Double = 1.0,
     var healthFlatModifier: Int = 0,
@@ -210,6 +215,9 @@ data class Stats(
         arcaneDamageMultiplier *= stats.arcaneDamageMultiplier
         petDamageMultiplier *= stats.petDamageMultiplier
 
+        spellDamageTakenMultiplier *= stats.spellDamageTakenMultiplier
+        shadowDamageTakenMultiplier *= stats.shadowDamageTakenMultiplier
+
         healthMultiplier *= stats.healthMultiplier
         healthFlatModifier += stats.healthFlatModifier
         manaMultiplier *= stats.manaMultiplier
@@ -222,6 +230,15 @@ data class Stats(
         fistWeaponAdditionalCritChancePercent += stats.fistWeaponAdditionalCritChancePercent
 
         return this
+    }
+
+    fun getSpellDamageTakenMultiplier(withSchool: DamageType?): Double {
+        val schoolMultiplier = when(withSchool){
+            DamageType.SHADOW -> shadowDamageTakenMultiplier
+            else -> 1.0
+        }
+
+        return spellDamageTakenMultiplier * schoolMultiplier
     }
 
     // Serves as a way to update a Stats object given a DB enum constant and a value

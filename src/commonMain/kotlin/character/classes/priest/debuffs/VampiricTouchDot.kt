@@ -31,11 +31,12 @@ class VampiricTouchDot(owner: SimParticipant, damageRoll: Double, tickCount: Int
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
+            val spellMultiplier = sp.stats.getSpellDamageTakenMultiplier(school)
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = baseDamage,
+                amount = baseDamage * spellMultiplier,
                 result = EventResult.HIT
             )
             owner.logEvent(event)

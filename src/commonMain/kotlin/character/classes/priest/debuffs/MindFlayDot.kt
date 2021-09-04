@@ -27,11 +27,12 @@ class MindFlayDot(owner: SimParticipant, val damageRoll: Double, ticks: Int) : D
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
+            val spellMultiplier = sp.stats.getSpellDamageTakenMultiplier(school)
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = damageRoll,
+                amount = damageRoll * spellMultiplier,
                 result = EventResult.HIT,
             )
             owner.logEvent(event)

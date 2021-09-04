@@ -22,10 +22,12 @@ talents:
     rank: 5
   - name: Mind Flay
     rank: 1
-  - name: Darkness
-    rank: 5
+  - name: Shadow Weaving
+    rank: 4
   - name: Focused Mind
     rank: 3
+  - name: Darkness
+    rank: 5
   - name: Shadowform
     rank: 1
   - name: Shadow Power
