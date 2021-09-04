@@ -95,7 +95,7 @@ abstract class MindFlay : Ability() {
 
         sp.logEvent(initialCast);
 
-        if (resultTick.second === EventResult.RESIST ){
+        if (resultTick.first == 0.0){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, initialCast)
             return;
         }

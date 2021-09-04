@@ -5,6 +5,7 @@ import character.Ability
 import character.Proc
 import character.classes.priest.*
 import character.classes.priest.debuffs.ShadowWordPainDot
+import character.classes.priest.talents.ImprovedShadowWordPain
 import data.Constants
 import mechanics.General
 import mechanics.Spell
@@ -43,10 +44,13 @@ class ShadowWordPain : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
+        val iswp: ImprovedShadowWordPain? = sp.character.klass.talentInstance(ImprovedShadowWordPain.name)
+        val iswpTicks = iswp?.currentRank ?: 0
+
         // snapshot damage on initial cast
+        var tickCount = baseDotTickCount + iswpTicks
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
         var result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, canCrit = false)
-        var tickCount = baseDotTickCount;
 
         val event = Event(
             eventType = EventType.SPELL_CAST,
@@ -55,8 +59,8 @@ class ShadowWordPain : Ability() {
             result = result.second,
         )
         sp.logEvent(event)
-        
-        if(result.second == EventResult.RESIST){
+
+        if(result.first == 0.0){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }

@@ -14,6 +14,8 @@ talents:
     rank: 1
 
   # Shadow Talents
+  - name: Improved Shadow Word Pain
+    rank: 2
   - name: Improved Mind Blast
     rank: 5
   - name: Mind Flay
@@ -92,7 +94,7 @@ gear:
     name: Band of Crimson Fury
     enchant: Spellpower (Ring)
   ring2:
-    name: Cobalt Band of Tyrigosa
+    name: Violet Signet of the Archmage
     enchant: Spellpower (Ring)
   trinket1:
     name: Eye of Magtheridon
@@ -120,6 +122,10 @@ rotation:
           debuff: Mind Flay (DoT)
           seconds: 0
     - name: Inner Focus
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
     - name: Shadow Word Pain
       criteria:
         - type: DEBUFF_DURATION_LTE

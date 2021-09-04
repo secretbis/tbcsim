@@ -62,7 +62,7 @@ class VampiricTouch : Ability() {
         sp.logEvent(event)
         
         // Apply the DoT
-        if(result.second == EventResult.RESIST){
+        if(result.first == 0.0){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }
