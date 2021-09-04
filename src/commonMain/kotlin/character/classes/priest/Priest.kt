@@ -35,6 +35,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name) {
             Darkness.name -> Darkness(ranks)
+            FocusedMind.name -> FocusedMind(ranks)
             InnerFocusTalent.name -> InnerFocusTalent(ranks)
             Meditation.name -> Meditation(ranks)
             MindFlayTalent.name -> MindFlayTalent(ranks)

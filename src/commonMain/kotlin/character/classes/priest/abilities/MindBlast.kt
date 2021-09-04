@@ -1,6 +1,7 @@
 package character.classes.priest.abilities
 
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
+import character.classes.priest.talents.FocusedMind
 import character.Ability
 import character.Buff
 import character.Proc
@@ -38,7 +39,10 @@ class MindBlast : Ability() {
             return 0.0
         }
 
-        return baseResourceCost
+        val fm: FocusedMind? = sp.character.klass.talentInstance(FocusedMind.name)
+        val fmMulti = fm?.manaReductionMultiplier() ?: 1.0
+
+        return baseResourceCost * fmMulti
     }
     
     override fun cast(sp: SimParticipant) {
