@@ -14,10 +14,14 @@ talents:
     rank: 1
 
   # Shadow Talents
-  - name: Darkness
+  - name: Improved Mind Blast
     rank: 5
   - name: Mind Flay
     rank: 1
+  - name: Darkness
+    rank: 5
+  - name: Focused Mind
+    rank: 3
   - name: Shadowform
     rank: 1
   - name: Vampiric Touch

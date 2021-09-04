@@ -36,6 +36,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         return when(name) {
             Darkness.name -> Darkness(ranks)
             FocusedMind.name -> FocusedMind(ranks)
+            ImprovedMindBlast.name -> ImprovedMindBlast(ranks)
             InnerFocusTalent.name -> InnerFocusTalent(ranks)
             Meditation.name -> Meditation(ranks)
             MindFlayTalent.name -> MindFlayTalent(ranks)

@@ -2,6 +2,7 @@ package character.classes.priest.abilities
 
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.FocusedMind
+import character.classes.priest.talents.ImprovedMindBlast
 import character.Ability
 import character.Buff
 import character.Proc
@@ -27,7 +28,13 @@ class MindBlast : Ability() {
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
-    override fun cooldownMs(sp: SimParticipant): Int = 8000
+    val baseCooldownMs = 8000
+    override fun cooldownMs(sp: SimParticipant): Int {
+        val impMb: ImprovedMindBlast? = sp.character.klass.talentInstance(ImprovedMindBlast.name)
+        val impMbCooldownReductionMs = impMb?.cooldownReductionMs() ?: 0
+
+        return baseCooldownMs - impMbCooldownReductionMs
+    }
     
     override fun castTimeMs(sp: SimParticipant): Int = baseCastTimeMs
 
