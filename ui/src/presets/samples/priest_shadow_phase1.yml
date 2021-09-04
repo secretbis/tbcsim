@@ -87,6 +87,11 @@ rotation:
     - name: Blackened Basilisk
     - name: Flask of Pure Death
   combat:
+    - name: Shadowfiend
+      criteria:
+        - type: RESOURCE_PCT_LTE 
+          pct: 25
+          resourceType: MANA
     - name: Vampiric Touch
       criteria:
         - type: DEBUFF_DURATION_LTE
@@ -127,6 +132,10 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
+
+pet:
+  type: Shadowfiend
+  startsActive: false
 
 raidBuffs:
   - Blessing of Kings

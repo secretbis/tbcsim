@@ -4,7 +4,6 @@ import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Buff
 import character.Proc
-import character.classes.priest.talents.InnerFocus as InnerFocusTalent
 import character.classes.priest.talents.*
 import character.Resource
 import data.Constants
