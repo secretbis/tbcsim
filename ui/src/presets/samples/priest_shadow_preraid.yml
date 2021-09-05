@@ -109,7 +109,8 @@ gear:
   trinket2:
     name: Icon of the Silver Crescent
 
-# In general Mind Flay will not be clipped before 2 ticks on most spells for Shadow
+# In general Mind Flay should not be clipped before 2 ticks on most spells for Shadow
+# If clipping after 1 tick is desired for a priority spell, remove Mind Flay debuff checks
 rotation:
   autoAttack: false
   precombat:
@@ -126,16 +127,16 @@ rotation:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
           resourceType: MANA
-    - name: Destruction Potion
+    - name: Super Mana Potion
       criteria:
-          # Giving a bit of time to build Shadow Weaving
-        - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 10
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
     - name: Vampiric Touch
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Vampiric Touch (DoT)
-          seconds: 0
+          seconds: 1.5
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
@@ -167,6 +168,35 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
+    # Optimal decision tree for mindflay is to ensure no other priority ability gets clipped
+    # by the channel of mind flay. For Vampiric Touch this is the Mind Flay channel time + Vampiric Touch
+    # cast time (2 + 1.5, or 3 + 1.5). Everything else is the DoT expiration (SW:P, other Mind Flays) 
+    # or Cooldown (MB, SW:D).
+    #
+    # In many cases we can fit two Mind Flay (2 ticks) in place of a 3 tick followed by 2 tick due to 
+    # GCD overlap (E.g. with 4 seconds left before another ability is up next, it's better to
+    # cast two Mind Flay (2 ticks) )
+
+    ## Single 2 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 3.5
+    # SW:P
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 2
+    # Mind Blast
     - name: Mind Flay (2 ticks)
       criteria:
         - type: DEBUFF_DURATION_LTE
@@ -175,6 +205,93 @@ rotation:
         - type: ABILITY_COOLDOWN_LTE
           ability: Mind Blast
           seconds: 2
+    # SW:D
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 2
+    
+    ## Single 3 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 4.5
+    # SW:P
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 3
+    # Mind Blast
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 3
+    # SW:D
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 3
+
+    ## Double 2 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 5.5
+    # SW:P
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 4
+    # Mind Blast
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 4
+    # SW:D
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 4
+
+    # Anything more than 4 seconds (Should be closer to 5) before next cast will be a 3 tick
     - name: Mind Flay (3 ticks)
       criteria:
         - type: DEBUFF_DURATION_LTE
