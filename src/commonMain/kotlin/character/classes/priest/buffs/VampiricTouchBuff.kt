@@ -14,7 +14,7 @@ import sim.SimParticipant
 
 class VampiricTouchBuff() : Buff() {
     companion object {
-        const val name: String = "Vampiric Touch (DoT)"
+        const val name: String = "Vampiric Touch (Restore Mana)"
     }
 
     override val id = 34919
@@ -35,7 +35,7 @@ class VampiricTouchBuff() : Buff() {
 
             val manaRestore = (event.amount * manaRestoreMultiplier).toInt();
 
-            sp.addResource(manaRestore, Resource.Type.MANA, ability.name)
+            sp.addResource(manaRestore, Resource.Type.MANA, name)
         }
     }
 
