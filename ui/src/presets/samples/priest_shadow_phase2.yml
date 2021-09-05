@@ -1,9 +1,9 @@
 class: Priest
 spec: Shadow
-description: Shadow Priest (phase 1)
+description: Shadow Priest (phase 2)
 race: Troll
 level: 70
-epCategory: phase1
+epCategory: phase2
 epSpec: priest_shadow
 
 talents:
@@ -43,7 +43,7 @@ gear:
   offHand:
     name: Orb of the Soul-Eater
   rangedTotemLibram:
-    name: The Black Stalk
+    name: Wand of the Forgotten Star
   head:
     name: Spellstrike Hood
     enchant: Glyph of Power
@@ -60,7 +60,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   back:
-    name: Shadow-Cloak of Dalaran
+    name: Royal Cloak of the Sunstriders
   chest:
     name: Frozen Shadoweave Robe
     enchant: Exceptional Stats
@@ -68,18 +68,16 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   wrists:
-    name: Bracers of Havok
+    name: Mindstorm Wristbands
     enchant: Spellpower (Bracer)
-    gems:
-      - Runed Living Ruby
   hands:
-    name: Handwraps of Flowing Thought
+    name: Soul-Eater's Handwraps
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   waist:
-    name: Belt of Divine Inspiration
+    name: Belt of Blasting
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -97,10 +95,10 @@ gear:
       - Runed Ornate Ruby
       - Runed Living Ruby
   ring1:
-    name: Band of Crimson Fury
+    name: Ring of Endless Coils
     enchant: Spellpower (Ring)
   ring2:
-    name: Violet Signet of the Archmage
+    name: Band of Al'ar
     enchant: Spellpower (Ring)
   trinket1:
     name: Eye of Magtheridon

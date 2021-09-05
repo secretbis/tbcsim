@@ -133,6 +133,7 @@ class TBCSim : CliktCommand() {
             "mage_arcane" to File(presetPath + "mage_arcane_phase2.yml"),
             "mage_fire" to File(presetPath + "mage_fire_phase2.yml"),
             "mage_frost" to File(presetPath + "mage_frost_phase2.yml"),
+            "priest_shadow" to File(presetPath + "priest_shadow_phase2.yml"),
             "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),

@@ -100,6 +100,9 @@ export default function() {
             <SpecEpPanel name='Fire' specKey='mage_fire' category='phase2' />
             <SpecEpPanel name='Frost' specKey='mage_frost' category='phase2' />
           </WrapperEpPanel>
+          <WrapperEpPanel name='Priest'>
+            <SpecEpPanel name='Shadow' specKey='priest_shadow' category='phase2' />
+          </WrapperEpPanel>
           <WrapperEpPanel name='Rogue'>
             <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='phase2' />
             <SpecEpPanel name='Combat' specKey='rogue_combat' category='phase2' />

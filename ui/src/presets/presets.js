@@ -23,6 +23,7 @@ import mageFrostPhase1 from './samples/mage_frost_phase1.yml'
 import mageFrostPhase2 from './samples/mage_frost_phase2.yml'
 import priestShadowPreraid from './samples/priest_shadow_preraid.yml'
 import priestShadowPhase1 from './samples/priest_shadow_phase1.yml'
+import priestShadowPhase2 from './samples/priest_shadow_phase2.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
 import rogueAssassinationPhase1 from './samples/rogue_assassination_phase1.yml'
 import rogueAssassinationPhase2 from './samples/rogue_assassination_phase2.yml'
@@ -98,6 +99,9 @@ const presets = {
     ],
     phase1: [
       priestShadowPhase1,
+    ],
+    phase2: [
+      priestShadowPhase2,
     ]
   },
   rogue: {
@@ -403,6 +407,9 @@ export default ({ character, phase, dispatch }) => {
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Priest'>
+            <Dropdown.Menu key={'phase2'} title='Phase 2'>
+              {presetsFor('priest', 'phase2')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase1'} title='Phase 1'>
               {presetsFor('priest', 'phase1')}
             </Dropdown.Menu>
