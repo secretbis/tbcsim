@@ -1,7 +1,7 @@
 class: Priest
 spec: Shadow
 description: Shadow Priest (phase 1)
-race: Troll
+race: Undead
 level: 70
 epCategory: phase1
 epSpec: priest_shadow
@@ -128,6 +128,11 @@ rotation:
           debuff: Mind Flay (DoT)
           seconds: 0
     - name: Inner Focus
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Devouring Plague
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)

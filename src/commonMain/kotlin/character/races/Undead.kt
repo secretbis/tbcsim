@@ -3,6 +3,7 @@ package character.races
 import character.Ability
 import character.Buff
 import character.Race
+import character.races.abilities.DevouringPlague
 import character.Stats
 import sim.SimParticipant
 
@@ -15,6 +16,11 @@ class Undead : Race() {
         spirit = 5
     )
 
-    override fun racialByName(name: String): Ability? = null
+    override fun racialByName(name: String): Ability? {
+        return when(name) {
+            "Devouring Plague" -> DevouringPlague()
+            else -> null
+        }
+    }
     override fun buffs(sp: SimParticipant): List<Buff> = listOf()
 }
