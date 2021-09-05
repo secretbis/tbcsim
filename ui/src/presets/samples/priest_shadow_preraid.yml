@@ -1,9 +1,9 @@
 class: Priest
 spec: Shadow
-description: Shadow Priest (phase 1)
+description: Shadow Priest (pre-raid)
 race: Troll
 level: 70
-epCategory: phase1
+epCategory: preraid
 epSpec: priest_shadow
 
 talents:
@@ -37,7 +37,7 @@ talents:
 
 gear:
   mainHand:
-    name: Nathrezim Mindblade
+    name: Gavel of Unearthed Secrets
     enchant: Soulfrost
     tempEnchant: Superior Wizard Oil
   offHand:
@@ -52,7 +52,9 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   neck:
-    name: Ritssyn's Lost Pendant
+    name: Pendant of Dominance
+    gems:
+      - Rune Living Ruby
   shoulders:
     name: Frozen Shadoweave Shoulders
     enchant: Greater Inscription of the Orb
@@ -60,7 +62,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   back:
-    name: Shadow-Cloak of Dalaran
+    name: Cloak of the Black Void
   chest:
     name: Frozen Shadoweave Robe
     enchant: Exceptional Stats
@@ -73,13 +75,13 @@ gear:
     gems:
       - Runed Living Ruby
   hands:
-    name: Handwraps of Flowing Thought
+    name: Tempest's Touch
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
   waist:
-    name: Belt of Divine Inspiration
+    name: Girdle of Ruination
     gems:
       - Runed Living Ruby
       - Runed Living Ruby
@@ -97,13 +99,13 @@ gear:
       - Runed Ornate Ruby
       - Runed Living Ruby
   ring1:
-    name: Band of Crimson Fury
+    name: Ashyen's Gift
     enchant: Spellpower (Ring)
   ring2:
-    name: Violet Signet of the Archmage
+    name: Cobalt Band of Tyrigosa
     enchant: Spellpower (Ring)
   trinket1:
-    name: Eye of Magtheridon
+    name: Quagmirran's Eye
   trinket2:
     name: Icon of the Silver Crescent
 
