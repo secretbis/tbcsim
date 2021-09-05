@@ -44,15 +44,17 @@ class ShadowWordDeath : Ability() {
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
+        val targetMultiplier = sp.sim.target.stats.getSpellDamageTakenMultiplier(school)
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, bonusCritChance = spCrit)
+        var finalDamage = result.first * targetMultiplier;
 
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
-            amount = result.first,
+            amount = finalDamage,
             result = result.second,
         )
         sp.logEvent(event)
