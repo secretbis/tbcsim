@@ -58,6 +58,17 @@
                 "blueSocket": 6.0,
                 "metaSocket": 100.0
             },
+            "priest_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.16,
+                "spellHasteRating": 0.87,
+                "spellCritRating": 0.19,
+                "spellHitRating": 1.41,
+                "redSocket": 12.0,
+                "yellowSocket": 12.0,
+                "blueSocket": 12.0,
+                "metaSocket": 100.0
+            },
             "rogue_assassination": {
                 "attackPower": 1.0,
                 "strength": 1.25,
@@ -232,6 +243,17 @@
                 "redSocket": 12.0,
                 "yellowSocket": 12.45,
                 "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "priest_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.05,
+                "spellHasteRating": 1.17,
+                "spellCritRating": 0.17,
+                "spellHitRating": 0.84,
+                "redSocket": 12.0,
+                "yellowSocket": 12.0,
+                "blueSocket": 12.0,
                 "metaSocket": 100.0
             },
             "rogue_assassination": {
