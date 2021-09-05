@@ -39,7 +39,8 @@ class Berserking : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalHasteMultiplier = 1.1
+                physicalHasteMultiplier = 1.1,
+                spellHasteRating = 10 * Rating.hastePerPct
             )
         }
     }
