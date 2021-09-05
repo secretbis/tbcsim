@@ -65,6 +65,7 @@ abstract class Proc {
         SHADOW_DAMAGE_NON_PERIODIC,
         PHYSICAL_DAMAGE_PERIODIC,
         ARCANE_DAMAGE,
+        ARCANE_DAMAGE_PERIODIC,
 
         // Mechanics
         SERVER_TICK, // 2s

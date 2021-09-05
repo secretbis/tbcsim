@@ -27,7 +27,7 @@ class DevouringPlague : Ability() {
     // https://wowwiki-archive.fandom.com/wiki/Spell_power_coefficient?oldid=1492745
     val spellPowerCoeff = 0.8
 
-    override fun cooldownMs(sp: SimParticipant): Int = 300000
+    override fun cooldownMs(sp: SimParticipant): Int = 180000
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 

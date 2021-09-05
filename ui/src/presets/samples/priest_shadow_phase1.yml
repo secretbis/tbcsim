@@ -1,7 +1,7 @@
 class: Priest
 spec: Shadow
 description: Shadow Priest (phase 1)
-race: Undead
+race: Night Elf
 level: 70
 epCategory: phase1
 epSpec: priest_shadow
@@ -127,12 +127,12 @@ rotation:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
-    - name: Inner Focus
+    - name: Starshards
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
           seconds: 0
-    - name: Devouring Plague
+    - name: Inner Focus
       criteria:
         - type: DEBUFF_DURATION_LTE
           debuff: Mind Flay (DoT)
