@@ -19,7 +19,7 @@ abstract class Gem(override var id: Int, var _name: String, override var icon: S
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
 
-    final override var stats: Stats
+    override var stats: Stats = Stats()
 
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
@@ -30,20 +30,22 @@ abstract class Gem(override var id: Int, var _name: String, override var icon: S
     override var name = "$cleanPrefixName$_name"
 
     init {
-        // Convert GemStats to item stats
-        val tmpStats = Stats()
-        for(gemStat in prefix?.stat ?: listOf()) {
-            val value = when(_quality) {
-                Quality.UNCOMMON -> gemStat.uncommonValue
-                Quality.RARE -> gemStat.rareValue
-                Quality.EPIC -> gemStat.epicValue
-                Quality.META -> gemStat.metaValue
-                else -> 0
+        // Convert GemStats to item stats, if a Prefix is specified
+        if(prefix != null) {
+            val tmpStats = Stats()
+            for (gemStat in prefix?.stat ?: listOf()) {
+                val value = when (_quality) {
+                    Quality.UNCOMMON -> gemStat.uncommonValue
+                    Quality.RARE -> gemStat.rareValue
+                    Quality.EPIC -> gemStat.epicValue
+                    Quality.META -> gemStat.metaValue
+                    else -> 0
+                }
+                tmpStats.addByStatType(gemStat.stat, value)
             }
-            tmpStats.addByStatType(gemStat.stat, value)
-        }
 
-        stats = tmpStats
+            stats = tmpStats
+        }
     }
 
     // Meta gem color requirements
