@@ -398,6 +398,14 @@ export function isGun(item) {
          validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
 }
 
+export function is1HWeapon(item) {
+  if(!item || !item.itemClass) return false
+
+  const validSubclasses = [wsc.axe_1h, wsc.mace_1h, wsc.sword_1h, wsc.fist, wsc.dagger]
+  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
+        validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+}
+
 export const classes = {
   druid: {
     name: 'Druid',
@@ -506,3 +514,14 @@ export const classes = {
     ]
   },
 }
+
+export const allEpCategories = [{
+  name: 'Pre-raid',
+  key: 'preraid'
+},{
+  name: 'Phase 1',
+  key: 'phase1'
+},{
+  name: 'Phase 2',
+  key: 'phase2'
+}]

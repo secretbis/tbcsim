@@ -3,7 +3,7 @@ import { Col, Dropdown, Row, Button, Uploader, Notification } from 'rsuite';
 import _ from 'lodash';
 import filesaver from 'file-saver';
 
-import { classes } from '../data/constants';
+import { classes, allEpCategories } from '../data/constants';
 import * as impex from './importexport';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
@@ -192,12 +192,12 @@ function PhaseSelect({ phase, dispatch }) {
 
   return (
     <>
-      <Dropdown title="Phase">
+      <Dropdown title="Item Filter">
         {allPhases.map(phase => {
-          return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>{phase}</Dropdown.Item>
+          return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>Phase {phase}</Dropdown.Item>
         })}
       </Dropdown>
-      <span>{phase}</span>
+      <span>Phase {phase}</span>
     </>
   );
 }
@@ -205,16 +205,6 @@ function PhaseSelect({ phase, dispatch }) {
 function EpSelect({ epCategoryKey, dispatch }) {
   if(epCategoryKey == null) return null;
 
-  const allEpCategories = [{
-    name: 'Pre-raid',
-    key: 'preraid'
-  },{
-    name: 'Phase 1',
-    key: 'phase1'
-  },{
-    name: 'Phase 2',
-    key: 'phase2'
-  }]
   const epCategoryEntry = allEpCategories.find(epc => epc.key == epCategoryKey)
   if(epCategoryEntry == null) return null;
 

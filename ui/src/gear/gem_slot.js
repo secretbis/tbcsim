@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { itemClasses, gemSubclasses as gsc } from '../data/constants';
 import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
 import { kprop } from '../util/util';
@@ -11,20 +10,6 @@ const socketImages = {
   red: 'sockets/red.png',
   yellow: 'sockets/yellow.png',
 };
-
-const nonMetaIC = {
-  itemClasses: [itemClasses.gem],
-  itemSubclasses: {
-    [itemClasses.gem]: [gsc.red, gsc.blue, gsc.yellow, gsc.purple, gsc.green, gsc.orange]
-  }
-};
-
-const metaIC = {
-  itemClasses: [itemClasses.gem],
-  itemSubclasses: {
-    [itemClasses.gem]: [gsc.meta]
-  }
-}
 
 export default function({ phase, socket, character, onSelect }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
@@ -52,8 +37,7 @@ export default function({ phase, socket, character, onSelect }) {
         <GearSelector
           character={character}
           phase={phase}
-          inventorySlots={[0]}
-          itemClasses={isMetaGem ? metaIC : nonMetaIC}
+          slotName={isMetaGem ? 'metaGem' : 'gem'}
           visible={selectorVisible}
           setVisible={setSelectorVisible}
           onSelect={onGemSelect}

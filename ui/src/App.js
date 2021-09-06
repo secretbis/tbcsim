@@ -13,6 +13,7 @@ import { initialState, stateReducer } from './state';
 import CombatLog from './combat_log/combat_log';
 import EquivalencePoints from './ep/equivalence_points';
 import GearEditor from './gear/gear_editor';
+import GearEP from './gear/gear_ep';
 import Presets from './presets/presets';
 import RaidBuffs from './buffs/raid_buffs';
 import Rankings from './rankings/rankings';
@@ -185,6 +186,9 @@ function App() {
                 <Link to="/">
                   <Nav.Item>Simulator</Nav.Item>
                 </Link>
+                <Link to="/gear">
+                  <Nav.Item>Gear EP</Nav.Item>
+                </Link>
                 <Link to="/ep">
                   <Nav.Item>Equivalence Points</Nav.Item>
                 </Link>
@@ -207,6 +211,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             {renderSimulator()}
+          </Route>
+          <Route path="/gear">
+            <GearEP />
           </Route>
           <Route path="/ep">
             <EquivalencePoints />

@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-export default function({ gear, item, isMetaGem=false, children }) {
+export default function({ gear, item, isMetaGem=false, children, allowClick=false }) {
   if(item) {
     // TODO: Meta gem tooltips don't seem to work, regardless of how I set IDs
     // const allGemIds = []
@@ -25,9 +25,10 @@ export default function({ gear, item, isMetaGem=false, children }) {
     return (
       <a
         href={`https://tbc.wowhead.com/?item=${item.id}&${suffixStr}`}
+        target='_blank'
         className={itemClass}
         rel={suffixStr}
-        onClick={e => e.preventDefault()}
+        onClick={e => !allowClick && e.preventDefault()}
         style={{ textDecoration: 'none' }}
       >
         {children}

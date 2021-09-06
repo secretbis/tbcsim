@@ -1,88 +1,19 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { Input, InputGroup, Icon, Modal, Table } from 'rsuite';
+import { Checkbox, Input, InputGroup, Icon, Modal, Table } from 'rsuite';
 
-import * as Constants from '../data/constants';
-import { itemEp } from '../ep/ep_stats';
+import { filterByItemName, filter1HOnly, itemsForSlot } from '../util/items';
+
 import ItemTooltip from './item_tooltip';
-import { kprop } from '../util/util';
-
-import * as tbcsim from 'tbcsim';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ character, phase, type, item, TooltipComponent, inventorySlots, itemClasses, allowableClasses, visible, setVisible, onSelect }) {
+export default function({ character, phase, type, item, slotName, TooltipComponent, visible, setVisible, onSelect }) {
   const [filter, setFilter] = useState('');
+  const [oneHandOnly, setOneHandOnly] = useState(true);
   const [modalFullyShown, setModalFullyShown] = useState('');
 
   TooltipComponent = TooltipComponent || ItemTooltip
-
-  let baseData = tbcsim.data.Items
-  if(type === "enchants") {
-    baseData = tbcsim.data.Enchants
-  }
-  if(type === "tempEnchants") {
-    baseData = tbcsim.data.TempEnchants
-  }
-
-  function getItemsForSlot() {
-    let items = [];
-    for(const inventorySlot of inventorySlots) {
-      items = [...items, ...(baseData.bySlot.get_35(inventorySlot) || [])];
-    }
-
-    items = items.map(i => i(item))
-
-    // Filter again by equippable item subclasses, if provided
-    const filtered = _.filter(
-      _.filter(items, item => {
-        // Check phase first
-        const isInPhase = (item.phase || 1) <= phase
-        if(!isInPhase) return false
-
-        if(itemClasses) {
-          const itemClass = kprop(item.itemClass, 'ordinal');
-
-          if(itemClasses.itemClasses.includes(itemClass)) {
-            const itemSubclass = kprop(item.itemSubclass, 'itemClassOrdinal');
-            const subclasses = itemClasses.itemSubclasses[itemClass]
-
-            // Never filter the cloak slot on itemSubclass
-            if(item.inventorySlot == Constants.inventorySlots.back) {
-              return true
-            }
-
-            if(subclasses.includes(itemSubclass)) {
-              const matchesName = filter ? (item.displayName || item.name).toLowerCase().includes(filter.toLowerCase()) : true
-              return matchesName
-            }
-          }
-
-          return false;
-        }
-
-        return true;
-      }), item => {
-        // Filter by allowable classes
-        if(allowableClasses) {
-          return item.allowableClasses == null || item.allowableClasses.some(it => {
-            return allowableClasses.map(it => it.toUpperCase()).includes(kprop(it, 'name', '').toUpperCase());
-          })
-        }
-        return true;
-      });
-
-    // Add item EP if we have a reference point
-    if(character) {
-      items = items.forEach(i => {
-        const ep = itemEp(i, character.epCategory, character.epSpec)
-        i.ep = ep
-      })
-    }
-
-    const sortKey = character ? 'ep' : 'itemLevel';
-    return _.sortBy(filtered, sortKey).reverse()
-  }
 
   function onRowClick(item, e) {
     e.preventDefault();
@@ -109,7 +40,7 @@ export default function({ character, phase, type, item, TooltipComponent, invent
     setModalFullyShown(true);
   }
 
-  if(!inventorySlots || !visible) {
+  if(!visible) {
     return null;
   }
 
@@ -158,7 +89,8 @@ export default function({ character, phase, type, item, TooltipComponent, invent
   }
 
   function renderModalBody() {
-    const allRowData = getItemsForSlot()
+    const filters = [filterByItemName(filter), ...(oneHandOnly && slotName === 'mainHand' ? [filter1HOnly()] : [])]
+    const allRowData = itemsForSlot(slotName, character, phase, type, item, filters)
     return (
       <>
         <InputGroup inside style={{ margin: '15px 0 15px 0' }}>
@@ -167,6 +99,11 @@ export default function({ character, phase, type, item, TooltipComponent, invent
             <Icon icon="search" />
           </InputGroup.Button>
         </InputGroup>
+        {slotName == 'mainHand' ?
+        <InputGroup inside>
+          <Checkbox checked={oneHandOnly} onChange={() => setOneHandOnly(!oneHandOnly)}>One-Hand Only</Checkbox>
+        </InputGroup>
+        : null}
 
         <Table height={400} rowHeight={60} data={allRowData} affixHorizontalScrollbar={-1000}>
           <Column width={55}>

@@ -52,7 +52,9 @@ const titles = {
   ammo: 'AMMO',
 };
 
-export default function({ character, phase, slotName, inventorySlots, itemClasses, width=defaultWidth, dispatch }) {
+export default function({ character, phase, slotName, width=defaultWidth, dispatch }) {
+  if(!character || !character.class) return;
+
   const item = character && character.gear && character.gear[slotName];
   const itemImgStyles = { border: '1px solid #AAA', height: width, width }
 
@@ -65,10 +67,8 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
   }
 
   function onItemSelect(item) {
-    // Clean sockets and enchants
+    // Clean sockets
     item.sockets && item.sockets.forEach(sk => sk.gem = null);
-    item.enchant = null;
-    item.tempEnchant = null;
     dispatch({ type: 'updateGearSlot', value: { [slotName]: item }, slotName, item })
   }
 
@@ -119,10 +119,10 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
               return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
             })}
             {slotCanEnchant && itemCanEnchant ?
-              <EnchantSlot enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} inventorySlots={inventorySlots} onSelect={onEnchantSelect} />
+              <EnchantSlot character={character} slotName={slotName} enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} onSelect={onEnchantSelect} />
             : null}
             {itemCanTempEnchant ?
-              <EnchantSlot enchantType={'tempEnchants'} phase={phase} item={item} enchant={item && item.tempEnchant} inventorySlots={inventorySlots} onSelect={onTempEnchantSelect} />
+              <EnchantSlot character={character} slotName={slotName} enchantType={'tempEnchants'} phase={phase} item={item} enchant={item && item.tempEnchant} onSelect={onTempEnchantSelect} />
             : null}
           </Row>
         </Col>
@@ -150,9 +150,7 @@ export default function({ character, phase, slotName, inventorySlots, itemClasse
       <GearSelector
         character={character}
         phase={phase}
-        allowableClasses={[character.class]}
-        inventorySlots={inventorySlots}
-        itemClasses={itemClasses}
+        slotName={slotName}
         visible={selectorVisible}
         setVisible={setSelectorVisible}
         onSelect={onItemSelect}
