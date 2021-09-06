@@ -15,8 +15,8 @@ class Soulfrost(item: Item) : Enchant(item) {
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
-            frostDamage = 50,
-            shadowDamage = 50
+            frostDamage = 54,
+            shadowDamage = 54
         )
     }
 }
