@@ -38,8 +38,11 @@ const classes = [{
   label: 'Warlock (Afflicton + Ruin)',
   value: 'warlock_affliction_ruin'
 },{
-  label: 'Warlock (Destruction)',
-  value: 'warlock_destruction'
+  label: 'Warlock (Destruction + Fire)',
+  value: 'warlock_destruction_fire'
+},{
+  label: 'Warlock (Destruction + Shadow)',
+  value: 'warlock_destruction_shadow'
 },{
   label: 'Warrior (Arms)',
   value: 'warrior_arms'
