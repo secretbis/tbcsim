@@ -39,7 +39,7 @@ class Starshards : Ability() {
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, canCrit = false)
 
         val event = Event(
-            eventType = EventType.SPELL_CAST,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             result = result.second,

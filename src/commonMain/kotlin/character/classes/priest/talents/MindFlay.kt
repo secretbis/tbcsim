@@ -27,7 +27,8 @@ class MindFlay(currentRank: Int) : Talent(currentRank) {
         val interruptProc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
                 Trigger.SPELL_START_CAST,
-                Trigger.SPELL_CAST
+                Trigger.SPELL_HIT,
+                Trigger.SPELL_CRIT,
             )
             override val type: Type = Type.STATIC
     

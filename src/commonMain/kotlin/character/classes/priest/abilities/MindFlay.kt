@@ -61,7 +61,7 @@ abstract class MindFlay : Ability() {
             canCrit = false,
         )
         val initialCast = Event(
-            eventType = EventType.SPELL_CAST,
+            eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
             result = resultTick.second,
