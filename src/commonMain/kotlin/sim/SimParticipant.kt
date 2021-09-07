@@ -11,6 +11,7 @@ import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
 import character.classes.priest.pet.Shadowfiend as ShadowfiendPet
 import character.classes.priest.pet.abilities.ShadowfiendMelee
+import data.Constants
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
@@ -704,6 +705,18 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun spellDamage(): Int {
         return stats.spellDamage
+    }
+
+    fun spellDamageWithSchool(school: Constants.DamageType): Int { 
+        return stats.getSpellDamage(school)
+    }
+
+    fun getSpellDamageMultiplier(school: Constants.DamageType): Double {
+        return stats.getSpellDamageMultiplier(school)
+    }
+
+    fun getSpellDamageTakenMultiplier(school: Constants.DamageType): Double {
+        return stats.getSpellDamageTakenMultiplier(school)
     }
 
     fun physicalHitPct(): Double {

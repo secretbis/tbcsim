@@ -232,6 +232,34 @@ data class Stats(
         return this
     }
 
+    fun getSpellDamage(withSchool: DamageType?): Int {
+        val schoolDamage = when(withSchool){
+            DamageType.ARCANE -> arcaneDamage
+            DamageType.FIRE -> fireDamage
+            DamageType.FROST -> frostDamage
+            DamageType.HOLY -> holyDamage
+            DamageType.NATURE -> natureDamage
+            DamageType.SHADOW -> shadowDamage
+            else -> 0
+        }
+
+        return spellDamage + schoolDamage
+    }
+
+    fun getSpellDamageMultiplier(withSchool: DamageType?): Double {
+        val schoolDamage = when(withSchool){
+            DamageType.ARCANE -> arcaneDamageMultiplier
+            DamageType.FIRE -> fireDamageMultiplier
+            DamageType.FROST -> frostDamageMultiplier
+            DamageType.HOLY -> holyDamageMultiplier
+            DamageType.NATURE -> natureDamageMultiplier
+            DamageType.SHADOW -> shadowDamageMultiplier
+            else -> 1.0
+        }
+
+        return spellDamageMultiplier * schoolDamage
+    }
+
     fun getSpellDamageTakenMultiplier(withSchool: DamageType?): Double {
         val schoolMultiplier = when(withSchool){
             DamageType.SHADOW -> shadowDamageTakenMultiplier
