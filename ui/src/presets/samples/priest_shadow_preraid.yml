@@ -132,6 +132,7 @@ rotation:
         - type: RESOURCE_MISSING_GTE
           amount: 1500
           resourceType: MANA
+    - name: Use Active Trinket
     - name: Vampiric Touch
       criteria:
         - type: DEBUFF_DURATION_LTE

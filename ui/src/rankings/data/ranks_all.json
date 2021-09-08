@@ -51,14 +51,14 @@
             "petSd": 7.903024070651175
         },
         "priest_shadow": {
-            "subjectMean": 1243.375604974257,
-            "subjectPetMean": 6.1227894818551585,
-            "totalMean": 1249.498394456112,
-            "subjectMedian": 1243.5003823009415,
-            "subjectPetMedian": 8.118535866730834,
-            "totalMedian": 1251.6189181676723,
-            "subjectSd": 21.86021691623437,
-            "petSd": 4.337399293133411
+            "subjectMean": 1264.0987147410938,
+            "subjectPetMean": 5.75310172977209,
+            "totalMean": 1269.851816470866,
+            "subjectMedian": 1264.0396076396016,
+            "subjectPetMedian": 7.9817881543892195,
+            "totalMedian": 1272.021395793991,
+            "subjectSd": 22.54629752585746,
+            "petSd": 4.680857626380913
         },
         "rogue_assassination": {
             "subjectMean": 1419.396335398874,
@@ -203,14 +203,14 @@
             "petSd": 8.507219211461361
         },
         "priest_shadow": {
-            "subjectMean": 1294.822669218553,
-            "subjectPetMean": 2.0101849050849507,
-            "totalMean": 1296.832854123638,
-            "subjectMedian": 1294.565386784775,
+            "subjectMean": 1313.8616400691308,
+            "subjectPetMean": 1.487829189273959,
+            "totalMean": 1315.3494692584047,
+            "subjectMedian": 1313.8036668396603,
             "subjectPetMedian": 0.0,
-            "totalMedian": 1294.565386784775,
-            "subjectSd": 20.03051108668448,
-            "petSd": 3.618782292722737
+            "totalMedian": 1313.8036668396603,
+            "subjectSd": 20.113312147704328,
+            "petSd": 3.2728782873225897
         },
         "rogue_assassination": {
             "subjectMean": 1550.689220600217,
@@ -355,14 +355,14 @@
             "petSd": 8.462702289311633
         },
         "priest_shadow": {
-            "subjectMean": 1313.2880388773092,
-            "subjectPetMean": 8.576618954141205,
-            "totalMean": 1321.8646578314504,
-            "subjectMedian": 1313.1578783874265,
-            "subjectPetMedian": 8.572688087951736,
-            "totalMedian": 1321.7305664753783,
-            "subjectSd": 19.808684917248335,
-            "petSd": 1.4293656427262686
+            "subjectMean": 1333.4583438946272,
+            "subjectPetMean": 8.929074168894278,
+            "totalMean": 1342.3874180635214,
+            "subjectMedian": 1333.1754146552962,
+            "subjectPetMedian": 8.89711935099261,
+            "totalMedian": 1342.0725340062888,
+            "subjectSd": 20.117872520879878,
+            "petSd": 1.5261730198328076
         },
         "rogue_assassination": {
             "subjectMean": 1739.4052745548152,
