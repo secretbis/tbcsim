@@ -37,7 +37,7 @@ talents:
 
 gear:
   mainHand:
-    name: Nathrezim Mindblade
+    name: Merciless Gladiator's Spellblade
     enchant: Soulfrost
     tempEnchant: Superior Wizard Oil
   offHand:
@@ -45,12 +45,12 @@ gear:
   rangedTotemLibram:
     name: Wand of the Forgotten Star
   head:
-    name: Spellstrike Hood
+    name: Destruction Holo-gogs
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Mystical Skyfire Diamond
+      # TODO: Update with Fluorescent Tanzanite when added
+      - Glowing Nightseye
   neck:
     name: Ritssyn's Lost Pendant
   shoulders:
@@ -71,7 +71,7 @@ gear:
     name: Mindstorm Wristbands
     enchant: Spellpower (Bracer)
   hands:
-    name: Soul-Eater's Handwraps
+    name: Handwraps of Flowing Thought
     enchant: Major Spellpower (Gloves)
     gems:
       - Runed Living Ruby
@@ -82,7 +82,7 @@ gear:
       - Runed Living Ruby
       - Runed Living Ruby
   legs:
-    name: Spellstrike Pants
+    name: Trousers of the Astromancer
     enchant: Runic Spellthread
     gems:
       - Runed Living Ruby
@@ -95,11 +95,9 @@ gear:
       - Runed Ornate Ruby
       - Runed Living Ruby
   ring1:
-    name: Ring of Endless Coils
-    enchant: Spellpower (Ring)
-  ring2:
     name: Band of Al'ar
-    enchant: Spellpower (Ring)
+  ring2:
+    name: Ring of Endless Coils
   trinket1:
     name: Eye of Magtheridon
   trinket2:
@@ -116,7 +114,7 @@ rotation:
     - name: Shadowfiend
       criteria:
         - type: RESOURCE_PCT_LTE 
-          pct: 25
+          pct: 50
           resourceType: MANA
     - name: Dark Rune
       criteria:
