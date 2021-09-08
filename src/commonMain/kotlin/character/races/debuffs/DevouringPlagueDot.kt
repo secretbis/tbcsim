@@ -5,7 +5,6 @@ import character.Debuff
 import character.Buff
 import character.Proc
 import character.Resource
-import character.classes.priest.talents.ShadowWeaving
 import character.classes.priest.talents.VampiricTouch
 import character.classes.priest.debuffs.VampiricTouchDot
 import data.Constants

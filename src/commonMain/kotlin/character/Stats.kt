@@ -215,9 +215,6 @@ data class Stats(
         arcaneDamageMultiplier *= stats.arcaneDamageMultiplier
         petDamageMultiplier *= stats.petDamageMultiplier
 
-        spellDamageTakenMultiplier *= stats.spellDamageTakenMultiplier
-        shadowDamageTakenMultiplier *= stats.shadowDamageTakenMultiplier
-
         healthMultiplier *= stats.healthMultiplier
         healthFlatModifier += stats.healthFlatModifier
         manaMultiplier *= stats.manaMultiplier
@@ -258,15 +255,6 @@ data class Stats(
         }
 
         return spellDamageMultiplier * schoolDamage
-    }
-
-    fun getSpellDamageTakenMultiplier(withSchool: DamageType?): Double {
-        val schoolMultiplier = when(withSchool){
-            DamageType.SHADOW -> shadowDamageTakenMultiplier
-            else -> 1.0
-        }
-
-        return spellDamageTakenMultiplier * schoolMultiplier
     }
 
     // Serves as a way to update a Stats object given a DB enum constant and a value

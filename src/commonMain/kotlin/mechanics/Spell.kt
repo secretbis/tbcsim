@@ -63,9 +63,8 @@ object Spell {
         // Additional damage multipliers
         val flatModifier = sp.stats.spellDamageFlatModifier
         val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
-        val targetMultiplier = sp.sim.target.getSpellDamageTakenMultiplier(school)
 
-        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * targetMultiplier
+        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier
 
         // Get the hit/miss result
         if (canResist){

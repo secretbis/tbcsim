@@ -1,11 +1,12 @@
 package data.abilities.raid
 
 import character.*
+import character.classes.priest.buffs.ShadowWeavingBuff
 import sim.SimParticipant
 
 class ShadowWeaving : Ability() {
     companion object {
-        const val name = "Shadow Weaving"
+        const val name = ShadowWeavingBuff.name
     }
 
     override val id: Int = 33195

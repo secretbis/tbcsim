@@ -1,4 +1,4 @@
-package character.classes.priest.debuffs
+package character.classes.priest.buffs
 
 import character.*
 import data.Constants
@@ -8,13 +8,16 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class ShadowWeavingDebuff(sp: SimParticipant) : Debuff(sp){
+class ShadowWeavingBuff(sp: SimParticipant) : Buff(){
+    companion object {
+        const val name = "Shadow Weaving"
+    }
     override val id = 15258
-    override val name: String = "Shadow Vulnerability"
+    override val name: String = Companion.name
     override val durationMs: Int = 15000
     override val maxStacks: Int = 5
 
     override fun modifyStats(sp: SimParticipant) = Stats(
-        shadowDamageTakenMultiplier = 1 + (0.02 * state(sp).currentStacks)
+        shadowDamageMultiplier = 1 + (0.02 * state(sp).currentStacks)
     )
 }

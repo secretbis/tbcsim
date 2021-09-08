@@ -1,7 +1,6 @@
 package character.classes.priest.talents
 
 import character.*
-import character.classes.priest.debuffs.ShadowWeavingDebuff
 import character.classes.priest.debuffs.MindFlayDot
 import data.Constants
 import data.model.Item

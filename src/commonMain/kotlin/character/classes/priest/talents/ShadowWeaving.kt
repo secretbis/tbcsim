@@ -1,7 +1,7 @@
 package character.classes.priest.talents
 
 import character.*
-import character.classes.priest.debuffs.ShadowWeavingDebuff
+import character.classes.priest.buffs.ShadowWeavingBuff
 import data.Constants
 import data.model.Item
 import sim.Event
@@ -33,7 +33,7 @@ class ShadowWeaving(currentRank: Int) : Talent(currentRank) {
             override fun percentChance(sp: SimParticipant): Double = 100.0 * currentRank / maxRank
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.sim.target.addDebuff(ShadowWeavingDebuff(sp))
+                sp.sim.addRaidBuff(ShadowWeavingBuff(sp))
             }
         }
 
