@@ -7,7 +7,7 @@ import character.Buff
 import data.itemsets.IncarnateRegalia
 import sim.SimParticipant
 
-class Shadowfiend : Ability() {
+class Shadowfiend() : Ability() {
     companion object {
         const val name: String = "Shadowfiend"
     }
@@ -15,10 +15,15 @@ class Shadowfiend : Ability() {
     override val id: Int = 34433
     override val name: String = Companion.name
 
-    val fiendUpBuff = object : Buff() {
-        override val name: String = "${Shadowfiend.name} (Hidden)"
-        override val durationMs: Int = 15000
+    val baseDurationMs = 15000
+
+    fun fiendUpBuff(sp: SimParticipant) = object : Buff() {
+        override val name: String = "${Companion.name} (Hidden)"
         override val hidden: Boolean = true
+        override val durationMs: Int = if(sp.buffs[IncarnateRegalia.TWO_SET_BUFF_NAME] != null) {
+            baseDurationMs + 3000
+        } else baseDurationMs
+        
 
         override fun reset(sp: SimParticipant) {
             sp.pet?.deactivate(true)
@@ -43,6 +48,6 @@ class Shadowfiend : Ability() {
     override fun cast(sp: SimParticipant) {    
         sp.pet?.activate()
 
-        sp.addBuff(fiendUpBuff)    
+        sp.addBuff(fiendUpBuff(sp))    
     }
 }

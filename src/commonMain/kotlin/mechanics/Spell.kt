@@ -59,12 +59,12 @@ object Spell {
      * 
      * @return Pair<Double, EventResult> where first is the damage to be done and second is event of HIT (success) or RESIST (failure)
      */
-    private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
+    private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusDamageMultiplier: Double = 1.0, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
         // Additional damage multipliers
         val flatModifier = sp.stats.spellDamageFlatModifier
         val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
 
-        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier
+        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
 
         // Get the hit/miss result
         if (canResist){
@@ -197,10 +197,11 @@ object Spell {
         bonusCritChance: Double = 0.0, 
         bonusHitChance: Double = 0.0,
         bonusCritMultiplier: Double = 1.0,
+        bonusDamageMultiplier: Double = 1.0,
         canCrit: Boolean = true,
         canResist: Boolean = true,
     ) : Pair<Double, EventResult> {
-        var finalResult = firstAttackRollPair(sp, damageRoll, school, bonusHitChance, canResist)
+        var finalResult = firstAttackRollPair(sp, damageRoll, school, bonusDamageMultiplier, bonusHitChance, canResist)
 
         if(canCrit && finalResult.second == EventResult.HIT) {
             finalResult = secondCritRollPair(sp, finalResult, bonusCritChance, bonusCritMultiplier)

@@ -3,6 +3,7 @@ package character.classes.priest.debuffs
 import character.Ability
 import character.Debuff
 import data.Constants
+import data.itemsets.IncarnateRegalia
 import data.model.Item
 import mechanics.Spell
 import sim.Event
@@ -23,8 +24,7 @@ class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
     val school = Constants.DamageType.SHADOW
     val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble() 
     var baseDotDamage: Double = 176.0
-    // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
-    val baseDotSpellCoeff = 0.57 / 3;
+    val baseDotSpellCoeff = 0.19
 
     val ability = object : Ability() {
         override val id: Int = 25387
@@ -33,8 +33,17 @@ class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
+            val t4FourSetBonusMulti: Double = if(owner.buffs[IncarnateRegalia.FOUR_SET_BUFF_NAME] == null) 1.0 else 1.05
+
             val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
-            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+            val result = Spell.attackRoll(
+                owner, 
+                damageRoll,
+                school,
+                bonusDamageMultiplier = t4FourSetBonusMulti, 
+                canCrit = false,
+                canResist = false,
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,

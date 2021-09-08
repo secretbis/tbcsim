@@ -10,13 +10,16 @@ class IncarnateRegalia : ItemSet() {
     }
     override val id: Int = 664
 
-    // TODO: Shadowfiend should check this buff once it exists
+    // https://tbc.wowhead.com/spell=37570/improved-shadowfiend
+    // Shadowfiend lasts 3 seconds longer for the simulation
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
     }
 
-    // TODO: Mind Flay and Smite should check this buff once they exist
+    // https://tbc.wowhead.com/spell=37571/improved-mind-flay-and-smite
+    // Increases Mind Flay periodic damage and Smite damage by 5%
+    // TODO: Add to Smite spell when implemented
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1
