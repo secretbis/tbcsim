@@ -1,7 +1,6 @@
 package character.classes.priest.pet.buffs
 
 import character.*
-import character.classes.hunter.talents.FerociousInspiration
 import data.model.Item
 import sim.Event
 import sim.SimParticipant
