@@ -21,10 +21,7 @@ abstract class MindFlay : Ability() {
     override val id: Int = 25387
     open val tickCount = 3
 
-    val baseDamage = 528.0
-    val school = Constants.DamageType.SHADOW
-    // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
-    val spellPowerCoeff = 0.57   
+    val school = Constants.DamageType.SHADOW 
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -50,32 +47,23 @@ abstract class MindFlay : Ability() {
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
-        // Overall damage is determined before doing tick damage
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        val resultTick = Spell.attackRoll(
-            sp, 
-            damageRoll,
-            school,
-            isBinary = true,
-            bonusHitChance = sfHit,
-            canCrit = false,
-        )
-        val initialCast = Event(
+        val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
+
+        val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
             abilityName = name,
-            result = resultTick.second,
+            result = result.second,
         )
+        sp.logEvent(event)
 
-        sp.logEvent(initialCast);
-
-        if (resultTick.first == 0.0){
-            sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, initialCast)
+        if (result.second == EventResult.RESIST){
+            sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return;
         }
 
-        sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, initialCast)
+        sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
-        sp.sim.target.addDebuff(MindFlayDot(sp, resultTick.first / 3, tickCount));
+        sp.sim.target.addDebuff(MindFlayDot(sp, tickCount));
     }
 }

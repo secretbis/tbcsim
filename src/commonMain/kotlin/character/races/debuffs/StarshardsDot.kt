@@ -12,18 +12,19 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class StarshardsDot(owner: SimParticipant, damageRoll: Double, tickCount: Int) : Debuff(owner) {
+class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name: String = "Starshards (DoT)"
     }
 
     override val name: String = Companion.name
     override val tickDeltaMs: Int = 3000
-    override val durationMs: Int = tickCount * tickDeltaMs
+    override val durationMs: Int = 15000
 
     val school = Constants.DamageType.ARCANE
-    val baseTickCount = 5
-    val baseDamage = damageRoll / baseTickCount
+    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
+    val baseDotDamage = 157.0
+    val baseDotSpellCoeff = 0.167
 
     val starshardsAbility = object : Ability() {
         override val id: Int = 25446
@@ -32,13 +33,15 @@ class StarshardsDot(owner: SimParticipant, damageRoll: Double, tickCount: Int) :
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val spellMultiplier = sp.stats.getSpellDamageTakenMultiplier(school)
+            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
+            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = baseDamage * spellMultiplier,
-                result = EventResult.HIT
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

@@ -65,7 +65,7 @@ class VampiricTouch : Ability() {
         )
         sp.logEvent(event)
 
-        if(result.first == 0.0){
+        if(result.second == EventResult.RESIST){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }
@@ -73,6 +73,6 @@ class VampiricTouch : Ability() {
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
         sp.addBuff(VampiricTouchBuff())
-        sp.sim.target.addDebuff(VampiricTouchDot(sp, result.first, baseDotTickCount))
+        sp.sim.target.addDebuff(VampiricTouchDot(sp))
     }
 }

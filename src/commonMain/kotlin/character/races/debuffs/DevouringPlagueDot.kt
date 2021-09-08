@@ -7,7 +7,6 @@ import character.Proc
 import character.Resource
 import character.classes.priest.talents.ShadowWeaving
 import character.classes.priest.talents.VampiricTouch
-import character.classes.priest.debuffs.ShadowWeavingDebuff
 import character.classes.priest.debuffs.VampiricTouchDot
 import data.Constants
 import mechanics.Spell
@@ -16,18 +15,19 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class DevouringPlagueDot(owner: SimParticipant, damageRoll: Double, tickCount: Int) : Debuff(owner) {
+class DevouringPlagueDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name: String = "Devouring Plague (DoT)"
     }
 
     override val name: String = Companion.name
     override val tickDeltaMs: Int = 3000
-    override val durationMs: Int = tickCount * tickDeltaMs
+    override val durationMs: Int = 24000
 
     val school = Constants.DamageType.SHADOW
-    val baseTickCount = 8
-    val baseDamage = damageRoll / baseTickCount
+    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
+    var baseDotDamage: Double = 152.0
+    val baseDotSpellCoeff = 0.1
 
     val dpAbility = object : Ability() {
         override val id: Int = 25467
@@ -36,13 +36,15 @@ class DevouringPlagueDot(owner: SimParticipant, damageRoll: Double, tickCount: I
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val spellMultiplier = sp.stats.getSpellDamageTakenMultiplier(school)
+            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
+            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = baseDamage * spellMultiplier,
-                result = EventResult.HIT
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

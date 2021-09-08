@@ -68,7 +68,7 @@ object Spell {
         val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * targetMultiplier
 
         // Get the hit/miss result
-        if (!canResist){
+        if (canResist){
             val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
             val attackRoll = Random.nextDouble()
 
@@ -173,7 +173,7 @@ object Spell {
 
     fun baseDamageRollFromSnapShot(baseDmg: Double, spellDamage: Double, spellDamageCoeff: Double = 1.0): Double {
         return baseDmg + (spellDamage * spellDamageCoeff)
-    }   
+    }
 
     fun baseDamageRollSingle(sp: SimParticipant, baseDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
@@ -197,9 +197,9 @@ object Spell {
         isBinary: Boolean = false,
         bonusCritChance: Double = 0.0, 
         bonusHitChance: Double = 0.0,
-        bonusCritMultiplier: Double = 1.0, 
+        bonusCritMultiplier: Double = 1.0,
         canCrit: Boolean = true,
-        canResist: Boolean = false,
+        canResist: Boolean = true,
     ) : Pair<Double, EventResult> {
         var finalResult = firstAttackRollPair(sp, damageRoll, school, bonusHitChance, canResist)
 

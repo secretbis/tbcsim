@@ -22,10 +22,6 @@ class ShadowWordPain : Ability() {
     override val name: String = Companion.name
 
     val school = Constants.DamageType.SHADOW
-    val baseDamage = 1236.0
-    val baseDotTickCount = 6
-    // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
-    val spellPowerCoeff = 1.1
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -46,10 +42,7 @@ class ShadowWordPain : Ability() {
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
-        // snapshot damage on initial cast
-        val tickCount = baseDotTickCount + iswpTicks
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
+        val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.DAMAGE,
@@ -59,13 +52,13 @@ class ShadowWordPain : Ability() {
         )
         sp.logEvent(event)
 
-        if(result.first == 0.0){
+        if(result.second == EventResult.RESIST){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }
 
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
-        sp.sim.target.addDebuff(ShadowWordPainDot(sp, result.first, tickCount))
+        sp.sim.target.addDebuff(ShadowWordPainDot(sp))
     }
 }

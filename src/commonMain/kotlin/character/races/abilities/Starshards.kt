@@ -20,10 +20,6 @@ class Starshards : Ability() {
     override val name: String = "Starshards"
 
     val school = Constants.DamageType.ARCANE
-    val baseDamage = 785.0
-    val baseDotTickCount = 5
-    // https://wowwiki-archive.fandom.com/wiki/Spell_power_coefficient?oldid=1492745
-    val spellPowerCoeff = 0.835
 
     override fun cooldownMs(sp: SimParticipant): Int = 30000
 
@@ -34,9 +30,7 @@ class Starshards : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        // snapshot damage on initial cast
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, canCrit = false)
+        val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, canCrit = false)
 
         val event = Event(
             eventType = EventType.DAMAGE,
@@ -46,14 +40,14 @@ class Starshards : Ability() {
         )
         sp.logEvent(event)
 
-        if(result.first == 0.0){
+        if(result.second == EventResult.RESIST){
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }
 
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
-        sp.sim.target.addDebuff(StarshardsDot(sp, result.first, baseDotTickCount))
+        sp.sim.target.addDebuff(StarshardsDot(sp))
     }     
 }
 

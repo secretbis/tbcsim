@@ -11,7 +11,7 @@ import sim.EventType
 import sim.SimParticipant
 import character.Proc
 
-class MindFlayDot(owner: SimParticipant, val damageRoll: Double, ticks: Int) : Debuff(owner) {
+class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
     companion object {
         const val name = "Mind Flay (DoT)"
     }
@@ -21,27 +21,35 @@ class MindFlayDot(owner: SimParticipant, val damageRoll: Double, ticks: Int) : D
     override val tickDeltaMs: Int = durationMs / ticks
 
     val school = Constants.DamageType.SHADOW
+    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble() 
+    var baseDotDamage: Double = 176.0
+    // See https://www.warcrafttavern.com/tbc/guides/shadow-priest-damage-coefficients/
+    val baseDotSpellCoeff = 0.57 / 3;
 
-    val mindFlay = object : Ability() {
+    val ability = object : Ability() {
         override val id: Int = 25387
         override val name: String = Companion.name
+
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val spellMultiplier = sp.stats.getSpellDamageTakenMultiplier(school)
+            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
+            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 abilityName = name,
-                amount = damageRoll * spellMultiplier,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
+
             owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
         }
     }
 
     override fun tick(sp: SimParticipant) {
-        mindFlay.cast(sp)
+        ability.cast(sp)
     }
 }
