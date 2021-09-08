@@ -7,6 +7,7 @@ import character.Proc
 import character.Resource
 import character.classes.priest.talents.*
 import data.Constants
+import data.itemsets.AbsolutionRegalia
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -23,9 +24,10 @@ class ShadowWordPainDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int get() {
         val iswp: ImprovedShadowWordPain? = owner.character.klass.talentInstance(ImprovedShadowWordPain.name)
         val iswpTicks = iswp?.currentRank ?: 0
+        val t6TwoSetTick = if(owner.buffs[AbsolutionRegalia.TWO_SET_BUFF_NAME] == null) 0 else 1
 
         // 6 base ticks + 1 tick per talent point
-        return tickDeltaMs * (6 + iswpTicks)
+        return tickDeltaMs * (6 + iswpTicks + t6TwoSetTick)
     }
     
     val school = Constants.DamageType.SHADOW

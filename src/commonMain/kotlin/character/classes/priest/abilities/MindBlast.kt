@@ -7,6 +7,7 @@ import character.Buff
 import character.Proc
 import character.Resource
 import data.Constants
+import data.itemsets.AbsolutionRegalia
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -56,6 +57,7 @@ class MindBlast : Ability() {
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
+        val t6FourSetMulti: Double = if(sp.buffs[AbsolutionRegalia.FOUR_SET_BUFF_NAME] == null) 1.0 else 1.1        
         
         val damageRoll = Spell.baseDamageRoll(
             sp, 
@@ -64,7 +66,14 @@ class MindBlast : Ability() {
             school, 
             spellPowerCoeff,
         )
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, bonusCritChance = spCrit )
+        val result = Spell.attackRoll(
+            sp, 
+            damageRoll, 
+            school, 
+            bonusDamageMultiplier = t6FourSetMulti,
+            bonusHitChance = sfHit, 
+            bonusCritChance = spCrit,
+        )
 
         val event = Event(
             eventType = EventType.DAMAGE,
