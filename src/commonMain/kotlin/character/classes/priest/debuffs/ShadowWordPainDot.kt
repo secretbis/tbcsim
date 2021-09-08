@@ -52,7 +52,7 @@ class ShadowWordPainDot(owner: SimParticipant) : Debuff(owner) {
             )
             owner.logEvent(event)
 
-            owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+            owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC, Proc.Trigger.PRIEST_TICK_SHADOW_WORD_PAIN), listOf(), this, event)
         }
     }
 
