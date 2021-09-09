@@ -23,6 +23,9 @@ const classes = [{
   label: 'Mage (Frost)',
   value: 'mage_frost'
 },{
+  label: 'Priest (Shadow)',
+  value: 'priest_shadow'
+},{
   label: 'Rogue (Assassination)',
   value: 'rogue_assassination'
 },{
