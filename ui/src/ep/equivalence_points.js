@@ -100,6 +100,9 @@ export default function() {
             <SpecEpPanel name='Fire' specKey='mage_fire' category='phase2' />
             <SpecEpPanel name='Frost' specKey='mage_frost' category='phase2' />
           </WrapperEpPanel>
+          <WrapperEpPanel name='Priest'>
+            <SpecEpPanel name='Shadow' specKey='priest_shadow' category='phase2' />
+          </WrapperEpPanel>
           <WrapperEpPanel name='Rogue'>
             <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='phase2' />
             <SpecEpPanel name='Combat' specKey='rogue_combat' category='phase2' />
@@ -129,6 +132,9 @@ export default function() {
             <SpecEpPanel name='Fire' specKey='mage_fire' category='phase1' />
             <SpecEpPanel name='Frost' specKey='mage_frost' category='phase1' />
           </WrapperEpPanel>
+          <WrapperEpPanel name='Priest'>
+            <SpecEpPanel name='Shadow' specKey='priest_shadow' category='phase1' />
+          </WrapperEpPanel>
           <WrapperEpPanel name='Rogue'>
             <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='phase1' />
             <SpecEpPanel name='Combat' specKey='rogue_combat' category='phase1' />
@@ -156,6 +162,9 @@ export default function() {
             <SpecEpPanel name='Arcane' specKey='mage_arcane' category='preraid' />
             <SpecEpPanel name='Fire' specKey='mage_fire' category='preraid' />
             <SpecEpPanel name='Frost' specKey='mage_frost' category='preraid' />
+          </WrapperEpPanel>
+          <WrapperEpPanel name='Priest'>
+            <SpecEpPanel name='Shadow' specKey='priest_shadow' category='preraid' />
           </WrapperEpPanel>
           <WrapperEpPanel name='Rogue'>
             <SpecEpPanel name='Assassination' specKey='rogue_assassination' category='preraid' />

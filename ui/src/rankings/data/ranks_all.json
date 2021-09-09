@@ -50,6 +50,16 @@
             "subjectSd": 50.833175170027005,
             "petSd": 7.903024070651175
         },
+        "priest_shadow": {
+            "subjectMean": 1264.0987147410938,
+            "subjectPetMean": 5.75310172977209,
+            "totalMean": 1269.851816470866,
+            "subjectMedian": 1264.0396076396016,
+            "subjectPetMedian": 7.9817881543892195,
+            "totalMedian": 1272.021395793991,
+            "subjectSd": 22.54629752585746,
+            "petSd": 4.680857626380913
+        },
         "rogue_assassination": {
             "subjectMean": 1419.396335398874,
             "subjectPetMean": 0.0,
@@ -191,6 +201,16 @@
             "totalMedian": 1430.0704808721732,
             "subjectSd": 56.03938638562838,
             "petSd": 8.507219211461361
+        },
+        "priest_shadow": {
+            "subjectMean": 1313.8616400691308,
+            "subjectPetMean": 1.487829189273959,
+            "totalMean": 1315.3494692584047,
+            "subjectMedian": 1313.8036668396603,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 1313.8036668396603,
+            "subjectSd": 20.113312147704328,
+            "petSd": 3.2728782873225897
         },
         "rogue_assassination": {
             "subjectMean": 1550.689220600217,
@@ -334,6 +354,16 @@
             "subjectSd": 59.587838851389165,
             "petSd": 8.462702289311633
         },
+        "priest_shadow": {
+            "subjectMean": 1333.4583438946272,
+            "subjectPetMean": 8.929074168894278,
+            "totalMean": 1342.3874180635214,
+            "subjectMedian": 1333.1754146552962,
+            "subjectPetMedian": 8.89711935099261,
+            "totalMedian": 1342.0725340062888,
+            "subjectSd": 20.117872520879878,
+            "petSd": 1.5261730198328076
+        },
         "rogue_assassination": {
             "subjectMean": 1739.4052745548152,
             "subjectPetMean": 0.0,
@@ -414,16 +444,6 @@
             "subjectSd": 91.1159836976228,
             "petSd": 0.0
         },
-        "warrior_kebab": {
-            "subjectMean": 1627.7322522679215,
-            "subjectPetMean": 0.0,
-            "totalMean": 1627.7322522679215,
-            "subjectMedian": 1627.5564080107802,
-            "subjectPetMedian": 0.0,
-            "totalMedian": 1627.5564080107802,
-            "subjectSd": 84.81511371763462,
-            "petSd": 0.0
-        },
         "warrior_fury": {
             "subjectMean": 2055.2327289726863,
             "subjectPetMean": 0.0,
@@ -432,6 +452,16 @@
             "subjectPetMedian": 0.0,
             "totalMedian": 2055.197198236765,
             "subjectSd": 97.85470532867865,
+            "petSd": 0.0
+        },
+        "warrior_kebab": {
+            "subjectMean": 1627.7322522679215,
+            "subjectPetMean": 0.0,
+            "totalMean": 1627.7322522679215,
+            "subjectMedian": 1627.5564080107802,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 1627.5564080107802,
+            "subjectSd": 84.81511371763462,
             "petSd": 0.0
         }
     }

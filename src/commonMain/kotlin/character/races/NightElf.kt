@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Race
 import character.Stats
+import character.races.abilities.Starshards
 import mechanics.Rating
 import sim.SimParticipant
 
@@ -28,6 +29,12 @@ class NightElf : Race() {
         }
     }
 
-    override fun racialByName(name: String): Ability? = null
+    override fun racialByName(name: String): Ability? {
+        return when(name) {
+            "Starshards" -> Starshards()
+            else -> null
+        }
+    }
+
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(dodge)
 }

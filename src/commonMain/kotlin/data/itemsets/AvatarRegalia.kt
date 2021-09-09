@@ -38,7 +38,7 @@ class AvatarRegalia : ItemSet() {
     }
 
     val twoSetCostReductionBuff = object : Buff() {
-        override val name: String = "$TWO_SET_BUFF_NAME (cost reduction)"
+        override val name: String = "$TWO_SET_BUFF_NAME (Cost Reduction)"
         override val durationMs: Int = -1
 
         val consumeProc = twoSetConsumeProc(this)

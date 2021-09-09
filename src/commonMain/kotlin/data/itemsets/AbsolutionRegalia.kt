@@ -10,13 +10,15 @@ class AbsolutionRegalia : ItemSet() {
     }
     override val id: Int = 674
 
-    // TODO: Shadow Word Pain should check this buff once it exists
+    // https://tbc.wowhead.com/spell=38413/increased-shadow-word-pain-duration
+    // Increases shadow word pain by 3 seconds
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
     }
 
-    // TODO: Mind Blast should check this buff once it exists
+    // https://tbc.wowhead.com/spell=38412/improved-mind-blast
+    // Increases mind blast damage by 10%
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1

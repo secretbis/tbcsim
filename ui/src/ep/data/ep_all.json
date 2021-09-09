@@ -58,6 +58,17 @@
                 "blueSocket": 6.0,
                 "metaSocket": 100.0
             },
+            "priest_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.02,
+                "spellHasteRating": 0.93,
+                "spellCritRating": 0.2,
+                "spellHitRating": 1.44,
+                "redSocket": 12.0,
+                "yellowSocket": 12.0,
+                "blueSocket": 12.0,
+                "metaSocket": 100.0
+            },
             "rogue_assassination": {
                 "attackPower": 1.0,
                 "strength": 1.25,
@@ -232,6 +243,17 @@
                 "redSocket": 12.0,
                 "yellowSocket": 12.45,
                 "blueSocket": 6.0,
+                "metaSocket": 100.0
+            },
+            "priest_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.01,
+                "spellHasteRating": 0.76,
+                "spellCritRating": 0.19,
+                "spellHitRating": 0.92,
+                "redSocket": 12.0,
+                "yellowSocket": 12.0,
+                "blueSocket": 12.0,
                 "metaSocket": 100.0
             },
             "rogue_assassination": {
@@ -410,6 +432,17 @@
                 "blueSocket": 6.0,
                 "metaSocket": 100.0
             },
+            "priest_shadow": {
+                "spellDamage": 1.0,
+                "intellect": 0.09,
+                "spellHasteRating": 0.87,
+                "spellCritRating": 0.21,
+                "spellHitRating": 0.98,
+                "redSocket": 12.0,
+                "yellowSocket": 12.0,
+                "blueSocket": 12.0,
+                "metaSocket": 100.0
+            },
             "rogue_assassination": {
                 "attackPower": 1.0,
                 "strength": 1.01,
@@ -513,20 +546,6 @@
                 "blueSocket": 11.7,
                 "metaSocket": 100.0
             },
-            "warrior_kebab": {
-                "attackPower": 1.0,
-                "strength": 2.08,
-                "agility": 1.73,
-                "meleeCritRating": 2.27,
-                "physicalHitRating": 1.82,
-                "physicalHasteRating": 2.28,
-                "expertiseRating": 0.0,
-                "armorPen": 0.34,
-                "redSocket": 20.8,
-                "yellowSocket": 22.7,
-                "blueSocket": 10.4,
-                "metaSocket": 100.0
-            },
             "warrior_fury": {
                 "attackPower": 1.0,
                 "strength": 2.21,
@@ -539,6 +558,20 @@
                 "redSocket": 22.1,
                 "yellowSocket": 19.3,
                 "blueSocket": 11.05,
+                "metaSocket": 100.0
+            },
+            "warrior_kebab": {
+                "attackPower": 1.0,
+                "strength": 2.08,
+                "agility": 1.73,
+                "meleeCritRating": 2.27,
+                "physicalHitRating": 1.82,
+                "physicalHasteRating": 2.28,
+                "expertiseRating": 0.0,
+                "armorPen": 0.34,
+                "redSocket": 20.8,
+                "yellowSocket": 22.7,
+                "blueSocket": 10.4,
                 "metaSocket": 100.0
             }
         }
@@ -561,6 +594,10 @@
             "benefitsFromRangedWeaponDps": false
         },
         "mage_frost": {
+            "benefitsFromMeleeWeaponDps": false,
+            "benefitsFromRangedWeaponDps": false
+        },
+        "priest_shadow": {
             "benefitsFromMeleeWeaponDps": false,
             "benefitsFromRangedWeaponDps": false
         },
@@ -596,11 +633,11 @@
             "benefitsFromMeleeWeaponDps": true,
             "benefitsFromRangedWeaponDps": false
         },
-        "warrior_kebab": {
+        "warrior_fury": {
             "benefitsFromMeleeWeaponDps": true,
             "benefitsFromRangedWeaponDps": false
         },
-        "warrior_fury": {
+        "warrior_kebab": {
             "benefitsFromMeleeWeaponDps": true,
             "benefitsFromRangedWeaponDps": false
         }

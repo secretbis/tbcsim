@@ -33,7 +33,6 @@ function bannerMsg() {
       <p>At this moment, the following specs are not implemented:</p>
       <ul>
         <li>Ret Paladin</li>
-        <li>Shadow Priest</li>
         <li>Balance/Feral Druid</li>
       </ul>
     </div>

@@ -13,8 +13,8 @@ class Berserking : Ability() {
     override val name: String = "Berserking"
 
     override fun cooldownMs(sp: SimParticipant): Int = 180000
-    // According to the internet, this was moved off of GCD in 3.0.3
-    override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
+    // https://tbc.wowhead.com/spell=20554/berserking
+    override fun gcdMs(sp: SimParticipant): Int = 0
 
     override fun resourceType(sp: SimParticipant): Resource.Type {
         if(sp.resources.containsKey(Resource.Type.MANA)) return Resource.Type.MANA
@@ -39,7 +39,8 @@ class Berserking : Ability() {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                physicalHasteMultiplier = 1.1
+                physicalHasteMultiplier = 1.1,
+                spellHasteMultiplier = 1.1,
             )
         }
     }

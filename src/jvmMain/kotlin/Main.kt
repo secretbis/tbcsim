@@ -5,6 +5,7 @@ import character.classes.hunter.specs.Survival
 import character.classes.mage.specs.Arcane
 import character.classes.mage.specs.Fire
 import character.classes.mage.specs.Frost
+import character.classes.priest.specs.Shadow
 import character.classes.rogue.specs.Assassination
 import character.classes.rogue.specs.Combat
 import character.classes.shaman.specs.Elemental
@@ -72,6 +73,7 @@ class TBCSim : CliktCommand() {
         "mage_arcane" to Arcane(),
         "mage_fire" to Fire(),
         "mage_frost" to Frost(),
+        "priest_shadow" to Shadow(),
         "rogue_assassination" to Assassination(),
         "rogue_combat" to Combat(),
         "shaman_ele" to Elemental(),
@@ -95,6 +97,7 @@ class TBCSim : CliktCommand() {
             "mage_arcane" to File(presetPath + "mage_arcane_preraid.yml"),
             "mage_fire" to File(presetPath + "mage_fire_preraid.yml"),
             "mage_frost" to File(presetPath + "mage_frost_preraid.yml"),
+            "priest_shadow" to File(presetPath + "priest_shadow_preraid.yml"),
             "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
@@ -112,6 +115,7 @@ class TBCSim : CliktCommand() {
             "mage_arcane" to File(presetPath + "mage_arcane_phase1.yml"),
             "mage_fire" to File(presetPath + "mage_fire_phase1.yml"),
             "mage_frost" to File(presetPath + "mage_frost_phase1.yml"),
+            "priest_shadow" to File(presetPath + "priest_shadow_phase1.yml"),
             "rogue_assassination" to File(presetPath + "rogue_assassination_phase1.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_phase1.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_phase1.yml"),
@@ -129,6 +133,7 @@ class TBCSim : CliktCommand() {
             "mage_arcane" to File(presetPath + "mage_arcane_phase2.yml"),
             "mage_fire" to File(presetPath + "mage_fire_phase2.yml"),
             "mage_frost" to File(presetPath + "mage_frost_phase2.yml"),
+            "priest_shadow" to File(presetPath + "priest_shadow_phase2.yml"),
             "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),

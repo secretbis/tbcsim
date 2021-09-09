@@ -9,6 +9,9 @@ import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
+import character.classes.priest.pet.Shadowfiend as ShadowfiendPet
+import character.classes.priest.pet.abilities.ShadowfiendMelee
+import data.Constants
 import data.model.Item
 import mechanics.Rating
 import mu.KotlinLogging
@@ -72,6 +75,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 rangedAutoAttack = AutoShot()
             } else if(character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
+            } else if(character.klass is ShadowfiendPet){
+                mhAutoAttack = ShadowfiendMelee()
             } else if(character.klass is Rogue) {
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHandRogue()
@@ -192,6 +197,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         target = sim.target
                     )
                     logEvent(castEvent)
+
+                    fireProc(listOf(Proc.Trigger.SPELL_START_CAST), null, castingRule!!.ability, castEvent)
                 }
             }
         }
@@ -698,6 +705,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun spellDamage(): Int {
         return stats.spellDamage
+    }
+
+    fun spellDamageWithSchool(school: Constants.DamageType): Int { 
+        return stats.getSpellDamage(school)
+    }
+
+    fun getSpellDamageMultiplier(school: Constants.DamageType): Double {
+        return stats.getSpellDamageMultiplier(school)
     }
 
     fun physicalHitPct(): Double {

@@ -8,6 +8,8 @@ import mechanics.Melee
 import sim.*
 
 abstract class AutoAttackBase : Ability() {
+    open val damageType = Constants.DamageType.PHYSICAL
+
     abstract fun item(sp: SimParticipant): Item
 
     override fun gcdMs(sp: SimParticipant): Int = 0
@@ -40,7 +42,7 @@ abstract class AutoAttackBase : Ability() {
 
         val event = Event(
             eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
+            damageType = damageType,
             isWhiteDamage = true,
             abilityName = name,
             amount = result.first,

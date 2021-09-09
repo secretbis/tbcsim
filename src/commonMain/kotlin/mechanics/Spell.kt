@@ -46,6 +46,84 @@ object Spell {
         }
     }
 
+    /**
+     * First roll for damage and miss roll calculation
+     * 
+     * @param spellDamageRoll Roll based on spell needs. 
+     * Use result from `baseDamageRoll` for spells with base damage range pairs (e.g. 500 to 575)
+     * Use result from `baseDamageRollFromSnapShot` for spells which store spell damage for later (e.g. Spell Dots)
+     * Use result from `baseDamageRollSingle` for spells which do not have a range of damage
+     * @param school Spell school for retrieving additional damage based on school and multipliers
+     * @param bonusHitChance Provide more hit chance to landing spell outside the casters spell hit
+     * @param canResist Can this attack be resisted
+     * 
+     * @return Pair<Double, EventResult> where first is the damage to be done and second is event of HIT (success) or RESIST (failure)
+     */
+    private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusDamageMultiplier: Double = 1.0, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
+        // Additional damage multipliers
+        val flatModifier = sp.stats.spellDamageFlatModifier
+        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
+
+        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
+
+        // Get the hit/miss result
+        if (canResist){
+            val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
+            val attackRoll = Random.nextDouble()
+
+            return when {
+                attackRoll < missChance -> Pair(0.0, EventResult.RESIST)
+                else -> Pair(finalDamageRoll, EventResult.HIT)
+            }
+        }
+
+        return Pair(finalDamageRoll, EventResult.HIT);
+    }
+
+    /**
+     * Second roll for spell crit based calculation
+     * 
+     * @param result Result Pair from first roll
+     * @param bonusCritChance Additional chance to crit
+     * @param bonusCritMultiplier Additional damage if a crit does occur
+     * 
+     * @return Pair<Double, EventResult> where first is the damage to be done and second is event of CRIT if successful
+     */
+    private fun secondCritRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, bonusCritChance: Double = 0.0, bonusCritMultiplier: Double = 1.0): Pair<Double, EventResult> {
+        // Find all our possible damage mods from buffs and so on
+        val critChance = spellCritChance(sp) + bonusCritChance
+        val critMultiplier = (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) * bonusCritMultiplier + 1
+        val hitRoll2 = Random.nextDouble()
+
+        if (hitRoll2 < critChance){
+            return Pair(result.first * critMultiplier, EventResult.CRIT)
+        }
+        
+        return result;
+    }
+
+    /**
+     * Third and final roll (For spells which can resist) for spell resist based calculation
+     * 
+     * @param result Result Pair from first or second roll
+     * @param school Spell school for retrieving resistence 
+     * @param isBinary Additional damage if a crit does occur
+     * 
+     * @return Pair<Double, EventResult> where first is the damage after resistance calculations and event result remains the same
+     */
+    private fun thirdResistRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, school: Constants.DamageType, isBinary: Boolean): Pair<Double, EventResult> {
+        val resistAvgReduction = spellResistReduction(sp, school)
+
+        if(isBinary) {
+            // Make a third roll for full resist or not
+            val fullResistRoll = Random.nextDouble()
+            val fullResistMod = if(fullResistRoll < resistAvgReduction) { 0.0 } else { 1.0 }
+            return Pair(result.first * fullResistMod, result.second)
+        } else {
+            return Pair(result.first * (1 - resistAvgReduction), result.second)
+        }
+    }
+
     // AP and spell damage coefficients
     // TODO: Verify that these formulas reflect TBC mechanics
     // https://wowwiki.fandom.com/wiki/Spell_power
@@ -88,19 +166,19 @@ object Spell {
         return (0.75 * totalResistance / (5 * sp.character.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
     }
 
-    fun spellSchoolDamageMultiplier(sp: SimParticipant, school: Constants.DamageType): Double {
-        return when(school) {
-            Constants.DamageType.ARCANE -> sp.stats.arcaneDamageMultiplier
-            Constants.DamageType.FIRE -> sp.stats.fireDamageMultiplier
-            Constants.DamageType.FROST -> sp.stats.frostDamageMultiplier
-            Constants.DamageType.NATURE -> sp.stats.natureDamageMultiplier
-            Constants.DamageType.SHADOW -> sp.stats.shadowDamageMultiplier
-            else -> 1.0
-        }
-    }
-
     fun spellCritChance(sp: SimParticipant): Double {
         return (sp.spellCritPct() / 100.0).coerceAtLeast(0.0)
+    }
+
+    fun baseDamageRollFromSnapShot(baseDmg: Double, spellDamage: Double, spellDamageCoeff: Double = 1.0): Double {
+        return baseDmg + (spellDamage * spellDamageCoeff)
+    }
+
+    fun baseDamageRollSingle(sp: SimParticipant, baseDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
+        // Add school damage
+        val spellDamage = sp.spellDamageWithSchool(school)
+        val totalSpellDamage = (spellDamage + bonusSpellDamage) * bonusSpellDamageMultiplier
+        return baseDamageRollFromSnapShot(baseDmg, totalSpellDamage, spellDamageCoeff)
     }
 
     fun baseDamageRoll(sp: SimParticipant, minDmg: Double, maxDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
@@ -110,67 +188,27 @@ object Spell {
         return baseDamageRollSingle(sp, dmg, school, spellDamageCoeff, bonusSpellDamage, bonusSpellDamageMultiplier)
     }
 
-    fun baseDamageRollSingle(sp: SimParticipant, dmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
-        // Add school damage
-        val schoolDamage = when(school) {
-            Constants.DamageType.HOLY -> sp.stats.holyDamage
-            Constants.DamageType.FIRE -> sp.stats.fireDamage
-            Constants.DamageType.NATURE -> sp.stats.natureDamage
-            Constants.DamageType.FROST -> sp.stats.frostDamage
-            Constants.DamageType.SHADOW -> sp.stats.shadowDamage
-            Constants.DamageType.ARCANE -> sp.stats.arcaneDamage
-            else -> 0
-        }
-
-        val totalSpellDamage = (sp.spellDamage() + bonusSpellDamage + schoolDamage) * bonusSpellDamageMultiplier
-        return dmg + (totalSpellDamage * spellDamageCoeff)
-    }
-
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, damageRoll: Double, school: Constants.DamageType, isBinary: Boolean = false, bonusCritChance: Double = 0.0, bonusHitChance: Double = 0.0, bonusCritMultiplier: Double = 1.0) : Pair<Double, EventResult> {
-        // Find all our possible damage mods from buffs and so on
-        val critMultiplier = (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) * bonusCritMultiplier + 1
+    fun attackRoll(
+        sp: SimParticipant, 
+        damageRoll: Double, 
+        school: Constants.DamageType,
+        isBinary: Boolean = false,
+        bonusCritChance: Double = 0.0, 
+        bonusHitChance: Double = 0.0,
+        bonusCritMultiplier: Double = 1.0,
+        bonusDamageMultiplier: Double = 1.0,
+        canCrit: Boolean = true,
+        canResist: Boolean = true,
+    ) : Pair<Double, EventResult> {
+        var finalResult = firstAttackRollPair(sp, damageRoll, school, bonusDamageMultiplier, bonusHitChance, canResist)
 
-        // School damage multiplier
-        val schoolDamageMultiplier = spellSchoolDamageMultiplier(sp, school)
-
-        // Additional damage multipliers
-        val flatModifier = sp.stats.spellDamageFlatModifier
-        val allMultiplier = sp.stats.spellDamageMultiplier
-
-        val finalDamageRoll = (damageRoll + flatModifier) * allMultiplier * schoolDamageMultiplier
-
-        // Get the attack result
-        val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
-        val critChance = spellCritChance(sp) + bonusCritChance
-
-        val attackRoll = Random.nextDouble()
-        var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, EventResult.RESIST)
-            else -> Pair(finalDamageRoll, EventResult.HIT)
+        if(canCrit && finalResult.second == EventResult.HIT) {
+            finalResult = secondCritRollPair(sp, finalResult, bonusCritChance, bonusCritMultiplier)
         }
 
-        // Two-roll all spells
-        if(finalResult.second == EventResult.HIT) {
-            val hitRoll2 = Random.nextDouble()
-            finalResult = when {
-                hitRoll2 < critChance -> Pair(
-                    finalResult.first * critMultiplier,
-                    EventResult.CRIT
-                )
-                else -> finalResult
-            }
-        }
-
-        // Apply resistance mitigation
-        val resistAvgReduction = spellResistReduction(sp, school)
-        if(isBinary) {
-            // Make a third roll for full resist or not
-            val fullResistRoll = Random.nextDouble()
-            val fullResistMod = if(fullResistRoll < resistAvgReduction) { 0.0 } else { 1.0 }
-            finalResult = Pair(finalResult.first * fullResistMod, finalResult.second)
-        } else {
-            finalResult = Pair(finalResult.first * (1 - resistAvgReduction), finalResult.second)
+        if(!canResist){
+            finalResult = thirdResistRollPair(sp,finalResult, school, isBinary)
         }
 
         return finalResult

@@ -5,6 +5,7 @@ import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.Ravager
 import character.classes.hunter.pet.WindSerpent
 import character.classes.mage.pet.WaterElemental
+import character.classes.priest.pet.Shadowfiend
 import mu.KotlinLogging
 import character.races.Pet as PetRace
 
@@ -16,6 +17,7 @@ class Pet(klass: Class, val startsActive: Boolean = true) : Character(klass, Pet
             return when(name) {
                 "Cat" -> Cat()
                 "Ravager" -> Ravager()
+                "Shadowfiend" -> Shadowfiend()
                 "Water Elemental" -> WaterElemental()
                 "Wind Serpent" -> WindSerpent()
                 else -> {
