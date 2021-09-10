@@ -25,7 +25,8 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
         FIGHT_TIME_REMAINING_LTE,
         IS_EXECUTE_PHASE,
         PET_ACTIVE,
-        BUFF_STACKS_LTE
+        BUFF_STACKS_LTE,
+        BUFF_STACKS_GTE,
     }
 
     companion object {
@@ -54,6 +55,7 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
                 Type.IS_EXECUTE_PHASE -> IsExecutePhase(data)
                 Type.PET_ACTIVE -> PetActive(data)
                 Type.BUFF_STACKS_LTE -> BuffStacksLte(data)
+                Type.BUFF_STACKS_GTE -> BuffStacksGte(data)
                 else -> {
                     logger.warn { "Unknown rotation criterion: $typeName" }
                     null
