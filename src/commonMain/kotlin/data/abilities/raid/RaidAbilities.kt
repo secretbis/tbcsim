@@ -10,6 +10,7 @@ object RaidAbilities {
     val raidBuffs: Array<Ability> = arrayOf(
         BlessingOfKings(),
         Bloodlust(),
+        DivineSpirit(),
         DrumsOfBattle(),
         FerociousInspiration(1),
         FerociousInspiration(2),
@@ -19,6 +20,7 @@ object RaidAbilities {
         ImprovedBattleShout(),
         ImprovedBlessingOfMight(),
         ImprovedBlessingOfWisdom(),
+        ImprovedDivineSpirit(),
         ImprovedMarkOfTheWild(),
         ImprovedSanctityAura(),
         ImprovedSealOfTheCrusader(),
