@@ -1,7 +1,7 @@
 package data.abilities.raid
 
 import character.*
-import character.classes.warlock.talents.Malediction
+import character.classes.warlock.talents.Malediction as MaledictionTalent
 import sim.SimParticipant
 
 class CurseOfTheElements : Ability() {
@@ -20,8 +20,9 @@ class CurseOfTheElements : Ability() {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val malediction = sp.character.klass.talents[Malediction.name] as Malediction?
-            val additionalDmgPct = (malediction?.currentRank ?: 0) * 0.01
+            val maledictionTalent = sp.character.klass.talents[MaledictionTalent.name] as MaledictionTalent?
+            val talentDmgPct = (maledictionTalent?.currentRank ?: 0) * 0.01
+            val additionalDmgPct = if(sp.buffs[Malediction.name] != null) 0.03 else talentDmgPct
 
             return Stats(
                 arcaneDamageMultiplier = 1.1 + additionalDmgPct,
