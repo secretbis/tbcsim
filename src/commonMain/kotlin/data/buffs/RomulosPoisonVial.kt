@@ -56,8 +56,7 @@ class RomulosPoisonVial : Buff() {
             Trigger.RANGED_BLOCK,
         )
         override val type: Type = Type.PPM
-        override val ppm: Double = 2.0
-        //TODO: test proc rate on live, value based on wowhead comments with a sample size of 1k
+        override val ppm: Double = 1.0
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             natureAbility.cast(sp)
