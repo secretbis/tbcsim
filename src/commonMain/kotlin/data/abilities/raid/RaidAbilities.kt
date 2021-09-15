@@ -48,6 +48,7 @@ object RaidAbilities {
         ImprovedFaerieFire(),
         ImprovedScorch(),
         JudgementOfWisdom(),
+        Malediction(),
         Misery(),
         ShadowWeaving(),
         Stormstrike(),
