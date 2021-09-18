@@ -17,14 +17,13 @@ class Bloodlust : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
-        override val durationMs: Int = 20000
-        override val hidden: Boolean = true
+        override val durationMs: Int = 40000
+        override val hidden: Boolean = false
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val rating = 35.0 * Rating.hastePerPct
             return Stats(
-                physicalHasteRating = rating,
-                spellHasteRating = rating
+                physicalHasteMultiplier = 1.3,
+                spellHasteMultiplier = 1.3,
             )
         }
     }
