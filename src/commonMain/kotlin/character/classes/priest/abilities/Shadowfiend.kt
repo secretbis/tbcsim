@@ -26,7 +26,7 @@ class Shadowfiend() : Ability() {
         
 
         override fun reset(sp: SimParticipant) {
-            sp.pet?.deactivate(true)
+            sp.pet?.deactivate()
             super.reset(sp)
         }
     }
@@ -47,6 +47,8 @@ class Shadowfiend() : Ability() {
 
     override fun cast(sp: SimParticipant) {    
         sp.pet?.activate()
+        // Recompute caster applied stats on activation
+        sp.pet?.recomputeStats()
 
         sp.addBuff(fiendUpBuff(sp))    
     }
