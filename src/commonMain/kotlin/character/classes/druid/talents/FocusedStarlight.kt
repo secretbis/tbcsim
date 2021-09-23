@@ -13,11 +13,11 @@ class FocusedStarlight(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    fun increasedWrathCritChance() : Double {
-        return currentRank * 2.0
+    fun increasedWrathCritChancePercent() : Double {
+        return currentRank * .02
     }
 
-    fun increasedStarfireCritChance() : Double {
-        return increasedWrathCritChance()
+    fun increasedStarfireCritChancePercent() : Double {
+        return increasedWrathCritChancePercent()
     }
 }

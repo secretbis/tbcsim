@@ -14,6 +14,6 @@ class Vengeance(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 5
 
     fun increasedCritBonusDamagePercent() : Double {
-        return 20.0 * currentRank
+        return 0.2 * currentRank
     }
 }
