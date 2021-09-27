@@ -32,6 +32,21 @@ object Items {
         { TheHungeringCold() },
         { TheRestrainedEssenceOfSapphiron() },
 
+        // Manually added enchanted gear
+        { AmethystBeholderEyeOfShadowWrath() },
+        { ChimaerahideLeggingsOfShadowWrath() },
+        { ElementalistBraceletsOfShadowWrath() },
+        { ElementalistGlovesOfShadowWrath() },
+        { ElementalistLeggingsOfShadowWrath() },
+        { ElementalistSkullcapOfShadowWrath() },
+        { FlawlessWandOfShadowWrath() },
+        { GlidersFootWrapsOfShadowWrath() },
+        { IllidariBindingsOfShadowWrath() },
+        { IllidariCloakOfShadowWrath() },
+        { LurkersCordOfShadowWrath() },
+        { NethersteelLinedHandwrapsOfShadowWrath() },
+        { RavagersCuffsOfShadowWrath() },
+
         // Honor gems
         { BoldOrnateRuby() },
         { GleamingOrnateDawnstone() },
