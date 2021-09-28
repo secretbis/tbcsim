@@ -133,6 +133,7 @@ object Buffs {
             43716 -> BerserkersCall()
             45354 -> ShardOfContempt()
             45355 -> BlackenedNaaruSliver()
+            51953 -> DarkIronSmokingPipe()
 
             //Weapons
             16916 -> KhoriumChampion(item)
