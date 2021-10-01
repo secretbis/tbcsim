@@ -207,7 +207,7 @@ object Spell {
             finalResult = secondCritRollPair(sp, finalResult, bonusCritChance, bonusCritMultiplier)
         }
 
-        if(!canResist){
+        if(canResist){
             finalResult = thirdResistRollPair(sp,finalResult, school, isBinary)
         }
 
