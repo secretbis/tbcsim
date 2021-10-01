@@ -10,7 +10,7 @@ import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
-class BracingEarthstormDiamond : Gem(32867, "Bracing Earthstorm Diamond", "inv_misc_gem_diamond_06.jpg", null, Color.META, Quality.META) {
+class BracingEarthstormDiamond : Gem(25897, "Bracing Earthstorm Diamond", "inv_misc_gem_diamond_06.jpg", null, Color.META, Quality.META) {
     val buff = object : Buff() {
         override val name: String = "Bracing Earthstorm Diamond"
         override val durationMs: Int = -1
