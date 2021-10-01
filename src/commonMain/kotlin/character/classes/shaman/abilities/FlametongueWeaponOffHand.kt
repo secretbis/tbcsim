@@ -3,6 +3,7 @@ package character.classes.shaman.abilities
 import character.Ability
 import character.Buff
 import character.classes.shaman.buffs.FlametongueWeapon
+import data.itemscustom.EmptyItem
 import sim.SimParticipant
 
 class FlametongueWeaponOffHand : Ability() {
@@ -15,15 +16,17 @@ class FlametongueWeaponOffHand : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
-        return sp.hasOffHandWeapon()
+        return true
     }
 
     var buff: Buff? = null
 
     override fun cast(sp: SimParticipant) {
-        if(buff == null) {
-            buff = FlametongueWeapon(sp.character.gear.offHand)
+        if(sp.character.gear.offHand !is EmptyItem) {
+            if (buff == null) {
+                buff = FlametongueWeapon(sp.character.gear.offHand)
+            }
+            sp.addBuff(buff!!)
         }
-        sp.addBuff(buff!!)
     }
 }

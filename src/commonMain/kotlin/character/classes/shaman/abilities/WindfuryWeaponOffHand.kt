@@ -3,6 +3,8 @@ package character.classes.shaman.abilities
 import character.Ability
 import character.Buff
 import character.classes.shaman.buffs.WindfuryWeapon
+import data.itemscustom.EmptyItem
+import data.model.Item
 import sim.SimParticipant
 
 class WindfuryWeaponOffHand : Ability() {
@@ -15,15 +17,17 @@ class WindfuryWeaponOffHand : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
-        return sp.hasOffHandWeapon()
+        return true
     }
 
     var buff: Buff? = null
 
     override fun cast(sp: SimParticipant) {
-        if(buff == null) {
-            buff = WindfuryWeapon(sp.character.gear.offHand)
+        if(sp.character.gear.offHand !is EmptyItem) {
+            if (buff == null) {
+                buff = WindfuryWeapon(sp.character.gear.offHand)
+            }
+            sp.addBuff(buff!!)
         }
-        sp.addBuff(buff!!)
     }
 }
