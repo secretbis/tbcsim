@@ -133,6 +133,8 @@ object Buffs {
             43716 -> BerserkersCall()
             45354 -> ShardOfContempt()
             45355 -> BlackenedNaaruSliver()
+            51953 -> DarkIronPipeweed()
+            51955 -> DireDrunkard()
 
             //Weapons
             16916 -> KhoriumChampion(item)
@@ -144,6 +146,7 @@ object Buffs {
             34696 -> GlaiveOfThePit(item)
             35131 -> TheBladefist(item)
             36070 -> RodOfTheSunKing(item)
+            36479 -> Devastation(item)
             38282 -> SingingCrystalAxe(item)
             38284 -> TheHammerOfDestiny(item)
             38307 -> TheNightBlade(item)
