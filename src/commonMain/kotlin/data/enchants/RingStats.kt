@@ -12,14 +12,18 @@ class RingStats(item: Item) : Enchant(item) {
     override val id: Int = 46519
     override val inventorySlot: Int = Constants.InventorySlot.FINGER.ordinal
     override val name: String = "Stats (Ring)"
+    override val maxStacks = 2
 
     override fun modifyStats(sp: SimParticipant): Stats {
+        val state = state(sp)
+        val stat = 4 * state.currentStacks
+
         return Stats(
-            agility = 4,
-            strength = 4,
-            stamina = 4,
-            spirit = 4,
-            intellect = 4
+            agility = stat,
+            strength = stat,
+            stamina = stat,
+            spirit = stat,
+            intellect = stat
         )
     }
 }

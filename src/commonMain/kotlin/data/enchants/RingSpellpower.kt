@@ -12,8 +12,10 @@ class RingSpellpower(item: Item) : Enchant(item) {
     override val id: Int = 46518
     override val inventorySlot: Int = Constants.InventorySlot.FINGER.ordinal
     override val name: String = "Spellpower (Ring)"
+    override val maxStacks = 2
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(spellDamage = 12)
+        val state = state(sp)
+        return Stats(spellDamage = 12 * state.currentStacks)
     }
 }

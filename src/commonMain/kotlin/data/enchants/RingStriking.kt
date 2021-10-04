@@ -12,11 +12,15 @@ class RingStriking(item: Item) : Enchant(item) {
     override val id: Int = 46520
     override val inventorySlot: Int = Constants.InventorySlot.FINGER.ordinal
     override val name: String = "Striking"
+    override val maxStacks = 2
 
     override fun modifyStats(sp: SimParticipant): Stats {
+        val state = state(sp)
+        var mod = 2.0 * state.currentStacks;
+
         return Stats(
-            whiteDamageFlatModifier = 2.0,
-            yellowDamageFlatModifier = 2.0
+            whiteDamageFlatModifier = mod,
+            yellowDamageFlatModifier = mod
         )
     }
 }
