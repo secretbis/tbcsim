@@ -152,6 +152,7 @@ class TBCSim : CliktCommand() {
         // Most presets are hit capped, so apply a universal -2% hit buff so the hit has something to sim against
         val hitReduction = Stats(
             physicalHitRating = -2.0 * Rating.physicalHitPerPct,
+            expertiseRating = -2.0 * Rating.expertisePerPct,
             spellHitRating = -5.0 * Rating.spellHitPerPct,
         )
 
