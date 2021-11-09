@@ -129,7 +129,7 @@ object Buffs {
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
             40438 -> AshtongueTalismanOfAcumen()
-//            40442 -> AshtongueTalismanOfEquilibrium() // TODO: Druid things
+            40442 -> AshtongueTalismanOfEquilibrium()
             40482 -> AshtongueTalismanOfInsight()
             40460 -> AshtongueTalismanOfLethality()
             40478 -> AshtongueTalismanOfShadows()
@@ -160,6 +160,7 @@ object Buffs {
             38284 -> TheHammerOfDestiny(item)
             38307 -> TheNightBlade(item)
             38308 -> Blinkstrike(item)
+            40291 -> SyphonOfTheNathrezim(item)
 
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)

@@ -71,6 +71,9 @@ abstract class Proc {
         SERVER_SLOW_TICK,  // 3s
 
         // Specifics
+        DRUID_CAST_MANGLE,
+        DRUID_CAST_STARFIRE,
+
         HUNTER_CAST_KILL_COMMAND,
         HUNTER_CAST_STEADY_SHOT,
 
