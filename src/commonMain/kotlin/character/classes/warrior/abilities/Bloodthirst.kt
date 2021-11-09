@@ -74,7 +74,7 @@ class Bloodthirst : Ability() {
         }
 
         if(triggerTypes != null) {
-            sp.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(listOf(Proc.Trigger.WARRIOR_CAST_BLOODTHIRST) + triggerTypes, listOf(item), this, event)
         }
     }
 }

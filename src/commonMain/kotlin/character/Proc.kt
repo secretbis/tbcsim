@@ -72,9 +72,12 @@ abstract class Proc {
 
         // Specifics
         HUNTER_CAST_KILL_COMMAND,
+        HUNTER_CAST_STEADY_SHOT,
 
         MAGE_ANY_SCORCH,
         MAGE_MANA_GEM,
+
+        PALADIN_CAST_JUDGEMENT,
 
         PRIEST_TICK_SHADOW_WORD_PAIN,
 
@@ -99,7 +102,10 @@ abstract class Proc {
         WARLOCK_HIT_SHADOW_BOLT,
         WARLOCK_TICK_CORRUPTION,
 
-        WARRIOR_CAST_OVERPOWER
+        WARRIOR_CAST_BLOODTHIRST,
+        WARRIOR_CAST_OVERPOWER,
+        WARRIOR_CAST_MORTAL_STRIKE,
+        WARRIOR_CAST_SHIELD_SLAM,
     }
 
     enum class Type {

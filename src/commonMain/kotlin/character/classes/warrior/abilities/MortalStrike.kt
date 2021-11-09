@@ -70,7 +70,7 @@ class MortalStrike : Ability() {
         }
 
         if(triggerTypes != null) {
-            sp.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(listOf(Proc.Trigger.WARRIOR_CAST_MORTAL_STRIKE) + triggerTypes, listOf(item), this, event)
         }
     }
 }
