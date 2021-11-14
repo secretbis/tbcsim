@@ -123,6 +123,7 @@ object Buffs {
             35166 -> BloodlustBrooch()
             35337 -> ScryersBloodgemXirisGift(item.name)
             37173 -> WarpSpringCoil()
+            37507 -> TalonOfAlar()
             37657 -> TheLightningCapacitor()
             37447 -> SerpentCoilBraid()
             38347 -> SextantOfUnstableCurrents()

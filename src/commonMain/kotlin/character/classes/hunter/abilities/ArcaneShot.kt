@@ -66,7 +66,7 @@ class ArcaneShot : Ability() {
         }
 
         if(triggerTypes != null) {
-            sp.fireProc(triggerTypes, listOf(item), this, event)
+            sp.fireProc(listOf(Proc.Trigger.HUNTER_CAST_ARCANE_SHOT) + triggerTypes, listOf(item), this, event)
         }
     }
 }

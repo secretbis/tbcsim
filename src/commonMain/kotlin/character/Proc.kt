@@ -74,6 +74,7 @@ abstract class Proc {
         DRUID_CAST_MANGLE,
         DRUID_CAST_STARFIRE,
 
+        HUNTER_CAST_ARCANE_SHOT,
         HUNTER_CAST_KILL_COMMAND,
         HUNTER_CAST_STEADY_SHOT,
 
