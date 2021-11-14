@@ -149,7 +149,8 @@ export const initialState = {
     targetLevel: simDefaults.targetLevel,
     targetArmor: simDefaults.targetArmor,
     allowParryAndBlock: simDefaults.allowParryAndBlock,
-    showHiddenBuffs: simDefaults.showHiddenBuffs
+    showHiddenBuffs: simDefaults.showHiddenBuffs,
+    targetType: simDefaults.targetType
   },
 
   character: {
@@ -186,6 +187,7 @@ initialState.serialize = function() {
       spec: this.character.spec,
       race: this.character.race,
       level: this.character.level,
+      targetType: this.character.targetType,
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
         gems: it.sockets ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it) : [],
@@ -247,6 +249,7 @@ initialState.makeSimOptions = function() {
     this.simOptions.targetLevel,
     this.simOptions.targetArmor,
     this.simOptions.allowParryAndBlock,
-    this.simOptions.showHiddenBuffs
+    this.simOptions.showHiddenBuffs,
+    this.simOptions.targetType
   )
 }

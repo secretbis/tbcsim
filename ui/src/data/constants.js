@@ -526,3 +526,26 @@ export const allEpCategories = [{
   name: 'Phase 2',
   key: 'phase2'
 }]
+
+export const targetTypes = [{
+  name: 'Beast',
+  key: 1
+},{
+  name: 'Demon',
+  key: 3
+},{
+  name: 'Dragonkin',
+  key: 4
+},{
+  name: 'Elemental',
+  key: 5
+},{
+  name: 'Giant',
+  key: 6
+},{
+  name: 'Humanoid',
+  key: 7
+},{
+  name: 'Undead',
+  key: 9
+}]

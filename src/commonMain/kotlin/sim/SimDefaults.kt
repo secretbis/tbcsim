@@ -17,4 +17,6 @@ object SimDefaults {
     const val targetArmor: Int = 7700
     const val allowParryAndBlock: Boolean = false
     const val showHiddenBuffs: Boolean = false
+    // Demon
+    const val targetType = 3
 }

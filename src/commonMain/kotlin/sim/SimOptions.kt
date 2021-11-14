@@ -11,6 +11,7 @@ data class SimOptions(
     var iterations: Int = SimDefaults.iterations,
     var targetLevel: Int = SimDefaults.targetLevel,
     var targetArmor: Int = SimDefaults.targetArmor,
+    var targetType: Int = SimDefaults.targetType,
     var allowParryAndBlock: Boolean = SimDefaults.allowParryAndBlock,
     var showHiddenBuffs: Boolean = SimDefaults.showHiddenBuffs,
     var randomSeed: Long? = null

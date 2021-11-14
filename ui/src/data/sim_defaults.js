@@ -10,7 +10,8 @@ const simDefaults = {
   targetLevel: tbcsim.sim.SimDefaults.targetLevel,
   targetArmor: tbcsim.sim.SimDefaults.targetArmor,
   // allowParryAndBlock: tbcsim.sim.SimDefaults.allowParryAndBlock,
-  showHiddenBuffs: tbcsim.sim.SimDefaults.showHiddenBuffs
+  showHiddenBuffs: tbcsim.sim.SimDefaults.showHiddenBuffs,
+  targetType: tbcsim.sim.SimDefaults.targetType || 3
 };
 
 export default simDefaults;

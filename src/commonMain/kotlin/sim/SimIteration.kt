@@ -151,7 +151,8 @@ class SimIteration(
                 armor = opts.targetArmor
             )),
             BossRace(),
-            opts.targetLevel
+            opts.targetLevel,
+            subTypes = setOf(CharacterType.values()[opts.targetType])
         )
 
         return SimParticipant(char, Rotation(listOf(), false), this).init()

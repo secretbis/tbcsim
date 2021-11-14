@@ -3,7 +3,7 @@ import { Col, Dropdown, Row, Button, Uploader, Notification } from 'rsuite';
 import _ from 'lodash';
 import filesaver from 'file-saver';
 
-import { classes, allEpCategories } from '../data/constants';
+import { classes, allEpCategories, targetTypes } from '../data/constants';
 import * as impex from './importexport';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
@@ -242,7 +242,27 @@ function EpSelect({ epCategoryKey, dispatch }) {
   );
 }
 
-export default ({ character, phase, dispatch }) => {
+function TargetTypeSelect({ targetTypeOrdinal, dispatch }) {
+  if(targetTypeOrdinal == null) return null;
+
+  function onSelect(ordinal) {
+    dispatch({ type: 'simOptions.targetType', value: ordinal })
+  }
+
+  const targetTypeName = (targetTypes.find(it => it.key === targetTypeOrdinal) || {}).name;
+  return (
+    <>
+      <Dropdown title="Target Type">
+        {targetTypes.map(type => {
+          return <Dropdown.Item key={type.key} eventKey={type.key} onSelect={onSelect}>{type.name}</Dropdown.Item>
+        })}
+      </Dropdown>
+      <span>{targetTypeName}</span>
+    </>
+  );
+}
+
+export default ({ character, phase, simOptions, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function Import({ dispatch }) {
@@ -468,6 +488,9 @@ export default ({ character, phase, dispatch }) => {
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <EpSelect epCategoryKey={character && character.epCategory} dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <TargetTypeSelect targetTypeOrdinal={simOptions && simOptions.targetType} dispatch={dispatch} />
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <Import dispatch={dispatch} />

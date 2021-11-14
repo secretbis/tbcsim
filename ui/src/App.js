@@ -124,7 +124,7 @@ function App() {
       <Content style={{ padding: '20px' }}>
         <Grid fluid={true}>
           <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
-          <Presets character={state.character} phase={state.phase} dispatch={dispatch} />
+          <Presets character={state.character} phase={state.phase} simOptions={state.simOptions} dispatch={dispatch} />
           <Row>
             <Col xs={14} style={{ maxWidth: '750px' }}>
               <Panel header="Gear" bordered>
