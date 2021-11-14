@@ -495,7 +495,8 @@ export const classes = {
       'Gnome',
       'Human',
       'Orc',
-      'Troll'
+      'Troll',
+      'Undead'
     ]
   },
   warrior: {
