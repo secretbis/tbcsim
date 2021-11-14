@@ -28,6 +28,7 @@ object RaidAbilities {
         LeaderOfThePack(),
         ManaSpringTotem(),
         MoonkinAura(),
+        SapphireWrathBattleShout(),
         StrengthOfEarthTotem(),
         TotemOfWrath(),
         UnleashedRage(),

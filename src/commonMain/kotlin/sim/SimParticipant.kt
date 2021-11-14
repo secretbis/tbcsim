@@ -273,7 +273,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     .filter { existing -> buffDebuff.mutex.any { existing.mutex.contains(it) } }
 
                 if(allMutex.isNotEmpty()) {
-                    val highestPriority = allMutex.map { it.mutexPriority(this)[mutex] ?: 0 }.last()
+                    val highestPriority = allMutex.map { it.mutexPriority(this)[mutex] ?: 0 }.maxOrNull() ?: 0
 
                     // If this incoming buff is the highest or equal priority, keep it and remove the others
                     // Otherwise, do not apply the buff
@@ -707,7 +707,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.spellDamage
     }
 
-    fun spellDamageWithSchool(school: Constants.DamageType): Int { 
+    fun spellDamageWithSchool(school: Constants.DamageType): Int {
         return stats.getSpellDamage(school)
     }
 

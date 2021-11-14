@@ -28,5 +28,6 @@ enum class Mutex {
     DEBUFF_EXPOSE_ARMOR,
 
     // Warrior
+    BUFF_BATTLE_SHOUT,
     BUFF_WARRIOR_STANCE
 }

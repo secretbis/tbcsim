@@ -1,9 +1,6 @@
 package character.classes.warrior.abilities
 
-import character.Ability
-import character.Buff
-import character.Resource
-import character.Stats
+import character.*
 import character.classes.warrior.talents.CommandingPresence
 import sim.SimParticipant
 
@@ -20,16 +17,25 @@ class BattleShout : Ability() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sp: SimParticipant): Double = 10.0
 
+    private fun totalAp(sp: SimParticipant): Int {
+        val cmdPres = sp.character.klass.talents[CommandingPresence.name] as CommandingPresence?
+        return (305.0 * (cmdPres?.shoutMultiplier() ?: 1.0)).toInt()
+    }
+
     val buff = object : Buff() {
         override val name: String = "Battle Shout"
         override val durationMs: Int = 120000
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val cmdPres = sp.character.klass.talents[CommandingPresence.name] as CommandingPresence?
-            val ap = 305.0 * (cmdPres?.shoutMultiplier() ?: 1.0)
+        override val mutex: List<Mutex> = listOf(Mutex.BUFF_BATTLE_SHOUT)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+            return mapOf(
+                Mutex.BUFF_BATTLE_SHOUT to totalAp(sp)
+            )
+        }
 
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPower = ap.toInt()
+                attackPower = totalAp(sp).toInt()
             )
         }
     }
