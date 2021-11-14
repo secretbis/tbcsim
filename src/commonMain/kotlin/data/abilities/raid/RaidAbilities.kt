@@ -48,6 +48,7 @@ object RaidAbilities {
         FaerieFire(),
         ImprovedExposeArmor(),
         ImprovedFaerieFire(),
+        ImprovedHuntersMark(),
         ImprovedScorch(),
         JudgementOfWisdom(),
         Malediction(),

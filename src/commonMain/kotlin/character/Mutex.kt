@@ -19,6 +19,9 @@ enum class Mutex {
     BUFF_FEROCIOUS_INSPIRATION,
     BUFF_FAERIE_FIRE,
 
+    // Hunter
+    BUFF_HUNTERS_MARK,
+
     // Rogue
     BUFF_SLICE_AND_DICE,
     DEBUFF_RUPTURE_DOT,

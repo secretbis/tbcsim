@@ -1,9 +1,6 @@
 package character.classes.hunter.abilities
 
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Stats
+import character.*
 import character.classes.hunter.talents.ImprovedHuntersMark
 import character.classes.hunter.talents.TheBeastWithin
 import data.model.Item
@@ -59,21 +56,34 @@ class HuntersMark : Ability() {
         override val name: String = Companion.name
         override val durationMs: Int = 120000
 
+        override val mutex: List<Mutex> = listOf(Mutex.BUFF_HUNTERS_MARK)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+            return mapOf(
+                Mutex.BUFF_HUNTERS_MARK to getApBonus(sp)
+            )
+        }
+
         override fun stateFactory(): State {
             return HuntersMarkState()
         }
 
         val apProc = apIncProc(this)
 
-        override fun modifyStats(sp: SimParticipant): Stats {
+        private fun getApBonus(sp: SimParticipant): Int {
             val impHuntersMarkRanks = sp.character.klass.talents[ImprovedHuntersMark.name]?.currentRank ?: 0
 
             val attackCount = (state(sp) as HuntersMarkState).rangedAttackCount
             val rangedAp = (baseApBonus + (apIncrement * attackCount)).coerceAtMost(maxApBonus)
 
+            return (rangedAp * impHuntersMarkRanks * 0.2).toInt()
+        }
+
+        override fun modifyStats(sp: SimParticipant): Stats {
+            val bonusAp = getApBonus(sp)
+
             return Stats(
-                attackPower = (rangedAp * impHuntersMarkRanks * 0.2).toInt(),
-                rangedAttackPower = rangedAp.toInt()
+                attackPower = bonusAp,
+                rangedAttackPower = bonusAp
             )
         }
 
