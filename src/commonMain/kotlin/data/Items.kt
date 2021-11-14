@@ -12,6 +12,8 @@ object Items {
     val items = arrayOf(
         // Manually added items
         { Annihilator() },
+        { AtieshMage() },
+        { AtieshWarlock() },
         { BadgeOfTheSwarmguard() },
         { BandOfTheInevitable() },
         { DrakeFangTalisman () },
