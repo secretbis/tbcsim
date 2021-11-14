@@ -120,6 +120,7 @@ export default function() {
             <SpecEpPanel name='Arms' specKey='warrior_arms' category='phase2' />
             <SpecEpPanel name='Fury' specKey='warrior_fury' category='phase2' />
             <SpecEpPanel name='Kebab' specKey='warrior_kebab' category='phase2' />
+            <SpecEpPanel name='Protection' specKey='warrior_protection' category='phase2' />
           </WrapperEpPanel>
         </WrapperEpPanel>
         <WrapperEpPanel name='Phase 1'>

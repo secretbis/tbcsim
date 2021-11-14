@@ -25,6 +25,11 @@ class Recklessness : Ability() {
         }
     }
 
+    override fun available(sp: SimParticipant): Boolean {
+        val isBerserkerStance = sp.buffs[BerserkerStance.name] != null
+        return isBerserkerStance && super.available(sp)
+    }
+
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)
     }

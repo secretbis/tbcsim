@@ -25,5 +25,8 @@ enum class Mutex {
     // Rogue
     BUFF_SLICE_AND_DICE,
     DEBUFF_RUPTURE_DOT,
-    DEBUFF_EXPOSE_ARMOR
+    DEBUFF_EXPOSE_ARMOR,
+
+    // Warrior
+    BUFF_WARRIOR_STANCE
 }

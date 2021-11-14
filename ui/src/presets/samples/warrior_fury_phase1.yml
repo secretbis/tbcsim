@@ -133,6 +133,7 @@ rotation:
 #    - name: Spicy Hot Talbuk
 
     # Abilities
+    - name: Berserker Stance
     - name: Battle Shout
     - name: Bloodrage
 

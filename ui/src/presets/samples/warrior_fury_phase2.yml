@@ -87,8 +87,8 @@ gear:
   waist:
     name: Belt of One-Hundred Deaths
     gems:
-      - Smooth Dawnstone
-      - Smooth Dawnstone
+      - Inscribed Noble Topaz
+      - Jagged Talasite
   legs:
     name: Leggings of Murderous Intent
     enchant: Nethercobra Leg Armor
@@ -122,6 +122,7 @@ rotation:
 #    - name: Spicy Hot Talbuk
 
     # Abilities
+    - name: Berserker Stance
     - name: Battle Shout
     - name: Bloodrage
 

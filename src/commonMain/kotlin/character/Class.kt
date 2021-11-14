@@ -21,6 +21,7 @@ import character.classes.rogue.specs.Combat
 import character.classes.rogue.Rogue
 import character.classes.rogue.specs.Assassination
 import character.classes.warrior.specs.Kebab
+import character.classes.warrior.specs.Protection
 import data.model.Item
 import kotlin.reflect.KClass
 
@@ -81,6 +82,7 @@ abstract class Class(
                     "arms" -> Arms()
                     "fury" -> Fury()
                     "kebab" -> Kebab()
+                    "protection" -> Protection()
                     else -> null
                 }
                 "rogue" -> when(specName) {

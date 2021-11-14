@@ -6,6 +6,7 @@ import character.classes.shaman.talents.Flurry
 import character.classes.warrior.abilities.*
 import character.classes.warrior.abilities.Bloodthirst
 import character.classes.warrior.abilities.DeathWish
+import character.classes.warrior.abilities.Devastate
 import character.classes.warrior.abilities.MortalStrike
 import character.classes.warrior.abilities.Rampage
 import character.classes.warrior.buffs.RageGeneration
@@ -13,6 +14,7 @@ import character.classes.warrior.buffs.RampageBase
 import character.classes.warrior.talents.*
 import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import character.classes.warrior.talents.DeathWish as DeathWishTalent
+import character.classes.warrior.talents.Devastate as DevastateTalent
 import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import character.classes.warrior.talents.Rampage as RampageTalent
 import data.model.Item
@@ -34,9 +36,13 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
             BattleShout.name -> BattleShout()
+            BattleStance.name -> BattleStance()
+            BerserkerStance.name -> BerserkerStance()
             Bloodrage.name -> Bloodrage()
             Bloodthirst.name -> Bloodthirst()
             DeathWish.name -> DeathWish()
+            DefensiveStance.name -> DefensiveStance()
+            Devastate.name -> Devastate()
             Execute.name -> Execute()
             HeroicStrike.name -> HeroicStrike()
             MortalStrike.name -> MortalStrike()
@@ -57,18 +63,23 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             Cruelty.name -> Cruelty(ranks)
             DeathWishTalent.name -> DeathWishTalent(ranks)
             DeepWounds.name -> DeepWounds(ranks)
+            Defiance.name -> Defiance(ranks)
+            DevastateTalent.name -> DeepWounds(ranks)
             DualWieldSpec.name -> DualWieldSpec(ranks)
             EndlessRage.name -> EndlessRage(ranks)
+            FocusedRage.name -> FocusedRage(ranks)
             Flurry.name -> Flurry(ranks)
             Impale.name -> Impale(ranks)
             ImprovedBerserkerStance.name -> ImprovedBerserkerStance(ranks)
             ImprovedExecute.name -> ImprovedExecute(ranks)
             ImprovedHeroicStrike.name -> ImprovedHeroicStrike(ranks)
             ImprovedMortalStrike.name -> ImprovedMortalStrike(ranks)
+            ImprovedSunderArmor.name -> ImprovedSunderArmor(ranks)
             ImprovedSlam.name -> ImprovedSlam(ranks)
             ImprovedWhirlwind.name -> ImprovedWhirlwind(ranks)
             MaceSpec.name -> MaceSpec(ranks)
             MortalStrikeTalent.name -> MortalStrikeTalent(ranks)
+            OneHandedWeaponSpecialization.name -> OneHandedWeaponSpecialization(ranks)
             PoleaxeSpec.name -> PoleaxeSpec(ranks)
             Precision.name -> Precision(ranks)
             RampageTalent.name -> RampageTalent(ranks)
@@ -77,6 +88,7 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             TacticalMastery.name -> TacticalMastery(ranks)
             TwoHandWeaponSpec.name -> TwoHandWeaponSpec(ranks)
             UnbridledWrath.name -> UnbridledWrath(ranks)
+            Vitality.name -> Vitality(ranks)
             WeaponMastery.name -> WeaponMastery(ranks)
             else -> null
         }

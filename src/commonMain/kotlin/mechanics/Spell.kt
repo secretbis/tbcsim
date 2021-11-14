@@ -48,23 +48,20 @@ object Spell {
 
     /**
      * First roll for damage and miss roll calculation
-     * 
-     * @param spellDamageRoll Roll based on spell needs. 
+     *
+     * @param spellDamageRoll Roll based on spell needs.
      * Use result from `baseDamageRoll` for spells with base damage range pairs (e.g. 500 to 575)
      * Use result from `baseDamageRollFromSnapShot` for spells which store spell damage for later (e.g. Spell Dots)
      * Use result from `baseDamageRollSingle` for spells which do not have a range of damage
      * @param school Spell school for retrieving additional damage based on school and multipliers
      * @param bonusHitChance Provide more hit chance to landing spell outside the casters spell hit
      * @param canResist Can this attack be resisted
-     * 
+     *
      * @return Pair<Double, EventResult> where first is the damage to be done and second is event of HIT (success) or RESIST (failure)
      */
     private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusDamageMultiplier: Double = 1.0, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
-        // Additional damage multipliers
-        val flatModifier = sp.stats.spellDamageFlatModifier
-        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
-
-        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
+        // Additional damage multiplier
+        val finalDamageRoll = spellDamageRoll * bonusDamageMultiplier
 
         // Get the hit/miss result
         if (canResist){
@@ -82,11 +79,11 @@ object Spell {
 
     /**
      * Second roll for spell crit based calculation
-     * 
+     *
      * @param result Result Pair from first roll
      * @param bonusCritChance Additional chance to crit
      * @param bonusCritMultiplier Additional damage if a crit does occur
-     * 
+     *
      * @return Pair<Double, EventResult> where first is the damage to be done and second is event of CRIT if successful
      */
     private fun secondCritRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, bonusCritChance: Double = 0.0, bonusCritMultiplier: Double = 1.0): Pair<Double, EventResult> {
@@ -98,17 +95,17 @@ object Spell {
         if (hitRoll2 < critChance){
             return Pair(result.first * critMultiplier, EventResult.CRIT)
         }
-        
+
         return result;
     }
 
     /**
      * Third and final roll (For spells which can resist) for spell resist based calculation
-     * 
+     *
      * @param result Result Pair from first or second roll
-     * @param school Spell school for retrieving resistence 
+     * @param school Spell school for retrieving resistence
      * @param isBinary Additional damage if a crit does occur
-     * 
+     *
      * @return Pair<Double, EventResult> where first is the damage after resistance calculations and event result remains the same
      */
     private fun thirdResistRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, school: Constants.DamageType, isBinary: Boolean): Pair<Double, EventResult> {
@@ -176,7 +173,9 @@ object Spell {
 
     fun baseDamageRollSingle(sp: SimParticipant, baseDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
-        val spellDamage = sp.spellDamageWithSchool(school)
+        val flatModifier = sp.stats.spellDamageFlatModifier
+        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
+        val spellDamage = (sp.spellDamageWithSchool(school) + flatModifier) * spellDamageMultiplier
         val totalSpellDamage = (spellDamage + bonusSpellDamage) * bonusSpellDamageMultiplier
         return baseDamageRollFromSnapShot(baseDmg, totalSpellDamage, spellDamageCoeff)
     }
@@ -190,11 +189,11 @@ object Spell {
 
     // Performs an attack roll given an initial unmitigated damage value
     fun attackRoll(
-        sp: SimParticipant, 
-        damageRoll: Double, 
+        sp: SimParticipant,
+        damageRoll: Double,
         school: Constants.DamageType,
         isBinary: Boolean = false,
-        bonusCritChance: Double = 0.0, 
+        bonusCritChance: Double = 0.0,
         bonusHitChance: Double = 0.0,
         bonusCritMultiplier: Double = 1.0,
         bonusDamageMultiplier: Double = 1.0,
@@ -207,7 +206,7 @@ object Spell {
             finalResult = secondCritRollPair(sp, finalResult, bonusCritChance, bonusCritMultiplier)
         }
 
-        if(canResist){
+        if(canResist) {
             finalResult = thirdResistRollPair(sp,finalResult, school, isBinary)
         }
 

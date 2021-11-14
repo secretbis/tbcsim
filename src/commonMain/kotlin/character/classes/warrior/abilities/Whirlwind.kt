@@ -1,6 +1,7 @@
 package character.classes.warrior.abilities
 
 import character.*
+import character.classes.warrior.talents.FocusedRage
 import character.classes.warrior.talents.ImprovedWhirlwind
 import data.Constants
 import data.itemsets.WarbringerBattlegear
@@ -26,11 +27,18 @@ class Whirlwind : Ability() {
     override fun resourceCost(sp: SimParticipant): Double {
         val baseCost = 25.0
 
+        val focusedRageRanks = sp.character.klass.talents[FocusedRage.name]?.currentRank ?: 0
+
         // Check T4 set bonus
         val t4Bonus = sp.buffs[WarbringerBattlegear.TWO_SET_BUFF_NAME] != null
         val t4CostReduction = if(t4Bonus) { WarbringerBattlegear.twoSetWhirlwindCostReduction() } else 0.0
 
-        return baseCost - t4CostReduction
+        return baseCost - t4CostReduction - focusedRageRanks
+    }
+
+    override fun available(sp: SimParticipant): Boolean {
+        val isBerserkerStance = sp.buffs[BerserkerStance.name] != null
+        return isBerserkerStance && super.available(sp)
     }
 
     override fun cast(sp: SimParticipant) {

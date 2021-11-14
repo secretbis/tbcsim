@@ -15,6 +15,7 @@ import character.classes.warlock.specs.Destruction
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
 import character.classes.warrior.specs.Kebab
+import character.classes.warrior.specs.Protection
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -84,7 +85,8 @@ class TBCSim : CliktCommand() {
         "warlock_destruction_shadow" to Destruction(),
         "warrior_arms" to Arms(),
         "warrior_fury" to Fury(),
-        "warrior_kebab" to Kebab()
+        "warrior_kebab" to Kebab(),
+        "warrior_protection" to Protection()
     )
     val presetPath = "./ui/src/presets/samples/"
     val rankingOutputPath = "./ui/src/rankings/data/ranks_all.json"
@@ -145,6 +147,7 @@ class TBCSim : CliktCommand() {
             "warrior_arms" to File(presetPath + "warrior_arms_phase2.yml"),
             "warrior_fury" to File(presetPath + "warrior_fury_phase2.yml"),
             "warrior_kebab" to File(presetPath + "warrior_kebab_phase2.yml"),
+            "warrior_protection" to File(presetPath + "warrior_protection_phase2.yml"),
         )
     )
 

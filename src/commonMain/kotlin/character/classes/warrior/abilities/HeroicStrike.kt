@@ -1,6 +1,7 @@
 package character.classes.warrior.abilities
 
 import character.*
+import character.classes.warrior.talents.FocusedRage
 import character.classes.warrior.talents.ImprovedHeroicStrike
 import data.Constants
 import mechanics.Melee
@@ -24,7 +25,8 @@ class HeroicStrike : Ability() {
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sp: SimParticipant): Double {
         val impHsRanks = sp.character.klass.talents[ImprovedHeroicStrike.name]?.currentRank ?: 0
-        return 15.0 - impHsRanks
+        val focusedRageRanks = sp.character.klass.talents[FocusedRage.name]?.currentRank ?: 0
+        return 15.0 - impHsRanks - focusedRageRanks
     }
 
     // Model the off-hand hit bonus when HS is queued

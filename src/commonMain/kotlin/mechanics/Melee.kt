@@ -4,7 +4,6 @@ import character.Stats
 import data.Constants
 import data.model.Item
 import mu.KotlinLogging
-import sim.Event
 import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
@@ -63,6 +62,14 @@ object Melee {
                item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
                item.itemSubclass == Constants.ItemSubclass.POLEARM ||
                item.itemSubclass == Constants.ItemSubclass.STAFF
+    }
+
+    fun is1H(item: Item): Boolean {
+        return item.itemSubclass == Constants.ItemSubclass.SWORD_1H ||
+               item.itemSubclass == Constants.ItemSubclass.AXE_1H ||
+               item.itemSubclass == Constants.ItemSubclass.MACE_1H ||
+               item.itemSubclass == Constants.ItemSubclass.DAGGER ||
+               item.itemSubclass == Constants.ItemSubclass.FIST
     }
 
     fun isAxe(item: Item): Boolean {

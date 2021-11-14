@@ -2,7 +2,9 @@ package character.classes.warrior.abilities
 
 import character.*
 import character.classes.warrior.talents.FocusedRage
-import character.classes.warrior.talents.ImprovedExecute
+import character.classes.warrior.talents.ImprovedMortalStrike
+import character.classes.warrior.talents.ImprovedSunderArmor
+import character.classes.warrior.talents.Devastate as DevastateTalent
 import data.Constants
 import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
@@ -11,45 +13,37 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class Execute : Ability() {
+class Devastate : Ability() {
     companion object {
-        const val name = "Execute"
+        const val name = "Devastate"
     }
 
-    override val id: Int = 12292
+    override val id: Int = 30022
     override val name: String = Companion.name
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
-
-    override fun available(sp: SimParticipant): Boolean {
-        return sp.sim.isExecutePhase() && super.available(sp)
-    }
+    override fun cooldownMs(sp: SimParticipant): Int = 0
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+
     override fun resourceCost(sp: SimParticipant): Double {
-        val impExRanks = sp.character.klass.talents[ImprovedExecute.name]?.currentRank
-        val impExDiscount = when(impExRanks) {
-            1 -> 2
-            2 -> 5
-            else -> 0
-        }
         val focusedRageRanks = sp.character.klass.talents[FocusedRage.name]?.currentRank ?: 0
-
-        // Check T6 set bonus
-        val t6Bonus = sp.buffs[OnslaughtBattlegear.TWO_SET_BUFF_NAME] != null
-        val t6Discount = if(t6Bonus) { OnslaughtBattlegear.twoSetExecuteCostReduction() } else 0.0
-
-        return 15.0 - impExDiscount - t6Discount - focusedRageRanks
+        val impSunderRanks = sp.character.klass.talents[ImprovedSunderArmor.name]?.currentRank ?: 0
+        return 15.0 - focusedRageRanks - impSunderRanks
     }
 
+    override fun available(sp: SimParticipant): Boolean {
+        val hasTalent = sp.character.klass.talents[DevastateTalent.name]?.currentRank == 1
+        val oneHandWeapon = Melee.is1H(sp.character.gear.mainHand)
+        return hasTalent && oneHandWeapon && super.available(sp)
+    }
+
+    // Assume 5 sunders
+    val bonusDmg = 35.0 * 5
     override fun cast(sp: SimParticipant) {
         val item = sp.character.gear.mainHand
-        val res = sp.resources[resourceType(sp)]!!
-        val damage = 925.0 + res.currentAmount * 21
-        val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
-
-        // Drain rage
-        sp.subtractResource(res.currentAmount, Resource.Type.RAGE, "Execute (extra)")
+        val damageRoll = (Melee.baseDamageRoll(sp, item, isNormalized = true) * 0.5) + bonusDmg
+        val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
         // Save last hit state and fire event
         val event = Event(

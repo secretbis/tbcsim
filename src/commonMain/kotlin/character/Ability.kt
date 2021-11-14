@@ -13,7 +13,8 @@ abstract class Ability {
         SHAMAN_SHOCK,
         POTION,
         RUNE_OR_MANA_GEM,
-        ACTIVE_TRINKET
+        ACTIVE_TRINKET,
+        WARRIOR_STANCE
     }
 
     abstract val id: Int

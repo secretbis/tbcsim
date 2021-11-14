@@ -120,6 +120,11 @@ rotation:
     - name: Roasted Clefthoof
 #    - name: Spicy Hot Talbuk
 
+    # Abilities
+    - name: Berserker Stance
+    - name: Battle Shout
+    - name: Bloodrage
+
   combat:
     - name: Blood Fury
     - name: Berserking

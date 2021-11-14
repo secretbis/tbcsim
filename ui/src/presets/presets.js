@@ -58,6 +58,7 @@ import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
 import warriorFuryPhase1 from './samples/warrior_fury_phase1.yml'
 import warriorFuryPhase2 from './samples/warrior_fury_phase2.yml'
 import warriorKebabPhase2 from './samples/warrior_kebab_phase2.yml'
+import warriorProtectionPhase2 from './samples/warrior_protection_phase2.yml'
 
 import * as tbcsim from 'tbcsim';
 
@@ -167,7 +168,8 @@ const presets = {
     phase2: [
       warriorArmsPhase2,
       warriorFuryPhase2,
-      warriorKebabPhase2
+      warriorKebabPhase2,
+      warriorProtectionPhase2
     ]
   }
 }

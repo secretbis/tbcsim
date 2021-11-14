@@ -573,6 +573,20 @@
                 "yellowSocket": 22.21,
                 "blueSocket": 10.25,
                 "metaSocket": 100.0
+            },
+            "warrior_protection": {
+                "attackPower": 1.0,
+                "strength": 2.26,
+                "agility": 1.81,
+                "meleeCritRating": 2.32,
+                "physicalHitRating": 1.8,
+                "physicalHasteRating": 2.12,
+                "expertiseRating": 4.0,
+                "armorPen": 0.36,
+                "redSocket": 22.6,
+                "yellowSocket": 23.2,
+                "blueSocket": 11.3,
+                "metaSocket": 100.0
             }
         }
     },
@@ -638,6 +652,10 @@
             "benefitsFromRangedWeaponDps": false
         },
         "warrior_kebab": {
+            "benefitsFromMeleeWeaponDps": true,
+            "benefitsFromRangedWeaponDps": false
+        },
+        "warrior_protection": {
             "benefitsFromMeleeWeaponDps": true,
             "benefitsFromRangedWeaponDps": false
         }
