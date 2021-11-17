@@ -61,7 +61,10 @@ object Spell {
      */
     private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusDamageMultiplier: Double = 1.0, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
         // Additional damage multiplier
-        val finalDamageRoll = spellDamageRoll * bonusDamageMultiplier
+        val flatModifier = sp.stats.spellDamageFlatModifier
+        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
+
+        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
 
         // Get the hit/miss result
         if (canResist){
@@ -173,9 +176,7 @@ object Spell {
 
     fun baseDamageRollSingle(sp: SimParticipant, baseDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
-        val flatModifier = sp.stats.spellDamageFlatModifier
-        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
-        val spellDamage = (sp.spellDamageWithSchool(school) + flatModifier) * spellDamageMultiplier
+        val spellDamage = sp.spellDamageWithSchool(school)
         val totalSpellDamage = (spellDamage + bonusSpellDamage) * bonusSpellDamageMultiplier
         return baseDamageRollFromSnapShot(baseDmg, totalSpellDamage, spellDamageCoeff)
     }
