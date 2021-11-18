@@ -24,6 +24,7 @@ object ItemGen {
     val pkg: String = "data.items"
 
     val itemOverrides = mapOf(
+        // Warglaives
         32837 to mapOf(
             "className" to "WarglaiveOfAzzinothMH",
             "name" to "Warglaive of Azzinoth (MH)"
@@ -31,7 +32,60 @@ object ItemGen {
         32838 to mapOf(
             "className" to "WarglaiveOfAzzinothOH",
             "name" to "Warglaive of Azzinoth (OH)"
-        )
+        ),
+
+        // Scale of the Sands reputation rings
+        29298 to mapOf(
+            "className" to "BandOfEternityChampionFriendly",
+            "name" to "Band of Eternity (Champion, Friendly)"
+        ),
+        29299 to mapOf(
+            "className" to "BandOfEternityChampionHonored",
+            "name" to "Band of Eternity (Champion, Honored)"
+        ),
+        29300 to mapOf(
+            "className" to "BandOfEternityChampionRevered",
+            "name" to "Band of Eternity (Champion, Revered)"
+        ),
+
+        29294 to mapOf(
+            "className" to "BandOfEternityDefenderFriendly",
+            "name" to "Band of Eternity (Defender, Friendly)"
+        ),
+        29295 to mapOf(
+            "className" to "BandOfEternityDefenderHonored",
+            "name" to "Band of Eternity (Defender, Honored)"
+        ),
+        29296 to mapOf(
+            "className" to "BandOfEternityDefenderRevered",
+            "name" to "Band of Eternity (Defender, Revered)"
+        ),
+
+        29306 to mapOf(
+            "className" to "BandOfEternityRestorerFriendly",
+            "name" to "Band of Eternity (Restorer, Friendly)"
+        ),
+        29307 to mapOf(
+            "className" to "BandOfEternityRestorerHonored",
+            "name" to "Band of Eternity (Restorer, Honored)"
+        ),
+        29308 to mapOf(
+            "className" to "BandOfEternityRestorerRevered",
+            "name" to "Band of Eternity (Restorer, Revered)"
+        ),
+
+        29302 to mapOf(
+            "className" to "BandOfEternitySageFriendly",
+            "name" to "Band of Eternity (Sage, Friendly)"
+        ),
+        29303 to mapOf(
+            "className" to "BandOfEternitySageHonored",
+            "name" to "Band of Eternity (Sage, Honored)"
+        ),
+        29304 to mapOf(
+            "className" to "BandOfEternitySageRevered",
+            "name" to "Band of Eternity (Sage, Revered)"
+        ),
     )
 
     val itemIgnore = listOf(
@@ -286,7 +340,7 @@ object ItemGen {
         if(itemOverrides[item.id] != null) {
             return itemOverrides[item.id]!!["className"]!!
         }
-        val safeRegex = Regex("""[^a-zA-Z ]""")
+        val safeRegex = Regex("""[^a-zA-Z0-9 ]""")
         return item.name.replace(safeRegex, "").toPascalCase()
     }
 
