@@ -203,7 +203,7 @@ export function filter1HOnly() {
 
 // Returns a list of items for a particular slot, given a character context
 // Can also return lists of enchants or tempEnchants, if specified as itemType
-export function itemsForSlot(slotName, character, phase, itemType, contextItem, filters) {
+export function itemsForSlot(slotName, character, phase, itemType, contextItem, filters, epOptions) {
   if(!slotName || !character || !character.class) return null;
 
   console.log("FULL ITEM FILTER")
@@ -263,7 +263,7 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
   // Add item EP if we have a reference point
   if(character) {
     items = items.forEach(i => {
-      const ep = itemEp(i, character.epCategory, character.epSpec)
+      const ep = itemEp(i, character.epCategory, character.epSpec, epOptions)
       i.ep = ep
     })
   }

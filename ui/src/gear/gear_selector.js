@@ -8,7 +8,7 @@ import ItemTooltip from './item_tooltip';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ character, phase, type, item, slotName, TooltipComponent, visible, setVisible, onSelect }) {
+export default function({ character, phase, type, item, slotName, TooltipComponent, visible, setVisible, onSelect, epOptions }) {
   const [filter, setFilter] = useState('');
   const [oneHandOnly, setOneHandOnly] = useState(true);
   const [modalFullyShown, setModalFullyShown] = useState('');
@@ -90,7 +90,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
 
   function renderModalBody() {
     const filters = [filterByItemName(filter), ...(oneHandOnly && slotName === 'mainHand' ? [filter1HOnly()] : [])]
-    const allRowData = itemsForSlot(slotName, character, phase, type, item, filters)
+    const allRowData = itemsForSlot(slotName, character, phase, type, item, filters, epOptions)
     return (
       <>
         <InputGroup inside style={{ margin: '15px 0 15px 0' }}>

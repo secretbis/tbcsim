@@ -4,6 +4,7 @@ import { Checkbox, Content, Container, Dropdown, Icon, Input, InputGroup, Grid, 
 import { allEpCategories } from '../data/constants';
 import ItemTooltip from './item_tooltip';
 import { filterByItemName, filter1HOnly, itemsForSlot } from '../util/items';
+import EPOptions from '../ep/ep_options';
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -101,7 +102,7 @@ function EpCell({ rowData, dataKey, ...props }) {
   )
 }
 
-export default function() {
+export default function({ epOptions, dispatch }) {
   const [klass, setKlass] = useState('hunter_bm');
   const [itemPhase, setItemPhase] = useState(2);
   const [epCategory, setEpCategory] = useState('phase2');
@@ -117,12 +118,12 @@ export default function() {
     }
   }
 
-  function EPPanel({ header, slotName }) {
+  function EPPanel({ header, slotName, epOptions }) {
     const [filter, setFilter] = useState('');
     const [oneHandOnly, setOneHandOnly] = useState(slotName === 'mainHand');
 
     const filters = [filterByItemName(filter), ...(oneHandOnly ? [filter1HOnly()] : [])]
-    const allRowData = itemsForSlot(slotName, getCharacter(), itemPhase, null, null, filters)
+    const allRowData = itemsForSlot(slotName, getCharacter(), itemPhase, null, null, filters, epOptions)
     return (
       <Panel header={header} collapsible bordered defaultExpanded={true} style={{ marginBottom: 10 }}>
         <InputGroup inside style={{ margin: '0px 0 15px 0' }}>
@@ -237,6 +238,7 @@ export default function() {
           <KlassSelect />
           <PhaseSelect />
           <EpSelect />
+          <EPOptions epOptions={epOptions} dispatch={dispatch} />
         </Row>
         <Container style={{ margin: 15 }}>
         {(!klass || !epCategory || !itemPhase) ?
@@ -244,25 +246,25 @@ export default function() {
           :
           <Row>
             <Col xs={8}>
-              <EPPanel header='Head' slotName='head' bordered />
-              <EPPanel header='Neck' slotName='neck' bordered />
-              <EPPanel header='Shoulders' slotName='shoulders' bordered />
-              <EPPanel header='Back' slotName='back' bordered />
-              <EPPanel header='Chest' slotName='chest' bordered />
-              <EPPanel header='Wrists' slotName='wrists' bordered />
+              <EPPanel header='Head' slotName='head' epOptions={epOptions} bordered />
+              <EPPanel header='Neck' slotName='neck' epOptions={epOptions} bordered />
+              <EPPanel header='Shoulders' slotName='shoulders' epOptions={epOptions} bordered />
+              <EPPanel header='Back' slotName='back' epOptions={epOptions} bordered />
+              <EPPanel header='Chest' slotName='chest' epOptions={epOptions} bordered />
+              <EPPanel header='Wrists' slotName='wrists' epOptions={epOptions} bordered />
             </Col>
             <Col xs={8}>
-              <EPPanel header='Main Hand' slotName='mainHand' bordered />
-              <EPPanel header='Off Hand' slotName='offHand' bordered />
-              <EPPanel header='Ranged' slotName='rangedTotemLibram' bordered />
+              <EPPanel header='Main Hand' slotName='mainHand' epOptions={epOptions} bordered />
+              <EPPanel header='Off Hand' slotName='offHand' epOptions={epOptions} bordered />
+              <EPPanel header='Ranged' slotName='rangedTotemLibram' epOptions={epOptions} bordered />
             </Col>
             <Col xs={8}>
-              <EPPanel header='Hands' slotName='hands' bordered />
-              <EPPanel header='Waist' slotName='waist' bordered />
-              <EPPanel header='Legs' slotName='legs' bordered />
-              <EPPanel header='Feet' slotName='feet' bordered />
-              <EPPanel header='Ring' slotName='ring1' bordered />
-              <EPPanel header='Trinket' slotName='trinket1' bordered />
+              <EPPanel header='Hands' slotName='hands' epOptions={epOptions} bordered />
+              <EPPanel header='Waist' slotName='waist' epOptions={epOptions} bordered />
+              <EPPanel header='Legs' slotName='legs' epOptions={epOptions} bordered />
+              <EPPanel header='Feet' slotName='feet' epOptions={epOptions} bordered />
+              <EPPanel header='Ring' slotName='ring1' epOptions={epOptions} bordered />
+              <EPPanel header='Trinket' slotName='trinket1' epOptions={epOptions} bordered />
             </Col>
           </Row>
         }

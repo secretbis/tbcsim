@@ -140,6 +140,10 @@ export const initialState = {
   resultsResourceUsageByAbility: null,
   resultsDps: null,
 
+  epOptions: {
+    hitZero: false
+  },
+
   simOptions: {
     durationSeconds: simDefaults.durationSeconds,
     durationVariabilitySeconds: simDefaults.durationVariabilitySeconds,

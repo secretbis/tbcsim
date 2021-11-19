@@ -52,7 +52,7 @@ const titles = {
   ammo: 'AMMO',
 };
 
-export default function({ character, phase, slotName, width=defaultWidth, dispatch }) {
+export default function({ character, phase, slotName, width=defaultWidth, epOptions, dispatch }) {
   if(!character || !character.class) return;
 
   const item = character && character.gear && character.gear[slotName];
@@ -116,7 +116,7 @@ export default function({ character, phase, slotName, width=defaultWidth, dispat
               <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
             </ItemTooltip>
             {item.sockets && item.sockets.map((sk, idx) => {
-              return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} />
+              return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} epOptions={epOptions} />
             })}
             {slotCanEnchant && itemCanEnchant ?
               <EnchantSlot character={character} slotName={slotName} enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} onSelect={onEnchantSelect} />
@@ -154,6 +154,7 @@ export default function({ character, phase, slotName, width=defaultWidth, dispat
         visible={selectorVisible}
         setVisible={setSelectorVisible}
         onSelect={onItemSelect}
+        epOptions={epOptions}
       />
     </>
   );

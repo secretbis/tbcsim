@@ -5,6 +5,7 @@ import filesaver from 'file-saver';
 
 import { classes, allEpCategories, targetTypes } from '../data/constants';
 import * as impex from './importexport';
+import EPOptions from '../ep/ep_options';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterBmPhase1 from './samples/hunter_bm_phase1.yml'
@@ -262,7 +263,7 @@ function TargetTypeSelect({ targetTypeOrdinal, dispatch }) {
   );
 }
 
-export default ({ character, phase, simOptions, dispatch }) => {
+export default ({ character, phase, simOptions, epOptions, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function Import({ dispatch }) {
@@ -497,6 +498,9 @@ export default ({ character, phase, simOptions, dispatch }) => {
       </Col>
       <Col style={{ display: 'inline-block', marginLeft: 10 }}>
         <Export dispatch={dispatch} />
+      </Col>
+      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
+        <EPOptions epOptions={epOptions} dispatch={dispatch} />
       </Col>
     </Row>
   )

@@ -11,7 +11,7 @@ const socketImages = {
   yellow: 'sockets/yellow.png',
 };
 
-export default function({ phase, socket, character, onSelect }) {
+export default function({ phase, socket, character, onSelect, epOptions }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   const color = kprop(kprop(socket, 'color'), 'name', '').toLowerCase();
@@ -41,6 +41,7 @@ export default function({ phase, socket, character, onSelect }) {
           visible={selectorVisible}
           setVisible={setSelectorVisible}
           onSelect={onGemSelect}
+          epOptions={epOptions}
         />
       </ItemTooltip>
     </span>

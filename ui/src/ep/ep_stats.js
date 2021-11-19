@@ -47,7 +47,8 @@ export const statDisplayNames = {
   blueSocket: 'Blue Socket',
 }
 
-export function itemEp(item, category, spec) {
+export function itemEp(item, category, spec, epOptions) {
+  epOptions = epOptions || {};
   const data = _.get(epData, `categories[${category}][${spec}]`, {})
   const options = _.get(epData, `options[${spec}]`, {})
 
@@ -57,6 +58,11 @@ export function itemEp(item, category, spec) {
 
   let itemEp = allStats.reduce((acc, current) => {
     const currentStatEp = data[current]
+
+    // The user may choose to value hit as zero, if they are overcapped
+    if(epOptions.hitZero && ['physicalHitRating', 'spellHitRating'].includes(current)) {
+      return acc;
+    }
 
     // Socket EPs are already computed
     if(current === 'redSocket') {

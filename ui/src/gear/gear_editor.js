@@ -5,7 +5,7 @@ import GearSlot from './gear_slot';
 import Stats from './stats';
 import { hasAmmo } from '../util/items';
 
-export default function({ state, character, phase, dispatch }) {
+export default function({ state, character, phase, epOptions, dispatch }) {
   character = character || {}
 
   return (
@@ -13,26 +13,26 @@ export default function({ state, character, phase, dispatch }) {
       <div style={{ textAlign: 'center', marginBottom: 10, marginTop: -25 }}><em>Click any slot, gem, or enchant to change it!</em></div>
       <Row>
         <Col xs={12}>
-          <GearSlot character={character} phase={phase} slotName='head' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='neck' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='shoulders' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='back' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='chest' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='wrists' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='mainHand' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='offHand' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='rangedTotemLibram' dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='head' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='neck' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='shoulders' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='back' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='chest' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='wrists' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='mainHand' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='offHand' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='rangedTotemLibram' epOptions={epOptions} dispatch={dispatch} />
         </Col>
         <Col xs={12}>
-          <GearSlot character={character} phase={phase} slotName='hands' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='waist' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='legs' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='feet' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='ring1' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='ring2' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='trinket1' dispatch={dispatch} />
-          <GearSlot character={character} phase={phase} slotName='trinket2' dispatch={dispatch} />
-          {hasAmmo(character.gear.rangedTotemLibram) ? <GearSlot character={character} phase={phase} slotName='ammo' dispatch={dispatch} /> : null }
+          <GearSlot character={character} phase={phase} slotName='hands' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='waist' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='legs' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='feet' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='ring1' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='ring2' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='trinket1' epOptions={epOptions} dispatch={dispatch} />
+          <GearSlot character={character} phase={phase} slotName='trinket2' epOptions={epOptions} dispatch={dispatch} />
+          {hasAmmo(character.gear.rangedTotemLibram) ? <GearSlot character={character} phase={phase} slotName='ammo' epOptions={epOptions} dispatch={dispatch} /> : null }
         </Col>
       </Row>
       <Row>
