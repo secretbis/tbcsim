@@ -10,6 +10,7 @@ class ColdSnap : Ability() {
     }
     override val id: Int = 11958
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_wizardmark.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun castTimeMs(sp: SimParticipant): Int = 0
 

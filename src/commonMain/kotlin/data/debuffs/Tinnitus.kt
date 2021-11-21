@@ -10,4 +10,5 @@ class Tinnitus(owner: SimParticipant) : Debuff(owner) {
 
     override val name: String = Companion.name
     override val durationMs: Int = 120000
+    override val icon: String = "inv_misc_ear_human_01.jpg"
 }

@@ -17,8 +17,14 @@ class MalorneRegalia : ItemSet() {
     }
     override val id: Int = 639
 
+    val twoSetAbility = object : Ability() {
+        override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
+    }
+
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
         override val durationMs: Int = -1
 
         val spellProc = object : Proc() {
@@ -32,7 +38,7 @@ class MalorneRegalia : ItemSet() {
             override val ppm: Double = 1.0
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(120, Resource.Type.MANA, TWO_SET_BUFF_NAME)
+                sp.addResource(120, Resource.Type.MANA, twoSetAbility)
             }
         }
 
@@ -42,6 +48,7 @@ class MalorneRegalia : ItemSet() {
     // TODO: Innervate should check this buff once it exists
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
         override val durationMs: Int = -1
     }
 

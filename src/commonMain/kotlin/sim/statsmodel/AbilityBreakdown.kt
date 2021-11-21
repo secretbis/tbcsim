@@ -5,6 +5,7 @@ import kotlin.js.JsExport
 @JsExport
 data class AbilityBreakdown(
     val name: String,
+    val icon: String,
     val countAvg: Double,
     val totalAvg: Double,
     val pctOfTotal: Double,

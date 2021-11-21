@@ -15,6 +15,11 @@ class AvatarRegalia : ItemSet() {
 
     override val id: Int = 666
 
+    val twoSetAbility = object : Ability() {
+        override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_cloth_43.jpg"
+    }
+
     fun twoSetConsumeProc(buff: Buff): Proc {
         return object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -31,7 +36,7 @@ class AvatarRegalia : ItemSet() {
                 if(ability != null) {
                     // Choose the lower of the spell cost, or the 150 set reduction
                     val refund = min(ability.resourceCost(sp), 150.0).toInt()
-                    sp.addResource(refund, Resource.Type.MANA, TWO_SET_BUFF_NAME)
+                    sp.addResource(refund, Resource.Type.MANA, twoSetAbility)
                 }
             }
         }
@@ -39,6 +44,7 @@ class AvatarRegalia : ItemSet() {
 
     val twoSetCostReductionBuff = object : Buff() {
         override val name: String = "$TWO_SET_BUFF_NAME (Cost Reduction)"
+        override val icon: String = "inv_chest_cloth_43.jpg"
         override val durationMs: Int = -1
 
         val consumeProc = twoSetConsumeProc(this)
@@ -48,6 +54,7 @@ class AvatarRegalia : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_cloth_43.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -85,6 +92,7 @@ class AvatarRegalia : ItemSet() {
 
     val fourSetSpellDamageBuff = object : Buff() {
         override val name: String = "$FOUR_SET_BUFF_NAME (Spell Damage)"
+        override val icon: String = "inv_chest_cloth_43.jpg"
         override val durationMs: Int = 15000
 
         override fun modifyStats(sp: SimParticipant): Stats? {

@@ -16,6 +16,17 @@ class RageGeneration : Buff() {
     override val name: String = "Rage Generation"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "spell_misc_emotionangry.jpg"
+
+    val hitAbility = object : Ability() {
+        override val name: String = "Melee Hit"
+        override val icon: String = "spell_misc_emotionangry.jpg"
+    }
+
+    val critAbility = object : Ability() {
+        override val name: String = "Melee Crit"
+        override val icon: String = "spell_misc_emotionangry.jpg"
+    }
 
     val rageConversionFactor = 274.7
     fun damageToRage(sp: SimParticipant, damage: Double, item: Item, weaponFactor: Double): Int {
@@ -46,7 +57,7 @@ class RageGeneration : Buff() {
                     damageToRage(sp, damage, item, 3.5)
                 }
 
-                sp.addResource(rage, Resource.Type.RAGE, "Melee Hit")
+                sp.addResource(rage, Resource.Type.RAGE, hitAbility)
             }
         }
     }
@@ -70,7 +81,7 @@ class RageGeneration : Buff() {
                     damageToRage(sp, damage, item, 7.0)
                 }
 
-                sp.addResource(rage, Resource.Type.RAGE, "Melee Crit")
+                sp.addResource(rage, Resource.Type.RAGE, critAbility)
             }
         }
     }

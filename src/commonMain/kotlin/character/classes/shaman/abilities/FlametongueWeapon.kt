@@ -18,6 +18,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 25489
+    override val icon: String = "spell_fire_flametounge.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     override fun available(sp: SimParticipant): Boolean {
@@ -41,7 +42,7 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

@@ -13,6 +13,7 @@ class FelArmor : Ability() {
     }
     override val id: Int = 28189
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_felarmour.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -21,6 +22,7 @@ class FelArmor : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_felarmour.jpg"
         override val durationMs: Int = 30 * 60 * 1000
 
         override fun modifyStats(sp: SimParticipant): Stats {

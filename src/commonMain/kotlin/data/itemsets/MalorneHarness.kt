@@ -14,8 +14,14 @@ class MalorneHarness : ItemSet() {
     }
     override val id: Int = 640
 
+    val twoSetAbility = object : Ability() {
+        override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
+    }
+
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
         override val durationMs: Int = -1
 
         val bearCatProc = object : Proc() {
@@ -38,11 +44,11 @@ class MalorneHarness : ItemSet() {
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 // TODO: Figure out druid forms for reals
                 if(sp.buffs[Druid.BEAR_FORM_BUFF_NAME] != null || sp.buffs[Druid.DIRE_BEAR_FORM_BUFF_NAME] != null) {
-                    sp.addResource(10, Resource.Type.RAGE, FOUR_SET_BUFF_NAME)
+                    sp.addResource(10, Resource.Type.RAGE, twoSetAbility)
                 }
 
                 if(sp.buffs[Druid.CAT_FORM_BUFF_NAME] != null) {
-                    sp.addResource(20, Resource.Type.ENERGY, FOUR_SET_BUFF_NAME)
+                    sp.addResource(20, Resource.Type.ENERGY, twoSetAbility)
                 }
             }
         }
@@ -52,6 +58,7 @@ class MalorneHarness : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_chest_chain_15.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats? {

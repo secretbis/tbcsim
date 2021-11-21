@@ -15,13 +15,18 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class Stormstrike : Ability() {
+class StormstrikeOH : Stormstrike() {
+    override val name: String = "Stormstrike (OH)"
+}
+
+open class Stormstrike : Ability() {
     companion object {
         const val name = "Stormstrike"
     }
 
     override val id: Int = 17364
     override val name: String = Companion.name
+    override val icon: String = "ability_shaman_stormstrike.jpg"
     override fun cooldownMs(sp: SimParticipant): Int = 10000
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -48,6 +53,7 @@ class Stormstrike : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Stormstrike (Nature)"
+        override val icon: String = "ability_shaman_stormstrike.jpg"
         override val durationMs: Int = 12000
         override val maxCharges: Int = 2
 
@@ -76,7 +82,7 @@ class Stormstrike : Ability() {
         val eventMh = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = "$name (MH)",
+            ability = this,
             amount = mhResult.first,
             result = mhResult.second,
         )
@@ -90,7 +96,7 @@ class Stormstrike : Ability() {
             val eventOh = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = "$name (OH)",
+                ability = StormstrikeOH(),
                 amount = ohResult.first,
                 result = ohResult.second,
             )

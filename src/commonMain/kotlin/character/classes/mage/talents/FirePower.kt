@@ -16,6 +16,7 @@ class FirePower(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_fire_immolation.jpg"
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(fireDamageMultiplier = 1.0 + (0.02 * currentRank))

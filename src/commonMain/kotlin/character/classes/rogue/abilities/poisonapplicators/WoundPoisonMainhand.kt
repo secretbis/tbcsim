@@ -12,6 +12,7 @@ class WoundPoisonMainhand : Ability() {
 
     override val id: Int = 27189
     override val name: String = Companion.name
+    override val icon: String = "inv_misc_herb_16.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {

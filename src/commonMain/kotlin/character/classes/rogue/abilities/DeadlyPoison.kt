@@ -14,6 +14,7 @@ class DeadlyPoison(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 27187
+    override val icon: String = "ability_rogue_dualweild.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true
 

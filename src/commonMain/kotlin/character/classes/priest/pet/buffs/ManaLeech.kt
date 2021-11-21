@@ -8,10 +8,20 @@ import sim.SimParticipant
 // https://tbc.wowhead.com/spell=28305/mana-leech
 // https://tbc.wowhead.com/spell=34650/mana-leech
 class ManaLeech : Buff() {
+    companion object {
+        const val name = "Mana Leech"
+    }
+
     override val id = 28305
-    override val name: String = "Mana Leech"
+    override val name: String = Companion.name
+    override val icon: String = "spell_shadow_shadowmend.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+
+    val mlAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_shadow_shadowmend.jpg"
+    }
 
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -24,7 +34,7 @@ class ManaLeech : Buff() {
             if (sp.owner == null || event == null) return
 
             // https://web.archive.org/web/20071201221602/http://www.shadowpriest.com/viewtopic.php?t=7616
-            sp.owner.addResource((event.amount * 2.5).toInt(), Resource.Type.MANA, name)
+            sp.owner.addResource((event.amount * 2.5).toInt(), Resource.Type.MANA, mlAbility)
         }
     }
 

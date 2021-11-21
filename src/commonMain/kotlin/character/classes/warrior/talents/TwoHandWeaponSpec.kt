@@ -16,6 +16,7 @@ class TwoHandWeaponSpec(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Two-Handed Weapon Specialization"
+        override val icon: String = "inv_axe_09.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

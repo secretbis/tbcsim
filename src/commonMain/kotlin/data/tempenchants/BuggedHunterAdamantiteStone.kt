@@ -9,6 +9,7 @@ import sim.SimParticipant
 class BuggedHunterAdamantiteStone(item: Item) : TempEnchant(item) {
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val name: String = "Bugged? Hunter Adamantite Stone"
+    override val icon: String = "inv_stone_sharpeningstone_07.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(

@@ -12,6 +12,10 @@ import mechanics.General
 import mechanics.Spell
 import sim.*
 
+class LightningBoltOverload : LightningBolt() {
+    override val name: String = "Lightning Overload (LB)"
+}
+
 open class LightningBolt : Ability() {
     companion object {
         const val name = "Lightning Bolt"
@@ -19,6 +23,7 @@ open class LightningBolt : Ability() {
 
     override val id: Int = 25449
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_lightning.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -37,6 +42,7 @@ open class LightningBolt : Ability() {
 
     val loBuff = object : Buff() {
         override val name: String = "Lightning Overload (LB)"
+        override val icon: String = "spell_nature_lightningoverload.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -97,7 +103,7 @@ open class LightningBolt : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = if(isLoProc) { "Lightning Overload (LB)" } else name,
+            ability = if(isLoProc) { LightningBoltOverload() } else this,
             amount = result.first,
             result = result.second,
         )

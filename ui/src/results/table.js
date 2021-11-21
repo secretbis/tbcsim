@@ -6,12 +6,25 @@ import TableExport from '../data/export';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default ({ title, data, columnInfo }) => {
+export default ({ title, data, columnInfo, icons=true }) => {
 
   function renderCell(col, row) {
     const formatter = col.formatter || noop
     const result = formatter(row[col.key])
     return result === "NaN" ? '-' : result;
+  }
+
+  function iconColumn() {
+    if(!icons) return null;
+
+    return (
+      <Column width={38}>
+        <HeaderCell title=''></HeaderCell>
+        <Cell>
+          {row => row ? <img style={{ marginTop: -6, marginLeft: -5, border: '1px solid #AAA', borderRadius: 3 }} height={32} width={32} src={`icons/${row.icon}`} /> : null }
+        </Cell>
+      </Column>
+    );
   }
 
   return (
@@ -24,6 +37,7 @@ export default ({ title, data, columnInfo }) => {
         autoHeight={true}
         data={data}
       >
+        {iconColumn()}
         {columnInfo.map((col, idx) => {
           return (
             <Column key={idx} flexGrow={col.flex || 1} minWidth={col.minWidth}>

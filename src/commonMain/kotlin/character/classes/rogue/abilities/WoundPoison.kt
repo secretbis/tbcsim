@@ -17,6 +17,7 @@ class WoundPoison(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 27189
+    override val icon: String = "inv_misc_herb_16.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true
 
@@ -40,7 +41,7 @@ class WoundPoison(override val name: String, val item: Item) : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
-            abilityName = name,
+            ability = this,
             amount = damage,
             result = EventResult.HIT
         )

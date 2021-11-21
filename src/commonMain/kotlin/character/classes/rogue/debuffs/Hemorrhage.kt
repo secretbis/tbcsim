@@ -13,16 +13,17 @@ class Hemorrhage(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_lifedrain.jpg"
     override val durationMs: Int = 15000
 
-    // TODO: maybe reduce this to a number that represents something realistic with other raid members consuming charges, 
+    // TODO: maybe reduce this to a number that represents something realistic with other raid members consuming charges,
     //       otherwise the personal damage increase will be highly inflated.
     override val maxCharges = 10 - 1
 
     val physicalDmgIncrease = 42.0
 
-    // TODO: unsure if this is correct. 
-    override fun modifyStats(sp: SimParticipant): Stats {  
+    // TODO: unsure if this is correct.
+    override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
             whiteDamageFlatModifier = physicalDmgIncrease,
             yellowDamageFlatModifier = physicalDmgIncrease
@@ -37,7 +38,7 @@ class Hemorrhage(owner: SimParticipant) : Debuff(owner) {
                 Proc.Trigger.PHYSICAL_DAMAGE
             )
             override val type: Type = Type.STATIC
-        
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.consumeDebuff(buff)
             }

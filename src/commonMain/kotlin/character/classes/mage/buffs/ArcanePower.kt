@@ -11,6 +11,7 @@ class ArcanePower : Buff() {
 
     override val name: String = Companion.name
     override val durationMs: Int = 15000
+    override val icon: String = "spell_nature_lightning.jpg"
 
     fun manaCostMultiplier(): Double = 1.3
 

@@ -21,6 +21,7 @@ class ManaEmerald : Ability() {
 
     override val id: Int = 22044
     override val name: String = Companion.name
+    override val icon: String = "inv_misc_gem_stone_01.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd = true
     override val sharedCooldown: SharedCooldown = SharedCooldown.RUNE_OR_MANA_GEM
@@ -48,7 +49,7 @@ class ManaEmerald : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val manaRestored = Random.nextInt(gemItem.minDmg.toInt(), gemItem.maxDmg.toInt())
-        sp.addResource(manaRestored, Resource.Type.MANA, name)
+        sp.addResource(manaRestored, Resource.Type.MANA, this)
 
         // Craft and fire event to send with the proc
         val currentAmount = sp.resources[Resource.Type.MANA]?.currentAmount?.toDouble() ?: 0.0
@@ -57,7 +58,7 @@ class ManaEmerald : Ability() {
             amount = currentAmount,
             delta = manaRestored.toDouble(),
             resourceType = Resource.Type.MANA,
-            abilityName = Companion.name
+            ability = this
         )
 
         sp.fireProc(listOf(Proc.Trigger.MAGE_MANA_GEM), listOf(gemItem), null, event)

@@ -10,6 +10,7 @@ class PetSerpentsSwiftness : Buff() {
     override val name: String = "Serpent's Swiftness (Pet)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "ability_hunter_serpentswiftness.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         val serpentsSwiftness = sp.owner?.character?.klass?.talents?.get(SerpentsSwiftness.name) as SerpentsSwiftness?

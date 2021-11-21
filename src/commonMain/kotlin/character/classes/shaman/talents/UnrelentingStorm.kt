@@ -14,6 +14,7 @@ class UnrelentingStorm(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Unrelenting Storm"
+        override val icon: String = "spell_nature_unrelentingstorm.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

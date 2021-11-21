@@ -12,6 +12,7 @@ class AmplifyCurse : Ability() {
     }
     override val id: Int = 18288
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_contagion.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 
@@ -24,6 +25,7 @@ class AmplifyCurse : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_contagion.jpg"
         override val durationMs: Int = 30000
         override val hidden: Boolean = true
     }

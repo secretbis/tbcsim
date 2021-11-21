@@ -14,13 +14,20 @@ class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
+    val acAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_shadow_manaburn.jpg"
+    }
+
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_shadow_manaburn.jpg"
 
         val ccBuff = object : Buff() {
             override val name: String = buffName
+            override val icon: String = "spell_shadow_manaburn.jpg"
             override val durationMs: Int = -1
             override val hidden: Boolean = true
 
@@ -38,7 +45,7 @@ class ArcaneConcentration(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(ability?.resourceCost(sp)?.toInt() ?: 0, Resource.Type.MANA, buffName)
+                sp.addResource(ability?.resourceCost(sp)?.toInt() ?: 0, Resource.Type.MANA, acAbility)
                 sp.consumeBuff(buff)
             }
         }

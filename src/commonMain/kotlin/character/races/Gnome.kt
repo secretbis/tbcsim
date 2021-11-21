@@ -17,6 +17,7 @@ class Gnome : Race() {
 
     val expansiveMind = object : Buff() {
         override val name: String = "Expansive Mind"
+        override val icon: String = "inv_enchant_essenceeternallarge.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -14,6 +14,7 @@ import sim.SimParticipant
 class BiteRank9 : Ability() {
     override val id: Int = 27050
     override val name: String = "Bite (Rank 9)"
+    override val icon: String = "ability_racial_cannibalize.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.FOCUS
@@ -30,7 +31,7 @@ class BiteRank9 : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

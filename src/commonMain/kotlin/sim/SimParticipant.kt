@@ -193,7 +193,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 if(castTimeMs > 0) {
                     val castEvent = Event(
                         eventType = EventType.SPELL_START_CAST,
-                        abilityName = castingRule!!.ability.name,
+                        ability = castingRule!!.ability,
                         target = sim.target
                     )
                     logEvent(castEvent)
@@ -218,7 +218,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     // Log cast event
                     val castEvent = Event(
                         eventType = EventType.SPELL_CAST,
-                        abilityName = castingRule!!.ability.name,
+                        ability = castingRule!!.ability,
                         target = sim.target
                     )
                     logEvent(castEvent)
@@ -531,7 +531,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     // Resource
-    fun addResource(amount: Int, type: Resource.Type, abilityName: String) {
+    fun addResource(amount: Int, type: Resource.Type, ability: Ability) {
         if(amount == 0) return
 
         var res = resources[type]
@@ -549,11 +549,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             delta = amount.toDouble(),
             amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
             resourceType = res.type,
-            abilityName = abilityName
+            ability = ability
         ))
     }
 
-    fun subtractResource(amount: Int, type: Resource.Type, abilityName: String) {
+    fun subtractResource(amount: Int, type: Resource.Type, ability: Ability) {
         var res = resources[type]
 
         if(res == null) {
@@ -569,7 +569,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             delta = -1 * amount.toDouble(),
             amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
             resourceType = res.type,
-            abilityName = abilityName
+            ability = ability
         ))
     }
 
@@ -638,7 +638,6 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             event.target = event.target ?: sim.target
         }
 
-        logger.trace { "Got event: ${event.abilityName} - ${event.tick} (${event.tick * sim.opts.stepMs}ms) - ${event.eventType} - ${event.eventType} - ${event.amount}" }
         events.add(event)
     }
 

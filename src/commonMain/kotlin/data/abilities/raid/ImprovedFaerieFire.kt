@@ -11,10 +11,12 @@ class ImprovedFaerieFire : Ability() {
 
     override val id: Int = 26993
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_faeriefire.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Improved Faerie Fire"
+        override val icon: String = "spell_nature_faeriefire.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false
@@ -35,6 +37,7 @@ class ImprovedFaerieFire : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Improved Faerie Fire"
+        override val icon: String = "spell_nature_faeriefire.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

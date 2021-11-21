@@ -14,16 +14,19 @@ class BadgeOfTheSwarmguard : Buff() {
     }
     override val id: Int = 26480
     override val name: String = Companion.name
+    override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 30000
     val buff = object : Buff() {
         override val name: String  = "Badge of the Swarmguard"
+        override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
         override val durationMs: Int = buffDurationMs
 
         val stackBuff = object : Buff() {
             override val name: String = "Insight of the Qiraji"
+            override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
             override val durationMs: Int = buffDurationMs
             override val maxStacks: Int = 6
             override val hidden: Boolean = false
@@ -68,6 +71,7 @@ class BadgeOfTheSwarmguard : Buff() {
     val ability = object : Ability() {
         override val id: Int = 26480
         override val name: String = "Badge of the Swarmguard"
+        override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 180000
        //no trinket lockout

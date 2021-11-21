@@ -16,9 +16,11 @@ import sim.SimParticipant
 class MultiShot : Ability() {
     companion object {
         const val name = "Multi Shot"
+        const val icon = "ability_upgrademoonglaive.jpg"
     }
     override val id: Int = 27021
     override val name: String = Companion.name
+    override val icon: String = Companion.icon
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 10000
 
@@ -52,7 +54,7 @@ class MultiShot : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

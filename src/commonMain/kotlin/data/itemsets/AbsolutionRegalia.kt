@@ -15,6 +15,7 @@ class AbsolutionRegalia : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_99.jpg"
     }
 
     // https://tbc.wowhead.com/spell=38412/improved-mind-blast
@@ -22,6 +23,7 @@ class AbsolutionRegalia : ItemSet() {
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_99.jpg"
     }
 
     override val bonuses: List<Bonus> = listOf(

@@ -22,6 +22,7 @@ class Scorch : Ability() {
     }
     override val id: Int = 27074
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_soulburn.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 1500
@@ -40,6 +41,7 @@ class Scorch : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Improved Scorch"
+        override val icon: String = "spell_fire_soulburn.jpg"
         override val durationMs: Int = 30000
         override val maxStacks: Int = 5
 
@@ -74,7 +76,7 @@ class Scorch : Ability() {
          val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

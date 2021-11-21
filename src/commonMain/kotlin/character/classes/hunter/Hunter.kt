@@ -21,6 +21,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
     // Every quiver adds 15% haste, so there's no point in selecting it
     val quiverHaste = object : Buff() {
         override val name: String = "Quiver Haste"
+        override val icon: String = "classic_inv_misc_quiver_05.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

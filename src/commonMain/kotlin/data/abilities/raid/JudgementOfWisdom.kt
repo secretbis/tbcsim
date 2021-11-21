@@ -12,10 +12,12 @@ class JudgementOfWisdom : Ability() {
 
     override val id: Int = 27164
     override val name: String = Companion.name
+    override val icon: String = "spell_holy_righteousnessaura.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Judgement of Wisdom"
+        override val icon: String = "spell_holy_righteousnessaura.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
@@ -45,7 +47,7 @@ class JudgementOfWisdom : Ability() {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 if(sp.resources.containsKey(Resource.Type.MANA)) {
-                    sp.addResource(74, Resource.Type.MANA, name)
+                    sp.addResource(74, Resource.Type.MANA, this@JudgementOfWisdom)
                 }
             }
         }

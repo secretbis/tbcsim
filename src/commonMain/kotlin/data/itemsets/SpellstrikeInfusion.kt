@@ -17,11 +17,13 @@ class SpellstrikeInfusion : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_pants_cloth_14.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         val blastingBuff = object : Buff() {
             override val name: String = "$TWO_SET_BUFF_NAME (Spell Damage)"
+            override val icon: String = "inv_pants_cloth_14.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

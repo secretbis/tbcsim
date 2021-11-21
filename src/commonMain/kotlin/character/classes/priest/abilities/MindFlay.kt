@@ -21,9 +21,10 @@ abstract class MindFlay : Ability() {
     override val id: Int = 25387
     open val tickCount = 3
 
-    val school = Constants.DamageType.SHADOW 
+    val school = Constants.DamageType.SHADOW
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
+    override val icon: String = "spell_shadow_siphonmana.jpg"
 
     val baseResourceCost = 230.0
     override fun resourceCost(sp: SimParticipant): Double {
@@ -52,7 +53,7 @@ abstract class MindFlay : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

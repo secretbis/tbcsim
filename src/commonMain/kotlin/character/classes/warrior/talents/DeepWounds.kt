@@ -18,6 +18,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
 
     val bloodFrenzy = object : Buff() {
         override val name: String = "Blood Frenzy (DW)"
+        override val icon: String = "ability_warrior_bloodfrenzy.jpg"
         override val durationMs: Int = 12000
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -28,8 +29,14 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
 
     fun bleedDebuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Deep Wounds"
+        override val icon: String = "ability_backstab.jpg"
         override val durationMs: Int = 12000
         override val tickDeltaMs: Int = 3000
+
+        val deepWoundsAbility = object : Ability() {
+            override val name: String = Companion.name
+            override val icon: String = "ability_warrior_bloodfrenzy.jpg"
+        }
 
         override fun tick(sp: SimParticipant) {
             // 20% of average weapon damage per talent point over  full duration
@@ -40,7 +47,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
             owner.logEvent(Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = name,
+                ability = deepWoundsAbility,
                 amount = damageFullDuration * tickPct,
                 result = EventResult.HIT,
             ))
@@ -49,6 +56,7 @@ class DeepWounds(currentRank: Int) : Talent(currentRank) {
 
     val staticBuff = object : Buff() {
         override val name: String = "Deep Wounds (static)"
+        override val icon: String = "ability_backstab.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -25,6 +25,12 @@ class CycloneRegalia : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_pants_mail_15.jpg"
+    }
+
+    val fourSetAbility = object : Ability() {
+        override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_pants_mail_15.jpg"
     }
 
     fun fourSetConsumeProc(buff: Buff): Proc {
@@ -43,7 +49,7 @@ class CycloneRegalia : ItemSet() {
                 if(ability != null) {
                     // Choose the lower of the spell cost, or the 270 set reduction
                     val refund = min(ability.resourceCost(sp), 270.0).toInt()
-                    sp.addResource(refund, Resource.Type.MANA, FOUR_SET_BUFF_NAME)
+                    sp.addResource(refund, Resource.Type.MANA, fourSetAbility)
                 }
             }
         }
@@ -51,6 +57,7 @@ class CycloneRegalia : ItemSet() {
 
     val fourSetCostReductionBuff = object : Buff() {
         override val name: String = "$FOUR_SET_BUFF_NAME (cost reduction)"
+        override val icon: String = "inv_pants_mail_15.jpg"
         override val durationMs: Int = 15000
 
         val consumeProc = fourSetConsumeProc(this)
@@ -60,6 +67,7 @@ class CycloneRegalia : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_pants_mail_15.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

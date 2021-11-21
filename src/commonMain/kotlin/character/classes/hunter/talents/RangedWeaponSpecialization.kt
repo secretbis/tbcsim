@@ -16,6 +16,7 @@ class RangedWeaponSpecialization(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "inv_weapon_rifle_06.jpg"
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(physicalDamageMultiplier = 1.0 + (0.01 * currentRank))

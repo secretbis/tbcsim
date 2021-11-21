@@ -8,6 +8,7 @@ class WaterElementalBase: Buff() {
     override val name: String = "Water Elemental Base"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "spell_frost_summonwaterelemental_2.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         // Inherit stats from the caster

@@ -16,6 +16,7 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_dualweild.jpg"
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
     val totalTicks = durationMs / tickDeltaMs
@@ -35,6 +36,7 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
         return object : Ability() {
             override val id: Int = 27187
             override val name: String = Companion.name
+            override val icon: String = "ability_rogue_dualweild.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
             override val castableOnGcd: Boolean = true
 
@@ -44,7 +46,7 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
                 val event = Event(
                     eventType = EventType.DAMAGE,
                     damageType = Constants.DamageType.NATURE,
-                    abilityName = name,
+                    ability = this,
                     amount = dmgPerTick,
                     result = EventResult.HIT
                 )

@@ -10,6 +10,7 @@ class NetherscaleArmor : ItemSet() {
 
     val threeBuff = object : Buff() {
         override val name: String = "Netherscale Armor (3 set)"
+        override val icon: String = "inv_belt_29.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

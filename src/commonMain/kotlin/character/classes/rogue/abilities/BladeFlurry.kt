@@ -19,6 +19,7 @@ class BladeFlurry : Ability() {
 
     override val id: Int = 13877
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_punishingblow.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 120000
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()

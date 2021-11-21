@@ -22,6 +22,7 @@ class AssassinationArmor : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = "Assassination Armor (2 set)"
+        override val icon: String = "inv_shoulder_24.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -34,6 +35,7 @@ class AssassinationArmor : ItemSet() {
 
             val hasteBuff = object : Buff() {
                 override val name: String = "Assassination Armor (CS/KS haste)"
+                override val icon: String = "inv_shoulder_24.jpg"
                 override val durationMs: Int = 6000
 
                 override fun modifyStats(sp: SimParticipant): Stats {

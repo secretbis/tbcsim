@@ -13,6 +13,7 @@ class ColdBlood() : Buff() {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_ice_lament.jpg"
     override val durationMs: Int = -1
 
     val consumingAbilities = setOf(
@@ -22,13 +23,13 @@ class ColdBlood() : Buff() {
         Envenom.name,
         Eviscerate.name,
         Shiv.name,
-        Mutilate.secondaryName,  // cold blood applies to both hits, make sure its only removed on the 2nd hit
+        MutilateOH.name,  // cold blood applies to both hits, make sure its only removed on the 2nd hit
         Hemorrhage.name,
         GhostlyStrike.name
     )
 
     // this will also make it proc on Kick and Gouge which are not supposed to consume this buff. Should not be relevant for dps sims though.
-    override fun modifyStats(sp: SimParticipant): Stats {  
+    override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
             yellowHitsAdditionalCritPct = 100.0
         )
@@ -46,11 +47,11 @@ class ColdBlood() : Buff() {
                 Trigger.MELEE_PARRY
             )
             override val type: Type = Type.STATIC
-        
+
             override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 return consumingAbilities.contains(ability?.name) && super.shouldProc(sp, items, ability, event)
             }
-        
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.consumeBuff(buff)
             }

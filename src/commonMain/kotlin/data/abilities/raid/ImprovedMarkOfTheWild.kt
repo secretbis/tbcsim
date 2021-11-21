@@ -12,6 +12,7 @@ class ImprovedMarkOfTheWild : Ability() {
 
     override val id: Int = 39233
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_giftofthewild.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     // Always assume the raid buffer has 5/5 imp motw
@@ -22,6 +23,7 @@ class ImprovedMarkOfTheWild : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Mark of the Wild"
+        override val icon: String = "spell_nature_giftofthewild.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

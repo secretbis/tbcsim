@@ -20,11 +20,18 @@ class WarbringerBattlegear : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_58.jpg"
         override val durationMs: Int = -1
+    }
+
+    val fourSetAbility = object : Ability() {
+        override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_58.jpg"
     }
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_58.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -36,7 +43,7 @@ class WarbringerBattlegear : ItemSet() {
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(2, Resource.Type.RAGE, name)
+                sp.addResource(2, Resource.Type.RAGE, fourSetAbility)
             }
         }
 

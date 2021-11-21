@@ -11,6 +11,7 @@ import sim.SimParticipant
 class EyeOfMagtheridon : Buff() {
 
     override val name: String = "Eye of Magtheridon (static)"
+    override val icon: String = "inv_elemental_mote_life01.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -24,6 +25,7 @@ class EyeOfMagtheridon : Buff() {
         val buff = object : Buff() {
             override val id: Int = 34749
             override val name: String = "Eye of Magtheridon"
+            override val icon: String = "inv_elemental_mote_life01.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

@@ -16,6 +16,7 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
     }
 
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_rupture.jpg"
     override val durationMs: Int = getDurationForCombopoints(owner, consumedComboPoints)
     override val tickDeltaMs: Int = 2000
 
@@ -67,13 +68,14 @@ class RuptureDot(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owner
     val dot = object : Ability() {
         override val id: Int = 26867
         override val name: String = Companion.name
+        override val icon: String = "ability_rogue_rupture.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = name,
+                ability = this,
                 amount = dmgPerTick,
                 result = EventResult.HIT,
             )

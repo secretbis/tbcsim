@@ -13,8 +13,14 @@ class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
+    val uwAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_nature_stoneclawtotem.jpg"
+    }
+
     val buff = object : Buff() {
-        override val name: String = "Unbridled Wrath"
+        override val name: String = Companion.name
+        override val icon: String = "spell_nature_stoneclawtotem.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -34,7 +40,7 @@ class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
             override val ppm: Double = 3.0 * currentRank
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(1, Resource.Type.RAGE, name)
+                sp.addResource(1, Resource.Type.RAGE, uwAbility)
             }
         }
 

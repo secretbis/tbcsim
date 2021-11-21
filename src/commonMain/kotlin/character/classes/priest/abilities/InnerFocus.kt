@@ -11,11 +11,12 @@ class InnerFocus : Ability() {
     }
     override val id: Int = 14751
     override val name: String = Companion.name
-    
+    override val icon: String = "spell_frost_windwalkon.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
-    
+
     override fun castTimeMs(sp: SimParticipant): Int = 0
-    
+
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 
     override fun available(sp: SimParticipant): Boolean {

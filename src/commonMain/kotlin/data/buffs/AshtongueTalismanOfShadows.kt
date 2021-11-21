@@ -14,11 +14,13 @@ class AshtongueTalismanOfShadows : Buff() {
     }
 
     override val name: String = "${Companion.name} (static)"
+    override val icon: String = "inv_qirajidol_night.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "inv_qirajidol_night.jpg"
         override val durationMs: Int = 5000
 
         override fun modifyStats(sp: SimParticipant): Stats {

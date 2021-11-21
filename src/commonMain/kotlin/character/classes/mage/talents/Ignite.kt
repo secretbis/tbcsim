@@ -19,6 +19,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_fire_incinerate.jpg"
 
         inner class IgniteState : Buff.State() {
             // List of damage to damage event timestamp in ms
@@ -33,6 +34,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
 
             fun igniteDebuff(sp: SimParticipant): Debuff = object : Debuff(sp) {
                 override val name: String = Companion.name
+                override val icon: String = "spell_fire_incinerate.jpg"
                 override val durationMs: Int = 4000
                 override val tickDeltaMs: Int = 2000
                 override val maxStacks: Int = 5
@@ -41,6 +43,11 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
 
                 override fun stateFactory(): State {
                     return IgniteState()
+                }
+
+                val igniteAbility = object : Ability() {
+                    override val name: String = Companion.name
+                    override val icon: String = "spell_fire_incinerate.jpg"
                 }
 
                 override fun tick(sp: SimParticipant) {
@@ -54,7 +61,7 @@ class Ignite(currentRank: Int) : Talent(currentRank) {
                     owner.logEvent(Event(
                         eventType = EventType.DAMAGE,
                         damageType = Constants.DamageType.FIRE,
-                        abilityName = Companion.name,
+                        ability = igniteAbility,
                         result = EventResult.HIT,
                         amount = igniteTickDamage
                     ))

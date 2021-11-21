@@ -13,10 +13,16 @@ class MasterOfElements(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
+    val moeAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_fire_masterofelements.jpg"
+    }
+
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_fire_masterofelements.jpg"
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -29,7 +35,7 @@ class MasterOfElements(currentRank: Int) : Talent(currentRank) {
                 if(event?.result == EventResult.CRIT) {
                     val resourceCost = ability?.resourceCost(sp)
                     if(resourceCost != null) {
-                        sp.addResource((resourceCost * 0.1 * currentRank).toInt(), Resource.Type.MANA, Companion.name)
+                        sp.addResource((resourceCost * 0.1 * currentRank).toInt(), Resource.Type.MANA, moeAbility)
                     }
                 }
             }

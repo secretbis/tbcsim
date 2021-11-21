@@ -12,6 +12,7 @@ class InstantPoisonOffhand : Ability() {
 
     override val id: Int = 26890
     override val name: String = Companion.name
+    override val icon: String = "ability_poisons.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {

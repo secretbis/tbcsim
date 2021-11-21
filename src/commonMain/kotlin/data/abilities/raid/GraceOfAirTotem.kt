@@ -12,10 +12,12 @@ class GraceOfAirTotem : Ability() {
 
     override val id: Int = 25359
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_invisibilitytotem.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Grace of Air Totem"
+        override val icon: String = "spell_nature_invisibilitytotem.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

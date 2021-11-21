@@ -30,6 +30,7 @@ class Devastation(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         val buff = object : Buff() {
             override val name: String = "Devastation"
+            override val icon: String = "inv_axe_68.jpg"
             override val durationMs: Int = 30000
 
             override fun modifyStats(sp: SimParticipant): Stats {

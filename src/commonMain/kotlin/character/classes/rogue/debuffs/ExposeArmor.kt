@@ -14,6 +14,7 @@ class ExposeArmor(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owne
     }
 
     override val name: String = "Expose Armor"
+    override val icon: String = "ability_warrior_riposte.jpg"
     override val durationMs: Int = 30000
 
     val armorReduce = getArmorReduceForCombopoints(owner, consumedComboPoints)
@@ -25,11 +26,11 @@ class ExposeArmor(owner: SimParticipant, consumedComboPoints: Int) : Debuff(owne
         )
     }
 
-    override fun modifyStats(sp: SimParticipant): Stats {  
+    override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(
             armor = -1 * armorReduce
         )
-    }  
+    }
 
     fun getArmorReduceForCombopoints(sp: SimParticipant, consumedComboPoints: Int): Int {
         val improved = sp.character.klass.talents[ImprovedExposeArmor.name] as ImprovedExposeArmor?

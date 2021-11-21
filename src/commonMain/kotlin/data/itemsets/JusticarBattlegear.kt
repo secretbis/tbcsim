@@ -14,12 +14,14 @@ class JusticarBattlegear : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_15.jpg"
     }
 
     // TODO: Judgement of Command should check this buff once it exists
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_15.jpg"
     }
 
     override val bonuses: List<Bonus> = listOf(

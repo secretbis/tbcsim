@@ -18,9 +18,11 @@ import kotlin.random.Random
 class SteadyShot : Ability() {
     companion object {
         const val name = "Steady Shot"
+        const val icon = "ability_hunter_steadyshot.jpg"
     }
     override val id: Int = 34120
     override val name: String = Companion.name
+    override val icon: String = Companion.icon
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     // Tooltip value is 1s, but hunters have a secret 0.5s additional cast/wind-up time
     override fun castTimeMs(sp: SimParticipant): Int {
@@ -56,7 +58,7 @@ class SteadyShot : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

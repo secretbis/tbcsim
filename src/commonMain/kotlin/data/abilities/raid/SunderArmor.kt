@@ -10,10 +10,12 @@ class SunderArmor : Ability() {
 
     override val id: Int = 25225
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_sunder.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Sunder Armor"
+        override val icon: String = "ability_warrior_sunder.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false

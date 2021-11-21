@@ -1,6 +1,7 @@
 package sim
 
 import character.*
+import data.abilities.generic.MP5
 import mu.KotlinLogging
 import sim.rotation.Rotation
 import kotlin.js.JsExport
@@ -94,7 +95,7 @@ class SimIteration(
         if (elapsedTimeMs - lastMp5Tick >= 5000) {
             allParticipants.forEach {
                 if (it.resources.containsKey(Resource.Type.MANA)) {
-                    it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA, "MP5")
+                    it.addResource(it.stats.manaPer5Seconds, Resource.Type.MANA, MP5())
                 }
             }
             lastMp5Tick = elapsedTimeMs

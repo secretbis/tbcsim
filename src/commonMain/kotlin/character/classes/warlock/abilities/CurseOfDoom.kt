@@ -17,6 +17,7 @@ class CurseOfDoom : Ability() {
 
     override val id: Int = 27216
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_auraofdarkness.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun resourceCost(sp: SimParticipant): Double = 380.0
@@ -31,7 +32,7 @@ class CurseOfDoom : Ability() {
         val event = Event(
             eventType = EventType.SPELL_CAST,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

@@ -25,6 +25,7 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "inv_sword_27.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -42,6 +43,26 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
             override val type: Type = Type.PERCENT
             override fun percentChance(sp: SimParticipant): Double = additionalAttackChancePercent()
 
+            val swordSpecAbility = object : Ability() {
+                override val name: String = Companion.name
+                override val icon: String = "inv_sword_27.jpg"
+
+                override fun cast(sp: SimParticipant) {
+                    // the additional attack is always carried out by the mainhand
+                    val attackItem = sp.character.gear.mainHand
+                    val damageRoll = Melee.baseDamageRoll(sp, attackItem)
+                    val result = Melee.attackRoll(sp, damageRoll, attackItem, isWhiteDmg = true)
+
+                    sp.logEvent(Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = Constants.DamageType.PHYSICAL,
+                        ability = this,
+                        amount = result.first,
+                        result = result.second,
+                    ))
+                }
+            }
+
             override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 // Sword spec cannot proc off itself
                 val isSwordSpec = ability?.name == name
@@ -55,18 +76,7 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
                     return
                 }
 
-                // the additional attack is always carried out by the mainhand
-                val attackItem = sp.character.gear.mainHand
-                val damageRoll = Melee.baseDamageRoll(sp, attackItem)
-                val result = Melee.attackRoll(sp, damageRoll, attackItem, isWhiteDmg = true)
-
-                sp.logEvent(Event(
-                    eventType = EventType.DAMAGE,
-                    damageType = Constants.DamageType.PHYSICAL,
-                    abilityName = name,
-                    amount = result.first,
-                    result = result.second,
-                ))
+                swordSpecAbility.cast(sp)
             }
         }
 

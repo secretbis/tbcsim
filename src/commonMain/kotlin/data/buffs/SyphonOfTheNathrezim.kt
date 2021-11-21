@@ -1,9 +1,6 @@
 package data.buffs
 
-import character.Ability
-import character.Buff
-import character.ItemProc
-import character.Proc
+import character.*
 import data.Constants
 import data.model.Item
 import sim.Event
@@ -11,7 +8,7 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class SyphonOfTheNathrezim(val sourceItem: Item) : Buff() {
+class SyphonOfTheNathrezim(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     companion object {
         const val name = "Siphon Essence"
     }
@@ -23,6 +20,7 @@ class SyphonOfTheNathrezim(val sourceItem: Item) : Buff() {
     // TODO: With two Syphons, oes this buff stack independently or just refresh itself?
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "inv_mace_44.jpg"
         override val durationMs: Int = 6000
 
         // Always steals 20 life from the enemy on every attack
@@ -38,14 +36,22 @@ class SyphonOfTheNathrezim(val sourceItem: Item) : Buff() {
             )
             override val type: Type = Type.STATIC
 
+            val syphonAbility = object : Ability() {
+                override val name: String = Companion.name
+                override val icon: String = "inv_mace_44.jpg"
+                override fun cast(sp: SimParticipant) {
+                    sp.logEvent(Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = Constants.DamageType.SHADOW,
+                        ability = this,
+                        result = EventResult.HIT,
+                        amount = 20.0,
+                    ))
+                }
+            }
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.logEvent(Event(
-                    eventType = EventType.DAMAGE,
-                    damageType = Constants.DamageType.SHADOW,
-                    abilityName = Companion.name,
-                    result = EventResult.HIT,
-                    amount = 20.0,
-                ))
+                syphonAbility.cast(sp)
             }
         }
 

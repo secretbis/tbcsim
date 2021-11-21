@@ -10,6 +10,7 @@ import sim.SimParticipant
 
 class MadnessOfTheBetrayer : Buff() {
     override val name: String = "Madness of the Betrayer (static)"
+    override val icon: String = "spell_shadow_charm.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -37,6 +38,7 @@ class MadnessOfTheBetrayer : Buff() {
         val buff = object : Buff() {
             override val id: Int = 40475
             override val name: String = "Madness of the Betrayer"
+            override val icon: String = "spell_shadow_charm.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

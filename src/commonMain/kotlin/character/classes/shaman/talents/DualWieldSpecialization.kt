@@ -16,6 +16,7 @@ class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Dual Wield Specialization"
+        override val icon: String = "ability_dualwieldspecialization.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

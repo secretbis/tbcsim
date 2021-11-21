@@ -13,6 +13,7 @@ class LifeTap : Ability() {
     }
     override val id: Int = 27222
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_burningspirit.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     // TODO: Life as a resource
@@ -26,6 +27,6 @@ class LifeTap : Ability() {
         val withSpellPower = Spell.baseDamageRollSingle(sp, manaPerCast, Constants.DamageType.SHADOW, spellPowerCoeff)
 
         val totalAmount = withSpellPower * impLtMultiplier
-        sp.addResource(totalAmount.toInt(), Resource.Type.MANA, name)
+        sp.addResource(totalAmount.toInt(), Resource.Type.MANA, this)
     }
 }

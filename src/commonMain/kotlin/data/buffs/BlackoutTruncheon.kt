@@ -31,6 +31,7 @@ class BlackoutTruncheon(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         val buff = object : Buff() {
             override val name: String = "Blackout Truncheon"
             override val durationMs: Int = 10000
+            override val icon: String = "inv_mace_35.jpg"
 
             override fun modifyStats(sp: SimParticipant): Stats {
                 return Stats(physicalHasteRating = 132.00)

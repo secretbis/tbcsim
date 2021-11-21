@@ -12,7 +12,7 @@ import character.classes.rogue.talents.*
 abstract class FinisherAbility : Ability() {
 
     protected var consumedComboPoints: Int = 0
-    
+
     override open fun available(sp: SimParticipant): Boolean {
         // making sure at least 1 CP is available, but this should already be ensured in the rotation
         return sp.hasEnoughResource(Resource.Type.COMBO_POINT, 1.0) && super.available(sp)
@@ -21,7 +21,7 @@ abstract class FinisherAbility : Ability() {
     override open fun beforeCast(sp: SimParticipant) {
         super.beforeCast(sp)
         consumedComboPoints = sp.resources[Resource.Type.COMBO_POINT]!!.currentAmount
-        sp.subtractResource(consumedComboPoints, Resource.Type.COMBO_POINT, name)
+        sp.subtractResource(consumedComboPoints, Resource.Type.COMBO_POINT, this)
     }
 
     protected fun fireProcAsFinisher(sp: SimParticipant, triggers: List<Proc.Trigger>?, items: List<Item>?, event: Event?) {
@@ -29,7 +29,7 @@ abstract class FinisherAbility : Ability() {
         if(triggers != null) {
             finalTriggers.addAll(triggers)
         }
-        
+
         sp.fireProc(finalTriggers, items, this, event)
     }
 

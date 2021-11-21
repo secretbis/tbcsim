@@ -20,6 +20,7 @@ import sim.SimParticipant
 class DevouringPlague : Ability() {
     override val id: Int = 19280
     override val name: String = "Devouring Plague"
+    override val icon: String = "spell_shadow_blackplague.jpg"
 
     val school = Constants.DamageType.SHADOW
 
@@ -51,7 +52,7 @@ class DevouringPlague : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)
@@ -64,6 +65,5 @@ class DevouringPlague : Ability() {
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
         sp.sim.target.addDebuff(DevouringPlagueDot(sp))
-    }    
+    }
 }
-

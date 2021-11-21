@@ -14,24 +14,36 @@ class AshtongueTalismanOfZeal : Buff() {
     }
 
     override val name: String = "${Companion.name} (static)"
+    override val icon: String = "inv_qiraj_jewelblessed.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     fun debuff(sp: SimParticipant) = object : Debuff(sp) {
         override val name: String = Companion.name
+        override val icon: String = "inv_qiraj_jewelblessed.jpg"
         override val durationMs: Int = 8000
         override val tickDeltaMs: Int = 2000
 
         val baseDmg = 480
         val numTicks = durationMs / tickDeltaMs
+
+        val talismanAbility = object : Ability() {
+            override val name: String = Companion.name
+            override val icon: String = "inv_qiraj_jewelblessed.jpg"
+
+            override fun cast(sp: SimParticipant) {
+                owner.logEvent(Event(
+                    eventType = EventType.DAMAGE,
+                    damageType = Constants.DamageType.PHYSICAL,
+                    ability = this,
+                    result = EventResult.HIT,
+                    amount = (baseDmg / numTicks).toDouble(),
+                ))
+            }
+        }
+
         override fun tick(sp: SimParticipant) {
-            owner.logEvent(Event(
-                eventType = EventType.DAMAGE,
-                damageType = Constants.DamageType.PHYSICAL,
-                abilityName = Companion.name,
-                result = EventResult.HIT,
-                amount = (baseDmg / numTicks).toDouble(),
-            ))
+            talismanAbility.cast(sp)
         }
     }
 

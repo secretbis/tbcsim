@@ -16,6 +16,7 @@ class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Elemental Precision"
+        override val icon: String = "spell_nature_elementalprecision_1.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

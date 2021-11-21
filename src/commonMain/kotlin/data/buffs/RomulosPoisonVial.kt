@@ -9,9 +9,8 @@ import sim.EventType
 import sim.SimParticipant
 
 class RomulosPoisonVial : Buff() {
-
-
     override val name: String = "Romulo's Poison Vial (static)"
+    override val icon: String = "inv_poison_mindnumbing.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -19,6 +18,7 @@ class RomulosPoisonVial : Buff() {
         override val id: Int = 34586
         override fun gcdMs(sp: SimParticipant): Int = 0
         override val name: String = "Romulo's Poison Vial"
+        override val icon: String = "inv_poison_mindnumbing.jpg"
 
         val school = Constants.DamageType.NATURE
         override fun cast(sp: SimParticipant) {
@@ -28,7 +28,7 @@ class RomulosPoisonVial : Buff() {
             val damageEvent = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second,
             )

@@ -17,6 +17,7 @@ class Shiv : Ability() {
 
     override val id: Int = 5938
     override val name: String = Companion.name
+    override val icon: String = "inv_throwingknife_04.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -43,13 +44,13 @@ class Shiv : Ability() {
                 poison.poisonAbility?.cast(sp)
             }
 
-            sp.addResource(1, Resource.Type.COMBO_POINT, name)
+            sp.addResource(1, Resource.Type.COMBO_POINT, this)
         }
 
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

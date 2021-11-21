@@ -11,6 +11,7 @@ import sim.SimParticipant
 class RageOfTheUnraveller : Buff() {
     override val id: Int = 33648
     override val name: String = "Rage of the Unraveller (static)"
+    override val icon: String = "inv_gizmo_khoriumpowercore.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -33,6 +34,7 @@ class RageOfTheUnraveller : Buff() {
 
         val buff = object : Buff() {
             override val name: String = "Rage of the Unraveller"
+            override val icon: String = "inv_gizmo_khoriumpowercore.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

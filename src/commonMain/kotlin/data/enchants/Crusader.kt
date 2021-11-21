@@ -12,6 +12,7 @@ import kotlin.js.JsExport
 class Crusader(item: Item) : Enchant(item) {
     override val id: Int = 20034
     override val name: String = "Crusader (static) ${item.uniqueName}"
+    override val icon: String = "spell_holy_blessingofstrength.jpg"
     override var displayName: String? = "Crusader"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
@@ -30,6 +31,7 @@ class Crusader(item: Item) : Enchant(item) {
 
             val buff = object : ItemBuff(listOf(item)) {
                 override val name: String = "Crusader $suffix"
+                override val icon: String = "spell_holy_blessingofstrength.jpg"
                 override val durationMs: Int = 15000
 
                 override fun modifyStats(sp: SimParticipant): Stats {

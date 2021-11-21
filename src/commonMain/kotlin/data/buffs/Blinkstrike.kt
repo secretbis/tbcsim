@@ -21,6 +21,7 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     val extraAttack = object : Ability() {
         override val id: Int = 38308
         override val name: String = "Blinkstrike Extra Attack"
+        override val icon: String = "inv_sword_76.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
@@ -32,7 +33,7 @@ class Blinkstrike (val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
                 isWhiteDamage = true,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second,
             )

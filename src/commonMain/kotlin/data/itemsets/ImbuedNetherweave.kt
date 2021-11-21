@@ -13,6 +13,7 @@ class ImbuedNetherweave : ItemSet() {
 
     val threeBuff = object : Buff() {
         override val name: String = THREE_SET_BUFF_NAME
+        override val icon: String = "inv_chest_cloth_12.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

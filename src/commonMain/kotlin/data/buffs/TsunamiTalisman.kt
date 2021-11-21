@@ -10,6 +10,7 @@ import sim.SimParticipant
 
 class TsunamiTalisman : Buff() {
     override val name: String = "Tsunami Talisman (static)"
+    override val icon: String = "spell_nature_unrelentingstorm.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -29,6 +30,7 @@ class TsunamiTalisman : Buff() {
         val buff = object : Buff() {
             override val id: Int = 42083
             override val name: String = "Tsunami Talisman"
+            override val icon: String = "spell_nature_unrelentingstorm.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

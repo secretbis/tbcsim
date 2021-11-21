@@ -13,10 +13,16 @@ class GoForTheThroat(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
+    val gfttAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "ability_hunter_goforthethroat.jpg"
+    }
+
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "ability_hunter_goforthethroat.jpg"
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -29,7 +35,7 @@ class GoForTheThroat(currentRank: Int) : Talent(currentRank) {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val focus = 25 * currentRank
-                sp.pet?.addResource(focus, Resource.Type.FOCUS, Companion.name)
+                sp.pet?.addResource(focus, Resource.Type.FOCUS, gfttAbility)
             }
         }
 

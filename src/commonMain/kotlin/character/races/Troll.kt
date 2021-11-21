@@ -26,6 +26,7 @@ class Troll : Race() {
 
     val beastSlaying = object : Buff() {
         override val name: String = "Beast Slaying"
+        override val icon: String = "inv_misc_pelt_bear_ruin_02.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -40,6 +41,7 @@ class Troll : Race() {
 
     val bowSpec = object : Buff() {
         override val name: String = "Bow Specialization"
+        override val icon: String = "inv_weapon_bow_12.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

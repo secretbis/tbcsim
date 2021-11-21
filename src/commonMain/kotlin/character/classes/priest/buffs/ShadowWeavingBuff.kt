@@ -14,6 +14,7 @@ class ShadowWeavingBuff(sp: SimParticipant) : Buff(){
     }
     override val id = 15258
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_blackplague.jpg"
     override val durationMs: Int = 15000
     override val maxStacks: Int = 5
 

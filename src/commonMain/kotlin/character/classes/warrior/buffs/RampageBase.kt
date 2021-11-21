@@ -12,11 +12,13 @@ class RampageBase : Buff() {
         // This is just a marker to tell the rotation that we can cast Rampage
         val rampageFlagBuff = object : Buff() {
             override val name: String = "Rampage (available)"
+            override val icon: String = "ability_warrior_rampage.jpg"
             override val durationMs: Int = 3000 // TODO: 1 server tick?  Needs confirmation
             override val hidden: Boolean = true
         }
     }
     override val name: String = "Rampage (base)"
+    override val icon: String = "ability_warrior_rampage.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

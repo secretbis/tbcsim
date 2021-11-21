@@ -10,6 +10,7 @@ import sim.SimParticipant
 
 class ShardOfContempt : Buff() {
     override val name: String = "Shard of Contempt (static)"
+    override val icon: String = "inv_misc_rune_04.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -38,6 +39,7 @@ class ShardOfContempt : Buff() {
         val buff = object : Buff() {
             override val id: Int = 45354
             override val name: String = "Shard of Contempt"
+            override val icon: String = "inv_misc_rune_04.jpg"
             override val durationMs: Int = 20000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

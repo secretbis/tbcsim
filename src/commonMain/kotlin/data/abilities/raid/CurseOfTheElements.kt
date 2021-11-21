@@ -11,10 +11,12 @@ class CurseOfTheElements : Ability() {
 
     override val id: Int = 27228
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_chilltouch.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Curse of the Elements"
+        override val icon: String = "spell_shadow_chilltouch.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true
@@ -35,6 +37,7 @@ class CurseOfTheElements : Ability() {
 
     fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Curse of the Elements"
+        override val icon: String = "spell_shadow_chilltouch.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

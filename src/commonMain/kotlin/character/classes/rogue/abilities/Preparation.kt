@@ -18,6 +18,7 @@ class Preparation : Ability() {
 
     override val id: Int = 14185
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_antishadow.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 600000
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()

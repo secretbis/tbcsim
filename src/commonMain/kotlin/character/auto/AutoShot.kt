@@ -22,6 +22,7 @@ class AutoShot : AutoAttackBase() {
 
     override val id: Int = 1
     override val name: String = "Auto Shot"
+    override val icon: String = "ability_whirlwind.jpg"
     override fun castTimeMs(sp: SimParticipant): Int {
         return (500.0 / sp.physicalHasteMultiplier()).toInt()
     }
@@ -40,7 +41,7 @@ class AutoShot : AutoAttackBase() {
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
             isWhiteDamage = true,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

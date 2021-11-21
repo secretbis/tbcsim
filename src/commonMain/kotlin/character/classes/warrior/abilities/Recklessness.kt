@@ -13,11 +13,13 @@ class Recklessness : Ability() {
 
     override val id: Int = 1719
     override val name: String = Companion.name
+    override val icon: String = "ability_criticalstrike.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 30 * 60 * 1000
 
     val buff = object : Buff() {
         override val name: String = "Recklessness"
+        override val icon: String = "ability_criticalstrike.jpg"
         override val durationMs: Int = 15000
 
         override fun modifyStats(sp: SimParticipant): Stats {

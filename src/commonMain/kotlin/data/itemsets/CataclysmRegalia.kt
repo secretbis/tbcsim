@@ -16,10 +16,14 @@ class CataclysmRegalia : ItemSet() {
 
     override val id: Int = 635
 
-    // The two-set is entirely useless
+    val fourSetAbility = object : Ability() {
+        override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_15.jpg"
+    }
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_15.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -31,7 +35,7 @@ class CataclysmRegalia : ItemSet() {
             override fun percentChance(sp: SimParticipant): Double = 25.0
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(120, Resource.Type.MANA, FOUR_SET_BUFF_NAME)
+                sp.addResource(120, Resource.Type.MANA, fourSetAbility)
             }
         }
 

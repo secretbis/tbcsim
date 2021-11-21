@@ -16,12 +16,14 @@ class GarroteDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_garrote.jpg"
     override val durationMs: Int = 18000
     override val tickDeltaMs: Int = 3000
 
     val dot = object : Ability() {
         override val id: Int = 26884
         override val name: String = Companion.name
+        override val icon: String = "ability_rogue_garrote.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         fun dmgPerTick(sp: SimParticipant): Double{
@@ -37,7 +39,7 @@ class GarroteDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = name,
+                ability = this,
                 amount = dmgPerTick(sp),
                 result = EventResult.HIT
             )

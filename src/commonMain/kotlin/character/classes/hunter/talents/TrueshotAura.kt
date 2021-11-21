@@ -17,6 +17,7 @@ class TrueshotAura(currentRank: Int) : Talent(currentRank) {
     val buff = object : Buff() {
         override val name: String = Companion.name
         override val durationMs: Int = -1
+        override val icon: String = "ability_trueshot.jpg"
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(

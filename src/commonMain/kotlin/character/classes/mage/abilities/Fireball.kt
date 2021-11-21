@@ -19,6 +19,7 @@ class Fireball : Ability() {
     }
     override val id: Int = 38692
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_flamebolt.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 3500
@@ -69,7 +70,7 @@ class Fireball : Ability() {
          val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

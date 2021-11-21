@@ -1,6 +1,6 @@
 package character
 
-import sim.SimIteration
+import data.Constants
 import sim.SimParticipant
 
 abstract class Ability {
@@ -17,10 +17,11 @@ abstract class Ability {
         WARRIOR_STANCE
     }
 
-    abstract val id: Int
+    open val id: Int = -1
     abstract val name: String
+    open val icon: String = Constants.UNKNOWN_ICON
 
-    abstract fun gcdMs(sp: SimParticipant): Int
+    open fun gcdMs(sp: SimParticipant): Int = 0
     open val castableOnGcd = false
 
     open fun cooldownMs(sp: SimParticipant): Int = 0
@@ -76,11 +77,14 @@ abstract class Ability {
         val resourceCost = this.resourceCost(sp).toInt()
         val resourceType = this.resourceType(sp)
         if (resourceCost != 0) {
-            sp.subtractResource(resourceCost, resourceType, name)
+            sp.subtractResource(resourceCost, resourceType, this)
         }
     }
 
-    abstract fun cast(sp: SimParticipant)
+    open fun cast(sp: SimParticipant) {
+        // Noop
+    }
+
     open fun afterCast(sp: SimParticipant) {
         // Store individual cooldown state
         val state = state(sp)

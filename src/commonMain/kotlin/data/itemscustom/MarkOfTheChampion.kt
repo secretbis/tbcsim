@@ -33,6 +33,7 @@ class MarkOfTheChampion : Item() {
 
     val apBuff = object : Buff() {
         override val name: String = "Mark of the Champion (AP)"
+        override var icon: String = "inv_misc_token_argentdawn3.jpg"
         override val durationMs: Int = -1
 
         val validSubtypes = setOf(CharacterType.DEMON, CharacterType.UNDEAD)

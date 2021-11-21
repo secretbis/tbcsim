@@ -6,6 +6,7 @@ import kotlin.js.JsExport
 import kotlin.math.sqrt
 import kotlin.random.Random
 import character.*
+import data.Constants
 
 @JsExport
 object SimStats {
@@ -86,11 +87,18 @@ object SimStats {
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
+            val allBuffs: MutableMap<String, Buff> = mutableMapOf()
             val byBuff = iterations.flatMap { iter ->
                 val context = if(onlyTarget) { iter.target } else iter.participants[idx]
                 context.events
                     .filter { it.buff != null && (!it.buff.hidden || showHidden) && eventTypes.contains(it.eventType) }
                     .filter { it.buff?.name != null }
+            }.also {
+                // Store a buff reference so we can lookup members later
+                // Using the Buff object as the key does not translate well to JS
+                for(evt in it) {
+                    allBuffs[evt.buff!!.name] = evt.buff
+                }
             }.groupBy { it.buff!!.name }
 
             val keys = byBuff.keys.toList()
@@ -195,6 +203,7 @@ object SimStats {
 
                 BuffBreakdown(
                     key,
+                    allBuffs[key]?.icon ?: Constants.UNKNOWN_ICON,
                     applied,
                     refreshed,
                     uptimePct,
@@ -210,11 +219,18 @@ object SimStats {
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
+            val allAbilities: MutableMap<String, Ability> = mutableMapOf()
             val byAbility = iterations.flatMap { iter ->
                 iter.participants[idx].events
                     .filter { it.eventType == EventType.DAMAGE }
-                    .filter { it.abilityName != null }
-            }.groupBy { it.abilityName!! }
+                    .filter { it.ability?.name != null }
+            }.also {
+                // Store an ability reference so we can lookup members later
+                // Using the Ability object as the key does not translate well to JS
+                for(evt in it) {
+                    allAbilities[evt.ability!!.name] = evt.ability
+                }
+            }.groupBy { it.ability!!.name }
 
             val keys = byAbility.keys.toList()
             val grandTotal = keys.fold(0.0) { acc, it ->
@@ -253,6 +269,7 @@ object SimStats {
 
                 AbilityBreakdown(
                     key,
+                    allAbilities[key]?.icon ?: Constants.UNKNOWN_ICON,
                     countAvg,
                     totalAvg,
                     pctOfTotal,
@@ -339,12 +356,19 @@ object SimStats {
 
             // Also group by resource type
             resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
+                val allAbilities: MutableMap<String, Ability> = mutableMapOf()
                 val byAbility = iterations.flatMap { iter ->
                     iter.participants[idx].events
                         .filter { it.eventType == EventType.RESOURCE_CHANGED }
-                        .filter { it.abilityName != null }
+                        .filter { it.ability?.name != null }
                         .filter { it.resourceType == resourceType }
-                }.groupBy { it.abilityName!! }
+                }.also {
+                    // Store an ability reference so we can lookup members later
+                    // Using the Ability object as the key does not translate well to JS
+                    for(evt in it) {
+                        allAbilities[evt.ability!!.name] = evt.ability
+                    }
+                }.groupBy { it.ability!!.name }
 
                 val keys = byAbility.keys.toList()
 
@@ -356,6 +380,7 @@ object SimStats {
 
                     ResourceByAbility(
                         key,
+                        allAbilities[key]?.icon ?: Constants.UNKNOWN_ICON,
                         countAvg,
                         totalGainAvg,
                         totalGainAvg / countAvg

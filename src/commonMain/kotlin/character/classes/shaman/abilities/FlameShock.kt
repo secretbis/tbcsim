@@ -20,6 +20,7 @@ class FlameShock : Ability() {
 
     override val id: Int = 25457
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_flameshock.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int {
         val reverberation = sp.character.klass.talents[Reverberation.name] as Reverberation?
@@ -62,7 +63,7 @@ class FlameShock : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

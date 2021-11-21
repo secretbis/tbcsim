@@ -26,6 +26,7 @@ class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sp -> Stats(shad
 open class DemonicSacrifice(suffix: String, stats: (sp: SimParticipant) -> Stats) : Ability() {
     override val id: Int = 18788
     override val name: String = "Demonic Sacrifice ($suffix)"
+    override val icon: String = "spell_shadow_psychicscream.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -35,6 +36,7 @@ open class DemonicSacrifice(suffix: String, stats: (sp: SimParticipant) -> Stats
 
     val buff = object : Buff() {
         override val name: String = "Demonic Sacrifice"
+        override val icon: String = "spell_shadow_psychicscream.jpg"
         override val durationMs: Int = 30 * 60 * 1000
 
         override fun modifyStats(sp: SimParticipant): Stats {

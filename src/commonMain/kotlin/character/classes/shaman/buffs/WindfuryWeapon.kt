@@ -19,6 +19,7 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     }
 
     override val name = "Windfury Weapon (static) ${sourceItem.uniqueName}"
+    override val icon: String = "spell_nature_cyclone.jpg"
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 30 * 60 * 1000
     override val hidden: Boolean = true
@@ -85,7 +86,7 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
                 sp.logEvent(
                     Event(
                         eventType = EventType.PROC,
-                        abilityName = wfAbility!!.name
+                        ability = wfAbility!!
                     )
                 )
             }

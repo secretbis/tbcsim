@@ -28,9 +28,10 @@ class SerratedBlades(currentRank: Int) : Talent(currentRank) {
     fun getDebuff(sp: SimParticipant): Debuff {
         return object : Debuff(sp) {
             override val name: String = "${Companion.name} (Talent)"
+            override val icon: String = "inv_sword_17.jpg"
             override val durationMs: Int = -1
             override val hidden: Boolean = true
-    
+
             override fun modifyStats(sp: SimParticipant): Stats {
                 return Stats(
                     armor = -1 * decreasedArmor()
@@ -41,6 +42,7 @@ class SerratedBlades(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "inv_sword_17.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

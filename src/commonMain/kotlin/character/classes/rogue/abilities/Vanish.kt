@@ -19,6 +19,7 @@ class Vanish : Ability() {
 
     override val id: Int = 26889
     override val name: String = Companion.name
+    override val icon: String = "ability_vanish.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int {
         val elusiveness = sp.character.klass.talents[Elusiveness.name] as Elusiveness?

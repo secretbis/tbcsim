@@ -13,10 +13,12 @@ class FlaskOfBlindingLight : Ability() {
 
     override val id: Int = 22861
     override val name: String = Companion.name
+    override val icon: String = "inv_potion_116.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Flask of Blinding Light"
+        override val icon: String = "inv_potion_116.jpg"
         override val durationMs: Int = 2 * 60 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR, Mutex.GUARDIAN_ELIXIR)
 

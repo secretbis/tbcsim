@@ -18,17 +18,19 @@ class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
     }
     override val id = 25387
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_siphonmana.jpg"
     override val durationMs = (ticks.coerceAtLeast(1).coerceAtMost(3) * 1000 / owner.spellHasteMultiplier()).toInt()
     override val tickDeltaMs: Int = durationMs / ticks
 
     val school = Constants.DamageType.SHADOW
-    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble() 
+    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
     var baseDotDamage: Double = 176.0
     val baseDotSpellCoeff = 0.19
 
     val ability = object : Ability() {
         override val id: Int = 25387
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_siphonmana.jpg"
 
         override fun gcdMs(sp: SimParticipant): Int = 0
 
@@ -37,10 +39,10 @@ class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
 
             val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
             val result = Spell.attackRoll(
-                owner, 
+                owner,
                 damageRoll,
                 school,
-                bonusDamageMultiplier = t4FourSetBonusMulti, 
+                bonusDamageMultiplier = t4FourSetBonusMulti,
                 canCrit = false,
                 canResist = false,
             )
@@ -48,7 +50,7 @@ class MindFlayDot(owner: SimParticipant, ticks: Int) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second
             )

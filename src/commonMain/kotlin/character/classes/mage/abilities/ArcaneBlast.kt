@@ -23,6 +23,7 @@ class ArcaneBlast : Ability() {
     }
     override val id: Int = 30451
     override val name: String = Companion.name
+    override val icon: String = "spell_arcane_blast.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 2500
@@ -56,6 +57,7 @@ class ArcaneBlast : Ability() {
         override val name: String = Companion.name
         override val durationMs: Int = 8000
         override val maxStacks: Int = 3
+        override val icon: String = "spell_arcane_blast.jpg"
 
         fun manaCostMultiplier(sp: SimParticipant): Double {
             val state = state(sp)
@@ -96,7 +98,7 @@ class ArcaneBlast : Ability() {
          val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

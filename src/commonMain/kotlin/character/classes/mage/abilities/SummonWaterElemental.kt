@@ -11,6 +11,7 @@ class SummonWaterElemental : Ability() {
     }
     override val id: Int = 30451
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_summonwaterelemental_2.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
     override fun castTimeMs(sp: SimParticipant): Int  = 0
 
@@ -25,6 +26,7 @@ class SummonWaterElemental : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_frost_summonwaterelemental_2.jpg"
         override val durationMs: Int = 45000
         override val hidden: Boolean = true
 

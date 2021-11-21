@@ -22,6 +22,7 @@ class DirtyDeeds() : Buff() {
     }
 
     override val name: String = "${Companion.name} (Talent) (Buff applier)"
+    override val icon: String = "spell_shadow_summonsuccubus.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

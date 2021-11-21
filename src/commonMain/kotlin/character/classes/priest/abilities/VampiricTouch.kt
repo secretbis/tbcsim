@@ -22,6 +22,7 @@ class VampiricTouch : Ability() {
 
     override val id: Int = 34917
     override val name: String = Companion.name
+    override val icon: String = "spell_holy_stoicism.jpg"
 
     val school = Constants.DamageType.SHADOW
     val baseDamage = 650.0
@@ -60,7 +61,7 @@ class VampiricTouch : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

@@ -21,6 +21,12 @@ class Deathmantle : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_58.jpg"
+    }
+
+    val fourSetAbility = object : Ability() {
+        override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_58.jpg"
     }
 
     fun noCostConsumeProc(buff: Buff): Proc {
@@ -38,7 +44,7 @@ class Deathmantle : ItemSet() {
 
                 // Refund the resource cost of the triggering ability
                 if(ability != null) {
-                    sp.addResource(ability.resourceCost(sp).toInt(), ability.resourceType(sp), FOUR_SET_BUFF_NAME)
+                    sp.addResource(ability.resourceCost(sp).toInt(), ability.resourceType(sp), fourSetAbility)
                 }
             }
         }
@@ -46,6 +52,7 @@ class Deathmantle : ItemSet() {
 
     val freeFinisherBuff = object : Buff() {
         override val name: String = "Deathmantle (free finisher)"
+        override val icon: String = "inv_helmet_58.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -55,6 +62,7 @@ class Deathmantle : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_58.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

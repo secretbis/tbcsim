@@ -11,12 +11,12 @@ class Bloodlust : Ability() {
         const val name = "Bloodlust"
     }
 
-    override val id: Int = -1
     override val name: String = Companion.name
-    override fun gcdMs(sp: SimParticipant): Int = 0
+    override val icon: String = "spell_nature_bloodlust.jpg"
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_nature_bloodlust.jpg"
         override val durationMs: Int = 40000
         override val hidden: Boolean = false
 

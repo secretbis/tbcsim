@@ -8,6 +8,7 @@ import sim.SimParticipant
 
 class SuperiorWizardOil(item: Item) : TempEnchant(item) {
     override val name: String = "Superior Wizard Oil"
+    override val icon: String = "inv_potion_141.jpg"
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 60 * 60 * 1000
 

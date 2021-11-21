@@ -13,12 +13,14 @@ class TempestRegalia : ItemSet() {
     // TODO: Evocation should check this buff once it exists
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_64.jpg"
         override val durationMs: Int = -1
     }
 
     // TODO: Fireball, Frostbolt, and Arcane Missiles should check this buff once they exist
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_64.jpg"
         override val durationMs: Int = -1
     }
 

@@ -13,12 +13,14 @@ class RighteousArmor : ItemSet() {
     // TODO: Consecrate should check this buff once it exists
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_10.jpg"
         override val durationMs: Int = -1
     }
 
     // TODO: Righteous Defense should check this buff once it exists
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_10.jpg"
         override val durationMs: Int = -1
     }
 

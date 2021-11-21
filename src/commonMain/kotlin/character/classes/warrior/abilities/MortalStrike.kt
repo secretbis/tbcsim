@@ -18,6 +18,7 @@ class MortalStrike : Ability() {
 
     override val id: Int = 30330
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_savageblow.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -51,7 +52,7 @@ class MortalStrike : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

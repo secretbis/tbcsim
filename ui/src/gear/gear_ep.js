@@ -64,7 +64,7 @@ function IconCell({ rowData, dataKey, ...props }) {
     return (
       <Cell {...props}>
         <ItemTooltip item={rowData} allowClick={true}>
-          <img style={{ border: '1px solid #AAA', marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+          <img style={{ border: '1px solid #AAA', borderRadius: 5, marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
         </ItemTooltip>
       </Cell>
     )

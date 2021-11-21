@@ -10,6 +10,7 @@ class PetFerociousInspiration : Buff() {
         override val name: String = "Ferocious Inspiration (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "ability_hunter_ferociousinspiration.jpg"
 
         fun getFIRanks(sp: SimParticipant): Int {
             return sp.owner?.character?.klass?.talents?.get(FerociousInspiration.name)?.currentRank ?: 0
@@ -18,6 +19,7 @@ class PetFerociousInspiration : Buff() {
         val apBuff = object : Buff() {
             override val name: String = "Ferocious Inspiration"
             override val durationMs: Int = 10000
+            override val icon: String = "ability_hunter_ferociousinspiration.jpg"
 
             override fun modifyStats(sp: SimParticipant): Stats {
                 val mult = 1.0 + (0.01 * getFIRanks(sp))

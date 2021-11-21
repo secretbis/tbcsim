@@ -34,6 +34,7 @@ class EmpyreanDemolisher : Item() {
 
     val hasteBuff = object : Buff() {
         override val name: String = "Empyrean Demolisher"
+        override val icon: String = "spell_nature_invisibilty.jpg"
         override val durationMs: Int = 10000
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -43,6 +44,7 @@ class EmpyreanDemolisher : Item() {
 
     fun makeStaticBuff(item: Item): Buff = object : ItemBuff(listOf(item)) {
         override val name: String = "Empyrean Demolisher (static)"
+        override val icon: String = "spell_nature_invisibilty.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

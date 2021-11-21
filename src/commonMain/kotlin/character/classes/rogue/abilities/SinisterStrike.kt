@@ -17,6 +17,7 @@ class SinisterStrike : Ability() {
 
     override val id: Int = 26862
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_ritualofsacrifice.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -52,13 +53,13 @@ class SinisterStrike : Ability() {
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
         if(result.second != EventResult.MISS && result.second != EventResult.DODGE && result.second != EventResult.PARRY) {
-            sp.addResource(1, Resource.Type.COMBO_POINT, name)
+            sp.addResource(1, Resource.Type.COMBO_POINT, this)
         }
 
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

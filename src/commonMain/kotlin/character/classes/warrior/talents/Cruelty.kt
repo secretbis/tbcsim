@@ -16,6 +16,7 @@ class Cruelty(ranks: Int) : Talent(ranks) {
 
     val buff = object : Buff() {
         override val name: String = "Cruelty"
+        override val icon: String = "ability_rogue_eviscerate.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

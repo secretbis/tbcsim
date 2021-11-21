@@ -12,6 +12,7 @@ class PrimalMooncloth : ItemSet() {
     // 5% regen while casting
     val threeBuff = object : Buff() {
         override val name: String = "Primal Mooncloth (3 set)"
+        override val icon: String = "inv_chest_cloth_04.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

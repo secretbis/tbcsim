@@ -17,6 +17,7 @@ class LethalShots(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "ability_searingarrow.jpg"
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(rangedCritRating = Rating.critPerPct * currentRank)

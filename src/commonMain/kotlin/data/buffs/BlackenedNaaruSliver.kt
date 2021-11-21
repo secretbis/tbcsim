@@ -14,11 +14,13 @@ class BlackenedNaaruSliver : Buff() {
     }
 
     override val name: String = "${Companion.name} (static)"
+    override val icon: String = "inv_jewelry_talisman_16.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val apBuff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "inv_jewelry_talisman_16.jpg"
         override val durationMs: Int = 20000
         override val maxStacks: Int = 10
 
@@ -58,6 +60,7 @@ class BlackenedNaaruSliver : Buff() {
 
     val battleTranceBuff = object : Buff() {
         override val name: String = "${Companion.name} (battle trance)"
+        override val icon: String = "inv_jewelry_talisman_16.jpg"
         override val durationMs: Int = 20000
         override val hidden: Boolean = true
 

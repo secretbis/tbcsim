@@ -12,6 +12,7 @@ class SuperManaPotion : Ability() {
 
     override val id: Int = 22832
     override val name: String = Companion.name
+    override val icon: String = "inv_potion_137.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd = true
     override val sharedCooldown: SharedCooldown = SharedCooldown.POTION
@@ -19,6 +20,6 @@ class SuperManaPotion : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val manaRestored = Random.nextInt(1800, 3000)
-        sp.addResource(manaRestored, Resource.Type.MANA, name)
+        sp.addResource(manaRestored, Resource.Type.MANA, this)
     }
 }

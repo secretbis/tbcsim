@@ -19,6 +19,7 @@ class DesolationBattlegear : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_20.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats? {
@@ -28,11 +29,13 @@ class DesolationBattlegear : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_20.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         val apBuff = object : Buff() {
             override val name: String = "$FOUR_SET_BUFF_NAME (AP)"
+            override val icon: String = "inv_shoulder_20.jpg"
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats {

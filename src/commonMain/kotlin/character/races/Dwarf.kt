@@ -18,6 +18,7 @@ class Dwarf : Race() {
 
     val gunSpec = object : Buff() {
         override val name: String = "Gun Specialization"
+        override val icon: String = "inv_musket_03.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

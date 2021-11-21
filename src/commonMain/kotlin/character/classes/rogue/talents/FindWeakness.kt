@@ -20,9 +20,10 @@ class FindWeakness(currentRank: Int) : Talent(currentRank) {
 
     val dmgBuff = object : Buff() {
         override val name: String = "Find Weakness"
+        override val icon: String = "ability_rogue_findweakness.jpg"
         override val durationMs: Int = 10000
 
-        override fun modifyStats(sp: SimParticipant): Stats {  
+        override fun modifyStats(sp: SimParticipant): Stats {
             // unsure if yellowDamageMultiplier or yellowDamageFlatModifier
             return Stats(
                 yellowDamageMultiplier = damageMultiplier()
@@ -32,6 +33,7 @@ class FindWeakness(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "ability_rogue_findweakness.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -10,6 +10,7 @@ class PetFerocity: Buff() {
     override val name: String = "Ferocity"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "inv_misc_monsterclaw_04.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         val ferocity = sp.owner?.character?.klass?.talents?.get(Ferocity.name) as Ferocity?

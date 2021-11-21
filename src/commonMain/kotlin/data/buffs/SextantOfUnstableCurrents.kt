@@ -11,6 +11,7 @@ import sim.SimParticipant
 class SextantOfUnstableCurrents : Buff() {
 
     override val name: String = "Sextant of Unstable Currents (static)"
+    override val icon: String = "inv_gizmo_09.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -25,6 +26,7 @@ class SextantOfUnstableCurrents : Buff() {
         val buff = object : Buff() {
             override val id: Int = 38347
             override val name: String = "Sextant of Unstable Currents"
+            override val icon: String = "inv_gizmo_09.jpg"
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

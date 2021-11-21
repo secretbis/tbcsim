@@ -11,6 +11,10 @@ import mechanics.General
 import mechanics.Spell
 import sim.*
 
+class ChainLightningOverload : ChainLightning() {
+    override val name = "Lightning Overload (CL)"
+}
+
 open class ChainLightning : Ability() {
     companion object {
         const val name = "Chain Lightning"
@@ -18,6 +22,7 @@ open class ChainLightning : Ability() {
 
     override val id: Int = 25442
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_chainlightning.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -38,6 +43,7 @@ open class ChainLightning : Ability() {
 
     val loBuff = object : Buff() {
         override val name: String = "Lightning Overload (CL)"
+        override val icon: String = "spell_nature_lightningoverload.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -94,7 +100,7 @@ open class ChainLightning : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = if(isLoProc) { "Lightning Overload (CL)" } else name,
+            ability = if(isLoProc) { ChainLightningOverload() } else this,
             amount = result.first,
             result = result.second,
         )

@@ -18,6 +18,7 @@ class StrengthOfEarthTotem: Ability() {
 
     override val id: Int = 25528
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_earthbindtotem.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
@@ -36,6 +37,7 @@ class StrengthOfEarthTotem: Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Strength of Earth Totem"
+        override val icon: String = "spell_nature_earthbindtotem.jpg"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
 

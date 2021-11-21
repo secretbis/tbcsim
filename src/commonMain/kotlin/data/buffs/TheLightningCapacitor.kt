@@ -9,9 +9,8 @@ import sim.EventType
 import sim.SimParticipant
 
 class TheLightningCapacitor : Buff() {
-
-
     override val name: String = "The Lightning Capacitor (static)"
+    override val icon: String = "inv_trinket_naxxramas06.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -19,6 +18,7 @@ class TheLightningCapacitor : Buff() {
         override val id: Int = 37657
         override fun gcdMs(sp: SimParticipant): Int = 0
         override val name: String = "The Lightning Capacitor"
+        override val icon: String = "inv_trinket_naxxramas06.jpg"
 
         val school = Constants.DamageType.NATURE
         override fun cast(sp: SimParticipant) {
@@ -30,7 +30,7 @@ class TheLightningCapacitor : Buff() {
             val damageEvent = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second,
             )
@@ -40,6 +40,7 @@ class TheLightningCapacitor : Buff() {
 
     val stackBuff = object : Buff() {
         override val name: String = "Electric Charge"
+        override val icon: String = "inv_trinket_naxxramas06.jpg"
         override val durationMs: Int = -1
         override val maxStacks: Int = 3
     }

@@ -16,6 +16,7 @@ class ImprovedScorch(currentRank: Int) : Talent(currentRank) {
         override val name: String = "${Companion.name} (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_fire_soulburn.jpg"
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -28,6 +29,7 @@ class ImprovedScorch(currentRank: Int) : Talent(currentRank) {
                 override val name: String = Companion.name
                 override val durationMs: Int = 30000
                 override val maxStacks: Int = 5
+                override val icon: String = "spell_fire_soulburn.jpg"
 
                 override fun modifyStats(sp: SimParticipant): Stats {
                     val state = state(sp)

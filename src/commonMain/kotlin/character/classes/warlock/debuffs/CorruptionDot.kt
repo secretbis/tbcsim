@@ -4,6 +4,7 @@ import character.Ability
 import character.Buff
 import character.Debuff
 import character.Proc
+import character.classes.warlock.abilities.Nightfall as NightfallAbility
 import character.classes.warlock.talents.Contagion
 import character.classes.warlock.talents.EmpoweredCorruption
 import character.classes.warlock.talents.Nightfall
@@ -24,6 +25,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_corruption.jpg"
     override val durationMs: Int by object : Any() {
         operator fun getValue(dot: CorruptionDot, property: KProperty<*>): Int {
             val baseDuration = 18000
@@ -50,12 +52,13 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             sp.logEvent(Event(
                 eventType = EventType.PROC,
-                abilityName = Nightfall.name
+                ability = NightfallAbility()
             ))
 
             sp.addBuff(object: Buff() {
                 override val name: String = Nightfall.name
                 override val durationMs: Int = 10000
+                override val icon: String = "spell_shadow_twilight.jpg"
             })
         }
     }
@@ -63,6 +66,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
     val dot = object : Ability() {
         override val id: Int = 27216
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_corruption.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 50.0
@@ -85,7 +89,7 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT
             )

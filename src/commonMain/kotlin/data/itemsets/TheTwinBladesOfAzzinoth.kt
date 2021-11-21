@@ -14,6 +14,7 @@ class TheTwinBladesOfAzzinoth : ItemSet() {
 
     val twoBuffHaste = object : Buff() {
         override val name: String = "$TWO_SET_BUFF_NAME (Haste) (static)"
+        override val icon: String = "inv_weapon_glave_01.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -34,6 +35,7 @@ class TheTwinBladesOfAzzinoth : ItemSet() {
 
             val buff = object : Buff() {
                 override val name: String = "$TWO_SET_BUFF_NAME (Haste)"
+                override val icon: String = "inv_weapon_glave_01.jpg"
                 override val durationMs: Int = 10000
 
                 override fun modifyStats(sp: SimParticipant): Stats {
@@ -51,6 +53,7 @@ class TheTwinBladesOfAzzinoth : ItemSet() {
 
     val twoBuffAp = object : Buff() {
         override val name: String = "$TWO_SET_BUFF_NAME (AP vs Demons)"
+        override val icon: String = "inv_weapon_glave_01.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats? {

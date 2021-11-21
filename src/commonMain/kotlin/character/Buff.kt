@@ -1,5 +1,6 @@
 package character
 
+import data.Constants
 import mu.KotlinLogging
 import sim.SimParticipant
 
@@ -28,6 +29,7 @@ abstract class Buff {
     open val id: Int = -1
     abstract val name: String
     abstract val durationMs: Int
+    open val icon: String = Constants.UNKNOWN_ICON
     open val mutex: List<Mutex> = listOf(Mutex.NONE)
     // Higher wins
     // This is typically the value of the buff/debuff - stronger should naturally take priority over weaker

@@ -13,6 +13,7 @@ class TalonOfAlar : Buff() {
         const val name = "Talon of Al'ar"
     }
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_soulburn.jpg"
     override val durationMs: Int = -1
 
     val proc = object : Proc() {
@@ -21,6 +22,7 @@ class TalonOfAlar : Buff() {
 
         val buff = object : Buff() {
             override val name: String = Companion.name
+            override val icon: String = "spell_fire_soulburn.jpg"
             override val durationMs: Int = 6000
 
             override fun modifyStats(sp: SimParticipant): Stats {

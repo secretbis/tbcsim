@@ -14,6 +14,7 @@ class Emberstorm(currentRank: Int) : Talent(currentRank) {
 
     val fireBuff = object : Buff() {
         override val name: String = "Emberstorm"
+        override val icon: String = "spell_fire_selfdestruct.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

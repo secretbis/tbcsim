@@ -16,6 +16,7 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Weapon Mastery"
+        override val icon: String = "ability_warrior_weaponmastery.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

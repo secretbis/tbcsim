@@ -18,6 +18,7 @@ class SearingPain : Ability() {
 
     override val id: Int = 27210
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_soulburn.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -48,7 +49,7 @@ class SearingPain : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

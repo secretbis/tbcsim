@@ -16,6 +16,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
             if(singletonBuff == null) {
                 singletonBuff = object : Buff() {
                     override val name: String = "Haste (BS Hammer)"
+                    override val icon: String = "spell_nature_invisibilty.jpg"
 
                     override val durationMs: Int = 10000
 
@@ -31,6 +32,7 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
     override val id: Int = 21165
     override val name: String = "Haste (BS Hammer) (static) ${sourceItem.uniqueName}"
+    override val icon: String = "spell_nature_invisibilty.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

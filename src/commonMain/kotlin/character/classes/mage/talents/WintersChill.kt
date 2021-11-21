@@ -16,6 +16,7 @@ class WintersChill(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_frost_chillingblast.jpg"
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -26,6 +27,7 @@ class WintersChill(currentRank: Int) : Talent(currentRank) {
 
             fun critDebuff(sp: SimParticipant): Debuff = object : Debuff(sp) {
                 override val name: String = Companion.name
+                override val icon: String = "spell_frost_chillingblast.jpg"
                 override val durationMs: Int = 15000
                 override val maxStacks: Int = 5
             }

@@ -12,6 +12,7 @@ class Evocation : Ability() {
 
     override val id: Int = 12051
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_purge.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     // TODO: Create a way to describe partial evocations in rotations.  Allowing a cast time to be specified should be enough.
@@ -28,7 +29,7 @@ class Evocation : Ability() {
         // Restores 15% of max mana per 2s, which is 60% for full channel
         val restored = (sp.resources[Resource.Type.MANA]?.maxAmount ?: 0) * (0.15 * castTimeMs(sp) / 2000)
         if(restored > 0.0) {
-            sp.addResource(restored.toInt(), Resource.Type.MANA, Companion.name)
+            sp.addResource(restored.toInt(), Resource.Type.MANA, this)
         }
     }
 }

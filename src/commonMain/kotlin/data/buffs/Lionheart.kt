@@ -29,6 +29,7 @@ class Lionheart(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         val buff = object : Buff() {
             override val name: String = "Lionheart"
+            override val icon: String = "inv_sword_2h_blacksmithing_03.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

@@ -15,6 +15,7 @@ class Backlash(currentRank: Int) : Talent(currentRank) {
 
     val critBuff = object : Buff() {
         override val name: String = "Backlash"
+        override val icon: String = "spell_fire_playingwithfire.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -18,6 +18,7 @@ class Frostbolt : Ability() {
     }
     override val id: Int = 38697
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_frostbolt02.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 3000
@@ -69,7 +70,7 @@ class Frostbolt : Ability() {
          val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

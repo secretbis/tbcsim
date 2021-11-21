@@ -14,6 +14,7 @@ import kotlin.js.JsExport
 class Mongoose(item: Item) : Enchant(item) {
     override val id: Int = 46536
     override val name: String = "Mongoose (static) ${item.uniqueName}"
+    override val icon: String = "spell_nature_unrelentingstorm.jpg"
     override var displayName: String? = "Mongoose"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
@@ -32,6 +33,7 @@ class Mongoose(item: Item) : Enchant(item) {
 
             val buff = object : ItemBuff(listOf(item)) {
                 override val name: String = "Mongoose $suffix"
+                override val icon: String = "spell_nature_unrelentingstorm.jpg"
                 override val durationMs: Int = 15000
 
                 override fun modifyStats(sp: SimParticipant): Stats {

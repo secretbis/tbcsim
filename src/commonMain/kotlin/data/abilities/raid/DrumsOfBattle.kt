@@ -12,12 +12,12 @@ class DrumsOfBattle : Ability() {
         const val name = "Drums of Battle"
     }
 
-    override val id: Int = -1
     override val name: String = Companion.name
-    override fun gcdMs(sp: SimParticipant): Int = 0
+    override val icon: String = "inv_misc_drum_02.jpg"
 
     val buff = object : Buff() {
         override val name: String = "Drums of Battle"
+        override val icon: String = "inv_misc_drum_02.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

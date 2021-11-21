@@ -9,6 +9,7 @@ class PetBaseDamage(val multiplier: Double) : Buff() {
     override val name: String = "Pet Damage Modifier"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "ability_meleedamage.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         // Various stats scale with the owner

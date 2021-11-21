@@ -9,12 +9,14 @@ class KissOfTheSpider : Buff() {
 
     override val id: Int = 28866
     override val name: String = "Kiss of the Spider (static)"
+    override val icon: String = "inv_trinket_naxxramas04.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 15000
     val buff = object : Buff() {
         override val name: String  = "Kiss of the Spider"
+        override val icon: String = "inv_trinket_naxxramas04.jpg"
         override val durationMs: Int = buffDurationMs
 
         override fun modifyStats(sp: SimParticipant): Stats? {
@@ -27,6 +29,7 @@ class KissOfTheSpider : Buff() {
     val ability = object : Ability() {
         override val id: Int = 28866
         override val name: String = "Kiss of the Spider"
+        override val icon: String = "inv_trinket_naxxramas04.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000
 

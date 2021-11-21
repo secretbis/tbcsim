@@ -7,11 +7,21 @@ import sim.Event
 import sim.SimParticipant
 
 class PetFocusRegen : Buff() {
-    override val name: String = "Focus Regen"
+    companion object {
+        const val name = "Focus Regen"
+    }
+
+    override val name: String = Companion.name
+    override val icon: String = "ability_hunter_focusfire.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val baseFocusRegen: Double = 5.0
+
+    val frAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "ability_hunter_focusfire.jpg"
+    }
 
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -25,7 +35,7 @@ class PetFocusRegen : Buff() {
 
             // Focus regen is per second, but server tick isn't every second
             val tickModifier: Double = sp.sim.serverTickMs / 1000.0
-            sp.addResource((baseFocusRegen * tickModifier * bdMultiplier).toInt(), Resource.Type.FOCUS, name)
+            sp.addResource((baseFocusRegen * tickModifier * bdMultiplier).toInt(), Resource.Type.FOCUS, frAbility)
         }
     }
 

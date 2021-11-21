@@ -21,6 +21,7 @@ class Annihilator : Item() {
             if(singletonDebuff == null) {
                 singletonDebuff = object : Debuff(owner) {
                     override val name: String = "Annihilator"
+                    override val icon: String = "inv_axe_12.jpg"
                     override val durationMs: Int = 45000
                     override val maxStacks: Int = 3
 
@@ -57,6 +58,7 @@ class Annihilator : Item() {
 
     val staticBuff = object : Buff() {
         override val name: String = "Annihilator (static)"
+        override val icon: String = "inv_axe_12.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

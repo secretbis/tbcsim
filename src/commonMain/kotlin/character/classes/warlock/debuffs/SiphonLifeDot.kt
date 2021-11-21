@@ -14,12 +14,14 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
         const val name = "Siphon Life (DoT)"
     }
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_requiem.jpg"
     override val durationMs: Int = 30000
     override val tickDeltaMs: Int = 3000
 
     val siphon = object : Ability() {
         override val id: Int = 30911
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_requiem.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 63.0
@@ -33,7 +35,7 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT,
             )

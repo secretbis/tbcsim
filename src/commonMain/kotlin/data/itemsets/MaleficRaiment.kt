@@ -18,6 +18,7 @@ class MaleficRaiment : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_103.jpg"
         override val durationMs: Int = -1
     }
 

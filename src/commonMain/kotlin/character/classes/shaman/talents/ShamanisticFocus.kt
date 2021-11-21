@@ -31,6 +31,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
 
     val postCritBuff = object : Buff() {
         override val name: String = "Shamanistic Focus"
+        override val icon: String = "spell_nature_elementalabsorption.jpg"
         override val durationMs: Int = 12000
         override val maxCharges: Int = 1
 
@@ -41,6 +42,7 @@ class ShamanisticFocus(ranks: Int) : Talent(ranks) {
 
     val staticBuff = object : Buff() {
         override val name: String = "Shamanistic Focus (static)"
+        override val icon: String = "spell_nature_elementalabsorption.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

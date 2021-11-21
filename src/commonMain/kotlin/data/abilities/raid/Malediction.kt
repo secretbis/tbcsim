@@ -10,10 +10,12 @@ class Malediction : Ability() {
 
     override val id: Int = 32484
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_curseofachimonde.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_curseofachimonde.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
     }

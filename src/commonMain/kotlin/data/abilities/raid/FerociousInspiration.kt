@@ -10,10 +10,12 @@ import kotlin.math.pow
 class FerociousInspiration(val count: Int) : Ability() {
     override val id: Int = 34460
     override val name: String = "Ferocious Inspiration (x$count)"
+    override val icon: String = "ability_hunter_ferociousinspiration.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Ferocious Inspiration (x$count)"
+        override val icon: String = "ability_hunter_ferociousinspiration.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false

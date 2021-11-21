@@ -11,9 +11,10 @@ abstract class Stance: Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override val sharedCooldown: SharedCooldown = SharedCooldown.WARRIOR_STANCE
 
-    fun stanceBuff(type: String, stats: Stats = Stats()): Buff {
+    fun stanceBuff(type: String, icon: String, stats: Stats = Stats()): Buff {
         return object : Buff() {
             override val name: String = type
+            override val icon: String = icon
             override val durationMs: Int = -1
 
             override val mutex: List<Mutex> = listOf(Mutex.BUFF_WARRIOR_STANCE)
@@ -33,7 +34,7 @@ abstract class Stance: Ability() {
         val currentRage = sp.resources[Resource.Type.RAGE]?.currentAmount ?: 0
         val rageLost = max(currentRage - maxRageRetained, 0)
         if(rageLost > 0) {
-            sp.subtractResource(rageLost, Resource.Type.RAGE, "Stance Change")
+            sp.subtractResource(rageLost, Resource.Type.RAGE, this)
         }
     }
 }

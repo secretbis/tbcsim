@@ -20,6 +20,7 @@ class Draenei : Race() {
 
     val heroicPresence = object : Buff() {
         override val name: String = "Heroic Presence"
+        override val icon: String = "inv_helmet_21.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -29,6 +30,7 @@ class Draenei : Race() {
 
     val inspiringPresence = object : Buff() {
         override val name: String = "Inspiring Presence"
+        override val icon: String = "inv_staff_23.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

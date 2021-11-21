@@ -10,6 +10,7 @@ class PetAnimalHandler : Buff() {
     override val name: String = "Animal Handler"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "ability_hunter_animalhandler.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         val animalHandler = sp.owner?.character?.klass?.talents?.get(AnimalHandler.name) as AnimalHandler?

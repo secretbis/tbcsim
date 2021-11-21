@@ -14,6 +14,7 @@ class HuntersMark : Ability() {
     }
     override val id: Int = 14325
     override val name: String = Companion.name
+    override val icon: String = "ability_hunter_snipershot.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     val baseCost = 60.0
@@ -54,6 +55,7 @@ class HuntersMark : Ability() {
 
     val apBuff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "ability_hunter_snipershot.jpg"
         override val durationMs: Int = 120000
 
         override val mutex: List<Mutex> = listOf(Mutex.BUFF_HUNTERS_MARK)

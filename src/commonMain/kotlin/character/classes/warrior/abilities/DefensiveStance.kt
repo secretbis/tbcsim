@@ -10,9 +10,10 @@ class DefensiveStance: Stance() {
 
     override val id: Int = 71
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_defensivestance.jpg"
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(stanceBuff(Companion.name, Stats(physicalDamageMultiplier = 0.9)))
+        sp.addBuff(stanceBuff(Companion.name, icon, Stats(physicalDamageMultiplier = 0.9)))
         super.cast(sp)
     }
 }

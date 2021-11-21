@@ -10,6 +10,7 @@ class BurningRage : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = "Burning Rage (2 set)"
+        override val icon: String = "inv_gauntlets_26.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

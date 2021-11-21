@@ -15,6 +15,7 @@ class Combustion : Buff() {
         const val name = "Combustion"
     }
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_sealoffire.jpg"
     override val durationMs: Int = -1
     override val maxStacks: Int = 10
     override val maxCharges: Int = 3

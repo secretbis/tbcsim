@@ -10,6 +10,7 @@ class Combustion : Ability() {
     }
     override val id: Int = 11129
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_sealoffire.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun castTimeMs(sp: SimParticipant): Int = 0
     override fun cooldownMs(sp: SimParticipant): Int = 180000

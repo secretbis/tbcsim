@@ -14,6 +14,7 @@ class Rampage : Ability() {
 
     override val id: Int = 30033
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_rampage.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 0
 
@@ -56,6 +57,7 @@ class Rampage : Ability() {
 
     val stackBuff = object : Buff() {
         override val name: String = "Rampage"
+        override val icon: String = "ability_warrior_rampage.jpg"
         override val durationMs: Int = 30000
 
         override val maxStacks: Int = 5

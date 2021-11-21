@@ -9,6 +9,7 @@ abstract class Enchant(val item: Item) : ItemBuff(listOf(item)) {
     // All of these are permanent, or last long enough that it doesn't matter
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "inv_misc_note_01.jpg"
 
     open var displayName: String? = null
         get() = field ?: name

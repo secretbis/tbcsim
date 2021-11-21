@@ -22,6 +22,7 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
 
         val buff = object : Buff() {
             override val name: String = "Elemental Devastation"
+            override val icon: String = "classic_spell_fire_elementaldevastation.jpg"
             override val durationMs: Int = 10000
             override val hidden: Boolean = true
 
@@ -37,6 +38,7 @@ class ElementalDevastation(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Elemental Devastation (static)"
+        override val icon: String = "classic_spell_fire_elementaldevastation.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

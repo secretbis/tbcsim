@@ -9,6 +9,7 @@ import sim.SimParticipant
 class ElementalStone(item: Item) : TempEnchant(item) {
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val name: String = "Elemental Sharpening Stone"
+    override val icon: String = "inv_stone_02.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         return Stats(

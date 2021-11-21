@@ -18,6 +18,7 @@ class Ambush : Ability() {
 
     override val id: Int = 27441
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_ambush.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -55,13 +56,13 @@ class Ambush : Ability() {
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = critChanceIncrease)
 
         if(result.second != EventResult.MISS && result.second != EventResult.DODGE) {
-            sp.addResource(1, Resource.Type.COMBO_POINT, name)
+            sp.addResource(1, Resource.Type.COMBO_POINT, this)
         }
 
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

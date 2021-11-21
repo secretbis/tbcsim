@@ -11,11 +11,21 @@ import sim.SimIteration
 import sim.SimParticipant
 
 class BaseEnergyGeneneration : Buff() {
-    override val name: String = "Base Energy Generation"
+    companion object {
+        const val name = "Base Energy Generation"
+    }
+
+    override val name: String = Companion.name
+    override val icon: String = "spell_shadow_shadowworddominate.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val energyPerTick = 20
+
+    val energyAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_shadow_shadowworddominate.jpg"
+    }
 
     val procTick = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -24,7 +34,7 @@ class BaseEnergyGeneneration : Buff() {
         override val type: Type = Type.STATIC
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addResource(energyPerTick, Resource.Type.ENERGY, name)
+            sp.addResource(energyPerTick, Resource.Type.ENERGY, energyAbility)
         }
     }
 

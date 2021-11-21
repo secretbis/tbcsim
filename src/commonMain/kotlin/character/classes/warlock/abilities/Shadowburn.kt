@@ -20,6 +20,7 @@ class Shadowburn : Ability() {
 
     override val id: Int = 30546
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_scourgebuild.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun cooldownMs(sp: SimParticipant): Int = 15000
@@ -49,7 +50,7 @@ class Shadowburn : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

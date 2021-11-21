@@ -56,7 +56,7 @@ export default function({ character, phase, slotName, width=defaultWidth, epOpti
   if(!character || !character.class) return;
 
   const item = character && character.gear && character.gear[slotName];
-  const itemImgStyles = { border: '1px solid #AAA', height: width, width }
+  const itemImgStyles = { border: '1px solid #AAA', borderRadius: 5, height: width, width }
 
   const [selectorVisible, setSelectorVisible] = useState(false);
 

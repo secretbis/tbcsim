@@ -19,6 +19,7 @@ open class ShadowBolt : Ability() {
 
     override val id: Int = 27209
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_shadowbolt.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -64,7 +65,7 @@ open class ShadowBolt : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

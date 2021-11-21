@@ -8,6 +8,7 @@ class PetCobraReflexes : Buff() {
     override val name: String = "Cobra Reflexes"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "spell_nature_guardianward.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         // Per rando wowhead comments, this is approximately a 15% damage reduction

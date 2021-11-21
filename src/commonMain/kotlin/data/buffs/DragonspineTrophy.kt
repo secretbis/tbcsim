@@ -11,6 +11,7 @@ import sim.SimParticipant
 class DragonspineTrophy : Buff() {
     override val id: Int = 34774
     override val name: String = "Dragonspine Trophy (static)"
+    override val icon: String = "inv_misc_bone_03.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -41,6 +42,7 @@ class DragonspineTrophy : Buff() {
 
         val buff = object : Buff() {
             override val name: String = "Dragonspine Trophy"
+            override val icon: String = "inv_misc_bone_03.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

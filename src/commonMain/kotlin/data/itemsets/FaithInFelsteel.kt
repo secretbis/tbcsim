@@ -10,6 +10,7 @@ class FaithInFelsteel : ItemSet() {
 
     val threeBuff = object : Buff() {
         override val name: String = "Faith in Felsteel (3 set)"
+        override val icon: String = "inv_helmet_22.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

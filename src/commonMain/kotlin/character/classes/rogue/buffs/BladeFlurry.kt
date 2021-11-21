@@ -14,11 +14,12 @@ class BladeFlurry() : Buff() {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_punishingblow.jpg"
     override val durationMs: Int = 15000
 
     val hastePercent = 20.0
 
-    override fun modifyStats(sp: SimParticipant): Stats {  
+    override fun modifyStats(sp: SimParticipant): Stats {
         val hasteRating = Rating.hastePerPct * hastePercent
         return Stats(
             physicalHasteRating = hasteRating

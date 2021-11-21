@@ -19,12 +19,14 @@ class TheFistsOfFury : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_weapon_hand_14.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         val fireAbility = object : Ability() {
             override val id: Int = 41989
             override val name: String = "$TWO_SET_BUFF_NAME (Fire)"
+            override val icon: String = "inv_weapon_hand_14.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
 
             val school = Constants.DamageType.FIRE
@@ -35,7 +37,7 @@ class TheFistsOfFury : ItemSet() {
                 val damageEvent = Event(
                     eventType = EventType.DAMAGE,
                     damageType = school,
-                    abilityName = name,
+                    ability = this,
                     amount = result.first,
                     result = result.second,
                 )

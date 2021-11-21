@@ -10,6 +10,7 @@ class WindhawkArmor : ItemSet() {
 
     val threeBuff = object : Buff() {
         override val name: String = "Windhawk Armor (3 set)"
+        override val icon: String = "inv_chest_leather_01.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

@@ -13,12 +13,14 @@ class ImprovedHuntersMark : Ability() {
 
     override val id: Int = 2048
     override val name: String = Companion.name
+    override val icon: String = "ability_hunter_snipershot.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     // Always assume the raid buffer has 5/5
     val bonusAp = 440
     val buff = object : Buff() {
         override val name: String = "Improved Hunter's Mark"
+        override val icon: String = "ability_hunter_snipershot.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

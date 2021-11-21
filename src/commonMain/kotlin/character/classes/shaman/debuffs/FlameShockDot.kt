@@ -13,12 +13,14 @@ import sim.SimParticipant
 
 class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
     override val name: String = "Flame Shock (DoT)"
+    override val icon: String = "spell_fire_flameshock.jpg"
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
 
     val fsdAbility = object : Ability() {
         override val id: Int = 25457
         override val name: String = "Flame Shock (DoT)"
+        override val icon: String = "spell_fire_flameshock.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 105.0
@@ -31,7 +33,7 @@ class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT
             )

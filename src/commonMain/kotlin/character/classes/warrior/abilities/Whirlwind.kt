@@ -9,13 +9,18 @@ import data.model.Item
 import mechanics.Melee
 import sim.*
 
-class Whirlwind : Ability() {
+class WhirlwindOH : Whirlwind() {
+    override val name: String = "Whirlwind (OH)"
+}
+
+open class Whirlwind : Ability() {
     companion object {
         const val name = "Whirlwind"
     }
 
     override val id: Int = 8989
     override val name: String = Companion.name
+    override val icon: String = "ability_whirlwind.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int {
         val impWWRanks = sp.character.klass.talents[ImprovedWhirlwind.name]?.currentRank ?: 0
@@ -50,7 +55,7 @@ class Whirlwind : Ability() {
         val mhEvent = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = "$name (MH)",
+            ability = this,
             amount = mhResult.first,
             result = mhResult.second,
         )
@@ -67,7 +72,7 @@ class Whirlwind : Ability() {
             val ohEvent = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = "$name (OH)",
+                ability = WhirlwindOH(),
                 amount = ohResult.first,
                 result = ohResult.second,
             )

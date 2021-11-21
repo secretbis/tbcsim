@@ -16,11 +16,13 @@ class FireballDot(owner: SimParticipant) : Debuff(owner) {
     override val name: String = Companion.name
     override val durationMs: Int = 8000
     override val tickDeltaMs: Int = 2000
+    override val icon: String = "spell_fire_flamebolt.jpg"
 
     val dmgPerTick = 21.0
     val fbDotAbility = object : Ability() {
         override val id: Int = 38692
         override val name: String = Companion.name
+        override val icon: String = "spell_fire_flamebolt.jpg"
 
         override fun castTimeMs(sp: SimParticipant): Int = 0
         override fun gcdMs(sp: SimParticipant): Int = 0
@@ -30,7 +32,7 @@ class FireballDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.FIRE,
-                abilityName = name,
+                ability = this,
                 amount = dmgPerTick,
                 result = EventResult.HIT,
             )

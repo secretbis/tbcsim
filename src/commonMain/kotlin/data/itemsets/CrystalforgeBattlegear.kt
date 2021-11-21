@@ -14,12 +14,14 @@ class CrystalforgeBattlegear : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_shoulder_14.jpg"
     }
 
     // TODO: Judgements should check this buff once they exist, but it probably doesn't matter
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_shoulder_14.jpg"
     }
 
     override val bonuses: List<Bonus> = listOf(

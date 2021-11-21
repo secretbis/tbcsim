@@ -252,8 +252,8 @@ initialState.makeSimOptions = function() {
     this.simOptions.iterations,
     this.simOptions.targetLevel,
     this.simOptions.targetArmor,
+    this.simOptions.targetType,
     this.simOptions.allowParryAndBlock,
-    this.simOptions.showHiddenBuffs,
-    this.simOptions.targetType
+    this.simOptions.showHiddenBuffs
   )
 }

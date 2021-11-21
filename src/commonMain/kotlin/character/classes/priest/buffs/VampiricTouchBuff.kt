@@ -12,16 +12,22 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class VampiricTouchBuff() : Buff() {
+class VampiricTouchBuff : Buff() {
     companion object {
         const val name: String = "Vampiric Touch (Restore Mana)"
     }
 
     override val id = 34919
     override val name: String = Companion.name
+    override val icon: String = "spell_holy_stoicism.jpg"
     override val durationMs: Int = 15000
 
     val manaRestoreMultiplier = 0.05
+
+    val vtAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "spell_holy_stoicism.jpg"
+    }
 
     val shadowDamageProc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -35,7 +41,7 @@ class VampiricTouchBuff() : Buff() {
 
             val manaRestore = (event.amount * manaRestoreMultiplier).toInt();
 
-            sp.addResource(manaRestore, Resource.Type.MANA, name)
+            sp.addResource(manaRestore, Resource.Type.MANA, vtAbility)
         }
     }
 

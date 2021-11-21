@@ -16,10 +16,12 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
 
     override val id: Int = abilityId
     override val name: String = abilityName
+    override val icon: String = "spell_nature_windfury.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val weaponBuff = object : Buff() {
         override val name: String = "$abilityName (Weapon)"
+        override val icon: String = "spell_nature_windfury.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -28,6 +30,7 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
             val totalExtraAp = baseApBonus * 1.3
             override val id: Int = abilityId
             override val name: String = abilityName
+            override val icon: String = "spell_nature_windfury.jpg"
 
             override fun gcdMs(sp: SimParticipant): Int = 0
 
@@ -41,7 +44,7 @@ open class WindfuryTotem(val baseApBonus: Double, val abilityId: Int, val abilit
                     eventType = EventType.DAMAGE,
                     damageType = Constants.DamageType.PHYSICAL,
                     isWhiteDamage = true,
-                    abilityName = name,
+                    ability = this,
                     amount = result.first,
                     result = result.second,
                 )

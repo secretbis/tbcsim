@@ -15,6 +15,7 @@ class Waterbolt : Ability() {
     }
     override val id: Int = 31707
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_frostbolt.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 1500
 
     val baseCastTimeMs = 2500
@@ -36,7 +37,7 @@ class Waterbolt : Ability() {
          val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

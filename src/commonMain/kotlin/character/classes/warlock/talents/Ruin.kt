@@ -14,6 +14,7 @@ class Ruin(currentRank: Int) : Talent(currentRank) {
 
     val critBuff = object : Buff() {
         override val name: String = "Ruin"
+        override val icon: String = "spell_shadow_shadowwordpain.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

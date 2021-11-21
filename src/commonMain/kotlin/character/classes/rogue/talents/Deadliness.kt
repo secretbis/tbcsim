@@ -17,10 +17,11 @@ class Deadliness(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "inv_weapon_crossbow_11.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {  
+        override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
                 attackPowerMultiplier = attackPowerMultiplier()
             )

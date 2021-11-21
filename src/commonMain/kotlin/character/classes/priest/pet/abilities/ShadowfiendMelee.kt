@@ -24,6 +24,7 @@ class ShadowfiendMelee : AutoAttackBase() {
 
     override val id: Int = 1
     override val name: String = Companion.name
+    override val icon: String = "ability_meleedamage.jpg"
     override val damageType = Constants.DamageType.SHADOW
 
     val basePetAttackSpeed: Double = 1500.0

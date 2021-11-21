@@ -42,6 +42,10 @@
   font-weight: 600;
 }
 
+.rs-table-cell-content {
+  text-overflow: clip !important;
+}
+
 .rs-modal {
   margin: 20vh auto 0 auto !important;
 }

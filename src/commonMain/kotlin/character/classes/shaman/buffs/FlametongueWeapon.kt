@@ -17,6 +17,7 @@ class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
     }
     override val id: Int = 25489
     override val name = "Flametongue Weapon (static) ${sourceItem.uniqueName}"
+    override val icon: String = "spell_fire_flametounge.jpg"
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 30 * 60 * 1000
 
@@ -49,7 +50,7 @@ class FlametongueWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
                 sp.logEvent(
                     Event(
                         eventType = EventType.PROC,
-                        abilityName = ftAbility!!.name
+                        ability = ftAbility!!
                     )
                 )
             }

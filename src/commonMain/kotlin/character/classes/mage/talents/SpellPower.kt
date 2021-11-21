@@ -17,6 +17,7 @@ class SpellPower(currentRank: Int) : Talent(currentRank) {
         override val name: String = Companion.name
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "spell_arcane_arcanetorrent.jpg"
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spellDamageAddlCritMultiplier = 1.0 + (currentRank * 0.25))

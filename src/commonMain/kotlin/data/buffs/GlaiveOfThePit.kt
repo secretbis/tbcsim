@@ -16,6 +16,7 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         val shadowAbility = object : Ability() {
             override val id: Int = 34696
             override val name: String = "Glaive of the Pit (Shadow)"
+            override val icon: String = "inv_weapon_halberd16.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
 
             val school = Constants.DamageType.SHADOW
@@ -28,7 +29,7 @@ class GlaiveOfThePit(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 val damageEvent = Event(
                     eventType = EventType.DAMAGE,
                     damageType = school,
-                    abilityName = name,
+                    ability = this,
                     amount = result.first,
                     result = result.second,
                 )

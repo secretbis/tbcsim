@@ -18,12 +18,14 @@ class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_auraofdarkness.jpg"
     override val durationMs: Int = 60000
     override val tickDeltaMs: Int = 60000
 
     val doom = object : Ability() {
         override val id: Int = 27216
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_auraofdarkness.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 4200.0
@@ -43,7 +45,7 @@ class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT,
             )

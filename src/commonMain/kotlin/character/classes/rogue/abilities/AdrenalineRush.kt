@@ -17,7 +17,8 @@ class AdrenalineRush : Ability() {
 
     override val id: Int = 13750
     override val name: String = Companion.name
-    
+    override val icon: String = "spell_shadow_shadowworddominate.jpg"
+
     override fun cooldownMs(sp: SimParticipant): Int = 300000
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true

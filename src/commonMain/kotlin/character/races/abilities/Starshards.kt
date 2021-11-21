@@ -18,6 +18,7 @@ import sim.SimParticipant
 class Starshards : Ability() {
     override val id: Int = 25446
     override val name: String = "Starshards"
+    override val icon: String = "spell_arcane_starfire.jpg"
 
     val school = Constants.DamageType.ARCANE
 
@@ -35,7 +36,7 @@ class Starshards : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)
@@ -48,6 +49,5 @@ class Starshards : Ability() {
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
         sp.sim.target.addDebuff(StarshardsDot(sp))
-    }     
+    }
 }
-

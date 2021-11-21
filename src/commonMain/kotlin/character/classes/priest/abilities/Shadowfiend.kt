@@ -14,16 +14,18 @@ class Shadowfiend() : Ability() {
 
     override val id: Int = 34433
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_shadowfiend.jpg"
 
     val baseDurationMs = 15000
 
     fun fiendUpBuff(sp: SimParticipant) = object : Buff() {
         override val name: String = "${Companion.name} (Hidden)"
+        override val icon: String = "spell_shadow_shadowfiend.jpg"
         override val hidden: Boolean = true
         override val durationMs: Int = if(sp.buffs[IncarnateRegalia.TWO_SET_BUFF_NAME] != null) {
             baseDurationMs + 3000
         } else baseDurationMs
-        
+
 
         override fun reset(sp: SimParticipant) {
             sp.pet?.deactivate()
@@ -45,11 +47,11 @@ class Shadowfiend() : Ability() {
         return sp.character.klass.baseMana * 0.06
     }
 
-    override fun cast(sp: SimParticipant) {    
+    override fun cast(sp: SimParticipant) {
         sp.pet?.activate()
         // Recompute caster applied stats on activation
         sp.pet?.recomputeStats()
 
-        sp.addBuff(fiendUpBuff(sp))    
+        sp.addBuff(fiendUpBuff(sp))
     }
 }

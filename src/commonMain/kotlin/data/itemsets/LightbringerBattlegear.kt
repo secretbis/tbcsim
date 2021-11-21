@@ -18,8 +18,14 @@ class LightbringerBattlegear : ItemSet() {
     }
     override val id: Int = 680
 
+    val twoSetAbility = object : Ability() {
+        override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_96.jpg"
+    }
+
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_96.jpg"
         override val durationMs: Int = -1
 
         val manaProc = object : Proc() {
@@ -37,7 +43,7 @@ class LightbringerBattlegear : ItemSet() {
             override fun percentChance(sp: SimParticipant): Double = 20.0
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(50, Resource.Type.MANA, TWO_SET_BUFF_NAME)
+                sp.addResource(50, Resource.Type.MANA, twoSetAbility)
             }
         }
 
@@ -46,6 +52,7 @@ class LightbringerBattlegear : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_96.jpg"
         override val durationMs: Int = -1
     }
 

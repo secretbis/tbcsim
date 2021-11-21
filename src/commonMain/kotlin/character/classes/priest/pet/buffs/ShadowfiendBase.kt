@@ -6,6 +6,7 @@ import sim.SimParticipant
 
 class ShadowfiendBase: Buff() {
     override val name: String = "Shadowfiend Base"
+    override val icon: String = "spell_shadow_shadowfiend.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

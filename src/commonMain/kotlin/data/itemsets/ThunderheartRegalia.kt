@@ -13,12 +13,14 @@ class ThunderheartRegalia : ItemSet() {
     // TODO: Mangle should check this buff once it exists
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_94.jpg"
         override val durationMs: Int = -1
     }
 
     // TODO: Rip, Swipe, and Ferocious Bite should check this buff once they exist
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_helmet_94.jpg"
         override val durationMs: Int = -1
     }
 

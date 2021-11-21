@@ -21,8 +21,14 @@ class CombatPotency(currentRank: Int) : Talent(currentRank) {
         return currentRank * 3
     }
 
+    val cpAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "inv_weapon_shortblade_38.jpg"
+    }
+
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "inv_weapon_shortblade_38.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -46,7 +52,7 @@ class CombatPotency(currentRank: Int) : Talent(currentRank) {
             }
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(energyGenerated(), Resource.Type.ENERGY, name)
+                sp.addResource(energyGenerated(), Resource.Type.ENERGY, cpAbility)
             }
         }
 

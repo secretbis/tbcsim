@@ -25,6 +25,7 @@ class BeastLordArmor : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_helmet_19.jpg"
     }
 
     // Big yikes on this one blizz
@@ -35,6 +36,7 @@ class BeastLordArmor : ItemSet() {
 
         val armorPenBuff = object : Buff() {
             override val name: String = "$FOUR_SET_BUFF_NAME (Armor Pen)"
+            override val icon: String = "inv_helmet_19.jpg"
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats {

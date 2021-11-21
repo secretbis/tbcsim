@@ -13,6 +13,7 @@ class Stealth : Buff() {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "ability_stealth.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -41,7 +42,7 @@ class Stealth : Buff() {
                 // so we just remove it when a stealth ability is used.
                 return (stealthAbilities.contains(ability?.name)) && super.shouldProc(sp, items, ability, event)
             }
-        
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.consumeBuff(buff)
             }

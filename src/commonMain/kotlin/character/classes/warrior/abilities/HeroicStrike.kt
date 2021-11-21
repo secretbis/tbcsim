@@ -18,6 +18,7 @@ class HeroicStrike : Ability() {
     override val id: Int = 29707
     //Rank 11 Heroic Strike is unavailable to players despite being on the DB
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_ambush.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true
@@ -32,6 +33,7 @@ class HeroicStrike : Ability() {
     // Model the off-hand hit bonus when HS is queued
     val offHandHitBuff = object : Buff() {
         override val name: String = "Heroic Strike (Queued)"
+        override val icon: String = "ability_rogue_ambush.jpg"
         override val durationMs: Int = -1
         override val maxCharges: Int = 1
 
@@ -44,6 +46,7 @@ class HeroicStrike : Ability() {
     val nextHitAbility = object : Ability() {
         override val id: Int = 29707
         override val name: String = Companion.name
+        override val icon: String = "ability_rogue_ambush.jpg"
 
         override fun gcdMs(sp: SimParticipant): Int = 0
 
@@ -58,7 +61,7 @@ class HeroicStrike : Ability() {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = Constants.DamageType.PHYSICAL,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second,
             )

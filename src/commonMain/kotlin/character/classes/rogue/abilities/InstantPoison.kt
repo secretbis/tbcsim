@@ -17,6 +17,7 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
     }
 
     override val id: Int = 26890
+    override val icon: String = "ability_poisons.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd: Boolean = true
 
@@ -38,7 +39,7 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second
         )

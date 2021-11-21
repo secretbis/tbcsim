@@ -18,6 +18,7 @@ class Eviscerate : FinisherAbility() {
 
     override val id: Int = 26865
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_eviscerate.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -47,7 +48,7 @@ class Eviscerate : FinisherAbility() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             comboPointsSpent = consumedComboPoints,
             amount = result.first,
             result = result.second,

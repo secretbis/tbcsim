@@ -11,6 +11,7 @@ import sim.SimParticipant
 class Berserking : Ability() {
     override val id: Int = 26297
     override val name: String = "Berserking"
+    override val icon: String = "racial_troll_berserk.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 180000
     // https://tbc.wowhead.com/spell=20554/berserking
@@ -35,6 +36,7 @@ class Berserking : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Berserking"
+        override val icon: String = "racial_troll_berserk.jpg"
         override val durationMs: Int = 10000
 
         override fun modifyStats(sp: SimParticipant): Stats {

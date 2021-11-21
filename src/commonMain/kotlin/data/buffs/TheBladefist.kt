@@ -32,6 +32,7 @@ class TheBladefist(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         val buff = object : Buff() {
             override val name: String = "The Bladefist"
+            override val icon: String = "inv_weapon_hand_10.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

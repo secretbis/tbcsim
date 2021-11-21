@@ -50,7 +50,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
       return (
         <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
           <TooltipComponent item={rowData} enchant={rowData}>
-            <img style={{ border: '1px solid #AAA', marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+            <img style={{ border: '1px solid #AAA', borderRadius: 5, marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
           </TooltipComponent>
         </Cell>
       )

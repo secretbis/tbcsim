@@ -9,9 +9,10 @@ class BattleStance: Stance() {
 
     override val id: Int = 2457
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_offensivestance.jpg"
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(stanceBuff(Companion.name))
+        sp.addBuff(stanceBuff(Companion.name, icon))
         super.cast(sp)
     }
 }

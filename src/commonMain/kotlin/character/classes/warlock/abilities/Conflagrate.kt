@@ -21,6 +21,7 @@ class Conflagrate : Ability() {
 
     override val id: Int = 32231
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_fireball.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun cooldownMs(sp: SimParticipant): Int = 10000
@@ -50,7 +51,7 @@ class Conflagrate : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

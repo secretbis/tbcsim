@@ -11,6 +11,7 @@ class BattleShout : Ability() {
 
     override val id: Int = 2048
     override val name: String = Companion.name
+    override val icon: String = "ability_warrior_battleshout.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -24,6 +25,7 @@ class BattleShout : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Battle Shout"
+        override val icon: String = "ability_warrior_battleshout.jpg"
         override val durationMs: Int = 120000
 
         override val mutex: List<Mutex> = listOf(Mutex.BUFF_BATTLE_SHOUT)

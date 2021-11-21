@@ -9,6 +9,7 @@ class TotemOfTheAstralWinds : Buff() {
 
     override val id: Int = 34244
     override val name: String = Companion.name
+    override val icon: String = "spell_unused.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 

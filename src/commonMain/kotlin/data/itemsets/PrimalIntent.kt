@@ -10,6 +10,7 @@ class PrimalIntent : ItemSet() {
 
     val threeBuff = object : Buff() {
         override val name: String = "Primal Intent (3 set)"
+        override val icon: String = "inv_chest_cloth_45.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

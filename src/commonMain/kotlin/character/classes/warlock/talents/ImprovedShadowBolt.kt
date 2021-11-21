@@ -27,12 +27,13 @@ class ImprovedShadowBolt(currentRank: Int) : Talent(currentRank) {
 
     val procBuff = object : Buff() {
         override val name: String = "Improved Shadow Bolt (static)"
+        override val icon: String = "spell_shadow_shadowbolt.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
-
         val isbBuff = object : Buff() {
             override val name: String = "Improved Shadow Bolt"
+            override val icon: String = "spell_shadow_shadowbolt.jpg"
             override val durationMs: Int = 12000
             override val maxCharges: Int = 4
 

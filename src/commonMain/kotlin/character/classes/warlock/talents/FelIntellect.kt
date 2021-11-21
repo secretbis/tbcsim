@@ -14,6 +14,7 @@ class FelIntellect(currentRank: Int) : Talent(currentRank) {
 
     val intBuff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_holy_magicalsentry.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

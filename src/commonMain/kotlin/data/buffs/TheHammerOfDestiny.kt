@@ -12,6 +12,11 @@ class TheHammerOfDestiny(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
+    val hdAbility = object : Ability() {
+        override val name: String = "The Hammer of Destiny"
+        override val icon: String = "inv_hammer_28.jpg"
+    }
+
     val proc = object : ItemProc(listOf(sourceItem)) {
         override val triggers: List<Trigger> = listOf(
             Trigger.MELEE_AUTO_HIT,
@@ -26,18 +31,20 @@ class TheHammerOfDestiny(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override val type: Type = Type.PPM
         override val ppm: Double = 3.0
+
         //TODO:Confirm proc rate, based on wowhead comment, test when ret is added
-    val manaRestore = object : Ability(){
+        val manaRestore = object : Ability(){
             override val id: Int = 34107
             override val name: String = "The Hammer of Destiny"
+            override val icon: String = "inv_hammer_28.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
 
             override fun cast(sp: SimParticipant) {
                 val manaRestored = Random.nextInt(170, 230)
-                sp.addResource(manaRestored, Resource.Type.MANA, name)
+                sp.addResource(manaRestored, Resource.Type.MANA, hdAbility)
             }
+        }
 
-    }
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             manaRestore.cast(sp)
         }

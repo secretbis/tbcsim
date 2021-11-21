@@ -18,6 +18,7 @@ class SiphonLife : Ability() {
 
     override val id: Int = 30911
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_requiem.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun resourceCost(sp: SimParticipant): Double = 410.0
@@ -36,7 +37,7 @@ class SiphonLife : Ability() {
         val event = Event(
             eventType = EventType.SPELL_CAST,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

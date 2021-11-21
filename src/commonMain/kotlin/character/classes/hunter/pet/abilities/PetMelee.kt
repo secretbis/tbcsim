@@ -12,6 +12,7 @@ import sim.SimParticipant
 class PetMelee : AutoAttackBase() {
     override val id: Int = 1
     override val name: String = "Melee (Pet)"
+    override val icon: String = "ability_meleedamage.jpg"
 
     val basePetAttackSpeed: Double = 2000.0
     override fun item(sp: SimParticipant): Item {

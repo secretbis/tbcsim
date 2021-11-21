@@ -13,6 +13,7 @@ import kotlin.js.JsExport
 class BracingEarthstormDiamond : Gem(25897, "Bracing Earthstorm Diamond", "inv_misc_gem_diamond_06.jpg", null, Color.META, Quality.META) {
     val buff = object : Buff() {
         override val name: String = "Bracing Earthstorm Diamond"
+        override val icon: String = "inv_misc_gem_diamond_04.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

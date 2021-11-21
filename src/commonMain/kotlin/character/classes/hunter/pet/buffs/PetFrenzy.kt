@@ -11,6 +11,7 @@ class PetFrenzy : Buff() {
     override val name: String = "Frenzy (static)"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "inv_misc_monsterclaw_03.jpg"
 
     val frenzyProc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
@@ -25,6 +26,7 @@ class PetFrenzy : Buff() {
 
         val frenzyBuff = object : Buff() {
             override val name: String = "Frenzy"
+            override val icon: String = "inv_misc_monsterclaw_03.jpg"
             override val durationMs: Int = 8000
 
             override fun modifyStats(sp: SimParticipant): Stats {

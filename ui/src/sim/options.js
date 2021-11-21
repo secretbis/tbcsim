@@ -11,6 +11,7 @@ const model = Schema.Model({
   latencyMs: NumberType().range(0, 500, "Valid latencies are 0-500ms").isRequired("A latency amount is required"),
   iterations: NumberType().range(1, 10000, "Valid iteration counts are 1-10000").isRequired("Number of iterations is required"),
   targetLevel: NumberType().range(70, 73, "Valid target levels are 70-73").isRequired("Target level is required"),
+  targetType: NumberType().range(0, 9, "Valid target types are 0-9, corresponding to internal constants"),
   targetArmor: NumberType().range(0, 10000, "Valid target armor amounts are 0-10000").isRequired("Target armor is required"),
   allowParryAndBlock: ArrayType(),
   showHiddenBuffs: ArrayType()
@@ -101,6 +102,13 @@ export default function({ dispatch }) {
               <Checkbox value={1} />
             </FormControl>
             <HelpBlock tooltip>If checked, allows parry and block for melee simulation</HelpBlock>
+          </FormGroup>
+          <FormGroup controlId="showHiddenBuffs" style={groupStyle}>
+            <ControlLabel>Show hidden buffs?</ControlLabel>
+            <FormControl name="showHiddenBuffs" accepter={CheckboxGroup}>
+              <Checkbox value={1} />
+            </FormControl>
+            <HelpBlock tooltip>This is a debugging option to show extremely verbose buffs, that are normally invisible to the player.</HelpBlock>
           </FormGroup>
         </Col>
       </Row>

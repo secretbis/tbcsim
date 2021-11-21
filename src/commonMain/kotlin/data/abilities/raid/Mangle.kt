@@ -10,10 +10,12 @@ class Mangle : Ability() {
 
     override val id: Int = 33987
     override val name: String = Companion.name
+    override val icon: String = "ability_druid_mangle2.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     fun debuff(owner: SimParticipant) = object : Debuff(owner) {
         override val name: String = "Mangle"
+        override val icon: String = "ability_druid_mangle2.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false

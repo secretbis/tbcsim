@@ -19,6 +19,7 @@ class EarthShock : Ability() {
 
     override val id: Int = 25454
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_earthshock.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -63,7 +64,7 @@ class EarthShock : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

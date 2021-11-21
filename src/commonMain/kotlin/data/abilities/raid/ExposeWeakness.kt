@@ -9,10 +9,12 @@ import sim.SimParticipant
 class ExposeWeakness(val agility: Int): Ability() {
     override val id: Int = 34501
     override val name: String = "Expose Weakness ($agility Agi)"
+    override val icon: String = "ability_rogue_findweakness.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Expose Weakness ($agility Agi)"
+        override val icon: String = "ability_rogue_findweakness.jpg"
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = true

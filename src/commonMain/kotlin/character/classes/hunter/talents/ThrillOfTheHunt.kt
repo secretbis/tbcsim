@@ -13,10 +13,16 @@ class ThrillOfTheHunt(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
+    val tothAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "ability_hunter_thrillofthehunt.jpg"
+    }
+
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "ability_hunter_thrillofthehunt.jpg"
 
         val proc = object : Proc() {
             override val triggers: List<Trigger> = listOf(
@@ -28,7 +34,7 @@ class ThrillOfTheHunt(currentRank: Int) : Talent(currentRank) {
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 if(ability != null) {
                     val refund = (ability.resourceCost(sp) * 0.4).toInt()
-                    sp.addResource(refund, Resource.Type.MANA, Companion.name)
+                    sp.addResource(refund, Resource.Type.MANA, tothAbility)
                 }
             }
         }

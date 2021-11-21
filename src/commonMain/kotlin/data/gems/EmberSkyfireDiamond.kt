@@ -13,6 +13,7 @@ import kotlin.js.JsExport
 class EmberSkyfireDiamond : Gem(35503, "Ember Skyfire Diamond", "inv_misc_gem_diamond_07.jpg", null, Color.META, Quality.META) {
     val buff = object : Buff() {
         override val name: String = "Ember Skyfire Diamond"
+        override val icon: String = "inv_misc_gem_diamond_05.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

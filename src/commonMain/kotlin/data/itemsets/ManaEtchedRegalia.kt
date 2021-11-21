@@ -18,6 +18,7 @@ class ManaEtchedRegalia : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_jewelry_ring_56.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -27,11 +28,13 @@ class ManaEtchedRegalia : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_jewelry_ring_56.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         val spellDamageBuff = object : Buff() {
             override val name: String = "$FOUR_SET_BUFF_NAME (Spell Damage)"
+            override val icon: String = "inv_jewelry_ring_56.jpg"
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats {

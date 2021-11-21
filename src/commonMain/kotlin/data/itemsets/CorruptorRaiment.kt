@@ -26,6 +26,7 @@ class CorruptorRaiment : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_25.jpg"
         override val durationMs: Int = -1
 
         val shadowDamageBuff = object : Buff() {
@@ -48,6 +49,7 @@ class CorruptorRaiment : ItemSet() {
 
         val fireDamageBuff = object : Buff() {
             override val name: String = FOUR_SET_IMMOLATE_BUFF_NAME
+            override val icon: String = "inv_shoulder_25.jpg"
             // TODO: Can't find if this has any sort of duration or not
             override val durationMs: Int = -1
         }

@@ -11,6 +11,7 @@ import sim.SimParticipant
 class ShiffarsNexusHorn : Buff() {
 
     override val name: String = "Shiffar's Nexus-Horn (static)"
+    override val icon: String = "inv_gizmo_elementalblastingpowder.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -27,6 +28,7 @@ class ShiffarsNexusHorn : Buff() {
         val buff = object : Buff() {
             override val id: Int = 34320
             override val name: String = "Shiffar's Nexus-Horn"
+            override val icon: String = "inv_gizmo_elementalblastingpowder.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

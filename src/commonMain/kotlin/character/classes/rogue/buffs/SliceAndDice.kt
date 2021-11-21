@@ -16,7 +16,8 @@ class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
         const val name = "Slice and Dice"
     }
 
-    override val name: String = "Slice and Dice"        
+    override val name: String = "Slice and Dice"
+    override val icon: String = "ability_rogue_slicedice.jpg"
     override val durationMs: Int = getDurationForCombopoints(sp, consumedComboPoints)
 
     // can only replace when the new buff has a longer remaining duration
@@ -45,12 +46,12 @@ class SliceAndDice(sp: SimParticipant, consumedComboPoints: Int) : Buff() {
 
         val improved = sp.character.klass.talents[ImprovedSliceAndDice.name] as ImprovedSliceAndDice?
         val multiplier = improved?.durationMultiplier() ?: 1.0
-        
+
         return (baseDuration * multiplier).toInt()
     }
-    
-    override fun modifyStats(sp: SimParticipant): Stats {  
-        val slayers = sp.buffs[Netherblade.TWO_SET_BUFF_NAME]
+
+    override fun modifyStats(sp: SimParticipant): Stats {
+        val slayers = sp.buffs[SlayersArmor.TWO_SET_BUFF_NAME]
         val hasteBonus = if (slayers != null) { SlayersArmor.twoSetAdditionalSnDHaste() } else 0.0
 
         // TODO: might be multiplicative

@@ -10,6 +10,7 @@ import sim.SimParticipant
 
 class WarpSpringCoil : Buff() {
     override val name: String = "Warp-Spring Coil (static)"
+    override val icon: String = "inv_gizmo_hardenedadamantitetube.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
@@ -25,6 +26,7 @@ class WarpSpringCoil : Buff() {
         val buff = object : Buff() {
             override val id: Int = 37173
             override val name: String = "Warp-Spring Coil"
+            override val icon: String = "inv_gizmo_hardenedadamantitetube.jpg"
             override val durationMs: Int = 15000
 
             override fun modifyStats(sp: SimParticipant): Stats? {

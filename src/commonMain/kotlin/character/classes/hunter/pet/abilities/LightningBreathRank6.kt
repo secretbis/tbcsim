@@ -14,6 +14,7 @@ class LightningBreathRank6 : Ability() {
     override val id: Int = 25012
     // TODO: Is there no Outland rank of this?
     override val name: String = "Lightning Breath (Rank 6)"
+    override val icon: String = "spell_nature_lightning.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.FOCUS
@@ -29,7 +30,7 @@ class LightningBreathRank6 : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

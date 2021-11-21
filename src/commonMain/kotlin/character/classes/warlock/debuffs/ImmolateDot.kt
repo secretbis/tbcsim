@@ -19,6 +19,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
         const val name = "Immolate (DoT)"
     }
     override val name: String = Companion.name
+    override val icon: String = "spell_fire_immolation.jpg"
     override val durationMs: Int by object : Any() {
         operator fun getValue(dot: ImmolateDot, property: KProperty<*>): Int {
             val baseDuration = 15000
@@ -35,6 +36,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
     val immolateDot = object : Ability() {
         override val id: Int = 27215
         override val name: String = Companion.name
+        override val icon: String = "spell_fire_immolation.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 41.0
@@ -52,7 +54,7 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT,
             )

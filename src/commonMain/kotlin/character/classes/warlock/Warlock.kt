@@ -7,6 +7,7 @@ import character.classes.warlock.talents.*
 import character.classes.warlock.talents.AmplifyCurse as AmplifyCurseTalent
 import character.classes.warlock.talents.Conflagrate as ConflagrateTalent
 import character.classes.warlock.talents.DemonicSacrifice as DemonicSacrificeTalent
+import character.classes.warlock.talents.Nightfall as NightfallTalent
 import character.classes.warlock.talents.Shadowburn as ShadowburnTalent
 import character.classes.warlock.talents.SiphonLife as SiphonLifeTalent
 import character.classes.warlock.talents.UnstableAffliction as UnstableAfflictionTalent
@@ -67,7 +68,7 @@ class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             ImprovedSearingPain.name -> ImprovedSearingPain(ranks)
             ImprovedShadowBolt.name -> ImprovedShadowBolt(ranks)
             Malediction.name -> Malediction(ranks)
-            Nightfall.name -> Nightfall(ranks)
+            NightfallTalent.name -> NightfallTalent(ranks)
             Ruin.name -> Ruin(ranks)
             ShadowAndFlame.name -> ShadowAndFlame(ranks)
             ShadowburnTalent.name -> ShadowburnTalent(ranks)

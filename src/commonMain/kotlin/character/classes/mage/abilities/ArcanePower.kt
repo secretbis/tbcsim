@@ -11,6 +11,7 @@ class ArcanePower : Ability() {
     }
     override val id: Int = 12042
     override val name: String = ArcanePower.name
+    override val icon: String = "spell_nature_lightning.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun castTimeMs(sp: SimParticipant): Int = 0
     override fun cooldownMs(sp: SimParticipant): Int = 180000

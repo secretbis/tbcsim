@@ -15,6 +15,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Unleashed Rage (static)"
+        override val icon: String = "spell_nature_unleashedrage.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -28,6 +29,7 @@ class UnleashedRage(currentRank: Int) : Talent(currentRank) {
 
             val buff = object : Buff() {
                 override val name: String = "Unleashed Rage"
+                override val icon: String = "spell_nature_unleashedrage.jpg"
                 override val durationMs: Int = 10000
 
                 override fun modifyStats(sp: SimParticipant): Stats {

@@ -16,6 +16,7 @@ class Revenger(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         val shadowAbility = object : Ability() {
             override val id: Int = 34107
             override val name: String = "Revenger (Shadow)"
+            override val icon: String = "inv_sword_79.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
 
             val school = Constants.DamageType.SHADOW
@@ -28,7 +29,7 @@ class Revenger(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 val damageEvent = Event(
                     eventType = EventType.DAMAGE,
                     damageType = school,
-                    abilityName = name,
+                    ability = this,
                     amount = result.first,
                     result = result.second,
                 )

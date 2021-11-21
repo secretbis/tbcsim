@@ -18,6 +18,7 @@ class SliceAndDice : FinisherAbility() {
 
     override val id: Int = 6774
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_slicedice.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 

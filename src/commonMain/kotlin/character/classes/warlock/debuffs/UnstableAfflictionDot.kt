@@ -15,6 +15,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
         const val name = "Unstable Affliction (DoT)"
     }
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
     override val durationMs: Int = 18000
     override val tickDeltaMs: Int = 3000
 
@@ -24,6 +25,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
     val ua = object : Ability() {
         override val id: Int = 30405
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
@@ -33,7 +35,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT,
             )

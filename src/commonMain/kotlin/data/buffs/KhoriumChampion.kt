@@ -27,9 +27,9 @@ class KhoriumChampion(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         override val ppm: Double = 1.0
         //TODO:Confirm proc rate, based on wowhead comments
 
-
         val buff = object : Buff() {
             override val name: String = "Khorium Champion"
+            override val icon: String = "inv_sword_08.jpg"
             override val durationMs: Int = 30000
 
             override fun modifyStats(sp: SimParticipant): Stats {

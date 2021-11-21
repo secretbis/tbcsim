@@ -20,6 +20,7 @@ class ShadowWeaving(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (static)"
+        override val icon: String = "spell_shadow_blackplague.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

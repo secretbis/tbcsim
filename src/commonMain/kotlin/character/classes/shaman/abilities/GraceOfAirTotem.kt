@@ -17,6 +17,7 @@ class GraceOfAirTotem : Ability() {
 
     override val id: Int = 25359
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_invisibilitytotem.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
@@ -36,6 +37,7 @@ class GraceOfAirTotem : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Grace of Air Totem"
+        override val icon: String = "spell_nature_invisibilitytotem.jpg"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
 

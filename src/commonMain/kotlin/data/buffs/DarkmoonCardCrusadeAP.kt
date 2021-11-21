@@ -14,11 +14,13 @@ class DarkmoonCardCrusadeAP : Buff() {
     }
 
     override val name: String = "${Companion.name} (static)"
+    override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val apBuff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
         override val durationMs: Int = 10000
         override val maxStacks: Int = 20
 

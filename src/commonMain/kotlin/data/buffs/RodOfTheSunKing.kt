@@ -13,6 +13,11 @@ class RodOfTheSunKing(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
+    val rodAbility = object : Ability() {
+        override val name: String = "Rod of the Sun King"
+        override val icon: String = "inv_mace_48.jpg"
+    }
+
     val proc = object : ItemProc(listOf(sourceItem)) {
         override val triggers: List<Trigger> = listOf(
             Trigger.MELEE_AUTO_HIT,
@@ -31,9 +36,9 @@ class RodOfTheSunKing(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
             if(sp.character.klass is Rogue) {
-                sp.addResource(10, Resource.Type.ENERGY, "Rod of the Sun King")
+                sp.addResource(10, Resource.Type.ENERGY, rodAbility)
             } else if(sp.character.klass is Warrior) {
-                sp.addResource(5, Resource.Type.RAGE, "Rod of the Sun King")
+                sp.addResource(5, Resource.Type.RAGE, rodAbility)
             }
         }
     }

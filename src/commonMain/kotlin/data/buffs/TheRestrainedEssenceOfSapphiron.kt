@@ -9,12 +9,14 @@ class TheRestrainedEssenceOfSapphiron : Buff() {
 
     override val id: Int = 28779
     override val name: String = "The Restrained Essence of Sapphiron (static)"
+    override val icon: String = "inv_trinket_naxxramas06.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
-        override val name: String  = "The Restrained Essence of Sapphiron"
+        override val name: String = "The Restrained Essence of Sapphiron"
+        override val icon: String = "inv_trinket_naxxramas06.jpg"
         override val durationMs: Int = buffDurationMs
 
         override fun modifyStats(sp: SimParticipant): Stats? {
@@ -27,6 +29,7 @@ class TheRestrainedEssenceOfSapphiron : Buff() {
     val ability = object : Ability() {
         override val id: Int = 28779
         override val name: String = "The Restrained Essence of Sapphiron"
+        override val icon: String = "inv_trinket_naxxramas06.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000
 

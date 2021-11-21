@@ -16,6 +16,7 @@ class WoundPoison(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "inv_misc_herb_16.jpg"
     override val durationMs: Int = 15000
     override val maxStacks: Int = 5
 }

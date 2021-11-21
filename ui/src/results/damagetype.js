@@ -30,6 +30,7 @@ export default ({data}) => {
       title='Damage Type Breakdown'
       data={data}
       columnInfo={columnInfo}
+      icons={false}
     />
   )
 }

@@ -16,6 +16,7 @@ class Despair(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         val procAbility = object : Ability() {
             override val id: Int = 34580
             override val name: String = "Despair"
+            override val icon: String = "inv_sword_69.jpg"
             override fun gcdMs(sp: SimParticipant): Int = 0
             override fun cast(sp: SimParticipant) {
                 val item = sp.character.gear.mainHand
@@ -24,7 +25,7 @@ class Despair(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
                 val damageEvent = Event(
                     eventType = EventType.DAMAGE,
                     damageType = Constants.DamageType.PHYSICAL_IGNORE_ARMOR,
-                    abilityName = name,
+                    ability = this,
                     amount = result.first,
                     result = result.second,
                 )

@@ -19,6 +19,7 @@ class ColdBlood : Ability() {
 
     override val id: Int = 14177
     override val name: String = Companion.name
+    override val icon: String = "spell_ice_lament.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 180000
     override fun gcdMs(sp: SimParticipant): Int = 0

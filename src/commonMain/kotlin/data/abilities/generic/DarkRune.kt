@@ -12,6 +12,7 @@ class DarkRune : Ability() {
 
     override val id: Int = 20520
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_sealofkings.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd = true
     override val sharedCooldown: SharedCooldown = SharedCooldown.RUNE_OR_MANA_GEM
@@ -19,6 +20,6 @@ class DarkRune : Ability() {
 
     override fun cast(sp: SimParticipant) {
         val manaRestored = Random.nextInt(900, 1500)
-        sp.addResource(manaRestored, Resource.Type.MANA, name)
+        sp.addResource(manaRestored, Resource.Type.MANA, this)
     }
 }

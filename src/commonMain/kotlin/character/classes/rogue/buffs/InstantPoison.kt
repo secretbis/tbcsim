@@ -13,6 +13,7 @@ import sim.EventType
 class InstantPoison(sourceItem: Item) : Poison(sourceItem) {
 
     override val name = "Instant Poison ${sourceItem.uniqueName}"
+    override val icon: String = "ability_poisons.jpg"
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
     override val durationMs: Int = 60 * 60 * 1000
     override val hidden: Boolean = true
@@ -49,7 +50,7 @@ class InstantPoison(sourceItem: Item) : Poison(sourceItem) {
                 sp.logEvent(
                     Event(
                         eventType = EventType.PROC,
-                        abilityName = poisonAbility!!.name
+                        ability = poisonAbility!!
                     )
                 )
             }

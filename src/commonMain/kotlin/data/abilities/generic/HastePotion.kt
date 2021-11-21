@@ -10,6 +10,7 @@ class HastePotion : Ability() {
 
     override val id: Int = 22838
     override val name: String = Companion.name
+    override val icon: String = "inv_potion_108.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override val castableOnGcd = true
     override val sharedCooldown: SharedCooldown = SharedCooldown.POTION
@@ -17,6 +18,7 @@ class HastePotion : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Haste Potion"
+        override val icon: String = "inv_potion_108.jpg"
         override val durationMs: Int = 15000
         override val mutex: List<Mutex> = listOf(Mutex.POTION)
 

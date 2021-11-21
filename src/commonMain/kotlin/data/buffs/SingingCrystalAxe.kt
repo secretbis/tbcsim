@@ -30,6 +30,7 @@ class SingingCrystalAxe(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
         val buff = object : Buff() {
             override val name: String = "Singing Crystal Axe"
+            override val icon: String = "inv_axe_72.jpg"
             override val durationMs: Int = 10000
 
             override fun modifyStats(sp: SimParticipant): Stats {

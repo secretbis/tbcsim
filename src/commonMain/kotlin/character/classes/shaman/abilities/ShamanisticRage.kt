@@ -12,11 +12,13 @@ class ShamanisticRage : Ability() {
 
     override val id: Int = 30823
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_shamanrage.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 120000
 
     val buff = object : Buff() {
         override val name: String = "Shamanistic Rage"
+        override val icon: String = "spell_nature_shamanrage.jpg"
         override val durationMs: Int = 15000
 
         val proc = object : Proc() {
@@ -36,7 +38,7 @@ class ShamanisticRage : Ability() {
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val amount = (sp.attackPower() * 0.30).toInt()
-                sp.addResource(amount, Resource.Type.MANA, name)
+                sp.addResource(amount, Resource.Type.MANA, this@ShamanisticRage)
             }
         }
 

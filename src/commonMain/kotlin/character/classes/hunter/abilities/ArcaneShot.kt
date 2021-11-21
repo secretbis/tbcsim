@@ -17,9 +17,11 @@ import kotlin.random.Random
 class ArcaneShot : Ability() {
     companion object {
         const val name = "Arcane Shot"
+        const val icon = "ability_impalingbolt.jpg"
     }
     override val id: Int = 27019
     override val name: String = Companion.name
+    override val icon: String = Companion.icon
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     val baseCd = 6000
@@ -49,7 +51,7 @@ class ArcaneShot : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.ARCANE,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

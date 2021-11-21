@@ -13,6 +13,7 @@ class Human : Race() {
 
     val swordMaceSpec = object : Buff() {
         override val name: String = "Sword/Mace Specialization"
+        override val icon: String = "ability_meleedamage.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

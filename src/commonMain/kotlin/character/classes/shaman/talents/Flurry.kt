@@ -37,6 +37,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
 
     val hasteBuff = object : Buff() {
         override val name: String = "Flurry"
+        override val icon: String = "ability_ghoulfrenzy.jpg"
         override val durationMs: Int = 15000
         override val maxCharges: Int = 3
 
@@ -81,6 +82,7 @@ class Flurry(currentRank: Int) : Talent(currentRank) {
 
     val wrapper = object : Buff() {
         override val name: String = "Flurry (static)"
+        override val icon: String = "ability_ghoulfrenzy.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

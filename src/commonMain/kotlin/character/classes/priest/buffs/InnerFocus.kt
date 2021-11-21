@@ -16,6 +16,7 @@ class InnerFocus : Buff() {
 
     override val id = 14751
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_windwalkon.jpg"
     override val durationMs: Int = -1
 
     fun genCastRemovalProc(ifBuff: InnerFocus) = object : Proc() {
@@ -31,7 +32,7 @@ class InnerFocus : Buff() {
             sp.consumeBuff(ifBuff)
         }
     }
-    
+
     override fun modifyStats(sp: SimParticipant): Stats? {
         return Stats(spellCritRating = 25 * Rating.critPerPct)
     }

@@ -9,12 +9,14 @@ import sim.SimParticipant
 class ScryersBloodgemXirisGift(name: String) : Buff() {
     override val id: Int = 35337
     override val name: String = "$name (static)"
+    override val icon: String = "inv_misc_elvencoins.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 15000
     val buff = object : Buff() {
         override val name: String  = name
+        override val icon: String = "inv_misc_elvencoins.jpg"
         override val durationMs: Int = buffDurationMs
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -25,6 +27,7 @@ class ScryersBloodgemXirisGift(name: String) : Buff() {
     val ability = object : Ability() {
         override val id: Int = 35337
         override val name: String = name
+        override val icon: String = "inv_misc_elvencoins.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 90000
 

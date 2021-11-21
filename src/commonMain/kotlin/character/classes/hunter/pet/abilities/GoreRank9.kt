@@ -15,6 +15,7 @@ import kotlin.random.Random
 class GoreRank9 : Ability() {
     override val id: Int = 35298
     override val name: String = "Gore (Rank 9)"
+    override val icon: String = "inv_weapon_shortblade_28.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.FOCUS
@@ -31,7 +32,7 @@ class GoreRank9 : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

@@ -17,6 +17,7 @@ class SkyshatterRegalia : ItemSet() {
 
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_61.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -31,6 +32,7 @@ class SkyshatterRegalia : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_61.jpg"
         override val durationMs: Int = -1
     }
 

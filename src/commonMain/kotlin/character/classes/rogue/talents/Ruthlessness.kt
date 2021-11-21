@@ -13,12 +13,18 @@ class Ruthlessness(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
+    val ruthlessnessAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "ability_druid_disembowel.jpg"
+    }
+
     fun chanceToAddComboPointPercent(): Double {
         return currentRank * 20.0
     }
 
     val buff = object : Buff() {
         override val name: String = "${Companion.name} (Talent)"
+        override val icon: String = "ability_druid_disembowel.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -30,7 +36,7 @@ class Ruthlessness(currentRank: Int) : Talent(currentRank) {
             override fun percentChance(sp: SimParticipant): Double = chanceToAddComboPointPercent()
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(1, Resource.Type.COMBO_POINT, name)
+                sp.addResource(1, Resource.Type.COMBO_POINT, ruthlessnessAbility)
             }
         }
 

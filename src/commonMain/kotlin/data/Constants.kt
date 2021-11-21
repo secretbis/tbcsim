@@ -2,6 +2,8 @@ package data
 
 // This contains meanings for all the magic numbers in the WoW TBC database
 object Constants {
+    const val UNKNOWN_ICON = "inv_misc_questionmark.jpg"
+
     enum class StatType(private val id: Int) {
         MANA(0),
         HEALTH(1),

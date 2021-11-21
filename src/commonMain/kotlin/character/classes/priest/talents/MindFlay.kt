@@ -18,6 +18,7 @@ class MindFlay(currentRank: Int) : Talent(currentRank) {
 
     val interruptWatch = object : Buff(){
         override val name = "${Companion.name} (Static)"
+        override val icon: String = "spell_shadow_siphonmana.jpg"
         override val hidden = true
         override val durationMs = -1
 
@@ -30,7 +31,7 @@ class MindFlay(currentRank: Int) : Talent(currentRank) {
                 Trigger.SPELL_CRIT,
             )
             override val type: Type = Type.STATIC
-    
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 // Mind Flay will refresh the dot if cast again, so we skip removing it
                 if (ability == null || ability.name.startsWith("Mind Flay")) return

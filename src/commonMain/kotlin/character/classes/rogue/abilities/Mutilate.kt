@@ -12,15 +12,21 @@ import data.itemsets.SlayersArmor
 import sim.EventResult
 import sim.EventType
 
-class Mutilate : Ability() {
+class MutilateOH : Mutilate() {
+    companion object {
+        const val name = "Mutilate (OH)"
+    }
+    override val name = Companion.name
+}
+
+open class Mutilate : Ability() {
     companion object {
         const val name = "Mutilate"
-        const val secondaryName = "Mutilate (Offhand)"
     }
 
     override val id: Int = 34413
     override val name: String = Companion.name
-    val secondaryName: String = Companion.secondaryName
+    override val icon: String = "ability_rogue_shadowstrikes.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -68,13 +74,13 @@ class Mutilate : Ability() {
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false, bonusCritChance = increasedCritChance, abilityAdditionalCritDamageMultiplier = critDmgMultiplier)
 
         if(result.second != EventResult.MISS && result.second != EventResult.DODGE && result.second != EventResult.PARRY) {
-            sp.addResource(2, Resource.Type.COMBO_POINT, name)
+            sp.addResource(2, Resource.Type.COMBO_POINT, this)
         }
 
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )
@@ -120,7 +126,7 @@ class Mutilate : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = secondaryName,
+            ability = MutilateOH(),
             amount = result.first,
             result = result.second,
         )
@@ -154,6 +160,6 @@ class Mutilate : Ability() {
         val bonusDamage = 110.0
         castMainhand(sp, bonusDamage, poisonMultiplier)
         castOffhand(sp, bonusDamage, poisonMultiplier)
-        sp.addResource(2, Resource.Type.COMBO_POINT, name)
+        sp.addResource(2, Resource.Type.COMBO_POINT, this)
     }
 }

@@ -16,6 +16,7 @@ class ThunderingStrikes(ranks: Int) : Talent(ranks) {
 
     val buff = object : Buff() {
         override val name: String = "Thundering Strikes"
+        override val icon: String = "ability_thunderbolt.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

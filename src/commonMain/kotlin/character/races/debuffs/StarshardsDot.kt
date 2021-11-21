@@ -18,6 +18,7 @@ class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_arcane_starfire.jpg"
     override val tickDeltaMs: Int = 3000
     override val durationMs: Int = 15000
 
@@ -29,6 +30,7 @@ class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
     val starshardsAbility = object : Ability() {
         override val id: Int = 25446
         override val name: String = Companion.name
+        override val icon: String = "spell_arcane_starfire.jpg"
 
         override fun gcdMs(sp: SimParticipant): Int = 0
 
@@ -39,7 +41,7 @@ class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second
             )

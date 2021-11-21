@@ -33,6 +33,7 @@ class ElementalFocus(ranks: Int) : Talent(ranks) {
 
     val postCritBuff = object : Buff() {
         override val name: String = "Elemental Focus"
+        override val icon: String = "spell_shadow_manaburn.jpg"
         override val durationMs: Int = -1
         override val maxCharges: Int = 2
 
@@ -43,6 +44,7 @@ class ElementalFocus(ranks: Int) : Talent(ranks) {
 
     val staticBuff = object : Buff() {
         override val name: String = "Elemental Focus (static)"
+        override val icon: String = "spell_shadow_manaburn.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -19,6 +19,7 @@ class Orc : Race() {
 
     val axeSpec = object : Buff() {
         override val name: String = "Axe Specialization"
+        override val icon: String = "inv_axe_02.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -32,6 +33,7 @@ class Orc : Race() {
 
     val petDmg = object : Buff() {
         override val name: String = "Command"
+        override val icon: String = "ability_warrior_warcry.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

@@ -14,6 +14,7 @@ class DeathWish : Ability() {
 
     override val id: Int = 12292
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_deathpact.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 
@@ -26,6 +27,7 @@ class DeathWish : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Death Wish"
+        override val icon: String = "spell_shadow_deathpact.jpg"
         override val durationMs: Int = 30000
 
         override fun modifyStats(sp: SimParticipant): Stats {

@@ -21,6 +21,7 @@ class Envenom : FinisherAbility() {
 
     override val id: Int = 32684
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_disembowel.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -67,7 +68,7 @@ class Envenom : FinisherAbility() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.NATURE,
-            abilityName = name,
+            ability = this,
             comboPointsSpent = consumedComboPoints,
             amount = result.first,
             result = result.second,

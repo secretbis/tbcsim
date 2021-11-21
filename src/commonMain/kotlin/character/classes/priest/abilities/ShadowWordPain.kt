@@ -20,6 +20,7 @@ class ShadowWordPain : Ability() {
 
     override val id: Int = 25368
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_shadowwordpain.jpg"
 
     val school = Constants.DamageType.SHADOW
 
@@ -47,7 +48,7 @@ class ShadowWordPain : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

@@ -16,6 +16,7 @@ class ManaSpringTotem : Ability() {
 
     override val id: Int = 25570
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_manaregentotem.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
@@ -35,6 +36,7 @@ class ManaSpringTotem : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Mana Spring Totem"
+        override val icon: String = "spell_nature_manaregentotem.jpg"
         override val durationMs: Int = 120000
         override val mutex: List<Mutex> = listOf(Mutex.WATER_TOTEM)
 

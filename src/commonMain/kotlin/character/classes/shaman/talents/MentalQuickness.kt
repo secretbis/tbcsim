@@ -17,6 +17,7 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
         return listOf(
             object : Buff() {
                 override val name: String = "Mental Quickness (Spell Damage)"
+                override val icon: String = "spell_nature_mentalquickness.jpg"
                 override val durationMs: Int = -1
                 override val hidden: Boolean = true
 

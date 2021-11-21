@@ -20,6 +20,7 @@ class DevouringPlagueDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_blackplague.jpg"
     override val tickDeltaMs: Int = 3000
     override val durationMs: Int = 24000
 
@@ -31,6 +32,7 @@ class DevouringPlagueDot(owner: SimParticipant) : Debuff(owner) {
     val dpAbility = object : Ability() {
         override val id: Int = 25467
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_blackplague.jpg"
 
         override fun gcdMs(sp: SimParticipant): Int = 0
 
@@ -41,7 +43,7 @@ class DevouringPlagueDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = result.first,
                 result = result.second
             )

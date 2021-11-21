@@ -19,6 +19,7 @@ class ShadowWordDeath : Ability() {
     }
     override val id: Int = 32996
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_demonicfortitude.jpg"
 
     val baseDamage = Pair(572.0, 664.0)
     val school = Constants.DamageType.SHADOW
@@ -38,7 +39,7 @@ class ShadowWordDeath : Ability() {
 
         return baseResourceCost
     }
-    
+
     override fun cast(sp: SimParticipant) {
         val spTalent: ShadowPower? = sp.character.klass.talentInstance(ShadowPower.name)
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
@@ -51,7 +52,7 @@ class ShadowWordDeath : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = school,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

@@ -17,6 +17,7 @@ class Garrote : Ability() {
 
     override val id: Int = 26884
     override val name: String = Companion.name
+    override val icon: String = "ability_rogue_garrote.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -39,7 +40,7 @@ class Garrote : Ability() {
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = 0.0,
             result = result.second,
         )
@@ -47,7 +48,7 @@ class Garrote : Ability() {
 
         if(result.second != EventResult.MISS) {
             sp.sim.target.addDebuff(GarroteDot(sp))
-            sp.addResource(1, Resource.Type.COMBO_POINT, name)
+            sp.addResource(1, Resource.Type.COMBO_POINT, this)
         }
 
         val triggerTypes = when(result.second) {

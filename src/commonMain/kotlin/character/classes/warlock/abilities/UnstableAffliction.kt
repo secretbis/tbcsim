@@ -17,6 +17,7 @@ class UnstableAffliction : Ability() {
 
     override val id: Int = 30405
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
     override fun castTimeMs(sp: SimParticipant): Int = (1500 / sp.spellHasteMultiplier()).toInt()
@@ -37,7 +38,7 @@ class UnstableAffliction : Ability() {
         val event = Event(
             eventType = EventType.SPELL_CAST,
             damageType = school,
-            abilityName = name,
+            ability = this,
             result = result.second,
         )
         sp.logEvent(event)

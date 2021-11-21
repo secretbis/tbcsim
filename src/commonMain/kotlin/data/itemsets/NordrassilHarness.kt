@@ -15,6 +15,7 @@ class NordrassilHarness : ItemSet() {
     // TODO: Shred and Lacerate should check this buff once they exist
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_14.jpg"
         override val durationMs: Int = -1
     }
 

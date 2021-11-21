@@ -12,6 +12,7 @@ abstract class AutoAttackBase : Ability() {
 
     abstract fun item(sp: SimParticipant): Item
 
+    override val icon: String = "ability_meleedamage.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     class AutoAttackState : Ability.State() {
@@ -44,7 +45,7 @@ abstract class AutoAttackBase : Ability() {
             eventType = EventType.DAMAGE,
             damageType = damageType,
             isWhiteDamage = true,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

@@ -14,6 +14,7 @@ class IcyVeins : Ability() {
     }
     override val id: Int = 12472
     override val name: String = Companion.name
+    override val icon: String = "spell_frost_coldhearted.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun castTimeMs(sp: SimParticipant): Int = 0
 
@@ -32,6 +33,7 @@ class IcyVeins : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "spell_frost_coldhearted.jpg"
         override val durationMs: Int = 20000
 
         override fun modifyStats(sp: SimParticipant): Stats {

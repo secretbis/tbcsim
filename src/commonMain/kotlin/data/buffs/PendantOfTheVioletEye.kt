@@ -14,16 +14,19 @@ class PendantOfTheVioletEye : Buff() {
     }
     override val id: Int = 29601
     override val name: String = Companion.name
+    override val icon: String = "inv_trinket_naxxramas02.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
         override val name: String  = "Pendant of the Violet Eye"
+        override val icon: String = "inv_trinket_naxxramas02.jpg"
         override val durationMs: Int = buffDurationMs
 
         val stackBuff = object : Buff() {
             override val name: String = "Enlightenment (Violet Eye)"
+            override val icon: String = "inv_trinket_naxxramas02.jpg"
             override val durationMs: Int = -1
             override val maxStacks: Int = 100
             override val hidden: Boolean = false
@@ -53,6 +56,7 @@ class PendantOfTheVioletEye : Buff() {
     val ability = object : Ability() {
         override val id: Int = 29601
         override val name: String = "Pendant of the Violet Eye"
+        override val icon: String = "inv_trinket_naxxramas02.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000
         override fun trinketLockoutMs(sp: SimParticipant): Int = buffDurationMs

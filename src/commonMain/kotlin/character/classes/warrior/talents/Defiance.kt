@@ -16,6 +16,7 @@ class Defiance(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = "ability_warrior_innerrage.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

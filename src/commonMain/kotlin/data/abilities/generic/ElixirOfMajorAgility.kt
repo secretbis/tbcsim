@@ -10,10 +10,12 @@ class ElixirOfMajorAgility : Ability() {
 
     override val id: Int = 22831
     override val name: String = Companion.name
+    override val icon: String = "inv_potion_127.jpg"
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     val buff = object : Buff() {
         override val name: String = "Elixir of Major Agility"
+        override val icon: String = "inv_potion_127.jpg"
         override val durationMs: Int = 60 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.BATTLE_ELIXIR)
 

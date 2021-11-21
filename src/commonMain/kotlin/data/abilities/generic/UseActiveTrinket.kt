@@ -17,9 +17,8 @@ class UseActiveTrinket : Ability() {
         return TrinketState()
     }
 
-    override val id: Int = -1
     override val name: String = Companion.name
-    override fun gcdMs(sp: SimParticipant): Int = 0
+    override val icon: String = "inv_trinket_honorhold.jpg"
     override val sharedCooldown: SharedCooldown = SharedCooldown.ACTIVE_TRINKET
 
     private fun getActiveTrinkets(sp: SimParticipant): List<Ability> {

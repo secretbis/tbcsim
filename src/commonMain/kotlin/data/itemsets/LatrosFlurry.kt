@@ -7,12 +7,13 @@ import sim.SimParticipant
 
 class LatrosFlurry : ItemSet() {
     companion object {
-        const val TWO_SET_BUFF_NAME = "Latro's Flurry(2 set)"
+        const val TWO_SET_BUFF_NAME = "Latro's Flurry (2 set)"
     }
     override val id: Int = 737
 
     val threeBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_sword_76.jpg"
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {

@@ -9,6 +9,7 @@ class PetUnleashedFury : Buff() {
     override val name: String = "Pet Unleashed Fury"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
+    override val icon: String = "ability_bullrush.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
         val unleashedFury = sp.owner?.character?.klass?.talents?.get(UnleashedFury.name) as UnleashedFury?

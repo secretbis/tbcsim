@@ -13,6 +13,7 @@ class TheNightBlade(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
 
     val buff = object : Buff(){
         override val name: String = "The Night Blade"
+        override val icon: String = "inv_weapon_shortblade_26.jpg"
         override val durationMs: Int =  10000
         override val maxStacks: Int = 3
 

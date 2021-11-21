@@ -14,6 +14,7 @@ class MysticalSkyfireDiamond : Gem(25893, "Mystical Skyfire Diamond", "inv_misc_
 
     val hasteBuff = object : Buff() {
         override val name: String = "Mystical Skyfire Diamond"
+        override val icon: String = "inv_misc_gem_diamond_05.jpg"
         override val durationMs: Int = 4000
 
         override fun modifyStats(sp: SimParticipant): Stats {
@@ -23,6 +24,7 @@ class MysticalSkyfireDiamond : Gem(25893, "Mystical Skyfire Diamond", "inv_misc_
 
     val buff = object : Buff() {
         override val name: String = "Mystical Skyfire Diamond (passive)"
+        override val icon: String = "inv_misc_gem_diamond_05.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

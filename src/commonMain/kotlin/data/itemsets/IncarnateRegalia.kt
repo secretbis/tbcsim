@@ -15,6 +15,7 @@ class IncarnateRegalia : ItemSet() {
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_chest_cloth_43.jpg"
     }
 
     // https://tbc.wowhead.com/spell=37571/improved-mind-flay-and-smite
@@ -23,6 +24,7 @@ class IncarnateRegalia : ItemSet() {
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
         override val durationMs: Int = -1
+        override val icon: String = "inv_chest_cloth_43.jpg"
     }
 
     override val bonuses: List<Bonus> = listOf(

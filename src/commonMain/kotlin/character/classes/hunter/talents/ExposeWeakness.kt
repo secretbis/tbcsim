@@ -17,10 +17,12 @@ class ExposeWeakness(currentRank: Int) : Talent(currentRank) {
         override val name: String = "${Companion.name} (static)"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
+        override val icon: String = "ability_rogue_findweakness.jpg"
 
         val apBuff = object : Buff() {
             override val name: String = Companion.name
             override val durationMs: Int = 7000
+            override val icon: String = "ability_rogue_findweakness.jpg"
 
             override val mutex: List<Mutex> = listOf(Mutex.BUFF_EXPOSE_WEAKNESS)
             override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {

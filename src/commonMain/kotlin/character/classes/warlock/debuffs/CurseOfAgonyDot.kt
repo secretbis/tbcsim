@@ -17,6 +17,7 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_shadow_curseofsargeras.jpg"
     override val durationMs: Int = 24000
     override val tickDeltaMs: Int = 2000
 
@@ -25,6 +26,7 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
     val dot = object : Ability() {
         override val id: Int = 27218
         override val name: String = Companion.name
+        override val icon: String = "spell_shadow_curseofsargeras.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 113.0
@@ -44,7 +46,7 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
-                abilityName = name,
+                ability = this,
                 amount = damageRoll,
                 result = EventResult.HIT,
             )

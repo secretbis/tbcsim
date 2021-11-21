@@ -9,6 +9,7 @@ import sim.SimParticipant
 class BloodFury : Ability() {
     override val id: Int = 33697
     override val name: String = "Blood Fury"
+    override val icon: String = "racial_orc_berserkerstrength.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 120000
     // According to the internet, this was moved off of GCD in 3.0.3
@@ -16,6 +17,7 @@ class BloodFury : Ability() {
 
     val buff = object : Buff() {
         override val name: String = "Blood Fury"
+        override val icon: String = "racial_orc_berserkerstrength.jpg"
         override val durationMs: Int = 15000
 
         override fun modifyStats(sp: SimParticipant): Stats? {

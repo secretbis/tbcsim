@@ -20,11 +20,13 @@ class DestroyerBattlegear : ItemSet() {
     // TODO: Overpower should check this buff if once it exists
     val twoBuff = object : Buff() {
         override val name: String = TWO_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_29.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
         val overpowerApBuff = object : Buff() {
             override val name: String = "$TWO_SET_BUFF_NAME (AP)"
+            override val icon: String = "inv_shoulder_29.jpg"
             override val durationMs: Int = 5000
 
             override fun modifyStats(sp: SimParticipant): Stats {
@@ -48,6 +50,7 @@ class DestroyerBattlegear : ItemSet() {
 
     val fourBuff = object : Buff() {
         override val name: String = FOUR_SET_BUFF_NAME
+        override val icon: String = "inv_shoulder_29.jpg"
         override val durationMs: Int = -1
     }
 

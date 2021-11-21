@@ -39,6 +39,7 @@ class AtieshWarlock : Item() {
 
     val groupBuff = object : Buff() {
         override val name: String = "Power of the Guardian (Warlock)"
+        override val icon: String = "inv_staff_medivh.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 

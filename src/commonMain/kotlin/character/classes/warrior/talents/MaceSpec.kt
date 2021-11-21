@@ -14,8 +14,14 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
+    val msAbility = object : Ability() {
+        override val name: String = Companion.name
+        override val icon: String = "inv_mace_01.jpg"
+    }
+
     val buff = object : Buff() {
-        override val name: String = "Mace Specialization"
+        override val name: String = Companion.name
+        override val icon: String = "inv_mace_01.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
@@ -44,9 +50,11 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
                     return
                 }
 
-                sp.addResource(7, Resource.Type.RAGE, name)
+                sp.addResource(7, Resource.Type.RAGE, msAbility)
             }
         }
+
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)

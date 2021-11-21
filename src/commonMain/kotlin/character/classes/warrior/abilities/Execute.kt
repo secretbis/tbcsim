@@ -11,13 +11,18 @@ import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
 
-class Execute : Ability() {
+class ExecuteExtra : Execute() {
+    override val name: String = "Execute (extra)"
+}
+
+open class Execute : Ability() {
     companion object {
         const val name = "Execute"
     }
 
     override val id: Int = 12292
     override val name: String = Companion.name
+    override val icon: String = "inv_sword_48.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
@@ -49,13 +54,13 @@ class Execute : Ability() {
         val result = Melee.attackRoll(sp, damage, item, isWhiteDmg = false)
 
         // Drain rage
-        sp.subtractResource(res.currentAmount, Resource.Type.RAGE, "Execute (extra)")
+        sp.subtractResource(res.currentAmount, Resource.Type.RAGE, ExecuteExtra())
 
         // Save last hit state and fire event
         val event = Event(
             eventType = EventType.DAMAGE,
             damageType = Constants.DamageType.PHYSICAL,
-            abilityName = name,
+            ability = this,
             amount = result.first,
             result = result.second,
         )

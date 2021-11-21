@@ -10,9 +10,11 @@ import sim.SimParticipant
 class RapidFire : Ability() {
     companion object {
         const val name = "Rapid Fire"
+        const val icon = "ability_hunter_runningshot.jpg"
     }
     override val id: Int = 3045
     override val name: String = Companion.name
+    override val icon: String = Companion.icon
     override fun gcdMs(sp: SimParticipant): Int = 0
     override fun cooldownMs(sp: SimParticipant): Int {
         val rk = sp.character.klass.talents[RapidKilling.name] as RapidKilling?
@@ -23,6 +25,7 @@ class RapidFire : Ability() {
 
     val buff = object : Buff() {
         override val name: String = Companion.name
+        override val icon: String = Companion.icon
         override val durationMs: Int = 15000
 
         override fun modifyStats(sp: SimParticipant): Stats {

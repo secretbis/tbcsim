@@ -17,6 +17,7 @@ class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
 
     val buff = object : Buff() {
         override val name: String = "Poleaxe Specialization"
+        override val icon: String = "inv_axe_06.jpg"
         override val durationMs: Int = -1
         override val hidden: Boolean = true
 
