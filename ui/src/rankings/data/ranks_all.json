@@ -213,13 +213,13 @@
             "petSd": 3.2728782873225897
         },
         "rogue_assassination": {
-            "subjectMean": 1550.689220600217,
+            "subjectMean": 1659.117310896767,
             "subjectPetMean": 0.0,
-            "totalMean": 1550.689220600217,
-            "subjectMedian": 1550.4447796332024,
+            "totalMean": 1659.117310896767,
+            "subjectMedian": 1659.6041314824129,
             "subjectPetMedian": 0.0,
-            "totalMedian": 1550.4447796332024,
-            "subjectSd": 58.62047609024581,
+            "totalMedian": 1659.6041314824129,
+            "subjectSd": 59.41846863499079,
             "petSd": 0.0
         },
         "rogue_combat": {
@@ -365,13 +365,13 @@
             "petSd": 1.5261730198328076
         },
         "rogue_assassination": {
-            "subjectMean": 1739.4052745548152,
+            "subjectMean": 1899.5694633271746,
             "subjectPetMean": 0.0,
-            "totalMean": 1739.4052745548152,
-            "subjectMedian": 1738.7534111358204,
+            "totalMean": 1899.5694633271746,
+            "subjectMedian": 1897.759341120115,
             "subjectPetMedian": 0.0,
-            "totalMedian": 1738.7534111358204,
-            "subjectSd": 68.64820824011659,
+            "totalMedian": 1897.759341120115,
+            "subjectSd": 71.65350598421043,
             "petSd": 0.0
         },
         "rogue_combat": {

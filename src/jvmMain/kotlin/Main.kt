@@ -295,8 +295,12 @@ class TBCSim : CliktCommand() {
                                     println("Starting EP run for ${categoryEntry.first}/${categorySpecEntry.key}")
                                     acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
                                 } else {
-                                    acc2[categorySpecEntry.key] =
-                                        existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                                    if(existing.categories[categoryEntry.first] != null && existing.categories[categoryEntry.first]!![categorySpecEntry.key] != null) {
+                                        acc2[categorySpecEntry.key] =
+                                            existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
+                                    } else {
+                                        println("No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping")
+                                    }
                                 }
                                 acc2
                             }
@@ -339,8 +343,12 @@ class TBCSim : CliktCommand() {
                                     println("Starting ranking run for ${categoryEntry.first}/${categorySpecEntry.key}")
                                     acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
                                 } else {
-                                    acc2[categorySpecEntry.key] =
-                                        existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                                    if(existing[categoryEntry.first] != null && existing[categoryEntry.first]!![categorySpecEntry.key] != null) {
+                                        acc2[categorySpecEntry.key] =
+                                            existing[categoryEntry.first]!![categorySpecEntry.key]!!
+                                    } else {
+                                        println("No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping")
+                                    }
                                 }
                                 acc2
                             }
