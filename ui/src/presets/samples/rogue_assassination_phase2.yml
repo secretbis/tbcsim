@@ -45,10 +45,11 @@ talents:
     rank: 3
   - name: Precision
     rank: 5
+  - name: Dual Wield Specialization
+    rank: 5
 
   # Sub talents
-  - name: Opportunity
-    rank: 5
+  # None
 
 gear:
   mainHand:
