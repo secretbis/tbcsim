@@ -33,17 +33,17 @@ const eventTemplates = {
     return `${kprop(evt.buff, 'name')} on Target ends`
   },
   DAMAGE: evt => {
-    return `Your ${evt.abilityName} deals ${evt.amount.toFixed(0)} damage (${_.capitalize(kprop(evt.result, 'name', ''))})`
+    return `Your ${evt.ability && kprop(evt.ability, 'name')} deals ${evt.amount.toFixed(0)} damage (${_.capitalize(kprop(evt.result, 'name', ''))})`
   },
   RESOURCE_CHANGED: evt => {
     const type = evt.delta >= 0 ? 'gain' : 'lose';
-    return `You ${type} ${Math.abs(evt.delta).toFixed(0)} ${kprop(evt.resourceType, 'name').toLowerCase()} (${evt.abilityName}) (current: ${evt.amount.toFixed(0)})`
+    return `You ${type} ${Math.abs(evt.delta).toFixed(0)} ${kprop(evt.resourceType, 'name').toLowerCase()} (${evt.ability && kprop(evt.ability, 'name')}) (current: ${evt.amount.toFixed(0)})`
   },
   SPELL_START_CAST: evt => {
-    return `You begin casting ${evt.abilityName}`
+    return `You begin casting ${evt.ability && kprop(evt.ability, 'name')}`
   },
   SPELL_CAST: evt => {
-    return `You finish casting ${evt.abilityName}`
+    return `You finish casting ${evt.ability && kprop(evt.ability, 'name')}`
   },
 }
 
