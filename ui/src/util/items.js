@@ -239,11 +239,7 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
           const subclasses = itemClasses.itemSubclasses[itemClass]
 
           // Never filter the cloak slot on itemSubclass
-          if(item.inventorySlot == constantInvSlots.back) {
-            return true
-          }
-
-          if(subclasses.includes(itemSubclass)) {
+          if(subclasses.includes(itemSubclass) || item.inventorySlot == constantInvSlots.back) {
             return filters ? filters.every(f => f(item)) : true
           }
         }
