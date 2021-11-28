@@ -16,7 +16,7 @@ class IllidariCloakOfShadowWrath : Item() {
     override var itemLevel: Int = 103
     override var quality: Int = 3
     override var icon: String = "inv_misc_cape_20.jpg"
-    override var inventorySlot: Int = 9
+    override var inventorySlot: Int = 16
     override var itemSet: ItemSet? = null
     override var itemClass: Constants.ItemClass? = Constants.ItemClass.ARMOR
     override var itemSubclass: Constants.ItemSubclass? = Constants.ItemSubclass.CLOTH
