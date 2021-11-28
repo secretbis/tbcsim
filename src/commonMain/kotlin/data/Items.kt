@@ -25,6 +25,7 @@ object Items {
         { KissOfTheSpider() },
         { MamasInsurance() },
         { MarkOfTheChampion() },
+        { MarkOfTheChampionSpell() },
         { MindQuickeningGem() },
         { NeltharionsTear() },
         { NightstalkersWristguards() },
