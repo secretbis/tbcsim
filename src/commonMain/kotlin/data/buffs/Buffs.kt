@@ -129,6 +129,7 @@ object Buffs {
             38347 -> SextantOfUnstableCurrents()
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
+            40396 -> FelInfusion()
             40438 -> AshtongueTalismanOfAcumen()
             40442 -> AshtongueTalismanOfEquilibrium()
             40482 -> AshtongueTalismanOfInsight()
