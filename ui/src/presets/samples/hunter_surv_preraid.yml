@@ -106,12 +106,31 @@ rotation:
 
     # Abilities
     - name: Hunter's Mark
+    - name: Aspect of the Hawk
 
   combat:
     - name: Hunter's Mark
       criteria:
         - type: BUFF_DURATION_LTE
           buff: Hunter's Mark
+          seconds: 0
+    - name: Aspect of the Viper
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 20
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Viper
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 40
+    - name: Aspect of the Hawk
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 30
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Hawk
           seconds: 0
     - name: Blood Fury
     - name: Berserking

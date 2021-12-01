@@ -20,6 +20,7 @@ enum class Mutex {
     BUFF_FAERIE_FIRE,
 
     // Hunter
+    BUFF_HUNTER_ASPECT,
     BUFF_HUNTERS_MARK,
 
     // Rogue

@@ -35,6 +35,8 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {
             ArcaneShot.name -> ArcaneShot()
+            AspectOfTheHawk.name -> AspectOfTheHawk()
+            AspectOfTheViper.name -> AspectOfTheViper()
             BestialWrath.name -> BestialWrath()
             HuntersMark.name -> HuntersMark()
             KillCommand.name -> KillCommand()
