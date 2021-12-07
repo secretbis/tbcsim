@@ -12,6 +12,7 @@ object GenericAbilities {
             DemonicRune.name -> DemonicRune()
             DestructionPotion.name -> DestructionPotion()
             ElixirOfMajorAgility.name -> ElixirOfMajorAgility()
+            ElixirOfMajorStrength.name -> ElixirOfMajorStrength()
             FlaskOfBlindingLight.name -> FlaskOfBlindingLight()
             FlaskOfPureDeath.name -> FlaskOfPureDeath()
             FlaskOfRelentlessAssault.name -> FlaskOfRelentlessAssault()
