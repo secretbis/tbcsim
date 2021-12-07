@@ -263,7 +263,7 @@ function TargetTypeSelect({ targetTypeOrdinal, dispatch }) {
   );
 }
 
-export default ({ character, phase, simOptions, epOptions, dispatch }) => {
+export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOptions, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function Import({ dispatch }) {
@@ -310,7 +310,7 @@ export default ({ character, phase, simOptions, epOptions, dispatch }) => {
     const exportPreset = () => {
       try {
         const filename = character.filename || "exported-preset.yaml";
-        const exported = impex.exportPreset(character);
+        const exported = impex.exportPreset(character, raidBuffs, raidDebuffs);
         const blob = new Blob([exported], {type: "text/yaml;charset=utf-8"});
         filesaver.saveAs(blob, filename);
       } catch(e) {

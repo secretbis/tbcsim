@@ -38,7 +38,7 @@ const keyOrder = _.transform([
   return acc;
 }, {})
 
-export const exportPreset = (presetObj) => {
+export const exportPreset = (presetObj, raidBuffs, raidDebuffs) => {
   if(!presetObj || !presetObj.gear) {
     throw new Error('Cannot save empty preset');
   }
@@ -60,7 +60,9 @@ export const exportPreset = (presetObj) => {
 
   const toSave = {
     ...presetObj,
-    gear: cleanGear
+    gear: cleanGear,
+    raidBuffs: _.keys(raidBuffs),
+    raidDebuffs: _.keys(raidDebuffs)
   }
 
   // Sort keys into a useful order
