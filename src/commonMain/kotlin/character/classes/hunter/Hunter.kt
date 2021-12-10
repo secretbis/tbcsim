@@ -5,6 +5,7 @@ import character.classes.hunter.abilities.*
 import character.classes.hunter.talents.*
 import character.classes.hunter.talents.AimedShot as AimedShotTalent
 import character.classes.hunter.talents.BestialWrath as BestialWrathTalent
+import character.classes.hunter.talents.Readiness as ReadinessTalent
 import data.model.Item
 import mechanics.Rating
 import sim.SimParticipant
@@ -42,6 +43,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
             KillCommand.name -> KillCommand()
             MultiShot.name -> MultiShot()
             RapidFire.name -> RapidFire()
+            Readiness.name -> Readiness()
             SteadyShot.name -> SteadyShot()
             else -> null
         }
@@ -76,6 +78,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
             MortalShots.name -> MortalShots(ranks)
             RangedWeaponSpecialization.name -> RangedWeaponSpecialization(ranks)
             RapidKilling.name -> RapidKilling(ranks)
+            ReadinessTalent.name -> ReadinessTalent(ranks)
             SerpentsSwiftness.name -> SerpentsSwiftness(ranks)
             Surefooted.name -> Surefooted(ranks)
             SurvivalInstincts.name -> SurvivalInstincts(ranks)

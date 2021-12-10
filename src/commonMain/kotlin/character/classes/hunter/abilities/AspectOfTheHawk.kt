@@ -46,6 +46,10 @@ class AspectOfTheHawk : Ability() {
             override val type: Type = Type.PERCENT
             override fun percentChance(sp: SimParticipant): Double = 10.0
 
+            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+                return sp.character.klass.hasTalentRanks(ImprovedAspectOfTheHawk.name) && super.shouldProc(sp, items, ability, event)
+            }
+
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.addBuff(hasteBuff)
             }

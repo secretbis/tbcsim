@@ -44,7 +44,7 @@ class MasterTactician(currentRank: Int) : Talent(currentRank) {
                 Trigger.RANGED_BLOCK
             )
             override val type: Type = Type.PERCENT
-            override fun percentChance(sp: SimParticipant): Double = 10.0
+            override fun percentChance(sp: SimParticipant): Double = 6.0
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.addBuff(critBuff)

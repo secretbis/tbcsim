@@ -24,6 +24,8 @@ talents:
     rank: 2
   - name: Master Tactician
     rank: 5
+  - name: Readiness
+    rank: 1
   # Marks talents
   - name: Lethal Shots
     rank: 5
@@ -147,6 +149,11 @@ rotation:
     - name: Blood Fury
     - name: Berserking
     - name: Rapid Fire
+      criteria:
+        - buff: Rapid Fire
+          seconds: 0
+          type: BUFF_DURATION_LTE
+    - name: Readiness
     - name: Haste Potion
     - name: Use Active Trinket
     - name: Kill Command
