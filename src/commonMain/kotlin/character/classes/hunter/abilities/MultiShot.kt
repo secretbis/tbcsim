@@ -5,6 +5,7 @@ import character.Proc
 import character.classes.hunter.talents.Efficiency
 import character.classes.hunter.talents.TheBeastWithin
 import data.Constants
+import data.buffs.NoAmmo
 import data.itemsets.DemonStalkerArmor
 import mechanics.General
 import mechanics.Ranged
@@ -47,7 +48,7 @@ class MultiShot : Ability() {
         val item = sp.character.gear.rangedTotemLibram
 
         // Ammo adds DPS, so we can just model it as bonus AP
-        val ammoBonusAp = General.dpsToAp(sp.character.gear.ammo.maxDmg)
+        val ammoBonusAp = if(sp.buffs[NoAmmo.name] == null) { General.dpsToAp(sp.character.gear.ammo.maxDmg) } else 0
         val damage = Ranged.baseDamageRoll(sp, item, isNormalized = true, bonusAp = ammoBonusAp) + bonusDmg
         val result = Ranged.attackRoll(sp, damage, item)
 

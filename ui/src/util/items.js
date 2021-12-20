@@ -9,7 +9,8 @@ export function hasAmmo(item) {
   if(!item) return false
 
   const itemSubclass = kprop(item.itemSubclass, 'itemClassOrdinal')
-  return [weaponSubclasses.bow, weaponSubclasses.crossbow, weaponSubclasses.gun].includes(itemSubclass)
+  const isThoridal = kprop(item, 'id') == 34334;
+  return [weaponSubclasses.bow, weaponSubclasses.crossbow, weaponSubclasses.gun].includes(itemSubclass) && !isThoridal
 }
 
 export function inventorySlotInfo(character, slotName, itemType) {

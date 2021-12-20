@@ -170,6 +170,10 @@ object Buffs {
             35083 -> BandOfTheEternalSage()
             35086 -> BandOfTheEternalRestorer()
 
+            // Thoridal
+            44972 -> Ignored("Quiver haste is the same, and baked into mechanics")
+            46699 -> NoAmmo()
+
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
             18379 -> GenericManaRegenBuff(6)

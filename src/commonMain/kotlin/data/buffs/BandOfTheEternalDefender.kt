@@ -13,8 +13,9 @@ class BandOfTheEternalDefender : Buff() {
         const val name = "Band of the Eternal Defender"
     }
 
-    override val name: String = Companion.name
+    override val name: String = "${Companion.name} (static)"
     override val durationMs: Int = -1
+    override val hidden: Boolean = true
     override val icon: String = "inv_jewelry_ring_55.jpg"
 
     val proc = object : Proc() {
