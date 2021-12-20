@@ -238,6 +238,15 @@ object Items {
         { ShadowDraenite(23111, Prefix.SOVEREIGN) },
         { Nightseye(24054, Prefix.SOVEREIGN) },
         { ShadowsongAmethyst(32211, Prefix.SOVEREIGN) },
+
+        // JC only gems
+        { BloodOfAmber() },
+        { CrimsonSun() },
+        { DonJuliosHeart() },
+        { FacetOfEternity() },
+        { FallingStar() },
+        { KaileesRose() },
+        { StoneOfBlades() },
     ) + ItemIndex.items
 
     val byName = items.map { val eval = it(); eval.name to { it() } }.toMap()
