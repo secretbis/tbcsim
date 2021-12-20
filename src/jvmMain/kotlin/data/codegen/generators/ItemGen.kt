@@ -37,54 +37,66 @@ object ItemGen {
         // Scale of the Sands reputation rings
         29298 to mapOf(
             "className" to "BandOfEternityChampionFriendly",
-            "name" to "Band of Eternity (Champion, Friendly)"
+            "name" to "Band of Eternity (Champion, Friendly)",
+            "phase" to "2"
         ),
         29299 to mapOf(
             "className" to "BandOfEternityChampionHonored",
-            "name" to "Band of Eternity (Champion, Honored)"
+            "name" to "Band of Eternity (Champion, Honored)",
+            "phase" to "3"
         ),
         29300 to mapOf(
             "className" to "BandOfEternityChampionRevered",
-            "name" to "Band of Eternity (Champion, Revered)"
+            "name" to "Band of Eternity (Champion, Revered)",
+            "phase" to "3"
         ),
 
         29294 to mapOf(
             "className" to "BandOfEternityDefenderFriendly",
-            "name" to "Band of Eternity (Defender, Friendly)"
+            "name" to "Band of Eternity (Defender, Friendly)",
+            "phase" to "2"
         ),
         29295 to mapOf(
             "className" to "BandOfEternityDefenderHonored",
-            "name" to "Band of Eternity (Defender, Honored)"
+            "name" to "Band of Eternity (Defender, Honored)",
+            "phase" to "3"
         ),
         29296 to mapOf(
             "className" to "BandOfEternityDefenderRevered",
-            "name" to "Band of Eternity (Defender, Revered)"
+            "name" to "Band of Eternity (Defender, Revered)",
+            "phase" to "3"
         ),
 
         29306 to mapOf(
             "className" to "BandOfEternityRestorerFriendly",
-            "name" to "Band of Eternity (Restorer, Friendly)"
+            "name" to "Band of Eternity (Restorer, Friendly)",
+            "phase" to "2"
         ),
         29307 to mapOf(
             "className" to "BandOfEternityRestorerHonored",
-            "name" to "Band of Eternity (Restorer, Honored)"
+            "name" to "Band of Eternity (Restorer, Honored)",
+            "phase" to "3"
         ),
         29308 to mapOf(
             "className" to "BandOfEternityRestorerRevered",
-            "name" to "Band of Eternity (Restorer, Revered)"
+            "name" to "Band of Eternity (Restorer, Revered)",
+            "phase" to "3"
         ),
 
         29302 to mapOf(
             "className" to "BandOfEternitySageFriendly",
-            "name" to "Band of Eternity (Sage, Friendly)"
+            "name" to "Band of Eternity (Sage, Friendly)",
+            "phase" to "2"
         ),
         29303 to mapOf(
             "className" to "BandOfEternitySageHonored",
-            "name" to "Band of Eternity (Sage, Honored)"
+            "name" to "Band of Eternity (Sage, Honored)",
+            "phase" to "3"
         ),
         29304 to mapOf(
             "className" to "BandOfEternitySageRevered",
-            "name" to "Band of Eternity (Sage, Revered)"
+            "name" to "Band of Eternity (Sage, Revered)",
+            "phase" to "3"
         ),
     )
 
@@ -177,7 +189,8 @@ object ItemGen {
             item.stats = deserializeStats(it)
             item.sockets = deserializeSockets(it)
 
-            val phase = itemPhases[item.id.toString()] ?: itemPhasesApprox[item.id.toString()] ?: 0
+            val phaseOverride = itemOverrides[item.id]?.get("phase")?.toInt()
+            val phase = phaseOverride ?: itemPhases[item.id.toString()] ?: itemPhasesApprox[item.id.toString()] ?: 0
             item.phase = phase
 
             Pair(item, it)
