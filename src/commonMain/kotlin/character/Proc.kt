@@ -66,6 +66,14 @@ abstract class Proc {
         ARCANE_DAMAGE,
         ARCANE_DAMAGE_PERIODIC,
 
+        // Incoming damage
+        STRUCK_IN_COMBAT,
+
+        // Healing
+        HEAL_HIT,
+        HEAL_CRIT,
+        HEAL_PERIODIC,
+
         // Mechanics
         SERVER_TICK, // 2s
         SERVER_SLOW_TICK,  // 3s

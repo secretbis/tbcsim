@@ -164,6 +164,12 @@ object Buffs {
             38308 -> Blinkstrike(item)
             40291 -> SyphonOfTheNathrezim(item)
 
+            // Hyjal Rep Rings
+            35077 -> BandOfTheEternalDefender()
+            35080 -> BandOfTheEternalChampion()
+            35083 -> BandOfTheEternalSage()
+            35086 -> BandOfTheEternalRestorer()
+
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
             18379 -> GenericManaRegenBuff(6)
