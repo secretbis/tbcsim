@@ -49,7 +49,7 @@ class Frostbolt : Ability() {
     val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
     override fun cast(sp: SimParticipant) {
         val elementalPrecision: ElementalPrecision? = sp.character.klass.talentInstance(ElementalPrecision.name)
-        val emHit = elementalPrecision?.bonusFireFrostHitPct() ?: 0.0
+        val emHit = 2 * (elementalPrecision?.bonusFireFrostHitPct() ?: 0.0)
 
         val empFb: EmpoweredFrostbolt? = sp.character.klass.talentInstance(EmpoweredFrostbolt.name)
         val bonusFbCrit = empFb?.frostboltAddlCritPct() ?: 0.0

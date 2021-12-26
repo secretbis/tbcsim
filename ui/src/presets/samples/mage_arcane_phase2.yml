@@ -53,7 +53,7 @@ gear:
   mainHand:
     name: The Nexus Key
     enchant: Major Spellpower (Weapon)
-    tempEnchant: Superior Wizard Oil
+    tempEnchant: Brilliant Wizard Oil
   rangedTotemLibram:
     name: Eredar Wand of Obliteration
   head:
@@ -112,14 +112,28 @@ gear:
 rotation:
   autoAttack: false
   precombat:
-    - name: Flask of Blinding Light
+    - name: Elixir of Draenic Wisdom
+    - name: Adept's Elixir
     - name: Crunchy Serpent
     - name: Arcane Intellect
-    - name: Molten Armor
+    - name: Mage Armor
+    - name: Scroll of Spirit V
 
   combat:
+    - name: Evocation
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 30
+          resourceType: MANA
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 30
     - name: Blood Fury
     - name: Berserking
+    - name: Bloodlust
+      criteria:
+        - type: FIGHT_DURATION_GTE
+          seconds: 15
+    - name: Drums of Battle
     - name: Mana Emerald
       criteria:
         - type: RESOURCE_MISSING_GTE
@@ -131,31 +145,40 @@ rotation:
         - type: RESOURCE_MISSING_GTE
           amount: 3000
           resourceType: MANA
-    - name: Evocation
+        - type: ABILITY_COOLDOWN_GTE
+          ability: Mana Emerald
+          seconds: 1
+    - name: Innervate
       criteria:
         - type: RESOURCE_PCT_LTE
-          pct: 20
+          pct: 35
           resourceType: MANA
-        - type: FIGHT_TIME_REMAINING_GTE
-          seconds: 30
     - name: Cold Snap
       criteria:
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mana Emerald
+          seconds: 5
         - type: ABILITY_COOLDOWN_GTE
-          ability: Icy Veins
+          ability: Mana Emerald
           seconds: 1
     - name: Icy Veins
       criteria:
-        - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
+        - type: RESOURCE_MISSING_GTE
+          # Account for Serpent-Coil Braid bonus potential over the regular mana gem amount
+          amount: 3125
+          resourceType: MANA
     - name: Arcane Power
       criteria:
-        - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
+        - type: RESOURCE_MISSING_GTE
+          # Account for Serpent-Coil Braid bonus potential over the regular mana gem amount
+          amount: 3125
+          resourceType: MANA
     - name: Presence of Mind
-      criteria:
-        - type: FIGHT_TIME_ELAPSED_GTE
-          seconds: 5
     - name: Use Active Trinket
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 3125
+          resourceType: MANA
     # Cast AB if we're using cooldowns, have high mana, or have low mana and low stacks
     - name: Arcane Blast
       criteria:
@@ -170,16 +193,18 @@ rotation:
     - name: Arcane Blast
       criteria:
         - type: RESOURCE_PCT_GTE
-          pct: 20
+          pct: 25
           resourceType: MANA
     - name: Arcane Blast
       criteria:
         - type: BUFF_STACKS_LTE
           buff: Arcane Blast
           stacks: 2
-        - type: RESOURCE_PCT_LTE
-          pct: 20
-          resourceType: MANA
+    - name: Arcane Blast
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Arcane Blast
+          seconds: 1
     - name: Frostbolt
 
 raidBuffs:
