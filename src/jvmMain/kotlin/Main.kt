@@ -258,7 +258,11 @@ class TBCSim : CliktCommand() {
         val specFilter = specFilterStr?.split(",")
         val categoryFilter = categoryFilterStr?.split(",")
 
-        if (calcEP) {
+        if (calcEP && configFile?.exists() == true) {
+            val config = ConfigMaker.fromYml(configFile!!.readText())
+            println("Starting EP run")
+            val deltas = computeEpDeltas(config, opts)
+        } else if (calcEP) {
             val epTypeRef = object : TypeReference<EpOutput>(){}
             val existing = mapper.readValue(File(epOutputPath).readText(), epTypeRef)
             // EP calculation sim
