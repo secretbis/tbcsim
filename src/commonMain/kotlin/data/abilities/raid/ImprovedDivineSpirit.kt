@@ -21,7 +21,6 @@ class ImprovedDivineSpirit : Ability() {
         override val name: String = Companion.name
         override val icon: String = "spell_holy_prayerofspirit.jpg"
         override val durationMs: Int = -1
-        override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
 
         override fun modifyStats(sp: SimParticipant): Stats {
             // assumes max rank
