@@ -14,7 +14,7 @@ abstract class Spec {
             Triple("meleeCritRating", Stats(meleeCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
             Triple("physicalHitRating", Stats(physicalHitRating = -5.0 * Rating.physicalHitPerPct), -5.0 * Rating.physicalHitPerPct),
             Triple("physicalHasteRating", Stats(physicalHasteRating = 5.0 * Rating.hastePerPct), 5.0 * Rating.hastePerPct),
-            Triple("expertiseRating", Stats(expertiseRating = 2.0 * Rating.expertisePerPct), 2.0 * Rating.expertisePerPct),
+            Triple("expertiseRating", Stats(expertiseRating = -2.0 * Rating.expertisePerPct), -2.0 * Rating.expertisePerPct),
             Triple("armorPen", Stats(armorPen = 100), 100.0),
         )
 
@@ -23,7 +23,7 @@ abstract class Spec {
         val defaultRangedDeltas: List<SpecEpDelta> = listOf(
             Triple("agility", Stats(agility = 50), 50.0),
             Triple("rangedCritRating", Stats(rangedCritRating = 5.0 * Rating.critPerPct), 5.0 * Rating.critPerPct),
-            Triple("physicalHitRating", Stats(physicalHitRating = 2.0 * Rating.physicalHitPerPct), 2.0 * Rating.physicalHitPerPct),
+            Triple("physicalHitRating", Stats(physicalHitRating = -2.0 * Rating.physicalHitPerPct), -2.0 * Rating.physicalHitPerPct),
             Triple("physicalHasteRating", Stats(physicalHasteRating = 5.0 * Rating.hastePerPct), 5.0 * Rating.hastePerPct),
             Triple("armorPen", Stats(armorPen = 100), 100.0)
         )
@@ -37,7 +37,7 @@ abstract class Spec {
         )
         val defaultCasterDeltas: List<SpecEpDelta> = listOf(
             Triple("intellect", Stats(intellect = 50), 50.0),
-            Triple("spellHasteRating", Stats(spellHasteRating = 10.0 * Rating.hastePerPct), 10.0 * Rating.hastePerPct),
+            Triple("spellHasteRating", Stats(spellHasteRating = 5.0 * Rating.hastePerPct), 5.0 * Rating.hastePerPct),
         ) + casterHybridDeltas
     }
     abstract val name: String
