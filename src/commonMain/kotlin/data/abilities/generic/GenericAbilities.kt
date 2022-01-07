@@ -15,6 +15,7 @@ object GenericAbilities {
             ElixirOfDraenicWisdom.name -> ElixirOfDraenicWisdom()
             ElixirOfMajorAgility.name -> ElixirOfMajorAgility()
             ElixirOfMajorStrength.name -> ElixirOfMajorStrength()
+            FlameCap.name -> FlameCap()
             FlaskOfBlindingLight.name -> FlaskOfBlindingLight()
             FlaskOfPureDeath.name -> FlaskOfPureDeath()
             FlaskOfRelentlessAssault.name -> FlaskOfRelentlessAssault()
