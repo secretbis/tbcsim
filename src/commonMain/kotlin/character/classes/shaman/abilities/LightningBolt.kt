@@ -5,6 +5,7 @@ import character.Buff
 import character.Proc
 import character.classes.shaman.talents.*
 import data.Constants
+import data.buffs.TotemOfAncestralGuidance
 import data.buffs.TotemOfTheVoid
 import data.itemsets.SkyshatterRegalia
 import data.model.Item
@@ -97,7 +98,10 @@ open class LightningBolt : Ability() {
         val totemOfTheVoid = sp.buffs[TotemOfTheVoid.name] as TotemOfTheVoid?
         val totemSpellDmgBonus = totemOfTheVoid?.lightningDamageBonus() ?: 0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff, totemSpellDmgBonus) * concussionMod * loMod * t6Multiplier
+        val totemOfAncestralGuidance = sp.buffs[TotemOfAncestralGuidance.name] as TotemOfAncestralGuidance?
+        val totemAgSpellDmgBonus = totemOfAncestralGuidance?.lightningDamageBonus() ?: 0
+
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff, totemSpellDmgBonus + totemAgSpellDmgBonus) * concussionMod * loMod * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, cotAddlCrit + tmAddlCrit)
 
         val event = Event(

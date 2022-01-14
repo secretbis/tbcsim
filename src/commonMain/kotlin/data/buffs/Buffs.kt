@@ -140,6 +140,7 @@ object Buffs {
             40463 -> AshtongueTalismanOfVision()
             40470 -> AshtongueTalismanOfZeal()
             40475 -> MadnessOfTheBetrayer()
+            41040 -> TotemOfAncestralGuidance()
             42083 -> TsunamiTalisman()
             43716 -> BerserkersCall()
             45354 -> ShardOfContempt()
