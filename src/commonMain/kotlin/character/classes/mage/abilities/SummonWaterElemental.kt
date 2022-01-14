@@ -13,7 +13,7 @@ class SummonWaterElemental : Ability() {
     override val name: String = Companion.name
     override val icon: String = "spell_frost_summonwaterelemental_2.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
-    override fun castTimeMs(sp: SimParticipant): Int  = 0
+    override fun castTimeMs(sp: SimParticipant): Int = 0
 
     override fun cooldownMs(sp: SimParticipant): Int = 180000
 

@@ -42,7 +42,7 @@ class ImprovedScorch(currentRank: Int) : Talent(currentRank) {
             }
         }
 
-        override fun procs(sp: SimParticipant): List<Proc>  = listOf(proc)
+        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
     }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)

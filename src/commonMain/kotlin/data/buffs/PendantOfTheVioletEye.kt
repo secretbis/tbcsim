@@ -10,17 +10,17 @@ import sim.SimParticipant
 
 class PendantOfTheVioletEye : Buff() {
     companion object {
-        const val name = "Pendant of the Violet Eye (static)"
+        const val name = "Pendant of the Violet Eye"
     }
     override val id: Int = 29601
-    override val name: String = Companion.name
+    override val name: String = Companion.name + " (static)"
     override val icon: String = "inv_trinket_naxxramas02.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
-        override val name: String  = "Pendant of the Violet Eye"
+        override val name: String = Companion.name
         override val icon: String = "inv_trinket_naxxramas02.jpg"
         override val durationMs: Int = buffDurationMs
 
@@ -55,7 +55,7 @@ class PendantOfTheVioletEye : Buff() {
 
     val ability = object : Ability() {
         override val id: Int = 29601
-        override val name: String = "Pendant of the Violet Eye"
+        override val name: String = Companion.name
         override val icon: String = "inv_trinket_naxxramas02.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000

@@ -15,7 +15,7 @@ class KissOfTheSpider : Buff() {
 
     val buffDurationMs = 15000
     val buff = object : Buff() {
-        override val name: String  = "Kiss of the Spider"
+        override val name: String = "Kiss of the Spider"
         override val icon: String = "inv_trinket_naxxramas04.jpg"
         override val durationMs: Int = buffDurationMs
 

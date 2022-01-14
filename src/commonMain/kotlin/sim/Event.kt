@@ -24,5 +24,12 @@ data class Event(
     val delta: Double = 0.0,
     val result: EventResult = EventResult.NONE,
     val partialAmount: Double = 0.0,
-    var comboPointsSpent: Int = 0
+    var comboPointsSpent: Int = 0,
+
+    // Threat values
+    val abilityThreatMultiplier: Double = 1.0,
+    // The difference between these is that ability bonus threat is affected by innate threat modifiers
+    // while flat bonus threat is not - it is just added, unmodified (e.g. power gains)
+    val abilityBonusThreat: Double = 0.0,
+    val flatBonusThreat: Double = 0.0
 )

@@ -425,6 +425,9 @@ class TBCSim : CliktCommand() {
                 val dmgType = SimStats.resultsByDamageType(iterations)
                 SimStatsPrinter.printDamage(dmgType)
 
+                val threat = SimStats.threatByAbility(iterations)
+                SimStatsPrinter.printThreat(threat)
+
                 val abilities = SimStats.resultsByAbility(iterations)
                 SimStatsPrinter.printAbilities(abilities)
 

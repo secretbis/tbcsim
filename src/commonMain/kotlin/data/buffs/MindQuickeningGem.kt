@@ -15,7 +15,7 @@ class MindQuickeningGem : Buff() {
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
-        override val name: String  = "Mind Quickening Gem"
+        override val name: String = "Mind Quickening Gem"
         override val icon: String = "spell_nature_wispheal.jpg"
         override val durationMs: Int = buffDurationMs
 

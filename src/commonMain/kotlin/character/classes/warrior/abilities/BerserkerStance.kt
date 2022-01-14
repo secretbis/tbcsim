@@ -14,7 +14,10 @@ class BerserkerStance: Stance() {
     override val icon: String = "ability_racial_avatar.jpg"
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(stanceBuff(Companion.name, icon, Stats(meleeCritRating = 3.0 * Rating.critPerPct)))
+        sp.addBuff(stanceBuff(Companion.name, icon, Stats(
+            meleeCritRating = 3.0 * Rating.critPerPct,
+            innateThreatMultiplier = 0.8
+        )))
         super.cast(sp)
     }
 }

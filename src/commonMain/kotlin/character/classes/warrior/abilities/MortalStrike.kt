@@ -2,6 +2,7 @@ package character.classes.warrior.abilities
 
 import character.*
 import character.classes.warrior.talents.ImprovedMortalStrike
+import character.classes.warrior.talents.TacticalMastery
 import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import data.Constants
 import data.itemsets.OnslaughtBattlegear
@@ -35,6 +36,13 @@ class MortalStrike : Ability() {
         return sp.character.klass.talents[MortalStrikeTalent.name]?.currentRank == 1 && super.available(sp)
     }
 
+    private fun getThreatMultiplier(sp: SimParticipant): Double {
+        return if(sp.buffs[DefensiveStance.name] != null) {
+            val tmRanks = sp.character.klass.talentRanks(TacticalMastery.name)
+            1.0 + (0.21 * tmRanks)
+        } else 1.0
+    }
+
     val bonusDmg = 210.0
     override fun cast(sp: SimParticipant) {
         val impMSRanks = sp.character.klass.talents[ImprovedMortalStrike.name]?.currentRank ?: 0
@@ -55,6 +63,7 @@ class MortalStrike : Ability() {
             ability = this,
             amount = result.first,
             result = result.second,
+            abilityThreatMultiplier = getThreatMultiplier(sp)
         )
         sp.logEvent(event)
 

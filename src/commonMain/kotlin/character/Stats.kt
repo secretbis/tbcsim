@@ -116,7 +116,10 @@ data class Stats(
 
     // per weapontype crit increase
     var daggerAdditionalCritChancePercent: Double = 0.0,
-    var fistWeaponAdditionalCritChancePercent: Double = 0.0
+    var fistWeaponAdditionalCritChancePercent: Double = 0.0,
+
+    // Threat
+    var innateThreatMultiplier: Double = 1.0
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -225,6 +228,8 @@ data class Stats(
 
         daggerAdditionalCritChancePercent += stats.daggerAdditionalCritChancePercent
         fistWeaponAdditionalCritChancePercent += stats.fistWeaponAdditionalCritChancePercent
+
+        innateThreatMultiplier *= stats.innateThreatMultiplier
 
         return this
     }

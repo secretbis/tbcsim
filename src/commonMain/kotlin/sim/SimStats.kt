@@ -55,6 +55,12 @@ object SimStats {
         )
     }
 
+    private fun tpsForParticipant(sp: SimParticipant): Double {
+        return sp.events.filter { evt -> evt.eventType == EventType.DAMAGE }.fold(0.0) { acc, event ->
+            acc + event.amount
+        } / (sp.sim.opts.durationMs / 1000.0)
+    }
+
     fun resultsByBuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
         return processBuffs(
             iterations,
@@ -388,6 +394,45 @@ object SimStats {
                 }.sortedBy { it.totalGainAvg }.reversed()
                 acc
             }
+        }
+    }
+
+    fun threatByAbility(iterations: List<SimIteration>): List<List<ThreatByAbility>> {
+        val participantCount = iterations[0].participants.size - 1
+        return (0..participantCount).map { idx ->
+            val sp = iterations[0].participants[idx]
+
+            val allAbilities: MutableMap<String, Ability> = mutableMapOf()
+            val byAbility = iterations.flatMap { iter ->
+                iter.participants[idx].events
+                    .filter { it.eventType == EventType.DAMAGE || it.eventType == EventType.THREAT }
+                    .filter { it.ability?.name != null }
+            }.also {
+                // Store an ability reference so we can lookup members later
+                // Using the Ability object as the key does not translate well to JS
+                for(evt in it) {
+                    allAbilities[evt.ability!!.name] = evt.ability
+                }
+            }.groupBy { it.ability!!.name }
+
+            val keys = byAbility.keys.toList()
+
+            keys.map { key ->
+                val events = byAbility[key]!!
+                val threatAmounts = events.map {
+                    (((it.amount * it.abilityThreatMultiplier) + it.abilityBonusThreat) * sp.stats.innateThreatMultiplier) + it.flatBonusThreat
+                }
+                val countAvg = threatAmounts.size.toDouble() / iterations.size.toDouble()
+                val totalThreatAvg = threatAmounts.sum() / iterations.size.toDouble()
+
+                ThreatByAbility(
+                    key,
+                    allAbilities[key]?.icon ?: Constants.UNKNOWN_ICON,
+                    countAvg,
+                    totalThreatAvg / sp.sim.opts.durationMs * 1000,
+                    totalThreatAvg / countAvg
+                )
+            }.sortedBy { it.threatPerSecondAvg }.reversed()
         }
     }
 }

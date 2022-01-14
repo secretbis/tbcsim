@@ -10,17 +10,17 @@ import sim.SimParticipant
 
 class BadgeOfTheSwarmguard : Buff() {
     companion object {
-        const val name = "Badge of the Swarmguard (static)"
+        const val name = "Badge of the Swarmguard"
     }
     override val id: Int = 26480
-    override val name: String = Companion.name
+    override val name: String = Companion.name + " (static)"
     override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 30000
     val buff = object : Buff() {
-        override val name: String  = "Badge of the Swarmguard"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
         override val durationMs: Int = buffDurationMs
 
@@ -70,7 +70,7 @@ class BadgeOfTheSwarmguard : Buff() {
 
     val ability = object : Ability() {
         override val id: Int = 26480
-        override val name: String = "Badge of the Swarmguard"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_ahnqirajtrinket_04.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 180000

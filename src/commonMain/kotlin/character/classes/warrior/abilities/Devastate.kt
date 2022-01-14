@@ -53,6 +53,8 @@ class Devastate : Ability() {
             ability = this,
             amount = result.first,
             result = result.second,
+            // Devastate bonus + sunder effect
+            abilityBonusThreat = 100 + 301.5
         )
         sp.logEvent(event)
 
@@ -70,6 +72,8 @@ class Devastate : Ability() {
 
         if(triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item), this, event)
+            // The sunder effect also procs yellow hit effects (confirmed?)
+            sp.fireProc(listOf(Proc.Trigger.MELEE_YELLOW_HIT), listOf(item), this, event)
         }
     }
 }

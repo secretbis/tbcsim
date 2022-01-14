@@ -3,6 +3,7 @@ package character.classes.warrior.talents
 import character.Buff
 import character.Stats
 import character.Talent
+import character.classes.warrior.abilities.DefensiveStance
 import mechanics.Rating
 import sim.SimParticipant
 
@@ -21,7 +22,11 @@ class Defiance(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(expertiseRating = 2 * currentRank * Rating.expertiseRatingPerPoint)
+            val isDefensiveStance = sp.buffs[DefensiveStance.name] != null
+            return Stats(
+                expertiseRating = 2 * currentRank * Rating.expertiseRatingPerPoint,
+                innateThreatMultiplier = if(isDefensiveStance) { 1.0 + (0.05 * currentRank) } else 1.0
+            )
         }
     }
 

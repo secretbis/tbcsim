@@ -217,4 +217,32 @@ object SimStatsPrinter {
             }
         }
     }
+
+    fun printThreat(participants: List<List<ThreatByAbility>>) {
+        participants.forEach { rows ->
+            println(
+                "Threat by Ability Breakdown\n" +
+                table {
+                    header("Name", "CountAvg", "ThreatPerSecAvg", "ThreatPerCastAvg")
+
+                    for(row in rows) {
+                        row(row.name, row.countAvg, row.threatPerSecondAvg, row.threatPerCastAvg)
+                    }
+
+                    hints {
+                        alignment(0, Table.Hints.Alignment.LEFT)
+
+                        for(i in 1..3) {
+                            precision(i, 2)
+                            formatFlag(i, ",")
+                        }
+
+                        borderStyle = Table.BorderStyle.SINGLE_LINE
+                    }
+                }.render(StringBuilder())
+            )
+            println("Total TPS: " + df.format(rows.sumOf { it.threatPerSecondAvg }))
+            println()
+        }
+    }
 }

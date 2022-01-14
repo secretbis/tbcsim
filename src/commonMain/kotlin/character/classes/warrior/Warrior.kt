@@ -18,6 +18,7 @@ import character.classes.warrior.talents.Devastate as DevastateTalent
 import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import character.classes.warrior.talents.Rampage as RampageTalent
 import data.model.Item
+import sim.SimParticipant
 
 class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(

@@ -15,7 +15,7 @@ class ScryersBloodgemXirisGift(name: String) : Buff() {
 
     val buffDurationMs = 15000
     val buff = object : Buff() {
-        override val name: String  = name
+        override val name: String = name
         override val icon: String = "inv_misc_elvencoins.jpg"
         override val durationMs: Int = buffDurationMs
 

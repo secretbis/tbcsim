@@ -7,17 +7,17 @@ import sim.SimParticipant
 
 class AbacusOfViolentOdds : Buff() {
     companion object {
-        const val name = "Abacus of Violent Odds (static)"
+        const val name = "Abacus of Violent Odds"
     }
     override val id: Int = 33807
-    override val name: String = Companion.name
+    override val name: String = Companion.name + " (static)"
     override val icon: String = "inv_misc_enggizmos_18.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 10000
     val buff = object : Buff() {
-        override val name: String  = "Abacus of Violent Odds"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_enggizmos_18.jpg"
         override val durationMs: Int = buffDurationMs
 
@@ -28,7 +28,7 @@ class AbacusOfViolentOdds : Buff() {
 
     val ability = object : Ability() {
         override val id: Int = 33807
-        override val name: String = "Abacus of Violent Odds"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_enggizmos_18.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000

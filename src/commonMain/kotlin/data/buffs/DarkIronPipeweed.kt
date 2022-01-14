@@ -7,17 +7,17 @@ import sim.SimParticipant
 
 class DarkIronPipeweed : Buff() {
     companion object {
-        const val name = "Dark Iron Pipeweed (static)"
+        const val name = "Dark Iron Pipeweed"
     }
     override val id: Int = 51953
-    override val name: String = Companion.name
+    override val name: String = Companion.name + " (static)"
     override val icon: String = "inv_misc_pipe_01.jpg"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
-        override val name: String  = "Dark Iron Pipeweed"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_pipe_01.jpg"
         override val durationMs: Int = buffDurationMs
 
@@ -28,7 +28,7 @@ class DarkIronPipeweed : Buff() {
 
     val ability = object : Ability() {
         override val id: Int = 35163
-        override val name: String = "Dark Iron Pipeweed"
+        override val name: String = Companion.name
         override val icon: String = "inv_misc_pipe_01.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
         override fun cooldownMs(sp: SimParticipant): Int = 120000

@@ -13,6 +13,7 @@ class AspectOfTheHawk : Ability() {
     }
 
     override val name: String = Companion.name
+    override val icon: String = "spell_nature_ravenform.jpg"
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
     override fun resourceCost(sp: SimParticipant): Double = 120.0
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.MANA

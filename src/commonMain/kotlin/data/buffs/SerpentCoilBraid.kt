@@ -8,17 +8,17 @@ import sim.SimParticipant
 
 class SerpentCoilBraid : Buff() {
     companion object {
-        const val name: String = "Serpent-Coil Braid (static)"
+        const val name: String = "Serpent-Coil Braid"
     }
 
-    override val name: String = Companion.name
+    override val name: String = Companion.name + " (static)"
     override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
     override val id: Int = 37447
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
     val sbcAbility = object : Ability() {
-        override val name: String = "Serpent-Coil Braid"
+        override val name: String = Companion.name
         override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
     }
 
@@ -30,7 +30,7 @@ class SerpentCoilBraid : Buff() {
 
         val spBuff = object : Buff() {
             override val id: Int = 37447
-            override val name: String = "Serpent-Coil Braid"
+            override val name: String = Companion.name
             override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
             override val durationMs: Int = 15000
 

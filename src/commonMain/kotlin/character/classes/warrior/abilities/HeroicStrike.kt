@@ -64,6 +64,7 @@ class HeroicStrike : Ability() {
                 ability = this,
                 amount = result.first,
                 result = result.second,
+                abilityBonusThreat = 194.0
             )
             sp.logEvent(event)
 

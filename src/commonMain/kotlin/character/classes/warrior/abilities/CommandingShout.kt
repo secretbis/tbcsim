@@ -6,40 +6,40 @@ import sim.Event
 import sim.EventType
 import sim.SimParticipant
 
-class BattleShout : Ability() {
+class CommandingShout : Ability() {
     companion object {
-        const val name: String = "Battle Shout"
+        const val name: String = "Commanding Shout"
     }
 
-    override val id: Int = 2048
+    override val id: Int = 469
     override val name: String = Companion.name
-    override val icon: String = "ability_warrior_battleshout.jpg"
+    override val icon: String = "ability_warrior_rallyingcry.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sp: SimParticipant): Double = 10.0
 
-    private fun totalAp(sp: SimParticipant): Int {
+    private fun totalHp(sp: SimParticipant): Int {
         val cmdPres = sp.character.klass.talents[CommandingPresence.name] as CommandingPresence?
-        return (305.0 * (cmdPres?.shoutMultiplier() ?: 1.0)).toInt()
+        return (1080.0 * (cmdPres?.shoutMultiplier() ?: 1.0)).toInt()
     }
 
     val buff = object : Buff() {
-        override val name: String = "Battle Shout"
-        override val icon: String = "ability_warrior_battleshout.jpg"
+        override val name: String = Companion.name
+        override val icon: String = "ability_warrior_rallyingcry.jpg"
         override val durationMs: Int = 120000
 
-        override val mutex: List<Mutex> = listOf(Mutex.BUFF_BATTLE_SHOUT)
+        override val mutex: List<Mutex> = listOf(Mutex.BUFF_COMMANDING_SHOUT)
         override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
             return mapOf(
-                Mutex.BUFF_BATTLE_SHOUT to totalAp(sp)
+                Mutex.BUFF_COMMANDING_SHOUT to totalHp(sp)
             )
         }
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(
-                attackPower = totalAp(sp).toInt()
+                healthFlatModifier = totalHp(sp)
             )
         }
     }
@@ -49,7 +49,7 @@ class BattleShout : Ability() {
         sp.logEvent(
             Event(
                 eventType = EventType.THREAT,
-                amount = 69.0 * 5
+                amount = 68.0 * 5
             )
         )
     }

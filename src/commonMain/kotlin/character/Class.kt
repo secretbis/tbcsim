@@ -23,7 +23,6 @@ import character.classes.rogue.specs.Assassination
 import character.classes.warrior.specs.Kebab
 import character.classes.warrior.specs.Protection
 import data.model.Item
-import kotlin.reflect.KClass
 
 abstract class Class(
     var talents: Map<String, Talent>,

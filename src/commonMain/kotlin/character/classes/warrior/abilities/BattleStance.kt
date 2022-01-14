@@ -1,5 +1,6 @@
 package character.classes.warrior.abilities
 
+import character.Stats
 import sim.SimParticipant
 
 class BattleStance: Stance() {
@@ -12,7 +13,7 @@ class BattleStance: Stance() {
     override val icon: String = "ability_warrior_offensivestance.jpg"
 
     override fun cast(sp: SimParticipant) {
-        sp.addBuff(stanceBuff(Companion.name, icon))
+        sp.addBuff(stanceBuff(Companion.name, icon, Stats(innateThreatMultiplier = 0.8)))
         super.cast(sp)
     }
 }

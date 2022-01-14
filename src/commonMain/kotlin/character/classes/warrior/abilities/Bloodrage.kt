@@ -2,6 +2,8 @@ package character.classes.warrior.abilities
 
 import character.Ability
 import character.Resource
+import sim.Event
+import sim.EventType
 import sim.SimParticipant
 
 class Bloodrage : Ability() {
@@ -19,5 +21,12 @@ class Bloodrage : Ability() {
     override fun cast(sp: SimParticipant) {
         // Close enough
         sp.addResource(20, Resource.Type.RAGE, this)
+        sp.logEvent(
+            // Power gains are not affected by innate threat multipliers
+            Event(
+                eventType = EventType.THREAT,
+                flatBonusThreat = 20.0
+            )
+        )
     }
 }

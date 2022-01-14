@@ -63,6 +63,7 @@ open class Execute : Ability() {
             ability = this,
             amount = result.first,
             result = result.second,
+            abilityThreatMultiplier = 1.25
         )
         sp.logEvent(event)
 

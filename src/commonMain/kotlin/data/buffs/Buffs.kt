@@ -121,6 +121,7 @@ object Buffs {
             34774 -> DragonspineTrophy()
             35163 -> IconOfTheSilverCrescent()
             35166 -> BloodlustBrooch()
+            35169 -> GnomereganAutoBlocker600()
             35337 -> ScryersBloodgemXirisGift(item.name)
             37173 -> WarpSpringCoil()
             37507 -> TalonOfAlar()

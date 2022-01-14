@@ -15,7 +15,7 @@ class SlayersCrest : Buff() {
 
     val buffDurationMs = 20000
     val buff = object : Buff() {
-        override val name: String  = "Slayer's Crest"
+        override val name: String = "Slayer's Crest"
         override val icon: String = "inv_trinket_naxxramas03.jpg"
         override val durationMs: Int = buffDurationMs
 

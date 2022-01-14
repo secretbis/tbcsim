@@ -3,6 +3,7 @@ package character.classes.warrior.abilities
 import character.Ability
 import character.Proc
 import character.Resource
+import character.classes.warrior.talents.TacticalMastery
 import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import data.Constants
 import data.itemsets.DestroyerBattlegear
@@ -40,6 +41,13 @@ class Bloodthirst : Ability() {
         return sp.character.klass.talents[BloodthirstTalent.name]?.currentRank == 1 && super.available(sp)
     }
 
+    private fun getThreatMultiplier(sp: SimParticipant): Double {
+        return if(sp.buffs[DefensiveStance.name] != null) {
+            val tmRanks = sp.character.klass.talentRanks(TacticalMastery.name)
+            1.0 + (0.21 * tmRanks)
+        } else 1.0
+    }
+
     override fun cast(sp: SimParticipant) {
         // TODO: This currently assigns the main hand weapon as context,
         //       since that would allow things like Sword Spec to proc off of BT, which I presume it can
@@ -59,6 +67,7 @@ class Bloodthirst : Ability() {
             ability = this,
             amount = result.first,
             result = result.second,
+            abilityThreatMultiplier = getThreatMultiplier(sp)
         )
         sp.logEvent(event)
 

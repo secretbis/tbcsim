@@ -30,5 +30,6 @@ enum class Mutex {
 
     // Warrior
     BUFF_BATTLE_SHOUT,
+    BUFF_COMMANDING_SHOUT,
     BUFF_WARRIOR_STANCE
 }
