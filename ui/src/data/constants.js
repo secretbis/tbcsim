@@ -267,7 +267,7 @@ export const classOffHandItemClasses = {
     itemClasses: [ic.weapon, ic.armor],
     itemSubclasses: {
       [ic.weapon]: [wsc.axe_1h, wsc.dagger, wsc.fist, wsc.mace_1h],
-      [ic.armor]: [asc.misc]
+      [ic.armor]: [asc.misc, asc.shield]
     }
   },
   warlock: {
