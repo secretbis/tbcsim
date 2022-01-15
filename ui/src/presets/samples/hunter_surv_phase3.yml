@@ -1,0 +1,202 @@
+class: Hunter
+spec: Survival
+description: Survival Hunter (phase 3)
+race: Night Elf
+level: 70
+epCategory: phase3
+epSpec: hunter_surv
+
+talents:
+  # Surv talents
+  - name: Monster Slaying
+    rank: 3
+  - name: Humanoid Slaying
+    rank: 3
+  - name: Surefooted
+    rank: 3
+  - name: Killer Instinct
+    rank: 3
+  - name: Lightning Reflexes
+    rank: 5
+  - name: Expose Weakness
+    rank: 3
+  - name: Thrill of the Hunt
+    rank: 2
+  - name: Master Tactician
+    rank: 5
+  - name: Readiness
+    rank: 1
+  # Marks talents
+  - name: Lethal Shots
+    rank: 5
+  - name: Efficiency
+    rank: 5
+  - name: Go for the Throat
+    rank: 2
+  - name: Aimed Shot
+    rank: 1
+  - name: Rapid Killing
+    rank: 2
+  - name: Mortal Shots
+    rank: 5
+
+gear:
+  mainHand:
+    name: Blade of Infamy
+    enchant: Greater Agility (1H)
+  offHand:
+    name: Blade of Infamy
+    enchant: Greater Agility (1H)
+  rangedTotemLibram:
+    name: Bristleblitz Striker
+    enchant: Stabilized Eternium Scope
+  ammo:
+    name: Timeless Arrow
+  head:
+    name: Gronnstalker's Helmet
+    enchant: Glyph of Ferocity
+    gems:
+      - Delicate Crimson Spinel
+      - Relentless Earthstorm Diamond
+  neck:
+    name: Telonicus's Pendant of Mayhem
+  shoulders:
+    name: Gronnstalker's Spaulders
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  back:
+    name: Thalassian Wildercloak
+    enchant: Greater Agility
+  chest:
+    name: Gronnstalker's Chestguard
+    enchant: Exceptional Stats
+    gems:
+      - Delicate Crimson Spinel
+      - Jagged Seaspray Emerald
+      - Jagged Seaspray Emerald
+  wrists:
+    name: Insidious Bands
+    enchant: Assault
+    gems:
+      - Delicate Crimson Spinel
+  hands:
+    name: Gronnstalker's Gloves
+    enchant: Superior Agility
+    gems:
+      - Delicate Crimson Spinel
+  waist:
+    name: Don Alejandro's Money Belt
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  legs:
+    name: Bow-stitched Leggings
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  feet:
+    name: Shadowmaster's Boots
+    enchant: Dexterity
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  ring1:
+    name: Band of the Eternal Champion
+  ring2:
+    name: Ring of the Recalcitrant
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Madness of the Betrayer
+
+rotation:
+  precombat:
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Warp Burger
+
+    # Abilities
+    - name: Hunter's Mark
+    - name: Aspect of the Hawk
+
+  combat:
+    - name: Hunter's Mark
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Hunter's Mark
+          seconds: 0
+    - name: Aspect of the Viper
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 20
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Viper
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 40
+    - name: Aspect of the Hawk
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 30
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Hawk
+          seconds: 0
+    - name: Blood Fury
+    - name: Berserking
+    - name: Rapid Fire
+      criteria:
+        - buff: Rapid Fire
+          seconds: 0
+          type: BUFF_DURATION_LTE
+    - name: Readiness
+    - name: Haste Potion
+    - name: Use Active Trinket
+    - name: Kill Command
+    - name: Steady Shot
+      # This tries to squeeze as many Steadies as possible while never clipping
+      # It is possible that some amount of clipping may be superior - test this by setting the timer criteria to less than 1.0
+      criteria:
+        - type: SWING_TIMER_REMAINING_GTE
+          seconds: 1.01
+          swingType: Auto Shot
+          oncePerSwing: false
+    - name: Multi Shot
+    - name: Arcane Shot
+
+pet:
+  type: Ravager
+  rotation:
+    combat:
+      - name: Bite
+      - name: Gore
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Improved Sanctity Aura
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

@@ -1,0 +1,202 @@
+class: Hunter
+spec: Beast Mastery
+description: Beast Mastery Hunter (phase 3)
+race: Night Elf
+level: 70
+epCategory: phase3
+epSpec: hunter_bm
+
+talents:
+  # BM talents
+  - name: Improved Aspect of the Hawk
+    rank: 5
+  - name: Focused Fire
+    rank: 2
+  - name: Unleashed Fury
+    rank: 5
+  - name: Ferocity
+    rank: 5
+  - name: Bestial Discipline
+    rank: 2
+  - name: Frenzy
+    rank: 4
+  - name: Animal Handler
+    rank: 2
+  - name: Ferocious Inspiration
+    rank: 3
+  - name: Bestial Wrath
+    rank: 1
+  - name: Serpent's Swiftness
+    rank: 5
+  - name: The Beast Within
+    rank: 1
+  # Marks talents
+  - name: Lethal Shots
+    rank: 5
+  - name: Efficiency
+    rank: 5
+  - name: Go for the Throat
+    rank: 2
+  - name: Aimed Shot
+    rank: 1
+  - name: Rapid Killing
+    rank: 2
+  - name: Mortal Shots
+    rank: 5
+
+gear:
+  mainHand:
+    name: Boundless Agony
+    enchant: Greater Agility (1H)
+  offHand:
+    name: Blade of Infamy
+    enchant: Greater Agility (1H)
+  rangedTotemLibram:
+    name: Bristleblitz Striker
+    enchant: Stabilized Eternium Scope
+  ammo:
+    name: Timeless Arrow
+  head:
+    name: Cursed Vision of Sargeras
+    enchant: Glyph of Ferocity
+    gems:
+      - Relentless Earthstorm Diamond
+      - Delicate Crimson Spinel
+  neck:
+    name: Telonicus's Pendant of Mayhem
+  shoulders:
+    name: Gronnstalker's Spaulders
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  back:
+    name: Thalassian Wildercloak
+    enchant: Greater Agility
+  chest:
+    name: Gronnstalker's Chestguard
+    enchant: Exceptional Stats
+    gems:
+      - Delicate Crimson Spinel
+      - Jagged Seaspray Emerald
+      - Jagged Seaspray Emerald
+  wrists:
+    name: Insidious Bands
+    enchant: Assault
+    gems:
+      - Wicked Pyrestone
+  hands:
+    name: Gronnstalker's Gloves
+    enchant: Superior Agility
+    gems:
+      - Delicate Crimson Spinel
+  waist:
+    name: Don Alejandro's Money Belt
+    gems:
+      - Delicate Crimson Spinel
+      - Delicate Crimson Spinel
+  legs:
+    name: Gronnstalker's Leggings
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Delicate Crimson Spinel
+  feet:
+    name: Shadowmaster's Boots
+    enchant: Dexterity
+    gems:
+      - Delicate Crimson Spinel
+      - Wicked Pyrestone
+  ring1:
+    name: Band of the Eternal Champion
+  ring2:
+    name: Stormrage Signet Ring
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Madness of the Betrayer
+
+rotation:
+  precombat:
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Warp Burger
+
+    # Abilities
+    - name: Hunter's Mark
+    - name: Aspect of the Hawk
+
+  combat:
+    - name: Hunter's Mark
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Hunter's Mark
+          seconds: 0
+    - name: Aspect of the Viper
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 20
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Viper
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 40
+    - name: Aspect of the Hawk
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 30
+          resourceType: MANA
+        - type: BUFF_DURATION_LTE
+          buff: Aspect of the Hawk
+          seconds: 0
+    - name: Blood Fury
+    - name: Berserking
+    - name: Bestial Wrath
+    - name: Rapid Fire
+    - name: Haste Potion
+    - name: Use Active Trinket
+    - name: Kill Command
+    - name: Steady Shot
+      # This tries to squeeze as many Steadies as possible while never clipping
+      criteria:
+        - type: SWING_TIMER_REMAINING_GTE
+          # If an ability is specified instead of fixed seconds, this criterion will succeed if the remaining swing time is GTE the cast time of that ability
+          ability: Steady Shot
+          # This specifies the maximum auto-attack clipping amount
+          maxClipSeconds: 0.3
+          swingType: Auto Shot
+          oncePerSwing: false
+    # Fill excess swing time with Multi, without disrupting Steady too much
+    - name: Multi Shot
+
+pet:
+  type: Ravager
+  rotation:
+    combat:
+      - name: Bite
+      - name: Gore
+
+raidBuffs:
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Leader of the Pack
+  - Ferocious Inspiration (x2)
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Faerie Fire
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Expose Weakness (750 Agi)

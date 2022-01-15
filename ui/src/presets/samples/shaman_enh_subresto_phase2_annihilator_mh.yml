@@ -105,7 +105,7 @@ gear:
   trinket1:
     name: Dragonspine Trophy
   trinket2:
-    name: "Darkmoon Card: Crusade"
+    name: Bloodlust Brooch
 
 # WIP: Specify additional items to compare
 #      Each will be tested individually, in all combinations, and the sim will rank each setup

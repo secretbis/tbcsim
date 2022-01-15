@@ -104,7 +104,6 @@ class TBCSim : CliktCommand() {
             "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
-            // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
             "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
             "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_preraid.yml"),
@@ -122,7 +121,6 @@ class TBCSim : CliktCommand() {
             "rogue_assassination" to File(presetPath + "rogue_assassination_phase1.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_phase1.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_phase1.yml"),
-            // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase1.yml"),
             "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase1.yml"),
             "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase1.yml"),
@@ -140,7 +138,6 @@ class TBCSim : CliktCommand() {
             "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
             "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
             "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),
-            // Enhance weights aren't appreciably different between the two sub-specs
             "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase2.yml"),
             "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase2.yml"),
             "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase2.yml"),
@@ -149,6 +146,31 @@ class TBCSim : CliktCommand() {
             "warrior_fury" to File(presetPath + "warrior_fury_phase2.yml"),
             "warrior_kebab" to File(presetPath + "warrior_kebab_phase2.yml"),
             "warrior_protection" to File(presetPath + "warrior_protection_phase2.yml"),
+        ),
+        "phase3" to mapOf(
+            "hunter_bm" to File(presetPath + "hunter_bm_phase3.yml"),
+            "hunter_surv" to File(presetPath + "hunter_surv_phase3.yml"),
+            "mage_arcane" to File(presetPath + "mage_arcane_phase3.yml"),
+            "mage_fire" to File(presetPath + "mage_fire_phase3.yml"),
+            "mage_frost" to File(presetPath + "mage_frost_phase3.yml"),
+            "priest_shadow" to File(presetPath + "priest_shadow_phase3.yml"),
+            "rogue_combat" to File(presetPath + "rogue_combat_phase3.yml"),
+            "shaman_ele" to File(presetPath + "shaman_ele_phase3.yml"),
+            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase3.yml"),
+            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase3.yml"),
+            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase3.yml"),
+            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase3.yml"),
+            "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
+            "warrior_fury" to File(presetPath + "warrior_fury_phase3.yml"),
+            "warrior_kebab" to File(presetPath + "warrior_kebab_phase3.yml"),
+            "warrior_protection" to File(presetPath + "warrior_protection_phase3.yml"),
+        ),
+        "phase3_glaives" to mapOf(
+            "rogue_combat" to File(presetPath + "rogue_combat_phase3_glaives.yml"),
+            "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
+            "warrior_fury" to File(presetPath + "warrior_fury_phase3_glaives.yml"),
+            "warrior_kebab" to File(presetPath + "warrior_kebab_phase3_glaives.yml"),
+            "warrior_protection" to File(presetPath + "warrior_protection_phase3_glaives.yml"),
         )
     )
 

@@ -1,0 +1,181 @@
+class: Warlock
+spec: Destruction
+description: Destruction Shadow Warlock (phase 3)
+race: Gnome
+level: 70
+epCategory: phase3
+epSpec: warlock_destruction_shadow
+
+talents:
+  # Destro talents
+  - name: Improved Shadow Bolt
+    rank: 5
+  - name: Cataclysm
+    rank: 5
+  - name: Bane
+    rank: 5
+  - name: Devastation
+    rank: 5
+  - name: Shadowburn
+    rank: 1
+  - name: Ruin
+    rank: 1
+  - name: Emberstorm
+    rank: 1
+  - name: Backlash
+    rank: 3
+  - name: Shadow and Flame
+    rank: 5
+
+  # Demo talents
+  - name: Fel Intellect
+    rank: 3
+  - name: Demonic Aegis
+    rank: 3
+  - name: Demonic Sacrifice
+    rank: 1
+
+gear:
+  mainHand:
+    name: Zhar'doom, Greatstaff of the Devourer
+    enchant: Soulfrost
+    tempEnchant: Superior Wizard Oil
+  rangedTotemLibram:
+    name: Wand of the Forgotten Star
+  head:
+    name: Hood of the Malefic
+    enchant: Glyph of Power
+    gems:
+      - Chaotic Skyfire Diamond
+      - Potent Pyrestone
+  neck:
+    name: Vindicator's Pendant of Subjugation
+    gems:
+      - Runed Crimson Spinel
+  shoulders:
+    name: Mantle of the Malefic
+    enchant: Greater Inscription of the Orb
+    gems:
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+  back:
+    name: Cloak of the Illidari Council
+  chest:
+    name: Vestments of the Sea-Witch
+    enchant: Exceptional Stats
+    gems:
+      - Veiled Pyrestone
+      - Veiled Pyrestone
+      - Glowing Shadowsong Amethyst
+  wrists:
+    name: Bracers of Nimble Thought
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Gloves of the Malefic
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Veiled Pyrestone
+  waist:
+    name: Waistwrap of Infinity
+  legs:
+    name: Leggings of the Malefic
+    enchant: Runic Spellthread
+    gems:
+      - Veiled Pyrestone
+  feet:
+    name: Slippers of the Seacaller
+    enchant: Boar's Speed
+    gems:
+      - Veiled Pyrestone
+      - Glowing Shadowsong Amethyst
+  ring1:
+    name: Band of the Eternal Sage
+    enchant: Spellpower (Ring)
+  ring2:
+    name: Ring of Ancient Knowledge
+    enchant: Spellpower (Ring)
+  trinket1:
+    name: Quagmirran's Eye
+  trinket2:
+    name: The Skull of Gul'dan
+
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Flask of Pure Death
+    - name: Crunchy Serpent
+    - name: Fel Armor
+    - name: Demonic Sacrifice (Succubus)
+
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    # Use a Dark Rune if we've used at least 1500 mana
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Life Tap
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 10
+          resourceType: MANA
+    - name: Curse of Doom
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_GTE
+          seconds: 61
+    - name: Curse of Agony
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Agony (DoT)
+          seconds: 0
+        - type: FIGHT_TIME_REMAINING_LTE
+          seconds: 60
+        - type: DEBUFF_DURATION_LTE
+          debuff: Curse of Doom
+          seconds: 0
+    - name: Destruction Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+# TODO: Some internet guides say to do this, but it doesn't seem to be an improvement
+#    - name: Immolate
+#      criteria:
+#        - type: DEBUFF_DURATION_LTE
+#          debuff: Immolate (DoT)
+#          seconds: 0
+    - name: Use Active Trinket
+    - name: Shadow Bolt
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+
+  - Moonkin Aura
+  - Wrath of Air Totem
+  - Totem of Wrath
+  - Mana Spring Totem
+  - Vampiric Touch (1000 DPS)
+
+raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Improved Scorch
+  - Shadow Weaving

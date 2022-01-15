@@ -1,11 +1,12 @@
 class: Shaman
 spec: Enhancement
-description: Enhancement Shaman (phase 2, sub-Ele)
+description: Enhancement Shaman (phase 3, sub-Resto, Anni MH)
 race: Draenei
 level: 70
-epCategory: phase2
+epCategory: phase3
 epSpec: shaman_enh
 
+# Stock sub-resto Enhancement
 talents:
   # Enh talents
   - name: Ancestral Knowledge
@@ -36,79 +37,78 @@ talents:
     rank: 5
   - name: Shamanistic Rage
     rank: 1
-  # Ele talents
-  - name: Convection
+  # Resto talents
+  - name: Totemic Focus
     rank: 5
-  - name: Concussion
-    rank: 5
-  - name: Reverberation
-    rank: 5
-  - name: Elemental Focus
-    rank: 1
+  - name: Nature's Guidance
+    rank: 3
 
 gear:
   mainHand:
-    name: Talon of the Phoenix
+    name: Annihilator
     enchant: Mongoose
   offHand:
-    name: Rod of the Sun King
+    name: Syphon of the Nathrezim
     enchant: Mongoose
   rangedTotemLibram:
     name: Totem of the Astral Winds
   head:
-    name: Cataclysm Helm
+    name: Cursed Vision of Sargeras
     enchant: Glyph of Ferocity
     gems:
       - Relentless Earthstorm Diamond
-      - Inscribed Noble Topaz
+      - Inscribed Pyrestone
   neck:
-    name: Telonicus's Pendant of Mayhem
+    name: Choker of Endless Nightmares
   shoulders:
     name: Shoulderpads of the Stranger
     enchant: Greater Inscription of Vengeance
     gems:
-      - Bold Living Ruby
+      - Bold Crimson Spinel
   back:
-    name: Vengeance Wrap
+    name: Shadowmoon Destroyer's Drape
     enchant: Greater Agility
-    gems:
-      - Bold Living Ruby
   chest:
-    name: Cataclysm Chestplate
+    name: Midnight Chestguard
     enchant: Exceptional Stats
     gems:
-      - Bold Living Ruby
-      - Sovereign Nightseye
-      - Inscribed Noble Topaz
+      - Bold Crimson Spinel
+      - Bold Crimson Spinel
+      - Bold Crimson Spinel
   wrists:
-    name: True-Aim Stalker Bands
+    name: Deadly Cuffs
     enchant: Brawn
     gems:
-      - Bold Living Ruby
+      - Inscribed Pyrestone
   hands:
-    name: Cataclysm Gauntlets
+    name: Grips of Damnation
     enchant: Major Strength
   waist:
     name: Belt of One-Hundred Deaths
     gems:
-      - Bold Living Ruby
-      - Sovereign Nightseye
+      - Bold Crimson Spinel
+      - Sovereign Shadowsong Amethyst
   legs:
-    name: Cataclysm Legplates
+    name: Bow-stitched Leggings
     enchant: Nethercobra Leg Armor
     gems:
-      - Bold Living Ruby
+      - Bold Crimson Spinel
+      - Inscribed Pyrestone
+      - Sovereign Shadowsong Amethyst
   feet:
-    name: Boots of Utter Darkness
+    name: Shadowmaster's Boots
     enchant: Cat's Swiftness
+    gems:
+      - Bold Crimson Spinel
+      - Inscribed Pyrestone
   ring1:
     name: Band of the Ranger-General
   ring2:
-    name: Ring of Lethality
+    name: Stormrage Signet Ring
   trinket1:
     name: Dragonspine Trophy
   trinket2:
-    name: Bloodlust Brooch
+    name: Madness of the Betrayer
 
 # WIP: Specify additional items to compare
 #      Each will be tested individually, in all combinations, and the sim will rank each setup
@@ -127,8 +127,8 @@ rotation:
 
     # Abilities
     - name: Windfury Weapon (MH)
-    - name: Windfury Weapon (OH)
-#    - name: Flametongue Weapon (OH)
+#    - name: Windfury Weapon (OH)
+    - name: Flametongue Weapon (OH)
     - name: Strength of Earth Totem
     - name: Windfury Totem (Rank 1)
     - name: Water Shield
@@ -160,7 +160,7 @@ rotation:
       criteria:
         # Replace Windfury Totem as quickly as possible
         - type: BUFF_DURATION_LTE
-          buff: Windfury Totem
+          buff: Windfury Totem (Rank 1)
           seconds: 120
         # But not if we already have a GoAT active
         - type: BUFF_DURATION_LTE
@@ -209,6 +209,9 @@ raidBuffs:
   - Improved Sanctity Aura
 
 raidDebuffs:
+  # Sunder Armor and Imp EA cannot be applied at the same time
+  # If Imp EA becomes active, it will replace Sunderm and further Sunders will not apply
+  # To test with Sunder, comment out Imp EA
   - Sunder Armor
   - Improved Expose Armor
   - Improved Faerie Fire

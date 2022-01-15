@@ -1,10 +1,10 @@
 class: Mage
-spec: Frost
-description: Frost Mage (phase 2)
+spec: Fire
+description: Fire Mage (phase 3)
 race: Gnome
 level: 70
-epCategory: phase2
-epSpec: mage_frost
+epCategory: phase3
+epSpec: mage_fire
 
 talents:
   # Frost talents
@@ -12,109 +12,106 @@ talents:
     rank: 3
   - name: Improved Frostbolt
     rank: 5
-  - name: Ice Shards
-    rank: 5
-  - name: Piercing Ice
-    rank: 3
   - name: Icy Veins
     rank: 1
-  - name: Frost Channeling
-    rank: 3
-  - name: Cold Snap
+
+  # Fire talents
+  - name: Improved Fireball
+    rank: 5
+  - name: Ignite
+    rank: 5
+  - name: Improved Fire Blast
     rank: 1
-  - name: Ice Floes
+  - name: Incineration
     rank: 2
-  - name: Improved Cone of Cold
+  - name: Improved Scorch
     rank: 3
-  - name: Winter's Chill
+  - name: Master of Elements
+    rank: 3
+  - name: Playing With Fire
+    rank: 3
+  - name: Critical Mass
+    rank: 3
+  - name: Fire Power
     rank: 5
-  - name: Arctic Winds
+  - name: Pyromaniac
     rank: 5
-  - name: Empowered Frostbolt
-    rank: 5
-  - name: Summon Water Elemental
+  - name: Combustion
     rank: 1
+  - name: Molten Fury
+    rank: 2
+  - name: Empowered Fireball
+    rank: 5
 
   # Arcane talents
   - name: Arcane Subtlety
     rank: 2
-  - name: Arcane Focus
-    rank: 3
-  - name: Arcane Concentration
-    rank: 5
-  - name: Arcane Meditation
-    rank: 1
 
 gear:
   mainHand:
-    name: Fang of the Leviathan
-    enchant: Major Spellpower (Weapon)
+    name: Zhar'doom, Greatstaff of the Devourer
+    enchant: Sunfire
     tempEnchant: Superior Wizard Oil
-  offHand:
-    name: Sapphiron's Wing Bone
   rangedTotemLibram:
     name: Wand of the Forgotten Star
   head:
-    name: Spellstrike Hood
+    name: Cowl of the Illidari High Lord
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Glowing Shadowsong Amethyst
   neck:
-    name: The Sun King's Talisman
+    name: Translucent Spellthread Necklace
   shoulders:
-    name: Mantle of Tirisfal
+    name: Mantle of the Tempest
     enchant: Greater Inscription of the Orb
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Veiled Pyrestone
+      - Glowing Shadowsong Amethyst
   back:
-    name: Ruby Drape of the Mysticant
+    # This is a COPIUM-FREE ZONE
+    name: Cloak of the Illidari Council
   chest:
-    name: Vestments of the Sea-Witch
+    name: Robes of the Tempest
     enchant: Exceptional Stats
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   wrists:
-    name: Mindstorm Wristbands
+    name: Bracers of Nimble Thought
     enchant: Spellpower (Bracer)
   hands:
-    name: Anger-Spark Gloves
+    name: Gloves of the Tempest
     enchant: Major Spellpower (Gloves)
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
   waist:
     name: Belt of Blasting
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   legs:
-    name: Spellstrike Pants
+    name: Leggings of the Tempest
     enchant: Runic Spellthread
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
   feet:
-    name: Frozen Shadoweave Boots
+    name: Slippers of the Seacaller
     enchant: Boar's Speed
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   ring1:
-    name: Ring of Endless Coils
+    name: Ring of Ancient Knowledge
     enchant: Spellpower (Ring)
   ring2:
-    name: Ring of Recurrence
+    name: Band of the Eternal Sage
     enchant: Spellpower (Ring)
   trinket1:
-    name: Quagmirran's Eye
+    name: The Skull of Gul'dan
   trinket2:
-    name: Icon of the Silver Crescent
+    name: Quagmirran's Eye
 
 rotation:
   autoAttack: false
@@ -140,17 +137,19 @@ rotation:
           resourceType: MANA
         - type: FIGHT_TIME_REMAINING_GTE
           seconds: 30
-    - name: Cold Snap
+    # Scorch up to 5
+    - name: Scorch
       criteria:
-        - type: ABILITY_COOLDOWN_GTE
-          ability: Summon Water Elemental
-          seconds: 1
-        - type: PET_ACTIVE
-          bool: false
-    - name: Summon Water Elemental
+        - type: BUFF_STACKS_LTE
+          buff: Improved Scorch
+          stacks: 4
+    # Refresh Scorch if about to expire
+    - name: Scorch
       criteria:
-        - type: PET_ACTIVE
-          bool: false
+        - type: BUFF_DURATION_LTE
+          buff: Improved Scorch
+          seconds: 5
+    - name: Combustion
     - name: Icy Veins
       criteria:
         - type: FIGHT_TIME_ELAPSED_GTE
@@ -161,14 +160,7 @@ rotation:
         - type: FIGHT_TIME_ELAPSED_GTE
           seconds: 5
     - name: Use Active Trinket
-    - name: Frostbolt
-
-pet:
-  type: Water Elemental
-  startsActive: false
-  rotation:
-    combat:
-      - name: Waterbolt
+    - name: Fireball
 
 raidBuffs:
   - Blessing of Kings

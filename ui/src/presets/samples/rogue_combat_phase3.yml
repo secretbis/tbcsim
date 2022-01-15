@@ -1,0 +1,250 @@
+class: Rogue
+spec: Combat
+description: Combat Rogue (phase 3)
+race: Human
+level: 70
+epCategory: phase3
+epSpec: rogue_combat
+
+# theres only about 2% difference between 3s/3r, 3s/5r, 4s/5r, 5s/5r or other combinations, doesn't seem to matter much.
+# 3s/3r seems to sim the best.
+# completely replacing rupture with eviscerate is also only about 1%, if no Mangle is present on the target.
+# using shiv when a 5 stack deadly poison stack is about to drop seems to be a very slight dps *loss*
+
+# sword/sword
+talents:
+  # Assassination talents
+  - name: Malice
+    rank: 5
+  - name: Ruthlessness
+    rank: 3
+  - name: Murder
+    rank: 2
+  - name: Relentless Strikes
+    rank: 1
+  - name: Lethality
+    rank: 5
+  - name: Vile Poisons
+    rank: 4
+
+  # Combat talents
+  - name: Improved Sinister Strike
+    rank: 2
+  - name: Lightning Reflexes
+    rank: 3
+  - name: Improved Slice and Dice
+    rank: 3
+  - name: Precision
+    rank: 5
+  - name: Improved Sprint
+    rank: 2
+  - name: Dual Wield Specialization
+    rank: 5
+  - name: Blade Flurry
+    rank: 1
+  - name: Sword Specialization
+    rank: 5
+  - name: Weapon Expertise
+    rank: 2
+  - name: Aggression
+    rank: 3
+  - name: Vitality
+    rank: 2
+  - name: Adrenaline Rush
+    rank: 1
+  - name: Nerves of Steel
+    rank: 1
+  - name: Combat Potency
+    rank: 5
+  - name: Surprise Attacks
+    rank: 1
+
+gear:
+  mainHand:
+    name: Vengeful Gladiator's Slicer
+    enchant: Mongoose
+  offHand:
+    name: Blade of Savagery
+    enchant: Mongoose
+  rangedTotemLibram:
+    name: Arcanite Steam-Pistol
+  head:
+    name: Cursed Vision of Sargeras
+    enchant: Glyph of Ferocity
+    gems:
+      - Relentless Earthstorm Diamond
+      - Glinting Pyrestone
+  neck:
+    name: Choker of Endless Nightmares
+  shoulders:
+    name: Slayer's Shoulderpads
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Glinting Pyrestone
+      - Glinting Pyrestone
+  back:
+    name: Shadowmoon Destroyer's Drape
+    enchant: Greater Agility
+  chest:
+    name: Slayer's Chestguard
+    enchant: Exceptional Stats
+    gems:
+      - Glinting Pyrestone
+      - Glinting Pyrestone
+      - Shifting Shadowsong Amethyst
+  wrists:
+    name: Insidious Bands
+    enchant: Assault
+    gems:
+      - Glinting Pyrestone
+  hands:
+    name: Slayer's Handguards
+    enchant: Superior Agility
+    gems:
+      - Rigid Lionseye
+  waist:
+    name: Belt of One-Hundred Deaths
+    gems:
+      - Delicate Crimson Spinel
+      - Shifting Shadowsong Amethyst
+  legs:
+    name: Slayer's Legguards
+    enchant: Nethercobra Leg Armor
+    gems:
+      - Glinting Pyrestone
+  feet:
+    name: Shadowmaster's Boots
+    enchant: Dexterity
+    gems:
+      - Glinting Pyrestone
+      - Glinting Pyrestone
+  ring1:
+    name: Stormrage Signet Ring
+  ring2:
+    name: Band of the Eternal Champion
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Warp-Spring Coil
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Elixir of Major Agility
+    - name: Spicy Hot Talbuk
+
+    # Abilities
+#    - name: Instant Poison (MH)
+    - name: Deadly Poison (OH)
+  # 3s/5r
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    # All rotation items have the following implied criteria:
+    # - It won't cast while it's on cooldown
+    # - It won't cast if there is not enough resource to do so
+
+    # Stealth ability
+    - name: Garrote
+
+    # Consumables, Trinkets and Cooldowns, only use after Slice and Dice is applied.
+    - name: Haste Potion
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+    - name: Use Active Trinket
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+    - name: Blade Flurry
+      criteria:
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 0
+
+    # AR at low energy
+    - name: Adrenaline Rush
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 30
+          resourceType: ENERGY
+
+    # Rupture if we have 3+ CP and SnD has enough time left to refresh it as the next finisher
+    - name: Rupture
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 3
+          resourceType: COMBO_POINT
+        - type: DEBUFF_DURATION_LTE
+          debuff: Rupture (DoT)
+          seconds: 2
+        - type: BUFF_DURATION_GTE
+          buff: Slice and Dice
+          seconds: 8 # takes about this long to build 3 CPs for a new SnD
+
+    # SnD if we have 3+ CP and it's about to run out
+    - name: Slice and Dice
+      criteria:
+        - type: RESOURCE_GTE
+          amount: 3
+          resourceType: COMBO_POINT
+        - type: BUFF_DURATION_LTE
+          buff: Slice and Dice
+          seconds: 4
+
+    # SS otherwise, but only if we are not CP capped
+    - name: Sinister Strike
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1
+          resourceType: COMBO_POINT
+
+    # If we are CP capped, use Eviscerate, but only if we are at high energy, otherwise we wait
+    - name: Eviscerate
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 100
+          resourceType: COMBO_POINT
+        - type: RESOURCE_PCT_GTE
+          pct: 80 # so we dont waste energy if we are right before a new tick
+          resourceType: ENERGY
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Arms Warrior and Enhancement Shaman
+  - Ferocious Inspiration (x1)
+  - Leader of the Pack
+  - Improved Battle Shout
+  - Windfury Totem
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Improved Faerie Fire
+  - Improved Hunter's Mark
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Improved Scorch
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements
+  - Expose Weakness (750 Agi)
+  - Mangle

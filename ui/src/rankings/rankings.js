@@ -128,6 +128,7 @@ const specDisplayNames = {
   warrior_arms: 'Arms Warrior',
   warrior_fury: 'Fury Warrior',
   warrior_kebab: 'Kebab Warrior',
+  warrior_protection: 'Protection Warrior',
 }
 
 // Other colors for later:
@@ -153,6 +154,7 @@ const specColors = {
   warrior_arms: '#C69B6D',
   warrior_fury: '#C69B6D',
   warrior_kebab: '#C69B6D',
+  warrior_protection: '#C69B6D',
 }
 
 const specPetColors = {
@@ -161,15 +163,17 @@ const specPetColors = {
   mage_frost: '#64BDC8',
 }
 
-function SpecRankingPanel({ name, category, collapsible=true }) {
-  const categoryData = _.get(rankingData, category, {})
-  const categoryRankings = _.sortBy(Object.keys(categoryData).map(key => {
-    const rankingData = categoryData[key];
+function SpecRankingPanel({ name, subtitle, category, collapsible=true, categoryOverrides }) {
+  const baseData = _.get(rankingData, category, {});
+  const categoryRankings = _.sortBy(Object.keys(baseData).map(key => {
+    const categoryOverride = _.get(categoryOverrides, key) || category;
+    const categoryData = _.get(rankingData, categoryOverride, {});
+    const categoryRankingData = categoryData[key];
 
     return {
       spec: key,
       spec_display: _.get(specDisplayNames, key, key),
-      ...rankingData
+      ...categoryRankingData
     }
   }), 'totalMean')
 
@@ -183,6 +187,7 @@ function SpecRankingPanel({ name, category, collapsible=true }) {
           bordered
           style={{ width: '100%' }}
         >
+          { subtitle && <div>{subtitle}</div> }
           <div style={{ width: '100%', height: 500 }}>
             <RankingBarChart data={categoryRankings} />
           </div>
@@ -198,6 +203,16 @@ export default function() {
       <Grid fluid={true}>
         <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
+        <SpecRankingPanel name='Phase 3 (WITH GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked WITH Warglaives'
+          categoryOverrides={{
+            rogue_combat: 'phase3_glaives',
+            warrior_arms: 'phase3_glaives',
+            warrior_fury: 'phase3_glaives',
+            warrior_kebab: 'phase3_glaives',
+            warrior_protection: 'phase3_glaives',
+          }}
+        />
+        <SpecRankingPanel name='Phase 3 (NO GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked with NO Warglaives' />
         <SpecRankingPanel name='Phase 2' category='phase2' />
         <SpecRankingPanel name='Phase 1' category='phase1' />
         <SpecRankingPanel name='Pre-raid' category='preraid' />

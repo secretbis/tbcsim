@@ -10,56 +10,78 @@ import EPOptions from '../ep/ep_options';
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterBmPhase1 from './samples/hunter_bm_phase1.yml'
 import hunterBmPhase2 from './samples/hunter_bm_phase2.yml'
+import hunterBmPhase3 from './samples/hunter_bm_phase3.yml'
 import hunterSurvPreraid from './samples/hunter_surv_preraid.yml'
 import hunterSurvPhase1 from './samples/hunter_surv_phase1.yml'
 import hunterSurvPhase2 from './samples/hunter_surv_phase2.yml'
+import hunterSurvPhase3 from './samples/hunter_surv_phase3.yml'
 import mageArcanePreraid from './samples/mage_arcane_preraid.yml'
 import mageArcanePhase1 from './samples/mage_arcane_phase1.yml'
 import mageArcanePhase2 from './samples/mage_arcane_phase2.yml'
+import mageArcanePhase3 from './samples/mage_arcane_phase3.yml'
 import mageFirePreraid from './samples/mage_fire_preraid.yml'
 import mageFirePhase1 from './samples/mage_fire_phase1.yml'
 import mageFirePhase2 from './samples/mage_fire_phase2.yml'
+import mageFirePhase3 from './samples/mage_fire_phase3.yml'
 import mageFrostPreraid from './samples/mage_frost_preraid.yml'
 import mageFrostPhase1 from './samples/mage_frost_phase1.yml'
 import mageFrostPhase2 from './samples/mage_frost_phase2.yml'
+import mageFrostPhase3 from './samples/mage_frost_phase3.yml'
 import priestShadowPreraid from './samples/priest_shadow_preraid.yml'
 import priestShadowPhase1 from './samples/priest_shadow_phase1.yml'
 import priestShadowPhase2 from './samples/priest_shadow_phase2.yml'
+import priestShadowPhase3 from './samples/priest_shadow_phase3.yml'
 import rogueAssassinationPreraid from './samples/rogue_assassination_preraid.yml'
 import rogueAssassinationPhase1 from './samples/rogue_assassination_phase1.yml'
 import rogueAssassinationPhase2 from './samples/rogue_assassination_phase2.yml'
 import rogueCombatPreraid from './samples/rogue_combat_preraid.yml'
 import rogueCombatPhase1 from './samples/rogue_combat_phase1.yml'
 import rogueCombatPhase2 from './samples/rogue_combat_phase2.yml'
+import rogueCombatPhase3 from './samples/rogue_combat_phase3.yml'
+import rogueCombatPhase3Glaives from './samples/rogue_combat_phase3_glaives.yml'
 import shamanElePreraid from './samples/shaman_ele_preraid.yml'
 import shamanElePhase1 from './samples/shaman_ele_phase1.yml'
 import shamanElePhase2 from './samples/shaman_ele_phase2.yml'
+import shamanElePhase3 from './samples/shaman_ele_phase3.yml'
 import shamanEnhSubElePreraid from './samples/shaman_enh_subele_preraid.yml'
 import shamanEnhSubElePhase1 from './samples/shaman_enh_subele_phase1.yml'
 import shamanEnhSubElePhase2 from './samples/shaman_enh_subele_phase2.yml'
+import shamanEnhSubElePhase3 from './samples/shaman_enh_subele_phase3.yml'
 import shamanEnhSubRestoPreraid from './samples/shaman_enh_subresto_preraid.yml'
 import shamanEnhSubRestoPhase1 from './samples/shaman_enh_subresto_phase1.yml'
 import shamanEnhSubRestoPhase2 from './samples/shaman_enh_subresto_phase2.yml'
+import shamanEnhSubRestoPhase3 from './samples/shaman_enh_subresto_phase3.yml'
 import shamanEnhSubRestoPreraidAnniMh from './samples/shaman_enh_subresto_preraid_annihilator_mh.yml'
 import shamanEnhSubRestoPhase1AnniMh from './samples/shaman_enh_subresto_phase1_annihilator_mh.yml'
 import shamanEnhSubRestoPhase2AnniMh from './samples/shaman_enh_subresto_phase2_annihilator_mh.yml'
+import shamanEnhSubRestoPhase3AnniMh from './samples/shaman_enh_subresto_phase3_annihilator_mh.yml'
 import warlockAfflictionRuinPreraid from './samples/warlock_affliction_ruin_preraid.yml'
 import warlockAfflictionRuinPhase1 from './samples/warlock_affliction_ruin_phase1.yml'
 import warlockAfflictionRuinPhase2 from './samples/warlock_affliction_ruin_phase2.yml'
+import warlockAfflictionRuinPhase3 from './samples/warlock_affliction_ruin_phase3.yml'
 import warlockDestructionFirePreraid from './samples/warlock_destruction_fire_preraid.yml'
 import warlockDestructionFirePhase1 from './samples/warlock_destruction_fire_phase1.yml'
 import warlockDestructionFirePhase2 from './samples/warlock_destruction_fire_phase2.yml'
+import warlockDestructionFirePhase3 from './samples/warlock_destruction_fire_phase3.yml'
 import warlockDestructionShadowPreraid from './samples/warlock_destruction_shadow_preraid.yml'
 import warlockDestructionShadowPhase1 from './samples/warlock_destruction_shadow_phase1.yml'
 import warlockDestructionShadowPhase2 from './samples/warlock_destruction_shadow_phase2.yml'
+import warlockDestructionShadowPhase3 from './samples/warlock_destruction_shadow_phase3.yml'
 import warriorArmsPreraid from './samples/warrior_arms_preraid.yml'
 import warriorArmsPhase1 from './samples/warrior_arms_phase1.yml'
 import warriorArmsPhase2 from './samples/warrior_arms_phase2.yml'
+import warriorArmsPhase3 from './samples/warrior_arms_phase3.yml'
 import warriorFuryPreraid from './samples/warrior_fury_preraid.yml'
 import warriorFuryPhase1 from './samples/warrior_fury_phase1.yml'
 import warriorFuryPhase2 from './samples/warrior_fury_phase2.yml'
+import warriorFuryPhase3 from './samples/warrior_fury_phase3.yml'
+import warriorFuryPhase3Glaives from './samples/warrior_fury_phase3_glaives.yml'
 import warriorKebabPhase2 from './samples/warrior_kebab_phase2.yml'
+import warriorKebabPhase3 from './samples/warrior_kebab_phase3.yml'
+import warriorKebabPhase3Glaives from './samples/warrior_kebab_phase3_glaives.yml'
 import warriorProtectionPhase2 from './samples/warrior_protection_phase2.yml'
+import warriorProtectionPhase3 from './samples/warrior_protection_phase3.yml'
+import warriorProtectionPhase3Glaives from './samples/warrior_protection_phase3_glaives.yml'
 
 import * as tbcsim from 'tbcsim';
 
@@ -76,6 +98,10 @@ const presets = {
     phase2: [
       hunterBmPhase2,
       hunterSurvPhase2
+    ],
+    phase3: [
+      hunterBmPhase3,
+      hunterSurvPhase3
     ]
   },
   mage: {
@@ -93,6 +119,11 @@ const presets = {
       mageArcanePhase2,
       mageFirePhase2,
       mageFrostPhase2
+    ],
+    phase3: [
+      mageArcanePhase3,
+      mageFirePhase3,
+      mageFrostPhase3
     ]
   },
   priest: {
@@ -104,6 +135,9 @@ const presets = {
     ],
     phase2: [
       priestShadowPhase2,
+    ],
+    phase3: [
+      priestShadowPhase3,
     ]
   },
   rogue: {
@@ -118,6 +152,10 @@ const presets = {
     phase2: [
       rogueAssassinationPhase2,
       rogueCombatPhase2
+    ],
+    phase3: [
+      rogueCombatPhase3,
+      rogueCombatPhase3Glaives
     ]
   },
   shaman: {
@@ -138,6 +176,12 @@ const presets = {
       shamanEnhSubElePhase2,
       shamanEnhSubRestoPhase2,
       shamanEnhSubRestoPhase2AnniMh
+    ],
+    phase3: [
+      shamanElePhase3,
+      shamanEnhSubElePhase3,
+      shamanEnhSubRestoPhase3,
+      shamanEnhSubRestoPhase3AnniMh
     ]
   },
   warlock: {
@@ -155,6 +199,11 @@ const presets = {
       warlockDestructionFirePhase2,
       warlockDestructionShadowPhase2,
       warlockAfflictionRuinPhase2
+    ],
+    phase3: [
+      warlockDestructionFirePhase3,
+      warlockDestructionShadowPhase3,
+      warlockAfflictionRuinPhase3
     ]
   },
   warrior: {
@@ -171,6 +220,15 @@ const presets = {
       warriorFuryPhase2,
       warriorKebabPhase2,
       warriorProtectionPhase2
+    ],
+    phase3: [
+      warriorArmsPhase3,
+      warriorFuryPhase3,
+      warriorFuryPhase3Glaives,
+      warriorKebabPhase3,
+      warriorKebabPhase3Glaives,
+      warriorProtectionPhase3,
+      warriorProtectionPhase3Glaives
     ]
   }
 }
@@ -398,6 +456,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
           open={isOpen}
         >
           <Dropdown.Menu title='Hunter'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('hunter', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('hunter', 'phase2')}
             </Dropdown.Menu>
@@ -409,6 +470,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Mage'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('mage', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('mage', 'phase2')}
             </Dropdown.Menu>
@@ -420,6 +484,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Priest'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('priest', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('priest', 'phase2')}
             </Dropdown.Menu>
@@ -431,6 +498,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Rogue'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('rogue', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('rogue', 'phase2')}
             </Dropdown.Menu>
@@ -442,6 +512,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Shaman'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('shaman', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('shaman', 'phase2')}
             </Dropdown.Menu>
@@ -453,6 +526,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Warlock'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('warlock', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phase2'} title='Phase 2'>
               {presetsFor('warlock', 'phase2')}
             </Dropdown.Menu>
@@ -464,6 +540,9 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
           <Dropdown.Menu title='Warrior'>
+            <Dropdown.Menu key={'phase3'} title='Phase 3'>
+              {presetsFor('warrior', 'phase3')}
+            </Dropdown.Menu>
             <Dropdown.Menu key={'phases'} title='Phase 2'>
               {presetsFor('warrior', 'phase2')}
             </Dropdown.Menu>

@@ -525,6 +525,9 @@ export const allEpCategories = [{
 },{
   name: 'Phase 2',
   key: 'phase2'
+},{
+  name: 'Phase 3',
+  key: 'phase3'
 }]
 
 export const targetTypes = [{

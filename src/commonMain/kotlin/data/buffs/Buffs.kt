@@ -175,6 +175,9 @@ object Buffs {
             44972 -> Ignored("Quiver haste is the same, and baked into mechanics")
             46699 -> NoAmmo()
 
+            // Armor
+            47524 -> Ignored("Cursed Vision demon sight buff")
+
             // All the random mp5 buffs
             18378 -> GenericManaRegenBuff(8)
             18379 -> GenericManaRegenBuff(6)

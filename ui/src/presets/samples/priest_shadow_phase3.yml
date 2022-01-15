@@ -1,0 +1,307 @@
+class: Priest
+spec: Shadow
+description: Shadow Priest (phase 3)
+race: Troll
+level: 70
+epCategory: phase3
+epSpec: priest_shadow
+
+talents:
+  # Disc Talents
+  - name: Meditation
+    rank: 3
+  - name: Inner Focus
+    rank: 1
+
+  # Shadow Talents
+  - name: Improved Shadow Word Pain
+    rank: 2
+  - name: Shadow Focus
+    rank: 5
+  - name: Improved Mind Blast
+    rank: 5
+  - name: Mind Flay
+    rank: 1
+  - name: Shadow Weaving
+    rank: 4
+  - name: Focused Mind
+    rank: 3
+  - name: Darkness
+    rank: 5
+  - name: Shadowform
+    rank: 1
+  - name: Shadow Power
+    rank: 4
+  - name: Vampiric Touch
+    rank: 1
+
+gear:
+  mainHand:
+    name: Zhar'doom, Greatstaff of the Devourer
+    enchant: Soulfrost
+    tempEnchant: Superior Wizard Oil
+  rangedTotemLibram:
+    name: Wand of the Forgotten Star
+  head:
+    name: Hood of Absolution
+    enchant: Glyph of Power
+    gems:
+      - Mystical Skyfire Diamond
+      - Glowing Shadowsong Amethyst
+  neck:
+    name: Vindicator's Pendant of Subjugation
+    gems:
+      - Runed Crimson Spinel
+  shoulders:
+    name: Shoulderpads of Absolution
+    enchant: Greater Inscription of Discipline
+    gems:
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+  back:
+    name: Nethervoid Cloak
+  chest:
+    name: Shroud of Absolution
+    enchant: Exceptional Stats
+    gems:
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+  wrists:
+    name: Bracers of Nimble Thought
+    enchant: Spellpower (Bracer)
+  hands:
+    name: Handguards of Absolution
+    enchant: Major Spellpower (Gloves)
+    gems:
+      - Runed Crimson Spinel
+  waist:
+    name: Waistwrap of Infinity
+  legs:
+    name: Leggings of Channeled Elements
+    enchant: Runic Spellthread
+    gems:
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+  feet:
+    name: Frozen Shadoweave Boots
+    enchant: Boar's Speed
+    gems:
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+  ring1:
+    name: Ring of Ancient Knowledge
+  ring2:
+    name: Ring of Ancient Knowledge
+  trinket1:
+    name: The Skull of Gul'dan
+  trinket2:
+    name: Icon of the Silver Crescent
+
+# In general Mind Flay should not be clipped before 2 ticks on most spells for Shadow
+# If clipping after 1 tick is desired for a priority spell, remove Mind Flay debuff checks
+rotation:
+  autoAttack: false
+  precombat:
+    - name: Blackened Basilisk
+    - name: Flask of Pure Death
+  combat:
+    - name: Shadowfiend
+      criteria:
+        - type: RESOURCE_PCT_LTE
+          pct: 50
+          resourceType: MANA
+    - name: Dark Rune
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Super Mana Potion
+      criteria:
+        - type: RESOURCE_MISSING_GTE
+          amount: 1500
+          resourceType: MANA
+    - name: Use Active Trinket
+    - name: Vampiric Touch
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 1.5
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Inner Focus
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Shadow Word Pain
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Mind Blast
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Shadow Word Death
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    - name: Berserking
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+    # Optimal decision tree for mindflay is to ensure no other priority ability gets clipped
+    # by the channel of mind flay. For Vampiric Touch this is the Mind Flay channel time + Vampiric Touch
+    # cast time (2 + 1.5, or 3 + 1.5). Everything else is the DoT expiration (SW:P, other Mind Flays)
+    # or Cooldown (MB, SW:D).
+    #
+    # In many cases we can fit two Mind Flay (2 ticks) in place of a 3 tick followed by 2 tick due to
+    # GCD overlap (E.g. with 4 seconds left before another ability is up next, it's better to
+    # cast two Mind Flay (2 ticks) )
+
+    ## Single 2 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 3.5
+    # SW:P
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 2
+    # Mind Blast
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 2
+    # SW:D
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 2
+
+    ## Single 3 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 4.5
+    # SW:P
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 3
+    # Mind Blast
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 3
+    # SW:D
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 3
+
+    ## Double 2 Ticks Remaining
+    # Vampiric Touch
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Vampiric Touch (DoT)
+          seconds: 5.5
+    # SW:P
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: DEBUFF_DURATION_LTE
+          debuff: Shadow Word Pain (DoT)
+          seconds: 4
+    # Mind Blast
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 4
+    # SW:D
+    - name: Mind Flay (2 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+        - type: ABILITY_COOLDOWN_LTE
+          ability: Mind Blast
+          seconds: 4
+
+    # Anything more than 4 seconds (Should be closer to 5) before next cast will be a 3 tick
+    - name: Mind Flay (3 ticks)
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Mind Flay (DoT)
+          seconds: 0
+
+pet:
+  type: Shadowfiend
+  startsActive: false
+
+raidBuffs:
+  - Blessing of Kings
+  - Improved Blessing of Wisdom
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  - Wrath of Air Totem
+  - Mana Spring Totem
+
+raidDebuffs:
+  - Misery
+  - Judgement of Wisdom
+  - Curse of the Elements

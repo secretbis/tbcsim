@@ -1,0 +1,183 @@
+class: Warrior
+spec: Protection
+description: Protection Warrior (phase 3)
+race: Human
+level: 70
+epCategory: phase3
+epSpec: warrior_protection
+
+talents:
+  # Fury talents
+  - name: Cruelty
+    rank: 3
+  # Arms talents
+  - name: Improved Heroic Strike
+    rank: 3
+  - name: Anger Management
+    rank: 1
+  - name: Deep Wounds
+    rank: 3
+  - name: Impale
+    rank: 2
+  # Prot talents
+  - name: Tactical Mastery
+    rank: 3
+  - name: Defiance
+    rank: 3
+  - name: Improved Sunder Armor
+    rank: 3
+  - name: One-Handed Weapon Specialization
+    rank: 5
+  - name: Focused Rage
+    rank: 3
+  - name: Vitality
+    rank: 5
+  - name: Devastate
+    rank: 1
+
+gear:
+  mainHand:
+    name: Dragonstrike
+    enchant: Mongoose
+  offHand:
+    name: Vengeful Gladiator's Slicer
+    enchant: Mongoose
+  rangedTotemLibram:
+    name: Serpent Spine Longbow
+  head:
+    name: Cursed Vision of Sargeras
+    enchant: Glyph of Ferocity
+    gems:
+      - Relentless Earthstorm Diamond
+      - Smooth Lionseye
+  neck:
+    name: Choker of Endless Nightmares
+  shoulders:
+    name: Onslaught Shoulderblades
+    enchant: Greater Inscription of Vengeance
+    gems:
+      - Smooth Lionseye
+      - Jagged Seaspray Emerald
+  back:
+    name: Shadowmoon Destroyer's Drape
+    enchant: Greater Agility
+  chest:
+    name: Onslaught Breastplate
+    enchant: Exceptional Stats
+    gems:
+      - Inscribed Pyrestone
+      - Jagged Seaspray Emerald
+      - Jagged Seaspray Emerald
+  wrists:
+    name: Deadly Cuffs
+    enchant: Brawn
+    gems:
+      - Smooth Lionseye
+  hands:
+    name: Grips of Silent Justice
+    enchant: Major Strength
+    gems:
+      - Inscribed Pyrestone
+      - Inscribed Pyrestone
+  waist:
+    name: Belt of One-Hundred Deaths
+    gems:
+      - Smooth Lionseye
+      - Smooth Lionseye
+  legs:
+    name: Leggings of Divine Retribution
+    enchant: Nethercobra Leg Armor
+  feet:
+    name: Dreadboots of the Legion
+    enchant: Cat's Swiftness
+    gems:
+      - Smooth Lionseye
+      - Smooth Lionseye
+  ring1:
+    name: Stormrage Signet Ring
+    enchant: Stats (Ring)
+  ring2:
+    name: Unstoppable Aggressor's Ring
+    enchant: Stats (Ring)
+  trinket1:
+    name: Dragonspine Trophy
+  trinket2:
+    name: Madness of the Betrayer
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+    - name: Flask of Relentless Assault
+#    - name: Elixir of Major Agility
+    - name: Roasted Clefthoof
+#    - name: Spicy Hot Talbuk
+
+    # Abilities
+    - name: Berserker Stance
+    - name: Battle Shout
+    - name: Bloodrage
+
+  combat:
+    - name: Blood Fury
+    - name: Berserking
+    - name: Bloodrage
+    - name: Execute
+    - name: Whirlwind
+    - name: Devastate
+    - name: Heroic Strike
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 30
+          resourceType: RAGE
+    - name: Battle Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Battle Shout
+          seconds: 0
+    - name: Haste Potion
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using potions
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+    - name: Use Active Trinket
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using trinkets
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Enhancement Shaman and Ret Paladin
+  - Ferocious Inspiration (x1)
+  - Leader of the Pack
+  - Improved Sanctity Aura
+  - Windfury Totem
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Improved Faerie Fire
+  - Improved Hunter's Mark
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Expose Weakness (750 Agi)

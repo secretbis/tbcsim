@@ -464,5 +464,219 @@
             "subjectSd": 84.81511371763462,
             "petSd": 0.0
         }
+    },
+    "phase3": {
+        "hunter_bm": {
+            "subjectMean": 1749.644370940941,
+            "subjectPetMean": 553.5738610107139,
+            "totalMean": 2303.218231951655,
+            "subjectMedian": 1749.451050121454,
+            "subjectPetMedian": 553.8561799883712,
+            "totalMedian": 2303.3072301098255,
+            "subjectSd": 61.87984686371294,
+            "petSd": 23.499102916760993
+        },
+        "hunter_surv": {
+            "subjectMean": 1701.6063097912274,
+            "subjectPetMean": 314.9996619383948,
+            "totalMean": 2016.6059717296223,
+            "subjectMedian": 1701.725399319162,
+            "subjectPetMedian": 314.88221536319236,
+            "totalMedian": 2016.6076146823543,
+            "subjectSd": 60.87357282635818,
+            "petSd": 13.594860677878833
+        },
+        "mage_arcane": {
+            "subjectMean": 2155.7760349604464,
+            "subjectPetMean": 0.0,
+            "totalMean": 2155.7760349604464,
+            "subjectMedian": 2154.974540673487,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2154.974540673487,
+            "subjectSd": 82.5718517185198,
+            "petSd": 0.0
+        },
+        "mage_fire": {
+            "subjectMean": 2182.6173666384784,
+            "subjectPetMean": 0.0,
+            "totalMean": 2182.6173666384784,
+            "subjectMedian": 2182.2185884164023,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2182.2185884164023,
+            "subjectSd": 94.0941330697733,
+            "petSd": 0.0
+        },
+        "mage_frost": {
+            "subjectMean": 1658.9201934432272,
+            "subjectPetMean": 104.97004937798926,
+            "totalMean": 1763.8902428212164,
+            "subjectMedian": 1660.446177595974,
+            "subjectPetMedian": 105.220623188624,
+            "totalMedian": 1765.6668007845979,
+            "subjectSd": 62.51358064221692,
+            "petSd": 8.621889140063335
+        },
+        "priest_shadow": {
+            "subjectMean": 1515.4883643789103,
+            "subjectPetMean": 0.45492323510357263,
+            "totalMean": 1515.9432876140138,
+            "subjectMedian": 1515.773517334679,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 1515.773517334679,
+            "subjectSd": 21.65716344518345,
+            "petSd": 2.0510131160971694
+        },
+        "rogue_combat": {
+            "subjectMean": 2276.15636006169,
+            "subjectPetMean": 0.0,
+            "totalMean": 2276.15636006169,
+            "subjectMedian": 2275.985162028211,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2275.985162028211,
+            "subjectSd": 83.7273613371603,
+            "petSd": 0.0
+        },
+        "shaman_ele": {
+            "subjectMean": 2124.7740782733176,
+            "subjectPetMean": 0.0,
+            "totalMean": 2124.7740782733176,
+            "subjectMedian": 2126.026761112694,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2126.026761112694,
+            "subjectSd": 82.93365920680428,
+            "petSd": 0.0
+        },
+        "shaman_enh": {
+            "subjectMean": 2027.2991799244794,
+            "subjectPetMean": 0.0,
+            "totalMean": 2027.2991799244794,
+            "subjectMedian": 2027.137285358914,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2027.137285358914,
+            "subjectSd": 96.80520626335668,
+            "petSd": 0.0
+        },
+        "warlock_affliction_ruin": {
+            "subjectMean": 1958.9208142284776,
+            "subjectPetMean": 0.0,
+            "totalMean": 1958.9208142284776,
+            "subjectMedian": 1960.1586967888893,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 1960.1586967888893,
+            "subjectSd": 88.29431116765961,
+            "petSd": 0.0
+        },
+        "warlock_destruction_fire": {
+            "subjectMean": 2203.248290693535,
+            "subjectPetMean": 0.0,
+            "totalMean": 2203.248290693535,
+            "subjectMedian": 2202.2989347319026,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2202.2989347319026,
+            "subjectSd": 79.4758268099,
+            "petSd": 0.0
+        },
+        "warlock_destruction_shadow": {
+            "subjectMean": 2430.172785271965,
+            "subjectPetMean": 0.0,
+            "totalMean": 2430.172785271965,
+            "subjectMedian": 2430.7380272256582,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2430.7380272256582,
+            "subjectSd": 115.69091394933498,
+            "petSd": 0.0
+        },
+        "warrior_arms": {
+            "subjectMean": 2067.1083999357634,
+            "subjectPetMean": 0.0,
+            "totalMean": 2067.1083999357634,
+            "subjectMedian": 2065.954374346241,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2065.954374346241,
+            "subjectSd": 106.3371094130849,
+            "petSd": 0.0
+        },
+        "warrior_fury": {
+            "subjectMean": 2353.9228372640196,
+            "subjectPetMean": 0.0,
+            "totalMean": 2353.9228372640196,
+            "subjectMedian": 2353.9436851617857,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2353.9436851617857,
+            "subjectSd": 107.54483494442313,
+            "petSd": 0.0
+        },
+        "warrior_kebab": {
+            "subjectMean": 1878.1191641509301,
+            "subjectPetMean": 0.0,
+            "totalMean": 1878.1191641509301,
+            "subjectMedian": 1877.8791608351985,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 1877.8791608351985,
+            "subjectSd": 90.27286183372092,
+            "petSd": 0.0
+        },
+        "warrior_protection": {
+            "subjectMean": 2063.3091389105502,
+            "subjectPetMean": 0.0,
+            "totalMean": 2063.3091389105502,
+            "subjectMedian": 2060.109934089851,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2060.109934089851,
+            "subjectSd": 111.32664932650364,
+            "petSd": 0.0
+        }
+    },
+    "phase3_glaives": {
+        "rogue_combat": {
+            "subjectMean": 2540.532682593478,
+            "subjectPetMean": 0.0,
+            "totalMean": 2540.532682593478,
+            "subjectMedian": 2539.217868786912,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2539.217868786912,
+            "subjectSd": 93.97135040999225,
+            "petSd": 0.0
+        },
+        "warrior_arms": {
+            "subjectMean": 2069.5167503740718,
+            "subjectPetMean": 0.0,
+            "totalMean": 2069.5167503740718,
+            "subjectMedian": 2069.0467746350328,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2069.0467746350328,
+            "subjectSd": 106.69971887282935,
+            "petSd": 0.0
+        },
+        "warrior_fury": {
+            "subjectMean": 2582.0705380792347,
+            "subjectPetMean": 0.0,
+            "totalMean": 2582.0705380792347,
+            "subjectMedian": 2583.746569823789,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2583.746569823789,
+            "subjectSd": 108.8686206057463,
+            "petSd": 0.0
+        },
+        "warrior_kebab": {
+            "subjectMean": 2062.236220687233,
+            "subjectPetMean": 0.0,
+            "totalMean": 2062.236220687233,
+            "subjectMedian": 2063.0668321951416,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2063.0668321951416,
+            "subjectSd": 98.12865163958153,
+            "petSd": 0.0
+        },
+        "warrior_protection": {
+            "subjectMean": 2289.4201873484317,
+            "subjectPetMean": 0.0,
+            "totalMean": 2289.4201873484317,
+            "subjectMedian": 2287.088303325748,
+            "subjectPetMedian": 0.0,
+            "totalMedian": 2287.088303325748,
+            "subjectSd": 116.9552844293492,
+            "petSd": 0.0
+        }
     }
 }

@@ -1,9 +1,9 @@
 class: Mage
 spec: Frost
-description: Frost Mage (phase 2)
+description: Frost Mage (phase 3)
 race: Gnome
 level: 70
-epCategory: phase2
+epCategory: phase3
 epSpec: mage_frost
 
 talents:
@@ -47,74 +47,69 @@ talents:
 
 gear:
   mainHand:
-    name: Fang of the Leviathan
-    enchant: Major Spellpower (Weapon)
+    name: Zhar'doom, Greatstaff of the Devourer
+    enchant: Soulfrost
     tempEnchant: Superior Wizard Oil
-  offHand:
-    name: Sapphiron's Wing Bone
   rangedTotemLibram:
     name: Wand of the Forgotten Star
   head:
-    name: Spellstrike Hood
+    name: Cowl of the Illidari High Lord
     enchant: Glyph of Power
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Chaotic Skyfire Diamond
+      - Glowing Shadowsong Amethyst
   neck:
-    name: The Sun King's Talisman
+    name: Translucent Spellthread Necklace
   shoulders:
-    name: Mantle of Tirisfal
+    name: Mantle of the Tempest
     enchant: Greater Inscription of the Orb
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Veiled Pyrestone
+      - Glowing Shadowsong Amethyst
   back:
-    name: Ruby Drape of the Mysticant
+    # This is a COPIUM-FREE ZONE
+    name: Cloak of the Illidari Council
   chest:
-    name: Vestments of the Sea-Witch
+    name: Robes of the Tempest
     enchant: Exceptional Stats
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   wrists:
-    name: Mindstorm Wristbands
+    name: Bracers of Nimble Thought
     enchant: Spellpower (Bracer)
   hands:
-    name: Anger-Spark Gloves
+    name: Gloves of the Tempest
     enchant: Major Spellpower (Gloves)
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
   waist:
     name: Belt of Blasting
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   legs:
-    name: Spellstrike Pants
+    name: Leggings of the Tempest
     enchant: Runic Spellthread
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
   feet:
-    name: Frozen Shadoweave Boots
+    name: Slippers of the Seacaller
     enchant: Boar's Speed
     gems:
-      - Runed Living Ruby
-      - Runed Living Ruby
+      - Runed Crimson Spinel
+      - Runed Crimson Spinel
   ring1:
-    name: Ring of Endless Coils
+    name: Ring of Ancient Knowledge
     enchant: Spellpower (Ring)
   ring2:
-    name: Ring of Recurrence
+    name: Band of the Eternal Sage
     enchant: Spellpower (Ring)
   trinket1:
-    name: Quagmirran's Eye
+    name: The Skull of Gul'dan
   trinket2:
-    name: Icon of the Silver Crescent
+    name: Quagmirran's Eye
 
 rotation:
   autoAttack: false
