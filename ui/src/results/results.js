@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Col, Nav, Row } from 'rsuite';
 
 import AbilityResults from './ability';
+import AbilityThreatResults from './abilityThreat';
 import BuffResults from './buffs';
 import DamageTypeResults from './damagetype';
 import ResourceUsage from './resource';
@@ -12,7 +13,7 @@ import { toFixed, toFixedPct } from './formatters';
 export default function({ character, results }) {
   const [activeTab, setActiveTab] = useState(0)
 
-  const { ability, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results
+  const { ability, abilityThreat, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results
 
   if(!ability || !buff || !debuff || !damageType || !resourceUsage || !dps) {
     return null;
@@ -79,7 +80,10 @@ export default function({ character, results }) {
             </Container>
           </Col>
           <Col xs={12}>
-            <DamageTypeResults data={damageType[activeTab]} />
+            <AbilityThreatResults data={abilityThreat[activeTab]} />
+            <Container style={{ marginTop: '20px' }}>
+              <DamageTypeResults data={damageType[activeTab]} />
+            </Container>
             <Container style={{ marginTop: '20px', marginBottom: '20px' }}>
               <ResourceUsageByAbility data={resourceUsageByAbility[activeTab]} />
             </Container>

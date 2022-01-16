@@ -31,7 +31,7 @@ class Troll : Race() {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats? {
-            return if(sp.sim.target.character.subTypes.intersect(setOf(CharacterType.BEAST)).isNotEmpty()) {
+            return if(sp.target().character.subTypes.intersect(setOf(CharacterType.BEAST)).isNotEmpty()) {
                 Stats(
                     physicalDamageMultiplier = 1.05,
                 )

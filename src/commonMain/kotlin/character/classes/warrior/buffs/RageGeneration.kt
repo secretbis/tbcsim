@@ -9,7 +9,6 @@ import data.model.Item
 import mechanics.Melee
 import sim.Event
 import sim.EventType
-import sim.SimIteration
 import sim.SimParticipant
 
 class RageGeneration : Buff() {
@@ -28,9 +27,14 @@ class RageGeneration : Buff() {
         override val icon: String = "spell_misc_emotionangry.jpg"
     }
 
+    val incomingAbility = object : Ability() {
+        override val name: String = "Incoming Damage"
+        override val icon: String = "spell_misc_emotionangry.jpg"
+    }
+
     val rageConversionFactor = 274.7
     fun damageToRage(sp: SimParticipant, damage: Double, item: Item, weaponFactor: Double): Int {
-        val endlessRage = sp.character.klass.talents[EndlessRage.name]?.currentRank ?: 0 > 0
+        val endlessRage = sp.character.klass.hasTalentRanks(EndlessRage.name)
         val multiplier = if(endlessRage) { 1.25 } else 1.0
 
         return (((damage / rageConversionFactor * 7.5) + (item.speed / 1000.0 * weaponFactor)) / 2.0 * multiplier).toInt()
@@ -86,7 +90,25 @@ class RageGeneration : Buff() {
         }
     }
 
+    val procIncoming = object : Proc() {
+        override val triggers: List<Trigger> = listOf(
+            Trigger.INCOMING_MELEE_HIT,
+            Trigger.INCOMING_MELEE_CRIT,
+            Trigger.INCOMING_MELEE_CRUSH,
+            Trigger.INCOMING_MELEE_BLOCK,
+
+            Trigger.INCOMING_SPELL_HIT,
+            Trigger.INCOMING_SPELL_CRIT,
+        )
+        override val type: Type = Type.STATIC
+
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            val rage = (2.5 * (event?.amount ?: 0.0) / rageConversionFactor).toInt()
+            sp.addResource(rage, Resource.Type.RAGE, incomingAbility)
+        }
+    }
+
     // TODO: Refund rage for mitigated yellow attacks, once I figure out how TBC does that
     //       May need to be implemented per-ability, if it's the same as Classic
-    override fun procs(sp: SimParticipant): List<Proc> = listOf(procHit, procCrit)
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(procHit, procCrit, procIncoming)
 }

@@ -58,6 +58,7 @@ open class Whirlwind : Ability() {
             ability = this,
             amount = mhResult.first,
             result = mhResult.second,
+            abilityThreatMultiplier = 1.25
         )
         sp.logEvent(mhEvent)
 
@@ -75,6 +76,7 @@ open class Whirlwind : Ability() {
                 ability = WhirlwindOH(),
                 amount = ohResult.first,
                 result = ohResult.second,
+                abilityThreatMultiplier = 1.25
             )
             sp.logEvent(ohEvent)
 

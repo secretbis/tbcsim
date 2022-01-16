@@ -21,6 +21,7 @@ export function stateReducer(state, action) {
         iterationResults: null,
 
         resultsByAbility: null,
+        resultsByAbilityThreat: null,
         resultsByBuff: null,
         resultsByDebuff: null,
         resultsByDamageType: null,
@@ -133,6 +134,7 @@ export const initialState = {
   iterationResults: null,
 
   resultsByAbility: null,
+  resultsByAbilityThreat: null,
   resultsByBuff: null,
   resultsByDebuff: null,
   resultsByDamageType: null,
@@ -150,11 +152,18 @@ export const initialState = {
     stepMs: simDefaults.stepMs,
     latencyMs: simDefaults.latencyMs,
     iterations: simDefaults.iterations,
+
     targetLevel: simDefaults.targetLevel,
     targetArmor: simDefaults.targetArmor,
+    targetType: simDefaults.targetType,
+    targetProfile: simDefaults.targetProfile,
+    targetActive: simDefaults.targetActive,
+    targetAutoAttackSpeedMs: simDefaults.targetAutoAttackSpeedMs,
+    targetWeaponPower: simDefaults.targetWeaponPower,
+    targetDualWield: simDefaults.targetDualWield,
+
     allowParryAndBlock: simDefaults.allowParryAndBlock,
     showHiddenBuffs: simDefaults.showHiddenBuffs,
-    targetType: simDefaults.targetType
   },
 
   character: {
@@ -250,9 +259,16 @@ initialState.makeSimOptions = function() {
     this.simOptions.stepMs,
     this.simOptions.latencyMs,
     this.simOptions.iterations,
+
     this.simOptions.targetLevel,
     this.simOptions.targetArmor,
     this.simOptions.targetType,
+    this.simOptions.targetProfile,
+    this.simOptions.targetActive,
+    this.simOptions.targetAutoAttackSpeedMs,
+    this.simOptions.targetWeaponPower,
+    this.simOptions.targetDualWield,
+
     this.simOptions.allowParryAndBlock,
     this.simOptions.showHiddenBuffs
   )

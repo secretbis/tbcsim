@@ -70,6 +70,7 @@ data class Stats(
 
     // Generic (non-spell-specific) modifiers
     var armorMultiplier: Double = 1.0,
+    var blockValueMultiplier: Double = 1.0,
 
     var attackPowerMultiplier: Double = 1.0,
     var rangedAttackPowerMultiplier: Double = 1.0,
@@ -188,6 +189,7 @@ data class Stats(
         axeExpertiseRating += stats.axeExpertiseRating
 
         armorMultiplier *= stats.armorMultiplier
+        blockValueMultiplier *= stats.blockValueMultiplier
 
         attackPowerMultiplier *= stats.attackPowerMultiplier
         rangedAttackPowerMultiplier *= stats.rangedAttackPowerMultiplier

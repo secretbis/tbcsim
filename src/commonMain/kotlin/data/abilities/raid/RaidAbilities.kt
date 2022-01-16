@@ -9,6 +9,7 @@ import kotlin.js.JsExport
 object RaidAbilities {
     val raidBuffs: Array<Ability> = arrayOf(
         BlessingOfKings(),
+        BlessingOfSalvation(),
         Bloodlust(),
         DivineSpirit(),
         DrumsOfBattle(),
@@ -43,6 +44,7 @@ object RaidAbilities {
         BloodFrenzy(),
         CurseOfRecklessness(),
         CurseOfTheElements(),
+        DemoralizingShout(),
         ExposeWeakness(750),
         ExposeWeakness(1000),
         ExposeWeakness(1250),
@@ -57,6 +59,7 @@ object RaidAbilities {
         ShadowWeaving(),
         Stormstrike(),
         SunderArmor(),
+        ThunderClap(),
         Mangle()
     )
 

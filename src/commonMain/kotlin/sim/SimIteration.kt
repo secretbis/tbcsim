@@ -156,7 +156,8 @@ class SimIteration(
             subTypes = setOf(CharacterType.values()[opts.targetType])
         )
 
-        return SimParticipant(char, Rotation(listOf(), false), this).init()
+        // TODO: Add boss-specific rotations and abilities
+        return SimParticipant(char, Rotation(listOf(), opts.targetActive), this).init()
     }
 
     fun isExecutePhase(thresholdPercent: Double = 20.0): Boolean {

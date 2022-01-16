@@ -1,6 +1,7 @@
 package sim.config
 
 import kotlinx.serialization.Serializable
+import sim.SimOptions
 import kotlin.js.JsExport
 
 @JsExport
@@ -97,18 +98,6 @@ data class RotationRuleCriterion(
 
 @JsExport
 @Serializable
-data class SimOptionsYml(
-    val durationMs: Int? = null,
-    val stepMs: Int? = null,
-    val latencyMs: Int? = null,
-    val iterations: Int? = null,
-    val targetLevel: Int? = null,
-    val targetArmor: Int? = null,
-    val allowParryAndBlock: Boolean? = null
-)
-
-@JsExport
-@Serializable
 data class PetYml(
     val type: String,
     val startsActive: Boolean = true,
@@ -131,6 +120,6 @@ data class ConfigYml(
     val rotation: RotationYml? = null,
     val raidBuffs: List<String>? = null,
     val raidDebuffs: List<String>? = null,
-    val simOpts: SimOptionsYml? = null,
+    val simOptions: SimOptions? = null,
     val pet: PetYml? = null
 )

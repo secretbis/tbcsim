@@ -117,6 +117,7 @@ object Items {
         { ImbuedUnstableDiamond() },
         { MysticalSkyfireDiamond() },
         { PotentUnstableDiamond() },
+        { PowerfulEarthstormDiamond() },
         { RelentlessEarthstormDiamond() },
         { SwiftSkyfireDiamond() },
         { SwiftStarfireDiamond() },

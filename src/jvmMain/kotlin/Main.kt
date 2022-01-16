@@ -58,7 +58,7 @@ class TBCSim : CliktCommand() {
     val categoryFilterStr: String? by option("--categories", help="Limit rankings/ep calc by category (comma-separated")
 
     val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
-    val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
+    val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVariabilityMs / 1000)
     val stepMs: Int by option("-s", "--step-ms", help="Fight simulation step size, in milliseconds").int().default(SimDefaults.stepMs)
     val latencyMs: Int by option("-l", "--latency", help="Latency to add when casting spells, in milliseconds").int().default(SimDefaults.latencyMs)
     val iterations: Int by option("-i", "--iterations", help="Number of simulation iterations to run").int().default(SimDefaults.iterations)
@@ -273,7 +273,7 @@ class TBCSim : CliktCommand() {
 
         val opts = SimOptions(
             durationMs = duration * 1000,
-            durationVaribilityMs = durationVariability * 1000,
+            durationVariabilityMs = durationVariability * 1000,
             stepMs = stepMs,
             latencyMs = latencyMs,
             iterations = iterations,

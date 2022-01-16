@@ -31,7 +31,7 @@ object Spell {
     )
 
     private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
-        val levelDiff = sp.sim.target.character.level - sp.character.level
+        val levelDiff = sp.target().character.level - sp.character.level
 
         return when {
             levelDiff <= 0 -> {
@@ -149,16 +149,16 @@ object Spell {
     // https://dwarfpriest.wordpress.com/2008/01/07/spell-hit-spell-penetration-and-resistances/
     fun spellResistReduction(sp: SimParticipant, school: Constants.DamageType): Double {
         val targetResistance = when(school) {
-            Constants.DamageType.ARCANE -> sp.sim.target.stats.arcaneResistance
-            Constants.DamageType.FIRE -> sp.sim.target.stats.fireResistance
-            Constants.DamageType.FROST -> sp.sim.target.stats.frostResistance
-            Constants.DamageType.NATURE -> sp.sim.target.stats.natureResistance
-            Constants.DamageType.SHADOW -> sp.sim.target.stats.shadowResistance
+            Constants.DamageType.ARCANE -> sp.target().stats.arcaneResistance
+            Constants.DamageType.FIRE -> sp.target().stats.fireResistance
+            Constants.DamageType.FROST -> sp.target().stats.frostResistance
+            Constants.DamageType.NATURE -> sp.target().stats.natureResistance
+            Constants.DamageType.SHADOW -> sp.target().stats.shadowResistance
             else -> 0
         }
 
         // theres a base 8 resist per level which can not be negated by spellpen
-        val baseResistance = (sp.sim.target.character.level - sp.character.level) * 8
+        val baseResistance = (sp.target().character.level - sp.character.level) * 8
 
         // TODO: Model partial resists as 0/25/50/75
         //       There seems to be no real formula for that, though, so just going with avg every time for now

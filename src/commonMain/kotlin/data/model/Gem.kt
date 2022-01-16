@@ -33,7 +33,7 @@ abstract class Gem(override var id: Int, var _name: String, override var icon: S
         // Convert GemStats to item stats, if a Prefix is specified
         if(prefix != null) {
             val tmpStats = Stats()
-            for (gemStat in prefix?.stat ?: listOf()) {
+            for (gemStat in prefix.stat) {
                 val value = when (_quality) {
                     Quality.UNCOMMON -> gemStat.uncommonValue
                     Quality.RARE -> gemStat.rareValue

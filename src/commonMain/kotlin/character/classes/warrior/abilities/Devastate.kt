@@ -6,6 +6,8 @@ import character.classes.warrior.talents.ImprovedMortalStrike
 import character.classes.warrior.talents.ImprovedSunderArmor
 import character.classes.warrior.talents.Devastate as DevastateTalent
 import data.Constants
+import data.abilities.raid.ImprovedExposeArmor
+import data.abilities.raid.SunderArmor
 import data.itemsets.OnslaughtBattlegear
 import mechanics.Melee
 import sim.Event
@@ -46,6 +48,11 @@ class Devastate : Ability() {
         val damageRoll = (Melee.baseDamageRoll(sp, item, isNormalized = true) * 0.5) + bonusDmg
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
+        // https://github.com/magey/tbc-warrior/wiki/Threat-Values#devastate
+        val hasImpEa = sp.sim.target.debuffs[ImprovedExposeArmor.name] != null
+        val sunderStacks = sp.sim.target.debuffs[SunderArmor.name]?.state(sp.sim.target)?.currentStacks ?: 0
+        val sunderBonus = if(!hasImpEa && sunderStacks < 5) { 301.5 } else 0.0
+
         // Save last hit state and fire event
         val event = Event(
             eventType = EventType.DAMAGE,
@@ -54,7 +61,7 @@ class Devastate : Ability() {
             amount = result.first,
             result = result.second,
             // Devastate bonus + sunder effect
-            abilityBonusThreat = 100 + 301.5
+            abilityBonusThreat = 100 + sunderBonus
         )
         sp.logEvent(event)
 

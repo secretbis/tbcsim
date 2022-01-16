@@ -31,7 +31,8 @@ object ConfigMaker {
 
         return Config(
             character,
-            rotation
+            rotation,
+            simOptions = cfg.simOptions
         )
     }
 
@@ -42,7 +43,8 @@ object ConfigMaker {
 
         return Config(
             character,
-            rotation
+            rotation,
+            simOptions = cfg.simOptions
         )
     }
 

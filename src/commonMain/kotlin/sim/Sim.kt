@@ -9,11 +9,13 @@ import kotlin.random.Random
 
 class Sim (
     val config: Config,
-    val opts: SimOptions,
+    _opts: SimOptions,
     val epStatMod: Stats? = null,
     val progressCb:(SimProgress) -> Unit
 ) {
     val logger = KotlinLogging.logger {}
+    // Merge in character file-defined options, if present
+    val opts = _opts.merge(config.simOptions)
 
     suspend fun sim(): List<SimIteration> {
         // Iteration coroutines
@@ -45,7 +47,7 @@ class Sim (
         val iteration = SimIteration(config.character, config.rotation, opts, epStatMod)
 
         // Randomly alter the fight duration, if configured
-        val dvms = opts.durationVaribilityMs
+        val dvms = opts.durationVariabilityMs
         val variability = if(dvms != 0) { Random.nextInt(-1 * dvms, dvms) } else 0
         val durationMs = opts.durationMs + variability
 

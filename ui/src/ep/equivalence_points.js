@@ -5,17 +5,6 @@ import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite';
 import { allStats, statDisplayNames } from './ep_stats';
 import epData from './data/ep_all.json';
 
-const bannerTitle = 'EP values are very beta!'
-function bannerMsg() {
-  return (
-    <div>
-      <p>These values have not been cross-referenced with other work, and may be anywhere from exactly right to wildly incorrect.</p>
-      <p>These values are very likely to change as TBC behavior is tested further, and sim issues are resolved.</p>
-      <p>Please consume these values with an appropriate amount of sodium!</p>
-    </div>
-  );
-}
-
 function HowItWorks() {
   return (
     <Container style={{ marginTop: 20, marginBottom: 20 }}>
@@ -88,7 +77,6 @@ export default function() {
   return (
     <Content style={{ padding: '20px' }}>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
         <WrapperEpPanel name='Phase 3'>
           <WrapperEpPanel name='Hunter'>

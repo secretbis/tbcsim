@@ -1,6 +1,7 @@
 package mechanics
 
 import character.Stats
+import character.classes.boss.Boss
 import data.Constants
 import data.model.Item
 import mu.KotlinLogging
@@ -14,30 +15,13 @@ object Melee {
     private val logger = KotlinLogging.logger {}
 
     // Base mitigation values based on level difference
-    const val baseDualWieldMiss: Double = 0.19
-    // TODO: Wasn't able to find confirmed parry values for 71/72 mobs
-    //       Assumes 14% boss parry persists to TBC
-    val baseParryChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.14
-    )
-    val baseDodgeChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.065
-    )
-    val baseGlancingChance = mapOf(
-        0 to 0.10,
-        1 to 0.15,
-        2 to 0.20,
-        3 to 0.25
-    )
+    private const val baseMissChance: Double = 0.05
+    private const val baseDualWieldMissChance: Double = 0.19
+    private const val baseParryChance = 0.05
+    private const val baseDodgeChance = 0.05
 
     // Instant yellow attack AP normalization
-    val normalizedWeaponSpeedMs: Map<Constants.ItemSubclass, Double> = mapOf(
+    private val normalizedWeaponSpeedMs: Map<Constants.ItemSubclass, Double> = mapOf(
         Constants.ItemSubclass.AXE_2H to 3300.0,
         Constants.ItemSubclass.MACE_2H to 3300.0,
         Constants.ItemSubclass.SWORD_2H to 3300.0,
@@ -49,12 +33,6 @@ object Melee {
         Constants.ItemSubclass.FIST to 2400.0,
         // TODO: Druid weirdness
     )
-
-    fun rngSuffix(sp: SimParticipant, item: Item): String {
-        val handSuffix = if(isOffhand(sp, item)) { "OH" } else "MH"
-        val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
-        return "$handSuffix $castingAbility ${item.name}"
-    }
 
     fun is2H(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
@@ -102,65 +80,67 @@ object Melee {
         } / Rating.expertisePerPct
     }
 
-    private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
-        val levelDiff = sp.sim.target.character.level - sp.character.level
-
-        return when {
-            levelDiff <= 0 -> {
-                logger.warn { "Attempted to compute a melee hit on a target more than 3 levels below" }
-                table[0]!!
-            }
-            levelDiff > 3 -> {
-                logger.warn { "Attempted to compute a melee hit on a target more than 3 levels above" }
-                table[3]!!
-            }
-            else -> table[levelDiff]!!
-        }
-    }
-
     fun isOffhand(sp: SimParticipant, item: Item?): Boolean {
         if(item == null) return false
         return item === sp.character.gear.offHand
     }
 
-    fun baseMiss(sp: SimParticipant, item: Item?, isWhiteHit: Boolean): Double {
-        val baseMissForLevel = valueByLevelDiff(sp, General.baseMissChance)
+    fun meleeMissChance(sp: SimParticipant, item: Item?, isWhiteHit: Boolean): Double {
+        val baseMiss = General.baseMiss(sp)
 
         // The heroic strike nonsense only eliminates the dual-wield penalty, and nothing further
-        val offHandHitBonus = if(isOffhand(sp, item)) { sp.stats.offHandAddlWhiteHitPct / 100.0 } else 0.0
-        val actualDWMissChance = (baseDualWieldMiss - offHandHitBonus).coerceAtLeast(0.0)
+        val offHandHitBonus = if (isOffhand(sp, item)) {
+            sp.stats.offHandAddlWhiteHitPct / 100.0
+        } else 0.0
+        val actualDWMissChance = (baseDualWieldMissChance - offHandHitBonus).coerceAtLeast(0.0)
 
-        return if(isWhiteHit && sp.isDualWielding()) {
-            baseMissForLevel + actualDWMissChance
-        } else baseMissForLevel
-    }
+        val totalMiss = if (isWhiteHit && sp.isDualWielding()) {
+            baseMiss + actualDWMissChance
+        } else baseMiss
 
-    fun meleeMissChance(sp: SimParticipant, item: Item?, isWhiteHit: Boolean): Double {
-        val baseMiss = baseMiss(sp, item, isWhiteHit)
         val meleeHitChance = sp.physicalHitPct() / 100.0
-        return (baseMiss - meleeHitChance).coerceAtLeast(0.0)
+        return (totalMiss - meleeHitChance).coerceAtLeast(0.0)
     }
 
     fun meleeParryChance(sp: SimParticipant, item: Item?): Double {
         return if(sp.sim.opts.allowParryAndBlock) {
-            (valueByLevelDiff(sp, baseParryChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
+            val baseParry = if(sp.target().isBoss()) {
+                val levelDiff = General.levelDiff(sp)
+                if(levelDiff > 2) {
+                    baseParryChance + (levelDiff * 0.03)
+                } else {
+                    baseParryChance + (levelDiff * 0.005)
+                }
+            } else {
+                sp.parryPct() + General.defenseChance(sp)
+            }
+
+            val expertiseReduction = (sp.expertisePct() + expertisePctForItem(sp, item)) / 100
+            return (baseParry - expertiseReduction).coerceAtLeast(0.0)
         } else {
             0.0
         }
     }
 
     fun meleeDodgeChance(sp: SimParticipant, item: Item?): Double {
-        return (valueByLevelDiff(sp, baseDodgeChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
+        val baseDodge = if(sp.target().isBoss()) {
+            val levelDiff = General.levelDiff(sp)
+            baseDodgeChance + (levelDiff * 0.005)
+        } else {
+            sp.target().dodgePct() + General.defenseChance(sp)
+        }
+
+        val expertiseReduction = (sp.expertisePct() + expertisePctForItem(sp, item)) / 100
+        return (baseDodge - expertiseReduction).coerceAtLeast(0.0)
     }
 
     fun meleeGlanceChance(sp: SimParticipant): Double {
-        return valueByLevelDiff(sp, baseGlancingChance)
+        val levelDiff = General.levelDiff(sp)
+        return (0.06 + (levelDiff * 0.06)).coerceAtLeast(0.0)
     }
 
-    // this is actually the meleeGlanceMultiplier and not the reduction.
-    // also, the max "low" for melee is 0.91 and not 0.6
     fun meleeGlanceMultiplier(sp: SimParticipant, item: Item?): Double {
-        val defDifference: Int = (sp.sim.target.character.level - sp.character.level).coerceAtLeast(0) * 5
+        val defDifference: Int = (sp.target().character.level - sp.character.level).coerceAtLeast(0) * 5
         val low = 1.3 - (0.05 * defDifference).coerceAtMost(0.91).coerceAtLeast(0.01)
         val high = 1.2 - (0.03 * defDifference).coerceAtMost(0.99).coerceAtLeast(0.2)
 
@@ -168,7 +148,21 @@ object Melee {
     }
 
     fun meleeCritChance(sp: SimParticipant): Double {
-        return (sp.meleeCritPct() / 100.0 - valueByLevelDiff(sp, General.critSuppression)).coerceAtLeast(0.0)
+        val skillDiff = General.skillDiff(sp)
+        val baseCrit = if(sp.target().isBoss()) {
+            val levelDiff = General.levelDiff(sp)
+            val levelDiffCrit = if(skillDiff < 0) {
+                (sp.meleeCritPct() / 100) + (levelDiff * 0.01)
+            } else {
+                (sp.meleeCritPct() / 100) + (levelDiff * 0.002)
+            }
+            val suppression = General.critSuppression(sp)
+            levelDiffCrit - suppression
+        } else {
+            (sp.meleeCritPct() / 100) + General.defenseChance(sp)
+        }
+
+        return baseCrit.coerceAtLeast(0.0)
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
@@ -204,16 +198,6 @@ object Melee {
             else -> 0.0
         }
     }
-
-    /*  maybe do this instead of the optional arguments I added below for crit, critdmg and dodge?
-        would be a more general version although I don't know if there would be any side-effects
-
-    fun attackRollWithTemporaryStats(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, temporaryStats: Stats){
-        sp.stats.add(temporaryStats)
-        attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false)
-        sp.recomputeStats()
-    }
-    */
 
     // Performs an attack roll given an initial unmitigated damage value
     fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, abilityAdditionalCritDamageMultiplier: Double = 1.0, bonusCritChance: Double = 0.0, noDodgeAllowed: Boolean = false) : Pair<Double, EventResult> {

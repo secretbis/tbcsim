@@ -1,0 +1,209 @@
+class: Warrior
+spec: Protection
+description: Protection Warrior (phase 3)
+race: Human
+level: 70
+epCategory: phase3
+epSpec: warrior_protection
+
+talents:
+  # Fury talents
+  - name: Cruelty
+    rank: 3
+  # Arms talents
+  - name: Improved Heroic Strike
+    rank: 3
+  - name: Deflection
+    rank: 5
+  - name: Improved Thunder Clap
+    rank: 3
+  - name: Anger Management
+    rank: 1
+  - name: Deep Wounds
+    rank: 1
+  # Prot talents
+  - name: Anticipation
+    rank: 5
+  - name: Toughness
+    rank: 5
+  - name: Shield Specialization
+    rank: 5
+  - name: Improved Shield Block
+    rank: 1
+  - name: Defiance
+    rank: 3
+  - name: Improved Sunder Armor
+    rank: 3
+  - name: Shield Mastery
+    rank: 3
+  - name: One-Handed Weapon Specialization
+    rank: 5
+  - name: Focused Rage
+    rank: 3
+  - name: Vitality
+    rank: 5
+  - name: Devastate
+    rank: 1
+
+gear:
+  mainHand:
+    name: The Brutalizer
+    enchant: Mongoose
+  offHand:
+    name: Bulwark of Azzinoth
+    enchant: Major Stamina
+  rangedTotemLibram:
+    name: Legionkiller
+  head:
+    name: Faceplate of the Impenetrable
+    enchant: Presence of Might
+    gems:
+      - Powerful Earthstorm Diamond
+      - Shifting Shadowsong Amethyst
+  neck:
+    name: Vindicator's Pendant of Triumph
+    gems:
+      - Steady Seaspray Emerald
+  shoulders:
+    name: Onslaught Shoulderblades
+    enchant: Greater Inscription of the Knight
+    gems:
+      - Solid Empyrean Sapphire
+      - Solid Empyrean Sapphire
+  back:
+    name: Pepe's Shroud of Pacification
+    enchant: Greater Agility
+  chest:
+    name: Onslaught Breastplate
+    enchant: Exceptional Stats
+    gems:
+      - Solid Empyrean Sapphire
+      - Solid Empyrean Sapphire
+      - Solid Empyrean Sapphire
+  wrists:
+    name: Vindicator's Plate Bracers
+    enchant: Fortitude
+    gems:
+      - Solid Empyrean Sapphire
+  hands:
+    name: Gauntlets of Enforcement
+    enchant: Threat
+  waist:
+    name: Girdle of Stability
+    gems:
+      - Solid Empyrean Sapphire
+      - Solid Empyrean Sapphire
+  legs:
+    name: Praetorian's Legguards
+    enchant: Nethercleft Leg Armor
+    gems:
+      - Steady Seaspray Emerald
+      - Steady Seaspray Emerald
+      - Shifting Shadowsong Amethyst
+  feet:
+    name: Myrmidon's Treads
+    enchant: Boar's Speed
+    gems:
+      - Solid Empyrean Sapphire
+      - Solid Empyrean Sapphire
+  ring1:
+    name: Shapeshifter's Signet
+    enchant: Stats (Ring)
+  ring2:
+    name: Band of the Abyssal Lord
+    enchant: Stats (Ring)
+  trinket1:
+    name: "Darkmoon Card: Vengeance"
+  trinket2:
+    name: "Darkmoon Card: Madness"
+
+# WIP: Specify additional items to compare
+#      Each will be tested individually, in all combinations, and the sim will rank each setup
+gearCompare: {}
+
+# Rotation items are things that your character can personally do
+rotation:
+  precombat:
+    # Consumables
+    # These follow battle/guardian elixir rules:
+    #   Flasks will overwrite elixirs, elixirs will overwrite flasks, and food overwrites food
+#    - name: Flask of Fortification
+    - name: Elixir of Major Agility
+    - name: Elixir of Major Defense
+#    - name: Roasted Clefthoof
+    - name: Spicy Crawdad
+
+    # Abilities
+    - name: Defensive Stance
+    - name: Commanding Shout
+    - name: Bloodrage
+
+  combat:
+    - name: Ironshield Potion
+    - name: Blood Fury
+    - name: Berserking
+    - name: Shield Block
+    - name: Shield Slam
+    - name: Revenge
+    - name: Demoralizing Shout
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Demoralizing Shout
+          seconds: 0
+    - name: Thunder Clap
+      criteria:
+        - type: DEBUFF_DURATION_LTE
+          debuff: Thunder Clap
+          seconds: 0
+    - name: Commanding Shout
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Commanding Shout
+          seconds: 0
+    - name: Bloodrage
+    - name: Heroic Strike
+      criteria:
+        - type: RESOURCE_PCT_GTE
+          pct: 30
+          resourceType: RAGE
+    - name: Devastate
+    - name: Use Active Trinket
+      criteria:
+        # Allow some slush time for debuffs to get rolling before using trinkets
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
+
+# Raid and group setup
+# These are buffs/debuffs you are not personally responsible for applying
+# These are assumed to be up the entire fight
+raidBuffs:
+  # Consider your raid composition when selecting which buffs to apply
+  # e.g. if you don't have two paladins, you can't have two blessings
+  - Blessing of Kings
+  - Drums of Battle
+  - Improved Blessing of Might
+  - Improved Mark of the Wild
+  - Improved Seal of the Crusader
+  # Adjust these based on what you expect your personal group composition to be
+  # This happens to assume a BM Hunter, Feral Druid, Enhancement Shaman and Ret Paladin
+  - Ferocious Inspiration (x1)
+  - Leader of the Pack
+  - Improved Sanctity Aura
+  - Windfury Totem
+  - Grace of Air Totem
+  - Strength of Earth Totem
+  - Unleashed Rage
+
+raidDebuffs:
+  - Sunder Armor
+  - Improved Expose Armor
+  - Improved Faerie Fire
+  - Improved Hunter's Mark
+  - Curse of Recklessness
+  - Blood Frenzy
+  - Expose Weakness (750 Agi)
+
+simOptions:
+  targetProfile: Morogrim Tidewalker
+  allowParryAndBlock: true
+  targetActive: true

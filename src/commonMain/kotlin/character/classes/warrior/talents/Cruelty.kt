@@ -1,4 +1,4 @@
-package character.classes.shaman.talents
+package character.classes.warrior.talents
 
 import character.Buff
 import character.Stats

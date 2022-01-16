@@ -117,7 +117,7 @@ rotation:
   combat:
     - name: Shadowfiend
       criteria:
-        - type: RESOURCE_PCT_LTE 
+        - type: RESOURCE_PCT_LTE
           pct: 25
           resourceType: MANA
     - name: Dark Rune
@@ -169,10 +169,10 @@ rotation:
           seconds: 0
     # Optimal decision tree for mindflay is to ensure no other priority ability gets clipped
     # by the channel of mind flay. For Vampiric Touch this is the Mind Flay channel time + Vampiric Touch
-    # cast time (2 + 1.5, or 3 + 1.5). Everything else is the DoT expiration (SW:P, other Mind Flays) 
+    # cast time (2 + 1.5, or 3 + 1.5). Everything else is the DoT expiration (SW:P, other Mind Flays)
     # or Cooldown (MB, SW:D).
     #
-    # In many cases we can fit two Mind Flay (2 ticks) in place of a 3 tick followed by 2 tick due to 
+    # In many cases we can fit two Mind Flay (2 ticks) in place of a 3 tick followed by 2 tick due to
     # GCD overlap (E.g. with 4 seconds left before another ability is up next, it's better to
     # cast two Mind Flay (2 ticks) )
 
@@ -213,7 +213,7 @@ rotation:
         - type: ABILITY_COOLDOWN_LTE
           ability: Mind Blast
           seconds: 2
-    
+
     ## Single 3 Ticks Remaining
     # Vampiric Touch
     - name: Mind Flay (3 ticks)
@@ -303,6 +303,7 @@ pet:
 
 raidBuffs:
   - Blessing of Kings
+  - Blessing of Salvation
   - Improved Blessing of Wisdom
   - Improved Mark of the Wild
   - Improved Seal of the Crusader

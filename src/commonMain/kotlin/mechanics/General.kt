@@ -10,22 +10,11 @@ object General {
     private val logger = KotlinLogging.logger {}
 
     // Base mitigation values based on level difference
-    val baseMissChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.09
-    )
-    // TODO: Does TBC still have this?
-    val critSuppression = mapOf(
-        0 to 0.00,
-        1 to 0.01,
-        2 to 0.02,
-        3 to 0.03
-    )
+    val baseMissChance: Double = 0.05
+    val baseBlockChance: Double = 0.05
 
     fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
-        val levelDiff = sp.sim.target.character.level - sp.character.level
+        val levelDiff = sp.target().character.level - sp.character.level
 
         return when {
             levelDiff <= 0 -> {
@@ -44,11 +33,48 @@ object General {
         return (14.0 * dps).toInt()
     }
 
+    // The difference between attacker weapon skill (level * 5) and the target's defense skill
+    fun skillDiff(sp: SimParticipant): Int {
+        return (sp.character.level * 5) - ((sp.target().character.level * 5) + sp.target().defenseSkill())
+    }
+
+    fun levelDiff(sp: SimParticipant): Int {
+        return sp.target().character.level - sp.character.level
+    }
+
+    // Calculates the defense 0.04% per delta point to miss, dodge, block, parry - positive or negative
+    fun defenseChance(sp: SimParticipant): Double {
+        return 0.0004 * skillDiff(sp)
+    }
+
+    fun critSuppression(sp: SimParticipant): Double {
+        return if(levelDiff(sp) >= 3) 0.018 else 0.0
+    }
+
+    fun baseMiss(sp: SimParticipant): Double {
+        return if(sp.target().isBoss()) {
+            val levelDiff = levelDiff(sp)
+            if(levelDiff > 2) {
+                val suppression = (levelDiff - 2) * 0.01
+                baseMissChance + (levelDiff * 0.01) + suppression
+            } else {
+                baseMissChance + (levelDiff * 0.005)
+            }
+        } else {
+            baseMissChance + defenseChance(sp)
+        }
+    }
+
     fun physicalBlockChance(sp: SimParticipant): Double {
         return if(sp.sim.opts.allowParryAndBlock) {
-            // Mobs cannot block more than 5% of the time
-            // https://github.com/magey/classic-warrior/wiki/Attack-table#block
-            0.05
+            if(sp.target().isBoss()) {
+                // Mobs cannot block more than 5% of the time
+                // https://github.com/magey/classic-warrior/wiki/Attack-table#block
+
+                (baseBlockChance + (levelDiff(sp) * -0.005)).coerceAtMost(baseBlockChance)
+            } else {
+                baseBlockChance + sp.blockPct() + defenseChance(sp)
+            }
         } else {
             0.0
         }
@@ -75,7 +101,7 @@ object General {
     }
 
     fun physicalArmorMitigation(sp: SimParticipant): Double {
-        val targetArmor = (sp.sim.target.armor() - sp.armorPen()).coerceAtLeast(0)
-        return targetArmor / (targetArmor + (467.5 * sp.sim.target.character.level - 22167.5))
+        val targetArmor = (sp.target().armor() - sp.armorPen()).coerceAtLeast(0)
+        return targetArmor / (targetArmor + (467.5 * sp.target().character.level - 22167.5))
     }
 }

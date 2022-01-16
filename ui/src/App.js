@@ -44,6 +44,7 @@ function App() {
 
   const resultsData = {
     ability: state.resultsByAbility,
+    abilityThreat: state.resultsByAbilityThreat,
     buff: state.resultsByBuff,
     debuff: state.resultsByDebuff,
     damageType: state.resultsByDamageType,
@@ -92,6 +93,7 @@ function App() {
           const debuffResults = cleanKtList(tbcsim.sim.SimStats.resultsByDebuff(iterList));
           const abilityResults = cleanKtList(tbcsim.sim.SimStats.resultsByAbility(iterList));
           const damageTypeResults = cleanKtList(tbcsim.sim.SimStats.resultsByDamageType(iterList));
+          const abilityThreatResults = cleanKtList(tbcsim.sim.SimStats.threatByAbility(iterList));
           const dps = cleanKtList(tbcsim.sim.SimStats.dps_0(iterList));
 
           // Compute results
@@ -101,6 +103,7 @@ function App() {
           dispatch({ type: 'resultsByDebuff', value: debuffResults })
           dispatch({ type: 'resultsByDamageType', value: damageTypeResults })
           dispatch({ type: 'resultsByAbility', value: abilityResults })
+          dispatch({ type: 'resultsByAbilityThreat', value: abilityThreatResults })
           dispatch({ type: 'resultsDps', value: dps })
       }
     )
@@ -113,6 +116,7 @@ function App() {
     dispatch({ type: 'resultsByDebuff', value: null })
     dispatch({ type: 'resultsByDamageType', value: null })
     dispatch({ type: 'resultsByAbility', value: null })
+    dispatch({ type: 'resultsByAbilityThreat', value: null })
     dispatch({ type: 'resultsDps', value: null })
     sim()
   }

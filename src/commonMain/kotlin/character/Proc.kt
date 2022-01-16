@@ -13,6 +13,7 @@ abstract class Proc {
         // Specifically auto-attacks
         MELEE_AUTO_HIT,
         MELEE_AUTO_CRIT,
+        MELEE_AUTO_CRUSH,
         // An auto-attack or bonus attack that deals white damage
         MELEE_WHITE_HIT,
         MELEE_WHITE_CRIT,
@@ -67,7 +68,17 @@ abstract class Proc {
         ARCANE_DAMAGE_PERIODIC,
 
         // Incoming damage
-        STRUCK_IN_COMBAT,
+        INCOMING_MELEE_HIT,
+        INCOMING_MELEE_CRIT,
+        INCOMING_MELEE_CRUSH,
+        INCOMING_MELEE_DODGE,
+        INCOMING_MELEE_PARRY,
+        INCOMING_MELEE_BLOCK,
+        INCOMING_MELEE_MISS,
+
+        INCOMING_SPELL_HIT,
+        INCOMING_SPELL_CRIT,
+        INCOMING_SPELL_RESIST,
 
         // Healing
         HEAL_HIT,

@@ -48,6 +48,7 @@ object ItemSets {
         NordrassilHarness(),
         NordrassilRegalia(),
         OblivionRaiment(),
+        OnslaughtArmor(),
         OnslaughtBattlegear(),
         PrimalIntent(),
         PrimalMooncloth(),

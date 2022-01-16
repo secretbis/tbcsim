@@ -130,6 +130,8 @@ object Buffs {
             38347 -> SextantOfUnstableCurrents()
             39438 -> DarkmoonCardCrusadeAP()
             39440 -> DarkmoonCardCrusadeSP()
+            39444 -> DarkmoonCardVengeance()
+            39446 -> Ignored("Darkmoon Card: Madness - killing blows are not relevant")
             40396 -> FelInfusion()
             40438 -> AshtongueTalismanOfAcumen()
             40442 -> AshtongueTalismanOfEquilibrium()
@@ -177,6 +179,7 @@ object Buffs {
             46699 -> NoAmmo()
 
             // Armor
+            40407 -> BulwarkOfAzzinoth()
             47524 -> Ignored("Cursed Vision demon sight buff")
 
             // All the random mp5 buffs

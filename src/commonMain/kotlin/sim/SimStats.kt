@@ -55,12 +55,6 @@ object SimStats {
         )
     }
 
-    private fun tpsForParticipant(sp: SimParticipant): Double {
-        return sp.events.filter { evt -> evt.eventType == EventType.DAMAGE }.fold(0.0) { acc, event ->
-            acc + event.amount
-        } / (sp.sim.opts.durationMs / 1000.0)
-    }
-
     fun resultsByBuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
         return processBuffs(
             iterations,

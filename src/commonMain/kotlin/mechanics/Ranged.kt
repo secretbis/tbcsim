@@ -38,16 +38,12 @@ object Ranged {
             else -> 0.0
         } / Rating.critPerPct
 
-        val baseRangedCritChance = sp.rangedCritPct() / 100.0 - General.valueByLevelDiff(sp, General.critSuppression)
+        val baseRangedCritChance = sp.rangedCritPct() / 100.0 - General.critSuppression(sp)
         return ((itemBonusCritPct / 100.0) + baseRangedCritChance).coerceAtLeast(0.0)
     }
 
-    fun baseMiss(sp: SimParticipant): Double {
-        return General.valueByLevelDiff(sp, General.baseMissChance)
-    }
-
     fun rangedMissChance(sp: SimParticipant): Double {
-        val baseMiss = baseMiss(sp)
+        val baseMiss = General.baseMiss(sp)
         val physicalHitChance = sp.physicalHitPct() / 100.0
         return (baseMiss - physicalHitChance).coerceAtLeast(0.0)
     }

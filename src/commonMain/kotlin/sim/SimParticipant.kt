@@ -5,6 +5,7 @@ import character.auto.AutoAttackBase
 import character.auto.AutoShot
 import character.auto.MeleeMainHand
 import character.auto.*
+import character.classes.boss.Boss
 import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
@@ -117,6 +118,18 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return this
     }
 
+    fun isBoss(): Boolean {
+        return character.klass is Boss
+    }
+
+    fun target(): SimParticipant {
+        return if(isBoss()) {
+            sim.subject
+        } else {
+            sim.target
+        }
+    }
+
     fun onGcd(): Boolean {
         return sim.elapsedTimeMs < gcdEndMs
     }
@@ -194,7 +207,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     val castEvent = Event(
                         eventType = EventType.SPELL_START_CAST,
                         ability = castingRule!!.ability,
-                        target = sim.target
+                        target = target()
                     )
                     logEvent(castEvent)
 
@@ -219,7 +232,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     val castEvent = Event(
                         eventType = EventType.SPELL_CAST,
                         ability = castingRule!!.ability,
-                        target = sim.target
+                        target = target()
                     )
                     logEvent(castEvent)
                 } else {
@@ -455,7 +468,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 buff = debuff,
                 buffStacks = stacks,
                 buffCharges = charges,
-                target = sim.target
+                target = target()
             ))
 
             // Always recompute after adding a debuff
@@ -466,7 +479,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 buff = debuff,
                 buffStacks = stacks,
                 buffCharges = charges,
-                target = sim.target
+                target = target()
             ))
 
             // If a debuff is stackable, then recompute on a refresh as well
@@ -488,7 +501,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         buff = debuff,
                         buffStacks = state.currentStacks,
                         buffCharges = state.currentCharges,
-                        target = sim.target
+                        target = target()
                     )
                 )
 
@@ -523,7 +536,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             logEvent(Event(
                 eventType = EventType.DEBUFF_END,
                 buff = it,
-                target = sim.target
+                target = target()
             ))
         }
 
@@ -635,7 +648,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
         // Auto-set target if we can
         if(event.eventType == EventType.DAMAGE) {
-            event.target = event.target ?: sim.target
+            event.target = event.target ?: target()
         }
 
         events.add(event)
@@ -643,11 +656,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // Computed stats
     fun hasMainHandWeapon(): Boolean {
-        return character.gear.mainHand.id != -1 && character.gear.mainHand.itemClass === Constants.ItemClass.WEAPON
+        return character.gear.mainHand.id != -1 && character.gear.mainHand.itemClass == Constants.ItemClass.WEAPON
     }
 
     fun hasOffHandWeapon(): Boolean {
-        return character.gear.offHand.id != -1 && character.gear.offHand.itemClass === Constants.ItemClass.WEAPON
+        return character.gear.offHand.id != -1 && character.gear.offHand.itemClass == Constants.ItemClass.WEAPON
     }
 
     fun isDualWielding(): Boolean {
@@ -684,13 +697,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun attackPower(): Int {
-        return (
+        val ap = (
             (
                 stats.attackPower.coerceAtLeast(0) +
                 ((strength() - 10) * character.klass.attackPowerFromStrength) +
                 ((agility() - 10) * character.klass.attackPowerFromAgility)
             ) * stats.attackPowerMultiplier
         ).toInt()
+        return maxOf(ap, 0)
     }
 
     fun rangedAttackPower(): Int {
@@ -728,16 +742,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // from the numbers that are displayed ingame, you also have to subtract the race-specific agility bonuses from this to get an accurate result
     fun meleeCritPct(): Double {
-        return stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
+        return (stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility - target().resiliencePct()).coerceAtLeast(0.0)
     }
 
     fun rangedCritPct(): Double {
-        return stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
+        return (stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility - target().resiliencePct()).coerceAtLeast(0.0)
     }
 
     fun spellCritPct(): Double {
         val critFromInt = intellect() * character.klass.spellCritPctPerInt
-        return stats.spellCritRating / Rating.critPerPct + critFromInt + character.klass.baseSpellCritChance
+        return (stats.spellCritRating / Rating.critPerPct + critFromInt + character.klass.baseSpellCritChance - target().resiliencePct()).coerceAtLeast(0.0)
     }
 
     fun armorPen(): Int {
@@ -749,15 +763,19 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun dodgePct(): Double {
-        return character.klass.baseDodgePct + (agility() * character.klass.dodgePctPerAgility) + (stats.dodgeRating / Rating.dodgePerPct) + (0.04 * defenseSkill())
+        return character.klass.baseDodgePct + (agility() * character.klass.dodgePctPerAgility) + (stats.dodgeRating / Rating.dodgePerPct)
     }
 
     fun parryPct(): Double {
-        return 5.0 + (stats.parryRating / Rating.parryPerPct) + (0.04 * defenseSkill())
+        return (stats.parryRating / Rating.parryPerPct)
     }
 
     fun blockPct(): Double {
-        return 5.0 + (stats.blockRating / Rating.blockPerPct) + (0.04 * defenseSkill())
+        return (stats.blockRating / Rating.blockPerPct)
+    }
+
+    fun blockValue(): Double {
+        return stats.blockValue * stats.blockValueMultiplier + (strength() / 20.0)
     }
 
     fun resiliencePct(): Double {

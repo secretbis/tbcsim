@@ -6,16 +6,6 @@ import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite'
 
 import rankingData from './data/ranks_all.json'
 
-const bannerTitle = 'Rankings are very beta!'
-function bannerMsg() {
-  return (
-    <div>
-      <p>These values are very likely to change as TBC behavior is tested further, and sim issues are resolved.</p>
-      <p>Please consume these values with an appropriate amount of sodium!</p>
-    </div>
-  );
-}
-
 function HowItWorks() {
   return (
     <Container style={{ marginTop: 20, marginBottom: 20 }}>
@@ -201,7 +191,6 @@ export default function() {
   return (
     <Content style={{ padding: '20px' }}>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
         <SpecRankingPanel name='Phase 3 (WITH GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked WITH Warglaives'
           categoryOverrides={{

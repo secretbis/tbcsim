@@ -20,7 +20,10 @@ class BandOfTheEternalDefender : Buff() {
 
     val proc = object : Proc() {
         override val triggers: List<Trigger> = listOf(
-            Trigger.STRUCK_IN_COMBAT
+            Trigger.INCOMING_MELEE_HIT,
+            Trigger.INCOMING_MELEE_CRIT,
+            Trigger.INCOMING_MELEE_CRUSH,
+            Trigger.INCOMING_MELEE_BLOCK
         )
         override val type: Type = Type.PERCENT
         override fun percentChance(sp: SimParticipant): Double = 3.0

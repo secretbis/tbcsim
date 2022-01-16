@@ -6,7 +6,7 @@ import TableExport from '../data/export';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default ({ title, data, columnInfo, icons=true }) => {
+export default ({ title, subtitle, data, columnInfo, icons=true }) => {
 
   function renderCell(col, row) {
     const formatter = col.formatter || noop
@@ -33,6 +33,9 @@ export default ({ title, data, columnInfo, icons=true }) => {
         <Col xs={12}><h5 style={{ marginBottom: '5px' }}>{title}</h5></Col>
         <Col xs={12} style={{ 'textAlign': 'right', marginTop: -12 }}><TableExport columnInfo={columnInfo} data={data} /></Col>
       </Row>
+      {subtitle && <Row>
+        <Col xs={24}><div style={{ marginBottom: '5px' }}>{subtitle}</div></Col>
+      </Row>}
       <Table
         autoHeight={true}
         data={data}

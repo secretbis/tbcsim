@@ -25,7 +25,7 @@ class DebuffDurationLte(data: RotationRuleCriterion) : Criterion(Type.DEBUFF_DUR
     override fun satisfied(sp: SimParticipant): Boolean {
         if(debuff == null || seconds == null) return false
 
-        val debuff = sp.sim.target.debuffs[debuff]
-        return debuff == null || debuff.remainingDurationMs(sp.sim.target) <= (seconds * 1000)
+        val debuff = sp.target().debuffs[debuff]
+        return debuff == null || debuff.remainingDurationMs(sp.target()) <= (seconds * 1000)
     }
 }

@@ -1,7 +1,6 @@
 package character.classes.warrior
 
 import character.*
-import character.classes.shaman.talents.Cruelty
 import character.classes.shaman.talents.Flurry
 import character.classes.warrior.abilities.*
 import character.classes.warrior.abilities.Bloodthirst
@@ -11,6 +10,7 @@ import character.classes.warrior.abilities.MortalStrike
 import character.classes.warrior.abilities.Rampage
 import character.classes.warrior.buffs.RageGeneration
 import character.classes.warrior.buffs.RampageBase
+import character.classes.warrior.buffs.RevengeBase
 import character.classes.warrior.talents.*
 import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import character.classes.warrior.talents.DeathWish as DeathWishTalent
@@ -18,7 +18,6 @@ import character.classes.warrior.talents.Devastate as DevastateTalent
 import character.classes.warrior.talents.MortalStrike as MortalStrikeTalent
 import character.classes.warrior.talents.Rampage as RampageTalent
 import data.model.Item
-import sim.SimParticipant
 
 class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val baseStats: Stats = Stats(
@@ -31,7 +30,8 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
 
     override val buffs: List<Buff> = listOf(
         RageGeneration(),
-        RampageBase()
+        RampageBase(),
+        RevengeBase()
     )
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
@@ -41,15 +41,21 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             BerserkerStance.name -> BerserkerStance()
             Bloodrage.name -> Bloodrage()
             Bloodthirst.name -> Bloodthirst()
+            CommandingShout.name -> CommandingShout()
             DeathWish.name -> DeathWish()
             DefensiveStance.name -> DefensiveStance()
+            DemoralizingShout.name -> DemoralizingShout()
             Devastate.name -> Devastate()
             Execute.name -> Execute()
             HeroicStrike.name -> HeroicStrike()
             MortalStrike.name -> MortalStrike()
             Rampage.name -> Rampage()
             Recklessness.name -> Recklessness()
+            Revenge.name -> Revenge()
+            ShieldBlock.name -> ShieldBlock()
+            ShieldSlam.name -> ShieldSlam()
             Slam.name -> Slam()
+            ThunderClap.name -> ThunderClap()
             Whirlwind.name -> Whirlwind()
             else -> null
         }
@@ -57,6 +63,7 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return when(name) {
+            Anticipation.name -> Anticipation(ranks)
             AngerManagement.name -> AngerManagement(ranks)
             BloodFrenzy.name -> BloodFrenzy(ranks)
             BloodthirstTalent.name -> BloodthirstTalent(ranks)
@@ -65,6 +72,7 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             DeathWishTalent.name -> DeathWishTalent(ranks)
             DeepWounds.name -> DeepWounds(ranks)
             Defiance.name -> Defiance(ranks)
+            Deflection.name -> Deflection(ranks)
             DevastateTalent.name -> DeepWounds(ranks)
             DualWieldSpec.name -> DualWieldSpec(ranks)
             EndlessRage.name -> EndlessRage(ranks)
@@ -72,10 +80,13 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             Flurry.name -> Flurry(ranks)
             Impale.name -> Impale(ranks)
             ImprovedBerserkerStance.name -> ImprovedBerserkerStance(ranks)
+            ImprovedDemoralizingShout.name -> ImprovedDemoralizingShout(ranks)
             ImprovedExecute.name -> ImprovedExecute(ranks)
             ImprovedHeroicStrike.name -> ImprovedHeroicStrike(ranks)
             ImprovedMortalStrike.name -> ImprovedMortalStrike(ranks)
+            ImprovedShieldBlock.name -> ImprovedShieldBlock(ranks)
             ImprovedSunderArmor.name -> ImprovedSunderArmor(ranks)
+            ImprovedThunderClap.name -> ImprovedThunderClap(ranks)
             ImprovedSlam.name -> ImprovedSlam(ranks)
             ImprovedWhirlwind.name -> ImprovedWhirlwind(ranks)
             MaceSpec.name -> MaceSpec(ranks)
@@ -84,9 +95,12 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             PoleaxeSpec.name -> PoleaxeSpec(ranks)
             Precision.name -> Precision(ranks)
             RampageTalent.name -> RampageTalent(ranks)
+            ShieldSpecialization.name -> ShieldSpecialization(ranks)
+            ShieldMastery.name -> ShieldMastery(ranks)
             SweepingStrikes.name -> SweepingStrikes(ranks)
             SwordSpec.name -> SwordSpec(ranks)
             TacticalMastery.name -> TacticalMastery(ranks)
+            Toughness.name -> Toughness(ranks)
             TwoHandWeaponSpec.name -> TwoHandWeaponSpec(ranks)
             UnbridledWrath.name -> UnbridledWrath(ranks)
             Vitality.name -> Vitality(ranks)
