@@ -21,6 +21,7 @@ class Revenge : Ability() {
     override val icon: String = "ability_warrior_revenge.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
+    override fun cooldownMs(sp: SimParticipant): Int = 5000
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
     override fun resourceCost(sp: SimParticipant): Double {

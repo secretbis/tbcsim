@@ -19,7 +19,7 @@ object SimDefaults {
     const val targetAutoAttackSpeedMs: Int = 2000
     const val targetDualWield: Boolean = false
     // Simulates incoming damage about Tidewalker-ish
-    const val targetWeaponPower: Int = 8000
+    const val targetWeaponPower: Int = 13000
     const val allowParryAndBlock: Boolean = false
     const val showHiddenBuffs: Boolean = false
     // Demon

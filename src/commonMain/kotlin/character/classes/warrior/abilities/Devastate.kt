@@ -1,6 +1,7 @@
 package character.classes.warrior.abilities
 
 import character.*
+import character.classes.rogue.debuffs.ExposeArmor
 import character.classes.warrior.talents.FocusedRage
 import character.classes.warrior.talents.ImprovedMortalStrike
 import character.classes.warrior.talents.ImprovedSunderArmor
@@ -37,7 +38,7 @@ class Devastate : Ability() {
 
     override fun available(sp: SimParticipant): Boolean {
         val hasTalent = sp.character.klass.talents[DevastateTalent.name]?.currentRank == 1
-        val oneHandWeapon = Melee.is1H(sp.character.gear.mainHand)
+        val oneHandWeapon = sp.character.gear.mainHand.is1H()
         return hasTalent && oneHandWeapon && super.available(sp)
     }
 
@@ -48,10 +49,13 @@ class Devastate : Ability() {
         val damageRoll = (Melee.baseDamageRoll(sp, item, isNormalized = true) * 0.5) + bonusDmg
         val result = Melee.attackRoll(sp, damageRoll, item, isWhiteDmg = false)
 
-        // https://github.com/magey/tbc-warrior/wiki/Threat-Values#devastate
-        val hasImpEa = sp.sim.target.debuffs[ImprovedExposeArmor.name] != null
-        val sunderStacks = sp.sim.target.debuffs[SunderArmor.name]?.state(sp.sim.target)?.currentStacks ?: 0
-        val sunderBonus = if(!hasImpEa && sunderStacks < 5) { 301.5 } else 0.0
+        // Cast a Sunder Armor
+        // If valid, its bonus threat will be applied as well
+        val devastateHit = result.second in listOf(EventResult.HIT, EventResult.CRIT, EventResult.BLOCK, EventResult.BLOCKED_CRIT)
+        val sunder = character.classes.warrior.abilities.SunderArmor()
+        if(devastateHit && sunder.available(sp)) {
+            sunder.doSunder(sp, true, result.second)
+        }
 
         // Save last hit state and fire event
         val event = Event(
@@ -60,8 +64,7 @@ class Devastate : Ability() {
             ability = this,
             amount = result.first,
             result = result.second,
-            // Devastate bonus + sunder effect
-            abilityBonusThreat = 100 + sunderBonus
+            abilityBonusThreat = 100.0
         )
         sp.logEvent(event)
 
@@ -79,8 +82,6 @@ class Devastate : Ability() {
 
         if(triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item), this, event)
-            // The sunder effect also procs yellow hit effects (confirmed?)
-            sp.fireProc(listOf(Proc.Trigger.MELEE_YELLOW_HIT), listOf(item), this, event)
         }
     }
 }

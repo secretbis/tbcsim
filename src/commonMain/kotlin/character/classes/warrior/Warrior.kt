@@ -12,6 +12,7 @@ import character.classes.warrior.buffs.RageGeneration
 import character.classes.warrior.buffs.RampageBase
 import character.classes.warrior.buffs.RevengeBase
 import character.classes.warrior.talents.*
+import data.buffs.generic.ParryHaste
 import character.classes.warrior.talents.Bloodthirst as BloodthirstTalent
 import character.classes.warrior.talents.DeathWish as DeathWishTalent
 import character.classes.warrior.talents.Devastate as DevastateTalent
@@ -31,7 +32,8 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override val buffs: List<Buff> = listOf(
         RageGeneration(),
         RampageBase(),
-        RevengeBase()
+        RevengeBase(),
+        ParryHaste()
     )
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
@@ -54,6 +56,7 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             Revenge.name -> Revenge()
             ShieldBlock.name -> ShieldBlock()
             ShieldSlam.name -> ShieldSlam()
+            SunderArmor.name -> SunderArmor()
             Slam.name -> Slam()
             ThunderClap.name -> ThunderClap()
             Whirlwind.name -> Whirlwind()

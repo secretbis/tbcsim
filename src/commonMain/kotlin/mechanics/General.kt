@@ -1,5 +1,7 @@
 package mechanics
 
+import data.Constants
+import data.model.Item
 import mu.KotlinLogging
 import sim.SimParticipant
 import kotlin.js.JsExport
@@ -35,7 +37,7 @@ object General {
 
     // The difference between attacker weapon skill (level * 5) and the target's defense skill
     fun skillDiff(sp: SimParticipant): Int {
-        return (sp.character.level * 5) - ((sp.target().character.level * 5) + sp.target().defenseSkill())
+        return ((sp.target().character.level * 5) + sp.target().defenseSkill()) - (sp.character.level * 5)
     }
 
     fun levelDiff(sp: SimParticipant): Int {
@@ -52,8 +54,8 @@ object General {
     }
 
     fun baseMiss(sp: SimParticipant): Double {
+        val levelDiff = levelDiff(sp)
         return if(sp.target().isBoss()) {
-            val levelDiff = levelDiff(sp)
             if(levelDiff > 2) {
                 val suppression = (levelDiff - 2) * 0.01
                 baseMissChance + (levelDiff * 0.01) + suppression
@@ -61,8 +63,35 @@ object General {
                 baseMissChance + (levelDiff * 0.005)
             }
         } else {
-            baseMissChance + defenseChance(sp)
+            baseMissChance + (levelDiff * 0.01) + defenseChance(sp)
         }
+    }
+
+    fun baseCrit(sp: SimParticipant, item: Item?): Double {
+        val itemBonusCritPct = if(item != null) {
+            when {
+                item.isGun() -> sp.stats.gunCritRating
+                item.isBow() -> sp.stats.bowCritRating
+                item.isCrossbow() -> sp.stats.bowCritRating
+                else -> 0.0
+            } / Rating.critPerPct
+        } else 0.0
+
+        val skillDiff = skillDiff(sp)
+        val baseCrit = if(sp.target().isBoss()) {
+            val levelDiff = levelDiff(sp)
+            val levelDiffCrit = if(skillDiff < 0) {
+                (sp.meleeCritPct() / 100) + (levelDiff * 0.01)
+            } else {
+                (sp.meleeCritPct() / 100) + (levelDiff * 0.002)
+            }
+            val suppression = critSuppression(sp)
+            levelDiffCrit - suppression
+        } else {
+            (sp.meleeCritPct() / 100) - defenseChance(sp) - (sp.target().resiliencePct() / 100)
+        }
+
+        return (baseCrit + (itemBonusCritPct / 100)).coerceAtLeast(0.0)
     }
 
     fun physicalBlockChance(sp: SimParticipant): Double {
@@ -73,7 +102,7 @@ object General {
 
                 (baseBlockChance + (levelDiff(sp) * -0.005)).coerceAtMost(baseBlockChance)
             } else {
-                baseBlockChance + sp.blockPct() + defenseChance(sp)
+                baseBlockChance + (sp.target().blockPct() / 100) + defenseChance(sp)
             }
         } else {
             0.0

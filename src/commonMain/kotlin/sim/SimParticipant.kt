@@ -292,7 +292,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                     // Otherwise, do not apply the buff
                     val incomingBuffPriority = buffDebuff.mutexPriority(this)[mutex] ?: 0
                     // We should add the buff if it is highest in *any* mutex category
-                    incomingBuffPriority >= highestPriority
+                    incomingBuffPriority > highestPriority
                 } else true
             }.any { it }
         }
@@ -742,16 +742,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // from the numbers that are displayed ingame, you also have to subtract the race-specific agility bonuses from this to get an accurate result
     fun meleeCritPct(): Double {
-        return (stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility - target().resiliencePct()).coerceAtLeast(0.0)
+        return stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun rangedCritPct(): Double {
-        return (stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility - target().resiliencePct()).coerceAtLeast(0.0)
+        return stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
         val critFromInt = intellect() * character.klass.spellCritPctPerInt
-        return (stats.spellCritRating / Rating.critPerPct + critFromInt + character.klass.baseSpellCritChance - target().resiliencePct()).coerceAtLeast(0.0)
+        return stats.spellCritRating / Rating.critPerPct + critFromInt + character.klass.baseSpellCritChance
     }
 
     fun armorPen(): Int {

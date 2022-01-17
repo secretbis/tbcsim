@@ -4,6 +4,7 @@ import character.*
 import data.abilities.generic.MP5
 import mu.KotlinLogging
 import sim.rotation.Rotation
+import sim.target.TargetProfiles
 import kotlin.js.JsExport
 import kotlin.math.ceil
 import kotlin.random.Random
@@ -15,7 +16,8 @@ class SimIteration(
     _subject: Character,
     _rotation: Rotation,
     val opts: SimOptions,
-    epStatMod: Stats? = null
+    epStatMod: Stats? = null,
+    val targetProfile: TargetProfiles.ProfileResult?
 ) {
     val logger = KotlinLogging.logger {}
 
@@ -147,17 +149,32 @@ class SimIteration(
     }
 
     private fun defaultTarget(): SimParticipant {
+        val bossMH = BossClass.makeBossWeapon(opts.targetWeaponPower, opts.targetAutoAttackSpeedMs, true)
+        val bossOH = BossClass.makeBossWeapon(opts.targetWeaponPower / 2, opts.targetAutoAttackSpeedMs, false)
+
+        val bossGear = Gear()
+        bossGear.mainHand = bossMH
+        if(opts.targetDualWield) {
+            bossGear.offHand = bossOH
+        }
+
         val char = Character(
-            BossClass(baseStats = Stats(
-                armor = opts.targetArmor
-            )),
+            BossClass(
+                baseStats = Stats(
+                    armor = opts.targetArmor
+                ),
+                targetProfile?.buffs
+            ),
             BossRace(),
             opts.targetLevel,
+            gear = bossGear,
             subTypes = setOf(CharacterType.values()[opts.targetType])
         )
 
         // TODO: Add boss-specific rotations and abilities
-        return SimParticipant(char, Rotation(listOf(), opts.targetActive), this).init()
+        val rotation = targetProfile?.rotation ?: Rotation(listOf(), opts.targetActive)
+        rotation.autoAttack = opts.targetActive
+        return SimParticipant(char, rotation, this).init()
     }
 
     fun isExecutePhase(thresholdPercent: Double = 20.0): Boolean {

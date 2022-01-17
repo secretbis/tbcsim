@@ -23,7 +23,7 @@ class PoleaxeSpec(currentRank: Int) : Talent(currentRank) {
 
         override fun modifyStats(sp: SimParticipant): Stats {
             // This doesn't account for dual-wielding different weapon types, since Fury should never take this
-            return if(Melee.isPoleaxe(sp.character.gear.mainHand)) {
+            return if(sp.character.gear.mainHand.isPoleaxe()) {
                 val critPct = 1.0 * currentRank
                 return Stats(meleeCritRating = critPct * Rating.critPerPct)
             } else Stats()

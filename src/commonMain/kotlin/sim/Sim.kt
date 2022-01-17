@@ -4,6 +4,7 @@ import character.Stats
 import kotlinx.coroutines.*
 import mu.KotlinLogging
 import sim.config.Config
+import sim.target.TargetProfiles
 import util.Time
 import kotlin.random.Random
 
@@ -14,8 +15,13 @@ class Sim (
     val progressCb:(SimProgress) -> Unit
 ) {
     val logger = KotlinLogging.logger {}
+
     // Merge in character file-defined options, if present
-    val opts = _opts.merge(config.simOptions)
+    // If we have a target profile, use that as well
+    val targetProfileName = config.simOptions?.targetProfile
+    val targetProfile = if(targetProfileName != null) TargetProfiles.profileFor(targetProfileName) else null
+
+    val opts = _opts.merge(config.simOptions).merge(targetProfile?.simOptions)
 
     suspend fun sim(): List<SimIteration> {
         // Iteration coroutines
@@ -44,7 +50,7 @@ class Sim (
 
     private fun iterate(num: Int) : SimIteration {
         // Simulate
-        val iteration = SimIteration(config.character, config.rotation, opts, epStatMod)
+        val iteration = SimIteration(config.character, config.rotation, opts, epStatMod, targetProfile)
 
         // Randomly alter the fight duration, if configured
         val dvms = opts.durationVariabilityMs

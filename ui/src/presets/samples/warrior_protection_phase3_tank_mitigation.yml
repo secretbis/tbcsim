@@ -1,6 +1,6 @@
 class: Warrior
 spec: Protection
-description: Protection Warrior (phase 3)
+description: Protection Warrior (phase 3, tanking, mitigation)
 race: Human
 level: 70
 epCategory: phase3
@@ -143,6 +143,10 @@ rotation:
     - name: Blood Fury
     - name: Berserking
     - name: Shield Block
+      criteria:
+        - type: BUFF_DURATION_LTE
+          buff: Shield Block
+          seconds: 0
     - name: Shield Slam
     - name: Revenge
     - name: Demoralizing Shout
@@ -196,7 +200,7 @@ raidBuffs:
 
 raidDebuffs:
   - Sunder Armor
-  - Improved Expose Armor
+#  - Improved Expose Armor
   - Improved Faerie Fire
   - Improved Hunter's Mark
   - Curse of Recklessness

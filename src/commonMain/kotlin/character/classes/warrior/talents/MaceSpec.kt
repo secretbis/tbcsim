@@ -40,12 +40,12 @@ class MaceSpec(currentRank: Int) : Talent(currentRank) {
             override fun percentChance(sp: SimParticipant): Double = 5.0 * currentRank
 
             override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
-                return items?.all { Melee.isMace(it) } ?: false && super.shouldProc(sp, items, ability, event)
+                return items?.all { it.isMace() } ?: false && super.shouldProc(sp, items, ability, event)
             }
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val item = items?.get(0)
-                if(item == null || !Melee.isMace(item)) {
+                if(item == null || !item.isMace()) {
                     logger.warn { "Tried to proc warrior Mace Specialization, but the context was not a mace." }
                     return
                 }

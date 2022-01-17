@@ -1,6 +1,7 @@
 package character.classes.paladin
 
 import character.*
+import data.buffs.generic.ParryHaste
 import data.model.Item
 
 class Paladin(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
@@ -11,8 +12,7 @@ class Paladin(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         stamina = 154,
         spirit = 135
     )
-    override val buffs: List<Buff>
-        get() = TODO("Not yet implemented")
+    override val buffs: List<Buff> = listOf(ParryHaste())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         TODO("Not yet implemented")

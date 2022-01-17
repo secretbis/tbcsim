@@ -49,7 +49,8 @@ class BattleShout : Ability() {
         sp.logEvent(
             Event(
                 eventType = EventType.THREAT,
-                amount = 69.0 * 5
+                amount = 69.0 * 5,
+                ability = this
             )
         )
     }

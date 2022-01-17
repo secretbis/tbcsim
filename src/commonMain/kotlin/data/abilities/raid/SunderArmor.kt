@@ -19,6 +19,7 @@ class SunderArmor : Ability() {
         // Assume the caster is always maintaining this
         override val durationMs: Int = -1
         override val hidden: Boolean = false
+        override val maxStacks: Int = 5
 
         override val mutex: List<Mutex> = listOf(Mutex.DEBUFF_MAJOR_ARMOR)
         override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf(
@@ -31,6 +32,8 @@ class SunderArmor : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
-        sp.sim.target.addDebuff(debuff(sp))
+        val debuff = debuff(sp)
+        debuff.state(sp.sim.target).currentStacks = 5
+        sp.sim.target.addDebuff(debuff)
     }
 }

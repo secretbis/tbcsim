@@ -49,7 +49,8 @@ class CommandingShout : Ability() {
         sp.logEvent(
             Event(
                 eventType = EventType.THREAT,
-                amount = 68.0 * 5
+                amount = 68.0 * 5,
+                ability = this
             )
         )
     }

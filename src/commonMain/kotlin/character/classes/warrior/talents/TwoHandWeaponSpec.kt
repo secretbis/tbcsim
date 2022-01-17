@@ -21,7 +21,7 @@ class TwoHandWeaponSpec(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return if(Melee.is2H(sp.character.gear.mainHand)) {
+            return if(sp.character.gear.mainHand.is2H()) {
                 val multiplier = 1.0 + currentRank * 0.01
                 Stats(physicalDamageMultiplier = multiplier)
             } else Stats()

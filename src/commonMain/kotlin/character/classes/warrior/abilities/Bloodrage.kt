@@ -25,7 +25,8 @@ class Bloodrage : Ability() {
             // Power gains are not affected by innate threat multipliers
             Event(
                 eventType = EventType.THREAT,
-                flatBonusThreat = 20.0
+                flatBonusThreat = 20.0,
+                ability = this
             )
         )
     }

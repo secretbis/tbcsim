@@ -13,35 +13,6 @@ import kotlin.random.Random
 object Ranged {
     const val NORMALIZED_SPEED = 2800.0
 
-    fun rngSuffix(sp: SimParticipant, item: Item): String {
-        val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
-        return "$castingAbility ${item.name}"
-    }
-
-    fun isGun(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.GUN
-    }
-
-    fun isBow(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.BOW
-    }
-
-    fun isCrossbow(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.CROSSBOW
-    }
-
-    fun rangedCritChance(sp: SimParticipant, item: Item): Double {
-        val itemBonusCritPct = when {
-            isGun(item) -> sp.stats.gunCritRating
-            isBow(item) -> sp.stats.bowCritRating
-            isCrossbow(item) -> sp.stats.bowCritRating
-            else -> 0.0
-        } / Rating.critPerPct
-
-        val baseRangedCritChance = sp.rangedCritPct() / 100.0 - General.critSuppression(sp)
-        return ((itemBonusCritPct / 100.0) + baseRangedCritChance).coerceAtLeast(0.0)
-    }
-
     fun rangedMissChance(sp: SimParticipant): Double {
         val baseMiss = General.baseMiss(sp)
         val physicalHitChance = sp.physicalHitPct() / 100.0
@@ -92,7 +63,7 @@ object Ranged {
         val missChance = rangedMissChance(sp)
         val blockChance = General.physicalBlockChance(sp) + missChance
         val critChance = if(isWhiteDmg) {
-            rangedCritChance(sp, item) + bonusCritChance + blockChance
+            General.baseCrit(sp, item) + bonusCritChance + blockChance
         } else {
             blockChance
         }
@@ -110,7 +81,7 @@ object Ranged {
             if(finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
                 finalResult = when {
-                    hitRoll2 < (rangedCritChance(sp, item) + bonusCritChance) -> Pair(
+                    hitRoll2 < (General.baseCrit(sp, item) + bonusCritChance) -> Pair(
                         finalResult.first * critMultiplier,
                         EventResult.CRIT
                     )

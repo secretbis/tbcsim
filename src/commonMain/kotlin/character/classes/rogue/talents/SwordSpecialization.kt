@@ -66,12 +66,12 @@ class SwordSpecialization(currentRank: Int) : Talent(currentRank) {
             override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
                 // Sword spec cannot proc off itself
                 val isSwordSpec = ability?.name == name
-                return !isSwordSpec && items?.all { Melee.isSword(it) } ?: false && super.shouldProc(sp, items, ability, event)
+                return !isSwordSpec && items?.all { it.isSword() } ?: false && super.shouldProc(sp, items, ability, event)
             }
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 val item = items?.get(0)
-                if(item == null || !Melee.isSword(item)) {
+                if(item == null || !item.isSword()) {
                     logger.warn { "Tried to proc rogue Sword Specialization, but the context was not a sword." }
                     return
                 }

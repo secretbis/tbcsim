@@ -65,4 +65,51 @@ abstract class Item {
         get() { return avgDmg / (speed / 1000.0) }
     val uniqueName: String
         get() { return name + equippedSlot }
+
+    fun is2H(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.SWORD_2H ||
+               itemSubclass == Constants.ItemSubclass.AXE_2H ||
+               itemSubclass == Constants.ItemSubclass.MACE_2H ||
+               itemSubclass == Constants.ItemSubclass.POLEARM ||
+               itemSubclass == Constants.ItemSubclass.STAFF
+    }
+
+    fun is1H(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.SWORD_1H ||
+               itemSubclass == Constants.ItemSubclass.AXE_1H ||
+               itemSubclass == Constants.ItemSubclass.MACE_1H ||
+               itemSubclass == Constants.ItemSubclass.DAGGER ||
+               itemSubclass == Constants.ItemSubclass.FIST
+    }
+
+    fun isAxe(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.AXE_2H ||
+               itemSubclass == Constants.ItemSubclass.AXE_1H
+    }
+
+    fun isMace(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.MACE_2H ||
+               itemSubclass == Constants.ItemSubclass.MACE_1H
+    }
+
+    fun isPoleaxe(): Boolean {
+        return isAxe() || itemSubclass == Constants.ItemSubclass.POLEARM
+    }
+
+    fun isSword(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.SWORD_2H ||
+               itemSubclass == Constants.ItemSubclass.SWORD_1H
+    }
+
+    fun isGun(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.GUN
+    }
+
+    fun isBow(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.BOW
+    }
+
+    fun isCrossbow(): Boolean {
+        return itemSubclass == Constants.ItemSubclass.CROSSBOW
+    }
 }

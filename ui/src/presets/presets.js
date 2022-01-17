@@ -82,6 +82,7 @@ import warriorKebabPhase3Glaives from './samples/warrior_kebab_phase3_glaives.ym
 import warriorProtectionPhase2 from './samples/warrior_protection_phase2.yml'
 import warriorProtectionPhase3 from './samples/warrior_protection_phase3.yml'
 import warriorProtectionPhase3Glaives from './samples/warrior_protection_phase3_glaives.yml'
+import warriorProtectionPhase3TankMitigation from './samples/warrior_protection_phase3_tank_mitigation.yml'
 
 import * as tbcsim from 'tbcsim';
 
@@ -228,7 +229,8 @@ const presets = {
       warriorKebabPhase3,
       warriorKebabPhase3Glaives,
       warriorProtectionPhase3,
-      warriorProtectionPhase3Glaives
+      warriorProtectionPhase3Glaives,
+      warriorProtectionPhase3TankMitigation
     ]
   }
 }

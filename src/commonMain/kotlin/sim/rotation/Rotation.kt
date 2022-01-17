@@ -5,8 +5,8 @@ import mu.KotlinLogging
 import sim.SimParticipant
 
 class Rotation(
-    val rules: List<Rule>,
-    val autoAttack: Boolean
+    var rules: List<Rule>,
+    var autoAttack: Boolean
 ) {
     private val logger = KotlinLogging.logger {}
     enum class Phase {

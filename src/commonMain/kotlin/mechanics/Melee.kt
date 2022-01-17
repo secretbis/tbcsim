@@ -34,48 +34,13 @@ object Melee {
         // TODO: Druid weirdness
     )
 
-    fun is2H(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.POLEARM ||
-               item.itemSubclass == Constants.ItemSubclass.STAFF
-    }
-
-    fun is1H(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.SWORD_1H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_1H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_1H ||
-               item.itemSubclass == Constants.ItemSubclass.DAGGER ||
-               item.itemSubclass == Constants.ItemSubclass.FIST
-    }
-
-    fun isAxe(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_1H
-    }
-
-    fun isMace(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_1H
-    }
-
-    fun isPoleaxe(item: Item): Boolean {
-        return isAxe(item) || item.itemSubclass == Constants.ItemSubclass.POLEARM
-    }
-
-    fun isSword(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
-               item.itemSubclass == Constants.ItemSubclass.SWORD_1H
-    }
-
     // Computes additional item-specific expertise, i.e. racial abilities
     fun expertisePctForItem(sp: SimParticipant, item: Item?): Double {
         if(item == null) return 0.0
         return when {
-            isAxe(item) -> sp.stats.axeExpertiseRating
-            isMace(item) -> sp.stats.maceExpertiseRating
-            isSword(item) -> sp.stats.swordExpertiseRating
+            item.isAxe() -> sp.stats.axeExpertiseRating
+            item.isMace() -> sp.stats.maceExpertiseRating
+            item.isSword() -> sp.stats.swordExpertiseRating
             else -> 0.0
         } / Rating.expertisePerPct
     }
@@ -112,7 +77,7 @@ object Melee {
                     baseParryChance + (levelDiff * 0.005)
                 }
             } else {
-                sp.parryPct() + General.defenseChance(sp)
+                sp.target().parryPct() / 100 + General.defenseChance(sp)
             }
 
             val expertiseReduction = (sp.expertisePct() + expertisePctForItem(sp, item)) / 100
@@ -127,7 +92,7 @@ object Melee {
             val levelDiff = General.levelDiff(sp)
             baseDodgeChance + (levelDiff * 0.005)
         } else {
-            sp.target().dodgePct() + General.defenseChance(sp)
+            sp.target().dodgePct() / 100 + General.defenseChance(sp)
         }
 
         val expertiseReduction = (sp.expertisePct() + expertisePctForItem(sp, item)) / 100
@@ -147,22 +112,16 @@ object Melee {
         return Random.nextDouble(low, high)
     }
 
-    fun meleeCritChance(sp: SimParticipant): Double {
-        val skillDiff = General.skillDiff(sp)
-        val baseCrit = if(sp.target().isBoss()) {
+    fun meleeCrushChance(sp: SimParticipant): Double {
+        val baseCrush = if(sp.isBoss()) {
+            // Crushes only occur with a mob hitting a lower-level player target
             val levelDiff = General.levelDiff(sp)
-            val levelDiffCrit = if(skillDiff < 0) {
-                (sp.meleeCritPct() / 100) + (levelDiff * 0.01)
-            } else {
-                (sp.meleeCritPct() / 100) + (levelDiff * 0.002)
-            }
-            val suppression = General.critSuppression(sp)
-            levelDiffCrit - suppression
-        } else {
-            (sp.meleeCritPct() / 100) + General.defenseChance(sp)
-        }
+            if(levelDiff < 0) {
+                (levelDiff * -0.1) - 0.15
+            } else 0.0
+        } else 0.0
 
-        return baseCrit.coerceAtLeast(0.0)
+        return baseCrush.coerceAtLeast(0.0)
     }
 
     // Converts an attack power value into a flat damage modifier for a particular item
@@ -236,7 +195,7 @@ object Melee {
 
         // Get the attack result
         val missChance = meleeMissChance(sp, item, isWhiteDmg)
-        val actualCritChance = meleeCritChance(sp) + bonusCritChance + additionalWeaponTypeCritChance(sp, item) + sp.stats.yellowHitsAdditionalCritPct
+        val actualCritChance = General.baseCrit(sp, item) + bonusCritChance + additionalWeaponTypeCritChance(sp, item) + sp.stats.yellowHitsAdditionalCritPct
         val dodgeChance = if(noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance
         val parryChance = meleeParryChance(sp, item) + dodgeChance
         val glanceChance = if(isWhiteDmg) {
@@ -250,6 +209,7 @@ object Melee {
         } else {
             blockChance
         }
+        val crushChance = meleeCrushChance(sp) + critChance
 
         val attackRoll = Random.nextDouble()
         var finalResult = when {
@@ -259,6 +219,7 @@ object Melee {
             isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), EventResult.GLANCE)
             attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
             isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
+            isWhiteDmg && attackRoll < crushChance -> Pair(damageRoll * critMultiplier, EventResult.CRUSH)
             else -> Pair(damageRoll, EventResult.HIT)
         }
 

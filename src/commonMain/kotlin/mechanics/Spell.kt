@@ -11,40 +11,7 @@ import kotlin.random.Random
 
 @JsExport
 object Spell {
-    private val logger = KotlinLogging.logger {}
-
-    // https://wowwiki.fandom.com/wiki/Spell_hit
-    val baseMissChance = mapOf(
-        0 to 0.04,
-        1 to 0.05,
-        2 to 0.06,
-        3 to 0.17
-    )
-
-    // https://www.youtube.com/watch?v=7DXvTVfDN18
-    // Note that this cannot be reduced by spell pen or other mechanics
-    val baseSpellResistance = mapOf(
-        0 to 0,
-        1 to 5,
-        2 to 10,
-        3 to 15
-    )
-
-    private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
-        val levelDiff = sp.target().character.level - sp.character.level
-
-        return when {
-            levelDiff <= 0 -> {
-                logger.warn { "Attempted to compute a spell hit on a target more than 3 levels below" }
-                table[0]!!
-            }
-            levelDiff > 3 -> {
-                logger.warn { "Attempted to compute a spell hit on a target more than 3 levels above" }
-                table[3]!!
-            }
-            else -> table[levelDiff]!!
-        }
-    }
+    val baseMissChance = 0.04
 
     /**
      * First roll for damage and miss roll calculation
@@ -67,7 +34,7 @@ object Spell {
         val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
 
         // Get the hit/miss result
-        if (canResist){
+        if (canResist) {
             val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
             val attackRoll = Random.nextDouble()
 
@@ -138,10 +105,20 @@ object Spell {
     }
 
     fun spellMissChance(sp: SimParticipant): Double {
-        val baseMiss = valueByLevelDiff(sp, baseMissChance)
-        val spellHitChance = sp.spellHitPct() / 100.0
+        val levelDiff = General.levelDiff(sp)
+        val baseMiss = if(sp.target().isBoss()) {
+            if(levelDiff > 2) {
+                val suppression = (levelDiff - 2) * 0.1
+                baseMissChance + (levelDiff * 0.01) + suppression
+            } else {
+                baseMissChance + (levelDiff * 0.005)
+            }
+        } else {
+            baseMissChance + (levelDiff * 0.01)
+        }
 
         // Spells can never get to 100% hit kekw
+        val spellHitChance = sp.spellHitPct() / 100.0
         return (baseMiss - spellHitChance).coerceAtLeast(0.01)
     }
 

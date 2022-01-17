@@ -21,7 +21,7 @@ class OneHandedWeaponSpecialization(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return if(Melee.is1H(sp.character.gear.mainHand)) {
+            return if(sp.character.gear.mainHand.is1H()) {
                 val multiplier = 1.0 + currentRank * 0.02
                 Stats(physicalDamageMultiplier = multiplier)
             } else Stats()
