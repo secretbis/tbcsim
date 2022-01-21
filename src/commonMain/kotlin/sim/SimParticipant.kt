@@ -643,11 +643,11 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // Computed stats
     fun hasMainHandWeapon(): Boolean {
-        return character.gear.mainHand.id != -1
+        return character.gear.mainHand.id != -1 && character.gear.mainHand.itemClass === Constants.ItemClass.WEAPON
     }
 
     fun hasOffHandWeapon(): Boolean {
-        return character.gear.offHand.id != -1
+        return character.gear.offHand.id != -1 && character.gear.offHand.itemClass === Constants.ItemClass.WEAPON
     }
 
     fun isDualWielding(): Boolean {
