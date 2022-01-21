@@ -1,6 +1,7 @@
 package `data`.items
 
 import `data`.Constants
+import `data`.buffs.Buffs
 import `data`.model.Item
 import `data`.model.ItemSet
 import `data`.model.Socket
@@ -56,6 +57,8 @@ public class DemonicBulwark : Item() {
   public override var phase: Int = 1
 
   public override val buffs: List<Buff> by lazy {
-        listOf()}
+        listOfNotNull(
+        Buffs.byIdOrName(-1, "Block Value 86", this)
+        )}
 
 }

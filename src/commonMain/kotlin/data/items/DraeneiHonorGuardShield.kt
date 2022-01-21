@@ -60,7 +60,8 @@ public class DraeneiHonorGuardShield : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(14254, "Increase Spell Dam 19", this)
+        Buffs.byIdOrName(14254, "Increase Spell Dam 19", this),
+        Buffs.byIdOrName(-1, "Block Value 80", this)
         )}
 
 }

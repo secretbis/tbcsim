@@ -61,7 +61,8 @@ public class MercilessGladiatorsBarrier : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18050, "Increase Spell Dam 33", this)
+        Buffs.byIdOrName(18050, "Increase Spell Dam 33", this),
+        Buffs.byIdOrName(-1, "Block Value 152", this)
         )}
 
 }

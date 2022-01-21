@@ -83,13 +83,13 @@ object SimStats {
     ): List<List<BuffBreakdown>> {
         val eventTypes = listOf(buffStart, buffRefresh, buffEnd)
         val showHidden = iterations[0].opts.showHiddenBuffs
-        val participantCount = if(onlyTarget) { 0 } else (iterations[0].participants.size - 1)
+        val participantCount = if(onlyTarget) { 0 } else (iterations[0].allParticipants.size - 1)
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
             val allBuffs: MutableMap<String, Buff> = mutableMapOf()
             val byBuff = iterations.flatMap { iter ->
-                val context = if(onlyTarget) { iter.target } else iter.participants[idx]
+                val context = if(onlyTarget) { iter.target } else iter.allParticipants[idx]
                 context.events
                     .filter { it.buff != null && (!it.buff.hidden || showHidden) && eventTypes.contains(it.eventType) }
                     .filter { it.buff?.name != null }
@@ -215,13 +215,13 @@ object SimStats {
     }
 
     fun resultsByAbility(iterations: List<SimIteration>): List<List<AbilityBreakdown>> {
-        val participantCount = iterations[0].participants.size - 1
+        val participantCount = iterations[0].allParticipants.size - 1
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
             val allAbilities: MutableMap<String, Ability> = mutableMapOf()
             val byAbility = iterations.flatMap { iter ->
-                iter.participants[idx].events
+                iter.allParticipants[idx].events
                     .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.ability?.name != null }
             }.also {
@@ -291,10 +291,10 @@ object SimStats {
     }
 
     fun resultsByDamageType(iterations: List<SimIteration>): List<List<DamageTypeBreakdown>> {
-        val participantCount = iterations[0].participants.size - 1
+        val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
             val byDmgType = iterations.flatMap { iter ->
-                iter.participants[idx].events
+                iter.allParticipants[idx].events
                     .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.damageType != null }
             }.groupBy { it.damageType!! }
@@ -327,7 +327,7 @@ object SimStats {
         // TODO: Average and +/- some number of stddevs usage across iterations for each participant
         //       Multiple lines for avg, percentiles?
         val iterationIdx = Random.nextInt(iterations.size)
-        val participants = iterations[iterationIdx].participants
+        val participants = iterations[iterationIdx].allParticipants
 
         return participants.mapIndexed { _, sp ->
             val resourceTypes = sp.character.klass.resourceTypes
@@ -349,16 +349,16 @@ object SimStats {
     }
 
     fun resourceUsageByAbility(iterations: List<SimIteration>): List<Map<String, List<ResourceByAbility>>> {
-        val participantCount = iterations[0].participants.size - 1
+        val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
-            val sp = iterations[0].participants[idx]
+            val sp = iterations[0].allParticipants[idx]
             val resourceTypes = sp.character.klass.resourceTypes
 
             // Also group by resource type
             resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
                 val allAbilities: MutableMap<String, Ability> = mutableMapOf()
                 val byAbility = iterations.flatMap { iter ->
-                    iter.participants[idx].events
+                    iter.allParticipants[idx].events
                         .filter { it.eventType == EventType.RESOURCE_CHANGED }
                         .filter { it.ability?.name != null }
                         .filter { it.resourceType == resourceType }
@@ -392,13 +392,13 @@ object SimStats {
     }
 
     fun threatByAbility(iterations: List<SimIteration>): List<List<ThreatByAbility>> {
-        val participantCount = iterations[0].participants.size - 1
+        val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
-            val sp = iterations[0].participants[idx]
+            val sp = iterations[0].allParticipants[idx]
 
             val allAbilities: MutableMap<String, Ability> = mutableMapOf()
             val byAbility = iterations.flatMap { iter ->
-                iter.participants[idx].events
+                iter.allParticipants[idx].events
                     .filter { it.eventType == EventType.DAMAGE || it.eventType == EventType.THREAT }
                     .filter { it.ability?.name != null }
             }.also {

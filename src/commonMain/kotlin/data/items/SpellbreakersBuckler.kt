@@ -60,7 +60,8 @@ public class SpellbreakersBuckler : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(13881, "Increase Spell Dam 29", this)
+        Buffs.byIdOrName(13881, "Increase Spell Dam 29", this),
+        Buffs.byIdOrName(-1, "Block Value 80", this)
         )}
 
 }

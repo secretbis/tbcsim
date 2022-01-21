@@ -60,7 +60,8 @@ public class IllidariRuneshield : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18052, "Increase Spell Dam 34", this)
+        Buffs.byIdOrName(18052, "Increase Spell Dam 34", this),
+        Buffs.byIdOrName(-1, "Block Value 160", this)
         )}
 
 }

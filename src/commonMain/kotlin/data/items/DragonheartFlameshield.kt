@@ -61,7 +61,8 @@ public class DragonheartFlameshield : Item() {
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(14047, "Increase Spell Dam 23", this),
-        Buffs.byIdOrName(21628, "Increased Mana Regen", this)
+        Buffs.byIdOrName(21628, "Increased Mana Regen", this),
+        Buffs.byIdOrName(-1, "Block Value 122", this)
         )}
 
 }

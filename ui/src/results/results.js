@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Col, Nav, Row } from 'rsuite';
+import _ from 'lodash';
 
 import AbilityResults from './ability';
 import AbilityThreatResults from './abilityThreat';
@@ -14,6 +15,7 @@ export default function({ character, results }) {
   const [activeTab, setActiveTab] = useState(0)
 
   const { ability, abilityThreat, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results
+  const numParticipants = (ability && ability.length) || 0
 
   if(!ability || !buff || !debuff || !damageType || !resourceUsage || !dps) {
     return null;
@@ -58,11 +60,13 @@ export default function({ character, results }) {
     }
   }
 
-  function renderTab() {
+  function renderTab() {no
     // TODO: This will need to be smarter for full raid sims
     let characterTab = character;
     if(activeTab == 1) {
       characterTab = character.pet
+    } else if(activeTab == 2) {
+      characterTab = character.sim.target
     }
 
     return (
@@ -98,13 +102,14 @@ export default function({ character, results }) {
     setActiveTab(evt)
   }
 
-  const titles = ['You', 'Pet']
+  // TODO: Bake this into the sim output
+  const titles = numParticipants === 3 ? ['You', 'Pet', 'Boss'] : ['You', 'Boss']
 
   return (
     <Container style={{ marginTop: '20px', marginBottom: '20px' }}>
       {renderDps()}
       <Nav appearance='subtle' activeKey={activeTab} onSelect={onSelect}>
-        {ability.map((_, idx) => {
+        {_.range(numParticipants).map((_, idx) => {
           return (
             <Nav.Item key={idx} eventKey={idx}>
               <span style={{ fontSize: 20 }}>{titles[idx]}</span>

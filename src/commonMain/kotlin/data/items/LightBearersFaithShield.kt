@@ -60,7 +60,8 @@ public class LightBearersFaithShield : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18036, "Increase Healing 55", this)
+        Buffs.byIdOrName(18036, "Increase Healing 55", this),
+        Buffs.byIdOrName(-1, "Block Value 115", this)
         )}
 
 }

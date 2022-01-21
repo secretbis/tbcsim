@@ -61,7 +61,8 @@ public class MercilessGladiatorsRedoubt : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18039, "Increase Healing 62", this)
+        Buffs.byIdOrName(18039, "Increase Healing 62", this),
+        Buffs.byIdOrName(-1, "Block Value 152", this)
         )}
 
 }

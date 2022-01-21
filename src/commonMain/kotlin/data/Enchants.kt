@@ -53,6 +53,7 @@ object Enchants {
         { item: Item -> RingStriking(item) },
         { item: Item -> RunicSpellthread(item) },
         { item: Item -> ShieldIntellect(item) },
+        { item: Item -> ShieldFelsteelSpike(item) },
         { item: Item -> ShieldMajorStamina(item) },
         { item: Item -> Soulfrost(item) },
         { item: Item -> StabilizedEterniumScope(item) },

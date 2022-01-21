@@ -60,7 +60,8 @@ public class PhaseshiftBulwark : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(36481, "Arcane Barrier", this)
+        Buffs.byIdOrName(36481, "Arcane Barrier", this),
+        Buffs.byIdOrName(-1, "Block Value 208", this)
         )}
 
 }

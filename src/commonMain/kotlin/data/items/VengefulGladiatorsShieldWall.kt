@@ -1,6 +1,7 @@
 package `data`.items
 
 import `data`.Constants
+import `data`.buffs.Buffs
 import `data`.model.Item
 import `data`.model.ItemSet
 import `data`.model.Socket
@@ -58,6 +59,8 @@ public class VengefulGladiatorsShieldWall : Item() {
   public override var phase: Int = 3
 
   public override val buffs: List<Buff> by lazy {
-        listOf()}
+        listOfNotNull(
+        Buffs.byIdOrName(-1, "Block Value 167", this)
+        )}
 
 }

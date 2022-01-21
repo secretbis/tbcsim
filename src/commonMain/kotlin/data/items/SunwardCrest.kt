@@ -61,7 +61,8 @@ public class SunwardCrest : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18049, "Increase Spell Dam 26", this)
+        Buffs.byIdOrName(18049, "Increase Spell Dam 26", this),
+        Buffs.byIdOrName(-1, "Block Value 122", this)
         )}
 
 }

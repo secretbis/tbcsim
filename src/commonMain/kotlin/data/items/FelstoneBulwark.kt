@@ -61,7 +61,8 @@ public class FelstoneBulwark : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18040, "Increase Healing 64", this)
+        Buffs.byIdOrName(18040, "Increase Healing 64", this),
+        Buffs.byIdOrName(-1, "Block Value 160", this)
         )}
 
 }

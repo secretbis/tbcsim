@@ -61,7 +61,8 @@ public class DawnforgedDefender : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(34593, "Block Value 33", this)
+        Buffs.byIdOrName(34593, "Block Value 33", this),
+        Buffs.byIdOrName(-1, "Block Value 122", this)
         )}
 
 }

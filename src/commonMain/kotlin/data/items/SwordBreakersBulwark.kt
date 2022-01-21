@@ -65,7 +65,8 @@ public class SwordBreakersBulwark : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(42078, "Block Value 47", this)
+        Buffs.byIdOrName(42078, "Block Value 47", this),
+        Buffs.byIdOrName(-1, "Block Value 178", this)
         )}
 
 }

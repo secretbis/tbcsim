@@ -61,7 +61,8 @@ public class AegisOfAngelicFortune : Item() {
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18044, "Increase Healing 73", this),
-        Buffs.byIdOrName(21638, "Increased Mana Regen", this)
+        Buffs.byIdOrName(21638, "Increased Mana Regen", this),
+        Buffs.byIdOrName(-1, "Block Value 178", this)
         )}
 
 }

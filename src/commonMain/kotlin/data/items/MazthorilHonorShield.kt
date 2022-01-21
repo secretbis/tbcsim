@@ -61,7 +61,8 @@ public class MazthorilHonorShield : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(14047, "Increase Spell Dam 23", this)
+        Buffs.byIdOrName(14047, "Increase Spell Dam 23", this),
+        Buffs.byIdOrName(-1, "Block Value 115", this)
         )}
 
 }

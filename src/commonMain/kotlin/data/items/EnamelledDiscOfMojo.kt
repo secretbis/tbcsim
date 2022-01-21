@@ -65,7 +65,8 @@ public class EnamelledDiscOfMojo : Item() {
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(18036, "Increase Healing 55", this),
-        Buffs.byIdOrName(21364, "Increased Mana Regen", this)
+        Buffs.byIdOrName(21364, "Increased Mana Regen", this),
+        Buffs.byIdOrName(-1, "Block Value 141", this)
         )}
 
 }

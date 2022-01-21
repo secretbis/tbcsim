@@ -65,7 +65,8 @@ public class CrestOfTheShatar : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(23181, "Block Value 24", this)
+        Buffs.byIdOrName(23181, "Block Value 24", this),
+        Buffs.byIdOrName(-1, "Block Value 108", this)
         )}
 
 }

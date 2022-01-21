@@ -61,7 +61,8 @@ public class NetherwingProtectorsShield : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(22852, "Block Value 23", this)
+        Buffs.byIdOrName(22852, "Block Value 23", this),
+        Buffs.byIdOrName(-1, "Block Value 80", this)
         )}
 
 }

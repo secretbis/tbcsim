@@ -401,8 +401,12 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
 
       if(rawItem.gems) {
         rawItem.gems.forEach((gemName, idx) => {
-          const gem = tbcsim.data.Items.byName.get_35(gemName)()
-          item.sockets[idx].gem = gem
+          const gemThunk = tbcsim.data.Items.byName.get_35(gemName)
+          let gem = null;
+          if(typeof gemThunk === 'function') {
+            gem = gemThunk();
+          }
+          item.sockets[idx].gem = gem;
         })
       }
 

@@ -61,7 +61,8 @@ public class VengefulGladiatorsBarrier : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(14055, "Increase Spell Dam 35", this)
+        Buffs.byIdOrName(14055, "Increase Spell Dam 35", this),
+        Buffs.byIdOrName(-1, "Block Value 167", this)
         )}
 
 }

@@ -260,10 +260,10 @@ initialState.makeSimOptions = function() {
     this.simOptions.latencyMs,
     this.simOptions.iterations,
 
+    this.simOptions.targetProfile,
     this.simOptions.targetLevel,
     this.simOptions.targetArmor,
     this.simOptions.targetType,
-    this.simOptions.targetProfile,
     this.simOptions.targetActive,
     this.simOptions.targetAutoAttackSpeedMs,
     this.simOptions.targetWeaponPower,

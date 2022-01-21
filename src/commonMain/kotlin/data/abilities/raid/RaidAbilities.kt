@@ -31,6 +31,7 @@ object RaidAbilities {
         MoonkinAura(),
         SapphireWrathBattleShout(),
         StrengthOfEarthTotem(),
+        Thorns(),
         TotemOfWrath(),
         UnleashedRage(),
         VampiricTouch(1000),

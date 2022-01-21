@@ -233,6 +233,21 @@ export default function({ state }) {
 
   if(!state.character.class) return null;
 
+  // Shim debuff state storage
+  const debuffStateFactory = function() {
+    const data = {
+      currentStacks: 0
+    }
+
+    data._set_currentStacks__3 = function(stacks) {
+      data.currentStacks = stacks
+    }
+
+    return data;
+  };
+
+  const debuffState = {};
+
   const simConfig = state.makeSimConfig();
   const simParticipant = new tbcsim.sim.SimParticipant(
     simConfig.character,
@@ -254,7 +269,19 @@ export default function({ state }) {
             }
           }
         },
-        addDebuff: function() {}
+        addDebuff: function() {},
+        _debuffState: {
+          get_35: function(name) {
+            const state = debuffState[name];
+            if(!state) {
+              debuffState[name] = debuffStateFactory();
+            }
+            return debuffState[name];
+          },
+          put_5: function(stateKey, state) {
+            debuffState[stateKey] = state;
+          }
+        }
       },
       addRaidBuff: function(buff) {
         simParticipant.addBuff(buff)

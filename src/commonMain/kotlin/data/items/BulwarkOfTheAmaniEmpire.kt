@@ -64,7 +64,8 @@ public class BulwarkOfTheAmaniEmpire : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(39987, "Block Value 42", this)
+        Buffs.byIdOrName(39987, "Block Value 42", this),
+        Buffs.byIdOrName(-1, "Block Value 141", this)
         )}
 
 }

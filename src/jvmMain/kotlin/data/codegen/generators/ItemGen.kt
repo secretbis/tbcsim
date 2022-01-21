@@ -189,6 +189,7 @@ object ItemGen {
             item.stats = deserializeStats(it)
             item.sockets = deserializeSockets(it)
 
+
             val phaseOverride = itemOverrides[item.id]?.get("phase")?.toInt()
             val phase = phaseOverride ?: itemPhases[item.id.toString()] ?: itemPhasesApprox[item.id.toString()] ?: 0
             item.phase = phase
@@ -321,6 +322,11 @@ object ItemGen {
                 val name = itemBuff["SpellName"] as String
                 Pair(spellId, name)
             }
+        }.toMutableList()
+
+        // Block value from shields is a separate DB column, but add it here as a buff for consistency
+        if((itemData["block"] as Int? ?: 0) > 0) {
+            buffIds.add(Pair(-1, "Block Value ${itemData["block"]}"))
         }
 
         return if(buffIds.isNotEmpty()) {

@@ -51,9 +51,7 @@ class SimIteration(
     // TODO: The rest of the party and raid
     val participants = listOfNotNull(subject, subject.pet)
 
-    private val allParticipants: List<SimParticipant> = listOfNotNull(
-        target,
-    ) + participants
+    val allParticipants: List<SimParticipant> = participants + target
 
     // Initialize all non-target participants
     init {

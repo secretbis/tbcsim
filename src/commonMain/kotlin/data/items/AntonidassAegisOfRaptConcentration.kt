@@ -61,7 +61,8 @@ public class AntonidassAegisOfRaptConcentration : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(18058, "Increase Spell Dam 42", this)
+        Buffs.byIdOrName(18058, "Increase Spell Dam 42", this),
+        Buffs.byIdOrName(-1, "Block Value 174", this)
         )}
 
 }

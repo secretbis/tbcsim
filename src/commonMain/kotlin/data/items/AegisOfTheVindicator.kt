@@ -60,7 +60,8 @@ public class AegisOfTheVindicator : Item() {
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
         Buffs.byIdOrName(15696, "Increase Healing 53", this),
-        Buffs.byIdOrName(21366, "Increased Mana Regen", this)
+        Buffs.byIdOrName(21366, "Increased Mana Regen", this),
+        Buffs.byIdOrName(-1, "Block Value 137", this)
         )}
 
 }

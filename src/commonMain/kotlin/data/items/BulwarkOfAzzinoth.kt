@@ -60,7 +60,8 @@ public class BulwarkOfAzzinoth : Item() {
 
   public override val buffs: List<Buff> by lazy {
         listOfNotNull(
-        Buffs.byIdOrName(40407, "Illidan Tank Shield", this)
+        Buffs.byIdOrName(40407, "Illidan Tank Shield", this),
+        Buffs.byIdOrName(-1, "Block Value 174", this)
         )}
 
 }
