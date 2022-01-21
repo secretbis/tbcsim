@@ -3,7 +3,7 @@ spec: Kebab
 description: Kebab Warrior (phase 3, Warglaives)
 race: Human
 level: 70
-epCategory: phase2
+epCategory: phase3
 epSpec: warrior_kebab
 
 # Stock Arms
