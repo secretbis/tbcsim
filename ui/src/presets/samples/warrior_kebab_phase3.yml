@@ -144,7 +144,6 @@ rotation:
     - name: Mortal Strike
     - name: Heroic Strike
       criteria:
-        # Cast HS if we have 60 rage or more
         - type: RESOURCE_PCT_GTE
           pct: 60
           resourceType: RAGE

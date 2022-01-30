@@ -1,8 +1,7 @@
 package character.classes.warrior
 
 import character.*
-import character.classes.shaman.talents.Cruelty
-import character.classes.shaman.talents.Flurry
+import character.classes.common.talents.Flurry
 import character.classes.warrior.abilities.*
 import character.classes.warrior.abilities.Bloodthirst
 import character.classes.warrior.abilities.DeathWish

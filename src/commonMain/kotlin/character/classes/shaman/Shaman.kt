@@ -1,6 +1,7 @@
 package character.classes.shaman
 
 import character.*
+import character.classes.common.talents.Flurry
 import character.classes.shaman.abilities.*
 import character.classes.shaman.talents.*
 import character.classes.shaman.talents.ElementalMastery as ElementalMasteryTalent

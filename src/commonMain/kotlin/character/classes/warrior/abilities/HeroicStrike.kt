@@ -32,7 +32,7 @@ class HeroicStrike : Ability() {
 
     // Model the off-hand hit bonus when HS is queued
     val offHandHitBuff = object : Buff() {
-        override val name: String = "Heroic Strike (Queued)"
+        override val name: String = "Heroic Strike (Queued, DW)"
         override val icon: String = "ability_rogue_ambush.jpg"
         override val durationMs: Int = -1
         override val maxCharges: Int = 1
@@ -40,6 +40,19 @@ class HeroicStrike : Ability() {
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(offHandAddlWhiteHitPct = 19.0)
         }
+    }
+
+    val genericQueuedBuff = object : Buff() {
+        override val name: String = "Heroic Strike (Queued)"
+        override val icon: String = "ability_rogue_ambush.jpg"
+        override val durationMs: Int = -1
+        override val maxCharges: Int = 1
+        override val hidden: Boolean = true
+    }
+
+    override fun available(sp: SimParticipant): Boolean {
+        val isQueued = sp.buffs[genericQueuedBuff.name] != null
+        return !isQueued && super.available(sp)
     }
 
     val bonusDamage = 176.0
@@ -52,6 +65,7 @@ class HeroicStrike : Ability() {
 
         override fun cast(sp: SimParticipant) {
             sp.consumeBuff(offHandHitBuff)
+            sp.consumeBuff(genericQueuedBuff)
 
             val mhItem = sp.character.gear.mainHand
             val damage = Melee.baseDamageRoll(sp, mhItem, isNormalized = false) + bonusDamage
@@ -86,6 +100,7 @@ class HeroicStrike : Ability() {
     }
 
     override fun cast(sp: SimParticipant) {
+        sp.addBuff(genericQueuedBuff)
         sp.replaceNextMainHandAutoAttack(nextHitAbility)
         if(sp.isDualWielding()) {
             sp.addBuff(offHandHitBuff)
