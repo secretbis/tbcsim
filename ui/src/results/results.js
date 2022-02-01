@@ -60,12 +60,14 @@ export default function({ character, results }) {
     }
   }
 
-  function renderTab() {no
+  function renderTab() {
     // TODO: This will need to be smarter for full raid sims
+    const isPetTab = activeTab == 1 && numParticipants == 3;
+    const isBossTab = (activeTab == 1 && numParticipants == 2) || (activeTab == 2 && numParticipants == 3);
     let characterTab = character;
-    if(activeTab == 1) {
+    if(isPetTab) {
       characterTab = character.pet
-    } else if(activeTab == 2) {
+    } else if(isBossTab) {
       characterTab = character.sim.target
     }
 

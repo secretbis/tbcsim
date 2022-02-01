@@ -250,6 +250,7 @@ export default function({ state }) {
 
   const simConfig = state.makeSimConfig();
   const simParticipant = new tbcsim.sim.SimParticipant(
+    "Stats Shim",
     simConfig.character,
     simConfig.rotation,
     // Shim any parts of the sim object we need

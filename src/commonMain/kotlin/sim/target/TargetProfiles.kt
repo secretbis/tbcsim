@@ -8,6 +8,7 @@ import sim.rotation.Rotation
 
 object TargetProfiles {
     data class ProfileResult(
+        val name: String,
         val simOptions: SimOptions?,
         val buffs: List<Buff> = listOf(),
         val rotation: Rotation? = null
@@ -26,7 +27,7 @@ object TargetProfiles {
                     targetAutoAttackSpeedMs = 2000
                 )
 
-                ProfileResult(opts)
+                ProfileResult("The Lurker Below", opts)
             }
             "leotheras the blind" -> {
                 val opts = SimOptions(
@@ -36,7 +37,7 @@ object TargetProfiles {
                     targetDualWield = true
                 )
 
-                ProfileResult(opts)
+                ProfileResult("Leotheras the Blind", opts)
             }
             "morogrim tidewalker" -> {
                 val opts = SimOptions(
@@ -47,7 +48,7 @@ object TargetProfiles {
 
                 val buffs = listOf(MorogrimTidewalkerThrash())
 
-                ProfileResult(opts, buffs)
+                ProfileResult("Morogrim Tidewalker", opts, buffs)
             }
             else -> null
         }

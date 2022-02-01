@@ -1,5 +1,6 @@
 package sim.statsmodel
 
+import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport

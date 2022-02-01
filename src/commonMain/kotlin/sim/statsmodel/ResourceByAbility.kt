@@ -2,6 +2,7 @@ package sim.statsmodel
 
 import kotlin.js.JsExport
 import character.*
+import sim.SimParticipant
 
 @JsExport
 data class ResourceByAbility(

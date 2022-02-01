@@ -25,7 +25,7 @@ object SimStats {
         } / (sp.sim.opts.durationMs / 1000.0)
     }
 
-    fun dps(iterations: List<SimIteration>): Map<String, DpsBreakdown?> {
+    fun dps(iterations: List<SimIteration>): Map<String, Pair<StatsMeta, DpsBreakdown>?> {
         val hasPet = iterations[0].subject.pet != null
         val perIteration = iterations.map {
             mapOf(
@@ -40,22 +40,28 @@ object SimStats {
         val subjectMean = subjectData.average()
         val subjectPetMean = subjectPetData?.average()
         return mapOf(
-            "subject" to DpsBreakdown(
-                median(subjectData),
-                mean = subjectMean,
-                sd = sd(subjectData, subjectMean)
+            "subject" to Pair(
+                StatsMeta(iterations[0].subject.name),
+                DpsBreakdown(
+                    median(subjectData),
+                    mean = subjectMean,
+                    sd = sd(subjectData, subjectMean)
+                )
             ),
             "subjectPet" to if(hasPet) {
-                DpsBreakdown(
-                    median(subjectPetData!!),
-                    mean = subjectPetMean!!,
-                    sd = sd(subjectPetData, subjectPetMean)
+                Pair(
+                    StatsMeta(iterations[0].subject.name),
+                    DpsBreakdown(
+                        median(subjectPetData!!),
+                        mean = subjectPetMean!!,
+                        sd = sd(subjectPetData, subjectPetMean)
+                    )
                 )
             } else null
         )
     }
 
-    fun resultsByBuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
+    fun resultsByBuff(iterations: List<SimIteration>): List<Pair<StatsMeta, List<BuffBreakdown>>> {
         return processBuffs(
             iterations,
             EventType.BUFF_START,
@@ -64,7 +70,7 @@ object SimStats {
         )
     }
 
-    fun resultsByDebuff(iterations: List<SimIteration>): List<List<BuffBreakdown>> {
+    fun resultsByDebuff(iterations: List<SimIteration>): List<Pair<StatsMeta, List<BuffBreakdown>>> {
         return processBuffs(
             iterations,
             EventType.DEBUFF_START,
@@ -80,16 +86,17 @@ object SimStats {
         buffRefresh: EventType,
         buffEnd: EventType,
         onlyTarget: Boolean = false
-    ): List<List<BuffBreakdown>> {
+    ): List<Pair<StatsMeta, List<BuffBreakdown>>> {
         val eventTypes = listOf(buffStart, buffRefresh, buffEnd)
         val showHidden = iterations[0].opts.showHiddenBuffs
         val participantCount = if(onlyTarget) { 0 } else (iterations[0].allParticipants.size - 1)
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
+            val sp = iterations[0].allParticipants[idx]
             val allBuffs: MutableMap<String, Buff> = mutableMapOf()
             val byBuff = iterations.flatMap { iter ->
-                val context = if(onlyTarget) { iter.target } else iter.allParticipants[idx]
+                val context = if(onlyTarget) { iter.target } else sp
                 context.events
                     .filter { it.buff != null && (!it.buff.hidden || showHidden) && eventTypes.contains(it.eventType) }
                     .filter { it.buff?.name != null }
@@ -103,7 +110,7 @@ object SimStats {
 
             val keys = byBuff.keys.toList()
 
-            keys.map { key ->
+            val breakdowns = keys.map { key ->
                 val events = byBuff[key]!!
                 val applied = events.filter { it.eventType == buffStart }.size / iterations.size.toDouble()
                 val refreshed = events.filter { it.eventType == buffRefresh }.size / iterations.size.toDouble()
@@ -211,17 +218,23 @@ object SimStats {
                     avgStacks
                 )
             }.sortedBy { it.name }
+
+            Pair(
+                StatsMeta(iterations[idx].subject.name),
+                breakdowns
+            )
         }
     }
 
-    fun resultsByAbility(iterations: List<SimIteration>): List<List<AbilityBreakdown>> {
+    fun resultsByAbility(iterations: List<SimIteration>): List<Pair<StatsMeta, List<AbilityBreakdown>>> {
         val participantCount = iterations[0].allParticipants.size - 1
 
         // Aggregate all events for each participant across all iterations
         return (0..participantCount).map { idx ->
+            val sp = iterations[0].allParticipants[idx]
             val allAbilities: MutableMap<String, Ability> = mutableMapOf()
             val byAbility = iterations.flatMap { iter ->
-                iter.allParticipants[idx].events
+                sp.events
                     .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.ability?.name != null }
             }.also {
@@ -237,7 +250,7 @@ object SimStats {
                 acc + (byAbility[it]?.sumByDouble { it.amount } ?: 0.0)
             } / iterations.size.toDouble()
 
-            keys.map { key ->
+            val breakdowns = keys.map { key ->
                 val events = byAbility[key]!!
                 val amounts = events.map { it.amount }
                 val countAvg = amounts.size.toDouble() / iterations.size.toDouble()
@@ -287,14 +300,20 @@ object SimStats {
                     glancePct
                 )
             }.sortedBy { it.totalAvg }.reversed()
+
+            Pair(
+                StatsMeta(sp.name),
+                breakdowns
+            )
         }
     }
 
-    fun resultsByDamageType(iterations: List<SimIteration>): List<List<DamageTypeBreakdown>> {
+    fun resultsByDamageType(iterations: List<SimIteration>): List<Pair<StatsMeta, List<DamageTypeBreakdown>>> {
         val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
+            val sp = iterations[0].allParticipants[idx]
             val byDmgType = iterations.flatMap { iter ->
-                iter.allParticipants[idx].events
+                sp.events
                     .filter { it.eventType == EventType.DAMAGE }
                     .filter { it.damageType != null }
             }.groupBy { it.damageType!! }
@@ -305,7 +324,7 @@ object SimStats {
                 acc + (byDmgType[it]?.sumByDouble { it.amount } ?: 0.0)
             } / iterations.size.toDouble()
 
-            keys.map { key ->
+            val breakdowns = keys.map { key ->
                 val events = byDmgType[key]!!
                 val amounts = events.map { it.amount }
                 val count = amounts.size.toDouble() / iterations.size.toDouble()
@@ -319,10 +338,15 @@ object SimStats {
                     pctOfTotal
                 )
             }.sortedBy { it.totalAvg }.reversed()
+
+            Pair(
+                StatsMeta(sp.name),
+                breakdowns
+            )
         }
     }
 
-    fun resourceUsage(iterations: List<SimIteration>): List<Map<String, ResourceBreakdown>> {
+    fun resourceUsage(iterations: List<SimIteration>): List<Pair<StatsMeta, Map<String, ResourceBreakdown>>> {
         // Pick an execution at random
         // TODO: Average and +/- some number of stddevs usage across iterations for each participant
         //       Multiple lines for avg, percentiles?
@@ -332,7 +356,7 @@ object SimStats {
         return participants.mapIndexed { _, sp ->
             val resourceTypes = sp.character.klass.resourceTypes
 
-            resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
+            val breakdowns: Map<String, ResourceBreakdown> = resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
                 val series =
                     sp.events.filter { it.eventType == EventType.RESOURCE_CHANGED && it.resourceType == resourceType }
                         .map {
@@ -345,17 +369,22 @@ object SimStats {
                 )
                 acc
             }
+
+            Pair(
+                StatsMeta(sp.name),
+                breakdowns
+            )
         }
     }
 
-    fun resourceUsageByAbility(iterations: List<SimIteration>): List<Map<String, List<ResourceByAbility>>> {
+    fun resourceUsageByAbility(iterations: List<SimIteration>): List<Pair<StatsMeta, Map<String, List<ResourceByAbility>>>> {
         val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
             val sp = iterations[0].allParticipants[idx]
             val resourceTypes = sp.character.klass.resourceTypes
 
             // Also group by resource type
-            resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
+            val breakdowns: Map<String, List<ResourceByAbility>> = resourceTypes.fold(mutableMapOf()) { acc, resourceType ->
                 val allAbilities: MutableMap<String, Ability> = mutableMapOf()
                 val byAbility = iterations.flatMap { iter ->
                     iter.allParticipants[idx].events
@@ -388,10 +417,15 @@ object SimStats {
                 }.sortedBy { it.totalGainAvg }.reversed()
                 acc
             }
+
+            Pair(
+                StatsMeta(sp.name),
+                breakdowns
+            )
         }
     }
 
-    fun threatByAbility(iterations: List<SimIteration>): List<List<ThreatByAbility>> {
+    fun threatByAbility(iterations: List<SimIteration>): List<Pair<StatsMeta, List<ThreatByAbility>>> {
         val participantCount = iterations[0].allParticipants.size - 1
         return (0..participantCount).map { idx ->
             val sp = iterations[0].allParticipants[idx]
@@ -411,7 +445,7 @@ object SimStats {
 
             val keys = byAbility.keys.toList()
 
-            keys.map { key ->
+            val breakdowns = keys.map { key ->
                 val events = byAbility[key]!!
                 val threatAmounts = events.map {
                     (((it.amount * it.abilityThreatMultiplier) + it.abilityBonusThreat) * sp.stats.innateThreatMultiplier) + it.flatBonusThreat
@@ -427,6 +461,11 @@ object SimStats {
                     totalThreatAvg / countAvg
                 )
             }.sortedBy { it.threatPerSecondAvg }.reversed()
+
+            Pair(
+                StatsMeta(sp.name),
+                breakdowns
+            )
         }
     }
 }

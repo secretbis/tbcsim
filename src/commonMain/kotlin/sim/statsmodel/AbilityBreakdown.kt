@@ -20,5 +20,5 @@ data class AbilityBreakdown(
     val missPct: Double,
     val dodgePct: Double,
     val parryPct: Double,
-    val glancePct: Double,
+    val glancePct: Double
 )

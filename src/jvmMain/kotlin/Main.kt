@@ -186,7 +186,7 @@ class TBCSim : CliktCommand() {
         val totalStatMod = Stats().add(epStatMod).add(hitReduction)
 
         val iterations = runBlocking { Sim(config, opts, totalStatMod) {}.sim() }
-        return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.mean ?: 0.0 })
+        return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.second?.mean ?: 0.0 })
     }
 
     fun formatEp(dps: Double): Double {
@@ -238,16 +238,16 @@ class TBCSim : CliktCommand() {
         val iterations = runBlocking { Sim(config, opts) {}.sim() }
 
         val dps = SimStats.dps(iterations)
-        val subjectMean = dps["subject"]!!.mean
-        val petMean = dps["subjectPet"]?.mean ?: 0.0
+        val subjectMean = dps["subject"]!!.second.mean
+        val petMean = dps["subjectPet"]?.second?.mean ?: 0.0
         val totalMean = subjectMean + petMean
 
-        val subjectMedian = dps["subject"]!!.median
-        val petMedian = dps["subjectPet"]?.median ?: 0.0
+        val subjectMedian = dps["subject"]!!.second.median
+        val petMedian = dps["subjectPet"]?.second?.median ?: 0.0
         val totalMedian = subjectMedian + petMedian
 
-        val subjectSd = dps["subject"]!!.sd
-        val petSd = dps["subjectPet"]?.sd ?: 0.0
+        val subjectSd = dps["subject"]!!.second.sd
+        val petSd = dps["subjectPet"]?.second?.sd ?: 0.0
 
         return mapOf(
             "subjectMean" to subjectMean,
@@ -407,8 +407,9 @@ class TBCSim : CliktCommand() {
                 // Only print the big chart for the main subject - others arent interesting
                 val resource = SimStats.resourceUsage(iterations)
                 resourceTypes.forEach {
-                    println("Resource usage for iteration ${resource[0][it.name]!!.iterationIdx}")
-                    Chart.print(resource[0][it.name]!!.series, xMax = durationSeconds, yLabel = it.toString())
+                    val resourceBreakdown = resource[0].second[it.name]
+                    println("Resource usage for iteration ${resourceBreakdown!!.iterationIdx}")
+                    Chart.print(resourceBreakdown.series, xMax = durationSeconds, yLabel = it.toString())
                 }
 
                 resourceTypes.forEach {
@@ -432,7 +433,7 @@ class TBCSim : CliktCommand() {
                 SimStatsPrinter.printAbilities(abilities)
 
                 val dps = SimStats.dps(iterations)
-                SimStatsPrinter.printDps(dps["subject"]!!, dps["subjectPet"])
+                SimStatsPrinter.printDps(dps["subject"]!!.second, dps["subjectPet"]?.second)
             }
         }
     }

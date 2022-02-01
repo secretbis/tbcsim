@@ -19,14 +19,16 @@ object SimStatsPrinter {
         println()
     }
 
-    fun printBuffs(title: String, participants: List<List<BuffBreakdown>>) {
-        participants.forEach { rows ->
+    fun printBuffs(title: String, participants: List<Pair<StatsMeta, List<BuffBreakdown>>>) {
+        participants.forEach { participant ->
+            if(participant.second.isEmpty()) return@forEach
+
             println(
-                "$title\n" +
+                "$title (${participant.first.participantName})\n" +
                 table {
                     header("Name", "AppliedCountAvg", "RefreshedCountAvg", "UptimePct", "AvgDurationSeconds", "AvgStacks")
 
-                    for(row in rows) {
+                    for(row in participant.second) {
                         row(row.name, row.appliedAvg, row.refreshedAvg, row.uptimePct, row.avgDuration, row.avgStacks)
                     }
 
@@ -49,14 +51,16 @@ object SimStatsPrinter {
         }
     }
 
-    fun printAbilities(participants: List<List<AbilityBreakdown>>) {
-        participants.forEach { rows ->
+    fun printAbilities(participants: List<Pair<StatsMeta, List<AbilityBreakdown>>>) {
+        participants.forEach { participant ->
+            if(participant.second.isEmpty()) return@forEach
+
             println(
-                "Ability Breakdown\n" +
+                "Ability Breakdown (${participant.first.participantName})\n" +
                 table {
                     header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal", "MinHit", "AvgHit", "MaxHit", "MinCrit", "AvgCrit", "MaxCrit", "Hit%", "Crit%", "Miss%", "Dodge%", "Parry%", "Glance%")
 
-                    for(row in rows) {
+                    for(row in participant.second) {
                         row(row.name, row.countAvg, row.totalAvg, row.pctOfTotal, row.minHit, row.avgHit, row.maxHit, row.minCrit, row.avgCrit, row.maxCrit, row.hitPct, row.critPct, row.missPct, row.dodgePct, row.parryPct, row.glancePct)
                     }
 
@@ -80,14 +84,16 @@ object SimStatsPrinter {
         }
     }
 
-    fun printDamage(participants: List<List<DamageTypeBreakdown>>) {
-        participants.forEach { rows ->
+    fun printDamage(participants: List<Pair<StatsMeta, List<DamageTypeBreakdown>>>) {
+        participants.forEach { participant ->
+            if(participant.second.isEmpty()) return@forEach
+
             println(
-                "Damage Type Breakdown\n" +
+                "Damage Type Breakdown (${participant.first.participantName})\n" +
                 table {
                     header("Name", "CountAvg", "TotalDmgAvg", "PctOfTotal")
 
-                    for(row in rows) {
+                    for(row in participant.second) {
                         row(row.type, row.countAvg, row.totalAvg, row.pctOfTotal)
                     }
 
@@ -189,12 +195,12 @@ object SimStatsPrinter {
         )
     }
 
-    fun printResourceUsageByAbility(participants: List<Map<String, List<ResourceByAbility>>>) {
-        participants.forEach { resourceType ->
-            resourceType.entries.forEach { resourceData ->
+    fun printResourceUsageByAbility(participants: List<Pair<StatsMeta, Map<String, List<ResourceByAbility>>>>) {
+        participants.forEach { participant ->
+            participant.second.entries.forEach { resourceData ->
                 val rows = resourceData.value
                 println(
-                    "Resource by Ability Breakdown (${resourceData.key})\n" +
+                    "Resource by Ability Breakdown (${participant.first.participantName}, ${resourceData.key})\n" +
                     table {
                         header("Name", "CountAvg", "TotalGainAvg", "GainPerCountAvg")
 
@@ -218,14 +224,16 @@ object SimStatsPrinter {
         }
     }
 
-    fun printThreat(participants: List<List<ThreatByAbility>>) {
-        participants.forEach { rows ->
+    fun printThreat(participants: List<Pair<StatsMeta, List<ThreatByAbility>>>) {
+        participants.forEach { participant ->
+            if(participant.second.isEmpty()) return@forEach
+
             println(
-                "Threat by Ability Breakdown\n" +
+                "Threat by Ability Breakdown (${participant.first.participantName})\n" +
                 table {
                     header("Name", "CountAvg", "ThreatPerSecAvg", "ThreatPerCastAvg")
 
-                    for(row in rows) {
+                    for(row in participant.second) {
                         row(row.name, row.countAvg, row.threatPerSecondAvg, row.threatPerCastAvg)
                     }
 
@@ -241,7 +249,7 @@ object SimStatsPrinter {
                     }
                 }.render(StringBuilder())
             )
-            println("Total TPS: " + df.format(rows.sumOf { it.threatPerSecondAvg }))
+            println("Total TPS: " + df.format(participant.second.sumOf { it.threatPerSecondAvg }))
             println()
         }
     }

@@ -7,7 +7,6 @@ import sim.rotation.Rotation
 import sim.target.TargetProfiles
 import kotlin.js.JsExport
 import kotlin.math.ceil
-import kotlin.random.Random
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 
@@ -45,7 +44,7 @@ class SimIteration(
 
     // Setup known participants
     val target: SimParticipant = defaultTarget()
-    val subject: SimParticipant = SimParticipant(_subject, _rotation, this, epStatMod = epStatMod)
+    val subject: SimParticipant = SimParticipant("You", _subject, _rotation, this, epStatMod = epStatMod)
 
     // This is basically the non-sim target participants, and is the data needed for output
     // TODO: The rest of the party and raid
@@ -172,7 +171,9 @@ class SimIteration(
         // TODO: Add boss-specific rotations and abilities
         val rotation = targetProfile?.rotation ?: Rotation(listOf(), opts.targetActive)
         rotation.autoAttack = opts.targetActive
-        return SimParticipant(char, rotation, this).init()
+
+        val bossName = targetProfile?.name ?: "Boss"
+        return SimParticipant(bossName, char, rotation, this).init()
     }
 
     fun isExecutePhase(thresholdPercent: Double = 20.0): Boolean {

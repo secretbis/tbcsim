@@ -23,7 +23,7 @@ import kotlin.js.JsExport
 import kotlin.math.floor
 
 @JsExport
-class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null, val epStatMod: Stats? = null) {
+class SimParticipant(val name: String, val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null, val epStatMod: Stats? = null) {
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
@@ -66,7 +66,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // Pet
     val pet: SimParticipant? = if(character.pet != null && character.petRotation != null) {
-        SimParticipant(character.pet, character.petRotation, sim, this)
+        val petName = if(name === "You") "Your Pet" else "${name}'s Pet"
+        SimParticipant(petName, character.pet, character.petRotation, sim, this)
     } else null
 
     fun init(): SimParticipant {
