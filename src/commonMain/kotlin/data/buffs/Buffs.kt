@@ -143,6 +143,8 @@ object Buffs {
             41040 -> TotemOfAncestralGuidance()
             42083 -> TsunamiTalisman()
             43716 -> BerserkersCall()
+            43748 -> ElementalStrength()
+            43750 -> Energized()
             45354 -> ShardOfContempt()
             45355 -> BlackenedNaaruSliver()
             51953 -> DarkIronPipeweed()
