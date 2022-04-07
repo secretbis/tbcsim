@@ -13,75 +13,43 @@ import kotlin.js.JsExport
 // https://warcraft.blizzplanet.com/blog/comments/world_of_warcraft_burning_crusade___enchanting___executioner_vs_mongoose
 @JsExport
 class Executioner(item: Item) : Enchant(item) {
-    // Executioner always stacks once even if enchanted and procced twice, so use a singleton Buff object to track it
-    companion object {
-        private var singletonBuff: Buff? = null
-
-        fun singletonBuff(sourceItems: List<Item>): Buff {
-            if(singletonBuff == null) {
-                singletonBuff = object : ItemBuff(sourceItems) {
-                    override val name: String = "Executioner"
-                    override val durationMs: Int = 15000
-
-                    override fun modifyStats(sp: SimParticipant): Stats {
-                        return Stats(armorPen = 840)
-                    }
-                }
-            }
-
-            return singletonBuff!!
-        }
-    }
-
+    // Executioner always stacks once even if enchanted twice
     override val id: Int = 42976
     override val name: String = "Executioner (enchant)"
+    override var displayName: String? = "Executioner"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
     override val inventorySlot: Int = Constants.InventorySlot.WEAPON.ordinal
 
-    private var _procs: List<Proc>? = null
-    private fun makeProcs(sp: SimParticipant): List<Proc> {
-        if(_procs == null) {
-            // Find items
-            val sourceItems = listOfNotNull(
-                if (sp.character.gear.mainHand.enchant is Executioner) {
-                    sp.character.gear.mainHand
-                } else {
-                    null
-                },
-                if (sp.character.gear.offHand.enchant is Executioner) {
-                    sp.character.gear.offHand
-                } else {
-                    null
-                }
-            )
+    val buff = object : ItemBuff(listOf(item)) {
+        override val name: String = "Executioner"
+        override val durationMs: Int = 15000
 
-            _procs = listOf(
-                object : Proc() {
-                    override val triggers: List<Trigger> = listOf(
-                        Trigger.MELEE_AUTO_HIT,
-                        Trigger.MELEE_AUTO_CRIT,
-                        Trigger.MELEE_YELLOW_HIT,
-                        Trigger.MELEE_YELLOW_CRIT,
-                        Trigger.MELEE_WHITE_HIT,
-                        Trigger.MELEE_WHITE_CRIT,
-                        Trigger.MELEE_BLOCK,
-                        Trigger.MELEE_GLANCE
-                    )
-
-                    override val type: Type = Type.PPM
-                    override val ppm: Double = 1.2
-                    override val requiresItem: Boolean = true
-
-                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sp.addBuff(singletonBuff(sourceItems))
-                    }
-                }
-            )
+        override fun modifyStats(sp: SimParticipant): Stats {
+            return Stats(armorPen = 840)
         }
-
-        return _procs!!
     }
 
-    override fun procs(sp: SimParticipant): List<Proc> = makeProcs(sp)
+    val proc = object : ItemProc(listOf(item)) {
+        override val triggers: List<Trigger> = listOf(
+            Trigger.MELEE_AUTO_HIT,
+            Trigger.MELEE_AUTO_CRIT,
+            Trigger.MELEE_YELLOW_HIT,
+            Trigger.MELEE_YELLOW_CRIT,
+            Trigger.MELEE_WHITE_HIT,
+            Trigger.MELEE_WHITE_CRIT,
+            Trigger.MELEE_BLOCK,
+            Trigger.MELEE_GLANCE
+        )
+
+        override val type: Type = Type.PPM
+        override val ppm: Double = 1.2
+        override val requiresItem: Boolean = true
+
+        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+            sp.addBuff(buff)
+        }
+    }
+
+    override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }
