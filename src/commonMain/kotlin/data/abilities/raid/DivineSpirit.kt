@@ -2,6 +2,7 @@ package data.abilities.raid
 
 import character.Ability
 import character.Buff
+import character.Mutex
 import character.Stats
 import mechanics.Rating
 import sim.SimParticipant
@@ -20,6 +21,7 @@ class DivineSpirit : Ability() {
         override val name: String = Companion.name
         override val icon: String = "spell_holy_prayerofspirit.jpg"
         override val durationMs: Int = -1
+        override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spirit = 50)

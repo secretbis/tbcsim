@@ -175,15 +175,8 @@ class TBCSim : CliktCommand() {
     )
 
     fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {
-        // Most presets are hit capped, so apply a universal -2% hit buff so the hit has something to sim against
-        val hitReduction = Stats(
-            physicalHitRating = -2.0 * Rating.physicalHitPerPct,
-            expertiseRating = -2.0 * Rating.expertisePerPct,
-            spellHitRating = -5.0 * Rating.spellHitPerPct,
-        )
-
         val epStatMod = epDelta?.second ?: Stats()
-        val totalStatMod = Stats().add(epStatMod).add(hitReduction)
+        val totalStatMod = Stats().add(epStatMod)//.add(hitReduction)
 
         val iterations = runBlocking { Sim(config, opts, totalStatMod) {}.sim() }
         return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.mean ?: 0.0 })
@@ -287,7 +280,11 @@ class TBCSim : CliktCommand() {
         val specFilter = specFilterStr?.split(",")
         val categoryFilter = categoryFilterStr?.split(",")
 
-        if (calcEP) {
+        if (calcEP && configFile?.exists() == true) {
+            val config = ConfigMaker.fromYml(configFile!!.readText())
+            println("Starting EP run")
+            val deltas = computeEpDeltas(config, opts)
+        } else if (calcEP) {
             val epTypeRef = object : TypeReference<EpOutput>(){}
             val existing = mapper.readValue(File(epOutputPath).readText(), epTypeRef)
             // EP calculation sim

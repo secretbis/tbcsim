@@ -36,6 +36,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             IcyVeins.name -> IcyVeins()
             ManaEmerald.name -> ManaEmerald()
             MoltenArmor.name -> MoltenArmor()
+            MageArmor.name -> MageArmor()
             PresenceOfMind.name -> PresenceOfMind()
             Scorch.name -> Scorch()
             SummonWaterElemental.name -> SummonWaterElemental()

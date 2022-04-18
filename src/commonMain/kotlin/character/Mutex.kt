@@ -18,6 +18,7 @@ enum class Mutex {
     BUFF_EXPOSE_WEAKNESS,
     BUFF_FEROCIOUS_INSPIRATION,
     BUFF_FAERIE_FIRE,
+    BUFF_SPIRIT,
 
     // Hunter
     BUFF_HUNTER_ASPECT,
