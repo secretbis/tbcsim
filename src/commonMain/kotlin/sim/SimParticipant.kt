@@ -20,6 +20,7 @@ import sim.rotation.Rotation
 import sim.rotation.Rule
 import kotlin.js.JsExport
 import kotlin.math.floor
+import kotlin.reflect.KClass
 
 @JsExport
 class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null, val epStatMod: Stats? = null) {
@@ -115,6 +116,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         }
 
         return this
+    }
+
+    inline fun <reified T: Talent> getTalent(talentName: String): T? {
+        return this.character.klass.talents[talentName] as T
     }
 
     fun onGcd(): Boolean {
