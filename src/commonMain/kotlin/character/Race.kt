@@ -2,11 +2,13 @@ package character
 
 import character.races.*
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 abstract class Race {
     companion object {
         fun fromString(name: String): Race? {
-            return when(name.toLowerCase().trim()) {
+            return when(name.lowercase().trim()) {
                 "blood elf" -> return BloodElf()
                 "draenei" -> return Draenei()
                 "dwarf" -> return Dwarf()

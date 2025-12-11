@@ -13,7 +13,7 @@ import data.itemscustom.EmptyItem
 import data.itemsets.ItemSets
 import data.model.*
 import data.socketbonus.SocketBonuses
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import net.pearx.kasechange.toPascalCase
 import java.io.File
 import java.lang.IllegalArgumentException
@@ -244,7 +244,7 @@ object ItemGen {
         // Render all stats constructor params and inject Item values
         val baseStats = Stats()
         val block = fields.mapNotNull {
-            val method = Class.forName("character.Stats").getDeclaredMethod("get${it.name.capitalize()}")
+            val method = Class.forName("character.Stats").getDeclaredMethod("get${it.name.replaceFirstChar { c -> c.uppercase() }}")
             val methodValue = method.invoke(item.stats)
 
             // Only render non-default values

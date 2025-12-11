@@ -15,7 +15,7 @@ import sim.Event
 import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 abstract class MindFlay : Ability() {
     override val id: Int = 25387

@@ -1,11 +1,13 @@
 package character
 
 import data.model.Item
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.Event
 import sim.SimParticipant
+import kotlin.js.JsExport
 import kotlin.random.Random
 
+@JsExport
 abstract class Proc {
     val logger = KotlinLogging.logger {}
 

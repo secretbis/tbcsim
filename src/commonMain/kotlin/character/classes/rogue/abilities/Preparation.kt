@@ -9,7 +9,7 @@ import data.model.Item
 import character.classes.rogue.abilities.*
 import mechanics.Rating
 import mechanics.Spell
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 class Preparation : Ability() {
     companion object {

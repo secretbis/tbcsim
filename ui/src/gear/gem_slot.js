@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import ItemTooltip from './item_tooltip';
 import GearSelector from './gear_selector';
-import { kprop } from '../util/util';
 
 const socketImages = {
   blue: 'sockets/blue.png',
@@ -14,7 +13,7 @@ const socketImages = {
 export default function({ phase, socket, character, onSelect, epOptions }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
-  const color = kprop(kprop(socket, 'color'), 'name', '').toLowerCase();
+  const color = socket.color.name.toLowerCase();
   const gem = socket.gem;
   const icon = gem ? `icons/${gem.icon}` : socketImages[color];
 

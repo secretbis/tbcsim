@@ -1,6 +1,6 @@
 package sim
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.statsmodel.*
 import kotlin.js.JsExport
 import kotlin.math.sqrt
@@ -138,8 +138,8 @@ object SimStats {
                             if (lastStackSegmentEvent != null) {
                                 stackDurationsMs.add(
                                     Pair(
-                                        it.timeMs - lastStackSegmentEvent!!.timeMs,
-                                        lastStackSegmentEvent!!.buffStacks
+                                        it.timeMs - lastStackSegmentEvent.timeMs,
+                                        lastStackSegmentEvent.buffStacks
                                     )
                                 )
 
@@ -169,7 +169,7 @@ object SimStats {
                         if (currentStart != null) {
                             segments.add(
                                 BuffSegment(
-                                    currentStart!!.timeMs,
+                                    currentStart.timeMs,
                                     it.timeMs,
                                     refreshCount,
                                     it.buff!!,
@@ -188,18 +188,17 @@ object SimStats {
                     lastEvent = it
                 }
 
-                val uptimePct = segments.map { it.durationMs }
-                    .sum() / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
-                val avgDuration = segments.map { it.durationMs }.sum() / segments.size.toDouble() / 1000.0
-                val avgStacks = segments.map { segment ->
+                val uptimePct = segments.sumOf { it.durationMs } / (iterations.size * iterations[0].opts.durationMs).toDouble() * 100.0
+                val avgDuration = segments.sumOf { it.durationMs } / segments.size.toDouble() / 1000.0
+                val avgStacks = segments.sumOf { segment ->
                     // Compute the weighted average of each stack sub-segment
-                    if (segment.stackDurationsMs.isNotEmpty()) {
-                        val totalSegmentTimeMs = segment.stackDurationsMs.sumBy { it.first }
-                        segment.stackDurationsMs.sumBy { it.first * it.second } / totalSegmentTimeMs.toDouble()
+                    if(segment.stackDurationsMs.isNotEmpty()) {
+                        val totalSegmentTimeMs = segment.stackDurationsMs.sumOf { it.first }
+                        segment.stackDurationsMs.sumOf { it.first * it.second } / totalSegmentTimeMs.toDouble()
                     } else {
                         0.0
                     }
-                }.sum() / segments.size.toDouble()
+                } / segments.size.toDouble()
 
                 BuffBreakdown(
                     key,
@@ -234,7 +233,7 @@ object SimStats {
 
             val keys = byAbility.keys.toList()
             val grandTotal = keys.fold(0.0) { acc, it ->
-                acc + (byAbility[it]?.sumByDouble { it.amount } ?: 0.0)
+                acc + (byAbility[it]?.sumOf { it.amount } ?: 0.0)
             } / iterations.size.toDouble()
 
             keys.map { key ->
@@ -247,12 +246,12 @@ object SimStats {
                     events.filter { it.result == EventResult.HIT || it.result == EventResult.BLOCK || it.result == EventResult.PARTIAL_RESIST_HIT }
                 val allCrits =
                     events.filter { it.result == EventResult.CRIT || it.result == EventResult.BLOCKED_CRIT || it.result == EventResult.PARTIAL_RESIST_CRIT }
-                val avgHit = allHits.map { it.amount }.sum() / allHits.size.toDouble()
-                val minHit = allHits.map { it.amount }.minOrNull() ?: Double.NaN
-                val maxHit = allHits.map { it.amount }.maxOrNull() ?: Double.NaN
-                val avgCrit = allCrits.map { it.amount }.sum() / allCrits.size.toDouble()
-                val minCrit = allCrits.map { it.amount }.minOrNull() ?: Double.NaN
-                val maxCrit = allCrits.map { it.amount }.maxOrNull() ?: Double.NaN
+                val avgHit = allHits.sumOf { it.amount } / allHits.size.toDouble()
+                val minHit = allHits.minOfOrNull { it.amount } ?: Double.NaN
+                val maxHit = allHits.maxOfOrNull { it.amount } ?: Double.NaN
+                val avgCrit = allCrits.sumOf { it.amount } / allCrits.size.toDouble()
+                val minCrit = allCrits.minOfOrNull { it.amount } ?: Double.NaN
+                val maxCrit = allCrits.maxOfOrNull { it.amount } ?: Double.NaN
 
                 // Compute result distributions with the entire set of events
                 // Count blocked hits/crits as hits/crits, since the block value is very small
@@ -302,7 +301,7 @@ object SimStats {
             val keys = byDmgType.keys.toList()
 
             val grandTotal = keys.fold(0.0) { acc, it ->
-                acc + (byDmgType[it]?.sumByDouble { it.amount } ?: 0.0)
+                acc + (byDmgType[it]?.sumOf { it.amount } ?: 0.0)
             } / iterations.size.toDouble()
 
             keys.map { key ->

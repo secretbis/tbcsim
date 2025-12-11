@@ -6,7 +6,7 @@ import sim.Event
 import sim.SimParticipant
 import data.Constants
 import data.model.Item
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import character.classes.rogue.talents.*
 
 abstract class FinisherAbility : Ability() {

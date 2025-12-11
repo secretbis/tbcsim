@@ -2,7 +2,7 @@ package mechanics
 
 import character.Stats
 import data.Constants
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.Event
 import sim.EventResult
 import sim.SimParticipant

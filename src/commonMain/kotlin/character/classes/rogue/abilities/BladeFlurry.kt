@@ -10,7 +10,7 @@ import character.classes.rogue.talents.*
 import character.classes.rogue.buffs.*
 import mechanics.Rating
 import mechanics.Spell
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 class BladeFlurry : Ability() {
     companion object {

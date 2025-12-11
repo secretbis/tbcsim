@@ -26,7 +26,7 @@ abstract class Gem(override var id: Int, var _name: String, override var icon: S
 
     override var phase = if(_quality == Quality.EPIC) { 3 } else 1
 
-    private val cleanPrefixName = if(prefix != null) { "${prefix.name.toLowerCase().capitalize()} " } else ""
+    private val cleanPrefixName = if(prefix != null) { "${prefix.name.lowercase().replaceFirstChar { c -> c.uppercase() }} " } else ""
     override var name = "$cleanPrefixName$_name"
 
     init {

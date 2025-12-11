@@ -92,7 +92,7 @@ function App() {
           const debuffResults = cleanKtList(tbcsim.sim.SimStats.resultsByDebuff(iterList));
           const abilityResults = cleanKtList(tbcsim.sim.SimStats.resultsByAbility(iterList));
           const damageTypeResults = cleanKtList(tbcsim.sim.SimStats.resultsByDamageType(iterList));
-          const dps = cleanKtList(tbcsim.sim.SimStats.dps_0(iterList));
+          const dps = cleanKtList(tbcsim.sim.SimStats.dps(iterList));
 
           // Compute results
           dispatch({ type: 'resultsResourceUsage', value: resourceUsage })
@@ -207,7 +207,7 @@ function App() {
                 <Nav.Item
                   icon={<Icon icon='github' />}
                   style={{ color: '#e9ebf0', textDecoration: 'none' }}
-                  href='https://github.com/marisa-ashkandi/tbcsim/issues/new'
+                  href='https://github.com/secretbis/tbcsim/issues/new'
                   target='_blank'
                   rel='noreferrer noopener'>Report a Bug
                 </Nav.Item>
@@ -234,7 +234,6 @@ function App() {
             <Navbar.Body>
               <Nav>
                 <Nav.Item></Nav.Item>
-                Footer KEKW
               </Nav>
             </Navbar.Body>
           </Navbar>

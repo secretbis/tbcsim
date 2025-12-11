@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { ResponsiveLine } from '@nivo/line'
 import { Container } from 'rsuite'
 
-import { kprop } from '../util/util';
 import { linkedHashMapKeys } from '../util/util';
 
 const ResourceLineChart = ({ character, data, config }) => (
@@ -119,7 +118,7 @@ export default function({ character, data }) {
   return (
     <Container>
       {linkedHashMapKeys(data).map(key => {
-        const resourceData = data.get_35(key)
+        const resourceData = data.asJsMapView().get(key)
         if(resourceData == null) return null;
 
         const config = chartConfig(character, key)

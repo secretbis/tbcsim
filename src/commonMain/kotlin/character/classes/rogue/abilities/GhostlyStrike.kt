@@ -6,7 +6,7 @@ import sim.Event
 import sim.SimParticipant
 import data.Constants
 import character.classes.rogue.talents.*
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.EventResult
 import sim.EventType
 

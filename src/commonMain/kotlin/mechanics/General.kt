@@ -1,6 +1,6 @@
 package mechanics
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.math.sqrt

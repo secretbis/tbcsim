@@ -2,7 +2,7 @@ package sim
 
 import character.Stats
 import kotlinx.coroutines.*
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.config.Config
 import util.Time
 import kotlin.random.Random

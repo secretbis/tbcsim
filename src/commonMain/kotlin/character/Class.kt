@@ -23,7 +23,6 @@ import character.classes.rogue.specs.Assassination
 import character.classes.warrior.specs.Kebab
 import character.classes.warrior.specs.Protection
 import data.model.Item
-import kotlin.reflect.KClass
 
 abstract class Class(
     var talents: Map<String, Talent>,
@@ -31,8 +30,8 @@ abstract class Class(
 ) {
     companion object {
         fun fromString(name: String, _specName: String, talents: Map<String, Talent> = mapOf()): Class? {
-            val className = name.toLowerCase().trim()
-            val specName = _specName.toLowerCase().trim()
+            val className = name.lowercase().trim()
+            val specName = _specName.lowercase().trim()
 
             val spec = specFromString(className, specName) ?: throw Exception("Invalid class + spec: $className - $specName")
             return when(className) {
@@ -48,8 +47,8 @@ abstract class Class(
         }
 
         fun specFromString(_className: String, _specName: String): Spec? {
-            val className = _className.toLowerCase().trim()
-            val specName = _specName.toLowerCase().trim()
+            val className = _className.lowercase().trim()
+            val specName = _specName.lowercase().trim()
 
             return when(className) {
                 "hunter" -> when(specName) {

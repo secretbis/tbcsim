@@ -1,7 +1,7 @@
 package data.itemsets
 
 import data.model.ItemSet
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 object ItemSets {
     val logger = KotlinLogging.logger {}

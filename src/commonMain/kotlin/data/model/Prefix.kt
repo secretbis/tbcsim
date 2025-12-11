@@ -1,7 +1,9 @@
 package data.model
 
 import data.Constants
+import kotlin.js.JsExport
 
+@JsExport
 enum class Prefix(val stat: List<GemStat>) {
     // Red
     DELICATE(listOf(GemStat(Constants.StatType.AGILITY, 6, 8, 10))),

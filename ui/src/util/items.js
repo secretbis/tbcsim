@@ -1,6 +1,5 @@
 import { inventorySlots as constantInvSlots, itemClasses, armorSubclasses, weaponSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classRangedInvSlots, classMainHandItemClasses, classOffHandItemClasses, classRangedItemClasses, is1HWeapon, gemSubclasses as gsc } from '../data/constants';
 import { itemEp } from '../ep/ep_stats';
-import { kprop } from '../util/util';
 
 import * as tbcsim from 'tbcsim';
 import _ from 'lodash';
@@ -8,8 +7,8 @@ import _ from 'lodash';
 export function hasAmmo(item) {
   if(!item) return false
 
-  const itemSubclass = kprop(item.itemSubclass, 'itemClassOrdinal')
-  const isThoridal = kprop(item, 'id') == 34334;
+  const itemSubclass = item.itemSubclass.itemClassOrdinal
+  const isThoridal = item.id == 34334;
   return [weaponSubclasses.bow, weaponSubclasses.crossbow, weaponSubclasses.gun].includes(itemSubclass) && !isThoridal
 }
 
@@ -46,7 +45,7 @@ export function inventorySlotInfo(character, slotName, itemType) {
 
   const rangedItem = character.gear.rangedTotemLibram
   if(rangedItem) {
-    const rangedItemSubclass = kprop(rangedItem.itemSubclass, 'itemClassOrdinal')
+    const rangedItemSubclass = rangedItem.itemSubclass.itemClassOrdinal
     if([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(rangedItemSubclass)) {
       projectileISCs.push(2)  // Arrow
     }
@@ -220,7 +219,7 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
 
   let items = [];
   for(const inventorySlot of inventorySlots) {
-    items = [...items, ...(baseData.bySlot.get_35(inventorySlot) || [])];
+    items = [...items, ...(baseData.bySlot.asJsMapView().get(inventorySlot) || [])];
   }
 
   items = items.map(i => i(contextItem))
@@ -233,10 +232,10 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
       if(!isInPhase) return false
 
       if(itemClasses) {
-        const itemClass = kprop(item.itemClass, 'ordinal');
+        const itemClass = item.itemClass.ordinal;
 
         if(itemClasses.itemClasses.includes(itemClass)) {
-          const itemSubclass = kprop(item.itemSubclass, 'itemClassOrdinal');
+          const itemSubclass = item.itemSubclass.itemClassOrdinal;
           const subclasses = itemClasses.itemSubclasses[itemClass]
 
           // Never filter the cloak slot on itemSubclass
@@ -253,7 +252,7 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
       // Filter by allowable classes
       const allowableClasses = [character.class]
       return item.allowableClasses == null || item.allowableClasses.some(it => {
-        return allowableClasses.map(it => it.toUpperCase()).includes(kprop(it, 'name', '').toUpperCase());
+        return allowableClasses.map(it => it.toUpperCase()).includes(it.name.toUpperCase());
       })
     });
 

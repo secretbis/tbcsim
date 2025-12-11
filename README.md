@@ -2,7 +2,7 @@
 
 This is a simulation of WoW: TBC DPS - items, abilities, and mechanics.
 
-Web version here: https://tbcsim.com
+Web version here: https://secretbis.github.io/tbcsim/
 
 This information is not very cleanly available, and requires a fair amount of archaeology to discover.
 As such, I'm sure there are a thousand subtle bugs.  Please report any if you find them!
@@ -134,8 +134,8 @@ STDDEV DPS: 130.06
 
 ## Setup
 
-1. Install Java 14
-   - [OpenJDK Downloads](https://adoptopenjdk.net/releases.html?variant=openjdk14&jvmVariant=hotspot)
+1. Install Java 23
+   - [OpenJDK Downloads](https://adoptium.net/temurin/releases?version=23&mode=filter&os=any&arch=any)
 1. Install Git
    - [Git Downloads](https://git-scm.com/downloads)
 1. `git clone` the project

@@ -3,7 +3,7 @@ package mechanics
 import character.Stats
 import data.Constants
 import data.model.Item
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport

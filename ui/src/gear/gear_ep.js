@@ -104,7 +104,7 @@ function EpCell({ rowData, dataKey, ...props }) {
 
 export default function({ epOptions, dispatch }) {
   const [klass, setKlass] = useState('hunter_bm');
-  const [itemPhase, setItemPhase] = useState(4);
+  const [itemPhase, setItemPhase] = useState(1);
   const [epCategory, setEpCategory] = useState('phase3');
 
   function getCharacter() {

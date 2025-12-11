@@ -1,5 +1,8 @@
 package sim
 
+import kotlin.js.JsExport
+
+@JsExport
 enum class EventType {
     DAMAGE,
     SPELL_START_CAST,

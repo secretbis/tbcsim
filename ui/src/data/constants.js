@@ -1,5 +1,3 @@
-import { kprop } from '../util/util';
-
 export const inventorySlots = {
   not_equippable: 0,
   head: 1,
@@ -346,64 +344,64 @@ export function isMeleeWeapon(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.polearm, wsc.staff, wsc.sword_1h, wsc.sword_2h]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isAxe(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.axe_1h, wsc.axe_2h]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isSword(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.sword_1h, wsc.sword_2h]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isMace(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.mace_1h, wsc.mace_2h]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isRangedWeapon(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isBow(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.bow, wsc.crossbow]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function isGun(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.gun]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-         validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export function is1HWeapon(item) {
   if(!item || !item.itemClass) return false
 
   const validSubclasses = [wsc.axe_1h, wsc.mace_1h, wsc.sword_1h, wsc.fist, wsc.dagger]
-  return kprop(item.itemClass, 'ordinal') === itemClasses.weapon &&
-        validSubclasses.includes(kprop(item.itemSubclass, 'itemClassOrdinal'))
+  return item.itemClass.ordinal === itemClasses.weapon &&
+        validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
 }
 
 export const classes = {

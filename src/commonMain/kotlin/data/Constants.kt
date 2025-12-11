@@ -1,6 +1,10 @@
 package data
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
+
 // This contains meanings for all the magic numbers in the WoW TBC database
+@JsExport
 object Constants {
     const val UNKNOWN_ICON = "inv_misc_questionmark.jpg"
 

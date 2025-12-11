@@ -1,9 +1,11 @@
 package sim.rotation
 
 import character.Ability
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 class Rotation(
     val rules: List<Rule>,
     val autoAttack: Boolean

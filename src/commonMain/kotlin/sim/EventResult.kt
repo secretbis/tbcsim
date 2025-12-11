@@ -1,5 +1,8 @@
 package sim
 
+import kotlin.js.JsExport
+
+@JsExport
 enum class EventResult {
     RESIST,
     PARTIAL_RESIST_CRIT,

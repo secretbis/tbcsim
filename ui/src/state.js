@@ -127,7 +127,7 @@ export function stateReducer(state, action) {
 }
 
 export const initialState = {
-  phase: 4,
+  phase: 1,
 
   iterationsCompleted: null,
   iterationResults: null,

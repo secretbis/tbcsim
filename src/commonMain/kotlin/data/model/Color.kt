@@ -1,7 +1,9 @@
 package data.model
 
 import data.Constants
+import kotlin.js.JsExport
 
+@JsExport
 enum class Color(val mask: Int, val itemSubclass: Constants.ItemSubclass) {
     META(1, Constants.ItemSubclass.META),
 

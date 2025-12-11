@@ -2,48 +2,47 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { CheckPicker, Button, Container, InputNumber, Modal } from 'rsuite';
 
-import { kprop } from '../util/util';
 import * as tbcsim from 'tbcsim';
 
 const eventTemplates = {
   BUFF_START: evt => {
-    return `You gain ${kprop(evt.buff, 'name')}`;
+    return `You gain ${evt.buff.name}`;
   },
   BUFF_REFRESH: evt => {
     const stacks = evt.buffStacks ? ` (${evt.buffStacks} stacks)` : '';
     const charges = evt.buffCharges ? ` (${evt.buffCharges} charges)` : '';
-    return `${kprop(evt.buff, 'name')} on You is refreshed${stacks}${charges}`;
+    return `${evt.buff.name} on You is refreshed${stacks}${charges}`;
   },
   BUFF_CHARGE_CONSUMED: evt => {
-    return `Consumed ${kprop(evt.buff, 'name')} charge (${evt.buffCharges} left)`
+    return `Consumed ${evt.buff.name} charge (${evt.buffCharges} left)`
   },
   BUFF_END: evt => {
-    return `${kprop(evt.buff, 'name')} on You ends`
+    return `${evt.buff.name} on You ends`
   },
   DEBUFF_START: evt => {
-    return `Target gains ${kprop(evt.buff, 'name')}`
+    return `Target gains ${evt.buff.name}`
   },
   DEBUFF_REFRESH: evt => {
-    return `${kprop(evt.buff, 'name')} on Target is refreshed ${evt.buffStacks}`
+    return `${evt.buff.name} on Target is refreshed ${evt.buffStacks}`
   },
   DEBUFF_CHARGE_CONSUMED: evt => {
-    return `Target ${kprop(evt.buff, 'name')} charge consumed: ${kprop(evt.buff, 'buffCharges')}`
+    return `Target ${evt.buff.name} charge consumed: ${evt.buff.buffCharges}`
   },
   DEBUFF_END: evt => {
-    return `${kprop(evt.buff, 'name')} on Target ends`
+    return `${evt.buff.name} on Target ends`
   },
   DAMAGE: evt => {
-    return `Your ${evt.ability && kprop(evt.ability, 'name')} deals ${evt.amount.toFixed(0)} damage (${_.capitalize(kprop(evt.result, 'name', ''))})`
+    return `Your ${evt.ability && evt.ability.name} deals ${evt.amount.toFixed(0)} damage (${_.capitalize(evt.result.name)})`
   },
   RESOURCE_CHANGED: evt => {
     const type = evt.delta >= 0 ? 'gain' : 'lose';
-    return `You ${type} ${Math.abs(evt.delta).toFixed(0)} ${kprop(evt.resourceType, 'name').toLowerCase()} (${evt.ability && kprop(evt.ability, 'name')}) (current: ${evt.amount.toFixed(0)})`
+    return `You ${type} ${Math.abs(evt.delta).toFixed(0)} ${evt.resourceType.name.toLowerCase()} (${evt.ability && evt.ability.name}) (current: ${evt.amount.toFixed(0)})`
   },
   SPELL_START_CAST: evt => {
-    return `You begin casting ${evt.ability && kprop(evt.ability, 'name')}`
+    return `You begin casting ${evt.ability && evt.ability.name}`
   },
   SPELL_CAST: evt => {
-    return `You finish casting ${evt.ability && kprop(evt.ability, 'name')}`
+    return `You finish casting ${evt.ability && evt.ability.name}`
   },
 }
 
@@ -74,7 +73,7 @@ export default function({ iterations }) {
   const [selectedParticipant, setSelectedParticipant] = useState('subject');
 
   function onSelectedIterationChange(value) {
-    if(kprop(iterations, 'array')[value] != null) {
+    if(iterations.asJsReadonlyArrayView()[value] != null) {
       setSelectedIteration(value)
     }
   }
@@ -99,13 +98,13 @@ export default function({ iterations }) {
   }
 
   function shouldRenderEvent(event) {
-    const isHiddenBuff = kprop(event.buff, 'hidden');
-    const isFiltered = !selectedFilters.includes(kprop(event.eventType, 'name'))
+    const isHiddenBuff = event.buff && event.buff.hidden;
+    const isFiltered = !selectedFilters.includes(event.eventType.name)
     return !(isHiddenBuff || isFiltered)
   }
 
   function renderLog() {
-    const events = kprop(kprop(iterations, 'array')[selectedIteration][selectedParticipant].events, 'array')
+    const events = iterations.asJsReadonlyArrayView()[selectedIteration][selectedParticipant].events.asJsReadonlyArrayView()
     return (
       <Container>
         {events.map((event, idx) => {
@@ -125,7 +124,7 @@ export default function({ iterations }) {
               <div key={idx}>
                 <span>{logTimestamp(event.timeMs)}</span>
                 &nbsp;
-                <span>{kprop(event.eventType, 'name')}</span>
+                <span>{event.eventType.name}</span>
               </div>
             )
           }
@@ -135,13 +134,12 @@ export default function({ iterations }) {
   }
 
   function iterationDps() {
-    const dps = tbcsim.sim.SimStats.dps_0(
-      tbcsim.util.Utils.listWrap([kprop(iterations, 'array')[selectedIteration]])
+    const dps = tbcsim.sim.SimStats.dps(
+      tbcsim.util.Utils.listWrap([iterations.asJsReadonlyArrayView()[selectedIteration]])
     )
 
-    // Median of 1, omegalul
-    const subjectDpsMedian = dps.get_35('subject').median
-    const subjectPetDpsMedian = (dps.get_35('subjectPet') || {}).median || 0
+    const subjectDpsMedian = dps.asJsMapView().get('subject').median
+    const subjectPetDpsMedian = (dps.asJsMapView().get('subjectPet') || {}).median || 0
     const totalMedian = subjectDpsMedian + subjectPetDpsMedian
 
     const totalDps = {

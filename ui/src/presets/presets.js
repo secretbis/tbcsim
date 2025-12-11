@@ -390,8 +390,7 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
   function loadPreset(presetObj, dispatch) {
     const clone = JSON.parse(JSON.stringify(presetObj))
     clone.gear = _.mapValues(clone.gear, rawItem => {
-      // TODO: This method is code generator internals, and possibly fragile
-      let item = tbcsim.data.Items.byName.get_35(rawItem.name)
+      let item = tbcsim.data.Items.byName.asJsMapView().get(rawItem.name)
       if(!item) {
         return;
       }
@@ -399,20 +398,20 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
 
       if(rawItem.gems) {
         rawItem.gems.forEach((gemName, idx) => {
-          const gem = tbcsim.data.Items.byName.get_35(gemName)()
+          const gem = tbcsim.data.Items.byName.asJsMapView().get(gemName)()
           item.sockets[idx].gem = gem
         })
       }
 
       if(rawItem.enchant) {
-        const enchant = tbcsim.data.Enchants.byName.get_35(rawItem.enchant)
+        const enchant = tbcsim.data.Enchants.byName.asJsMapView().get(rawItem.enchant)
         if(enchant) {
           item.enchant = enchant(item)
         }
       }
 
       if(rawItem.tempEnchant) {
-        const tmpEnchant = tbcsim.data.TempEnchants.byName.get_35(rawItem.tempEnchant)
+        const tmpEnchant = tbcsim.data.TempEnchants.byName.asJsMapView().get(rawItem.tempEnchant)
         if(tmpEnchant) {
           item.tempEnchant = tmpEnchant(item)
         }

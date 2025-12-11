@@ -19,8 +19,8 @@ export default function({ character, results }) {
   }
 
   function renderDps() {
-    const subjectDps = dps.get_35('subject')
-    const subjectPetDps = dps.get_35('subjectPet')
+    const subjectDps = dps.asJsMapView().get('subject')
+    const subjectPetDps = dps.asJsMapView().get('subjectPet')
 
     function withPet(type) {
       const subjectValue = subjectDps[type]

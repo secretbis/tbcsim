@@ -1,9 +1,11 @@
 package character
 
 import data.Constants
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 abstract class Buff {
     open class State {
         val logger = KotlinLogging.logger {}

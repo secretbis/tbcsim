@@ -3,7 +3,9 @@ package character
 import data.model.Item
 import sim.Event
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 abstract class ItemProc(val sourceItems: List<Item>) : Proc() {
     override val requiresItem: Boolean = true
 

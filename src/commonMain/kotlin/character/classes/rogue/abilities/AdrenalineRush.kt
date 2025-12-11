@@ -8,7 +8,7 @@ import data.Constants
 import data.model.Item
 import character.classes.rogue.talents.*
 import character.classes.rogue.buffs.*
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 class AdrenalineRush : Ability() {
     companion object {

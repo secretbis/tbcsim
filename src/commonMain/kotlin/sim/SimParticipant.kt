@@ -14,7 +14,7 @@ import character.classes.priest.pet.abilities.ShadowfiendMelee
 import data.Constants
 import data.model.Item
 import mechanics.Rating
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.rotation.Criterion
 import sim.rotation.Rotation
 import sim.rotation.Rule

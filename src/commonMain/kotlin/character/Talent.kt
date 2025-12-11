@@ -1,6 +1,5 @@
 package character
 
-import sim.SimIteration
 import sim.SimParticipant
 
 abstract class Talent(private var _currentRank: Int) {

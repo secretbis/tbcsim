@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
 import com.github.ajalt.clikt.parameters.options.*
@@ -41,10 +42,10 @@ import java.math.RoundingMode
 
 fun setupLogging(debug: Boolean) {
     val level = if(debug) { "DEBUG" } else "INFO"
-    val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
-    if(System.getProperty(logKey).isNullOrEmpty()) {
-        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, level)
-    }
+//    val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
+//    if(System.getProperty(logKey).isNullOrEmpty()) {
+//        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, level)
+//    }
 }
 
 private val mapper = ObjectMapper().registerKotlinModule()
@@ -186,7 +187,7 @@ class TBCSim : CliktCommand() {
         val totalStatMod = Stats().add(epStatMod).add(hitReduction)
 
         val iterations = runBlocking { Sim(config, opts, totalStatMod) {}.sim() }
-        return Pair(epDelta, SimStats.dps(iterations).entries.sumByDouble { it.value?.mean ?: 0.0 })
+        return Pair(epDelta, SimStats.dps(iterations).entries.sumOf { it.value?.mean ?: 0.0 })
     }
 
     fun formatEp(dps: Double): Double {
@@ -262,6 +263,8 @@ class TBCSim : CliktCommand() {
             "petSd" to petSd
         )
     }
+
+    private val json = Json { prettyPrint = true }
 
     override fun run() {
         setupLogging(debug)
@@ -347,7 +350,7 @@ class TBCSim : CliktCommand() {
                 epCategories,
                 epOptions
             )
-            File(epOutputPath).writeText(Json { prettyPrint = true }.encodeToString(fullOutput))
+            File(epOutputPath).writeText(json.encodeToString(fullOutput))
         } else if (calcRankings) {
             val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
             val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
@@ -382,7 +385,7 @@ class TBCSim : CliktCommand() {
                 }
 
             // Output rankings
-            File(rankingOutputPath).writeText(Json { prettyPrint = true }.encodeToString(rankingCategories))
+            File(rankingOutputPath).writeText(json.encodeToString(rankingCategories))
         } else {
             if (configFile == null) {
                 println("Please specify a sim config file path as the first positional argument")
@@ -435,4 +438,4 @@ class TBCSim : CliktCommand() {
     }
 }
 
-fun main(args: Array<String>) = TBCSim().main(args)
+fun main(args: Array<String>): Unit = TBCSim().main(args)

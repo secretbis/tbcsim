@@ -2,11 +2,10 @@ package sim
 
 import character.*
 import data.abilities.generic.MP5
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.rotation.Rotation
 import kotlin.js.JsExport
 import kotlin.math.ceil
-import kotlin.random.Random
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
 

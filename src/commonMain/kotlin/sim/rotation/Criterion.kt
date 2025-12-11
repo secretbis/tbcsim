@@ -1,6 +1,6 @@
 package sim.rotation
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import sim.SimParticipant
 import sim.config.RotationRuleCriterion
 import sim.rotation.criteria.*

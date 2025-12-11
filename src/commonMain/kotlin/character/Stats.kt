@@ -2,7 +2,9 @@ package character
 
 import data.Constants.StatType
 import data.Constants.DamageType
+import kotlin.js.JsExport
 
+@JsExport
 data class Stats(
     // Base stats
     var strength: Int = 0,

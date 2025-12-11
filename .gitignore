@@ -1,6 +1,9 @@
 .gradle
 .idea
 .DS_Store
+.kotlin
+
+kotlin-js-store
 build
 
 *.iml

@@ -29,7 +29,7 @@ const columnInfo = [
 
 export default (props) => {
   return linkedHashMapKeys(props.data).map(key => {
-    const data = props.data.get_35(key)
+    const data = props.data.asJsMapView().get(key)
     if(data == null) return null;
 
     return (

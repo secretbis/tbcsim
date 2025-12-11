@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Col, Container, Dropdown, Row } from 'rsuite';
 
 import { isAxe, isMace, isSword, isBow, isGun } from '../data/constants';
-import { kprop } from '../util/util';
 
 import * as tbcsim from 'tbcsim';
 
@@ -11,23 +10,23 @@ function BaseStats({ simParticipant: sp }) {
     <Col>
       <Row>
         <Col xs={12}>Strength:</Col>
-        <Col xs={12}>{sp.strength_0()}</Col>
+        <Col xs={12}>{sp.strength()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Agility:</Col>
-        <Col xs={12}>{sp.agility_0()}</Col>
+        <Col xs={12}>{sp.agility()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Stamina:</Col>
-        <Col xs={12}>{sp.stamina_0()}</Col>
+        <Col xs={12}>{sp.stamina()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Intellect:</Col>
-        <Col xs={12}>{sp.intellect_0()}</Col>
+        <Col xs={12}>{sp.intellect()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Spirit:</Col>
-        <Col xs={12}>{sp.spirit_0()}</Col>
+        <Col xs={12}>{sp.spirit()}</Col>
       </Row>
     </Col>
   )
@@ -44,25 +43,25 @@ function MeleeStats({ simParticipant: sp }) {
   const mainHand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand
   const hasMainhand = mainHand && sp.character.gear.mainHand.itemClass;
   if(hasMainhand) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.mainHand);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower(), sp.character.gear.mainHand);
     damageMhLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageMhHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
-    speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
+    speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
   }
 
   const offHand = sp && sp.character && sp.character.gear && sp.character.gear.offHand
   const hasOffhand = offHand && sp.character.gear.offHand.itemClass;
   if(hasOffhand) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.offHand);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower(), sp.character.gear.offHand);
     damageOhLow = ((sp.character.gear.offHand.minDmg + dmgFromAp) / 2).toFixed(1);
     damageOhHigh = ((sp.character.gear.offHand.maxDmg + dmgFromAp) / 2).toFixed(1);
-    speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
+    speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
   }
 
   // Special stats
-  const swordExpertisePct = kprop(sp.stats, 'swordExpertiseRating') / 15.77
-  const maceExpertisePct = kprop(sp.stats, 'maceExpertiseRating') / 15.77
-  const axeExpertisePct = kprop(sp.stats, 'axeExpertiseRating') / 15.77
+  const swordExpertisePct = sp.stats.swordExpertiseRating / 15.77
+  const maceExpertisePct = sp.stats.maceExpertiseRating / 15.77
+  const axeExpertisePct = sp.stats.axeExpertiseRating / 15.77
 
   return (
     <Col>
@@ -76,7 +75,7 @@ function MeleeStats({ simParticipant: sp }) {
       </Row> : null}
       <Row>
         <Col xs={12}>Attack Power:</Col>
-        <Col xs={12}>{sp.attackPower_0()}</Col>
+        <Col xs={12}>{sp.attackPower()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
@@ -104,7 +103,7 @@ function MeleeStats({ simParticipant: sp }) {
       </Row> : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
-        <Col xs={12}>{sp.armorPen_0()}</Col>
+        <Col xs={12}>{sp.armorPen()}</Col>
       </Row>
     </Col>
   )
@@ -118,15 +117,15 @@ function RangedStats({ simParticipant: sp }) {
   const ranged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram
   const hasRanged = ranged && sp.character.gear.rangedTotemLibram.itemClass;
   if(hasRanged) {
-    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage_0(sp, sp.attackPower_0(), sp.character.gear.rangedTotemLibram);
+    const dmgFromAp = tbcsim.mechanics.Melee.apToDamage(sp, sp.attackPower(), sp.character.gear.rangedTotemLibram);
     damageRangedLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageRangedHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
-    speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier_0()).toFixed(2);
+    speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
   }
 
   // Special stats
-  const bowCritPct =  kprop(sp.stats, 'bowCritRating') / 22.08
-  const gunCritPct =  kprop(sp.stats, 'gunCritRating') / 22.08
+  const bowCritPct =  sp.stats.bowCritRating / 22.08
+  const gunCritPct =  sp.stats.gunCritRating / 22.08
 
   return (
     <Col>
@@ -136,7 +135,7 @@ function RangedStats({ simParticipant: sp }) {
       </Row> : null}
       <Row>
         <Col xs={12}>Attack Power:</Col>
-        <Col xs={12}>{sp.rangedAttackPower_0()}</Col>
+        <Col xs={12}>{sp.rangedAttackPower()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
@@ -156,7 +155,7 @@ function RangedStats({ simParticipant: sp }) {
       </Row> : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
-        <Col xs={12}>{sp.armorPen_0()}</Col>
+        <Col xs={12}>{sp.armorPen()}</Col>
       </Row>
     </Col>
   )
@@ -167,11 +166,11 @@ function SpellStats({ simParticipant: sp }) {
     <Col>
       <Row>
         <Col xs={12}>Spell Damage:</Col>
-        <Col>{sp.spellDamage_0()}</Col>
+        <Col>{sp.spellDamage()}</Col>
       </Row>
       <Row>
         <Col xs={12}>Spell Pen:</Col>
-        <Col>{kprop(sp.stats, 'spellPen')}</Col>
+        <Col>{sp.stats.spellPen}</Col>
       </Row>
       <Row>
         <Col xs={12}>Hit %:</Col>
@@ -183,18 +182,18 @@ function SpellStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Haste %:</Col>
-        <Col>{((sp.spellHasteMultiplier_0() - 1) * 100).toFixed(2)}%</Col>
+        <Col>{((sp.spellHasteMultiplier() - 1) * 100).toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>MP5:</Col>
-        <Col>{kprop(sp.stats, 'manaPer5Seconds')}</Col>
+        <Col>{sp.stats.manaPer5Seconds}</Col>
       </Row>
     </Col>
   )
 }
 
 function DefensiveStats({ simParticipant: sp }) {
-  const armor = sp.armor_0();
+  const armor = sp.armor();
   const armorMit = ((armor / (armor + (467.5 * 70 - 22167.5))) * 100).toFixed(2)
 
   return (
@@ -209,11 +208,11 @@ function DefensiveStats({ simParticipant: sp }) {
       </Row>
       <Row>
         <Col xs={12}>Dodge %:</Col>
-        <Col xs={12}>{sp.dodgePct_0().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.dodgePct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Parry %:</Col>
-        <Col xs={12}>{sp.parryPct_0().toFixed(2)}%</Col>
+        <Col xs={12}>{sp.parryPct().toFixed(2)}%</Col>
       </Row>
       <Row>
         <Col xs={12}>Block %:</Col>
@@ -237,32 +236,7 @@ export default function({ state }) {
   const simParticipant = new tbcsim.sim.SimParticipant(
     simConfig.character,
     simConfig.rotation,
-    // Shim any parts of the sim object we need
-    // FIXME: This really needs a better solution, it's mega jank
-    {
-      _tickNum: 0,
-      _elapsedTimeMs: 0,
-      getExpirationTick: function() { return 0; },
-      _target_0: {
-        _character: {
-          _subTypes: {
-            contains_61: function() { return false; },
-            iterator_70: function() {
-              return {
-                hasNext_52: function() { return false; }
-              }
-            }
-          }
-        },
-        addDebuff: function() {}
-      },
-      addRaidBuff: function(buff) {
-        simParticipant.addBuff(buff)
-      },
-      isExecutePhase$default: function() {
-        return false;
-      }
-    }
+    new tbcsim.sim.SimIteration(simConfig.character, simConfig.rotation, {})
   ).init()
 
   // Boofs

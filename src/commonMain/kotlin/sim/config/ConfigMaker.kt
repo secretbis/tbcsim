@@ -13,7 +13,7 @@ import data.itemscustom.EmptyItem
 import data.model.Gem
 import data.model.Item
 import kotlinx.serialization.json.Json
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import net.mamoe.yamlkt.Yaml
 import sim.rotation.Criterion
 import sim.rotation.Rotation

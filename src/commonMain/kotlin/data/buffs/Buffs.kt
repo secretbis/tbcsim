@@ -3,7 +3,7 @@ package data.buffs
 import character.Buff
 import data.buffs.permanent.*
 import data.model.Item
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 object Buffs {
     private val logger = KotlinLogging.logger {}

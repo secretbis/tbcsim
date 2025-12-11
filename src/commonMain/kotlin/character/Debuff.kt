@@ -1,7 +1,9 @@
 package character
 
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 abstract class Debuff(val owner: SimParticipant) : Buff() {
     open val tickDeltaMs: Int = -1
 

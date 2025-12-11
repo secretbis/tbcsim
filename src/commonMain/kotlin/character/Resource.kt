@@ -1,7 +1,9 @@
 package character
 
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 class Resource(
     val sp: SimParticipant,
     val type: Type

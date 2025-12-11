@@ -2,7 +2,9 @@ package character
 
 import data.Constants
 import sim.SimParticipant
+import kotlin.js.JsExport
 
+@JsExport
 abstract class Ability {
     open class State {
         var cooldownStartMs: Int = -1
