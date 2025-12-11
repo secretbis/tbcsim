@@ -21,7 +21,7 @@ jobs:
           java-version: 23
           cache: gradle
       - name: Kotlin JS Build
-        run: ./gradlew compileKotlinJs
+        run: ./gradlew compileProductionExecutableKotlinJs
 
       # NPM/UI
       - uses: actions/setup-node@v5
