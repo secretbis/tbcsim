@@ -2,6 +2,7 @@
   "name": "ui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/tbcsim",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@nivo/bar": "^0.67.0",
