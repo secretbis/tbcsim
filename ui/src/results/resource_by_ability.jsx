@@ -33,7 +33,7 @@ export default (props) => {
     if(data == null) return null;
 
     return (
-      <Container style={{ marginBottom: '20px' }}>
+      <Container>
         <Table
           key={key}
           title={`Resource Gain/Usage By Ability (${key})`}

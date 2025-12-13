@@ -6,32 +6,20 @@ import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite'
 
 import rankingData from './data/ranks_all.json'
 
-const bannerTitle = 'Rankings are very beta!'
-function bannerMsg() {
-  return (
-    <div>
-      <p>These values are very likely to change as TBC behavior is tested further, and sim issues are resolved.</p>
-      <p>Please consume these values with an appropriate amount of sodium!</p>
-    </div>
-  );
-}
-
 function HowItWorks() {
   return (
-    <Container style={{ marginTop: 20, marginBottom: 20 }}>
-      <Row>
-        <h5>How are these values calculated?</h5>
-        <ul>
-          <li>Each specialization is simulated for 15,000 iterations at 10ms resolution, with full raid buffs</li>
-          <li>The gear, buff and rotation setups for each of these specializations are the presets selectable on the simulator page</li>
-          <li>Rankings are per-tier.  Each preset has a tier-specific BIS or BIS-adjacent gear set (if it isn't BIS/BIS-adjacent, please file a bug!)</li>
-        </ul>
-        <h5>Notes and Caveats</h5>
-        <ul>
-          <li>Each class is simulated in "ideal" conditions.  For example, supporting 10 Rogues/Fury Warriors with perfect melee groups is not possible - a 25-man raid would max out at approximately one or two.</li>
-          <li>If you are interested in how these classes perform in different conditions, head over to the Simulator tab and subtract some buffs!</li>
-        </ul>
-      </Row>
+    <Container style={{ marginBottom: 20 }}>
+      <h5>How are these values calculated?</h5>
+      <ul>
+        <li>Each specialization is simulated for 15,000 iterations at 10ms resolution, with full raid buffs</li>
+        <li>The gear, buff and rotation setups for each of these specializations are the presets selectable on the simulator page</li>
+        <li>Rankings are per-tier.  Each preset has a tier-specific BIS or BIS-adjacent gear set (if it isn't BIS/BIS-adjacent, please file a bug!)</li>
+      </ul>
+      <h5>Notes and Caveats</h5>
+      <ul>
+        <li>Each class is simulated in "ideal" conditions.  For example, supporting 10 Rogues/Fury Warriors with perfect melee groups is not possible - that would not fit in a raid.</li>
+        <li>If you are interested in how these classes perform in different conditions, head over to the Simulator tab and subtract some buffs!</li>
+      </ul>
     </Container>
   );
 }
@@ -199,9 +187,8 @@ function SpecRankingPanel({ name, subtitle, category, collapsible=true, category
 
 export default function() {
   return (
-    <Content style={{ padding: '20px' }}>
+    <Content>
       <Grid fluid={true}>
-        <Message type='warning' title={bannerTitle} description={bannerMsg()} closable />
         <HowItWorks />
         <SpecRankingPanel name='Phase 3 (WITH GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked WITH Warglaives'
           categoryOverrides={{

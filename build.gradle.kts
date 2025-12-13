@@ -18,6 +18,7 @@ kotlin {
         browser()
         generateTypeScriptDefinitions()
         binaries.executable()
+        useEsModules()
     }
 
     sourceSets {

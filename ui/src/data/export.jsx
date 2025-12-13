@@ -51,7 +51,7 @@ export default function({ columnInfo, data }) {
         <Button onClick={() => { navigator.clipboard.writeText(exportData); }}>Copy to Clipboard</Button>
         <textarea
           style={{ color: '#000', resize: 'none' }}
-          value={exportData}
+          value={exportData || ""}
           rows={5}
           wrap={'soft'}
         />
@@ -62,7 +62,7 @@ export default function({ columnInfo, data }) {
   return (
     <span style={{ marginLeft: 10 }}>
       <Button appearance='ghost' onClick={onOpen}>Export</Button>
-      <Modal show={modalOpen} full size='lg' onHide={onHide} style={{ display: 'inline-block', maxHeight: '80vh' }}>
+      <Modal open={modalOpen} full size='lg' onHide={onHide} onClose={onHide} style={{ display: 'inline-block', maxHeight: '80vh' }}>
         <Modal.Header style={{ marginBottom: 10 }}>
           <Modal.Title style={{ marginBottom: 10 }}>Export</Modal.Title>
         </Modal.Header>

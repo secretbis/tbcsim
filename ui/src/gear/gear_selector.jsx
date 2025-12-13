@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { Checkbox, Input, InputGroup, Icon, Modal, Table } from 'rsuite';
+import { Checkbox, Input, InputGroup, Modal, Table } from 'rsuite';
+import { Icon } from '@rsuite/icons';
+import { FaSearch } from "react-icons/fa";
 
 import { filterByItemName, filter1HOnly, itemsForSlot } from '../util/items';
 
@@ -11,7 +13,7 @@ const { Column, HeaderCell, Cell } = Table;
 export default function({ character, phase, type, item, slotName, TooltipComponent, visible, setVisible, onSelect, epOptions }) {
   const [filter, setFilter] = useState('');
   const [oneHandOnly, setOneHandOnly] = useState(true);
-  const [modalFullyShown, setModalFullyShown] = useState('');
+  const [modalFullyShown, setModalFullyShown] = useState(false);
 
   TooltipComponent = TooltipComponent || ItemTooltip
 
@@ -64,7 +66,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
         <TooltipComponent item={rowData} enchant={rowData}>
-          <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
+          <span className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</span>
         </TooltipComponent>
       </Cell>
     )
@@ -74,7 +76,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
     const cellValue = rowData[dataKey]
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <p>{cellValue}</p>
+        <span>{cellValue}</span>
       </Cell>
     )
   }
@@ -83,7 +85,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
     const cellValue = rowData[dataKey]
     return (
       <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
-        <p>{cellValue}</p>
+        <span>{cellValue}</span>
       </Cell>
     )
   }
@@ -94,9 +96,9 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
     return (
       <>
         <InputGroup inside style={{ margin: '15px 0 15px 0' }}>
-          <Input onChange={value => setFilter(value)} />
+          <Input placeholder={'Type to filter'} onChange={value => setFilter(value)} />
           <InputGroup.Button>
-            <Icon icon="search" />
+            <Icon as={FaSearch} />
           </InputGroup.Button>
         </InputGroup>
         {slotName == 'mainHand' ?
@@ -132,7 +134,7 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
   if(!visible) return null
 
   return (
-    <Modal show={true} height={600} onEntered={onEntered} onHide={onHide}>
+    <Modal open={true} size={'sm'} onEntered={onEntered} onHide={onHide} onClose={onHide}>
       <Modal.Header>
         <Modal.Title>Select an Item (Phase {phase})</Modal.Title>
       </Modal.Header>

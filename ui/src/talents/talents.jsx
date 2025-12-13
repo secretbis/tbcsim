@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
 import { Row, Col, Button } from 'rsuite';
+
+import { useDispatchContext, useStateContext } from '../state';
 
 function stringifyTalents(talents) {
   return talents ? JSON.stringify(talents, null, 2) : '';
 }
 
-export default function({ talents, dispatch }) {
+export default function() {
+  const { talents } = useStateContext();
+  const dispatch = useDispatchContext();
+
   const [jsonValid, setJsonValid] = useState(true);
   const [talentsStr, setTalentsStr] = useState(talents);
 
@@ -44,7 +48,7 @@ export default function({ talents, dispatch }) {
           width: '100%',
           height: '100%',
           minHeight: '400px'
-        }} value={talentsStr} onChange={onChange} />
+        }} value={talentsStr || ""} onChange={onChange} />
         <Button disabled={!talentsStr || !jsonValid} onClick={saveTalents}>Save</Button>
       </Col>
     </Row>

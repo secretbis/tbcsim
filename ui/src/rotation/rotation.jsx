@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
 import { Row, Col, Button } from 'rsuite';
+
+import { useDispatchContext, useStateContext } from '../state';
 
 function stringifyRotation(rotation) {
   return rotation ? JSON.stringify(rotation, null, 2) : '';
 }
 
-export default function({ rotation, dispatch }) {
+export default function() {
+  const { rotation } = useStateContext();
+  const dispatch = useDispatchContext();
+
   const [jsonValid, setJsonValid] = useState(true);
   const [rotationStr, setRotationStr] = useState(rotation);
 
@@ -44,7 +48,7 @@ export default function({ rotation, dispatch }) {
           width: '100%',
           height: '100%',
           minHeight: '400px'
-        }} value={rotationStr} onChange={onChange} />
+        }} value={rotationStr || ""} onChange={onChange} />
         <Button disabled={!rotationStr || !jsonValid} onClick={saveRotation}>Save</Button>
       </Col>
     </Row>

@@ -1,3 +1,4 @@
+import React, { createContext, useContext, useReducer } from 'react';
 import _ from 'lodash';
 
 import simDefaults from './data/sim_defaults';
@@ -6,7 +7,7 @@ import { inventorySlots } from './data/constants';
 
 import * as tbcsim from 'tbcsim';
 
-export function stateReducer(state, action) {
+function stateReducer(state, action) {
   let newState = state
   if (_.has(state, action.type)) {
     newState = _.merge({
@@ -126,7 +127,7 @@ export function stateReducer(state, action) {
   return newState
 }
 
-export const initialState = {
+const initialState = {
   phase: 1,
 
   iterationsCompleted: null,
@@ -172,11 +173,11 @@ export const initialState = {
     pet: null
   },
 
-  raidBuffs: _.reduce(tbcsim.data.abilities.raid.RaidAbilities.buffNames, (acc, buff) => {
+  raidBuffs: _.reduce(tbcsim.RaidAbilities.getInstance().buffNames, (acc, buff) => {
     acc[buff] = true
     return acc;
   }, {}),
-  raidDebuffs: _.reduce(tbcsim.data.abilities.raid.RaidAbilities.debuffNames, (acc, debuff) => {
+  raidDebuffs: _.reduce(tbcsim.RaidAbilities.getInstance().debuffNames, (acc, debuff) => {
     acc[debuff] = true
     return acc;
   }, {}),
@@ -213,14 +214,14 @@ initialState.deserialize = function(serialized) {
 
   // Rehydrate character data into actual items and etc.
   if(newState.character) {
-    newState.character = tbcsim.config.ConfigMaker.fromJson(newState.character)
+    newState.character = tbcsim.ConfigMaker.getInstance().fromJson(newState.character)
   }
 
   return newState;
 };
 
 initialState.makeSimConfig = function() {
-  return tbcsim.sim.config.ConfigMaker.fromJson(
+  return tbcsim.ConfigMaker.getInstance().fromJson(
     JSON.stringify({
       class: this.character.class,
       description: this.character.description,
@@ -244,7 +245,7 @@ initialState.makeSimConfig = function() {
 }
 
 initialState.makeSimOptions = function() {
-  return new tbcsim.sim.SimOptions(
+  return new tbcsim.SimOptions(
     this.simOptions.durationSeconds * 1000,
     this.simOptions.durationVariabilitySeconds * 1000,
     this.simOptions.stepMs,
@@ -256,4 +257,28 @@ initialState.makeSimOptions = function() {
     this.simOptions.allowParryAndBlock,
     this.simOptions.showHiddenBuffs
   )
+}
+
+// Context exports
+const StateContext = createContext(initialState);
+const DispatchContext = createContext(null);
+
+export function StateProvider({ children }) {
+  const [state, dispatch] = useReducer(stateReducer, initialState);
+
+  return (
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        {children}
+      </DispatchContext.Provider>
+    </StateContext.Provider>
+  )
+}
+
+export function useStateContext() {
+  return useContext(StateContext);
+}
+
+export function useDispatchContext() {
+  return useContext(DispatchContext);
 }
