@@ -28,11 +28,11 @@ export default function({ phase, socket, character, onSelect, epOptions }) {
     onSelect(gem)
   }
 
-  const isMetaGem = color == 'meta'
+  const isMetaGem = color == 'meta';
   return (
-    <span onClick={onGemClick}>
+    <span onClick={onGemClick} style={{ border: '1px solid', borderColor: color, borderRadius: '2px', marginRight: '5px' }}>
       <ItemTooltip item={gem} isMetaGem={isMetaGem} gear={character.gear}>
-        <img src={icon} style={{ width: 20, height: 20, marginRight: 5, cursor: 'pointer' }} />
+        <img src={icon} style={{ width: 20, height: 20, cursor: 'pointer' }} />
         <GearSelector
           character={character}
           phase={phase}

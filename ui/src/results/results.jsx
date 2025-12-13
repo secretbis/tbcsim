@@ -40,19 +40,31 @@ export default function({ character, results }) {
       const sd = withPet('sd')
 
       return (
-        <Row>
-          <p style={{ fontSize: 22 }}><b>AVERAGE DPS: {toFixed()(mean.total)}</b> | YOU: {toFixed()(subjectDps.mean)} ({toFixedPct()(mean.youPct)}) | PET: {toFixed()(subjectPetDps.mean)} ({toFixedPct()(mean.petPct)})</p>
-          <p>MEDIAN DPS: {toFixed()(median.total)} | YOU: {toFixed()(subjectDps.median)} ({toFixedPct()(median.youPct)}) | PET: {toFixed()(subjectPetDps.median)} ({toFixedPct()(median.petPct)})</p>
-          <p>STDDEV DPS: {toFixed()(subjectDps.sd)}</p>
-        </Row>
+        <>
+          <Row>
+            <span style={{ fontSize: 22 }}><b>AVERAGE DPS: {toFixed()(mean.total)}</b> | YOU: {toFixed()(subjectDps.mean)} ({toFixedPct()(mean.youPct)}) | PET: {toFixed()(subjectPetDps.mean)} ({toFixedPct()(mean.petPct)})</span>
+          </Row>
+          <Row>
+            <span>MEDIAN DPS: {toFixed()(median.total)} | YOU: {toFixed()(subjectDps.median)} ({toFixedPct()(median.youPct)}) | PET: {toFixed()(subjectPetDps.median)} ({toFixedPct()(median.petPct)})</span>
+          </Row>
+          <Row>
+            <span>STDDEV DPS: {toFixed()(subjectDps.sd)}</span>
+          </Row>
+        </>
       );
     } else {
       return (
-        <Row>
-          <h4><b>AVERAGE DPS: {toFixed()(subjectDps.mean)}</b></h4>
-          <p>MEDIAN DPS: {toFixed()(subjectDps.median)}</p>
-          <p>STDDEV DPS: {toFixed()(subjectDps.sd)}</p>
-        </Row>
+        <>
+          <Row>
+            <h4><b>AVERAGE DPS: {toFixed()(subjectDps.mean)}</b></h4>
+          </Row>
+          <Row>
+            <span>MEDIAN DPS: {toFixed()(subjectDps.median)}</span>
+          </Row>
+          <Row>
+            <span>STDDEV DPS: {toFixed()(subjectDps.sd)}</span>
+          </Row>
+        </>
       );
     }
   }
@@ -67,7 +79,7 @@ export default function({ character, results }) {
     return (
       <>
         <Row style={{ marginTop: '20px', marginBottom: '20px' }}>
-          <Col>
+          <Col xs={24}>
             <AbilityResults data={ability[activeTab]} />
           </Col>
         </Row>

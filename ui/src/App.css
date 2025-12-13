@@ -46,14 +46,6 @@
   text-overflow: clip !important;
 }
 
-.rs-modal {
-  margin: 20vh auto 0 auto !important;
-}
-
-.rs-modal-body {
-  margin-top: 0px !important;
-}
-
 td .s0 {
   display: none !important;
 }
@@ -64,4 +56,18 @@ td .s0 {
 
 .rs-table-scrollbar-horizontal {
   display: none !important;
+}
+
+.rs-panel-btn:hover,.rs-panel-btn:focus,.rs-panel-btn:active {
+  background-color: initial !important;
+  color: inherit !important;
+  outline: none !important;
+}
+
+.rs-content {
+  padding: 0px 20px;
+}
+
+h4,h5 {
+  margin: initial !important;
 }

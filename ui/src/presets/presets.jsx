@@ -6,6 +6,7 @@ import filesaver from 'file-saver';
 import { classes, allEpCategories, targetTypes } from '../data/constants';
 import * as impex from './importexport';
 import EPOptions from '../ep/ep_options';
+import { useDispatchContext, useStateContext } from '../state';
 
 import hunterBmPreraid from './samples/hunter_bm_preraid.yml'
 import hunterBmPhase1 from './samples/hunter_bm_phase1.yml'
@@ -233,7 +234,10 @@ const presets = {
   }
 }
 
-function RaceSelect({ character, dispatch }) {
+function RaceSelect() {
+  const { character } = useStateContext();
+  const dispatch = useDispatchContext();
+
   if(!character || !character.class) return null;
 
   const classData = classes[character.class.toLowerCase()]
@@ -244,19 +248,22 @@ function RaceSelect({ character, dispatch }) {
     dispatch({ type: 'character.race', value: race })
   }
 
+  const title = 'Race: ' + (character?.race ?? 'Unspecified');
   return (
     <>
-      <Dropdown title="Race">
+      <Dropdown title={title}>
         {racesForClass.map(race => {
           return <Dropdown.Item key={race} eventKey={race} onSelect={onSelect}>{race}</Dropdown.Item>
         })}
       </Dropdown>
-      <span>{character.race}</span>
     </>
   );
 }
 
-function PhaseSelect({ phase, dispatch }) {
+function PhaseSelect() {
+  const { phase } = useStateContext();
+  const dispatch = useDispatchContext();
+
   if(phase == null) return null;
 
   const allPhases = [1, 2, 3, 4, 5]
@@ -265,19 +272,23 @@ function PhaseSelect({ phase, dispatch }) {
     dispatch({ type: 'phase', value: phase })
   }
 
+  const title = 'Item Filter: Phase ' + phase;
   return (
     <>
-      <Dropdown title="Item Filter">
+      <Dropdown title={title}>
         {allPhases.map(phase => {
           return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>Phase {phase}</Dropdown.Item>
         })}
       </Dropdown>
-      <span>Phase {phase}</span>
     </>
   );
 }
 
-function EpSelect({ epCategoryKey, dispatch }) {
+function EpSelect() {
+  const { character } = useStateContext();
+  const dispatch = useDispatchContext();
+  const epCategoryKey = character?.epCategory;
+
   if(epCategoryKey == null) return null;
 
   const epCategoryEntry = allEpCategories.find(epc => epc.key == epCategoryKey)
@@ -289,19 +300,23 @@ function EpSelect({ epCategoryKey, dispatch }) {
     dispatch({ type: 'character.epCategory', value: epCategory })
   }
 
+  const title = 'EP Category: ' + epCategoryName;
   return (
     <>
-      <Dropdown title="EP Category">
+      <Dropdown title={title}>
         {allEpCategories.map(epCategory => {
           return <Dropdown.Item key={epCategory.key} eventKey={epCategory.key} onSelect={onSelect}>{epCategory.name}</Dropdown.Item>
         })}
       </Dropdown>
-      <span>{epCategoryName}</span>
     </>
   );
 }
 
-function TargetTypeSelect({ targetTypeOrdinal, dispatch }) {
+function TargetTypeSelect() {
+  const { simOptions } = useStateContext();
+  const dispatch = useDispatchContext();
+  const targetTypeOrdinal = simOptions?.targetTypeOrdinal;
+
   if(targetTypeOrdinal == null) return null;
 
   function onSelect(ordinal) {
@@ -309,22 +324,25 @@ function TargetTypeSelect({ targetTypeOrdinal, dispatch }) {
   }
 
   const targetTypeName = (targetTypes.find(it => it.key === targetTypeOrdinal) || {}).name;
+  const title = 'Target Type: ' + targetTypeName;
   return (
     <>
-      <Dropdown title="Target Type">
+      <Dropdown title={title}>
         {targetTypes.map(type => {
           return <Dropdown.Item key={type.key} eventKey={type.key} onSelect={onSelect}>{type.name}</Dropdown.Item>
         })}
       </Dropdown>
-      <span>{targetTypeName}</span>
     </>
   );
 }
 
-export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOptions, dispatch }) => {
+export default () => {
+  const { character, phase, raidBuffs, raidDebuffs, simOptions, epOptions } = useStateContext();
+  const dispatch = useDispatchContext();
+
   const [isOpen, setIsOpen] = useState(false);
 
-  function Import({ dispatch }) {
+  function Import() {
     const importPreset = (file) => {
       try {
         const reader = new FileReader()
@@ -361,15 +379,19 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
       }
     }
 
-    return <Uploader draggable={true} accept='yaml, yml' fileListVisible={false} disabledFileItem={true} onUpload={importPreset} />
+    return (
+      <Uploader draggable={false} accept='yaml, yml' fileListVisible={false} disabledFileItem={true} onUpload={importPreset}>
+        <Button>Import</Button>
+      </Uploader>
+    );
   }
 
-  function Export({ dispatch }) {
+  function Export() {
     const exportPreset = () => {
       try {
-        const filename = character.filename || "exported-preset.yaml";
+        const filename = character.filename || 'exported-preset.yaml';
         const exported = impex.exportPreset(character, raidBuffs, raidDebuffs);
-        const blob = new Blob([exported], {type: "text/yaml;charset=utf-8"});
+        const blob = new Blob([exported], {type: 'text/yaml;charset=utf-8'});
         filesaver.saveAs(blob, filename);
       } catch(e) {
         Notification['error']({
@@ -390,7 +412,7 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
   function loadPreset(presetObj, dispatch) {
     const clone = JSON.parse(JSON.stringify(presetObj))
     clone.gear = _.mapValues(clone.gear, rawItem => {
-      let item = tbcsim.data.Items.byName.asJsMapView().get(rawItem.name)
+      let item = tbcsim.Items.getInstance().byName.asJsMapView().get(rawItem.name)
       if(!item) {
         return;
       }
@@ -398,20 +420,20 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
 
       if(rawItem.gems) {
         rawItem.gems.forEach((gemName, idx) => {
-          const gem = tbcsim.data.Items.byName.asJsMapView().get(gemName)()
+          const gem = tbcsim.Items.getInstance().byName.asJsMapView().get(gemName)()
           item.sockets[idx].gem = gem
         })
       }
 
       if(rawItem.enchant) {
-        const enchant = tbcsim.data.Enchants.byName.asJsMapView().get(rawItem.enchant)
+        const enchant = tbcsim.Enchants.getInstance().byName.asJsMapView().get(rawItem.enchant)
         if(enchant) {
           item.enchant = enchant(item)
         }
       }
 
       if(rawItem.tempEnchant) {
-        const tmpEnchant = tbcsim.data.TempEnchants.byName.asJsMapView().get(rawItem.tempEnchant)
+        const tmpEnchant = tbcsim.TempEnchants.getInstance().byName.asJsMapView().get(rawItem.tempEnchant)
         if(tmpEnchant) {
           item.tempEnchant = tmpEnchant(item)
         }
@@ -446,14 +468,11 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
     </>
   }
 
+  const title = character?.description ?? 'Select a preset';
   return (
-    <Row style={{padding: '10px 0px', fontWeight: 800}}>
+    <Row style={{padding: '10px 0px'}}>
       <Col style={{ display: 'inline-block' }}>
-        <Dropdown title='Presets'
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-          open={isOpen}
-        >
+        <Dropdown title={title} trigger='hover'>
           <Dropdown.Menu title='Hunter'>
             <Dropdown.Menu key={'phase3'} title='Phase 3'>
               {presetsFor('hunter', 'phase3')}
@@ -553,32 +572,27 @@ export default ({ character, phase, raidBuffs, raidDebuffs, simOptions, epOption
             </Dropdown.Menu>
           </Dropdown.Menu>
         </Dropdown>
-
-        {character && character.description ?
-          <span>{character.description}</span> :
-          <span>Please select a preset</span>
-        }
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <RaceSelect character={character} dispatch={dispatch} />
+      <Col>
+        <RaceSelect />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <PhaseSelect phase={phase} dispatch={dispatch} />
+      <Col>
+        <PhaseSelect />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <EpSelect epCategoryKey={character && character.epCategory} dispatch={dispatch} />
+      <Col>
+        <EpSelect />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <TargetTypeSelect targetTypeOrdinal={simOptions && simOptions.targetType} dispatch={dispatch} />
+      <Col>
+        <EPOptions />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <Import dispatch={dispatch} />
+      <Col>
+        <TargetTypeSelect />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <Export dispatch={dispatch} />
+      <Col>
+        <Import />
       </Col>
-      <Col style={{ display: 'inline-block', marginLeft: 10 }}>
-        <EPOptions epOptions={epOptions} dispatch={dispatch} />
+      <Col>
+        <Export />
       </Col>
     </Row>
   )

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { Checkbox, Button, Modal } from 'rsuite';
+import { useDispatchContext, useStateContext } from '../state';
 
-export default function({ epOptions, dispatch }) {
+export default function() {
+  const { epOptions } = useStateContext();
+  const dispatch = useDispatchContext();
+
+
   const [modalOpen, setModalOpen] = useState(false);
 
   function onOpen() {
@@ -20,9 +25,9 @@ export default function({ epOptions, dispatch }) {
   const hitZero = _.get(epOptions, 'hitZero');
 
   return (
-    <span style={{ marginLeft: 10 }}>
+    <span>
       <Button onClick={onOpen}>EP Options</Button>
-      <Modal show={modalOpen} size='sm' onHide={onHide} style={{ maxHeight: '80vh' }}>
+      <Modal open={modalOpen} size='sm' onHide={onHide} onClose={onHide} style={{ maxHeight: '80vh' }}>
         <Modal.Header style={{ marginBottom: 10 }}>
           <Modal.Title style={{ marginBottom: 10 }}>EP Options</Modal.Title>
         </Modal.Header>

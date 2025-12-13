@@ -134,8 +134,8 @@ export default function({ iterations }) {
   }
 
   function iterationDps() {
-    const dps = tbcsim.sim.SimStats.dps(
-      tbcsim.util.Utils.listWrap([iterations.asJsReadonlyArrayView()[selectedIteration]])
+    const dps = tbcsim.SimStats.getInstance().dps(
+      tbcsim.Utils.getInstance().listWrap([iterations.asJsReadonlyArrayView()[selectedIteration]])
     )
 
     const subjectDpsMedian = dps.asJsMapView().get('subject').median
@@ -160,7 +160,7 @@ export default function({ iterations }) {
   return (
     <span style={{ marginLeft: 10 }}>
       <Button appearance='ghost' onClick={onCombatLogClick}>Combat Log</Button>
-      <Modal show={modalOpen} full size='lg' onHide={onHide} style={{ maxHeight: '80vh' }}>
+      <Modal open={modalOpen} full size='lg' onHide={onHide} onClose={onHide} style={{ maxHeight: '80vh' }}>
         <Modal.Header style={{ marginBottom: 10 }}>
           <Modal.Title style={{ marginBottom: 10 }}>Combat Log</Modal.Title>
           <div style={{ marginBottom: 10 }}><InputNumber prefix='Iteration: ' style={{ width: 170 }} min={0} max={iterations.size - 1} value={selectedIteration} onChange={onSelectedIterationChange} /></div>

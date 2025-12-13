@@ -18,7 +18,7 @@ export default ({ title, data, columnInfo, icons=true }) => {
     if(!icons) return null;
 
     return (
-      <Column width={38}>
+      <Column width={40}>
         <HeaderCell title=''></HeaderCell>
         <Cell>
           {row => row ? <img style={{ marginTop: -6, marginLeft: -5, border: '1px solid #AAA', borderRadius: 3 }} height={32} width={32} src={`icons/${row.icon}`} /> : null }

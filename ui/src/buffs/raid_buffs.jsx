@@ -1,19 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
-
 import { Checkbox, Row, Col } from 'rsuite';
 
 import * as tbcsim from 'tbcsim';
+import { useDispatchContext, useStateContext } from '../state';
 
 const groupStyle = {
   marginBottom: '5px'
 };
 
-export default function({ state, stateKey, dispatch }) {
-  const form = useRef(null);
+export default function({ stateKey }) {
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
 
   const dataKey = stateKey == 'raidBuffs' ? 'buffNames' : 'debuffNames';
-  const allAbilities = tbcsim.data.abilities.raid.RaidAbilities[dataKey];
+  const allAbilities = tbcsim.RaidAbilities.getInstance()[dataKey];
 
   function onChange(key, checked) {
     // Dispatch state change
@@ -34,9 +35,11 @@ export default function({ state, stateKey, dispatch }) {
       <div style={{ textAlign: 'center' }}><em>Select only {type} provided by *other* members of the raid</em></div>
       <Col xs={12}>
         {_.range(col1).map(key => {
-          const name = allAbilities[key]
+          const name = allAbilities[key];
           return (
-            <Checkbox key={key} value={name} checked={state[name]} onChange={onChange}>{name}</Checkbox>
+            <div key={key}>
+              <Checkbox value={name} checked={state[stateKey][name] ?? false} onChange={onChange}>{name}</Checkbox>
+            </div>
           )
         })}
       </Col>
@@ -44,7 +47,9 @@ export default function({ state, stateKey, dispatch }) {
       {_.range(col2).map(key => {
           const name = allAbilities[col1 + key]
           return (
-            <Checkbox key={key} value={name} checked={state[name]} onChange={onChange}>{name}</Checkbox>
+            <div key={key}>
+              <Checkbox value={name} checked={state[stateKey][name] ?? false} onChange={onChange}>{name}</Checkbox>
+            </div>
           )
         })}
       </Col>

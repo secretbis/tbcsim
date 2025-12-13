@@ -7,6 +7,7 @@ import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 
 import { inventorySlots as inv, itemClasses as ic, weaponSubclasses as wsc } from '../data/constants';
+import { useDispatchContext, useStateContext } from '../state';
 
 const defaultWidth = '55px';
 const bgImages = {
@@ -51,7 +52,10 @@ const titles = {
   ammo: 'AMMO',
 };
 
-export default function({ character, phase, slotName, width=defaultWidth, epOptions, dispatch }) {
+export default function({ slotName, width=defaultWidth }) {
+  const { character, phase, epOptions } = useStateContext();
+  const dispatch = useDispatchContext();
+
   if(!character || !character.class) return;
 
   const item = character && character.gear && character.gear[slotName];
@@ -109,17 +113,23 @@ export default function({ character, phase, slotName, width=defaultWidth, epOpti
             <img style={itemImgStyles} src={`icons/${item.icon}`} />
           </ItemTooltip>
         </Col>
-        <Col>
+        <Col xs={19}>
           <Row>
             <ItemTooltip item={item} gear={character.gear}>
-              <p style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</p>
+              <span style={{ fontSize: '16px', fontWeight: 800 }}>{item.name}</span>
             </ItemTooltip>
+          </Row>
+          <Row>
             {item.sockets && item.sockets.map((sk, idx) => {
               return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} epOptions={epOptions} />
             })}
+          </Row>
+          <Row>
             {slotCanEnchant && itemCanEnchant ?
               <EnchantSlot character={character} slotName={slotName} enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} onSelect={onEnchantSelect} />
             : null}
+          </Row>
+          <Row>
             {itemCanTempEnchant ?
               <EnchantSlot character={character} slotName={slotName} enchantType={'tempEnchants'} phase={phase} item={item} enchant={item && item.tempEnchant} onSelect={onTempEnchantSelect} />
             : null}

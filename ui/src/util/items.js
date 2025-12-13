@@ -209,12 +209,12 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
   console.log("FULL ITEM FILTER")
 
   const { inventorySlots, itemClasses } = inventorySlotInfo(character, slotName, itemType)
-  let baseData = tbcsim.data.Items
+  let baseData = tbcsim.Items.getInstance()
   if(itemType === "enchants") {
-    baseData = tbcsim.data.Enchants
+    baseData = tbcsim.Enchants.getInstance()
   }
   if(itemType === "tempEnchants") {
-    baseData = tbcsim.data.TempEnchants
+    baseData = tbcsim.TempEnchants.getInstance()
   }
 
   let items = [];
