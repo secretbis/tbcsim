@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react';
 import { Col, Row } from 'rsuite';
 
 import ItemTooltip from './item_tooltip';
@@ -6,7 +6,11 @@ import GearSelector from './gear_selector';
 import EnchantSlot from './enchant_slot';
 import GemSlot from './gem_slot';
 
-import { inventorySlots as inv, itemClasses as ic, weaponSubclasses as wsc } from '../data/constants';
+import {
+  inventorySlots as inv,
+  itemClasses as ic,
+  weaponSubclasses as wsc,
+} from '../data/constants';
 import { useDispatchContext, useStateContext } from '../state';
 
 const defaultWidth = '55px';
@@ -52,14 +56,19 @@ const titles = {
   ammo: 'AMMO',
 };
 
-export default function({ slotName, width=defaultWidth }) {
+export default function ({ slotName, width = defaultWidth }) {
   const { character, phase, epOptions } = useStateContext();
   const dispatch = useDispatchContext();
 
-  if(!character || !character.class) return;
+  if (!character || !character.class) return;
 
   const item = character && character.gear && character.gear[slotName];
-  const itemImgStyles = { border: '1px solid #AAA', borderRadius: 5, height: width, width }
+  const itemImgStyles = {
+    border: '1px solid #AAA',
+    borderRadius: 5,
+    height: width,
+    width,
+  };
 
   const [selectorVisible, setSelectorVisible] = useState(false);
 
@@ -71,23 +80,28 @@ export default function({ slotName, width=defaultWidth }) {
 
   function onItemSelect(item) {
     // Clean sockets
-    item.sockets && item.sockets.forEach(sk => sk.gem = null);
-    dispatch({ type: 'updateGearSlot', value: { [slotName]: item }, slotName, item })
+    item.sockets && item.sockets.forEach(sk => (sk.gem = null));
+    dispatch({
+      type: 'updateGearSlot',
+      value: { [slotName]: item },
+      slotName,
+      item,
+    });
   }
 
   function onGemSelect(gem, idx) {
-    item.sockets[idx].gem = gem
-    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+    item.sockets[idx].gem = gem;
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } });
   }
 
   function onEnchantSelect(enchant) {
-    item.enchant = enchant
-    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+    item.enchant = enchant;
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } });
   }
 
   function onTempEnchantSelect(enchant) {
-    item.tempEnchant = enchant
-    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } })
+    item.tempEnchant = enchant;
+    dispatch({ type: 'updateGearSlot', value: { [slotName]: item } });
   }
 
   function renderItemLabel() {
@@ -103,8 +117,15 @@ export default function({ slotName, width=defaultWidth }) {
   function renderItem() {
     const slotCanEnchant = !['trinket1', 'trinket2', 'neck', 'waist', 'ammo'].includes(slotName);
     // Guns are slot RANGED_RIGHT and bows are slot RANGED for whatever reason.  Wands are also RANGED_RIGHT, and those can't have enchants, so single out guns specifically
-    const itemCanEnchant = slotName == 'rangedTotemLibram' ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) || item.itemSubclass.itemClassOrdinal == wsc.gun : item.inventorySlot !== inv.holdable_tome;
-    const itemCanTempEnchant = (slotName == 'mainHand' || slotName == 'offHand') && item.itemClass && item.itemClass.ordinal === ic.weapon;
+    const itemCanEnchant =
+      slotName == 'rangedTotemLibram'
+        ? ![inv.thrown, inv.ranged_right, inv.relic].includes(item.inventorySlot) ||
+          item.itemSubclass.itemClassOrdinal == wsc.gun
+        : item.inventorySlot !== inv.holdable_tome;
+    const itemCanTempEnchant =
+      (slotName == 'mainHand' || slotName == 'offHand') &&
+      item.itemClass &&
+      item.itemClass.ordinal === ic.weapon;
 
     return (
       <Row style={{ padding: '5px' }} onClick={onClick}>
@@ -120,19 +141,45 @@ export default function({ slotName, width=defaultWidth }) {
             </ItemTooltip>
           </Row>
           <Row>
-            {item.sockets && item.sockets.map((sk, idx) => {
-              return <GemSlot key={idx} phase={phase} socket={sk} character={character} onSelect={(gem) => onGemSelect(gem, idx)} epOptions={epOptions} />
-            })}
+            {item.sockets &&
+              item.sockets.map((sk, idx) => {
+                return (
+                  <GemSlot
+                    key={idx}
+                    phase={phase}
+                    socket={sk}
+                    character={character}
+                    onSelect={gem => onGemSelect(gem, idx)}
+                    epOptions={epOptions}
+                  />
+                );
+              })}
           </Row>
           <Row>
-            {slotCanEnchant && itemCanEnchant ?
-              <EnchantSlot character={character} slotName={slotName} enchantType={'enchants'} phase={phase} item={item} enchant={item && item.enchant} onSelect={onEnchantSelect} />
-            : null}
+            {slotCanEnchant && itemCanEnchant ? (
+              <EnchantSlot
+                character={character}
+                slotName={slotName}
+                enchantType={'enchants'}
+                phase={phase}
+                item={item}
+                enchant={item && item.enchant}
+                onSelect={onEnchantSelect}
+              />
+            ) : null}
           </Row>
           <Row>
-            {itemCanTempEnchant ?
-              <EnchantSlot character={character} slotName={slotName} enchantType={'tempEnchants'} phase={phase} item={item} enchant={item && item.tempEnchant} onSelect={onTempEnchantSelect} />
-            : null}
+            {itemCanTempEnchant ? (
+              <EnchantSlot
+                character={character}
+                slotName={slotName}
+                enchantType={'tempEnchants'}
+                phase={phase}
+                item={item}
+                enchant={item && item.tempEnchant}
+                onSelect={onTempEnchantSelect}
+              />
+            ) : null}
           </Row>
         </Col>
       </Row>
@@ -143,10 +190,7 @@ export default function({ slotName, width=defaultWidth }) {
     return (
       <Row style={{ padding: '5px' }}>
         <Col xs={5} onClick={onClick}>
-          <img
-            style={itemImgStyles}
-            src={`slotbg/${bgImages[slotName]}`}
-          />
+          <img style={itemImgStyles} src={`slotbg/${bgImages[slotName]}`} />
         </Col>
         {renderItemLabel()}
       </Row>

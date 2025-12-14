@@ -8,76 +8,85 @@ const columnInfo = [
     title: 'Name',
     key: 'name',
     flex: 2,
-    minWidth: 200
-  },{
+    minWidth: 200,
+  },
+  {
     title: 'CountAvg',
     key: 'countAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'TotalDmgAvg',
     key: 'totalAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'PctOfTotal',
     key: 'pctOfTotal',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'MinHit',
     key: 'minHit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'AvgHit',
     key: 'avgHit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'MaxHit',
     key: 'maxHit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'MinCrit',
     key: 'minCrit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'AvgCrit',
     key: 'avgCrit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'MaxCrit',
     key: 'maxCrit',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'Hit%',
     key: 'hitPct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'Crit%',
     key: 'critPct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'Miss%',
     key: 'missPct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'Dodge%',
     key: 'dodgePct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'Parry%',
     key: 'parryPct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'Glance%',
     key: 'glancePct',
-    formatter: toFixedPct()
-  }
-]
+    formatter: toFixedPct(),
+  },
+];
 
-export default (props) => {
-  return (
-    <Table
-      title={'Ability Breakdown'}
-      data={props.data}
-      columnInfo={columnInfo}
-    />
-  )
-}
+export default props => {
+  return <Table title={'Ability Breakdown'} data={props.data} columnInfo={columnInfo} />;
+};

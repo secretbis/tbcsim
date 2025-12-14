@@ -9,43 +9,51 @@ import ResourceUsageByAbility from './resource_by_ability';
 
 import { toFixed, toFixedPct } from './formatters';
 
-export default function({ character, results }) {
-  const [activeTab, setActiveTab] = useState(0)
+export default function ({ character, results }) {
+  const [activeTab, setActiveTab] = useState(0);
 
-  const { ability, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results
+  const { ability, buff, debuff, damageType, resourceUsage, resourceUsageByAbility, dps } = results;
 
-  if(!ability || !buff || !debuff || !damageType || !resourceUsage || !dps) {
+  if (!ability || !buff || !debuff || !damageType || !resourceUsage || !dps) {
     return null;
   }
 
   function renderDps() {
-    const subjectDps = dps.asJsMapView().get('subject')
-    const subjectPetDps = dps.asJsMapView().get('subjectPet')
+    const subjectDps = dps.asJsMapView().get('subject');
+    const subjectPetDps = dps.asJsMapView().get('subjectPet');
 
     function withPet(type) {
-      const subjectValue = subjectDps[type]
-      const petValue = subjectPetDps[type]
-      const totalValue = subjectValue + petValue
+      const subjectValue = subjectDps[type];
+      const petValue = subjectPetDps[type];
+      const totalValue = subjectValue + petValue;
 
       return {
         total: subjectValue + petValue,
-        petPct: petValue / totalValue * 100.0,
-        youPct: subjectValue / totalValue * 100.0
-      }
+        petPct: (petValue / totalValue) * 100.0,
+        youPct: (subjectValue / totalValue) * 100.0,
+      };
     }
 
-    if(subjectPetDps) {
-      const mean = withPet('mean')
-      const median = withPet('median')
-      const sd = withPet('sd')
+    if (subjectPetDps) {
+      const mean = withPet('mean');
+      const median = withPet('median');
+      const sd = withPet('sd');
 
       return (
         <>
           <Row>
-            <span style={{ fontSize: 22 }}><b>AVERAGE DPS: {toFixed()(mean.total)}</b> | YOU: {toFixed()(subjectDps.mean)} ({toFixedPct()(mean.youPct)}) | PET: {toFixed()(subjectPetDps.mean)} ({toFixedPct()(mean.petPct)})</span>
+            <span style={{ fontSize: 22 }}>
+              <b>AVERAGE DPS: {toFixed()(mean.total)}</b> | YOU: {toFixed()(subjectDps.mean)} (
+              {toFixedPct()(mean.youPct)}) | PET: {toFixed()(subjectPetDps.mean)} (
+              {toFixedPct()(mean.petPct)})
+            </span>
           </Row>
           <Row>
-            <span>MEDIAN DPS: {toFixed()(median.total)} | YOU: {toFixed()(subjectDps.median)} ({toFixedPct()(median.youPct)}) | PET: {toFixed()(subjectPetDps.median)} ({toFixedPct()(median.petPct)})</span>
+            <span>
+              MEDIAN DPS: {toFixed()(median.total)} | YOU: {toFixed()(subjectDps.median)} (
+              {toFixedPct()(median.youPct)}) | PET: {toFixed()(subjectPetDps.median)} (
+              {toFixedPct()(median.petPct)})
+            </span>
           </Row>
           <Row>
             <span>STDDEV DPS: {toFixed()(subjectDps.sd)}</span>
@@ -56,7 +64,9 @@ export default function({ character, results }) {
       return (
         <>
           <Row>
-            <h4><b>AVERAGE DPS: {toFixed()(subjectDps.mean)}</b></h4>
+            <h4>
+              <b>AVERAGE DPS: {toFixed()(subjectDps.mean)}</b>
+            </h4>
           </Row>
           <Row>
             <span>MEDIAN DPS: {toFixed()(subjectDps.median)}</span>
@@ -72,8 +82,8 @@ export default function({ character, results }) {
   function renderTab() {
     // TODO: This will need to be smarter for full raid sims
     let characterTab = character;
-    if(activeTab == 1) {
-      characterTab = character.pet
+    if (activeTab == 1) {
+      characterTab = character.pet;
     }
 
     return (
@@ -103,10 +113,10 @@ export default function({ character, results }) {
   }
 
   function onSelect(evt) {
-    setActiveTab(evt)
+    setActiveTab(evt);
   }
 
-  const titles = ['You', 'Pet']
+  const titles = ['You', 'Pet'];
 
   return (
     <Container style={{ marginTop: '20px', marginBottom: '20px' }}>
@@ -122,5 +132,5 @@ export default function({ character, results }) {
       </Nav>
       {renderTab()}
     </Container>
-  )
+  );
 }

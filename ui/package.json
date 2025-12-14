@@ -23,6 +23,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "format": "prettier --write \"**/*.{js,jsx}\"",
     "preview": "vite preview"
   },
   "eslintConfig": {
@@ -47,6 +48,7 @@
     "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@vitejs/plugin-react": "^5.1.2",
     "json-loader": "^0.5.7",
+    "prettier": "3.7.4",
     "vite": "^7.2.7",
     "yaml-loader": "^0.8.1"
   }

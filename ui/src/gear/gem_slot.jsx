@@ -10,7 +10,7 @@ const socketImages = {
   yellow: 'sockets/yellow.png',
 };
 
-export default function({ phase, socket, character, onSelect, epOptions }) {
+export default function ({ phase, socket, character, onSelect, epOptions }) {
   const [selectorVisible, setSelectorVisible] = useState(false);
 
   const color = socket.color.name.toLowerCase();
@@ -20,17 +20,24 @@ export default function({ phase, socket, character, onSelect, epOptions }) {
   function onGemClick(e) {
     e.preventDefault();
     e.stopPropagation();
-    setSelectorVisible(true)
+    setSelectorVisible(true);
   }
 
   function onGemSelect(gem) {
-    setSelectorVisible(false)
-    onSelect(gem)
+    setSelectorVisible(false);
+    onSelect(gem);
   }
 
   const isMetaGem = color == 'meta';
   return (
-    <span onClick={onGemClick} style={{ border: '1px solid', borderColor: color, borderRadius: '2px', marginRight: '5px' }}>
+    <span
+      onClick={onGemClick}
+      style={{
+        border: '1px solid',
+        borderColor: color,
+        borderRadius: '2px',
+        marginRight: '5px',
+      }}>
       <ItemTooltip item={gem} isMetaGem={isMetaGem} gear={character.gear}>
         <img src={icon} style={{ width: 20, height: 20, cursor: 'pointer' }} />
         <GearSelector
@@ -44,5 +51,5 @@ export default function({ phase, socket, character, onSelect, epOptions }) {
         />
       </ItemTooltip>
     </span>
-  )
+  );
 }

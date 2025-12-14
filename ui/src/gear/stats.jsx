@@ -30,50 +30,66 @@ function BaseStats({ simParticipant: sp }) {
         <Col xs={12}>{sp.spirit()}</Col>
       </Row>
     </Col>
-  )
+  );
 }
 
 function MeleeStats({ simParticipant: sp }) {
-  let damageMhLow = '0.0'
+  let damageMhLow = '0.0';
   let damageMhHigh = '0.0';
-  let damageOhLow = '0.0'
+  let damageOhLow = '0.0';
   let damageOhHigh = '0.0';
   let speedMh = '-';
   let speedOh = '-';
 
-  const mainHand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand
+  const mainHand = sp && sp.character && sp.character.gear && sp.character.gear.mainHand;
   const hasMainhand = mainHand && sp.character.gear.mainHand.itemClass;
-  if(hasMainhand) {
-    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(sp, sp.attackPower(), sp.character.gear.mainHand);
+  if (hasMainhand) {
+    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(
+      sp,
+      sp.attackPower(),
+      sp.character.gear.mainHand,
+    );
     damageMhLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageMhHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
     speedMh = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
   }
 
-  const offHand = sp && sp.character && sp.character.gear && sp.character.gear.offHand
+  const offHand = sp && sp.character && sp.character.gear && sp.character.gear.offHand;
   const hasOffhand = offHand && sp.character.gear.offHand.itemClass;
-  if(hasOffhand) {
-    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(sp, sp.attackPower(), sp.character.gear.offHand);
+  if (hasOffhand) {
+    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(
+      sp,
+      sp.attackPower(),
+      sp.character.gear.offHand,
+    );
     damageOhLow = ((sp.character.gear.offHand.minDmg + dmgFromAp) / 2).toFixed(1);
     damageOhHigh = ((sp.character.gear.offHand.maxDmg + dmgFromAp) / 2).toFixed(1);
     speedOh = (sp.character.gear.offHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
   }
 
   // Special stats
-  const swordExpertisePct = sp.stats.swordExpertiseRating / 15.77
-  const maceExpertisePct = sp.stats.maceExpertiseRating / 15.77
-  const axeExpertisePct = sp.stats.axeExpertiseRating / 15.77
+  const swordExpertisePct = sp.stats.swordExpertiseRating / 15.77;
+  const maceExpertisePct = sp.stats.maceExpertiseRating / 15.77;
+  const axeExpertisePct = sp.stats.axeExpertiseRating / 15.77;
 
   return (
     <Col>
-      {hasMainhand ? <Row>
-        <Col xs={12}>Damage (MH):</Col>
-        <Col xs={12}>{damageMhLow}-{damageMhHigh} ({speedMh})</Col>
-      </Row> : null}
-      {hasOffhand ? <Row>
-        <Col xs={12}>Damage (OH):</Col>
-        <Col xs={12}>{damageOhLow}-{damageOhHigh} ({speedOh})</Col>
-      </Row> : null}
+      {hasMainhand ? (
+        <Row>
+          <Col xs={12}>Damage (MH):</Col>
+          <Col xs={12}>
+            {damageMhLow}-{damageMhHigh} ({speedMh})
+          </Col>
+        </Row>
+      ) : null}
+      {hasOffhand ? (
+        <Row>
+          <Col xs={12}>Damage (OH):</Col>
+          <Col xs={12}>
+            {damageOhLow}-{damageOhHigh} ({speedOh})
+          </Col>
+        </Row>
+      ) : null}
       <Row>
         <Col xs={12}>Attack Power:</Col>
         <Col xs={12}>{sp.attackPower()}</Col>
@@ -90,50 +106,68 @@ function MeleeStats({ simParticipant: sp }) {
         <Col xs={12}>Expertise %:</Col>
         <Col xs={12}>{sp.expertisePct().toFixed(2)}%</Col>
       </Row>
-      {(isAxe(mainHand) || isAxe(offHand)) && axeExpertisePct > 0 ? <Row>
-        <Col xs={12}>Expertise % (Axe):</Col>
-        <Col xs={12}>{(sp.expertisePct() + axeExpertisePct).toFixed(2)}%</Col>
-      </Row> : null}
-      {(isMace(mainHand) || isMace(offHand)) && maceExpertisePct > 0? <Row>
-        <Col xs={12}>Expertise % (Mace):</Col>
-        <Col xs={12}>{(sp.expertisePct() + maceExpertisePct).toFixed(2)}%</Col>
-      </Row> : null}
-      {(isSword(mainHand) || isSword(offHand)) && swordExpertisePct > 0 ? <Row>
-        <Col xs={12}>Expertise % (Sword):</Col>
-        <Col xs={12}>{(sp.expertisePct() + swordExpertisePct).toFixed(2)}%</Col>
-      </Row> : null}
+      {(isAxe(mainHand) || isAxe(offHand)) && axeExpertisePct > 0 ? (
+        <Row>
+          <Col xs={12}>Expertise % (Axe):</Col>
+          <Col xs={12}>{(sp.expertisePct() + axeExpertisePct).toFixed(2)}%</Col>
+        </Row>
+      ) : null}
+      {(isMace(mainHand) || isMace(offHand)) && maceExpertisePct > 0 ? (
+        <Row>
+          <Col xs={12}>Expertise % (Mace):</Col>
+          <Col xs={12}>{(sp.expertisePct() + maceExpertisePct).toFixed(2)}%</Col>
+        </Row>
+      ) : null}
+      {(isSword(mainHand) || isSword(offHand)) && swordExpertisePct > 0 ? (
+        <Row>
+          <Col xs={12}>Expertise % (Sword):</Col>
+          <Col xs={12}>{(sp.expertisePct() + swordExpertisePct).toFixed(2)}%</Col>
+        </Row>
+      ) : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
         <Col xs={12}>{sp.armorPen()}</Col>
       </Row>
     </Col>
-  )
+  );
 }
 
 function RangedStats({ simParticipant: sp }) {
-  let damageRangedLow = 0.0
-  let damageRangedHigh = 0.0
-  let speedRanged = 1.0
+  let damageRangedLow = 0.0;
+  let damageRangedHigh = 0.0;
+  let speedRanged = 1.0;
 
-  const ranged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram
+  const ranged = sp && sp.character && sp.character.gear && sp.character.gear.rangedTotemLibram;
   const hasRanged = ranged && sp.character.gear.rangedTotemLibram.itemClass;
-  if(hasRanged) {
-    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(sp, sp.attackPower(), sp.character.gear.rangedTotemLibram);
+  if (hasRanged) {
+    const dmgFromAp = tbcsim.Melee.getInstance().apToDamage(
+      sp,
+      sp.attackPower(),
+      sp.character.gear.rangedTotemLibram,
+    );
     damageRangedLow = (sp.character.gear.mainHand.minDmg + dmgFromAp).toFixed(1);
     damageRangedHigh = (sp.character.gear.mainHand.maxDmg + dmgFromAp).toFixed(1);
-    speedRanged = (sp.character.gear.mainHand.speed / 1000.0 / sp.physicalHasteMultiplier()).toFixed(2);
+    speedRanged = (
+      sp.character.gear.mainHand.speed /
+      1000.0 /
+      sp.physicalHasteMultiplier()
+    ).toFixed(2);
   }
 
   // Special stats
-  const bowCritPct =  sp.stats.bowCritRating / 22.08
-  const gunCritPct =  sp.stats.gunCritRating / 22.08
+  const bowCritPct = sp.stats.bowCritRating / 22.08;
+  const gunCritPct = sp.stats.gunCritRating / 22.08;
 
   return (
     <Col>
-      {hasRanged ? <Row>
-        <Col xs={12}>Damage (R):</Col>
-        <Col xs={12}>{damageRangedLow}-{damageRangedHigh} ({speedRanged})</Col>
-      </Row> : null}
+      {hasRanged ? (
+        <Row>
+          <Col xs={12}>Damage (R):</Col>
+          <Col xs={12}>
+            {damageRangedLow}-{damageRangedHigh} ({speedRanged})
+          </Col>
+        </Row>
+      ) : null}
       <Row>
         <Col xs={12}>Attack Power:</Col>
         <Col xs={12}>{sp.rangedAttackPower()}</Col>
@@ -146,20 +180,24 @@ function RangedStats({ simParticipant: sp }) {
         <Col xs={12}>Crit %:</Col>
         <Col xs={12}>{sp.rangedCritPct().toFixed(2)}%</Col>
       </Row>
-      {isBow(ranged) && bowCritPct > 0 ? <Row>
-        <Col xs={12}>Crit % (Bow):</Col>
-        <Col xs={12}>{(sp.rangedCritPct() + bowCritPct).toFixed(2)}%</Col>
-      </Row> : null}
-      {isGun(ranged) && gunCritPct > 0 ? <Row>
-        <Col xs={12}>Crit % (Gun):</Col>
-        <Col xs={12}>{(sp.rangedCritPct() + gunCritPct).toFixed(2)}%</Col>
-      </Row> : null}
+      {isBow(ranged) && bowCritPct > 0 ? (
+        <Row>
+          <Col xs={12}>Crit % (Bow):</Col>
+          <Col xs={12}>{(sp.rangedCritPct() + bowCritPct).toFixed(2)}%</Col>
+        </Row>
+      ) : null}
+      {isGun(ranged) && gunCritPct > 0 ? (
+        <Row>
+          <Col xs={12}>Crit % (Gun):</Col>
+          <Col xs={12}>{(sp.rangedCritPct() + gunCritPct).toFixed(2)}%</Col>
+        </Row>
+      ) : null}
       <Row>
         <Col xs={12}>Armor Pen:</Col>
         <Col xs={12}>{sp.armorPen()}</Col>
       </Row>
     </Col>
-  )
+  );
 }
 
 function SpellStats({ simParticipant: sp }) {
@@ -190,18 +228,20 @@ function SpellStats({ simParticipant: sp }) {
         <Col>{sp.stats.manaPer5Seconds}</Col>
       </Row>
     </Col>
-  )
+  );
 }
 
 function DefensiveStats({ simParticipant: sp }) {
   const armor = sp.armor();
-  const armorMit = ((armor / (armor + (467.5 * 70 - 22167.5))) * 100).toFixed(2)
+  const armorMit = ((armor / (armor + (467.5 * 70 - 22167.5))) * 100).toFixed(2);
 
   return (
     <Col>
       <Row>
         <Col xs={12}>Armor:</Col>
-        <Col xs={12}>{armor} ({armorMit}%)</Col>
+        <Col xs={12}>
+          {armor} ({armorMit}%)
+        </Col>
       </Row>
       <Row>
         <Col xs={12}>Defense:</Col>
@@ -224,54 +264,54 @@ function DefensiveStats({ simParticipant: sp }) {
         <Col xs={12}>{sp.resiliencePct().toFixed(2)}%</Col>
       </Row>
     </Col>
-  )
+  );
 }
 
-export default function() {
+export default function () {
   const state = useStateContext();
 
-  const [dropdownLeft, setDropdownLeft] = useState('baseStats')
-  const [dropdownRight, setDropdownRight] = useState('meleeStats')
+  const [dropdownLeft, setDropdownLeft] = useState('baseStats');
+  const [dropdownRight, setDropdownRight] = useState('meleeStats');
 
-  if(!state.character.class) return null;
+  if (!state.character.class) return null;
 
   const simConfig = state.makeSimConfig();
   const simParticipant = new tbcsim.SimParticipant(
     simConfig.character,
     simConfig.rotation,
-    new tbcsim.SimIteration(simConfig.character, simConfig.rotation, {})
-  ).init()
+    new tbcsim.SimIteration(simConfig.character, simConfig.rotation, {}),
+  ).init();
 
   // Boofs
-  simParticipant.rotation.castAllRaidBuffs(simParticipant)
-  simParticipant.rotation.castAllPrecombat(simParticipant)
-  simParticipant.recomputeStats()
+  simParticipant.rotation.castAllRaidBuffs(simParticipant);
+  simParticipant.rotation.castAllPrecombat(simParticipant);
+  simParticipant.recomputeStats();
 
   const panels = {
     baseStats: {
-      title: "Base Stats",
-      component: BaseStats
+      title: 'Base Stats',
+      component: BaseStats,
     },
     meleeStats: {
-      title: "Melee",
-      component: MeleeStats
+      title: 'Melee',
+      component: MeleeStats,
     },
     rangedStats: {
-      title: "Ranged",
-      component: RangedStats
+      title: 'Ranged',
+      component: RangedStats,
     },
     spellStats: {
-      title: "Spell",
-      component: SpellStats
+      title: 'Spell',
+      component: SpellStats,
     },
     defensiveStats: {
-      title: "Defense",
-      component: DefensiveStats
-    }
-  }
+      title: 'Defense',
+      component: DefensiveStats,
+    },
+  };
 
   function onSelect(value, setter) {
-    setter(value)
+    setter(value);
   }
 
   const titleLeft = panels[dropdownLeft].title;
@@ -285,14 +325,14 @@ export default function() {
             <Dropdown.Item key={key} eventKey={key} onSelect={key => onSelect(key, setter)}>
               {value.title}
             </Dropdown.Item>
-          )
+          );
         })}
       </>
-    )
+    );
   }
 
-  const PanelLeft = panels[dropdownLeft].component
-  const PanelRight = panels[dropdownRight].component
+  const PanelLeft = panels[dropdownLeft].component;
+  const PanelRight = panels[dropdownRight].component;
 
   return (
     <Row style={{ maxHeight: 400, maxWidth: 600, margin: 'auto' }}>
@@ -313,5 +353,5 @@ export default function() {
         </Container>
       </Col>
     </Row>
-  )
+  );
 }

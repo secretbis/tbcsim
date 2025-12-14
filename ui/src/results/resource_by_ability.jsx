@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'rsuite'
+import { Container } from 'rsuite';
 
 import { toFixed } from './formatters';
 import Table from './table';
@@ -11,26 +11,29 @@ const columnInfo = [
     title: 'Name',
     key: 'name',
     flex: 2,
-    minWidth: 200
-  },{
+    minWidth: 200,
+  },
+  {
     title: 'CountAvg',
     key: 'countAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'TotalGainAvg',
     key: 'totalGainAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'GainPerCountAvg',
     key: 'gainPerCountAvg',
-    formatter: toFixed()
-  }
-]
+    formatter: toFixed(),
+  },
+];
 
-export default (props) => {
+export default props => {
   return linkedHashMapKeys(props.data).map(key => {
-    const data = props.data.asJsMapView().get(key)
-    if(data == null) return null;
+    const data = props.data.asJsMapView().get(key);
+    if (data == null) return null;
 
     return (
       <Container>
@@ -41,6 +44,6 @@ export default (props) => {
           columnInfo={columnInfo}
         />
       </Container>
-    )
-  })
-}
+    );
+  });
+};

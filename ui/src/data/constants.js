@@ -27,7 +27,7 @@ export const inventorySlots = {
   thrown: 25,
   ranged_right: 26,
   quiver: 27,
-  relic: 28
+  relic: 28,
 };
 
 export const itemClasses = {
@@ -97,7 +97,7 @@ export const armorSubclasses = {
   libram: 7,
   idol: 8,
   totem: 9,
-}
+};
 
 export const allowableClasses = {
   warrior: 0,
@@ -113,10 +113,10 @@ export const allowableClasses = {
 };
 
 // Technically some of these can wear cloth, but literally will never do so (e.g. hunter, ret paladin)
-const asc = armorSubclasses
-const wsc = weaponSubclasses
-const ic = itemClasses
-const inv = inventorySlots
+const asc = armorSubclasses;
+const wsc = weaponSubclasses;
+const ic = itemClasses;
+const inv = inventorySlots;
 
 export const classArmorSubclasses = {
   druid: [asc.cloth, asc.leather],
@@ -127,7 +127,7 @@ export const classArmorSubclasses = {
   rogue: [asc.leather],
   shaman: [asc.cloth, asc.leather, asc.mail],
   warlock: [asc.cloth],
-  warrior: [asc.leather, asc.mail, asc.plate]
+  warrior: [asc.leather, asc.mail, asc.plate],
 };
 
 export const classMainHandInvSlots = {
@@ -139,7 +139,7 @@ export const classMainHandInvSlots = {
   rogue: [inv.weapon, inv.main_hand],
   shaman: [inv.weapon, inv.two_hand, inv.main_hand],
   warlock: [inv.weapon, inv.two_hand, inv.main_hand],
-  warrior: [inv.weapon, inv.two_hand, inv.main_hand]
+  warrior: [inv.weapon, inv.two_hand, inv.main_hand],
 };
 
 export const classOffHandInvSlots = {
@@ -151,7 +151,7 @@ export const classOffHandInvSlots = {
   rogue: [inv.weapon, inv.off_hand, inv.holdable_tome],
   shaman: [inv.weapon, inv.shield, inv.off_hand, inv.holdable_tome],
   warlock: [inv.holdable_tome],
-  warrior: [inv.weapon, inv.shield, inv.off_hand, inv.holdable_tome]
+  warrior: [inv.weapon, inv.shield, inv.off_hand, inv.holdable_tome],
 };
 
 export const classRangedInvSlots = {
@@ -163,390 +163,404 @@ export const classRangedInvSlots = {
   rogue: [inv.ranged, inv.ranged_right, inv.thrown],
   shaman: [inv.relic],
   warlock: [inv.ranged_right],
-  warrior: [inv.ranged, inv.ranged_right, inv.thrown]
+  warrior: [inv.ranged, inv.ranged_right, inv.thrown],
 };
 
 export const classMainHandItemClasses = {
   druid: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.staff]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.staff],
+    },
   },
   hunter: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.polearm, wsc.staff, wsc.sword_1h, wsc.sword_2h]
-    }
+      [ic.weapon]: [
+        wsc.axe_1h,
+        wsc.axe_2h,
+        wsc.dagger,
+        wsc.fist,
+        wsc.polearm,
+        wsc.staff,
+        wsc.sword_1h,
+        wsc.sword_2h,
+      ],
+    },
   },
   mage: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.staff, wsc.sword_1h]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.staff, wsc.sword_1h],
+    },
   },
   paladin: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.axe_1h, wsc.axe_2h, wsc.mace_1h, wsc.mace_2h, wsc.polearm, wsc.sword_1h, wsc.sword_2h]
-    }
+      [ic.weapon]: [
+        wsc.axe_1h,
+        wsc.axe_2h,
+        wsc.mace_1h,
+        wsc.mace_2h,
+        wsc.polearm,
+        wsc.sword_1h,
+        wsc.sword_2h,
+      ],
+    },
   },
   priest: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.mace_1h, wsc.staff]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.mace_1h, wsc.staff],
+    },
   },
   rogue: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h],
+    },
   },
   shaman: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.staff]
-    }
+      [ic.weapon]: [
+        wsc.axe_1h,
+        wsc.axe_2h,
+        wsc.dagger,
+        wsc.fist,
+        wsc.mace_1h,
+        wsc.mace_2h,
+        wsc.staff,
+      ],
+    },
   },
   warlock: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.staff, wsc.sword_1h]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.staff, wsc.sword_1h],
+    },
   },
   warrior: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.polearm, wsc.staff, wsc.sword_1h, wsc.sword_2h]
-    }
-  }
+      [ic.weapon]: [
+        wsc.axe_1h,
+        wsc.axe_2h,
+        wsc.dagger,
+        wsc.fist,
+        wsc.mace_1h,
+        wsc.mace_2h,
+        wsc.polearm,
+        wsc.staff,
+        wsc.sword_1h,
+        wsc.sword_2h,
+      ],
+    },
+  },
 };
 
 export const classOffHandItemClasses = {
   druid: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.misc]
-    }
+      [ic.armor]: [asc.misc],
+    },
   },
   hunter: {
     itemClasses: [ic.weapon, ic.armor],
     itemSubclasses: {
       [ic.weapon]: [wsc.axe_1h, wsc.dagger, wsc.fist, wsc.sword_1h],
-      [ic.armor]: [asc.misc]
-    }
+      [ic.armor]: [asc.misc],
+    },
   },
   mage: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.misc]
-    }
+      [ic.armor]: [asc.misc],
+    },
   },
   paladin: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.misc, asc.shield]
-    }
+      [ic.armor]: [asc.misc, asc.shield],
+    },
   },
   priest: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.misc]
-    }
+      [ic.armor]: [asc.misc],
+    },
   },
   rogue: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h]
-    }
+      [ic.weapon]: [wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h],
+    },
   },
   shaman: {
     itemClasses: [ic.weapon, ic.armor],
     itemSubclasses: {
       [ic.weapon]: [wsc.axe_1h, wsc.dagger, wsc.fist, wsc.mace_1h],
-      [ic.armor]: [asc.misc, asc.shield]
-    }
+      [ic.armor]: [asc.misc, asc.shield],
+    },
   },
   warlock: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.misc]
-    }
+      [ic.armor]: [asc.misc],
+    },
   },
   warrior: {
     itemClasses: [ic.weapon, ic.armor],
     itemSubclasses: {
       [ic.weapon]: [wsc.axe_1h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.sword_1h],
-      [ic.armor]: [asc.misc, asc.shield]
-    }
-  }
+      [ic.armor]: [asc.misc, asc.shield],
+    },
+  },
 };
 
 export const classRangedItemClasses = {
   druid: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.idol]
-    }
+      [ic.armor]: [asc.idol],
+    },
   },
   hunter: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun]
-    }
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun],
+    },
   },
   mage: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.wand]
-    }
+      [ic.weapon]: [wsc.wand],
+    },
   },
   paladin: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.libram]
-    }
+      [ic.armor]: [asc.libram],
+    },
   },
   priest: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.wand]
-    }
+      [ic.weapon]: [wsc.wand],
+    },
   },
   rogue: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
-    }
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown],
+    },
   },
   shaman: {
     itemClasses: [ic.armor],
     itemSubclasses: {
-      [ic.armor]: [asc.totem]
-    }
+      [ic.armor]: [asc.totem],
+    },
   },
   warlock: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.wand]
-    }
+      [ic.weapon]: [wsc.wand],
+    },
   },
   warrior: {
     itemClasses: [ic.weapon],
     itemSubclasses: {
-      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
-    }
-  }
+      [ic.weapon]: [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown],
+    },
+  },
 };
 
 export function isMeleeWeapon(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.axe_1h, wsc.axe_2h, wsc.dagger, wsc.fist, wsc.mace_1h, wsc.mace_2h, wsc.polearm, wsc.staff, wsc.sword_1h, wsc.sword_2h]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [
+    wsc.axe_1h,
+    wsc.axe_2h,
+    wsc.dagger,
+    wsc.fist,
+    wsc.mace_1h,
+    wsc.mace_2h,
+    wsc.polearm,
+    wsc.staff,
+    wsc.sword_1h,
+    wsc.sword_2h,
+  ];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isAxe(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.axe_1h, wsc.axe_2h]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.axe_1h, wsc.axe_2h];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isSword(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.sword_1h, wsc.sword_2h]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.sword_1h, wsc.sword_2h];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isMace(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.mace_1h, wsc.mace_2h]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.mace_1h, wsc.mace_2h];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isRangedWeapon(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.bow, wsc.crossbow, wsc.gun, wsc.thrown];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isBow(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.bow, wsc.crossbow]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.bow, wsc.crossbow];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function isGun(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.gun]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-         validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.gun];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export function is1HWeapon(item) {
-  if(!item || !item.itemClass) return false
+  if (!item || !item.itemClass) return false;
 
-  const validSubclasses = [wsc.axe_1h, wsc.mace_1h, wsc.sword_1h, wsc.fist, wsc.dagger]
-  return item.itemClass.ordinal === itemClasses.weapon &&
-        validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  const validSubclasses = [wsc.axe_1h, wsc.mace_1h, wsc.sword_1h, wsc.fist, wsc.dagger];
+  return (
+    item.itemClass.ordinal === itemClasses.weapon &&
+    validSubclasses.includes(item.itemSubclass.itemClassOrdinal)
+  );
 }
 
 export const classes = {
   druid: {
     name: 'Druid',
     icon: 'classes/druid.png',
-    races: [
-      'Night Elf',
-      'Tauren'
-    ]
+    races: ['Night Elf', 'Tauren'],
   },
   hunter: {
     name: 'Hunter',
     icon: 'classes/hunter.png',
-    races: [
-      'Blood Elf',
-      'Draenei',
-      'Dwarf',
-      'Night Elf',
-      'Orc',
-      'Tauren',
-      'Troll'
-    ]
+    races: ['Blood Elf', 'Draenei', 'Dwarf', 'Night Elf', 'Orc', 'Tauren', 'Troll'],
   },
   mage: {
     name: 'Mage',
     icon: 'classes/mage.png',
-    races: [
-      'Blood Elf',
-      'Draenei',
-      'Gnome',
-      'Human',
-      'Troll',
-      'Undead'
-    ]
+    races: ['Blood Elf', 'Draenei', 'Gnome', 'Human', 'Troll', 'Undead'],
   },
   paladin: {
     name: 'Paladin',
     icon: 'classes/paladin.png',
-    races: [
-      'Blood Elf',
-      'Draenei',
-      'Dwarf',
-      'Human'
-    ]
+    races: ['Blood Elf', 'Draenei', 'Dwarf', 'Human'],
   },
   priest: {
     name: 'Priest',
     icon: 'classes/priest.png',
-    races: [
-      'Blood Elf',
-      'Draenei',
-      'Dwarf',
-      'Human',
-      'Night Elf',
-      'Troll',
-      'Undead'
-    ]
+    races: ['Blood Elf', 'Draenei', 'Dwarf', 'Human', 'Night Elf', 'Troll', 'Undead'],
   },
   rogue: {
     name: 'Rogue',
     icon: 'classes/rogue.png',
-    races: [
-      'Blood Elf',
-      'Dwarf',
-      'Gnome',
-      'Humans',
-      'Night Elf',
-      'Orc',
-      'Troll',
-      'Undead'
-    ]
+    races: ['Blood Elf', 'Dwarf', 'Gnome', 'Humans', 'Night Elf', 'Orc', 'Troll', 'Undead'],
   },
   shaman: {
     name: 'Shaman',
     icon: 'classes/shaman.png',
-    races: [
-      'Draenei',
-      'Orc',
-      'Tauren',
-      'Troll'
-    ]
+    races: ['Draenei', 'Orc', 'Tauren', 'Troll'],
   },
   warlock: {
     name: 'Warlock',
     icon: 'classes/warlock.png',
-    races: [
-      'Blood Elf',
-      'Gnome',
-      'Human',
-      'Orc',
-      'Troll',
-      'Undead'
-    ]
+    races: ['Blood Elf', 'Gnome', 'Human', 'Orc', 'Troll', 'Undead'],
   },
   warrior: {
     name: 'Warrior',
     icon: 'classes/warrior.png',
-    races: [
-      'Draenei',
-      'Dwarf',
-      'Gnome',
-      'Human',
-      'Night Elf',
-      'Orc',
-      'Tauren',
-      'Troll',
-      'Undead'
-    ]
+    races: ['Draenei', 'Dwarf', 'Gnome', 'Human', 'Night Elf', 'Orc', 'Tauren', 'Troll', 'Undead'],
   },
-}
+};
 
-export const allEpCategories = [{
-  name: 'Pre-raid',
-  key: 'preraid'
-},{
-  name: 'Phase 1',
-  key: 'phase1'
-},{
-  name: 'Phase 2',
-  key: 'phase2'
-},{
-  name: 'Phase 3',
-  key: 'phase3'
-}]
+export const allEpCategories = [
+  {
+    name: 'Pre-raid',
+    key: 'preraid',
+  },
+  {
+    name: 'Phase 1',
+    key: 'phase1',
+  },
+  {
+    name: 'Phase 2',
+    key: 'phase2',
+  },
+  {
+    name: 'Phase 3',
+    key: 'phase3',
+  },
+];
 
-export const targetTypes = [{
-  name: 'Beast',
-  key: 1
-},{
-  name: 'Demon',
-  key: 3
-},{
-  name: 'Dragonkin',
-  key: 4
-},{
-  name: 'Elemental',
-  key: 5
-},{
-  name: 'Giant',
-  key: 6
-},{
-  name: 'Humanoid',
-  key: 7
-},{
-  name: 'Undead',
-  key: 9
-}]
+export const targetTypes = [
+  {
+    name: 'Beast',
+    key: 1,
+  },
+  {
+    name: 'Demon',
+    key: 3,
+  },
+  {
+    name: 'Dragonkin',
+    key: 4,
+  },
+  {
+    name: 'Elemental',
+    key: 5,
+  },
+  {
+    name: 'Giant',
+    key: 6,
+  },
+  {
+    name: 'Humanoid',
+    key: 7,
+  },
+  {
+    name: 'Undead',
+    key: 9,
+  },
+];

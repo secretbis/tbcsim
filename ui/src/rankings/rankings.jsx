@@ -1,24 +1,39 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { ResponsiveBar } from '@nivo/bar'
-import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite'
+import { ResponsiveBar } from '@nivo/bar';
+import { Container, Content, Grid, Row, Col, Panel, Message } from 'rsuite';
 
-import rankingData from './data/ranks_all.json'
+import rankingData from './data/ranks_all.json';
 
 function HowItWorks() {
   return (
     <Container style={{ marginBottom: 20 }}>
       <h5>How are these values calculated?</h5>
       <ul>
-        <li>Each specialization is simulated for 15,000 iterations at 10ms resolution, with full raid buffs</li>
-        <li>The gear, buff and rotation setups for each of these specializations are the presets selectable on the simulator page</li>
-        <li>Rankings are per-tier.  Each preset has a tier-specific BIS or BIS-adjacent gear set (if it isn't BIS/BIS-adjacent, please file a bug!)</li>
+        <li>
+          Each specialization is simulated for 15,000 iterations at 10ms resolution, with full raid
+          buffs
+        </li>
+        <li>
+          The gear, buff and rotation setups for each of these specializations are the presets
+          selectable on the simulator page
+        </li>
+        <li>
+          Rankings are per-tier. Each preset has a tier-specific BIS or BIS-adjacent gear set (if it
+          isn't BIS/BIS-adjacent, please file a bug!)
+        </li>
       </ul>
       <h5>Notes and Caveats</h5>
       <ul>
-        <li>Each class is simulated in "ideal" conditions.  For example, supporting 10 Rogues/Fury Warriors with perfect melee groups is not possible - that would not fit in a raid.</li>
-        <li>If you are interested in how these classes perform in different conditions, head over to the Simulator tab and subtract some buffs!</li>
+        <li>
+          Each class is simulated in "ideal" conditions. For example, supporting 10 Rogues/Fury
+          Warriors with perfect melee groups is not possible - that would not fit in a raid.
+        </li>
+        <li>
+          If you are interested in how these classes perform in different conditions, head over to
+          the Simulator tab and subtract some buffs!
+        </li>
       </ul>
     </Container>
   );
@@ -30,7 +45,7 @@ const RankingBarChart = ({ data }) => (
     indexBy='spec_display'
     margin={{ top: 50, right: 0, bottom: 0, left: 200 }}
     colors={node => {
-      const specColor = _.get(specColors, node.data.spec, '#000000')
+      const specColor = _.get(specColors, node.data.spec, '#000000');
       const specPetColor = _.get(specPetColors, node.data.spec, specColor);
       return node.id === 'subjectPetMean' ? specPetColor : specColor;
     }}
@@ -44,48 +59,44 @@ const RankingBarChart = ({ data }) => (
     labelSkipHeight={16}
     enableGridX={true}
     enableGridY={false}
-    label={d => d && d.value != null ? d.value.toFixed(2) : '' }
+    label={d => (d && d.value != null ? d.value.toFixed(2) : '')}
     axisTop={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'DPS (3 minutes)',
-        itemTextColor: '#fff',
-        legendPosition: 'middle',
-        legendOffset: -40
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'DPS (3 minutes)',
+      itemTextColor: '#fff',
+      legendPosition: 'middle',
+      legendOffset: -40,
     }}
-    tooltip={(props) => (
-        <strong style={{ }}>
-            Total: {props.data.totalMean.toFixed(2)}
-        </strong>
-    )}
+    tooltip={props => <strong style={{}}>Total: {props.data.totalMean.toFixed(2)}</strong>}
     theme={{
       axis: {
         ticks: {
           line: {
-            stroke: '#777'
+            stroke: '#777',
           },
           text: {
             fill: '#fff',
             fontSize: '14px',
-          }
+          },
         },
         legend: {
           text: {
             fill: '#fff',
             fontSize: '14px',
-          }
-        }
+          },
+        },
       },
       labels: {
         text: {
-          fontSize: '14px'
-        }
+          fontSize: '14px',
+        },
       },
       grid: {
         line: {
-          stroke: '#777'
-        }
+          stroke: '#777',
+        },
       },
       tooltip: {
         container: {
@@ -97,7 +108,7 @@ const RankingBarChart = ({ data }) => (
     motionStiffness={90}
     motionDamping={15}
   />
-)
+);
 
 const specDisplayNames = {
   hunter_bm: 'Beast Mastery Hunter',
@@ -117,7 +128,7 @@ const specDisplayNames = {
   warrior_fury: 'Fury Warrior',
   warrior_kebab: 'Kebab Warrior',
   warrior_protection: 'Protection Warrior',
-}
+};
 
 // Other colors for later:
 // Druid: #FF7C0A
@@ -143,27 +154,30 @@ const specColors = {
   warrior_fury: '#C69B6D',
   warrior_kebab: '#C69B6D',
   warrior_protection: '#C69B6D',
-}
+};
 
 const specPetColors = {
   hunter_bm: '#64BDC8',
   hunter_surv: '#64BDC8',
   mage_frost: '#64BDC8',
-}
+};
 
-function SpecRankingPanel({ name, subtitle, category, collapsible=true, categoryOverrides }) {
+function SpecRankingPanel({ name, subtitle, category, collapsible = true, categoryOverrides }) {
   const baseData = _.get(rankingData, category, {});
-  const categoryRankings = _.sortBy(Object.keys(baseData).map(key => {
-    const categoryOverride = _.get(categoryOverrides, key) || category;
-    const categoryData = _.get(rankingData, categoryOverride, {});
-    const categoryRankingData = categoryData[key];
+  const categoryRankings = _.sortBy(
+    Object.keys(baseData).map(key => {
+      const categoryOverride = _.get(categoryOverrides, key) || category;
+      const categoryData = _.get(rankingData, categoryOverride, {});
+      const categoryRankingData = categoryData[key];
 
-    return {
-      spec: key,
-      spec_display: _.get(specDisplayNames, key, key),
-      ...categoryRankingData
-    }
-  }), 'totalMean')
+      return {
+        spec: key,
+        spec_display: _.get(specDisplayNames, key, key),
+        ...categoryRankingData,
+      };
+    }),
+    'totalMean',
+  );
 
   return (
     <Row>
@@ -173,24 +187,26 @@ function SpecRankingPanel({ name, subtitle, category, collapsible=true, category
           defaultExpanded={true}
           header={name}
           bordered
-          style={{ width: '100%' }}
-        >
-          { subtitle && <div>{subtitle}</div> }
+          style={{ width: '100%' }}>
+          {subtitle && <div>{subtitle}</div>}
           <div style={{ width: '100%', height: 500 }}>
             <RankingBarChart data={categoryRankings} />
           </div>
         </Panel>
       </Col>
     </Row>
-  )
+  );
 }
 
-export default function() {
+export default function () {
   return (
     <Content>
       <Grid fluid={true}>
         <HowItWorks />
-        <SpecRankingPanel name='Phase 3 (WITH GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked WITH Warglaives'
+        <SpecRankingPanel
+          name='Phase 3 (WITH GLAIVES)'
+          category='phase3'
+          subtitle='Warriors and Rogues are ranked WITH Warglaives'
           categoryOverrides={{
             rogue_combat: 'phase3_glaives',
             warrior_arms: 'phase3_glaives',
@@ -199,11 +215,15 @@ export default function() {
             warrior_protection: 'phase3_glaives',
           }}
         />
-        <SpecRankingPanel name='Phase 3 (NO GLAIVES)' category='phase3' subtitle='Warriors and Rogues are ranked with NO Warglaives' />
+        <SpecRankingPanel
+          name='Phase 3 (NO GLAIVES)'
+          category='phase3'
+          subtitle='Warriors and Rogues are ranked with NO Warglaives'
+        />
         <SpecRankingPanel name='Phase 2' category='phase2' />
         <SpecRankingPanel name='Phase 1' category='phase1' />
         <SpecRankingPanel name='Pre-raid' category='preraid' />
       </Grid>
     </Content>
-  )
+  );
 }

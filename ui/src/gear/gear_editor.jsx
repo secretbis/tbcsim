@@ -1,17 +1,19 @@
-import React from 'react'
-import { Container, Col, Row } from 'rsuite'
+import React from 'react';
+import { Container, Col, Row } from 'rsuite';
 
 import GearSlot from './gear_slot';
 import Stats from './stats';
 import { hasAmmo } from '../util/items';
 import { useStateContext } from '../state';
 
-export default function() {
+export default function () {
   const { character = {} } = useStateContext();
 
   return (
     <Container style={{ maxWidth: '750px', minWidth: '500px' }}>
-      <div style={{ textAlign: 'center', marginBottom: 10, marginTop: -25 }}><em>Click any slot, gem, or enchant to change it!</em></div>
+      <div style={{ textAlign: 'center', marginBottom: 10, marginTop: -25 }}>
+        <em>Click any slot, gem, or enchant to change it!</em>
+      </div>
       <Row>
         <Col xs={12}>
           <GearSlot slotName='head' />
@@ -33,7 +35,7 @@ export default function() {
           <GearSlot slotName='ring2' />
           <GearSlot slotName='trinket1' />
           <GearSlot slotName='trinket2' />
-          {hasAmmo(character.gear.rangedTotemLibram) ? <GearSlot slotName='ammo' /> : null }
+          {hasAmmo(character.gear.rangedTotemLibram) ? <GearSlot slotName='ammo' /> : null}
         </Col>
       </Row>
       <Row style={{ marginTop: '20px' }}>

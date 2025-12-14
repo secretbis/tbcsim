@@ -1,19 +1,37 @@
-import { inventorySlots as constantInvSlots, itemClasses, armorSubclasses, weaponSubclasses, classArmorSubclasses, classMainHandInvSlots, classOffHandInvSlots, classRangedInvSlots, classMainHandItemClasses, classOffHandItemClasses, classRangedItemClasses, is1HWeapon, gemSubclasses as gsc } from '../data/constants';
+import {
+  inventorySlots as constantInvSlots,
+  itemClasses,
+  armorSubclasses,
+  weaponSubclasses,
+  classArmorSubclasses,
+  classMainHandInvSlots,
+  classOffHandInvSlots,
+  classRangedInvSlots,
+  classMainHandItemClasses,
+  classOffHandItemClasses,
+  classRangedItemClasses,
+  is1HWeapon,
+  gemSubclasses as gsc,
+} from '../data/constants';
 import { itemEp } from '../ep/ep_stats';
 
 import * as tbcsim from 'tbcsim';
 import _ from 'lodash';
 
 export function hasAmmo(item) {
-  if(!item) return false
+  if (!item) return false;
 
-  const itemSubclass = item.itemSubclass.itemClassOrdinal
+  const itemSubclass = item.itemSubclass.itemClassOrdinal;
   const isThoridal = item.id == 34334;
-  return [weaponSubclasses.bow, weaponSubclasses.crossbow, weaponSubclasses.gun].includes(itemSubclass) && !isThoridal
+  return (
+    [weaponSubclasses.bow, weaponSubclasses.crossbow, weaponSubclasses.gun].includes(
+      itemSubclass,
+    ) && !isThoridal
+  );
 }
 
 export function inventorySlotInfo(character, slotName, itemType) {
-  if(!character || !character.class) {
+  if (!character || !character.class) {
     return null;
   }
 
@@ -21,15 +39,15 @@ export function inventorySlotInfo(character, slotName, itemType) {
   const armorSlotIC = {
     itemClasses: [itemClasses.armor],
     itemSubclasses: {
-      [itemClasses.armor]: classArmorSubclasses[charClass]
-    }
+      [itemClasses.armor]: classArmorSubclasses[charClass],
+    },
   };
 
   const jewelrySlotIC = {
     itemClasses: [itemClasses.armor],
     itemSubclasses: {
-      [itemClasses.armor]: [armorSubclasses.misc]
-    }
+      [itemClasses.armor]: [armorSubclasses.misc],
+    },
   };
 
   const mainHandSlotIC = classMainHandItemClasses[charClass];
@@ -41,206 +59,214 @@ export function inventorySlotInfo(character, slotName, itemType) {
   const rangedInvSlots = classRangedInvSlots[charClass];
 
   // Build ammo item classes according to the ranged type, if any
-  const projectileISCs = []
+  const projectileISCs = [];
 
-  const rangedItem = character.gear.rangedTotemLibram
-  if(rangedItem) {
-    const rangedItemSubclass = rangedItem.itemSubclass.itemClassOrdinal
-    if([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(rangedItemSubclass)) {
-      projectileISCs.push(2)  // Arrow
+  const rangedItem = character.gear.rangedTotemLibram;
+  if (rangedItem) {
+    const rangedItemSubclass = rangedItem.itemSubclass.itemClassOrdinal;
+    if ([weaponSubclasses.bow, weaponSubclasses.crossbow].includes(rangedItemSubclass)) {
+      projectileISCs.push(2); // Arrow
     }
-    if(weaponSubclasses.gun === rangedItemSubclass) {
-      projectileISCs.push(3)  // Bullet
+    if (weaponSubclasses.gun === rangedItemSubclass) {
+      projectileISCs.push(3); // Bullet
     }
   }
 
   const ammoSlotIC = {
     itemClasses: [itemClasses.projectile],
     itemSubclasses: {
-      [itemClasses.projectile]: projectileISCs
-    }
+      [itemClasses.projectile]: projectileISCs,
+    },
   };
 
   const nonMetaGemIC = {
     itemClasses: [itemClasses.gem],
     itemSubclasses: {
-      [itemClasses.gem]: [gsc.red, gsc.blue, gsc.yellow, gsc.purple, gsc.green, gsc.orange]
-    }
+      [itemClasses.gem]: [gsc.red, gsc.blue, gsc.yellow, gsc.purple, gsc.green, gsc.orange],
+    },
   };
 
   const metaGemIC = {
     itemClasses: [itemClasses.gem],
     itemSubclasses: {
-      [itemClasses.gem]: [gsc.meta]
-    }
-  }
+      [itemClasses.gem]: [gsc.meta],
+    },
+  };
 
   const slotMap = {
     head: {
       slotName: 'head',
       inventorySlots: [1],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     neck: {
       slotName: 'neck',
       inventorySlots: [2],
-      itemClasses: jewelrySlotIC
+      itemClasses: jewelrySlotIC,
     },
     shoulders: {
       slotName: 'shoulders',
       inventorySlots: [3],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     back: {
       slotName: 'back',
       inventorySlots: [16],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     chest: {
       slotName: 'chest',
       inventorySlots: [5, 20],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     wrists: {
       slotName: 'wrists',
       inventorySlots: [9],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     mainHand: {
       slotName: 'mainHand',
       inventorySlots: mainHandInvSlots,
-      itemClasses: mainHandSlotIC
+      itemClasses: mainHandSlotIC,
     },
     offHand: {
       slotName: 'offHand',
       inventorySlots: offHandInvSlots,
-      itemClasses: offHandSlotIC
+      itemClasses: offHandSlotIC,
     },
     rangedTotemLibram: {
       slotName: 'rangedTotemLibram',
       inventorySlots: rangedInvSlots,
-      itemClasses: rangedSlotIC
+      itemClasses: rangedSlotIC,
     },
     hands: {
       slotName: 'hands',
       inventorySlots: [10],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     waist: {
       slotName: 'waist',
       inventorySlots: [6],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     legs: {
       slotName: 'legs',
       inventorySlots: [7],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     feet: {
       slotName: 'feet',
       inventorySlots: [8],
-      itemClasses: armorSlotIC
+      itemClasses: armorSlotIC,
     },
     ring1: {
       slotName: 'ring1',
       inventorySlots: [11],
-      itemClasses: jewelrySlotIC
+      itemClasses: jewelrySlotIC,
     },
     ring2: {
       slotName: 'ring2',
       inventorySlots: [11],
-      itemClasses: jewelrySlotIC
+      itemClasses: jewelrySlotIC,
     },
     trinket1: {
       slotName: 'trinket1',
       inventorySlots: [12],
-      itemClasses: jewelrySlotIC
+      itemClasses: jewelrySlotIC,
     },
     trinket2: {
       slotName: 'trinket2',
       inventorySlots: [12],
-      itemClasses: jewelrySlotIC
+      itemClasses: jewelrySlotIC,
     },
     ammo: {
       slotName: 'ammo',
       inventorySlots: [24],
-      itemClasses: ammoSlotIC
+      itemClasses: ammoSlotIC,
     },
     gem: {
       slotName: 'gem',
       inventorySlots: [0],
-      itemClasses: nonMetaGemIC
+      itemClasses: nonMetaGemIC,
     },
     metaGem: {
       slotName: 'metaGem',
       inventorySlots: [0],
-      itemClasses: metaGemIC
-    }
-  }
+      itemClasses: metaGemIC,
+    },
+  };
 
   // Only return itemClasses for regular item slots
-  if(!itemType) {
-    return slotMap[slotName]
+  if (!itemType) {
+    return slotMap[slotName];
   } else {
-    return _.omit(slotMap[slotName], ['itemClasses'])
+    return _.omit(slotMap[slotName], ['itemClasses']);
   }
 }
 
 // Some filter functions for itemsForSlot
 export function filterByItemName(itemName) {
-  return function(item) {
-    if(!item) return false;
-    return (item.displayName || item.name).toLowerCase().includes(itemName.toLowerCase())
-  }
+  return function (item) {
+    if (!item) return false;
+    return (item.displayName || item.name).toLowerCase().includes(itemName.toLowerCase());
+  };
 }
 
 export function filter1HOnly() {
-  return function(item) {
-    if(!item) return false;
+  return function (item) {
+    if (!item) return false;
     return is1HWeapon(item);
-  }
+  };
 }
 
 // Returns a list of items for a particular slot, given a character context
 // Can also return lists of enchants or tempEnchants, if specified as itemType
-export function itemsForSlot(slotName, character, phase, itemType, contextItem, filters, epOptions) {
-  if(!slotName || !character || !character.class) return null;
+export function itemsForSlot(
+  slotName,
+  character,
+  phase,
+  itemType,
+  contextItem,
+  filters,
+  epOptions,
+) {
+  if (!slotName || !character || !character.class) return null;
 
-  console.log("FULL ITEM FILTER")
+  console.log('FULL ITEM FILTER');
 
-  const { inventorySlots, itemClasses } = inventorySlotInfo(character, slotName, itemType)
-  let baseData = tbcsim.Items.getInstance()
-  if(itemType === "enchants") {
-    baseData = tbcsim.Enchants.getInstance()
+  const { inventorySlots, itemClasses } = inventorySlotInfo(character, slotName, itemType);
+  let baseData = tbcsim.Items.getInstance();
+  if (itemType === 'enchants') {
+    baseData = tbcsim.Enchants.getInstance();
   }
-  if(itemType === "tempEnchants") {
-    baseData = tbcsim.TempEnchants.getInstance()
+  if (itemType === 'tempEnchants') {
+    baseData = tbcsim.TempEnchants.getInstance();
   }
 
   let items = [];
-  for(const inventorySlot of inventorySlots) {
+  for (const inventorySlot of inventorySlots) {
     items = [...items, ...(baseData.bySlot.asJsMapView().get(inventorySlot) || [])];
   }
 
-  items = items.map(i => i(contextItem))
+  items = items.map(i => i(contextItem));
 
   // Filter again by equippable item subclasses, if provided
   const filtered = _.filter(
     _.filter(items, item => {
       // Check phase first
-      const isInPhase = (item.phase || 1) <= phase
-      if(!isInPhase) return false
+      const isInPhase = (item.phase || 1) <= phase;
+      if (!isInPhase) return false;
 
-      if(itemClasses) {
+      if (itemClasses) {
         const itemClass = item.itemClass.ordinal;
 
-        if(itemClasses.itemClasses.includes(itemClass)) {
+        if (itemClasses.itemClasses.includes(itemClass)) {
           const itemSubclass = item.itemSubclass.itemClassOrdinal;
-          const subclasses = itemClasses.itemSubclasses[itemClass]
+          const subclasses = itemClasses.itemSubclasses[itemClass];
 
           // Never filter the cloak slot on itemSubclass
-          if(subclasses.includes(itemSubclass) || item.inventorySlot == constantInvSlots.back) {
-            return filters ? filters.every(f => f(item)) : true
+          if (subclasses.includes(itemSubclass) || item.inventorySlot == constantInvSlots.back) {
+            return filters ? filters.every(f => f(item)) : true;
           }
         }
 
@@ -248,22 +274,27 @@ export function itemsForSlot(slotName, character, phase, itemType, contextItem, 
       }
 
       return true;
-    }), item => {
+    }),
+    item => {
       // Filter by allowable classes
-      const allowableClasses = [character.class]
-      return item.allowableClasses == null || item.allowableClasses.some(it => {
-        return allowableClasses.map(it => it.toUpperCase()).includes(it.name.toUpperCase());
-      })
-    });
+      const allowableClasses = [character.class];
+      return (
+        item.allowableClasses == null ||
+        item.allowableClasses.some(it => {
+          return allowableClasses.map(it => it.toUpperCase()).includes(it.name.toUpperCase());
+        })
+      );
+    },
+  );
 
   // Add item EP if we have a reference point
-  if(character) {
+  if (character) {
     items = items.forEach(i => {
-      const ep = itemEp(i, character.epCategory, character.epSpec, epOptions)
-      i.ep = ep
-    })
+      const ep = itemEp(i, character.epCategory, character.epSpec, epOptions);
+      i.ep = ep;
+    });
   }
 
   const sortKey = character ? 'ep' : 'itemLevel';
-  return _.sortBy(filtered, sortKey).reverse()
+  return _.sortBy(filtered, sortKey).reverse();
 }

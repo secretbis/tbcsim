@@ -1,0 +1,5 @@
+arrowParens: avoid
+bracketSameLine: true
+jsxSingleQuote: true
+printWidth: 100
+singleQuote: true

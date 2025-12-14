@@ -8,36 +8,35 @@ const columnInfo = [
     title: 'Name',
     key: 'name',
     flex: 2,
-    minWidth: 200
-  },{
+    minWidth: 200,
+  },
+  {
     title: 'AppliedCountAvg',
     key: 'appliedAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'RefreshedCountAvg',
     key: 'refreshedAvg',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'UptimePct',
     key: 'uptimePct',
-    formatter: toFixedPct()
-  },{
+    formatter: toFixedPct(),
+  },
+  {
     title: 'AvgDurationSeconds',
     key: 'avgDuration',
-    formatter: toFixed()
-  },{
+    formatter: toFixed(),
+  },
+  {
     title: 'AvgStacks',
     key: 'avgStacks',
-    formatter: toFixed()
-  }
+    formatter: toFixed(),
+  },
 ];
 
 export default ({ title, data }) => {
-  return (
-    <Table
-      title={title}
-      data={data}
-      columnInfo={columnInfo}
-    />
-  )
-}
+  return <Table title={title} data={data} columnInfo={columnInfo} />;
+};

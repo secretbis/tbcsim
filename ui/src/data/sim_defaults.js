@@ -12,7 +12,7 @@ const simDefaults = {
   targetArmor: baseDefaults.targetArmor,
   // allowParryAndBlock: baseDefaults.allowParryAndBlock,
   showHiddenBuffs: baseDefaults.showHiddenBuffs,
-  targetType: baseDefaults.targetType || 3
+  targetType: baseDefaults.targetType || 3,
 };
 
 export default simDefaults;

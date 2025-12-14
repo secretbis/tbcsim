@@ -4,35 +4,45 @@ import { Container, Button, Modal, Nav } from 'rsuite';
 
 function delimitTable(columnInfo, data, delimiter) {
   let headerStr = columnInfo.map(c => c.title).join(delimiter) + '\n';
-  let dataStr = (data && data.map && data.map(d => {
-    return columnInfo.map(c => {
-      const result = d[c.key];
-      return Number.isNaN(result) ? '0' : result.toLocaleString(undefined, {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2,
-        useGrouping: false
-      });;
-    }).join(delimiter);
-  }).join('\n')) || '';
+  let dataStr =
+    (data &&
+      data.map &&
+      data
+        .map(d => {
+          return columnInfo
+            .map(c => {
+              const result = d[c.key];
+              return Number.isNaN(result)
+                ? '0'
+                : result.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                    useGrouping: false,
+                  });
+            })
+            .join(delimiter);
+        })
+        .join('\n')) ||
+    '';
 
   return headerStr + dataStr;
 }
 
 const exporters = {
-  'CSV': function(columnInfo, data) {
+  CSV: function (columnInfo, data) {
     return delimitTable(columnInfo, data, ',');
   },
-  'TSV': function(columnInfo, data) {
+  TSV: function (columnInfo, data) {
     return delimitTable(columnInfo, data, '	');
-  }
+  },
 };
 
-export default function({ columnInfo, data }) {
+export default function ({ columnInfo, data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('CSV')
+  const [activeTab, setActiveTab] = useState('CSV');
 
   function onOpen() {
-    setModalOpen(true)
+    setModalOpen(true);
   }
 
   function onHide() {
@@ -40,18 +50,23 @@ export default function({ columnInfo, data }) {
   }
 
   function onSelect(evt) {
-    setActiveTab(evt)
+    setActiveTab(evt);
   }
 
   function renderTab() {
-    const exportData = exporters[activeTab](columnInfo, data)
+    const exportData = exporters[activeTab](columnInfo, data);
 
     return (
       <>
-        <Button onClick={() => { navigator.clipboard.writeText(exportData); }}>Copy to Clipboard</Button>
+        <Button
+          onClick={() => {
+            navigator.clipboard.writeText(exportData);
+          }}>
+          Copy to Clipboard
+        </Button>
         <textarea
           style={{ color: '#000', resize: 'none' }}
-          value={exportData || ""}
+          value={exportData || ''}
           rows={5}
           wrap={'soft'}
         />
@@ -61,7 +76,9 @@ export default function({ columnInfo, data }) {
 
   return (
     <span style={{ marginLeft: 10 }}>
-      <Button appearance='ghost' onClick={onOpen}>Export</Button>
+      <Button appearance='ghost' onClick={onOpen}>
+        Export
+      </Button>
       <Modal open={modalOpen} size='med' onHide={onHide} onClose={onHide}>
         <Modal.Header style={{ marginBottom: 10 }}>
           <Modal.Title style={{ marginBottom: 10 }}>Export</Modal.Title>
@@ -81,5 +98,5 @@ export default function({ columnInfo, data }) {
         </Modal.Body>
       </Modal>
     </span>
-  )
+  );
 }

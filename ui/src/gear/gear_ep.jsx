@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { Checkbox, Content, Container, Dropdown, Input, InputGroup, Grid, Row, Col, Panel, Table } from 'rsuite';
+import {
+  Checkbox,
+  Content,
+  Container,
+  Dropdown,
+  Input,
+  InputGroup,
+  Grid,
+  Row,
+  Col,
+  Panel,
+  Table,
+} from 'rsuite';
 import { Icon } from '@rsuite/icons';
 import { allEpCategories } from '../data/constants';
 import ItemTooltip from './item_tooltip';
@@ -10,101 +22,128 @@ import { useDispatchContext, useStateContext } from '../state';
 
 const { Column, HeaderCell, Cell } = Table;
 
-const classes = [{
-  label: 'Hunter (Beast Mastery)',
-  value: 'hunter_bm'
-},{
-  label: 'Hunter(Survival)',
-  value: 'hunter_surv'
-},{
-  label: 'Mage (Arcane)',
-  value: 'mage_arcane'
-},{
-  label: 'Mage (Fire)',
-  value: 'mage_fire'
-},{
-  label: 'Mage (Frost)',
-  value: 'mage_frost'
-},{
-  label: 'Priest (Shadow)',
-  value: 'priest_shadow'
-},{
-  label: 'Rogue (Assassination)',
-  value: 'rogue_assassination'
-},{
-  label: 'Rogue (Combat)',
-  value: 'rogue_combat'
-},{
-  label: 'Shaman (Elemental)',
-  value: 'shaman_ele'
-},{
-  label: 'Shaman (Enhancement)',
-  value: 'shaman_enh'
-},{
-  label: 'Warlock (Afflicton + Ruin)',
-  value: 'warlock_affliction_ruin'
-},{
-  label: 'Warlock (Destruction + Fire)',
-  value: 'warlock_destruction_fire'
-},{
-  label: 'Warlock (Destruction + Shadow)',
-  value: 'warlock_destruction_shadow'
-},{
-  label: 'Warrior (Arms)',
-  value: 'warrior_arms'
-},{
-  label: 'Warrior (Fury)',
-  value: 'warrior_fury'
-},{
-  label: 'Warrior (Kebab)',
-  value: 'warrior_kebab'
-}];
+const classes = [
+  {
+    label: 'Hunter (Beast Mastery)',
+    value: 'hunter_bm',
+  },
+  {
+    label: 'Hunter(Survival)',
+    value: 'hunter_surv',
+  },
+  {
+    label: 'Mage (Arcane)',
+    value: 'mage_arcane',
+  },
+  {
+    label: 'Mage (Fire)',
+    value: 'mage_fire',
+  },
+  {
+    label: 'Mage (Frost)',
+    value: 'mage_frost',
+  },
+  {
+    label: 'Priest (Shadow)',
+    value: 'priest_shadow',
+  },
+  {
+    label: 'Rogue (Assassination)',
+    value: 'rogue_assassination',
+  },
+  {
+    label: 'Rogue (Combat)',
+    value: 'rogue_combat',
+  },
+  {
+    label: 'Shaman (Elemental)',
+    value: 'shaman_ele',
+  },
+  {
+    label: 'Shaman (Enhancement)',
+    value: 'shaman_enh',
+  },
+  {
+    label: 'Warlock (Afflicton + Ruin)',
+    value: 'warlock_affliction_ruin',
+  },
+  {
+    label: 'Warlock (Destruction + Fire)',
+    value: 'warlock_destruction_fire',
+  },
+  {
+    label: 'Warlock (Destruction + Shadow)',
+    value: 'warlock_destruction_shadow',
+  },
+  {
+    label: 'Warrior (Arms)',
+    value: 'warrior_arms',
+  },
+  {
+    label: 'Warrior (Fury)',
+    value: 'warrior_fury',
+  },
+  {
+    label: 'Warrior (Kebab)',
+    value: 'warrior_kebab',
+  },
+];
 
 function IconCell({ rowData, dataKey, ...props }) {
-  const cellValue = rowData[dataKey]
-  if(cellValue) {
+  const cellValue = rowData[dataKey];
+  if (cellValue) {
     return (
       <Cell {...props}>
         <ItemTooltip item={rowData} allowClick={true}>
-          <img style={{ border: '1px solid #AAA', borderRadius: 5, marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+          <img
+            style={{
+              border: '1px solid #AAA',
+              borderRadius: 5,
+              marginTop: '-10px',
+              marginLeft: '-13px',
+            }}
+            src={`icons/${cellValue}`}
+          />
         </ItemTooltip>
       </Cell>
-    )
+    );
   }
 
   return null;
 }
 
 function NameCell({ rowData, dataKey, ...props }) {
-  const cellValue = rowData.displayName || rowData.name
+  const cellValue = rowData.displayName || rowData.name;
   return (
     <Cell {...props}>
       <ItemTooltip item={rowData} allowClick={true}>
-        <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</p>
+        <p className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>
+          {cellValue}
+        </p>
       </ItemTooltip>
     </Cell>
-  )
+  );
 }
 
 function ItemLevelCell({ rowData, dataKey, ...props }) {
-  const cellValue = rowData[dataKey]
+  const cellValue = rowData[dataKey];
   return (
     <Cell {...props}>
       <p>{cellValue}</p>
     </Cell>
-  )
+  );
 }
 
 function EpCell({ rowData, dataKey, ...props }) {
-  const cellValue = rowData[dataKey]
+  const cellValue = rowData[dataKey];
   return (
     <Cell {...props}>
       <p>{cellValue}</p>
     </Cell>
-  )
+  );
 }
 
-export default function() {
+export default function () {
   const { epOptions } = useStateContext();
   const dispatch = useDispatchContext();
 
@@ -118,65 +157,84 @@ export default function() {
       epCategory,
       epSpec: klass,
       gear: {
-        rangedTotemLibram: null
-      }
-    }
+        rangedTotemLibram: null,
+      },
+    };
   }
 
   function EPPanel({ header, slotName, epOptions }) {
     const [filter, setFilter] = useState('');
     const [oneHandOnly, setOneHandOnly] = useState(slotName === 'mainHand');
 
-    const filters = [filterByItemName(filter), ...(oneHandOnly ? [filter1HOnly()] : [])]
-    const allRowData = itemsForSlot(slotName, getCharacter(), itemPhase, null, null, filters, epOptions)
+    const filters = [filterByItemName(filter), ...(oneHandOnly ? [filter1HOnly()] : [])];
+    const allRowData = itemsForSlot(
+      slotName,
+      getCharacter(),
+      itemPhase,
+      null,
+      null,
+      filters,
+      epOptions,
+    );
     return (
-      <Panel header={header} collapsible bordered defaultExpanded={true} style={{ marginBottom: 10 }}>
+      <Panel
+        header={header}
+        collapsible
+        bordered
+        defaultExpanded={true}
+        style={{ marginBottom: 10 }}>
         <InputGroup inside style={{ margin: '0px 0 15px 0' }}>
           <Input onChange={value => setFilter(value)} />
           <InputGroup.Button>
-            <Icon icon="search" />
+            <Icon icon='search' />
           </InputGroup.Button>
         </InputGroup>
-        {slotName == 'mainHand' ?
+        {slotName == 'mainHand' ? (
           <InputGroup inside>
-            <Checkbox checked={oneHandOnly} onChange={() => setOneHandOnly(!oneHandOnly)}>One-Hand Only</Checkbox>
+            <Checkbox checked={oneHandOnly} onChange={() => setOneHandOnly(!oneHandOnly)}>
+              One-Hand Only
+            </Checkbox>
           </InputGroup>
-        : null}
+        ) : null}
 
         <Table height={400} rowHeight={60} data={allRowData} affixHorizontalScrollbar={-1000}>
           <Column width={55}>
             <HeaderCell></HeaderCell>
-            <IconCell dataKey="icon" />
+            <IconCell dataKey='icon' />
           </Column>
           <Column flexGrow={4}>
             <HeaderCell>Name</HeaderCell>
-            <NameCell dataKey="name" />
+            <NameCell dataKey='name' />
           </Column>
           <Column flexGrow={1}>
             <HeaderCell>EP</HeaderCell>
-            <EpCell dataKey="ep" />
+            <EpCell dataKey='ep' />
           </Column>
           <Column flexGrow={1}>
             <HeaderCell>ilvl</HeaderCell>
-            <ItemLevelCell dataKey="itemLevel" />
+            <ItemLevelCell dataKey='itemLevel' />
           </Column>
         </Table>
       </Panel>
-    )
+    );
   }
 
   function KlassSelect() {
     function onSelect(kls) {
-      setKlass(kls)
+      setKlass(kls);
     }
 
-    const klassEntry = classes.find(kls => kls.value === klass)
-    const klassLabel = klassEntry ? klassEntry.label : 'None'
+    const klassEntry = classes.find(kls => kls.value === klass);
+    const klassLabel = klassEntry ? klassEntry.label : 'None';
     return (
       <>
         <Dropdown title={klassLabel}>
           {classes.map(kls => {
-            return <Dropdown.Item key={kls.value} eventKey={kls.value} onSelect={onSelect}>{kls.label}</Dropdown.Item>
+            return (
+              <Dropdown.Item key={kls.value} eventKey={kls.value} onSelect={onSelect}>
+                {kls.label}
+              </Dropdown.Item>
+            );
           })}
         </Dropdown>
       </>
@@ -184,10 +242,10 @@ export default function() {
   }
 
   function PhaseSelect() {
-    const allPhases = [1, 2, 3, 4, 5]
+    const allPhases = [1, 2, 3, 4, 5];
 
     function onSelect(phase) {
-      setItemPhase(phase)
+      setItemPhase(phase);
     }
 
     const title = 'Item Filter: Phase ' + itemPhase;
@@ -195,7 +253,11 @@ export default function() {
       <>
         <Dropdown title={title}>
           {allPhases.map(phase => {
-            return <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>Phase {phase}</Dropdown.Item>
+            return (
+              <Dropdown.Item key={phase} eventKey={phase} onSelect={onSelect}>
+                Phase {phase}
+              </Dropdown.Item>
+            );
           })}
         </Dropdown>
       </>
@@ -203,13 +265,13 @@ export default function() {
   }
 
   function EpSelect() {
-    const epCategoryEntry = allEpCategories.find(epc => epc.key == epCategory)
-    if(epCategoryEntry == null) return null;
+    const epCategoryEntry = allEpCategories.find(epc => epc.key == epCategory);
+    if (epCategoryEntry == null) return null;
 
     const epCategoryName = epCategoryEntry.name;
 
     function onSelect(epCategory) {
-      setEpCategory(epCategory)
+      setEpCategory(epCategory);
     }
 
     const title = 'EP Category: ' + epCategoryName;
@@ -217,7 +279,11 @@ export default function() {
       <>
         <Dropdown title={title}>
           {allEpCategories.map(epCategory => {
-            return <Dropdown.Item key={epCategory.key} eventKey={epCategory.key} onSelect={onSelect}>{epCategory.name}</Dropdown.Item>
+            return (
+              <Dropdown.Item key={epCategory.key} eventKey={epCategory.key} onSelect={onSelect}>
+                {epCategory.name}
+              </Dropdown.Item>
+            );
           })}
         </Dropdown>
       </>
@@ -229,10 +295,16 @@ export default function() {
       <Grid fluid={true}>
         <Container>
           <h5>Gear Equivalence Points</h5>
-          <p>This page is meant to be used as a quick comparison between candidates for an item slot, using TBCSim EP.</p>
+          <p>
+            This page is meant to be used as a quick comparison between candidates for an item slot,
+            using TBCSim EP.
+          </p>
           <h5>Notes and Caveats</h5>
           <ul>
-            <li>Item procs and set bonuses are not currently included in total item EP when selecting items in the UI (Procs and sets are fully modeled in the sim)</li>
+            <li>
+              Item procs and set bonuses are not currently included in total item EP when selecting
+              items in the UI (Procs and sets are fully modeled in the sim)
+            </li>
           </ul>
         </Container>
         <Row>
@@ -250,35 +322,35 @@ export default function() {
           </Col>
         </Row>
         <Container style={{ margin: '15px 0px' }}>
-        {(!klass || !epCategory || !itemPhase) ?
-          <Row>Please select a class and EP category</Row>
-          :
-          <Row>
-            <Col xs={8}>
-              <EPPanel header='Head' slotName='head' bordered />
-              <EPPanel header='Neck' slotName='neck' bordered />
-              <EPPanel header='Shoulders' slotName='shoulders' bordered />
-              <EPPanel header='Back' slotName='back' bordered />
-              <EPPanel header='Chest' slotName='chest' bordered />
-              <EPPanel header='Wrists' slotName='wrists' bordered />
-            </Col>
-            <Col xs={8}>
-              <EPPanel header='Main Hand' slotName='mainHand' bordered />
-              <EPPanel header='Off Hand' slotName='offHand' bordered />
-              <EPPanel header='Ranged' slotName='rangedTotemLibram' bordered />
-            </Col>
-            <Col xs={8}>
-              <EPPanel header='Hands' slotName='hands' bordered />
-              <EPPanel header='Waist' slotName='waist' bordered />
-              <EPPanel header='Legs' slotName='legs' bordered />
-              <EPPanel header='Feet' slotName='feet' bordered />
-              <EPPanel header='Ring' slotName='ring1' bordered />
-              <EPPanel header='Trinket' slotName='trinket1' bordered />
-            </Col>
-          </Row>
-        }
+          {!klass || !epCategory || !itemPhase ? (
+            <Row>Please select a class and EP category</Row>
+          ) : (
+            <Row>
+              <Col xs={8}>
+                <EPPanel header='Head' slotName='head' bordered />
+                <EPPanel header='Neck' slotName='neck' bordered />
+                <EPPanel header='Shoulders' slotName='shoulders' bordered />
+                <EPPanel header='Back' slotName='back' bordered />
+                <EPPanel header='Chest' slotName='chest' bordered />
+                <EPPanel header='Wrists' slotName='wrists' bordered />
+              </Col>
+              <Col xs={8}>
+                <EPPanel header='Main Hand' slotName='mainHand' bordered />
+                <EPPanel header='Off Hand' slotName='offHand' bordered />
+                <EPPanel header='Ranged' slotName='rangedTotemLibram' bordered />
+              </Col>
+              <Col xs={8}>
+                <EPPanel header='Hands' slotName='hands' bordered />
+                <EPPanel header='Waist' slotName='waist' bordered />
+                <EPPanel header='Legs' slotName='legs' bordered />
+                <EPPanel header='Feet' slotName='feet' bordered />
+                <EPPanel header='Ring' slotName='ring1' bordered />
+                <EPPanel header='Trinket' slotName='trinket1' bordered />
+              </Col>
+            </Row>
+          )}
         </Container>
       </Grid>
     </Content>
-  )
+  );
 }

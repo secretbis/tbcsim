@@ -7,7 +7,7 @@ function stringifyRotation(rotation) {
   return rotation ? JSON.stringify(rotation, null, 2) : '';
 }
 
-export default function() {
+export default function () {
   const { rotation } = useStateContext();
   const dispatch = useDispatchContext();
 
@@ -16,14 +16,14 @@ export default function() {
 
   useEffect(() => {
     setRotationStr(stringifyRotation(rotation));
-  }, [rotation])
+  }, [rotation]);
 
   function saveRotation(evt) {
     try {
       const parsed = JSON.parse(rotationStr);
       setJsonValid(true);
       dispatch({ type: 'setRotation', value: parsed });
-    } catch(e) {
+    } catch (e) {
       setJsonValid(false);
     }
   }
@@ -33,24 +33,30 @@ export default function() {
     try {
       const parsed = JSON.parse(value);
       setJsonValid(true);
-    } catch(e) {
+    } catch (e) {
       setJsonValid(false);
     }
 
-    setRotationStr(value)
+    setRotationStr(value);
   }
 
   return (
     <Row>
       <Col xs={24}>
-        <textarea style={{
-          backgroundColor: '#1a1d24',
-          width: '100%',
-          height: '100%',
-          minHeight: '400px'
-        }} value={rotationStr || ""} onChange={onChange} />
-        <Button disabled={!rotationStr || !jsonValid} onClick={saveRotation}>Save</Button>
+        <textarea
+          style={{
+            backgroundColor: '#1a1d24',
+            width: '100%',
+            height: '100%',
+            minHeight: '400px',
+          }}
+          value={rotationStr || ''}
+          onChange={onChange}
+        />
+        <Button disabled={!rotationStr || !jsonValid} onClick={saveRotation}>
+          Save
+        </Button>
       </Col>
     </Row>
-  )
+  );
 }

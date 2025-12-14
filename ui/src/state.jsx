@@ -8,13 +8,16 @@ import { inventorySlots } from './data/constants';
 import * as tbcsim from 'tbcsim';
 
 function stateReducer(state, action) {
-  let newState = state
+  let newState = state;
   if (_.has(state, action.type)) {
-    newState = _.merge({
-      ...state,
-    }, _.set({}, action.type, action.value));
+    newState = _.merge(
+      {
+        ...state,
+      },
+      _.set({}, action.type, action.value),
+    );
   } else {
-    if(action.type == 'loadCharacterPreset') {
+    if (action.type == 'loadCharacterPreset') {
       newState = {
         ...state,
 
@@ -41,90 +44,98 @@ function stateReducer(state, action) {
           gear: action.value.gear,
           rotation: action.value.rotation,
           talents: action.value.talents,
-          pet: action.value.pet
+          pet: action.value.pet,
         },
 
-        raidBuffs: _.reduce(action.value.raidBuffs, (acc, buff) => {
-          acc[buff] = true
-          return acc;
-        }, {}),
-        raidDebuffs: _.reduce(action.value.raidDebuffs, (acc, debuff) => {
-          acc[debuff] = true
-          return acc;
-        }, {}),
-      }
-    } else if(action.type == 'updateGearSlot') {
+        raidBuffs: _.reduce(
+          action.value.raidBuffs,
+          (acc, buff) => {
+            acc[buff] = true;
+            return acc;
+          },
+          {},
+        ),
+        raidDebuffs: _.reduce(
+          action.value.raidDebuffs,
+          (acc, debuff) => {
+            acc[debuff] = true;
+            return acc;
+          },
+          {},
+        ),
+      };
+    } else if (action.type == 'updateGearSlot') {
       newState = {
         ...state,
         character: {
           ...state.character,
           gear: {
             ...state.character.gear,
-            ...action.value
-          }
-        }
-      }
+            ...action.value,
+          },
+        },
+      };
 
       // If a 2H is being equipped, remove the offhand slot
-      if(action.slotName == 'mainHand' && action.item) {
-        if(action.item.inventorySlot == inventorySlots.two_hand) {
-          delete newState.character.gear.offHand
+      if (action.slotName == 'mainHand' && action.item) {
+        if (action.item.inventorySlot == inventorySlots.two_hand) {
+          delete newState.character.gear.offHand;
         }
       }
 
       // If a 1H is being equipped in the OH, and a 2H is currently equipped, remove the 2H
-      if(action.slotName == 'offHand' && action.item && state.character.gear.mainHand) {
-        if(state.character.gear.mainHand.inventorySlot == inventorySlots.two_hand) {
-          delete newState.character.gear.mainHand
+      if (action.slotName == 'offHand' && action.item && state.character.gear.mainHand) {
+        if (state.character.gear.mainHand.inventorySlot == inventorySlots.two_hand) {
+          delete newState.character.gear.mainHand;
         }
       }
-    } else if(action.type == 'setRaidBuff') {
+    } else if (action.type == 'setRaidBuff') {
       newState = {
         ...state,
         raidBuffs: {
           ...state.raidBuffs,
-          [action.value.name]: action.value.value
-        }
-      }
-    } else if(action.type == 'setRaidDebuff') {
+          [action.value.name]: action.value.value,
+        },
+      };
+    } else if (action.type == 'setRaidDebuff') {
       newState = {
         ...state,
         raidDebuffs: {
           ...state.raidDebuffs,
-          [action.value.name]: action.value.value
-        }
-      }
-    } else if(action.type == 'setRotation') {
+          [action.value.name]: action.value.value,
+        },
+      };
+    } else if (action.type == 'setRotation') {
       newState = {
         ...state,
         character: {
           ...state.character,
-          rotation: action.value
-        }
-      }
-    } else if(action.type == 'setTalents') {
+          rotation: action.value,
+        },
+      };
+    } else if (action.type == 'setTalents') {
       newState = {
         ...state,
         character: {
           ...state.character,
-          talents: action.value
-        }
-      }
+          talents: action.value,
+        },
+      };
     } else {
       console.warn(`Unhandled action type: ${action.type}`);
     }
   }
 
   // Compute some props
-  if(newState.durationSeconds != null) {
-    newState.durationMs = newState.durationSeconds * 1000
+  if (newState.durationSeconds != null) {
+    newState.durationMs = newState.durationSeconds * 1000;
   }
 
-  if(newState.durationVariabilitySeconds != null) {
-    newState.durationVariabilityMs = newState.durationVariabilitySeconds * 1000
+  if (newState.durationVariabilitySeconds != null) {
+    newState.durationVariabilityMs = newState.durationVariabilitySeconds * 1000;
   }
 
-  return newState
+  return newState;
 }
 
 const initialState = {
@@ -142,7 +153,7 @@ const initialState = {
   resultsDps: null,
 
   epOptions: {
-    hitZero: false
+    hitZero: false,
   },
 
   simOptions: {
@@ -155,7 +166,7 @@ const initialState = {
     targetArmor: simDefaults.targetArmor,
     allowParryAndBlock: simDefaults.allowParryAndBlock,
     showHiddenBuffs: simDefaults.showHiddenBuffs,
-    targetType: simDefaults.targetType
+    targetType: simDefaults.targetType,
   },
 
   character: {
@@ -170,20 +181,28 @@ const initialState = {
     gear: null,
     rotation: null,
     talents: null,
-    pet: null
+    pet: null,
   },
 
-  raidBuffs: _.reduce(tbcsim.RaidAbilities.getInstance().buffNames, (acc, buff) => {
-    acc[buff] = true
-    return acc;
-  }, {}),
-  raidDebuffs: _.reduce(tbcsim.RaidAbilities.getInstance().debuffNames, (acc, debuff) => {
-    acc[debuff] = true
-    return acc;
-  }, {}),
+  raidBuffs: _.reduce(
+    tbcsim.RaidAbilities.getInstance().buffNames,
+    (acc, buff) => {
+      acc[buff] = true;
+      return acc;
+    },
+    {},
+  ),
+  raidDebuffs: _.reduce(
+    tbcsim.RaidAbilities.getInstance().debuffNames,
+    (acc, debuff) => {
+      acc[debuff] = true;
+      return acc;
+    },
+    {},
+  ),
 };
 
-initialState.serialize = function() {
+initialState.serialize = function () {
   return JSON.stringify({
     phase: this.phase,
     character: {
@@ -195,32 +214,34 @@ initialState.serialize = function() {
       targetType: this.character.targetType,
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
-        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it) : [],
+        gems: it.sockets
+          ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it)
+          : [],
         enchant: it.enchant ? it.enchant.displayName : null,
-        tempEnchant: it.tempEnchant ? it.tempEnchant.name : null
+        tempEnchant: it.tempEnchant ? it.tempEnchant.name : null,
       })),
       rotation: this.character.rotation,
       talents: this.character.talents,
-      pet: this.character.pet
+      pet: this.character.pet,
     },
 
     raidBuffs: this.raidBuffs,
-    raidDebuffs: this.raidDebuffs
-  })
+    raidDebuffs: this.raidDebuffs,
+  });
 };
 
-initialState.deserialize = function(serialized) {
+initialState.deserialize = function (serialized) {
   const newState = JSON.parse(serialized);
 
   // Rehydrate character data into actual items and etc.
-  if(newState.character) {
-    newState.character = tbcsim.ConfigMaker.getInstance().fromJson(newState.character)
+  if (newState.character) {
+    newState.character = tbcsim.ConfigMaker.getInstance().fromJson(newState.character);
   }
 
   return newState;
 };
 
-initialState.makeSimConfig = function() {
+initialState.makeSimConfig = function () {
   return tbcsim.ConfigMaker.getInstance().fromJson(
     JSON.stringify({
       class: this.character.class,
@@ -230,21 +251,23 @@ initialState.makeSimConfig = function() {
       level: this.character.level,
       gear: _.mapValues(this.character.gear, it => ({
         name: it.name,
-        gems: it.sockets ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it) : [],
+        gems: it.sockets
+          ? it.sockets.map(sk => sk && sk.gem && sk.gem.name).filter(it => !!it)
+          : [],
         enchant: it.enchant ? it.enchant.displayName : null,
-        tempEnchant: it.tempEnchant ? it.tempEnchant.name : null
+        tempEnchant: it.tempEnchant ? it.tempEnchant.name : null,
       })),
       rotation: this.character.rotation,
       talents: this.character.talents,
       pet: this.character.pet,
 
       raidBuffs: _.keys(_.pickBy(this.raidBuffs, value => !!value)),
-      raidDebuffs: _.keys(_.pickBy(this.raidDebuffs, value => !!value))
-    })
-  )
-}
+      raidDebuffs: _.keys(_.pickBy(this.raidDebuffs, value => !!value)),
+    }),
+  );
+};
 
-initialState.makeSimOptions = function() {
+initialState.makeSimOptions = function () {
   return new tbcsim.SimOptions(
     this.simOptions.durationSeconds * 1000,
     this.simOptions.durationVariabilitySeconds * 1000,
@@ -255,9 +278,9 @@ initialState.makeSimOptions = function() {
     this.simOptions.targetArmor,
     this.simOptions.targetType,
     this.simOptions.allowParryAndBlock,
-    this.simOptions.showHiddenBuffs
-  )
-}
+    this.simOptions.showHiddenBuffs,
+  );
+};
 
 // Context exports
 const StateContext = createContext(initialState);
@@ -268,11 +291,9 @@ export function StateProvider({ children }) {
 
   return (
     <StateContext.Provider value={state}>
-      <DispatchContext.Provider value={dispatch}>
-        {children}
-      </DispatchContext.Provider>
+      <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
     </StateContext.Provider>
-  )
+  );
 }
 
 export function useStateContext() {

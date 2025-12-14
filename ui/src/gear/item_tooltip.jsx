@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-export default function({ gear, item, isMetaGem=false, children, allowClick=false }) {
-  if(item) {
+export default function ({ gear, item, isMetaGem = false, children, allowClick = false }) {
+  if (item) {
     // TODO: Meta gem tooltips don't seem to work, regardless of how I set IDs
     // const allGemIds = []
     // if(isMetaGem) {
@@ -16,11 +16,16 @@ export default function({ gear, item, isMetaGem=false, children, allowClick=fals
     // }
 
     gear = gear || {};
-    const itemClass = `q${item.quality}`
-    const itemGems = 'gems=' + item.sockets.map(sk => sk.gem && sk.gem.id).join(':')
-    const itemEnchant = item.enchant ? `ench=${item.enchant.id}` : ''
-    const itemSet = 'pcs=' + _.values(gear).filter(it => !!it).map(it => it.id).join(':')
-    const suffixStr = `${itemGems}&${itemEnchant}&${itemSet}`
+    const itemClass = `q${item.quality}`;
+    const itemGems = 'gems=' + item.sockets.map(sk => sk.gem && sk.gem.id).join(':');
+    const itemEnchant = item.enchant ? `ench=${item.enchant.id}` : '';
+    const itemSet =
+      'pcs=' +
+      _.values(gear)
+        .filter(it => !!it)
+        .map(it => it.id)
+        .join(':');
+    const suffixStr = `${itemGems}&${itemEnchant}&${itemSet}`;
 
     return (
       <a
@@ -29,12 +34,11 @@ export default function({ gear, item, isMetaGem=false, children, allowClick=fals
         className={itemClass}
         rel={suffixStr}
         onClick={e => !allowClick && e.preventDefault()}
-        style={{ textDecoration: 'none' }}
-      >
+        style={{ textDecoration: 'none' }}>
         {children}
       </a>
-    )
+    );
   }
 
-  return <>{children}</>
+  return <>{children}</>;
 }

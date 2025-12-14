@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { Checkbox, Input, InputGroup, Modal, Table } from 'rsuite';
 import { Icon } from '@rsuite/icons';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa';
 
 import { filterByItemName, filter1HOnly, itemsForSlot } from '../util/items';
 
@@ -10,12 +10,23 @@ import ItemTooltip from './item_tooltip';
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function({ character, phase, type, item, slotName, TooltipComponent, visible, setVisible, onSelect, epOptions }) {
+export default function ({
+  character,
+  phase,
+  type,
+  item,
+  slotName,
+  TooltipComponent,
+  visible,
+  setVisible,
+  onSelect,
+  epOptions,
+}) {
   const [filter, setFilter] = useState('');
   const [oneHandOnly, setOneHandOnly] = useState(true);
   const [modalFullyShown, setModalFullyShown] = useState(false);
 
-  TooltipComponent = TooltipComponent || ItemTooltip
+  TooltipComponent = TooltipComponent || ItemTooltip;
 
   function onRowClick(item, e) {
     e.preventDefault();
@@ -42,57 +53,70 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
     setModalFullyShown(true);
   }
 
-  if(!visible) {
+  if (!visible) {
     return null;
   }
 
   function IconCell({ rowData, dataKey, ...props }) {
-    const cellValue = rowData[dataKey]
-    if(cellValue) {
+    const cellValue = rowData[dataKey];
+    if (cellValue) {
       return (
-        <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+        <Cell {...props} onClick={e => onRowClick(rowData, e)}>
           <TooltipComponent item={rowData} enchant={rowData}>
-            <img style={{ border: '1px solid #AAA', borderRadius: 5, marginTop: '-10px', marginLeft: '-13px' }} src={`icons/${cellValue}`} />
+            <img
+              style={{
+                border: '1px solid #AAA',
+                borderRadius: 5,
+                marginTop: '-10px',
+                marginLeft: '-13px',
+              }}
+              src={`icons/${cellValue}`}
+            />
           </TooltipComponent>
         </Cell>
-      )
+      );
     }
 
     return null;
   }
 
   function NameCell({ rowData, dataKey, ...props }) {
-    const cellValue = rowData.displayName || rowData.name
+    const cellValue = rowData.displayName || rowData.name;
     return (
-      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+      <Cell {...props} onClick={e => onRowClick(rowData, e)}>
         <TooltipComponent item={rowData} enchant={rowData}>
-          <span className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>{cellValue}</span>
+          <span className={`q${rowData.quality}`} style={{ fontWeight: 800 }}>
+            {cellValue}
+          </span>
         </TooltipComponent>
       </Cell>
-    )
+    );
   }
 
   function ItemLevelCell({ rowData, dataKey, ...props }) {
-    const cellValue = rowData[dataKey]
+    const cellValue = rowData[dataKey];
     return (
-      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+      <Cell {...props} onClick={e => onRowClick(rowData, e)}>
         <span>{cellValue}</span>
       </Cell>
-    )
+    );
   }
 
   function EpCell({ rowData, dataKey, ...props }) {
-    const cellValue = rowData[dataKey]
+    const cellValue = rowData[dataKey];
     return (
-      <Cell {...props} onClick={(e) => onRowClick(rowData, e)}>
+      <Cell {...props} onClick={e => onRowClick(rowData, e)}>
         <span>{cellValue}</span>
       </Cell>
-    )
+    );
   }
 
   function renderModalBody() {
-    const filters = [filterByItemName(filter), ...(oneHandOnly && slotName === 'mainHand' ? [filter1HOnly()] : [])]
-    const allRowData = itemsForSlot(slotName, character, phase, type, item, filters, epOptions)
+    const filters = [
+      filterByItemName(filter),
+      ...(oneHandOnly && slotName === 'mainHand' ? [filter1HOnly()] : []),
+    ];
+    const allRowData = itemsForSlot(slotName, character, phase, type, item, filters, epOptions);
     return (
       <>
         <InputGroup inside style={{ margin: '15px 0 15px 0' }}>
@@ -101,37 +125,39 @@ export default function({ character, phase, type, item, slotName, TooltipCompone
             <Icon as={FaSearch} />
           </InputGroup.Button>
         </InputGroup>
-        {slotName == 'mainHand' ?
-        <InputGroup inside>
-          <Checkbox checked={oneHandOnly} onChange={() => setOneHandOnly(!oneHandOnly)}>One-Hand Only</Checkbox>
-        </InputGroup>
-        : null}
+        {slotName == 'mainHand' ? (
+          <InputGroup inside>
+            <Checkbox checked={oneHandOnly} onChange={() => setOneHandOnly(!oneHandOnly)}>
+              One-Hand Only
+            </Checkbox>
+          </InputGroup>
+        ) : null}
 
         <Table height={400} rowHeight={60} data={allRowData} affixHorizontalScrollbar={-1000}>
           <Column width={55}>
             <HeaderCell></HeaderCell>
-            <IconCell dataKey="icon" />
+            <IconCell dataKey='icon' />
           </Column>
           <Column flexGrow={4}>
             <HeaderCell>Name</HeaderCell>
-            <NameCell dataKey="name" />
+            <NameCell dataKey='name' />
           </Column>
-          {character ?
+          {character ? (
             <Column flexGrow={1}>
               <HeaderCell>EP</HeaderCell>
-              <EpCell dataKey="ep" />
+              <EpCell dataKey='ep' />
             </Column>
-          : null}
+          ) : null}
           <Column flexGrow={1}>
             <HeaderCell>ilvl</HeaderCell>
-            <ItemLevelCell dataKey="itemLevel" />
+            <ItemLevelCell dataKey='itemLevel' />
           </Column>
         </Table>
       </>
-    )
+    );
   }
 
-  if(!visible) return null
+  if (!visible) return null;
 
   return (
     <Modal open={true} size={'sm'} onEntered={onEntered} onHide={onHide} onClose={onHide}>

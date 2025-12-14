@@ -7,7 +7,7 @@ function stringifyTalents(talents) {
   return talents ? JSON.stringify(talents, null, 2) : '';
 }
 
-export default function() {
+export default function () {
   const { talents } = useStateContext();
   const dispatch = useDispatchContext();
 
@@ -16,14 +16,14 @@ export default function() {
 
   useEffect(() => {
     setTalentsStr(stringifyTalents(talents));
-  }, [talents])
+  }, [talents]);
 
   function saveTalents(evt) {
     try {
       const parsed = JSON.parse(talentsStr);
       setJsonValid(true);
       dispatch({ type: 'setTalents', value: parsed });
-    } catch(e) {
+    } catch (e) {
       setJsonValid(false);
     }
   }
@@ -33,24 +33,30 @@ export default function() {
     try {
       const parsed = JSON.parse(value);
       setJsonValid(true);
-    } catch(e) {
+    } catch (e) {
       setJsonValid(false);
     }
 
-    setTalentsStr(value)
+    setTalentsStr(value);
   }
 
   return (
     <Row>
       <Col xs={24}>
-        <textarea style={{
-          backgroundColor: '#1a1d24',
-          width: '100%',
-          height: '100%',
-          minHeight: '400px'
-        }} value={talentsStr || ""} onChange={onChange} />
-        <Button disabled={!talentsStr || !jsonValid} onClick={saveTalents}>Save</Button>
+        <textarea
+          style={{
+            backgroundColor: '#1a1d24',
+            width: '100%',
+            height: '100%',
+            minHeight: '400px',
+          }}
+          value={talentsStr || ''}
+          onChange={onChange}
+        />
+        <Button disabled={!talentsStr || !jsonValid} onClick={saveTalents}>
+          Save
+        </Button>
       </Col>
     </Row>
-  )
+  );
 }
