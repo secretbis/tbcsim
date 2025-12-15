@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, Row, Button, Uploader, Notification } from 'rsuite';
+import { Col, Dropdown, Row, Button, Uploader, Notification, useToaster } from 'rsuite';
 import _ from 'lodash';
 import filesaver from 'file-saver';
 
@@ -296,6 +296,7 @@ function TargetTypeSelect() {
 export default () => {
   const { character, phase, raidBuffs, raidDebuffs, simOptions, epOptions } = useStateContext();
   const dispatch = useDispatchContext();
+  const toaster = useToaster();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -310,31 +311,35 @@ export default () => {
             presetObj['filename'] = file.name;
             return loadPreset(presetObj, dispatch);
           } catch (e) {
-            Notification['error']({
-              title: 'Import Error',
-              duration: 5000,
-              description: (
+            toaster.push(
+              <Notification title='Import Error' type='error' closable>
                 <div>
                   <p>
                     Error processing uploaded file, please make sure it is a valid preset YAML file.
                   </p>
                 </div>
-              ),
-            });
+              </Notification>,
+              {
+                placement: 'bottomEnd',
+                duration: 5000,
+              },
+            );
           }
         };
 
         reader.readAsText(file.blobFile);
       } catch (e) {
-        Notification['error']({
-          title: 'Import Error',
-          duration: 5000,
-          description: (
+        toaster.push(
+          <Notification title='Import Error' type='error' closable>
             <div>
               <p>Error uploading file, please try again.</p>
             </div>
-          ),
-        });
+          </Notification>,
+          {
+            placement: 'bottomEnd',
+            duration: 5000,
+          },
+        );
       }
     };
 
@@ -358,15 +363,18 @@ export default () => {
         const blob = new Blob([exported], { type: 'text/yaml;charset=utf-8' });
         filesaver.saveAs(blob, filename);
       } catch (e) {
-        Notification['error']({
-          title: 'Export Error',
-          duration: 5000,
-          description: (
+        console.log(e);
+        toaster.push(
+          <Notification title='Export Error' type='error' closable>
             <div>
               <p>Error saving file, please try again.</p>
             </div>
-          ),
-        });
+          </Notification>,
+          {
+            placement: 'bottomEnd',
+            duration: 5000,
+          },
+        );
       }
     };
 

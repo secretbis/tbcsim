@@ -50,7 +50,9 @@ export const exportPreset = (presetObj, raidBuffs, raidDebuffs) => {
   // Need to convert the item objects back into JSON
   const cleanGear = _.mapValues(presetObj.gear, item => {
     const name = item.name;
-    const gems = item.sockets ? item.sockets.map(socket => socket.gem.name) : [];
+    const gems = item.sockets
+      ? item.sockets.map(socket => socket.gem?.name).filter(it => !!it)
+      : [];
     const enchant = item.enchant && (item.enchant.displayName || item.enchant.name);
     const tempEnchant = item.tempEnchant && (item.tempEnchant.displayName || item.enchant.name);
 
