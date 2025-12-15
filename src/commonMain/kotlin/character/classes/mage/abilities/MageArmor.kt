@@ -22,7 +22,7 @@ class MageArmor : Ability() {
         override val durationMs: Int = 30 * 60 * 1000
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(manaPer5Seconds = (General.mp5FromSpiritNotCasting(sp) * .3).toInt())
+            return Stats(spiritRegenInCombatPct = 0.3)
         }
     }
 

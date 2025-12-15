@@ -1,6 +1,7 @@
 package character.classes.priest
 
 import character.*
+import character.classes.common.buffs.SpiritRegen
 import character.classes.priest.abilities.*
 import character.classes.priest.talents.*
 import character.classes.priest.talents.InnerFocus as InnerFocusTalent
@@ -16,7 +17,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         stamina = 154,
         spirit = 135
     )
-    override val buffs: List<Buff> = listOf()
+    override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {

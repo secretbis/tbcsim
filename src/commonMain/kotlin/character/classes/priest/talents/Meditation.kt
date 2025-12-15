@@ -20,7 +20,7 @@ class Meditation(currentRank: Int) : Talent(currentRank) {
         override val hidden: Boolean = true
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(manaPer5Seconds = (General.mp5FromSpiritNotCasting(sp) * 0.1 * currentRank).toInt())
+            return Stats(spiritRegenInCombatPct = 0.1 * currentRank)
         }
     }
 

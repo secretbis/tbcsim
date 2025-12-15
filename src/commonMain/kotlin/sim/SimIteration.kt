@@ -25,6 +25,9 @@ class SimIteration(
     val serverSlowTickMs = 3000
     var lastServerSlowTickMs = 0
 
+    var serverFiveSecondTickMs = 5000
+    var lastServerFiveSecondTickMs = 0
+
     var lastMp5Tick = 0
 
     var tickNum: Int = 0
@@ -113,6 +116,13 @@ class SimIteration(
             lastServerSlowTickMs = elapsedTimeMs
             allParticipants.forEach {
                 it.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null)
+            }
+        }
+
+        if(elapsedTimeMs >= lastServerFiveSecondTickMs + serverFiveSecondTickMs) {
+            lastServerFiveSecondTickMs = elapsedTimeMs
+            allParticipants.forEach {
+                it.fireProc(listOf(Proc.Trigger.SERVER_FIVE_SECOND_TICK), null, null, null)
             }
         }
 

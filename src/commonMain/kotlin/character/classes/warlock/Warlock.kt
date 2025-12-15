@@ -1,6 +1,7 @@
 package character.classes.warlock
 
 import character.*
+import character.classes.common.buffs.SpiritRegen
 import character.classes.warlock.abilities.*
 import character.classes.warlock.abilities.Conflagrate
 import character.classes.warlock.talents.*
@@ -21,7 +22,7 @@ class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         stamina = 154,
         spirit = 199
     )
-    override val buffs: List<Buff> = listOf()
+    override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {

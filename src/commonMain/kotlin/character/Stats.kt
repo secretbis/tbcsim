@@ -19,6 +19,9 @@ data class Stats(
     var intellectMultiplier: Double = 1.0,
     var spiritMultiplier: Double = 1.0,
 
+    var spiritRegenInCombatPct: Double = 0.0,
+    var spiritRegenInCombatMultiplier: Double = 1.0,
+
     var armor: Int = 0,
 
     // Secondary stats
@@ -138,6 +141,9 @@ data class Stats(
         staminaMultiplier *= stats.staminaMultiplier
         intellectMultiplier *= stats.intellectMultiplier
         spiritMultiplier *= stats.spiritMultiplier
+
+        spiritRegenInCombatPct = (spiritRegenInCombatPct + stats.spiritRegenInCombatPct).coerceAtMost(1.0)
+        spiritRegenInCombatMultiplier *= stats.spiritRegenInCombatMultiplier
 
         armor += stats.armor
 

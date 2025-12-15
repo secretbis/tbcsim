@@ -16,7 +16,7 @@ class NerubianSlavemaker : Item() {
     override var name: String = "Nerubian Slavemaker"
     override var itemLevel: Int = 89
     override var quality: Int = 4
-    override var icon: String = "inv_weapon_crossbow_12jpg"
+    override var icon: String = "inv_weapon_crossbow_12.jpg"
     override var itemSet: ItemSet? = null
     override var inventorySlot: Int = 15
     override var itemClass: Constants.ItemClass? = Constants.ItemClass.WEAPON

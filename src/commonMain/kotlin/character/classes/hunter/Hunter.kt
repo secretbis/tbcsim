@@ -1,6 +1,7 @@
 package character.classes.hunter
 
 import character.*
+import character.classes.common.buffs.SpiritRegen
 import character.classes.hunter.abilities.*
 import character.classes.hunter.talents.*
 import character.classes.hunter.talents.AimedShot as AimedShotTalent
@@ -31,7 +32,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
         }
     }
 
-    override val buffs: List<Buff> = listOf(quiverHaste)
+    override val buffs: List<Buff> = listOf(quiverHaste, SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {

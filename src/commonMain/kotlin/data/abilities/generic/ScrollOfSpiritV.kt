@@ -18,6 +18,9 @@ class ScrollOfSpiritV : Ability() {
         override val icon: String = "inv_scroll_01.jpg"
         override val durationMs: Int = 30 * 60 * 1000
         override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+            return mapOf(Mutex.BUFF_SPIRIT to 30)
+        }
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spirit = 30)

@@ -51,7 +51,7 @@ gear:
   mainHand:
     name: Zhar'doom, Greatstaff of the Devourer
     enchant: Sunfire
-    tempEnchant: Superior Wizard Oil
+    tempEnchant: Brilliant Wizard Oil
   rangedTotemLibram:
     name: Wand of the Forgotten Star
   head:

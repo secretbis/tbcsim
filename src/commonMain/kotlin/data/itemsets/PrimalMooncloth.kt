@@ -16,8 +16,7 @@ class PrimalMooncloth : ItemSet() {
         override val durationMs: Int = -1
 
         override fun modifyStats(sp: SimParticipant): Stats {
-            val spiritMp5 = General.mp5FromSpiritNotCasting(sp)
-            return Stats(manaPer5Seconds = (spiritMp5 * 0.05).toInt())
+            return Stats(spiritRegenInCombatPct = 0.05)
         }
     }
 

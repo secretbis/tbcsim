@@ -22,6 +22,9 @@ class DivineSpirit : Ability() {
         override val icon: String = "spell_holy_prayerofspirit.jpg"
         override val durationMs: Int = -1
         override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
+        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+            return mapOf(Mutex.BUFF_SPIRIT to 50)
+        }
 
         override fun modifyStats(sp: SimParticipant): Stats {
             return Stats(spirit = 50)

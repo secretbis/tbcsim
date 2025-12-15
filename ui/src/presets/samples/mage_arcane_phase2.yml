@@ -129,11 +129,6 @@ rotation:
           seconds: 30
     - name: Blood Fury
     - name: Berserking
-    - name: Bloodlust
-      criteria:
-        - type: FIGHT_DURATION_GTE
-          seconds: 15
-    - name: Drums of Battle
     - name: Mana Emerald
       criteria:
         - type: RESOURCE_MISSING_GTE

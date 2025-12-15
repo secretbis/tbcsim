@@ -178,7 +178,7 @@ class TBCSim : CliktCommand() {
 
     fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {
         val epStatMod = epDelta?.second ?: Stats()
-        val totalStatMod = Stats().add(epStatMod)//.add(hitReduction)
+        val totalStatMod = Stats().add(epStatMod)
 
         val iterations = runBlocking { Sim(config, opts, totalStatMod) {}.sim() }
         return Pair(epDelta, SimStats.dps(iterations).entries.sumOf { it.value?.mean ?: 0.0 })

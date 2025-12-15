@@ -52,7 +52,7 @@ gear:
   mainHand:
     name: Eternium Runed Blade
     enchant: Major Spellpower (Weapon)
-    tempEnchant: Superior Wizard Oil
+    tempEnchant: Brilliant Wizard Oil
   offHand:
     name: Flametongue Seal
   rangedTotemLibram:

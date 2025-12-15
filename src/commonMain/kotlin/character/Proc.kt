@@ -79,6 +79,7 @@ abstract class Proc {
         // Mechanics
         SERVER_TICK, // 2s
         SERVER_SLOW_TICK,  // 3s
+        SERVER_FIVE_SECOND_TICK, // 5s
 
         // Specifics
         DRUID_CAST_MANGLE,

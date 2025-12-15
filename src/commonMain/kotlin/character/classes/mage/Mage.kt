@@ -1,6 +1,7 @@
 package character.classes.mage
 
 import character.*
+import character.classes.common.buffs.SpiritRegen
 import character.classes.mage.abilities.*
 import character.classes.mage.talents.*
 import data.abilities.generic.ManaEmerald
@@ -20,7 +21,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         stamina = 154,
         spirit = 199
     )
-    override val buffs: List<Buff> = listOf()
+    override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
         return when(name) {

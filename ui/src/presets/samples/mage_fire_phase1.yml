@@ -51,7 +51,7 @@ gear:
   mainHand:
     name: Talon of the Tempest
     enchant: Major Spellpower (Weapon)
-    tempEnchant: Superior Wizard Oil
+    tempEnchant: Brilliant Wizard Oil
     gems:
       - Runed Living Ruby
       - Runed Living Ruby

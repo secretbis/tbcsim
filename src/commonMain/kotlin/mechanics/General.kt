@@ -69,9 +69,8 @@ object General {
         }.coerceAtLeast(0.0)
     }
 
-    fun mp5FromSpiritNotCasting(sp: SimParticipant): Int {
-        val regen = 0.001 + (sp.spirit() * sqrt(sp.intellect().toDouble()) * 0.005596) * 5
-        return regen.toInt()
+    fun regenFromSpiritNotCasting(sp: SimParticipant): Int {
+        return (0.002 + sqrt(sp.intellect().toDouble()) * sp.spirit() * 0.018654).toInt()
     }
 
     fun physicalArmorMitigation(sp: SimParticipant): Double {

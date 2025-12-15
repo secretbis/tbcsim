@@ -23,9 +23,11 @@ class Innervate : Ability() {
         override val icon: String = "spell_nature_lightning.jpg"
         override val durationMs: Int = 20000
 
-        //NOTE: This assumes arcane meditation and mage armor. Unsure how to detect actual value.
         override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(manaPer5Seconds = (General.mp5FromSpiritNotCasting(sp) * 4.4).toInt())
+            return Stats(
+                spiritRegenInCombatPct = 1.0,
+                spiritRegenInCombatMultiplier = 4.0
+            )
         }
     }
 

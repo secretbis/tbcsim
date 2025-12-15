@@ -1,6 +1,7 @@
 package character.classes.shaman
 
 import character.*
+import character.classes.common.buffs.SpiritRegen
 import character.classes.common.talents.Flurry
 import character.classes.shaman.abilities.*
 import character.classes.shaman.talents.*
@@ -80,7 +81,7 @@ class Shaman(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         spirit = 135
     )
 
-    override val buffs: List<Buff> = listOf()
+    override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)
 

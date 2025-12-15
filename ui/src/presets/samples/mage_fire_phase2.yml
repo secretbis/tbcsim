@@ -51,7 +51,7 @@ gear:
   mainHand:
     name: Fang of the Leviathan
     enchant: Major Spellpower (Weapon)
-    tempEnchant: Superior Wizard Oil
+    tempEnchant: Brilliant Wizard Oil
   offHand:
     name: Flametongue Seal
   rangedTotemLibram:

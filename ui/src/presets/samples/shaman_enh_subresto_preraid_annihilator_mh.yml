@@ -159,6 +159,10 @@ rotation:
         - type: BUFF_DURATION_LTE
           buff: Grace of Air Totem
           seconds: 0
+    - name: Flame Cap
+      criteria:
+        - type: FIGHT_TIME_ELAPSED_GTE
+          seconds: 5
     - name: Haste Potion
       criteria:
         # Allow some slush time for debuffs to get rolling before using potions

@@ -2,6 +2,7 @@ package character.classes.druid
 
 import character.*
 import character.Class
+import character.classes.common.buffs.SpiritRegen
 import data.model.Item
 
 class Druid(talents: Map<String, Talent>, spec: Spec)  : Class(talents, spec) {
@@ -25,7 +26,7 @@ class Druid(talents: Map<String, Talent>, spec: Spec)  : Class(talents, spec) {
         stamina = 154,
         spirit = 135
     )
-    override var buffs: List<Buff> = listOf()
+    override var buffs: List<Buff> = listOf(SpiritRegen())
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)
     override var canDualWield: Boolean = false
