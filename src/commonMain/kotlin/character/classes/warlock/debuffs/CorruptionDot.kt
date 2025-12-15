@@ -69,29 +69,37 @@ class CorruptionDot(owner: SimParticipant) : Debuff(owner) {
         override val icon: String = "spell_shadow_corruption.jpg"
         override fun gcdMs(sp: SimParticipant): Int = 0
 
-        val dmgPerTick = 50.0
-        val numTicks = durationMs / tickDeltaMs
+        val dmgPerTick = 150.0
         val school = Constants.DamageType.SHADOW
+        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+        val spellPowerCoeff = 0.156
+
+        val impCorruption = owner.character.klass.talents[EmpoweredCorruption.name] as EmpoweredCorruption?
+        val bonusSpellPowerMultiplier = impCorruption?.corruptionSpellDamageMultiplier() ?: 1.0
+
+        val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
+        val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
+
+        // Check T5 bonus
+        val t5Bonus = owner.buffs[CorruptorRaiment.FOUR_SET_BUFF_NAME] != null
+        val t5BonusMultiplier = if(t5Bonus) { CorruptorRaiment.fourSetDotDamageIncreaseMultiplier() } else 1.0
+
         override fun cast(sp: SimParticipant) {
-            val impCorruption = owner.character.klass.talents[EmpoweredCorruption.name] as EmpoweredCorruption?
-            val bonusSpellPowerMultiplier = impCorruption?.corruptionSpellDamageMultiplier() ?: 1.0
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier * t5BonusMultiplier
 
-            val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
-            val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
-
-            // Check T5 bonus
-            val t5Bonus = owner.buffs[CorruptorRaiment.FOUR_SET_BUFF_NAME] != null
-            val t5BonusMultiplier = if(t5Bonus) { CorruptorRaiment.fourSetDotDamageIncreaseMultiplier() } else 1.0
-
-            val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, bonusSpellDamageMultiplier = bonusSpellPowerMultiplier) * contagionMultiplier * t5BonusMultiplier
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

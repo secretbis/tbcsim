@@ -8,7 +8,6 @@ import character.classes.priest.debuffs.VampiricTouchDot
 import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import character.classes.priest.talents.*
 import data.Constants
-import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -25,11 +24,7 @@ class VampiricTouch : Ability() {
     override val icon: String = "spell_holy_stoicism.jpg"
 
     val school = Constants.DamageType.SHADOW
-    val baseDamage = 650.0
-    val baseDotTickCount = 5
-    val baseDotDurationMs = 15000
     val baseCastTimeMs = 1500
-    val spellPowerCoeff = Spell.spellPowerCoeff(0, baseDotDurationMs)
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -54,9 +49,7 @@ class VampiricTouch : Ability() {
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
 
-        // snapshot damage on initial cast
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
+        val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
         val event = Event(
             eventType = EventType.DAMAGE,

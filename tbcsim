@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
-./gradlew --quiet installDist
-./build/install/tbcsim/bin/tbcsim "$@"
+args="$@"
+./gradlew --quiet jvmRun --args="$args"

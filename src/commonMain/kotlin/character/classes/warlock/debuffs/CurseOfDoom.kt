@@ -30,24 +30,34 @@ class CurseOfDoom(owner: SimParticipant) : Debuff(owner) {
 
         val dmgPerTick = 4200.0
         val school = Constants.DamageType.SHADOW
-        override fun cast(sp: SimParticipant) {
-            // Amplify Curse
-            val ampCurseMultiplier = if(owner.buffs[AmplifyCurse.name] != null) { 1.5 } else 1.0
+        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+        val spellPowerCoeff = 2.0
+
+        // Amplify Curse
+        val ampCurseMultiplier = if(owner.buffs[AmplifyCurse.name] != null) { 1.5 } else 1.0
+        init {
             owner.consumeBuff(object : Buff() {
                 override val name: String = AmplifyCurse.name
                 override val durationMs: Int = -1
             })
+        }
 
-            // Per DBs this is 200% spell damage
-            val spellPowerCoeff = 2.0
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * ampCurseMultiplier
+        override fun cast(sp: SimParticipant) {
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower) * ampCurseMultiplier
+
+            // The end tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

@@ -710,7 +710,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.getSpellDamage(school)
     }
 
-    fun getSpellDamageMultiplier(school: Constants.DamageType): Double {
+    fun getSpellSchoolDamageMultiplier(school: Constants.DamageType): Double {
         return stats.getSpellDamageMultiplier(school)
     }
 

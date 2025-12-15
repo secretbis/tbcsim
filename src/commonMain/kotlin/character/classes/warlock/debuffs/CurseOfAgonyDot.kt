@@ -30,25 +30,32 @@ class CurseOfAgonyDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 113.0
-        val numTicks = durationMs / tickDeltaMs
         val school = Constants.DamageType.SHADOW
+        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+        val spellPowerCoeff = 0.1
+
+        val impCoa = owner.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
+        val impCoaMultiplier = impCoa?.damageMultiplier() ?: 1.0
+
+        val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
+        val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
+
         override fun cast(sp: SimParticipant) {
-            val impCoa = owner.character.klass.talents[ImprovedCurseOfAgony.name] as ImprovedCurseOfAgony?
-            val impCoaMultiplier = impCoa?.damageMultiplier() ?: 1.0
-
-            val contagion = owner.character.klass.talents[Contagion.name] as Contagion?
-            val contagionMultiplier = contagion?.additionalDamageMultiplier() ?: 1.0
-
-            // Per lock discord
-            val spellPowerCoeff = 1.0 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * contagionMultiplier * impCoaMultiplier
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower) * contagionMultiplier * impCoaMultiplier
+            val result = Spell.attackRoll(
+                owner,
+                damageRoll,
+                school,
+                canCrit = false,
+                canResist = true,
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

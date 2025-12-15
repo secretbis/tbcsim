@@ -20,8 +20,10 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
     override val tickDeltaMs: Int = 3000
 
     val dmgPerTick = 175.0
-    val numTicks = durationMs / tickDeltaMs
     val school = Constants.DamageType.SHADOW
+    val snapshotSpellPower = owner.stats.getSpellDamage(school)
+    val spellPowerCoeff = 0.2
+
     val ua = object : Ability() {
         override val id: Int = 30405
         override val name: String = Companion.name
@@ -29,15 +31,21 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val spellPowerCoeff = Spell.spellPowerCoeff(0, durationMs) / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
+
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

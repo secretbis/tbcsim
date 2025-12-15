@@ -23,9 +23,9 @@ class VampiricTouchDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int = 15000
 
     val school = Constants.DamageType.SHADOW
-    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
-    var baseDotDamage: Double = 130.0
-    val baseDotSpellCoeff = 0.2
+    val snapShotSpellPower = owner.spellDamageWithSchool(school)
+    var baseDamage: Double = 130.0
+    var spellPowerCoeff = 0.2
 
     val ability = object : Ability() {
         override val id: Int = 34917
@@ -35,9 +35,14 @@ class VampiricTouchDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
-            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+            val damageRoll: Double = Spell.baseDamageRollSingle(owner, baseDamage, school, spellPowerCoeff, snapShotSpellPower)
 
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,

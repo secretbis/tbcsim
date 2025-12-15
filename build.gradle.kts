@@ -13,7 +13,11 @@ repositories {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        mainRun {
+            mainClass.set("MainKt")
+        }
+    }
     js {
         browser()
         generateTypeScriptDefinitions()

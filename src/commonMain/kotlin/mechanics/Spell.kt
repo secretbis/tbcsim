@@ -3,7 +3,7 @@ package mechanics
 import character.Stats
 import data.Constants
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.Event
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import sim.EventResult
 import sim.SimParticipant
 import kotlin.js.JsExport
@@ -30,6 +30,49 @@ object Spell {
         3 to 15
     )
 
+    // Partial resists are calculated in terms of percentage of cap
+    // The function is piecewise in thirds - each bracket scales linearly (but differently) between 0%, 33.3%, 66.6% and 100%
+    // Weight of 0%, 25%, 50% and 75% partials across each of the three segments are tabulated below
+    // https://royalgiraffe.github.io/partial-resist-table
+    val resistWeights = mapOf(
+        // Chance of 0% resist
+        0.0 to listOf(
+            // Avg res 0% to 33.3%
+            Pair(1.0, 0.24),
+            // Avg res 33.3% to 66.6%
+            Pair(0.23, 0.0),
+            // Avg res 66.6% to 100%
+            Pair(0.0, 0.0)
+        ),
+        // Chance of 25% resist
+        0.25 to listOf(
+            // Avg res 0% to 33.3%
+            Pair(0.0, 0.55),
+            // Avg res 33.3% to 66.6%
+            Pair(0.54, 0.21),
+            // Avg res 66.6% to 100%
+            Pair(0.20, 0.04)
+        ),
+        // Chance of 50% resist
+        0.50 to listOf(
+            // Avg res 0% to 33.3%
+            Pair(0.0, 0.17),
+            // Avg res 33.3% to 66.6%
+            Pair(0.18, 0.56),
+            // Avg res 66.6% to 100%
+            Pair(0.57, 0.15)
+        ),
+        // Chance of 75% resist
+        0.75 to listOf(
+            // Avg res 0% to 33.3%
+            Pair(0.0, 0.04),
+            // Avg res 33.3% to 66.6%
+            Pair(0.05, 0.22),
+            // Avg res 66.6% to 100%
+            Pair(0.23, 0.81)
+        )
+    )
+
     private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
         val levelDiff = sp.sim.target.character.level - sp.character.level
 
@@ -46,95 +89,11 @@ object Spell {
         }
     }
 
-    /**
-     * First roll for damage and miss roll calculation
-     *
-     * @param spellDamageRoll Roll based on spell needs.
-     * Use result from `baseDamageRoll` for spells with base damage range pairs (e.g. 500 to 575)
-     * Use result from `baseDamageRollFromSnapShot` for spells which store spell damage for later (e.g. Spell Dots)
-     * Use result from `baseDamageRollSingle` for spells which do not have a range of damage
-     * @param school Spell school for retrieving additional damage based on school and multipliers
-     * @param bonusHitChance Provide more hit chance to landing spell outside the casters spell hit
-     * @param canResist Can this attack be resisted
-     *
-     * @return Pair<Double, EventResult> where first is the damage to be done and second is event of HIT (success) or RESIST (failure)
-     */
-    private fun firstAttackRollPair(sp: SimParticipant, spellDamageRoll: Double, school: Constants.DamageType, bonusDamageMultiplier: Double = 1.0, bonusHitChance: Double = 0.0, canResist: Boolean = true) : Pair<Double, EventResult> {
-        // Additional damage multiplier
-        val flatModifier = sp.stats.spellDamageFlatModifier
-        val spellDamageMultiplier = sp.getSpellDamageMultiplier(school)
-
-        val finalDamageRoll = (spellDamageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
-
-        // Get the hit/miss result
-        if (canResist){
-            val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
-            val attackRoll = Random.nextDouble()
-
-            return when {
-                attackRoll < missChance -> Pair(0.0, EventResult.RESIST)
-                else -> Pair(finalDamageRoll, EventResult.HIT)
-            }
-        }
-
-        return Pair(finalDamageRoll, EventResult.HIT);
-    }
-
-    /**
-     * Second roll for spell crit based calculation
-     *
-     * @param result Result Pair from first roll
-     * @param bonusCritChance Additional chance to crit
-     * @param bonusCritMultiplier Additional damage if a crit does occur
-     *
-     * @return Pair<Double, EventResult> where first is the damage to be done and second is event of CRIT if successful
-     */
-    private fun secondCritRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, bonusCritChance: Double = 0.0, bonusCritMultiplier: Double = 1.0): Pair<Double, EventResult> {
-        // Find all our possible damage mods from buffs and so on
-        val critChance = spellCritChance(sp) + bonusCritChance
-        val critMultiplier = (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) * bonusCritMultiplier + 1
-        val hitRoll2 = Random.nextDouble()
-
-        if (hitRoll2 < critChance){
-            return Pair(result.first * critMultiplier, EventResult.CRIT)
-        }
-
-        return result;
-    }
-
-    /**
-     * Third and final roll (For spells which can resist) for spell resist based calculation
-     *
-     * @param result Result Pair from first or second roll
-     * @param school Spell school for retrieving resistence
-     * @param isBinary Additional damage if a crit does occur
-     *
-     * @return Pair<Double, EventResult> where first is the damage after resistance calculations and event result remains the same
-     */
-    private fun thirdResistRollPair(sp: SimParticipant, result: Pair<Double, EventResult>, school: Constants.DamageType, isBinary: Boolean): Pair<Double, EventResult> {
-        val resistAvgReduction = spellResistReduction(sp, school)
-
-        if(isBinary) {
-            // Make a third roll for full resist or not
-            val fullResistRoll = Random.nextDouble()
-            val fullResistMod = if(fullResistRoll < resistAvgReduction) { 0.0 } else { 1.0 }
-            return Pair(result.first * fullResistMod, result.second)
-        } else {
-            return Pair(result.first * (1 - resistAvgReduction), result.second)
-        }
-    }
-
     // AP and spell damage coefficients
-    // TODO: Verify that these formulas reflect TBC mechanics
     // https://wowwiki.fandom.com/wiki/Spell_power
-    fun spellPowerCoeff(baseCastTimeMs: Int, baseDurationMs: Int = 0): Double {
-        // DoT
-        return if(baseDurationMs == 0) {
-            // Most instant spells are treated as 1.5s cast time for coeff purposes
-            baseCastTimeMs.coerceAtLeast(1500) / 3500.0
-        } else {
-            baseDurationMs / 15000.0
-        }
+    fun spellPowerCoeff(baseCastTimeMs: Int): Double {
+        // Most instant spells are treated as 1.5s cast time for coeff purposes
+        return baseCastTimeMs.coerceAtLeast(1500) / 3500.0
     }
 
     fun spellMissChance(sp: SimParticipant): Double {
@@ -147,7 +106,8 @@ object Spell {
 
     // https://wow.gamepedia.com/Resistance
     // https://dwarfpriest.wordpress.com/2008/01/07/spell-hit-spell-penetration-and-resistances/
-    fun spellResistReduction(sp: SimParticipant, school: Constants.DamageType): Double {
+    // https://royalgiraffe.github.io/resist-guide
+    fun spellResistReduction(sp: SimParticipant, school: Constants.DamageType, isBinary: Boolean): Double {
         val targetResistance = when(school) {
             Constants.DamageType.ARCANE -> sp.sim.target.stats.arcaneResistance
             Constants.DamageType.FIRE -> sp.sim.target.stats.fireResistance
@@ -157,28 +117,70 @@ object Spell {
             else -> 0
         }
 
-        // theres a base 8 resist per level which can not be negated by spellpen
+        // theres a base 8 resist per level difference which cannot be negated by spellpen
         val baseResistance = (sp.sim.target.character.level - sp.character.level) * 8
 
-        // TODO: Model partial resists as 0/25/50/75
-        //       There seems to be no real formula for that, though, so just going with avg every time for now
-        val totalResistance = (targetResistance - sp.stats.spellPen).coerceAtLeast(0) + baseResistance
-        return (0.75 * totalResistance / (5 * sp.character.level.toDouble())).coerceAtMost(0.75).coerceAtLeast(0.00)
+        // Resistance brackets are a piecewise function which, when weighted, average to the target average resistance
+        val resistCap = 5 * sp.character.level
+        val totalResistance = ((targetResistance - sp.stats.spellPen).coerceAtLeast(0) + baseResistance).coerceAtMost(resistCap)
+
+        if(isBinary) {
+            // Binary spells are a boolean outcome based on average resistance
+            val avgResistance = (0.75 * totalResistance / resistCap.toDouble()).coerceAtMost(0.75).coerceAtLeast(0.00)
+            val fullResistRoll = Random.nextDouble()
+            return if(fullResistRoll < avgResistance) {
+                1.0
+            } else {
+                0.0
+            }
+        }
+
+        // Compute partial resistances if not binary
+        // https://royalgiraffe.github.io/partial-resist-table
+        val pctOfCap = totalResistance / resistCap.toDouble()
+        val oneThird = 1.0/3.0
+        val twoThirds = 2.0/3.0
+
+        // Find the probability of each quartile resistance based on the cap % and the function
+        // First, find which reference line we are using based on how much resistance we have
+        var lineIndex = 2
+        var threshold = 1.0
+
+        if(pctOfCap < oneThird) {
+            lineIndex = 0
+            threshold = oneThird
+        } else if(pctOfCap < twoThirds) {
+            lineIndex = 1
+            threshold = twoThirds
+        }
+
+        val chanceByQuartileBase = resistWeights.map {
+            // Then, find where we are on each line to get a percentage chance of this being the outcome
+            val line = it.value[lineIndex]
+            val weight = (pctOfCap / threshold).coerceAtMost(1.0)
+            val totalChance = line.first * (1.0 - weight) + line.second * weight
+            Pair(it.key, totalChance)
+        }
+
+        // To check against a single roll, each value needs to be the sum of the value before
+        // The total sum of all chances is 1.0, and we're just making a simpler comparison
+        val chanceByQuartile = chanceByQuartileBase.mapIndexed { idx, it ->
+            Pair(it.first, chanceByQuartileBase.subList(0, idx + 1).sumOf { it.second })
+        }
+
+        val partialResistRoll = Random.nextDouble()
+        return chanceByQuartile.first { partialResistRoll < it.second }.first
     }
 
     fun spellCritChance(sp: SimParticipant): Double {
         return (sp.spellCritPct() / 100.0).coerceAtLeast(0.0)
     }
 
-    fun baseDamageRollFromSnapShot(baseDmg: Double, spellDamage: Double, spellDamageCoeff: Double = 1.0): Double {
-        return baseDmg + (spellDamage * spellDamageCoeff)
-    }
-
     fun baseDamageRollSingle(sp: SimParticipant, baseDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
         // Add school damage
         val spellDamage = sp.spellDamageWithSchool(school)
         val totalSpellDamage = (spellDamage + bonusSpellDamage) * bonusSpellDamageMultiplier
-        return baseDamageRollFromSnapShot(baseDmg, totalSpellDamage, spellDamageCoeff)
+        return baseDmg + (totalSpellDamage * spellDamageCoeff)
     }
 
     fun baseDamageRoll(sp: SimParticipant, minDmg: Double, maxDmg: Double, school: Constants.DamageType, spellDamageCoeff: Double = 1.0, bonusSpellDamage: Int = 0, bonusSpellDamageMultiplier: Double = 1.0): Double {
@@ -186,6 +188,20 @@ object Spell {
         val max = maxDmg.coerceAtLeast(1.0)
         val dmg = Random.nextDouble(min, max)
         return baseDamageRollSingle(sp, dmg, school, spellDamageCoeff, bonusSpellDamage, bonusSpellDamageMultiplier)
+    }
+
+    fun partialResistRoll(sp: SimParticipant, damageEvent: Pair<Double, EventResult>, school: Constants.DamageType): Pair<Double, EventResult> {
+        val resistReduction = spellResistReduction(sp, school, false)
+        val resistEventResult = when(resistReduction) {
+            0.0 -> damageEvent.second
+            else -> when(damageEvent.second) {
+                EventResult.HIT -> EventResult.PARTIAL_RESIST_HIT
+                EventResult.CRIT -> EventResult.PARTIAL_RESIST_CRIT
+                else -> damageEvent.second
+            }
+        }
+
+        return Pair(damageEvent.first * (1.0 - resistReduction), resistEventResult)
     }
 
     // Performs an attack roll given an initial unmitigated damage value
@@ -201,16 +217,37 @@ object Spell {
         canCrit: Boolean = true,
         canResist: Boolean = true,
     ) : Pair<Double, EventResult> {
-        var finalResult = firstAttackRollPair(sp, damageRoll, school, bonusDamageMultiplier, bonusHitChance, canResist)
+        val flatModifier = sp.stats.spellDamageFlatModifier
+        val spellDamageMultiplier = sp.getSpellSchoolDamageMultiplier(school)
 
-        if(canCrit && finalResult.second == EventResult.HIT) {
-            finalResult = secondCritRollPair(sp, finalResult, bonusCritChance, bonusCritMultiplier)
+        val finalDamageRoll = (damageRoll + flatModifier) * spellDamageMultiplier * bonusDamageMultiplier
+
+        val missChance = (spellMissChance(sp) - bonusHitChance).coerceAtLeast(0.01)
+        val attackRoll = Random.nextDouble()
+
+        // Get the hit/miss result
+        var result = when {
+            attackRoll < missChance && canResist -> Pair(0.0, EventResult.RESIST)
+            else -> Pair(finalDamageRoll, EventResult.HIT)
         }
 
-        if(canResist) {
-            finalResult = thirdResistRollPair(sp,finalResult, school, isBinary)
+        if(result.second == EventResult.RESIST) return result
+
+        if(canCrit) {
+            val critChance = spellCritChance(sp) + bonusCritChance
+            val critMultiplier =
+                (Stats.spellCritMultiplier - 1.0) * (sp.stats.spellDamageAddlCritMultiplier) * bonusCritMultiplier + 1
+            val hitRoll2 = Random.nextDouble()
+
+            if(hitRoll2 < critChance) {
+                result = Pair(result.first * critMultiplier, EventResult.CRIT)
+            }
         }
 
-        return finalResult
+        if(canResist && !isBinary) {
+            return partialResistRoll(sp, result, school)
+        }
+
+        return result
     }
 }

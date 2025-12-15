@@ -21,6 +21,8 @@ object SimStatsPrinter {
 
     fun printBuffs(title: String, participants: List<List<BuffBreakdown>>) {
         participants.forEach { rows ->
+            if(rows.isEmpty()) return
+
             println(
                 "$title\n" +
                 table {
@@ -51,6 +53,8 @@ object SimStatsPrinter {
 
     fun printAbilities(participants: List<List<AbilityBreakdown>>) {
         participants.forEach { rows ->
+            if(rows.isEmpty()) return
+
             println(
                 "Ability Breakdown\n" +
                 table {
@@ -82,6 +86,8 @@ object SimStatsPrinter {
 
     fun printDamage(participants: List<List<DamageTypeBreakdown>>) {
         participants.forEach { rows ->
+            if(rows.isEmpty()) return
+
             println(
                 "Damage Type Breakdown\n" +
                 table {

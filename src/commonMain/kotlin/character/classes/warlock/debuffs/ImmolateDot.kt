@@ -40,23 +40,30 @@ class ImmolateDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 41.0
-        val numTicks = durationMs / tickDeltaMs
         val school = Constants.DamageType.FIRE
-        override fun cast(sp: SimParticipant) {
-            // Check T5 bonus
-            val t5Bonus = owner.buffs[CorruptorRaiment.FOUR_SET_BUFF_NAME] != null
-            val t5BonusMultiplier = if(t5Bonus) { CorruptorRaiment.fourSetDotDamageIncreaseMultiplier() } else 1.0
+        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+        val spellPowerCoeff = 0.13
 
-            // Per lock discord
-            val spellPowerCoeff = 0.65 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff) * t5BonusMultiplier
+        // Check T5 bonus
+        val t5Bonus = owner.buffs[CorruptorRaiment.FOUR_SET_BUFF_NAME] != null
+        val t5BonusMultiplier = if(t5Bonus) { CorruptorRaiment.fourSetDotDamageIncreaseMultiplier() } else 1.0
+
+        override fun cast(sp: SimParticipant) {
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower) * t5BonusMultiplier
+
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
 

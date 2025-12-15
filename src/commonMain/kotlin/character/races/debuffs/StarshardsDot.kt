@@ -23,7 +23,7 @@ class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int = 15000
 
     val school = Constants.DamageType.ARCANE
-    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
+    val snapShotSpellPower = owner.spellDamageWithSchool(school)
     val baseDotDamage = 157.0
     val baseDotSpellCoeff = 0.167
 
@@ -35,9 +35,8 @@ class StarshardsDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
-            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
-
+            val damageRoll: Double = Spell.baseDamageRollSingle(owner,baseDotDamage, school, baseDotSpellCoeff, snapShotSpellPower)
+            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = true)
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,

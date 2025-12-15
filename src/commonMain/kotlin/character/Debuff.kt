@@ -2,6 +2,7 @@ package character
 
 import sim.SimParticipant
 import kotlin.js.JsExport
+import kotlin.math.min
 
 @JsExport
 abstract class Debuff(val owner: SimParticipant) : Buff() {

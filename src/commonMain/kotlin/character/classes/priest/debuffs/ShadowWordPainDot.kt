@@ -32,7 +32,7 @@ class ShadowWordPainDot(owner: SimParticipant) : Debuff(owner) {
     }
 
     val school = Constants.DamageType.SHADOW
-    val snapShotSpellPower = owner.spellDamageWithSchool(school).toDouble()
+    val snapShotSpellPower = owner.spellDamageWithSchool(school)
     var baseDotDamage: Double = 206.0
     val baseDotSpellCoeff = 0.1833
 
@@ -44,8 +44,14 @@ class ShadowWordPainDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         override fun cast(sp: SimParticipant) {
-            val damageRoll: Double = Spell.baseDamageRollFromSnapShot(baseDotDamage, snapShotSpellPower, baseDotSpellCoeff)
-            val result = Spell.attackRoll(owner, damageRoll, school, canCrit = false, canResist = false)
+            val damageRoll: Double = Spell.baseDamageRollSingle(owner, baseDotDamage, school, baseDotSpellCoeff, snapShotSpellPower)
+
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,

@@ -54,6 +54,7 @@ class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
     val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
     val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
+    val calcEPSingle: Boolean by option("--calc-ep-single", help="Calculate EP values a single character definition").flag(default = false)
     val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
     val specFilterStr: String? by option("--specs", help="Limit rankings/ep calc by spec (comma-separated")
     val categoryFilterStr: String? by option("--categories", help="Limit rankings/ep calc by category (comma-separated")
@@ -351,6 +352,16 @@ class TBCSim : CliktCommand() {
                 epOptions
             )
             File(epOutputPath).writeText(json.encodeToString(fullOutput))
+        } else if (calcEPSingle) {
+            if (configFile == null) {
+                println("Please specify a sim config file path as the first positional argument")
+                println(this.getFormattedHelp())
+                return
+            }
+
+            val config = ConfigMaker.fromYml(configFile!!.readText())
+            println("Starting EP run for ${configFile!!.name}")
+            computeEpDeltas(config, opts)
         } else if (calcRankings) {
             val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
             val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)

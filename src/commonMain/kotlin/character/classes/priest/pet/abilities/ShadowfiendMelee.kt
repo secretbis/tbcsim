@@ -1,21 +1,13 @@
 package character.classes.priest.pet.abilities
 
-import character.Ability
 import character.auto.AutoAttackBase
-import character.classes.priest.Priest
-import character.classes.priest.pet.Shadowfiend
-import character.Proc
-import character.Resource
 import character.Stats
 import data.Constants
 import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import mechanics.Spell
-import mechanics.Melee
 import sim.SimParticipant
-import sim.*
 
 class ShadowfiendMelee : AutoAttackBase() {
     companion object {

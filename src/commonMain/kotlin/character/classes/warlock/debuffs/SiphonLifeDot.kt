@@ -25,19 +25,26 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
         override fun gcdMs(sp: SimParticipant): Int = 0
 
         val dmgPerTick = 63.0
-        val numTicks = durationMs / tickDeltaMs
-        // TODO: What the heck school is this spell anyway
         val school = Constants.DamageType.SHADOW
+        val spellPowerCoeff = 0.1
+        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+
         override fun cast(sp: SimParticipant) {
-            val spellPowerCoeff = 0.5 / numTicks
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff)
+            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
+
+            // Each tick can still resist partially
+            val result = Spell.partialResistRoll(
+                owner,
+                Pair(damageRoll, EventResult.HIT),
+                school
+            )
 
             val event = Event(
                 eventType = EventType.DAMAGE,
                 damageType = school,
                 ability = this,
-                amount = damageRoll,
-                result = EventResult.HIT,
+                amount = result.first,
+                result = result.second
             )
             owner.logEvent(event)
         }
