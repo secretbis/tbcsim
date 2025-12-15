@@ -55,7 +55,7 @@ Not yet implemented:
 
 To calculate EPs for a single character definition, use the following command:
 
-`./tbcsim --calc-ep-single <path_to_character_definition_file>`
+`./tbcsim --calc-ep <path_to_character_definition_file>`
 
 This uses the sim defaults of a step interval of 10ms and an iteration count of 10,000 - both can be adjusted to your preference.  See the CLI usage below, or just run `./tbcsim`.
 
