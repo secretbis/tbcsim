@@ -109,7 +109,7 @@ function App() {
 
 export default function () {
   return (
-    <Router>
+    <Router basename="/tbcsim">
       <CustomProvider theme='dark'>
         <StateProvider>
           <App />
