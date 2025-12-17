@@ -29,6 +29,7 @@ open class Whirlwind : Ability() {
     }
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.RAGE
+
     override fun resourceCost(sp: SimParticipant): Double {
         val baseCost = 25.0
 
@@ -36,7 +37,10 @@ open class Whirlwind : Ability() {
 
         // Check T4 set bonus
         val t4Bonus = sp.buffs[WarbringerBattlegear.TWO_SET_BUFF_NAME] != null
-        val t4CostReduction = if(t4Bonus) { WarbringerBattlegear.twoSetWhirlwindCostReduction() } else 0.0
+        val t4CostReduction =
+            if (t4Bonus) {
+                WarbringerBattlegear.twoSetWhirlwindCostReduction()
+            } else 0.0
 
         return baseCost - t4CostReduction - focusedRageRanks
     }
@@ -52,30 +56,32 @@ open class Whirlwind : Ability() {
         val mhResult = Melee.attackRoll(sp, mhDamageRoll, mh)
 
         // Save last hit state and fire event
-        val mhEvent = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
-            amount = mhResult.first,
-            result = mhResult.second,
-        )
+        val mhEvent =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                ability = this,
+                amount = mhResult.first,
+                result = mhResult.second,
+            )
         sp.logEvent(mhEvent)
 
         fireTriggers(sp, mh, mhEvent, mhResult)
 
-        if(sp.isDualWielding()) {
+        if (sp.isDualWielding()) {
             val oh = sp.character.gear.offHand
             val ohDamageRoll = Melee.baseDamageRoll(sp, oh, isNormalized = true)
             val ohResult = Melee.attackRoll(sp, ohDamageRoll, oh)
 
             // Save last hit state and fire event
-            val ohEvent = Event(
-                eventType = EventType.DAMAGE,
-                damageType = Constants.DamageType.PHYSICAL,
-                ability = WhirlwindOH(),
-                amount = ohResult.first,
-                result = ohResult.second,
-            )
+            val ohEvent =
+                Event(
+                    eventType = EventType.DAMAGE,
+                    damageType = Constants.DamageType.PHYSICAL,
+                    ability = WhirlwindOH(),
+                    amount = ohResult.first,
+                    result = ohResult.second,
+                )
             sp.logEvent(ohEvent)
 
             fireTriggers(sp, oh, ohEvent, ohResult)
@@ -83,18 +89,19 @@ open class Whirlwind : Ability() {
     }
 
     private fun fireTriggers(sp: SimParticipant, item: Item, event: Event, result: Pair<Double, EventResult>) {
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+                EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+                EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+                EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }

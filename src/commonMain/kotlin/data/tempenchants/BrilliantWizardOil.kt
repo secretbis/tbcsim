@@ -13,9 +13,6 @@ class BrilliantWizardOil(item: Item) : TempEnchant(item) {
     override val durationMs: Int = 60 * 60 * 1000
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            spellDamage = 36,
-            spellCritRating = 14.0
-        )
+        return Stats(spellDamage = 36, spellCritRating = 14.0)
     }
 }

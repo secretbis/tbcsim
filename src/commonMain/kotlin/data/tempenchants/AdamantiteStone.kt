@@ -12,10 +12,6 @@ class AdamantiteStone(item: Item) : TempEnchant(item) {
     override val icon: String = "inv_stone_sharpeningstone_07.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            whiteDamageFlatModifier = 12.0,
-            yellowDamageFlatModifier = 12.0,
-            meleeCritRating = 14.0
-        )
+        return Stats(whiteDamageFlatModifier = 12.0, yellowDamageFlatModifier = 12.0, meleeCritRating = 14.0)
     }
 }

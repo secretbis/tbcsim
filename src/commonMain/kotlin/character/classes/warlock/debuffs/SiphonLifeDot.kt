@@ -13,42 +13,43 @@ class SiphonLifeDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Siphon Life (DoT)"
     }
+
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_requiem.jpg"
     override val durationMs: Int = 30000
     override val tickDeltaMs: Int = 3000
 
-    val siphon = object : Ability() {
-        override val id: Int = 30911
-        override val name: String = Companion.name
-        override val icon: String = "spell_shadow_requiem.jpg"
-        override fun gcdMs(sp: SimParticipant): Int = 0
+    val siphon =
+        object : Ability() {
+            override val id: Int = 30911
+            override val name: String = Companion.name
+            override val icon: String = "spell_shadow_requiem.jpg"
 
-        val dmgPerTick = 63.0
-        val school = Constants.DamageType.SHADOW
-        val spellPowerCoeff = 0.1
-        val snapshotSpellPower = owner.stats.getSpellDamage(school)
+            override fun gcdMs(sp: SimParticipant): Int = 0
 
-        override fun cast(sp: SimParticipant) {
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
+            val dmgPerTick = 63.0
+            val school = Constants.DamageType.SHADOW
+            val spellPowerCoeff = 0.1
+            val snapshotSpellPower = owner.stats.getSpellDamage(school)
 
-            // Each tick can still resist partially
-            val result = Spell.partialResistRoll(
-                owner,
-                Pair(damageRoll, EventResult.HIT),
-                school
-            )
+            override fun cast(sp: SimParticipant) {
+                val damageRoll =
+                    Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
 
-            val event = Event(
-                eventType = EventType.DAMAGE,
-                damageType = school,
-                ability = this,
-                amount = result.first,
-                result = result.second
-            )
-            owner.logEvent(event)
+                // Each tick can still resist partially
+                val result = Spell.partialResistRoll(owner, Pair(damageRoll, EventResult.HIT), school)
+
+                val event =
+                    Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = school,
+                        ability = this,
+                        amount = result.first,
+                        result = result.second,
+                    )
+                owner.logEvent(event)
+            }
         }
-    }
 
     override fun tick(sp: SimParticipant) {
         siphon.cast(sp)

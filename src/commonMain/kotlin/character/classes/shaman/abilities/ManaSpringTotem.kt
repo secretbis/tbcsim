@@ -34,19 +34,18 @@ class ManaSpringTotem : Ability() {
         return true
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Mana Spring Totem"
-        override val icon: String = "spell_nature_manaregentotem.jpg"
-        override val durationMs: Int = 120000
-        override val mutex: List<Mutex> = listOf(Mutex.WATER_TOTEM)
+    val buff =
+        object : Buff() {
+            override val name: String = "Mana Spring Totem"
+            override val icon: String = "spell_nature_manaregentotem.jpg"
+            override val durationMs: Int = 120000
+            override val mutex: List<Mutex> = listOf(Mutex.WATER_TOTEM)
 
-        // TODO: Does anyone care about the Restorative Totems talent?  Probably not
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                manaPer5Seconds = 50
-            )
+            // TODO: Does anyone care about the Restorative Totems talent?  Probably not
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(manaPer5Seconds = 50)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

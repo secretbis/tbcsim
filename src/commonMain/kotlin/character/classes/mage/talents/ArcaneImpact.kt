@@ -6,6 +6,7 @@ class ArcaneImpact(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Arcane Impact"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 

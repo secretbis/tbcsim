@@ -14,6 +14,7 @@ class Nightfall : Ability() {
     override val icon: String = Companion.icon
 
     override fun gcdMs(sp: SimParticipant): Int = 0
+
     override fun cast(sp: SimParticipant) {
         // Noop
     }

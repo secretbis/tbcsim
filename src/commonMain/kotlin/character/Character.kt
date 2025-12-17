@@ -1,7 +1,7 @@
 package character
 
-import sim.rotation.Rotation
 import kotlin.js.JsExport
+import sim.rotation.Rotation
 
 @JsExport
 open class Character(
@@ -11,5 +11,5 @@ open class Character(
     var gear: Gear = Gear(),
     val pet: Pet? = null,
     val petRotation: Rotation? = null,
-    val subTypes: Set<CharacterType> = setOf()
+    val subTypes: Set<CharacterType> = setOf(),
 )

@@ -13,6 +13,7 @@ abstract class AutoAttackBase : Ability() {
     abstract fun item(sp: SimParticipant): Item
 
     override val icon: String = "ability_meleedamage.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     class AutoAttackState : Ability.State() {
@@ -41,30 +42,37 @@ abstract class AutoAttackBase : Ability() {
         (state(sp) as AutoAttackState).lastAttackTimeMs = sp.sim.elapsedTimeMs
         (state(sp) as AutoAttackState).count += 1
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = damageType,
-            isWhiteDamage = true,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = damageType,
+                isWhiteDamage = true,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Proc anything that can proc off a white hit
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            EventResult.GLANCE -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_GLANCE, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT ->
+                    listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT ->
+                    listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+                EventResult.GLANCE ->
+                    listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_GLANCE, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+                EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+                EventResult.BLOCK ->
+                    listOf(Proc.Trigger.MELEE_AUTO_HIT, Proc.Trigger.MELEE_WHITE_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.BLOCKED_CRIT ->
+                    listOf(Proc.Trigger.MELEE_AUTO_CRIT, Proc.Trigger.MELEE_WHITE_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item(sp)), this, event)
         }
     }

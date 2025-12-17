@@ -18,31 +18,33 @@ class AshtongueTalismanOfValor : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "inv_jewelry_necklace_18.jpg"
-        override val durationMs: Int = 12000
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "inv_jewelry_necklace_18.jpg"
+            override val durationMs: Int = 12000
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                strength = 55
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(strength = 55)
+            }
         }
-    }
 
-    val proc = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.WARRIOR_CAST_BLOODTHIRST,
-            Trigger.WARRIOR_CAST_MORTAL_STRIKE,
-            Trigger.WARRIOR_CAST_SHIELD_SLAM
-        )
-        override val type: Type = Type.PERCENT
-        override fun percentChance(sp: SimParticipant): Double = 25.0
+    val proc =
+        object : Proc() {
+            override val triggers: List<Trigger> =
+                listOf(
+                    Trigger.WARRIOR_CAST_BLOODTHIRST,
+                    Trigger.WARRIOR_CAST_MORTAL_STRIKE,
+                    Trigger.WARRIOR_CAST_SHIELD_SLAM,
+                )
+            override val type: Type = Type.PERCENT
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addBuff(buff)
+            override fun percentChance(sp: SimParticipant): Double = 25.0
+
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(buff)
+            }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

@@ -8,6 +8,9 @@ import character.classes.mage.specs.Fire
 import character.classes.mage.specs.Frost
 import character.classes.priest.Priest
 import character.classes.priest.specs.Shadow
+import character.classes.rogue.Rogue
+import character.classes.rogue.specs.Assassination
+import character.classes.rogue.specs.Combat
 import character.classes.shaman.Shaman
 import character.classes.shaman.specs.Elemental
 import character.classes.shaman.specs.Enhancement
@@ -17,24 +20,19 @@ import character.classes.warlock.specs.Destruction
 import character.classes.warrior.Warrior
 import character.classes.warrior.specs.Arms
 import character.classes.warrior.specs.Fury
-import character.classes.rogue.specs.Combat
-import character.classes.rogue.Rogue
-import character.classes.rogue.specs.Assassination
 import character.classes.warrior.specs.Kebab
 import character.classes.warrior.specs.Protection
 import data.model.Item
 
-abstract class Class(
-    var talents: Map<String, Talent>,
-    val spec: Spec
-) {
+abstract class Class(var talents: Map<String, Talent>, val spec: Spec) {
     companion object {
         fun fromString(name: String, _specName: String, talents: Map<String, Talent> = mapOf()): Class? {
             val className = name.lowercase().trim()
             val specName = _specName.lowercase().trim()
 
-            val spec = specFromString(className, specName) ?: throw Exception("Invalid class + spec: $className - $specName")
-            return when(className) {
+            val spec =
+                specFromString(className, specName) ?: throw Exception("Invalid class + spec: $className - $specName")
+            return when (className) {
                 "hunter" -> Hunter(talents, spec)
                 "mage" -> Mage(talents, spec)
                 "priest" -> Priest(talents, spec)
@@ -50,45 +48,52 @@ abstract class Class(
             val className = _className.lowercase().trim()
             val specName = _specName.lowercase().trim()
 
-            return when(className) {
-                "hunter" -> when(specName) {
-                    "beast mastery" -> BeastMastery()
-                    "marksmanship" -> Marksmanship()
-                    "survival" -> Survival()
-                    else -> null
-                }
-                "mage" -> when(specName) {
-                    "arcane" -> Arcane()
-                    "fire" -> Fire()
-                    "frost" -> Frost()
-                    else -> null
-                }
-                "priest" -> when(specName) {
-                    "shadow" -> Shadow()
-                    else -> null
-                }
-                "shaman" -> when(specName) {
-                    "enhancement" -> Enhancement()
-                    "elemental" -> Elemental()
-                    else -> null
-                }
-                "warlock" -> when(specName) {
-                    "affliction" -> Affliction()
-                    "destruction" -> Destruction()
-                    else -> null
-                }
-                "warrior" -> when(specName) {
-                    "arms" -> Arms()
-                    "fury" -> Fury()
-                    "kebab" -> Kebab()
-                    "protection" -> Protection()
-                    else -> null
-                }
-                "rogue" -> when(specName) {
-                    "assassination" -> Assassination()
-                    "combat" -> Combat()
-                    else -> null
-                }
+            return when (className) {
+                "hunter" ->
+                    when (specName) {
+                        "beast mastery" -> BeastMastery()
+                        "marksmanship" -> Marksmanship()
+                        "survival" -> Survival()
+                        else -> null
+                    }
+                "mage" ->
+                    when (specName) {
+                        "arcane" -> Arcane()
+                        "fire" -> Fire()
+                        "frost" -> Frost()
+                        else -> null
+                    }
+                "priest" ->
+                    when (specName) {
+                        "shadow" -> Shadow()
+                        else -> null
+                    }
+                "shaman" ->
+                    when (specName) {
+                        "enhancement" -> Enhancement()
+                        "elemental" -> Elemental()
+                        else -> null
+                    }
+                "warlock" ->
+                    when (specName) {
+                        "affliction" -> Affliction()
+                        "destruction" -> Destruction()
+                        else -> null
+                    }
+                "warrior" ->
+                    when (specName) {
+                        "arms" -> Arms()
+                        "fury" -> Fury()
+                        "kebab" -> Kebab()
+                        "protection" -> Protection()
+                        else -> null
+                    }
+                "rogue" ->
+                    when (specName) {
+                        "assassination" -> Assassination()
+                        "combat" -> Combat()
+                        else -> null
+                    }
                 else -> null
             }
         }

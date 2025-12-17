@@ -23,9 +23,7 @@ class ElementalistGlovesOfShadowWrath : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        shadowDamage = 60,
-    )
+    override var stats: Stats = Stats(shadowDamage = 60)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

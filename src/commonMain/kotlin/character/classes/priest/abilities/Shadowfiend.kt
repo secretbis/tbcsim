@@ -1,9 +1,9 @@
 package character.classes.priest.abilities
 
-import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
-import character.classes.priest.talents.*
 import character.Ability
 import character.Buff
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
+import character.classes.priest.talents.*
 import data.itemsets.IncarnateRegalia
 import sim.SimParticipant
 
@@ -18,20 +18,21 @@ class Shadowfiend() : Ability() {
 
     val baseDurationMs = 15000
 
-    fun fiendUpBuff(sp: SimParticipant) = object : Buff() {
-        override val name: String = "${Companion.name} (Hidden)"
-        override val icon: String = "spell_shadow_shadowfiend.jpg"
-        override val hidden: Boolean = true
-        override val durationMs: Int = if(sp.buffs[IncarnateRegalia.TWO_SET_BUFF_NAME] != null) {
-            baseDurationMs + 3000
-        } else baseDurationMs
+    fun fiendUpBuff(sp: SimParticipant) =
+        object : Buff() {
+            override val name: String = "${Companion.name} (Hidden)"
+            override val icon: String = "spell_shadow_shadowfiend.jpg"
+            override val hidden: Boolean = true
+            override val durationMs: Int =
+                if (sp.buffs[IncarnateRegalia.TWO_SET_BUFF_NAME] != null) {
+                    baseDurationMs + 3000
+                } else baseDurationMs
 
-
-        override fun reset(sp: SimParticipant) {
-            sp.pet?.deactivate()
-            super.reset(sp)
+            override fun reset(sp: SimParticipant) {
+                sp.pet?.deactivate()
+                super.reset(sp)
+            }
         }
-    }
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
@@ -40,7 +41,7 @@ class Shadowfiend() : Ability() {
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
-        if(innerFocusBuff != null){
+        if (innerFocusBuff != null) {
             return 0.0
         }
 

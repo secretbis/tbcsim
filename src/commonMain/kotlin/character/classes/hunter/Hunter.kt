@@ -11,31 +11,26 @@ import data.model.Item
 import mechanics.Rating
 import sim.SimParticipant
 
-class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
-    override val baseStats: Stats = Stats(
-        agility = 222,
-        intellect = 147,
-        strength = 153,
-        stamina = 154,
-        spirit = 123
-    )
+class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
+    override val baseStats: Stats = Stats(agility = 222, intellect = 147, strength = 153, stamina = 154, spirit = 123)
 
     // Every quiver adds 15% haste, so there's no point in selecting it
-    val quiverHaste = object : Buff() {
-        override val name: String = "Quiver Haste"
-        override val icon: String = "classic_inv_misc_quiver_05.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val quiverHaste =
+        object : Buff() {
+            override val name: String = "Quiver Haste"
+            override val icon: String = "classic_inv_misc_quiver_05.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHasteRating = 15.0 * Rating.hastePerPct)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(physicalHasteRating = 15.0 * Rating.hastePerPct)
+            }
         }
-    }
 
     override val buffs: List<Buff> = listOf(quiverHaste, SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             ArcaneShot.name -> ArcaneShot()
             AspectOfTheHawk.name -> AspectOfTheHawk()
             AspectOfTheViper.name -> AspectOfTheViper()
@@ -51,7 +46,7 @@ class Hunter(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec){
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name) {
+        return when (name) {
             AimedShotTalent.name -> AimedShotTalent(ranks)
             AnimalHandler.name -> AnimalHandler(ranks)
             Barrage.name -> Barrage(ranks)

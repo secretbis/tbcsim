@@ -2,13 +2,16 @@ package character.classes.warrior.abilities
 
 import character.*
 import character.classes.warrior.talents.TacticalMastery
-import sim.SimParticipant
 import kotlin.math.max
+import sim.SimParticipant
 
-abstract class Stance: Ability() {
-    // Stances have a shared cooldown equal to the physical GCD, but are not on the main physical GCD
+abstract class Stance : Ability() {
+    // Stances have a shared cooldown equal to the physical GCD, but are not on the main physical
+    // GCD
     override fun gcdMs(sp: SimParticipant): Int = 0
+
     override fun cooldownMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
+
     override val sharedCooldown: SharedCooldown = SharedCooldown.WARRIOR_STANCE
 
     fun stanceBuff(type: String, icon: String, stats: Stats = Stats()): Buff {
@@ -33,7 +36,7 @@ abstract class Stance: Ability() {
         val maxRageRetained = baseRageRetained + (tacticalMastery?.rageRetained() ?: 0)
         val currentRage = sp.resources[Resource.Type.RAGE]?.currentAmount ?: 0
         val rageLost = max(currentRage - maxRageRetained, 0)
-        if(rageLost > 0) {
+        if (rageLost > 0) {
             sp.subtractResource(rageLost, Resource.Type.RAGE, this)
         }
     }

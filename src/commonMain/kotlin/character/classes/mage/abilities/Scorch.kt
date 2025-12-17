@@ -20,15 +20,19 @@ class Scorch : Ability() {
     companion object {
         const val name: String = "Scorch"
     }
+
     override val id: Int = 27074
     override val name: String = Companion.name
     override val icon: String = "spell_fire_soulburn.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 1500
+
     override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     val baseResourceCost = 180.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val apBuff = sp.buffs[ArcanePower.name] as ArcanePower?
         val apMult = apBuff?.manaCostMultiplier() ?: 1.0
@@ -39,21 +43,23 @@ class Scorch : Ability() {
         return baseResourceCost * apMult * pyroMult
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Improved Scorch"
-        override val icon: String = "spell_fire_soulburn.jpg"
-        override val durationMs: Int = 30000
-        override val maxStacks: Int = 5
+    val buff =
+        object : Buff() {
+            override val name: String = "Improved Scorch"
+            override val icon: String = "spell_fire_soulburn.jpg"
+            override val durationMs: Int = 30000
+            override val maxStacks: Int = 5
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val state = state(sp)
-            return Stats(fireDamageMultiplier = 1.0 + (0.03 * state.currentStacks))
+            override fun modifyStats(sp: SimParticipant): Stats {
+                val state = state(sp)
+                return Stats(fireDamageMultiplier = 1.0 + (0.03 * state.currentStacks))
+            }
         }
-    }
 
     val baseDamage = Pair(305.0, 361.0)
     val school = Constants.DamageType.FIRE
     val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
+
     override fun cast(sp: SimParticipant) {
         val criticalMass: CriticalMass? = sp.character.klass.talentInstance(CriticalMass.name)
         val cmCrit = criticalMass?.fireSpellAddlCritPct() ?: 0.0
@@ -71,32 +77,42 @@ class Scorch : Ability() {
         val incCrit = incineration?.fireBlastScorchAddlCritPct() ?: 0.0
 
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = cmCrit + pyroCrit + combustionCrit + incCrit, bonusHitChance = emHit)
+        val result =
+            Spell.attackRoll(
+                sp,
+                damageRoll,
+                school,
+                bonusCritChance = cmCrit + pyroCrit + combustionCrit + incCrit,
+                bonusHitChance = emHit,
+            )
 
-         val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
-        if(result.second != EventResult.RESIST) {
+        if (result.second != EventResult.RESIST) {
             sp.sim.addRaidBuff(buff)
         }
 
         // Fire procs
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

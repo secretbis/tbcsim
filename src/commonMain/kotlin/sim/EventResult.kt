@@ -16,5 +16,5 @@ enum class EventResult {
     CRIT,
     CRUSH,
     HIT,
-    NONE
+    NONE,
 }

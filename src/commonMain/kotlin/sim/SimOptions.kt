@@ -14,5 +14,5 @@ data class SimOptions(
     var targetType: Int = SimDefaults.targetType,
     var allowParryAndBlock: Boolean = SimDefaults.allowParryAndBlock,
     var showHiddenBuffs: Boolean = SimDefaults.showHiddenBuffs,
-    var randomSeed: Long? = null
+    var randomSeed: Long? = null,
 )

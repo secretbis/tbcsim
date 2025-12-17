@@ -4,8 +4,8 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class RunicSpellthread(item: Item) : Enchant(item) {
@@ -14,9 +14,6 @@ class RunicSpellthread(item: Item) : Enchant(item) {
     override val name: String = "Runic Spellthread"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            spellDamage = 35,
-            stamina = 20
-        )
+        return Stats(spellDamage = 35, stamina = 20)
     }
 }

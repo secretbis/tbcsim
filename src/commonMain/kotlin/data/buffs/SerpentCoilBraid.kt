@@ -17,37 +17,38 @@ class SerpentCoilBraid : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    val sbcAbility = object : Ability() {
-        override val name: String = "Serpent-Coil Braid"
-        override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
-    }
-
-    val proc = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.MAGE_MANA_GEM
-        )
-        override val type: Type = Type.STATIC
-
-        val spBuff = object : Buff() {
-            override val id: Int = 37447
+    val sbcAbility =
+        object : Ability() {
             override val name: String = "Serpent-Coil Braid"
             override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
-            override val durationMs: Int = 15000
-
-            override fun modifyStats(sp: SimParticipant): Stats {
-                return Stats(spellDamage = 225)
-            }
         }
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            if(event?.eventType == EventType.RESOURCE_CHANGED) {
-                // Add an additional 25% resource
-                sp.addResource((event.amount * 0.25).toInt(), Resource.Type.MANA, sbcAbility)
-            }
+    val proc =
+        object : Proc() {
+            override val triggers: List<Trigger> = listOf(Trigger.MAGE_MANA_GEM)
+            override val type: Type = Type.STATIC
 
-            sp.addBuff(spBuff)
+            val spBuff =
+                object : Buff() {
+                    override val id: Int = 37447
+                    override val name: String = "Serpent-Coil Braid"
+                    override val icon: String = "spell_nature_poisoncleansingtotem.jpg"
+                    override val durationMs: Int = 15000
+
+                    override fun modifyStats(sp: SimParticipant): Stats {
+                        return Stats(spellDamage = 225)
+                    }
+                }
+
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                if (event?.eventType == EventType.RESOURCE_CHANGED) {
+                    // Add an additional 25% resource
+                    sp.addResource((event.amount * 0.25).toInt(), Resource.Type.MANA, sbcAbility)
+                }
+
+                sp.addBuff(spBuff)
+            }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class FlameSpessarite(id: Int, prefix: Prefix) : Gem(id, "Flame Spessarite", "inv_misc_gem_flamespessarite_02.jpg", prefix, Color.ORANGE, Quality.UNCOMMON)
+class FlameSpessarite(id: Int, prefix: Prefix) :
+    Gem(id, "Flame Spessarite", "inv_misc_gem_flamespessarite_02.jpg", prefix, Color.ORANGE, Quality.UNCOMMON)

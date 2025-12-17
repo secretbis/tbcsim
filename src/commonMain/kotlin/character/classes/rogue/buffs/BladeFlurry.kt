@@ -2,11 +2,8 @@ package character.classes.rogue.buffs
 
 import character.*
 import character.classes.rogue.abilities.*
-import data.Constants
-import sim.Event
-import sim.SimParticipant
-import data.model.Item
 import mechanics.Rating
+import sim.SimParticipant
 
 class BladeFlurry() : Buff() {
     companion object {
@@ -21,8 +18,6 @@ class BladeFlurry() : Buff() {
 
     override fun modifyStats(sp: SimParticipant): Stats {
         val hasteRating = Rating.hastePerPct * hastePercent
-        return Stats(
-            physicalHasteRating = hasteRating
-        )
+        return Stats(physicalHasteRating = hasteRating)
     }
 }

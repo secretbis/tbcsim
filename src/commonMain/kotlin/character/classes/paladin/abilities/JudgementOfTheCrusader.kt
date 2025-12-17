@@ -1,4 +1,3 @@
 package character.classes.paladin.abilities
 
-class JudgementOfTheCrusader {
-}
+class JudgementOfTheCrusader {}

@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class DeepPeridot(id: Int, prefix: Prefix) : Gem(id, "Deep Peridot", "inv_misc_gem_deepperidot_02.jpg", prefix, Color.GREEN, Quality.UNCOMMON)
+class DeepPeridot(id: Int, prefix: Prefix) :
+    Gem(id, "Deep Peridot", "inv_misc_gem_deepperidot_02.jpg", prefix, Color.GREEN, Quality.UNCOMMON)

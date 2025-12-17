@@ -1,27 +1,18 @@
 package character.classes.rogue
 
 import character.*
-import data.model.Item
 import character.classes.rogue.abilities.*
-import character.classes.rogue.talents.*
 import character.classes.rogue.buffs.*
+import character.classes.rogue.talents.*
+import data.model.Item
 
 class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 158,
-        intellect = 39,
-        strength = 95,
-        stamina = 90,
-        spirit = 58,
-        attackPower = 140
-    )
-    override val buffs: List<Buff> = listOf(
-        BaseEnergyGeneneration(),
-        Stealth()
-    )
+    override val baseStats: Stats =
+        Stats(agility = 158, intellect = 39, strength = 95, stamina = 90, spirit = 58, attackPower = 140)
+    override val buffs: List<Buff> = listOf(BaseEnergyGeneneration(), Stealth())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             character.classes.rogue.abilities.AdrenalineRush.name -> character.classes.rogue.abilities.AdrenalineRush()
             character.classes.rogue.abilities.Mutilate.name -> character.classes.rogue.abilities.Mutilate()
             character.classes.rogue.abilities.SliceAndDice.name -> character.classes.rogue.abilities.SliceAndDice()
@@ -51,7 +42,7 @@ class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name.trim()) {
+        return when (name.trim()) {
             character.classes.rogue.talents.GhostlyStrike.name -> character.classes.rogue.talents.GhostlyStrike(ranks)
             character.classes.rogue.talents.Mutilate.name -> character.classes.rogue.talents.Mutilate(ranks)
             character.classes.rogue.talents.AdrenalineRush.name -> character.classes.rogue.talents.AdrenalineRush(ranks)
@@ -64,14 +55,14 @@ class Rogue(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
             Opportunity.name -> Opportunity(ranks)
             Aggression.name -> Aggression(ranks)
             ImprovedAmbush.name -> ImprovedAmbush(ranks)
-            Precision.name -> Precision(ranks)           
+            Precision.name -> Precision(ranks)
             ImprovedEviscerate.name -> ImprovedEviscerate(ranks)
             Premeditation.name -> Premeditation(ranks)
             BladeTwisting.name -> BladeTwisting(ranks)
-            ImprovedExposeArmor.name -> ImprovedExposeArmor(ranks)           
+            ImprovedExposeArmor.name -> ImprovedExposeArmor(ranks)
             Camouflage.name -> Camouflage(ranks)
             ImprovedGouge.name -> ImprovedGouge(ranks)
-            PuncturingWounds.name -> PuncturingWounds(ranks)  
+            PuncturingWounds.name -> PuncturingWounds(ranks)
             ImprovedKick.name -> ImprovedKick(ranks)
             QuickRecovery.name -> QuickRecovery(ranks)
             ImprovedKidneyShot.name -> ImprovedKidneyShot(ranks)

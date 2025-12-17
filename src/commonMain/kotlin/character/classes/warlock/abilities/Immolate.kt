@@ -19,6 +19,7 @@ class Immolate : Ability() {
     companion object {
         const val name = "Immolate"
     }
+
     override val id: Int = 32231
     override val name: String = Companion.name
     override val icon: String = "spell_fire_immolation.jpg"
@@ -33,12 +34,14 @@ class Immolate : Ability() {
     }
 
     val baseCastTimeMs = 2000
+
     override fun castTimeMs(sp: SimParticipant): Int {
         val bane = sp.character.klass.talents[Bane.name] as Bane?
         return ((baseCastTimeMs - (bane?.destructionCastReductionAmountMs() ?: 0)) / sp.spellHasteMultiplier()).toInt()
     }
 
     val baseDamage = 327.0
+
     override fun cast(sp: SimParticipant) {
         val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
@@ -50,32 +53,36 @@ class Immolate : Ability() {
         val spellPowerCoeff = 0.2
         val school = Constants.DamageType.FIRE
 
-        val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff) * impImmolateInitialMultiplier
+        val damageRoll =
+            Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff) * impImmolateInitialMultiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Apply the DoT
         sp.sim.target.addDebuff(ImmolateDot(sp))
 
         // Proc anything that can proc off non-periodic Fire damage
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

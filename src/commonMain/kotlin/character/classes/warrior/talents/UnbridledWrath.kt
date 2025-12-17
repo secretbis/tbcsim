@@ -13,39 +13,43 @@ class UnbridledWrath(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    val uwAbility = object : Ability() {
-        override val name: String = Companion.name
-        override val icon: String = "spell_nature_stoneclawtotem.jpg"
-    }
-
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "spell_nature_stoneclawtotem.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.MELEE_AUTO_HIT,
-                Trigger.MELEE_AUTO_CRIT,
-                Trigger.MELEE_WHITE_HIT,
-                Trigger.MELEE_WHITE_CRIT,
-                Trigger.MELEE_YELLOW_HIT,
-                Trigger.MELEE_YELLOW_CRIT,
-                Trigger.MELEE_GLANCE,
-                Trigger.MELEE_BLOCK
-            )
-
-            override val type: Type = Type.PPM
-            override val ppm: Double = 3.0 * currentRank
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(1, Resource.Type.RAGE, uwAbility)
-            }
+    val uwAbility =
+        object : Ability() {
+            override val name: String = Companion.name
+            override val icon: String = "spell_nature_stoneclawtotem.jpg"
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "spell_nature_stoneclawtotem.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
+
+            val proc =
+                object : Proc() {
+                    override val triggers: List<Trigger> =
+                        listOf(
+                            Trigger.MELEE_AUTO_HIT,
+                            Trigger.MELEE_AUTO_CRIT,
+                            Trigger.MELEE_WHITE_HIT,
+                            Trigger.MELEE_WHITE_CRIT,
+                            Trigger.MELEE_YELLOW_HIT,
+                            Trigger.MELEE_YELLOW_CRIT,
+                            Trigger.MELEE_GLANCE,
+                            Trigger.MELEE_BLOCK,
+                        )
+
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 3.0 * currentRank
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addResource(1, Resource.Type.RAGE, uwAbility)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
+        }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

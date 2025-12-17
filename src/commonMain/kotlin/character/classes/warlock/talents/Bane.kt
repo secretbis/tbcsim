@@ -6,6 +6,7 @@ class Bane(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Bane"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 5
 

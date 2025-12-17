@@ -1,7 +1,6 @@
 package data
 
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
 // This contains meanings for all the magic numbers in the WoW TBC database
 @JsExport
@@ -27,12 +26,12 @@ object Constants {
         CRIT_RANGED_RATING(20),
         CRIT_SPELL_RATING(21),
         // These are never actually used as far as I can tell
-//        HIT_TAKEN_MELEE_RATING(22),
-//        HIT_TAKEN_RANGED_RATING(23),
-//        HIT_TAKEN_SPELL_RATING(24),
-//        CRIT_TAKEN_MELEE_RATING(25),
-//        CRIT_TAKEN_RANGED_RATING(26),
-//        CRIT_TAKEN_SPELL_RATING(27),
+        //        HIT_TAKEN_MELEE_RATING(22),
+        //        HIT_TAKEN_RANGED_RATING(23),
+        //        HIT_TAKEN_SPELL_RATING(24),
+        //        CRIT_TAKEN_MELEE_RATING(25),
+        //        CRIT_TAKEN_RANGED_RATING(26),
+        //        CRIT_TAKEN_SPELL_RATING(27),
         HASTE_MELEE_RATING(28),
         HASTE_RANGED_RATING(29),
         HASTE_SPELL_RATING(30),
@@ -150,8 +149,8 @@ object Constants {
         GLYPH;
 
         companion object {
-            fun subclasses(itemClass: ItemClass?) : List<ItemSubclass> {
-                if(itemClass == null) return listOf()
+            fun subclasses(itemClass: ItemClass?): List<ItemSubclass> {
+                if (itemClass == null) return listOf()
                 return ItemSubclass.values().filter { it.itemClass == itemClass }
             }
         }
@@ -162,47 +161,44 @@ object Constants {
     }
 
     enum class ItemSubclass(val itemClass: ItemClass, val itemClassOrdinal: Int) {
-        CONSUMABLE(ItemClass.CONSUMABLE,0),
-        POTION(ItemClass.CONSUMABLE,1),
-        ELIXIR(ItemClass.CONSUMABLE,2),
-        FLASK(ItemClass.CONSUMABLE,3),
-        SCROLL(ItemClass.CONSUMABLE,4),
-        FOOD_DRINK(ItemClass.CONSUMABLE,5),
-        ITEM_ENHANCEMENT(ItemClass.CONSUMABLE,6),
-        BANDANGE(ItemClass.CONSUMABLE,7),
-        OTHER(ItemClass.CONSUMABLE,8),
-
-        BAG(ItemClass.CONTAINER,0),
-        SOUL_BAG(ItemClass.CONTAINER,1),
-        HERB_BAG(ItemClass.CONTAINER,2),
-        ENCHANTING_BAG(ItemClass.CONTAINER,3),
-        ENGINEERING_BAG(ItemClass.CONTAINER,4),
-        GEM_BAG(ItemClass.CONTAINER,5),
-        MINING_BAG(ItemClass.CONTAINER,6),
-        LEATHERWORKING_BAG(ItemClass.CONTAINER,7),
-
-        AXE_1H(ItemClass.WEAPON,0),
-        AXE_2H(ItemClass.WEAPON,1),
-        BOW(ItemClass.WEAPON,2),
-        GUN(ItemClass.WEAPON,3),
-        MACE_1H(ItemClass.WEAPON,4),
-        MACE_2H(ItemClass.WEAPON,5),
-        POLEARM(ItemClass.WEAPON,6),
-        SWORD_1H(ItemClass.WEAPON,7),
-        SWORD_2H(ItemClass.WEAPON,8),
-        OBSOLETE(ItemClass.WEAPON,9),
-        STAFF(ItemClass.WEAPON,10),
-        EXOTIC_1(ItemClass.WEAPON,11),
-        EXOTIC_2(ItemClass.WEAPON,12),
-        FIST(ItemClass.WEAPON,13),
-        MISC_TOOL(ItemClass.WEAPON,14),
-        DAGGER(ItemClass.WEAPON,15),
-        THROWN(ItemClass.WEAPON,16),
-        SPEAR(ItemClass.WEAPON,17),
-        CROSSBOW(ItemClass.WEAPON,18),
-        WAND(ItemClass.WEAPON,19),
-        FISHING_POLE(ItemClass.WEAPON,20),
-
+        CONSUMABLE(ItemClass.CONSUMABLE, 0),
+        POTION(ItemClass.CONSUMABLE, 1),
+        ELIXIR(ItemClass.CONSUMABLE, 2),
+        FLASK(ItemClass.CONSUMABLE, 3),
+        SCROLL(ItemClass.CONSUMABLE, 4),
+        FOOD_DRINK(ItemClass.CONSUMABLE, 5),
+        ITEM_ENHANCEMENT(ItemClass.CONSUMABLE, 6),
+        BANDANGE(ItemClass.CONSUMABLE, 7),
+        OTHER(ItemClass.CONSUMABLE, 8),
+        BAG(ItemClass.CONTAINER, 0),
+        SOUL_BAG(ItemClass.CONTAINER, 1),
+        HERB_BAG(ItemClass.CONTAINER, 2),
+        ENCHANTING_BAG(ItemClass.CONTAINER, 3),
+        ENGINEERING_BAG(ItemClass.CONTAINER, 4),
+        GEM_BAG(ItemClass.CONTAINER, 5),
+        MINING_BAG(ItemClass.CONTAINER, 6),
+        LEATHERWORKING_BAG(ItemClass.CONTAINER, 7),
+        AXE_1H(ItemClass.WEAPON, 0),
+        AXE_2H(ItemClass.WEAPON, 1),
+        BOW(ItemClass.WEAPON, 2),
+        GUN(ItemClass.WEAPON, 3),
+        MACE_1H(ItemClass.WEAPON, 4),
+        MACE_2H(ItemClass.WEAPON, 5),
+        POLEARM(ItemClass.WEAPON, 6),
+        SWORD_1H(ItemClass.WEAPON, 7),
+        SWORD_2H(ItemClass.WEAPON, 8),
+        OBSOLETE(ItemClass.WEAPON, 9),
+        STAFF(ItemClass.WEAPON, 10),
+        EXOTIC_1(ItemClass.WEAPON, 11),
+        EXOTIC_2(ItemClass.WEAPON, 12),
+        FIST(ItemClass.WEAPON, 13),
+        MISC_TOOL(ItemClass.WEAPON, 14),
+        DAGGER(ItemClass.WEAPON, 15),
+        THROWN(ItemClass.WEAPON, 16),
+        SPEAR(ItemClass.WEAPON, 17),
+        CROSSBOW(ItemClass.WEAPON, 18),
+        WAND(ItemClass.WEAPON, 19),
+        FISHING_POLE(ItemClass.WEAPON, 20),
         RED(ItemClass.GEM, 0),
         BLUE(ItemClass.GEM, 1),
         YELLOW(ItemClass.GEM, 2),
@@ -212,7 +208,6 @@ object Constants {
         META(ItemClass.GEM, 6),
         SIMPLE(ItemClass.GEM, 7),
         PRISMATIC(ItemClass.GEM, 8),
-
         MISC(ItemClass.ARMOR, 0),
         CLOTH(ItemClass.ARMOR, 1),
         LEATHER(ItemClass.ARMOR, 2),
@@ -223,15 +218,12 @@ object Constants {
         LIBRAM(ItemClass.ARMOR, 7),
         IDOL(ItemClass.ARMOR, 8),
         TOTEM(ItemClass.ARMOR, 9),
-
         REAGENT(ItemClass.REAGENT, 0),
-
         WAND_OBSOLETE(ItemClass.PROJECTILE, 0),
         BOLT_OBSOLETE(ItemClass.PROJECTILE, 1),
         ARROW(ItemClass.PROJECTILE, 2),
         BULLET(ItemClass.PROJECTILE, 3),
         THROWN_OBSOLETE(ItemClass.PROJECTILE, 4),
-
         TRADE_GOODS(ItemClass.TRADE_GOODS, 0),
         PARTS(ItemClass.TRADE_GOODS, 1),
         EXPLOSIVES(ItemClass.TRADE_GOODS, 2),
@@ -245,9 +237,7 @@ object Constants {
         ELEMENTAL(ItemClass.TRADE_GOODS, 10),
         TRADE_OTHER(ItemClass.TRADE_GOODS, 11),
         TRADE_ENCHANTING(ItemClass.TRADE_GOODS, 12),
-
         GENERIC_OBSOLETE(ItemClass.GENERIC_OBSOLETE, 0),
-
         BOOK(ItemClass.RECIPE, 0),
         LEATHERWORKING(ItemClass.RECIPE, 1),
         TAILORING(ItemClass.RECIPE, 2),
@@ -259,28 +249,21 @@ object Constants {
         ENCHANTING(ItemClass.RECIPE, 8),
         FISHING(ItemClass.RECIPE, 9),
         JEWELCRAFTING(ItemClass.RECIPE, 10),
-
         MONEY_OBSOLETE(ItemClass.MONEY_OBSOLETE, 0),
-
         QUIVER_OBSOLETE(ItemClass.QUIVER, 0),
         QUIVER_OBSOLETE_2(ItemClass.QUIVER, 1),
         QUIVER(ItemClass.QUIVER, 2),
         AMMO_POUCH(ItemClass.QUIVER, 3),
-
         QUEST(ItemClass.QUEST, 0),
-
         KEY(ItemClass.KEY, 0),
         LOCKPICK(ItemClass.KEY, 1),
-
         PERMANENT_OBSOLETE(ItemClass.PERMANENT_OBSOLETE, 0),
-
         JUNK(ItemClass.MISCELLANEOUS, 0),
         REAGENT_MISC(ItemClass.MISCELLANEOUS, 1),
         PET(ItemClass.MISCELLANEOUS, 2),
         HOLIDAY(ItemClass.MISCELLANEOUS, 3),
         OTHER_MISC(ItemClass.MISCELLANEOUS, 4),
         MOUNT(ItemClass.MISCELLANEOUS, 5),
-
         WARRIOR(ItemClass.GLYPH, 1),
         PALADIN(ItemClass.GLYPH, 2),
         HUNTER(ItemClass.GLYPH, 3),

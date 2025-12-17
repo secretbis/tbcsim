@@ -6,6 +6,7 @@ class EmpoweredCorruption(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Empowered Corruption"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 

@@ -19,21 +19,12 @@ import character.classes.warrior.talents.Rampage as RampageTalent
 import data.model.Item
 
 class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 154,
-        intellect = 123,
-        strength = 252,
-        stamina = 154,
-        spirit = 117
-    )
+    override val baseStats: Stats = Stats(agility = 154, intellect = 123, strength = 252, stamina = 154, spirit = 117)
 
-    override val buffs: List<Buff> = listOf(
-        RageGeneration(),
-        RampageBase()
-    )
+    override val buffs: List<Buff> = listOf(RageGeneration(), RampageBase())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             BattleShout.name -> BattleShout()
             BattleStance.name -> BattleStance()
             BerserkerStance.name -> BerserkerStance()
@@ -54,7 +45,7 @@ class Warrior(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name) {
+        return when (name) {
             AngerManagement.name -> AngerManagement(ranks)
             BloodFrenzy.name -> BloodFrenzy(ranks)
             BloodthirstTalent.name -> BloodthirstTalent(ranks)

@@ -1,8 +1,8 @@
 package character.auto
 
+import character.classes.rogue.buffs.*
 import data.model.Item
 import sim.SimParticipant
-import character.classes.rogue.buffs.*
 
 class MeleeOffHandRogue : MeleeOffHand() {
     companion object {

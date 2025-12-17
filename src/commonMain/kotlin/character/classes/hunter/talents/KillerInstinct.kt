@@ -10,22 +10,24 @@ class KillerInstinct(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Killer Instinct"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-        override val icon: String = "spell_holy_blessingofstamina.jpg"
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
+            override val icon: String = "spell_holy_blessingofstamina.jpg"
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                meleeCritRating = Rating.critPerPct * currentRank,
-                rangedCritRating = Rating.critPerPct * currentRank
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(
+                    meleeCritRating = Rating.critPerPct * currentRank,
+                    rangedCritRating = Rating.critPerPct * currentRank,
+                )
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

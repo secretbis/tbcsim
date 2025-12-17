@@ -13,6 +13,7 @@ class WindfuryWeaponMainHand : Ability() {
     override val id: Int = 25505
     override val name: String = Companion.name
     override val icon: String = "spell_nature_cyclone.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
@@ -22,7 +23,7 @@ class WindfuryWeaponMainHand : Ability() {
     var buff: Buff? = null
 
     override fun cast(sp: SimParticipant) {
-        if(buff == null) {
+        if (buff == null) {
             buff = WindfuryWeapon(sp.character.gear.mainHand)
         }
         sp.addBuff(buff!!)

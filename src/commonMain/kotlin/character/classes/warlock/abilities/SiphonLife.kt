@@ -19,6 +19,7 @@ class SiphonLife : Ability() {
     override val id: Int = 30911
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_requiem.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun resourceCost(sp: SimParticipant): Double = 410.0
@@ -34,15 +35,10 @@ class SiphonLife : Ability() {
         val school = Constants.DamageType.SHADOW
         val result = Spell.attackRoll(sp, 0.0, school, true, 0.0, suppressionBonusHit)
 
-        val event = Event(
-            eventType = EventType.SPELL_CAST,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.SPELL_CAST, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second != EventResult.MISS) {
+        if (result.second != EventResult.MISS) {
             sp.sim.target.addDebuff(SiphonLifeDot(sp))
         }
     }

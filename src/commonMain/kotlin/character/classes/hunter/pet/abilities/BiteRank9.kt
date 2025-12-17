@@ -15,41 +15,47 @@ class BiteRank9 : Ability() {
     override val id: Int = 27050
     override val name: String = "Bite (Rank 9)"
     override val icon: String = "ability_racial_cannibalize.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.FOCUS
+
     override fun resourceCost(sp: SimParticipant): Double = 35.0
+
     override fun cooldownMs(sp: SimParticipant): Int = 10000
 
     // Pets have no gear, so each attack is modeled as an item with the same damage range
     val item = HunterPet.makePetAttackItem(name, 108.0, 132.0)
+
     override fun cast(sp: SimParticipant) {
         val damageRoll = Melee.baseDamageRoll(sp, item)
         val result = Melee.attackRoll(sp, damageRoll, item)
 
         // Save last hit state and fire event
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Proc anything that can proc off a yellow hit
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+                EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+                EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+                EventResult.BLOCK -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item), this, event)
         }
     }

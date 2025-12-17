@@ -25,11 +25,7 @@ class GressilDawnOfRuin : Item() {
     override var minDmg: Double = 138.0
     override var maxDmg: Double = 257.0
     override var speed: Double = 2700.0
-    override var stats: Stats = Stats(
-        stamina = 15,
-        attackPower = 40,
-        rangedAttackPower = 40
-    )
+    override var stats: Stats = Stats(stamina = 15, attackPower = 40, rangedAttackPower = 40)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

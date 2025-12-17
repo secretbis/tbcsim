@@ -1,10 +1,6 @@
 package character.classes.hunter.talents
 
 import character.*
-import data.model.Item
-import mechanics.Rating
-import sim.Event
-import sim.SimParticipant
 
 class ImprovedAspectOfTheHawk(currentRank: Int) : Talent(currentRank) {
     companion object {

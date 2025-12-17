@@ -1,11 +1,9 @@
 package character.classes.priest.abilities
 
-import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
-import character.Buff
 import character.Proc
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.*
-import character.Resource
 import data.Constants
 import mechanics.Spell
 import sim.Event
@@ -17,6 +15,7 @@ class ShadowWordDeath : Ability() {
     companion object {
         const val name: String = "Shadow Word Death"
     }
+
     override val id: Int = 32996
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_demonicfortitude.jpg"
@@ -30,6 +29,7 @@ class ShadowWordDeath : Ability() {
     override fun cooldownMs(sp: SimParticipant): Int = 12000
 
     val baseResourceCost = 309.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -49,25 +49,29 @@ class ShadowWordDeath : Ability() {
         val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school, bonusHitChance = sfHit, bonusCritChance = spCrit)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT ->
+                    listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

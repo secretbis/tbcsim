@@ -2,19 +2,17 @@ package sim.rotation
 
 import character.Ability
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
-class Rotation(
-    val rules: List<Rule>,
-    val autoAttack: Boolean
-) {
+class Rotation(val rules: List<Rule>, val autoAttack: Boolean) {
     private val logger = KotlinLogging.logger {}
+
     enum class Phase {
         PRECOMBAT,
         COMBAT,
-        RAID_OR_PARTY
+        RAID_OR_PARTY,
     }
 
     val raidOrParty: List<Rule> = rules.filter { it.phase == Phase.RAID_OR_PARTY }
@@ -27,7 +25,7 @@ class Rotation(
 
     fun castAllPrecombat(sp: SimParticipant) {
         return precombat.forEach {
-            if(it.ability.available(sp)) {
+            if (it.ability.available(sp)) {
                 it.ability.cast(sp)
             } else {
                 logger.warn { "Could not cast precombat ability (not available): ${it.ability.name}" }
@@ -36,17 +34,15 @@ class Rotation(
     }
 
     fun castAllRaidBuffs(sp: SimParticipant) {
-        return raidOrParty.forEach {
-            it.ability.cast(sp)
-        }
+        return raidOrParty.forEach { it.ability.cast(sp) }
     }
 
     fun next(sp: SimParticipant, onGcd: Boolean = false): Rule? {
         return combat.firstOrNull {
             (!onGcd || (onGcd && it.ability.castableOnGcd)) &&
-            it.ability.available(sp) &&
-            it.satisfied(sp) &&
-            sp.hasEnoughResource(it.ability.resourceType(sp), it.ability.resourceCost(sp))
+                it.ability.available(sp) &&
+                it.satisfied(sp) &&
+                sp.hasEnoughResource(it.ability.resourceType(sp), it.ability.resourceCost(sp))
         }
     }
 }

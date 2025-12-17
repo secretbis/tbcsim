@@ -37,61 +37,60 @@ class WindfuryWeapon(sourceItem: Item) : TempEnchant(sourceItem) {
 
     // Windfury weapon has a global 3s ICD, regardless of rank
     val icdMs = 3000
-    val proc = object : ItemProc(sourceItems) {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.MELEE_WHITE_HIT,
-            Trigger.MELEE_WHITE_CRIT,
-            Trigger.MELEE_YELLOW_HIT,
-            Trigger.MELEE_YELLOW_CRIT
-        )
-
-        override val type: Type = Type.PERCENT
-        override fun percentChance(sp: SimParticipant): Double {
-            val mhWf = sp.character.gear.mainHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
-            val ohWf = sp.character.gear.offHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
-
-            return if(mhWf && ohWf) 36.0 else 20.0
-        }
-
-        override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
-            // Check shared WF ICD state
-            val state = buffState(sp)
-
-            val lastProc = state.lastWindfuryWeaponProcMs
-            val offIcd = lastProc == -1 || lastProc + icdMs <= sp.sim.elapsedTimeMs
-
-            return offIcd && super.shouldProc(sp, items, ability, event)
-        }
-
-        var wfAbility: Ability? = null
-
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            if(wfAbility == null) {
-                val suffix = when(sourceItem) {
-                    sp.character.gear.mainHand -> "(MH)"
-                    sp.character.gear.offHand -> "(OH)"
-                    else -> "(Unknown)"
-                }
-                val name = "Windfury Weapon $suffix"
-                wfAbility = WindfuryWeapon(name, sourceItem)
-            }
-
-            if(wfAbility!!.available(sp)) {
-                // Update ICD state
-                val state = buffState(sp)
-                state.lastWindfuryWeaponProcMs = sp.sim.elapsedTimeMs
-
-                wfAbility!!.cast(sp)
-
-                sp.logEvent(
-                    Event(
-                        eventType = EventType.PROC,
-                        ability = wfAbility!!
-                    )
+    val proc =
+        object : ItemProc(sourceItems) {
+            override val triggers: List<Trigger> =
+                listOf(
+                    Trigger.MELEE_WHITE_HIT,
+                    Trigger.MELEE_WHITE_CRIT,
+                    Trigger.MELEE_YELLOW_HIT,
+                    Trigger.MELEE_YELLOW_CRIT,
                 )
+
+            override val type: Type = Type.PERCENT
+
+            override fun percentChance(sp: SimParticipant): Double {
+                val mhWf = sp.character.gear.mainHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
+                val ohWf = sp.character.gear.offHand.tempEnchant?.name?.startsWith("Windfury Weapon") == true
+
+                return if (mhWf && ohWf) 36.0 else 20.0
+            }
+
+            override fun shouldProc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?): Boolean {
+                // Check shared WF ICD state
+                val state = buffState(sp)
+
+                val lastProc = state.lastWindfuryWeaponProcMs
+                val offIcd = lastProc == -1 || lastProc + icdMs <= sp.sim.elapsedTimeMs
+
+                return offIcd && super.shouldProc(sp, items, ability, event)
+            }
+
+            var wfAbility: Ability? = null
+
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                if (wfAbility == null) {
+                    val suffix =
+                        when (sourceItem) {
+                            sp.character.gear.mainHand -> "(MH)"
+                            sp.character.gear.offHand -> "(OH)"
+                            else -> "(Unknown)"
+                        }
+                    val name = "Windfury Weapon $suffix"
+                    wfAbility = WindfuryWeapon(name, sourceItem)
+                }
+
+                if (wfAbility!!.available(sp)) {
+                    // Update ICD state
+                    val state = buffState(sp)
+                    state.lastWindfuryWeaponProcMs = sp.sim.elapsedTimeMs
+
+                    wfAbility!!.cast(sp)
+
+                    sp.logEvent(Event(eventType = EventType.PROC, ability = wfAbility!!))
+                }
             }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
 }

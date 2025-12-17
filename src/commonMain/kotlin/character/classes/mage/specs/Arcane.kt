@@ -8,9 +8,8 @@ import kotlin.math.max
 class Arcane : Spec() {
     override val name: String = "Arcane"
     override val epBaseStat: SpecEpDelta = spellPowerBase
-    override val epStatDeltas: List<SpecEpDelta> = listOf(Triple("spirit", Stats(spirit = 50), 50.0)) +
-            defaultCasterDeltas
-
+    override val epStatDeltas: List<SpecEpDelta> =
+        listOf(Triple("spirit", Stats(spirit = 50), 50.0)) + defaultCasterDeltas
 
     override fun redSocketEp(deltas: Map<String, Double>): Double {
         // 12 spell dmg

@@ -9,6 +9,8 @@ class ShadowfiendSpec : Spec() {
     override val epStatDeltas: List<SpecEpDelta> = defaultMeleeDeltas
 
     override fun redSocketEp(deltas: Map<String, Double>): Double = 0.0
+
     override fun yellowSocketEp(deltas: Map<String, Double>): Double = 0.0
+
     override fun blueSocketEp(deltas: Map<String, Double>): Double = 0.0
 }

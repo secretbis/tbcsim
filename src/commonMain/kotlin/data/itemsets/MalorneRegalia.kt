@@ -15,45 +15,44 @@ class MalorneRegalia : ItemSet() {
             return 48000
         }
     }
+
     override val id: Int = 639
 
-    val twoSetAbility = object : Ability() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val icon: String = "inv_chest_chain_15.jpg"
-    }
-
-    val twoBuff = object : Buff() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val icon: String = "inv_chest_chain_15.jpg"
-        override val durationMs: Int = -1
-
-        val spellProc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_HIT,
-                Trigger.SPELL_CRIT
-            )
-
-            // TODO: Proc chance unknown, setting to 1PPM for now
-            override val type: Type = Type.PPM
-            override val ppm: Double = 1.0
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(120, Resource.Type.MANA, twoSetAbility)
-            }
+    val twoSetAbility =
+        object : Ability() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val icon: String = "inv_chest_chain_15.jpg"
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(spellProc)
-    }
+    val twoBuff =
+        object : Buff() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val icon: String = "inv_chest_chain_15.jpg"
+            override val durationMs: Int = -1
+
+            val spellProc =
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT)
+
+                    // TODO: Proc chance unknown, setting to 1PPM for now
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 1.0
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addResource(120, Resource.Type.MANA, twoSetAbility)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(spellProc)
+        }
 
     // TODO: Innervate should check this buff once it exists
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_chest_chain_15.jpg"
-        override val durationMs: Int = -1
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_chest_chain_15.jpg"
+            override val durationMs: Int = -1
+        }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 2, twoBuff),
-        Bonus(id, 4, fourBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 2, twoBuff), Bonus(id, 4, fourBuff))
 }

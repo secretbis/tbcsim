@@ -1,21 +1,17 @@
 package character.classes.priest.abilities
 
+import character.Ability
+import character.Proc
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.debuffs.*
 import character.classes.priest.talents.*
-import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.MindFlay as MindFlayTalent
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Resource
 import data.Constants
-import data.model.Item
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
 import sim.EventType
 import sim.SimParticipant
-import io.github.oshai.kotlinlogging.KotlinLogging
 
 abstract class MindFlay : Ability() {
     override val id: Int = 25387
@@ -24,9 +20,11 @@ abstract class MindFlay : Ability() {
     val school = Constants.DamageType.SHADOW
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
+
     override val icon: String = "spell_shadow_siphonmana.jpg"
 
     val baseResourceCost = 230.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -50,21 +48,16 @@ abstract class MindFlay : Ability() {
 
         val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.DAMAGE, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if (result.second == EventResult.RESIST){
+        if (result.second == EventResult.RESIST) {
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
-            return;
+            return
         }
 
         sp.fireProc(listOf(Proc.Trigger.SPELL_HIT), listOf(), this, event)
 
-        sp.sim.target.addDebuff(MindFlayDot(sp, tickCount));
+        sp.sim.target.addDebuff(MindFlayDot(sp, tickCount))
     }
 }

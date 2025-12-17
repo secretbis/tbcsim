@@ -6,7 +6,7 @@ import data.model.Item
 
 class WindSerpent : HunterPet(petDamageMultiplier = 1.1) {
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             "Lightning Breath" -> LightningBreathRank6()
             else -> super.abilityFromString(name, item)
         }

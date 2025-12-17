@@ -16,5 +16,5 @@ enum class EventType {
     DEBUFF_CHARGE_CONSUMED,
     DEBUFF_END,
     PROC,
-    RESOURCE_CHANGED
+    RESOURCE_CHANGED,
 }

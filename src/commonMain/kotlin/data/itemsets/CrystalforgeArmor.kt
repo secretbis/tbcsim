@@ -8,24 +8,24 @@ class CrystalforgeArmor : ItemSet() {
         const val TWO_SET_BUFF_NAME = "Crystalforge Armor (2 set)"
         const val FOUR_SET_BUFF_NAME = "Crystalforge Armor (4 set)"
     }
+
     override val id: Int = 628
 
     // TODO: Retribution Aura should check this buff once it exists
-    val twoBuff = object : Buff() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val durationMs: Int = -1
-        override val icon: String = "inv_shoulder_14.jpg"
-    }
+    val twoBuff =
+        object : Buff() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val durationMs: Int = -1
+            override val icon: String = "inv_shoulder_14.jpg"
+        }
 
     // TODO: Holy Shield should check this buff once it exists
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val durationMs: Int = -1
-        override val icon: String = "inv_shoulder_14.jpg"
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val durationMs: Int = -1
+            override val icon: String = "inv_shoulder_14.jpg"
+        }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 2, twoBuff),
-        Bonus(id, 4, fourBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 2, twoBuff), Bonus(id, 4, fourBuff))
 }

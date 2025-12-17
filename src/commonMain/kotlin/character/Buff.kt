@@ -2,8 +2,8 @@ package character
 
 import data.Constants
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 abstract class Buff {
@@ -11,18 +11,22 @@ abstract class Buff {
         val logger = KotlinLogging.logger {}
         var currentStacks: Int = 0
             set(value) {
-                field = if(value < 0) {
-                    logger.warn { "Buff currentStacks cannot be set below 0 - this is probably a bug" }
-                    0
-                } else value
+                field =
+                    if (value < 0) {
+                        logger.warn { "Buff currentStacks cannot be set below 0 - this is probably a bug" }
+                        0
+                    } else value
             }
+
         var currentCharges: Int = 0
             set(value) {
-                field = if(value < 0) {
-                    logger.warn { "currentCharges cannot be set below 0 - this is probably a bug" }
-                    0
-                } else value
+                field =
+                    if (value < 0) {
+                        logger.warn { "currentCharges cannot be set below 0 - this is probably a bug" }
+                        0
+                    } else value
             }
+
         var appliedAtMs: Int = 0
         var lastTickMs: Int = -1
         var tickCount: Int = 0
@@ -33,8 +37,10 @@ abstract class Buff {
     abstract val durationMs: Int
     open val icon: String = Constants.UNKNOWN_ICON
     open val mutex: List<Mutex> = listOf(Mutex.NONE)
+
     // Higher wins
-    // This is typically the value of the buff/debuff - stronger should naturally take priority over weaker
+    // This is typically the value of the buff/debuff - stronger should naturally take priority over
+    // weaker
     open fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> = mapOf()
 
     open val hidden: Boolean = false
@@ -80,7 +86,7 @@ abstract class Buff {
     }
 
     open fun remainingDurationMs(sp: SimParticipant): Int {
-        return if(durationMs == -1) {
+        return if (durationMs == -1) {
             // 24 hours in ms
             1000 * 60 * 60 * 24
         } else {

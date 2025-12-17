@@ -4,7 +4,7 @@ import character.Buff
 import character.Stats
 import sim.SimParticipant
 
-class ShadowfiendBase: Buff() {
+class ShadowfiendBase : Buff() {
     override val name: String = "Shadowfiend Base"
     override val icon: String = "spell_shadow_shadowfiend.jpg"
     override val durationMs: Int = -1
@@ -21,7 +21,7 @@ class ShadowfiendBase: Buff() {
             intellect = (0.3 * sp.owner.intellect()).toInt(),
             attackPower = (0.57 * sp.owner.spellDamage()).toInt(),
             physicalHitRating = sp.owner.stats.spellHitRating,
-            meleeCritRating = sp.owner.stats.spellCritRating
+            meleeCritRating = sp.owner.stats.spellCritRating,
         )
     }
 }

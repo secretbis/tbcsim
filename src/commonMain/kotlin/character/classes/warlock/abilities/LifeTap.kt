@@ -11,13 +11,16 @@ class LifeTap : Ability() {
     companion object {
         const val name = "Life Tap"
     }
+
     override val id: Int = 27222
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_burningspirit.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     // TODO: Life as a resource
     val manaPerCast = 580.0
+
     override fun cast(sp: SimParticipant) {
         val impLt = sp.character.klass.talents[ImprovedLifeTap.name] as ImprovedLifeTap?
         val impLtMultiplier = impLt?.lifeTapManaMultiplier() ?: 1.0

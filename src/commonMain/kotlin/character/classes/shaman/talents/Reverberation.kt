@@ -1,8 +1,6 @@
 package character.classes.shaman.talents
 
-import character.Proc
 import character.Talent
-import sim.SimIteration
 
 class Reverberation(currentRank: Int) : Talent(currentRank) {
     companion object {

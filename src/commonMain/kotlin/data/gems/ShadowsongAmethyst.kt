@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class ShadowsongAmethyst(id: Int, prefix: Prefix) : Gem(id, "Shadowsong Amethyst", "inv_jewelcrafting_shadowsongamethyst_02.jpg", prefix, Color.PURPLE, Quality.EPIC)
+class ShadowsongAmethyst(id: Int, prefix: Prefix) :
+    Gem(id, "Shadowsong Amethyst", "inv_jewelcrafting_shadowsongamethyst_02.jpg", prefix, Color.PURPLE, Quality.EPIC)

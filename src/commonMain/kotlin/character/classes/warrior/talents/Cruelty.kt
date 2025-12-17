@@ -14,17 +14,18 @@ class Cruelty(ranks: Int) : Talent(ranks) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    val buff = object : Buff() {
-        override val name: String = "Cruelty"
-        override val icon: String = "ability_rogue_eviscerate.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Cruelty"
+            override val icon: String = "ability_rogue_eviscerate.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val critPct = 1.0 * currentRank
-            return Stats(meleeCritRating = critPct * Rating.critPerPct)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                val critPct = 1.0 * currentRank
+                return Stats(meleeCritRating = critPct * Rating.critPerPct)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

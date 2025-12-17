@@ -23,11 +23,8 @@ class NeltharionsTear : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        spellHitRating = 16.0,
-        spellDamage = 44
+    override var stats: Stats = Stats(spellHitRating = 16.0, spellDamage = 44)
 
-    )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

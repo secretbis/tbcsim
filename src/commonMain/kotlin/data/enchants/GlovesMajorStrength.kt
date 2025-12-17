@@ -4,8 +4,8 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class GlovesMajorStrength(item: Item) : Enchant(item) {
@@ -14,8 +14,6 @@ class GlovesMajorStrength(item: Item) : Enchant(item) {
     override val name: String = "Major Strength"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            strength = 15
-        )
+        return Stats(strength = 15)
     }
 }

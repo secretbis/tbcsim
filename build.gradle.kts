@@ -1,8 +1,10 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
     kotlin("multiplatform") version "2.2.21"
     kotlin("plugin.serialization") version "2.2.21"
+    id("com.github.node-gradle.node") version "7.1.0"
+    id("com.diffplug.spotless") version "8.1.0"
     idea
 }
 
@@ -10,6 +12,20 @@ group = "com.tbcsim"
 
 repositories {
     mavenCentral()
+}
+
+node {
+    version = "25.2.1"
+    download = true
+}
+
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktfmt().kotlinlangStyle().configure {
+            it.setMaxWidth(120)
+        }
+    }
 }
 
 kotlin {
@@ -74,13 +90,6 @@ kotlin {
     }
 }
 
-// TODO: This would be nice, but the output drops the package info and jams it all into one export namespace
-//tasks.withType<KotlinJsCompile>().configureEach {
-//    compilerOptions {
-//        target = "es2015"
-//    }
-//}
-
 // This all gets bundled separately with the UI anyway, we don't need an optimized build here
 tasks.named("jsBrowserProductionWebpack") {
     enabled = false
@@ -88,4 +97,14 @@ tasks.named("jsBrowserProductionWebpack") {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+}
+
+tasks.register<NpmTask>("formatUi") {
+    workingDir = file("ui")
+    args = listOf("run", "format")
+}
+
+tasks.register("format") {
+    dependsOn("spotlessApply")
+    dependsOn("formatUi")
 }

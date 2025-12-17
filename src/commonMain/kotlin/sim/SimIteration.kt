@@ -1,21 +1,16 @@
 package sim
 
 import character.*
-import data.abilities.generic.MP5
-import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.rotation.Rotation
-import kotlin.js.JsExport
-import kotlin.math.ceil
 import character.classes.boss.Boss as BossClass
 import character.races.Boss as BossRace
+import data.abilities.generic.MP5
+import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlin.js.JsExport
+import kotlin.math.ceil
+import sim.rotation.Rotation
 
 @JsExport
-class SimIteration(
-    _subject: Character,
-    _rotation: Rotation,
-    val opts: SimOptions,
-    epStatMod: Stats? = null
-) {
+class SimIteration(_subject: Character, _rotation: Rotation, val opts: SimOptions, epStatMod: Stats? = null) {
     val logger = KotlinLogging.logger {}
 
     // General sim state
@@ -36,12 +31,13 @@ class SimIteration(
     var gcdBaseMs: Double = 1500.0
     val minGcdMs: Double = 1000.0
 
-    val forceRecomputeThresholds = mutableMapOf(
-        // 20% Execute/etc
-        opts.durationMs * 0.20 to false,
-        // 35% Dirty Deeds
-        opts.durationMs * 0.35 to false
-    )
+    val forceRecomputeThresholds =
+        mutableMapOf(
+            // 20% Execute/etc
+            opts.durationMs * 0.20 to false,
+            // 35% Dirty Deeds
+            opts.durationMs * 0.35 to false,
+        )
 
     // Setup known participants
     val target: SimParticipant = defaultTarget()
@@ -51,9 +47,7 @@ class SimIteration(
     // TODO: The rest of the party and raid
     val participants = listOfNotNull(subject, subject.pet)
 
-    private val allParticipants: List<SimParticipant> = listOfNotNull(
-        target,
-    ) + participants
+    private val allParticipants: List<SimParticipant> = listOfNotNull(target) + participants
 
     // Initialize all non-target participants
     init {
@@ -72,17 +66,13 @@ class SimIteration(
     fun tick() {
         // Force a recompute at predefined thresholds, e.g. execute talents
         forceRecomputeThresholds.forEach {
-            if(!it.value && elapsedTimeMs < it.key) {
+            if (!it.value && elapsedTimeMs < it.key) {
                 forceRecomputeThresholds[it.key] = true
-                allParticipants.forEach { sp ->
-                    sp.recomputeStats()
-                }
+                allParticipants.forEach { sp -> sp.recomputeStats() }
             }
         }
 
-        allParticipants.forEach {
-            it.tick()
-        }
+        allParticipants.forEach { it.tick() }
 
         // Check debuffs
         allParticipants.forEach {
@@ -104,7 +94,7 @@ class SimIteration(
         }
 
         // Fire server tick procs
-        if(elapsedTimeMs >= lastServerTickMs + serverTickMs) {
+        if (elapsedTimeMs >= lastServerTickMs + serverTickMs) {
             lastServerTickMs = elapsedTimeMs
             allParticipants.forEach {
                 it.fireProc(listOf(Proc.Trigger.SERVER_TICK), null, null, null)
@@ -112,18 +102,14 @@ class SimIteration(
             }
         }
 
-        if(elapsedTimeMs >= lastServerSlowTickMs + serverSlowTickMs) {
+        if (elapsedTimeMs >= lastServerSlowTickMs + serverSlowTickMs) {
             lastServerSlowTickMs = elapsedTimeMs
-            allParticipants.forEach {
-                it.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null)
-            }
+            allParticipants.forEach { it.fireProc(listOf(Proc.Trigger.SERVER_SLOW_TICK), null, null, null) }
         }
 
-        if(elapsedTimeMs >= lastServerFiveSecondTickMs + serverFiveSecondTickMs) {
+        if (elapsedTimeMs >= lastServerFiveSecondTickMs + serverFiveSecondTickMs) {
             lastServerFiveSecondTickMs = elapsedTimeMs
-            allParticipants.forEach {
-                it.fireProc(listOf(Proc.Trigger.SERVER_FIVE_SECOND_TICK), null, null, null)
-            }
+            allParticipants.forEach { it.fireProc(listOf(Proc.Trigger.SERVER_FIVE_SECOND_TICK), null, null, null) }
         }
 
         // Prune any buffs set to expire this tick
@@ -134,15 +120,11 @@ class SimIteration(
     }
 
     fun addRaidBuff(buff: Buff) {
-        participants.forEach {
-            it.addBuff(buff)
-        }
+        participants.forEach { it.addBuff(buff) }
     }
 
     fun addRaidDebuff(debuff: Debuff) {
-        participants.forEach {
-            it.addDebuff(debuff)
-        }
+        participants.forEach { it.addDebuff(debuff) }
     }
 
     fun getExpirationTick(buff: Buff): Int {
@@ -150,20 +132,17 @@ class SimIteration(
     }
 
     fun cleanup() {
-        allParticipants.forEach {
-            it.cleanup()
-        }
+        allParticipants.forEach { it.cleanup() }
     }
 
     private fun defaultTarget(): SimParticipant {
-        val char = Character(
-            BossClass(baseStats = Stats(
-                armor = opts.targetArmor
-            )),
-            BossRace(),
-            opts.targetLevel,
-            subTypes = setOf(CharacterType.values()[opts.targetType])
-        )
+        val char =
+            Character(
+                BossClass(baseStats = Stats(armor = opts.targetArmor)),
+                BossRace(),
+                opts.targetLevel,
+                subTypes = setOf(CharacterType.values()[opts.targetType]),
+            )
 
         return SimParticipant(char, Rotation(listOf(), false), this).init()
     }

@@ -12,22 +12,24 @@ class BloodFury : Ability() {
     override val icon: String = "racial_orc_berserkerstrength.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 120000
+
     // According to the internet, this was moved off of GCD in 3.0.3
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
-    val buff = object : Buff() {
-        override val name: String = "Blood Fury"
-        override val icon: String = "racial_orc_berserkerstrength.jpg"
-        override val durationMs: Int = 15000
+    val buff =
+        object : Buff() {
+            override val name: String = "Blood Fury"
+            override val icon: String = "racial_orc_berserkerstrength.jpg"
+            override val durationMs: Int = 15000
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
-            return Stats(
-                attackPower = 6 + 4 * sp.character.level,
-                rangedAttackPower = 6 + 4 * sp.character.level,
-                spellDamage = 5 + 2 * sp.character.level
-            )
+            override fun modifyStats(sp: SimParticipant): Stats? {
+                return Stats(
+                    attackPower = 6 + 4 * sp.character.level,
+                    rangedAttackPower = 6 + 4 * sp.character.level,
+                    spellDamage = 5 + 2 * sp.character.level,
+                )
+            }
         }
-    }
 
     override fun available(sp: SimParticipant): Boolean {
         return sp.character.race is Orc && super.available(sp)

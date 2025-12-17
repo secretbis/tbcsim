@@ -1,8 +1,8 @@
 package character
 
 import data.Constants
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 abstract class Ability {
@@ -16,7 +16,7 @@ abstract class Ability {
         POTION,
         RUNE_OR_MANA_GEM,
         ACTIVE_TRINKET,
-        WARRIOR_STANCE
+        WARRIOR_STANCE,
     }
 
     open val id: Int = -1
@@ -24,13 +24,17 @@ abstract class Ability {
     open val icon: String = Constants.UNKNOWN_ICON
 
     open fun gcdMs(sp: SimParticipant): Int = 0
+
     open val castableOnGcd = false
 
     open fun cooldownMs(sp: SimParticipant): Int = 0
+
     open val sharedCooldown: SharedCooldown = SharedCooldown.NONE
+
     open fun trinketLockoutMs(sp: SimParticipant): Int = 0
 
     open fun resourceCost(sp: SimParticipant): Double = 0.0
+
     open fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.MANA
 
     // Buff implementations can implement their own state containers
@@ -49,7 +53,7 @@ abstract class Ability {
     internal fun state(sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
         var state = sp.abilityState[name]
-        if(state == null) {
+        if (state == null) {
             state = stateFactory()
             sp.abilityState[name] = state
         }
@@ -57,16 +61,17 @@ abstract class Ability {
     }
 
     open fun currentCooldownMs(sp: SimParticipant): Int {
-        val state = if(sharedCooldown == SharedCooldown.NONE) {
-            state(sp)
-        } else {
-            sharedState(sharedCooldown, sp)
-        }
+        val state =
+            if (sharedCooldown == SharedCooldown.NONE) {
+                state(sp)
+            } else {
+                sharedState(sharedCooldown, sp)
+            }
 
-        return if(state.cooldownStartMs == -1) {
+        return if (state.cooldownStartMs == -1) {
             -1
         } else {
-             state.cooldownStartMs + cooldownMs(sp) - sp.sim.elapsedTimeMs
+            state.cooldownStartMs + cooldownMs(sp) - sp.sim.elapsedTimeMs
         }
     }
 
@@ -93,12 +98,13 @@ abstract class Ability {
         state.cooldownStartMs = sp.sim.elapsedTimeMs
 
         // Store shared cooldown state
-        if(sharedCooldown != SharedCooldown.NONE) {
+        if (sharedCooldown != SharedCooldown.NONE) {
             val sharedState = sharedState(sharedCooldown, sp)
             sharedState.cooldownStartMs = sp.sim.elapsedTimeMs
         }
     }
 
     open fun castTimeMs(sp: SimParticipant): Int = 0
+
     open fun buffs(sp: SimParticipant): List<Buff> = listOf()
 }

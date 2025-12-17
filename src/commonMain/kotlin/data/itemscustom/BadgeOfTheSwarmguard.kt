@@ -1,7 +1,6 @@
 package data.itemscustom
 
 import character.Buff
-import character.CharacterType
 import character.Stats
 import data.Constants
 import data.buffs.Buffs
@@ -9,7 +8,6 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -32,10 +30,5 @@ class BadgeOfTheSwarmguard : Item() {
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    override val buffs: List<Buff> by lazy {
-        listOfNotNull(
-            Buffs.byIdOrName(26480, "Badge of the Swarmguard", this)
-        )
-    }
-
+    override val buffs: List<Buff> by lazy { listOfNotNull(Buffs.byIdOrName(26480, "Badge of the Swarmguard", this)) }
 }

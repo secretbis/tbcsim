@@ -19,15 +19,19 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
 
     override val id: Int = 25489
     override val icon: String = "spell_fire_flametounge.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     override fun available(sp: SimParticipant): Boolean {
-        return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
+        return if (Melee.isOffhand(sp, item)) {
+            sp.isDualWielding()
+        } else true
     }
 
     // Per internet anedcodes, this gets 10% of spell power
     val spCoeff = 0.10
     val baseDamage = 40.35
+
     override fun cast(sp: SimParticipant) {
         val elementalWeapons = sp.character.klass.talents[ElementalWeapons.name] as ElementalWeapons?
         val mod = elementalWeapons?.flametongueDamageMultiplier() ?: 1.0
@@ -39,23 +43,25 @@ class FlametongueWeapon(override val name: String, val item: Item) : Ability() {
         val damageRoll = Spell.baseDamageRollSingle(sp, speedBasedDamage, school, spCoeff)
         val result = Spell.attackRoll(sp, damageRoll, school)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Proc anything that can proc off Fire damage
-        val triggerTypes = when (result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
         if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)

@@ -4,8 +4,8 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class GlyphOfTheOutcast(item: Item) : Enchant(item) {
@@ -14,9 +14,6 @@ class GlyphOfTheOutcast(item: Item) : Enchant(item) {
     override val name: String = "Glyph of the Outcast"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            strength = 17,
-            intellect = 16
-        )
+        return Stats(strength = 17, intellect = 16)
     }
 }

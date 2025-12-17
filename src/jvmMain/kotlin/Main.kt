@@ -29,154 +29,191 @@ import com.github.ajalt.clikt.parameters.types.int
 import data.codegen.CodeGen
 import ep.EpOutput
 import ep.EpOutputOptions
+import java.io.File
+import java.math.RoundingMode
 import kotlin.math.max
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import mechanics.Rating
 import sim.*
 import sim.config.Config
 import sim.config.ConfigMaker
-import java.io.File
-import java.math.RoundingMode
 
 fun setupLogging(debug: Boolean) {
-    val level = if(debug) { "DEBUG" } else "INFO"
-//    val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
-//    if(System.getProperty(logKey).isNullOrEmpty()) {
-//        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, level)
-//    }
+    val level =
+        if (debug) {
+            "DEBUG"
+        } else "INFO"
+    //    val logKey = org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY
+    //    if(System.getProperty(logKey).isNullOrEmpty()) {
+    //        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, level)
+    //    }
 }
 
 private val mapper = ObjectMapper().registerKotlinModule()
 
 class TBCSim : CliktCommand() {
     val configFile: File? by argument(help = "Path to configuration file").file(mustExist = true).optional()
-    val generate: Boolean by option("--generate", help="Autogenerate all item data").flag(default = false)
-    val calcEP: Boolean by option("--calc-ep", help="Calculate EP values for every preset").flag(default = false)
-    val calcEPSingle: Boolean by option("--calc-ep-single", help="Calculate EP values a single character definition").flag(default = false)
-    val calcRankings: Boolean by option("--calc-rankings", help="Calculate rankings for every preset").flag(default = false)
-    val specFilterStr: String? by option("--specs", help="Limit rankings/ep calc by spec (comma-separated")
-    val categoryFilterStr: String? by option("--categories", help="Limit rankings/ep calc by category (comma-separated")
+    val generate: Boolean by option("--generate", help = "Autogenerate all item data").flag(default = false)
+    val calcEP: Boolean by option("--calc-ep", help = "Calculate EP values for every preset").flag(default = false)
+    val calcEPSingle: Boolean by
+        option("--calc-ep-single", help = "Calculate EP values a single character definition").flag(default = false)
+    val calcRankings: Boolean by
+        option("--calc-rankings", help = "Calculate rankings for every preset").flag(default = false)
+    val specFilterStr: String? by option("--specs", help = "Limit rankings/ep calc by spec (comma-separated")
+    val categoryFilterStr: String? by
+        option("--categories", help = "Limit rankings/ep calc by category (comma-separated")
 
-    val duration: Int by option("-d", "--duration", help="Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
-    val durationVariability: Int by option("-v", "--duration-variability", help="Varies the fight duration randomly, plus or minus zero to this number of seconds").int().default(SimDefaults.durationVaribilityMs / 1000)
-    val stepMs: Int by option("-s", "--step-ms", help="Fight simulation step size, in milliseconds").int().default(SimDefaults.stepMs)
-    val latencyMs: Int by option("-l", "--latency", help="Latency to add when casting spells, in milliseconds").int().default(SimDefaults.latencyMs)
-    val iterations: Int by option("-i", "--iterations", help="Number of simulation iterations to run").int().default(SimDefaults.iterations)
-    val targetLevel: Int by option("--target-level", help="Target level, from 70 to 73").int().default(SimDefaults.targetLevel).validate { it in 70..73 }
-    val targetArmor: Int by option("-a", "--target-armor", help="The target's base armor value, before debuffs ").int().default(SimDefaults.targetArmor)
-    val targetType: Int by option("-t", "--target-type", help="The target's type ordinal ").int().default(SimDefaults.targetType)
-    val allowParryAndBlock: Boolean by option("-p", "--allow-parry-block").flag(default = SimDefaults.allowParryAndBlock)
+    val duration: Int by
+        option("-d", "--duration", help = "Fight duration in seconds").int().default(SimDefaults.durationMs / 1000)
+    val durationVariability: Int by
+        option(
+                "-v",
+                "--duration-variability",
+                help = "Varies the fight duration randomly, plus or minus zero to this number of seconds",
+            )
+            .int()
+            .default(SimDefaults.durationVaribilityMs / 1000)
+    val stepMs: Int by
+        option("-s", "--step-ms", help = "Fight simulation step size, in milliseconds")
+            .int()
+            .default(SimDefaults.stepMs)
+    val latencyMs: Int by
+        option("-l", "--latency", help = "Latency to add when casting spells, in milliseconds")
+            .int()
+            .default(SimDefaults.latencyMs)
+    val iterations: Int by
+        option("-i", "--iterations", help = "Number of simulation iterations to run")
+            .int()
+            .default(SimDefaults.iterations)
+    val targetLevel: Int by
+        option("--target-level", help = "Target level, from 70 to 73").int().default(SimDefaults.targetLevel).validate {
+            it in 70..73
+        }
+    val targetArmor: Int by
+        option("-a", "--target-armor", help = "The target's base armor value, before debuffs ")
+            .int()
+            .default(SimDefaults.targetArmor)
+    val targetType: Int by
+        option("-t", "--target-type", help = "The target's type ordinal ").int().default(SimDefaults.targetType)
+    val allowParryAndBlock: Boolean by
+        option("-p", "--allow-parry-block").flag(default = SimDefaults.allowParryAndBlock)
     val showHiddenBuffs: Boolean by option("-b", "--show-hidden-buffs").flag(default = SimDefaults.showHiddenBuffs)
     val debug: Boolean by option("--debug").flag(default = false)
 
-    val specs = mapOf(
-        "hunter_bm" to BeastMastery(),
-        "hunter_surv" to Survival(),
-        "mage_arcane" to Arcane(),
-        "mage_fire" to Fire(),
-        "mage_frost" to Frost(),
-        "priest_shadow" to Shadow(),
-        "rogue_assassination" to Assassination(),
-        "rogue_combat" to Combat(),
-        "shaman_ele" to Elemental(),
-        // Enhance weights aren't appreciably different between the two sub-specs
-        "shaman_enh" to Enhancement(),
-        "warlock_affliction_ruin" to Affliction(),
-        "warlock_destruction_fire" to Destruction(),
-        "warlock_destruction_shadow" to Destruction(),
-        "warrior_arms" to Arms(),
-        "warrior_fury" to Fury(),
-        "warrior_kebab" to Kebab(),
-        "warrior_protection" to Protection()
-    )
+    val specs =
+        mapOf(
+            "hunter_bm" to BeastMastery(),
+            "hunter_surv" to Survival(),
+            "mage_arcane" to Arcane(),
+            "mage_fire" to Fire(),
+            "mage_frost" to Frost(),
+            "priest_shadow" to Shadow(),
+            "rogue_assassination" to Assassination(),
+            "rogue_combat" to Combat(),
+            "shaman_ele" to Elemental(),
+            // Enhance weights aren't appreciably different between the two sub-specs
+            "shaman_enh" to Enhancement(),
+            "warlock_affliction_ruin" to Affliction(),
+            "warlock_destruction_fire" to Destruction(),
+            "warlock_destruction_shadow" to Destruction(),
+            "warrior_arms" to Arms(),
+            "warrior_fury" to Fury(),
+            "warrior_kebab" to Kebab(),
+            "warrior_protection" to Protection(),
+        )
     val presetPath = "./ui/src/presets/samples/"
     val rankingOutputPath = "./ui/src/rankings/data/ranks_all.json"
     val epOutputPath = "./ui/src/ep/data/ep_all.json"
 
-    val presetsByCategory = listOf(
-        "preraid" to mapOf(
-            "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
-            "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
-            "mage_arcane" to File(presetPath + "mage_arcane_preraid.yml"),
-            "mage_fire" to File(presetPath + "mage_fire_preraid.yml"),
-            "mage_frost" to File(presetPath + "mage_frost_preraid.yml"),
-            "priest_shadow" to File(presetPath + "priest_shadow_preraid.yml"),
-            "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
-            "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
-            "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
-            "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
-            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
-            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_preraid.yml"),
-            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_preraid.yml"),
-            "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
-            "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
-        ),
-        "phase1" to mapOf(
-            "hunter_bm" to File(presetPath + "hunter_bm_phase1.yml"),
-            "hunter_surv" to File(presetPath + "hunter_surv_phase1.yml"),
-            "mage_arcane" to File(presetPath + "mage_arcane_phase1.yml"),
-            "mage_fire" to File(presetPath + "mage_fire_phase1.yml"),
-            "mage_frost" to File(presetPath + "mage_frost_phase1.yml"),
-            "priest_shadow" to File(presetPath + "priest_shadow_phase1.yml"),
-            "rogue_assassination" to File(presetPath + "rogue_assassination_phase1.yml"),
-            "rogue_combat" to File(presetPath + "rogue_combat_phase1.yml"),
-            "shaman_ele" to File(presetPath + "shaman_ele_phase1.yml"),
-            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase1.yml"),
-            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase1.yml"),
-            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase1.yml"),
-            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase1.yml"),
-            "warrior_arms" to File(presetPath + "warrior_arms_phase1.yml"),
-            "warrior_fury" to File(presetPath + "warrior_fury_phase1.yml"),
-        ),
-        "phase2" to mapOf(
-            "hunter_bm" to File(presetPath + "hunter_bm_phase2.yml"),
-            "hunter_surv" to File(presetPath + "hunter_surv_phase2.yml"),
-            "mage_arcane" to File(presetPath + "mage_arcane_phase2.yml"),
-            "mage_fire" to File(presetPath + "mage_fire_phase2.yml"),
-            "mage_frost" to File(presetPath + "mage_frost_phase2.yml"),
-            "priest_shadow" to File(presetPath + "priest_shadow_phase2.yml"),
-            "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
-            "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
-            "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),
-            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase2.yml"),
-            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase2.yml"),
-            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase2.yml"),
-            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase2.yml"),
-            "warrior_arms" to File(presetPath + "warrior_arms_phase2.yml"),
-            "warrior_fury" to File(presetPath + "warrior_fury_phase2.yml"),
-            "warrior_kebab" to File(presetPath + "warrior_kebab_phase2.yml"),
-            "warrior_protection" to File(presetPath + "warrior_protection_phase2.yml"),
-        ),
-        "phase3" to mapOf(
-            "hunter_bm" to File(presetPath + "hunter_bm_phase3.yml"),
-            "hunter_surv" to File(presetPath + "hunter_surv_phase3.yml"),
-            "mage_arcane" to File(presetPath + "mage_arcane_phase3.yml"),
-            "mage_fire" to File(presetPath + "mage_fire_phase3.yml"),
-            "mage_frost" to File(presetPath + "mage_frost_phase3.yml"),
-            "priest_shadow" to File(presetPath + "priest_shadow_phase3.yml"),
-            "rogue_combat" to File(presetPath + "rogue_combat_phase3.yml"),
-            "shaman_ele" to File(presetPath + "shaman_ele_phase3.yml"),
-            "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase3.yml"),
-            "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase3.yml"),
-            "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase3.yml"),
-            "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase3.yml"),
-            "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
-            "warrior_fury" to File(presetPath + "warrior_fury_phase3.yml"),
-            "warrior_kebab" to File(presetPath + "warrior_kebab_phase3.yml"),
-            "warrior_protection" to File(presetPath + "warrior_protection_phase3.yml"),
-        ),
-        "phase3_glaives" to mapOf(
-            "rogue_combat" to File(presetPath + "rogue_combat_phase3_glaives.yml"),
-            "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
-            "warrior_fury" to File(presetPath + "warrior_fury_phase3_glaives.yml"),
-            "warrior_kebab" to File(presetPath + "warrior_kebab_phase3_glaives.yml"),
-            "warrior_protection" to File(presetPath + "warrior_protection_phase3_glaives.yml"),
+    val presetsByCategory =
+        listOf(
+            "preraid" to
+                mapOf(
+                    "hunter_bm" to File(presetPath + "hunter_bm_preraid.yml"),
+                    "hunter_surv" to File(presetPath + "hunter_surv_preraid.yml"),
+                    "mage_arcane" to File(presetPath + "mage_arcane_preraid.yml"),
+                    "mage_fire" to File(presetPath + "mage_fire_preraid.yml"),
+                    "mage_frost" to File(presetPath + "mage_frost_preraid.yml"),
+                    "priest_shadow" to File(presetPath + "priest_shadow_preraid.yml"),
+                    "rogue_assassination" to File(presetPath + "rogue_assassination_preraid.yml"),
+                    "rogue_combat" to File(presetPath + "rogue_combat_preraid.yml"),
+                    "shaman_ele" to File(presetPath + "shaman_ele_preraid.yml"),
+                    "shaman_enh" to File(presetPath + "shaman_enh_subresto_preraid.yml"),
+                    "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_preraid.yml"),
+                    "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_preraid.yml"),
+                    "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_preraid.yml"),
+                    "warrior_arms" to File(presetPath + "warrior_arms_preraid.yml"),
+                    "warrior_fury" to File(presetPath + "warrior_fury_preraid.yml"),
+                ),
+            "phase1" to
+                mapOf(
+                    "hunter_bm" to File(presetPath + "hunter_bm_phase1.yml"),
+                    "hunter_surv" to File(presetPath + "hunter_surv_phase1.yml"),
+                    "mage_arcane" to File(presetPath + "mage_arcane_phase1.yml"),
+                    "mage_fire" to File(presetPath + "mage_fire_phase1.yml"),
+                    "mage_frost" to File(presetPath + "mage_frost_phase1.yml"),
+                    "priest_shadow" to File(presetPath + "priest_shadow_phase1.yml"),
+                    "rogue_assassination" to File(presetPath + "rogue_assassination_phase1.yml"),
+                    "rogue_combat" to File(presetPath + "rogue_combat_phase1.yml"),
+                    "shaman_ele" to File(presetPath + "shaman_ele_phase1.yml"),
+                    "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase1.yml"),
+                    "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase1.yml"),
+                    "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase1.yml"),
+                    "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase1.yml"),
+                    "warrior_arms" to File(presetPath + "warrior_arms_phase1.yml"),
+                    "warrior_fury" to File(presetPath + "warrior_fury_phase1.yml"),
+                ),
+            "phase2" to
+                mapOf(
+                    "hunter_bm" to File(presetPath + "hunter_bm_phase2.yml"),
+                    "hunter_surv" to File(presetPath + "hunter_surv_phase2.yml"),
+                    "mage_arcane" to File(presetPath + "mage_arcane_phase2.yml"),
+                    "mage_fire" to File(presetPath + "mage_fire_phase2.yml"),
+                    "mage_frost" to File(presetPath + "mage_frost_phase2.yml"),
+                    "priest_shadow" to File(presetPath + "priest_shadow_phase2.yml"),
+                    "rogue_assassination" to File(presetPath + "rogue_assassination_phase2.yml"),
+                    "rogue_combat" to File(presetPath + "rogue_combat_phase2.yml"),
+                    "shaman_ele" to File(presetPath + "shaman_ele_phase2.yml"),
+                    "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase2.yml"),
+                    "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase2.yml"),
+                    "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase2.yml"),
+                    "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase2.yml"),
+                    "warrior_arms" to File(presetPath + "warrior_arms_phase2.yml"),
+                    "warrior_fury" to File(presetPath + "warrior_fury_phase2.yml"),
+                    "warrior_kebab" to File(presetPath + "warrior_kebab_phase2.yml"),
+                    "warrior_protection" to File(presetPath + "warrior_protection_phase2.yml"),
+                ),
+            "phase3" to
+                mapOf(
+                    "hunter_bm" to File(presetPath + "hunter_bm_phase3.yml"),
+                    "hunter_surv" to File(presetPath + "hunter_surv_phase3.yml"),
+                    "mage_arcane" to File(presetPath + "mage_arcane_phase3.yml"),
+                    "mage_fire" to File(presetPath + "mage_fire_phase3.yml"),
+                    "mage_frost" to File(presetPath + "mage_frost_phase3.yml"),
+                    "priest_shadow" to File(presetPath + "priest_shadow_phase3.yml"),
+                    "rogue_combat" to File(presetPath + "rogue_combat_phase3.yml"),
+                    "shaman_ele" to File(presetPath + "shaman_ele_phase3.yml"),
+                    "shaman_enh" to File(presetPath + "shaman_enh_subresto_phase3.yml"),
+                    "warlock_affliction_ruin" to File(presetPath + "warlock_affliction_ruin_phase3.yml"),
+                    "warlock_destruction_fire" to File(presetPath + "warlock_destruction_fire_phase3.yml"),
+                    "warlock_destruction_shadow" to File(presetPath + "warlock_destruction_shadow_phase3.yml"),
+                    "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
+                    "warrior_fury" to File(presetPath + "warrior_fury_phase3.yml"),
+                    "warrior_kebab" to File(presetPath + "warrior_kebab_phase3.yml"),
+                    "warrior_protection" to File(presetPath + "warrior_protection_phase3.yml"),
+                ),
+            "phase3_glaives" to
+                mapOf(
+                    "rogue_combat" to File(presetPath + "rogue_combat_phase3_glaives.yml"),
+                    "warrior_arms" to File(presetPath + "warrior_arms_phase3.yml"),
+                    "warrior_fury" to File(presetPath + "warrior_fury_phase3_glaives.yml"),
+                    "warrior_kebab" to File(presetPath + "warrior_kebab_phase3_glaives.yml"),
+                    "warrior_protection" to File(presetPath + "warrior_protection_phase3_glaives.yml"),
+                ),
         )
-    )
 
-    fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null) : Pair<SpecEpDelta?, Double> {
+    fun singleEpSim(config: Config, opts: SimOptions, epDelta: SpecEpDelta? = null): Pair<SpecEpDelta?, Double> {
         val epStatMod = epDelta?.second ?: Stats()
         val totalStatMod = Stats().add(epStatMod)
 
@@ -211,7 +248,9 @@ class TBCSim : CliktCommand() {
         spec.epStatDeltas.forEach { delta ->
             println("EP for ${delta.first}")
             val dps = singleEpSim(config, opts, delta)
-            // If the sim comes out with a negative value, it's just worth zero and that run got unluckier than baseline
+            // If the sim comes out with a negative value, it's just worth zero and that run got
+            // unluckier
+            // than baseline
             val dpsDelta = max((dps.second - baselineDpsMean.second) / delta.third * epBaseDpsFactor, 0.0)
             results[delta.first] = formatEp(dpsDelta)
         }
@@ -222,14 +261,12 @@ class TBCSim : CliktCommand() {
         results["blueSocket"] = formatEp(spec.blueSocketEp(results))
         results["metaSocket"] = formatEp(spec.metaSocketEp(results))
 
-        results.forEach {
-            println("EP of one ${it.key}: ${it.value}")
-        }
+        results.forEach { println("EP of one ${it.key}: ${it.value}") }
 
         return results
     }
 
-    fun singleRankingSim(config: Config, opts: SimOptions) : Map<String, Double> {
+    fun singleRankingSim(config: Config, opts: SimOptions): Map<String, Double> {
         val iterations = runBlocking { Sim(config, opts) {}.sim() }
 
         val dps = SimStats.dps(iterations)
@@ -248,13 +285,11 @@ class TBCSim : CliktCommand() {
             "subjectMean" to subjectMean,
             "subjectPetMean" to petMean,
             "totalMean" to totalMean,
-
             "subjectMedian" to subjectMedian,
             "subjectPetMedian" to petMedian,
             "totalMedian" to totalMedian,
-
             "subjectSd" to subjectSd,
-            "petSd" to petSd
+            "petSd" to petSd,
         )
     }
 
@@ -268,18 +303,19 @@ class TBCSim : CliktCommand() {
             return
         }
 
-        val opts = SimOptions(
-            durationMs = duration * 1000,
-            durationVaribilityMs = durationVariability * 1000,
-            stepMs = stepMs,
-            latencyMs = latencyMs,
-            iterations = iterations,
-            targetLevel = targetLevel,
-            targetArmor = targetArmor,
-            targetType = targetType,
-            allowParryAndBlock = allowParryAndBlock,
-            showHiddenBuffs = showHiddenBuffs
-        )
+        val opts =
+            SimOptions(
+                durationMs = duration * 1000,
+                durationVaribilityMs = durationVariability * 1000,
+                stepMs = stepMs,
+                latencyMs = latencyMs,
+                iterations = iterations,
+                targetLevel = targetLevel,
+                targetArmor = targetArmor,
+                targetType = targetType,
+                allowParryAndBlock = allowParryAndBlock,
+                showHiddenBuffs = showHiddenBuffs,
+            )
 
         val specFilter = specFilterStr?.split(",")
         val categoryFilter = categoryFilterStr?.split(",")
@@ -289,7 +325,7 @@ class TBCSim : CliktCommand() {
             println("Starting EP run")
             val deltas = computeEpDeltas(config, opts)
         } else if (calcEP) {
-            val epTypeRef = object : TypeReference<EpOutput>(){}
+            val epTypeRef = object : TypeReference<EpOutput>() {}
             val existing = mapper.readValue(File(epOutputPath).readText(), epTypeRef)
             // EP calculation sim
             // Output looks like this:
@@ -306,23 +342,35 @@ class TBCSim : CliktCommand() {
             // }
             val epCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
-                    if(categoryFilter == null || existing == null || existing.categories[categoryEntry.first] == null || categoryFilter.contains(categoryEntry.first)) {
+                    if (
+                        categoryFilter == null ||
+                            existing == null ||
+                            existing.categories[categoryEntry.first] == null ||
+                            categoryFilter.contains(categoryEntry.first)
+                    ) {
                         acc[categoryEntry.first] =
                             categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
-                                if (specFilter == null || existing == null || existing.categories[categoryEntry.first] == null || specFilter.contains(
-                                        categorySpecEntry.key
-                                    )
+                                if (
+                                    specFilter == null ||
+                                        existing == null ||
+                                        existing.categories[categoryEntry.first] == null ||
+                                        specFilter.contains(categorySpecEntry.key)
                                 ) {
                                     // Make config
                                     val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
                                     println("Starting EP run for ${categoryEntry.first}/${categorySpecEntry.key}")
                                     acc2[categorySpecEntry.key] = computeEpDeltas(config, opts)
                                 } else {
-                                    if(existing.categories[categoryEntry.first] != null && existing.categories[categoryEntry.first]!![categorySpecEntry.key] != null) {
+                                    if (
+                                        existing.categories[categoryEntry.first] != null &&
+                                            existing.categories[categoryEntry.first]!![categorySpecEntry.key] != null
+                                    ) {
                                         acc2[categorySpecEntry.key] =
                                             existing.categories[categoryEntry.first]!![categorySpecEntry.key]!!
                                     } else {
-                                        println("No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping")
+                                        println(
+                                            "No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping"
+                                        )
                                     }
                                 }
                                 acc2
@@ -335,19 +383,15 @@ class TBCSim : CliktCommand() {
                 }
 
             // Generate options/metadata
-            val epOptions = specs.entries.fold(mutableMapOf<String, EpOutputOptions>()) { acc, entry ->
-                acc[entry.key] = EpOutputOptions(
-                    entry.value.benefitsFromMeleeWeaponDps,
-                    entry.value.benefitsFromRangedWeaponDps
-                )
-                acc
-            }
+            val epOptions =
+                specs.entries.fold(mutableMapOf<String, EpOutputOptions>()) { acc, entry ->
+                    acc[entry.key] =
+                        EpOutputOptions(entry.value.benefitsFromMeleeWeaponDps, entry.value.benefitsFromRangedWeaponDps)
+                    acc
+                }
 
             // Output EPs
-            val fullOutput = EpOutput(
-                epCategories,
-                epOptions
-            )
+            val fullOutput = EpOutput(epCategories, epOptions)
             File(epOutputPath).writeText(json.encodeToString(fullOutput))
         } else if (calcEPSingle) {
             if (configFile == null) {
@@ -360,27 +404,39 @@ class TBCSim : CliktCommand() {
             println("Starting EP run for ${configFile!!.name}")
             computeEpDeltas(config, opts)
         } else if (calcRankings) {
-            val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>(){}
+            val rankTypeRef = object : TypeReference<Map<String, Map<String, Map<String, Double>>>>() {}
             val existing = mapper.readValue(File(rankingOutputPath).readText(), rankTypeRef)
             val rankingCategories =
                 presetsByCategory.fold(mutableMapOf<String, Map<String, Map<String, Double>>>()) { acc, categoryEntry ->
-                    if(categoryFilter == null || existing == null || existing[categoryEntry.first] == null || categoryFilter.contains(categoryEntry.first)) {
+                    if (
+                        categoryFilter == null ||
+                            existing == null ||
+                            existing[categoryEntry.first] == null ||
+                            categoryFilter.contains(categoryEntry.first)
+                    ) {
                         acc[categoryEntry.first] =
                             categoryEntry.second.entries.fold(mutableMapOf()) { acc2, categorySpecEntry ->
                                 // Make config
-                                if (specFilter == null || existing == null || existing[categoryEntry.first] == null || specFilter.contains(
-                                        categorySpecEntry.key
-                                    )
+                                if (
+                                    specFilter == null ||
+                                        existing == null ||
+                                        existing[categoryEntry.first] == null ||
+                                        specFilter.contains(categorySpecEntry.key)
                                 ) {
                                     val config = ConfigMaker.fromYml(categorySpecEntry.value.readText())
                                     println("Starting ranking run for ${categoryEntry.first}/${categorySpecEntry.key}")
                                     acc2[categorySpecEntry.key] = singleRankingSim(config, opts)
                                 } else {
-                                    if(existing[categoryEntry.first] != null && existing[categoryEntry.first]!![categorySpecEntry.key] != null) {
+                                    if (
+                                        existing[categoryEntry.first] != null &&
+                                            existing[categoryEntry.first]!![categorySpecEntry.key] != null
+                                    ) {
                                         acc2[categorySpecEntry.key] =
                                             existing[categoryEntry.first]!![categorySpecEntry.key]!!
                                     } else {
-                                        println("No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping")
+                                        println(
+                                            "No preexisting entry found for ${categoryEntry.first}/${categorySpecEntry.key} - skipping"
+                                        )
                                     }
                                 }
                                 acc2
@@ -405,11 +461,13 @@ class TBCSim : CliktCommand() {
 
             // Generic sim
             runBlocking {
-                val iterations = Sim(config, opts) {
-                    if (it.iterationsCompleted == 1) {
-                        SimStatsPrinter.precombatStats(it.currentIteration)
-                    }
-                }.sim()
+                val iterations =
+                    Sim(config, opts) {
+                            if (it.iterationsCompleted == 1) {
+                                SimStatsPrinter.precombatStats(it.currentIteration)
+                            }
+                        }
+                        .sim()
 
                 // Stats
                 val durationSeconds = (opts.durationMs / 1000.0).toInt()

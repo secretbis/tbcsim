@@ -1,6 +1,5 @@
 package character.classes.priest.buffs
 
-import sim.SimParticipant
 import character.Ability
 import character.Buff
 import character.Proc
@@ -8,6 +7,7 @@ import character.Stats
 import data.model.Item
 import mechanics.Rating
 import sim.Event
+import sim.SimParticipant
 
 class InnerFocus : Buff() {
     companion object {
@@ -19,19 +19,17 @@ class InnerFocus : Buff() {
     override val icon: String = "spell_frost_windwalkon.jpg"
     override val durationMs: Int = -1
 
-    fun genCastRemovalProc(ifBuff: InnerFocus) = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.SPELL_HIT,
-            Trigger.SPELL_CRIT,
-        )
-        override val type: Type = Type.STATIC
+    fun genCastRemovalProc(ifBuff: InnerFocus) =
+        object : Proc() {
+            override val triggers: List<Trigger> = listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT)
+            override val type: Type = Type.STATIC
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            if (ability == null || ability.name == name) return
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                if (ability == null || ability.name == name) return
 
-            sp.consumeBuff(ifBuff)
+                sp.consumeBuff(ifBuff)
+            }
         }
-    }
 
     override fun modifyStats(sp: SimParticipant): Stats? {
         return Stats(spellCritRating = 25 * Rating.critPerPct)

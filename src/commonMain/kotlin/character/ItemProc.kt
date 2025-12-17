@@ -1,9 +1,9 @@
 package character
 
 import data.model.Item
+import kotlin.js.JsExport
 import sim.Event
 import sim.SimParticipant
-import kotlin.js.JsExport
 
 @JsExport
 abstract class ItemProc(val sourceItems: List<Item>) : Proc() {

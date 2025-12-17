@@ -15,17 +15,11 @@ import character.classes.warlock.talents.UnstableAffliction as UnstableAfflictio
 import data.model.Item
 
 class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 170,
-        intellect = 180,
-        strength = 96,
-        stamina = 154,
-        spirit = 199
-    )
+    override val baseStats: Stats = Stats(agility = 170, intellect = 180, strength = 96, stamina = 154, spirit = 199)
     override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             AmplifyCurse.name -> AmplifyCurse()
             Conflagrate.name -> Conflagrate()
             Corruption.name -> Corruption()
@@ -48,7 +42,7 @@ class Warlock(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name) {
+        return when (name) {
             AmplifyCurseTalent.name -> AmplifyCurseTalent(ranks)
             Backlash.name -> Backlash(ranks)
             Bane.name -> Bane(ranks)

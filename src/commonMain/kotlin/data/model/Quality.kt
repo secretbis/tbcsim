@@ -10,5 +10,5 @@ enum class Quality {
     RARE,
     EPIC,
     LEGENDARY,
-    META
+    META,
 }

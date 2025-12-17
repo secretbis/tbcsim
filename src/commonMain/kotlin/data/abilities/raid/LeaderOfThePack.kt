@@ -14,22 +14,22 @@ class LeaderOfThePack : Ability() {
     override val id: Int = 17007
     override val name: String = Companion.name
     override val icon: String = "spell_nature_unyeildingstamina.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val buff = object : Buff() {
-        override val name: String = "Leader of the Pack"
-        override val icon: String = "spell_nature_unyeildingstamina.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Leader of the Pack"
+            override val icon: String = "spell_nature_unyeildingstamina.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        val bonusCritRating = 5.0 * Rating.critPerPct
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                meleeCritRating = bonusCritRating,
-                rangedCritRating = bonusCritRating
-            )
+            val bonusCritRating = 5.0 * Rating.critPerPct
+
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(meleeCritRating = bonusCritRating, rangedCritRating = bonusCritRating)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.sim.addRaidBuff(buff)

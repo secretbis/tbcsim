@@ -36,22 +36,24 @@ class WrathOfAirTotem : Ability() {
         return true
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Wrath of Air Totem"
-        override val icon: String = "spell_nature_slowingtotem.jpg"
-        override val durationMs: Int = 120000
-        override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
+    val buff =
+        object : Buff() {
+            override val name: String = "Wrath of Air Totem"
+            override val icon: String = "spell_nature_slowingtotem.jpg"
+            override val durationMs: Int = 120000
+            override val mutex: List<Mutex> = listOf(Mutex.AIR_TOTEM)
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            // Extra sp from T4 set
-            val t4BonusBuff = sp.buffs[CycloneRegalia.TWO_SET_BUFF_NAME] != null
-            val t4BonusSpellDamage = if(t4BonusBuff) { CycloneRegalia.twoSetWrathOfAirBonus() } else 0
+            override fun modifyStats(sp: SimParticipant): Stats {
+                // Extra sp from T4 set
+                val t4BonusBuff = sp.buffs[CycloneRegalia.TWO_SET_BUFF_NAME] != null
+                val t4BonusSpellDamage =
+                    if (t4BonusBuff) {
+                        CycloneRegalia.twoSetWrathOfAirBonus()
+                    } else 0
 
-            return Stats(
-                spellDamage = 101 + t4BonusSpellDamage
-            )
+                return Stats(spellDamage = 101 + t4BonusSpellDamage)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

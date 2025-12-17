@@ -1,16 +1,13 @@
 package character.races.abilities
 
 import character.Ability
-import character.Buff
 import character.Proc
-import character.Stats
 import character.classes.priest.Priest
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.ShadowFocus
 import character.races.Undead
 import character.races.debuffs.DevouringPlagueDot
 import data.Constants
-import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -33,6 +30,7 @@ class DevouringPlague : Ability() {
     }
 
     val baseResourceCost = 1145.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -49,15 +47,10 @@ class DevouringPlague : Ability() {
 
         val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.DAMAGE, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second == EventResult.RESIST){
+        if (result.second == EventResult.RESIST) {
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }

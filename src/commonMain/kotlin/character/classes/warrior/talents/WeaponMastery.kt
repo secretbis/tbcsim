@@ -14,17 +14,19 @@ class WeaponMastery(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    val buff = object : Buff() {
-        override val name: String = "Weapon Mastery"
-        override val icon: String = "ability_warrior_weaponmastery.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Weapon Mastery"
+            override val icon: String = "ability_warrior_weaponmastery.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            // This is slightly wrong when parry is turned on, but that's a scuffed situation anyway
-            return Stats(expertiseRating = currentRank * Rating.expertisePerPct)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                // This is slightly wrong when parry is turned on, but that's a scuffed situation
+                // anyway
+                return Stats(expertiseRating = currentRank * Rating.expertisePerPct)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

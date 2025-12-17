@@ -20,6 +20,7 @@ class UnstableAffliction : Ability() {
     override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
 
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
+
     override fun castTimeMs(sp: SimParticipant): Int = (1500 / sp.spellHasteMultiplier()).toInt()
 
     override fun resourceCost(sp: SimParticipant): Double = 400.0
@@ -35,15 +36,10 @@ class UnstableAffliction : Ability() {
         val school = Constants.DamageType.SHADOW
         val result = Spell.attackRoll(sp, 0.0, school, true, 0.0, suppressionBonusHit)
 
-        val event = Event(
-            eventType = EventType.SPELL_CAST,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.SPELL_CAST, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second != EventResult.MISS) {
+        if (result.second != EventResult.MISS) {
             sp.sim.target.addDebuff(UnstableAfflictionDot(sp))
         }
     }

@@ -6,6 +6,7 @@ class ShadowAndFlame(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Shadow and Flame"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 5
 

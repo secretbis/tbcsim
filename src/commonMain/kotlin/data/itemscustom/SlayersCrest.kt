@@ -1,7 +1,6 @@
 package data.itemscustom
 
 import character.Buff
-import character.CharacterType
 import character.Stats
 import data.Constants
 import data.buffs.Buffs
@@ -9,7 +8,6 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -27,17 +25,10 @@ class SlayersCrest : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        attackPower = 64,
-        rangedAttackPower = 64
-    )
+    override var stats: Stats = Stats(attackPower = 64, rangedAttackPower = 64)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    override val buffs: List<Buff> by lazy {
-        listOfNotNull(
-            Buffs.byIdOrName(28777, "Slayer's Crest", this)
-        )
-    }
+    override val buffs: List<Buff> by lazy { listOfNotNull(Buffs.byIdOrName(28777, "Slayer's Crest", this)) }
 }

@@ -12,9 +12,6 @@ class PetCobraReflexes : Buff() {
 
     override fun modifyStats(sp: SimParticipant): Stats {
         // Per rando wowhead comments, this is approximately a 15% damage reduction
-        return Stats(
-            physicalHasteMultiplier = 1.30,
-            physicalDamageMultiplier = 0.85
-        )
+        return Stats(physicalHasteMultiplier = 1.30, physicalDamageMultiplier = 0.85)
     }
 }

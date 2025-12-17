@@ -10,21 +10,25 @@ class MoltenArmor : Ability() {
     companion object {
         const val name = "Molten Armor"
     }
+
     override val id: Int = 30482
     override val name: String = Companion.name
     override val icon: String = "ability_mage_moltenarmor.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
+
     override fun resourceCost(sp: SimParticipant): Double = 630.0
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "ability_mage_moltenarmor.jpg"
-        override val durationMs: Int = 30 * 60 * 1000
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "ability_mage_moltenarmor.jpg"
+            override val durationMs: Int = 30 * 60 * 1000
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spellCritRating = 3.0 * Rating.critPerPct)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spellCritRating = 3.0 * Rating.critPerPct)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

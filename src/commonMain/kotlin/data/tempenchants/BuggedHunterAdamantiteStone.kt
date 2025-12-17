@@ -16,7 +16,7 @@ class BuggedHunterAdamantiteStone(item: Item) : TempEnchant(item) {
             whiteDamageFlatModifier = 12.0,
             yellowDamageFlatModifier = 12.0,
             meleeCritRating = 14.0,
-            rangedCritRating = 14.0
+            rangedCritRating = 14.0,
         )
     }
 }

@@ -13,6 +13,7 @@ class ImprovedMarkOfTheWild : Ability() {
     override val id: Int = 39233
     override val name: String = Companion.name
     override val icon: String = "spell_nature_giftofthewild.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     // Always assume the raid buffer has 5/5 imp motw
@@ -21,30 +22,31 @@ class ImprovedMarkOfTheWild : Ability() {
     val attr = (14 * multiplier).toInt()
     val resist = (25 * multiplier).toInt()
 
-    val buff = object : Buff() {
-        override val name: String = "Mark of the Wild"
-        override val icon: String = "spell_nature_giftofthewild.jpg"
-        // Assume the caster is always maintaining this
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Mark of the Wild"
+            override val icon: String = "spell_nature_giftofthewild.jpg"
+            // Assume the caster is always maintaining this
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
-            return Stats(
-                armor = armor,
-                strength = attr,
-                agility = attr,
-                intellect = attr,
-                spirit = attr,
-                stamina = attr,
-                // FIXME: Implement proper resist stacking, if that ever becomes relevant
-                fireResistance = resist,
-                frostResistance = resist,
-                natureResistance = resist,
-                shadowResistance = resist,
-                arcaneResistance = resist
-            )
+            override fun modifyStats(sp: SimParticipant): Stats? {
+                return Stats(
+                    armor = armor,
+                    strength = attr,
+                    agility = attr,
+                    intellect = attr,
+                    spirit = attr,
+                    stamina = attr,
+                    // FIXME: Implement proper resist stacking, if that ever becomes relevant
+                    fireResistance = resist,
+                    frostResistance = resist,
+                    natureResistance = resist,
+                    shadowResistance = resist,
+                    arcaneResistance = resist,
+                )
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.sim.addRaidBuff(buff)

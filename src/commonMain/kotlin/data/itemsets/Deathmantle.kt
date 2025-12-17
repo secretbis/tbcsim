@@ -18,72 +18,77 @@ class Deathmantle : ItemSet() {
 
     override val id: Int = 622
 
-    val twoBuff = object : Buff() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val durationMs: Int = -1
-        override val icon: String = "inv_helmet_58.jpg"
-    }
+    val twoBuff =
+        object : Buff() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val durationMs: Int = -1
+            override val icon: String = "inv_helmet_58.jpg"
+        }
 
-    val fourSetAbility = object : Ability() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_helmet_58.jpg"
-    }
+    val fourSetAbility =
+        object : Ability() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_helmet_58.jpg"
+        }
 
     fun noCostConsumeProc(buff: Buff): Proc {
         return object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.ROGUE_CAST_FINISHER
-            )
+            override val triggers: List<Trigger> = listOf(Trigger.ROGUE_CAST_FINISHER)
             override val type: Type = Type.STATIC
 
-            // TODO: is this also consumed on misses/dodges/parry etc? otherwise we have to check here for a hit
-            // if it does consume on a miss/etc. we need to check interactions with the "Quick Recovery" talent.
+            // TODO: is this also consumed on misses/dodges/parry etc? otherwise we have to check
+            // here for
+            // a hit
+            // if it does consume on a miss/etc. we need to check interactions with the "Quick
+            // Recovery"
+            // talent.
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 // Remove the crit buff
                 sp.consumeBuff(buff)
 
                 // Refund the resource cost of the triggering ability
-                if(ability != null) {
+                if (ability != null) {
                     sp.addResource(ability.resourceCost(sp).toInt(), ability.resourceType(sp), fourSetAbility)
                 }
             }
         }
     }
 
-    val freeFinisherBuff = object : Buff() {
-        override val name: String = "Deathmantle (free finisher)"
-        override val icon: String = "inv_helmet_58.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val freeFinisherBuff =
+        object : Buff() {
+            override val name: String = "Deathmantle (free finisher)"
+            override val icon: String = "inv_helmet_58.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        val proc = noCostConsumeProc(this)
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+            val proc = noCostConsumeProc(this)
 
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_helmet_58.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.PHYSICAL_DAMAGE
-            )
-            override val type: Type = Type.PPM
-            override val ppm: Double = 1.0
-
-            // TODO: does this also happen on misses/dodges/parry etc? otherwise we have to check here for a hit
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addBuff(freeFinisherBuff)
-            }
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_helmet_58.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 2, twoBuff),
-        Bonus(id, 4, fourBuff)
-    )
+            val proc =
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(Trigger.PHYSICAL_DAMAGE)
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 1.0
+
+                    // TODO: does this also happen on misses/dodges/parry etc? otherwise we have to
+                    // check
+                    // here for a hit
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(freeFinisherBuff)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
+        }
+
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 2, twoBuff), Bonus(id, 4, fourBuff))
 }

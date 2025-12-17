@@ -3,7 +3,7 @@ package character.classes.warrior.abilities
 import character.Stats
 import sim.SimParticipant
 
-class DefensiveStance: Stance() {
+class DefensiveStance : Stance() {
     companion object {
         const val name = "Defensive Stance"
     }

@@ -14,16 +14,17 @@ class Defiance(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "ability_warrior_innerrage.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "ability_warrior_innerrage.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(expertiseRating = 2 * currentRank * Rating.expertiseRatingPerPoint)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(expertiseRating = 2 * currentRank * Rating.expertiseRatingPerPoint)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

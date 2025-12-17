@@ -2,12 +2,10 @@ package character.classes.rogue.buffs
 
 import character.*
 import character.classes.rogue.abilities.*
-import data.Constants
+import character.classes.rogue.talents.*
 import data.model.Item
 import data.model.TempEnchant
-import sim.Event
 import sim.SimParticipant
-import character.classes.rogue.talents.*
 
 abstract class Poison(sourceItem: Item) : TempEnchant(sourceItem) {
 

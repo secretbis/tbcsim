@@ -3,9 +3,9 @@ package data.itemsets
 import character.*
 import data.model.Item
 import data.model.ItemSet
+import kotlin.math.min
 import sim.Event
 import sim.SimParticipant
-import kotlin.math.min
 
 class AvatarRegalia : ItemSet() {
     companion object {
@@ -15,25 +15,22 @@ class AvatarRegalia : ItemSet() {
 
     override val id: Int = 666
 
-    val twoSetAbility = object : Ability() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val icon: String = "inv_chest_cloth_43.jpg"
-    }
+    val twoSetAbility =
+        object : Ability() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val icon: String = "inv_chest_cloth_43.jpg"
+        }
 
     fun twoSetConsumeProc(buff: Buff): Proc {
         return object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_HIT,
-                Trigger.SPELL_CRIT,
-                Trigger.SPELL_RESIST
-            )
+            override val triggers: List<Trigger> = listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT, Trigger.SPELL_RESIST)
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
                 sp.consumeBuff(buff)
 
                 // Refund the cost
-                if(ability != null) {
+                if (ability != null) {
                     // Choose the lower of the spell cost, or the 150 set reduction
                     val refund = min(ability.resourceCost(sp), 150.0).toInt()
                     sp.addResource(refund, Resource.Type.MANA, twoSetAbility)
@@ -42,46 +39,43 @@ class AvatarRegalia : ItemSet() {
         }
     }
 
-    val twoSetCostReductionBuff = object : Buff() {
-        override val name: String = "$TWO_SET_BUFF_NAME (Cost Reduction)"
-        override val icon: String = "inv_chest_cloth_43.jpg"
-        override val durationMs: Int = -1
+    val twoSetCostReductionBuff =
+        object : Buff() {
+            override val name: String = "$TWO_SET_BUFF_NAME (Cost Reduction)"
+            override val icon: String = "inv_chest_cloth_43.jpg"
+            override val durationMs: Int = -1
 
-        val consumeProc = twoSetConsumeProc(this)
+            val consumeProc = twoSetConsumeProc(this)
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(consumeProc)
-    }
-
-    val twoBuff = object : Buff() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val icon: String = "inv_chest_cloth_43.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_HIT,
-                Trigger.SPELL_CRIT,
-                Trigger.SPELL_RESIST
-            )
-            override val type: Type = Type.PERCENT
-            override fun percentChance(sp: SimParticipant): Double = 6.0
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addBuff(twoSetCostReductionBuff)
-            }
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(consumeProc)
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+    val twoBuff =
+        object : Buff() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val icon: String = "inv_chest_cloth_43.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
+
+            val proc =
+                object : Proc() {
+                    override val triggers: List<Trigger> =
+                        listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT, Trigger.SPELL_RESIST)
+                    override val type: Type = Type.PERCENT
+
+                    override fun percentChance(sp: SimParticipant): Double = 6.0
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(twoSetCostReductionBuff)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
+        }
 
     fun fourSetConsumeProc(buff: Buff): Proc {
         return object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SPELL_HIT,
-                Trigger.SPELL_CRIT,
-                Trigger.SPELL_RESIST
-            )
+            override val triggers: List<Trigger> = listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT, Trigger.SPELL_RESIST)
             override val type: Type = Type.STATIC
 
             override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
@@ -90,42 +84,41 @@ class AvatarRegalia : ItemSet() {
         }
     }
 
-    val fourSetSpellDamageBuff = object : Buff() {
-        override val name: String = "$FOUR_SET_BUFF_NAME (Spell Damage)"
-        override val icon: String = "inv_chest_cloth_43.jpg"
-        override val durationMs: Int = 15000
+    val fourSetSpellDamageBuff =
+        object : Buff() {
+            override val name: String = "$FOUR_SET_BUFF_NAME (Spell Damage)"
+            override val icon: String = "inv_chest_cloth_43.jpg"
+            override val durationMs: Int = 15000
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
-            return Stats(spellDamage = 100)
-        }
-
-        val consumeProc = fourSetConsumeProc(this)
-
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(consumeProc)
-    }
-
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val swpProc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.PRIEST_TICK_SHADOW_WORD_PAIN
-            )
-            override val type: Type = Type.PERCENT
-            override fun percentChance(sp: SimParticipant): Double = 40.0
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addBuff(fourSetSpellDamageBuff)
+            override fun modifyStats(sp: SimParticipant): Stats? {
+                return Stats(spellDamage = 100)
             }
+
+            val consumeProc = fourSetConsumeProc(this)
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(consumeProc)
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(swpProc)
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 2, twoBuff),
-        Bonus(id, 4, fourBuff)
-    )
+            val swpProc =
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(Trigger.PRIEST_TICK_SHADOW_WORD_PAIN)
+                    override val type: Type = Type.PERCENT
+
+                    override fun percentChance(sp: SimParticipant): Double = 40.0
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(fourSetSpellDamageBuff)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(swpProc)
+        }
+
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 2, twoBuff), Bonus(id, 4, fourBuff))
 }

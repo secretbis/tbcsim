@@ -1,18 +1,18 @@
 package character.classes.rogue.abilities
 
 import character.*
-import mechanics.Melee
-import sim.Event
-import sim.SimParticipant
-import data.Constants
-import character.classes.rogue.talents.*
 import character.classes.rogue.debuffs.*
-import io.github.oshai.kotlinlogging.KotlinLogging
-import kotlin.math.*
+import character.classes.rogue.talents.*
+import data.Constants
 import data.itemsets.AssassinationArmor
 import data.itemsets.Deathmantle
+import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlin.math.*
+import mechanics.Melee
+import sim.Event
 import sim.EventResult
 import sim.EventType
+import sim.SimParticipant
 
 class Envenom : FinisherAbility() {
     companion object {
@@ -26,16 +26,22 @@ class Envenom : FinisherAbility() {
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceType(sp: SimParticipant): Resource.Type = Resource.Type.ENERGY
+
     override fun resourceCost(sp: SimParticipant): Double {
         val assArmor = sp.buffs[AssassinationArmor.FOUR_SET_BUFF_NAME]
-        val reduction = if (assArmor != null) { AssassinationArmor.fourSetEnergyReduction() } else 0.0
+        val reduction =
+            if (assArmor != null) {
+                AssassinationArmor.fourSetEnergyReduction()
+            } else 0.0
 
         return 35.0 - reduction
     }
 
     override fun available(sp: SimParticipant): Boolean {
         // there has to be at least one deadly poison debuff available
-        val dosesAvailable = sp.sim.target.debuffState[DeadlyPoisonDot.name] != null && sp.sim.target.debuffs[DeadlyPoisonDot.name] != null
+        val dosesAvailable =
+            sp.sim.target.debuffState[DeadlyPoisonDot.name] != null &&
+                sp.sim.target.debuffs[DeadlyPoisonDot.name] != null
 
         return dosesAvailable && super.available(sp)
     }
@@ -43,17 +49,21 @@ class Envenom : FinisherAbility() {
     override fun cast(sp: SimParticipant) {
 
         val deathmantle = sp.buffs[Deathmantle.TWO_SET_BUFF_NAME]
-        val bonusDamagePerCP = if (deathmantle != null) { Deathmantle.twoSetBonusDamagePerCP() } else 0.0
+        val bonusDamagePerCP =
+            if (deathmantle != null) {
+                Deathmantle.twoSetBonusDamagePerCP()
+            } else 0.0
 
         val consumedPoisonDoses = min(maxPoisonDosesAvailable(sp), consumedComboPoints)
-        val damage: Double = when(consumedPoisonDoses){
-            1 -> 180 * 1 + sp.attackPower() * 0.03 + (bonusDamagePerCP * 1)
-            2 -> 180 * 1 + sp.attackPower() * 0.06 + (bonusDamagePerCP * 2)
-            3 -> 180 * 1 + sp.attackPower() * 0.09 + (bonusDamagePerCP * 3)
-            4 -> 180 * 1 + sp.attackPower() * 0.12 + (bonusDamagePerCP * 4)
-            5 -> 180 * 1 + sp.attackPower() * 0.15 + (bonusDamagePerCP * 5)
-            else -> 0.0
-        }
+        val damage: Double =
+            when (consumedPoisonDoses) {
+                1 -> 180 * 1 + sp.attackPower() * 0.03 + (bonusDamagePerCP * 1)
+                2 -> 180 * 1 + sp.attackPower() * 0.06 + (bonusDamagePerCP * 2)
+                3 -> 180 * 1 + sp.attackPower() * 0.09 + (bonusDamagePerCP * 3)
+                4 -> 180 * 1 + sp.attackPower() * 0.12 + (bonusDamagePerCP * 4)
+                5 -> 180 * 1 + sp.attackPower() * 0.15 + (bonusDamagePerCP * 5)
+                else -> 0.0
+            }
 
         val vp = sp.character.klass.talents[VilePoisons.name] as VilePoisons?
         val dmgIncrease = vp?.damageIncreasePercentEnvenom() ?: 0.0
@@ -65,38 +75,60 @@ class Envenom : FinisherAbility() {
         val damageRoll = damage * dmgMultiplier
         val result = Melee.attackRoll(sp, damageRoll, null, isWhiteDmg = false, noDodgeAllowed = noDodgeAllowed(sp))
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.NATURE,
-            ability = this,
-            comboPointsSpent = consumedComboPoints,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.NATURE,
+                ability = this,
+                comboPointsSpent = consumedComboPoints,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
-        if(result.second != EventResult.MISS && result.second != EventResult.DODGE) {
+        if (result.second != EventResult.MISS && result.second != EventResult.DODGE) {
             removePoisonStacks(sp, consumedPoisonDoses)
         }
 
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL, Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL, Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
-            EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
-            EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
-            EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
-            EventResult.BLOCK -> listOf(Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL, Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.NATURE_DAMAGE)
-            EventResult.BLOCKED_CRIT -> listOf(Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL, Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.NATURE_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT ->
+                    listOf(
+                        Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL,
+                        Proc.Trigger.MELEE_YELLOW_HIT,
+                        Proc.Trigger.NATURE_DAMAGE,
+                    )
+                EventResult.CRIT ->
+                    listOf(
+                        Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL,
+                        Proc.Trigger.MELEE_YELLOW_CRIT,
+                        Proc.Trigger.NATURE_DAMAGE,
+                    )
+                EventResult.MISS -> listOf(Proc.Trigger.MELEE_MISS)
+                EventResult.DODGE -> listOf(Proc.Trigger.MELEE_DODGE)
+                EventResult.PARRY -> listOf(Proc.Trigger.MELEE_PARRY)
+                EventResult.BLOCK ->
+                    listOf(
+                        Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL,
+                        Proc.Trigger.MELEE_YELLOW_HIT,
+                        Proc.Trigger.NATURE_DAMAGE,
+                    )
+                EventResult.BLOCKED_CRIT ->
+                    listOf(
+                        Proc.Trigger.ROGUE_ANY_DAMAGING_SPECIAL,
+                        Proc.Trigger.MELEE_YELLOW_CRIT,
+                        Proc.Trigger.NATURE_DAMAGE,
+                    )
+                else -> null
+            }
 
         fireProcAsFinisher(sp, triggerTypes, null, event)
     }
 
     fun maxPoisonDosesAvailable(sp: SimParticipant): Int {
         val debuffState = sp.sim.target.debuffState[DeadlyPoisonDot.name]
-        if(debuffState == null) {
-            KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
+        if (debuffState == null) {
+            KotlinLogging.logger {}.debug { "Tried to cast $name but there was no deadly poison debuff present" }
             return 0
         }
         return debuffState.currentStacks
@@ -104,12 +136,12 @@ class Envenom : FinisherAbility() {
 
     fun removePoisonStacks(sp: SimParticipant, stacks: Int) {
         val debuffState = sp.sim.target.debuffState[DeadlyPoisonDot.name]
-        if(debuffState == null) {
-            KotlinLogging.logger{}.debug{ "Tried to cast $name but there was no deadly poison debuff present" }
+        if (debuffState == null) {
+            KotlinLogging.logger {}.debug { "Tried to cast $name but there was no deadly poison debuff present" }
             return
         }
 
-        if((debuffState.currentStacks) > stacks) {
+        if ((debuffState.currentStacks) > stacks) {
             debuffState.currentStacks -= stacks
         } else {
             sp.sim.target.consumeDebuff(sp.sim.target.debuffs[DeadlyPoisonDot.name]!!)

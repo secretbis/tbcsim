@@ -25,12 +25,8 @@ class NerubianSlavemaker : Item() {
     override var minDmg: Double = 151.0
     override var maxDmg: Double = 281.0
     override var speed: Double = 23200.0
-    override var stats: Stats = Stats(
-        attackPower = 24,
-        rangedAttackPower = 24,
-        meleeCritRating = 14.0,
-        rangedCritRating = 14.0
-    )
+    override var stats: Stats =
+        Stats(attackPower = 24, rangedAttackPower = 24, meleeCritRating = 14.0, rangedCritRating = 14.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

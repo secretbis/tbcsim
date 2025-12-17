@@ -14,23 +14,24 @@ class DualWieldSpecialization(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    val buff = object : Buff() {
-        override val name: String = "Dual Wield Specialization"
-        override val icon: String = "ability_dualwieldspecialization.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Dual Wield Specialization"
+            override val icon: String = "ability_dualwieldspecialization.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
-            // 2% hit per rank
-            val modifier = currentRank
-            val physicalHitRating = modifier * 2 * Rating.physicalHitPerPct
+            override fun modifyStats(sp: SimParticipant): Stats? {
+                // 2% hit per rank
+                val modifier = currentRank
+                val physicalHitRating = modifier * 2 * Rating.physicalHitPerPct
 
-            // Only when dual wielding
-            return if(sp.isDualWielding()) {
-                Stats(physicalHitRating = physicalHitRating)
-            } else null
+                // Only when dual wielding
+                return if (sp.isDualWielding()) {
+                    Stats(physicalHitRating = physicalHitRating)
+                } else null
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

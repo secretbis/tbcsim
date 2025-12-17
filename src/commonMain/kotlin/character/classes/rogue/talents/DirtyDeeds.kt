@@ -2,8 +2,6 @@ package character.classes.rogue.talents
 
 import character.*
 import sim.SimParticipant
-import data.model.Item
-import sim.Event
 
 // TODO: need to find a better way for this
 

@@ -9,19 +9,21 @@ class Ruin(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Ruin"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 1
 
-    val critBuff = object : Buff() {
-        override val name: String = "Ruin"
-        override val icon: String = "spell_shadow_shadowwordpain.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val critBuff =
+        object : Buff() {
+            override val name: String = "Ruin"
+            override val icon: String = "spell_shadow_shadowwordpain.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spellDamageAddlCritMultiplier = 2.0)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spellDamageAddlCritMultiplier = 2.0)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(critBuff)
 }

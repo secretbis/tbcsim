@@ -13,7 +13,7 @@ class WaterElemental : Class(mapOf(), WaterElementalSpec()) {
     }
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             "Waterbolt" -> Waterbolt()
             else -> null
         }

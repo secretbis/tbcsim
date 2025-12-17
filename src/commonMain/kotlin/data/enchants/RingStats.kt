@@ -4,8 +4,8 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class RingStats(item: Item) : Enchant(item) {
@@ -18,12 +18,6 @@ class RingStats(item: Item) : Enchant(item) {
         val state = state(sp)
         val stat = 4 * state.currentStacks
 
-        return Stats(
-            agility = stat,
-            strength = stat,
-            stamina = stat,
-            spirit = stat,
-            intellect = stat
-        )
+        return Stats(agility = stat, strength = stat, stamina = stat, spirit = stat, intellect = stat)
     }
 }

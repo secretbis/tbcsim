@@ -1,14 +1,15 @@
 package character.classes.priest.abilities
 
+import character.Ability
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.InnerFocus as InnerFocusTalent
-import character.Ability
 import sim.SimParticipant
 
 class InnerFocus : Ability() {
     companion object {
         const val name: String = "Inner Focus"
     }
+
     override val id: Int = 14751
     override val name: String = Companion.name
     override val icon: String = "spell_frost_windwalkon.jpg"

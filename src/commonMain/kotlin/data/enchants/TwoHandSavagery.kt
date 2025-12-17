@@ -4,8 +4,8 @@ import character.Stats
 import data.Constants
 import data.model.Enchant
 import data.model.Item
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class TwoHandSavagery(item: Item) : Enchant(item) {
@@ -14,9 +14,6 @@ class TwoHandSavagery(item: Item) : Enchant(item) {
     override val name: String = "Savagery"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            attackPower = 75,
-            rangedAttackPower = 75
-        )
+        return Stats(attackPower = 75, rangedAttackPower = 75)
     }
 }

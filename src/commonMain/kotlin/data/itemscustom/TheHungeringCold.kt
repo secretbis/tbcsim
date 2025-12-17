@@ -25,11 +25,7 @@ class TheHungeringCold : Item() {
     override var minDmg: Double = 76.0
     override var maxDmg: Double = 143.0
     override var speed: Double = 1500.0
-    override var stats: Stats = Stats(
-        armor = 140,
-        stamina = 14,
-        expertiseRating = 14.0
-    )
+    override var stats: Stats = Stats(armor = 140, stamina = 14, expertiseRating = 14.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

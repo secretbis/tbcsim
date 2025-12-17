@@ -14,6 +14,7 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
         const val name = "Unstable Affliction (DoT)"
     }
+
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
     override val durationMs: Int = 18000
@@ -24,34 +25,34 @@ class UnstableAfflictionDot(owner: SimParticipant) : Debuff(owner) {
     val snapshotSpellPower = owner.stats.getSpellDamage(school)
     val spellPowerCoeff = 0.2
 
-    val ua = object : Ability() {
-        override val id: Int = 30405
-        override val name: String = Companion.name
-        override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
-        override fun gcdMs(sp: SimParticipant): Int = 0
+    val ua =
+        object : Ability() {
+            override val id: Int = 30405
+            override val name: String = Companion.name
+            override val icon: String = "spell_shadow_unstableaffliction_3.jpg"
 
-        override fun cast(sp: SimParticipant) {
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
+            override fun gcdMs(sp: SimParticipant): Int = 0
 
-            // Each tick can still resist partially
-            val result = Spell.partialResistRoll(
-                owner,
-                Pair(damageRoll, EventResult.HIT),
-                school
-            )
+            override fun cast(sp: SimParticipant) {
+                val damageRoll =
+                    Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
 
-            val event = Event(
-                eventType = EventType.DAMAGE,
-                damageType = school,
-                ability = this,
-                amount = result.first,
-                result = result.second
-            )
-            owner.logEvent(event)
+                // Each tick can still resist partially
+                val result = Spell.partialResistRoll(owner, Pair(damageRoll, EventResult.HIT), school)
 
-            owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+                val event =
+                    Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = school,
+                        ability = this,
+                        amount = result.first,
+                        result = result.second,
+                    )
+                owner.logEvent(event)
+
+                owner.fireProc(listOf(Proc.Trigger.SHADOW_DAMAGE_PERIODIC), listOf(), this, event)
+            }
         }
-    }
 
     override fun tick(sp: SimParticipant) {
         ua.cast(owner)

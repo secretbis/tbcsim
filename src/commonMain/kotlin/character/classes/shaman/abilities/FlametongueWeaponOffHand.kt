@@ -14,6 +14,7 @@ class FlametongueWeaponOffHand : Ability() {
     override val id: Int = 25489
     override val name: String = Companion.name
     override val icon: String = "spell_fire_flametounge.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
@@ -23,7 +24,7 @@ class FlametongueWeaponOffHand : Ability() {
     var buff: Buff? = null
 
     override fun cast(sp: SimParticipant) {
-        if(sp.character.gear.offHand !is EmptyItem) {
+        if (sp.character.gear.offHand !is EmptyItem) {
             if (buff == null) {
                 buff = FlametongueWeapon(sp.character.gear.offHand)
             }

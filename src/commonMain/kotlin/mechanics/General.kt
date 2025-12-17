@@ -1,30 +1,20 @@
 package mechanics
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.math.sqrt
+import sim.SimParticipant
 
 @JsExport
 object General {
     private val logger = KotlinLogging.logger {}
 
     // Base mitigation values based on level difference
-    val baseMissChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.09
-    )
+    val baseMissChance = mapOf(0 to 0.05, 1 to 0.055, 2 to 0.06, 3 to 0.09)
     // TODO: Does TBC still have this?
-    val critSuppression = mapOf(
-        0 to 0.00,
-        1 to 0.01,
-        2 to 0.02,
-        3 to 0.03
-    )
+    val critSuppression = mapOf(0 to 0.00, 1 to 0.01, 2 to 0.02, 3 to 0.03)
 
-    fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
+    fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>): T {
         val levelDiff = sp.sim.target.character.level - sp.character.level
 
         return when {
@@ -45,7 +35,7 @@ object General {
     }
 
     fun physicalBlockChance(sp: SimParticipant): Double {
-        return if(sp.sim.opts.allowParryAndBlock) {
+        return if (sp.sim.opts.allowParryAndBlock) {
             // Mobs cannot block more than 5% of the time
             // https://github.com/magey/classic-warrior/wiki/Attack-table#block
             0.05
@@ -61,12 +51,13 @@ object General {
         return 46.0
     }
 
-    // This takes a list of *reductions* not multipliers, i.e. if a spell says reduced by 60%, send 0.6, not 0.4
-    fun resourceCostReduction(baseCost: Double, reductions: List<Double>) : Double {
-        // Resource reductions all work relative to the base mana cost, so each needs to be subtracted individually
-        return reductions.fold(baseCost) { acc, reduction ->
-            acc - acc * reduction
-        }.coerceAtLeast(0.0)
+    // This takes a list of *reductions* not multipliers, i.e. if a spell says reduced by 60%, send
+    // 0.6, not 0.4
+    fun resourceCostReduction(baseCost: Double, reductions: List<Double>): Double {
+        // Resource reductions all work relative to the base mana cost, so each needs to be
+        // subtracted
+        // individually
+        return reductions.fold(baseCost) { acc, reduction -> acc - acc * reduction }.coerceAtLeast(0.0)
     }
 
     fun regenFromSpiritNotCasting(sp: SimParticipant): Int {

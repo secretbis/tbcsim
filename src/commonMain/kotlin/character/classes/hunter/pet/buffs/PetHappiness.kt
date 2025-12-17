@@ -12,9 +12,6 @@ class PetHappiness : Buff() {
     // Let's assume everyone keeps their good bois well fed
     override fun modifyStats(sp: SimParticipant): Stats {
         val happinessMultiplier = 1.25
-        return Stats(
-            physicalDamageMultiplier = happinessMultiplier,
-            spellDamageMultiplier = happinessMultiplier
-        )
+        return Stats(physicalDamageMultiplier = happinessMultiplier, spellDamageMultiplier = happinessMultiplier)
     }
 }

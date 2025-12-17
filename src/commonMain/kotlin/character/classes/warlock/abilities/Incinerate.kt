@@ -31,13 +31,16 @@ class Incinerate : Ability() {
     }
 
     val baseCastTimeMs = 2500
+
     override fun castTimeMs(sp: SimParticipant): Int {
         val emberstorm = sp.character.klass.talents[Emberstorm.name] as Emberstorm?
-        return ((baseCastTimeMs * (emberstorm?.incinerateCastTimeMultiplier() ?: 1.0)) / sp.spellHasteMultiplier()).toInt()
+        return ((baseCastTimeMs * (emberstorm?.incinerateCastTimeMultiplier() ?: 1.0)) / sp.spellHasteMultiplier())
+            .toInt()
     }
 
     val baseDamage = Pair(444.0, 515.0)
     val baseDamageWithImmolate = Pair(baseDamage.first + 111, baseDamage.second + 182)
+
     override fun cast(sp: SimParticipant) {
         val devastation = sp.character.klass.talents[Devastation.name] as Devastation?
         val devastationAddlCrit = devastation?.additionalDestructionCritChance() ?: 0.0
@@ -46,37 +49,73 @@ class Incinerate : Ability() {
         val shadowAndFlameBonusSpellDamageMultiplier = shadowAndFlame?.bonusDestructionSpellDamageMultiplier() ?: 1.0
 
         val t6Bonus = sp.buffs[MaleficRaiment.FOUR_SET_BUFF_NAME] != null
-        val t6Multiplier = if(t6Bonus) { MaleficRaiment.fourSetSBIncinerateDamageMultiplier() } else 1.0
+        val t6Multiplier =
+            if (t6Bonus) {
+                MaleficRaiment.fourSetSBIncinerateDamageMultiplier()
+            } else 1.0
 
         val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
         val school = Constants.DamageType.FIRE
 
         val hasImmolate = sp.sim.target.debuffs[Immolate.name] !== null
-        val damagePair = if(hasImmolate) { baseDamageWithImmolate } else baseDamage
+        val damagePair =
+            if (hasImmolate) {
+                baseDamageWithImmolate
+            } else baseDamage
 
-        val damageRoll = Spell.baseDamageRoll(sp, damagePair.first, damagePair.second, school, spellPowerCoeff, bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier) * t6Multiplier
+        val damageRoll =
+            Spell.baseDamageRoll(
+                sp,
+                damagePair.first,
+                damagePair.second,
+                school,
+                spellPowerCoeff,
+                bonusSpellDamageMultiplier = shadowAndFlameBonusSpellDamageMultiplier,
+            ) * t6Multiplier
         val result = Spell.attackRoll(sp, damageRoll, school, isBinary = false, devastationAddlCrit)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Proc anything that can proc off non-periodic Fire damage
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.WARLOCK_HIT_INCINERATE, Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.WARLOCK_CRIT_INCINERATE, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT ->
+                    listOf(
+                        Proc.Trigger.WARLOCK_HIT_INCINERATE,
+                        Proc.Trigger.SPELL_HIT,
+                        Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC,
+                    )
+                EventResult.CRIT ->
+                    listOf(
+                        Proc.Trigger.SPELL_CRIT,
+                        Proc.Trigger.WARLOCK_CRIT_INCINERATE,
+                        Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC,
+                    )
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT ->
+                    listOf(
+                        Proc.Trigger.WARLOCK_HIT_INCINERATE,
+                        Proc.Trigger.SPELL_HIT,
+                        Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC,
+                    )
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(
+                        Proc.Trigger.SPELL_CRIT,
+                        Proc.Trigger.WARLOCK_CRIT_INCINERATE,
+                        Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC,
+                    )
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

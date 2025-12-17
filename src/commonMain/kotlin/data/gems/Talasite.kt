@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class Talasite(id: Int, prefix: Prefix) : Gem(id, "Talasite", "inv_jewelcrafting_talasite_03.jpg", prefix, Color.GREEN, Quality.RARE)
+class Talasite(id: Int, prefix: Prefix) :
+    Gem(id, "Talasite", "inv_jewelcrafting_talasite_03.jpg", prefix, Color.GREEN, Quality.RARE)

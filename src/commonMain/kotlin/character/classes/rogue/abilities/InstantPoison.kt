@@ -2,14 +2,14 @@ package character.classes.rogue.abilities
 
 import character.Ability
 import character.Proc
+import character.classes.rogue.talents.*
 import data.Constants
 import data.model.Item
 import mechanics.Melee
 import mechanics.Spell
 import sim.Event
-import sim.SimParticipant
-import character.classes.rogue.talents.*
 import sim.EventType
+import sim.SimParticipant
 
 class InstantPoison(override val name: String, val item: Item) : Ability() {
     companion object {
@@ -18,15 +18,19 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
 
     override val id: Int = 26890
     override val icon: String = "ability_poisons.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
+
     override val castableOnGcd: Boolean = true
 
     override fun available(sp: SimParticipant): Boolean {
-        return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
+        return if (Melee.isOffhand(sp, item)) {
+            sp.isDualWielding()
+        } else true
     }
 
     // val baseDamage = Pair(146.0, 194.0)  // VII
-    val baseDamage = Pair(92.0, 118.0)      // V to test since its the one you get on beta premades
+    val baseDamage = Pair(92.0, 118.0) // V to test since its the one you get on beta premades
 
     override fun cast(sp: SimParticipant) {
         val vp = sp.character.klass.talents[VilePoisons.name] as VilePoisons?
@@ -36,13 +40,14 @@ class InstantPoison(override val name: String, val item: Item) : Ability() {
 
         val damage = Melee.baseDamageRollPure(baseDamage.first, baseDamage.second) * dmgMultiplier
         val result = Spell.attackRoll(sp, damage, school = Constants.DamageType.NATURE, bonusHitChance = 100.0)
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.NATURE,
-            ability = this,
-            amount = result.first,
-            result = result.second
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.NATURE,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         sp.fireProc(listOf(Proc.Trigger.NATURE_DAMAGE), listOf(), this, event)

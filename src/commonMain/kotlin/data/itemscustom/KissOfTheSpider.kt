@@ -1,7 +1,6 @@
 package data.itemscustom
 
 import character.Buff
-import character.CharacterType
 import character.Stats
 import data.Constants
 import data.buffs.Buffs
@@ -9,7 +8,6 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import sim.SimParticipant
 import kotlin.js.JsExport
 
 @JsExport
@@ -27,18 +25,10 @@ class KissOfTheSpider : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        meleeCritRating = 14.0,
-        rangedCritRating = 14.0,
-        physicalHitRating = 10.0
-    )
+    override var stats: Stats = Stats(meleeCritRating = 14.0, rangedCritRating = 14.0, physicalHitRating = 10.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    override val buffs: List<Buff> by lazy {
-        listOfNotNull(
-            Buffs.byIdOrName(28866, "Kiss of the Spider", this)
-        )
-    }
+    override val buffs: List<Buff> by lazy { listOfNotNull(Buffs.byIdOrName(28866, "Kiss of the Spider", this)) }
 }

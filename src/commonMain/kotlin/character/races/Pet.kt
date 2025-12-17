@@ -8,6 +8,8 @@ import sim.SimParticipant
 
 class Pet : Race() {
     override var baseStats: Stats = Stats()
+
     override fun racialByName(name: String): Ability? = null
+
     override fun buffs(sp: SimParticipant): List<Buff> = listOf()
 }

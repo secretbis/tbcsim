@@ -16,15 +16,18 @@ class Frostbolt : Ability() {
     companion object {
         const val name: String = "Frostbolt"
     }
+
     override val id: Int = 38697
     override val name: String = Companion.name
     override val icon: String = "spell_frost_frostbolt02.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCastTimeMs = 3000
+
     override fun castTimeMs(sp: SimParticipant): Int {
         val pomBuff = sp.buffs[PresenceOfMind.name] as PresenceOfMind?
-        return if(pomBuff != null) {
+        return if (pomBuff != null) {
             sp.consumeBuff(pomBuff)
             0
         } else {
@@ -34,6 +37,7 @@ class Frostbolt : Ability() {
     }
 
     val baseResourceCost = 345.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val apBuff = sp.buffs[ArcanePower.name] as ArcanePower?
         val apMult = apBuff?.manaCostMultiplier() ?: 1.0
@@ -47,6 +51,7 @@ class Frostbolt : Ability() {
     val baseDamage = Pair(630.0, 680.0)
     val school = Constants.DamageType.FROST
     val spellPowerCoeff = Spell.spellPowerCoeff(baseCastTimeMs)
+
     override fun cast(sp: SimParticipant) {
         val elementalPrecision: ElementalPrecision? = sp.character.klass.talentInstance(ElementalPrecision.name)
         val emHit = 2 * (elementalPrecision?.bonusFireFrostHitPct() ?: 0.0)
@@ -64,29 +69,47 @@ class Frostbolt : Ability() {
         val iceShards: IceShards? = sp.character.klass.talentInstance(IceShards.name)
         val iceShardsCritBonusMult = iceShards?.frostCritDamageBonusMult() ?: 1.0
 
-        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff, bonusSpellDamageMultiplier = bonusFbSpellDmg) * piercingIceMult
-        val result = Spell.attackRoll(sp, damageRoll, school, bonusCritChance = bonusFbCrit + wintersChillCrit, bonusHitChance = emHit, bonusCritMultiplier = iceShardsCritBonusMult)
+        val damageRoll =
+            Spell.baseDamageRoll(
+                sp,
+                baseDamage.first,
+                baseDamage.second,
+                school,
+                spellPowerCoeff,
+                bonusSpellDamageMultiplier = bonusFbSpellDmg,
+            ) * piercingIceMult
+        val result =
+            Spell.attackRoll(
+                sp,
+                damageRoll,
+                school,
+                bonusCritChance = bonusFbCrit + wintersChillCrit,
+                bonusHitChance = emHit,
+                bonusCritMultiplier = iceShardsCritBonusMult,
+            )
 
-         val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Frost procs
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FROST_DAMAGE)
+                EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FROST_DAMAGE)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

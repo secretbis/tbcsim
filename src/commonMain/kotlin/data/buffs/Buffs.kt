@@ -8,89 +8,110 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 object Buffs {
     private val logger = KotlinLogging.logger {}
 
-    private val mappersByName = listOf(
-        Regex("Armor Penetration \\d+") to fun (name: String): Buff {
-            val amount = name.drop(18).toInt()
-            return GenericArmorPenBuff(amount)
-        },
-        Regex("Attack Power \\d+") to fun (name: String): Buff {
-            val amount = name.drop(13).toInt()
-            return GenericAttackPowerBuff(amount)
-        },
-        Regex("Attack Power Ranged \\d+") to fun (name: String): Buff {
-            val amount = name.drop(20).toInt()
-            return GenericRangedAttackPowerBuff(amount)
-        },
-        Regex("Increase Healing \\d+") to fun (name: String): Buff {
-            val amount = name.drop(17).toInt()
-            return GenericSpellHealingBuff(amount)
-        },
-        Regex("Increase Spell Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(19).toInt()
-            return GenericSpellDamageBuff(amount)
-        },
-        Regex("Block Value \\d+") to fun (name: String): Buff {
-            val amount = name.drop(12).toInt()
-            return GenericBlockValueBuff(amount)
-        },
-        Regex("Increase Holy Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(18).toInt()
-            return GenericHolyDamageBuff(amount)
-        },
-        Regex("Increase Fire Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(18).toInt()
-            return GenericFireDamageBuff(amount)
-        },
-        Regex("Increase Nature Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(20).toInt()
-            return GenericNatureDamageBuff(amount)
-        },
-        Regex("Increase Frost Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(19).toInt()
-            return GenericFrostDamageBuff(amount)
-        },
-        Regex("Increase Shadow Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(20).toInt()
-            return GenericShadowDamageBuff(amount)
-        },
-        Regex("Increase Arcane Dam \\d+") to fun (name: String): Buff {
-            val amount = name.drop(20).toInt()
-            return GenericArcaneDamageBuff(amount)
-        },
-        Regex("Increased Dodge \\d+") to fun (name: String): Buff {
-            val amount = name.drop(16).toInt()
-            return GenericDodgeRatingBuff(amount)
-        },
-        Regex("Increased Hit Rating \\d+") to fun (name: String): Buff {
-            val amount = name.drop(21).toInt()
-            return GenericHitRatingBuff(amount)
-        },
-        Regex("Increased Critical \\d+") to fun (name: String): Buff {
-            val amount = name.drop(19).toInt()
-            return GenericCritRatingBuff(amount)
-        },
-        Regex("Increased Spell Hit Chance \\d+") to fun (name: String): Buff {
-            val amount = name.drop(27).toInt()
-            return GenericSpellHitRatingBuff(amount)
-        },
-        Regex("Spell Penetration \\d+") to fun (name: String): Buff {
-            val amount = name.drop(18).toInt()
-            return GenericSpellPenBuff(amount)
-        },
-        Regex("Increased Spell Penetration \\d+") to fun (name: String): Buff {
-            val amount = name.drop(28).toInt()
-            return GenericSpellPenBuff(amount)
-        },
-        Regex("Attack Power - Feral \\(\\+\\d+\\)") to fun (name: String): Buff {
-            val amount = name.drop(24).dropLast(1).toInt()
-            return GenericFeralAttackPowerBuff(amount)
-        }
-    )
+    private val mappersByName =
+        listOf(
+            Regex("Armor Penetration \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(18).toInt()
+                    return GenericArmorPenBuff(amount)
+                },
+            Regex("Attack Power \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(13).toInt()
+                    return GenericAttackPowerBuff(amount)
+                },
+            Regex("Attack Power Ranged \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(20).toInt()
+                    return GenericRangedAttackPowerBuff(amount)
+                },
+            Regex("Increase Healing \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(17).toInt()
+                    return GenericSpellHealingBuff(amount)
+                },
+            Regex("Increase Spell Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(19).toInt()
+                    return GenericSpellDamageBuff(amount)
+                },
+            Regex("Block Value \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(12).toInt()
+                    return GenericBlockValueBuff(amount)
+                },
+            Regex("Increase Holy Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(18).toInt()
+                    return GenericHolyDamageBuff(amount)
+                },
+            Regex("Increase Fire Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(18).toInt()
+                    return GenericFireDamageBuff(amount)
+                },
+            Regex("Increase Nature Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(20).toInt()
+                    return GenericNatureDamageBuff(amount)
+                },
+            Regex("Increase Frost Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(19).toInt()
+                    return GenericFrostDamageBuff(amount)
+                },
+            Regex("Increase Shadow Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(20).toInt()
+                    return GenericShadowDamageBuff(amount)
+                },
+            Regex("Increase Arcane Dam \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(20).toInt()
+                    return GenericArcaneDamageBuff(amount)
+                },
+            Regex("Increased Dodge \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(16).toInt()
+                    return GenericDodgeRatingBuff(amount)
+                },
+            Regex("Increased Hit Rating \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(21).toInt()
+                    return GenericHitRatingBuff(amount)
+                },
+            Regex("Increased Critical \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(19).toInt()
+                    return GenericCritRatingBuff(amount)
+                },
+            Regex("Increased Spell Hit Chance \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(27).toInt()
+                    return GenericSpellHitRatingBuff(amount)
+                },
+            Regex("Spell Penetration \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(18).toInt()
+                    return GenericSpellPenBuff(amount)
+                },
+            Regex("Increased Spell Penetration \\d+") to
+                fun(name: String): Buff {
+                    val amount = name.drop(28).toInt()
+                    return GenericSpellPenBuff(amount)
+                },
+            Regex("Attack Power - Feral \\(\\+\\d+\\)") to
+                fun(name: String): Buff {
+                    val amount = name.drop(24).dropLast(1).toInt()
+                    return GenericFeralAttackPowerBuff(amount)
+                },
+        )
 
     fun byIdOrName(id: Int, name: String, item: Item): Buff? {
-        val byIdOrName = byId(id, item) ?: mappersByName.find {it.first.matches(name.trim()) }?.second?.invoke(name.trim())
+        val byIdOrName =
+            byId(id, item) ?: mappersByName.find { it.first.matches(name.trim()) }?.second?.invoke(name.trim())
 
-        if(byIdOrName == null) {
+        if (byIdOrName == null) {
             logger.warn { "Unable to resolve buff: $id - $name" }
         }
 
@@ -98,8 +119,8 @@ object Buffs {
     }
 
     fun byId(id: Int, item: Item): Buff? {
-        return when(id) {
-            //Trinkets
+        return when (id) {
+            // Trinkets
             23723 -> MindQuickeningGem()
             26480 -> BadgeOfTheSwarmguard()
             28777 -> SlayersCrest()
@@ -150,7 +171,7 @@ object Buffs {
             51953 -> DarkIronPipeweed()
             51955 -> DireDrunkard()
 
-            //Weapons
+            // Weapons
             16916 -> KhoriumChampion(item)
             21165 -> BSHammerHaste(item)
             33489 -> BlackoutTruncheon(item)

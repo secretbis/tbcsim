@@ -4,10 +4,10 @@ import character.Stats
 import data.Constants
 import data.model.Item
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.EventResult
-import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
+import sim.EventResult
+import sim.SimParticipant
 
 @JsExport
 object Melee {
@@ -17,69 +17,57 @@ object Melee {
     const val baseDualWieldMiss: Double = 0.19
     // TODO: Wasn't able to find confirmed parry values for 71/72 mobs
     //       Assumes 14% boss parry persists to TBC
-    val baseParryChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.14
-    )
-    val baseDodgeChance = mapOf(
-        0 to 0.05,
-        1 to 0.055,
-        2 to 0.06,
-        3 to 0.065
-    )
-    val baseGlancingChance = mapOf(
-        0 to 0.10,
-        1 to 0.15,
-        2 to 0.20,
-        3 to 0.25
-    )
+    val baseParryChance = mapOf(0 to 0.05, 1 to 0.055, 2 to 0.06, 3 to 0.14)
+    val baseDodgeChance = mapOf(0 to 0.05, 1 to 0.055, 2 to 0.06, 3 to 0.065)
+    val baseGlancingChance = mapOf(0 to 0.10, 1 to 0.15, 2 to 0.20, 3 to 0.25)
 
     // Instant yellow attack AP normalization
-    val normalizedWeaponSpeedMs: Map<Constants.ItemSubclass, Double> = mapOf(
-        Constants.ItemSubclass.AXE_2H to 3300.0,
-        Constants.ItemSubclass.MACE_2H to 3300.0,
-        Constants.ItemSubclass.SWORD_2H to 3300.0,
-        Constants.ItemSubclass.POLEARM to 3300.0,
-        Constants.ItemSubclass.DAGGER to 1700.0,
-        Constants.ItemSubclass.AXE_1H to 2400.0,
-        Constants.ItemSubclass.MACE_1H to 2400.0,
-        Constants.ItemSubclass.SWORD_1H to 2400.0,
-        Constants.ItemSubclass.FIST to 2400.0,
-        // TODO: Druid weirdness
-    )
+    val normalizedWeaponSpeedMs: Map<Constants.ItemSubclass, Double> =
+        mapOf(
+            Constants.ItemSubclass.AXE_2H to 3300.0,
+            Constants.ItemSubclass.MACE_2H to 3300.0,
+            Constants.ItemSubclass.SWORD_2H to 3300.0,
+            Constants.ItemSubclass.POLEARM to 3300.0,
+            Constants.ItemSubclass.DAGGER to 1700.0,
+            Constants.ItemSubclass.AXE_1H to 2400.0,
+            Constants.ItemSubclass.MACE_1H to 2400.0,
+            Constants.ItemSubclass.SWORD_1H to 2400.0,
+            Constants.ItemSubclass.FIST to 2400.0,
+            // TODO: Druid weirdness
+        )
 
     fun rngSuffix(sp: SimParticipant, item: Item): String {
-        val handSuffix = if(isOffhand(sp, item)) { "OH" } else "MH"
+        val handSuffix =
+            if (isOffhand(sp, item)) {
+                "OH"
+            } else "MH"
         val castingAbility = sp.castingRule?.ability?.name ?: "Autoattack"
         return "$handSuffix $castingAbility ${item.name}"
     }
 
     fun is2H(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.POLEARM ||
-               item.itemSubclass == Constants.ItemSubclass.STAFF
+            item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
+            item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
+            item.itemSubclass == Constants.ItemSubclass.POLEARM ||
+            item.itemSubclass == Constants.ItemSubclass.STAFF
     }
 
     fun is1H(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.SWORD_1H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_1H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_1H ||
-               item.itemSubclass == Constants.ItemSubclass.DAGGER ||
-               item.itemSubclass == Constants.ItemSubclass.FIST
+            item.itemSubclass == Constants.ItemSubclass.AXE_1H ||
+            item.itemSubclass == Constants.ItemSubclass.MACE_1H ||
+            item.itemSubclass == Constants.ItemSubclass.DAGGER ||
+            item.itemSubclass == Constants.ItemSubclass.FIST
     }
 
     fun isAxe(item: Item): Boolean {
-        return item.itemSubclass == Constants.ItemSubclass.AXE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.AXE_1H
+        return item.itemSubclass == Constants.ItemSubclass.AXE_2H || item.itemSubclass == Constants.ItemSubclass.AXE_1H
     }
 
     fun isMace(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.MACE_2H ||
-               item.itemSubclass == Constants.ItemSubclass.MACE_1H
+            item.itemSubclass == Constants.ItemSubclass.MACE_1H
     }
 
     fun isPoleaxe(item: Item): Boolean {
@@ -88,12 +76,12 @@ object Melee {
 
     fun isSword(item: Item): Boolean {
         return item.itemSubclass == Constants.ItemSubclass.SWORD_2H ||
-               item.itemSubclass == Constants.ItemSubclass.SWORD_1H
+            item.itemSubclass == Constants.ItemSubclass.SWORD_1H
     }
 
     // Computes additional item-specific expertise, i.e. racial abilities
     fun expertisePctForItem(sp: SimParticipant, item: Item?): Double {
-        if(item == null) return 0.0
+        if (item == null) return 0.0
         return when {
             isAxe(item) -> sp.stats.axeExpertiseRating
             isMace(item) -> sp.stats.maceExpertiseRating
@@ -102,7 +90,7 @@ object Melee {
         } / Rating.expertisePerPct
     }
 
-    private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>) : T {
+    private fun <T> valueByLevelDiff(sp: SimParticipant, table: Map<Int, T>): T {
         val levelDiff = sp.sim.target.character.level - sp.character.level
 
         return when {
@@ -119,7 +107,7 @@ object Melee {
     }
 
     fun isOffhand(sp: SimParticipant, item: Item?): Boolean {
-        if(item == null) return false
+        if (item == null) return false
         return item === sp.character.gear.offHand
     }
 
@@ -127,10 +115,13 @@ object Melee {
         val baseMissForLevel = valueByLevelDiff(sp, General.baseMissChance)
 
         // The heroic strike nonsense only eliminates the dual-wield penalty, and nothing further
-        val offHandHitBonus = if(isOffhand(sp, item)) { sp.stats.offHandAddlWhiteHitPct / 100.0 } else 0.0
+        val offHandHitBonus =
+            if (isOffhand(sp, item)) {
+                sp.stats.offHandAddlWhiteHitPct / 100.0
+            } else 0.0
         val actualDWMissChance = (baseDualWieldMiss - offHandHitBonus).coerceAtLeast(0.0)
 
-        return if(isWhiteHit && sp.isDualWielding()) {
+        return if (isWhiteHit && sp.isDualWielding()) {
             baseMissForLevel + actualDWMissChance
         } else baseMissForLevel
     }
@@ -142,15 +133,21 @@ object Melee {
     }
 
     fun meleeParryChance(sp: SimParticipant, item: Item?): Double {
-        return if(sp.sim.opts.allowParryAndBlock) {
-            (valueByLevelDiff(sp, baseParryChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
+        return if (sp.sim.opts.allowParryAndBlock) {
+            (valueByLevelDiff(sp, baseParryChance) -
+                    (sp.expertisePct() / 100.0) -
+                    (expertisePctForItem(sp, item) / 100.0))
+                .coerceAtLeast(0.0)
         } else {
             0.0
         }
     }
 
     fun meleeDodgeChance(sp: SimParticipant, item: Item?): Double {
-        return (valueByLevelDiff(sp, baseDodgeChance) - (sp.expertisePct() / 100.0) - (expertisePctForItem(sp, item) / 100.0)).coerceAtLeast(0.0)
+        return (valueByLevelDiff(sp, baseDodgeChance) -
+                (sp.expertisePct() / 100.0) -
+                (expertisePctForItem(sp, item) / 100.0))
+            .coerceAtLeast(0.0)
     }
 
     fun meleeGlanceChance(sp: SimParticipant): Double {
@@ -174,10 +171,11 @@ object Melee {
     // Converts an attack power value into a flat damage modifier for a particular item
     @Suppress("UNUSED_PARAMETER")
     fun apToDamage(sp: SimParticipant, attackPower: Int, item: Item, isNormalized: Boolean = false): Double {
-        val speed = if(isNormalized) {
-            normalizedWeaponSpeedMs[item.itemSubclass]
-                ?: throw Exception("Weapon subClass has no normalization coefficient: ${item.itemSubclass}")
-        } else item.speed
+        val speed =
+            if (isNormalized) {
+                normalizedWeaponSpeedMs[item.itemSubclass]
+                    ?: throw Exception("Weapon subClass has no normalization coefficient: ${item.itemSubclass}")
+            } else item.speed
 
         return attackPower / 14 * (speed / 1000.0)
     }
@@ -198,7 +196,7 @@ object Melee {
     }
 
     fun additionalWeaponTypeCritChance(sp: SimParticipant, item: Item?): Double {
-        return when(item?.itemSubclass) {
+        return when (item?.itemSubclass) {
             Constants.ItemSubclass.DAGGER -> sp.stats.daggerAdditionalCritChancePercent
             Constants.ItemSubclass.FIST -> sp.stats.fistWeaponAdditionalCritChancePercent
             else -> 0.0
@@ -216,79 +214,102 @@ object Melee {
     */
 
     // Performs an attack roll given an initial unmitigated damage value
-    fun attackRoll(sp: SimParticipant, _damageRoll: Double, item: Item?, isWhiteDmg: Boolean = false, abilityAdditionalCritDamageMultiplier: Double = 1.0, bonusCritChance: Double = 0.0, noDodgeAllowed: Boolean = false) : Pair<Double, EventResult> {
-        val offHandMultiplier = if(isOffhand(sp, item)) {
-            Stats.offHandPenalty * (if(isWhiteDmg) {
-                sp.stats.whiteDamageAddlOffHandPenaltyModifier
+    fun attackRoll(
+        sp: SimParticipant,
+        _damageRoll: Double,
+        item: Item?,
+        isWhiteDmg: Boolean = false,
+        abilityAdditionalCritDamageMultiplier: Double = 1.0,
+        bonusCritChance: Double = 0.0,
+        noDodgeAllowed: Boolean = false,
+    ): Pair<Double, EventResult> {
+        val offHandMultiplier =
+            if (isOffhand(sp, item)) {
+                Stats.offHandPenalty *
+                    (if (isWhiteDmg) {
+                        sp.stats.whiteDamageAddlOffHandPenaltyModifier
+                    } else {
+                        sp.stats.yellowDamageAddlOffHandPenaltyModifier
+                    } + 1)
             } else {
-                sp.stats.yellowDamageAddlOffHandPenaltyModifier
-            } + 1)
-        } else {
-            1.0
-        }
+                1.0
+            }
 
-        val flatModifier = if(isWhiteDmg) {
-            sp.stats.whiteDamageFlatModifier
-        } else {
-            sp.stats.yellowDamageFlatModifier
-        }
+        val flatModifier =
+            if (isWhiteDmg) {
+                sp.stats.whiteDamageFlatModifier
+            } else {
+                sp.stats.yellowDamageFlatModifier
+            }
 
-        val allMultiplier = if(isWhiteDmg) {
-            sp.stats.whiteDamageMultiplier
-        } else {
-            sp.stats.yellowDamageMultiplier
-        } * sp.stats.physicalDamageMultiplier
+        val allMultiplier =
+            if (isWhiteDmg) {
+                sp.stats.whiteDamageMultiplier
+            } else {
+                sp.stats.yellowDamageMultiplier
+            } * sp.stats.physicalDamageMultiplier
 
         val damageRoll = (_damageRoll + flatModifier) * offHandMultiplier * allMultiplier
 
         // Find all our possible damage mods from buffs and so on
-        // old version was technically correct but only worked because the base crit multiplier is 2.0. general formula should be this
-        val additionalCritMultiplier = (if(isWhiteDmg) {
-            sp.stats.whiteDamageAddlCritMultiplier
-        } else {
-            sp.stats.yellowDamageAddlCritMultiplier
-        })
-        val critMultiplier = (Stats.physicalCritMultiplier - 1.0) * (additionalCritMultiplier * abilityAdditionalCritDamageMultiplier) + 1
+        // old version was technically correct but only worked because the base crit multiplier is
+        // 2.0.
+        // general formula should be this
+        val additionalCritMultiplier =
+            (if (isWhiteDmg) {
+                sp.stats.whiteDamageAddlCritMultiplier
+            } else {
+                sp.stats.yellowDamageAddlCritMultiplier
+            })
+        val critMultiplier =
+            (Stats.physicalCritMultiplier - 1.0) * (additionalCritMultiplier * abilityAdditionalCritDamageMultiplier) +
+                1
 
         // Get the attack result
         val missChance = meleeMissChance(sp, item, isWhiteDmg)
-        val actualCritChance = meleeCritChance(sp) + bonusCritChance + additionalWeaponTypeCritChance(sp, item) + sp.stats.yellowHitsAdditionalCritPct
-        val dodgeChance = if(noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance
+        val actualCritChance =
+            meleeCritChance(sp) +
+                bonusCritChance +
+                additionalWeaponTypeCritChance(sp, item) +
+                sp.stats.yellowHitsAdditionalCritPct
+        val dodgeChance = if (noDodgeAllowed) 0.0 else meleeDodgeChance(sp, item) + missChance
         val parryChance = meleeParryChance(sp, item) + dodgeChance
-        val glanceChance = if(isWhiteDmg) {
-            meleeGlanceChance(sp) + parryChance
-        } else {
-            parryChance
-        }
+        val glanceChance =
+            if (isWhiteDmg) {
+                meleeGlanceChance(sp) + parryChance
+            } else {
+                parryChance
+            }
         val blockChance = General.physicalBlockChance(sp) + glanceChance
-        val critChance = if(isWhiteDmg) {
-            actualCritChance + blockChance
-        } else {
-            blockChance
-        }
+        val critChance =
+            if (isWhiteDmg) {
+                actualCritChance + blockChance
+            } else {
+                blockChance
+            }
 
         val attackRoll = Random.nextDouble()
-        var finalResult = when {
-            attackRoll < missChance -> Pair(0.0, EventResult.MISS)
-            attackRoll < dodgeChance -> Pair(0.0, EventResult.DODGE)
-            attackRoll < parryChance -> Pair(0.0, EventResult.PARRY)
-            isWhiteDmg && attackRoll < glanceChance -> Pair(damageRoll * meleeGlanceMultiplier(sp, item), EventResult.GLANCE)
-            attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
-            isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
-            else -> Pair(damageRoll, EventResult.HIT)
-        }
+        var finalResult =
+            when {
+                attackRoll < missChance -> Pair(0.0, EventResult.MISS)
+                attackRoll < dodgeChance -> Pair(0.0, EventResult.DODGE)
+                attackRoll < parryChance -> Pair(0.0, EventResult.PARRY)
+                isWhiteDmg && attackRoll < glanceChance ->
+                    Pair(damageRoll * meleeGlanceMultiplier(sp, item), EventResult.GLANCE)
+                attackRoll < blockChance -> Pair(damageRoll, EventResult.BLOCK) // Blocked damage is reduced later
+                isWhiteDmg && attackRoll < critChance -> Pair(damageRoll * critMultiplier, EventResult.CRIT)
+                else -> Pair(damageRoll, EventResult.HIT)
+            }
 
-        if(!isWhiteDmg) {
+        if (!isWhiteDmg) {
             // Two-roll yellow hit
-            if(finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
+            if (finalResult.second == EventResult.HIT || finalResult.second == EventResult.BLOCK) {
                 val hitRoll2 = Random.nextDouble()
-                finalResult = when {
-                    hitRoll2 < actualCritChance -> Pair(
-                        finalResult.first * critMultiplier,
-                        EventResult.CRIT
-                    )
-                    else -> finalResult
-                }
+                finalResult =
+                    when {
+                        hitRoll2 < actualCritChance -> Pair(finalResult.first * critMultiplier, EventResult.CRIT)
+                        else -> finalResult
+                    }
             }
         }
 
@@ -296,7 +317,7 @@ object Melee {
         finalResult = Pair(finalResult.first * (1 - General.physicalArmorMitigation(sp)), finalResult.second)
 
         // If the attack was blocked, reduce by the block value
-        if(finalResult.second == EventResult.BLOCK || finalResult.second == EventResult.BLOCKED_CRIT) {
+        if (finalResult.second == EventResult.BLOCK || finalResult.second == EventResult.BLOCKED_CRIT) {
             finalResult = Pair(finalResult.first - General.physicalBlockReduction(sp), finalResult.second)
         }
 

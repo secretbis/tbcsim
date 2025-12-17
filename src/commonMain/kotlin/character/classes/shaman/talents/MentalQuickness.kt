@@ -31,7 +31,7 @@ class MentalQuickness(currentRank: Int) : Talent(currentRank) {
     }
 
     fun instantManaCostReduction(): Double {
-        return when(currentRank) {
+        return when (currentRank) {
             1 -> 0.02
             2 -> 0.04
             3 -> 0.06

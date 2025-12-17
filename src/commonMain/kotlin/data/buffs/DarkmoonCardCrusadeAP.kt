@@ -18,45 +18,45 @@ class DarkmoonCardCrusadeAP : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    val apBuff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
-        override val durationMs: Int = 10000
-        override val maxStacks: Int = 20
+    val apBuff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
+            override val durationMs: Int = 10000
+            override val maxStacks: Int = 20
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val stacks = state(sp).currentStacks
-            return Stats(
-                attackPower = 6 * stacks,
-                rangedAttackPower = 6 * stacks
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                val stacks = state(sp).currentStacks
+                return Stats(attackPower = 6 * stacks, rangedAttackPower = 6 * stacks)
+            }
         }
-    }
 
-    val apProc = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.MELEE_AUTO_HIT,
-            Trigger.MELEE_AUTO_CRIT,
-            Trigger.MELEE_WHITE_HIT,
-            Trigger.MELEE_WHITE_CRIT,
-            Trigger.MELEE_YELLOW_HIT,
-            Trigger.MELEE_YELLOW_CRIT,
-            Trigger.MELEE_BLOCK,
-            Trigger.MELEE_GLANCE,
-            Trigger.RANGED_AUTO_HIT,
-            Trigger.RANGED_AUTO_CRIT,
-            Trigger.RANGED_WHITE_HIT,
-            Trigger.RANGED_WHITE_CRIT,
-            Trigger.RANGED_YELLOW_HIT,
-            Trigger.RANGED_YELLOW_CRIT,
-            Trigger.RANGED_BLOCK,
-        )
-        override val type: Type = Type.STATIC
+    val apProc =
+        object : Proc() {
+            override val triggers: List<Trigger> =
+                listOf(
+                    Trigger.MELEE_AUTO_HIT,
+                    Trigger.MELEE_AUTO_CRIT,
+                    Trigger.MELEE_WHITE_HIT,
+                    Trigger.MELEE_WHITE_CRIT,
+                    Trigger.MELEE_YELLOW_HIT,
+                    Trigger.MELEE_YELLOW_CRIT,
+                    Trigger.MELEE_BLOCK,
+                    Trigger.MELEE_GLANCE,
+                    Trigger.RANGED_AUTO_HIT,
+                    Trigger.RANGED_AUTO_CRIT,
+                    Trigger.RANGED_WHITE_HIT,
+                    Trigger.RANGED_WHITE_CRIT,
+                    Trigger.RANGED_YELLOW_HIT,
+                    Trigger.RANGED_YELLOW_CRIT,
+                    Trigger.RANGED_BLOCK,
+                )
+            override val type: Type = Type.STATIC
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addBuff(apBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(apBuff)
+            }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(apProc)
 }

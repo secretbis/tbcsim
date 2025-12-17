@@ -2,22 +2,32 @@ package character.classes.warlock.abilities
 
 import character.Ability
 import character.Buff
-import character.Stats
 import character.Resource
-import sim.SimIteration
+import character.Stats
 import sim.SimParticipant
 
-class DemonicSacrificeImp : DemonicSacrifice("Imp", { Stats(fireDamageMultiplier = 1.15)}) {
+class DemonicSacrificeImp : DemonicSacrifice("Imp", { Stats(fireDamageMultiplier = 1.15) }) {
     companion object {
         const val name = "Demonic Sacrifice (Imp)"
     }
 }
-class DemonicSacrificeSuccubus : DemonicSacrifice("Succubus", { Stats(shadowDamageMultiplier = 1.15)}) {
+
+class DemonicSacrificeSuccubus : DemonicSacrifice("Succubus", { Stats(shadowDamageMultiplier = 1.15) }) {
     companion object {
         const val name = "Demonic Sacrifice (Succubus)"
     }
 }
-class DemonicSacrificeFelguard : DemonicSacrifice("Felguard", { sp -> Stats(shadowDamageMultiplier = 1.15, manaPer5Seconds = ((sp.resources[Resource.Type.MANA]?.maxAmount ?: 0) * 0.02 * 0.8).toInt())}) {
+
+class DemonicSacrificeFelguard :
+    DemonicSacrifice(
+        "Felguard",
+        { sp ->
+            Stats(
+                shadowDamageMultiplier = 1.15,
+                manaPer5Seconds = ((sp.resources[Resource.Type.MANA]?.maxAmount ?: 0) * 0.02 * 0.8).toInt(),
+            )
+        },
+    ) {
     companion object {
         const val name = "Demonic Sacrifice (Felguard)"
     }
@@ -31,18 +41,19 @@ open class DemonicSacrifice(suffix: String, stats: (sp: SimParticipant) -> Stats
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
-        return sp.character.klass.talents[character.classes.warlock.talents.DemonicSacrifice.name]?.currentRank ?: 0  > 0
+        return sp.character.klass.talents[character.classes.warlock.talents.DemonicSacrifice.name]?.currentRank ?: 0 > 0
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Demonic Sacrifice"
-        override val icon: String = "spell_shadow_psychicscream.jpg"
-        override val durationMs: Int = 30 * 60 * 1000
+    val buff =
+        object : Buff() {
+            override val name: String = "Demonic Sacrifice"
+            override val icon: String = "spell_shadow_psychicscream.jpg"
+            override val durationMs: Int = 30 * 60 * 1000
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return stats(sp)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return stats(sp)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

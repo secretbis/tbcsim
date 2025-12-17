@@ -13,5 +13,5 @@ enum class CharacterType {
     GIANT,
     HUMANOID,
     MECHANICAL,
-    UNDEAD
+    UNDEAD,
 }

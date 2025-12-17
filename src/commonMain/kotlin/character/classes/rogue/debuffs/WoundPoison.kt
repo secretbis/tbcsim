@@ -1,12 +1,8 @@
 package character.classes.rogue.debuffs
 
-import character.Ability
 import character.Debuff
-import data.Constants
-import sim.Event
-import sim.SimParticipant
-import character.Proc
 import character.classes.rogue.talents.*
+import sim.SimParticipant
 
 // this is just an empty buff to be able to apply the mutilate bonus damage
 

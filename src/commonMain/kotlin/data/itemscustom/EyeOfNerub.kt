@@ -25,13 +25,8 @@ class EyeOfNerub : Item() {
     override var minDmg: Double = 251.0
     override var maxDmg: Double = 378.0
     override var speed: Double = 3700.0
-    override var stats: Stats = Stats(
-        stamina = 22,
-        agility = 30,
-        attackPower = 60,
-        rangedAttackPower = 60,
-        physicalHitRating = 16.0
-    )
+    override var stats: Stats =
+        Stats(stamina = 22, agility = 30, attackPower = 60, rangedAttackPower = 60, physicalHitRating = 16.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

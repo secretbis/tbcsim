@@ -5,8 +5,8 @@ import character.Buff
 import character.Mutex
 import character.Stats
 import character.classes.shaman.talents.MentalQuickness
-import character.classes.shaman.talents.TotemicFocus
 import character.classes.shaman.talents.TotemOfWrath as TotemOfWrathTalent
+import character.classes.shaman.talents.TotemicFocus
 import mechanics.General
 import mechanics.Rating
 import sim.SimParticipant
@@ -38,19 +38,17 @@ class TotemOfWrath : Ability() {
         return towTalent?.currentRank == 1
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Totem of Wrath"
-        override val icon: String = "spell_fire_totemofwrath.jpg"
-        override val durationMs: Int = 120000
-        override val mutex: List<Mutex> = listOf(Mutex.FIRE_TOTEM)
+    val buff =
+        object : Buff() {
+            override val name: String = "Totem of Wrath"
+            override val icon: String = "spell_fire_totemofwrath.jpg"
+            override val durationMs: Int = 120000
+            override val mutex: List<Mutex> = listOf(Mutex.FIRE_TOTEM)
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                spellCritRating = 3.0 * Rating.critPerPct,
-                spellHitRating = 3.0 * Rating.spellHitPerPct
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spellCritRating = 3.0 * Rating.critPerPct, spellHitRating = 3.0 * Rating.spellHitPerPct)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

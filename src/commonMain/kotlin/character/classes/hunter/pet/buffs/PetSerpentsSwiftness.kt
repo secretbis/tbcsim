@@ -17,8 +17,6 @@ class PetSerpentsSwiftness : Buff() {
         val ssPetHastePct = serpentsSwiftness?.petHastePct() ?: 0.0
         val ssPetHasteRating = ssPetHastePct * Rating.hastePerPct
 
-        return Stats(
-            physicalHasteRating = ssPetHasteRating
-        )
+        return Stats(physicalHasteRating = ssPetHasteRating)
     }
 }

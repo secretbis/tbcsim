@@ -4,7 +4,7 @@ import character.Stats
 import mechanics.Rating
 import sim.SimParticipant
 
-class BerserkerStance: Stance() {
+class BerserkerStance : Stance() {
     companion object {
         const val name = "Berserker Stance"
     }

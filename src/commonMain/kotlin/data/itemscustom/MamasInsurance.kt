@@ -25,13 +25,8 @@ class MamasInsurance : Item() {
     override var minDmg: Double = 87.0
     override var maxDmg: Double = 163.0
     override var speed: Double = 2200.0
-    override var stats: Stats = Stats(
-        agility = 10,
-        meleeCritRating = 6.0,
-        rangedCritRating = 6.0,
-        attackPower = 32,
-        rangedAttackPower = 32
-    )
+    override var stats: Stats =
+        Stats(agility = 10, meleeCritRating = 6.0, rangedCritRating = 6.0, attackPower = 32, rangedAttackPower = 32)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

@@ -1,12 +1,12 @@
 package character.classes.priest.abilities
 
-import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.buffs.VampiricTouchBuff
 import character.classes.priest.debuffs.VampiricTouchDot
-import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import character.classes.priest.talents.*
+import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import data.Constants
 import mechanics.Spell
 import sim.Event
@@ -29,6 +29,7 @@ class VampiricTouch : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseResourceCost = 425.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -51,15 +52,10 @@ class VampiricTouch : Ability() {
 
         val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.DAMAGE, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second == EventResult.RESIST){
+        if (result.second == EventResult.RESIST) {
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }

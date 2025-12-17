@@ -6,6 +6,7 @@ class Contagion(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Contagion"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 5
 

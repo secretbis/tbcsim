@@ -14,17 +14,19 @@ class HeroicPresence : Ability() {
     override val id: Int = 28878
     override val name: String = Companion.name
     override val icon: String = "inv_helmet_21.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "inv_helmet_21.jpg"
-        override val durationMs: Int = -1
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "inv_helmet_21.jpg"
+            override val durationMs: Int = -1
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHitRating = 1.0 * Rating.physicalHitPerPct)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(physicalHitRating = 1.0 * Rating.physicalHitPerPct)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.sim.addRaidBuff(buff)

@@ -14,6 +14,7 @@ class Bloodrage : Ability() {
     override val icon: String = "ability_racial_bloodrage.jpg"
 
     override fun cooldownMs(sp: SimParticipant): Int = 60000
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     override fun cast(sp: SimParticipant) {

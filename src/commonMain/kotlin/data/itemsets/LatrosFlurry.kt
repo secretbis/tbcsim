@@ -9,22 +9,19 @@ class LatrosFlurry : ItemSet() {
     companion object {
         const val TWO_SET_BUFF_NAME = "Latro's Flurry (2 set)"
     }
+
     override val id: Int = 737
 
-    val threeBuff = object : Buff() {
-        override val name: String = TWO_SET_BUFF_NAME
-        override val icon: String = "inv_sword_76.jpg"
-        override val durationMs: Int = -1
+    val threeBuff =
+        object : Buff() {
+            override val name: String = TWO_SET_BUFF_NAME
+            override val icon: String = "inv_sword_76.jpg"
+            override val durationMs: Int = -1
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                attackPower = 30,
-                rangedAttackPower = 30
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(attackPower = 30, rangedAttackPower = 30)
+            }
         }
-    }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 3, threeBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 3, threeBuff))
 }

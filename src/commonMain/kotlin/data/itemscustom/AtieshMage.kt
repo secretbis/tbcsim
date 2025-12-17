@@ -7,8 +7,8 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class AtieshMage : Item() {
@@ -27,27 +27,23 @@ class AtieshMage : Item() {
     override var minDmg: Double = 130.0
     override var maxDmg: Double = 243.0
     override var speed: Double = 2900.0
-    override var stats: Stats = Stats(
-        stamina = 31,
-        intellect = 32,
-        spirit = 24,
-        spellDamage = 150,
-        spellHitRating = 16.0
-    )
+    override var stats: Stats =
+        Stats(stamina = 31, intellect = 32, spirit = 24, spellDamage = 150, spellHitRating = 16.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    val groupBuff = object : Buff() {
-        override val name: String = "Power of the Guardian (Mage)"
-        override val icon: String = "inv_staff_medivh.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val groupBuff =
+        object : Buff() {
+            override val name: String = "Power of the Guardian (Mage)"
+            override val icon: String = "inv_staff_medivh.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spellCritRating = 28.0)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spellCritRating = 28.0)
+            }
         }
-    }
 
     override var buffs: List<Buff> = listOf(groupBuff)
 }

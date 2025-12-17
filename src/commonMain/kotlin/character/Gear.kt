@@ -14,6 +14,7 @@ class Gear {
             value.equippedSlot = "mainHand"
             field = value
         }
+
     var offHand: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "offHand"
@@ -38,6 +39,7 @@ class Gear {
             value.equippedSlot = "ring1"
             field = value
         }
+
     var ring2: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "ring2"
@@ -49,6 +51,7 @@ class Gear {
             value.equippedSlot = "trinket1"
             field = value
         }
+
     var trinket2: Item = EmptyItem()
         set(value) {
             value.equippedSlot = "trinket2"
@@ -74,7 +77,7 @@ class Gear {
             ring1,
             ring2,
             trinket1,
-            trinket2
+            trinket2,
         )
     }
 
@@ -84,18 +87,18 @@ class Gear {
             // Only add dynamic buffs
             buffs.addAll(it.buffs.filter { buff -> buff !is PermanentBuff })
 
-            if(it.enchant != null) {
+            if (it.enchant != null) {
                 buffs.add(it.enchant!!)
             }
 
-            if(it.tempEnchant != null) {
+            if (it.tempEnchant != null) {
                 buffs.add(it.tempEnchant!!)
             }
 
             // Only meta gems provide dynamic buffs
             it.sockets.forEach { socket ->
-                if(socket.color == Color.META && socket.gem != null) {
-                    if(metaGemActive()) {
+                if (socket.color == Color.META && socket.gem != null) {
+                    if (metaGemActive()) {
                         buffs.addAll(socket.gem?.buffs ?: listOf())
                     }
                 }
@@ -106,7 +109,7 @@ class Gear {
         val allItemSets = all().mapNotNull { it.itemSet }.distinctBy { it.id }
         allItemSets.forEach { set ->
             set.bonuses.forEach { bonus ->
-                if(bonus.isActive(this)) {
+                if (bonus.isActive(this)) {
                     buffs.add(bonus.buff)
                 }
             }
@@ -121,20 +124,18 @@ class Gear {
             stats.add(it.stats)
 
             // Find any stats that are implemented on the server side by permanent buffs
-            it.buffs.filterIsInstance<PermanentBuff>().forEach { pbuff ->
-                stats.add(pbuff.permanentStats())
-            }
+            it.buffs.filterIsInstance<PermanentBuff>().forEach { pbuff -> stats.add(pbuff.permanentStats()) }
 
             // Compute stats from sockets
             it.sockets.forEach { socket ->
-                if(socket.gem != null) {
+                if (socket.gem != null) {
                     stats.add(socket.gem!!.stats)
                 }
             }
 
             // Add socket bonuses if active
-            if(it.socketBonusActive) {
-                if(it.socketBonus != null) {
+            if (it.socketBonusActive) {
+                if (it.socketBonus != null) {
                     stats.add(it.socketBonus!!.stats)
                 }
             }

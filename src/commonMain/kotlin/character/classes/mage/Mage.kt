@@ -4,27 +4,21 @@ import character.*
 import character.classes.common.buffs.SpiritRegen
 import character.classes.mage.abilities.*
 import character.classes.mage.talents.*
-import data.abilities.generic.ManaEmerald
 import character.classes.mage.talents.ArcanePower as ArcanePowerTalent
 import character.classes.mage.talents.ColdSnap as ColdSnapTalent
 import character.classes.mage.talents.Combustion as CombustionTalent
 import character.classes.mage.talents.IcyVeins as IcyVeinsTalent
 import character.classes.mage.talents.PresenceOfMind as PresenceOfMindTalent
 import character.classes.mage.talents.SummonWaterElemental as SummonWaterElementalTalent
+import data.abilities.generic.ManaEmerald
 import data.model.Item
 
 class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 154,
-        intellect = 180,
-        strength = 112,
-        stamina = 154,
-        spirit = 199
-    )
+    override val baseStats: Stats = Stats(agility = 154, intellect = 180, strength = 112, stamina = 154, spirit = 199)
     override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             ArcaneBlast.name -> ArcaneBlast()
             ArcaneIntellect.name -> ArcaneIntellect()
             ArcanePower.name -> ArcanePower()
@@ -46,7 +40,7 @@ class Mage(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name) {
+        return when (name) {
             ArcaneConcentration.name -> ArcaneConcentration(ranks)
             ArcaneFocus.name -> ArcaneFocus(ranks)
             ArcaneImpact.name -> ArcaneImpact(ranks)

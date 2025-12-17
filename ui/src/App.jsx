@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import { FaGithub } from 'react-icons/fa';
 import {
@@ -93,6 +93,7 @@ function App() {
         <Route path='/gear' element={<GearEP />} />
         <Route path='/ep' element={<EquivalencePoints />} />
         <Route path='/rankings' element={<Rankings />} />
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
       <Footer>
         <Navbar className='justify-content-center'>
@@ -109,7 +110,7 @@ function App() {
 
 export default function () {
   return (
-    <Router basename='/tbcsim'>
+    <Router basename='/tbcsim/'>
       <CustomProvider theme='dark'>
         <StateProvider>
           <App />

@@ -1,23 +1,22 @@
 package character
 
-import sim.SimParticipant
 import kotlin.js.JsExport
-import kotlin.math.min
+import sim.SimParticipant
 
 @JsExport
 abstract class Debuff(val owner: SimParticipant) : Buff() {
     open val tickDeltaMs: Int = -1
 
     open fun shouldTick(sp: SimParticipant): Boolean {
-        if(tickDeltaMs == -1) return false
+        if (tickDeltaMs == -1) return false
 
         val state = state(sp)
 
         // Never tick the debuff on the same server tick it was applied
-        if(sp.sim.elapsedTimeMs == state.appliedAtMs) return false
+        if (sp.sim.elapsedTimeMs == state.appliedAtMs) return false
 
         val shouldTick = sp.sim.elapsedTimeMs >= state.lastTickMs + tickDeltaMs - sp.sim.opts.stepMs
-        if(shouldTick) {
+        if (shouldTick) {
             state.tickCount++
             state.lastTickMs = sp.sim.elapsedTimeMs
         }

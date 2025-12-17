@@ -17,9 +17,6 @@ class PetAnimalHandler : Buff() {
         val ahHit = animalHandler?.petAdditionalHitChance() ?: 0.0
         val ahHitRating = Rating.physicalHitPerPct * ahHit
 
-        return Stats(
-            physicalHitRating = ahHitRating,
-            spellHitRating = ahHitRating
-        )
+        return Stats(physicalHitRating = ahHitRating, spellHitRating = ahHitRating)
     }
 }

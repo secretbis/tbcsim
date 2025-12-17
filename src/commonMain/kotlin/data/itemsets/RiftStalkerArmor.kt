@@ -16,13 +16,12 @@ class RiftStalkerArmor : ItemSet() {
 
     // The two-set is not relevant
 
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_pants_mail_15.jpg"
-        override val durationMs: Int = -1
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_pants_mail_15.jpg"
+            override val durationMs: Int = -1
+        }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 4, fourBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 4, fourBuff))
 }

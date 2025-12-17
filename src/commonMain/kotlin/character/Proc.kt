@@ -2,10 +2,10 @@ package character
 
 import data.model.Item
 import io.github.oshai.kotlinlogging.KotlinLogging
-import sim.Event
-import sim.SimParticipant
 import kotlin.js.JsExport
 import kotlin.random.Random
+import sim.Event
+import sim.SimParticipant
 
 @JsExport
 abstract class Proc {
@@ -78,24 +78,19 @@ abstract class Proc {
 
         // Mechanics
         SERVER_TICK, // 2s
-        SERVER_SLOW_TICK,  // 3s
+        SERVER_SLOW_TICK, // 3s
         SERVER_FIVE_SECOND_TICK, // 5s
 
         // Specifics
         DRUID_CAST_MANGLE,
         DRUID_CAST_STARFIRE,
-
         HUNTER_CAST_ARCANE_SHOT,
         HUNTER_CAST_KILL_COMMAND,
         HUNTER_CAST_STEADY_SHOT,
-
         MAGE_ANY_SCORCH,
         MAGE_MANA_GEM,
-
         PALADIN_CAST_JUDGEMENT,
-
         PRIEST_TICK_SHADOW_WORD_PAIN,
-
         ROGUE_ANY_DAMAGING_SPECIAL,
         ROGUE_CAST_CHEAP_SHOT,
         ROGUE_CAST_KIDNEY_SHOT,
@@ -104,19 +99,16 @@ abstract class Proc {
         ROGUE_CAST_RUPTURE,
         ROGUE_CAST_SLICE_AND_DICE,
         ROGUE_CAST_FINISHER,
-
         SHAMAN_CAST_SHOCK,
         SHAMAN_CAST_LIGHTNING_BOLT,
         SHAMAN_CAST_CHAIN_LIGHTNING,
         SHAMAN_CAST_STORMSTRIKE,
         SHAMAN_CRIT_LIGHTNING_BOLT,
-
         WARLOCK_CRIT_INCINERATE,
         WARLOCK_CRIT_SHADOW_BOLT,
         WARLOCK_HIT_INCINERATE,
         WARLOCK_HIT_SHADOW_BOLT,
         WARLOCK_TICK_CORRUPTION,
-
         WARRIOR_CAST_BLOODTHIRST,
         WARRIOR_CAST_OVERPOWER,
         WARRIOR_CAST_MORTAL_STRIKE,
@@ -129,7 +121,7 @@ abstract class Proc {
         // Triggers based on an item and a PPM-based percentage per opportunity
         PPM,
         // Triggers on every opportunity
-        STATIC
+        STATIC,
     }
 
     abstract val triggers: List<Trigger>
@@ -137,6 +129,7 @@ abstract class Proc {
 
     abstract val type: Type
     open val ppm: Double = 0.0
+
     open fun percentChance(sp: SimParticipant): Double = 0.0
 
     // Many procs have ICDs
@@ -153,7 +146,7 @@ abstract class Proc {
     internal fun state(sp: SimParticipant): State {
         // Create state object if it does not exist, and return it
         var state = sp.procState[this]
-        if(state == null) {
+        if (state == null) {
             state = stateFactory()
             sp.procState[this] = state
         }
@@ -173,13 +166,14 @@ abstract class Proc {
 
         // Return false if on ICD
         val state = state(sp)
-        val offCooldown = state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sp) <= sp.sim.elapsedTimeMs)
-        if(!offCooldown) {
+        val offCooldown =
+            state.cooldownStartMs == -1 || (state.cooldownStartMs + cooldownMs(sp) <= sp.sim.elapsedTimeMs)
+        if (!offCooldown) {
             return false
         }
 
-        if(requiresItem) {
-            if(items.isNullOrEmpty()) {
+        if (requiresItem) {
+            if (items.isNullOrEmpty()) {
                 logger.warn { "Attempted to proc an ItemProc, but got no items from ability: ${ability?.name}" }
             }
 
@@ -199,11 +193,12 @@ abstract class Proc {
                 when (type) {
                     Type.PPM -> {
                         // Try to use the procced item if it is a weapon
-                        val itemFromProc = items?.find { it === sp.character.gear.mainHand  }
-                            ?: items?.find { it === sp.character.gear.offHand }
-                            ?: items?.find { it === sp.character.gear.rangedTotemLibram }
+                        val itemFromProc =
+                            items?.find { it === sp.character.gear.mainHand }
+                                ?: items?.find { it === sp.character.gear.offHand }
+                                ?: items?.find { it === sp.character.gear.rangedTotemLibram }
 
-                        if(itemFromProc == null) {
+                        if (itemFromProc == null) {
                             logger.debug { "Attempted to compute a PPM without an Item from ability: ${ability?.name}" }
                             0.0
                         } else {

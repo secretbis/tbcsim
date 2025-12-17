@@ -2,13 +2,13 @@ package character.classes.rogue.debuffs
 
 import character.Ability
 import character.Debuff
-import data.Constants
-import sim.Event
-import sim.SimParticipant
 import character.Proc
 import character.classes.rogue.talents.*
+import data.Constants
+import sim.Event
 import sim.EventResult
 import sim.EventType
+import sim.SimParticipant
 
 class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
     companion object {
@@ -28,8 +28,8 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
 
         val dmgMultiplier = 1 + (dmgIncrease / 100.0).coerceAtLeast(0.0)
 
-        return 180.0 * dmgMultiplier      // VII, max at 70
-        //return 108.0 * dmgMultiplier    // IV to test since its the one you get on beta premades
+        return 180.0 * dmgMultiplier // VII, max at 70
+        // return 108.0 * dmgMultiplier    // IV to test since its the one you get on beta premades
     }
 
     fun getAbility(debuff: Debuff): Ability {
@@ -37,19 +37,22 @@ class DeadlyPoisonDot(owner: SimParticipant) : Debuff(owner) {
             override val id: Int = 27187
             override val name: String = Companion.name
             override val icon: String = "ability_rogue_dualweild.jpg"
+
             override fun gcdMs(sp: SimParticipant): Int = 0
+
             override val castableOnGcd: Boolean = true
 
             override fun cast(sp: SimParticipant) {
                 val stacks = sp.sim.target.debuffState[debuff.name]?.currentStacks ?: 0
-                val dmgPerTick = ((stacks+1) * dmgPerStack(sp)) / totalTicks
-                val event = Event(
-                    eventType = EventType.DAMAGE,
-                    damageType = Constants.DamageType.NATURE,
-                    ability = this,
-                    amount = dmgPerTick,
-                    result = EventResult.HIT
-                )
+                val dmgPerTick = ((stacks + 1) * dmgPerStack(sp)) / totalTicks
+                val event =
+                    Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = Constants.DamageType.NATURE,
+                        ability = this,
+                        amount = dmgPerTick,
+                        result = EventResult.HIT,
+                    )
                 owner.logEvent(event)
 
                 owner.fireProc(listOf(Proc.Trigger.NATURE_DAMAGE), listOf(), this, event)

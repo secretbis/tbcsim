@@ -8,5 +8,10 @@ import kotlin.js.JsExport
 // e.g. weapon enchants
 @JsExport
 abstract class ItemBuff(open var sourceItems: List<Item>) : Buff() {
-    override val icon: String = if(sourceItems.isNotEmpty()) { sourceItems[0].icon } else { Constants.UNKNOWN_ICON }
+    override val icon: String =
+        if (sourceItems.isNotEmpty()) {
+            sourceItems[0].icon
+        } else {
+            Constants.UNKNOWN_ICON
+        }
 }

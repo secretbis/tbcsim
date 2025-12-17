@@ -13,21 +13,21 @@ class BloodFrenzy : Ability() {
     override val id: Int = 29859
     override val name: String = Companion.name
     override val icon: String = "ability_warrior_bloodfrenzy.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val buff = object : Buff() {
-        override val name: String = "Blood Frenzy"
-        override val icon: String = "ability_warrior_bloodfrenzy.jpg"
-        // Assume the caster is always maintaining this
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Blood Frenzy"
+            override val icon: String = "ability_warrior_bloodfrenzy.jpg"
+            // Assume the caster is always maintaining this
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                physicalDamageMultiplier = 1.04
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(physicalDamageMultiplier = 1.04)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.sim.addRaidBuff(buff)

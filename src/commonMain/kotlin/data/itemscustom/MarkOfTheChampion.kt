@@ -8,8 +8,8 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 class MarkOfTheChampion : Item() {
@@ -31,21 +31,20 @@ class MarkOfTheChampion : Item() {
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    val apBuff = object : Buff() {
-        override val name: String = "Mark of the Champion (AP)"
-        override var icon: String = "inv_misc_token_argentdawn3.jpg"
-        override val durationMs: Int = -1
+    val apBuff =
+        object : Buff() {
+            override val name: String = "Mark of the Champion (AP)"
+            override var icon: String = "inv_misc_token_argentdawn3.jpg"
+            override val durationMs: Int = -1
 
-        val validSubtypes = setOf(CharacterType.DEMON, CharacterType.UNDEAD)
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return if(validSubtypes.intersect(sp.sim.target.character.subTypes).isNotEmpty()) {
-                Stats(
-                    attackPower = 150,
-                    rangedAttackPower = 150
-                )
-            } else Stats()
+            val validSubtypes = setOf(CharacterType.DEMON, CharacterType.UNDEAD)
+
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return if (validSubtypes.intersect(sp.sim.target.character.subTypes).isNotEmpty()) {
+                    Stats(attackPower = 150, rangedAttackPower = 150)
+                } else Stats()
+            }
         }
-    }
 
     override val buffs: List<Buff> = listOf(apBuff)
 }

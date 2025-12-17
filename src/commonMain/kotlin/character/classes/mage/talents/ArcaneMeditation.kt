@@ -3,26 +3,27 @@ package character.classes.mage.talents
 import character.Buff
 import character.Stats
 import character.Talent
-import mechanics.General
 import sim.SimParticipant
 
 class ArcaneMeditation(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Arcane Meditation"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-        override val icon: String = "spell_shadow_siphonmana.jpg"
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
+            override val icon: String = "spell_shadow_siphonmana.jpg"
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spiritRegenInCombatPct = 0.1 * currentRank)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spiritRegenInCombatPct = 0.1 * currentRank)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

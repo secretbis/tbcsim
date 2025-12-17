@@ -16,13 +16,12 @@ class MaleficRaiment : ItemSet() {
 
     // Two set is not relevant
 
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_helmet_103.jpg"
-        override val durationMs: Int = -1
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_helmet_103.jpg"
+            override val durationMs: Int = -1
+        }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 4, fourBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 4, fourBuff))
 }

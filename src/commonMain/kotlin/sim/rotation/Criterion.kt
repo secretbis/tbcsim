@@ -31,11 +31,12 @@ abstract class Criterion(val type: Type, val data: RotationRuleCriterion) {
 
     companion object {
         val logger = KotlinLogging.logger {}
+
         fun fromString(typeName: String?, data: RotationRuleCriterion): Criterion? {
-            if(typeName == null) return null
+            if (typeName == null) return null
 
             val type = Type.values().asList().find { it.name == typeName }
-            return when(type) {
+            return when (type) {
                 Type.RESOURCE_PCT_GTE -> ResourcePctGte(data)
                 Type.RESOURCE_PCT_LTE -> ResourcePctLte(data)
                 Type.RESOURCE_GTE -> ResourceGte(data)

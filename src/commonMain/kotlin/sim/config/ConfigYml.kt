@@ -1,13 +1,9 @@
 package sim.config
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
+import kotlinx.serialization.Serializable
 
-@JsExport
-@Serializable
-data class PartyYml(
-    val buffs: List<String>? = null
-)
+@JsExport @Serializable data class PartyYml(val buffs: List<String>? = null)
 
 @JsExport
 @Serializable
@@ -38,42 +34,29 @@ data class GearItemYml(
     val name: String,
     val enchant: String? = null,
     val tempEnchant: String? = null,
-    val gems: List<String>? = null
+    val gems: List<String>? = null,
 )
 
-@JsExport
-@Serializable
-data class GearCompareYml(
-    val name: String? = null
-)
+@JsExport @Serializable data class GearCompareYml(val name: String? = null)
 
-@JsExport
-@Serializable
-data class TalentYml(
-    val name: String,
-    val rank: Int
-)
+@JsExport @Serializable data class TalentYml(val name: String, val rank: Int)
 
 @JsExport
 @Serializable
 data class RotationYml(
     val autoAttack: Boolean? = null,
     val precombat: List<RotationRuleYml>? = null,
-    val combat: List<RotationRuleYml>
+    val combat: List<RotationRuleYml>,
 )
 
-@JsExport
-@Serializable
-data class RotationRuleOptions(
-    val name: String? = null
-)
+@JsExport @Serializable data class RotationRuleOptions(val name: String? = null)
 
 @JsExport
 @Serializable
 data class RotationRuleYml(
     val name: String,
     val criteria: List<RotationRuleCriterion>? = null,
-    val options: RotationRuleOptions? = null
+    val options: RotationRuleOptions? = null,
 )
 
 @JsExport
@@ -92,7 +75,7 @@ data class RotationRuleCriterion(
     val swingType: String? = null,
     val maxClipSeconds: Double? = null,
     val resourceType: String? = null,
-    val stacks: Int? = null
+    val stacks: Int? = null,
 )
 
 @JsExport
@@ -104,16 +87,12 @@ data class SimOptionsYml(
     val iterations: Int? = null,
     val targetLevel: Int? = null,
     val targetArmor: Int? = null,
-    val allowParryAndBlock: Boolean? = null
+    val allowParryAndBlock: Boolean? = null,
 )
 
 @JsExport
 @Serializable
-data class PetYml(
-    val type: String,
-    val startsActive: Boolean = true,
-    val rotation: RotationYml? = null
-)
+data class PetYml(val type: String, val startsActive: Boolean = true, val rotation: RotationYml? = null)
 
 @JsExport
 @Serializable
@@ -132,5 +111,5 @@ data class ConfigYml(
     val raidBuffs: List<String>? = null,
     val raidDebuffs: List<String>? = null,
     val simOpts: SimOptionsYml? = null,
-    val pet: PetYml? = null
+    val pet: PetYml? = null,
 )

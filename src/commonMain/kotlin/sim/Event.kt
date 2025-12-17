@@ -2,8 +2,8 @@ package sim
 
 import character.Ability
 import character.Buff
-import data.Constants
 import character.Resource
+import data.Constants
 import kotlin.js.JsExport
 
 @JsExport
@@ -24,5 +24,5 @@ data class Event(
     val delta: Double = 0.0,
     val result: EventResult = EventResult.NONE,
     val partialAmount: Double = 0.0,
-    var comboPointsSpent: Int = 0
+    var comboPointsSpent: Int = 0,
 )

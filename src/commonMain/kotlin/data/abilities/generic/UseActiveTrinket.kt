@@ -1,7 +1,6 @@
 package data.abilities.generic
 
 import character.Ability
-import sim.SimIteration
 import sim.SimParticipant
 
 class UseActiveTrinket : Ability() {
@@ -39,13 +38,14 @@ class UseActiveTrinket : Ability() {
 
         // The user can specify a "name" option to select a trinket.  Otherwise, just pick one.
         val preferredName = sp.castingRule?.options?.name
-        val trinket = if(preferredName == null) {
-            availableTrinkets.find { it.available(sp) }
-        } else {
-            availableTrinkets.find { it.name == preferredName && it.available(sp) }
-        }
+        val trinket =
+            if (preferredName == null) {
+                availableTrinkets.find { it.available(sp) }
+            } else {
+                availableTrinkets.find { it.name == preferredName && it.available(sp) }
+            }
 
-        if(trinket != null) {
+        if (trinket != null) {
             // Set cooldown state according to the trinket duration
             (state(sp) as TrinketState).lastTrinketUsedDurationMs = trinket.trinketLockoutMs(sp)
 

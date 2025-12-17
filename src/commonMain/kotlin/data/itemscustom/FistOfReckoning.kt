@@ -25,13 +25,14 @@ class FistOfReckoning : Item() {
     override var minDmg: Double = 102.0
     override var maxDmg: Double = 190.0
     override var speed: Double = 2700.0
-    override var stats: Stats = Stats(
-        physicalHitRating = 10.0,
-        meleeCritRating = 16.0,
-        rangedCritRating = 16.0,
-        attackPower = 12,
-        rangedAttackPower = 12
-    )
+    override var stats: Stats =
+        Stats(
+            physicalHitRating = 10.0,
+            meleeCritRating = 16.0,
+            rangedCritRating = 16.0,
+            attackPower = 12,
+            rangedAttackPower = 12,
+        )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

@@ -23,12 +23,8 @@ class DrakeFangTalisman : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        physicalHitRating = 20.0,
-        rangedAttackPower = 56,
-        attackPower = 56
+    override var stats: Stats = Stats(physicalHitRating = 20.0, rangedAttackPower = 56, attackPower = 56)
 
-    )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

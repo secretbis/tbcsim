@@ -19,29 +19,34 @@ class WindfuryWeapon(override val name: String, val item: Item) : Ability() {
 
     override val id: Int = 25505
     override val icon: String = "spell_nature_cyclone.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
     override fun available(sp: SimParticipant): Boolean {
-        return if(Melee.isOffhand(sp, item)) { sp.isDualWielding() } else true
+        return if (Melee.isOffhand(sp, item)) {
+            sp.isDualWielding()
+        } else true
     }
 
     fun fireEvents(sp: SimParticipant, result: Pair<Double, EventResult>) {
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Proc anything that can proc off a white hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
-        val triggerTypes = when (result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
 
         if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(item), this, event)

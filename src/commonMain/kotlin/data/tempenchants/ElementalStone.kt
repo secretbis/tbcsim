@@ -12,8 +12,6 @@ class ElementalStone(item: Item) : TempEnchant(item) {
     override val icon: String = "inv_stone_02.jpg"
 
     override fun modifyStats(sp: SimParticipant): Stats {
-        return Stats(
-            meleeCritRating = 28.0
-        )
+        return Stats(meleeCritRating = 28.0)
     }
 }

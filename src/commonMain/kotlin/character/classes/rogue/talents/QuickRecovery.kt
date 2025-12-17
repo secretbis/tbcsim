@@ -1,10 +1,10 @@
 package character.classes.rogue.talents
 
 import character.*
-import sim.SimParticipant
-import sim.Event
 import data.model.Item
+import sim.Event
 import sim.EventResult
+import sim.SimParticipant
 
 class QuickRecovery(currentRank: Int) : Talent(currentRank) {
     companion object {
@@ -14,37 +14,42 @@ class QuickRecovery(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    val qrAbility = object : Ability() {
-        override val name: String = Companion.name
-        override val icon: String = "ability_rogue_quickrecovery.jpg"
-    }
+    val qrAbility =
+        object : Ability() {
+            override val name: String = Companion.name
+            override val icon: String = "ability_rogue_quickrecovery.jpg"
+        }
 
     fun finisherMissCostRefundFraction(): Double {
         return currentRank * 0.4
     }
 
-    val buff = object : Buff() {
-        override val name: String = "${Companion.name} (Talent)"
-        override val icon: String = "ability_rogue_quickrecovery.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "${Companion.name} (Talent)"
+            override val icon: String = "ability_rogue_quickrecovery.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.ROGUE_CAST_FINISHER
-            )
-            override val type: Type = Type.STATIC
+            val proc =
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(Trigger.ROGUE_CAST_FINISHER)
+                    override val type: Type = Type.STATIC
 
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                if(event?.result == EventResult.MISS || event?.result == EventResult.DODGE) {
-                    val cost = ability?.resourceCost(sp) ?: 0.0
-                    sp.addResource((cost * finisherMissCostRefundFraction()).toInt(), Resource.Type.ENERGY, qrAbility)
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        if (event?.result == EventResult.MISS || event?.result == EventResult.DODGE) {
+                            val cost = ability?.resourceCost(sp) ?: 0.0
+                            sp.addResource(
+                                (cost * finisherMissCostRefundFraction()).toInt(),
+                                Resource.Type.ENERGY,
+                                qrAbility,
+                            )
+                        }
+                    }
                 }
-            }
-        }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
+        }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

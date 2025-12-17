@@ -11,26 +11,26 @@ class Murder(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 2
 
-    val characterTypes = setOf(CharacterType.HUMANOID, CharacterType.GIANT, CharacterType.BEAST, CharacterType.DRAGONKIN)
+    val characterTypes =
+        setOf(CharacterType.HUMANOID, CharacterType.GIANT, CharacterType.BEAST, CharacterType.DRAGONKIN)
 
     fun damageMultiplier(): Double {
         return 1.0 + (currentRank * 0.01)
     }
 
-    val buff = object : Buff() {
-        override val name: String = "${Companion.name} (Talent)"
-        override val icon: String = "spell_shadow_deathscream.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "${Companion.name} (Talent)"
+            override val icon: String = "spell_shadow_deathscream.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats? {
-            return if(sp.sim.target.character.subTypes.intersect(characterTypes).isNotEmpty()) {
-                Stats(
-                    physicalDamageMultiplier = damageMultiplier(),
-                )
-            } else null
+            override fun modifyStats(sp: SimParticipant): Stats? {
+                return if (sp.sim.target.character.subTypes.intersect(characterTypes).isNotEmpty()) {
+                    Stats(physicalDamageMultiplier = damageMultiplier())
+                } else null
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

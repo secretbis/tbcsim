@@ -11,7 +11,7 @@ import data.itemsets.CycloneHarness
 import mechanics.General
 import sim.SimParticipant
 
-class StrengthOfEarthTotem: Ability() {
+class StrengthOfEarthTotem : Ability() {
     companion object {
         const val name = "Strength of Earth Totem"
     }
@@ -19,6 +19,7 @@ class StrengthOfEarthTotem: Ability() {
     override val id: Int = 25528
     override val name: String = Companion.name
     override val icon: String = "spell_nature_earthbindtotem.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = sp.totemGcd().toInt()
 
     override fun available(sp: SimParticipant): Boolean {
@@ -35,26 +36,31 @@ class StrengthOfEarthTotem: Ability() {
         return General.resourceCostReduction(300.0, listOf(tfRed, mqRed))
     }
 
-    val buff = object : Buff() {
-        override val name: String = "Strength of Earth Totem"
-        override val icon: String = "spell_nature_earthbindtotem.jpg"
-        override val durationMs: Int = 120000
-        override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
+    val buff =
+        object : Buff() {
+            override val name: String = "Strength of Earth Totem"
+            override val icon: String = "spell_nature_earthbindtotem.jpg"
+            override val durationMs: Int = 120000
+            override val mutex: List<Mutex> = listOf(Mutex.EARTH_TOTEM)
 
-        val baseStr = 86.0
-        override fun modifyStats(sp: SimParticipant): Stats {
-            // Extra str from T4 set
-            val t4BonusBuff = sp.buffs[CycloneHarness.TWO_SET_BUFF_NAME] != null
-            val t4BonusStr = if(t4BonusBuff) { CycloneHarness.twoSetStrengthOfEarthBonus() } else 0
+            val baseStr = 86.0
 
-            // Enhancing Totems
-            val etTalent = sp.character.klass.talents[EnhancingTotems.name] as EnhancingTotems?
-            val multiplier = 1.0 * (etTalent?.strengthOfEarthMultiplier() ?: 1.0)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                // Extra str from T4 set
+                val t4BonusBuff = sp.buffs[CycloneHarness.TWO_SET_BUFF_NAME] != null
+                val t4BonusStr =
+                    if (t4BonusBuff) {
+                        CycloneHarness.twoSetStrengthOfEarthBonus()
+                    } else 0
 
-            val totalStr = baseStr + t4BonusStr
-            return Stats(strength = (totalStr * multiplier).toInt())
+                // Enhancing Totems
+                val etTalent = sp.character.klass.talents[EnhancingTotems.name] as EnhancingTotems?
+                val multiplier = 1.0 * (etTalent?.strengthOfEarthMultiplier() ?: 1.0)
+
+                val totalStr = baseStr + t4BonusStr
+                return Stats(strength = (totalStr * multiplier).toInt())
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.addBuff(buff)

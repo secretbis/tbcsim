@@ -1,11 +1,9 @@
 package character.classes.priest.abilities
 
+import character.Ability
+import character.Proc
 import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.talents.*
-import character.Ability
-import character.Buff
-import character.Proc
-import character.Resource
 import data.Constants
 import data.itemsets.AbsolutionRegalia
 import mechanics.Spell
@@ -18,6 +16,7 @@ class MindBlast : Ability() {
     companion object {
         const val name: String = "Mind Blast"
     }
+
     override val id: Int = 25375
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_unholyfrenzy.jpg"
@@ -30,6 +29,7 @@ class MindBlast : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseCooldownMs = 8000
+
     override fun cooldownMs(sp: SimParticipant): Int {
         val impMb: ImprovedMindBlast? = sp.character.klass.talentInstance(ImprovedMindBlast.name)
         val impMbCooldownReductionMs = impMb?.cooldownReductionMs() ?: 0
@@ -40,6 +40,7 @@ class MindBlast : Ability() {
     override fun castTimeMs(sp: SimParticipant): Int = (baseCastTimeMs / sp.spellHasteMultiplier()).toInt()
 
     val baseResourceCost = 450.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -58,43 +59,42 @@ class MindBlast : Ability() {
         val spCrit = spTalent?.critIncreasePct() ?: 0.0
         val sfTalent: ShadowFocus? = sp.character.klass.talentInstance(ShadowFocus.name)
         val sfHit = sfTalent?.shadowHitIncreasePct() ?: 0.0
-        val t6FourSetMulti: Double = if(sp.buffs[AbsolutionRegalia.FOUR_SET_BUFF_NAME] == null) 1.0 else 1.1
+        val t6FourSetMulti: Double = if (sp.buffs[AbsolutionRegalia.FOUR_SET_BUFF_NAME] == null) 1.0 else 1.1
 
-        val damageRoll = Spell.baseDamageRoll(
-            sp,
-            baseDamage.first,
-            baseDamage.second,
-            school,
-            spellPowerCoeff,
-        )
-        val result = Spell.attackRoll(
-            sp,
-            damageRoll,
-            school,
-            bonusDamageMultiplier = t6FourSetMulti,
-            bonusHitChance = sfHit,
-            bonusCritChance = spCrit,
-        )
+        val damageRoll = Spell.baseDamageRoll(sp, baseDamage.first, baseDamage.second, school, spellPowerCoeff)
+        val result =
+            Spell.attackRoll(
+                sp,
+                damageRoll,
+                school,
+                bonusDamageMultiplier = t6FourSetMulti,
+                bonusHitChance = sfHit,
+                bonusCritChance = spCrit,
+            )
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT ->
+                    listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.SHADOW_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(), this, event)
         }
     }

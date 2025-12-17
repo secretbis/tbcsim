@@ -5,12 +5,13 @@ import character.Class
 import character.classes.common.buffs.SpiritRegen
 import data.model.Item
 
-class Druid(talents: Map<String, Talent>, spec: Spec)  : Class(talents, spec) {
+class Druid(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     companion object {
         const val BEAR_FORM_BUFF_NAME = "Bear Form"
         const val DIRE_BEAR_FORM_BUFF_NAME = "Dire Bear Form"
         const val CAT_FORM_BUFF_NAME = "Cat Form"
     }
+
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }
@@ -19,13 +20,7 @@ class Druid(talents: Map<String, Talent>, spec: Spec)  : Class(talents, spec) {
         return null
     }
 
-    override var baseStats: Stats = Stats(
-        agility = 222,
-        intellect = 180,
-        strength = 108,
-        stamina = 154,
-        spirit = 135
-    )
+    override var baseStats: Stats = Stats(agility = 222, intellect = 180, strength = 108, stamina = 154, spirit = 135)
     override var buffs: List<Buff> = listOf(SpiritRegen())
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.MANA)

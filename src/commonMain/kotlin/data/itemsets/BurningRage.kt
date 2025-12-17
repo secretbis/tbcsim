@@ -8,17 +8,16 @@ import sim.SimParticipant
 class BurningRage : ItemSet() {
     override val id: Int = 566
 
-    val twoBuff = object : Buff() {
-        override val name: String = "Burning Rage (2 set)"
-        override val icon: String = "inv_gauntlets_26.jpg"
-        override val durationMs: Int = -1
+    val twoBuff =
+        object : Buff() {
+            override val name: String = "Burning Rage (2 set)"
+            override val icon: String = "inv_gauntlets_26.jpg"
+            override val durationMs: Int = -1
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHitRating = 20.0)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(physicalHitRating = 20.0)
+            }
         }
-    }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 2, twoBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 2, twoBuff))
 }

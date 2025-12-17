@@ -13,19 +13,20 @@ class AncestralKnowledge(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 5
 
-    val buff = object : Buff() {
-        override val name: String = "Ancestral Knowledge"
-        override val icon: String = "spell_shadow_grimward.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Ancestral Knowledge"
+            override val icon: String = "spell_shadow_grimward.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val talentRanks = sp.character.klass.talents[AncestralKnowledge.name]?.currentRank ?: 0
+            override fun modifyStats(sp: SimParticipant): Stats {
+                val talentRanks = sp.character.klass.talents[AncestralKnowledge.name]?.currentRank ?: 0
 
-            val modifier = 1 + (0.01 * talentRanks)
-            return Stats(manaMultiplier = modifier)
+                val modifier = 1 + (0.01 * talentRanks)
+                return Stats(manaMultiplier = modifier)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

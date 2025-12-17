@@ -1,14 +1,14 @@
 package character
 
 import character.races.*
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
 abstract class Race {
     companion object {
         fun fromString(name: String): Race? {
-            return when(name.lowercase().trim()) {
+            return when (name.lowercase().trim()) {
                 "blood elf" -> return BloodElf()
                 "draenei" -> return Draenei()
                 "dwarf" -> return Dwarf()
@@ -25,6 +25,8 @@ abstract class Race {
     }
 
     abstract var baseStats: Stats
+
     abstract fun racialByName(name: String): Ability?
+
     abstract fun buffs(sp: SimParticipant): List<Buff>
 }

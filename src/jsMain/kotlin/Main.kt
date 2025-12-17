@@ -7,7 +7,12 @@ import sim.SimProgress
 import sim.config.Config
 
 @JsExport
-fun runSim(config: Config, opts: SimOptions, progressCb: (SimProgress) -> Unit, cb: (iterations: Array<SimIteration>) -> Unit) {
+fun runSim(
+    config: Config,
+    opts: SimOptions,
+    progressCb: (SimProgress) -> Unit,
+    cb: (iterations: Array<SimIteration>) -> Unit,
+) {
     GlobalScope.promise {
         val iterations = Sim(config, opts, null, progressCb).sim()
         println("Done!")

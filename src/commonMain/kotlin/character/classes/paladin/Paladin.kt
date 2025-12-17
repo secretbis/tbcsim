@@ -5,13 +5,7 @@ import character.classes.common.buffs.SpiritRegen
 import data.model.Item
 
 class Paladin(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 79,
-        intellect = 180,
-        strength = 252,
-        stamina = 154,
-        spirit = 135
-    )
+    override val baseStats: Stats = Stats(agility = 79, intellect = 180, strength = 252, stamina = 154, spirit = 135)
     override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
@@ -24,16 +18,22 @@ class Paladin(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
 
     override val resourceTypes: List<Resource.Type>
         get() = TODO("Not yet implemented")
+
     override val canDualWield: Boolean
         get() = TODO("Not yet implemented")
+
     override val attackPowerFromAgility: Int
         get() = TODO("Not yet implemented")
+
     override val attackPowerFromStrength: Int
         get() = TODO("Not yet implemented")
+
     override val critPctPerAgility: Double
         get() = TODO("Not yet implemented")
+
     override val rangedAttackPowerFromAgility: Int
         get() = TODO("Not yet implemented")
+
     override val baseMana: Int = 2953
     override val baseSpellCritChance: Double = 3.336
     override val dodgePctPerAgility: Double = 1.0 / 25.0

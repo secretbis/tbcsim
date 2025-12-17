@@ -25,14 +25,15 @@ class TheCastigator : Item() {
     override var minDmg: Double = 119.0
     override var maxDmg: Double = 221.0
     override var speed: Double = 2600.0
-    override var stats: Stats = Stats(
-        stamina = 9,
-        meleeCritRating = 14.0,
-        rangedCritRating = 14.0,
-        physicalHitRating = 10.0,
-        attackPower = 16,
-        rangedAttackPower = 16
-    )
+    override var stats: Stats =
+        Stats(
+            stamina = 9,
+            meleeCritRating = 14.0,
+            rangedCritRating = 14.0,
+            physicalHitRating = 10.0,
+            attackPower = 16,
+            rangedAttackPower = 16,
+        )
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

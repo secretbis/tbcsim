@@ -25,12 +25,7 @@ class GauntletsOfAnnihilation : Item() {
     override var minDmg: Double = 0.0
     override var maxDmg: Double = 0.0
     override var speed: Double = 0.0
-    override var stats: Stats = Stats(
-        strength = 35,
-        stamina = 15,
-        meleeCritRating = 14.0,
-        physicalHitRating = 10.0
-    )
+    override var stats: Stats = Stats(strength = 35, stamina = 15, meleeCritRating = 14.0, physicalHitRating = 10.0)
     override var sockets: Array<Socket> = arrayOf()
     override var socketBonus: SocketBonus? = null
     override var phase = 1

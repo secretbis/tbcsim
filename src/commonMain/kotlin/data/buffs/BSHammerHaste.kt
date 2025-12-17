@@ -3,7 +3,6 @@ package data.buffs
 import character.*
 import data.model.Item
 import sim.Event
-import sim.SimIteration
 import sim.SimParticipant
 
 // https://tbc-twinhead.twinstar.cz/?spell=21165
@@ -13,17 +12,18 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
         private var singletonBuff: Buff? = null
 
         fun singletonBuff(): Buff {
-            if(singletonBuff == null) {
-                singletonBuff = object : Buff() {
-                    override val name: String = "Haste (BS Hammer)"
-                    override val icon: String = "spell_nature_invisibilty.jpg"
+            if (singletonBuff == null) {
+                singletonBuff =
+                    object : Buff() {
+                        override val name: String = "Haste (BS Hammer)"
+                        override val icon: String = "spell_nature_invisibilty.jpg"
 
-                    override val durationMs: Int = 10000
+                        override val durationMs: Int = 10000
 
-                    override fun modifyStats(sp: SimParticipant): Stats? {
-                        return Stats(physicalHasteRating = 212.0)
+                        override fun modifyStats(sp: SimParticipant): Stats? {
+                            return Stats(physicalHasteRating = 212.0)
+                        }
                     }
-                }
             }
 
             return singletonBuff!!
@@ -37,30 +37,33 @@ class BSHammerHaste(val sourceItem: Item) : ItemBuff(listOf(sourceItem)) {
     override val hidden: Boolean = true
 
     private var _procs: List<Proc>? = null
+
     private fun makeProcs(sp: SimParticipant): List<Proc> {
-        if(_procs == null) {
-            _procs = listOf(
-                object : ItemProc(listOf(sourceItem)) {
-                    override val triggers: List<Trigger> = listOf(
-                        Trigger.MELEE_AUTO_HIT,
-                        Trigger.MELEE_AUTO_CRIT,
-                        Trigger.MELEE_WHITE_HIT,
-                        Trigger.MELEE_WHITE_CRIT,
-                        Trigger.MELEE_YELLOW_HIT,
-                        Trigger.MELEE_YELLOW_CRIT,
-                        Trigger.MELEE_BLOCK,
-                        Trigger.MELEE_GLANCE
-                    )
+        if (_procs == null) {
+            _procs =
+                listOf(
+                    object : ItemProc(listOf(sourceItem)) {
+                        override val triggers: List<Trigger> =
+                            listOf(
+                                Trigger.MELEE_AUTO_HIT,
+                                Trigger.MELEE_AUTO_CRIT,
+                                Trigger.MELEE_WHITE_HIT,
+                                Trigger.MELEE_WHITE_CRIT,
+                                Trigger.MELEE_YELLOW_HIT,
+                                Trigger.MELEE_YELLOW_CRIT,
+                                Trigger.MELEE_BLOCK,
+                                Trigger.MELEE_GLANCE,
+                            )
 
-                    override val type: Type = Type.PPM
-                    override val ppm: Double = 1.0
-                    override val requiresItem: Boolean = true
+                        override val type: Type = Type.PPM
+                        override val ppm: Double = 1.0
+                        override val requiresItem: Boolean = true
 
-                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                        sp.addBuff(singletonBuff())
+                        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                            sp.addBuff(singletonBuff())
+                        }
                     }
-                }
-            )
+                )
         }
 
         return _procs!!

@@ -6,7 +6,7 @@ import character.classes.hunter.talents.Ferocity
 import mechanics.Rating
 import sim.SimParticipant
 
-class PetFerocity: Buff() {
+class PetFerocity : Buff() {
     override val name: String = "Ferocity"
     override val durationMs: Int = -1
     override val hidden: Boolean = true
@@ -20,7 +20,7 @@ class PetFerocity: Buff() {
         return Stats(
             meleeCritRating = ferocityCritRating,
             rangedCritRating = ferocityCritRating,
-            spellCritRating = ferocityCritRating
+            spellCritRating = ferocityCritRating,
         )
     }
 }

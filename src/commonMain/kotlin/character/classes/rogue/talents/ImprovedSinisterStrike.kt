@@ -11,7 +11,7 @@ class ImprovedSinisterStrike(currentRank: Int) : Talent(currentRank) {
     override val maxRank: Int = 2
 
     fun reducedEnergy(): Double {
-        return when(currentRank){
+        return when (currentRank) {
             1 -> 3.0
             2 -> 5.0
             else -> 0.0

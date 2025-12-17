@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class GoldenDraenite(id: Int, prefix: Prefix) : Gem(id, "Golden Draenite", "inv_misc_gem_goldendraenite_02.jpg", prefix, Color.YELLOW, Quality.UNCOMMON)
+class GoldenDraenite(id: Int, prefix: Prefix) :
+    Gem(id, "Golden Draenite", "inv_misc_gem_goldendraenite_02.jpg", prefix, Color.YELLOW, Quality.UNCOMMON)

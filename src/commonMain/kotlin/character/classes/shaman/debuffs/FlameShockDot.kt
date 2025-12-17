@@ -8,7 +8,6 @@ import mechanics.Spell
 import sim.Event
 import sim.EventResult
 import sim.EventType
-
 import sim.SimParticipant
 
 class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
@@ -17,39 +16,39 @@ class FlameShockDot(owner: SimParticipant) : Debuff(owner) {
     override val durationMs: Int = 12000
     override val tickDeltaMs: Int = 3000
 
-    val fsdAbility = object : Ability() {
-        override val id: Int = 25457
-        override val name: String = "Flame Shock (DoT)"
-        override val icon: String = "spell_fire_flameshock.jpg"
-        override fun gcdMs(sp: SimParticipant): Int = 0
+    val fsdAbility =
+        object : Ability() {
+            override val id: Int = 25457
+            override val name: String = "Flame Shock (DoT)"
+            override val icon: String = "spell_fire_flameshock.jpg"
 
-        val dmgPerTick = 105.0
-        val school = Constants.DamageType.FIRE
-        val snapshotSpellPower = owner.stats.getSpellDamage(school)
-        val spellPowerCoeff = 0.1
+            override fun gcdMs(sp: SimParticipant): Int = 0
 
-        override fun cast(sp: SimParticipant) {
-            val damageRoll = Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
+            val dmgPerTick = 105.0
+            val school = Constants.DamageType.FIRE
+            val snapshotSpellPower = owner.stats.getSpellDamage(school)
+            val spellPowerCoeff = 0.1
 
-            // Each tick can still resist partially
-            val result = Spell.partialResistRoll(
-                owner,
-                Pair(damageRoll, EventResult.HIT),
-                school
-            )
+            override fun cast(sp: SimParticipant) {
+                val damageRoll =
+                    Spell.baseDamageRollSingle(owner, dmgPerTick, school, spellPowerCoeff, snapshotSpellPower)
 
-            val event = Event(
-                eventType = EventType.DAMAGE,
-                damageType = school,
-                ability = this,
-                amount = result.first,
-                result = result.second
-            )
-            owner.logEvent(event)
+                // Each tick can still resist partially
+                val result = Spell.partialResistRoll(owner, Pair(damageRoll, EventResult.HIT), school)
 
-            owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE_PERIODIC), listOf(), this, event)
+                val event =
+                    Event(
+                        eventType = EventType.DAMAGE,
+                        damageType = school,
+                        ability = this,
+                        amount = result.first,
+                        result = result.second,
+                    )
+                owner.logEvent(event)
+
+                owner.fireProc(listOf(Proc.Trigger.FIRE_DAMAGE_PERIODIC), listOf(), this, event)
+            }
         }
-    }
 
     override fun tick(sp: SimParticipant) {
         fsdAbility.cast(sp)

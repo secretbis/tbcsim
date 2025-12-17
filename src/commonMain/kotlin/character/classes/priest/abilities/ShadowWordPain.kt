@@ -1,12 +1,11 @@
 package character.classes.priest.abilities
 
-import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.Ability
 import character.Proc
+import character.classes.priest.buffs.InnerFocus as InnerFocusBuff
 import character.classes.priest.debuffs.ShadowWordPainDot
 import character.classes.priest.talents.*
 import data.Constants
-import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -27,6 +26,7 @@ class ShadowWordPain : Ability() {
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     val baseResourceCost = 575.0
+
     override fun resourceCost(sp: SimParticipant): Double {
         val innerFocusBuff = sp.buffs[InnerFocusBuff.name] as InnerFocusBuff?
 
@@ -45,15 +45,10 @@ class ShadowWordPain : Ability() {
 
         val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, bonusHitChance = sfHit, canCrit = false)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.DAMAGE, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second == EventResult.RESIST){
+        if (result.second == EventResult.RESIST) {
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }

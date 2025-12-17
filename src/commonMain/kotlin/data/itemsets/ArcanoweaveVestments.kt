@@ -8,17 +8,16 @@ import sim.SimParticipant
 class ArcanoweaveVestments : ItemSet() {
     override val id: Int = 558
 
-    val threeBuff = object : Buff() {
-        override val name: String = "Arcanoweave Vestments (3 set)"
-        override val icon: String = "inv_chest_cloth_01.jpg"
-        override val durationMs: Int = -1
+    val threeBuff =
+        object : Buff() {
+            override val name: String = "Arcanoweave Vestments (3 set)"
+            override val icon: String = "inv_chest_cloth_01.jpg"
+            override val durationMs: Int = -1
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spellHitRating = 16.0)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spellHitRating = 16.0)
+            }
         }
-    }
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 3, threeBuff)
-    )
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 3, threeBuff))
 }

@@ -1,19 +1,16 @@
 package character
 
-import sim.SimParticipant
 import kotlin.js.JsExport
+import sim.SimParticipant
 
 @JsExport
-class Resource(
-    val sp: SimParticipant,
-    val type: Type
-) {
+class Resource(val sp: SimParticipant, val type: Type) {
     enum class Type {
         MANA,
         RAGE,
         ENERGY,
         FOCUS,
-        COMBO_POINT
+        COMBO_POINT,
     }
 
     val initialAmount: Int
@@ -21,11 +18,12 @@ class Resource(
     var currentAmount: Int
 
     init {
-        currentAmount = when(type) {
-            Type.RAGE -> 0
-            Type.COMBO_POINT -> 0
-            else -> max()
-        }
+        currentAmount =
+            when (type) {
+                Type.RAGE -> 0
+                Type.COMBO_POINT -> 0
+                else -> max()
+            }
         initialAmount = currentAmount
         maxAmount = max()
     }
@@ -34,26 +32,24 @@ class Resource(
         return sp.character.klass.baseMana
             // Add intellect
             .let {
-                it + when {
-                    sp.intellect() <= 20 -> sp.intellect()
-                    else -> 20 + (15 * (sp.intellect() - 20))
-                }
+                it +
+                    when {
+                        sp.intellect() <= 20 -> sp.intellect()
+                        else -> 20 + (15 * (sp.intellect() - 20))
+                    }
             }
-            .let {
-                it + sp.stats.manaFlatModifier
-            }
-            .let {
-                (it * sp.stats.manaMultiplier).toInt()
-            }
-
+            .let { it + sp.stats.manaFlatModifier }
+            .let { (it * sp.stats.manaMultiplier).toInt() }
     }
 
     private fun max(): Int {
-        return when(type) {
+        return when (type) {
             Type.MANA -> maxMana()
             Type.RAGE -> 100
             Type.ENERGY -> {
-                val vigor = sp.character.klass.talents[character.classes.rogue.talents.Vigor.name] as character.classes.rogue.talents.Vigor?
+                val vigor =
+                    sp.character.klass.talents[character.classes.rogue.talents.Vigor.name]
+                        as character.classes.rogue.talents.Vigor?
                 val bonus = vigor?.maxEnergyIncrease() ?: 0
                 100 + bonus
             }
@@ -64,12 +60,12 @@ class Resource(
 
     fun add(amt: Int) {
         currentAmount += amt
-        if(currentAmount > maxAmount) currentAmount = maxAmount
+        if (currentAmount > maxAmount) currentAmount = maxAmount
     }
 
     fun subtract(amt: Int) {
         currentAmount -= amt
-        if(currentAmount < 0) {
+        if (currentAmount < 0) {
             throw Exception("Resource negative - something tried to cast when it shouldn't")
         }
     }

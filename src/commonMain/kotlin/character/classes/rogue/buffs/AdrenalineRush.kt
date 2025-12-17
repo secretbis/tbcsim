@@ -2,21 +2,20 @@ package character.classes.rogue.buffs
 
 import character.*
 import character.classes.rogue.abilities.*
-import data.Constants
+import data.model.Item
 import sim.Event
 import sim.SimParticipant
-import data.model.Item
-import mechanics.Rating
 
 class AdrenalineRush : Buff() {
     companion object {
         const val name = "Adrenaline Rush"
     }
 
-    val arAbility = object : Ability() {
-        override val name: String = Companion.name
-        override val icon: String = "spell_shadow_shadowworddominate.jpg"
-    }
+    val arAbility =
+        object : Ability() {
+            override val name: String = Companion.name
+            override val icon: String = "spell_shadow_shadowworddominate.jpg"
+        }
 
     override val name: String = Companion.name
     override val icon: String = "spell_shadow_shadowworddominate.jpg"
@@ -24,16 +23,15 @@ class AdrenalineRush : Buff() {
 
     val extraEnergyPerTick: Int = 20
 
-    val procTick = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.SERVER_TICK
-        )
-        override val type: Type = Type.STATIC
+    val procTick =
+        object : Proc() {
+            override val triggers: List<Trigger> = listOf(Trigger.SERVER_TICK)
+            override val type: Type = Type.STATIC
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addResource(extraEnergyPerTick, Resource.Type.ENERGY, arAbility)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addResource(extraEnergyPerTick, Resource.Type.ENERGY, arAbility)
+            }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(procTick)
 }

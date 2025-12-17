@@ -1,7 +1,6 @@
 package character.classes.rogue.talents
 
 import character.*
-import mechanics.Rating
 import sim.SimParticipant
 
 class DaggerSpecialization(currentRank: Int) : Talent(currentRank) {
@@ -16,18 +15,17 @@ class DaggerSpecialization(currentRank: Int) : Talent(currentRank) {
         return currentRank * 0.01
     }
 
-    val buff = object : Buff() {
-        override val name: String = "${Companion.name} (Talent)"
-        override val icon: String = "inv_weapon_shortblade_05.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "${Companion.name} (Talent)"
+            override val icon: String = "inv_weapon_shortblade_05.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(
-                daggerAdditionalCritChancePercent = critIncrease()
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(daggerAdditionalCritChancePercent = critIncrease())
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

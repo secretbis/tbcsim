@@ -7,4 +7,5 @@ import data.model.Quality
 import kotlin.js.JsExport
 
 @JsExport
-class StarOfElune(id: Int, prefix: Prefix) : Gem(id, "Star of Elune", "inv_jewelcrafting_starofelune_03.jpg", prefix, Color.BLUE, Quality.RARE)
+class StarOfElune(id: Int, prefix: Prefix) :
+    Gem(id, "Star of Elune", "inv_jewelcrafting_starofelune_03.jpg", prefix, Color.BLUE, Quality.RARE)

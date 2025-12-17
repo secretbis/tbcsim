@@ -15,9 +15,6 @@ class PetUnleashedFury : Buff() {
         val unleashedFury = sp.owner?.character?.klass?.talents?.get(UnleashedFury.name) as UnleashedFury?
         val ufMultiplier = unleashedFury?.petDamageMultiplier() ?: 1.0
 
-        return Stats(
-            physicalDamageMultiplier = ufMultiplier,
-            spellDamageMultiplier = ufMultiplier
-        )
+        return Stats(physicalDamageMultiplier = ufMultiplier, spellDamageMultiplier = ufMultiplier)
     }
 }

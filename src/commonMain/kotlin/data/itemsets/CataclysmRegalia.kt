@@ -16,33 +16,33 @@ class CataclysmRegalia : ItemSet() {
 
     override val id: Int = 635
 
-    val fourSetAbility = object : Ability() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_helmet_15.jpg"
-    }
-
-    val fourBuff = object : Buff() {
-        override val name: String = FOUR_SET_BUFF_NAME
-        override val icon: String = "inv_helmet_15.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val proc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.SHAMAN_CRIT_LIGHTNING_BOLT
-            )
-            override val type: Type = Type.PERCENT
-            override fun percentChance(sp: SimParticipant): Double = 25.0
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addResource(120, Resource.Type.MANA, fourSetAbility)
-            }
+    val fourSetAbility =
+        object : Ability() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_helmet_15.jpg"
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
+    val fourBuff =
+        object : Buff() {
+            override val name: String = FOUR_SET_BUFF_NAME
+            override val icon: String = "inv_helmet_15.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-    override val bonuses: List<Bonus> = listOf(
-        Bonus(id, 4, fourBuff)
-    )
+            val proc =
+                object : Proc() {
+                    override val triggers: List<Trigger> = listOf(Trigger.SHAMAN_CRIT_LIGHTNING_BOLT)
+                    override val type: Type = Type.PERCENT
+
+                    override fun percentChance(sp: SimParticipant): Double = 25.0
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addResource(120, Resource.Type.MANA, fourSetAbility)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
+        }
+
+    override val bonuses: List<Bonus> = listOf(Bonus(id, 4, fourBuff))
 }

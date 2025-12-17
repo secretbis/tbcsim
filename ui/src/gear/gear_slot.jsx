@@ -131,7 +131,7 @@ export default function ({ slotName, width = defaultWidth }) {
       <Row style={{ padding: '5px' }} onClick={onClick}>
         <Col xs={5}>
           <ItemTooltip item={item} gear={character.gear}>
-            <img style={itemImgStyles} src={`tbcsim/icons/${item.icon}`} />
+            <img style={itemImgStyles} src={`icons/${item.icon}`} />
           </ItemTooltip>
         </Col>
         <Col xs={19}>

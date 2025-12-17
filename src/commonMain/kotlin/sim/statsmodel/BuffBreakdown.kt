@@ -10,5 +10,5 @@ data class BuffBreakdown(
     val refreshedAvg: Double,
     val uptimePct: Double,
     val avgDuration: Double,
-    val avgStacks: Double
+    val avgStacks: Double,
 )

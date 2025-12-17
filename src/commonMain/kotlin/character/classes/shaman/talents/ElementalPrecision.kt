@@ -14,21 +14,20 @@ class ElementalPrecision(currentRank: Int) : Talent(currentRank) {
     override val name: String = Companion.name
     override val maxRank: Int = 3
 
-    val buff = object : Buff() {
-        override val name: String = "Elemental Precision"
-        override val icon: String = "spell_nature_elementalprecision_1.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val buff =
+        object : Buff() {
+            override val name: String = "Elemental Precision"
+            override val icon: String = "spell_nature_elementalprecision_1.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            // This isn't technically exactly equal to spell hit rating (no arcane, shadow, etc)
-            // But for shaman it's good enough
-            val spellHitRating = 2 * currentRank * Rating.spellHitPerPct
-            return Stats(
-                spellHitRating = spellHitRating
-            )
+            override fun modifyStats(sp: SimParticipant): Stats {
+                // This isn't technically exactly equal to spell hit rating (no arcane, shadow, etc)
+                // But for shaman it's good enough
+                val spellHitRating = 2 * currentRank * Rating.spellHitPerPct
+                return Stats(spellHitRating = spellHitRating)
+            }
         }
-    }
 
     override fun buffs(sp: SimParticipant): List<Buff> = listOf(buff)
 }

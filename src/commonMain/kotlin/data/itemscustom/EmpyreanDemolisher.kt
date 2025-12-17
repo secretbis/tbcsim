@@ -6,9 +6,9 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
+import kotlin.js.JsExport
 import sim.Event
 import sim.SimParticipant
-import kotlin.js.JsExport
 
 @JsExport
 class EmpyreanDemolisher : Item() {
@@ -32,43 +32,47 @@ class EmpyreanDemolisher : Item() {
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    val hasteBuff = object : Buff() {
-        override val name: String = "Empyrean Demolisher"
-        override val icon: String = "spell_nature_invisibilty.jpg"
-        override val durationMs: Int = 10000
+    val hasteBuff =
+        object : Buff() {
+            override val name: String = "Empyrean Demolisher"
+            override val icon: String = "spell_nature_invisibilty.jpg"
+            override val durationMs: Int = 10000
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(physicalHasteRating = 212.0)
-        }
-    }
-
-    fun makeStaticBuff(item: Item): Buff = object : ItemBuff(listOf(item)) {
-        override val name: String = "Empyrean Demolisher (static)"
-        override val icon: String = "spell_nature_invisibilty.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
-
-        val hasteProc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.MELEE_AUTO_HIT,
-                Trigger.MELEE_AUTO_CRIT,
-                Trigger.MELEE_WHITE_HIT,
-                Trigger.MELEE_WHITE_CRIT,
-                Trigger.MELEE_YELLOW_HIT,
-                Trigger.MELEE_YELLOW_CRIT,
-                Trigger.MELEE_GLANCE,
-                Trigger.MELEE_BLOCK
-            )
-            override val type: Type = Type.PPM
-            override val ppm: Double = 1.0
-
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.addBuff(hasteBuff)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(physicalHasteRating = 212.0)
             }
         }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(hasteProc)
-    }
+    fun makeStaticBuff(item: Item): Buff =
+        object : ItemBuff(listOf(item)) {
+            override val name: String = "Empyrean Demolisher (static)"
+            override val icon: String = "spell_nature_invisibilty.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
+
+            val hasteProc =
+                object : Proc() {
+                    override val triggers: List<Trigger> =
+                        listOf(
+                            Trigger.MELEE_AUTO_HIT,
+                            Trigger.MELEE_AUTO_CRIT,
+                            Trigger.MELEE_WHITE_HIT,
+                            Trigger.MELEE_WHITE_CRIT,
+                            Trigger.MELEE_YELLOW_HIT,
+                            Trigger.MELEE_YELLOW_CRIT,
+                            Trigger.MELEE_GLANCE,
+                            Trigger.MELEE_BLOCK,
+                        )
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 1.0
+
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        sp.addBuff(hasteBuff)
+                    }
+                }
+
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(hasteProc)
+        }
 
     override var buffs: List<Buff> = listOf(makeStaticBuff(this))
 }

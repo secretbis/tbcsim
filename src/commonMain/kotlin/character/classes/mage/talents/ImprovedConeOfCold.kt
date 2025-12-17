@@ -6,6 +6,7 @@ class ImprovedConeOfCold(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Improved Cone of Cold"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 

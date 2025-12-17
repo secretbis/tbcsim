@@ -6,6 +6,7 @@ class Barrage(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Barrage"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 

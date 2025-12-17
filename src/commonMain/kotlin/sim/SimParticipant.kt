@@ -1,28 +1,34 @@
 package sim
 
 import character.*
+import character.auto.*
 import character.auto.AutoAttackBase
 import character.auto.AutoShot
 import character.auto.MeleeMainHand
-import character.auto.*
-import character.classes.rogue.Rogue
 import character.classes.hunter.Hunter
 import character.classes.hunter.pet.HunterPet
 import character.classes.hunter.pet.abilities.PetMelee
 import character.classes.priest.pet.Shadowfiend as ShadowfiendPet
 import character.classes.priest.pet.abilities.ShadowfiendMelee
+import character.classes.rogue.Rogue
 import data.Constants
 import data.model.Item
-import mechanics.Rating
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlin.js.JsExport
+import kotlin.math.floor
+import mechanics.Rating
 import sim.rotation.Criterion
 import sim.rotation.Rotation
 import sim.rotation.Rule
-import kotlin.js.JsExport
-import kotlin.math.floor
 
 @JsExport
-class SimParticipant(val character: Character, val rotation: Rotation, val sim: SimIteration, val owner: SimParticipant? = null, val epStatMod: Stats? = null) {
+class SimParticipant(
+    val character: Character,
+    val rotation: Rotation,
+    val sim: SimIteration,
+    val owner: SimParticipant? = null,
+    val epStatMod: Stats? = null,
+) {
     val logger = KotlinLogging.logger {}
 
     var stats: Stats = Stats()
@@ -64,20 +70,21 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     var events: MutableList<Event> = mutableListOf()
 
     // Pet
-    val pet: SimParticipant? = if(character.pet != null && character.petRotation != null) {
-        SimParticipant(character.pet, character.petRotation, sim, this)
-    } else null
+    val pet: SimParticipant? =
+        if (character.pet != null && character.petRotation != null) {
+            SimParticipant(character.pet, character.petRotation, sim, this)
+        } else null
 
     fun init(): SimParticipant {
         // Add auto-attack, if allowed
         if (rotation.autoAttack) {
-            if(character.klass is Hunter) {
+            if (character.klass is Hunter) {
                 rangedAutoAttack = AutoShot()
-            } else if(character.klass is HunterPet) {
+            } else if (character.klass is HunterPet) {
                 mhAutoAttack = PetMelee()
-            } else if(character.klass is ShadowfiendPet){
+            } else if (character.klass is ShadowfiendPet) {
                 mhAutoAttack = ShadowfiendMelee()
-            } else if(character.klass is Rogue) {
+            } else if (character.klass is Rogue) {
                 if (hasMainHandWeapon()) {
                     mhAutoAttack = MeleeMainHandRogue()
                 }
@@ -97,9 +104,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         // Collect buffs from class, talents, gear, and etc
         character.race.buffs(this).forEach { addBuff(it) }
         character.klass.buffs.forEach { addBuff(it) }
-        character.klass.talents.filter { it.value.currentRank > 0 }.forEach {
-            it.value.buffs(this).forEach { buff -> addBuff(buff) }
-        }
+        character.klass.talents
+            .filter { it.value.currentRank > 0 }
+            .forEach { it.value.buffs(this).forEach { buff -> addBuff(buff) } }
         character.gear.buffs().forEach { addBuff(it) }
         rotation.combatAbilities.forEach { it.buffs(this).forEach { buff -> addBuff(buff) } }
 
@@ -110,7 +117,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         resources = character.klass.resourceTypes.map { it to Resource(this, it) }.toMap()
 
         // Check to see if our pet starts active or not
-        if(character.pet?.startsActive == false) {
+        if (character.pet?.startsActive == false) {
             pet?.deactivate()
         }
 
@@ -126,20 +133,21 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun recomputeStats() {
-        stats = Stats()
-            .add(character.klass.baseStats)
-            .add(character.race.baseStats)
-            .add(character.gear.totalStats())
-            .add(epStatMod ?: Stats())
-            .let {
-                (buffs.values + debuffs.values).forEach { buff ->
-                    val stats = buff.modifyStats(this)
-                    if(stats != null) {
-                        it.add(stats)
+        stats =
+            Stats()
+                .add(character.klass.baseStats)
+                .add(character.race.baseStats)
+                .add(character.gear.totalStats())
+                .add(epStatMod ?: Stats())
+                .let {
+                    (buffs.values + debuffs.values).forEach { buff ->
+                        val stats = buff.modifyStats(this)
+                        if (stats != null) {
+                            it.add(stats)
+                        }
                     }
+                    it
                 }
-                it
-            }
     }
 
     fun isActive(): Boolean {
@@ -154,7 +162,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         isActive = false
         castingRule = null
 
-        if(resetAllState) {
+        if (resetAllState) {
             buffs.clear()
             debuffs.clear()
 
@@ -176,10 +184,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun tick() {
         // If this participant is inactive, do nothing
-        if(!isActive) return
+        if (!isActive) return
 
         // Find next rotation ability, if we are not currently casting something
-        if(!isCasting() && castingRule == null) {
+        if (!isCasting() && castingRule == null) {
             val rotationRule = rotation.next(this, onGcd())
             val rotationAbility = rotationRule?.ability
             if (rotationAbility != null) {
@@ -190,12 +198,13 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                 castEndMs = sim.elapsedTimeMs + castTimeMs + sim.opts.latencyMs
 
                 // Log cast start if it's not instant
-                if(castTimeMs > 0) {
-                    val castEvent = Event(
-                        eventType = EventType.SPELL_START_CAST,
-                        ability = castingRule!!.ability,
-                        target = sim.target
-                    )
+                if (castTimeMs > 0) {
+                    val castEvent =
+                        Event(
+                            eventType = EventType.SPELL_START_CAST,
+                            ability = castingRule!!.ability,
+                            target = sim.target,
+                        )
                     logEvent(castEvent)
 
                     fireProc(listOf(Proc.Trigger.SPELL_START_CAST), null, castingRule!!.ability, castEvent)
@@ -205,22 +214,26 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
         // Double check isCasting here, in case we just picked an instant cast spell
         // An instant spell is never "casting", as it has a cast time of zero
-        // So, make sure to cast it on the same tick to avoid adding artificial latency of <step_size> ms
-        if(!isCasting()) {
+        // So, make sure to cast it on the same tick to avoid adding artificial latency of
+        // <step_size>
+        // ms
+        if (!isCasting()) {
             // If we are not casting, and have an ability queued up, actually cast it
-            if(castingRule != null) {
+            if (castingRule != null) {
                 // Double check resources, since it could have changed since the start of the attack
-                if(hasEnoughResource(castingRule!!.ability.resourceType(this), castingRule!!.ability.resourceCost(this))){
+                if (
+                    hasEnoughResource(
+                        castingRule!!.ability.resourceType(this),
+                        castingRule!!.ability.resourceCost(this),
+                    )
+                ) {
                     castingRule!!.ability.beforeCast(this)
                     castingRule!!.ability.cast(this)
                     castingRule!!.ability.afterCast(this)
 
                     // Log cast event
-                    val castEvent = Event(
-                        eventType = EventType.SPELL_CAST,
-                        ability = castingRule!!.ability,
-                        target = sim.target
-                    )
+                    val castEvent =
+                        Event(eventType = EventType.SPELL_CAST, ability = castingRule!!.ability, target = sim.target)
                     logEvent(castEvent)
                 } else {
                     logger.info { "Canceled queued cast of ${castingRule!!.ability.name} - low resources" }
@@ -231,16 +244,18 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             }
 
             // Do auto attacks
-            if(rangedAutoAttack?.available(this) == true) {
+            if (rangedAutoAttack?.available(this) == true) {
                 // Auto shot has a cast time, unlike other auto-attack abilities
                 rangedAutoAttack!!.cast(this)
                 castEndMs = sim.elapsedTimeMs + rangedAutoAttack!!.castTimeMs(this) + sim.opts.latencyMs
             } else if (mhAutoAttack?.available(this) == true) {
                 // Check to see if we have a replacement ability
-                // Be sure to double check the cost, since our resources may have changed since we requested the replacement
-                if(mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
+                // Be sure to double check the cost, since our resources may have changed since we
+                // requested
+                // the replacement
+                if (mhAutoAttack is MeleeMainHand && mainHandAutoReplacement != null) {
                     // If we can cast it, do so
-                    if(mainHandAutoReplacement?.available(this) == true) {
+                    if (mainHandAutoReplacement?.available(this) == true) {
                         mainHandAutoReplacement!!.cast(this)
                     } else mhAutoAttack?.cast(this)
 
@@ -261,34 +276,43 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         this.mainHandAutoReplacement = ability
     }
 
-    // Determine the priority of an incoming mutex buff/debuff against already-present mutex buffs/debuffs of the same type
+    // Determine the priority of an incoming mutex buff/debuff against already-present mutex
+    // buffs/debuffs of the same type
     fun shouldApplyBuff(buffDebuff: Buff, buffsDebuffs: Map<String, Buff>): Boolean {
         // If this buff is mutex with others, compare priority and remove the weaker one(s)
         // If they are equal, choose the most recent (this one)
-        return if(buffDebuff.mutex.contains(Mutex.NONE)) {
+        return if (buffDebuff.mutex.contains(Mutex.NONE)) {
             true
         } else {
-            buffDebuff.mutex.map { mutex ->
-                val allMutex = buffsDebuffs.values
-                    .filter { existing -> buffDebuff.mutex.any { existing.mutex.contains(it) } }
+            buffDebuff.mutex
+                .map { mutex ->
+                    val allMutex =
+                        buffsDebuffs.values.filter { existing -> buffDebuff.mutex.any { existing.mutex.contains(it) } }
 
-                if(allMutex.isNotEmpty()) {
-                    val highestPriority = allMutex.map { it.mutexPriority(this)[mutex] ?: 0 }.maxOrNull() ?: 0
+                    if (allMutex.isNotEmpty()) {
+                        val highestPriority = allMutex.map { it.mutexPriority(this)[mutex] ?: 0 }.maxOrNull() ?: 0
 
-                    // If this incoming buff is the highest or equal priority, keep it and remove the others
-                    // Otherwise, do not apply the buff
-                    val incomingBuffPriority = buffDebuff.mutexPriority(this)[mutex] ?: 0
-                    // We should add the buff if it is highest in *any* mutex category
-                    incomingBuffPriority >= highestPriority
-                } else true
-            }.any { it }
+                        // If this incoming buff is the highest or equal priority, keep it and
+                        // remove the
+                        // others
+                        // Otherwise, do not apply the buff
+                        val incomingBuffPriority = buffDebuff.mutexPriority(this)[mutex] ?: 0
+                        // We should add the buff if it is highest in *any* mutex category
+                        incomingBuffPriority >= highestPriority
+                    } else true
+                }
+                .any { it }
         }
     }
 
-    private fun <T : Buff> pruneByPriority(newBuff: T, buffsDebuffs: Map<String, T>, removeDelegate: (List<T>) -> Unit) {
+    private fun <T : Buff> pruneByPriority(
+        newBuff: T,
+        buffsDebuffs: Map<String, T>,
+        removeDelegate: (List<T>) -> Unit,
+    ) {
         // Remove all buffs in each mutex category
         newBuff.mutex.forEach { mutex ->
-            if(mutex != Mutex.NONE) {
+            if (mutex != Mutex.NONE) {
                 val toRemove = buffsDebuffs.values.filter { it.mutex.contains(mutex) }
                 toRemove.forEach {
                     it.reset(this)
@@ -302,24 +326,26 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     fun addBuff(buff: Buff) {
         // Check mutex
         val shouldAddBuff = shouldApplyBuff(buff, buffs)
-        if(shouldAddBuff) {
+        if (shouldAddBuff) {
             pruneByPriority(buff, buffs, ::removeBuffs)
         } else return
 
         buff.refresh(this)
 
         // If this buff stacks, track stacks
-        val stacks = if(buff.maxStacks > 0) {
-            buffState[buff.name]?.currentStacks ?: 0
-        } else 0
+        val stacks =
+            if (buff.maxStacks > 0) {
+                buffState[buff.name]?.currentStacks ?: 0
+            } else 0
 
-        val charges = if(buff.maxCharges > 0) {
-            buffState[buff.name]?.currentCharges ?: 0
-        } else 0
+        val charges =
+            if (buff.maxCharges > 0) {
+                buffState[buff.name]?.currentCharges ?: 0
+            } else 0
 
         // Set expiration tick
         // Remove the old expiration
-        if(buff.durationMs != -1) {
+        if (buff.durationMs != -1) {
             val oldTick = buffExpirationTick[buff.name]
             buffExpirations[oldTick]?.removeAll { it.name == buff.name }
 
@@ -333,27 +359,17 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
         // If this is a new buff, add it
         val exists = buffs[buff.name] != null
-        if(!exists) {
+        if (!exists) {
             buffs[buff.name] = buff
-            logEvent(Event(
-                eventType = EventType.BUFF_START,
-                buff = buff,
-                buffStacks = stacks,
-                buffCharges = charges
-            ))
+            logEvent(Event(eventType = EventType.BUFF_START, buff = buff, buffStacks = stacks, buffCharges = charges))
 
             // Always recompute after adding a buff
             recomputeStats()
         } else {
-            logEvent(Event(
-                eventType = EventType.BUFF_REFRESH,
-                buff = buff,
-                buffStacks = stacks,
-                buffCharges = charges
-            ))
+            logEvent(Event(eventType = EventType.BUFF_REFRESH, buff = buff, buffStacks = stacks, buffCharges = charges))
 
             // If a buff is stackable, then recompute on a refresh as well
-            if(stacks > 0) {
+            if (stacks > 0) {
                 recomputeStats()
             }
         }
@@ -361,8 +377,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun consumeBuff(buff: Buff) {
         val state = buffState[buff.name]
-        if(state != null) {
-            if(buff.maxCharges >= 1) {
+        if (state != null) {
+            if (buff.maxCharges >= 1) {
                 state.currentCharges -= 1
 
                 logEvent(
@@ -370,15 +386,14 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         eventType = EventType.BUFF_CHARGE_CONSUMED,
                         buff = buff,
                         buffCharges = state.currentCharges,
-                        buffStacks = state.currentStacks
+                        buffStacks = state.currentStacks,
                     )
                 )
 
                 // Remove this if fully consumed
-                if(state.currentCharges == 0) {
+                if (state.currentCharges == 0) {
                     removeBuffs(listOf(buff))
                 }
-
             } else {
                 removeBuffs(listOf(buff))
             }
@@ -387,7 +402,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun pruneBuffs() {
         val toRemove = buffExpirations[sim.tickNum]
-        if(toRemove?.isEmpty() == false) {
+        if (toRemove?.isEmpty() == false) {
             removeBuffs(toRemove.toList())
         }
     }
@@ -398,79 +413,82 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             buffState.remove(it.name)
 
             val expirationTick = buffExpirationTick[it.name]
-            if(expirationTick != null) {
+            if (expirationTick != null) {
                 buffExpirations[expirationTick]?.removeAll { it2 -> it2.name == it.name }
             }
 
             it.reset(this)
 
-            logEvent(Event(
-                eventType = EventType.BUFF_END,
-                buff = it
-            ))
+            logEvent(Event(eventType = EventType.BUFF_END, buff = it))
         }
 
         recomputeStats()
     }
 
-     // Debuffs
+    // Debuffs
     fun addDebuff(debuff: Debuff) {
         // Check mutex
         val shouldApplyDebuff = shouldApplyBuff(debuff, debuffs)
-        if(shouldApplyDebuff) {
+        if (shouldApplyDebuff) {
             pruneByPriority(debuff, debuffs, ::removeDebuffs)
         } else return
 
         debuff.refresh(this)
 
         // If this debuff stacks, track stacks
-        val stacks = if(debuff.maxStacks > 0) {
-            debuffState[debuff.name]?.currentStacks ?: 0
-        } else 0
+        val stacks =
+            if (debuff.maxStacks > 0) {
+                debuffState[debuff.name]?.currentStacks ?: 0
+            } else 0
 
-         val charges = if(debuff.maxCharges > 0) {
-            buffState[debuff.name]?.currentCharges ?: 0
-        } else 0
+        val charges =
+            if (debuff.maxCharges > 0) {
+                buffState[debuff.name]?.currentCharges ?: 0
+            } else 0
 
         // Set expiration tick
         // Remove the old expiration
-         if(debuff.durationMs != -1) {
-             val oldTick = debuffExpirationTick[debuff.name]
-             debuffExpirations[oldTick]?.removeAll { it.name == debuff.name }
+        if (debuff.durationMs != -1) {
+            val oldTick = debuffExpirationTick[debuff.name]
+            debuffExpirations[oldTick]?.removeAll { it.name == debuff.name }
 
-             // Find the new expiration, and store that in both places
-             val newTick = sim.getExpirationTick(debuff)
-             debuffExpirationTick[debuff.name] = newTick
+            // Find the new expiration, and store that in both places
+            val newTick = sim.getExpirationTick(debuff)
+            debuffExpirationTick[debuff.name] = newTick
 
-             val expirationSet = debuffExpirations.getOrPut(newTick, { mutableSetOf() })
-             expirationSet.add(debuff)
-         }
+            val expirationSet = debuffExpirations.getOrPut(newTick, { mutableSetOf() })
+            expirationSet.add(debuff)
+        }
 
         // If this is a new debuff, add it
         val exists = debuffs[debuff.name] != null
-        if(!exists) {
+        if (!exists) {
             debuffs[debuff.name] = debuff
-            logEvent(Event(
-                eventType = EventType.DEBUFF_START,
-                buff = debuff,
-                buffStacks = stacks,
-                buffCharges = charges,
-                target = sim.target
-            ))
+            logEvent(
+                Event(
+                    eventType = EventType.DEBUFF_START,
+                    buff = debuff,
+                    buffStacks = stacks,
+                    buffCharges = charges,
+                    target = sim.target,
+                )
+            )
 
             // Always recompute after adding a debuff
             recomputeStats()
         } else {
-            logEvent(Event(
-                eventType = EventType.DEBUFF_REFRESH,
-                buff = debuff,
-                buffStacks = stacks,
-                buffCharges = charges,
-                target = sim.target
-            ))
+            logEvent(
+                Event(
+                    eventType = EventType.DEBUFF_REFRESH,
+                    buff = debuff,
+                    buffStacks = stacks,
+                    buffCharges = charges,
+                    target = sim.target,
+                )
+            )
 
             // If a debuff is stackable, then recompute on a refresh as well
-            if(stacks > 0) {
+            if (stacks > 0) {
                 recomputeStats()
             }
         }
@@ -478,8 +496,8 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun consumeDebuff(debuff: Debuff) {
         val state = debuffState[debuff.name]
-        if(state != null) {
-            if(debuff.maxCharges >= 1) {
+        if (state != null) {
+            if (debuff.maxCharges >= 1) {
                 state.currentCharges -= 1
 
                 logEvent(
@@ -488,12 +506,12 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
                         buff = debuff,
                         buffStacks = state.currentStacks,
                         buffCharges = state.currentCharges,
-                        target = sim.target
+                        target = sim.target,
                     )
                 )
 
                 // Remove this if fully consumed
-                if(state.currentCharges == 0) {
+                if (state.currentCharges == 0) {
                     removeDebuffs(listOf(debuff))
                 }
             } else {
@@ -504,7 +522,7 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun pruneDebuffs() {
         val toRemove = debuffExpirations[sim.tickNum]
-        if(toRemove?.isEmpty() == false) {
+        if (toRemove?.isEmpty() == false) {
             removeDebuffs(toRemove.toList())
         }
     }
@@ -515,16 +533,12 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
             debuffState.remove(it.name)
 
             val expirationTick = debuffExpirationTick[it.name]
-            if(expirationTick != null) {
+            if (expirationTick != null) {
                 debuffExpirations[expirationTick]?.removeAll { it2 -> it2.name == it.name }
             }
 
             it.reset(this)
-            logEvent(Event(
-                eventType = EventType.DEBUFF_END,
-                buff = it,
-                target = sim.target
-            ))
+            logEvent(Event(eventType = EventType.DEBUFF_END, buff = it, target = sim.target))
         }
 
         recomputeStats()
@@ -532,52 +546,58 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     // Resource
     fun addResource(amount: Int, type: Resource.Type, ability: Ability) {
-        if(amount == 0) return
+        if (amount == 0) return
 
         var res = resources[type]
 
-        if(res == null) {
+        if (res == null) {
             logger.debug { "Attempted to add resources type $type that is not present for participant" }
             return
         }
 
         res.add(amount)
 
-        logEvent(Event(
-            eventType = EventType.RESOURCE_CHANGED,
-            amount = res.currentAmount.toDouble(),
-            delta = amount.toDouble(),
-            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
-            resourceType = res.type,
-            ability = ability
-        ))
+        logEvent(
+            Event(
+                eventType = EventType.RESOURCE_CHANGED,
+                amount = res.currentAmount.toDouble(),
+                delta = amount.toDouble(),
+                amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+                resourceType = res.type,
+                ability = ability,
+            )
+        )
     }
 
     fun subtractResource(amount: Int, type: Resource.Type, ability: Ability) {
         var res = resources[type]
 
-        if(res == null) {
+        if (res == null) {
             logger.debug { "Attempted to subtract resources type $type that is not present for participant" }
             return
         }
 
         res.subtract(amount)
 
-        logEvent(Event(
-            eventType = EventType.RESOURCE_CHANGED,
-            amount = res.currentAmount.toDouble(),
-            delta = -1 * amount.toDouble(),
-            amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
-            resourceType = res.type,
-            ability = ability
-        ))
+        logEvent(
+            Event(
+                eventType = EventType.RESOURCE_CHANGED,
+                amount = res.currentAmount.toDouble(),
+                delta = -1 * amount.toDouble(),
+                amountPct = res.currentAmount / res.maxAmount.toDouble() * 100.0,
+                resourceType = res.type,
+                ability = ability,
+            )
+        )
     }
 
-    fun hasEnoughResource(type: Resource.Type, amount: Double) : Boolean {
-        if(amount == 0.0){return true} // for trinkets and other items that have MANA as the default
+    fun hasEnoughResource(type: Resource.Type, amount: Double): Boolean {
+        if (amount == 0.0) {
+            return true
+        } // for trinkets and other items that have MANA as the default
 
         var res = resources[type]
-        if(res != null){
+        if (res != null) {
             return amount <= res.currentAmount
         } else {
             logger.debug { "Attempted to access resources type $type that is not present for participant" }
@@ -588,18 +608,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     fun fireProc(triggers: List<Proc.Trigger>, items: List<Item>?, ability: Ability?, event: Event?) {
         // Collect fireable procs
         val allProcs: MutableSet<Proc> = mutableSetOf()
-        for(trigger in triggers) {
+        for (trigger in triggers) {
             // Get procs from active buffs
             (buffs.values + debuffs.values).forEach { buff ->
-                buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach {
-                    allProcs.add(it)
-                }
+                buff.procs(this).filter { proc -> proc.triggers.contains(trigger) }.forEach { allProcs.add(it) }
             }
         }
 
         // Fire all found procs
         allProcs.forEach {
-            if(it.shouldProc(this, items, ability, event)) {
+            if (it.shouldProc(this, items, ability, event)) {
                 it.proc(this, items, ability, event)
                 it.afterProc(this)
             }
@@ -608,33 +626,23 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
 
     fun cleanup() {
         // Log end for all buffs/debuffs
-        buffs.values.forEach { buff ->
-            logEvent(Event(
-                eventType = EventType.BUFF_END,
-                buff = buff
-           ))
-        }
+        buffs.values.forEach { buff -> logEvent(Event(eventType = EventType.BUFF_END, buff = buff)) }
 
-        debuffs.values.forEach { debuff ->
-            logEvent(Event(
-                eventType = EventType.DEBUFF_END,
-                buff = debuff
-            ))
-        }
+        debuffs.values.forEach { debuff -> logEvent(Event(eventType = EventType.DEBUFF_END, buff = debuff)) }
     }
 
     fun logEvent(event: Event) {
         // Auto-set tick and time if not specified
-        if(event.tick == -1) {
+        if (event.tick == -1) {
             event.tick = sim.tickNum
         }
 
-        if(event.timeMs == -1) {
+        if (event.timeMs == -1) {
             event.timeMs = sim.elapsedTimeMs
         }
 
         // Auto-set target if we can
-        if(event.eventType == EventType.DAMAGE) {
+        if (event.eventType == EventType.DAMAGE) {
             event.target = event.target ?: sim.target
         }
 
@@ -655,7 +663,9 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun weaponSpeed(item: Item): Double {
-        // Note that this does not need the hunter Auto Shot cast time accounted for - Auto Shot starts cooldown on start cast to simplify
+        // Note that this does not need the hunter Auto Shot cast time accounted for - Auto Shot
+        // starts
+        // cooldown on start cast to simplify
         return (item.speed / physicalHasteMultiplier()).coerceAtLeast(0.01)
     }
 
@@ -684,22 +694,16 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun attackPower(): Int {
-        return (
-            (
-                stats.attackPower.coerceAtLeast(0) +
+        return ((stats.attackPower.coerceAtLeast(0) +
                 ((strength() - 10) * character.klass.attackPowerFromStrength) +
-                ((agility() - 10) * character.klass.attackPowerFromAgility)
-            ) * stats.attackPowerMultiplier
-        ).toInt()
+                ((agility() - 10) * character.klass.attackPowerFromAgility)) * stats.attackPowerMultiplier)
+            .toInt()
     }
 
     fun rangedAttackPower(): Int {
-        return (
-            (
-                stats.rangedAttackPower.coerceAtLeast(0) +
-                (agility() * character.klass.rangedAttackPowerFromAgility)
-            ) * stats.rangedAttackPowerMultiplier
-        ).toInt()
+        return ((stats.rangedAttackPower.coerceAtLeast(0) +
+                (agility() * character.klass.rangedAttackPowerFromAgility)) * stats.rangedAttackPowerMultiplier)
+            .toInt()
     }
 
     fun spellDamage(): Int {
@@ -726,13 +730,15 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
         return stats.expertiseRating / Rating.expertisePerPct
     }
 
-    // from the numbers that are displayed ingame, you also have to subtract the race-specific agility bonuses from this to get an accurate result
+    // from the numbers that are displayed ingame, you also have to subtract the race-specific
+    // agility
+    // bonuses from this to get an accurate result
     fun meleeCritPct(): Double {
-        return stats.meleeCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
+        return stats.meleeCritRating / Rating.critPerPct + (agility() - 10) * character.klass.critPctPerAgility
     }
 
     fun rangedCritPct(): Double {
-        return stats.rangedCritRating / Rating.critPerPct + (agility()-10) * character.klass.critPctPerAgility
+        return stats.rangedCritRating / Rating.critPerPct + (agility() - 10) * character.klass.critPctPerAgility
     }
 
     fun spellCritPct(): Double {
@@ -749,7 +755,10 @@ class SimParticipant(val character: Character, val rotation: Rotation, val sim: 
     }
 
     fun dodgePct(): Double {
-        return character.klass.baseDodgePct + (agility() * character.klass.dodgePctPerAgility) + (stats.dodgeRating / Rating.dodgePerPct) + (0.04 * defenseSkill())
+        return character.klass.baseDodgePct +
+            (agility() * character.klass.dodgePctPerAgility) +
+            (stats.dodgeRating / Rating.dodgePerPct) +
+            (0.04 * defenseSkill())
     }
 
     fun parryPct(): Double {

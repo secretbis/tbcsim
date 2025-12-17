@@ -6,8 +6,11 @@ import kotlin.js.JsExport
 object SimDefaults {
     // The length of the fight you wish to simulate, in millseconds
     const val durationMs: Int = 180000
-    // Randomly alters the fight duration by adding or subtracting a random number of milliseconds, up to the configured value
-    // This helps model the real world more effectively, and can better evaluate things like haste effects or potion usage timings
+    // Randomly alters the fight duration by adding or subtracting a random number of milliseconds,
+    // up
+    // to the configured value
+    // This helps model the real world more effectively, and can better evaluate things like haste
+    // effects or potion usage timings
     const val durationVaribilityMs: Int = 0
     const val stepMs: Int = 10
     const val latencyMs: Int = 0

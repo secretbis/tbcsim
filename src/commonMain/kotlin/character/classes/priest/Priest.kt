@@ -10,17 +10,11 @@ import character.classes.priest.talents.VampiricTouch as VampiricTouchTalent
 import data.model.Item
 
 class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
-    override val baseStats: Stats = Stats(
-        agility = 184,
-        intellect = 180,
-        strength = 146,
-        stamina = 154,
-        spirit = 135
-    )
+    override val baseStats: Stats = Stats(agility = 184, intellect = 180, strength = 146, stamina = 154, spirit = 135)
     override val buffs: List<Buff> = listOf(SpiritRegen())
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             InnerFocus.name -> InnerFocus()
             MindBlast.name -> MindBlast()
             MindFlay2.name -> MindFlay2()
@@ -34,7 +28,7 @@ class Priest(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     }
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name) {
+        return when (name) {
             Darkness.name -> Darkness(ranks)
             FocusedMind.name -> FocusedMind(ranks)
             ImprovedMindBlast.name -> ImprovedMindBlast(ranks)

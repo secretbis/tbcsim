@@ -6,6 +6,7 @@ class RapidKilling(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Rapid Killing"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 2
 

@@ -37,38 +37,33 @@ abstract class HunterPet(petDamageMultiplier: Double) : Class(mapOf(), HunterPet
     }
 
     // TODO: These are base cat stats from a random pserver, needs updating from live
-    override var baseStats: Stats = Stats(
-        strength = 162,
-        agility = 128,
-        stamina = 373,
-        intellect = 60,
-        spirit = 99
-    )
+    override var baseStats: Stats = Stats(strength = 162, agility = 128, stamina = 373, intellect = 60, spirit = 99)
 
     override fun talentFromString(name: String, ranks: Int): Talent? {
         return null
     }
 
     override fun abilityFromString(name: String, item: Item?): Ability? {
-        return when(name) {
+        return when (name) {
             "Bite" -> BiteRank9()
             "Claw" -> ClawRank9()
             else -> null
         }
     }
 
-    override var buffs: List<Buff> = listOf(
-        PetAnimalHandler(),
-        PetBaseDamage(petDamageMultiplier),
-        PetCobraReflexes(),
-        PetFerociousInspiration(),
-        PetFerocity(),
-        PetFocusRegen(),
-        PetFrenzy(),
-        PetHappiness(),
-        PetSerpentsSwiftness(),
-        PetUnleashedFury()
-    )
+    override var buffs: List<Buff> =
+        listOf(
+            PetAnimalHandler(),
+            PetBaseDamage(petDamageMultiplier),
+            PetCobraReflexes(),
+            PetFerociousInspiration(),
+            PetFerocity(),
+            PetFocusRegen(),
+            PetFrenzy(),
+            PetHappiness(),
+            PetSerpentsSwiftness(),
+            PetUnleashedFury(),
+        )
 
     override val resourceTypes: List<Resource.Type> = listOf(Resource.Type.FOCUS)
     override var canDualWield: Boolean = false

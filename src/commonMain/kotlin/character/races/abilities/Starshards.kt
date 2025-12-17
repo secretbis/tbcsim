@@ -1,14 +1,11 @@
 package character.races.abilities
 
 import character.Ability
-import character.Buff
 import character.Proc
-import character.Stats
 import character.classes.priest.Priest
 import character.races.NightElf
 import character.races.debuffs.StarshardsDot
 import data.Constants
-import mechanics.General
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
@@ -33,15 +30,10 @@ class Starshards : Ability() {
     override fun cast(sp: SimParticipant) {
         val result = Spell.attackRoll(sp, 0.0, school, isBinary = true, canCrit = false)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            result = result.second,
-        )
+        val event = Event(eventType = EventType.DAMAGE, damageType = school, ability = this, result = result.second)
         sp.logEvent(event)
 
-        if(result.second == EventResult.RESIST){
+        if (result.second == EventResult.RESIST) {
             sp.fireProc(listOf(Proc.Trigger.SPELL_RESIST), listOf(), this, event)
             return
         }

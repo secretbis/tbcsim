@@ -18,29 +18,28 @@ class DarkmoonCardCrusadeSP : Buff() {
     override val durationMs: Int = -1
     override val hidden: Boolean = true
 
-    val spBuff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
-        override val durationMs: Int = 10000
-        override val maxStacks: Int = 10
+    val spBuff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "inv_misc_ticket_tarot_crusade.jpg"
+            override val durationMs: Int = 10000
+            override val maxStacks: Int = 10
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            val stacks = state(sp).currentStacks
-            return Stats(spellDamage = 8 * stacks)
+            override fun modifyStats(sp: SimParticipant): Stats {
+                val stacks = state(sp).currentStacks
+                return Stats(spellDamage = 8 * stacks)
+            }
         }
-    }
 
-    val spProc = object : Proc() {
-        override val triggers: List<Trigger> = listOf(
-            Trigger.SPELL_HIT,
-            Trigger.SPELL_CRIT,
-        )
-        override val type: Type = Type.STATIC
+    val spProc =
+        object : Proc() {
+            override val triggers: List<Trigger> = listOf(Trigger.SPELL_HIT, Trigger.SPELL_CRIT)
+            override val type: Type = Type.STATIC
 
-        override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-            sp.addBuff(spBuff)
+            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                sp.addBuff(spBuff)
+            }
         }
-    }
 
     override fun procs(sp: SimParticipant): List<Proc> = listOf(spProc)
 }

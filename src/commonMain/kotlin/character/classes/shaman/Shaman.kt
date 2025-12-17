@@ -13,7 +13,7 @@ import data.model.Item
 
 class Shaman(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
     override fun talentFromString(name: String, ranks: Int): Talent? {
-        return when(name.trim()) {
+        return when (name.trim()) {
             AncestralKnowledge.name -> AncestralKnowledge(ranks)
             CallOfThunder.name -> CallOfThunder(ranks)
             Concussion.name -> Concussion(ranks)
@@ -48,8 +48,8 @@ class Shaman(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         }
     }
 
-    override fun abilityFromString(name: String, item: Item?): Ability?{
-        return when(name) {
+    override fun abilityFromString(name: String, item: Item?): Ability? {
+        return when (name) {
             ChainLightning.name -> ChainLightning()
             EarthShock.name -> EarthShock()
             ElementalMastery.name -> ElementalMastery()
@@ -73,13 +73,7 @@ class Shaman(talents: Map<String, Talent>, spec: Spec) : Class(talents, spec) {
         }
     }
 
-    override var baseStats: Stats = Stats(
-        agility = 222,
-        intellect = 180,
-        strength = 108,
-        stamina = 154,
-        spirit = 135
-    )
+    override var baseStats: Stats = Stats(agility = 222, intellect = 180, strength = 108, stamina = 154, spirit = 135)
 
     override val buffs: List<Buff> = listOf(SpiritRegen())
 

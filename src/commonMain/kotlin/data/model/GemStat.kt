@@ -9,5 +9,5 @@ data class GemStat(
     val uncommonValue: Int = 0,
     val rareValue: Int = 0,
     val epicValue: Int = 0,
-    val metaValue: Int = 0
+    val metaValue: Int = 0,
 )

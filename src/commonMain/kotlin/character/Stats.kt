@@ -1,7 +1,7 @@
 package character
 
-import data.Constants.StatType
 import data.Constants.DamageType
+import data.Constants.StatType
 import kotlin.js.JsExport
 
 @JsExport
@@ -12,38 +12,31 @@ data class Stats(
     var stamina: Int = 0,
     var intellect: Int = 0,
     var spirit: Int = 0,
-
     var strengthMultiplier: Double = 1.0,
     var agilityMultiplier: Double = 1.0,
     var staminaMultiplier: Double = 1.0,
     var intellectMultiplier: Double = 1.0,
     var spiritMultiplier: Double = 1.0,
-
     var spiritRegenInCombatPct: Double = 0.0,
     var spiritRegenInCombatMultiplier: Double = 1.0,
-
     var armor: Int = 0,
 
     // Secondary stats
     var attackPower: Int = 0,
     var rangedAttackPower: Int = 0,
     var feralAttackPower: Int = 0,
-
     var meleeCritRating: Double = 0.0,
     var rangedCritRating: Double = 0.0,
-
     var physicalHitRating: Double = 0.0,
     var physicalHasteRating: Double = 0.0,
     var expertiseRating: Double = 0.0,
     var armorPen: Int = 0,
-
     var spellCritRating: Double = 0.0,
     var spellHitRating: Double = 0.0,
     var spellHasteRating: Double = 0.0,
     var spellDamage: Int = 0,
     var spellHealing: Int = 0,
     var spellPen: Int = 0,
-
     var holyDamage: Int = 0,
     var fireDamage: Int = 0,
     var natureDamage: Int = 0,
@@ -75,27 +68,21 @@ data class Stats(
 
     // Generic (non-spell-specific) modifiers
     var armorMultiplier: Double = 1.0,
-
     var attackPowerMultiplier: Double = 1.0,
     var rangedAttackPowerMultiplier: Double = 1.0,
-
     var physicalHasteMultiplier: Double = 1.0,
     var spellHasteMultiplier: Double = 1.0,
-
     var whiteDamageFlatModifier: Double = 0.0,
     var whiteDamageMultiplier: Double = 1.0,
     var whiteDamageAddlCritMultiplier: Double = 1.0,
     var whiteDamageAddlOffHandPenaltyModifier: Double = 0.0,
-
     var yellowDamageFlatModifier: Double = 0.0,
     var yellowDamageMultiplier: Double = 1.0,
     var yellowDamageAddlCritMultiplier: Double = 1.0,
     var yellowDamageAddlOffHandPenaltyModifier: Double = 0.0,
-
     var spellDamageFlatModifier: Double = 0.0,
     var spellDamageMultiplier: Double = 1.0,
     var spellDamageAddlCritMultiplier: Double = 1.0,
-
     var physicalDamageMultiplier: Double = 1.0,
     var holyDamageMultiplier: Double = 1.0,
     var fireDamageMultiplier: Double = 1.0,
@@ -108,7 +95,6 @@ data class Stats(
     // Spell school damage taken increases
     var spellDamageTakenMultiplier: Double = 1.0,
     var shadowDamageTakenMultiplier: Double = 1.0,
-
     var healthMultiplier: Double = 1.0,
     var healthFlatModifier: Int = 0,
     var manaMultiplier: Double = 1.0,
@@ -121,7 +107,7 @@ data class Stats(
 
     // per weapontype crit increase
     var daggerAdditionalCritChancePercent: Double = 0.0,
-    var fistWeaponAdditionalCritChancePercent: Double = 0.0
+    var fistWeaponAdditionalCritChancePercent: Double = 0.0,
 ) {
     companion object {
         const val physicalCritMultiplier: Double = 2.0
@@ -129,7 +115,7 @@ data class Stats(
         const val offHandPenalty: Double = 0.5
     }
 
-    fun add(stats: Stats) : Stats {
+    fun add(stats: Stats): Stats {
         strength += stats.strength
         agility += stats.agility
         stamina += stats.stamina
@@ -238,29 +224,31 @@ data class Stats(
     }
 
     fun getSpellDamage(withSchool: DamageType?): Int {
-        val schoolDamage = when(withSchool){
-            DamageType.ARCANE -> arcaneDamage
-            DamageType.FIRE -> fireDamage
-            DamageType.FROST -> frostDamage
-            DamageType.HOLY -> holyDamage
-            DamageType.NATURE -> natureDamage
-            DamageType.SHADOW -> shadowDamage
-            else -> 0
-        }
+        val schoolDamage =
+            when (withSchool) {
+                DamageType.ARCANE -> arcaneDamage
+                DamageType.FIRE -> fireDamage
+                DamageType.FROST -> frostDamage
+                DamageType.HOLY -> holyDamage
+                DamageType.NATURE -> natureDamage
+                DamageType.SHADOW -> shadowDamage
+                else -> 0
+            }
 
         return spellDamage + schoolDamage
     }
 
     fun getSpellDamageMultiplier(withSchool: DamageType?): Double {
-        val schoolDamage = when(withSchool){
-            DamageType.ARCANE -> arcaneDamageMultiplier
-            DamageType.FIRE -> fireDamageMultiplier
-            DamageType.FROST -> frostDamageMultiplier
-            DamageType.HOLY -> holyDamageMultiplier
-            DamageType.NATURE -> natureDamageMultiplier
-            DamageType.SHADOW -> shadowDamageMultiplier
-            else -> 1.0
-        }
+        val schoolDamage =
+            when (withSchool) {
+                DamageType.ARCANE -> arcaneDamageMultiplier
+                DamageType.FIRE -> fireDamageMultiplier
+                DamageType.FROST -> frostDamageMultiplier
+                DamageType.HOLY -> holyDamageMultiplier
+                DamageType.NATURE -> natureDamageMultiplier
+                DamageType.SHADOW -> shadowDamageMultiplier
+                else -> 1.0
+            }
 
         return spellDamageMultiplier * schoolDamage
     }
@@ -270,66 +258,44 @@ data class Stats(
     fun addByStatType(statType: StatType, value: Int): Stats {
         // TODO: Reorder this into something that makes sense
         when (statType) {
-            StatType.AGILITY ->
-                agility += value
+            StatType.AGILITY -> agility += value
             StatType.CRIT_RATING -> {
                 meleeCritRating += value
                 rangedCritRating += value
             }
-            StatType.CRIT_MELEE_RATING ->
-                meleeCritRating += value
-            StatType.CRIT_RANGED_RATING ->
-                rangedCritRating
-            StatType.CRIT_SPELL_RATING ->
-                spellCritRating += value
-            StatType.EXPERTISE_RATING ->
-                expertiseRating += value
-            StatType.HASTE_RATING, StatType.HASTE_MELEE_RATING, StatType.HASTE_RANGED_RATING ->
-                physicalHasteRating += value
-            StatType.HASTE_SPELL_RATING ->
-                spellHasteRating += value
-            StatType.HIT_RATING, StatType.HIT_MELEE_RATING, StatType.HIT_RANGED_RATING ->
-                physicalHitRating += value
-            StatType.HIT_SPELL_RATING ->
-                spellHitRating += value
-            StatType.SPELL_PEN ->
-                spellPen += value
-            StatType.SPELL_DAMAGE ->
-                spellDamage += value
-            StatType.ARMOR_PEN ->
-                armorPen += value
+            StatType.CRIT_MELEE_RATING -> meleeCritRating += value
+            StatType.CRIT_RANGED_RATING -> rangedCritRating
+            StatType.CRIT_SPELL_RATING -> spellCritRating += value
+            StatType.EXPERTISE_RATING -> expertiseRating += value
+            StatType.HASTE_RATING,
+            StatType.HASTE_MELEE_RATING,
+            StatType.HASTE_RANGED_RATING -> physicalHasteRating += value
+            StatType.HASTE_SPELL_RATING -> spellHasteRating += value
+            StatType.HIT_RATING,
+            StatType.HIT_MELEE_RATING,
+            StatType.HIT_RANGED_RATING -> physicalHitRating += value
+            StatType.HIT_SPELL_RATING -> spellHitRating += value
+            StatType.SPELL_PEN -> spellPen += value
+            StatType.SPELL_DAMAGE -> spellDamage += value
+            StatType.ARMOR_PEN -> armorPen += value
             StatType.ATTACK_POWER -> {
                 attackPower += value
                 rangedAttackPower += value
             }
-            StatType.SPELL_HEALING ->
-                spellHealing += value
-            StatType.INTELLECT ->
-                intellect += value
-            StatType.SPIRIT ->
-                spirit += value
-            StatType.STAMINA ->
-                stamina += value
-            StatType.STRENGTH ->
-                strength += value
-            StatType.DEFENSE_SKILL_RATING ->
-                defenseRating += value
-            StatType.BLOCK_VALUE ->
-                blockValue += value
-            StatType.BLOCK_RATING ->
-                blockRating += value
-            StatType.DODGE_RATING ->
-                dodgeRating += value
-            StatType.PARRY_RATING ->
-                parryRating += value
-            StatType.MANA ->
-                manaFlatModifier += value
-            StatType.HEALTH ->
-                healthFlatModifier += value
-            StatType.MANA_PER_5_SECONDS ->
-                manaPer5Seconds += value
-            StatType.RESILIENCE_RATING ->
-                resilienceRating += value
+            StatType.SPELL_HEALING -> spellHealing += value
+            StatType.INTELLECT -> intellect += value
+            StatType.SPIRIT -> spirit += value
+            StatType.STAMINA -> stamina += value
+            StatType.STRENGTH -> strength += value
+            StatType.DEFENSE_SKILL_RATING -> defenseRating += value
+            StatType.BLOCK_VALUE -> blockValue += value
+            StatType.BLOCK_RATING -> blockRating += value
+            StatType.DODGE_RATING -> dodgeRating += value
+            StatType.PARRY_RATING -> parryRating += value
+            StatType.MANA -> manaFlatModifier += value
+            StatType.HEALTH -> healthFlatModifier += value
+            StatType.MANA_PER_5_SECONDS -> manaPer5Seconds += value
+            StatType.RESILIENCE_RATING -> resilienceRating += value
             else -> {
                 // Do nothing
             }

@@ -6,6 +6,7 @@ class ImprovedFlamestrike(currentRank: Int) : Talent(currentRank) {
     companion object {
         const val name = "Improved Flamestrike"
     }
+
     override val name: String = Companion.name
     override val maxRank: Int = 3
 

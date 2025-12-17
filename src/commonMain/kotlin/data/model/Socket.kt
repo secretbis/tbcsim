@@ -8,7 +8,7 @@ class Socket(val color: Color) {
 
     // Only meta gems can go in meta sockets, and only meta sockets can hold meta gems
     fun canSocket(gem: Gem): Boolean {
-        return if(color == Color.META) {
+        return if (color == Color.META) {
             gem.color == Color.META
         } else true
     }

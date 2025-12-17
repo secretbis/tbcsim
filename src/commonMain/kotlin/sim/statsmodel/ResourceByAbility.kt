@@ -1,7 +1,7 @@
 package sim.statsmodel
 
-import kotlin.js.JsExport
 import character.*
+import kotlin.js.JsExport
 
 @JsExport
 data class ResourceByAbility(
@@ -9,5 +9,5 @@ data class ResourceByAbility(
     val icon: String,
     val countAvg: Double,
     val totalGainAvg: Double,
-    val gainPerCountAvg: Double
+    val gainPerCountAvg: Double,
 )

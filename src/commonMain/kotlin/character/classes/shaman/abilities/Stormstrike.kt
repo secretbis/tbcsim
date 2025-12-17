@@ -27,7 +27,9 @@ open class Stormstrike : Ability() {
     override val id: Int = 17364
     override val name: String = Companion.name
     override val icon: String = "ability_shaman_stormstrike.jpg"
+
     override fun cooldownMs(sp: SimParticipant): Int = 10000
+
     override fun gcdMs(sp: SimParticipant): Int = sp.physicalGcd().toInt()
 
     override fun resourceCost(sp: SimParticipant): Double {
@@ -38,40 +40,43 @@ open class Stormstrike : Ability() {
         return sp.character.klass.talents[StormstrikeTalent.name]?.currentRank == 1 && super.available(sp)
     }
 
-    val proc = fun(buff: Buff): Proc {
-        return object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.NATURE_DAMAGE
-            )
-            override val type: Type = Type.STATIC
+    val proc =
+        fun(buff: Buff): Proc {
+            return object : Proc() {
+                override val triggers: List<Trigger> = listOf(Trigger.NATURE_DAMAGE)
+                override val type: Type = Type.STATIC
 
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                sp.consumeBuff(buff)
+                override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                    sp.consumeBuff(buff)
+                }
             }
         }
-    }
 
-    val buff = object : Buff() {
-        override val name: String = "Stormstrike (Nature)"
-        override val icon: String = "ability_shaman_stormstrike.jpg"
-        override val durationMs: Int = 12000
-        override val maxCharges: Int = 2
+    val buff =
+        object : Buff() {
+            override val name: String = "Stormstrike (Nature)"
+            override val icon: String = "ability_shaman_stormstrike.jpg"
+            override val durationMs: Int = 12000
+            override val maxCharges: Int = 2
 
-        // Increase nature damage for as long as we have charges
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(natureDamageMultiplier = 1.2)
+            // Increase nature damage for as long as we have charges
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(natureDamageMultiplier = 1.2)
+            }
+
+            val proc = proc(this)
+
+            // Proc off of nature damage to reduce our stacks
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
         }
-
-        val proc = proc(this)
-
-        // Proc off of nature damage to reduce our stacks
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(proc)
-    }
 
     override fun cast(sp: SimParticipant) {
         // Extra damage from T4 set
         val t4BonusBuff = sp.buffs[CycloneHarness.FOUR_SET_BUFF_NAME] != null
-        val t4BonusDmg = if(t4BonusBuff) { CycloneHarness.fourSetStormstrikeBonus() } else 0
+        val t4BonusDmg =
+            if (t4BonusBuff) {
+                CycloneHarness.fourSetStormstrikeBonus()
+            } else 0
 
         // Do attacks
         // Stormstrike is yellow, and not normalized per EJ
@@ -79,38 +84,41 @@ open class Stormstrike : Ability() {
         val mhAttack = Melee.baseDamageRoll(sp, mhItem, isNormalized = false) + t4BonusDmg
         val mhResult = Melee.attackRoll(sp, mhAttack, mhItem, isWhiteDmg = false)
 
-        val eventMh = Event(
-            eventType = EventType.DAMAGE,
-            damageType = Constants.DamageType.PHYSICAL,
-            ability = this,
-            amount = mhResult.first,
-            result = mhResult.second,
-        )
+        val eventMh =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = Constants.DamageType.PHYSICAL,
+                ability = this,
+                amount = mhResult.first,
+                result = mhResult.second,
+            )
         sp.logEvent(eventMh)
 
         val ohItem = sp.character.gear.offHand
-        if(ohItem !is EmptyItem) {
+        if (ohItem !is EmptyItem) {
             val ohAttack = Melee.baseDamageRoll(sp, ohItem, isNormalized = false) + t4BonusDmg
             val ohResult = Melee.attackRoll(sp, ohAttack, ohItem, isWhiteDmg = false)
 
-            val eventOh = Event(
-                eventType = EventType.DAMAGE,
-                damageType = Constants.DamageType.PHYSICAL,
-                ability = StormstrikeOH(),
-                amount = ohResult.first,
-                result = ohResult.second,
-            )
+            val eventOh =
+                Event(
+                    eventType = EventType.DAMAGE,
+                    damageType = Constants.DamageType.PHYSICAL,
+                    ability = StormstrikeOH(),
+                    amount = ohResult.first,
+                    result = ohResult.second,
+                )
             sp.logEvent(eventOh)
 
             // TODO: This is modeled as two distinct hit events for the purposes of procs
             //       Confirm if that is correct behavior
-            val triggerTypesOh = when(ohResult.second) {
-                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-                else -> null
-            }
+            val triggerTypesOh =
+                when (ohResult.second) {
+                    EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                    EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                    else -> null
+                }
 
-            if(triggerTypesOh != null) {
+            if (triggerTypesOh != null) {
                 sp.fireProc(triggerTypesOh, listOf(ohItem), this, eventOh)
             }
         }
@@ -120,14 +128,17 @@ open class Stormstrike : Ability() {
 
         // Proc anything that can proc off a yellow hit
         // TODO: Should I fire procs off miss/dodge/parry/etc?
-        //       Would need to create new events to distinguish yellow-mitigation, to avoid consuming things like Flurry charges
-        val triggerTypes = when(mhResult.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
-            else -> null
-        }
+        //       Would need to create new events to distinguish yellow-mitigation, to avoid
+        // consuming
+        // things like Flurry charges
+        val triggerTypes =
+            when (mhResult.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.MELEE_YELLOW_HIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                EventResult.CRIT -> listOf(Proc.Trigger.MELEE_YELLOW_CRIT, Proc.Trigger.PHYSICAL_DAMAGE)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(triggerTypes, listOf(mhItem), this, eventMh)
         }
 

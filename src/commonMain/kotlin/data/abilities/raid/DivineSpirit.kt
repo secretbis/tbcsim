@@ -4,7 +4,6 @@ import character.Ability
 import character.Buff
 import character.Mutex
 import character.Stats
-import mechanics.Rating
 import sim.SimParticipant
 
 class DivineSpirit : Ability() {
@@ -15,21 +14,24 @@ class DivineSpirit : Ability() {
     override val id: Int = 25312
     override val name: String = Companion.name
     override val icon: String = "spell_holy_prayerofspirit.jpg"
+
     override fun gcdMs(sp: SimParticipant): Int = 0
 
-    val buff = object : Buff() {
-        override val name: String = Companion.name
-        override val icon: String = "spell_holy_prayerofspirit.jpg"
-        override val durationMs: Int = -1
-        override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
-        override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
-            return mapOf(Mutex.BUFF_SPIRIT to 50)
-        }
+    val buff =
+        object : Buff() {
+            override val name: String = Companion.name
+            override val icon: String = "spell_holy_prayerofspirit.jpg"
+            override val durationMs: Int = -1
+            override val mutex: List<Mutex> = listOf(Mutex.BUFF_SPIRIT)
 
-        override fun modifyStats(sp: SimParticipant): Stats {
-            return Stats(spirit = 50)
+            override fun mutexPriority(sp: SimParticipant): Map<Mutex, Int> {
+                return mapOf(Mutex.BUFF_SPIRIT to 50)
+            }
+
+            override fun modifyStats(sp: SimParticipant): Stats {
+                return Stats(spirit = 50)
+            }
         }
-    }
 
     override fun cast(sp: SimParticipant) {
         sp.sim.addRaidBuff(buff)

@@ -26,7 +26,9 @@ class FlameShock : Ability() {
         val reverberation = sp.character.klass.talents[Reverberation.name] as Reverberation?
         return 6000 - (reverberation?.shockCooldownReductionAmountMs() ?: 0).toInt()
     }
+
     override val sharedCooldown: SharedCooldown = SharedCooldown.SHAMAN_SHOCK
+
     override fun gcdMs(sp: SimParticipant): Int = sp.spellGcd().toInt()
 
     override fun resourceCost(sp: SimParticipant): Double {
@@ -37,19 +39,29 @@ class FlameShock : Ability() {
         val mqRed = mq?.instantManaCostReduction() ?: 0.0
 
         val shFocus = sp.buffs[ShamanisticFocus.name]
-        val shfRed = if(shFocus != null) { 0.60 } else 0.0
+        val shfRed =
+            if (shFocus != null) {
+                0.60
+            } else 0.0
 
         val eleFocus = sp.buffs[ElementalFocus.name]
-        val elefRed = if(eleFocus != null) { 0.40 } else 0.0
+        val elefRed =
+            if (eleFocus != null) {
+                0.40
+            } else 0.0
 
         // Check T6 set bonus
         val t6Bonus = sp.buffs[SkyshatterHarness.TWO_SET_BUFF_NAME] != null
-        val t6Discount = if(t6Bonus) { SkyshatterHarness.twoSetShockCostReductionPct() } else 0.0
+        val t6Discount =
+            if (t6Bonus) {
+                SkyshatterHarness.twoSetShockCostReductionPct()
+            } else 0.0
 
         return General.resourceCostReduction(500.0, listOf(cvRed, mqRed, shfRed, elefRed, t6Discount))
     }
 
     val baseDamage = 377.0
+
     override fun cast(sp: SimParticipant) {
         val spellPowerCoeff = Spell.spellPowerCoeff(0)
         val school = Constants.DamageType.FIRE
@@ -60,13 +72,14 @@ class FlameShock : Ability() {
         val damageRoll = Spell.baseDamageRollSingle(sp, baseDamage, school, spellPowerCoeff) * concussionMod
         val result = Spell.attackRoll(sp, damageRoll, school)
 
-        val event = Event(
-            eventType = EventType.DAMAGE,
-            damageType = school,
-            ability = this,
-            amount = result.first,
-            result = result.second,
-        )
+        val event =
+            Event(
+                eventType = EventType.DAMAGE,
+                damageType = school,
+                ability = this,
+                amount = result.first,
+                result = result.second,
+            )
         sp.logEvent(event)
 
         // Apply the DoT
@@ -74,16 +87,18 @@ class FlameShock : Ability() {
 
         // Proc anything that can proc off Fire damage
         val baseTriggerTypes = listOf(Proc.Trigger.SHAMAN_CAST_SHOCK)
-        val triggerTypes = when(result.second) {
-            EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
-            EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            EventResult.PARTIAL_RESIST_CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
-            else -> null
-        }
+        val triggerTypes =
+            when (result.second) {
+                EventResult.HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.CRIT -> listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.RESIST -> listOf(Proc.Trigger.SPELL_RESIST)
+                EventResult.PARTIAL_RESIST_HIT -> listOf(Proc.Trigger.SPELL_HIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                EventResult.PARTIAL_RESIST_CRIT ->
+                    listOf(Proc.Trigger.SPELL_CRIT, Proc.Trigger.FIRE_DAMAGE_NON_PERIODIC)
+                else -> null
+            }
 
-        if(triggerTypes != null) {
+        if (triggerTypes != null) {
             sp.fireProc(baseTriggerTypes + triggerTypes, listOf(), this, event)
         }
     }

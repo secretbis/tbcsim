@@ -6,11 +6,11 @@ import data.model.Item
 import data.model.ItemSet
 import data.model.Socket
 import data.model.SocketBonus
+import kotlin.js.JsExport
 import mechanics.Spell
 import sim.Event
 import sim.EventResult
 import sim.SimParticipant
-import kotlin.js.JsExport
 
 @JsExport
 class Annihilator : Item() {
@@ -18,18 +18,19 @@ class Annihilator : Item() {
         private var singletonDebuff: Debuff? = null
 
         fun singletonDebuff(owner: SimParticipant): Debuff {
-            if(singletonDebuff == null) {
-                singletonDebuff = object : Debuff(owner) {
-                    override val name: String = "Annihilator"
-                    override val icon: String = "inv_axe_12.jpg"
-                    override val durationMs: Int = 45000
-                    override val maxStacks: Int = 3
+            if (singletonDebuff == null) {
+                singletonDebuff =
+                    object : Debuff(owner) {
+                        override val name: String = "Annihilator"
+                        override val icon: String = "inv_axe_12.jpg"
+                        override val durationMs: Int = 45000
+                        override val maxStacks: Int = 3
 
-                    override fun modifyStats(sp: SimParticipant): Stats {
-                        val currentStacks = state(sp).currentStacks
-                        return Stats(armor = currentStacks * -200)
+                        override fun modifyStats(sp: SimParticipant): Stats {
+                            val currentStacks = state(sp).currentStacks
+                            return Stats(armor = currentStacks * -200)
+                        }
                     }
-                }
             }
 
             return singletonDebuff!!
@@ -56,37 +57,40 @@ class Annihilator : Item() {
     override var socketBonus: SocketBonus? = null
     override var phase = 1
 
-    val staticBuff = object : Buff() {
-        override val name: String = "Annihilator (static)"
-        override val icon: String = "inv_axe_12.jpg"
-        override val durationMs: Int = -1
-        override val hidden: Boolean = true
+    val staticBuff =
+        object : Buff() {
+            override val name: String = "Annihilator (static)"
+            override val icon: String = "inv_axe_12.jpg"
+            override val durationMs: Int = -1
+            override val hidden: Boolean = true
 
-        val armorProc = object : Proc() {
-            override val triggers: List<Trigger> = listOf(
-                Trigger.MELEE_AUTO_HIT,
-                Trigger.MELEE_AUTO_CRIT,
-                Trigger.MELEE_WHITE_HIT,
-                Trigger.MELEE_WHITE_CRIT,
-                Trigger.MELEE_YELLOW_HIT,
-                Trigger.MELEE_YELLOW_CRIT,
-                Trigger.MELEE_GLANCE,
-                Trigger.MELEE_BLOCK
-            )
-            override val type: Type = Type.PPM
-            override val ppm: Double = 1.0
+            val armorProc =
+                object : Proc() {
+                    override val triggers: List<Trigger> =
+                        listOf(
+                            Trigger.MELEE_AUTO_HIT,
+                            Trigger.MELEE_AUTO_CRIT,
+                            Trigger.MELEE_WHITE_HIT,
+                            Trigger.MELEE_WHITE_CRIT,
+                            Trigger.MELEE_YELLOW_HIT,
+                            Trigger.MELEE_YELLOW_CRIT,
+                            Trigger.MELEE_GLANCE,
+                            Trigger.MELEE_BLOCK,
+                        )
+                    override val type: Type = Type.PPM
+                    override val ppm: Double = 1.0
 
-            override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
-                // This proc is Shadow school, and is resistable
-                val result = Spell.attackRoll(sp, 1.0, Constants.DamageType.SHADOW, isBinary = true)
-                if(result.second != EventResult.RESIST) {
-                    sp.sim.target.addDebuff(singletonDebuff(sp))
+                    override fun proc(sp: SimParticipant, items: List<Item>?, ability: Ability?, event: Event?) {
+                        // This proc is Shadow school, and is resistable
+                        val result = Spell.attackRoll(sp, 1.0, Constants.DamageType.SHADOW, isBinary = true)
+                        if (result.second != EventResult.RESIST) {
+                            sp.sim.target.addDebuff(singletonDebuff(sp))
+                        }
+                    }
                 }
-            }
-        }
 
-        override fun procs(sp: SimParticipant): List<Proc> = listOf(armorProc)
-    }
+            override fun procs(sp: SimParticipant): List<Proc> = listOf(armorProc)
+        }
 
     override var buffs: List<Buff> = listOf(staticBuff)
 }
